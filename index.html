@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<title>Spieleblock. — All-in-One</title>
+<title>GameTab — All-in-One</title>
 <style>
   html, body { margin: 0; padding: 0; }
   #root { min-height: 100vh; }
@@ -419,7 +419,7 @@ input[type="number"] { -moz-appearance: textfield; }
 // Jede Sprache formuliert natürlich, nicht wörtlich übersetzt.
 const TRANSLATIONS = {
   de: {
-    appName: "Spieleblock.",
+    appName: "GameTab",
     appSubtitle: "All-in-One",
     readyForGameNight: "Bereit für den Spieleabend?",
     lastPlayed: "Zuletzt gespielt",
@@ -721,7 +721,7 @@ const TRANSLATIONS = {
     teamTargetSubtitle: (name, target) => `${name} · Ziel ${target}`
   },
   en: {
-    appName: "Scorepad.",
+    appName: "GameTab",
     appSubtitle: "All-in-One",
     readyForGameNight: "Ready for game night?",
     lastPlayed: "Last played",
@@ -1012,7 +1012,7 @@ const TRANSLATIONS = {
     teamTargetSubtitle: (name, target) => `${name} · Target ${target}`
   },
   fr: {
-    appName: "Bloc de jeu.",
+    appName: "GameTab",
     appSubtitle: "All-in-One",
     readyForGameNight: "Prêt pour la soirée jeux ?",
     lastPlayed: "Dernière partie",
@@ -3633,13 +3633,25 @@ function StartPage({
     }
   }), /*#__PURE__*/React.createElement("div", {
     style: {
-      fontSize: 27,
+      fontSize: 32,
       fontWeight: 600,
       color: tk.headerInk,
       fontFamily: "'Fraunces', serif",
-      lineHeight: 1
+      lineHeight: 1,
+      display: "flex",
+      alignItems: "center"
     }
-  }, t("appName")), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 48,
+      verticalAlign: "middle"
+    }
+  }, "G"), /*#__PURE__*/React.createElement("span", null, "ame"), /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 48,
+      verticalAlign: "middle"
+    }
+  }, "T"), /*#__PURE__*/React.createElement("span", null, "ab")), /*#__PURE__*/React.createElement("div", {
     style: {
       fontSize: 9.5,
       letterSpacing: "0.32em",

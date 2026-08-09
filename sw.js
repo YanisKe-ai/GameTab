@@ -4,7 +4,7 @@
 // Diese Datei sorgt dafür, dass die App nach dem ersten Laden auch offline
 // funktioniert und schneller startet.
 
-const CACHE_NAME = "gametab-cache-v1";
+const CACHE_NAME = "gametab-cache-v2";
 const APP_SHELL = ["./", "./index.html"];
 
 self.addEventListener("install", (event) => {
@@ -23,24 +23,22 @@ self.addEventListener("activate", (event) => {
   self.clients.claim();
 });
 
-// Stale-while-revalidate: sofort aus dem Cache antworten (schnell, funktioniert
-// offline), im Hintergrund parallel neu laden und den Cache für nächstes Mal
-// aktualisieren.
+// Netzwerk-zuerst: bei bestehender Verbindung immer die aktuellste Version laden
+// und den Cache dabei auffrischen. Nur wenn das Netzwerk nicht erreichbar ist
+// (offline), wird auf die zuletzt gespeicherte Version zurueckgegriffen.
+// So sind Updates sofort beim ersten Oeffnen sichtbar, Offline-Faehigkeit bleibt erhalten.
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
 
   event.respondWith(
-    caches.match(event.request).then((cached) => {
-      const networkFetch = fetch(event.request)
-        .then((response) => {
-          if (response && response.status === 200) {
-            const clone = response.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
-          }
-          return response;
-        })
-        .catch(() => cached);
-      return cached || networkFetch;
-    })
+    fetch(event.request)
+      .then((response) => {
+        if (response && response.status === 200) {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+        }
+        return response;
+      })
+      .catch(() => caches.match(event.request))
   );
 });

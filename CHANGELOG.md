@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.21-16 (21.10.2026 21:41)
+- iPhone-App: Startseite reicht jetzt bis zum unteren Rand (Abschneiden durch zu kleine gemeldete Höhe behoben), Messanzeige entfernt.
+
 ## 2026.10.21-15 (21.10.2026 21:31)
 - Vorübergehende Messanzeige in der Home-Bildschirm-App (20 Sekunden), um den unteren Rand auf dem iPhone genau zu beheben.
 

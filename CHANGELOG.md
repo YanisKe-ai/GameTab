@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.21-5 (21.10.2026 20:26)
+- Suche auf dem iPhone oben fixiert mit Trefferliste und Abbrechen. Endstand-Fenster deckend, Konfetti stoppt bei neuer Runde, ruhigere Seitenwechsel. Leere Spielergruppen verschwinden, neue heissen Gruppe 1, 2 usw. Weiterspielen auch für Darts und Mafia. Wizard-Tabelle ohne innere Scrollbox. Shanghai-Texte korrigiert.
+
 ## 2026.10.21-4 (21.10.2026 20:21)
 - iPhone: Bereich hinter der Statusleiste hat jetzt genau die Farbe der jeweiligen Seite, nichts scrollt mehr verschwommen darunter durch, kein Gummiband-Effekt. Kopfzeile bleibt beim Scrollen oben stehen. Kategorien und Einstellungen mit der neuen Kopfzeile.
 

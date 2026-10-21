@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.21-3 (21.10.2026 19:39)
+- Weisser Balken oben und unten auf dem iPhone behoben. Laptop: Punkte per Tastatur eingeben, schmale Eingabefenster, Rangliste in der rechten Spalte, alle laufenden Spiele in der Seitenleiste, sichtbarer Fokus, einheitliche linke Kante.
+
 ## 2026.10.21-2 (21.10.2026 19:28)
 - Datenschutz für Spielstände: laufende Spiele (Skyjo, Flip 7, Minigolf, Darts) bleiben nach dem Neuladen erhalten, Hi Score und Split Score werden gespeichert, alte oder unvollständige Daten führen nicht mehr zu einer weissen Seite, die Statistik zählt jede Partie nur einmal.
 

@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.21-14 (21.10.2026 21:28)
+- iPhone-App: Seiten werden um die Höhe der Statusleiste verlängert, damit sie bis zum unteren Rand reichen; Platz für den Home-Balken.
+
 ## 2026.10.21-13 (21.10.2026 21:25)
 - iPhone-App: Seiten reichen jetzt bis zum unteren Bildschirmrand (iOS meldete die Höhe um die Statusleiste zu klein).
 

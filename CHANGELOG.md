@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.21-12 (21.10.2026 21:19)
+- Startseite: violetter Streifen am unteren Rand entfernt, die Seite füllt den ganzen Bildschirm.
+
 ## 2026.10.21-11 (21.10.2026 21:12)
 - Sicherung enthält jetzt alles: laufende Partien, Einstellungen, Statistik, Gruppen und Bestwerte. Ältere Sicherungsdateien lassen sich weiterhin einlesen.
 

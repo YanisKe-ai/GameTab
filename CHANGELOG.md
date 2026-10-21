@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.21-24 (21.10.2026 23:17)
+- Ruhigere App: Ton nur noch bei wichtigen Knöpfen, einheitliches Drückgefühl ohne Nachfedern, kein Dauerleuchten mehr, kürzere Einblendungen, «Bewegung reduzieren» wird überall respektiert, Fortschrittsbalken flüssiger.
+
 ## 2026.10.21-23 (21.10.2026 22:23)
 - iPhone-App: Drachenkopf im Logo wird nicht mehr angeschnitten (wirkte verschwommen), Inhalt wieder auf früherer Höhe.
 

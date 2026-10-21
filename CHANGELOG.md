@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.21-18 (21.10.2026 21:57)
+- iPhone-App: Hintergrund der Startseite läuft nahtlos bis zum unteren Bildschirmrand.
+
 ## 2026.10.21-17 (21.10.2026 21:44)
 - iPhone-App: Startseite wird unten nicht mehr abgeschnitten (Scroll-Sperre ohne Abriegeln des Anzeigebereichs).
 

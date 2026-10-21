@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.21-6 (21.10.2026 20:40)
+- Bessere Lesbarkeit: alle Startknöpfe und Runde-speichern-Knöpfe in allen Designs gut lesbar (mindestens 4.5:1), Hinweis wenn noch keine Punkte eingetragen sind, Bogen am linken Kartenrand entfernt, grössere Tippflächen (44 px), Schweizer Schreibweise ohne ß, Werwolf- und Mafia-Rollen lesbar, ruhigere Glaskarten.
+
 ## 2026.10.21-5 (21.10.2026 20:26)
 - Suche auf dem iPhone oben fixiert mit Trefferliste und Abbrechen. Endstand-Fenster deckend, Konfetti stoppt bei neuer Runde, ruhigere Seitenwechsel. Leere Spielergruppen verschwinden, neue heissen Gruppe 1, 2 usw. Weiterspielen auch für Darts und Mafia. Wizard-Tabelle ohne innere Scrollbox. Shanghai-Texte korrigiert.
 

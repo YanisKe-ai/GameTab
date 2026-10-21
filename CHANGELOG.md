@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.21-13 (21.10.2026 21:25)
+- iPhone-App: Seiten reichen jetzt bis zum unteren Bildschirmrand (iOS meldete die Höhe um die Statusleiste zu klein).
+
 ## 2026.10.21-12 (21.10.2026 21:19)
 - Startseite: violetter Streifen am unteren Rand entfernt, die Seite füllt den ganzen Bildschirm.
 

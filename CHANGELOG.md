@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.21-9 (21.10.2026 20:59)
+- Home-Bildschirm-App: nach einem Design-Wechsel lädt GameTab kurz neu, damit die Statusleiste die Farbe des neuen Designs übernimmt.
+
 ## 2026.10.21-8 (21.10.2026 20:53)
 - Statusleiste: Farbe des gespeicherten Designs wird schon beim App-Start gesetzt. Laptop: alle übrigen Spiele zweispaltig (Wizard, Minigolf, Schieber, Tutto, Darts, Freies Spiel, Werwolf, Mafia, Impostor, Tabu, HeadsUp, Am ehesten, 5 Sekunden) mit Rangliste rechts.
 

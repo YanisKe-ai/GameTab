@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.21-10 (21.10.2026 21:07)
+- Neuladen nach Design-Wechsel entfernt (Versionsnummer korrigiert).
+
 ## 2026.10.21-9 (21.10.2026 21:07)
 - Neuladen nach Design-Wechsel wieder entfernt (führte zum Stocken und zurück zur Startseite).
 

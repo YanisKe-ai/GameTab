@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.21-4 (21.10.2026 20:21)
+- iPhone: Bereich hinter der Statusleiste hat jetzt genau die Farbe der jeweiligen Seite, nichts scrollt mehr verschwommen darunter durch, kein Gummiband-Effekt. Kopfzeile bleibt beim Scrollen oben stehen. Kategorien und Einstellungen mit der neuen Kopfzeile.
+
 ## 2026.10.21-3 (21.10.2026 19:39)
 - Weisser Balken oben und unten auf dem iPhone behoben. Laptop: Punkte per Tastatur eingeben, schmale Eingabefenster, Rangliste in der rechten Spalte, alle laufenden Spiele in der Seitenleiste, sichtbarer Fokus, einheitliche linke Kante.
 

@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.21-19 (21.10.2026 22:03)
+- iPhone-App: Startseite läuft unten weich in die Farbe des untersten Bildschirmbereichs aus, keine sichtbare Kante mehr.
+
 ## 2026.10.21-18 (21.10.2026 21:57)
 - iPhone-App: Hintergrund der Startseite läuft nahtlos bis zum unteren Bildschirmrand.
 

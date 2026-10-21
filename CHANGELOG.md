@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.21-23 (21.10.2026 22:23)
+- iPhone-App: Drachenkopf im Logo wird nicht mehr angeschnitten (wirkte verschwommen), Inhalt wieder auf früherer Höhe.
+
 ## 2026.10.21-22 (21.10.2026 22:19)
 - iPhone-App: Inhalt der Startseite wieder etwas tiefer, mehr Abstand zwischen Logo und Statusleiste.
 

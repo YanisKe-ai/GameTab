@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.21-20 (21.10.2026 22:10)
+- iPhone-App: Startseite wird nicht mehr am Bildschirm fixiert und reicht dadurch bis zum unteren Rand; Wackeln wird per Wischsperre verhindert.
+
 ## 2026.10.21-19 (21.10.2026 22:03)
 - iPhone-App: Startseite läuft unten weich in die Farbe des untersten Bildschirmbereichs aus, keine sichtbare Kante mehr.
 

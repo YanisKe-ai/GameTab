@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.21-7 (21.10.2026 20:44)
+- iPhone: Bereich hinter der Statusleiste nimmt jetzt die Farbe vom oberen Seitenrand statt vom unteren.
+
 ## 2026.10.21-6 (21.10.2026 20:40)
 - Bessere Lesbarkeit: alle Startknöpfe und Runde-speichern-Knöpfe in allen Designs gut lesbar (mindestens 4.5:1), Hinweis wenn noch keine Punkte eingetragen sind, Bogen am linken Kartenrand entfernt, grössere Tippflächen (44 px), Schweizer Schreibweise ohne ß, Werwolf- und Mafia-Rollen lesbar, ruhigere Glaskarten.
 

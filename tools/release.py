@@ -33,6 +33,13 @@ def main() -> int:
         print(f"FEHLER: APP_BUILD {len(m)}x in index.html gefunden, erwartet 1x")
         return 1
     old = m[0]
+    # Nie hinter eine schon veröffentlichte Nummer zurückfallen (z. B. nach Wiederherstellen einer alten index.html)
+    if ver_p.exists():
+        vj = json.loads(ver_p.read_text(encoding="utf-8")).get("build", "")
+        key = lambda b: (b.split("-")[0], int(b.split("-")[1])) if "-" in b else (b, 0)
+        if vj and key(vj) > key(old):
+            old_html, old = old, vj
+            html = html.replace(f'const APP_BUILD="{old_html}";', f'const APP_BUILD="{old}";')
 
     now = datetime.datetime.now(ZoneInfo("Europe/Zurich"))
     day = now.strftime("%Y.%m.%d")

@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.21-22 (21.10.2026 22:19)
+- iPhone-App: Inhalt der Startseite wieder etwas tiefer, mehr Abstand zwischen Logo und Statusleiste.
+
 ## 2026.10.21-21 (21.10.2026 22:16)
 - iPhone-App: Startseite genau bildschirmhoch, Hinweis unten sitzt über dem Home-Balken; kürzere Seiten nicht mehr zu lang.
 

@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.21-15 (21.10.2026 21:31)
+- Vorübergehende Messanzeige in der Home-Bildschirm-App (20 Sekunden), um den unteren Rand auf dem iPhone genau zu beheben.
+
 ## 2026.10.21-14 (21.10.2026 21:28)
 - iPhone-App: Seiten werden um die Höhe der Statusleiste verlängert, damit sie bis zum unteren Rand reichen; Platz für den Home-Balken.
 

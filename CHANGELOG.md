@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.21-17 (21.10.2026 21:44)
+- iPhone-App: Startseite wird unten nicht mehr abgeschnitten (Scroll-Sperre ohne Abriegeln des Anzeigebereichs).
+
 ## 2026.10.21-16 (21.10.2026 21:41)
 - iPhone-App: Startseite reicht jetzt bis zum unteren Rand (Abschneiden durch zu kleine gemeldete Höhe behoben), Messanzeige entfernt.
 

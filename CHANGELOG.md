@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.21-8 (21.10.2026 20:53)
+- Statusleiste: Farbe des gespeicherten Designs wird schon beim App-Start gesetzt. Laptop: alle übrigen Spiele zweispaltig (Wizard, Minigolf, Schieber, Tutto, Darts, Freies Spiel, Werwolf, Mafia, Impostor, Tabu, HeadsUp, Am ehesten, 5 Sekunden) mit Rangliste rechts.
+
 ## 2026.10.21-7 (21.10.2026 20:44)
 - iPhone: Bereich hinter der Statusleiste nimmt jetzt die Farbe vom oberen Seitenrand statt vom unteren.
 

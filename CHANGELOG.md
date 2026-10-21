@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.21-25 (21.10.2026 23:40)
+- Spieleabend-Momente: Timer-Ring mit rotem Schluss-Ticken und sichtbarem Ende, choreografierte Siegesfeier mit Stufen (überspringbar), Werwolf-, Mafia- und Impostor-Rolle durch Halten aufdecken, «Wer fängt an?»-Lauflicht, Designwechsel als Kreis vom Finger aus.
+
 ## 2026.10.21-24 (21.10.2026 23:17)
 - Ruhigere App: Ton nur noch bei wichtigen Knöpfen, einheitliches Drückgefühl ohne Nachfedern, kein Dauerleuchten mehr, kürzere Einblendungen, «Bewegung reduzieren» wird überall respektiert, Fortschrittsbalken flüssiger.
 

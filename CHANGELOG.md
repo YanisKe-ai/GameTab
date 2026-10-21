@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.21-26 (21.10.2026 23:50)
+- Punkte lebendig: Summen zählen hoch, «+12» schwebt beim Spieler, Ranglisten gleiten beim Überholen, einmaliger Lichtlauf beim Führungswechsel, Fortschrittsringe zum Ziel, Wackeln mit Hinweis bei ungültiger Eingabe, Halten zum Bestätigen bei Neue Runde.
+
 ## 2026.10.21-25 (21.10.2026 23:40)
 - Spieleabend-Momente: Timer-Ring mit rotem Schluss-Ticken und sichtbarem Ende, choreografierte Siegesfeier mit Stufen (überspringbar), Werwolf-, Mafia- und Impostor-Rolle durch Halten aufdecken, «Wer fängt an?»-Lauflicht, Designwechsel als Kreis vom Finger aus.
 

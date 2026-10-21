@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.21-21 (21.10.2026 22:16)
+- iPhone-App: Startseite genau bildschirmhoch, Hinweis unten sitzt über dem Home-Balken; kürzere Seiten nicht mehr zu lang.
+
 ## 2026.10.21-20 (21.10.2026 22:10)
 - iPhone-App: Startseite wird nicht mehr am Bildschirm fixiert und reicht dadurch bis zum unteren Rand; Wackeln wird per Wischsperre verhindert.
 

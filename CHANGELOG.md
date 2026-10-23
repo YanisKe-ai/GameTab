@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.23-3 (23.10.2026 22:10)
+- Tabu und HeadsUp: 5 neue Kategorien (750 Karten), Impostor: 4 neue Kategorien (710 Wörter)
+
 ## 2026.10.23-2 (23.10.2026 22:09)
 - Am ehesten: 187 Aussagen und 52 pikante, 5 Sekunden: 227 Aufgaben, in allen 6 Sprachen
 

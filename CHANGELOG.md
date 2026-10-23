@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.23-17 (23.10.2026 23:29)
+- Vitrum neu (Teil 2): alle Spiele im ruhigen Liquid-Glass-Stil mit Spielfarben-Schimmer
+
 ## 2026.10.23-16 (23.10.2026 23:28)
 - Vitrum neu (Teil 1): ruhiges Liquid Glass für App-Seiten, Fenster, Startleiste, Seitenleiste
 

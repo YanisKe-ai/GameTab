@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.23-18 (23.10.2026 23:44)
+- Feinschliff aus Audit: Noir einfarbig, Hell-Kontraste, Laptop-Abstände, Weis-Fenster am Laptop, Flip 7 übersetzt, Design wird sofort gespeichert
+
 ## 2026.10.23-17 (23.10.2026 23:29)
 - Vitrum neu (Teil 2): alle Spiele im ruhigen Liquid-Glass-Stil mit Spielfarben-Schimmer
 

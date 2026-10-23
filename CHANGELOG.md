@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.23-11 (23.10.2026 22:57)
+- Neue Spiele: Phase 10, Rommé, Verräter
+
 ## 2026.10.23-10 (23.10.2026 22:54)
 - Laptop: Setup als zwei Karten, Punkteverlauf als Diagramm, Weiterspielen oben auf der Startseite
 

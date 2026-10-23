@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.23-9 (23.10.2026 22:50)
+- Bildschirm bleibt an, Revanche überall, Spieleabend-Bilanz, Partyspiele in der Statistik, Yatzy noch X bis Bonus, Installationshinweis, QR-Code im Ergebnisbild, Stufen und eigene Wörter, Gruppen bei Schieber/Tabu/Freies Spiel, grosser Updatehinweis
+
 ## 2026.10.23-8 (23.10.2026 22:44)
 - Neuer Updatehinweis: schlicht, modern, passend zum Design
 

@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.23-8 (23.10.2026 22:44)
+- Neuer Updatehinweis: schlicht, modern, passend zum Design
+
 ## 2026.10.23-7 (23.10.2026 22:39)
 - Einheitliche Setup-Seiten: gleiche Spielerliste, Zielwerte als Chips mit Eigene, Startknopf unten fixiert, weicheres Hell-Design
 

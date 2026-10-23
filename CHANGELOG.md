@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.23-5 (23.10.2026 22:23)
+- Seiten aufgeräumt: Statistik, Alle Spiele, Einstellungen, Onboarding in 3 Schritten, Kategorien, Übergabe bei Werwolf/Mafia/Tabu
+
 ## 2026.10.23-4 (23.10.2026 22:15)
 - Fehler behoben: Vitrum-Zahlenblock deckend, Krone erst ab Runde 1, grössere Tippflächen, Hi Score/Split Score übersetzt, neues Tabu-Symbol, robuster Start (Instagram), HeadsUp quer
 

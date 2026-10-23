@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.23-15 (23.10.2026 23:23)
+- Feinschliff: Darts mit neuer Spielerliste, Impostor-Übergabe, Verräter-Auswahl, Am ehesten mit Familie/Locker/18+ (297 Aussagen), 5 Sekunden 300 Aufgaben
+
 ## 2026.10.23-14 (23.10.2026 23:22)
 - Logo im Hell-Modus schwarz ohne Gold
 

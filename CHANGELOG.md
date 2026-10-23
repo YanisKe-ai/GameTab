@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.23-6 (23.10.2026 22:29)
+- Jass Schieber: Weis und Stöck eintragen mit Weis-Statistik, Tutto: Kartenrechner
+
 ## 2026.10.23-5 (23.10.2026 22:23)
 - Seiten aufgeräumt: Statistik, Alle Spiele, Einstellungen, Onboarding in 3 Schritten, Kategorien, Übergabe bei Werwolf/Mafia/Tabu
 

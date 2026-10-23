@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.23-1 (23.10.2026 21:24)
+- Darts-Kopfzeilen wie die anderen Spiele, Punkte-Hinweis überdeckt nichts mehr (Tutto, Skyjo/Flip 7 am Laptop)
+
 ## 2026.10.21-26 (21.10.2026 23:50)
 - Punkte lebendig: Summen zählen hoch, «+12» schwebt beim Spieler, Ranglisten gleiten beim Überholen, einmaliger Lichtlauf beim Führungswechsel, Fortschrittsringe zum Ziel, Wackeln mit Hinweis bei ungültiger Eingabe, Halten zum Bestätigen bei Neue Runde.
 

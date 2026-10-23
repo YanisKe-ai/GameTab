@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.23-16 (23.10.2026 23:28)
+- Vitrum neu (Teil 1): ruhiges Liquid Glass für App-Seiten, Fenster, Startleiste, Seitenleiste
+
 ## 2026.10.23-15 (23.10.2026 23:23)
 - Feinschliff: Darts mit neuer Spielerliste, Impostor-Übergabe, Verräter-Auswahl, Am ehesten mit Familie/Locker/18+ (297 Aussagen), 5 Sekunden 300 Aufgaben
 

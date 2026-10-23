@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.23-14 (23.10.2026 23:22)
+- Logo im Hell-Modus schwarz ohne Gold
+
 ## 2026.10.23-13 (23.10.2026 23:18)
 - Knöpfe oben rechts (Beenden, Start, Regeln) wieder tippbar in allen Spielen; Siegesfeier neu nach Magic UI statt Konfetti
 

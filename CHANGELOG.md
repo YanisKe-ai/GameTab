@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.23-7 (23.10.2026 22:39)
+- Einheitliche Setup-Seiten: gleiche Spielerliste, Zielwerte als Chips mit Eigene, Startknopf unten fixiert, weicheres Hell-Design
+
 ## 2026.10.23-6 (23.10.2026 22:29)
 - Jass Schieber: Weis und Stöck eintragen mit Weis-Statistik, Tutto: Kartenrechner
 

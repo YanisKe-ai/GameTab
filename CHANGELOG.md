@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.23-19 (23.10.2026 23:58)
+- Vitrum: Yatzy, Jass-Tafel als Glas-Schiefer, Weis-Fenster als Glas, weichere Hintergründe
+
 ## 2026.10.23-18 (23.10.2026 23:44)
 - Feinschliff aus Audit: Noir einfarbig, Hell-Kontraste, Laptop-Abstände, Weis-Fenster am Laptop, Flip 7 übersetzt, Design wird sofort gespeichert
 

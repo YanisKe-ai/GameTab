@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.23-12 (23.10.2026 23:05)
+- Texte ohne Gedankenstriche in allen Sprachen
+
 ## 2026.10.23-11 (23.10.2026 22:57)
 - Neue Spiele: Phase 10, Rommé, Verräter
 

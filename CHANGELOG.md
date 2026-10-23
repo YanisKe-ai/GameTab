@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.23-4 (23.10.2026 22:15)
+- Fehler behoben: Vitrum-Zahlenblock deckend, Krone erst ab Runde 1, grössere Tippflächen, Hi Score/Split Score übersetzt, neues Tabu-Symbol, robuster Start (Instagram), HeadsUp quer
+
 ## 2026.10.23-3 (23.10.2026 22:10)
 - Tabu und HeadsUp: 5 neue Kategorien (750 Karten), Impostor: 4 neue Kategorien (710 Wörter)
 

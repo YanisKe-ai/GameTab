@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.24-29 (24.10.2026 22:20)
+- Technik: neues Build-Werkzeug (Vite 8, JSX, Tailwind, Magic UI Basis)
+
 ## 2026.10.24-28 (24.10.2026 22:00)
 - Technischer Umbau: App wird jetzt mit Vite aus Quelldateien gebaut (keine sichtbaren Änderungen)
 

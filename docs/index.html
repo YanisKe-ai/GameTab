@@ -94999,7 +94999,7 @@ function YatzyGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 }
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.10.24-28";
+var APP_BUILD = "2026.10.24-29";
 // web/src/app/storage.js
 var storage_exports = /* @__PURE__ */ __exportAll({
 	GT_CAT_KEYS: () => GT_CAT_KEYS,
@@ -95121,7 +95121,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.10.24-28");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.10.24-29");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -97224,7 +97224,7 @@ function UpdateBanner() {
 		let alive = true;
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.10.24-28") {
+				if (alive && v && v.build && v.build !== "2026.10.24-29") {
 					setReady(true);
 					setHidden(false);
 					try {
@@ -97419,6 +97419,128 @@ gtExpose([
 	boot_exports,
 	build_exports
 ]);</script>
+  <style rel="stylesheet" crossorigin>/*! tailwindcss v4.3.3 | MIT License | https://tailwindcss.com */
+@layer properties {
+  @supports (((-webkit-hyphens: none)) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color: rgb(from red r g b)))) {
+    *, :before, :after, ::backdrop {
+      --tw-tracking: initial;
+      --tw-ordinal: initial;
+      --tw-slashed-zero: initial;
+      --tw-numeric-figure: initial;
+      --tw-numeric-spacing: initial;
+      --tw-numeric-fraction: initial;
+    }
+  }
+}
+
+@layer theme {
+  :root, :host {
+    --tw-tracking-wider: .05em;
+    --tw-ease-out: cubic-bezier(0, 0, .2, 1);
+  }
+}
+
+@layer base, components;
+
+@layer utilities {
+  .tw\:pointer-events-none {
+    pointer-events: none;
+  }
+
+  .tw\:absolute {
+    position: absolute;
+  }
+
+  .tw\:inset-0 {
+    inset: 0;
+  }
+
+  .tw\:mx-auto {
+    margin-inline: auto;
+  }
+
+  .tw\:inline-block {
+    display: inline-block;
+  }
+
+  .tw\:size-full {
+    width: 100%;
+    height: 100%;
+  }
+
+  .tw\:w-full {
+    width: 100%;
+  }
+
+  .tw\:rounded-\[inherit\] {
+    border-radius: inherit;
+  }
+
+  .tw\:tracking-wider {
+    --tw-tracking: var(--tw-tracking-wider);
+    letter-spacing: var(--tw-tracking-wider);
+  }
+
+  .tw\:tabular-nums {
+    --tw-numeric-spacing: tabular-nums;
+    font-variant-numeric: var(--tw-ordinal, ) var(--tw-slashed-zero, ) var(--tw-numeric-figure, ) var(--tw-numeric-spacing, ) var(--tw-numeric-fraction, );
+  }
+
+  .tw\:will-change-\[background-position\] {
+    will-change: background-position;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .tw\:motion-safe\:animate-shine {
+      animation: shine var(--duration) infinite linear;
+    }
+  }
+}
+
+@property --tw-tracking {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-ordinal {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-slashed-zero {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-numeric-figure {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-numeric-spacing {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-numeric-fraction {
+  syntax: "*";
+  inherits: false
+}
+
+@keyframes shine {
+  0% {
+    background-position: 0 0;
+  }
+
+  50% {
+    background-position: 100% 100%;
+  }
+
+  to {
+    background-position: 0 0;
+  }
+}
+/*$vite$:1*/</style>
 </head>
 <body>
 <div id="root"><div id="loading">Lädt …</div></div>

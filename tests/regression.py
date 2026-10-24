@@ -293,6 +293,22 @@ def t_skyjo(pg, env):
     finish(pg, "Skyjo", env, True)
 
 
+@test("Erfolge: Hinweis nach Spielende und Abschnitt in der Statistik")
+def t_erfolge(pg, env):
+    open_game(pg, "Schreibunterlagen", "Skyjo"); press_start(pg)
+    numpad(pg, "Spieler 1", 5); numpad(pg, "Spieler 2", 120)
+    click(pg, btn(pg, "Spieler 1")); click(pg, btn(pg, "Runde speichern"), 900)
+    expect_text(pg, r"Neuer Erfolg: Erste Partie", "Erfolge: Hinweis auf dem Podest fehlt", timeout=9000)
+    pg.goto(URL); wait(pg, 700)
+    if pg.viewport_size["width"] < 768:
+        click(pg, pg.get_by_text("Schreibunterlagen", exact=True).first, 700)
+    click(pg, pg.get_by_text(re.compile(r"Statistik", re.I)).first, 900)
+    click(pg, pg.get_by_text("Spieler 1", exact=True).first, 1000)
+    expect_text(pg, r"Erfolge", "Erfolge: Abschnitt fehlt in der Personenansicht")
+    check(pg.locator("[data-gt-achv-state=on]").count() >= 1, "Erfolge: kein freigeschaltetes Abzeichen")
+    finish(pg, "Erfolge", env)
+
+
 @test("Flip 7")
 def t_flip7(pg, env):
     open_game(pg, "Schreibunterlagen", "Flip 7"); press_start(pg)

@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.25-1 (25.10.2026 00:29)
+- Erfolge für alle Spiele: Darts 180, Partyspiele und mehr
+
 ## 2026.10.24-33 (24.10.2026 23:58)
 - Neu: Erfolge und Abzeichen pro Person
 

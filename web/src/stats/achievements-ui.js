@@ -21,6 +21,20 @@ const ACHV_GLYPHS={
   hole:{d:"M6 19.5c0-1.1 2.7-2 6-2s6 .9 6 2-2.7 2-6 2-6-.9-6-2zM12 17.5V3.5M12 3.5l6 2.5-6 2.5"},
   hat:{d:"M12 3l5 13H7zM4 19h16",dots:[[12,11,1.1]]},
   seven:{d:"M7 6h10l-6 13"},
+  bull:{d:"M12 3a9 9 0 1 0 9 9M12 7.5a4.5 4.5 0 1 0 4.5 4.5M12 12l8-8M16 4h4v4",dots:[[12,12,1.2]]},
+  door:{d:"M6 20V5h12v15M4 20h16M14.5 12.5v.1"},
+  eyeoff:{d:"M2.5 12S6 6 12 6s9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6zM4 4l16 16",dots:[[12,12,2]]},
+  house:{d:"M4 11l8-7 8 7M6 10v10h12V10M10 20v-5h4v5"},
+  fedora:{d:"M3 16h18M6.5 16c0-6 1.5-9 5.5-9s5.5 3 5.5 9M7 12.5h10"},
+  lens:{d:"M10.5 4a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zM15.3 15.3L21 21"},
+  heart:{d:"M12 20s-8-4.8-8-10.5A4.5 4.5 0 0 1 12 7a4.5 4.5 0 0 1 8 2.5C20 15.2 12 20 12 20z"},
+  star:{d:"M12 3.5l2.4 5.6 6.1.5-4.6 4 1.4 6-5.3-3.2L6.7 19.6l1.4-6-4.6-4 6.1-.5z"},
+  hourglass:{d:"M7 3.5h10M7 20.5h10M8 3.5v3l4 5.5-4 5.5v3M16 3.5v3L12 12l4 5.5v3"},
+  steps:{d:"M4 20h4v-4h4v-4h4V8h4V4"},
+  spark:{d:"M12 3v5M12 16v5M3 12h5M16 12h5M6 6l2.5 2.5M15.5 15.5L18 18M18 6l-2.5 2.5M8.5 15.5L6 18"},
+  chat:{d:"M5 5h14v10h-8.5L6 19v-4H5z"},
+  crown:{d:"M4 18h16M5 18L4 8l5 4 3-6 3 6 5-4-1 10"},
+  stopwatch:{d:"M12 8a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM12 12v4M10 3h4M12 3v5"},
 };
 function AchvBadge({glyph,tier,locked,size=52,lockColor}){
   const uid=React.useId().replace(/[^a-zA-Z0-9]/g,"");const c=ACHV_TIER_COLORS[tier]||ACHV_TIER_COLORS.bronze;const g=ACHV_GLYPHS[glyph]||ACHV_GLYPHS.flag;

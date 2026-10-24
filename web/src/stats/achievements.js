@@ -9,6 +9,8 @@ function achvNight(ts){const d=new Date(ts);if(d.getHours()<5)d.setDate(d.getDat
 // Eigene, nicht-Team-Teilnahme einer Person
 function achvPart(m,norm){if(!m||!Array.isArray(m.participants))return null;return m.participants.find(p=>p&&p.isTeam!==true&&(p.norm||achvNorm(p.name))===norm)||null;}
 function achvWon(m,norm){if(Array.isArray(m.winners)&&m.winners.length)return m.winners.some(w=>achvNorm(w)===norm);return!!m.winner&&achvNorm(m.winner)===norm;}
+// Zaehler pro Name in einem Objekt {Name: Anzahl}
+function achvCount(o,norm){if(!o||typeof o!=="object"||Array.isArray(o))return 0;return Object.keys(o).reduce((s,k)=>achvNorm(k)===norm&&typeof o[k]==="number"&&o[k]>0?s+o[k]:s,0);}
 function achvDecided(m){return(Array.isArray(m.winners)&&m.winners.length>0)||!!m.winner;}
 function achvCtx(matches,norm){
   const mine=(matches||[]).filter(m=>m&&typeof m.ts==="number"&&achvPart(m,norm)).sort((a,b)=>a.ts-b.ts);
@@ -27,6 +29,8 @@ function achvCtx(matches,norm){
     }else{streak=0;if(achvDecided(m))lossRun++;}
   });
   const has=(m,key)=>achvNames(m[key]).includes(norm);
+  // Siege auf der Seite mit (inSide=true) oder ohne (false) die Person in der Liste; alte Eintraege ohne Liste zaehlen nicht
+  const sideWins=(g,key,inSide)=>mine.filter(m=>m.game===g&&Array.isArray(m[key])&&achvWon(m,norm)&&has(m,key)===inSide).length;
   return{
     mine,played:mine.length,wins:won.filter(Boolean).length,bestStreak,
     gamesWon:gamesWon.size,gamesPlayed:games.size,comeback,shared,
@@ -37,6 +41,20 @@ function achvCtx(matches,norm){
     ace:mine.some(m=>m.game==="minigolf"&&has(m,"aces")),
     perfect:mine.some(m=>m.game==="wizard"&&has(m,"perfect")),
     flip7:mine.some(m=>m.game==="flip7"&&has(m,"flip7")),
+    d180:mine.reduce((s,m)=>s+(m.game==="darts"?achvCount(m.d180,norm):0),0),
+    tonOut:mine.some(m=>m.game==="darts"&&has(m,"ton")),
+    unseen:sideWins("impostor","impostors",true),
+    villageSaver:mine.filter(m=>m.game==="werwolf"&&m.wwWin==="dorf"&&Array.isArray(m.wolves)&&achvWon(m,norm)&&!has(m,"wolves")).length,
+    godfather:sideWins("mafia","mafiosi",true),
+    exposed:sideWins("traitor","traitors",false),
+    darling:mine.filter(m=>m.game==="mostlikely"&&has(m,"fav")).length,
+    thousand:mine.some(m=>m.game==="tutto"&&has(m,"big")),
+    marathon:mine.some(m=>m.game==="freeplay"&&typeof m.fpRounds==="number"&&m.fpRounds>=20),
+    straight:mine.some(m=>m.game==="phase10"&&has(m,"straight")),
+    cleanHand:mine.some(m=>m.game==="romme"&&has(m,"clean")),
+    wordAcrobat:mine.reduce((s,m)=>{const p=m.game==="headsup"?achvPart(m,norm):null;return p&&typeof p.score==="number"?Math.max(s,p.score):s;},0),
+    jassAce:mine.filter((m,i)=>m.game==="jass-differenzler"&&won[i]).length,
+    quick5:mine.filter((m,i)=>m.game==="fivesec"&&won[i]).length,
   };
 }
 // id, glyph (Symbolname fuer das Abzeichen), tiers (Schwellen, 1 bis 3 Stufen), v (Fortschrittswert), bool: nur ja/nein
@@ -58,6 +76,20 @@ const ACHV_DEFS=[
   {id:"ace",glyph:"hole",game:"minigolf",tiers:[1],bool:true,v:c=>c.ace?1:0},
   {id:"perfect",glyph:"hat",game:"wizard",tiers:[1],bool:true,v:c=>c.perfect?1:0},
   {id:"flip7",glyph:"seven",game:"flip7",tiers:[1],bool:true,v:c=>c.flip7?1:0},
+  {id:"d180",glyph:"bull",game:"darts",tiers:[1,5,20],v:c=>c.d180},
+  {id:"tonOut",glyph:"door",game:"darts",tiers:[1],bool:true,v:c=>c.tonOut?1:0},
+  {id:"unseen",glyph:"eyeoff",game:"impostor",tiers:[1,3,10],v:c=>c.unseen},
+  {id:"villageSaver",glyph:"house",game:"werwolf",tiers:[1,3,10],v:c=>c.villageSaver},
+  {id:"godfather",glyph:"fedora",game:"mafia",tiers:[1,3,10],v:c=>c.godfather},
+  {id:"exposed",glyph:"lens",game:"traitor",tiers:[1,3,10],v:c=>c.exposed},
+  {id:"darling",glyph:"heart",game:"mostlikely",tiers:[1,3,10],v:c=>c.darling},
+  {id:"thousand",glyph:"star",game:"tutto",tiers:[1],bool:true,v:c=>c.thousand?1:0},
+  {id:"marathon",glyph:"hourglass",game:"freeplay",tiers:[1],bool:true,v:c=>c.marathon?1:0},
+  {id:"straight",glyph:"steps",game:"phase10",tiers:[1],bool:true,v:c=>c.straight?1:0},
+  {id:"cleanHand",glyph:"spark",game:"romme",tiers:[1],bool:true,v:c=>c.cleanHand?1:0},
+  {id:"wordAcrobat",glyph:"chat",game:"headsup",tiers:[10,15,20],v:c=>c.wordAcrobat},
+  {id:"jassAce",glyph:"crown",game:"jass-differenzler",tiers:[1,5,15],v:c=>c.jassAce},
+  {id:"quick5",glyph:"stopwatch",game:"fivesec",tiers:[1,5,15],v:c=>c.quick5},
 ];
 // Stufenfarbe: Bronze, Silber, Gold. Einstufige Erfolge zaehlen als Gold (Spezialleistung) bzw. Bronze (Einstieg).
 const ACHV_TIER_NAMES=["bronze","silver","gold"];

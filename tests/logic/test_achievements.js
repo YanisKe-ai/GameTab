@@ -18,7 +18,7 @@ const get=(log,name,aid)=>A.computeAchievements(log,name).find(x=>x.id===aid);
 const two=(w,ts,g)=>M(g||"skyjo",[["Anna",1],["Bob",2]],w,ts);
 
 T("leeres Log",()=>{const l=A.computeAchievements([],"Anna");assert.equal(l.length,A.ACHV_DEFS.length);assert(l.every(x=>!x.unlocked&&x.level===0));});
-T("Katalogumfang",()=>{assert(A.ACHV_DEFS.length>=15&&A.ACHV_DEFS.length<=20);const ids=A.ACHV_DEFS.map(d=>d.id);assert.equal(new Set(ids).size,ids.length);});
+T("Katalogumfang",()=>{assert(A.ACHV_DEFS.length>=15&&A.ACHV_DEFS.length<=40);const ids=A.ACHV_DEFS.map(d=>d.id);assert.equal(new Set(ids).size,ids.length);});
 T("erste Partie, Siege und Stufen",()=>{
   const log=[];for(let i=0;i<5;i++)log.push(two(["Anna"],base+i*DAY));
   assert.equal(get(log,"Anna","first").unlocked,true);
@@ -78,6 +78,44 @@ T("Extrafelder: Hole-in-one, Wizard, Flip 7 (alte Eintraege ohne Feld ignoriert)
   const f7=M("flip7",[["Anna",210],["Bob",90]],["Anna"],base,{flip7:["anna"]});
   assert.equal(get([f7],"Anna","flip7").unlocked,true);
   assert.equal(get([M("skyjo",[["Anna",1],["Bob",2]],["Anna"],base,{aces:["Anna"]})],"Anna","ace").unlocked,false);});
+T("Darts: 180er zaehlen pro Person, Ton-Checkout",()=>{
+  const d=M("darts",[["Anna",3],["Bob",1]],["Anna"],base,{d180:{Anna:2,bob:1},ton:["Anna"]});
+  assert.equal(get([d],"Anna","d180").value,2);assert.equal(get([d],"Anna","d180").level,1);assert.equal(get([d],"Bob","d180").value,1);
+  const d2=M("darts",[["Anna",3],["Bob",1]],["Anna"],base+DAY,{d180:{Anna:4}});
+  assert.equal(get([d,d2],"Anna","d180").value,6);assert.equal(get([d,d2],"Anna","d180").level,2);
+  assert.equal(get([d],"Anna","tonOut").unlocked,true);assert.equal(get([d],"Bob","tonOut").unlocked,false);
+  assert.equal(get([M("darts",[["Anna",3],["Bob",1]],["Anna"],base)],"Anna","d180").value,0);
+  assert.equal(get([M("skyjo",[["Anna",3],["Bob",1]],["Anna"],base,{d180:{Anna:9}})],"Anna","d180").value,0);});
+T("Partyspiele: Seiten und Rollen, alte Eintraege ignoriert",()=>{
+  const im=M("impostor",[["Anna"],["Bob"],["Cleo"]],["Anna"],base,{impostors:["Anna"]});
+  assert.equal(get([im],"Anna","unseen").value,1);assert.equal(get([im],"Bob","unseen").value,0);
+  const imLost=M("impostor",[["Anna"],["Bob"],["Cleo"]],["Bob","Cleo"],base,{impostors:["Anna"]});
+  assert.equal(get([imLost],"Anna","unseen").value,0);
+  assert.equal(get([M("impostor",[["Anna"],["Bob"]],["Anna"],base)],"Anna","unseen").value,0);
+  const ww=M("werwolf",[["Anna"],["Bob"],["Cleo"]],["Anna","Cleo"],base,{wolves:["Bob"],wwWin:"dorf"});
+  assert.equal(get([ww],"Anna","villageSaver").value,1);assert.equal(get([ww],"Bob","villageSaver").value,0);
+  const wwW=M("werwolf",[["Anna"],["Bob"]],["Bob"],base,{wolves:["Bob"],wwWin:"wolf"});
+  assert.equal(get([wwW],"Bob","villageSaver").value,0);
+  const mf=M("mafia",[["Anna"],["Bob"]],["Anna"],base,{mafiosi:["Anna"]});
+  assert.equal(get([mf],"Anna","godfather").value,1);assert.equal(get([mf],"Bob","godfather").value,0);
+  const tr=M("traitor",[["Anna"],["Bob"],["Cleo"]],["Anna","Bob"],base,{traitors:["Cleo"]});
+  assert.equal(get([tr],"Anna","exposed").value,1);assert.equal(get([tr],"Cleo","exposed").value,0);
+  assert.equal(get([M("traitor",[["Anna"],["Bob"]],["Anna"],base)],"Anna","exposed").value,0);
+  const ml=M("mostlikely",[["Anna"],["Bob"]],[],base,{fav:["Bob"]});
+  assert.equal(get([ml],"Bob","darling").value,1);assert.equal(get([ml],"Anna","darling").value,0);});
+T("Weitere Spiele: Tutto, Freeplay, Phase 10, Romme, Heads Up, Jass, 5 Sekunden",()=>{
+  assert.equal(get([M("tutto",[["Anna",5000],["Bob",100]],["Anna"],base,{big:["Anna"]})],"Anna","thousand").unlocked,true);
+  assert.equal(get([M("tutto",[["Anna",5000],["Bob",100]],["Anna"],base)],"Anna","thousand").unlocked,false);
+  assert.equal(get([M("freeplay",[["Anna",5],["Bob",1]],["Anna"],base,{fpRounds:20})],"Bob","marathon").unlocked,true);
+  assert.equal(get([M("freeplay",[["Anna",5],["Bob",1]],["Anna"],base,{fpRounds:19})],"Bob","marathon").unlocked,false);
+  assert.equal(get([M("phase10",[["Anna",50],["Bob",90]],["Anna"],base,{straight:["Anna"]})],"Anna","straight").unlocked,true);
+  assert.equal(get([M("romme",[["Anna",50],["Bob",500]],["Anna"],base,{clean:["Anna"]})],"Anna","cleanHand").unlocked,true);
+  assert.equal(get([M("romme",[["Anna",50],["Bob",500]],["Anna"],base)],"Anna","cleanHand").unlocked,false);
+  const hu=[M("headsup",[["Anna",12],["Bob",16]],["Bob"],base),M("headsup",[["Anna",9],["Bob",3]],["Anna"],base+DAY)];
+  assert.equal(get(hu,"Anna","wordAcrobat").value,12);assert.equal(get(hu,"Anna","wordAcrobat").level,1);assert.equal(get(hu,"Bob","wordAcrobat").level,2);
+  const js=[];for(let i=0;i<5;i++)js.push(M("jass-differenzler",[["Anna",9],["Bob",3]],["Anna"],base+i*DAY));
+  assert.equal(get(js,"Anna","jassAce").level,2);assert.equal(get(js,"Bob","jassAce").level,0);
+  assert.equal(get([M("fivesec",[["Anna",9],["Bob",3]],["Anna"],base)],"Anna","quick5").level,1);});
 T("Loeschen entfernt den Erfolg",()=>{const m1=M("skyjo",[["Anna",-1],["Bob",2]],["Anna"],base);
   assert.equal(get([m1],"Anna","skyjoNeg").unlocked,true);assert.equal(get([],"Anna","skyjoNeg").unlocked,false);});
 T("Neu durch jüngste Partie",()=>{

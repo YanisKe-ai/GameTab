@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.24-19 (24.10.2026 15:10)
+- Schieber-Turnier: Zeitpunkt für nachträgliche Partien, kürzere Tabs, laufende Turniere in Seitenleiste und Weiterspielen
+
 ## 2026.10.24-18 (24.10.2026 15:06)
 - Schieber-Turnier mit Strichliste und Grand Slam; Podest zeigt Gleichstände; Phase 10 und Rommé im Bildexport korrigiert; keine Emoji in Eingaben
 

@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.24-5 (24.10.2026 10:46)
+- Statistiken oben rechts in Schreibunterlagen und Partyspiele
+
 ## 2026.10.24-4 (24.10.2026 10:36)
 - Einstellungen ohne Scrollen, Startseite mit gleichmässigen Abständen
 

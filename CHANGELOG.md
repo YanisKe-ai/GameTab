@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.24-23 (24.10.2026 18:54)
+- Schieber-Turnier: Meldung verdeckt keine Knöpfe mehr; Regressionstest für alle Spiele
+
 ## 2026.10.24-22 (24.10.2026 18:15)
 - Soft-Blocks-Podest plastisch wie die Vorlage; Partyrunden überstehen Updates; Tabu fortsetzbar; Darts-Regeln, Turnier-Regeln, Werwolf-Dieb, Gleichstand-Texte
 

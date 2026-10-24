@@ -1,0 +1,394 @@
+[
+  {
+    "name": "Fünf Personen, manuelle Teams, drei gleich häufige Gewinnpartner",
+    "participants": [
+      {
+        "id": "A",
+        "displayName": "Yanis"
+      },
+      {
+        "id": "B",
+        "displayName": "Martin"
+      },
+      {
+        "id": "C",
+        "displayName": "Peti"
+      },
+      {
+        "id": "D",
+        "displayName": "Moritz"
+      },
+      {
+        "id": "E",
+        "displayName": "Papi"
+      }
+    ],
+    "matches": [
+      {
+        "id": "1",
+        "teamA": [
+          "A",
+          "B"
+        ],
+        "teamB": [
+          "C",
+          "D"
+        ],
+        "winner": "A",
+        "status": "completed"
+      },
+      {
+        "id": "2",
+        "teamA": [
+          "A",
+          "C"
+        ],
+        "teamB": [
+          "B",
+          "E"
+        ],
+        "winner": "A",
+        "status": "completed"
+      },
+      {
+        "id": "3",
+        "teamA": [
+          "A",
+          "D"
+        ],
+        "teamB": [
+          "C",
+          "E"
+        ],
+        "winner": "A",
+        "status": "completed"
+      }
+    ],
+    "expected": {
+      "points": {
+        "A": 3,
+        "B": 0,
+        "C": -1,
+        "D": 0,
+        "E": -2
+      },
+      "winners": [
+        "A"
+      ],
+      "topPartners": {
+        "A": {
+          "B": 1,
+          "C": 1,
+          "D": 1
+        }
+      }
+    }
+  },
+  {
+    "name": "Zehn Personen, zwei Tische, zwei pausieren, vier gemeinsame Sieger",
+    "participants": [
+      {
+        "id": "A",
+        "displayName": "Yanis"
+      },
+      {
+        "id": "B",
+        "displayName": "Martin"
+      },
+      {
+        "id": "C",
+        "displayName": "Peti"
+      },
+      {
+        "id": "D",
+        "displayName": "Moritz"
+      },
+      {
+        "id": "E",
+        "displayName": "Papi"
+      },
+      {
+        "id": "F",
+        "displayName": "Sarah"
+      },
+      {
+        "id": "G",
+        "displayName": "Nora"
+      },
+      {
+        "id": "H",
+        "displayName": "Tim"
+      },
+      {
+        "id": "I",
+        "displayName": "Luca"
+      },
+      {
+        "id": "J",
+        "displayName": "Mia"
+      }
+    ],
+    "matches": [
+      {
+        "id": "1",
+        "teamA": [
+          "A",
+          "B"
+        ],
+        "teamB": [
+          "C",
+          "D"
+        ],
+        "winner": "A",
+        "status": "completed"
+      },
+      {
+        "id": "2",
+        "teamA": [
+          "E",
+          "F"
+        ],
+        "teamB": [
+          "G",
+          "H"
+        ],
+        "winner": "B",
+        "status": "completed"
+      }
+    ],
+    "expected": {
+      "points": {
+        "A": 1,
+        "B": 1,
+        "C": -1,
+        "D": -1,
+        "E": -1,
+        "F": -1,
+        "G": 1,
+        "H": 1,
+        "I": 0,
+        "J": 0
+      },
+      "winners": [
+        "A",
+        "B",
+        "G",
+        "H"
+      ],
+      "unplayed": [
+        "I",
+        "J"
+      ],
+      "topPartners": {
+        "A": {
+          "B": 1
+        },
+        "B": {
+          "A": 1
+        },
+        "G": {
+          "H": 1
+        },
+        "H": {
+          "G": 1
+        }
+      }
+    }
+  },
+  {
+    "name": "Alle gewerteten Personen gleich, eine Person noch ohne Partie",
+    "participants": [
+      {
+        "id": "A",
+        "displayName": "Yanis"
+      },
+      {
+        "id": "B",
+        "displayName": "Martin"
+      },
+      {
+        "id": "C",
+        "displayName": "Peti"
+      },
+      {
+        "id": "D",
+        "displayName": "Moritz"
+      },
+      {
+        "id": "E",
+        "displayName": "Papi"
+      }
+    ],
+    "matches": [
+      {
+        "id": "1",
+        "teamA": [
+          "A",
+          "B"
+        ],
+        "teamB": [
+          "C",
+          "D"
+        ],
+        "winner": "A",
+        "status": "completed"
+      },
+      {
+        "id": "2",
+        "teamA": [
+          "A",
+          "B"
+        ],
+        "teamB": [
+          "C",
+          "D"
+        ],
+        "winner": "B",
+        "status": "completed"
+      }
+    ],
+    "expected": {
+      "points": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "D": 0,
+        "E": 0
+      },
+      "winners": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "unplayed": [
+        "E"
+      ]
+    }
+  },
+  {
+    "name": "Keine abgeschlossene Partie, keine Sieger",
+    "participants": [
+      {
+        "id": "A",
+        "displayName": "Yanis"
+      },
+      {
+        "id": "B",
+        "displayName": "Martin"
+      },
+      {
+        "id": "C",
+        "displayName": "Peti"
+      },
+      {
+        "id": "D",
+        "displayName": "Moritz"
+      }
+    ],
+    "matches": [
+      {
+        "id": "1",
+        "teamA": [
+          "A",
+          "B"
+        ],
+        "teamB": [
+          "C",
+          "D"
+        ],
+        "winner": null,
+        "status": "running"
+      }
+    ],
+    "expected": {
+      "points": {
+        "A": 0,
+        "B": 0,
+        "C": 0,
+        "D": 0
+      },
+      "winners": [],
+      "unplayed": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    }
+  },
+  {
+    "name": "Abbruch und void bleiben ungewertet",
+    "participants": [
+      {
+        "id": "A",
+        "displayName": "Yanis"
+      },
+      {
+        "id": "B",
+        "displayName": "Martin"
+      },
+      {
+        "id": "C",
+        "displayName": "Peti"
+      },
+      {
+        "id": "D",
+        "displayName": "Moritz"
+      }
+    ],
+    "matches": [
+      {
+        "id": "1",
+        "teamA": [
+          "A",
+          "B"
+        ],
+        "teamB": [
+          "C",
+          "D"
+        ],
+        "winner": "A",
+        "status": "completed"
+      },
+      {
+        "id": "2",
+        "teamA": [
+          "A",
+          "C"
+        ],
+        "teamB": [
+          "B",
+          "D"
+        ],
+        "winner": null,
+        "status": "aborted"
+      },
+      {
+        "id": "3",
+        "teamA": [
+          "A",
+          "B"
+        ],
+        "teamB": [
+          "C",
+          "D"
+        ],
+        "winner": "B",
+        "status": "void"
+      }
+    ],
+    "expected": {
+      "points": {
+        "A": 1,
+        "B": 1,
+        "C": -1,
+        "D": -1
+      },
+      "winners": [
+        "A",
+        "B"
+      ]
+    }
+  }
+]

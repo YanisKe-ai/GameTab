@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.24-7 (24.10.2026 11:10)
+- Statistik-Knopf auf Höhe des Titels
+
 ## 2026.10.24-6 (24.10.2026 11:04)
 - Neuer ruhiger Ergebnis-Bildexport GameTab Clean
 

@@ -1,15 +1,20 @@
 // GameTab Service Worker
-// Die App ist eine einzelne, eigenständige index.html (Schriften und Logo als Base64
-// eingebettet), dazu manifest.webmanifest und icons/. Es gibt keine externen Ressourcen-Requests.
+// Die App ist eine einzelne, eigenständige index.html (Code und Logo eingebettet), dazu manifest.webmanifest, fonts/, icons/ und img/. Es gibt keine externen Ressourcen-Requests.
 // Diese Datei sorgt dafür, dass die App nach dem ersten Laden auch offline
 // funktioniert und schneller startet.
 
 const CACHE_NAME = "gametab-cache-2026.10.24-28";
 const APP_SHELL = ["./", "./index.html"];
+// Zusatzdateien (Schriften, Icons, Bilder): wird beim Vite-Build aus docs/ erzeugt (web/vite.config.mjs).
+const PRECACHE_EXTRA = [];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL))
+    caches.open(CACHE_NAME).then((cache) =>
+      cache.addAll(APP_SHELL).then(() =>
+        Promise.all(PRECACHE_EXTRA.map((u) => cache.add(u).catch(() => {})))
+      )
+    )
   );
   self.skipWaiting();
 });

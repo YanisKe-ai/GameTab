@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..");
 const PUB = path.join(ROOT, "web", "public");
-const ITEMS = ["sw.js", "version.json", "manifest.webmanifest", "fonts", "icons", "datenschutz.html", "impressum.html"];
+const ITEMS = ["sw.js", "version.json", "manifest.webmanifest", "fonts", "icons", "img", "datenschutz.html", "impressum.html"];
 
 fs.rmSync(PUB, { recursive: true, force: true });
 fs.mkdirSync(PUB, { recursive: true });

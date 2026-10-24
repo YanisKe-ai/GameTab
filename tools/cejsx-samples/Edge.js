@@ -1,0 +1,1 @@
+function Edge({p,items,Tag}){const h=React.createElement;return S8E("div",{...p,className:"a b","data-x":"1",disabled:true,"x y":2,style:{color:"red"}},"Hallo ","Welt"," & <b>",React.createElement(React.Fragment,null,h("span",null,"x"),h("span",null)),items.map(i=>h("li",{key:i},i)),React.createElement(Tag,{a:1}),React.createElement("div",null,...items),h("p",p,"  lead"));}

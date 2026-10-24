@@ -2,6 +2,8 @@
 // Standard: Inhalt der HTML-Datei (Argument, GAMETAB_HTML oder index.html).
 // GAMETAB_SRC=web und web/src vorhanden: Module in Import-Reihenfolge von
 // web/src/main.js zusammengesetzt, Import/Export-Zeilen entfernt (wie tools/split.mjs --verify).
+// JSX (Etappe 4c) wird dabei zeilenerhaltend zurueck in React.createElement verwandelt (tools/jsx2ce.cjs),
+// damit die Tests Codezeilen weiterhin mit new Function auswerten koennen.
 const fs = require("fs"), path = require("path");
 const ROOT = path.resolve(__dirname, "..", "..");
 
@@ -24,13 +26,20 @@ function stripLine(line) {
   return line.replace(/^(\s*)export\s+(default\s+)?(?=(const|let|var|function|async|class)\b)/, "$1");
 }
 
+let jsxToCeSplice = null;
+function jsxToCe(text) {
+  if (!/<\/|\/>|<>/.test(text)) return text;
+  if (!jsxToCeSplice) jsxToCeSplice = require(path.join(ROOT, "tools", "jsx2ce.cjs")).jsxToCeSplice;
+  return jsxToCeSplice(text);
+}
+
 function composeWeb() {
   const entry = path.join(ROOT, "web", "src", "main.js");
   const seen = new Set(), out = [];
   function visit(file) {
     if (seen.has(file)) return;
     seen.add(file);
-    const text = fs.readFileSync(file, "utf8");
+    const text = jsxToCe(fs.readFileSync(file, "utf8"));
     // Importe in Quellreihenfolge zuerst besuchen (ES-Modul-Auswertungsreihenfolge)
     for (const line of text.split("\n")) {
       const m = line.match(IMPORT_RE);

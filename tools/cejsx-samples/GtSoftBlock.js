@@ -1,0 +1,14 @@
+function GtSoftBlock({H,win,rk,S,lv,solo}){const h=React.createElement;const light=S.th==="light";const c=win?(S.th==='light'||S.th==='noir'||S.bright?S.acc:gtSbVivid(S.acc)):S.base;const T=win?18:22;const fs=lv===1?92:lv===2?70:60;
+const fl=win?(S.bright?0.14:0.2):S.fl,fr=win?(S.bright?0.22:0.3):S.fr,hl=win?(S.bright?0.3:0.15):S.hl,bev=win?(S.bright?0.5:0.32):S.bev,bdk=win?(S.bright?0.22:0.34):S.bdk,lidSh=win?(S.bright?0.14:0.22):S.lidSh,ridge=win?(S.bright?0.6:0.34):S.ridge;
+const front=`linear-gradient(90deg, rgba(0,0,0,${fl}) 0%, rgba(0,0,0,0) 15%, rgba(0,0,0,0) 80%, rgba(0,0,0,${fr}) 100%), radial-gradient(75% 50% at 20% 22%, rgba(255,255,255,${hl}) 0%, rgba(255,255,255,0) 70%), linear-gradient(180deg, ${shadeHex(c,0.06)} 0%, ${c} 40%, ${shadeHex(c,light&&!win?-0.12:-0.24)} 100%)`;
+const lid=`linear-gradient(180deg, ${shadeHex(c,light&&!win?0.55:0.15)} 0%, ${shadeHex(c,light&&!win?0.35:0.08)} 100%)`;
+const bevel=`inset 3px 3px 3px -1px rgba(255,255,255,${bev}), inset 0 0 0 1px rgba(255,255,255,${bev*0.25}), inset -4px -6px 9px -2px rgba(0,0,0,${bdk}), inset 0 -3px 2px -1px rgba(0,0,0,${bdk*0.6})`;
+const lidShadow=`0 1.5px 0 rgba(255,255,255,${ridge}), 0 6px 9px -4px rgba(0,0,0,${lidSh}), inset 0 2px 2px -1px rgba(255,255,255,${ridge})`;
+const sh=light?`0 16px 18px -11px ${S.shadow}, 0 3px 6px -3px ${S.shadow}`:`0 18px 20px -12px ${S.shadow}, 0 4px 6px -3px ${S.shadow}`;const side=win&&!solo?(light?", -9px 0 14px -9px rgba(40,44,56,0.35), 9px 0 14px -9px rgba(40,44,56,0.35)":", -10px 0 14px -8px rgba(0,0,0,0.55), 10px 0 14px -8px rgba(0,0,0,0.55)"):"";
+const num=(col,shd,op)=>h("div",{className:"gtsb-numw"},h("span",{className:"gtsb-num",style:{fontSize:fs,color:col,textShadow:shd,opacity:op}},rk));
+return h("div",{className:"gtsb-blk","aria-hidden":true,style:{height:H,"--gtsb-T":T+"px","--gtsb-d":(120+lv*60)+"ms",boxShadow:sh+side}},
+h("div",{className:"gtsb-l",style:{background:S.ghost,boxShadow:`inset 0 0 0 1px ${S.edge}, inset 3px 3px 3px -1px rgba(255,255,255,${light?0.8:0.08}), inset -4px -6px 9px -2px rgba(0,0,0,${light?0.06:0.25})`}}),
+h("div",{className:"gtsb-lid",style:{background:S.ghostLid,boxShadow:`0 1px 0 ${S.edge}`}}),
+num(S.num,light?S.numSh:"none",light?0.45:0.5),
+h("div",{className:"gtsb-fw"},h("div",{className:"gtsb-fi",style:{background:front}},h("div",{className:"gtsb-lid",style:{background:lid,boxShadow:lidShadow}}),h("div",{className:"gtsb-l",style:{boxShadow:bevel}}),num(win?S.accNum:S.num,win?S.accNumSh:S.numSh,1)),h("span",{className:"gtsb-glint"})),
+win&&h("span",{className:"gtsb-sheen"},h("i")),win&&h("span",{className:"gtsb-shine"},h("i")));}

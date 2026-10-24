@@ -1,0 +1,56 @@
+[
+ {
+  "file": "GtStatsHeadBtn.js",
+  "themes": [
+   "dark",
+   "light",
+   "noir",
+   "vitrum"
+  ],
+  "props": "({tk:{gold:'#C9A15C'},t:k=>k,theme:%THEME%,onClick(){}})"
+ },
+ {
+  "file": "GtSoftBlock.js",
+  "themes": [
+   "dark",
+   "light"
+  ],
+  "props": "({H:'Titel',win:true,rk:1,S:{th:%THEME%,acc:'#fa0',bright:false,font:'Inter'},lv:3,solo:false})"
+ },
+ {
+  "file": "FiveSecSetup.js",
+  "themes": [
+   "dark",
+   "light"
+  ],
+  "props": "({state:{players:[{id:1,name:'A'},{id:2,name:'B'}]},setState(){},onStart(){},theme:%THEME%,t:k=>typeof k==='string'?k:'x'})",
+  "env": {
+   "FIVESEC_FONT": "'Inter'"
+  }
+ },
+ {
+  "file": "Edge.js",
+  "props": "({p:{id:'q',title:'t \"x\"'},items:['a','b'],Tag:'em'})",
+  "env": {
+   "S8E": "React.createElement"
+  }
+ },
+ {
+  "file": "MostLikelySetup.js",
+  "themes": [
+   "dark"
+  ],
+  "props": "({state:{players:[{id:1,name:'A'},{id:2,name:'B'}],rounds:3},setState(){},onStart(){},theme:%THEME%,t:k=>typeof k==='string'?k:'x'})"
+ },
+ {
+  "file": "Edge2.js",
+  "props": "({p:{id:'q',Comp:'em'},n:2,list:['a','b']})",
+  "env": {
+   "Item": "(q)=>React.createElement('em',{'data-v':q.v},q.v)"
+  }
+ },
+ {
+  "file": "Edge3.js",
+  "props": "({a:'A',b:'B',items:['x','y']})"
+ }
+]

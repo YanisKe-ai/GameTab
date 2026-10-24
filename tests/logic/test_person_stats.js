@@ -146,9 +146,9 @@ T("Bewusstes Zusammenfuehren",()=>{
   // beide in derselben Partie: Partie zaehlt einmal, kein Doppelsieg, keine Selbst-Mitspielerin
   assert.equal(a2.matches.length,4);
   assert.ok(!F.getCoPlayers("Anna").some(c=>c.name==="Anna"));
-  assert.equal(F.getLeaderboard("skyjo",5).find(x=>x.name==="Anna").played,5);
-  const wm=JSON.parse(mem.gt_matchLog).find(m=>m.participants.filter(p=>p.name==="Anna").length===2);
-  assert.ok(wm);assert.equal(wm.winner,"Anna");
+  assert.equal(F.getLeaderboard("skyjo",5).find(x=>x.name==="Anna").played,4);
+  assert.ok(!JSON.parse(mem.gt_matchLog).some(m=>m.participants.filter(p=>p.name==="Anna").length>1));
+  const wm=JSON.parse(mem.gt_matchLog)[0];assert.equal(wm.participants.length,1);assert.equal(wm.participants[0].rank,1);assert.equal(wm.winner,"Anna");
 });
 T("Zusammenfuehren: Gleichstand-Sieger ohne Doppelte",()=>{
   seed([M("skyjo",[["Anna",1],["Hanna",1],["Bob",5]],["Anna","Hanna"])]);

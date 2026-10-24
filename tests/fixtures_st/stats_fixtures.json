@@ -1,0 +1,2311 @@
+{
+"_info": "GameTab Statistik-Fixtures (stK). Einspielen: localStorage gt_matchLog und gt_playerGroups setzen, schieberTournaments in spieleblock-app-state-v1 mergen.",
+"gt_matchLog": [
+{
+"id": "fx1",
+"ts": 1756486800000,
+"game": "skyjo",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 44,
+"rank": 3
+},
+{
+"name": "Lena",
+"norm": "lena",
+"score": 27,
+"rank": 1
+},
+{
+"name": "Ben",
+"norm": "ben",
+"score": 78,
+"rank": 4
+},
+{
+"name": "Mia",
+"norm": "mia",
+"score": 27,
+"rank": 1
+}
+],
+"winner": "Lena",
+"lowWins": true,
+"status": "done",
+"winners": [
+"Lena",
+"Mia"
+],
+"groupId": 1
+},
+{
+"id": "fx2",
+"ts": 1756492200000,
+"game": "flip7",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 196,
+"rank": 1
+},
+{
+"name": "Lena",
+"norm": "lena",
+"score": 196,
+"rank": 1
+},
+{
+"name": "Ben",
+"norm": "ben",
+"score": 126,
+"rank": 4
+},
+{
+"name": "Mia",
+"norm": "mia",
+"score": 166,
+"rank": 3
+}
+],
+"winner": "Yanis",
+"lowWins": false,
+"status": "done",
+"winners": [
+"Yanis",
+"Lena"
+]
+},
+{
+"id": "fx4",
+"ts": 1756497000000,
+"game": "mostlikely",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": null,
+"rank": null
+},
+{
+"name": "Lena",
+"norm": "lena",
+"score": null,
+"rank": null
+},
+{
+"name": "Ben",
+"norm": "ben",
+"score": null,
+"rank": null
+},
+{
+"name": "Mia",
+"norm": "mia",
+"score": null,
+"rank": null
+}
+],
+"winner": null,
+"lowWins": false,
+"status": "done"
+},
+{
+"id": "fx3",
+"ts": 1756501800000,
+"game": "tabu",
+"participants": [
+{
+"name": "Yanis & Lena",
+"norm": "yanis & lena",
+"score": 16,
+"rank": 2,
+"isTeam": true
+},
+{
+"name": "Ben & Mia",
+"norm": "ben & mia",
+"score": 17,
+"rank": 1,
+"isTeam": true
+}
+],
+"winner": "Ben & Mia",
+"lowWins": false,
+"status": "done"
+},
+{
+"ts": 1756922400000,
+"game": "skyjo",
+"participants": [
+{
+"name": "Lena",
+"score": 40,
+"rank": 1
+},
+{
+"name": "Ben",
+"score": 61,
+"rank": 2
+}
+],
+"winner": "Lena"
+},
+{
+"id": "fx5",
+"ts": 1759078800000,
+"game": "tutto",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 4091,
+"rank": 1
+},
+{
+"name": "Noah",
+"norm": "noah",
+"score": 2038,
+"rank": 4
+},
+{
+"name": "Sara",
+"norm": "sara",
+"score": 2478,
+"rank": 3
+},
+{
+"name": "Luca",
+"norm": "luca",
+"score": 2864,
+"rank": 2
+}
+],
+"winner": "Yanis",
+"lowWins": false,
+"status": "done",
+"groupId": 2
+},
+{
+"id": "fx6",
+"ts": 1759084200000,
+"game": "freeplay",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 74,
+"rank": 1
+},
+{
+"name": "Noah",
+"norm": "noah",
+"score": 16,
+"rank": 4
+},
+{
+"name": "Sara",
+"norm": "sara",
+"score": 26,
+"rank": 3
+},
+{
+"name": "Luca",
+"norm": "luca",
+"score": 41,
+"rank": 2
+}
+],
+"winner": "Yanis",
+"lowWins": false,
+"status": "done"
+},
+{
+"id": "fx7",
+"ts": 1759089600000,
+"game": "skyjo",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 96,
+"rank": 3
+},
+{
+"name": "Noah",
+"norm": "noah",
+"score": 80,
+"rank": 2
+},
+{
+"name": "Sara",
+"norm": "sara",
+"score": 53,
+"rank": 1
+},
+{
+"name": "Luca",
+"norm": "luca",
+"score": 139,
+"rank": 4
+}
+],
+"winner": "Sara",
+"lowWins": true,
+"status": "done",
+"groupId": 2
+},
+{
+"id": "fx8",
+"ts": 1759101300000,
+"game": "werwolf",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": null,
+"rank": 1
+},
+{
+"name": "Noah",
+"norm": "noah",
+"score": null,
+"rank": 2
+},
+{
+"name": "Sara",
+"norm": "sara",
+"score": null,
+"rank": 1
+},
+{
+"name": "Luca",
+"norm": "luca",
+"score": null,
+"rank": 2
+}
+],
+"winner": "Yanis",
+"winners": [
+"Yanis",
+"Sara"
+]
+},
+{
+"id": "fx9",
+"ts": 1761760800000,
+"game": "yatzy",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 324,
+"rank": 1
+},
+{
+"name": "Lena",
+"norm": "lena",
+"score": 324,
+"rank": 1
+},
+{
+"name": "Ben",
+"norm": "ben",
+"score": 174,
+"rank": 3
+},
+{
+"name": "Mia",
+"norm": "mia",
+"score": 161,
+"rank": 4
+}
+],
+"winner": "Yanis",
+"lowWins": false,
+"status": "done",
+"winners": [
+"Yanis",
+"Lena"
+],
+"groupId": 1
+},
+{
+"id": "fx10",
+"ts": 1761766200000,
+"game": "wizard",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 133,
+"rank": 3
+},
+{
+"name": "Lena",
+"norm": "lena",
+"score": 273,
+"rank": 1
+},
+{
+"name": "Ben",
+"norm": "ben",
+"score": 96,
+"rank": 4
+},
+{
+"name": "Mia",
+"norm": "mia",
+"score": 167,
+"rank": 2
+}
+],
+"winner": "Lena",
+"lowWins": false,
+"status": "done"
+},
+{
+"id": "fx11",
+"ts": 1761771600000,
+"game": "jass-differenzler",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 303,
+"rank": 1
+},
+{
+"name": "Lena",
+"norm": "lena",
+"score": 228,
+"rank": 3
+},
+{
+"name": "Ben",
+"norm": "ben",
+"score": 246,
+"rank": 2
+},
+{
+"name": "Mia",
+"norm": "mia",
+"score": 77,
+"rank": 4
+}
+],
+"winner": "Yanis",
+"lowWins": false,
+"status": "done",
+"groupId": 1
+},
+{
+"id": "fx13",
+"ts": 1761774000000,
+"game": "schieber",
+"participants": [
+{
+"name": "Yanis & Lena",
+"norm": "yanis & lena",
+"score": 1500,
+"rank": 1,
+"isTeam": true
+},
+{
+"name": "Ben & Mia",
+"norm": "ben & mia",
+"score": 1076,
+"rank": 2,
+"isTeam": true
+}
+],
+"winner": "Yanis & Lena",
+"lowWins": false,
+"status": "done",
+"weis": []
+},
+{
+"id": "fx12",
+"ts": 1761777000000,
+"game": "phase10",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 48,
+"rank": 1
+},
+{
+"name": "Lena",
+"norm": "lena",
+"score": 69,
+"rank": 2
+},
+{
+"name": "Ben",
+"norm": "ben",
+"score": 189,
+"rank": 4
+},
+{
+"name": "Mia",
+"norm": "mia",
+"score": 141,
+"rank": 3
+}
+],
+"winner": "Yanis",
+"lowWins": true,
+"status": "done"
+},
+{
+"id": "fx57",
+"ts": 1762966800000,
+"game": "darts",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 3,
+"rank": 1
+},
+{
+"name": "Ben",
+"norm": "ben",
+"score": 2,
+"rank": 2
+}
+],
+"winner": "Yanis",
+"lowWins": false,
+"status": "done"
+},
+{
+"id": "fx14",
+"ts": 1764352800000,
+"game": "skyjo",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 66,
+"rank": 2
+},
+{
+"name": "Noah",
+"norm": "noah",
+"score": 67,
+"rank": 3
+},
+{
+"name": "Sara",
+"norm": "sara",
+"score": 44,
+"rank": 1
+},
+{
+"name": "Luca",
+"norm": "luca",
+"score": 118,
+"rank": 5
+},
+{
+"name": "Ben",
+"norm": "ben",
+"score": 82,
+"rank": 4
+}
+],
+"winner": "Sara",
+"lowWins": true,
+"status": "done"
+},
+{
+"id": "fx15",
+"ts": 1764358200000,
+"game": "flip7",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 160,
+"rank": 5
+},
+{
+"name": "Noah",
+"norm": "noah",
+"score": 163,
+"rank": 4
+},
+{
+"name": "Sara",
+"norm": "sara",
+"score": 186,
+"rank": 2
+},
+{
+"name": "Luca",
+"norm": "luca",
+"score": 167,
+"rank": 3
+},
+{
+"name": "Ben",
+"norm": "ben",
+"score": 200,
+"rank": 1
+}
+],
+"winner": "Ben",
+"lowWins": false,
+"status": "done"
+},
+{
+"id": "fx16",
+"ts": 1764363000000,
+"game": "mostlikely",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": null,
+"rank": null
+},
+{
+"name": "Noah",
+"norm": "noah",
+"score": null,
+"rank": null
+},
+{
+"name": "Sara",
+"norm": "sara",
+"score": null,
+"rank": null
+},
+{
+"name": "Luca",
+"norm": "luca",
+"score": null,
+"rank": null
+},
+{
+"name": "Ben",
+"norm": "ben",
+"score": null,
+"rank": null
+}
+],
+"winner": null,
+"lowWins": false,
+"status": "done"
+},
+{
+"id": "fx17",
+"ts": 1767031200000,
+"game": "jass-differenzler",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 172,
+"rank": 3
+},
+{
+"name": "Lena",
+"norm": "lena",
+"score": 481,
+"rank": 1
+},
+{
+"name": "Ben",
+"norm": "ben",
+"score": 100,
+"rank": 4
+},
+{
+"name": "Mia",
+"norm": "mia",
+"score": 191,
+"rank": 2
+}
+],
+"winner": "Lena",
+"lowWins": false,
+"status": "done",
+"groupId": 1
+},
+{
+"id": "fx18",
+"ts": 1767036600000,
+"game": "phase10",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 188,
+"rank": 4
+},
+{
+"name": "Lena",
+"norm": "lena",
+"score": 59,
+"rank": 2
+},
+{
+"name": "Ben",
+"norm": "ben",
+"score": 147,
+"rank": 3
+},
+{
+"name": "Mia",
+"norm": "mia",
+"score": 51,
+"rank": 1
+}
+],
+"winner": "Mia",
+"lowWins": true,
+"status": "done"
+},
+{
+"id": "fx19",
+"ts": 1767042000000,
+"game": "romme",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 186,
+"rank": 2
+},
+{
+"name": "Lena",
+"norm": "lena",
+"score": 189,
+"rank": 3
+},
+{
+"name": "Ben",
+"norm": "ben",
+"score": 176,
+"rank": 1
+},
+{
+"name": "Mia",
+"norm": "mia",
+"score": 278,
+"rank": 4
+}
+],
+"winner": "Ben",
+"lowWins": true,
+"status": "done",
+"groupId": 1
+},
+{
+"id": "fx20",
+"ts": 1767046200000,
+"game": "tabu",
+"participants": [
+{
+"name": "Yanis & Lena",
+"norm": "yanis & lena",
+"score": 25,
+"rank": 1,
+"isTeam": true
+},
+{
+"name": "Ben & Mia",
+"norm": "ben & mia",
+"score": 25,
+"rank": 1,
+"isTeam": true
+}
+],
+"winner": "Yanis & Lena",
+"lowWins": false,
+"status": "done",
+"winners": [
+"Yanis & Lena",
+"Ben & Mia"
+]
+},
+{
+"id": "fx21",
+"ts": 1769623200000,
+"game": "fivesec",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 10,
+"rank": 1
+},
+{
+"name": "Noah",
+"norm": "noah",
+"score": 7,
+"rank": 3
+},
+{
+"name": "Sara",
+"norm": "sara",
+"score": 8,
+"rank": 2
+},
+{
+"name": "Luca",
+"norm": "luca",
+"score": 5,
+"rank": 4
+}
+],
+"winner": "Yanis",
+"lowWins": false,
+"status": "done",
+"groupId": 2
+},
+{
+"id": "fx22",
+"ts": 1769628600000,
+"game": "headsup",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 13,
+"rank": 1
+},
+{
+"name": "Noah",
+"norm": "noah",
+"score": 11,
+"rank": 2
+},
+{
+"name": "Sara",
+"norm": "sara",
+"score": 8,
+"rank": 3
+},
+{
+"name": "Luca",
+"norm": "luca",
+"score": 7,
+"rank": 4
+}
+],
+"winner": "Yanis",
+"lowWins": false,
+"status": "done"
+},
+{
+"id": "fx23",
+"ts": 1769634000000,
+"game": "minigolf",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 29,
+"rank": 1
+},
+{
+"name": "Noah",
+"norm": "noah",
+"score": 64,
+"rank": 3
+},
+{
+"name": "Sara",
+"norm": "sara",
+"score": 53,
+"rank": 2
+},
+{
+"name": "Luca",
+"norm": "luca",
+"score": 90,
+"rank": 4
+}
+],
+"winner": "Yanis",
+"lowWins": true,
+"status": "done",
+"groupId": 2
+},
+{
+"id": "fx24",
+"ts": 1769639400000,
+"game": "tutto",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 5792,
+"rank": 1
+},
+{
+"name": "Noah",
+"norm": "noah",
+"score": 2807,
+"rank": 4
+},
+{
+"name": "Sara",
+"norm": "sara",
+"score": 3716,
+"rank": 2
+},
+{
+"name": "Luca",
+"norm": "luca",
+"score": 3620,
+"rank": 3
+}
+],
+"winner": "Yanis",
+"lowWins": false,
+"status": "done"
+},
+{
+"id": "fx58",
+"ts": 1770224400000,
+"game": "cricket",
+"participants": [
+{
+"name": "Ben",
+"norm": "ben",
+"score": 3,
+"rank": 1
+},
+{
+"name": "Noah",
+"norm": "noah",
+"score": 2,
+"rank": 2
+}
+],
+"winner": "Ben",
+"lowWins": false,
+"status": "done"
+},
+{
+"id": "fx25",
+"ts": 1772301600000,
+"game": "romme",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 15,
+"rank": 1
+},
+{
+"name": "Lena",
+"norm": "lena",
+"score": 117,
+"rank": 4
+},
+{
+"name": "Ben",
+"norm": "ben",
+"score": 58,
+"rank": 3
+},
+{
+"name": "Mia",
+"norm": "mia",
+"score": 46,
+"rank": 2
+}
+],
+"winner": "Yanis",
+"lowWins": true,
+"status": "done",
+"groupId": 1
+},
+{
+"id": "fx26",
+"ts": 1772307000000,
+"game": "skyjo",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 23,
+"rank": 1
+},
+{
+"name": "Lena",
+"norm": "lena",
+"score": 72,
+"rank": 4
+},
+{
+"name": "Ben",
+"norm": "ben",
+"score": 31,
+"rank": 2
+},
+{
+"name": "Mia",
+"norm": "mia",
+"score": 44,
+"rank": 3
+}
+],
+"winner": "Yanis",
+"lowWins": true,
+"status": "done"
+},
+{
+"id": "fx29",
+"ts": 1772311800000,
+"game": "mostlikely",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": null,
+"rank": null
+},
+{
+"name": "Lena",
+"norm": "lena",
+"score": null,
+"rank": null
+},
+{
+"name": "Ben",
+"norm": "ben",
+"score": null,
+"rank": null
+},
+{
+"name": "Mia",
+"norm": "mia",
+"score": null,
+"rank": null
+}
+],
+"winner": null,
+"lowWins": false,
+"status": "done"
+},
+{
+"id": "fx28",
+"ts": 1772314800000,
+"game": "schieber",
+"participants": [
+{
+"name": "Yanis & Lena",
+"norm": "yanis & lena",
+"score": 1000,
+"rank": 1,
+"isTeam": true
+},
+{
+"name": "Ben & Mia",
+"norm": "ben & mia",
+"score": 770,
+"rank": 2,
+"isTeam": true
+}
+],
+"winner": "Yanis & Lena",
+"lowWins": false,
+"status": "done",
+"weis": []
+},
+{
+"id": "fx27",
+"ts": 1772324100000,
+"game": "werwolf",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": null,
+"rank": 2
+},
+{
+"name": "Lena",
+"norm": "lena",
+"score": null,
+"rank": 1
+},
+{
+"name": "Ben",
+"norm": "ben",
+"score": null,
+"rank": 2
+},
+{
+"name": "Mia",
+"norm": "mia",
+"score": null,
+"rank": 1
+}
+],
+"winner": "Lena",
+"winners": [
+"Lena",
+"Mia"
+]
+},
+{
+"id": "fx30",
+"ts": 1774890000000,
+"game": "minigolf",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 43,
+"rank": 1
+},
+{
+"name": "Noah",
+"norm": "noah",
+"score": 43,
+"rank": 1
+},
+{
+"name": "Sara",
+"norm": "sara",
+"score": 62,
+"rank": 3
+},
+{
+"name": "Luca",
+"norm": "luca",
+"score": 81,
+"rank": 4
+}
+],
+"winner": "Yanis",
+"lowWins": true,
+"status": "done",
+"winners": [
+"Yanis",
+"Noah"
+],
+"groupId": 2
+},
+{
+"id": "fx31",
+"ts": 1774895400000,
+"game": "tutto",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 5976,
+"rank": 1
+},
+{
+"name": "Noah",
+"norm": "noah",
+"score": 2784,
+"rank": 3
+},
+{
+"name": "Sara",
+"norm": "sara",
+"score": 3839,
+"rank": 2
+},
+{
+"name": "Luca",
+"norm": "luca",
+"score": 2660,
+"rank": 4
+}
+],
+"winner": "Yanis",
+"lowWins": false,
+"status": "done"
+},
+{
+"id": "fx32",
+"ts": 1774900800000,
+"game": "freeplay",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 78,
+"rank": 1
+},
+{
+"name": "Noah",
+"norm": "noah",
+"score": 68,
+"rank": 2
+},
+{
+"name": "Sara",
+"norm": "sara",
+"score": 21,
+"rank": 3
+},
+{
+"name": "Luca",
+"norm": "luca",
+"score": 17,
+"rank": 4
+}
+],
+"winner": "Yanis",
+"lowWins": false,
+"status": "done",
+"groupId": 2
+},
+{
+"id": "fx33",
+"ts": 1777568400000,
+"game": "flip7",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 159,
+"rank": 4
+},
+{
+"name": "Lena",
+"norm": "lena",
+"score": 178,
+"rank": 1
+},
+{
+"name": "Ben",
+"norm": "ben",
+"score": 173,
+"rank": 3
+},
+{
+"name": "Mia",
+"norm": "mia",
+"score": 175,
+"rank": 2
+}
+],
+"winner": "Lena",
+"lowWins": false,
+"status": "done",
+"groupId": 1
+},
+{
+"id": "fx34",
+"ts": 1777573800000,
+"game": "yatzy",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 213,
+"rank": 2
+},
+{
+"name": "Lena",
+"norm": "lena",
+"score": 184,
+"rank": 4
+},
+{
+"name": "Ben",
+"norm": "ben",
+"score": 221,
+"rank": 1
+},
+{
+"name": "Mia",
+"norm": "mia",
+"score": 201,
+"rank": 3
+}
+],
+"winner": "Ben",
+"lowWins": false,
+"status": "done"
+},
+{
+"id": "fx35",
+"ts": 1777579200000,
+"game": "wizard",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 189,
+"rank": 3
+},
+{
+"name": "Lena",
+"norm": "lena",
+"score": 306,
+"rank": 1
+},
+{
+"name": "Ben",
+"norm": "ben",
+"score": 198,
+"rank": 2
+},
+{
+"name": "Mia",
+"norm": "mia",
+"score": 154,
+"rank": 4
+}
+],
+"winner": "Lena",
+"lowWins": false,
+"status": "done",
+"groupId": 1
+},
+{
+"id": "fx37",
+"ts": 1777583400000,
+"game": "tabu",
+"participants": [
+{
+"name": "Yanis & Lena",
+"norm": "yanis & lena",
+"score": 27,
+"rank": 1,
+"isTeam": true
+},
+{
+"name": "Ben & Mia",
+"norm": "ben & mia",
+"score": 27,
+"rank": 1,
+"isTeam": true
+}
+],
+"winner": "Yanis & Lena",
+"lowWins": false,
+"status": "done",
+"winners": [
+"Yanis & Lena",
+"Ben & Mia"
+]
+},
+{
+"id": "fx36",
+"ts": 1777584600000,
+"game": "jass-differenzler",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 295,
+"rank": 3
+},
+{
+"name": "Lena",
+"norm": "lena",
+"score": 355,
+"rank": 1
+},
+{
+"name": "Ben",
+"norm": "ben",
+"score": 78,
+"rank": 4
+},
+{
+"name": "Mia",
+"norm": "mia",
+"score": 347,
+"rank": 2
+}
+],
+"winner": "Lena",
+"lowWins": false,
+"status": "done"
+},
+{
+"id": "fx59",
+"ts": 1779292800000,
+"game": "mafia",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": null,
+"rank": 1
+},
+{
+"name": "Lena",
+"norm": "lena",
+"score": null,
+"rank": 1
+},
+{
+"name": "Mia",
+"norm": "mia",
+"score": null,
+"rank": 2
+},
+{
+"name": "Noah",
+"norm": "noah",
+"score": null,
+"rank": 2
+},
+{
+"name": "Luca",
+"norm": "luca",
+"score": null,
+"rank": 2
+}
+],
+"winner": "Yanis",
+"winners": [
+"Yanis",
+"Lena"
+]
+},
+{
+"id": "fx38",
+"ts": 1780160400000,
+"game": "freeplay",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 41,
+"rank": 2
+},
+{
+"name": "Noah",
+"norm": "noah",
+"score": 15,
+"rank": 3
+},
+{
+"name": "Sara",
+"norm": "sara",
+"score": 57,
+"rank": 1
+},
+{
+"name": "Luca",
+"norm": "luca",
+"score": 11,
+"rank": 5
+},
+{
+"name": "Ben",
+"norm": "ben",
+"score": 14,
+"rank": 4
+}
+],
+"winner": "Sara",
+"lowWins": false,
+"status": "done"
+},
+{
+"id": "fx39",
+"ts": 1780165800000,
+"game": "skyjo",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 35,
+"rank": 3
+},
+{
+"name": "Noah",
+"norm": "noah",
+"score": 38,
+"rank": 4
+},
+{
+"name": "Sara",
+"norm": "sara",
+"score": 48,
+"rank": 5
+},
+{
+"name": "Luca",
+"norm": "luca",
+"score": 31,
+"rank": 2
+},
+{
+"name": "Ben",
+"norm": "ben",
+"score": 20,
+"rank": 1
+}
+],
+"winner": "Ben",
+"lowWins": true,
+"status": "done"
+},
+{
+"id": "fx40",
+"ts": 1780170600000,
+"game": "mostlikely",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": null,
+"rank": null
+},
+{
+"name": "Noah",
+"norm": "noah",
+"score": null,
+"rank": null
+},
+{
+"name": "Sara",
+"norm": "sara",
+"score": null,
+"rank": null
+},
+{
+"name": "Luca",
+"norm": "luca",
+"score": null,
+"rank": null
+},
+{
+"name": "Ben",
+"norm": "ben",
+"score": null,
+"rank": null
+}
+],
+"winner": null,
+"lowWins": false,
+"status": "done"
+},
+{
+"id": "fx41",
+"ts": 1782838800000,
+"game": "wizard",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 98,
+"rank": 2
+},
+{
+"name": "Lena",
+"norm": "lena",
+"score": 98,
+"rank": 2
+},
+{
+"name": "Ben",
+"norm": "ben",
+"score": 132,
+"rank": 1
+},
+{
+"name": "Mia",
+"norm": "mia",
+"score": 61,
+"rank": 4
+}
+],
+"winner": "Ben",
+"lowWins": false,
+"status": "done",
+"groupId": 1
+},
+{
+"id": "fx42",
+"ts": 1782844200000,
+"game": "jass-differenzler",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 391,
+"rank": 1
+},
+{
+"name": "Lena",
+"norm": "lena",
+"score": 329,
+"rank": 2
+},
+{
+"name": "Ben",
+"norm": "ben",
+"score": 110,
+"rank": 4
+},
+{
+"name": "Mia",
+"norm": "mia",
+"score": 138,
+"rank": 3
+}
+],
+"winner": "Yanis",
+"lowWins": false,
+"status": "done"
+},
+{
+"id": "fx43",
+"ts": 1782849600000,
+"game": "phase10",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 106,
+"rank": 3
+},
+{
+"name": "Lena",
+"norm": "lena",
+"score": 98,
+"rank": 2
+},
+{
+"name": "Ben",
+"norm": "ben",
+"score": 67,
+"rank": 1
+},
+{
+"name": "Mia",
+"norm": "mia",
+"score": 239,
+"rank": 4
+}
+],
+"winner": "Ben",
+"lowWins": true,
+"status": "done",
+"groupId": 1
+},
+{
+"id": "fx44",
+"ts": 1782852000000,
+"game": "schieber",
+"participants": [
+{
+"name": "Yanis & Lena",
+"norm": "yanis & lena",
+"score": 1500,
+"rank": 1,
+"isTeam": true
+},
+{
+"name": "Ben & Mia",
+"norm": "ben & mia",
+"score": 1091,
+"rank": 2,
+"isTeam": true
+}
+],
+"winner": "Yanis & Lena",
+"lowWins": false,
+"status": "done",
+"weis": []
+},
+{
+"id": "fx45",
+"ts": 1785430800000,
+"game": "flip7",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 189,
+"rank": 1
+},
+{
+"name": "Noah",
+"norm": "noah",
+"score": 115,
+"rank": 4
+},
+{
+"name": "Sara",
+"norm": "sara",
+"score": 137,
+"rank": 2
+},
+{
+"name": "Luca",
+"norm": "luca",
+"score": 122,
+"rank": 3
+}
+],
+"winner": "Yanis",
+"lowWins": false,
+"status": "done",
+"groupId": 2
+},
+{
+"id": "fx46",
+"ts": 1785436200000,
+"game": "fivesec",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 5,
+"rank": 2
+},
+{
+"name": "Noah",
+"norm": "noah",
+"score": 9,
+"rank": 1
+},
+{
+"name": "Sara",
+"norm": "sara",
+"score": 4,
+"rank": 3
+},
+{
+"name": "Luca",
+"norm": "luca",
+"score": 2,
+"rank": 4
+}
+],
+"winner": "Noah",
+"lowWins": false,
+"status": "done"
+},
+{
+"id": "fx47",
+"ts": 1785441600000,
+"game": "headsup",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 14,
+"rank": 1
+},
+{
+"name": "Noah",
+"norm": "noah",
+"score": 7,
+"rank": 2
+},
+{
+"name": "Sara",
+"norm": "sara",
+"score": 3,
+"rank": 4
+},
+{
+"name": "Luca",
+"norm": "luca",
+"score": 6,
+"rank": 3
+}
+],
+"winner": "Yanis",
+"lowWins": false,
+"status": "done",
+"groupId": 2
+},
+{
+"id": "fx48",
+"ts": 1785447000000,
+"game": "minigolf",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 28,
+"rank": 1
+},
+{
+"name": "Noah",
+"norm": "noah",
+"score": 57,
+"rank": 2
+},
+{
+"name": "Sara",
+"norm": "sara",
+"score": 65,
+"rank": 3
+},
+{
+"name": "Luca",
+"norm": "luca",
+"score": 83,
+"rank": 4
+}
+],
+"winner": "Yanis",
+"lowWins": true,
+"status": "done"
+},
+{
+"id": "fx49",
+"ts": 1785453300000,
+"game": "werwolf",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": null,
+"rank": 2
+},
+{
+"name": "Noah",
+"norm": "noah",
+"score": null,
+"rank": 2
+},
+{
+"name": "Sara",
+"norm": "sara",
+"score": null,
+"rank": 1
+},
+{
+"name": "Luca",
+"norm": "luca",
+"score": null,
+"rank": 1
+}
+],
+"winner": "Sara",
+"winners": [
+"Sara",
+"Luca"
+]
+},
+{
+"id": "fx50",
+"ts": 1788109200000,
+"game": "phase10",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 110,
+"rank": 2
+},
+{
+"name": "Lena",
+"norm": "lena",
+"score": 62,
+"rank": 1
+},
+{
+"name": "Ben",
+"norm": "ben",
+"score": 209,
+"rank": 4
+},
+{
+"name": "Mia",
+"norm": "mia",
+"score": 165,
+"rank": 3
+}
+],
+"winner": "Lena",
+"lowWins": true,
+"status": "done",
+"groupId": 1
+},
+{
+"id": "fx51",
+"ts": 1788114600000,
+"game": "romme",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 215,
+"rank": 3
+},
+{
+"name": "Lena",
+"norm": "lena",
+"score": 86,
+"rank": 2
+},
+{
+"name": "Ben",
+"norm": "ben",
+"score": 74,
+"rank": 1
+},
+{
+"name": "Mia",
+"norm": "mia",
+"score": 258,
+"rank": 4
+}
+],
+"winner": "Ben",
+"lowWins": true,
+"status": "done"
+},
+{
+"id": "fx53",
+"ts": 1788119400000,
+"game": "mostlikely",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": null,
+"rank": null
+},
+{
+"name": "Lena",
+"norm": "lena",
+"score": null,
+"rank": null
+},
+{
+"name": "Ben",
+"norm": "ben",
+"score": null,
+"rank": null
+},
+{
+"name": "Mia",
+"norm": "mia",
+"score": null,
+"rank": null
+}
+],
+"winner": null,
+"lowWins": false,
+"status": "done"
+},
+{
+"id": "fx52",
+"ts": 1788124200000,
+"game": "tabu",
+"participants": [
+{
+"name": "Yanis & Lena",
+"norm": "yanis & lena",
+"score": 21,
+"rank": 2,
+"isTeam": true
+},
+{
+"name": "Ben & Mia",
+"norm": "ben & mia",
+"score": 22,
+"rank": 1,
+"isTeam": true
+}
+],
+"winner": "Ben & Mia",
+"lowWins": false,
+"status": "done"
+},
+{
+"id": "fx54",
+"ts": 1790701200000,
+"game": "headsup",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 12,
+"rank": 1
+},
+{
+"name": "Noah",
+"norm": "noah",
+"score": 9,
+"rank": 2
+},
+{
+"name": "Sara",
+"norm": "sara",
+"score": 4,
+"rank": 4
+},
+{
+"name": "Luca",
+"norm": "luca",
+"score": 6,
+"rank": 3
+}
+],
+"winner": "Yanis",
+"lowWins": false,
+"status": "done",
+"groupId": 2
+},
+{
+"id": "fx55",
+"ts": 1790706600000,
+"game": "minigolf",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 40,
+"rank": 3
+},
+{
+"name": "Noah",
+"norm": "noah",
+"score": 34,
+"rank": 2
+},
+{
+"name": "Sara",
+"norm": "sara",
+"score": 29,
+"rank": 1
+},
+{
+"name": "Luca",
+"norm": "luca",
+"score": 53,
+"rank": 4
+}
+],
+"winner": "Sara",
+"lowWins": true,
+"status": "done"
+},
+{
+"id": "fx56",
+"ts": 1790712000000,
+"game": "tutto",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 3326,
+"rank": 3
+},
+{
+"name": "Noah",
+"norm": "noah",
+"score": 4266,
+"rank": 2
+},
+{
+"name": "Sara",
+"norm": "sara",
+"score": 6110,
+"rank": 1
+},
+{
+"name": "Luca",
+"norm": "luca",
+"score": 2934,
+"rank": 4
+}
+],
+"winner": "Sara",
+"lowWins": false,
+"status": "done",
+"groupId": 2
+},
+{
+"id": "fx60",
+"ts": 1790784000000,
+"game": "impostor",
+"participants": [
+{
+"name": "Lena",
+"norm": "lena",
+"score": null,
+"rank": 1
+},
+{
+"name": "Ben",
+"norm": "ben",
+"score": null,
+"rank": 1
+},
+{
+"name": "Mia",
+"norm": "mia",
+"score": null,
+"rank": 2
+},
+{
+"name": "Sara",
+"norm": "sara",
+"score": null,
+"rank": 2
+}
+],
+"winner": "Lena",
+"winners": [
+"Lena",
+"Ben"
+]
+},
+{
+"id": "fx61",
+"ts": 1792080000000,
+"game": "minigolf",
+"participants": [
+{
+"name": "Luca",
+"norm": "luca",
+"score": 42,
+"rank": 2
+},
+{
+"name": "Sara",
+"norm": "sara",
+"score": 32,
+"rank": 1
+}
+],
+"winner": "Sara",
+"lowWins": true,
+"status": "done"
+},
+{
+"id": "fxopen",
+"ts": 1792778400000,
+"game": "yatzy",
+"status": "open",
+"participants": [
+{
+"name": "Yanis",
+"norm": "yanis",
+"score": 120,
+"rank": 1
+},
+{
+"name": "Lena",
+"norm": "lena",
+"score": 80,
+"rank": 2
+}
+],
+"winner": "Yanis",
+"matchId": "m_open"
+}
+],
+"gt_playerGroups": [
+{
+"id": 1,
+"name": "Stammtisch",
+"players": [
+"Yanis",
+"Lena",
+"Ben",
+"Mia"
+]
+},
+{
+"id": 2,
+"name": "Familie",
+"players": [
+"Yanis",
+"Noah",
+"Sara",
+"Luca"
+]
+}
+],
+"schieberTournaments": [
+{
+"id": "6086500f-4d98-47e5-8a36-59ea548ff03b",
+"schemaVersion": 1,
+"revision": 7,
+"name": "Sommer-Turnier",
+"status": "completed",
+"createdAt": "2026-06-13T17:00:00.000Z",
+"updatedAt": "2026-06-13T17:59:00.000Z",
+"completedAt": "2026-06-13T17:59:00.000Z",
+"theme": "strichliste",
+"participants": [
+{
+"id": "eec271d7-6a66-4e79-9dc7-f9ca693ccd5d",
+"displayName": "Yanis",
+"joinedAt": "2026-06-13T17:00:00.000Z",
+"stableOrder": 1,
+"attendance": "present"
+},
+{
+"id": "d0b4d66b-b995-468e-b91e-968e5688beed",
+"displayName": "Lena",
+"joinedAt": "2026-06-13T17:00:00.000Z",
+"stableOrder": 2,
+"attendance": "present"
+},
+{
+"id": "e1de8c62-a161-4185-be6c-173908dbadb1",
+"displayName": "Ben",
+"joinedAt": "2026-06-13T17:00:00.000Z",
+"stableOrder": 3,
+"attendance": "present"
+},
+{
+"id": "131ec5ba-c86e-4466-b915-680bb0533cdc",
+"displayName": "Mia",
+"joinedAt": "2026-06-13T17:00:00.000Z",
+"stableOrder": 4,
+"attendance": "present"
+},
+{
+"id": "c901fac7-0601-4d31-bcb0-18ad8c4a33a0",
+"displayName": "Sara",
+"joinedAt": "2026-06-13T17:00:00.000Z",
+"stableOrder": 5,
+"attendance": "present"
+},
+{
+"id": "edd6935b-6af2-4174-b615-a8e0e0bebd7a",
+"displayName": "Noah",
+"joinedAt": "2026-06-13T17:00:00.000Z",
+"stableOrder": 6,
+"attendance": "present"
+}
+],
+"tables": [
+{
+"id": "tbl-1-b8d4b69a",
+"label": "Tisch 1",
+"enabled": true,
+"number": 1
+}
+],
+"matches": [
+{
+"id": "a0a91086-45ab-479c-950c-367a57fd4403",
+"operationId": "op0",
+"revision": 1,
+"tableId": null,
+"teamA": [
+"eec271d7-6a66-4e79-9dc7-f9ca693ccd5d",
+"d0b4d66b-b995-468e-b91e-968e5688beed"
+],
+"teamB": [
+"e1de8c62-a161-4185-be6c-173908dbadb1",
+"131ec5ba-c86e-4466-b915-680bb0533cdc"
+],
+"status": "completed",
+"winner": "A",
+"startedAt": null,
+"completedAt": "2026-06-13T17:10:00.000Z",
+"createdAt": "2026-06-13T17:10:00.000Z",
+"updatedAt": "2026-06-13T17:10:00.000Z",
+"entryKind": "retrospective",
+"correctionHistory": []
+},
+{
+"id": "4e38988c-5dfb-41e8-ae56-bd86efe7916b",
+"operationId": "op1",
+"revision": 1,
+"tableId": null,
+"teamA": [
+"eec271d7-6a66-4e79-9dc7-f9ca693ccd5d",
+"e1de8c62-a161-4185-be6c-173908dbadb1"
+],
+"teamB": [
+"c901fac7-0601-4d31-bcb0-18ad8c4a33a0",
+"edd6935b-6af2-4174-b615-a8e0e0bebd7a"
+],
+"status": "completed",
+"winner": "A",
+"startedAt": null,
+"completedAt": "2026-06-13T17:18:00.000Z",
+"createdAt": "2026-06-13T17:18:00.000Z",
+"updatedAt": "2026-06-13T17:18:00.000Z",
+"entryKind": "retrospective",
+"correctionHistory": []
+},
+{
+"id": "5646f13e-280c-4efd-9b91-3fb45fd2d05b",
+"operationId": "op2",
+"revision": 1,
+"tableId": null,
+"teamA": [
+"d0b4d66b-b995-468e-b91e-968e5688beed",
+"131ec5ba-c86e-4466-b915-680bb0533cdc"
+],
+"teamB": [
+"c901fac7-0601-4d31-bcb0-18ad8c4a33a0",
+"eec271d7-6a66-4e79-9dc7-f9ca693ccd5d"
+],
+"status": "completed",
+"winner": "B",
+"startedAt": null,
+"completedAt": "2026-06-13T17:26:00.000Z",
+"createdAt": "2026-06-13T17:26:00.000Z",
+"updatedAt": "2026-06-13T17:26:00.000Z",
+"entryKind": "retrospective",
+"correctionHistory": []
+},
+{
+"id": "ff4b847e-07e8-47d4-91e2-9b1e21da8b84",
+"operationId": "op3",
+"revision": 1,
+"tableId": null,
+"teamA": [
+"eec271d7-6a66-4e79-9dc7-f9ca693ccd5d",
+"edd6935b-6af2-4174-b615-a8e0e0bebd7a"
+],
+"teamB": [
+"d0b4d66b-b995-468e-b91e-968e5688beed",
+"e1de8c62-a161-4185-be6c-173908dbadb1"
+],
+"status": "completed",
+"winner": "A",
+"startedAt": null,
+"completedAt": "2026-06-13T17:34:00.000Z",
+"createdAt": "2026-06-13T17:34:00.000Z",
+"updatedAt": "2026-06-13T17:34:00.000Z",
+"entryKind": "retrospective",
+"correctionHistory": []
+},
+{
+"id": "ac6881a6-504c-4d3f-9af4-ca96503c2e80",
+"operationId": "op4",
+"revision": 1,
+"tableId": null,
+"teamA": [
+"131ec5ba-c86e-4466-b915-680bb0533cdc",
+"c901fac7-0601-4d31-bcb0-18ad8c4a33a0"
+],
+"teamB": [
+"d0b4d66b-b995-468e-b91e-968e5688beed",
+"edd6935b-6af2-4174-b615-a8e0e0bebd7a"
+],
+"status": "completed",
+"winner": "B",
+"startedAt": null,
+"completedAt": "2026-06-13T17:42:00.000Z",
+"createdAt": "2026-06-13T17:42:00.000Z",
+"updatedAt": "2026-06-13T17:42:00.000Z",
+"entryKind": "retrospective",
+"correctionHistory": []
+}
+]
+}
+]
+}

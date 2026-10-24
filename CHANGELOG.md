@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.24-4 (24.10.2026 10:36)
+- Einstellungen ohne Scrollen, Startseite mit gleichmässigen Abständen
+
 ## 2026.10.24-3 (24.10.2026 10:25)
 - Design Dunkel heisst jetzt Nocturne
 

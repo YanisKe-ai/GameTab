@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.24-24 (24.10.2026 19:05)
+- Werwolf: offizielle Siegbedingung nach Düsterwald
+
 ## 2026.10.24-23 (24.10.2026 18:54)
 - Schieber-Turnier: Meldung verdeckt keine Knöpfe mehr; Regressionstest für alle Spiele
 

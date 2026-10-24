@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.25-3 (25.10.2026 00:43)
+- Tutto: kleiner Titel weg, nur noch der grosse Schriftzug
+
 ## 2026.10.25-2 (25.10.2026 00:40)
 - Tutto: grosser Schriftzug beim Spielen ist zurück
 

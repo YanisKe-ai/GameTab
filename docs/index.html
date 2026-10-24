@@ -18892,7 +18892,7 @@ function GameCard({ title, description, status, accent, onClick, disabled, logo,
 	} }, "›"));
 }
 var GT_HEAD_CSS = ".gt-hb{position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:44px;height:44px;padding:0;margin:0;border:none;background:transparent;cursor:pointer;font:inherit;-webkit-tap-highlight-color:transparent;touch-action:manipulation}.gt-hb:focus{outline:none}.gt-hb>.gt-hf{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:36px;min-width:36px;box-sizing:border-box;border-radius:999px;white-space:nowrap;transition:transform .16s cubic-bezier(.23,1,.32,1),background-color .2s ease,border-color .2s ease,color .2s ease}.gt-hb:active>.gt-hf{transform:scale(.96)}.gt-hb:focus-visible>.gt-hf{outline:2px solid currentColor;outline-offset:2px}@media (hover:hover) and (pointer:fine){.gt-hb:hover>.gt-hf{filter:brightness(1.15)}}@media (prefers-reduced-motion:reduce){.gt-hb>.gt-hf{transition:none}}.gt-gamehead{position:sticky;top:var(--gt-sat, env(safe-area-inset-top, 0px));z-index:20;margin:-6px -12px 8px;padding:6px 12px 8px}.gt-gamehead.is-stuck{background-color:var(--gt-pg-col);background-image:var(--gt-pg-img);background-size:var(--gt-pg-size);background-repeat:no-repeat;background-position:var(--gt-head-pos,0 0);box-shadow:0 1px 0 rgba(128,128,128,.22)}html[data-gt-theme=\"vitrum\"] .gt-gamehead.is-stuck{background:rgba(16,18,25,.58);background-image:none;-webkit-backdrop-filter:blur(24px) saturate(160%);backdrop-filter:blur(24px) saturate(160%);box-shadow:inset 0 -1px 0 rgba(255,255,255,.10),0 8px 24px -12px rgba(0,0,0,.5)}.gt-gamehead>.gt-headbtns{top:6px!important;right:8px!important}.gt-headbtns{z-index:21!important}div:has(>.gt-gamehead~.gt-headbtns){position:sticky!important;top:var(--gt-sat, env(safe-area-inset-top, 0px));z-index:20}div:has(>.gt-gamehead~.gt-headbtns)>.gt-headbtns{top:6px!important}.gtL-content .gt-gamehead,.gtL-content .gt-gamehead.is-stuck{position:relative;top:auto;margin:0 0 16px;padding:0;background:none;box-shadow:none}html[data-gt-theme=\"vitrum\"] .gtL-content .gt-gamehead.is-stuck{background:none;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:none}.gtL-content .gt-gamehead>.gt-headbtns{top:0!important;right:-4px!important}.gtL-content div:has(>.gt-gamehead~.gt-headbtns){position:relative!important;top:auto}.gtL-content div:has(>.gt-gamehead~.gt-headbtns)>.gt-headbtns{top:0!important}div:has(>.gt-headbtns+.gt-gamehead)>.gt-headbtns{position:sticky!important;top:calc(var(--gt-headtop, var(--gt-sat, env(safe-area-inset-top, 0px))) + 6px)!important;right:auto!important;left:auto!important;height:0;overflow:visible;display:flex;justify-content:flex-end;margin-right:-4px;z-index:22!important}.gtL-content div:has(>.gt-headbtns+.gt-gamehead)>.gt-headbtns{position:absolute!important;top:0!important;right:-4px!important;height:auto;margin-right:0}.gtL-yatzy-sheets,.gt-gamehead~.gtL-e-fit{isolation:isolate}.gt-gamehead.is-stuck{-webkit-transform:translateZ(0);transform:translateZ(0)}.gt-gamehead.is-stuck::before{content:'';position:absolute;left:0;right:0;bottom:100%;height:var(--gt-cover,0px);pointer-events:none;background-color:var(--gt-pg-col);background-image:var(--gt-pg-img);background-size:var(--gt-pg-size);background-repeat:no-repeat;background-position:var(--gt-head-pos2,0 0)}.gtL-content .gt-gamehead.is-stuck::before{display:none}";
-function GameHeader({ title, subtitle, icon, accent, onBack, backLabel, tk, titleFont, onHome, onEndGame, onRules, rulesTitle, rulesText, extra }) {
+function GameHeader({ title, subtitle, icon, accent, onBack, backLabel, tk, titleFont, onHome, onEndGame, onRules, rulesTitle, rulesText, extra, hideTitle }) {
 	const [rulesOpen, setRulesOpen] = useState$11(false);
 	const headRef = useRef$17(null);
 	const [stuck, setStuck] = useState$11(false);
@@ -18998,7 +18998,14 @@ function GameHeader({ title, subtitle, icon, accent, onBack, backLabel, tk, titl
 			display: "flex",
 			zIndex: 5
 		}
-	}, extra), /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	}, extra), /* @__PURE__ */ import_react.default.createElement("div", { style: hideTitle ? {
+		position: "absolute",
+		width: 1,
+		height: 1,
+		overflow: "hidden",
+		clip: "rect(0 0 0 0)",
+		whiteSpace: "nowrap"
+	} : {
 		display: "flex",
 		alignItems: "center",
 		gap: 10,
@@ -43374,7 +43381,7 @@ function TuttoDecoration({ theme }) {
 		opacity: op
 	})));
 }
-function TuttoTopBar({ subtitle, onBack, theme, t, onHome, rulesText, onEndGame }) {
+function TuttoTopBar({ subtitle, onBack, theme, t, onHome, rulesText, onEndGame, hideTitle }) {
 	const tk = tuttoTokens(theme);
 	return /* @__PURE__ */ import_react.default.createElement(GameHeader, {
 		title: t("gameTutto"),
@@ -43386,7 +43393,8 @@ function TuttoTopBar({ subtitle, onBack, theme, t, onHome, rulesText, onEndGame 
 		icon: /* @__PURE__ */ import_react.default.createElement(TuttoLogo, { color: tk.gold }),
 		onHome,
 		onEndGame,
-		rulesText
+		rulesText,
+		hideTitle
 	});
 }
 function TuttoPlayerRow({ onCard, pmLeaders, selfLead, gtLead, player, color, target, playerNumber, isLeader, onAdd, onUndo, onRename, onRemove, canRemove, tk, t }) {
@@ -43762,7 +43770,7 @@ function TuttoWordmark({ theme }) {
 		"aria-hidden": "true",
 		style: {
 			textAlign: "center",
-			margin: "-4px 0 14px",
+			margin: "0 0 14px",
 			position: "relative",
 			zIndex: 1,
 			pointerEvents: "none"
@@ -43885,7 +43893,8 @@ function TuttoPlay({ players, setPlayers, target, onBack, onHome, onEndGame, onE
 	}), /* @__PURE__ */ import_react.default.createElement(TuttoTopBar, {
 		onBack,
 		theme,
-		t
+		t,
+		hideTitle: true
 	}), /* @__PURE__ */ import_react.default.createElement(TuttoWordmark, { theme }), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side" }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		justifyContent: "flex-end",
@@ -104616,7 +104625,7 @@ function YatzyGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 }
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.10.25-2";
+var APP_BUILD = "2026.10.25-3";
 // web/src/app/storage.js
 var storage_exports = /* @__PURE__ */ __exportAll({
 	GT_CAT_KEYS: () => GT_CAT_KEYS,
@@ -104738,7 +104747,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.10.25-2");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.10.25-3");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -107032,7 +107041,7 @@ function UpdateBanner() {
 		let alive = true;
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.10.25-2") {
+				if (alive && v && v.build && v.build !== "2026.10.25-3") {
 					setReady(true);
 					setHidden(false);
 					try {

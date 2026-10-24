@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.24-9 (24.10.2026 11:14)
+- Bildexport wieder Night League, ohne Körnung
+
 ## 2026.10.24-8 (24.10.2026 11:12)
 - Startseite zeigt immer die Tipps, Spieleabend-Karte nur noch in den Statistiken
 

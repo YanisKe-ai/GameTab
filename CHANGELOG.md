@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.24-22 (24.10.2026 18:15)
+- Soft-Blocks-Podest plastisch wie die Vorlage; Partyrunden überstehen Updates; Tabu fortsetzbar; Darts-Regeln, Turnier-Regeln, Werwolf-Dieb, Gleichstand-Texte
+
 ## 2026.10.24-21 (24.10.2026 17:39)
 - Minigolf auf dem Handy, Spielfarben pro Design, Regeln-Fenster gegliedert, grössere Trefferflächen, Laptop-Einstellungen zweispaltig
 

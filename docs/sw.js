@@ -1,15 +1,20 @@
 // GameTab Service Worker
-// Die App ist eine einzelne, eigenständige index.html (Schriften und Logo als Base64
-// eingebettet), dazu manifest.webmanifest und icons/. Es gibt keine externen Ressourcen-Requests.
+// Die App ist eine einzelne, eigenständige index.html (Code und Logo eingebettet), dazu manifest.webmanifest, fonts/, icons/ und img/. Es gibt keine externen Ressourcen-Requests.
 // Diese Datei sorgt dafür, dass die App nach dem ersten Laden auch offline
 // funktioniert und schneller startet.
 
 const CACHE_NAME = "gametab-cache-2026.10.24-29";
 const APP_SHELL = ["./", "./index.html"];
+// Zusatzdateien (Schriften, Icons, Bilder): wird beim Vite-Build aus docs/ erzeugt (web/vite.config.mjs).
+const PRECACHE_EXTRA = ["./fonts/Baloo2-400-1.woff2","./fonts/Baloo2-701-1.woff2","./fonts/Fraunces-500-1.woff2","./fonts/Fraunces-500-2.woff2","./fonts/Inter-400-1.woff2","./fonts/Inter-400-2.woff2","./fonts/Kalam-400-1.woff2","./fonts/Kalam-400-2.woff2","./fonts/Kalam-700-1.woff2","./fonts/Kalam-700-2.woff2","./fonts/SpaceGrotesk-500-1.woff2","./fonts/SpaceGrotesk-500-2.woff2","./icons/192.png","./icons/512.png","./icons/apple-touch-icon.png","./icons/favicon-16.png","./icons/favicon-32.png","./icons/favicon.ico","./icons/maskable-192.png","./icons/maskable-512.png","./img/dragon-fly-head.png","./img/dragon-fly-lw.png","./img/dragon-fly-rw.png","./manifest.webmanifest"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL))
+    caches.open(CACHE_NAME).then((cache) =>
+      cache.addAll(APP_SHELL).then(() =>
+        Promise.all(PRECACHE_EXTRA.map((u) => cache.add(u).catch(() => {})))
+      )
+    )
   );
   self.skipWaiting();
 });

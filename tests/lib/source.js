@@ -34,7 +34,7 @@ function composeWeb() {
       if (m && m[1].startsWith(".")) {
         let t = path.resolve(path.dirname(file), m[1]);
         if (!fs.existsSync(t) && fs.existsSync(t + ".js")) t += ".js";
-        if (fs.existsSync(t) && fs.statSync(t).isFile()) visit(t);
+        if (fs.existsSync(t) && fs.statSync(t).isFile() && t.endsWith(".js")) visit(t);
       }
     }
     const kept = [];

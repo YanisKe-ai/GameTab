@@ -1,0 +1,8 @@
+/* Nur Theme + Utilities, KEIN preflight. Praefix "tw" => Klassen heissen tw:flex usw. */
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme) prefix(tw);
+@import "tailwindcss/utilities.css" layer(utilities) prefix(tw);
+@theme inline {
+  --animate-shine: shine var(--duration) infinite linear;
+  @keyframes shine { 0% { background-position: 0% 0%; } 50% { background-position: 100% 100%; } to { background-position: 0% 0%; } }
+}

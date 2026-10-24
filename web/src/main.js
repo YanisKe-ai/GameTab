@@ -1,5 +1,6 @@
 // Erzeugt von tools/split.mjs. Importiert alle Module in der Original-Reihenfolge.
 import * as M0 from "./prelude.js";
+import "./tw.css"; // Tailwind v4 ohne Preflight, Praefix tw: (nur fuer Magic UI)
 import * as M1 from "./shared/fx.js";
 import * as M2 from "./themes/palette.js";
 import * as M3 from "./assets/logo-data.js";

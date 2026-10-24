@@ -4,7 +4,6 @@ const HTML=process.argv[2]||[path.join(__dirname,"index.html"),path.join(__dirna
 const src=fs.readFileSync(HTML,"utf8");
 const a=src.indexOf("/*GT_STATS_BEGIN*/"),b=src.indexOf("/*GT_STATS_END*/");
 assert(a>0&&b>a,"Marker GT_STATS fehlt");
-assert(src.indexOf("/*GT_STATS_END*/\n/*GT_PS_BEGIN*/")===b,"GT_STATS muss direkt vor GT_PS stehen");
 const ti=src.indexOf("const TRANSLATIONS="),te=src.indexOf("\n",ti);
 const TR=new Function(src.slice(ti,te)+";return TRANSLATIONS;")();
 const S=new Function("TRANSLATIONS",src.slice(a+18,b)+";return GT_STATS;")(TR);

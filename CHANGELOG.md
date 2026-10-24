@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.24-27 (24.10.2026 21:22)
+- Statistik komplett neu: Filter, faire Rangliste, Profile, Nemesis, Spielabende, Jahresrückblick
+
 ## 2026.10.24-26 (24.10.2026 20:18)
 - Logik: Darts-Zugreihenfolge, Shanghai-Sieg, Personenstatistik ohne Namensverwechslung, Freies Spiel Niedrigste gewinnt, Korrekturen in der Statistik
 

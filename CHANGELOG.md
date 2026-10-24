@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.24-20 (24.10.2026 17:21)
+- Soft-Blocks-Podest; Spielfehler in HeadsUp, Tabu, Werwolf, Darts, Freies Spiel behoben; Partyspiele fortsetzbar; App 30 Prozent kleiner
+
 ## 2026.10.24-19 (24.10.2026 15:10)
 - Schieber-Turnier: Zeitpunkt für nachträgliche Partien, kürzere Tabs, laufende Turniere in Seitenleiste und Weiterspielen
 

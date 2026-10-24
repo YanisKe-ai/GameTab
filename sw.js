@@ -1,10 +1,10 @@
 // GameTab Service Worker
-// Die App ist eine einzelne, komplett eigenständige index.html (Schriften, Icons,
-// Logo alles als Base64 eingebettet) — es gibt keine externen Ressourcen-Requests.
+// Die App ist eine einzelne, eigenständige index.html (Schriften und Logo als Base64
+// eingebettet), dazu manifest.webmanifest und icons/. Es gibt keine externen Ressourcen-Requests.
 // Diese Datei sorgt dafür, dass die App nach dem ersten Laden auch offline
 // funktioniert und schneller startet.
 
-const CACHE_NAME = "gametab-cache-2026.10.24-19";
+const CACHE_NAME = "gametab-cache-2026.10.24-20";
 const APP_SHELL = ["./", "./index.html"];
 
 self.addEventListener("install", (event) => {
@@ -29,16 +29,20 @@ self.addEventListener("activate", (event) => {
 // So sind Updates sofort beim ersten Oeffnen sichtbar, Offline-Faehigkeit bleibt erhalten.
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
+  // Update-Pruefung (version.json, auch mit ?t=...) nie cachen und nie abfangen,
+  // sonst waechst der Cache bei jedem Fokus um einen Eintrag.
+  const reqUrl = new URL(event.request.url);
+  if (reqUrl.pathname.endsWith("/version.json")) return;
 
   event.respondWith(
     fetch(event.request)
       .then((response) => {
-        if (response && response.status === 200) {
+        if (response && response.status === 200 && !reqUrl.search) {
           const clone = response.clone();
           caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
         }
         return response;
       })
-      .catch(() => caches.match(event.request))
+      .catch(() => caches.match(event.request, { ignoreSearch: true }))
   );
 });

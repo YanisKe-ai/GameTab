@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.24-26 (24.10.2026 20:18)
+- Logik: Darts-Zugreihenfolge, Shanghai-Sieg, Personenstatistik ohne Namensverwechslung, Freies Spiel Niedrigste gewinnt, Korrekturen in der Statistik
+
 ## 2026.10.24-25 (24.10.2026 19:24)
 - Schieber-Turnier im Look des gewählten App-Designs
 

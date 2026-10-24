@@ -2,14 +2,13 @@
   "name": "gametab",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "split": "node tools/split.mjs",
     "verify": "node tools/split.mjs --verify",
     "public": "node web/scripts/copy-public.mjs",
-    "dev": "npm run public && vite --config web/vite.config.js",
-    "build": "npm run public && vite build --config web/vite.config.js",
-    "lint": "eslint --config web/eslint.config.js web/src"
+    "dev": "npm run public && vite --config web/vite.config.mjs",
+    "build": "npm run public && vite build --config web/vite.config.mjs",
+    "lint": "eslint --config web/eslint.config.mjs web/src"
   },
   "dependencies": {
     "react": "18.3.1",

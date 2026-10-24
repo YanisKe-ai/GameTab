@@ -1,0 +1,477 @@
+{
+  "note": "Zuordnung Top-Level-Anweisungen -> Datei unter web/src. Erste passende Regel gewinnt (names exakt, match = Regex auf ersten Namen, from/to = Bereich nach Original-Reihenfolge). Anweisungen ohne Namen (Seiteneffekte) gehoeren zur Datei der vorigen Anweisung. Nicht erfasste -> rest.",
+  "rest": "legacy/rest.js",
+  "rules": [
+    {
+      "file": "app/App.js",
+      "names": [
+        "GT_S8P",
+        "GT_CUR_LANG"
+      ],
+      "why": "let wird in App beschrieben, Importe sind schreibgeschuetzt"
+    },
+    {
+      "file": "prelude.js",
+      "from": "useState",
+      "to": "gtNoEmo"
+    },
+    {
+      "file": "app/build.js",
+      "names": [
+        "APP_BUILD"
+      ]
+    },
+    {
+      "file": "boot.js",
+      "from": "root",
+      "to": "UpdateBanner"
+    },
+    {
+      "file": "themes/tokens.js",
+      "match": "^[a-zA-Z0-9]+(Tokens|PageShellStyle)$"
+    },
+    {
+      "file": "shared/fx.js",
+      "from": "gtRM",
+      "to": "GtHoldButton"
+    },
+    {
+      "file": "themes/palette.js",
+      "from": "HUES",
+      "to": "RADIUS_SM"
+    },
+    {
+      "file": "assets/logo-data.js",
+      "from": "APP_LOGO_URI_GOLD",
+      "to": "DRAGON_ICON_RW_DARK"
+    },
+    {
+      "file": "shared/app-logo.js",
+      "names": [
+        "AppLogo"
+      ]
+    },
+    {
+      "file": "content/legal.js",
+      "from": "LEGAL_TITLE",
+      "to": "LEGAL_TEXT"
+    },
+    {
+      "file": "styles/global.js",
+      "names": [
+        "GLOBAL_STYLES"
+      ]
+    },
+    {
+      "file": "i18n/translations.js",
+      "names": [
+        "TRANSLATIONS"
+      ]
+    },
+    {
+      "file": "games/s8/shared.js",
+      "from": "GT_S8_PH",
+      "to": "s8NumPad"
+    },
+    {
+      "file": "games/phase10/game.js",
+      "from": "p10Calc",
+      "to": "Phase10Game"
+    },
+    {
+      "file": "games/romme/game.js",
+      "from": "romCalc",
+      "to": "RommeGame"
+    },
+    {
+      "file": "games/traitor/game.js",
+      "from": "trtAuto",
+      "to": "TraitorGame"
+    },
+    {
+      "file": "i18n/use-t.js",
+      "from": "useT",
+      "to": "appTimeAgoLabel"
+    },
+    {
+      "file": "themes/shell.js",
+      "from": "dartsAccent",
+      "to": "shellTokens"
+    },
+    {
+      "file": "app/storage.js",
+      "from": "STORAGE_KEY",
+      "to": "gtSyncMatchId"
+    },
+    {
+      "file": "shared/fireworks.js",
+      "from": "Confetti",
+      "to": "Fireworks"
+    },
+    {
+      "file": "shared/sound.js",
+      "from": "soundEnabled",
+      "to": "hapticReveal"
+    },
+    {
+      "file": "shared/ranking.js",
+      "from": "rankedPodium",
+      "to": "usePlayCount"
+    },
+    {
+      "file": "stats/core.js",
+      "names": [
+        "GT_STATS"
+      ]
+    },
+    {
+      "file": "stats/year-review.js",
+      "from": "GT_YR_SUIT",
+      "to": "gtYearReviewImage"
+    },
+    {
+      "file": "stats/match-log.js",
+      "from": "MATCH_LOG_KEY",
+      "to": "usePersonalBest"
+    },
+    {
+      "file": "export/canvas-utils.js",
+      "from": "hexToRgb",
+      "to": "drawConfettiSideBands"
+    },
+    {
+      "file": "export/result-card.js",
+      "from": "GT_EC",
+      "to": "shareResultImage"
+    },
+    {
+      "file": "export/schieber-sheet.js",
+      "from": "GT_STX",
+      "to": "GtStExportSheet"
+    },
+    {
+      "file": "export/share-preview.js",
+      "names": [
+        "ShareImagePreview"
+      ]
+    },
+    {
+      "file": "shared/game-helpers.js",
+      "from": "gtRotate",
+      "to": "gtYatzyBonusCell"
+    },
+    {
+      "file": "stats/night.js",
+      "from": "gtNightStart",
+      "to": "GtNightCard"
+    },
+    {
+      "file": "app/install.js",
+      "from": "gtBIP",
+      "to": "GtStartExtras"
+    },
+    {
+      "file": "shared/qr.js",
+      "from": "gtQrMatrix",
+      "to": "GT_SHARE_FOOTER_H"
+    },
+    {
+      "file": "shared/soft-block.js",
+      "from": "GT_SB_ACC",
+      "to": "GtSbCrown"
+    },
+    {
+      "file": "shared/podium.js",
+      "from": "PodiumOverlay",
+      "to": "useMilestoneBurst"
+    },
+    {
+      "file": "assets/icons.js",
+      "from": "gtIcP",
+      "to": "DiePips"
+    },
+    {
+      "file": "shared/top-bar.js",
+      "names": [
+        "TopBar",
+        "pageShellStyle"
+      ]
+    },
+    {
+      "file": "games/headsup/orientation.js",
+      "from": "useOrientation",
+      "to": "headsupRequestMotion"
+    },
+    {
+      "file": "assets/logos.js",
+      "match": "Logo$"
+    },
+    {
+      "file": "stats/start-bits.js",
+      "names": [
+        "GtStatsEmpty",
+        "GtStatsHeadBtn"
+      ]
+    },
+    {
+      "file": "games/tabu/turn-intro.js",
+      "names": [
+        "TabuTurnIntro2"
+      ]
+    },
+    {
+      "file": "shared/game-header.js",
+      "from": "GameCard",
+      "to": "GameHeader"
+    },
+    {
+      "file": "app/App.js",
+      "from": "GT_CUR_LANG",
+      "to": "RulesSheet",
+      "why": "GT_CUR_LANG/GT_RS_SEQ (let) werden in App und RulesSheet beschrieben"
+    },
+    {
+      "file": "app/start.js",
+      "from": "GT_HANDOVER_H",
+      "to": "StartPage"
+    },
+    {
+      "file": "games/darts/cricket.js",
+      "from": "cricketHitInfo",
+      "to": "CricketGame"
+    },
+    {
+      "file": "games/darts/hiscore.js",
+      "from": "shanghaiHitInfo",
+      "to": "dartsScoreEnd"
+    },
+    {
+      "file": "games/darts/splitscore.js",
+      "from": "SPLIT_SCORE_TARGETS",
+      "to": "SplitScoreGame"
+    },
+    {
+      "file": "games/darts/shanghai.js",
+      "from": "ShanghaiSetup",
+      "to": "ShanghaiGame"
+    },
+    {
+      "file": "games/darts/darts.js",
+      "from": "DARTS_PREFS",
+      "to": "DartsGame"
+    },
+    {
+      "file": "app/categories.js",
+      "from": "CategoryScorepads",
+      "to": "CategoryPartyGames"
+    },
+    {
+      "file": "app/settings.js",
+      "names": [
+        "SettingsPage"
+      ]
+    },
+    {
+      "file": "games/schieber/tournament-core.js",
+      "from": "GT_ST",
+      "to": "useGtStStore"
+    },
+    {
+      "file": "games/schieber/tournament.js",
+      "from": "SchieberTournament",
+      "to": "gtStuResume"
+    },
+    {
+      "file": "app/variant-select.js",
+      "from": "JassVariantSelect",
+      "to": "DartsVariantSelect"
+    },
+    {
+      "file": "shared/standings.js",
+      "names": [
+        "GtRoundChart",
+        "GtLStandings"
+      ]
+    },
+    {
+      "file": "games/tutto/game.js",
+      "from": "TUTTO_RED",
+      "to": "TuttoGame"
+    },
+    {
+      "file": "games/freeplay/game.js",
+      "from": "FreeplayLeaderRow",
+      "to": "FreeplayGame"
+    },
+    {
+      "file": "shared/groups.js",
+      "names": [
+        "useSavedGroups"
+      ]
+    },
+    {
+      "file": "shared/setup-ui.js",
+      "from": "GT_SU_ACC",
+      "to": "GroupManager"
+    },
+    {
+      "file": "games/yatzy/game.js",
+      "from": "YATZY_UPPER",
+      "to": "YatzyGame"
+    },
+    {
+      "file": "games/minigolf/game.js",
+      "names": [
+        "MINIGOLF_SCORECARD_CSS"
+      ]
+    },
+    {
+      "file": "games/impostor/game.js",
+      "names": [
+        "IMPOSTOR_DOSSIER_CSS"
+      ]
+    },
+    {
+      "file": "games/wizard/game.js",
+      "from": "wizardRoundCount",
+      "to": "WizardGame"
+    },
+    {
+      "file": "games/jass/game.js",
+      "from": "JASS_CATEGORIES",
+      "to": "JassGame"
+    },
+    {
+      "file": "games/schieber/game.js",
+      "from": "CHALK_BG",
+      "to": "SchieberGame"
+    },
+    {
+      "file": "content/impostor-words.js",
+      "names": [
+        "IMPOSTOR_CATEGORIES_BY_LANG"
+      ]
+    },
+    {
+      "file": "games/impostor/game.js",
+      "from": "impostorPickWord",
+      "to": "ImpostorGame"
+    },
+    {
+      "file": "games/werwolf/game.js",
+      "from": "WEREWOLF_ROLES_BY_LANG",
+      "to": "WerewolfGame"
+    },
+    {
+      "file": "games/mafia/game.js",
+      "from": "mafiaTokens",
+      "to": "DEFAULT_MAFIA"
+    },
+    {
+      "file": "content/five-sec.js",
+      "from": "FIVE_SEC_PROMPTS",
+      "to": "fiveSecPromptsFor"
+    },
+    {
+      "file": "content/most-likely.js",
+      "from": "MOST_LIKELY_STATEMENTS",
+      "to": "mostLikelyStatementsFor"
+    },
+    {
+      "file": "content/tabu-words.js",
+      "names": [
+        "TABU_CATEGORIES_BY_LANG"
+      ]
+    },
+    {
+      "file": "shared/custom-deck.js",
+      "names": [
+        "gtCustomRead",
+        "gtCustomWrite",
+        "gtCustomParse",
+        "gtCustomCat",
+        "gtImpCats",
+        "GtCustomDeck"
+      ]
+    },
+    {
+      "file": "games/tabu/game.js",
+      "from": "TABU_CATEGORIES_FOR",
+      "to": "TabuGame"
+    },
+    {
+      "file": "games/headsup/game.js",
+      "from": "headsupTokens",
+      "to": "HeadsUpGame"
+    },
+    {
+      "file": "shared/laptop-keys.js",
+      "from": "GTL_FOCUS",
+      "to": "GtlStandings"
+    },
+    {
+      "file": "games/skyjo/game.js",
+      "from": "skyjoTokens",
+      "to": "SkyjoGame"
+    },
+    {
+      "file": "games/flip7/game.js",
+      "from": "flip7Tokens",
+      "to": "DEFAULT_FLIP7"
+    },
+    {
+      "file": "games/minigolf/game.js",
+      "from": "MINIGOLF_HOLES",
+      "to": "MinigolfGame"
+    },
+    {
+      "file": "games/fivesec/game.js",
+      "from": "fiveSecTokens",
+      "to": "FiveSecGame"
+    },
+    {
+      "file": "games/mostlikely/game.js",
+      "from": "mostLikelyTokens",
+      "to": "MostLikelyGame"
+    },
+    {
+      "file": "app/defaults.js",
+      "from": "DEFAULT_TUTTO",
+      "to": "DEFAULT_MOSTLIKELY"
+    },
+    {
+      "file": "app/loading.js",
+      "names": [
+        "LoadingScreen"
+      ]
+    },
+    {
+      "file": "stats/legacy-ui.js",
+      "from": "STATS_GAME_COLORS",
+      "to": "sharePlayerCardImage"
+    },
+    {
+      "file": "stats/page.js",
+      "from": "GT_ST2_CSS",
+      "to": "StatsPage"
+    },
+    {
+      "file": "app/App.js",
+      "names": [
+        "App"
+      ]
+    }
+  ],
+  "allowReorder": [
+    {
+      "a": "GT_ST_STORE",
+      "b": "after:gtBIP",
+      "why": "zwei unabhaengige window-Listener (storage / beforeinstallprompt), Reihenfolge egal"
+    },
+    {
+      "a": "after:GTL_FOCUS",
+      "b": "after:gtBIP",
+      "why": "document-focusin-Listener und window-Install-Listener sind unabhaengig"
+    }
+  ]
+}

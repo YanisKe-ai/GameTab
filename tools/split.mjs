@@ -93,6 +93,9 @@ function joinHtml(tpl, code, meta) {
 
 // ---------------------------------------------------------------- Analyse
 const FN_TYPES = new Set(["FunctionDeclaration", "FunctionExpression", "ArrowFunctionExpression", "ObjectMethod", "ClassMethod", "ClassPrivateMethod"]);
+// Globale ohne Zustand; alles andere (window, document, localStorage, React ...) gilt als "Welt"
+const PURE_GLOBALS = new Set(["Object", "Array", "Math", "JSON", "String", "Number", "Boolean", "Symbol", "RegExp", "Set", "Map", "WeakMap", "WeakSet", "Date", "Promise", "Error", "TypeError",
+  "parseInt", "parseFloat", "isNaN", "isFinite", "Infinity", "NaN", "undefined", "Intl", "encodeURIComponent", "decodeURIComponent", "BigInt", "Reflect", "Uint8Array", "Uint8ClampedArray", "Float32Array", "Int32Array", "Uint32Array", "Uint16Array", "ArrayBuffer", "DataView", "TextEncoder", "TextDecoder", "structuredClone", "atob", "btoa"]);
 const PURE_CTORS = new Set(["RegExp", "Set", "Map", "WeakMap", "WeakSet", "Symbol", "Date", "Error"]);
 const PURE_STATIC = new Set(["Object.freeze", "Object.keys", "Object.values", "Object.entries", "Object.fromEntries", "Array.from", "Array.isArray",
   "JSON.parse", "JSON.stringify", "String.fromCharCode", "String.fromCodePoint", "Number.isFinite", "Math.max", "Math.min", "Math.round", "Math.floor", "Math.ceil", "Math.abs", "Math.sqrt", "Math.pow"]);
@@ -125,7 +128,7 @@ function analyze(code) {
     }
     const kind = s.type === "VariableDeclaration" ? s.kind : s.type === "FunctionDeclaration" ? "function" : s.type === "ClassDeclaration" ? "class" : "effect";
     const fnInit = s.type === "VariableDeclaration" && s.declarations.length === 1 && s.declarations[0].init && FN_TYPES.has(s.declarations[0].init.type);
-    return { i, start: i ? body[i - 1].end : 0, end: s.end, node: s, names, kind, fnInit, refs: [], impure: kind === "effect", hasSemi: code[s.end - 1] === ";" || code[s.end - 1] === "}" };
+    return { i, start: i ? body[i - 1].end : 0, end: s.end, node: s, names, kind, fnInit, refs: [], globals: [], impure: kind === "effect", hasSemi: code[s.end - 1] === ";" || code[s.end - 1] === "}" };
   });
   const stmtAt = (pos) => { let lo = 0, hi = stmts.length - 1; while (lo < hi) { const m = (lo + hi + 1) >> 1; if (stmts[m].node.start <= pos) lo = m; else hi = m - 1; } return stmts[lo]; };
 
@@ -178,6 +181,11 @@ function analyze(code) {
       }
       for (const [name] of Object.entries(p.scope.globals)) freeGlobals.set(name, 0);
     },
+    ReferencedIdentifier(p) {
+      if (p.node.type !== "Identifier" || p.scope.getBinding(p.node.name)) return;
+      if (PURE_GLOBALS.has(p.node.name)) return;
+      stmtAt(p.node.start).globals.push({ name: p.node.name, eager: isEager(p) });
+    },
     "AssignmentExpression|UpdateExpression"(p) {
       const t = p.node.type === "AssignmentExpression" ? p.node.left : p.node.argument;
       if (t.type === "Identifier" && !p.scope.hasBinding(t.name, true)) undeclaredWrites.push({ name: t.name, stmt: stmtAt(p.node.start).i });
@@ -190,11 +198,12 @@ function analyze(code) {
       if (p.node.type === "AssignmentExpression" || p.node.type === "UpdateExpression" || p.node.type === "UnaryExpression") {
         // Zuweisung an lokale Variable innerhalb einer IIFE ist harmlos
         const t = p.node.type === "AssignmentExpression" ? p.node.left : p.node.argument;
-        if (t.type === "Identifier" && p.scope.hasBinding(t.name) && !p.scope.getBinding(t.name).scope.path.isProgram()) return;
+        if (t.type === "Identifier" && p.scope.getBinding(t.name) && !p.scope.getBinding(t.name).scope.path.isProgram()) return;
         st.impure = true; st.why = "Zuweisung"; return;
       }
       const c = p.node.callee;
       const cn = memberName(c) || "";
+      if ((c.type === "FunctionExpression" || c.type === "ArrowFunctionExpression") && p.node.arguments.length === 0) return; // IIFE: Rumpf wird selbst geprueft
       if (p.node.type === "NewExpression" && c.type === "Identifier" && PURE_CTORS.has(c.name)) return;
       if (c.type === "Identifier" && PURE_CTORS.has(c.name)) return;
       if (PURE_STATIC.has(cn)) return;
@@ -222,8 +231,11 @@ function computeNeeds(A) {
       if (!isFn(b)) need.add(name);
       if (callish || (!isFn(b) && stmts[b.stmt].fnInit && callish)) expand(b.stmt);
     };
-    const expand = (t) => { if (seen.has(t)) return; seen.add(t); for (const r of stmts[t].refs) add(r.name, r.callish); };
+    const world = new Set();
+    const expand = (t) => { if (seen.has(t)) return; seen.add(t); stmts[t].globals.forEach((g) => world.add(g.name)); for (const r of stmts[t].refs) add(r.name, r.callish); };
+    s.globals.forEach((g) => { if (g.eager) world.add(g.name); });
     for (const r of s.refs) if (r.eager) add(r.name, r.callish);
+    s.world = world;
     s.need = need;
     s.touch = new Set([...need, ...s.refs.filter((r) => r.eager).map((r) => r.name)].filter((n) => bindings.get(n) && bindings.get(n).stmt !== s.i));
   }
@@ -289,7 +301,7 @@ function buildModules(A, code) {
     m.vendor = [...vendor];
     m.exports = [...own];
     m.chunks = m.stmts.map((s) => code.slice(s.start, s.end));
-    if (m.file === order[order.length - 1].file) m.chunks.push(tail);
+    if (m.file === stmts[stmts.length - 1].file) m.chunks.push(tail);
   }
   return { order, tail, files };
 }
@@ -329,8 +341,12 @@ function simulate(order) {
   return new Map(out.map((f, k) => [f, k]));
 }
 
-function checkOrder(A, mods) {
+function checkOrder(A, mods, map) {
   const { stmts, bindings, writes, undeclaredWrites } = A;
+  // Bezeichnung einer Anweisung: erster Name, sonst "after:<voriger Name>"
+  const label = (s) => { if (s.names.length) return s.names[0]; for (let k = s.i - 1; k >= 0; k--) if (stmts[k].names.length) return "after:" + stmts[k].names[0]; return "#" + s.i; };
+  const allow = (map.allowReorder || []).map((r) => [r.a, r.b].sort().join("|"));
+  const allowed = (a, b) => allow.includes([label(a), label(b)].sort().join("|"));
   const ev = simulate(mods.order);
   const pos = (s) => ev.get(s.file) * 1e6 + s.i;
   const errors = [], warns = [];
@@ -341,7 +357,14 @@ function checkOrder(A, mods) {
   }
   // 2) Seiteneffekte in Original-Reihenfolge
   const imp = stmts.filter((s) => s.impure);
-  for (let k = 1; k < imp.length; k++) if (!(pos(imp[k - 1]) < pos(imp[k]))) errors.push(`Reihenfolge: Seiteneffekt #${imp[k].i} (${imp[k].file}) laeuft vor #${imp[k - 1].i} (${imp[k - 1].file})`);
+  // Paarweise: gleiche Bindings beruehrt oder beide greifen auf die Welt zu (DOM, Storage, React ...)
+  for (let x = 0; x < imp.length; x++) for (let y = x + 1; y < imp.length; y++) {
+    const a = imp[x], b = imp[y];
+    const shared = [...a.touch].filter((n) => b.touch.has(n));
+    const bothWorld = a.world.size && b.world.size;
+    if (allowed(a, b)) continue;
+    if ((shared.length || bothWorld) && !(pos(a) < pos(b))) errors.push(`Reihenfolge: Seiteneffekt #${b.i} (${b.file}) laeuft vor #${a.i} (${a.file}) [${shared.join(",") || "Welt: " + [...a.world].slice(0, 3) + " / " + [...b.world].slice(0, 3)}]`);
+  }
   // 3) Pure Anweisungen, die mit einem Seiteneffekt dasselbe Binding beruehren
   for (const w of imp) for (const s of stmts) {
     if (s.impure || s.i === w.i) continue;
@@ -417,7 +440,7 @@ function main() {
   computeNeeds(A);
   const { unmatched, unusedRules } = assignFiles(A, map, mono);
   const mods = buildModules(A, H.code);
-  const { errors, warns, ev } = checkOrder(A, mods);
+  const { errors, warns, ev } = checkOrder(A, mods, map);
 
   console.log(`Quelle ${srcRel}: ${A.stmts.length} Top-Level-Anweisungen, ${mods.order.length} Module, ${A.stmts.filter((s) => s.impure).length} mit Seiteneffekt`);
   const lets = A.stmts.filter((s) => s.kind === "let" || s.kind === "var");
@@ -425,7 +448,7 @@ function main() {
   if (unmatched.length) console.log(`Warnliste Rest (${unmatched.length}): ${unmatched.join(", ")}`);
   if (unusedRules.length) console.log(`Unbenutzte Regeln: ${unusedRules.join("; ")}`);
   warns.forEach((w) => console.log("WARN " + w));
-  if (has("--why")) A.stmts.filter((s) => s.impure).forEach((s) => console.log(`  Effekt #${s.i} ${s.names[0] || s.kind} ${s.file}: ${s.why || s.kind}`));
+  if (has("--why")) A.stmts.filter((s) => s.impure).forEach((s) => console.log(`  Effekt #${s.i} ${s.names[0] || s.kind} ${s.file}: ${s.why || s.kind}; Welt: ${[...s.world].join(",")}`));
   if (errors.length) {
     errors.slice(0, 80).forEach((e) => console.error("FEHLER " + e));
     console.error(`${errors.length} Gefahrenstellen, Abbruch (nichts geschrieben).`);

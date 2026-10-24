@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.24-21 (24.10.2026 17:39)
+- Minigolf auf dem Handy, Spielfarben pro Design, Regeln-Fenster gegliedert, grössere Trefferflächen, Laptop-Einstellungen zweispaltig
+
 ## 2026.10.24-20 (24.10.2026 17:21)
 - Soft-Blocks-Podest; Spielfehler in HeadsUp, Tabu, Werwolf, Darts, Freies Spiel behoben; Partyspiele fortsetzbar; App 30 Prozent kleiner
 

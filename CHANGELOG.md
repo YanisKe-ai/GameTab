@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.24-32 (24.10.2026 23:27)
+- Podest zählt Punkte hoch, Sieger glänzt, Startseite blendet sanft ein
+
 ## 2026.10.24-31 (24.10.2026 23:05)
 - Technik: Code auf JSX umgestellt
 

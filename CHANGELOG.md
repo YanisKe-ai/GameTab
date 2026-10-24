@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.25-2 (25.10.2026 00:40)
+- Tutto: grosser Schriftzug beim Spielen ist zurück
+
 ## 2026.10.25-1 (25.10.2026 00:29)
 - Erfolge für alle Spiele: Darts 180, Partyspiele und mehr
 

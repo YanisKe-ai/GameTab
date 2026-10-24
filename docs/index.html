@@ -43756,6 +43756,30 @@ function TuttoSetup({ players, setPlayers, target, setTarget, onStart, tk: gtTk0
 		skin: gtS
 	}))));
 }
+function TuttoWordmark({ theme }) {
+	const tk = tuttoTokens(theme);
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		"aria-hidden": "true",
+		style: {
+			textAlign: "center",
+			margin: "-4px 0 14px",
+			position: "relative",
+			zIndex: 1,
+			pointerEvents: "none"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("span", { style: {
+		display: "inline-block",
+		fontSize: 50,
+		lineHeight: 1.05,
+		fontWeight: 900,
+		fontFamily: "'Inter', sans-serif",
+		color: tk.gold,
+		WebkitTextStroke: theme === "light" ? "1.5px rgba(27,24,21,0.18)" : "1.5px #FFFFFF",
+		textShadow: "0 3px 0 rgba(0,0,0,0.2)",
+		letterSpacing: "0.01em",
+		transform: "skewX(-3deg)"
+	} }, "TUTTO"));
+}
 function TuttoPlay({ players, setPlayers, target, onBack, onHome, onEndGame, onEditPlayers, lang = "de", theme = "dark" }) {
 	const [confirmingReset, setConfirmingReset] = useState$11(false);
 	const [confirmingSetup, setConfirmingSetup] = useState$11(false);
@@ -43862,7 +43886,7 @@ function TuttoPlay({ players, setPlayers, target, onBack, onHome, onEndGame, onE
 		onBack,
 		theme,
 		t
-	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side" }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	}), /* @__PURE__ */ import_react.default.createElement(TuttoWordmark, { theme }), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side" }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		justifyContent: "flex-end",
 		marginBottom: 12
@@ -104592,7 +104616,7 @@ function YatzyGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 }
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.10.25-1";
+var APP_BUILD = "2026.10.25-2";
 // web/src/app/storage.js
 var storage_exports = /* @__PURE__ */ __exportAll({
 	GT_CAT_KEYS: () => GT_CAT_KEYS,
@@ -104714,7 +104738,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.10.25-1");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.10.25-2");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -107008,7 +107032,7 @@ function UpdateBanner() {
 		let alive = true;
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.10.25-1") {
+				if (alive && v && v.build && v.build !== "2026.10.25-2") {
 					setReady(true);
 					setHidden(false);
 					try {

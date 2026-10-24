@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.24-14 (24.10.2026 12:51)
+- Kopfzeile springt beim Scrollen nicht mehr, neuer Noir-Scheinwerfer
+
 ## 2026.10.24-13 (24.10.2026 12:42)
 - Keine System-Emoji im Bildexport und bei Werwolf
 

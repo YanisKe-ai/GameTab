@@ -4,7 +4,7 @@
 // Diese Datei sorgt dafür, dass die App nach dem ersten Laden auch offline
 // funktioniert und schneller startet.
 
-const CACHE_NAME = "gametab-cache-2026.10.24-13";
+const CACHE_NAME = "gametab-cache-2026.10.24-14";
 const APP_SHELL = ["./", "./index.html"];
 
 self.addEventListener("install", (event) => {

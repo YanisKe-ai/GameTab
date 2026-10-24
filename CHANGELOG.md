@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.24-6 (24.10.2026 11:04)
+- Neuer ruhiger Ergebnis-Bildexport GameTab Clean
+
 ## 2026.10.24-5 (24.10.2026 10:46)
 - Statistiken oben rechts in Schreibunterlagen und Partyspiele
 

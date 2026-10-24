@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.24-11 (24.10.2026 12:14)
+- Yatzy und Wizard: Kopfzeile und Knöpfe bleiben beim Scrollen sauber
+
 ## 2026.10.24-10 (24.10.2026 12:04)
 - Bildexport im bestätigten Night-League-Look
 

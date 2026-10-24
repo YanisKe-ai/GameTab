@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.24-12 (24.10.2026 12:39)
+- Bildexport: Abstände gemessen statt geschätzt, feinere Körnung
+
 ## 2026.10.24-11 (24.10.2026 12:14)
 - Yatzy und Wizard: Kopfzeile und Knöpfe bleiben beim Scrollen sauber
 

@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.24-2 (24.10.2026 10:24)
+- Neuer Ergebnis-Bildexport im Night-League-Design
+
 ## 2026.10.24-1 (24.10.2026 10:20)
 - Vitrum klar eigenständig: farbiger Hintergrund mit hellem Glas
 

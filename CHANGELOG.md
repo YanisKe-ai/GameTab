@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.24-13 (24.10.2026 12:42)
+- Keine System-Emoji im Bildexport und bei Werwolf
+
 ## 2026.10.24-12 (24.10.2026 12:39)
 - Bildexport: Abstände gemessen statt geschätzt, feinere Körnung
 

@@ -13,6 +13,9 @@ function htmlPath(arg) {
 const IMPORT_RE = /^\s*import\s+(?:[^"'()]*?\s+from\s+)?["']([^"']+)["'];?\s*$/;
 
 function stripLine(line) {
+  // Bild-Import ("import X from './img/x.png'") -> Platzhalter-String, damit der Name definiert bleibt
+  const asset = line.match(/^\s*import\s+([A-Za-z_$][\w$]*)\s+from\s+["'][^"']+\.(png|webp|jpe?g|svg|gif|woff2?)["'];?\s*$/);
+  if (asset) return `const ${asset[1]} = "data:,";`;
   if (IMPORT_RE.test(line)) return null;
   // "export { a, b };" und "export * from ..." entfernen
   if (/^\s*export\s*\{[^}]*\}\s*(from\s*["'][^"']+["'])?\s*;?\s*$/.test(line)) return null;

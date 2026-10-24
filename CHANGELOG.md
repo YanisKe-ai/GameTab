@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.24-30 (24.10.2026 22:39)
+- Technik: Schriften und Bilder als eigene Dateien, App lädt schneller
+
 ## 2026.10.24-29 (24.10.2026 22:20)
 - Technik: neues Build-Werkzeug (Vite 8, JSX, Tailwind, Magic UI Basis)
 

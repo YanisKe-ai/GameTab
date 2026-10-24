@@ -645,13 +645,11 @@ def run_node_core():
         return "SKIP", "node nicht installiert"
     if not script.exists():
         return "SKIP", "tests/test_core.js fehlt"
-    target = str(HTML_PATH)
-    if (ROOT / "tools" / "split.mjs").exists() and "docs" in target:
-        # Build hat keine Kommentar-Marker: rekonstruierten Quelltext aus web/src pruefen
-        import tempfile
-        src = subprocess.run([node, str(ROOT / "tools" / "split.mjs"), "--source"], capture_output=True, text=True, timeout=120, cwd=str(ROOT)).stdout
-        tf = tempfile.NamedTemporaryFile("w", suffix=".html", delete=False); tf.write(src); tf.close(); target = tf.name
-    r = subprocess.run([node, str(script), target], capture_output=True, text=True, timeout=120)
+    target, env = str(HTML_PATH), None
+    if "docs" in target and (ROOT / "web" / "src" / "main.js").exists():
+        # Build hat keine Kommentar-Marker: Quelltext aus web/src pruefen (tests/lib/source.js)
+        target, env = None, dict(os.environ, GAMETAB_SRC="web")
+    r = subprocess.run([node, str(script)] + ([target] if target else []), capture_output=True, text=True, timeout=120, env=env)
     out = (r.stdout + r.stderr).strip().splitlines()
     return ("OK" if r.returncode == 0 else "FEHLER"), (out[-1] if out else "")
 

@@ -172,7 +172,7 @@ T("Store: Abonnenten + stabiler Snapshot",()=>{let k=0;const un=GT_ST_STORE.subs
 T("Store: Notausgang/leerer State, Import-Sperre",()=>{delete mem[KEY];const r=GT_ST_STORE.commit(GT_ST_STORE.getSnapshot().list[0].id,t=>GT_ST.rename(t,"Nach Reset",tick()));assert(r.ok);assert(JSON.parse(mem[KEY]).schieberTournaments.length>=1);});
 
 // ---------- Hartpruefung gegen die Edits in index.html ----------
-T("index.html: Persistenz-/Backup-Anbindung vorhanden",()=>{["GT_ST_STORE.forSave()","GT_ST_STORE.hydrate(saved)","GT_ST.validateImport(data.schieberTournaments)","schieberTournaments:(()=>"].forEach(s=>assert(src.includes(s),s));assert.equal(src.split("const GT_ST=").length-1,1);assert(src.indexOf("/*GT_ST_END*/")<src.indexOf("function JassVariantSelect("));assert(!/[–—]/.test(src.slice(a,b)),"Gedankenstrich im Block");});
+T("index.html: Persistenz-/Backup-Anbindung vorhanden",()=>{["GT_ST_STORE.forSave()","GT_ST_STORE.hydrate(saved)","GT_ST.validateImport(data.schieberTournaments)","schieberTournaments:(()=>"].forEach(s=>assert(src.includes(s),s));assert.equal(src.split("const GT_ST=").length-1,1);assert(src.indexOf("/*GT_ST_END*/")<src.indexOf("function JassVariantSelect("));const blk=process.env.GAMETAB_SRC==="web"?(()=>{const fs=require("fs"),f=n=>fs.readFileSync(require("path").join(__dirname,"..","web","src","games","schieber",n),"utf8");const c=f("tournament-core.js"),e=f("tournament.js");return c.slice(c.indexOf("/*GT_ST_BEGIN*/"))+e.slice(0,e.indexOf("/*GT_ST_END*/"));})():src.slice(a,b);assert(!/[–—]/.test(blk),"Gedankenstrich im Block");});
 
 console.log(`${n} Tests gruen, ${fail} Fehler`);
 if(fail){fails.forEach(f=>console.log("FEHLER:",f));process.exit(1);}

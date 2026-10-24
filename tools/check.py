@@ -18,7 +18,34 @@ import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-HTML = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / "index.html"
+_dist = ROOT / "docs" / "index.html"
+HTML = Path(sys.argv[1]) if len(sys.argv) > 1 else (_dist if _dist.exists() else ROOT / "index.html")
+BUILD_RE = r'APP_BUILD\s*=\s*"([^"]*)"'
+
+
+def first_existing(name):
+    for d in (ROOT, ROOT / "public", ROOT / "web" / "public"):
+        if (d / name).exists():
+            return d / name
+    return ROOT / name
+
+
+def src_build():
+    """APP_BUILD aus der Quelle (web/src/app/build.js), sonst None."""
+    p = ROOT / "web" / "src" / "app" / "build.js"
+    if p.exists():
+        f = re.findall(BUILD_RE, p.read_text(encoding="utf-8"))
+        return f[0] if len(f) == 1 else "?"
+    return None
+
+
+def vitrum_suspects(js):
+    out = []
+    for m in re.finditer(r"radial-gradient\([^`\"]{0,80}\$\{(\w+)\.bg\}", js):
+        before = js[max(0, m.start() - 160): m.start()]
+        if "vitrum" not in before:
+            out.append(js[m.start(): m.start() + 90])
+    return out
 
 
 def main() -> int:
@@ -58,11 +85,10 @@ def main() -> int:
             print("OK   StartPage Klammern")
 
     # 3. Vitrum-Falle: ${tokens.bg} direkt in radial-gradient ohne vitrum-Weiche
-    suspects = []
-    for m in re.finditer(r"radial-gradient\([^`\"]{0,80}\$\{(\w+)\.bg\}", main_js):
-        before = main_js[max(0, m.start() - 160): m.start()]
-        if "vitrum" not in before:
-            suspects.append(main_js[m.start(): m.start() + 90])
+    suspects = vitrum_suspects(main_js)
+    for f in sorted((ROOT / "web" / "src").rglob("*.js")) if (ROOT / "web" / "src").is_dir() else []:
+        for x in vitrum_suspects(f.read_text(encoding="utf-8")):
+            suspects.append(f"{f.relative_to(ROOT)}: {x}")
     if suspects:
         problems.append(
             "Möglicher Vitrum-Hintergrundfehler (bg ist im Vitrum-Modus schon ein kompletter Verlauf, "
@@ -81,16 +107,28 @@ def main() -> int:
     else:
         problems.append("Lade-Absicherung fehlt: catch-Zweig muss setLoaded(true) aufrufen, sonst haengt die App auf 'Laedt ...'")
 
-    # 5. Version: APP_BUILD, version.json und sw.js müssen zusammenpassen (nur für die Projektdatei)
-    builds = re.findall(r'const APP_BUILD="([^"]*)";', main_js)
-    if HTML.resolve() == (ROOT / "index.html").resolve() and builds:
-        ver = ROOT / "version.json"
+    # 5. Version: Quelle (web/src/app/build.js), gebaute Datei, version.json und sw.js müssen zusammenpassen
+    builds = re.findall(BUILD_RE, main_js)
+    sb = src_build()
+    is_dist = HTML.resolve() == _dist.resolve()
+    if (HTML.resolve() == (ROOT / "index.html").resolve() or is_dist) and builds:
+        ver, sw_p = first_existing("version.json"), first_existing("sw.js")
         vj = json.loads(ver.read_text(encoding="utf-8")).get("build") if ver.exists() else None
-        sw = (ROOT / "sw.js").read_text(encoding="utf-8")
-        if len(builds) != 1 or vj != builds[0] or f'gametab-cache-{builds[0]}"' not in sw:
-            problems.append(f"Version passt nicht zusammen: APP_BUILD={builds}, version.json={vj}. Mit tools/release.py erhöhen")
+        sw = sw_p.read_text(encoding="utf-8") if sw_p.exists() else ""
+        ok = len(builds) == 1 and vj == builds[0] and f'gametab-cache-{builds[0]}"' in sw
+        names = ["APP_BUILD", "version.json", "sw.js"]
+        if sb is not None:
+            ok = ok and sb == builds[0]
+            names.insert(0, f"Quelle={sb}")
+        for extra in ("version.json", "sw.js"):  # ausgelieferte Kopien in docs/, falls vorhanden
+            e = ROOT / "docs" / extra
+            if is_dist and e.exists():
+                t = e.read_text(encoding="utf-8")
+                ok = ok and (builds[0] in t)
+        if not ok:
+            problems.append(f"Version passt nicht zusammen: APP_BUILD={builds}, Quelle={sb}, version.json={vj}. Mit tools/release.py erhöhen")
         else:
-            print(f"OK   Version {builds[0]} (index.html, version.json, sw.js)")
+            print(f"OK   Version {builds[0]} ({', '.join(names)})")
 
     if problems:
         print("\nPROBLEME:")

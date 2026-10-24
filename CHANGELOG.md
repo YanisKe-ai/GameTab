@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.24-28 (24.10.2026 22:00)
+- Technischer Umbau: App wird jetzt mit Vite aus Quelldateien gebaut (keine sichtbaren Änderungen)
+
 ## 2026.10.24-27 (24.10.2026 21:22)
 - Statistik komplett neu: Filter, faire Rangliste, Profile, Nemesis, Spielabende, Jahresrückblick
 

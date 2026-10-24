@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.24-10 (24.10.2026 12:04)
+- Bildexport im bestätigten Night-League-Look
+
 ## 2026.10.24-9 (24.10.2026 11:14)
 - Bildexport wieder Night League, ohne Körnung
 

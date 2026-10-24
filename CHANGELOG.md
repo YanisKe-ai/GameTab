@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.24-18 (24.10.2026 15:06)
+- Schieber-Turnier mit Strichliste und Grand Slam; Podest zeigt Gleichstände; Phase 10 und Rommé im Bildexport korrigiert; keine Emoji in Eingaben
+
 ## 2026.10.24-17 (24.10.2026 13:27)
 - Noir-Scheinwerfer als Inszenierung mit Schwenk, Nebel und Nahdrache
 

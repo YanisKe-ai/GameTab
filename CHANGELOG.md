@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.24-8 (24.10.2026 11:12)
+- Startseite zeigt immer die Tipps, Spieleabend-Karte nur noch in den Statistiken
+
 ## 2026.10.24-7 (24.10.2026 11:10)
 - Statistik-Knopf auf Höhe des Titels
 

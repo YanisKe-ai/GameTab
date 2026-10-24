@@ -1,9 +1,11 @@
 "use client"
 
 import { useRef } from "react"
+import * as m from "motion/react-m"
 import {
   AnimatePresence,
-  motion,
+  LazyMotion,
+  domAnimation,
   useInView,
   type MotionProps,
   type UseInViewOptions,
@@ -71,8 +73,8 @@ export function BlurFade({
     hiddenFilter !== visibleFilter
 
   return (
-    <AnimatePresence>
-      <motion.div
+    <LazyMotion features={domAnimation}><AnimatePresence>
+      <m.div
         ref={ref}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
@@ -88,7 +90,7 @@ export function BlurFade({
         {...props}
       >
         {children}
-      </motion.div>
-    </AnimatePresence>
+      </m.div>
+    </AnimatePresence></LazyMotion>
   )
 }

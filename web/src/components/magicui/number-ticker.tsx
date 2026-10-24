@@ -55,7 +55,7 @@ export function NumberTicker({
           ref.current.textContent = Intl.NumberFormat("de-CH", {
             minimumFractionDigits: decimalPlaces,
             maximumFractionDigits: decimalPlaces,
-          }).format(Number(latest.toFixed(decimalPlaces)))
+          }).format(Number(latest.toFixed(decimalPlaces)) || 0)
         }
       }),
     [springValue, decimalPlaces]
@@ -65,7 +65,7 @@ export function NumberTicker({
     <span
       ref={ref}
       className={cn(
-        "tw:inline-block tw:tracking-wider tw:tabular-nums",
+        "tw:inline-block tw:tabular-nums",
         className
       )}
       {...props}

@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.24-31 (24.10.2026 23:05)
+- Technik: Code auf JSX umgestellt
+
 ## 2026.10.24-30 (24.10.2026 22:39)
 - Technik: Schriften und Bilder als eigene Dateien, App lädt schneller
 

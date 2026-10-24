@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.24-17 (24.10.2026 13:27)
+- Noir-Scheinwerfer als Inszenierung mit Schwenk, Nebel und Nahdrache
+
 ## 2026.10.24-16 (24.10.2026 13:17)
 - Noir-Scheinwerfer: Drachen fliegen organisch mit Flügelschlag
 

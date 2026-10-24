@@ -17,6 +17,7 @@ Ausgabe je Test: OK / FEHLER / XFAIL (bekannter Fehler) / XPASS (xfail ist jetzt
 Exitcode 1 bei FEHLER (XPASS nur mit --strict-xfail).
 Konsolenfehler und pageerror zaehlen als FEHLER.
 """
+import os
 import re
 import shutil
 import subprocess
@@ -644,7 +645,13 @@ def run_node_core():
         return "SKIP", "node nicht installiert"
     if not script.exists():
         return "SKIP", "tests/test_core.js fehlt"
-    r = subprocess.run([node, str(script), str(HTML_PATH)], capture_output=True, text=True, timeout=120)
+    target = str(HTML_PATH)
+    if (ROOT / "tools" / "split.mjs").exists() and "docs" in target:
+        # Build hat keine Kommentar-Marker: rekonstruierten Quelltext aus web/src pruefen
+        import tempfile
+        src = subprocess.run([node, str(ROOT / "tools" / "split.mjs"), "--source"], capture_output=True, text=True, timeout=120, cwd=str(ROOT)).stdout
+        tf = tempfile.NamedTemporaryFile("w", suffix=".html", delete=False); tf.write(src); tf.close(); target = tf.name
+    r = subprocess.run([node, str(script), target], capture_output=True, text=True, timeout=120)
     out = (r.stdout + r.stderr).strip().splitlines()
     return ("OK" if r.returncode == 0 else "FEHLER"), (out[-1] if out else "")
 

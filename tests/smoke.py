@@ -18,7 +18,7 @@ URL = (ROOT / "index.html").as_uri()
 QUICK = "--quick" in sys.argv
 
 VIEWPORTS = {"mobile": (393, 852), "laptop-1512": (1512, 982), "laptop-1280": (1280, 800)}
-THEMES = ["Dunkel", "Hell", "Vitrum"]
+THEMES = ["Nocturne", "Hell", "Vitrum"]
 CATEGORIES = ["Schreibunterlagen", "Partyspiele"]
 GAMES = ["Skyjo", "Flip 7", "Jass", "Yatzy", "Tutto", "Darts", "Wizard", "Minigolf", "Freeplay",
          "Impostor", "Werwolf", "Mafia", "Am Ehesten", "Tabu", "HeadsUp", "5 Sekunden"]

@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.24-3 (24.10.2026 10:25)
+- Design Dunkel heisst jetzt Nocturne
+
 ## 2026.10.24-2 (24.10.2026 10:24)
 - Neuer Ergebnis-Bildexport im Night-League-Design
 

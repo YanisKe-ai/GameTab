@@ -14,7 +14,9 @@ from playwright.sync_api import sync_playwright
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "tests" / "out"
 OUT.mkdir(parents=True, exist_ok=True)
-URL = (ROOT / "index.html").as_uri()
+import os
+HTML_PATH = (ROOT / os.environ.get("GAMETAB_HTML", "index.html")).resolve()
+URL = HTML_PATH.as_uri()
 QUICK = "--quick" in sys.argv
 
 VIEWPORTS = {"mobile": (393, 852), "laptop-1512": (1512, 982), "laptop-1280": (1280, 800)}

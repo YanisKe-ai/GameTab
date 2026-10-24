@@ -1,6 +1,6 @@
 // lgD: Logiktests Darts (Zugreihenfolge, Shanghai-Vorrang). Aufruf: node test_darts.js <index.html>
 const fs = require("fs");
-const html = fs.readFileSync(process.argv[2] || __dirname + "/index.html", "utf8");
+const html = require("../lib/source.js").getSource(process.argv[2]);
 function lineOf(marker) { const i = html.indexOf(marker); if (i < 0) throw Error("fehlt: " + marker); const a = html.lastIndexOf("\n", i) + 1, b = html.indexOf("\n", i); return html.slice(a, b); }
 function fromTo(marker) { const i = html.indexOf(marker); if (i < 0) throw Error("fehlt: " + marker); return html.slice(i, html.indexOf("\n", i)); }
 const parts = [

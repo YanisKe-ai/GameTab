@@ -1,8 +1,8 @@
 // Rechenkern-Tests GT_ST. Aufruf: node test_core.js [pfad/zu/index.html]
 const fs=require("fs"),path=require("path"),assert=require("assert/strict"),cp=require("child_process");
-const HTML=process.argv[2]||path.join(__dirname,"..","index.html");
+const {getSource}=require("./lib/source.js");
 const PKG=path.join(__dirname,"fixtures_st");
-const src=fs.readFileSync(HTML,"utf8");
+const src=getSource(process.argv[2]);
 const a=src.indexOf("/*GT_ST_BEGIN*/"),b=src.indexOf("/*GT_ST_END*/");
 assert(a>0&&b>a,"Marker nicht gefunden");
 // localStorage-Mock (steuerbar: Quota-Fehler)

@@ -1,7 +1,6 @@
 // Personenstatistik: node tests/test_person_stats.js [pfad/zu/index.html]
 const fs=require("fs"),path=require("path"),assert=require("assert/strict");
-const HTML=process.argv[2]||path.join(__dirname,"..","index.html");
-const src=fs.readFileSync(HTML,"utf8");
+const src=require("./../lib/source.js").getSource(process.argv[2]);
 const a=src.indexOf("/*GT_PS_BEGIN*/"),b=src.indexOf("/*GT_PS_END*/");
 assert(a>0&&b>a,"Marker GT_PS nicht gefunden");
 const g=src.indexOf("function gtWon("),ge=src.indexOf("\n",g);

@@ -1,7 +1,6 @@
 // GT_STATS Kern-Tests: node test_stats.js [pfad/zu/index.html]
 const fs=require("fs"),path=require("path"),assert=require("assert/strict");
-const HTML=process.argv[2]||[path.join(__dirname,"index.html"),path.join(__dirname,"..","..","index.html")].find(f=>fs.existsSync(f));
-const src=fs.readFileSync(HTML,"utf8");
+const src=require("../lib/source.js").getSource(process.argv[2]);
 const a=src.indexOf("/*GT_STATS_BEGIN*/"),b=src.indexOf("/*GT_STATS_END*/");
 assert(a>0&&b>a,"Marker GT_STATS fehlt");
 const ti=src.indexOf("const TRANSLATIONS="),te=src.indexOf("\n",ti);

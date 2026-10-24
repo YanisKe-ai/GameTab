@@ -29,7 +29,7 @@ from playwright.sync_api import sync_playwright
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import smoke  # noqa: E402  (nutzt ROOT, URL, start, set_theme)
-from smoke import ROOT, URL, start, set_theme  # noqa: E402
+from smoke import ROOT, URL, HTML_PATH, start, set_theme  # noqa: E402
 
 OUT = ROOT / "tests" / "out" / "regression"
 OUT.mkdir(parents=True, exist_ok=True)
@@ -644,7 +644,7 @@ def run_node_core():
         return "SKIP", "node nicht installiert"
     if not script.exists():
         return "SKIP", "tests/test_core.js fehlt"
-    r = subprocess.run([node, str(script), str(ROOT / "index.html")], capture_output=True, text=True, timeout=120)
+    r = subprocess.run([node, str(script), str(HTML_PATH)], capture_output=True, text=True, timeout=120)
     out = (r.stdout + r.stderr).strip().splitlines()
     return ("OK" if r.returncode == 0 else "FEHLER"), (out[-1] if out else "")
 

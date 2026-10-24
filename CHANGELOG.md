@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.24-15 (24.10.2026 13:06)
+- Noir-Scheinwerfer: Drachen ohne Rahmen
+
 ## 2026.10.24-14 (24.10.2026 12:51)
 - Kopfzeile springt beim Scrollen nicht mehr, neuer Noir-Scheinwerfer
 

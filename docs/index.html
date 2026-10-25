@@ -21717,11 +21717,14 @@ function P10Entry({ players, init, isEdit, onSave, onCancel, tk, theme, t }) {
 			done
 		});
 	};
-	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 10
-	} }, !isEdit && s8Lbl(tk, t("p10RoundQ"), { marginBottom: 0 }), !isEdit && s8Hint(tk, "cards", t("p10PointsHint")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: isEdit ? void 0 : "pld-entry",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 10
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", { className: "pld-body" }, !isEdit && s8Lbl(tk, t("p10RoundQ"), { marginBottom: 0 }), !isEdit && s8Hint(tk, "cards", t("p10PointsHint")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		flexDirection: "column",
 		gap: 8
@@ -21732,6 +21735,7 @@ function P10Entry({ players, init, isEdit, onSave, onCancel, tk, theme, t }) {
 		return /* @__PURE__ */ import_react.default.createElement("div", {
 			key: p.id,
 			"data-gt-p10row": p.id,
+			className: "pld-p10row",
 			style: {
 				background: ok ? `${tk.teal}14` : tk.card,
 				border: `2px solid ${ok ? tk.teal : theme === "light" ? "rgba(24,22,32,0.14)" : tk.border}`,
@@ -21765,17 +21769,20 @@ function P10Entry({ players, init, isEdit, onSave, onCancel, tk, theme, t }) {
 			whiteSpace: "nowrap",
 			overflow: "hidden",
 			textOverflow: "ellipsis"
-		} }, /* @__PURE__ */ import_react.default.createElement("strong", { style: { color: tk.teal } }, t("p10Phase")(p.cur)), "  ", Array.isArray(ph) ? ph[p.cur - 1] : ""), !isEdit && /* @__PURE__ */ import_react.default.createElement("div", { style: {
-			fontSize: 12.5,
-			color: tk.muted,
-			fontFamily: "'Inter', sans-serif",
-			marginTop: 2
-		} }, t("gtlTotal"), ": ", /* @__PURE__ */ import_react.default.createElement(GtCount, {
+		} }, /* @__PURE__ */ import_react.default.createElement("strong", { style: { color: tk.teal } }, t("p10Phase")(p.cur)), "  ", Array.isArray(ph) ? ph[p.cur - 1] : ""), !isEdit && /* @__PURE__ */ import_react.default.createElement("div", {
+			className: "pld-hide",
+			style: {
+				fontSize: 12.5,
+				color: tk.muted,
+				fontFamily: "'Inter', sans-serif",
+				marginTop: 2
+			}
+		}, t("gtlTotal"), ": ", /* @__PURE__ */ import_react.default.createElement(GtCount, {
 			value: p.total,
 			mem: "p10t" + p.id,
 			good: "low",
 			dpos: "r"
-		})), !isEdit && p10Bar(tk, p.done)), /* @__PURE__ */ import_react.default.createElement("button", {
+		})), !isEdit && /* @__PURE__ */ import_react.default.createElement("div", { className: "pld-hide" }, p10Bar(tk, p.done))), /* @__PURE__ */ import_react.default.createElement("button", {
 			onClick: () => {
 				setInst(false);
 				setPad(p.id);
@@ -21848,7 +21855,7 @@ function P10Entry({ players, init, isEdit, onSave, onCancel, tk, theme, t }) {
 				lineHeight: 1
 			}
 		}, ok ? "✓" : ""), isEdit ? t("p10Done") : t("p10DoneN")(p.cur)));
-	})), /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	}))), /* @__PURE__ */ import_react.default.createElement("div", { className: "pld-foot" }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		gap: 8,
 		marginTop: 2
@@ -21870,7 +21877,7 @@ function P10Entry({ players, init, isEdit, onSave, onCancel, tk, theme, t }) {
 		color: tk.muted,
 		textAlign: "center",
 		fontFamily: "'Inter', sans-serif"
-	} }, t("enterPointsFirst")), s8NumPad(tk, theme, t, players, pad, setPad, inst, setInst, sc, setSc));
+	} }, t("enterPointsFirst"))), s8NumPad(tk, theme, t, players, pad, setPad, inst, setInst, sc, setSc));
 }
 function P10Standings({ list, tk, theme, t, rounds }) {
 	const r = p10Rank(list);
@@ -22036,7 +22043,8 @@ function Phase10Game({ state, setState, onBack, onHome, onEndGame, lang = "de", 
 		onBack,
 		onHome,
 		onEndGame: sub === t("gtNewMatch") ? void 0 : onEndGame,
-		rulesText: t("rulesPhase10")
+		rulesText: t("rulesPhase10"),
+		pld: true
 	}, kids);
 	if (state.phase !== "play") {
 		const tooFew = state.players.length < 2;
@@ -22044,7 +22052,7 @@ function Phase10Game({ state, setState, onBack, onHome, onEndGame, lang = "de", 
 			display: "flex",
 			flexDirection: "column",
 			gap: 14
-		} }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-split-setup" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement(S8Players, {
+		} }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-split-setup pld-split pld-setup" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement(S8Players, {
 			players: state.players,
 			setPlayers: (u) => setState((s) => ({
 				...s,
@@ -22095,7 +22103,7 @@ function Phase10Game({ state, setState, onBack, onHome, onEndGame, lang = "de", 
 			record: () => s8Record("phase10", ranked, ranked[0] && ranked[0].pscore >= 10 && hist.length === 10 ? { straight: [ranked[0].name] } : void 0)
 		}));
 	}
-	return W(t("skyjoRoundLabel")(hist.length + 1), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement("div", { style: { marginTop: 4 } }, /* @__PURE__ */ import_react.default.createElement(P10Entry, {
+	return W(t("skyjoRoundLabel")(hist.length + 1), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split pld-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement("div", { style: { marginTop: 4 } }, /* @__PURE__ */ import_react.default.createElement(P10Entry, {
 		key: hist.length,
 		players: list,
 		onSave: addRound,
@@ -22322,11 +22330,14 @@ function RommeEntry({ players, init, isEdit, onSave, onCancel, tk, theme, t, tar
 		});
 	};
 	const leaderId = !isEdit && players.length > 1 ? gtLeader(players.map((p) => [p.id, p.total]), true) : null;
-	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 10
-	} }, s8Lbl(tk, t("romOutQ"), { marginBottom: 0 }), /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: isEdit ? void 0 : "pld-entry",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 10
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", { className: "pld-body" }, s8Lbl(tk, t("romOutQ"), { marginBottom: 0 }), /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		flexWrap: "wrap",
 		gap: 6
@@ -22504,7 +22515,7 @@ function RommeEntry({ players, init, isEdit, onSave, onCancel, tk, theme, t, tar
 			color: tk.teal,
 			marginLeft: 4
 		} }, "×2")) : v : "·"));
-	})), /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	}))), /* @__PURE__ */ import_react.default.createElement("div", { className: "pld-foot" }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		gap: 8,
 		marginTop: 2
@@ -22526,7 +22537,7 @@ function RommeEntry({ players, init, isEdit, onSave, onCancel, tk, theme, t, tar
 		color: tk.muted,
 		textAlign: "center",
 		fontFamily: "'Inter', sans-serif"
-	} }, out == null ? t("romChooseOut") : t("enterPointsFirst")), s8NumPad(tk, theme, t, players, pad, setPad, inst, setInst, sc, setSc, out));
+	} }, out == null ? t("romChooseOut") : t("enterPointsFirst"))), s8NumPad(tk, theme, t, players, pad, setPad, inst, setInst, sc, setSc, out));
 }
 function RommeGame({ state, setState, onBack, onHome, onEndGame, lang = "de", theme = "dark" }) {
 	const t = useT(lang);
@@ -22575,7 +22586,8 @@ function RommeGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 		onBack,
 		onHome,
 		onEndGame: sub === t("gtNewMatch") ? void 0 : onEndGame,
-		rulesText: t("rulesRomme")
+		rulesText: t("rulesRomme"),
+		pld: true
 	}, kids);
 	if (state.phase !== "play") {
 		const tooFew = state.players.length < 2;
@@ -22583,7 +22595,7 @@ function RommeGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 			display: "flex",
 			flexDirection: "column",
 			gap: 14
-		} }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-split-setup" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement(S8Players, {
+		} }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-split-setup pld-split pld-setup" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement(S8Players, {
 			players: state.players,
 			setPlayers: (u) => setState((s) => ({
 				...s,
@@ -22645,7 +22657,7 @@ function RommeGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 			record: () => s8Record("romme", ranked, ranked[0] && ranked[0].score * 4 <= target ? { clean: ranked.filter((p) => p.score === ranked[0].score).map((p) => p.name) } : void 0)
 		}));
 	}
-	return W(`${t("romTarget")} ${target}`, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement("div", { style: { marginTop: 4 } }, /* @__PURE__ */ import_react.default.createElement(RommeEntry, {
+	return W(`${t("romTarget")} ${target}`, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split pld-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement("div", { style: { marginTop: 4 } }, /* @__PURE__ */ import_react.default.createElement(RommeEntry, {
 		key: hist.length,
 		players: list,
 		onSave: addRound,
@@ -43338,6 +43350,210 @@ function SchieberGame({ teams, setTeams, target, setTarget, phase, setPhase, onB
 		tokens: tk
 	}));
 }
+// web/src/games/skyjo/landscape.js
+var PLD_CSS = `
+.pld-body, .pld-foot { display: contents; }
+[data-phone-landscape] .pld-shell { padding: calc(var(--pl-sat) + 4px) 0 0 !important; min-height: 0 !important; }
+[data-phone-landscape] .pld { display: flex; flex-direction: column; height: calc(var(--pl-avail) - var(--pl-sat) - 4px - var(--pl-sab)); min-height: 0; }
+[data-phone-landscape] .pld .gt-gamehead { position: relative !important; top: auto !important; flex: none; }
+[data-phone-landscape] .pld > div:has(> .pld-split) { flex: 1 1 0; min-height: 0; box-sizing: border-box; padding-bottom: 4px; }
+[data-phone-landscape] .pld-split { display: grid; grid-template-columns: minmax(0, var(--pld-l, 5fr)) minmax(0, var(--pld-r, 6fr)); grid-template-rows: minmax(0, 1fr); gap: var(--pl-gap); align-items: stretch; width: 100%; box-sizing: border-box; flex: 1 1 0; min-height: 0; }
+[data-phone-landscape] .pld-split > :is(.gtL-col-main, .gtL-col-side) { display: block; min-width: 0; min-height: 0; box-sizing: border-box; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+[data-phone-landscape] .pld-split > .gtL-col-side2 { display: block; min-width: 0; box-sizing: border-box; }
+[data-phone-landscape] .pld-split:not(.pld-setup) > .gtL-col-side { order: -1; }
+[data-phone-landscape] .pld-split > .gtL-col-main:has(.pld-entry) { display: flex; flex-direction: column; overflow: visible; }
+[data-phone-landscape] .pld-split > .gtL-col-main:has(.pld-entry) > div { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
+[data-phone-landscape] .pld-setup { --pld-l: 1fr; --pld-r: 1fr; }
+[data-phone-landscape] .pld-split.pld-rows { grid-template-rows: minmax(0, 1fr) auto; }
+[data-phone-landscape] .pld-split.pld-rows > .gtL-col-side { grid-column: 1; grid-row: 1; order: 0; }
+[data-phone-landscape] .pld-split.pld-rows > .gtL-col-main { grid-column: 2; grid-row: 1 / span 2; }
+[data-phone-landscape] .pld-split.pld-rows > .gtL-col-side2 { grid-column: 1; grid-row: 2; max-height: 42vh; max-height: calc(var(--pl-avail) * 0.42); overflow-y: auto; overscroll-behavior: contain; }
+[data-phone-landscape] .pld-split.pld-rows > .gtL-col-side2 > div:first-child { margin-top: 6px !important; }
+[data-phone-landscape] .pld-wordmark { display: none; }
+[data-phone-landscape] .pld-split.pld-free { grid-template-rows: auto minmax(0, 1fr); }
+[data-phone-landscape] .pld-split.pld-free > .gtL-col-side { overflow: visible; }
+[data-phone-landscape] .pld-split.pld-free > .gtL-col-side2 { max-height: none; min-height: 0; }
+[data-phone-landscape] .pld-split > .gtL-col-main:has(.tutto-card) { padding: 0 10px 14px 0; }
+[data-phone-landscape] .pld .tutto-card button.gt-hit { min-width: 44px; }
+[data-phone-landscape] .pld .tutto-card input { min-height: 44px; box-sizing: border-box; }
+[data-phone-landscape] .pld .gtL-standings, [data-phone-landscape] .pld .gtL-e-only { display: block !important; padding: 10px 12px 6px !important; margin: 0 0 10px !important; }
+[data-phone-landscape] .pld .gtL-standings li { padding-top: 6px !important; padding-bottom: 6px !important; }
+[data-phone-landscape] .pld-entry { display: flex; flex-direction: column; flex: 1 1 auto; min-height: 0; }
+[data-phone-landscape] .pld-entry > .pld-body { display: flex; flex-direction: column; gap: 8px; flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding-bottom: 2px; }
+[data-phone-landscape] .pld-entry > .pld-foot { display: grid; grid-template-columns: minmax(0, 1fr); align-items: center; column-gap: 10px; row-gap: 4px; flex: none; padding-bottom: 4px; }
+[data-phone-landscape] .pld-entry > .pld-foot:has(> div:nth-child(2)) { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); }
+[data-phone-landscape] .pld-entry > .pld-foot > div:not(:first-child) { text-align: left !important; font-size: 12px !important; line-height: 1.25; }
+[data-phone-landscape] .pld-entry .pld-body button[aria-pressed] { min-height: 44px; }
+[data-phone-landscape] .pld-entry .gtL-entryrow { padding: 6px 14px !important; }
+[data-phone-landscape] .pld-entry .gtL-entryval { font-size: 28px !important; }
+[data-phone-landscape] .pld-entry .pld-foot button { min-height: 48px; }
+[data-phone-landscape] .pld-entry .pld-foot > div:not(:first-child) { margin-top: 0 !important; }
+[data-phone-landscape] .pld-hide { display: none; }
+[data-phone-landscape] .pld-p10row { display: grid !important; grid-template-columns: minmax(0, 1fr) auto auto; column-gap: 10px; align-items: center; padding: 8px 12px !important; }
+[data-phone-landscape] .pld-p10row > div:first-child { display: contents; }
+[data-phone-landscape] .pld-p10row > div:first-child > div { grid-column: 1; grid-row: 1; }
+[data-phone-landscape] .pld-p10row > div:first-child > button { grid-column: 2; grid-row: 1; }
+[data-phone-landscape] .pld-p10row > button { grid-column: 3; grid-row: 1; min-height: 44px; align-self: center; }
+@media (prefers-reduced-motion: reduce) { [data-phone-landscape] .pld * { scroll-behavior: auto !important; } }
+`;
+// web/src/shared/phone-landscape.js
+var PL_ATTR = "data-phone-landscape";
+var PL_FORCE_KEY = "gametab-pl-force";
+var PL_STATE_KEY = "spieleblock-app-state-v1";
+function decidePhoneLandscape(e) {
+	if (!e || e.viewMode === "laptop") return false;
+	if (e.force === true) return true;
+	if (e.force === false) return false;
+	if (!e.touch) return false;
+	const iw = e.innerW || 0, ih = e.innerH || 0;
+	const sw = e.screenW || 0, sh = e.screenH || 0;
+	const short = sw && sh ? Math.min(sw, sh) : Math.min(iw, ih);
+	if (!short || short > 500) return false;
+	let land;
+	if (typeof e.orientationType === "string" && e.orientationType) land = e.orientationType.indexOf("landscape") === 0;
+	else if (typeof e.windowOrientation === "number") land = Math.abs(e.windowOrientation) === 90;
+	else if (sw && sh && sw !== sh) land = sw > sh;
+	else land = !!e.mqLandscape;
+	if (!land) return false;
+	return iw > ih;
+}
+function plReadForce() {
+	try {
+		const m = /[?&]pl=([01])\b/.exec(window.location.search || "");
+		if (m) return m[1] === "1";
+	} catch (_) {}
+	try {
+		const v = window.localStorage.getItem(PL_FORCE_KEY);
+		if (v === "1") return true;
+		if (v === "0") return false;
+	} catch (_) {}
+	return null;
+}
+function plReadSavedViewMode() {
+	try {
+		return (JSON.parse(window.localStorage.getItem(PL_STATE_KEY) || "{}") || {}).viewMode === "laptop" ? "laptop" : "mobile";
+	} catch (_) {
+		return "mobile";
+	}
+}
+function plMQ(q) {
+	try {
+		return !!(window.matchMedia && window.matchMedia(q).matches);
+	} catch (_) {
+		return false;
+	}
+}
+function plEnv(viewMode, force) {
+	const w = window, s = w.screen || {};
+	let ot = null;
+	try {
+		ot = s.orientation && s.orientation.type ? String(s.orientation.type) : null;
+	} catch (_) {}
+	return {
+		viewMode,
+		force,
+		touch: w.navigator && w.navigator.maxTouchPoints > 0 || plMQ("(any-pointer: coarse)"),
+		screenW: s.width || 0,
+		screenH: s.height || 0,
+		orientationType: ot,
+		windowOrientation: typeof w.orientation === "number" ? w.orientation : null,
+		mqLandscape: plMQ("(orientation: landscape)"),
+		innerW: w.innerWidth || 0,
+		innerH: w.innerHeight || 0
+	};
+}
+var plViewMode = null;
+var plForce;
+var plActive = null;
+var plBound = false;
+var plTimer = 0;
+var plRefs = 0;
+var plSubs = /* @__PURE__ */ new Set();
+function plApply(v) {
+	const root = document.documentElement;
+	if (v) root.setAttribute(PL_ATTR, "");
+	else root.removeAttribute(PL_ATTR);
+	plActive = v;
+	plSubs.forEach((f) => {
+		try {
+			f();
+		} catch (_) {}
+	});
+}
+function plSetVvh() {
+	const root = document.documentElement, vv = window.visualViewport;
+	if (plActive && vv) root.style.setProperty("--pl-vvh", Math.round(vv.height) + "px");
+	else root.style.removeProperty("--pl-vvh");
+}
+function updatePhoneLandscape() {
+	if (typeof window === "undefined") return false;
+	if (plViewMode == null) plViewMode = plReadSavedViewMode();
+	if (plForce === void 0) plForce = plReadForce();
+	const v = decidePhoneLandscape(plEnv(plViewMode, plForce));
+	if (v !== plActive) plApply(v);
+	plSetVvh();
+	return v;
+}
+function plOnChange() {
+	updatePhoneLandscape();
+	clearTimeout(plTimer);
+	plTimer = setTimeout(updatePhoneLandscape, 350);
+}
+function plBind() {
+	if (plBound || typeof window === "undefined") return;
+	plBound = true;
+	window.addEventListener("resize", plOnChange);
+	window.addEventListener("orientationchange", plOnChange);
+	try {
+		if (screen.orientation && screen.orientation.addEventListener) screen.orientation.addEventListener("change", plOnChange);
+	} catch (_) {}
+	if (window.visualViewport) window.visualViewport.addEventListener("resize", plSetVvh);
+}
+function plUnbind() {
+	if (!plBound) return;
+	plBound = false;
+	clearTimeout(plTimer);
+	window.removeEventListener("resize", plOnChange);
+	window.removeEventListener("orientationchange", plOnChange);
+	try {
+		if (screen.orientation && screen.orientation.removeEventListener) screen.orientation.removeEventListener("change", plOnChange);
+	} catch (_) {}
+	if (window.visualViewport) window.visualViewport.removeEventListener("resize", plSetVvh);
+}
+function setPhoneLandscapeViewMode(mode) {
+	plViewMode = mode === "laptop" ? "laptop" : "mobile";
+	return updatePhoneLandscape();
+}
+function plRetain() {
+	plRefs++;
+	plBind();
+	return () => {
+		plRefs = Math.max(0, plRefs - 1);
+		if (!plRefs) plUnbind();
+	};
+}
+function plSubscribe(cb) {
+	plSubs.add(cb);
+	const rel = plRetain();
+	if (plActive == null) updatePhoneLandscape();
+	return () => {
+		plSubs.delete(cb);
+		rel();
+	};
+}
+function plSnapshot() {
+	if (plActive == null) updatePhoneLandscape();
+	return !!plActive;
+}
+function usePhoneLandscape() {
+	return import_react.default.useSyncExternalStore(plSubscribe, plSnapshot, () => false);
+}
+function usePhoneLandscapeRoot(viewMode, loaded) {
+	import_react.default.useLayoutEffect(() => plRetain(), []);
+	import_react.default.useLayoutEffect(() => {
+		if (loaded) setPhoneLandscapeViewMode(viewMode);
+	}, [viewMode, loaded]);
+}
 // web/src/games/tutto/game.js
 var game_exports$15 = /* @__PURE__ */ __exportAll({
 	TUTTO_CARD: () => TUTTO_CARD,
@@ -43974,7 +44190,7 @@ function TuttoSetup({ players, setPlayers, target, setTarget, onStart, tk: gtTk0
 		[next[idx], next[target]] = [next[target], next[idx]];
 		return next;
 	});
-	return /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-split-setup gtL-e-block" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement(GroupPicker, {
+	return /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-split-setup gtL-e-block pld-split pld-setup" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement(GroupPicker, {
 		getNames: () => players.map((p) => p.name),
 		setNames: (names) => setPlayers(names.map((name, i) => ({
 			id: i + 1,
@@ -44018,6 +44234,7 @@ function TuttoWordmark({ theme }) {
 	const tk = tuttoTokens(theme);
 	return /* @__PURE__ */ import_react.default.createElement("div", {
 		"aria-hidden": "true",
+		className: "pld-wordmark",
 		style: {
 			textAlign: "center",
 			margin: "0 0 14px",
@@ -44039,6 +44256,7 @@ function TuttoWordmark({ theme }) {
 	} }, "TUTTO"));
 }
 function TuttoPlay({ players, setPlayers, target, onBack, onHome, onEndGame, onEditPlayers, lang = "de", theme = "dark" }) {
+	const plLand = usePhoneLandscape();
 	const [confirmingReset, setConfirmingReset] = useState$11(false);
 	const [confirmingSetup, setConfirmingSetup] = useState$11(false);
 	const [rulesOpen, setRulesOpen] = useState$11(false);
@@ -44112,13 +44330,13 @@ function TuttoPlay({ players, setPlayers, target, onBack, onHome, onEndGame, onE
 		setConfirmingSetup(false);
 	};
 	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage",
+		className: "gtL-shellpage pld-shell",
 		style: {
 			...tuttoPageShellStyle(theme),
 			position: "relative",
 			overflow: "clip"
 		}
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, TUTTO_TABLE_CSS), /* @__PURE__ */ import_react.default.createElement(TuttoDecoration, { theme }), celebration, milestoneNode, /* @__PURE__ */ import_react.default.createElement(PodiumOverlay, {
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, TUTTO_TABLE_CSS, PLD_CSS), /* @__PURE__ */ import_react.default.createElement(TuttoDecoration, { theme }), celebration, milestoneNode, /* @__PURE__ */ import_react.default.createElement(PodiumOverlay, {
 		gameId: "tutto",
 		gameLabel: t("gameTutto"),
 		open: podiumOpen,
@@ -44129,7 +44347,7 @@ function TuttoPlay({ players, setPlayers, target, onBack, onHome, onEndGame, onE
 		t,
 		theme
 	}), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "reveal-1 gtL-game",
+		className: "reveal-1 gtL-game pl-wide pl-page pl-head-compact pld",
 		style: {
 			maxWidth: 380,
 			margin: "0 auto",
@@ -44144,8 +44362,8 @@ function TuttoPlay({ players, setPlayers, target, onBack, onHome, onEndGame, onE
 		onBack,
 		theme,
 		t,
-		hideTitle: true
-	}), /* @__PURE__ */ import_react.default.createElement(TuttoWordmark, { theme }), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side" }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		hideTitle: !plLand
+	}), /* @__PURE__ */ import_react.default.createElement(TuttoWordmark, { theme }), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split pld-split pld-rows" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side" }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		justifyContent: "flex-end",
 		marginBottom: 12
@@ -44313,14 +44531,14 @@ function TuttoGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 		phase: "setup"
 	}));
 	if (state.phase === "setup") return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage",
+		className: "gtL-shellpage pld-shell",
 		style: {
 			...tuttoPageShellStyle(theme),
 			position: "relative",
 			overflow: "clip"
 		}
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, TUTTO_TABLE_CSS), /* @__PURE__ */ import_react.default.createElement(TuttoDecoration, { theme }), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-page gtL-game",
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, TUTTO_TABLE_CSS, PLD_CSS), /* @__PURE__ */ import_react.default.createElement(TuttoDecoration, { theme }), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtL-page gtL-game pl-wide pl-page pl-head-compact pld",
 		style: {
 			maxWidth: 380,
 			margin: "0 auto",
@@ -50014,7 +50232,7 @@ function SkyjoSetup({ state, setState, onStart, theme, t }) {
 		display: "flex",
 		flexDirection: "column",
 		gap: 14
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-split-setup" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement(GroupPicker, {
+	} }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-split-setup pld-split pld-setup" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement(GroupPicker, {
 		getNames: () => players.map((p) => p.name),
 		setNames: (names) => setPlayers(names.map((name, i) => ({
 			id: i + 1,
@@ -50314,11 +50532,14 @@ function SkyjoRoundEntry({ players, initialScores, isEdit, onSave, onCancel, the
 		setEnderId(null);
 	};
 	const padPlayer = padPlayerId != null ? players.find((p) => p.id === padPlayerId) : null;
-	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 10
-	} }, !isEdit && /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: isEdit ? void 0 : "pld-entry",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 10
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", { className: "pld-body" }, !isEdit && /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		fontSize: 11,
 		color: sk.muted,
 		letterSpacing: "0.08em",
@@ -50475,7 +50696,7 @@ function SkyjoRoundEntry({ players, initialScores, isEdit, onSave, onCancel, the
 			cursor: "pointer",
 			fontFamily: "'Inter', sans-serif"
 		}
-	}, t("skyjoRoundEnderNone")))), /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	}, t("skyjoRoundEnderNone"))))), /* @__PURE__ */ import_react.default.createElement("div", { className: "pld-foot" }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		gap: 8,
 		marginTop: 2
@@ -50509,7 +50730,7 @@ function SkyjoRoundEntry({ players, initialScores, isEdit, onSave, onCancel, the
 			marginTop: 8,
 			fontFamily: "'Inter', sans-serif"
 		}
-	}, t("enterPointsFirst")), padPlayer && /* @__PURE__ */ import_react.default.createElement(SkyjoNumPad, {
+	}, t("enterPointsFirst"))), padPlayer && /* @__PURE__ */ import_react.default.createElement(SkyjoNumPad, {
 		key: padPlayer.id,
 		instant: padInstant,
 		onAdvance: (v, dir) => {
@@ -50808,10 +51029,10 @@ function SkyjoGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 		state.target
 	]);
 	if (state.phase === "setup") return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage",
+		className: "gtL-shellpage pld-shell",
 		style: skyjoPageShellStyle(theme)
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-game",
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, PLD_CSS), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtL-game pl-wide pl-page pl-head-compact pld",
 		style: {
 			maxWidth: 380,
 			margin: "0 auto",
@@ -50840,10 +51061,10 @@ function SkyjoGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 		tokens: sk
 	}));
 	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage",
+		className: "gtL-shellpage pld-shell",
 		style: skyjoPageShellStyle(theme)
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-game",
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, PLD_CSS), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtL-game pl-wide pl-page pl-head-compact pld",
 		style: {
 			maxWidth: 380,
 			margin: "0 auto",
@@ -50868,7 +51089,7 @@ function SkyjoGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 		})),
 		theme,
 		t
-	}) : /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement("div", { style: { marginTop: 4 } }, /* @__PURE__ */ import_react.default.createElement(SkyjoRoundEntry, {
+	}) : /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split pld-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement("div", { style: { marginTop: 4 } }, /* @__PURE__ */ import_react.default.createElement(SkyjoRoundEntry, {
 		key: state.players[0]?.rounds.length || 0,
 		gtTarget: state.target,
 		gtRound: state.players[0]?.rounds.length || 0,
@@ -52018,13 +52239,13 @@ function S8Players({ players, setPlayers, min, max, mk, tk, t, theme }) {
 		hues: HUES
 	}));
 }
-function S8Wrap({ theme, tk, title, sub, logo, onBack, onHome, onEndGame, rulesText, t, children, extraCss }) {
+function S8Wrap({ theme, tk, title, sub, logo, onBack, onHome, onEndGame, rulesText, t, children, extraCss, pld }) {
 	const [rulesOpen, setRulesOpen] = useState$11(false);
 	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage",
+		className: "gtL-shellpage" + (pld ? " pld-shell" : ""),
 		style: s8Shell(theme, tk)
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, extraCss || ""), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-game",
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, extraCss || "", pld ? PLD_CSS : ""), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtL-game" + (pld ? " pl-wide pl-page pl-head-compact pld" : ""),
 		style: {
 			maxWidth: 380,
 			margin: "0 auto",
@@ -64674,148 +64895,6 @@ function DartsVariantSelect({ onSelect, onBack, dartsProgress, cricketProgress, 
 		onClick: () => onSelect("splitscore")
 	})))));
 }
-// web/src/shared/phone-landscape.js
-var PL_ATTR = "data-phone-landscape";
-var PL_FORCE_KEY = "gametab-pl-force";
-var PL_STATE_KEY = "spieleblock-app-state-v1";
-function decidePhoneLandscape(e) {
-	if (!e || e.viewMode === "laptop") return false;
-	if (e.force === true) return true;
-	if (e.force === false) return false;
-	if (!e.touch) return false;
-	const iw = e.innerW || 0, ih = e.innerH || 0;
-	const sw = e.screenW || 0, sh = e.screenH || 0;
-	const short = sw && sh ? Math.min(sw, sh) : Math.min(iw, ih);
-	if (!short || short > 500) return false;
-	let land;
-	if (typeof e.orientationType === "string" && e.orientationType) land = e.orientationType.indexOf("landscape") === 0;
-	else if (typeof e.windowOrientation === "number") land = Math.abs(e.windowOrientation) === 90;
-	else if (sw && sh && sw !== sh) land = sw > sh;
-	else land = !!e.mqLandscape;
-	if (!land) return false;
-	return iw > ih;
-}
-function plReadForce() {
-	try {
-		const m = /[?&]pl=([01])\b/.exec(window.location.search || "");
-		if (m) return m[1] === "1";
-	} catch (_) {}
-	try {
-		const v = window.localStorage.getItem(PL_FORCE_KEY);
-		if (v === "1") return true;
-		if (v === "0") return false;
-	} catch (_) {}
-	return null;
-}
-function plReadSavedViewMode() {
-	try {
-		return (JSON.parse(window.localStorage.getItem(PL_STATE_KEY) || "{}") || {}).viewMode === "laptop" ? "laptop" : "mobile";
-	} catch (_) {
-		return "mobile";
-	}
-}
-function plMQ(q) {
-	try {
-		return !!(window.matchMedia && window.matchMedia(q).matches);
-	} catch (_) {
-		return false;
-	}
-}
-function plEnv(viewMode, force) {
-	const w = window, s = w.screen || {};
-	let ot = null;
-	try {
-		ot = s.orientation && s.orientation.type ? String(s.orientation.type) : null;
-	} catch (_) {}
-	return {
-		viewMode,
-		force,
-		touch: w.navigator && w.navigator.maxTouchPoints > 0 || plMQ("(any-pointer: coarse)"),
-		screenW: s.width || 0,
-		screenH: s.height || 0,
-		orientationType: ot,
-		windowOrientation: typeof w.orientation === "number" ? w.orientation : null,
-		mqLandscape: plMQ("(orientation: landscape)"),
-		innerW: w.innerWidth || 0,
-		innerH: w.innerHeight || 0
-	};
-}
-var plViewMode = null;
-var plForce;
-var plActive = null;
-var plBound = false;
-var plTimer = 0;
-var plRefs = 0;
-var plSubs = /* @__PURE__ */ new Set();
-function plApply(v) {
-	const root = document.documentElement;
-	if (v) root.setAttribute(PL_ATTR, "");
-	else root.removeAttribute(PL_ATTR);
-	plActive = v;
-	plSubs.forEach((f) => {
-		try {
-			f();
-		} catch (_) {}
-	});
-}
-function plSetVvh() {
-	const root = document.documentElement, vv = window.visualViewport;
-	if (plActive && vv) root.style.setProperty("--pl-vvh", Math.round(vv.height) + "px");
-	else root.style.removeProperty("--pl-vvh");
-}
-function updatePhoneLandscape() {
-	if (typeof window === "undefined") return false;
-	if (plViewMode == null) plViewMode = plReadSavedViewMode();
-	if (plForce === void 0) plForce = plReadForce();
-	const v = decidePhoneLandscape(plEnv(plViewMode, plForce));
-	if (v !== plActive) plApply(v);
-	plSetVvh();
-	return v;
-}
-function plOnChange() {
-	updatePhoneLandscape();
-	clearTimeout(plTimer);
-	plTimer = setTimeout(updatePhoneLandscape, 350);
-}
-function plBind() {
-	if (plBound || typeof window === "undefined") return;
-	plBound = true;
-	window.addEventListener("resize", plOnChange);
-	window.addEventListener("orientationchange", plOnChange);
-	try {
-		if (screen.orientation && screen.orientation.addEventListener) screen.orientation.addEventListener("change", plOnChange);
-	} catch (_) {}
-	if (window.visualViewport) window.visualViewport.addEventListener("resize", plSetVvh);
-}
-function plUnbind() {
-	if (!plBound) return;
-	plBound = false;
-	clearTimeout(plTimer);
-	window.removeEventListener("resize", plOnChange);
-	window.removeEventListener("orientationchange", plOnChange);
-	try {
-		if (screen.orientation && screen.orientation.removeEventListener) screen.orientation.removeEventListener("change", plOnChange);
-	} catch (_) {}
-	if (window.visualViewport) window.visualViewport.removeEventListener("resize", plSetVvh);
-}
-function setPhoneLandscapeViewMode(mode) {
-	plViewMode = mode === "laptop" ? "laptop" : "mobile";
-	return updatePhoneLandscape();
-}
-function plRetain() {
-	plRefs++;
-	plBind();
-	return () => {
-		plRefs = Math.max(0, plRefs - 1);
-		if (!plRefs) plUnbind();
-	};
-}
-function usePhoneLandscapeRoot(viewMode, loaded) {
-	import_react.default.useLayoutEffect(() => plRetain(), []);
-	import_react.default.useLayoutEffect(() => {
-		if (loaded) setPhoneLandscapeViewMode(viewMode);
-	}, [viewMode, loaded]);
-}
 // web/src/games/freeplay/game.js
 var game_exports$8 = /* @__PURE__ */ __exportAll({
 	FreeplayGame: () => FreeplayGame,
@@ -65149,9 +65228,9 @@ function FreeplayGame({ players, setPlayers, target, setTarget, lowWins, setLowW
 		performReset();
 	};
 	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage",
+		className: "gtL-shellpage pld-shell",
 		style: pageShellStyle(theme)
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), celebration, milestoneNode, /* @__PURE__ */ import_react.default.createElement(PodiumOverlay, {
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, PLD_CSS), celebration, milestoneNode, /* @__PURE__ */ import_react.default.createElement(PodiumOverlay, {
 		gameId: "freeplay",
 		gameLabel: t("gameFreeplay"),
 		open: podiumOpen,
@@ -65162,7 +65241,7 @@ function FreeplayGame({ players, setPlayers, target, setTarget, lowWins, setLowW
 		t,
 		theme
 	}), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "paper-grid",
+		className: "paper-grid pl-wide pl-page pl-head-compact pld",
 		style: {
 			borderRadius: 26,
 			maxWidth: 380,
@@ -65184,7 +65263,7 @@ function FreeplayGame({ players, setPlayers, target, setTarget, lowWins, setLowW
 			size: 26,
 			color: playerHue(4, theme)
 		})
-	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side" }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split pld-split pld-rows pld-free" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side" }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		flexWrap: "wrap",
 		gap: 8,
@@ -89767,7 +89846,7 @@ function Flip7Setup({ state, setState, onStart, theme, t }) {
 		display: "flex",
 		flexDirection: "column",
 		gap: 14
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-split-setup" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement(GroupPicker, {
+	} }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-split-setup pld-split pld-setup" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement(GroupPicker, {
 		getNames: () => players.map((p) => p.name),
 		setNames: (names) => setPlayers(names.map((name, i) => ({
 			id: i + 1,
@@ -90157,11 +90236,14 @@ function Flip7RoundEntry({ players, initialData, isEdit, onSave, onCancel, theme
 		onSave(Object.fromEntries(players.map((p) => [p.id, flip7RoundScore(data[p.id] || {})])), data);
 		if (!isEdit) setData(Object.fromEntries(players.map((p) => [p.id, null])));
 	};
-	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 10
-	} }, !isEdit && /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: isEdit ? void 0 : "pld-entry",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 10
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", { className: "pld-body" }, !isEdit && /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		fontSize: 11,
 		color: fk.muted,
 		letterSpacing: "0.08em",
@@ -90278,7 +90360,7 @@ function Flip7RoundEntry({ players, initialData, isEdit, onSave, onCancel, theme
 				textAlign: "right"
 			}
 		}, busted ? t("flip7BustAbbr") : score != null ? score : "·"));
-	})), /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	}))), /* @__PURE__ */ import_react.default.createElement("div", { className: "pld-foot" }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		gap: 8,
 		marginTop: 2
@@ -90312,7 +90394,7 @@ function Flip7RoundEntry({ players, initialData, isEdit, onSave, onCancel, theme
 			marginTop: 8,
 			fontFamily: "'Inter', sans-serif"
 		}
-	}, t("enterPointsFirst")), padPlayer && /* @__PURE__ */ import_react.default.createElement(Flip7RoundPad, {
+	}, t("enterPointsFirst"))), padPlayer && /* @__PURE__ */ import_react.default.createElement(Flip7RoundPad, {
 		key: padPlayer.id,
 		instant: padInstant,
 		onAdvance: (v, dir) => {
@@ -90600,10 +90682,10 @@ function Flip7Game({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 		state.history
 	]);
 	if (state.phase === "setup") return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage",
+		className: "gtL-shellpage pld-shell",
 		style: flip7PageShellStyle(theme)
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-game",
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, PLD_CSS), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtL-game pl-wide pl-page pl-head-compact pld",
 		style: {
 			maxWidth: 380,
 			margin: "0 auto",
@@ -90632,10 +90714,10 @@ function Flip7Game({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 		tokens: fk
 	}));
 	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage",
+		className: "gtL-shellpage pld-shell",
 		style: flip7PageShellStyle(theme)
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-game",
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, PLD_CSS), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtL-game pl-wide pl-page pl-head-compact pld",
 		style: {
 			maxWidth: 380,
 			margin: "0 auto",
@@ -90661,7 +90743,7 @@ function Flip7Game({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 		})),
 		theme,
 		t
-	}) : /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement("div", { style: { marginTop: 4 } }, /* @__PURE__ */ import_react.default.createElement(Flip7RoundEntry, {
+	}) : /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split pld-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement("div", { style: { marginTop: 4 } }, /* @__PURE__ */ import_react.default.createElement(Flip7RoundEntry, {
 		key: (state.history || []).length,
 		gtTarget: state.target,
 		gtRound: (state.history || []).length,

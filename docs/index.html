@@ -8912,14 +8912,48 @@ var TRANSLATIONS = {
 		rulesShanghai: "Jede Runde hat eine eigene Zielzahl, in Runde 1 zählt nur die 1, in Runde 2 nur die 2, und so weiter. Jede Person wirft drei Darts pro Runde, nur Treffer auf die aktuelle Zielzahl zählen, ein Einfachfeld bringt den Zahlenwert, ein Doppel das Doppelte, ein Dreifach das Dreifache.\n\nTrifft jemand in derselben Aufnahme ein Einfach-, ein Doppel- und ein Dreifachfeld der aktuellen Zahl, gewinnt diese Person sofort, egal wie die Punkte sonst stehen.\n\nOhne diesen Sofortsieg gewinnt nach der letzten Runde, wer die meisten Punkte gesammelt hat.",
 		dartsStandardMode: "Standard",
 		minigolfSetupSubtitle: "Spieler festlegen",
-		minigolfSubtitle: "18 Löcher",
-		holeLabel: (n) => `Loch ${n}`,
+		minigolfSubtitle: "18 Bahnen",
+		holeLabel: (n) => `Bahn ${n}`,
 		minigolfOutRow: "Aus",
 		mgHoleRange: (a, b) => `Loch ${a} bis ${b}`,
 		mgMaxShort: "Max",
 		mgMaxHint: (m) => `Nach ${m - 1} Schlägen nicht eingelocht: ${m} eintragen.`,
 		mgStrokesRange: (m) => `Bitte 1 bis ${m} Schläge eingeben.`,
 		mgClear: "Leeren",
+		mgTabHole: "Bahn",
+		mgTabTable: "Tabelle",
+		mgViewLabel: "Ansicht",
+		mgOf: (n) => `von ${n}`,
+		mgHoleOf: (h, n) => `Bahn ${h} von ${n}`,
+		mgPrevHole: "Vorherige Bahn",
+		mgNextHole: "Nächste Bahn",
+		mgProgress: (d, n) => `${d} von ${n} Bahnen gespeichert`,
+		mgSoFar: "Bisher",
+		mgHolesN: (n) => n === 1 ? "1 Bahn" : `${n} Bahnen`,
+		mgAdd: (n) => `Schlag für ${n} hinzufügen`,
+		mgSub: (n) => `Schlag für ${n} abziehen`,
+		mgPick: (n, v) => v === null ? `Schläge für ${n}: offen. Zahl direkt wählen` : `Schläge für ${n}: ${v}. Zahl direkt wählen`,
+		mgOpen: "offen",
+		mgLeads: "Führt",
+		mgUnsaved: "Nicht gespeichert",
+		mgStandAfter: (n) => n === 1 ? "Stand nach 1 Bahn" : `Stand nach ${n} Bahnen`,
+		mgStandCommon: (n) => n === 1 ? "Vergleich über 1 gemeinsame Bahn" : `Vergleich über ${n} gemeinsame Bahnen`,
+		mgStandNone: "Noch keine Bahn gespeichert",
+		mgOpenTable: "Ganze Tabelle öffnen",
+		mgSaveHole: "Bahn speichern",
+		mgSaveChanges: "Änderungen speichern",
+		mgStillOpen: (s) => `Noch offen: ${s}`,
+		mgEnterHint: "Schläge für alle eintragen",
+		mgGoNext: (n) => `Weiter zu Bahn ${n}`,
+		mgSaved: "Bahn gespeichert",
+		mgShowResult: "Endstand zeigen",
+		mgUndo: "Rückgängig",
+		mgUndoAria: (l) => `Speichern von Bahn ${l} rückgängig machen`,
+		mgDirtyHoles: (l) => `Nicht gespeichert: Bahn ${l}`,
+		mgCurrentHole: "aktuelle Bahn",
+		mgTableHint: "Zelle antippen, um sie zu ändern. Änderungen gelten erst nach dem Speichern.",
+		mgOk: "übernehmen",
+		mgClose: "Schliessen",
 		mgTapHint: "Feld antippen, um Schläge einzutragen oder zu ändern.",
 		mgWinsTie: (n, s) => `${n} gewinnen gemeinsam mit ${s} Schlägen!`,
 		minigolfInRow: "Ein",
@@ -10302,6 +10336,40 @@ var TRANSLATIONS = {
 		mgMaxHint: (m) => `Not holed after ${m - 1} strokes: enter ${m}.`,
 		mgStrokesRange: (m) => `Please enter 1 to ${m} strokes.`,
 		mgClear: "Clear",
+		mgTabHole: "Hole",
+		mgTabTable: "Table",
+		mgViewLabel: "View",
+		mgOf: (n) => `of ${n}`,
+		mgHoleOf: (h, n) => `Hole ${h} of ${n}`,
+		mgPrevHole: "Previous hole",
+		mgNextHole: "Next hole",
+		mgProgress: (d, n) => `${d} of ${n} holes saved`,
+		mgSoFar: "So far",
+		mgHolesN: (n) => n === 1 ? "1 hole" : `${n} holes`,
+		mgAdd: (n) => `Add a stroke for ${n}`,
+		mgSub: (n) => `Remove a stroke for ${n}`,
+		mgPick: (n, v) => v === null ? `Strokes for ${n}: open. Pick a number` : `Strokes for ${n}: ${v}. Pick a number`,
+		mgOpen: "open",
+		mgLeads: "Leads",
+		mgUnsaved: "Not saved",
+		mgStandAfter: (n) => n === 1 ? "Standings after 1 hole" : `Standings after ${n} holes`,
+		mgStandCommon: (n) => n === 1 ? "Compared over 1 shared hole" : `Compared over ${n} shared holes`,
+		mgStandNone: "No hole saved yet",
+		mgOpenTable: "Open full table",
+		mgSaveHole: "Save hole",
+		mgSaveChanges: "Save changes",
+		mgStillOpen: (s) => `Still open: ${s}`,
+		mgEnterHint: "Enter strokes for everyone",
+		mgGoNext: (n) => `Go to hole ${n}`,
+		mgSaved: "Hole saved",
+		mgShowResult: "Show final standings",
+		mgUndo: "Undo",
+		mgUndoAria: (l) => `Undo saving hole ${l}`,
+		mgDirtyHoles: (l) => `Not saved: hole ${l}`,
+		mgCurrentHole: "current hole",
+		mgTableHint: "Tap a cell to change it. Changes apply once you save.",
+		mgOk: "confirm",
+		mgClose: "Close",
 		mgTapHint: "Tap a box to enter or change strokes.",
 		mgWinsTie: (n, s) => `${n} win together with ${s} strokes!`,
 		minigolfInRow: "In",
@@ -11684,6 +11752,40 @@ var TRANSLATIONS = {
 		mgMaxHint: (m) => `Balle pas rentrée après ${m - 1} coups : noter ${m}.`,
 		mgStrokesRange: (m) => `Saisis entre 1 et ${m} coups.`,
 		mgClear: "Effacer",
+		mgTabHole: "Trou",
+		mgTabTable: "Tableau",
+		mgViewLabel: "Vue",
+		mgOf: (n) => `sur ${n}`,
+		mgHoleOf: (h, n) => `Trou ${h} sur ${n}`,
+		mgPrevHole: "Trou précédent",
+		mgNextHole: "Trou suivant",
+		mgProgress: (d, n) => `${d} trous sur ${n} enregistrés`,
+		mgSoFar: "Jusqu'ici",
+		mgHolesN: (n) => n === 1 ? "1 trou" : `${n} trous`,
+		mgAdd: (n) => `Ajouter un coup pour ${n}`,
+		mgSub: (n) => `Retirer un coup pour ${n}`,
+		mgPick: (n, v) => v === null ? `Coups de ${n} : ouvert. Choisir un nombre` : `Coups de ${n} : ${v}. Choisir un nombre`,
+		mgOpen: "ouvert",
+		mgLeads: "En tête",
+		mgUnsaved: "Non enregistré",
+		mgStandAfter: (n) => n === 1 ? "Classement après 1 trou" : `Classement après ${n} trous`,
+		mgStandCommon: (n) => n === 1 ? "Comparaison sur 1 trou commun" : `Comparaison sur ${n} trous communs`,
+		mgStandNone: "Aucun trou enregistré",
+		mgOpenTable: "Ouvrir le tableau complet",
+		mgSaveHole: "Enregistrer le trou",
+		mgSaveChanges: "Enregistrer les modifications",
+		mgStillOpen: (s) => `Encore ouvert : ${s}`,
+		mgEnterHint: "Saisir les coups de chacun",
+		mgGoNext: (n) => `Aller au trou ${n}`,
+		mgSaved: "Trou enregistré",
+		mgShowResult: "Voir le classement final",
+		mgUndo: "Annuler",
+		mgUndoAria: (l) => `Annuler l'enregistrement du trou ${l}`,
+		mgDirtyHoles: (l) => `Non enregistré : trou ${l}`,
+		mgCurrentHole: "trou actuel",
+		mgTableHint: "Touchez une case pour la modifier. Les modifications comptent après l'enregistrement.",
+		mgOk: "valider",
+		mgClose: "Fermer",
 		mgTapHint: "Touche une case pour saisir ou modifier les coups.",
 		mgWinsTie: (n, s) => `${n} gagnent ensemble avec ${s} coups !`,
 		minigolfInRow: "Retour",
@@ -13066,6 +13168,40 @@ var TRANSLATIONS = {
 		mgMaxHint: (m) => `Pallina non in buca dopo ${m - 1} colpi: segna ${m}.`,
 		mgStrokesRange: (m) => `Inserisci da 1 a ${m} colpi.`,
 		mgClear: "Cancella",
+		mgTabHole: "Buca",
+		mgTabTable: "Tabella",
+		mgViewLabel: "Vista",
+		mgOf: (n) => `di ${n}`,
+		mgHoleOf: (h, n) => `Buca ${h} di ${n}`,
+		mgPrevHole: "Buca precedente",
+		mgNextHole: "Buca successiva",
+		mgProgress: (d, n) => `${d} buche su ${n} salvate`,
+		mgSoFar: "Finora",
+		mgHolesN: (n) => n === 1 ? "1 buca" : `${n} buche`,
+		mgAdd: (n) => `Aggiungi un colpo a ${n}`,
+		mgSub: (n) => `Togli un colpo a ${n}`,
+		mgPick: (n, v) => v === null ? `Colpi di ${n}: aperto. Scegli un numero` : `Colpi di ${n}: ${v}. Scegli un numero`,
+		mgOpen: "aperto",
+		mgLeads: "In testa",
+		mgUnsaved: "Non salvato",
+		mgStandAfter: (n) => n === 1 ? "Classifica dopo 1 buca" : `Classifica dopo ${n} buche`,
+		mgStandCommon: (n) => n === 1 ? "Confronto su 1 buca comune" : `Confronto su ${n} buche comuni`,
+		mgStandNone: "Nessuna buca salvata",
+		mgOpenTable: "Apri la tabella completa",
+		mgSaveHole: "Salva buca",
+		mgSaveChanges: "Salva modifiche",
+		mgStillOpen: (s) => `Ancora aperto: ${s}`,
+		mgEnterHint: "Inserisci i colpi di tutti",
+		mgGoNext: (n) => `Vai alla buca ${n}`,
+		mgSaved: "Buca salvata",
+		mgShowResult: "Mostra classifica finale",
+		mgUndo: "Annulla",
+		mgUndoAria: (l) => `Annulla il salvataggio della buca ${l}`,
+		mgDirtyHoles: (l) => `Non salvato: buca ${l}`,
+		mgCurrentHole: "buca attuale",
+		mgTableHint: "Tocca una cella per modificarla. Le modifiche valgono dopo il salvataggio.",
+		mgOk: "conferma",
+		mgClose: "Chiudi",
 		mgTapHint: "Tocca una casella per inserire o modificare i colpi.",
 		mgWinsTie: (n, s) => `${n} vincono insieme con ${s} colpi!`,
 		minigolfInRow: "Ritorno",
@@ -14448,6 +14584,40 @@ var TRANSLATIONS = {
 		mgMaxHint: (m) => `Sin embocar tras ${m - 1} golpes: anota ${m}.`,
 		mgStrokesRange: (m) => `Introduce de 1 a ${m} golpes.`,
 		mgClear: "Borrar",
+		mgTabHole: "Hoyo",
+		mgTabTable: "Tabla",
+		mgViewLabel: "Vista",
+		mgOf: (n) => `de ${n}`,
+		mgHoleOf: (h, n) => `Hoyo ${h} de ${n}`,
+		mgPrevHole: "Hoyo anterior",
+		mgNextHole: "Hoyo siguiente",
+		mgProgress: (d, n) => `${d} de ${n} hoyos guardados`,
+		mgSoFar: "Hasta ahora",
+		mgHolesN: (n) => n === 1 ? "1 hoyo" : `${n} hoyos`,
+		mgAdd: (n) => `Añadir un golpe a ${n}`,
+		mgSub: (n) => `Quitar un golpe a ${n}`,
+		mgPick: (n, v) => v === null ? `Golpes de ${n}: abierto. Elegir número` : `Golpes de ${n}: ${v}. Elegir número`,
+		mgOpen: "abierto",
+		mgLeads: "Lidera",
+		mgUnsaved: "Sin guardar",
+		mgStandAfter: (n) => n === 1 ? "Clasificación tras 1 hoyo" : `Clasificación tras ${n} hoyos`,
+		mgStandCommon: (n) => n === 1 ? "Comparación en 1 hoyo común" : `Comparación en ${n} hoyos comunes`,
+		mgStandNone: "Aún no hay hoyos guardados",
+		mgOpenTable: "Abrir la tabla completa",
+		mgSaveHole: "Guardar hoyo",
+		mgSaveChanges: "Guardar cambios",
+		mgStillOpen: (s) => `Aún pendiente: ${s}`,
+		mgEnterHint: "Anota los golpes de todos",
+		mgGoNext: (n) => `Ir al hoyo ${n}`,
+		mgSaved: "Hoyo guardado",
+		mgShowResult: "Ver clasificación final",
+		mgUndo: "Deshacer",
+		mgUndoAria: (l) => `Deshacer guardar el hoyo ${l}`,
+		mgDirtyHoles: (l) => `Sin guardar: hoyo ${l}`,
+		mgCurrentHole: "hoyo actual",
+		mgTableHint: "Toca una celda para cambiarla. Los cambios se aplican al guardar.",
+		mgOk: "confirmar",
+		mgClose: "Cerrar",
 		mgTapHint: "Toca una casilla para anotar o cambiar golpes.",
 		mgWinsTie: (n, s) => `¡${n} ganan juntos con ${s} golpes!`,
 		minigolfInRow: "Vuelta",
@@ -15830,6 +16000,40 @@ var TRANSLATIONS = {
 		mgMaxHint: (m) => `Sem acertar após ${m - 1} tacadas: anota ${m}.`,
 		mgStrokesRange: (m) => `Introduz de 1 a ${m} tacadas.`,
 		mgClear: "Apagar",
+		mgTabHole: "Buraco",
+		mgTabTable: "Tabela",
+		mgViewLabel: "Vista",
+		mgOf: (n) => `de ${n}`,
+		mgHoleOf: (h, n) => `Buraco ${h} de ${n}`,
+		mgPrevHole: "Buraco anterior",
+		mgNextHole: "Buraco seguinte",
+		mgProgress: (d, n) => `${d} de ${n} buracos guardados`,
+		mgSoFar: "Até agora",
+		mgHolesN: (n) => n === 1 ? "1 buraco" : `${n} buracos`,
+		mgAdd: (n) => `Adicionar uma tacada a ${n}`,
+		mgSub: (n) => `Retirar uma tacada a ${n}`,
+		mgPick: (n, v) => v === null ? `Tacadas de ${n}: em aberto. Escolher número` : `Tacadas de ${n}: ${v}. Escolher número`,
+		mgOpen: "em aberto",
+		mgLeads: "Lidera",
+		mgUnsaved: "Não guardado",
+		mgStandAfter: (n) => n === 1 ? "Classificação após 1 buraco" : `Classificação após ${n} buracos`,
+		mgStandCommon: (n) => n === 1 ? "Comparação em 1 buraco comum" : `Comparação em ${n} buracos comuns`,
+		mgStandNone: "Ainda nenhum buraco guardado",
+		mgOpenTable: "Abrir a tabela completa",
+		mgSaveHole: "Guardar buraco",
+		mgSaveChanges: "Guardar alterações",
+		mgStillOpen: (s) => `Ainda em aberto: ${s}`,
+		mgEnterHint: "Anota as tacadas de todos",
+		mgGoNext: (n) => `Ir para o buraco ${n}`,
+		mgSaved: "Buraco guardado",
+		mgShowResult: "Ver classificação final",
+		mgUndo: "Desfazer",
+		mgUndoAria: (l) => `Desfazer guardar o buraco ${l}`,
+		mgDirtyHoles: (l) => `Não guardado: buraco ${l}`,
+		mgCurrentHole: "buraco atual",
+		mgTableHint: "Toca numa célula para a alterar. As alterações aplicam-se ao guardar.",
+		mgOk: "confirmar",
+		mgClose: "Fechar",
 		mgTapHint: "Toca numa casa para anotar ou alterar tacadas.",
 		mgWinsTie: (n, s) => `${n} ganham juntos com ${s} tacadas!`,
 		minigolfInRow: "Volta",
@@ -45028,26 +45232,39 @@ function flip7PageShellStyle(theme) {
 	};
 }
 function minigolfTokens(theme) {
+	const vbg = "radial-gradient(ellipse 95% 50% at 12% -6%, rgba(63,143,66,0.46) 0%, transparent 64%), radial-gradient(ellipse 80% 45% at 108% 32%, rgba(84,132,255,0.30) 0%, transparent 66%), radial-gradient(ellipse 100% 55% at -5% 104%, rgba(38,200,186,0.24) 0%, transparent 66%), linear-gradient(168deg, #16204A 0%, #0D1430 52%, #0A0F24 100%)";
 	if (theme === "light") return {
-		btnFrom: "#2F6B4A",
-		btnTo: "#234D26",
+		btnFrom: "#1F5A38",
+		btnTo: "#1F5A38",
 		onAccent: "#FFFFFF",
-		bg: "#E2F0DB",
-		bg2: "#CEE5C2",
+		bg: "#EEF3EC",
+		bg2: "#F6F9F4",
 		card: "#FFFFFF",
-		ink: "#17241A",
-		muted: "#4B5468",
-		green: "#2F6B4A",
+		ink: "#12261B",
+		muted: "#4A5E52",
+		green: "#1F5A38",
 		gold: "#83683B",
-		border: "#4A4038",
+		border: "#D3DECF",
 		gridLine: "#E1EEDC",
-		stripeA: "#EAF4E0",
-		stripeB: "#DCEBCD",
-		clipBody: "#2E4A31",
-		clipHighlight: "#57795A",
-		clipShadow: "rgba(20,30,20,0.4)",
-		boardEdge: "#264A29",
-		boardEdgeLight: "#3C6A40",
+		surf: "#FFFFFF",
+		surf2: "#F1F5EF",
+		line: "#D3DECF",
+		acc: "#1F5A38",
+		onAcc: "#FFFFFF",
+		accInk: "#1F5A38",
+		accSoft: "rgba(31,90,56,0.08)",
+		segBg: "#C8F45B",
+		segInk: "#12261B",
+		track: "#DCE5D8",
+		ctrl: "#F1F5EF",
+		ctrlLine: "#C6D3C2",
+		flag: "#D9483B",
+		accLine: "rgba(31,90,56,0.45)",
+		solid: "#FFFFFF",
+		err: "#B3261E",
+		shadow: "0 1px 2px rgba(18,38,27,0.05), 0 8px 22px -14px rgba(18,38,27,0.28)",
+		ctaShadow: "0 10px 24px -14px rgba(31,90,56,0.7)",
+		glass: false,
 		hues: [
 			"#2F6B52",
 			"#2E5C8A",
@@ -45060,25 +45277,37 @@ function minigolfTokens(theme) {
 		]
 	};
 	if (theme === "vitrum") return {
-		btnFrom: "#357A38",
-		btnTo: "#234D26",
-		onAccent: "#FFFFFF",
-		bg: "radial-gradient(ellipse 95% 50% at 12% -6%, rgba(63,143,66,0.46) 0%, transparent 64%), radial-gradient(ellipse 80% 45% at 108% 32%, rgba(84,132,255,0.30) 0%, transparent 66%), radial-gradient(ellipse 100% 55% at -5% 104%, rgba(38,200,186,0.24) 0%, transparent 66%), linear-gradient(168deg, #16204A 0%, #0D1430 52%, #0A0F24 100%)",
+		btnFrom: "#B5EBA0",
+		btnTo: "#B5EBA0",
+		onAccent: "#0E1A12",
+		bg: vbg,
 		bg2: "rgba(255,255,255,0.04)",
 		card: "rgba(255,255,255,0.07)",
 		ink: "#F2F4F8",
-		muted: "#A3A7B0",
+		muted: "#B3BAC5",
 		green: "#7EEBA0",
 		gold: "#E8CB93",
 		border: "rgba(255,255,255,0.12)",
 		gridLine: "rgba(255,255,255,0.10)",
-		stripeA: "rgba(255,255,255,0.025)",
-		stripeB: "rgba(255,255,255,0.008)",
-		clipBody: "rgba(255,255,255,0.22)",
-		clipHighlight: "rgba(255,255,255,0.38)",
-		clipShadow: "rgba(0,0,0,0.55)",
-		boardEdge: "rgba(126,235,160,0.32)",
-		boardEdgeLight: "rgba(126,235,160,0.55)",
+		surf: "rgba(255,255,255,0.07)",
+		surf2: "rgba(255,255,255,0.05)",
+		line: "rgba(255,255,255,0.14)",
+		acc: "#B5EBA0",
+		onAcc: "#0E1A12",
+		accInk: "#B5EBA0",
+		accSoft: "rgba(181,235,160,0.12)",
+		segBg: "rgba(181,235,160,0.92)",
+		segInk: "#0E1A12",
+		track: "rgba(255,255,255,0.13)",
+		ctrl: "rgba(255,255,255,0.06)",
+		ctrlLine: "rgba(255,255,255,0.22)",
+		flag: "#F08A7E",
+		accLine: "rgba(181,235,160,0.5)",
+		solid: "#18213F",
+		err: "#FF8A80",
+		shadow: "none",
+		ctaShadow: "0 10px 26px -14px rgba(126,235,160,0.55)",
+		glass: true,
 		hues: [
 			"#7EEBA0",
 			"#8FB4E0",
@@ -45093,25 +45322,37 @@ function minigolfTokens(theme) {
 	if (theme === "noir") {
 		const ac = "#C9C9C9";
 		return {
-			btnFrom: "#6B6B6B",
-			btnTo: "#474747",
-			onAccent: "#FFFFFF",
+			btnFrom: "#EDEDED",
+			btnTo: "#EDEDED",
+			onAccent: "#0A0A0A",
 			bg: "#0A0A0A",
-			bg2: "#050505",
-			card: "#1E1E1E",
+			bg2: "#121212",
+			card: "#161616",
 			ink: "#EDEDED",
 			muted: "#A5A5A5",
 			green: ac,
 			gold: ac,
-			border: "#454545",
+			border: "#2C2C2C",
 			gridLine: "#242424",
-			stripeA: "#101010",
-			stripeB: "#0A0A0A",
-			clipBody: "#454545",
-			clipHighlight: "#3D3D3D",
-			clipShadow: "rgba(0,0,0,0.6)",
-			boardEdge: "#454545",
-			boardEdgeLight: "#3D3D3D",
+			surf: "#161616",
+			surf2: "#101010",
+			line: "#2C2C2C",
+			acc: "#EDEDED",
+			onAcc: "#0A0A0A",
+			accInk: "#EDEDED",
+			accSoft: "rgba(255,255,255,0.06)",
+			segBg: "#EDEDED",
+			segInk: "#0A0A0A",
+			track: "#2A2A2A",
+			ctrl: "transparent",
+			ctrlLine: "#4A4A4A",
+			flag: "#BDBDBD",
+			accLine: "#8A8A8A",
+			solid: "#161616",
+			err: "#FF8A80",
+			shadow: "none",
+			ctaShadow: "none",
+			glass: false,
 			hues: [
 				"#E0E0E0",
 				"#B8B8B8",
@@ -45125,25 +45366,37 @@ function minigolfTokens(theme) {
 		};
 	}
 	return {
-		btnFrom: "#357A38",
-		btnTo: "#234D26",
-		onAccent: "#FFFFFF",
-		bg: "#0E140F",
-		bg2: "#141F16",
-		card: "#1A241C",
-		ink: "#EAF3E6",
-		muted: "#84A17F",
-		green: "#5FBE5D",
+		btnFrom: "#C8F45B",
+		btnTo: "#C8F45B",
+		onAccent: "#0B1411",
+		bg: "#0B1411",
+		bg2: "#10221B",
+		card: "#102B23",
+		ink: "#EEF5EE",
+		muted: "#A3BBAF",
+		green: "#C8F45B",
 		gold: "#E0BA72",
-		border: "#28372A",
-		gridLine: "#25332A",
-		stripeA: "#1F3C26",
-		stripeB: "#0F2216",
-		clipBody: "#3A4F3C",
-		clipHighlight: "#5D7A61",
-		clipShadow: "rgba(0,0,0,0.55)",
-		boardEdge: "#264A29",
-		boardEdgeLight: "#3D6640",
+		border: "#1D3D32",
+		gridLine: "#1A3229",
+		surf: "#102B23",
+		surf2: "#0D231C",
+		line: "#1D3D32",
+		acc: "#C8F45B",
+		onAcc: "#0B1411",
+		accInk: "#C8F45B",
+		accSoft: "rgba(200,244,91,0.09)",
+		segBg: "#C8F45B",
+		segInk: "#0B1411",
+		track: "#21443A",
+		ctrl: "transparent",
+		ctrlLine: "#33594C",
+		flag: "#F0524A",
+		accLine: "rgba(200,244,91,0.55)",
+		solid: "#102B23",
+		err: "#FF8A80",
+		shadow: "0 1px 0 rgba(255,255,255,0.03) inset, 0 10px 24px -16px rgba(0,0,0,0.7)",
+		ctaShadow: "0 10px 26px -14px rgba(200,244,91,0.45)",
+		glass: false,
 		hues: [
 			"#5FBE5D",
 			"#5B9BD5",
@@ -45160,7 +45413,7 @@ function minigolfPageShellStyle(theme) {
 	const mg = minigolfTokens(theme);
 	return {
 		minHeight: "100vh",
-		background: theme === "vitrum" ? `repeating-linear-gradient(115deg, ${mg.stripeA} 0px, ${mg.stripeA} 28px, ${mg.stripeB} 28px, ${mg.stripeB} 56px), ${mg.bg}` : `repeating-linear-gradient(115deg, ${mg.stripeA} 0px, ${mg.stripeA} 28px, ${mg.stripeB} 28px, ${mg.stripeB} 56px)`,
+		background: theme === "vitrum" ? mg.bg : `radial-gradient(ellipse at 50% -10%, ${mg.bg2} 0%, ${mg.bg} 65%)`,
 		padding: "20px 12px 32px"
 	};
 }
@@ -46961,310 +47214,273 @@ function WizardGame({ state, setState, onBack, onHome, onEndGame, lang = "de", t
 		theme
 	});
 }
-// web/src/export/canvas-utils.js
-var canvas_utils_exports = /* @__PURE__ */ __exportAll({
-	RESULT_CARD_THEMES: () => RESULT_CARD_THEMES,
-	_gtLogoImgPromise: () => _gtLogoImgPromise,
-	drawConfettiSideBands: () => drawConfettiSideBands,
-	drawLetterSpacedText: () => drawLetterSpacedText,
-	drawSunburstRays: () => drawSunburstRays,
-	fitFontSize: () => fitFontSize,
-	hexToRgb: () => hexToRgb,
-	loadGtLogoImage: () => loadGtLogoImage,
-	measureLetterSpacedWidth: () => measureLetterSpacedWidth,
-	resultTheme: () => resultTheme,
-	roundRectPath: () => roundRectPath,
-	shadeHex: () => shadeHex,
-	truncateForWidth: () => truncateForWidth
-});
-function hexToRgb(hex) {
-	const f = parseInt(hex.slice(1), 16);
-	return `${f >> 16}, ${f >> 8 & 255}, ${f & 255}`;
+function mgOk(v) {
+	return typeof v === "number" && Number.isInteger(v) && v >= 1 && v <= 7;
 }
-function shadeHex(hex, percent) {
-	const f = parseInt(hex.slice(1), 16);
-	const t = percent < 0 ? 0 : 255;
-	const p = percent < 0 ? -percent : percent;
-	const R = f >> 16;
-	const G = f >> 8 & 255;
-	const B = f & 255;
-	return "#" + (16777216 + (Math.round((t - R) * p) + R) * 65536 + (Math.round((t - G) * p) + G) * 256 + (Math.round((t - B) * p) + B)).toString(16).slice(1);
+function mgIsObj(o) {
+	return !!o && typeof o === "object" && !Array.isArray(o);
 }
-var RESULT_CARD_THEMES = {
-	darts: {
-		bgFrom: "#24262E",
-		bgTo: "#0A0B0D",
-		accent: "#F0A83C",
-		ink: "#F2F0E6",
-		winnerInk: "#241505",
-		icon: "🎯"
-	},
-	cricket: {
-		bgFrom: "#24262E",
-		bgTo: "#0A0B0D",
-		accent: "#F0A83C",
-		ink: "#F2F0E6",
-		winnerInk: "#241505",
-		icon: "🎯"
-	},
-	hiscore: {
-		bgFrom: "#24262E",
-		bgTo: "#0A0B0D",
-		accent: "#F0A83C",
-		ink: "#F2F0E6",
-		winnerInk: "#241505",
-		icon: "🎯"
-	},
-	splitscore: {
-		bgFrom: "#24262E",
-		bgTo: "#0A0B0D",
-		accent: "#F0A83C",
-		ink: "#F2F0E6",
-		winnerInk: "#241505",
-		icon: "🎯"
-	},
-	shanghai: {
-		bgFrom: "#24262E",
-		bgTo: "#0A0B0D",
-		accent: "#F0A83C",
-		ink: "#F2F0E6",
-		winnerInk: "#241505",
-		icon: "🎯"
-	},
-	tutto: {
-		bgFrom: "#2A1416",
-		bgTo: "#0F0607",
-		accent: "#E6474E",
-		ink: "#FBEFEF",
-		winnerInk: "#FFF5F5",
-		icon: "🎲"
-	},
-	freeplay: {
-		bgFrom: "#241A12",
-		bgTo: "#0B0906",
-		accent: "#C9A15C",
-		ink: "#F5EFE2",
-		winnerInk: "#1A1408",
-		icon: "✏️"
-	},
-	yatzy: {
-		bgFrom: "#1A1B2E",
-		bgTo: "#0A0A14",
-		accent: "#5B5FEF",
-		ink: "#EDEDFB",
-		winnerInk: "#F5F5FF",
-		icon: "🎲"
-	},
-	wizard: {
-		bgFrom: "#2B1A20",
-		bgTo: "#0D0A0C",
-		accent: "#D4AF5A",
-		ink: "#EFE6D2",
-		winnerInk: "#1A1408",
-		icon: "🧙"
-	},
-	"jass-differenzler": {
-		bgFrom: "#2A1D10",
-		bgTo: "#100B05",
-		accent: "#D52B1E",
-		ink: "#F5ECD8",
-		winnerInk: "#FFF3EC",
-		icon: "🃏"
-	},
-	schieber: {
-		bgFrom: "#2A1D10",
-		bgTo: "#100B05",
-		accent: "#D52B1E",
-		ink: "#F5ECD8",
-		winnerInk: "#FFF3EC",
-		icon: "🃏"
-	},
-	fivesec: {
-		bgFrom: "#241810",
-		bgTo: "#0D0905",
-		accent: "#FF9640",
-		ink: "#FFF4E8",
-		winnerInk: "#2A1203",
-		icon: ""
-	},
-	tabu: {
-		bgFrom: "#201A10",
-		bgTo: "#0C0A06",
-		accent: "#FFC93C",
-		ink: "#FFF8E8",
-		winnerInk: "#241D06",
-		icon: "🤫"
-	},
-	headsup: {
-		bgFrom: "#1E1622",
-		bgTo: "#0D0910",
-		accent: "#FF7A52",
-		ink: "#FBF3FF",
-		winnerInk: "#2A0F05",
-		icon: "🤳"
-	},
-	skyjo: {
-		bgFrom: "#171B21",
-		bgTo: "#0A0C0F",
-		accent: "#2FD9A8",
-		ink: "#EAF7F1",
-		winnerInk: "#04231A",
-		icon: "🃏"
-	},
-	minigolf: {
-		bgFrom: "#141F16",
-		bgTo: "#080C09",
-		accent: "#5FBE5D",
-		ink: "#EAF3E6",
-		winnerInk: "#0C2410",
-		icon: "⛳"
-	},
-	phase10: {
-		bgFrom: "#141B26",
-		bgTo: "#080B10",
-		accent: "#2E9BF0",
-		ink: "#EAF3FC",
-		winnerInk: "#04121F",
-		icon: "🔟"
-	},
-	romme: {
-		bgFrom: "#22161D",
-		bgTo: "#0D080B",
-		accent: "#F25C9A",
-		ink: "#FBEFF5",
-		winnerInk: "#2A0716",
-		icon: "🃏"
-	}
-};
-function resultTheme(gameId) {
-	return RESULT_CARD_THEMES[gameId] || RESULT_CARD_THEMES.freeplay;
+function mgCard(scores, id) {
+	const c = mgIsObj(scores) ? scores[id] : null;
+	return Array.isArray(c) ? c : [];
 }
-function roundRectPath(ctx, x, y, w, h, r) {
-	ctx.beginPath();
-	ctx.moveTo(x + r, y);
-	ctx.arcTo(x + w, y, x + w, y + h, r);
-	ctx.arcTo(x + w, y + h, x, y + h, r);
-	ctx.arcTo(x, y + h, x, y, r);
-	ctx.arcTo(x, y, x + w, y, r);
-	ctx.closePath();
+function mgSaved(scores, id, h) {
+	const v = mgCard(scores, id)[h];
+	return v === null || v === void 0 ? null : v;
 }
-var _gtLogoImgPromise = null;
-function loadGtLogoImage() {
-	if (_gtLogoImgPromise) return _gtLogoImgPromise;
-	_gtLogoImgPromise = new Promise((resolve) => {
-		const img = new Image();
-		img.onload = () => resolve(img);
-		img.onerror = () => resolve(null);
-		img.src = app_logo_gold_default;
+function mgCleanDrafts(drafts, players, scores) {
+	const out = {};
+	if (!mgIsObj(drafts)) return out;
+	Object.keys(drafts).forEach((hk) => {
+		const h = Number(hk);
+		if (!Number.isInteger(h) || h < 0 || h >= 18 || !mgIsObj(drafts[hk])) return;
+		const row = {};
+		players.forEach((p) => {
+			if (!Object.prototype.hasOwnProperty.call(drafts[hk], p.id)) return;
+			const raw = drafts[hk][p.id];
+			const v = mgOk(raw) ? raw : null;
+			if (v !== mgSaved(scores, p.id, h)) row[p.id] = v;
+		});
+		if (Object.keys(row).length) out[h] = row;
 	});
-	return _gtLogoImgPromise;
+	return out;
 }
-function drawLetterSpacedText(ctx, text, cx, y, spacing) {
-	const prevAlign = ctx.textAlign;
-	const chars = text.split("");
-	const widths = chars.map((c) => ctx.measureText(c).width);
-	let x = cx - (widths.reduce((a, b) => a + b, 0) + spacing * (chars.length - 1)) / 2;
-	ctx.textAlign = "left";
-	chars.forEach((c, idx) => {
-		ctx.fillText(c, x, y);
-		x += widths[idx] + spacing;
+function mgHoleComplete(players, scores, h) {
+	return players.length > 0 && players.every((p) => mgSaved(scores, p.id, h) !== null);
+}
+function mgNextOpen(players, scores, from) {
+	for (let h = from + 1; h < 18; h++) if (!mgHoleComplete(players, scores, h)) return h;
+	for (let h = 0; h <= Math.min(from, 17); h++) if (!mgHoleComplete(players, scores, h)) return h;
+	return -1;
+}
+function mgUi(state) {
+	const s = mgIsObj(state) ? state : {};
+	const players = Array.isArray(s.players) ? s.players : [];
+	const scores = mgIsObj(s.scores) ? s.scores : {};
+	let hole = Number.isInteger(s.hole) && s.hole >= 0 && s.hole < 18 ? s.hole : -1;
+	if (hole < 0) {
+		const n = mgNextOpen(players, scores, -1);
+		hole = n < 0 ? 17 : n;
+	}
+	const tab = s.tab === "table" ? "table" : "hole";
+	const drafts = mgCleanDrafts(s.drafts, players, scores);
+	const undo = Array.isArray(s.undo) ? s.undo.filter((u) => mgIsObj(u) && mgIsObj(u.vals) && Array.isArray(u.holes)) : [];
+	return {
+		players,
+		scores,
+		hole,
+		tab,
+		drafts,
+		undo
+	};
+}
+function mgHasDraft(drafts, h, id) {
+	return mgIsObj(drafts) && mgIsObj(drafts[h]) && Object.prototype.hasOwnProperty.call(drafts[h], id);
+}
+function mgEff(ui, id, h) {
+	return mgHasDraft(ui.drafts, h, id) ? ui.drafts[h][id] : mgSaved(ui.scores, id, h);
+}
+function mgHoleInfo(ui, h) {
+	const saved = ui.players.filter((p) => mgSaved(ui.scores, p.id, h) !== null).length;
+	const missing = ui.players.filter((p) => mgEff(ui, p.id, h) === null);
+	const dirty = mgIsObj(ui.drafts[h]) && Object.keys(ui.drafts[h]).length > 0;
+	const isNew = saved === 0;
+	const complete = ui.players.length > 0 && missing.length === 0;
+	return {
+		saved,
+		missing,
+		dirty,
+		isNew,
+		complete,
+		done: ui.players.length > 0 && saved === ui.players.length,
+		canSave: dirty && (isNew ? complete : true)
+	};
+}
+function mgSetDraft(state, id, h, v) {
+	const ui = mgUi(state);
+	if (!Number.isInteger(h) || h < 0 || h >= 18 || !ui.players.some((p) => p.id === id)) return state;
+	const val = mgOk(v) ? v : null;
+	const drafts = {
+		...ui.drafts,
+		[h]: { ...ui.drafts[h] || {} }
+	};
+	if (val === mgSaved(ui.scores, id, h)) delete drafts[h][id];
+	else drafts[h][id] = val;
+	if (!Object.keys(drafts[h]).length) delete drafts[h];
+	return {
+		...state,
+		drafts
+	};
+}
+function mgStep(state, id, h, dir) {
+	const cur = mgEff(mgUi(state), id, h);
+	let next;
+	if (cur === null) {
+		if (dir <= 0) return state;
+		next = 1;
+	} else next = Math.max(1, Math.min(7, cur + (dir > 0 ? 1 : -1)));
+	if (next === cur) return state;
+	return mgSetDraft(state, id, h, next);
+}
+function mgGoto(state, h) {
+	const n = Math.max(0, Math.min(17, Number(h) || 0));
+	return {
+		...state,
+		hole: n
+	};
+}
+function mgApply(ui, holes) {
+	const scores = { ...ui.scores };
+	ui.players.forEach((p) => {
+		const card = Array.from({ length: 18 }, (_, k) => mgSaved(ui.scores, p.id, k));
+		let changed = false;
+		holes.forEach((h) => {
+			if (mgHasDraft(ui.drafts, h, p.id)) {
+				card[h] = ui.drafts[h][p.id];
+				changed = true;
+			}
+		});
+		if (changed || !Array.isArray(scores[p.id])) scores[p.id] = card;
 	});
-	ctx.textAlign = prevAlign;
+	const drafts = { ...ui.drafts };
+	holes.forEach((h) => delete drafts[h]);
+	return {
+		scores,
+		drafts
+	};
 }
-function truncateForWidth(ctx, text, maxW) {
-	let t = text;
-	while (ctx.measureText(t).width > maxW && t.length > 3) t = t.slice(0, -2) + "…";
-	return t;
+function mgSnap(ui, holes) {
+	const vals = {}, drafts = {};
+	holes.forEach((h) => {
+		vals[h] = {};
+		ui.players.forEach((p) => vals[h][p.id] = mgSaved(ui.scores, p.id, h));
+		if (ui.drafts[h]) drafts[h] = { ...ui.drafts[h] };
+	});
+	return {
+		holes,
+		hole: ui.hole,
+		vals,
+		drafts
+	};
 }
-function drawSunburstRays(ctx, cx, cy, innerR, outerR, count, color, alpha) {
-	ctx.save();
-	ctx.globalAlpha = alpha;
-	ctx.fillStyle = color;
-	const halfAngle = Math.PI * 2 / count * .16;
-	for (let i = 0; i < count; i++) {
-		const a = i / count * Math.PI * 2;
-		ctx.beginPath();
-		ctx.moveTo(cx + Math.cos(a - halfAngle) * innerR, cy + Math.sin(a - halfAngle) * innerR);
-		ctx.lineTo(cx + Math.cos(a) * outerR, cy + Math.sin(a) * outerR);
-		ctx.lineTo(cx + Math.cos(a + halfAngle) * innerR, cy + Math.sin(a + halfAngle) * innerR);
-		ctx.closePath();
-		ctx.fill();
+function mgSave(state, h) {
+	const ui = mgUi(state);
+	if (!mgHoleInfo(ui, h).canSave) return state;
+	const { scores, drafts } = mgApply(ui, [h]);
+	const undo = [...ui.undo, mgSnap(ui, [h])].slice(-12);
+	let hole = h;
+	if (mgHoleComplete(ui.players, scores, h)) {
+		const n = mgNextOpen(ui.players, scores, h);
+		if (n >= 0) hole = n;
 	}
-	ctx.restore();
+	return {
+		...state,
+		scores,
+		drafts,
+		undo,
+		hole
+	};
 }
-function measureLetterSpacedWidth(ctx, text, spacing) {
-	const chars = text.split("");
-	return chars.map((c) => ctx.measureText(c).width).reduce((a, b) => a + b, 0) + spacing * Math.max(0, chars.length - 1);
+function mgSavableHoles(state) {
+	const ui = mgUi(state);
+	return Object.keys(ui.drafts).map(Number).sort((a, b) => a - b).filter((h) => mgHoleInfo(ui, h).canSave);
 }
-function fitFontSize(ctx, text, maxWidth, maxPx, minPx, weight, family) {
-	let size = maxPx;
-	while (size > minPx) {
-		ctx.font = `${weight} ${size}px ${family}`;
-		if (ctx.measureText(text).width <= maxWidth) break;
-		size -= 2;
-	}
-	return size;
+function mgSaveAll(state) {
+	const ui = mgUi(state);
+	const holes = mgSavableHoles(state);
+	if (!holes.length) return state;
+	const { scores, drafts } = mgApply(ui, holes);
+	const undo = [...ui.undo, mgSnap(ui, holes)].slice(-12);
+	return {
+		...state,
+		scores,
+		drafts,
+		undo
+	};
 }
-function drawConfettiSideBands(ctx, W, topY, bottomY, count, colors, bandWidth) {
-	colors = colors || [
-		"#C9A15C",
-		"#E8C77A",
-		"#8FA998",
-		"#C1798F",
-		"#4A9A9A",
-		"#F5EFE2"
-	];
-	for (let i = 0; i < count; i++) {
-		const x = Math.random() < .5 ? Math.random() * bandWidth : W - Math.random() * bandWidth;
-		const y = topY + Math.random() * (bottomY - topY);
-		const r = 3 + Math.random() * 6;
-		ctx.globalAlpha = .3 + Math.random() * .4;
-		ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
-		if (Math.random() < .5) {
-			ctx.beginPath();
-			ctx.arc(x, y, r, 0, Math.PI * 2);
-			ctx.fill();
-		} else {
-			ctx.save();
-			ctx.translate(x, y);
-			ctx.rotate(Math.random() * Math.PI);
-			ctx.fillRect(-r, -r * .4, r * 2, r * .8);
-			ctx.restore();
+function mgUndo(state) {
+	const ui = mgUi(state);
+	if (!ui.undo.length) return state;
+	const last = ui.undo[ui.undo.length - 1];
+	const holes = last.holes.filter((h) => Number.isInteger(h) && h >= 0 && h < 18);
+	const scores = { ...ui.scores };
+	ui.players.forEach((p) => {
+		const card = Array.from({ length: 18 }, (_, k) => mgSaved(ui.scores, p.id, k));
+		holes.forEach((h) => {
+			const row = mgIsObj(last.vals) && mgIsObj(last.vals[h]) ? last.vals[h] : {};
+			card[h] = mgOk(row[p.id]) ? row[p.id] : null;
+		});
+		scores[p.id] = card;
+	});
+	const merged = { ...ui.drafts };
+	holes.forEach((h) => {
+		if (mgIsObj(last.drafts) && mgIsObj(last.drafts[h])) merged[h] = last.drafts[h];
+		else delete merged[h];
+	});
+	const hole = Number.isInteger(last.hole) && last.hole >= 0 && last.hole < 18 ? last.hole : ui.hole;
+	return {
+		...state,
+		scores,
+		drafts: mgCleanDrafts(merged, ui.players, scores),
+		hole,
+		undo: ui.undo.slice(0, -1)
+	};
+}
+function mgFreshUi() {
+	return {
+		hole: 0,
+		tab: "hole",
+		drafts: {},
+		undo: []
+	};
+}
+function mgStandings(players, scores) {
+	const common = [];
+	for (let h = 0; h < 18; h++) if (mgHoleComplete(players, scores, h)) common.push(h);
+	const rows = players.map((p, i) => {
+		let count = 0, total = 0, sum = 0;
+		for (let h = 0; h < 18; h++) {
+			const v = mgSaved(scores, p.id, h);
+			if (v !== null) {
+				count++;
+				total += v;
+			}
 		}
-	}
-	ctx.globalAlpha = 1;
+		common.forEach((h) => sum += mgSaved(scores, p.id, h));
+		return {
+			id: p.id,
+			name: p.name,
+			idx: i,
+			count,
+			total,
+			sum
+		};
+	});
+	const uniform = rows.every((r) => r.count === common.length);
+	rows.forEach((r) => r.rank = common.length ? 1 + rows.filter((x) => x.sum < r.sum).length : null);
+	const sorted = common.length ? [...rows].sort((a, b) => a.rank - b.rank || a.idx - b.idx) : rows;
+	return {
+		common: common.length,
+		uniform,
+		rows: sorted
+	};
 }
 // web/src/games/minigolf/game.js
 var game_exports$12 = /* @__PURE__ */ __exportAll({
 	MINIGOLF_FONT: () => MINIGOLF_FONT,
 	MINIGOLF_HOLES: () => 18,
-	MINIGOLF_LAYOUT_CSS: () => MINIGOLF_LAYOUT_CSS,
 	MINIGOLF_MAX_STROKES: () => 7,
-	MINIGOLF_PAPER_BG: () => MINIGOLF_PAPER_BG,
-	MINIGOLF_PAPER_BG_FILLED: () => MINIGOLF_PAPER_BG_FILLED,
-	MINIGOLF_PAPER_INK: () => MINIGOLF_PAPER_INK,
-	MINIGOLF_PAPER_LINE: () => MINIGOLF_PAPER_LINE,
-	MINIGOLF_PAPER_MUTED: () => MINIGOLF_PAPER_MUTED,
-	MINIGOLF_SCORECARD_CSS: () => MINIGOLF_SCORECARD_CSS,
-	MinigolfClipboardFrame: () => MinigolfClipboardFrame,
 	MinigolfEditorPanel: () => MinigolfEditorPanel,
-	MinigolfFlagWatermark: () => MinigolfFlagWatermark,
 	MinigolfGame: () => MinigolfGame,
 	MinigolfPlay: () => MinigolfPlay,
 	MinigolfSetup: () => MinigolfSetup,
 	MinigolfTopBar: () => MinigolfTopBar,
 	emptyMinigolfCard: () => emptyMinigolfCard,
-	mgContrast: () => mgContrast,
-	mgInkOn: () => mgInkOn,
-	mgLum: () => mgLum,
-	mgOnHue: () => mgOnHue,
 	minigolfFilledCount: () => minigolfFilledCount,
 	minigolfInSum: () => minigolfInSum,
 	minigolfOutSum: () => minigolfOutSum,
-	minigolfPaper: () => minigolfPaper,
 	minigolfTotal: () => minigolfTotal
 });
-var MINIGOLF_SCORECARD_CSS = ".minigolf-scorecard{border:3px solid rgba(255,255,255,0.55);}.minigolf-scorecard::before{content:'';position:absolute;top:0;left:0;right:0;height:100%;pointer-events:none;z-index:1;background:linear-gradient(115deg, transparent 22%, rgba(255,255,255,0.38) 40%, rgba(255,255,255,0.62) 47%, rgba(255,255,255,0.28) 54%, transparent 72%);}.minigolf-scorecard::after{content:'';position:absolute;top:1px;left:0;right:0;height:8px;pointer-events:none;z-index:2;background-image:radial-gradient(circle at 16px 4px, rgba(0,0,0,0.45) 0 3.5px, rgba(255,255,255,0.5) 3.5px 4.2px, transparent 4.6px),radial-gradient(circle at calc(100% - 16px) 4px, rgba(0,0,0,0.45) 0 3.5px, rgba(255,255,255,0.5) 3.5px 4.2px, transparent 4.6px);}";
 function emptyMinigolfCard() {
 	return Array(18).fill(null);
 }
@@ -47280,91 +47496,72 @@ function minigolfInSum(card) {
 function minigolfFilledCount(card) {
 	return card.filter((v) => v !== null).length;
 }
-function minigolfPaper(theme) {
-	return theme === "noir" ? {
-		bg: "#EFEFEF",
-		filled: "#DADADA",
-		ink: "#111111",
-		muted: "#4F4F4F",
-		line: "#BDBDBD"
-	} : {
-		bg: MINIGOLF_PAPER_BG,
-		filled: MINIGOLF_PAPER_BG_FILLED,
-		ink: MINIGOLF_PAPER_INK,
-		muted: "#5E5640",
-		line: MINIGOLF_PAPER_LINE
-	};
-}
-function mgLum(hex) {
-	const n = parseInt(String(hex).slice(1, 7), 16);
-	return [
-		n >> 16,
-		n >> 8 & 255,
-		n & 255
-	].map((v) => {
-		v /= 255;
-		return v <= .03928 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4);
-	}).reduce((s, v, i) => s + v * [
-		.2126,
-		.7152,
-		.0722
-	][i], 0);
-}
-function mgContrast(a, b) {
-	const x = mgLum(a), y = mgLum(b);
-	return (Math.max(x, y) + .05) / (Math.min(x, y) + .05);
-}
-function mgOnHue(hue) {
-	return mgContrast(hue, "#FFFFFF") >= mgContrast(hue, "#111111") ? "#FFFFFF" : "#111111";
-}
-function mgInkOn(hue, bg) {
-	let c = hue;
-	for (let k = 0; k < 14 && mgContrast(c, bg) < 4.6; k++) c = shadeHex(c, -.12);
-	return c;
-}
-var MINIGOLF_LAYOUT_CSS = ".gtL-content .mgTot{display:none!important}";
 var MINIGOLF_FONT = "'Space Grotesk', sans-serif";
-var MINIGOLF_PAPER_BG = "#F0E9D2";
-var MINIGOLF_PAPER_BG_FILLED = "#E3D6A9";
-var MINIGOLF_PAPER_INK = "#20200F";
-var MINIGOLF_PAPER_MUTED = "#7C7355";
-var MINIGOLF_PAPER_LINE = "#D9CB9C";
-function MinigolfFlagWatermark({ color, gtSetup }) {
+var MG_UI = "'Inter', sans-serif";
+var MG_CSS = `
+.mgGL button { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+.mgGL .mgPress { transition: transform 140ms var(--gt-ease-out), background-color 160ms ease, border-color 160ms ease, color 160ms ease, opacity 160ms ease, box-shadow 160ms ease; }
+.mgGL .mgPress:active:not(:disabled) { transform: scale(0.97); }
+.mgGL .mgPress:disabled { cursor: default; }
+@media (hover: hover) and (pointer: fine) { .mgGL .mgPress:hover:not(:disabled) { filter: brightness(1.07); } }
+.mgGL .mgHoleNum { animation: mgIn 220ms var(--gt-ease-out); }
+@keyframes mgIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.mgGL .mgSr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+.mgGL .mgTableWrap { overflow-x: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; }
+.mgGL .mgSticky { position: sticky; left: 0; z-index: 1; }
+.mgGL .mgCard { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 12px; }
+.gtL-content .mgPhoneOnly { display: none !important; }
+.gtL-content .mgGL .mgBar { border-radius: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .mgGL .mgPress, .mgGL .mgPress:active:not(:disabled) { transition: none; transform: none; }
+  .mgGL .mgHoleNum { animation: none; }
+}
+`;
+function MgSvg({ size = 20, sw = 2.2, children }) {
 	return /* @__PURE__ */ import_react.default.createElement("svg", {
-		width: 220,
-		height: 220,
-		viewBox: "0 0 30 30",
-		style: {
-			position: "absolute",
-			top: 14,
-			right: -30,
-			opacity: .16,
-			pointerEvents: "none",
-			zIndex: 0,
-			...gtSetup ? {
-				position: "fixed",
-				top: "auto",
-				bottom: -10,
-				right: -40,
-				opacity: .1
-			} : {}
-		}
-	}, /* @__PURE__ */ import_react.default.createElement("ellipse", {
-		cx: "14.5",
-		cy: "25.2",
-		rx: "8.5",
-		ry: "2.1",
+		width: size,
+		height: size,
+		viewBox: "0 0 24 24",
 		fill: "none",
-		stroke: color,
-		strokeWidth: "1.3"
+		stroke: "currentColor",
+		strokeWidth: sw,
+		strokeLinecap: "round",
+		strokeLinejoin: "round",
+		"aria-hidden": "true",
+		focusable: "false"
+	}, children);
+}
+function MgFlag({ mg, size = 44 }) {
+	return /* @__PURE__ */ import_react.default.createElement("svg", {
+		width: size,
+		height: size,
+		viewBox: "0 0 48 48",
+		"aria-hidden": "true",
+		focusable: "false",
+		style: { flexShrink: 0 }
+	}, /* @__PURE__ */ import_react.default.createElement("ellipse", {
+		cx: "21",
+		cy: "40",
+		rx: "15",
+		ry: "4.6",
+		fill: mg.accSoft,
+		stroke: mg.line,
+		strokeWidth: "1"
+	}), /* @__PURE__ */ import_react.default.createElement("ellipse", {
+		cx: "21",
+		cy: "40",
+		rx: "3.4",
+		ry: "1.4",
+		fill: mg.ink,
+		opacity: "0.5"
 	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M14.5 25V6.5",
-		stroke: color,
-		strokeWidth: "1.6",
+		d: "M21 40V9",
+		stroke: mg.ink,
+		strokeWidth: "2.4",
 		strokeLinecap: "round"
 	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M14.5 7l8.5 3.3-8.5 3.3Z",
-		fill: color
+		d: "M22.2 9.6l14.8 5.9-14.8 5.9z",
+		fill: mg.flag
 	}));
 }
 function MinigolfTopBar({ subtitle, onBack, theme, t, onHome, rulesText, onEndGame }) {
@@ -47375,9 +47572,9 @@ function MinigolfTopBar({ subtitle, onBack, theme, t, onHome, rulesText, onEndGa
 		onBack,
 		backLabel: t("back"),
 		tk: mg,
-		accent: mg.green,
+		accent: mg.accInk,
 		titleFont: MINIGOLF_FONT,
-		icon: /* @__PURE__ */ import_react.default.createElement(MinigolfLogo, { color: mg.green }),
+		icon: /* @__PURE__ */ import_react.default.createElement(MinigolfLogo, { color: mg.accInk }),
 		onHome,
 		onEndGame,
 		rulesText
@@ -47385,9 +47582,9 @@ function MinigolfTopBar({ subtitle, onBack, theme, t, onHome, rulesText, onEndGa
 }
 function MinigolfSetup({ players, setPlayers, onStart, theme, t }) {
 	const mg = gtSoftTk(minigolfTokens(theme), theme);
-	const gtS = gtSkin(theme, mg, "minigolf", {
+	const gtS = gtSkin(theme, mg, "minigolf", theme === "noir" ? { font: MINIGOLF_FONT } : {
 		font: MINIGOLF_FONT,
-		acc: mg.green
+		acc: mg.acc
 	});
 	const rename = (idx, name) => setPlayers((ps) => ps.map((p, i) => i === idx ? {
 		...p,
@@ -47438,75 +47635,43 @@ function MinigolfSetup({ players, setPlayers, onStart, theme, t }) {
 		skin: gtS
 	}));
 }
-function MinigolfClipboardFrame({ mg, style, children, paper }) {
-	const pp = paper || minigolfPaper("dark");
-	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		position: "relative",
-		borderRadius: 24,
-		background: `linear-gradient(160deg, ${mg.boardEdgeLight}, ${mg.boardEdge})`,
-		padding: 4,
-		boxShadow: `0 14px 34px -10px ${mg.clipShadow}, 0 3px 10px rgba(0,0,0,0.22)`,
-		...style
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		position: "absolute",
-		top: -15,
-		left: "50%",
-		transform: "translateX(-50%)",
-		width: 68,
-		height: 24,
-		borderRadius: 7,
-		background: `linear-gradient(180deg, ${mg.clipHighlight}, ${mg.clipBody})`,
-		boxShadow: `0 3px 7px ${mg.clipShadow}`,
-		zIndex: 2
-	} }), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		position: "absolute",
-		top: -4,
-		left: "50%",
-		transform: "translateX(-50%)",
-		width: 30,
-		height: 16,
-		borderRadius: "0 0 15px 15px",
-		background: mg.clipBody,
-		zIndex: 1
-	} }), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		borderRadius: 20,
-		background: `linear-gradient(180deg, ${pp.bg}, ${shadeHex(pp.bg, -.04)})`,
-		boxShadow: `inset 0 1px 3px rgba(0,0,0,0.12), inset 0 -1px 0 rgba(255,255,255,0.4)`,
-		overflow: "hidden",
-		position: "relative"
-	} }, children));
-}
-function MinigolfEditorPanel({ editing, players, scores, onSave, onClose, t, theme, mg }) {
+function MinigolfEditorPanel({ editing, players, value: cur, onSave, onClose, t, mg }) {
 	const [value, setValue] = useState$11("");
+	const boxRef = useRef$17(null);
 	useEffect$15(() => {
 		if (editing) {
-			const current = scores[editing.playerId][editing.holeIdx];
-			setValue(current !== null && current !== void 0 ? String(current) : "");
+			setValue(cur !== null && cur !== void 0 ? String(cur) : "");
+			if (boxRef.current) boxRef.current.focus({ preventScroll: true });
 		}
 	}, [editing]);
+	useEffect$15(() => {
+		if (!editing) return;
+		const onKey = (e) => {
+			if (e.key === "Escape") onClose();
+		};
+		window.addEventListener("keydown", onKey);
+		return () => window.removeEventListener("keydown", onKey);
+	}, [editing]);
 	if (!editing) return null;
-	const pp = minigolfPaper(theme);
 	const MAX = 7;
 	const player = players.find((p) => p.id === editing.playerId);
-	const playerIdx = players.findIndex((p) => p.id === editing.playerId);
-	const hue = mg.hues[playerIdx % mg.hues.length];
-	const cur = scores[editing.playerId][editing.holeIdx];
 	const commit = (v) => onSave(editing.playerId, editing.holeIdx, v);
 	const num = /^\d+$/.test(value) ? parseInt(value, 10) : NaN;
 	const ok = num >= 1 && num <= MAX;
 	const bad = value !== "" && !ok;
 	const btnBase = {
-		border: "none",
+		border: `1px solid ${mg.ctrlLine}`,
 		borderRadius: 14,
-		background: pp.filled,
-		color: pp.ink,
+		background: mg.ctrl,
+		color: mg.ink,
 		cursor: "pointer",
 		fontFamily: MINIGOLF_FONT,
-		boxShadow: "inset 0 -2px 0 rgba(0,0,0,0.06)",
-		minHeight: 46,
+		minHeight: 48,
 		minWidth: 0
 	};
 	return /* @__PURE__ */ import_react.default.createElement("div", {
+		ref: boxRef,
+		tabIndex: -1,
 		"data-mg-panel": "1",
 		role: "dialog",
 		"aria-label": (player ? player.name : "") + ", " + t("holeLabel")(editing.holeIdx + 1),
@@ -47515,12 +47680,13 @@ function MinigolfEditorPanel({ editing, players, scores, onSave, onClose, t, the
 			left: 0,
 			right: 0,
 			bottom: 0,
-			background: pp.bg,
+			background: mg.solid,
 			borderRadius: "22px 22px 0 0",
-			boxShadow: "0 -10px 28px rgba(10,16,10,0.35)",
-			padding: "14px 16px calc(16px + env(safe-area-inset-bottom))",
+			boxShadow: "0 -12px 32px rgba(0,0,0,0.35)",
+			padding: "14px 14px calc(16px + env(safe-area-inset-bottom))",
 			zIndex: 70,
-			borderTop: `3px solid ${hue}`
+			borderTop: `2px solid ${mg.acc}`,
+			outline: "none"
 		}
 	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		maxWidth: 520,
@@ -47529,53 +47695,50 @@ function MinigolfEditorPanel({ editing, players, scores, onSave, onClose, t, the
 		display: "flex",
 		justifyContent: "space-between",
 		alignItems: "center",
+		gap: 10,
 		marginBottom: 12
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		alignItems: "center",
-		gap: 8,
-		minWidth: 0
 	} }, /* @__PURE__ */ import_react.default.createElement("span", { style: {
-		width: 10,
-		height: 10,
-		borderRadius: "50%",
-		background: hue,
-		flexShrink: 0
-	} }), /* @__PURE__ */ import_react.default.createElement("span", { style: {
 		fontFamily: MINIGOLF_FONT,
-		fontSize: 16,
+		fontSize: 17,
 		fontWeight: 700,
-		color: pp.ink,
-		overflow: "hidden",
-		textOverflow: "ellipsis",
-		whiteSpace: "nowrap"
-	} }, player?.name, " · ", t("holeLabel")(editing.holeIdx + 1))), /* @__PURE__ */ import_react.default.createElement("button", {
+		color: mg.ink,
+		minWidth: 0,
+		overflowWrap: "anywhere"
+	} }, player?.name, /* @__PURE__ */ import_react.default.createElement("span", { style: {
+		color: mg.muted,
+		fontWeight: 600
+	} }, " · ", t("holeLabel")(editing.holeIdx + 1))), /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "mgPress",
 		onClick: onClose,
+		"aria-label": t("mgClose"),
 		style: {
-			border: "none",
-			background: pp.filled,
+			border: `1px solid ${mg.ctrlLine}`,
+			background: mg.ctrl,
 			borderRadius: "50%",
-			width: 32,
-			height: 32,
+			width: 44,
+			height: 44,
 			flexShrink: 0,
-			color: pp.ink,
-			fontSize: 14,
-			cursor: "pointer"
+			color: mg.ink,
+			cursor: "pointer",
+			display: "grid",
+			placeItems: "center"
 		}
 	}, /* @__PURE__ */ import_react.default.createElement(XMark, null))), /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "grid",
-		gridTemplateColumns: `repeat(${MAX}, minmax(0,1fr))`,
-		gap: 6,
+		gridTemplateColumns: "repeat(auto-fit, minmax(44px, 1fr))",
+		gap: 4,
 		marginBottom: 6
 	} }, Array.from({ length: MAX }, (_, k) => k + 1).map((n) => {
 		const isMax = n === MAX;
 		const isCur = cur === n;
 		return /* @__PURE__ */ import_react.default.createElement("button", {
+			className: "mgPress",
 			"data-gt-sound": "1",
 			key: n,
 			onClick: () => commit(n),
 			"data-mg-giveup": isMax ? "1" : void 0,
 			"aria-label": isMax ? n + ", " + t("mgMaxHint")(MAX) : String(n),
+			"aria-pressed": isCur ? "true" : "false",
 			style: {
 				...btnBase,
 				display: "flex",
@@ -47584,23 +47747,24 @@ function MinigolfEditorPanel({ editing, players, scores, onSave, onClose, t, the
 				justifyContent: "center",
 				gap: 1,
 				padding: "6px 0",
-				fontSize: 17,
+				fontSize: 19,
 				fontWeight: 700,
-				background: isCur ? `${hue}33` : pp.filled,
-				boxShadow: isCur ? `inset 0 0 0 2px ${mgInkOn(hue, pp.filled)}` : btnBase.boxShadow
+				background: isCur ? mg.segBg : mg.ctrl,
+				color: isCur ? mg.segInk : mg.ink,
+				borderColor: isCur ? mg.segBg : mg.ctrlLine
 			}
 		}, /* @__PURE__ */ import_react.default.createElement("span", { style: { lineHeight: 1 } }, n), isMax && /* @__PURE__ */ import_react.default.createElement("span", { style: {
 			fontSize: 10,
 			fontWeight: 700,
-			color: pp.muted,
-			fontFamily: "'Inter', sans-serif",
+			color: isCur ? mg.segInk : mg.muted,
+			fontFamily: MG_UI,
 			lineHeight: 1,
 			letterSpacing: "0.02em"
 		} }, t("mgMaxShort")));
 	})), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 11.5,
-		color: pp.muted,
-		fontFamily: "'Inter', sans-serif",
+		fontSize: 12,
+		color: mg.muted,
+		fontFamily: MG_UI,
 		marginBottom: 10,
 		lineHeight: 1.35
 	} }, t("mgMaxHint")(MAX)), /* @__PURE__ */ import_react.default.createElement("div", { style: {
@@ -47613,6 +47777,7 @@ function MinigolfEditorPanel({ editing, players, scores, onSave, onClose, t, the
 		pattern: "[0-9]*",
 		maxLength: 2,
 		placeholder: t("strokesPlaceholder"),
+		"aria-label": t("strokesPlaceholder"),
 		"aria-invalid": bad ? "true" : "false",
 		"aria-describedby": bad ? "mg-range-hint" : void 0,
 		value,
@@ -47624,73 +47789,588 @@ function MinigolfEditorPanel({ editing, players, scores, onSave, onClose, t, the
 		style: {
 			flex: 1,
 			minWidth: 0,
-			border: `1px solid ${bad ? "#B3261E" : pp.line}`,
+			border: `1px solid ${bad ? mg.err : mg.ctrlLine}`,
 			borderRadius: 14,
-			padding: "12px 12px",
+			padding: "12px",
 			fontSize: 16,
-			outline: "none",
-			fontFamily: "'Inter', sans-serif",
-			background: pp.filled,
-			color: pp.ink
+			fontFamily: MG_UI,
+			background: mg.ctrl,
+			color: mg.ink
 		}
 	}), cur !== null && cur !== void 0 && /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "mgPress",
 		onClick: () => commit(null),
 		style: {
-			border: "none",
-			borderRadius: 14,
-			background: pp.filled,
-			color: pp.ink,
-			fontSize: 12.5,
+			...btnBase,
+			fontSize: 13,
 			fontWeight: 700,
 			padding: "0 14px",
-			cursor: "pointer",
-			fontFamily: "'Inter', sans-serif"
+			fontFamily: MG_UI
 		}
 	}, t("mgClear")), /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "mgPress",
 		onClick: () => ok && commit(num),
 		disabled: !ok,
-		"aria-label": t("strokesPlaceholder"),
+		"aria-label": t("strokesPlaceholder") + " " + t("mgOk"),
 		style: {
 			border: "none",
 			borderRadius: 14,
-			background: ok ? mgInkOn(hue, "#FFFFFF") : pp.line,
-			color: "#fff",
+			background: ok ? mg.acc : mg.track,
+			color: ok ? mg.onAcc : mg.muted,
 			fontSize: 14,
 			fontWeight: 700,
 			padding: "0 18px",
 			minWidth: 52,
+			minHeight: 48,
 			cursor: ok ? "pointer" : "default"
 		}
 	}, /* @__PURE__ */ import_react.default.createElement(CheckMark, null))), bad && /* @__PURE__ */ import_react.default.createElement("div", {
 		id: "mg-range-hint",
 		role: "alert",
 		style: {
-			fontSize: 12,
+			fontSize: 12.5,
 			fontWeight: 600,
-			color: "#B3261E",
-			fontFamily: "'Inter', sans-serif",
+			color: mg.err,
+			fontFamily: MG_UI,
 			marginTop: 6
 		}
 	}, t("mgStrokesRange")(MAX))));
 }
-function MinigolfPlay({ players, scores, setScores, onResetSheet, onEditPlayers, onBack, onHome, onEndGame, lang = "de", theme = "dark" }) {
+function MgSegmented({ tab, onTab, mg, t }) {
+	const item = (id, label) => {
+		const on = tab === id;
+		return /* @__PURE__ */ import_react.default.createElement("button", {
+			key: id,
+			role: "tab",
+			id: "mg-tab-" + id,
+			"aria-selected": on ? "true" : "false",
+			"aria-controls": "mg-panel",
+			tabIndex: on ? 0 : -1,
+			className: "mgPress",
+			onClick: () => onTab(id),
+			onKeyDown: (e) => {
+				if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+					e.preventDefault();
+					const nx = id === "hole" ? "table" : "hole";
+					onTab(nx);
+					const el = document.getElementById("mg-tab-" + nx);
+					if (el) el.focus();
+				}
+			},
+			style: {
+				flex: "1 1 0",
+				minHeight: 44,
+				border: "none",
+				borderRadius: 14,
+				background: on ? mg.segBg : "transparent",
+				color: on ? mg.segInk : mg.muted,
+				fontFamily: MINIGOLF_FONT,
+				fontWeight: 700,
+				fontSize: 16,
+				cursor: "pointer",
+				boxShadow: on ? "0 1px 2px rgba(0,0,0,0.12)" : "none"
+			}
+		}, label);
+	};
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		role: "tablist",
+		"aria-label": t("mgViewLabel"),
+		className: mg.glass ? "gtL-glass-soft" : void 0,
+		style: {
+			display: "flex",
+			gap: 4,
+			padding: 4,
+			borderRadius: 18,
+			background: mg.surf,
+			border: `1px solid ${mg.line}`,
+			marginBottom: 12
+		}
+	}, item("hole", t("mgTabHole")), item("table", t("mgTabTable")));
+}
+function MgHoleCard({ ui, hole, onGo, mg, t }) {
+	const done = Array.from({ length: 18 }, (_, h) => mgHoleComplete(ui.players, ui.scores, h));
+	const nDone = done.filter(Boolean).length;
+	const nav = (dir) => {
+		const dis = dir < 0 ? hole <= 0 : hole >= 17;
+		return /* @__PURE__ */ import_react.default.createElement("button", {
+			className: "mgPress",
+			onClick: () => !dis && onGo(hole + dir),
+			disabled: dis,
+			"aria-label": dir < 0 ? t("mgPrevHole") : t("mgNextHole"),
+			style: {
+				width: 46,
+				height: 46,
+				borderRadius: "50%",
+				border: `1px solid ${mg.ctrlLine}`,
+				background: mg.ctrl,
+				color: mg.ink,
+				display: "grid",
+				placeItems: "center",
+				cursor: "pointer",
+				opacity: dis ? .38 : 1,
+				flexShrink: 0
+			}
+		}, /* @__PURE__ */ import_react.default.createElement(MgSvg, { size: 20 }, dir < 0 ? /* @__PURE__ */ import_react.default.createElement("path", { d: "M15 5l-7 7 7 7" }) : /* @__PURE__ */ import_react.default.createElement("path", { d: "M9 5l7 7-7 7" })));
+	};
+	return /* @__PURE__ */ import_react.default.createElement("section", {
+		"aria-label": t("mgHoleOf")(hole + 1, 18),
+		className: mg.glass ? "gtL-glass" : void 0,
+		style: {
+			background: mg.surf,
+			border: `1px solid ${mg.line}`,
+			borderRadius: 24,
+			padding: "14px 14px 14px 12px",
+			boxShadow: mg.shadow,
+			marginBottom: 12
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		display: "flex",
+		alignItems: "center",
+		gap: 10
+	} }, /* @__PURE__ */ import_react.default.createElement(MgFlag, { mg }), /* @__PURE__ */ import_react.default.createElement("div", {
+		style: {
+			flex: "1 1 auto",
+			minWidth: 0
+		},
+		"aria-live": "polite",
+		"aria-atomic": "true"
+	}, /* @__PURE__ */ import_react.default.createElement("span", { className: "mgSr" }, t("mgHoleOf")(hole + 1, 18)), /* @__PURE__ */ import_react.default.createElement("div", {
+		"aria-hidden": "true",
+		style: {
+			fontSize: 15,
+			fontWeight: 700,
+			color: mg.ink,
+			fontFamily: MG_UI,
+			lineHeight: 1.1
+		}
+	}, t("mgTabHole")), /* @__PURE__ */ import_react.default.createElement("div", {
+		"aria-hidden": "true",
+		style: {
+			display: "flex",
+			flexWrap: "wrap",
+			alignItems: "baseline",
+			columnGap: 8
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("span", {
+		key: hole,
+		className: "mgHoleNum",
+		"data-mg-hole": hole + 1,
+		style: {
+			fontFamily: MINIGOLF_FONT,
+			fontWeight: 700,
+			fontSize: 54,
+			lineHeight: 1,
+			color: mg.accInk,
+			letterSpacing: "-0.04em",
+			fontVariantNumeric: "tabular-nums"
+		}
+	}, String(hole + 1).padStart(2, "0")), /* @__PURE__ */ import_react.default.createElement("span", { style: {
+		fontSize: 17,
+		color: mg.muted,
+		fontFamily: MG_UI,
+		fontWeight: 600,
+		whiteSpace: "nowrap"
+	} }, t("mgOf")(18)))), /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		display: "flex",
+		gap: 8,
+		flexShrink: 0
+	} }, nav(-1), nav(1))), /* @__PURE__ */ import_react.default.createElement("div", {
+		role: "img",
+		"aria-label": t("mgProgress")(nDone, 18),
+		style: {
+			display: "grid",
+			gridTemplateColumns: `repeat(18, minmax(0, 1fr))`,
+			gap: 3,
+			marginTop: 12,
+			padding: "0 2px"
+		}
+	}, done.map((d, h) => /* @__PURE__ */ import_react.default.createElement("span", {
+		key: h,
+		style: {
+			height: 5,
+			borderRadius: 3,
+			background: d ? mg.acc : mg.track,
+			outline: h === hole ? `1.5px solid ${mg.muted}` : "none",
+			outlineOffset: 1.5
+		}
+	}))));
+}
+function MgPlayerCard({ p, val, isDraft, missing, sofar, countNote, leads, onStep, onPick, mg, t }) {
+	const name = p.name || "";
+	const has = val !== null && val !== void 0;
+	const round = {
+		width: 44,
+		height: 44,
+		borderRadius: "50%",
+		border: `1px solid ${mg.ctrlLine}`,
+		background: mg.ctrl,
+		color: mg.ink,
+		display: "grid",
+		placeItems: "center",
+		cursor: "pointer",
+		flexShrink: 0
+	};
+	const minusDis = !has || val <= 1;
+	const plusDis = has && val >= 7;
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		"data-mg-card": p.id,
+		className: "mgCard" + (mg.glass ? " gtL-glass-soft" : ""),
+		style: {
+			background: leads ? `linear-gradient(${mg.accSoft}, ${mg.accSoft}), ${mg.surf}` : mg.surf,
+			border: `1px solid ${leads ? mg.accLine : mg.line}`,
+			borderRadius: 20,
+			padding: "12px 12px 12px 16px",
+			boxShadow: mg.shadow
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		flex: "1 1 128px",
+		minWidth: 0
+	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		display: "flex",
+		flexWrap: "wrap",
+		alignItems: "center",
+		gap: "2px 8px"
+	} }, /* @__PURE__ */ import_react.default.createElement("span", { style: {
+		fontFamily: MINIGOLF_FONT,
+		fontWeight: 700,
+		fontSize: 19,
+		color: mg.ink,
+		lineHeight: 1.2,
+		overflowWrap: "anywhere",
+		letterSpacing: "-0.01em"
+	} }, name), leads && /* @__PURE__ */ import_react.default.createElement("span", { style: {
+		fontFamily: MG_UI,
+		fontSize: 11,
+		fontWeight: 700,
+		letterSpacing: "0.05em",
+		textTransform: "uppercase",
+		padding: "2px 8px",
+		borderRadius: 999,
+		color: mg.accInk,
+		border: `1px solid ${mg.accLine}`,
+		lineHeight: 1.4
+	} }, t("mgLeads"))), /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		fontSize: 14,
+		color: mg.muted,
+		fontFamily: MG_UI,
+		marginTop: 2
+	} }, t("mgSoFar"), " ", /* @__PURE__ */ import_react.default.createElement("span", { style: {
+		color: mg.ink,
+		fontWeight: 700,
+		fontFamily: MINIGOLF_FONT,
+		fontSize: 17,
+		fontVariantNumeric: "tabular-nums"
+	} }, sofar), countNote ? /* @__PURE__ */ import_react.default.createElement("span", null, " · " + countNote) : null)), /* @__PURE__ */ import_react.default.createElement("div", {
+		role: "group",
+		"aria-label": t("strokesPlaceholder") + ", " + name,
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			alignItems: "center",
+			gap: 4,
+			marginLeft: "auto"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("span", {
+		"aria-hidden": "true",
+		style: {
+			fontSize: 12,
+			color: mg.muted,
+			fontWeight: 600,
+			fontFamily: MG_UI
+		}
+	}, t("strokesPlaceholder")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		display: "flex",
+		alignItems: "center",
+		gap: 6
+	} }, /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "mgPress",
+		"data-mg-minus": p.id,
+		onClick: () => !minusDis && onStep(-1),
+		disabled: minusDis,
+		"aria-label": t("mgSub")(name),
+		style: {
+			...round,
+			opacity: minusDis ? .38 : 1
+		}
+	}, /* @__PURE__ */ import_react.default.createElement(MgSvg, { size: 18 }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M6 12h12" }))), /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "mgPress",
+		"data-mg-val": p.id,
+		onClick: onPick,
+		"aria-label": t("mgPick")(name, has ? val : null) + (isDraft ? ", " + t("mgUnsaved") : ""),
+		style: {
+			minWidth: 58,
+			height: 46,
+			borderRadius: 14,
+			border: has ? `${isDraft ? 1.5 : 1}px solid ${isDraft ? mg.acc : mg.ctrlLine}` : `1.5px dashed ${missing ? mg.acc : mg.ctrlLine}`,
+			background: has ? mg.surf2 : "transparent",
+			color: mg.ink,
+			fontFamily: MINIGOLF_FONT,
+			fontWeight: 700,
+			fontSize: 24,
+			fontVariantNumeric: "tabular-nums",
+			cursor: "pointer",
+			padding: 0
+		}
+	}, has ? val : /* @__PURE__ */ import_react.default.createElement("span", { style: {
+		fontFamily: MG_UI,
+		fontSize: 11.5,
+		fontWeight: 600,
+		color: missing ? mg.accInk : mg.muted,
+		letterSpacing: "0.01em"
+	} }, t("mgOpen"))), /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "mgPress",
+		"data-mg-plus": p.id,
+		onClick: () => !plusDis && onStep(1),
+		disabled: plusDis,
+		"aria-label": t("mgAdd")(name),
+		style: {
+			...round,
+			opacity: plusDis ? .38 : 1
+		}
+	}, /* @__PURE__ */ import_react.default.createElement(MgSvg, { size: 18 }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M12 6v12M6 12h12" }))))));
+}
+function MgStandingsBox({ st, onOpen, finished, mg, t, className }) {
+	const title = st.common === 0 ? t("mgStandNone") : st.uniform ? t("mgStandAfter")(st.common) : t("mgStandCommon")(st.common);
+	const allTied = st.rows.every((r) => r.rank === 1);
+	return /* @__PURE__ */ import_react.default.createElement("section", {
+		className,
+		"aria-label": title,
+		style: {
+			background: mg.surf2,
+			border: `1px solid ${mg.line}`,
+			borderRadius: 20,
+			padding: "6px 10px 10px",
+			marginTop: 12
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "mgPress",
+		onClick: onOpen,
+		"aria-label": title + ". " + t("mgOpenTable"),
+		style: {
+			width: "100%",
+			minHeight: 44,
+			display: "flex",
+			alignItems: "center",
+			justifyContent: "space-between",
+			gap: 8,
+			border: "none",
+			background: "transparent",
+			color: mg.muted,
+			fontFamily: MG_UI,
+			fontSize: 14,
+			fontWeight: 600,
+			padding: "0 4px 0 6px",
+			cursor: "pointer",
+			textAlign: "left"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("span", null, title), /* @__PURE__ */ import_react.default.createElement(MgSvg, { size: 18 }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M9 5l7 7-7 7" }))), st.common > 0 && /* @__PURE__ */ import_react.default.createElement("ol", { style: {
+		listStyle: "none",
+		margin: 0,
+		padding: 0,
+		display: "grid",
+		gridTemplateColumns: st.rows.every((r) => String(r.name || "").length <= 11) ? "repeat(auto-fill, minmax(min(100%, 148px), 1fr))" : "1fr",
+		gap: 6
+	} }, st.rows.map((r) => {
+		const top = r.rank === 1 && !allTied && !finished;
+		return /* @__PURE__ */ import_react.default.createElement("li", {
+			key: r.id,
+			style: {
+				display: "flex",
+				alignItems: "center",
+				gap: 8,
+				padding: "8px 12px",
+				borderRadius: 12,
+				border: `1px solid ${top ? mg.accLine : mg.line}`,
+				background: top ? mg.accSoft : "transparent",
+				minWidth: 0
+			}
+		}, /* @__PURE__ */ import_react.default.createElement("span", { style: {
+			color: top ? mg.accInk : mg.muted,
+			fontWeight: 700,
+			fontFamily: "'Space Grotesk', sans-serif",
+			fontSize: 15,
+			minWidth: 20,
+			fontVariantNumeric: "tabular-nums"
+		} }, r.rank, "."), /* @__PURE__ */ import_react.default.createElement("span", { style: {
+			flex: "1 1 auto",
+			minWidth: 0,
+			color: mg.ink,
+			fontFamily: MG_UI,
+			fontWeight: 600,
+			fontSize: 15,
+			overflowWrap: "anywhere",
+			lineHeight: 1.25
+		} }, r.name, top && /* @__PURE__ */ import_react.default.createElement("span", { className: "mgSr" }, ", " + t("mgLeads")), !st.uniform && /* @__PURE__ */ import_react.default.createElement("span", { style: {
+			display: "block",
+			fontSize: 12,
+			fontWeight: 500,
+			color: mg.muted
+		} }, t("mgHolesN")(r.count) + " · " + t("minigolfTotalRow") + " " + r.total)), /* @__PURE__ */ import_react.default.createElement("span", { style: {
+			fontFamily: "'Space Grotesk', sans-serif",
+			fontWeight: 700,
+			fontSize: 18,
+			color: mg.ink,
+			fontVariantNumeric: "tabular-nums"
+		} }, r.sum));
+	})));
+}
+function MgTable({ ui, hole, onCell, mg, t }) {
+	const ps = ui.players;
+	const cellBtn = {
+		width: "100%",
+		minWidth: 44,
+		minHeight: 40,
+		border: "none",
+		borderRadius: 10,
+		background: "transparent",
+		fontFamily: MINIGOLF_FONT,
+		fontSize: 16,
+		fontWeight: 700,
+		cursor: "pointer",
+		fontVariantNumeric: "tabular-nums",
+		position: "relative",
+		padding: "0 4px"
+	};
+	const stickyBg = (cur) => cur ? `linear-gradient(${mg.accSoft}, ${mg.accSoft}), ${mg.solid}` : mg.solid;
+	const thBase = {
+		padding: "10px 4px",
+		fontFamily: MG_UI,
+		fontSize: 12.5,
+		fontWeight: 700,
+		color: mg.ink,
+		textAlign: "center",
+		borderBottom: `1px solid ${mg.line}`,
+		verticalAlign: "bottom"
+	};
+	const sumRow = (label, fn, strong) => /* @__PURE__ */ import_react.default.createElement("tr", null, /* @__PURE__ */ import_react.default.createElement("th", {
+		scope: "row",
+		className: "mgSticky",
+		style: {
+			background: mg.solid,
+			padding: "8px 10px",
+			textAlign: "left",
+			fontFamily: MG_UI,
+			fontSize: 12,
+			fontWeight: 700,
+			color: strong ? mg.accInk : mg.muted,
+			textTransform: "uppercase",
+			letterSpacing: "0.04em",
+			borderTop: `1px solid ${mg.line}`,
+			whiteSpace: "nowrap"
+		}
+	}, label), ps.map((p) => /* @__PURE__ */ import_react.default.createElement("td", {
+		key: p.id,
+		style: {
+			textAlign: "center",
+			padding: "8px 4px",
+			borderTop: `1px solid ${mg.line}`,
+			fontFamily: MINIGOLF_FONT,
+			fontWeight: 700,
+			fontSize: strong ? 18 : 15,
+			color: strong ? mg.ink : mg.muted,
+			fontVariantNumeric: "tabular-nums"
+		}
+	}, fn(ui.scores[p.id] || []))));
+	const holeRow = (h) => {
+		const cur = h === hole;
+		return /* @__PURE__ */ import_react.default.createElement("tr", {
+			key: h,
+			"aria-current": cur ? "true" : void 0,
+			style: { background: cur ? mg.accSoft : void 0 }
+		}, /* @__PURE__ */ import_react.default.createElement("th", {
+			scope: "row",
+			className: "mgSticky",
+			style: {
+				background: stickyBg(cur),
+				padding: "2px 10px",
+				textAlign: "left",
+				fontFamily: MINIGOLF_FONT,
+				fontSize: 14,
+				fontWeight: 700,
+				color: cur ? mg.accInk : mg.muted,
+				fontVariantNumeric: "tabular-nums",
+				boxShadow: cur ? `inset 3px 0 0 ${mg.acc}` : "none"
+			}
+		}, h + 1, cur && /* @__PURE__ */ import_react.default.createElement("span", { className: "mgSr" }, ", " + t("mgCurrentHole"))), ps.map((p) => {
+			const v = mgEff(ui, p.id, h);
+			const d = mgHasDraft(ui.drafts, h, p.id);
+			return /* @__PURE__ */ import_react.default.createElement("td", {
+				key: p.id,
+				style: {
+					padding: "2px 2px",
+					textAlign: "center"
+				}
+			}, /* @__PURE__ */ import_react.default.createElement("button", {
+				className: "mgPress",
+				"data-mg-cell": p.id + "-" + h,
+				onClick: () => onCell(p.id, h),
+				"aria-label": p.name + ", " + t("holeLabel")(h + 1) + ": " + (v === null ? t("mgOpen") : v) + (d ? ", " + t("mgUnsaved") : ""),
+				style: {
+					...cellBtn,
+					color: v === null ? mg.muted : d ? mg.accInk : mg.ink,
+					fontWeight: v === null ? 400 : 700,
+					boxShadow: d ? `inset 0 0 0 1.5px ${mg.acc}` : "none"
+				}
+			}, v === null ? "·" : v));
+		}));
+	};
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "mgTableWrap" + (mg.glass ? " gtL-glass" : ""),
+		role: "region",
+		"aria-label": t("mgTabTable"),
+		tabIndex: 0,
+		style: {
+			background: mg.surf,
+			border: `1px solid ${mg.line}`,
+			borderRadius: 20,
+			boxShadow: mg.shadow
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("table", { style: {
+		borderCollapse: "separate",
+		borderSpacing: 0,
+		width: "100%",
+		minWidth: 52 + ps.length * 60
+	} }, /* @__PURE__ */ import_react.default.createElement("thead", null, /* @__PURE__ */ import_react.default.createElement("tr", null, /* @__PURE__ */ import_react.default.createElement("th", {
+		scope: "col",
+		className: "mgSticky",
+		style: {
+			...thBase,
+			background: mg.solid,
+			textAlign: "left",
+			paddingLeft: 10,
+			color: mg.muted,
+			width: 52,
+			borderTopLeftRadius: 20
+		}
+	}, t("mgTabHole")), ps.map((p) => /* @__PURE__ */ import_react.default.createElement("th", {
+		key: p.id,
+		scope: "col",
+		title: p.name,
+		style: thBase
+	}, /* @__PURE__ */ import_react.default.createElement("span", { style: {
+		display: "block",
+		maxWidth: 110,
+		margin: "0 auto",
+		overflowWrap: "anywhere",
+		hyphens: "auto",
+		lineHeight: 1.2
+	} }, p.name))))), /* @__PURE__ */ import_react.default.createElement("tbody", null, Array.from({ length: 9 }, (_, h) => holeRow(h)), sumRow(t("minigolfOutRow"), minigolfOutSum), Array.from({ length: 9 }, (_, k) => holeRow(9 + k)), sumRow(t("minigolfInRow"), minigolfInSum), sumRow(t("minigolfTotalRow"), minigolfTotal, true))));
+}
+function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, onHome, onEndGame, lang = "de", theme = "dark" }) {
+	const players = state.players;
+	const scores = state.scores;
 	const [editing, setEditing] = useState$11(null);
 	const [confirmingReset, setConfirmingReset] = useState$11(false);
 	const [confirmingSetup, setConfirmingSetup] = useState$11(false);
-	const [rulesOpen, setRulesOpen] = useState$11(false);
 	const t = useT(lang);
 	const mg = minigolfTokens(theme);
 	const tk = shellTokens(theme);
 	const filledCounts = players.map((p) => minigolfFilledCount(scores[p.id]));
 	const finished = players.length > 0 && filledCounts.every((c) => c === 18);
 	const totals = players.map((p) => minigolfTotal(scores[p.id]));
-	const outSums = players.map((p) => minigolfOutSum(scores[p.id]));
-	const inSums = players.map((p) => minigolfInSum(scores[p.id]));
-	const anyFilled = filledCounts.some((c) => c > 0);
-	const minTotal = anyFilled ? Math.min(...totals) : null;
-	const leaderIdx = finished || !anyFilled ? -1 : totals.findIndex((tot, i) => tot === minTotal && filledCounts[i] > 0);
+	const minTotal = filledCounts.some((c) => c > 0) ? Math.min(...totals) : null;
 	const winnerIdx = finished ? totals.findIndex((tot) => tot === minTotal) : -1;
-	const { best: golfBest, isNew: golfIsNew } = usePersonalBest("minigolf", finished, winnerIdx !== -1 ? players[winnerIdx].name : "", winnerIdx !== -1 ? minTotal : null, true);
+	const { isNew: golfIsNew } = usePersonalBest("minigolf", finished, winnerIdx !== -1 ? players[winnerIdx].name : "", winnerIdx !== -1 ? minTotal : null, true);
 	useGtRecord("minigolf", winnerIdx !== -1, () => {
 		const aces = players.filter((p) => (scores[p.id] || []).some((v) => v === 1)).map((p) => p.name);
 		return {
@@ -47708,17 +48388,15 @@ function MinigolfPlay({ players, scores, setScores, onResetSheet, onEditPlayers,
 		if (winnerIdx !== -1) setPodiumOpen(true);
 	}, [winnerIdx]);
 	const podiumRanked = winnerIdx !== -1 ? rankedPodium(players, (p) => minigolfTotal(scores[p.id]), true) : [];
-	const saveScore = (playerId, holeIdx, rawValue) => {
-		const nv = parseInt(rawValue, 10);
-		const val = rawValue === null || !(nv >= 1) ? null : Math.min(7, nv);
-		setScores((prev) => {
-			const card = [...prev[playerId]];
-			card[holeIdx] = val;
-			return {
-				...prev,
-				[playerId]: card
-			};
-		});
+	const ui = mgUi(state);
+	const hole = ui.hole;
+	const tab = ui.tab;
+	const upd = (fn) => setState((s) => fn(s));
+	const st = mgStandings(players, scores);
+	const lead = new Set(!finished && st.common > 0 && !st.rows.every((r) => r.rank === 1) ? st.rows.filter((r) => r.rank === 1).map((r) => r.id) : []);
+	const info = mgHoleInfo(ui, hole);
+	const saveDraft = (playerId, holeIdx, v) => {
+		upd((s) => mgSetDraft(s, playerId, holeIdx, v));
 		setEditing(null);
 	};
 	const reset = () => {
@@ -47739,37 +48417,204 @@ function MinigolfPlay({ players, scores, setScores, onResetSheet, onEditPlayers,
 		onEditPlayers();
 		setConfirmingSetup(false);
 	};
-	const mgBoxRef = useRef$17(null);
-	const [mgW, setMgW] = useState$11(0);
-	useEffect$15(() => {
-		const el = mgBoxRef.current;
+	const names = (list) => gtJoinNames(list.map((p) => p.name), t);
+	const holesTxt = (hs) => hs.map((h) => h + 1).join(", ");
+	const showMissing = () => {
+		const m = info.missing[0];
+		const el = m && document.querySelector(`[data-mg-plus="${m.id}"]`);
 		if (!el) return;
-		const upd = (w) => {
-			w = Math.round(w);
-			setMgW((v) => v === w ? v : w);
+		const rm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+		el.scrollIntoView({
+			block: "center",
+			behavior: rm ? "auto" : "smooth"
+		});
+		el.focus({ preventScroll: true });
+	};
+	const lastUndo = ui.undo.length ? ui.undo[ui.undo.length - 1] : null;
+	let main = null, status = null, statusOk = false;
+	if (tab === "table") {
+		const dirtyHoles = Object.keys(ui.drafts).map(Number).sort((a, b) => a - b);
+		const savable = mgSavableHoles(state);
+		if (dirtyHoles.length) {
+			main = {
+				label: t("mgSaveChanges"),
+				disabled: !savable.length,
+				onClick: () => upd((s) => mgSaveAll(s))
+			};
+			const blocked = dirtyHoles.filter((h) => !savable.includes(h));
+			status = blocked.length ? blocked.map((h) => t("holeLabel")(h + 1) + ": " + t("mgStillOpen")(names(mgHoleInfo(ui, h).missing))).join(" · ") : t("mgDirtyHoles")(holesTxt(dirtyHoles));
+		} else status = t("mgTableHint");
+	} else if (info.dirty) {
+		main = info.canSave ? {
+			label: info.isNew ? t("mgSaveHole") : t("mgSaveChanges"),
+			onClick: () => upd((s) => mgSave(s, hole))
+		} : {
+			label: t("mgSaveHole"),
+			blocked: true,
+			onClick: showMissing
 		};
-		upd(el.clientWidth - 24);
-		if (typeof ResizeObserver === "undefined") return;
-		const ro = new ResizeObserver((es) => upd(es[0].contentRect.width));
-		ro.observe(el);
-		return () => ro.disconnect();
-	}, []);
-	const pp = minigolfPaper(theme);
-	const mgN = Math.max(1, players.length);
-	const MG_NUM = 24, MG_GAP = 3, MG_SEP = 26;
-	const mgSide = mgW >= 420 && mgW >= 2 * (MG_NUM + mgN * 41) + MG_SEP;
-	const mgColW = ((mgSide ? (mgW - MG_SEP) / 2 : mgW) - MG_NUM - mgN * MG_GAP) / mgN;
-	const mgNameW = Math.min(110, Math.max(4, ...players.map((p) => String(p.name || "").length + 1)) * 6.9 + 10);
-	const mgVert = mgW > 0 && mgColW < mgNameW;
+		status = info.isNew && info.missing.length ? t("mgStillOpen")(names(info.missing)) : t("mgUnsaved");
+	} else if (finished) main = {
+		label: t("mgShowResult"),
+		onClick: () => setPodiumOpen(true),
+		icon: "trophy"
+	};
+	else if (info.done) {
+		const nx = mgNextOpen(players, scores, hole);
+		main = nx >= 0 ? {
+			label: t("mgGoNext")(nx + 1),
+			onClick: () => upd((s) => mgGoto(s, nx)),
+			icon: "next"
+		} : null;
+		status = t("mgSaved");
+		statusOk = true;
+	} else {
+		main = {
+			label: info.isNew ? t("mgSaveHole") : t("mgSaveChanges"),
+			blocked: true,
+			onClick: showMissing
+		};
+		status = info.missing.length === players.length ? t("mgEnterHint") : t("mgStillOpen")(names(info.missing));
+	}
+	const glassBar = theme === "vitrum";
+	const bar = /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "mgBar",
+		style: {
+			position: "sticky",
+			bottom: 0,
+			zIndex: 5,
+			margin: "4px -12px 0",
+			padding: "12px 12px calc(8px + env(safe-area-inset-bottom))",
+			...glassBar ? {
+				background: "rgba(13,20,46,0.72)",
+				backdropFilter: "blur(16px) saturate(1.4)",
+				WebkitBackdropFilter: "blur(16px) saturate(1.4)",
+				borderRadius: "22px 22px 0 0",
+				borderTop: `1px solid ${mg.line}`
+			} : { background: `linear-gradient(180deg, ${mg.bg}00, ${mg.bg}F2 14px, ${mg.bg} 30%)` }
+		}
+	}, status && /* @__PURE__ */ import_react.default.createElement("div", {
+		id: "mg-status",
+		role: "status",
+		"aria-live": "polite",
+		style: {
+			display: "flex",
+			alignItems: "center",
+			justifyContent: "center",
+			gap: 6,
+			textAlign: "center",
+			fontSize: 13.5,
+			fontWeight: 600,
+			color: statusOk ? mg.accInk : mg.muted,
+			fontFamily: MG_UI,
+			margin: "0 4px 8px",
+			lineHeight: 1.35
+		}
+	}, statusOk && /* @__PURE__ */ import_react.default.createElement(CheckMark, null), /* @__PURE__ */ import_react.default.createElement("span", null, status)), main && /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "mgPress",
+		"data-mg-main": "1",
+		onClick: main.disabled ? void 0 : main.onClick,
+		disabled: !!main.disabled,
+		"aria-disabled": main.blocked ? "true" : void 0,
+		"aria-describedby": status ? "mg-status" : void 0,
+		style: {
+			width: "100%",
+			minHeight: 56,
+			border: "none",
+			borderRadius: 18,
+			background: main.disabled || main.blocked ? mg.track : mg.acc,
+			color: main.disabled || main.blocked ? mg.muted : mg.onAcc,
+			fontFamily: "'Space Grotesk', sans-serif",
+			fontWeight: 700,
+			fontSize: 19,
+			display: "flex",
+			alignItems: "center",
+			justifyContent: "center",
+			gap: 10,
+			cursor: main.disabled ? "default" : "pointer",
+			boxShadow: main.disabled || main.blocked ? "none" : mg.ctaShadow
+		}
+	}, main.icon === "trophy" ? /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+		name: "trophy",
+		size: 20,
+		color: "currentColor"
+	}) : main.icon === "next" ? /* @__PURE__ */ import_react.default.createElement(MgSvg, { size: 20 }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M5 12h14M13 6l6 6-6 6" })) : /* @__PURE__ */ import_react.default.createElement(MgSvg, {
+		size: 20,
+		sw: 2
+	}, /* @__PURE__ */ import_react.default.createElement("path", { d: "M5 4h11l3 3v12a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1z" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M8 4v5h7V4M8 20v-6h8v6" })), /* @__PURE__ */ import_react.default.createElement("span", null, main.label)), /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "mgPress",
+		"data-mg-undo": "1",
+		onClick: () => lastUndo && upd((s) => mgUndo(s)),
+		disabled: !lastUndo,
+		"aria-label": lastUndo ? t("mgUndoAria")(holesTxt(lastUndo.holes)) : t("mgUndo"),
+		style: {
+			display: "flex",
+			alignItems: "center",
+			justifyContent: "center",
+			gap: 8,
+			margin: "4px auto 0",
+			minHeight: 44,
+			padding: "0 16px",
+			border: "none",
+			background: "transparent",
+			color: mg.muted,
+			fontFamily: MG_UI,
+			fontSize: 14.5,
+			fontWeight: 600,
+			cursor: lastUndo ? "pointer" : "default",
+			opacity: lastUndo ? 1 : .45
+		}
+	}, /* @__PURE__ */ import_react.default.createElement(MgSvg, {
+		size: 18,
+		sw: 2
+	}, /* @__PURE__ */ import_react.default.createElement("path", { d: "M9 7L5 11l4 4" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M5 11h9a5 5 0 0 1 0 10h-2" })), /* @__PURE__ */ import_react.default.createElement("span", null, t("mgUndo") + (lastUndo ? " · " + t("holeLabel")(holesTxt(lastUndo.holes)) : ""))));
+	const winBanner = winnerIdx !== -1 && /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "reveal-1",
+		role: "status",
+		style: {
+			color: mg.onAcc,
+			borderRadius: 18,
+			padding: "13px 14px",
+			marginBottom: 12,
+			fontSize: 15,
+			fontWeight: 700,
+			textAlign: "center",
+			fontFamily: "'Space Grotesk', sans-serif",
+			background: mg.acc
+		}
+	}, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+		name: "party",
+		size: 15,
+		color: "currentColor",
+		style: {
+			verticalAlign: "-2px",
+			marginRight: 6
+		}
+	}), gtWinLine(t, "minigolfWinsWith", "mgWinsTie", players.filter((_, i) => totals[i] === minTotal).map((q) => q.name), minTotal));
+	const sideBtn = (on, onColor, onInk) => ({
+		flex: 1,
+		border: `1px solid ${on ? onColor : mg.line}`,
+		borderRadius: 16,
+		background: on ? onColor : mg.surf,
+		color: on ? onInk : mg.muted,
+		fontSize: 12,
+		fontWeight: 700,
+		letterSpacing: "0.03em",
+		textTransform: "uppercase",
+		padding: "10px 6px",
+		minHeight: 48,
+		cursor: "pointer",
+		fontFamily: MG_UI
+	});
 	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage",
+		className: "gtL-shellpage mgGL" + (theme === "vitrum" ? " vitrum-active" : ""),
 		style: {
 			...minigolfPageShellStyle(theme),
 			position: "relative",
 			overflowX: "clip",
-			paddingBottom: editing ? 250 : 32
+			paddingBottom: editing ? 290 : 24
 		}
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, MINIGOLF_SCORECARD_CSS, MINIGOLF_LAYOUT_CSS), /* @__PURE__ */ import_react.default.createElement(MinigolfFlagWatermark, { color: mg.green }), celebration, /* @__PURE__ */ import_react.default.createElement(PodiumOverlay, {
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, MG_CSS), celebration, /* @__PURE__ */ import_react.default.createElement(PodiumOverlay, {
 		gameId: "minigolf",
 		gameLabel: t("gameMinigolf"),
 		open: podiumOpen,
@@ -47781,63 +48626,93 @@ function MinigolfPlay({ players, scores, setScores, onResetSheet, onEditPlayers,
 		bestRecord: { isNew: golfIsNew },
 		theme
 	}), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "paper-grid",
+		className: "gtL-page gtL-game",
 		style: {
-			borderRadius: 26,
 			maxWidth: 520,
 			margin: "0 auto",
 			position: "relative"
 		}
-	}, /* @__PURE__ */ import_react.default.createElement(RulesButton, {
-		onClick: () => setRulesOpen(true),
-		onHome,
-		onEndGame,
-		tokens: tk
-	}), /* @__PURE__ */ import_react.default.createElement(MinigolfTopBar, {
+	}, /* @__PURE__ */ import_react.default.createElement(MinigolfTopBar, {
 		subtitle: t("minigolfSubtitle"),
 		onBack,
 		theme,
-		t
-	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-e-block" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side" }, winnerIdx !== -1 && /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "reveal-1",
-		style: {
-			border: "none",
-			color: mg.onAccent,
-			borderRadius: 20,
-			padding: "13px 14px",
-			marginBottom: 12,
-			fontSize: 14,
-			fontWeight: 700,
-			textAlign: "center",
-			letterSpacing: "-0.01em",
-			fontFamily: "'Space Grotesk', sans-serif",
-			background: `linear-gradient(135deg, ${mg.btnFrom}, ${mg.btnTo})`,
-			boxShadow: `0 4px 16px -4px ${mg.green}88`
-		}
-	}, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
-		name: "party",
-		size: 14,
-		color: "currentColor",
-		style: {
-			verticalAlign: "-2px",
-			marginRight: 5
-		}
-	}), gtWinLine(t, "minigolfWinsWith", "mgWinsTie", players.filter((_, i) => totals[i] === minTotal).map((q) => q.name), minTotal)), /* @__PURE__ */ import_react.default.createElement(GtLStandings, {
-		title: t("minigolfTotalRow") + " · " + Math.min(18, ...filledCounts) + "/18",
-		rows: players.map((p, i) => ({
-			id: p.id,
-			name: p.name,
-			total: totals[i],
-			color: mg.hues[i % mg.hues.length]
+		t,
+		onHome,
+		onEndGame,
+		rulesText: t("rulesMinigolf")
+	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-e-block" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, winBanner, /* @__PURE__ */ import_react.default.createElement(MgSegmented, {
+		tab,
+		onTab: (v) => upd((s) => ({
+			...s,
+			tab: v
 		})),
-		target: 0,
-		lowWins: true,
-		ink: mg.ink,
-		muted: mg.muted,
-		card: mg.card,
-		border: mg.border,
-		font: MINIGOLF_FONT
-	}), /* @__PURE__ */ import_react.default.createElement(GtRoundChart, {
+		mg,
+		t
+	}), /* @__PURE__ */ import_react.default.createElement("div", {
+		id: "mg-panel",
+		role: "tabpanel",
+		"aria-labelledby": "mg-tab-" + tab
+	}, tab === "hole" ? /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement(MgHoleCard, {
+		ui,
+		hole,
+		onGo: (h) => upd((s) => mgGoto(s, h)),
+		mg,
+		t
+	}), /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		display: "flex",
+		flexDirection: "column",
+		gap: 10
+	} }, players.map((p) => {
+		const r = st.rows.find((x) => x.id === p.id);
+		return /* @__PURE__ */ import_react.default.createElement(MgPlayerCard, {
+			key: p.id,
+			p,
+			val: mgEff(ui, p.id, hole),
+			isDraft: mgHasDraft(ui.drafts, hole, p.id),
+			missing: info.isNew && info.dirty && mgEff(ui, p.id, hole) === null,
+			sofar: r ? r.total : 0,
+			countNote: r && !st.uniform ? t("mgHolesN")(r.count) : "",
+			leads: lead.has(p.id),
+			onStep: (dir) => upd((s) => mgStep(s, p.id, hole, dir)),
+			onPick: () => setEditing({
+				playerId: p.id,
+				holeIdx: hole
+			}),
+			mg,
+			t
+		});
+	})), /* @__PURE__ */ import_react.default.createElement(MgStandingsBox, {
+		className: "mgPhoneOnly",
+		st,
+		finished,
+		onOpen: () => upd((s) => ({
+			...s,
+			tab: "table"
+		})),
+		mg,
+		t
+	})) : /* @__PURE__ */ import_react.default.createElement(MgTable, {
+		ui,
+		hole,
+		onCell: (pid, h) => setEditing({
+			playerId: pid,
+			holeIdx: h
+		}),
+		mg,
+		t
+	})), bar), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-e-only" }, /* @__PURE__ */ import_react.default.createElement(MgStandingsBox, {
+		st,
+		finished,
+		onOpen: () => upd((s) => ({
+			...s,
+			tab: "table"
+		})),
+		mg,
+		t
+	})), /* @__PURE__ */ import_react.default.createElement("div", {
+		style: { marginTop: 12 },
+		className: "gtL-e-only"
+	}, /* @__PURE__ */ import_react.default.createElement(GtRoundChart, {
 		series: (() => {
 			const last = Math.max(0, ...players.map((p) => {
 				const c = scores[p.id] || [];
@@ -47853,301 +48728,37 @@ function MinigolfPlay({ players, scores, setScores, onResetSheet, onEditPlayers,
 		})(),
 		ink: mg.ink,
 		muted: mg.muted,
-		card: mg.card,
-		border: mg.border,
+		card: mg.surf,
+		border: mg.line,
 		title: t("gtChartTitle"),
 		theme
-	})), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement("div", {
-		"data-mg-board": "1",
-		style: {
-			margin: "56px auto 0",
-			width: "100%",
-			minWidth: 0
-		}
-	}, /* @__PURE__ */ import_react.default.createElement(MinigolfClipboardFrame, {
-		mg,
-		paper: pp
-	}, /* @__PURE__ */ import_react.default.createElement("div", {
-		ref: mgBoxRef,
-		style: {
-			display: "flex",
-			flexDirection: mgSide ? "row" : "column",
-			gap: 0,
-			padding: "14px 12px 10px",
-			minWidth: 0
-		}
-	}, [[
-		0,
-		8,
-		"minigolfOutRow",
-		outSums
-	], [
-		9,
-		17,
-		"minigolfInRow",
-		inSums
-	]].map(([fromHole, toHole, sumKey, sums], blockIdx) => /* @__PURE__ */ import_react.default.createElement("div", {
-		key: blockIdx,
-		style: {
-			flex: "1 1 0",
-			minWidth: 0,
-			...blockIdx === 0 ? mgSide ? {
-				marginRight: 14,
-				paddingRight: 12,
-				borderRight: `1px dashed ${pp.line}`
-			} : {
-				marginBottom: 12,
-				paddingBottom: 12,
-				borderBottom: `1px dashed ${pp.line}`
-			} : {}
-		}
-	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 11,
-		fontWeight: 700,
-		color: pp.muted,
-		letterSpacing: "0.06em",
-		textTransform: "uppercase",
-		marginBottom: 6,
-		paddingLeft: 2,
-		fontFamily: "'Inter', sans-serif"
-	} }, t("mgHoleRange")(fromHole + 1, toHole + 1)), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "grid",
-		gridTemplateColumns: `${MG_NUM}px repeat(${players.length}, minmax(0,1fr))`,
-		gap: MG_GAP
-	} }, /* @__PURE__ */ import_react.default.createElement("div", null), players.map((p, i) => {
-		const hue = mg.hues[i % mg.hues.length];
-		const on = mgOnHue(hue);
-		return /* @__PURE__ */ import_react.default.createElement("div", {
-			key: p.id,
-			title: p.name,
-			style: {
-				padding: mgVert ? "7px 0" : "6px 3px",
-				textAlign: "center",
-				background: hue,
-				borderRadius: "10px 10px 0 0",
-				minWidth: 0,
-				display: "flex",
-				alignItems: "flex-end",
-				justifyContent: "center",
-				boxShadow: leaderIdx === i ? `0 0 0 2px ${mgInkOn(mg.gold, pp.bg)}` : "none"
-			}
-		}, /* @__PURE__ */ import_react.default.createElement("div", {
-			"data-mg-head": "1",
-			style: {
-				fontSize: 11,
-				fontWeight: 800,
-				color: on,
-				fontFamily: "'Inter', sans-serif",
-				whiteSpace: "nowrap",
-				overflow: "hidden",
-				textOverflow: "ellipsis",
-				lineHeight: 1.15,
-				maxWidth: "100%",
-				...mgVert ? {
-					writingMode: "vertical-rl",
-					transform: "rotate(180deg)",
-					maxHeight: 96,
-					maxWidth: "none"
-				} : {}
-			}
-		}, leaderIdx === i && "★ ", p.name));
-	}), Array.from({ length: toHole - fromHole + 1 }).map((_, k) => {
-		const holeIdx = fromHole + k;
-		return /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, { key: holeIdx }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-			display: "flex",
-			alignItems: "center",
-			justifyContent: "center",
-			fontWeight: 600,
-			color: pp.muted,
-			fontSize: 11,
-			fontFamily: "'Inter', sans-serif"
-		} }, holeIdx + 1), players.map((p, i) => {
-			const hue = mg.hues[i % mg.hues.length];
-			const value = scores[p.id][holeIdx];
-			const isEditing = editing && editing.playerId === p.id && editing.holeIdx === holeIdx;
-			return /* @__PURE__ */ import_react.default.createElement("button", {
-				key: p.id,
-				"data-mg-cell": i + "-" + holeIdx,
-				"aria-label": p.name + ", " + t("holeLabel")(holeIdx + 1) + (value !== null ? ": " + value : ""),
-				onClick: () => setEditing({
-					playerId: p.id,
-					holeIdx
-				}),
-				style: {
-					border: "none",
-					borderRadius: 8,
-					padding: "8px 0",
-					minWidth: 0,
-					textAlign: "center",
-					background: isEditing ? `${hue}40` : value !== null ? pp.filled : "transparent",
-					boxShadow: isEditing ? `inset 0 0 0 2px ${mgInkOn(hue, pp.filled)}` : "none",
-					fontSize: 14,
-					fontWeight: value !== null ? 800 : 400,
-					color: value !== null ? mgInkOn(hue, pp.filled) : pp.muted,
-					fontVariantNumeric: "tabular-nums",
-					cursor: "pointer",
-					fontFamily: MINIGOLF_FONT
-				}
-			}, value !== null ? value : "·");
-		}));
-	}), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		gridColumn: "1 / -1",
-		height: 1,
-		background: pp.line,
-		margin: "3px 0"
-	} }), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		alignItems: "center",
-		justifyContent: "center",
-		fontSize: 10,
-		fontWeight: 700,
-		color: mgInkOn(mg.green, pp.bg),
-		fontFamily: "'Inter', sans-serif",
-		textTransform: "uppercase",
-		minWidth: 0,
-		overflow: "hidden"
-	} }, sumKey === "minigolfOutRow" ? t("minigolfOutRow") : t("minigolfInRow")), players.map((p, i) => {
-		const hue = mg.hues[i % mg.hues.length];
-		return /* @__PURE__ */ import_react.default.createElement("div", {
-			key: p.id,
-			style: {
-				textAlign: "center",
-				padding: "5px 0",
-				minWidth: 0,
-				borderRadius: 8,
-				background: `${hue}26`,
-				fontWeight: 800,
-				fontSize: 12.5,
-				color: mgInkOn(hue, pp.filled),
-				fontVariantNumeric: "tabular-nums",
-				fontFamily: MINIGOLF_FONT
-			}
-		}, sums[i]);
-	}))))))), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "mgTot",
-		style: {
-			maxWidth: 520,
-			margin: "12px auto 0",
-			borderRadius: 18,
-			overflow: "hidden",
-			boxShadow: "0 2px 8px rgba(15,25,15,0.18)"
-		}
-	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "grid",
-		gridTemplateColumns: `74px repeat(${players.length}, minmax(0,1fr))`,
-		background: mg.card
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		padding: "11px 4px 11px 6px",
-		fontWeight: 700,
-		color: mg.green,
-		fontSize: 12.5,
-		fontFamily: "'Inter', sans-serif",
-		display: "flex",
-		alignItems: "center",
-		gap: 3
-	} }, /* @__PURE__ */ import_react.default.createElement(GtRing, {
-		value: Math.min(18, ...filledCounts) / 18,
-		size: 12,
-		color: mg.green,
-		label: Math.min(18, ...filledCounts) + "/18"
-	}), t("minigolfTotalRow")), players.map((p, i) => {
-		const hue = mg.hues[i % mg.hues.length];
-		const isWinner = winnerIdx === i;
-		const isLeader = leaderIdx === i;
-		return /* @__PURE__ */ import_react.default.createElement("div", {
-			key: p.id,
-			style: {
-				borderLeft: `1px solid ${mg.border}`,
-				padding: "9px 2px",
-				minWidth: 0,
-				textAlign: "center",
-				background: isWinner ? `${hue}2A` : "transparent",
-				boxShadow: isLeader || isWinner ? `inset 0 0 0 1.5px ${hue}` : "none",
-				fontWeight: 800,
-				fontSize: players.length >= 7 ? 13 : 15,
-				color: hue,
-				fontVariantNumeric: "tabular-nums",
-				fontFamily: MINIGOLF_FONT,
-				display: "flex",
-				alignItems: "center",
-				justifyContent: "center",
-				gap: 3
-			}
-		}, isWinner && /* @__PURE__ */ import_react.default.createElement(GameIcon, {
-			name: "trophy",
-			size: 12,
-			color: hue
-		}), /* @__PURE__ */ import_react.default.createElement(GtCount, {
-			value: totals[i],
-			good: "low",
-			dpos: "l"
-		}));
-	})))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side2" }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	}))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side2" }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		gap: 8,
 		marginTop: 14
 	} }, /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "mgPress",
 		...gtHold(() => {
 			onResetSheet();
 			setConfirmingReset(false);
 		}, reset),
-		style: {
-			flex: 1,
-			border: "none",
-			borderRadius: 18,
-			background: confirmingReset ? "#C0392B" : mg.card,
-			color: confirmingReset ? "#FFFFFF" : mg.muted,
-			fontSize: 12,
-			fontWeight: 700,
-			letterSpacing: "0.03em",
-			textTransform: "uppercase",
-			padding: "10px 0",
-			cursor: "pointer",
-			fontFamily: "'Inter', sans-serif",
-			boxShadow: "0 1px 3px rgba(21,24,38,0.11)"
-		}
+		style: sideBtn(confirmingReset, mg.err, "#FFFFFF")
 	}, confirmingReset ? t("confirmAgain") : /* @__PURE__ */ import_react.default.createElement(GtHoldLabel, {
 		label: t("newRound"),
 		hint: t("gtHoldHint"),
 		again: t("confirmAgain")
 	})), /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "mgPress",
 		onClick: editPlayers,
-		style: {
-			flex: 1,
-			border: "none",
-			borderRadius: 18,
-			background: confirmingSetup ? mg.green : mg.card,
-			color: confirmingSetup ? "#FFFFFF" : mg.muted,
-			fontSize: 12,
-			fontWeight: 700,
-			letterSpacing: "0.03em",
-			textTransform: "uppercase",
-			padding: "10px 0",
-			cursor: "pointer",
-			fontFamily: "'Inter', sans-serif",
-			boxShadow: "0 1px 3px rgba(21,24,38,0.11)"
-		}
-	}, confirmingSetup ? t("confirmAgain") : t("changePlayers"))), /* @__PURE__ */ import_react.default.createElement("p", { style: {
-		fontSize: 11,
-		color: mg.muted,
-		textAlign: "center",
-		marginTop: 10,
-		fontFamily: "'Inter', sans-serif"
-	} }, t("mgTapHint"))))), /* @__PURE__ */ import_react.default.createElement(MinigolfEditorPanel, {
+		style: sideBtn(confirmingSetup, mg.acc, mg.onAcc)
+	}, confirmingSetup ? t("confirmAgain") : t("changePlayers")))))), /* @__PURE__ */ import_react.default.createElement(MinigolfEditorPanel, {
 		editing,
 		players,
-		scores,
-		onSave: saveScore,
+		value: editing ? mgEff(ui, editing.playerId, editing.holeIdx) : null,
+		onSave: saveDraft,
 		onClose: () => setEditing(null),
 		t,
-		theme,
 		mg
-	}), /* @__PURE__ */ import_react.default.createElement(RulesSheet, {
-		open: rulesOpen,
-		onClose: () => setRulesOpen(false),
-		title: t("gameMinigolf"),
-		text: t("rulesMinigolf"),
-		tokens: tk
 	}));
 }
 function MinigolfGame({ state, setState, onBack, onHome, onEndGame, lang = "de", theme = "dark" }) {
@@ -48156,42 +48767,30 @@ function MinigolfGame({ state, setState, onBack, onHome, onEndGame, lang = "de",
 		...s,
 		players: typeof updater === "function" ? updater(s.players) : updater
 	}));
-	const setScores = (updater) => setState((s) => ({
+	const freshScores = (s) => {
+		const scores = {};
+		s.players.forEach((p) => scores[p.id] = emptyMinigolfCard());
+		return scores;
+	};
+	const startGame = () => setState((s) => ({
 		...s,
-		scores: typeof updater === "function" ? updater(s.scores) : updater
+		...mgFreshUi(),
+		phase: "play",
+		scores: freshScores(s)
 	}));
-	const startGame = () => {
-		setState((s) => {
-			const scores = {};
-			s.players.forEach((p) => scores[p.id] = emptyMinigolfCard());
-			return {
-				...s,
-				phase: "play",
-				scores
-			};
-		});
-	};
-	const resetSheet = () => {
-		setState((s) => {
-			const scores = {};
-			s.players.forEach((p) => scores[p.id] = emptyMinigolfCard());
-			return {
-				...s,
-				scores
-			};
-		});
-	};
+	const resetSheet = () => setState((s) => ({
+		...s,
+		...mgFreshUi(),
+		scores: freshScores(s)
+	}));
 	const goToSetup = () => setState((s) => ({
 		...s,
 		phase: "setup"
 	}));
 	if (state.phase === "setup") return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage",
+		className: "gtL-shellpage" + (theme === "vitrum" ? " vitrum-active" : ""),
 		style: minigolfPageShellStyle(theme)
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement(MinigolfFlagWatermark, {
-		color: minigolfTokens(theme).green,
-		gtSetup: true
-	}), /* @__PURE__ */ import_react.default.createElement("div", {
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-page gtL-game",
 		style: {
 			maxWidth: 380,
@@ -48214,9 +48813,8 @@ function MinigolfGame({ state, setState, onBack, onHome, onEndGame, lang = "de",
 		t
 	})));
 	return /* @__PURE__ */ import_react.default.createElement(MinigolfPlay, {
-		players: state.players,
-		scores: state.scores,
-		setScores,
+		state,
+		setState,
 		onResetSheet: resetSheet,
 		onEditPlayers: goToSetup,
 		onBack,
@@ -96175,6 +96773,279 @@ var GT_STATS = (function() {
 		storeTournaments
 	};
 })();
+// web/src/export/canvas-utils.js
+var canvas_utils_exports = /* @__PURE__ */ __exportAll({
+	RESULT_CARD_THEMES: () => RESULT_CARD_THEMES,
+	_gtLogoImgPromise: () => _gtLogoImgPromise,
+	drawConfettiSideBands: () => drawConfettiSideBands,
+	drawLetterSpacedText: () => drawLetterSpacedText,
+	drawSunburstRays: () => drawSunburstRays,
+	fitFontSize: () => fitFontSize,
+	hexToRgb: () => hexToRgb,
+	loadGtLogoImage: () => loadGtLogoImage,
+	measureLetterSpacedWidth: () => measureLetterSpacedWidth,
+	resultTheme: () => resultTheme,
+	roundRectPath: () => roundRectPath,
+	shadeHex: () => shadeHex,
+	truncateForWidth: () => truncateForWidth
+});
+function hexToRgb(hex) {
+	const f = parseInt(hex.slice(1), 16);
+	return `${f >> 16}, ${f >> 8 & 255}, ${f & 255}`;
+}
+function shadeHex(hex, percent) {
+	const f = parseInt(hex.slice(1), 16);
+	const t = percent < 0 ? 0 : 255;
+	const p = percent < 0 ? -percent : percent;
+	const R = f >> 16;
+	const G = f >> 8 & 255;
+	const B = f & 255;
+	return "#" + (16777216 + (Math.round((t - R) * p) + R) * 65536 + (Math.round((t - G) * p) + G) * 256 + (Math.round((t - B) * p) + B)).toString(16).slice(1);
+}
+var RESULT_CARD_THEMES = {
+	darts: {
+		bgFrom: "#24262E",
+		bgTo: "#0A0B0D",
+		accent: "#F0A83C",
+		ink: "#F2F0E6",
+		winnerInk: "#241505",
+		icon: "🎯"
+	},
+	cricket: {
+		bgFrom: "#24262E",
+		bgTo: "#0A0B0D",
+		accent: "#F0A83C",
+		ink: "#F2F0E6",
+		winnerInk: "#241505",
+		icon: "🎯"
+	},
+	hiscore: {
+		bgFrom: "#24262E",
+		bgTo: "#0A0B0D",
+		accent: "#F0A83C",
+		ink: "#F2F0E6",
+		winnerInk: "#241505",
+		icon: "🎯"
+	},
+	splitscore: {
+		bgFrom: "#24262E",
+		bgTo: "#0A0B0D",
+		accent: "#F0A83C",
+		ink: "#F2F0E6",
+		winnerInk: "#241505",
+		icon: "🎯"
+	},
+	shanghai: {
+		bgFrom: "#24262E",
+		bgTo: "#0A0B0D",
+		accent: "#F0A83C",
+		ink: "#F2F0E6",
+		winnerInk: "#241505",
+		icon: "🎯"
+	},
+	tutto: {
+		bgFrom: "#2A1416",
+		bgTo: "#0F0607",
+		accent: "#E6474E",
+		ink: "#FBEFEF",
+		winnerInk: "#FFF5F5",
+		icon: "🎲"
+	},
+	freeplay: {
+		bgFrom: "#241A12",
+		bgTo: "#0B0906",
+		accent: "#C9A15C",
+		ink: "#F5EFE2",
+		winnerInk: "#1A1408",
+		icon: "✏️"
+	},
+	yatzy: {
+		bgFrom: "#1A1B2E",
+		bgTo: "#0A0A14",
+		accent: "#5B5FEF",
+		ink: "#EDEDFB",
+		winnerInk: "#F5F5FF",
+		icon: "🎲"
+	},
+	wizard: {
+		bgFrom: "#2B1A20",
+		bgTo: "#0D0A0C",
+		accent: "#D4AF5A",
+		ink: "#EFE6D2",
+		winnerInk: "#1A1408",
+		icon: "🧙"
+	},
+	"jass-differenzler": {
+		bgFrom: "#2A1D10",
+		bgTo: "#100B05",
+		accent: "#D52B1E",
+		ink: "#F5ECD8",
+		winnerInk: "#FFF3EC",
+		icon: "🃏"
+	},
+	schieber: {
+		bgFrom: "#2A1D10",
+		bgTo: "#100B05",
+		accent: "#D52B1E",
+		ink: "#F5ECD8",
+		winnerInk: "#FFF3EC",
+		icon: "🃏"
+	},
+	fivesec: {
+		bgFrom: "#241810",
+		bgTo: "#0D0905",
+		accent: "#FF9640",
+		ink: "#FFF4E8",
+		winnerInk: "#2A1203",
+		icon: ""
+	},
+	tabu: {
+		bgFrom: "#201A10",
+		bgTo: "#0C0A06",
+		accent: "#FFC93C",
+		ink: "#FFF8E8",
+		winnerInk: "#241D06",
+		icon: "🤫"
+	},
+	headsup: {
+		bgFrom: "#1E1622",
+		bgTo: "#0D0910",
+		accent: "#FF7A52",
+		ink: "#FBF3FF",
+		winnerInk: "#2A0F05",
+		icon: "🤳"
+	},
+	skyjo: {
+		bgFrom: "#171B21",
+		bgTo: "#0A0C0F",
+		accent: "#2FD9A8",
+		ink: "#EAF7F1",
+		winnerInk: "#04231A",
+		icon: "🃏"
+	},
+	minigolf: {
+		bgFrom: "#141F16",
+		bgTo: "#080C09",
+		accent: "#5FBE5D",
+		ink: "#EAF3E6",
+		winnerInk: "#0C2410",
+		icon: "⛳"
+	},
+	phase10: {
+		bgFrom: "#141B26",
+		bgTo: "#080B10",
+		accent: "#2E9BF0",
+		ink: "#EAF3FC",
+		winnerInk: "#04121F",
+		icon: "🔟"
+	},
+	romme: {
+		bgFrom: "#22161D",
+		bgTo: "#0D080B",
+		accent: "#F25C9A",
+		ink: "#FBEFF5",
+		winnerInk: "#2A0716",
+		icon: "🃏"
+	}
+};
+function resultTheme(gameId) {
+	return RESULT_CARD_THEMES[gameId] || RESULT_CARD_THEMES.freeplay;
+}
+function roundRectPath(ctx, x, y, w, h, r) {
+	ctx.beginPath();
+	ctx.moveTo(x + r, y);
+	ctx.arcTo(x + w, y, x + w, y + h, r);
+	ctx.arcTo(x + w, y + h, x, y + h, r);
+	ctx.arcTo(x, y + h, x, y, r);
+	ctx.arcTo(x, y, x + w, y, r);
+	ctx.closePath();
+}
+var _gtLogoImgPromise = null;
+function loadGtLogoImage() {
+	if (_gtLogoImgPromise) return _gtLogoImgPromise;
+	_gtLogoImgPromise = new Promise((resolve) => {
+		const img = new Image();
+		img.onload = () => resolve(img);
+		img.onerror = () => resolve(null);
+		img.src = app_logo_gold_default;
+	});
+	return _gtLogoImgPromise;
+}
+function drawLetterSpacedText(ctx, text, cx, y, spacing) {
+	const prevAlign = ctx.textAlign;
+	const chars = text.split("");
+	const widths = chars.map((c) => ctx.measureText(c).width);
+	let x = cx - (widths.reduce((a, b) => a + b, 0) + spacing * (chars.length - 1)) / 2;
+	ctx.textAlign = "left";
+	chars.forEach((c, idx) => {
+		ctx.fillText(c, x, y);
+		x += widths[idx] + spacing;
+	});
+	ctx.textAlign = prevAlign;
+}
+function truncateForWidth(ctx, text, maxW) {
+	let t = text;
+	while (ctx.measureText(t).width > maxW && t.length > 3) t = t.slice(0, -2) + "…";
+	return t;
+}
+function drawSunburstRays(ctx, cx, cy, innerR, outerR, count, color, alpha) {
+	ctx.save();
+	ctx.globalAlpha = alpha;
+	ctx.fillStyle = color;
+	const halfAngle = Math.PI * 2 / count * .16;
+	for (let i = 0; i < count; i++) {
+		const a = i / count * Math.PI * 2;
+		ctx.beginPath();
+		ctx.moveTo(cx + Math.cos(a - halfAngle) * innerR, cy + Math.sin(a - halfAngle) * innerR);
+		ctx.lineTo(cx + Math.cos(a) * outerR, cy + Math.sin(a) * outerR);
+		ctx.lineTo(cx + Math.cos(a + halfAngle) * innerR, cy + Math.sin(a + halfAngle) * innerR);
+		ctx.closePath();
+		ctx.fill();
+	}
+	ctx.restore();
+}
+function measureLetterSpacedWidth(ctx, text, spacing) {
+	const chars = text.split("");
+	return chars.map((c) => ctx.measureText(c).width).reduce((a, b) => a + b, 0) + spacing * Math.max(0, chars.length - 1);
+}
+function fitFontSize(ctx, text, maxWidth, maxPx, minPx, weight, family) {
+	let size = maxPx;
+	while (size > minPx) {
+		ctx.font = `${weight} ${size}px ${family}`;
+		if (ctx.measureText(text).width <= maxWidth) break;
+		size -= 2;
+	}
+	return size;
+}
+function drawConfettiSideBands(ctx, W, topY, bottomY, count, colors, bandWidth) {
+	colors = colors || [
+		"#C9A15C",
+		"#E8C77A",
+		"#8FA998",
+		"#C1798F",
+		"#4A9A9A",
+		"#F5EFE2"
+	];
+	for (let i = 0; i < count; i++) {
+		const x = Math.random() < .5 ? Math.random() * bandWidth : W - Math.random() * bandWidth;
+		const y = topY + Math.random() * (bottomY - topY);
+		const r = 3 + Math.random() * 6;
+		ctx.globalAlpha = .3 + Math.random() * .4;
+		ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
+		if (Math.random() < .5) {
+			ctx.beginPath();
+			ctx.arc(x, y, r, 0, Math.PI * 2);
+			ctx.fill();
+		} else {
+			ctx.save();
+			ctx.translate(x, y);
+			ctx.rotate(Math.random() * Math.PI);
+			ctx.fillRect(-r, -r * .4, r * 2, r * .8);
+			ctx.restore();
+		}
+	}
+	ctx.globalAlpha = 1;
+}
 // web/src/stats/legacy-ui.js
 var legacy_ui_exports = /* @__PURE__ */ __exportAll({
 	STATS_CHART_FALLBACK: () => STATS_CHART_FALLBACK,

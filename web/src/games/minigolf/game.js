@@ -362,7 +362,7 @@ function MgHoleCard({ ui, hole, onGo, mg, t }) {
     </section>
   );
 }
-function MgPlayerCard({ p, val, isDraft, sofar, countNote, leads, onStep, onPick, mg, t }) {
+function MgPlayerCard({ p, val, isDraft, missing, sofar, countNote, leads, onStep, onPick, mg, t }) {
   const name = p.name || "";
   const has = val !== null && val !== undefined;
   const round = { width: 44, height: 44, borderRadius: "50%", border: `1px solid ${mg.ctrlLine}`, background: mg.ctrl, color: mg.ink, display: "grid", placeItems: "center", cursor: "pointer", flexShrink: 0 };
@@ -402,10 +402,10 @@ function MgPlayerCard({ p, val, isDraft, sofar, countNote, leads, onStep, onPick
             onClick={onPick}
             aria-label={t("mgPick")(name, has ? val : null) + (isDraft ? ", " + t("mgUnsaved") : "")}
             style={{
-              width: 56,
+              minWidth: 58,
               height: 46,
               borderRadius: 14,
-              border: has ? `${isDraft ? 1.5 : 1}px solid ${isDraft ? mg.acc : mg.ctrlLine}` : `1.5px dashed ${mg.ctrlLine}`,
+              border: has ? `${isDraft ? 1.5 : 1}px solid ${isDraft ? mg.acc : mg.ctrlLine}` : `1.5px dashed ${missing ? mg.acc : mg.ctrlLine}`,
               background: has ? mg.surf2 : "transparent",
               color: mg.ink,
               fontFamily: MINIGOLF_FONT,
@@ -416,7 +416,7 @@ function MgPlayerCard({ p, val, isDraft, sofar, countNote, leads, onStep, onPick
               padding: 0,
             }}
           >
-            {has ? val : ""}
+            {has ? val : <span style={{ fontFamily: MG_UI, fontSize: 11.5, fontWeight: 600, color: missing ? mg.accInk : mg.muted, letterSpacing: "0.01em" }}>{t("mgOpen")}</span>}
           </button>
           <button className="mgPress" data-mg-plus={p.id} onClick={() => !plusDis && onStep(1)} disabled={plusDis} aria-label={t("mgAdd")(name)} style={{ ...round, opacity: plusDis ? 0.38 : 1 }}>
             <MgSvg size={18}>
@@ -445,7 +445,7 @@ function MgStandingsBox({ st, onOpen, finished, mg, t, className }) {
         </MgSvg>
       </button>
       {st.common > 0 && (
-        <ol style={{ listStyle: "none", margin: 0, padding: 0, display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 148px), 1fr))", gap: 6 }}>
+        <ol style={{ listStyle: "none", margin: 0, padding: 0, display: "grid", gridTemplateColumns: st.rows.every((r) => String(r.name || "").length <= 11) ? "repeat(auto-fill, minmax(min(100%, 148px), 1fr))" : "1fr", gap: 6 }}>
           {st.rows.map((r) => {
             const top = r.rank === 1 && !allTied && !finished;
             return (
@@ -593,6 +593,15 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
   };
   const names = (list) => gtJoinNames(list.map((p) => p.name), t);
   const holesTxt = (hs) => hs.map((h) => h + 1).join(", ");
+  // Gesperrte Hauptaktion bleibt antippbar und fuehrt zur ersten fehlenden Person
+  const showMissing = () => {
+    const m = info.missing[0];
+    const el = m && document.querySelector(`[data-mg-plus="${m.id}"]`);
+    if (!el) return;
+    const rm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    el.scrollIntoView({ block: "center", behavior: rm ? "auto" : "smooth" });
+    el.focus({ preventScroll: true });
+  };
   const lastUndo = ui.undo.length ? ui.undo[ui.undo.length - 1] : null;
   // Hauptaktion je nach Zustand der Bahn bzw. der Tabelle
   let main = null,
@@ -607,7 +616,7 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
       status = blocked.length ? blocked.map((h) => t("holeLabel")(h + 1) + ": " + t("mgStillOpen")(names(mgHoleInfo(ui, h).missing))).join(" · ") : t("mgDirtyHoles")(holesTxt(dirtyHoles));
     } else status = t("mgTableHint");
   } else if (info.dirty) {
-    main = { label: info.isNew ? t("mgSaveHole") : t("mgSaveChanges"), disabled: !info.canSave, onClick: () => upd((s) => mgSave(s, hole)) };
+    main = info.canSave ? { label: info.isNew ? t("mgSaveHole") : t("mgSaveChanges"), onClick: () => upd((s) => mgSave(s, hole)) } : { label: t("mgSaveHole"), blocked: true, onClick: showMissing };
     status = info.isNew && info.missing.length ? t("mgStillOpen")(names(info.missing)) : t("mgUnsaved");
   } else if (finished) {
     main = { label: t("mgShowResult"), onClick: () => setPodiumOpen(true), icon: "trophy" };
@@ -617,12 +626,12 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
     status = t("mgSaved");
     statusOk = true;
   } else {
-    main = { label: info.isNew ? t("mgSaveHole") : t("mgSaveChanges"), disabled: true, onClick: () => {} };
+    main = { label: info.isNew ? t("mgSaveHole") : t("mgSaveChanges"), blocked: true, onClick: showMissing };
     status = info.missing.length === players.length ? t("mgEnterHint") : t("mgStillOpen")(names(info.missing));
   }
   const glassBar = theme === "vitrum";
   const bar = (
-    <div className="mgBar" style={{ position: "sticky", bottom: 0, zIndex: 5, margin: "4px -12px 0", padding: "12px 12px calc(8px + env(safe-area-inset-bottom))", background: glassBar ? "linear-gradient(180deg, rgba(10,15,36,0), rgba(10,15,36,0.78) 28%)" : `linear-gradient(180deg, ${mg.bg}00, ${mg.bg} 26%)` }}>
+    <div className="mgBar" style={{ position: "sticky", bottom: 0, zIndex: 5, margin: "4px -12px 0", padding: "12px 12px calc(8px + env(safe-area-inset-bottom))", ...(glassBar ? { background: "rgba(13,20,46,0.72)", backdropFilter: "blur(16px) saturate(1.4)", WebkitBackdropFilter: "blur(16px) saturate(1.4)", borderRadius: "22px 22px 0 0", borderTop: `1px solid ${mg.line}` } : { background: `linear-gradient(180deg, ${mg.bg}00, ${mg.bg}F2 14px, ${mg.bg} 30%)` }) }}>
       {status && (
         <div id="mg-status" role="status" aria-live="polite" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, textAlign: "center", fontSize: 13.5, fontWeight: 600, color: statusOk ? mg.accInk : mg.muted, fontFamily: MG_UI, margin: "0 4px 8px", lineHeight: 1.35 }}>
           {statusOk && <CheckMark />}
@@ -635,14 +644,15 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
           data-mg-main="1"
           onClick={main.disabled ? undefined : main.onClick}
           disabled={!!main.disabled}
+          aria-disabled={main.blocked ? "true" : undefined}
           aria-describedby={status ? "mg-status" : undefined}
           style={{
             width: "100%",
             minHeight: 56,
             border: "none",
             borderRadius: 18,
-            background: main.disabled ? mg.track : mg.acc,
-            color: main.disabled ? mg.muted : mg.onAcc,
+            background: main.disabled || main.blocked ? mg.track : mg.acc,
+            color: main.disabled || main.blocked ? mg.muted : mg.onAcc,
             fontFamily: MINIGOLF_FONT,
             fontWeight: 700,
             fontSize: 19,
@@ -651,7 +661,7 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
             justifyContent: "center",
             gap: 10,
             cursor: main.disabled ? "default" : "pointer",
-            boxShadow: main.disabled ? "none" : mg.ctaShadow,
+            boxShadow: main.disabled || main.blocked ? "none" : mg.ctaShadow,
           }}
         >
           {main.icon === "trophy" ? (
@@ -750,6 +760,7 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
                           p={p}
                           val={mgEff(ui, p.id, hole)}
                           isDraft={mgHasDraft(ui.drafts, hole, p.id)}
+                          missing={info.isNew && info.dirty && mgEff(ui, p.id, hole) === null}
                           sofar={r ? r.total : 0}
                           countNote={r && !st.uniform ? t("mgHolesN")(r.count) : ""}
                           leads={lead.has(p.id)}

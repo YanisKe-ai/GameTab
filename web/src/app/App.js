@@ -24,6 +24,7 @@ import { DEFAULT_SPLITSCORE, SplitScoreGame } from "../games/darts/splitscore.js
 import { ShanghaiGame } from "../games/darts/shanghai.js";
 import { CategoryPartyGames, CategoryScorepads } from "./categories.js";
 import { SettingsPage } from "./settings.js";
+import "./landscape.js";
 import { GT_ST_STORE, useGtStStore } from "../games/schieber/tournament-core.js";
 import { SchieberTournament } from "../games/schieber/tournament.js";
 import { DartsVariantSelect, JassVariantSelect } from "./variant-select.js";

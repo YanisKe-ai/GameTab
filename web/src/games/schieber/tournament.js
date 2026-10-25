@@ -269,6 +269,35 @@ grandslam:{"--st-page":"#2448E8","--st-hink":"#FFFFFF","--st-hmuted":"rgba(248,2
 "--st-lead":"#FFE5DD","--st-lead-ink":"#B8321A","--st-pt":"#071743","--st-pos":"#071743","--st-chalk":"#071743","--st-self":"#E3E8F7",
 "--st-leadbox":"#FF7659","--st-leadbox-ink":"#071743","--st-leadbox-cap":"#071743","--st-leadbox-line":"none","--st-lname-font":"800 26px/1.08 'Space Grotesk','Inter',sans-serif",
 "--st-sel":"rgba(255,118,89,.35)","--st-toast":"#071743","--st-toast-ink":"#FFFFFF","--st-cta-shadow":"0 12px 26px -12px rgba(7,23,67,.7)","--st-sheet-line":"none"}};
+/* Handy-Querformat: nur unter [data-phone-landscape] aktiv (Hochformat und Laptop unveraendert) */
+const ST_PL_CSS=`
+[data-phone-landscape] .gtst-page{max-width:none!important;width:100%;box-sizing:border-box;padding-left:var(--pl-gutter-l);padding-right:var(--pl-gutter-r)}
+[data-phone-landscape] .gtst-head{display:flex;flex-wrap:wrap;align-items:center;column-gap:16px;row-gap:4px;padding:0 2px 10px}
+[data-phone-landscape] .gtst-head>.gtst-titlerow{min-width:0;flex:0 1 auto;align-items:center}
+[data-phone-landscape] .gtst-head .gtst-title{font-size:22px;margin:0}
+[data-phone-landscape] .gtst-head .gtst-title>span{display:inline!important;margin:0 0 0 10px!important;vertical-align:.12em}
+[data-phone-landscape] .gtst-head>.gtst-meta{margin-top:0;font-size:13px}
+[data-phone-landscape] .gtst-head>.gtst-panel{flex:1 1 100%}
+[data-phone-landscape] .gtst-tv-split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--pl-gap);align-items:start}
+[data-phone-landscape] .gtst-tv-split>.gtL-col-main,[data-phone-landscape] .gtst-tv-split>.gtL-col-side{display:block;min-width:0}
+[data-phone-landscape] .gtst-tv-side{margin-top:0!important}
+[data-phone-landscape] .gtst-tv-side>.gtst-sec:first-child{margin-top:0}
+[data-phone-landscape] .gtst-tv-side>.gtst-cta{position:static}
+[data-phone-landscape] .gtst-su .pl-side>.gtst-panel:first-child{margin-top:0!important}
+[data-phone-landscape] .gtst-cta .is-primary{min-height:48px}
+[data-phone-landscape] .gtst-ovl{align-items:flex-end;padding:6px var(--pl-gutter-r) 0 var(--pl-gutter-l)}
+[data-phone-landscape] .gtst-sheet{max-width:820px;max-height:calc(var(--pl-avail) - 6px);border-radius:20px 20px 0 0}
+[data-phone-landscape] .gtst-shead{padding:6px 8px 2px 18px}
+[data-phone-landscape] .gtst-sfoot{padding:8px 18px calc(var(--pl-sab) + 8px)}
+[data-phone-landscape] .gtst-sfoot .gtst-btn.is-primary{min-height:48px!important}
+[data-phone-landscape] .gtst-sbody:has(> .gtst-mx-ppl){display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);grid-template-rows:repeat(6,auto) 1fr;column-gap:16px;align-content:start}
+[data-phone-landscape] .gtst-sbody:has(> .gtst-mx-ppl)>*{grid-column:1;min-width:0}
+[data-phone-landscape] .gtst-sbody>.gtst-mx-ppl{grid-column:2;grid-row:1 / -1;margin-top:0!important;max-height:max(150px,calc(var(--pl-avail) - 150px));overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:0 2px 4px}
+[data-phone-landscape] .gtst-sbody:has(> .gtst-mx-ppl)>.gtst-slots{grid-template-columns:minmax(0,1fr)}
+[data-phone-landscape] .gtst-sbody:has(> .gtst-mx-ppl) .gtst-tbox{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+[data-phone-landscape] .gtst-sbody:has(> .gtst-mx-ppl) .gtst-tbox>b{grid-column:1 / -1}
+[data-phone-landscape] .gtst-mx-ppl .gtst-plist2{grid-template-columns:repeat(auto-fill,minmax(180px,1fr))}
+`;
 function rootStyle(d){const v=VARS[d]||VARS.strichliste;const bg=d==="grandslam"?"#2448E8":"radial-gradient(120% 55% at 12% -4%, rgba(244,243,234,0.07) 0%, rgba(244,243,234,0) 62%), radial-gradient(80% 40% at 100% 100%, rgba(133,209,245,0.05) 0%, rgba(133,209,245,0) 70%), #15191C";return Object.assign({},v,{minHeight:"100vh",background:bg,padding:"20px 12px calc(env(safe-area-inset-bottom,0px) + 32px)"});}
 /* ---------- Bausteine ---------- */
 function useLabels(tour){return useMemo(()=>{const by={},m={};if(!tour)return{lbl:id=>"",map:m};tour.participants.slice().sort((a,b)=>a.stableOrder-b.stableOrder).forEach(p=>{const k=fold(p.displayName).trim();(by[k]=by[k]||[]).push(p);});Object.keys(by).forEach(k=>{const arr=by[k];arr.forEach((p,i)=>{m[p.id]=arr.length>1?p.displayName+" ("+(i+1)+")":p.displayName;});});return{lbl:id=>m[id]!=null?m[id]:"?",map:m};},[tour]);}
@@ -299,16 +328,16 @@ const add=()=>{const v=GT_ST.cleanName(nn);if(!v)return;setNames(a=>a.concat([v]
 const addGroup=g=>{const have=new Set(names.map(fold));const add2=(g.players||[]).map(x=>GT_ST.cleanName(String(x||""))).filter(x=>x&&!have.has(fold(x)));setNames(a=>a.concat(add2));};
 const maxT=Math.max(1,Math.floor(names.length/4));
 const submit=()=>{const v=GT_ST.cleanName(name);if(!v){setNameErr(t("stuErr_NAME_EMPTY"));return;}if(GT_ST.graphemeLength(v)>GT_ST.LIMITS.name)return;onCreate({name:v,participants:names,tables,theme:design});};
-return <div className="gtst-body">
-<div className="gtst-panel" style={{padding:14}}><NameField id="gtst-setup-name" label={t("stuNameLabel")} value={name} onChange={v=>{setName(v);setNameErr("");}} t={t} error={nameErr}/></div>
+return <div className="gtst-body gtst-su">
+<div className="pl-split"><div className="pl-main"><div className="gtst-panel" style={{padding:14}}><NameField id="gtst-setup-name" label={t("stuNameLabel")} value={name} onChange={v=>{setName(v);setNameErr("");}} t={t} error={nameErr}/></div>
 <div className="gtst-panel" style={{padding:14,marginTop:12}}><label className="gtst-label" htmlFor="gtst-add">{t("stuParticipants")+" ("+names.length+")"}</label>
 <div style={{display:"flex",gap:8}}><input id="gtst-add" ref={inRef} className="gtst-input" value={nn} placeholder={t("stuAddPh")} onChange={e=>setNn(e.target.value)} enterKeyHint="enter" autoComplete="off" onKeyDown={e=>{if(e.key==="Enter"){e.preventDefault();add();}}}/><button type="button" className="gtst-btn is-primary" onClick={add} disabled={!GT_ST.cleanName(nn)} aria-label={t("stuAdd")} style={{minWidth:52}}><Icon n="plus"/></button></div>
 {groups.length>0&&<div style={{marginTop:10}}><div className="gtst-cap" style={{marginBottom:6}}>{t("stuFromGroup")}</div><div className="gtst-chips">{groups.map(g=><button key={g.id} type="button" className="gtst-chip" onClick={()=>addGroup(g)} style={{paddingLeft:14}}><Icon n="users" size={18}/><span>{g.name+" ("+(g.players||[]).length+")"}</span></button>)}</div></div>}
 {names.length>0&&<ul style={{listStyle:"none",margin:"10px 0 0",padding:0,display:"flex",flexWrap:"wrap",gap:6}}>{names.map((n,i)=><li key={i}><button type="button" className="gtst-chip" onClick={()=>setNames(a=>a.filter((_,j)=>j!==i))} aria-label={fmt(t("stuRemoveName"),{name:n})}><Avatar id={n+i} name={n} design={UID}/><span>{n}</span><Icon n="close" size={16}/></button></li>)}</ul>}
-<div className="gtst-help"><span>{names.length<4?fmt(t("stuNeedFour"),{n:4-names.length}):t("stuEnoughPeople")}</span></div></div>
+<div className="gtst-help"><span>{names.length<4?fmt(t("stuNeedFour"),{n:4-names.length}):t("stuEnoughPeople")}</span></div></div></div><div className="pl-side">
 <div className="gtst-panel" style={{padding:14,marginTop:12}}><div className="gtst-label" id="gtst-tl">{t("stuTables")}</div><div className="gtst-step" role="group" aria-labelledby="gtst-tl"><button type="button" className="gtst-btn" onClick={()=>setTables(n=>Math.max(1,n-1))} disabled={tables<=1} aria-label={t("stuLess")}>−</button><output aria-live="polite">{tables}</output><button type="button" className="gtst-btn" onClick={()=>setTables(n=>Math.min(GT_ST.LIMITS.tables,n+1))} disabled={tables>=GT_ST.LIMITS.tables} aria-label={t("stuMore")}>+</button></div>
 <div className="gtst-help"><span>{names.length>=4?fmt(t("stuTablesHint"),{p:names.length,m:maxT}):t("stuTablesHint0")}</span></div></div>
-<div className="gtst-panel" style={{padding:14,marginTop:12}}><div className="gtst-label">{t("stuDesign")}</div><ThemePick value={design} onChange={setDesign} t={t}/><p className="gtst-help" style={{display:"block"}}>{t("stuDesignHint")}</p></div>
+<div className="gtst-panel" style={{padding:14,marginTop:12}}><div className="gtst-label">{t("stuDesign")}</div><ThemePick value={design} onChange={setDesign} t={t}/><p className="gtst-help" style={{display:"block"}}>{t("stuDesignHint")}</p></div></div></div>
 {err&&<p className="gtst-err" role="alert" style={{margin:"12px 2px 0"}}>{err}</p>}
 <div className="gtst-cta"><button type="button" className="gtst-btn is-primary is-block" onClick={submit}><Icon n="check"/>{t("stuCreate")}</button></div></div>;}
 /* ---------- Partie waehlen / eintragen ---------- */
@@ -336,7 +365,7 @@ const footer=[err&&<div key="e" className="gtst-err" role="alert">{err}</div>,<b
 return <Sheet title={title} onClose={onClose} footer={footer}>
 {mode==="enter"&&<p className="gtst-help" style={{marginTop:0,marginBottom:10}}>{t("stuEnterHint")}</p>}
 <div className="gtst-slots"><div className="gtst-tbox"><b>{t("stuTeamA")}</b>{slot(0)}{slot(1)}</div><div className="gtst-tbox"><b>{t("stuTeamB")}</b>{slot(2)}{slot(3)}</div></div>
-{!lock&&<div style={{marginTop:12}}>{tour.participants.length>8&&<div style={{position:"relative"}}><label className="gtst-label" htmlFor="gtst-q" style={{position:"absolute",width:1,height:1,overflow:"hidden",clip:"rect(0 0 0 0)"}}>{t("stuSearch")}</label><input id="gtst-q" type="search" className="gtst-input" placeholder={t("stuSearch")} value={q} onChange={e=>setQ(e.target.value)} autoComplete="off" style={{paddingLeft:40}}/><span style={{position:"absolute",left:12,top:14,color:"var(--st-muted)"}}><Icon n="search" size={20}/></span></div>}
+{!lock&&<div className="gtst-mx-ppl" style={{marginTop:12}}>{tour.participants.length>8&&<div style={{position:"relative"}}><label className="gtst-label" htmlFor="gtst-q" style={{position:"absolute",width:1,height:1,overflow:"hidden",clip:"rect(0 0 0 0)"}}>{t("stuSearch")}</label><input id="gtst-q" type="search" className="gtst-input" placeholder={t("stuSearch")} value={q} onChange={e=>setQ(e.target.value)} autoComplete="off" style={{paddingLeft:40}}/><span style={{position:"absolute",left:12,top:14,color:"var(--st-muted)"}}><Icon n="search" size={20}/></span></div>}
 <div className="gtst-plist2" role="group" aria-label={t("stuPeople")}>{shown.map(({p,dis,why})=>{const at=slots.indexOf(p.id);return <button key={p.id} type="button" className="gtst-pbtn" disabled={dis&&at<0} aria-pressed={at>=0?"true":"false"} onClick={()=>pick(p.id)}><Avatar id={p.id} name={lbl(p.id)} design={design}/><span className="nm">{lbl(p.id)}<span className="gtst-sub">{fmt(t(games[p.id]===1?"stuGamesOne":"stuGamesOther"),{n:games[p.id]||0})}</span></span>{why&&<span className="why">{why}</span>}{at>=0&&<span className="gtst-tag" aria-label={at<2?t("stuTeamA"):t("stuTeamB")}>{at<2?"A":"B"}</span>}</button>;})}{shown.length===0&&<p className="gtst-help">{t("stuNoHits")}</p>}</div></div>}
 {needW&&<div style={{marginTop:16}}><div className="gtst-label" id="gtst-wl">{t("stuWhoWon")}</div><div className="gtst-win" role="group" aria-labelledby="gtst-wl">{["A","B"].map(w=><button key={w} type="button" className="gtst-wbtn" aria-pressed={winner===w?"true":"false"} disabled={!full} onClick={()=>{setWinner(w);setErr("");}}><span style={{display:"flex",alignItems:"center",gap:6}}>{winner===w&&<Icon n="check" size={18}/>}{w==="A"?t("stuTeamAWins"):t("stuTeamBWins")}</span><small>{full?nm(w==="A"?A:B):t("stuPickFour")}</small></button>)}</div></div>}
 {ready&&needW&&<div className="gtst-sum" style={{marginTop:14}} aria-live="polite">{fmt(t("stuSummary"),{w:nm(winner==="A"?A:B),l:nm(winner==="A"?B:A)})}<div className="gtst-prev">{(winner==="A"?A:B).map(id=><span key={id}>{"+1 "+lbl(id)}</span>)}{(winner==="A"?B:A).map(id=><span key={id}>{"−1 "+lbl(id)}</span>)}</div></div>}
@@ -411,11 +440,11 @@ onRestore:m=>{const r=GT_ST_STORE.commit(tour.id,x=>GT_ST.restoreMatch(x,m.id));
 const tablesEl=<Tables {...Object.assign({tour,d,occ,t,lang,lbl,ro},act)}/>;
 const canEnter=!ro&&tour.participants.length>=4;
 return <Fragment>
-<div className="gtL-split"><div className="gtL-col-main"><div className="gtst-body">
+<div className="gtL-split gtst-tv-split"><div className="gtL-col-main"><div className="gtst-body">
 {ro&&<div className="gtst-ro" role="status"><b style={{display:"block",marginBottom:2}}>{d.summary.matches?t("stuDoneBannerT"):t("stuStatusUnrated")}</b>{t("stuDoneBanner")}<div className="gtst-acts" style={{marginTop:10}}><button type="button" className="gtst-btn" onClick={()=>openSheet({k:"reopen"})}><Icon n="reopen" size={18}/>{t("stuReopen")}</button><button type="button" className="gtst-btn is-primary" onClick={()=>openSheet({k:"export"})} disabled={typeof GtStExportSheet!=="function"}><Icon n="share" size={18}/>{t("stuExport")}</button></div></div>}
 <div className="gtst-tabs" role="tablist" aria-label={t("stuViews")} onKeyDown={onTabKey}>{tabs.map(([k,l,sl])=><button key={k} type="button" role="tab" aria-label={l} id={"gtst-tab-"+k} aria-selected={tab===k?"true":"false"} aria-controls={"gtst-panel-"+k} tabIndex={tab===k?0:-1} className="gtst-tab" onClick={()=>setTab(k)}><span className="gtst-tl">{l}</span><span className="gtst-ts" aria-hidden>{sl}</span></button>)}</div>
 <div role="tabpanel" id={"gtst-panel-"+tab} aria-labelledby={"gtst-tab-"+tab}>{tab==="rank"?<Ranking tour={tour} d={d} t={t} lbl={lbl} design={design} ro={ro} onPeople={()=>openSheet({k:"people"})}/>:tab==="pairs"?<Partners tour={tour} d={d} t={t} lbl={lbl} design={design}/>:<History {...Object.assign({tour,d,t,lang,lbl,ro},act)}/>}</div></div></div>
-<div className="gtL-col-side"><div className="gtst-body" style={{marginTop:12}}>{!ro&&tablesEl}
+<div className="gtL-col-side"><div className="gtst-body gtst-tv-side" style={{marginTop:12}}>{!ro&&tablesEl}
 {!ro&&<div className="gtst-cta"><button type="button" className="gtst-btn is-primary is-block" disabled={!canEnter} onClick={()=>openSheet({k:"match",mode:"enter"})}><Icon n="plus"/>{t("stuEnterMatch")}</button>{!canEnter&&<p className="gtst-help" style={{margin:0}}>{t("stuNeedFourShort")}</p>}</div>}
 {!ro&&<div className="gtst-acts" style={{marginTop:8}}><button type="button" className="gtst-btn" onClick={()=>openSheet({k:"people"})}><Icon n="users" size={18}/>{t("stuPeopleBtn")}</button><button type="button" className="gtst-btn" onClick={()=>openSheet({k:"end"})}><Icon n="flag" size={18}/>{t("stuEndTour")}</button></div>}
 {ro&&<div className="gtst-acts"><button type="button" className="gtst-btn" onClick={()=>openSheet({k:"people"})}><Icon n="users" size={18}/>{t("stuPeopleBtn")}</button><button type="button" className="gtst-btn" onClick={goList}><Icon n="list" size={18}/>{t("stuAllTours")}</button></div>}</div></div></div></Fragment>;}
@@ -487,8 +516,8 @@ else if(k==="export")sheetEl=typeof GtStExportSheet==="function"?<GtStExportShee
 if(sheet&&sheet.k==="rules")sheetEl=<Sheet title={t("stuRulesT")} onClose={close}>{String(t("stuRules")).split("\n\n").map((x,i)=><p key={i} style={{margin:"0 0 12px",font:"500 15px/1.55 var(--st-ui)"}}>{x}</p>)}</Sheet>;
 else if(sheet&&sheet.k==="delete"&&sheet.target)sheetEl=<ConfirmSheet cancel={t("stuCancel")} title={fmt(t("stuDeleteT"),{name:sheet.target.name})} text={t("stuDeleteText")} ok={t("stuDeleteOk")} danger onClose={close} onOk={()=>doDelete(sheet.target)}/>;
 const gtitle=t("stuMode");
-return <div className="gtL-shellpage gtst" data-d="app" data-t={stuT(theme)} lang={lang} style={stuRoot(theme)}><style>{GLOBAL_STYLES}{CSS}</style>
-<div className="gtL-page gtL-game" style={{maxWidth:scr==="tour"?380:420,margin:"0 auto"}}>
+return <div className="gtL-shellpage gtst" data-d="app" data-t={stuT(theme)} lang={lang} style={stuRoot(theme)}><style>{GLOBAL_STYLES}{CSS}{ST_PL_CSS}</style>
+<div className="gtL-page gtL-game gtst-page pl-head-compact" style={{maxWidth:scr==="tour"?380:420,margin:"0 auto"}}>
 <GameHeader title={gtitle} subtitle={scr==="list"?t("stuListSub"):scr==="setup"?t("stuSetupSub"):null} onBack={back} backLabel={t("back")} tk={tk} accent={sk.txt} icon={<GtStuLogo color={sk.txt}/>} extra={menuBtn}/>
 {snap.error&&snap.error.code==="STORAGE"&&<div className="gtst-note" role="alert" style={{marginBottom:10,background:"var(--st-body-solid)"}}>{t("stuErr_STORAGE")}<button type="button" className="gtst-btn is-small" style={{marginLeft:8}} onClick={()=>GT_ST_STORE.dismissError()}>{t("stuOk")}</button></div>}
 {scr==="tour"&&tour?<Fragment><TourHead tour={tour} t={t} lang={lang} onRename={nm=>{const r=GT_ST_STORE.commit(tour.id,x=>GT_ST.rename(x,nm));return r.ok?r:{ok:false,msg:errText(t,r,lbl,tour)};}}/><TourView tour={tour} t={t} lang={lang} toast={toast} openSheet={openSheet} goList={goList}/></Fragment>

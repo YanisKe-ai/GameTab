@@ -12,6 +12,7 @@ import { PodiumOverlay, useCelebration } from "../../shared/podium.js";
 import { CheckMark, GameIcon, XMark } from "../../assets/icons.js";
 import { MinigolfLogo } from "../../assets/logos.js";
 import { GameHeader } from "../../shared/game-header.js";
+import { usePhoneLandscape } from "../../shared/phone-landscape.js";
 import { GtRoundChart } from "../../shared/standings.js";
 import { GroupPicker, GtPlayerList, GtStartBar, gtSkin, gtSkinTk, gtSoftTk } from "../../shared/setup-ui.js";
 import {
@@ -49,6 +50,35 @@ function minigolfInSum(card) {
 function minigolfFilledCount(card) {
   return card.filter((v) => v !== null).length;
 }
+const MG_LAND_CSS = `
+[data-phone-landscape] .mg-land { padding-top: calc(var(--pl-sat) + 6px) !important; padding-bottom: calc(var(--pl-sab) + 6px) !important; --mg-edw: clamp(280px, 40vw, 360px); }
+[data-phone-landscape] .mg-inner { max-width: none !important; margin: 0 !important; width: 100% !important; }
+[data-phone-landscape] .mg-split { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); grid-template-rows: auto auto minmax(0, 1fr) auto auto; column-gap: 12px; row-gap: 0; height: max(230px, calc(var(--pl-body) - 6px)); margin-top: 6px; }
+[data-phone-landscape] .mg-split.mg-tab-table { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); }
+[data-phone-landscape] .mg-main { display: contents; }
+[data-phone-landscape] .mg-banner { grid-column: 1 / -1; grid-row: 1; margin-bottom: 8px !important; padding: 8px 12px !important; }
+[data-phone-landscape] .mg-seg { grid-column: 1; grid-row: 2; margin-bottom: 8px !important; }
+[data-phone-landscape] .mg-panel { grid-column: 1; grid-row: 3 / span 3; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding-bottom: 2px; }
+[data-phone-landscape] .mg-split.mg-tab-table .mg-panel { overflow: hidden; }
+[data-phone-landscape] .mg-split.mg-tab-table .mgTableWrap { height: 100%; box-sizing: border-box; overflow: auto; overscroll-behavior: contain; }
+[data-phone-landscape] .mg-side { display: block; grid-column: 2; grid-row: 2 / span 2; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+[data-phone-landscape] .mg-side > .gtL-e-only:first-child { display: block; }
+[data-phone-landscape] .mg-side > .gtL-e-only:first-child > section { margin-top: 0 !important; }
+[data-phone-landscape] .mg-land .mgPhoneOnly { display: none !important; }
+[data-phone-landscape] .mg-land .mgBar { grid-column: 2; grid-row: 4; position: static !important; margin: 8px 0 0 !important; padding: 0 !important; background: transparent !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; border: 0 !important; border-radius: 0 !important; box-shadow: none !important; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+[data-phone-landscape] .mg-land .mgBar #mg-status { flex: 1 0 100%; margin: 0 !important; justify-content: flex-start !important; text-align: left !important; font-size: 13px !important; line-height: 1.3 !important; }
+[data-phone-landscape] .mg-land .mgBar [data-mg-main] { width: auto !important; flex: 1 1 140px; min-height: 48px !important; font-size: 17px !important; }
+[data-phone-landscape] .mg-land .mgBar [data-mg-undo] { margin: 0 !important; min-height: 44px !important; min-width: 44px; padding: 0 12px !important; flex: 0 0 auto; }
+[data-phone-landscape] .mg-side2 { display: block; grid-column: 2; grid-row: 5; }
+[data-phone-landscape] .mg-split .mgTableWrap td button { min-height: 44px !important; }
+[data-phone-landscape] .mg-side > .gtL-e-only:first-child > section > button { min-height: 44px !important; }
+[data-phone-landscape] .mg-side2 > div { margin-top: 6px !important; }
+[data-phone-landscape] .mg-side2 button { min-height: 44px !important; }
+[data-phone-landscape] .mg-editor { left: auto !important; right: 0 !important; bottom: 0 !important; top: calc(var(--pl-sat) + var(--pl-head) + 6px) !important; width: calc(var(--mg-edw) + var(--pl-sar)) !important; box-sizing: border-box; border-radius: 22px 0 0 0 !important; padding: 12px calc(14px + var(--pl-sar)) calc(10px + var(--pl-sab)) 14px !important; overflow-y: auto; overscroll-behavior: contain; box-shadow: -10px 0 28px rgba(0,0,0,0.35) !important; border-top: 2px solid var(--mg-edacc, currentColor); }
+@media (max-width: 700px) { [data-phone-landscape] .mg-land .mgBar .mg-undo-txt { display: none; } }
+@media (max-width: 700px) { [data-phone-landscape] .mg-split { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); } [data-phone-landscape] .mg-split.mg-tab-table { grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); } }
+@media (max-height: 360px) { [data-phone-landscape] .mg-editor .mg-edhint { display: none; } }
+`;
 const MINIGOLF_FONT = "'Space Grotesk', sans-serif";
 const MG_UI = "'Inter', sans-serif";
 const MG_CSS = `
@@ -162,6 +192,7 @@ function MinigolfEditorPanel({ editing, players, value: cur, onSave, onClose, t,
       ref={boxRef}
       tabIndex={-1}
       data-mg-panel="1"
+      className="mg-editor"
       role="dialog"
       aria-label={(player ? player.name : "") + ", " + t("holeLabel")(editing.holeIdx + 1)}
       style={{
@@ -176,6 +207,7 @@ function MinigolfEditorPanel({ editing, players, value: cur, onSave, onClose, t,
         zIndex: 70,
         borderTop: `2px solid ${mg.acc}`,
         outline: "none",
+        "--mg-edacc": mg.acc,
       }}
     >
       <div style={{ maxWidth: 520, margin: "0 auto" }}>
@@ -225,7 +257,7 @@ function MinigolfEditorPanel({ editing, players, value: cur, onSave, onClose, t,
             );
           })}
         </div>
-        <div style={{ fontSize: 12, color: mg.muted, fontFamily: MG_UI, marginBottom: 10, lineHeight: 1.35 }}>{t("mgMaxHint")(MAX)}</div>
+        <div className="mg-edhint" style={{ fontSize: 12, color: mg.muted, fontFamily: MG_UI, marginBottom: 10, lineHeight: 1.35 }}>{t("mgMaxHint")(MAX)}</div>
         <div style={{ display: "flex", gap: 6 }}>
           <input
             data-mg-input="1"
@@ -310,7 +342,7 @@ function MgSegmented({ tab, onTab, mg, t }) {
     );
   };
   return (
-    <div role="tablist" aria-label={t("mgViewLabel")} className={mg.glass ? "gtL-glass-soft" : undefined} style={{ display: "flex", gap: 4, padding: 4, borderRadius: 18, background: mg.surf, border: `1px solid ${mg.line}`, marginBottom: 12 }}>
+    <div role="tablist" aria-label={t("mgViewLabel")} className={"mg-seg" + (mg.glass ? " gtL-glass-soft" : "")} style={{ display: "flex", gap: 4, padding: 4, borderRadius: 18, background: mg.surf, border: `1px solid ${mg.line}`, marginBottom: 12 }}>
       {item("hole", t("mgTabHole"))}
       {item("table", t("mgTabTable"))}
     </div>
@@ -465,9 +497,18 @@ function MgStandingsBox({ st, onOpen, finished, mg, t, className }) {
 }
 function MgTable({ ui, hole, onCell, mg, t }) {
   const ps = ui.players;
+  const pl = usePhoneLandscape();
+  const wrapRef = useRef(null);
+  useEffect(() => {
+    // Querformat: Tabelle oeffnet mit der aktuellen Bahn im Blick (nur im eigenen Scrollbereich)
+    const w = wrapRef.current;
+    if (!pl || !w) return;
+    const row = w.querySelector('tr[aria-current="true"]');
+    if (row) w.scrollTop = Math.max(0, row.offsetTop - w.clientHeight / 2 + row.offsetHeight / 2);
+  }, [pl]);
   const cellBtn = { width: "100%", minWidth: 44, minHeight: 40, border: "none", borderRadius: 10, background: "transparent", fontFamily: MINIGOLF_FONT, fontSize: 16, fontWeight: 700, cursor: "pointer", fontVariantNumeric: "tabular-nums", position: "relative", padding: "0 4px" };
   const stickyBg = (cur) => (cur ? `linear-gradient(${mg.accSoft}, ${mg.accSoft}), ${mg.solid}` : mg.solid);
-  const thBase = { padding: "10px 4px", fontFamily: MG_UI, fontSize: 12.5, fontWeight: 700, color: mg.ink, textAlign: "center", borderBottom: `1px solid ${mg.line}`, verticalAlign: "bottom" };
+  const thBase = { padding: "10px 4px", fontFamily: MG_UI, fontSize: 12.5, fontWeight: 700, color: mg.ink, textAlign: "center", borderBottom: `1px solid ${mg.line}`, verticalAlign: "bottom", ...(pl ? { position: "sticky", top: 0, zIndex: 2, background: mg.solid, fontSize: 14 } : null) };
   const sumRow = (label, fn, strong) => (
     <tr>
       <th scope="row" className="mgSticky" style={{ background: mg.solid, padding: "8px 10px", textAlign: "left", fontFamily: MG_UI, fontSize: 12, fontWeight: 700, color: strong ? mg.accInk : mg.muted, textTransform: "uppercase", letterSpacing: "0.04em", borderTop: `1px solid ${mg.line}`, whiteSpace: "nowrap" }}>
@@ -509,11 +550,11 @@ function MgTable({ ui, hole, onCell, mg, t }) {
     );
   };
   return (
-    <div className={"mgTableWrap" + (mg.glass ? " gtL-glass" : "")} role="region" aria-label={t("mgTabTable")} tabIndex={0} style={{ background: mg.surf, border: `1px solid ${mg.line}`, borderRadius: 20, boxShadow: mg.shadow }}>
+    <div ref={wrapRef} className={"mgTableWrap" + (mg.glass ? " gtL-glass" : "")} role="region" aria-label={t("mgTabTable")} tabIndex={0} style={{ background: mg.surf, border: `1px solid ${mg.line}`, borderRadius: 20, boxShadow: mg.shadow }}>
       <table style={{ borderCollapse: "separate", borderSpacing: 0, width: "100%", minWidth: 52 + ps.length * 60 }}>
         <thead>
           <tr>
-            <th scope="col" className="mgSticky" style={{ ...thBase, background: mg.solid, textAlign: "left", paddingLeft: 10, color: mg.muted, width: 52, borderTopLeftRadius: 20 }}>
+            <th scope="col" className="mgSticky" style={{ ...thBase, background: mg.solid, textAlign: "left", paddingLeft: 10, color: mg.muted, width: 52, borderTopLeftRadius: 20, ...(pl ? { zIndex: 3 } : null) }}>
               {t("mgTabHole")}
             </th>
             {ps.map((p) => (
@@ -689,12 +730,12 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
           <path d="M9 7L5 11l4 4" />
           <path d="M5 11h9a5 5 0 0 1 0 10h-2" />
         </MgSvg>
-        <span>{t("mgUndo") + (lastUndo ? " · " + t("holeLabel")(holesTxt(lastUndo.holes)) : "")}</span>
+        <span className="mg-undo-txt">{t("mgUndo") + (lastUndo ? " · " + t("holeLabel")(holesTxt(lastUndo.holes)) : "")}</span>
       </button>
     </div>
   );
   const winBanner = winnerIdx !== -1 && (
-    <div className="reveal-1" role="status" style={{ color: mg.onAcc, borderRadius: 18, padding: "13px 14px", marginBottom: 12, fontSize: 15, fontWeight: 700, textAlign: "center", fontFamily: MINIGOLF_FONT, background: mg.acc }}>
+    <div className="reveal-1 mg-banner" role="status" style={{ color: mg.onAcc, borderRadius: 18, padding: "13px 14px", marginBottom: 12, fontSize: 15, fontWeight: 700, textAlign: "center", fontFamily: MINIGOLF_FONT, background: mg.acc }}>
       <GameIcon name="party" size={15} color="currentColor" style={{ verticalAlign: "-2px", marginRight: 6 }} />
       {gtWinLine(
         t,
@@ -721,10 +762,11 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
     fontFamily: MG_UI,
   });
   return (
-    <div className={"gtL-shellpage mgGL" + (theme === "vitrum" ? " vitrum-active" : "")} style={{ ...minigolfPageShellStyle(theme), position: "relative", overflowX: "clip", paddingBottom: editing ? 290 : 24 }}>
+    <div className={"gtL-shellpage mgGL mg-land pl-page pl-head-compact" + (theme === "vitrum" ? " vitrum-active" : "")} style={{ ...minigolfPageShellStyle(theme), position: "relative", overflowX: "clip", paddingBottom: editing ? 290 : 24 }}>
       <style>
         {GLOBAL_STYLES}
         {MG_CSS}
+        {MG_LAND_CSS}
       </style>
       {celebration}
       <PodiumOverlay
@@ -739,13 +781,13 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
         bestRecord={{ isNew: golfIsNew }}
         theme={theme}
       />
-      <div className="gtL-page gtL-game" style={{ maxWidth: 520, margin: "0 auto", position: "relative" }}>
+      <div className="gtL-page gtL-game mg-inner" style={{ maxWidth: 520, margin: "0 auto", position: "relative" }}>
         <MinigolfTopBar subtitle={t("minigolfSubtitle")} onBack={onBack} theme={theme} t={t} onHome={onHome} onEndGame={onEndGame} rulesText={t("rulesMinigolf")} />
-        <div className="gtL-split gtL-e-block">
-          <div className="gtL-col-main">
+        <div className={"gtL-split gtL-e-block mg-split mg-tab-" + tab}>
+          <div className="gtL-col-main mg-main">
             {winBanner}
             <MgSegmented tab={tab} onTab={(v) => upd((s) => ({ ...s, tab: v }))} mg={mg} t={t} />
-            <div id="mg-panel" role="tabpanel" aria-labelledby={"mg-tab-" + tab}>
+            <div id="mg-panel" className="mg-panel" role="tabpanel" aria-labelledby={"mg-tab-" + tab}>
               {tab === "hole" ? (
                 <React.Fragment>
                   <MgHoleCard ui={ui} hole={hole} onGo={(h) => upd((s) => mgGoto(s, h))} mg={mg} t={t} />
@@ -778,7 +820,7 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
             </div>
             {bar}
           </div>
-          <div className="gtL-col-side">
+          <div className="gtL-col-side mg-side">
             <div className="gtL-e-only">
               <MgStandingsBox st={st} finished={finished} onOpen={() => upd((s) => ({ ...s, tab: "table" }))} mg={mg} t={t} />
             </div>
@@ -804,7 +846,7 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
               />
             </div>
           </div>
-          <div className="gtL-col-side2">
+          <div className="gtL-col-side2 mg-side2">
             <div style={{ display: "flex", gap: 8, marginTop: 8 }}>
               <button
                 className="mgPress"

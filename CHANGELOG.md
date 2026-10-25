@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.25-6 (25.10.2026 17:06)
+- Neu: eigene Ansicht für Handy im Querformat (alle Spiele)
+
 ## 2026.10.25-5 (25.10.2026 15:16)
 - Minigolf: kompakter, mit 2 Spielern kein Scrollen
 

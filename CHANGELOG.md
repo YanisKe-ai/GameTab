@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.25-4 (25.10.2026 15:09)
+- Minigolf im neuen Greenline-Design: Bahn und Tabelle, einfacher eintragen
+
 ## 2026.10.25-3 (25.10.2026 00:43)
 - Tutto: kleiner Titel weg, nur noch der grosse Schriftzug
 

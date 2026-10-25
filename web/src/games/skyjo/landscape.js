@@ -4,11 +4,11 @@
 // Bausteine: .pld (Seitencontainer), .pld-shell (Seitenhintergrund), .pld-split (Zweispalter, Uebersicht links, Eingabe rechts),
 // .pld-setup (Einrichtung: Spieler links, Ziel und Start rechts), .pld-entry (Rundeneingabe mit festem Fuss), .pld-body / .pld-foot.
 const PLD_CSS = `
-.pld-body, .pld-foot { display: contents; }
+.pld-body, .pld-foot, .pld-padL, .pld-padR { display: contents; }
 [data-phone-landscape] .pld-shell { padding: calc(var(--pl-sat) + 4px) 0 0 !important; min-height: 0 !important; }
 [data-phone-landscape] .pld { display: flex; flex-direction: column; height: calc(var(--pl-avail) - var(--pl-sat) - 4px - var(--pl-sab)); min-height: 0; }
 [data-phone-landscape] .pld .gt-gamehead { position: relative !important; top: auto !important; flex: none; }
-[data-phone-landscape] .pld > div:has(> .pld-split) { flex: 1 1 0; min-height: 0; box-sizing: border-box; padding-bottom: 4px; }
+[data-phone-landscape] .pld > div:has(> .pld-split) { flex: 1 1 0; min-height: 0; box-sizing: border-box; padding-bottom: 4px; display: flex; flex-direction: column; }
 [data-phone-landscape] .pld-split { display: grid; grid-template-columns: minmax(0, var(--pld-l, 5fr)) minmax(0, var(--pld-r, 6fr)); grid-template-rows: minmax(0, 1fr); gap: var(--pl-gap); align-items: stretch; width: 100%; box-sizing: border-box; flex: 1 1 0; min-height: 0; }
 [data-phone-landscape] .pld-split > :is(.gtL-col-main, .gtL-col-side) { display: block; min-width: 0; min-height: 0; box-sizing: border-box; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
 [data-phone-landscape] .pld-split > .gtL-col-side2 { display: block; min-width: 0; box-sizing: border-box; }
@@ -46,6 +46,16 @@ const PLD_CSS = `
 [data-phone-landscape] .pld-p10row > div:first-child > div { grid-column: 1; grid-row: 1; }
 [data-phone-landscape] .pld-p10row > div:first-child > button { grid-column: 2; grid-row: 1; }
 [data-phone-landscape] .pld-p10row > button { grid-column: 3; grid-row: 1; min-height: 44px; align-self: center; }
+[data-phone-landscape] .gtL-padsheet.pld-pad { grid-template-rows: auto auto auto auto; max-width: min(740px, 100%) !important; align-content: start; row-gap: 0; }
+[data-phone-landscape] .gtL-padsheet.pld-pad > :first-child { grid-column: 1 / -1; grid-row: 1; }
+[data-phone-landscape] .gtL-padsheet.pld-pad > .pld-padL > button:first-child { grid-column: 1 / -1; grid-row: 1; justify-self: center; width: min(44%, 300px) !important; margin: 0 !important; padding-top: 8px !important; padding-bottom: 8px !important; z-index: 1; }
+[data-phone-landscape] .gtL-padsheet.pld-pad > .pld-padL > div:nth-of-type(1) { grid-column: 1; grid-row: 2; margin-bottom: 4px !important; }
+[data-phone-landscape] .gtL-padsheet.pld-pad > .pld-padL > div:nth-of-type(2) { grid-column: 1; grid-row: 3; margin-bottom: 8px !important; }
+[data-phone-landscape] .gtL-padsheet.pld-pad > .pld-padL > div:nth-of-type(3) { grid-column: 1; grid-row: 4; gap: 5px !important; margin-bottom: 0 !important; }
+[data-phone-landscape] .gtL-padsheet.pld-pad > .pld-padL > div:nth-of-type(3) > button { padding: 8px 0 !important; }
+[data-phone-landscape] .gtL-padsheet.pld-pad > .pld-padR { display: flex; flex-direction: column; grid-column: 2; grid-row: 2 / span 3; min-width: 0; }
+[data-phone-landscape] .pld-pad .pld-padR > * { margin-bottom: 8px !important; }
+[data-phone-landscape] .pld-pad .pld-padR > button[data-gt-sound="1"] { margin-top: auto; margin-bottom: 0 !important; position: sticky; bottom: 0; }
 @media (prefers-reduced-motion: reduce) { [data-phone-landscape] .pld * { scroll-behavior: auto !important; } }
 `;
 export { PLD_CSS };

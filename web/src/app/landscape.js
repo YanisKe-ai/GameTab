@@ -25,6 +25,7 @@ export const APP_LANDSCAPE_CSS = `
 [data-phone-landscape] .gtL-startcol > .gtL-startmain-tiles { grid-column: 1; grid-row: 1; transform: none !important; }
 [data-phone-landscape] .gtL-startcol > [data-onboard="showcase"] { grid-column: 1 / -1; grid-row: 2; margin-top: 10px !important; }
 [data-phone-landscape] .gtL-startcol > .gt-resume, [data-phone-landscape] .gtL-startcol > .gtL-tipcard { grid-column: 2; grid-row: 1; margin-top: 0 !important; }
+[data-phone-landscape] .gtL-startcol .gtL-tipcard { padding-right: 6px; }
 [data-phone-landscape] .gtL-startcol .gtL-tiles { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; margin-top: 0 !important; }
 [data-phone-landscape] .gtL-startcol .gtL-tile { margin-bottom: 0 !important; min-height: 56px; padding-top: 6px !important; padding-bottom: 6px !important; }
 [data-phone-landscape] .gtL-startcol .gtL-tile-title { font-size: 20px !important; }
@@ -70,7 +71,19 @@ export const APP_LANDSCAPE_CSS = `
 [data-phone-landscape] .pl-app .gtSt2-hl { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)); overflow: visible !important; margin: 0 !important; padding: 0 !important; scroll-snap-type: none; }
 [data-phone-landscape] .pl-app .gtSt2-hl > * { min-width: 0; flex: none; }
 [data-phone-landscape] .pl-app .gtSt2-seg button { min-height: 44px; }
-[data-phone-landscape] .pl-app .gtSt2-sel { min-height: 44px; }
+[data-phone-landscape] .pl-app .gtSt2-sel { min-height: 44px !important; height: auto; }
+[data-phone-landscape] .pl-app .gtSt2-sel > * { min-height: 44px; box-sizing: border-box; }
+[data-phone-landscape] [data-onboard="search"] input { min-height: 44px; box-sizing: border-box; }
 [data-phone-landscape] .pl-app .gtL-split.pl-st-split { display: grid !important; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 0 22px; align-items: start; }
 [data-phone-landscape] .pl-app .pl-st-split > .gtL-col-main, [data-phone-landscape] .pl-app .pl-st-split > .gtL-col-side { display: flex !important; flex-direction: column; min-width: 0; }
 `;
+
+// Einmal ins <head> setzen (idempotent), damit kein <style> im App-Baum die Geschwister-Reihenfolge veraendert.
+try {
+  if (typeof document !== "undefined" && !document.getElementById("gt-pl-app-css")) {
+    const el = document.createElement("style");
+    el.id = "gt-pl-app-css";
+    el.textContent = APP_LANDSCAPE_CSS;
+    document.head.appendChild(el);
+  }
+} catch (_) {}

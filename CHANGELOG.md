@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.25-7 (25.10.2026 18:14)
+- Querformat verfeinert: Setups, Statistik, Partyspiele, lange Namen
+
 ## 2026.10.25-6 (25.10.2026 17:06)
 - Neu: eigene Ansicht für Handy im Querformat (alle Spiele)
 

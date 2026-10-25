@@ -19040,6 +19040,73 @@ function MinigolfLogo({ color }) {
 		opacity: "0.85"
 	}));
 }
+// web/src/shared/pl-names.js
+var POP_ID = "gt-pl-fullname";
+var CSS_ID = "gt-pl-names-css";
+var PL_NAMES_CSS = `
+[data-phone-landscape] :is(button, [role="button"]) [style*="text-overflow: ellipsis"],
+[data-phone-landscape] :is(button, [role="button"])[style*="text-overflow: ellipsis"] { white-space: normal !important; overflow: visible !important; text-overflow: clip !important; overflow-wrap: anywhere; min-width: 0; }
+#${POP_ID} { position: fixed; z-index: 100000; max-width: min(78vw, 420px); box-sizing: border-box; padding: 8px 12px; border-radius: 12px; background: rgba(18,18,24,0.97); color: #fff; border: 1px solid rgba(255,255,255,0.28); box-shadow: 0 6px 24px rgba(0,0,0,0.45); font: 600 15px/1.3 'Inter', system-ui, sans-serif; overflow-wrap: anywhere; pointer-events: none; }
+`;
+var timer = null;
+function plHideFullName() {
+	if (timer) {
+		clearTimeout(timer);
+		timer = null;
+	}
+	const el = document.getElementById(POP_ID);
+	if (el) el.remove();
+}
+function plTruncatedAt(target) {
+	let el = target && target.nodeType === 1 ? target : target && target.parentElement;
+	for (let i = 0; i < 4 && el && el !== document.body; i++, el = el.parentElement) {
+		if (el.closest(".gt-gamehead") || el.closest("button, [role=button], a, input, select, textarea")) return null;
+		if (getComputedStyle(el).textOverflow === "ellipsis" && el.scrollWidth > el.clientWidth + 1) return el;
+	}
+	return null;
+}
+function plShowFullName(el) {
+	const text = (el.textContent || "").replace(/\s+/g, " ").trim();
+	if (!text) return;
+	plHideFullName();
+	const pop = document.createElement("div");
+	pop.id = POP_ID;
+	pop.setAttribute("role", "status");
+	pop.textContent = text;
+	document.body.appendChild(pop);
+	const r = el.getBoundingClientRect();
+	const pr = pop.getBoundingClientRect();
+	const vw = window.innerWidth, vh = window.innerHeight;
+	let left = Math.min(Math.max(8, r.left), vw - pr.width - 8);
+	let top = r.bottom + 6;
+	if (top + pr.height > vh - 8) top = Math.max(8, r.top - pr.height - 6);
+	pop.style.left = left + "px";
+	pop.style.top = top + "px";
+	timer = setTimeout(plHideFullName, 5e3);
+}
+function plNamesInstall() {
+	if (typeof document === "undefined" || window.__gtPlNames) return;
+	window.__gtPlNames = true;
+	if (!document.getElementById(CSS_ID)) {
+		const st = document.createElement("style");
+		st.id = CSS_ID;
+		st.textContent = PL_NAMES_CSS;
+		document.head.appendChild(st);
+	}
+	document.addEventListener("click", (e) => {
+		if (!document.documentElement.hasAttribute("data-phone-landscape")) {
+			plHideFullName();
+			return;
+		}
+		const had = !!document.getElementById(POP_ID);
+		const el = plTruncatedAt(e.target);
+		if (el) plShowFullName(el);
+		else if (had) plHideFullName();
+	}, true);
+	window.addEventListener("resize", plHideFullName);
+	window.addEventListener("scroll", plHideFullName, true);
+}
+plNamesInstall();
 // web/src/shared/pl-shared.js
 var PL_SHARED_ID = "gt-pl-shared-css";
 var PL_SHARED_CSS = `
@@ -19075,6 +19142,8 @@ var PL_SHARED_CSS = `
 [data-phone-landscape] .gt-su-ib, [data-phone-landscape] .gt-su-add { min-height: 44px; }
 [data-phone-landscape] .gt-gm-sb { min-height: 44px !important; min-width: 44px; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; }
 [data-phone-landscape] .gt-gm-in { min-height: 44px; box-sizing: border-box; }
+[data-phone-landscape] .gt-gm-head { flex-wrap: wrap; row-gap: 4px; }
+[data-phone-landscape] .gt-gm-head > .gt-gm-in:first-child { flex: 1 1 100% !important; width: 100%; text-overflow: clip; }
 
 /* ---- Podest (PodiumOverlay): links Sieger, rechts Rangliste und Aktionen ---- */
 [data-phone-landscape] .gtsb-modal { max-width: min(760px, 100%) !important; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); grid-template-rows: auto 1fr; column-gap: 18px; align-items: start; padding: 14px 16px 14px !important; border-radius: 24px !important; max-height: calc(var(--pl-avail) - 16px - var(--pl-sat) - var(--pl-sab)); }
@@ -19102,6 +19171,20 @@ var PL_SHARED_CSS = `
 [data-phone-landscape] .gtstx-status { grid-column: 1; grid-row: 3; }
 [data-phone-landscape] .gtstx-pages { grid-column: 2; grid-row: 2 / 6; min-height: 0; }
 [data-phone-landscape] .gtstx-foot { grid-column: 1; grid-row: 5; }
+/* Huellen der Einrichtung ohne Laptop-Layout: ausserhalb Querformat unsichtbar */
+.plsu-split, .plsu-main, .plsu-side { display: contents; }
+/* ---- Einrichtung aller Spiele (gtL-split-setup): Teilnehmer links, Einstellungen und Start rechts, Spalten scrollen einzeln ---- */
+[data-phone-landscape] :is(.gtL-split-setup, .plsu-split):not(.pld-split) { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--pl-gap) calc(var(--pl-gap) + 4px); align-items: stretch; width: 100%; box-sizing: border-box; max-height: max(160px, var(--pl-body)); }
+[data-phone-landscape] :is(.gtL-split-setup, .plsu-split):not(.pld-split) > :is(.gtL-col-main, .gtL-col-side, .plsu-main, .plsu-side) { display: flex; flex-direction: column; gap: 10px; min-width: 0; min-height: 0; max-height: max(160px, var(--pl-body)); box-sizing: border-box; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding-bottom: 2px; }
+[data-phone-landscape] :is(.gtL-split-setup, .plsu-split):not(.pld-split) > :is(.gtL-col-side, .plsu-side) > .gt-su-cta { position: sticky; bottom: 0; z-index: 6; margin: 4px 0 0; padding: 8px 0 2px; background: transparent; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+[data-phone-landscape] :is(.gtL-split-setup, .plsu-split):not(.pld-split) > :is(.gtL-col-side, .plsu-side) > .gt-su-cta::before { display: none; }
+[data-phone-landscape] :is(.gtL-split-setup, .plsu-split):not(.pld-split) > :is(.gtL-col-side, .plsu-side) > .gt-su-cta > button { box-shadow: none; }
+@media (max-width: 640px) { [data-phone-landscape] :is(.gtL-split-setup, .plsu-split):not(.pld-split) { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); } [data-phone-landscape] :is(.gtL-split-setup, .plsu-split):not(.pld-split) > :is(.gtL-col-main, .plsu-main) button { font-size: 13px; } }
+[data-phone-landscape] :is(.gtL-split-setup, .plsu-split):not(.pld-split) :is(button, input, select) { min-height: 44px; box-sizing: border-box; }
+[data-phone-landscape] :is(.gtL-split-setup, .plsu-split):not(.pld-split) input { scroll-margin: 8px; }
+[data-phone-landscape] .gtL-page:has(:is(.gtL-split-setup, .plsu-split)) { max-width: none !important; width: 100% !important; margin: 0 !important; box-sizing: border-box; padding-left: var(--pl-gutter-l) !important; padding-right: var(--pl-gutter-r) !important; }
+[data-phone-landscape] .gtL-shellpage:has(:is(.gtL-split-setup, .plsu-split)) { padding-top: max(var(--pl-sat), 6px) !important; }
+
 `;
 function plInstallSharedCss() {
 	if (typeof document === "undefined") return;
@@ -21656,11 +21739,14 @@ function GroupManager({ t, tk }) {
 		return /* @__PURE__ */ import_react.default.createElement("div", {
 			key: g.id,
 			style: row
-		}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-			display: "flex",
-			alignItems: "center",
-			gap: 8
-		} }, /* @__PURE__ */ import_react.default.createElement("input", {
+		}, /* @__PURE__ */ import_react.default.createElement("div", {
+			className: "gt-gm-head",
+			style: {
+				display: "flex",
+				alignItems: "center",
+				gap: 8
+			}
+		}, /* @__PURE__ */ import_react.default.createElement("input", {
 			className: "gt-gm-in",
 			value: g.name,
 			onChange: (e) => updateGroup(g.id, { name: e.target.value }),
@@ -22419,11 +22505,14 @@ function RommeEntry({ players, init, isEdit, onSave, onCancel, tk, theme, t, tar
 			flexDirection: "column",
 			gap: 10
 		}
-	}, /* @__PURE__ */ import_react.default.createElement("div", { className: "pld-body" }, s8Lbl(tk, t("romOutQ"), { marginBottom: 0 }), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexWrap: "wrap",
-		gap: 6
-	} }, players.map((p) => {
+	}, /* @__PURE__ */ import_react.default.createElement("div", { className: "pld-body rom-body" }, s8Lbl(tk, t("romOutQ"), { marginBottom: 0 }), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "rom-chips",
+		style: {
+			display: "flex",
+			flexWrap: "wrap",
+			gap: 6
+		}
+	}, players.map((p) => {
 		const on = String(out) === String(p.id);
 		return /* @__PURE__ */ import_react.default.createElement("button", {
 			key: p.id,
@@ -22442,6 +22531,7 @@ function RommeEntry({ players, init, isEdit, onSave, onCancel, tk, theme, t, tar
 			}
 		}, p.name);
 	})), /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "rom-hand",
 		onClick: () => setHand((v) => !v),
 		"aria-pressed": hand,
 		style: {
@@ -22465,11 +22555,14 @@ function RommeEntry({ players, init, isEdit, onSave, onCancel, tk, theme, t, tar
 		color: tk.muted,
 		fontFamily: S8I,
 		marginTop: 1
-	} }, t("romHandDesc"))), s8Switch(tk, hand)), !isEdit && s8Hint(tk, "cards", t("romCardHint")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 8
-	} }, players.map((p) => {
+	} }, t("romHandDesc"))), s8Switch(tk, hand)), !isEdit && /* @__PURE__ */ import_react.default.createElement("div", { className: "rom-hint" }, s8Hint(tk, "cards", t("romCardHint"))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "rom-rows",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 8
+		}
+	}, players.map((p) => {
 		const isOut = String(p.id) === String(out);
 		const v = sc[p.id];
 		const has = v !== "";
@@ -23039,6 +23132,164 @@ function pageShellStyle(theme) {
 		background: `radial-gradient(ellipse at 50% -10%, ${PAGE_BG_2} 0%, ${PAGE_BG} 55%, ${NEARBLACK} 100%)`,
 		padding: "20px 12px 32px"
 	};
+}
+// web/src/shared/phone-landscape.js
+var PL_ATTR = "data-phone-landscape";
+var PL_FORCE_KEY = "gametab-pl-force";
+var PL_STATE_KEY = "spieleblock-app-state-v1";
+function decidePhoneLandscape(e) {
+	if (!e || e.viewMode === "laptop") return false;
+	if (e.force === true) return true;
+	if (e.force === false) return false;
+	if (!e.touch) return false;
+	const iw = e.innerW || 0, ih = e.innerH || 0;
+	const sw = e.screenW || 0, sh = e.screenH || 0;
+	const short = sw && sh ? Math.min(sw, sh) : Math.min(iw, ih);
+	if (!short || short > 500) return false;
+	let land;
+	if (typeof e.orientationType === "string" && e.orientationType) land = e.orientationType.indexOf("landscape") === 0;
+	else if (typeof e.windowOrientation === "number") land = Math.abs(e.windowOrientation) === 90;
+	else if (sw && sh && sw !== sh) land = sw > sh;
+	else land = !!e.mqLandscape;
+	if (!land) return false;
+	return iw > ih;
+}
+function plReadForce() {
+	try {
+		const m = /[?&]pl=([01])\b/.exec(window.location.search || "");
+		if (m) return m[1] === "1";
+	} catch (_) {}
+	try {
+		const v = window.localStorage.getItem(PL_FORCE_KEY);
+		if (v === "1") return true;
+		if (v === "0") return false;
+	} catch (_) {}
+	return null;
+}
+function plReadSavedViewMode() {
+	try {
+		return (JSON.parse(window.localStorage.getItem(PL_STATE_KEY) || "{}") || {}).viewMode === "laptop" ? "laptop" : "mobile";
+	} catch (_) {
+		return "mobile";
+	}
+}
+function plMQ(q) {
+	try {
+		return !!(window.matchMedia && window.matchMedia(q).matches);
+	} catch (_) {
+		return false;
+	}
+}
+function plEnv(viewMode, force) {
+	const w = window, s = w.screen || {};
+	let ot = null;
+	try {
+		ot = s.orientation && s.orientation.type ? String(s.orientation.type) : null;
+	} catch (_) {}
+	return {
+		viewMode,
+		force,
+		touch: w.navigator && w.navigator.maxTouchPoints > 0 || plMQ("(any-pointer: coarse)"),
+		screenW: s.width || 0,
+		screenH: s.height || 0,
+		orientationType: ot,
+		windowOrientation: typeof w.orientation === "number" ? w.orientation : null,
+		mqLandscape: plMQ("(orientation: landscape)"),
+		innerW: w.innerWidth || 0,
+		innerH: w.innerHeight || 0
+	};
+}
+var plViewMode = null;
+var plForce;
+var plActive = null;
+var plBound = false;
+var plTimer = 0;
+var plRefs = 0;
+var plSubs = /* @__PURE__ */ new Set();
+function plApply(v) {
+	const root = document.documentElement;
+	if (v) root.setAttribute(PL_ATTR, "");
+	else root.removeAttribute(PL_ATTR);
+	plActive = v;
+	plSubs.forEach((f) => {
+		try {
+			f();
+		} catch (_) {}
+	});
+}
+function plSetVvh() {
+	const root = document.documentElement, vv = window.visualViewport;
+	if (plActive && vv) root.style.setProperty("--pl-vvh", Math.round(vv.height) + "px");
+	else root.style.removeProperty("--pl-vvh");
+}
+function updatePhoneLandscape() {
+	if (typeof window === "undefined") return false;
+	if (plViewMode == null) plViewMode = plReadSavedViewMode();
+	if (plForce === void 0) plForce = plReadForce();
+	const v = decidePhoneLandscape(plEnv(plViewMode, plForce));
+	if (v !== plActive) plApply(v);
+	plSetVvh();
+	return v;
+}
+function plOnChange() {
+	updatePhoneLandscape();
+	clearTimeout(plTimer);
+	plTimer = setTimeout(updatePhoneLandscape, 350);
+}
+function plBind() {
+	if (plBound || typeof window === "undefined") return;
+	plBound = true;
+	window.addEventListener("resize", plOnChange);
+	window.addEventListener("orientationchange", plOnChange);
+	try {
+		if (screen.orientation && screen.orientation.addEventListener) screen.orientation.addEventListener("change", plOnChange);
+	} catch (_) {}
+	if (window.visualViewport) window.visualViewport.addEventListener("resize", plSetVvh);
+}
+function plUnbind() {
+	if (!plBound) return;
+	plBound = false;
+	clearTimeout(plTimer);
+	window.removeEventListener("resize", plOnChange);
+	window.removeEventListener("orientationchange", plOnChange);
+	try {
+		if (screen.orientation && screen.orientation.removeEventListener) screen.orientation.removeEventListener("change", plOnChange);
+	} catch (_) {}
+	if (window.visualViewport) window.visualViewport.removeEventListener("resize", plSetVvh);
+}
+function setPhoneLandscapeViewMode(mode) {
+	plViewMode = mode === "laptop" ? "laptop" : "mobile";
+	return updatePhoneLandscape();
+}
+function plRetain() {
+	plRefs++;
+	plBind();
+	return () => {
+		plRefs = Math.max(0, plRefs - 1);
+		if (!plRefs) plUnbind();
+	};
+}
+function plSubscribe(cb) {
+	plSubs.add(cb);
+	const rel = plRetain();
+	if (plActive == null) updatePhoneLandscape();
+	return () => {
+		plSubs.delete(cb);
+		rel();
+	};
+}
+function plSnapshot() {
+	if (plActive == null) updatePhoneLandscape();
+	return !!plActive;
+}
+function usePhoneLandscape() {
+	return import_react.default.useSyncExternalStore(plSubscribe, plSnapshot, () => false);
+}
+function usePhoneLandscapeRoot(viewMode, loaded) {
+	import_react.default.useLayoutEffect(() => plRetain(), []);
+	import_react.default.useLayoutEffect(() => {
+		if (loaded) setPhoneLandscapeViewMode(viewMode);
+	}, [viewMode, loaded]);
 }
 // web/src/app/install.js
 var install_exports = /* @__PURE__ */ __exportAll({
@@ -39845,6 +40096,7 @@ function OnboardingSpotlightTour(p) {
 	return /* @__PURE__ */ import_react.default.createElement(GtOnboarding3, p);
 }
 function StartPage({ onSelect, lang, theme, viewMode, lastPlayed, dismissedResume, onDismissResume, ...flags }) {
+	const pl = usePhoneLandscape();
 	const t = useT(lang);
 	const tk = startPageTokens(theme);
 	const _resume = (() => {
@@ -40590,6 +40842,42 @@ function StartPage({ onSelect, lang, theme, viewMode, lastPlayed, dismissedResum
 			document.removeEventListener("touchmove", onTM);
 		};
 	}, [isLaptop]);
+	const gtShowcaseEl = /* @__PURE__ */ import_react.default.createElement(BlurFade, {
+		key: "showcase",
+		...gtBf(theme, .1),
+		"data-onboard": "showcase"
+	}, /* @__PURE__ */ import_react.default.createElement(GameShowcaseStrip, {
+		lang,
+		theme,
+		tokens: tk,
+		onSelect,
+		fixedOrder: isLaptop
+	}));
+	const gtExtrasEl = /* @__PURE__ */ import_react.default.createElement(GtStartExtras, {
+		key: "extras",
+		tokens: tk,
+		theme,
+		t,
+		isLaptop,
+		onSelect,
+		hideNight: !isLaptop && _resume.length > 0
+	});
+	const gtResumeEl = !isLaptop && _resume.length > 0 ? /* @__PURE__ */ import_react.default.createElement("div", {
+		key: "resume",
+		className: "gt-resume reveal-4",
+		style: { marginTop: 8 }
+	}, /* @__PURE__ */ import_react.default.createElement(QuickResumeSection, {
+		quickResume: _resume,
+		onSelect,
+		onDismissResume,
+		tokens: tk,
+		t
+	})) : /* @__PURE__ */ import_react.default.createElement(DailyTipCard, {
+		key: "resume",
+		lang,
+		tokens: tk,
+		theme
+	});
 	return /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-shellpage gtL-start" + (theme === "vitrum" ? " vitrum-active" : ""),
 		style: {
@@ -41065,36 +41353,15 @@ function StartPage({ onSelect, lang, theme, viewMode, lastPlayed, dismissedResum
 		theme,
 		tokens: tk,
 		onSelect
-	}))), /* @__PURE__ */ import_react.default.createElement(BlurFade, {
-		...gtBf(theme, .1),
-		"data-onboard": "showcase"
-	}, /* @__PURE__ */ import_react.default.createElement(GameShowcaseStrip, {
-		lang,
-		theme,
-		tokens: tk,
-		onSelect,
-		fixedOrder: isLaptop
-	})), /* @__PURE__ */ import_react.default.createElement(GtStartExtras, {
-		tokens: tk,
-		theme,
-		t,
-		isLaptop,
-		onSelect,
-		hideNight: !isLaptop && _resume.length > 0
-	}), !isLaptop && _resume.length > 0 ? /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gt-resume reveal-4",
-		style: { marginTop: 8 }
-	}, /* @__PURE__ */ import_react.default.createElement(QuickResumeSection, {
-		quickResume: _resume,
-		onSelect,
-		onDismissResume,
-		tokens: tk,
-		t
-	})) : /* @__PURE__ */ import_react.default.createElement(DailyTipCard, {
-		lang,
-		tokens: tk,
-		theme
-	}))), theme !== "light" && /* @__PURE__ */ import_react.default.createElement("div", {
+	}))), pl ? [
+		gtResumeEl,
+		gtShowcaseEl,
+		gtExtrasEl
+	] : [
+		gtShowcaseEl,
+		gtExtrasEl,
+		gtResumeEl
+	])), theme !== "light" && /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "pl-hide",
 		style: {}
 	}, /* @__PURE__ */ import_react.default.createElement(DecoGapStrip, {
@@ -43670,6 +43937,13 @@ var PLD_CSS = `
 [data-phone-landscape] .pld-entry .gtL-entryrow { padding: 6px 14px !important; }
 [data-phone-landscape] .pld-entry .gtL-entryval { font-size: 28px !important; }
 [data-phone-landscape] .pld-entry .pld-foot button { min-height: 48px; }
+/* Romme: Hinweis ausgeblendet (steht in den Regeln), Spielerzeilen zweispaltig, damit 2 Spieler ohne Scrollen passen */
+[data-phone-landscape] .rom-body .rom-hint { display: none; }
+[data-phone-landscape] .rom-body .rom-hand { padding: 6px 12px !important; }
+[data-phone-landscape] .rom-body .rom-hand > span > div:nth-child(2) { font-size: 11px !important; line-height: 1.2; }
+[data-phone-landscape] .rom-body .rom-chips button { padding: 6px 12px !important; }
+[data-phone-landscape] .rom-body .rom-rows { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px !important; }
+[data-phone-landscape] .rom-body .rom-rows > button, [data-phone-landscape] .rom-body .rom-rows > div { min-width: 0; }
 [data-phone-landscape] .pld-entry .pld-foot > div:not(:first-child) { margin-top: 0 !important; }
 [data-phone-landscape] .pld-hide { display: none; }
 [data-phone-landscape] .pld-p10row { display: grid !important; grid-template-columns: minmax(0, 1fr) auto auto; column-gap: 10px; align-items: center; padding: 8px 12px !important; }
@@ -43689,164 +43963,6 @@ var PLD_CSS = `
 [data-phone-landscape] .pld-pad .pld-padR > button[data-gt-sound="1"] { margin-top: auto; margin-bottom: 0 !important; position: sticky; bottom: 0; }
 @media (prefers-reduced-motion: reduce) { [data-phone-landscape] .pld * { scroll-behavior: auto !important; } }
 `;
-// web/src/shared/phone-landscape.js
-var PL_ATTR = "data-phone-landscape";
-var PL_FORCE_KEY = "gametab-pl-force";
-var PL_STATE_KEY = "spieleblock-app-state-v1";
-function decidePhoneLandscape(e) {
-	if (!e || e.viewMode === "laptop") return false;
-	if (e.force === true) return true;
-	if (e.force === false) return false;
-	if (!e.touch) return false;
-	const iw = e.innerW || 0, ih = e.innerH || 0;
-	const sw = e.screenW || 0, sh = e.screenH || 0;
-	const short = sw && sh ? Math.min(sw, sh) : Math.min(iw, ih);
-	if (!short || short > 500) return false;
-	let land;
-	if (typeof e.orientationType === "string" && e.orientationType) land = e.orientationType.indexOf("landscape") === 0;
-	else if (typeof e.windowOrientation === "number") land = Math.abs(e.windowOrientation) === 90;
-	else if (sw && sh && sw !== sh) land = sw > sh;
-	else land = !!e.mqLandscape;
-	if (!land) return false;
-	return iw > ih;
-}
-function plReadForce() {
-	try {
-		const m = /[?&]pl=([01])\b/.exec(window.location.search || "");
-		if (m) return m[1] === "1";
-	} catch (_) {}
-	try {
-		const v = window.localStorage.getItem(PL_FORCE_KEY);
-		if (v === "1") return true;
-		if (v === "0") return false;
-	} catch (_) {}
-	return null;
-}
-function plReadSavedViewMode() {
-	try {
-		return (JSON.parse(window.localStorage.getItem(PL_STATE_KEY) || "{}") || {}).viewMode === "laptop" ? "laptop" : "mobile";
-	} catch (_) {
-		return "mobile";
-	}
-}
-function plMQ(q) {
-	try {
-		return !!(window.matchMedia && window.matchMedia(q).matches);
-	} catch (_) {
-		return false;
-	}
-}
-function plEnv(viewMode, force) {
-	const w = window, s = w.screen || {};
-	let ot = null;
-	try {
-		ot = s.orientation && s.orientation.type ? String(s.orientation.type) : null;
-	} catch (_) {}
-	return {
-		viewMode,
-		force,
-		touch: w.navigator && w.navigator.maxTouchPoints > 0 || plMQ("(any-pointer: coarse)"),
-		screenW: s.width || 0,
-		screenH: s.height || 0,
-		orientationType: ot,
-		windowOrientation: typeof w.orientation === "number" ? w.orientation : null,
-		mqLandscape: plMQ("(orientation: landscape)"),
-		innerW: w.innerWidth || 0,
-		innerH: w.innerHeight || 0
-	};
-}
-var plViewMode = null;
-var plForce;
-var plActive = null;
-var plBound = false;
-var plTimer = 0;
-var plRefs = 0;
-var plSubs = /* @__PURE__ */ new Set();
-function plApply(v) {
-	const root = document.documentElement;
-	if (v) root.setAttribute(PL_ATTR, "");
-	else root.removeAttribute(PL_ATTR);
-	plActive = v;
-	plSubs.forEach((f) => {
-		try {
-			f();
-		} catch (_) {}
-	});
-}
-function plSetVvh() {
-	const root = document.documentElement, vv = window.visualViewport;
-	if (plActive && vv) root.style.setProperty("--pl-vvh", Math.round(vv.height) + "px");
-	else root.style.removeProperty("--pl-vvh");
-}
-function updatePhoneLandscape() {
-	if (typeof window === "undefined") return false;
-	if (plViewMode == null) plViewMode = plReadSavedViewMode();
-	if (plForce === void 0) plForce = plReadForce();
-	const v = decidePhoneLandscape(plEnv(plViewMode, plForce));
-	if (v !== plActive) plApply(v);
-	plSetVvh();
-	return v;
-}
-function plOnChange() {
-	updatePhoneLandscape();
-	clearTimeout(plTimer);
-	plTimer = setTimeout(updatePhoneLandscape, 350);
-}
-function plBind() {
-	if (plBound || typeof window === "undefined") return;
-	plBound = true;
-	window.addEventListener("resize", plOnChange);
-	window.addEventListener("orientationchange", plOnChange);
-	try {
-		if (screen.orientation && screen.orientation.addEventListener) screen.orientation.addEventListener("change", plOnChange);
-	} catch (_) {}
-	if (window.visualViewport) window.visualViewport.addEventListener("resize", plSetVvh);
-}
-function plUnbind() {
-	if (!plBound) return;
-	plBound = false;
-	clearTimeout(plTimer);
-	window.removeEventListener("resize", plOnChange);
-	window.removeEventListener("orientationchange", plOnChange);
-	try {
-		if (screen.orientation && screen.orientation.removeEventListener) screen.orientation.removeEventListener("change", plOnChange);
-	} catch (_) {}
-	if (window.visualViewport) window.visualViewport.removeEventListener("resize", plSetVvh);
-}
-function setPhoneLandscapeViewMode(mode) {
-	plViewMode = mode === "laptop" ? "laptop" : "mobile";
-	return updatePhoneLandscape();
-}
-function plRetain() {
-	plRefs++;
-	plBind();
-	return () => {
-		plRefs = Math.max(0, plRefs - 1);
-		if (!plRefs) plUnbind();
-	};
-}
-function plSubscribe(cb) {
-	plSubs.add(cb);
-	const rel = plRetain();
-	if (plActive == null) updatePhoneLandscape();
-	return () => {
-		plSubs.delete(cb);
-		rel();
-	};
-}
-function plSnapshot() {
-	if (plActive == null) updatePhoneLandscape();
-	return !!plActive;
-}
-function usePhoneLandscape() {
-	return import_react.default.useSyncExternalStore(plSubscribe, plSnapshot, () => false);
-}
-function usePhoneLandscapeRoot(viewMode, loaded) {
-	import_react.default.useLayoutEffect(() => plRetain(), []);
-	import_react.default.useLayoutEffect(() => {
-		if (loaded) setPhoneLandscapeViewMode(viewMode);
-	}, [viewMode, loaded]);
-}
 // web/src/games/tutto/game.js
 var game_exports$15 = /* @__PURE__ */ __exportAll({
 	TUTTO_CARD: () => TUTTO_CARD,
@@ -46340,7 +46456,7 @@ function JassSetup({ players, setPlayers, onStart, t, theme }) {
 		display: "flex",
 		flexDirection: "column",
 		gap: 8
-	} }, /* @__PURE__ */ import_react.default.createElement(GroupPicker, {
+	} }, /* @__PURE__ */ import_react.default.createElement("div", { className: "plsu-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "plsu-main" }, /* @__PURE__ */ import_react.default.createElement(GroupPicker, {
 		getNames: () => players.map((p) => p.name),
 		setNames: (names) => setPlayers(names.map((name, i) => ({
 			id: i + 1,
@@ -46365,7 +46481,7 @@ function JassSetup({ players, setPlayers, onStart, t, theme }) {
 		minPlayers: 2,
 		maxPlayers: 4,
 		hues: _JHUES
-	}), /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	})), /* @__PURE__ */ import_react.default.createElement("div", { className: "plsu-side" }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		fontSize: 11,
 		color: _JMUTED,
 		fontFamily: "'Inter', sans-serif",
@@ -46376,7 +46492,7 @@ function JassSetup({ players, setPlayers, onStart, t, theme }) {
 		disabled: tooFew,
 		label: tooFew ? t("needTwoPlayers") : t("startGame"),
 		skin: gtS
-	}));
+	}))));
 }
 function JassEditorPanel({ editing, players, scores, category, onSave, onClose, t, theme }) {
 	const _JCARD = theme === "noir" ? "#1E1E1E" : JASS_CARD;
@@ -48326,7 +48442,7 @@ function MinigolfSetup({ players, setPlayers, onStart, theme, t }) {
 		display: "flex",
 		flexDirection: "column",
 		gap: 10
-	} }, /* @__PURE__ */ import_react.default.createElement(GroupPicker, {
+	} }, /* @__PURE__ */ import_react.default.createElement("div", { className: "plsu-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "plsu-main" }, /* @__PURE__ */ import_react.default.createElement(GroupPicker, {
 		getNames: () => players.map((p) => p.name),
 		setNames: (names) => setPlayers(names.map((name, i) => ({
 			id: i + 1,
@@ -48345,12 +48461,12 @@ function MinigolfSetup({ players, setPlayers, onStart, theme, t }) {
 		minPlayers: 1,
 		maxPlayers: 8,
 		hues: mg.hues
-	}), /* @__PURE__ */ import_react.default.createElement(GtStartBar, {
+	})), /* @__PURE__ */ import_react.default.createElement("div", { className: "plsu-side" }, /* @__PURE__ */ import_react.default.createElement(GtStartBar, {
 		onClick: onStart,
 		disabled: false,
 		label: t("startGame"),
 		skin: gtS
-	}));
+	}))));
 }
 function MinigolfEditorPanel({ editing, players, value: cur, onSave, onClose, t, mg }) {
 	const [value, setValue] = useState$11("");
@@ -59658,18 +59774,18 @@ function TrtDay({ day, secs, tk, t, onVote }) {
 		background: tk.card,
 		border: `1px solid ${tk.border}`,
 		borderRadius: 24,
-		padding: "20px",
+		padding: pl ? "8px 12px" : "20px",
 		textAlign: "center"
 	} }, /* @__PURE__ */ import_react.default.createElement(GtTimerRing, {
 		left,
 		total,
 		running: run,
-		size: pl ? 110 : 168,
+		size: pl ? 92 : 168,
 		stroke: 3,
 		color: tk.teal,
 		warn: tk.red
 	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 40,
+		fontSize: pl ? 26 : 40,
 		fontWeight: 800,
 		color: tk.teal,
 		fontFamily: S8F,
@@ -59678,7 +59794,7 @@ function TrtDay({ day, secs, tk, t, onVote }) {
 		display: "flex",
 		gap: 8,
 		justifyContent: "center",
-		marginTop: 12
+		marginTop: pl ? 6 : 12
 	} }, /* @__PURE__ */ import_react.default.createElement("button", {
 		onClick: () => {
 			if (left <= 0) {
@@ -65321,7 +65437,7 @@ var APP_LANDSCAPE_CSS = `
 /* Einstellungen */
 [data-phone-landscape] .pl-app .gtL-settings button { min-height: 44px; }
 [data-phone-landscape] .pl-app .gtL-set-split .gtL-toggle-row { flex-wrap: wrap; }
-[data-phone-landscape] .pl-app .gtL-set-split .gtL-toggle-row > button { flex: 1 1 128px !important; min-width: 0; }
+[data-phone-landscape] .pl-app .gtL-set-split .gtL-toggle-row > button { flex: 1 1 104px !important; min-width: 0; }
 [data-phone-landscape] .pl-app .gtL-set-split { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0 28px; align-items: start; }
 [data-phone-landscape] .pl-app .gtL-set-split > .gtL-col-main, [data-phone-landscape] .pl-app .gtL-set-split > .gtL-col-side { display: block !important; min-width: 0; }
 
@@ -65335,6 +65451,15 @@ var APP_LANDSCAPE_CSS = `
 [data-phone-landscape] [data-onboard="search"] input { min-height: 44px; box-sizing: border-box; }
 [data-phone-landscape] .pl-app .gtL-split.pl-st-split { display: grid !important; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 0 22px; align-items: start; }
 [data-phone-landscape] .pl-app .pl-st-split > .gtL-col-main, [data-phone-landscape] .pl-app .pl-st-split > .gtL-col-side { display: flex !important; flex-direction: column; min-width: 0; }
+
+/* Statistik: Touchziele, volle Namen ohne Abschneiden (Handy hat kein Hover) */
+[data-phone-landscape] .pl-app .gtSt2-btn { min-height: 44px !important; }
+[data-phone-landscape] .pl-app .gtSt2-nm { white-space: normal !important; overflow: visible !important; text-overflow: clip !important; overflow-wrap: anywhere; }
+[data-phone-landscape] .pl-app .gtSt2-pod div[dir="auto"] { -webkit-line-clamp: 4 !important; }
+[data-phone-landscape] .pl-app .gtSt2-achv { grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)) !important; }
+
+/* Regel-/Datenschutz-Blatt (RulesSheet) */
+[data-phone-landscape] .gt-rules-box { max-height: calc(var(--pl-vh) - var(--pl-sat) - 8px) !important; width: min(620px, calc(100% - var(--pl-sal) - var(--pl-sar))) !important; max-width: none !important; padding-left: 22px !important; padding-right: 22px !important; }
 `;
 try {
 	if (typeof document !== "undefined" && !document.getElementById("gt-pl-app-css")) {
@@ -93747,7 +93872,7 @@ function FiveSecSetup({ state, setState, onStart, theme, t }) {
 		display: "flex",
 		flexDirection: "column",
 		gap: 14
-	} }, /* @__PURE__ */ import_react.default.createElement(GroupPicker, {
+	} }, /* @__PURE__ */ import_react.default.createElement("div", { className: "plsu-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "plsu-main" }, /* @__PURE__ */ import_react.default.createElement(GroupPicker, {
 		getNames: () => players.map((p) => p.name),
 		setNames: (names) => setPlayers(names.map((name, i) => ({
 			id: i + 1,
@@ -93769,12 +93894,12 @@ function FiveSecSetup({ state, setState, onStart, theme, t }) {
 		skin: gtS,
 		t,
 		minPlayers: 2
-	}), /* @__PURE__ */ import_react.default.createElement(GtStartBar, {
+	})), /* @__PURE__ */ import_react.default.createElement("div", { className: "plsu-side" }, /* @__PURE__ */ import_react.default.createElement(GtStartBar, {
 		onClick: onStart,
 		disabled: tooFew,
 		label: tooFew ? t("needTwoPlayersHeadsUp") : t("startGame"),
 		skin: gtS
-	}));
+	}))));
 }
 function FiveSecPlay({ prompt, playerName, secondsLeft, phase, onSuccess, onFail, theme, lang, t }) {
 	const fk = fiveSecTokens(theme);
@@ -101675,6 +101800,7 @@ function GtSt2RankRows({ rows, t, tk, lk, acc, onOpen, start }) {
 		flexDirection: "column"
 	} }, /* @__PURE__ */ import_react.default.createElement("span", {
 		dir: "auto",
+		className: "gtSt2-nm",
 		style: {
 			fontSize: 14,
 			fontWeight: 700,
@@ -102022,6 +102148,7 @@ function GtSt2People({ people, t, tk, lk, theme, acc, onOpen, q, setQ }) {
 		flexDirection: "column"
 	} }, /* @__PURE__ */ import_react.default.createElement("span", {
 		dir: "auto",
+		className: "gtSt2-nm",
 		style: {
 			fontSize: 14.5,
 			fontWeight: 700,
@@ -102149,6 +102276,7 @@ function GtSt2Games({ games, t, tk, lk, theme, onPick, current }) {
 			color: tk.gold
 		}), /* @__PURE__ */ import_react.default.createElement("span", {
 			dir: "auto",
+			className: "gtSt2-nm",
 			style: {
 				fontSize: 13.5,
 				fontWeight: 700,
@@ -102238,6 +102366,7 @@ function GtSt2Nights({ nights, t, tk, lk, theme, lang, names }) {
 			color: tk.gold
 		}), /* @__PURE__ */ import_react.default.createElement("span", {
 			key: "n",
+			className: "gtSt2-nm",
 			style: {
 				minWidth: 0,
 				overflow: "hidden",
@@ -102283,6 +102412,7 @@ function GtSt2Teams({ teams, t, tk, lk, theme }) {
 		minWidth: 0
 	} }, /* @__PURE__ */ import_react.default.createElement("span", {
 		dir: "auto",
+		className: "gtSt2-nm",
 		style: {
 			display: "block",
 			fontSize: 14,
@@ -102332,12 +102462,15 @@ function GtSt2Tours({ tours, t, tk, lk, theme, lang }) {
 		fontWeight: 700,
 		color: tk.ink,
 		fontFamily: "'Inter', sans-serif"
-	} }, /* @__PURE__ */ import_react.default.createElement("span", { style: {
-		minWidth: 0,
-		overflow: "hidden",
-		textOverflow: "ellipsis",
-		whiteSpace: "nowrap"
-	} }, x.name || t("st2Tours")), /* @__PURE__ */ import_react.default.createElement("span", { style: {
+	} }, /* @__PURE__ */ import_react.default.createElement("span", {
+		className: "gtSt2-nm",
+		style: {
+			minWidth: 0,
+			overflow: "hidden",
+			textOverflow: "ellipsis",
+			whiteSpace: "nowrap"
+		}
+	}, x.name || t("st2Tours")), /* @__PURE__ */ import_react.default.createElement("span", { style: {
 		flexShrink: 0,
 		fontSize: 12,
 		fontWeight: 600,
@@ -102808,6 +102941,7 @@ function GtSt2Compare({ matches, pkey, pname, opts, people, t, tk, lk, theme, ac
 		style: { minWidth: 0 }
 	}, /* @__PURE__ */ import_react.default.createElement("div", {
 		dir: "auto",
+		className: "gtSt2-nm",
 		style: {
 			fontSize: 13,
 			fontWeight: 700,
@@ -103284,6 +103418,7 @@ function GtSt2Profile({ pkey, matches, opts, people, t, tk, lk, theme, lang, acc
 		L: lk.L
 	}), /* @__PURE__ */ import_react.default.createElement("span", {
 		dir: "auto",
+		className: "gtSt2-nm",
 		style: {
 			minWidth: 0,
 			overflow: "hidden",
@@ -104126,7 +104261,7 @@ function RulesSheet({ open, onClose, title, text, tokens }) {
 		"aria-modal": "true",
 		"aria-labelledby": idRef.current,
 		onClick: (e) => e.stopPropagation(),
-		className: VX ? "gtL-sheet-glass" : void 0,
+		className: "gt-rules-box" + (VX ? " gtL-sheet-glass" : ""),
 		style: {
 			background: tk.cardElevated || tk.card,
 			borderRadius: "26px 26px 0 0",
@@ -105930,7 +106065,7 @@ function YatzySetup({ players, setPlayers, onStart, t, theme }) {
 		display: "flex",
 		flexDirection: "column",
 		gap: 10
-	} }, /* @__PURE__ */ import_react.default.createElement(GroupPicker, {
+	} }, /* @__PURE__ */ import_react.default.createElement("div", { className: "plsu-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "plsu-main" }, /* @__PURE__ */ import_react.default.createElement(GroupPicker, {
 		getNames: () => players.map((p) => p.name),
 		setNames: (names) => setPlayers(names.map((name, i) => ({
 			id: i + 1,
@@ -105955,12 +106090,12 @@ function YatzySetup({ players, setPlayers, onStart, t, theme }) {
 		minPlayers: 1,
 		maxPlayers: 8,
 		hues: _YHUES
-	}), /* @__PURE__ */ import_react.default.createElement(GtStartBar, {
+	})), /* @__PURE__ */ import_react.default.createElement("div", { className: "plsu-side" }, /* @__PURE__ */ import_react.default.createElement(GtStartBar, {
 		onClick: onStart,
 		disabled: false,
 		label: t("startGame"),
 		skin: gtS
-	}));
+	}))));
 }
 var YATZY_MAXV = {
 	onePair: 12,
@@ -106931,7 +107066,7 @@ function YatzyGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 }
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.10.25-6";
+var APP_BUILD = "2026.10.25-7";
 // web/src/app/storage.js
 var storage_exports = /* @__PURE__ */ __exportAll({
 	GT_CAT_KEYS: () => GT_CAT_KEYS,
@@ -107053,7 +107188,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.10.25-6");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.10.25-7");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -109355,7 +109490,7 @@ function UpdateBanner() {
 		let alive = true;
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.10.25-6") {
+				if (alive && v && v.build && v.build !== "2026.10.25-7") {
 					setReady(true);
 					setHidden(false);
 					try {

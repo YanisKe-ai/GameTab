@@ -62,7 +62,7 @@ export const APP_LANDSCAPE_CSS = `
 /* Einstellungen */
 [data-phone-landscape] .pl-app .gtL-settings button { min-height: 44px; }
 [data-phone-landscape] .pl-app .gtL-set-split .gtL-toggle-row { flex-wrap: wrap; }
-[data-phone-landscape] .pl-app .gtL-set-split .gtL-toggle-row > button { flex: 1 1 128px !important; min-width: 0; }
+[data-phone-landscape] .pl-app .gtL-set-split .gtL-toggle-row > button { flex: 1 1 104px !important; min-width: 0; }
 [data-phone-landscape] .pl-app .gtL-set-split { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0 28px; align-items: start; }
 [data-phone-landscape] .pl-app .gtL-set-split > .gtL-col-main, [data-phone-landscape] .pl-app .gtL-set-split > .gtL-col-side { display: block !important; min-width: 0; }
 
@@ -76,6 +76,15 @@ export const APP_LANDSCAPE_CSS = `
 [data-phone-landscape] [data-onboard="search"] input { min-height: 44px; box-sizing: border-box; }
 [data-phone-landscape] .pl-app .gtL-split.pl-st-split { display: grid !important; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 0 22px; align-items: start; }
 [data-phone-landscape] .pl-app .pl-st-split > .gtL-col-main, [data-phone-landscape] .pl-app .pl-st-split > .gtL-col-side { display: flex !important; flex-direction: column; min-width: 0; }
+
+/* Statistik: Touchziele, volle Namen ohne Abschneiden (Handy hat kein Hover) */
+[data-phone-landscape] .pl-app .gtSt2-btn { min-height: 44px !important; }
+[data-phone-landscape] .pl-app .gtSt2-nm { white-space: normal !important; overflow: visible !important; text-overflow: clip !important; overflow-wrap: anywhere; }
+[data-phone-landscape] .pl-app .gtSt2-pod div[dir="auto"] { -webkit-line-clamp: 4 !important; }
+[data-phone-landscape] .pl-app .gtSt2-achv { grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)) !important; }
+
+/* Regel-/Datenschutz-Blatt (RulesSheet) */
+[data-phone-landscape] .gt-rules-box { max-height: calc(var(--pl-vh) - var(--pl-sat) - 8px) !important; width: min(620px, calc(100% - var(--pl-sal) - var(--pl-sar))) !important; max-width: none !important; padding-left: 22px !important; padding-right: 22px !important; }
 `;
 
 // Einmal ins <head> setzen (idempotent), damit kein <style> im App-Baum die Geschwister-Reihenfolge veraendert.

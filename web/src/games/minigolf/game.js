@@ -155,9 +155,15 @@ function MinigolfSetup({ players, setPlayers, onStart, theme, t }) {
     });
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-      <GroupPicker getNames={() => players.map((p) => p.name)} setNames={(names) => setPlayers(names.map((name, i) => ({ id: i + 1, name })))} t={t} tk={gtSkinTk(mg, gtS)} />
-      <GtPlayerList players={players} onRename={rename} onRemove={removePlayer} onAdd={addPlayer} skin={gtS} t={t} onMove={move} minPlayers={1} maxPlayers={8} hues={mg.hues} />
-      <GtStartBar onClick={onStart} disabled={false} label={t("startGame")} skin={gtS} />
+      <div className="plsu-split">
+        <div className="plsu-main">
+          <GroupPicker getNames={() => players.map((p) => p.name)} setNames={(names) => setPlayers(names.map((name, i) => ({ id: i + 1, name })))} t={t} tk={gtSkinTk(mg, gtS)} />
+          <GtPlayerList players={players} onRename={rename} onRemove={removePlayer} onAdd={addPlayer} skin={gtS} t={t} onMove={move} minPlayers={1} maxPlayers={8} hues={mg.hues} />
+        </div>
+        <div className="plsu-side">
+          <GtStartBar onClick={onStart} disabled={false} label={t("startGame")} skin={gtS} />
+        </div>
+      </div>
     </div>
   );
 }

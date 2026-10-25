@@ -39,6 +39,13 @@ const PLD_CSS = `
 [data-phone-landscape] .pld-entry .gtL-entryrow { padding: 6px 14px !important; }
 [data-phone-landscape] .pld-entry .gtL-entryval { font-size: 28px !important; }
 [data-phone-landscape] .pld-entry .pld-foot button { min-height: 48px; }
+/* Romme: Hinweis ausgeblendet (steht in den Regeln), Spielerzeilen zweispaltig, damit 2 Spieler ohne Scrollen passen */
+[data-phone-landscape] .rom-body .rom-hint { display: none; }
+[data-phone-landscape] .rom-body .rom-hand { padding: 6px 12px !important; }
+[data-phone-landscape] .rom-body .rom-hand > span > div:nth-child(2) { font-size: 11px !important; line-height: 1.2; }
+[data-phone-landscape] .rom-body .rom-chips button { padding: 6px 12px !important; }
+[data-phone-landscape] .rom-body .rom-rows { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px !important; }
+[data-phone-landscape] .rom-body .rom-rows > button, [data-phone-landscape] .rom-body .rom-rows > div { min-width: 0; }
 [data-phone-landscape] .pld-entry .pld-foot > div:not(:first-child) { margin-top: 0 !important; }
 [data-phone-landscape] .pld-hide { display: none; }
 [data-phone-landscape] .pld-p10row { display: grid !important; grid-template-columns: minmax(0, 1fr) auto auto; column-gap: 10px; align-items: center; padding: 8px 12px !important; }

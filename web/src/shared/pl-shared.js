@@ -1,6 +1,7 @@
 // Handy-Querformat: gemeinsame Bausteine (Kopf, Regeln-Dialog, Ziffernfeld-Dialoge, Startleiste, Podest, Exportvorschau).
 // Alles NUR unter [data-phone-landscape]. Hochformat und Laptop bleiben unveraendert.
 // Das Stylesheet wird einmal beim Laden ins <head> gesetzt (idempotent), damit jeder Baustein es ohne eigenes <style> erbt.
+import "./pl-names.js";
 const PL_SHARED_ID = "gt-pl-shared-css";
 
 const PL_SHARED_CSS = `
@@ -36,6 +37,8 @@ const PL_SHARED_CSS = `
 [data-phone-landscape] .gt-su-ib, [data-phone-landscape] .gt-su-add { min-height: 44px; }
 [data-phone-landscape] .gt-gm-sb { min-height: 44px !important; min-width: 44px; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; }
 [data-phone-landscape] .gt-gm-in { min-height: 44px; box-sizing: border-box; }
+[data-phone-landscape] .gt-gm-head { flex-wrap: wrap; row-gap: 4px; }
+[data-phone-landscape] .gt-gm-head > .gt-gm-in:first-child { flex: 1 1 100% !important; width: 100%; text-overflow: clip; }
 
 /* ---- Podest (PodiumOverlay): links Sieger, rechts Rangliste und Aktionen ---- */
 [data-phone-landscape] .gtsb-modal { max-width: min(760px, 100%) !important; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); grid-template-rows: auto 1fr; column-gap: 18px; align-items: start; padding: 14px 16px 14px !important; border-radius: 24px !important; max-height: calc(var(--pl-avail) - 16px - var(--pl-sat) - var(--pl-sab)); }
@@ -63,6 +66,20 @@ const PL_SHARED_CSS = `
 [data-phone-landscape] .gtstx-status { grid-column: 1; grid-row: 3; }
 [data-phone-landscape] .gtstx-pages { grid-column: 2; grid-row: 2 / 6; min-height: 0; }
 [data-phone-landscape] .gtstx-foot { grid-column: 1; grid-row: 5; }
+/* Huellen der Einrichtung ohne Laptop-Layout: ausserhalb Querformat unsichtbar */
+.plsu-split, .plsu-main, .plsu-side { display: contents; }
+/* ---- Einrichtung aller Spiele (gtL-split-setup): Teilnehmer links, Einstellungen und Start rechts, Spalten scrollen einzeln ---- */
+[data-phone-landscape] :is(.gtL-split-setup, .plsu-split):not(.pld-split) { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--pl-gap) calc(var(--pl-gap) + 4px); align-items: stretch; width: 100%; box-sizing: border-box; max-height: max(160px, var(--pl-body)); }
+[data-phone-landscape] :is(.gtL-split-setup, .plsu-split):not(.pld-split) > :is(.gtL-col-main, .gtL-col-side, .plsu-main, .plsu-side) { display: flex; flex-direction: column; gap: 10px; min-width: 0; min-height: 0; max-height: max(160px, var(--pl-body)); box-sizing: border-box; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding-bottom: 2px; }
+[data-phone-landscape] :is(.gtL-split-setup, .plsu-split):not(.pld-split) > :is(.gtL-col-side, .plsu-side) > .gt-su-cta { position: sticky; bottom: 0; z-index: 6; margin: 4px 0 0; padding: 8px 0 2px; background: transparent; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+[data-phone-landscape] :is(.gtL-split-setup, .plsu-split):not(.pld-split) > :is(.gtL-col-side, .plsu-side) > .gt-su-cta::before { display: none; }
+[data-phone-landscape] :is(.gtL-split-setup, .plsu-split):not(.pld-split) > :is(.gtL-col-side, .plsu-side) > .gt-su-cta > button { box-shadow: none; }
+@media (max-width: 640px) { [data-phone-landscape] :is(.gtL-split-setup, .plsu-split):not(.pld-split) { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); } [data-phone-landscape] :is(.gtL-split-setup, .plsu-split):not(.pld-split) > :is(.gtL-col-main, .plsu-main) button { font-size: 13px; } }
+[data-phone-landscape] :is(.gtL-split-setup, .plsu-split):not(.pld-split) :is(button, input, select) { min-height: 44px; box-sizing: border-box; }
+[data-phone-landscape] :is(.gtL-split-setup, .plsu-split):not(.pld-split) input { scroll-margin: 8px; }
+[data-phone-landscape] .gtL-page:has(:is(.gtL-split-setup, .plsu-split)) { max-width: none !important; width: 100% !important; margin: 0 !important; box-sizing: border-box; padding-left: var(--pl-gutter-l) !important; padding-right: var(--pl-gutter-r) !important; }
+[data-phone-landscape] .gtL-shellpage:has(:is(.gtL-split-setup, .plsu-split)) { padding-top: max(var(--pl-sat), 6px) !important; }
+
 `;
 
 function plInstallSharedCss() {

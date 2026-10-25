@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.10.25-5 (25.10.2026 15:16)
+- Minigolf: kompakter, mit 2 Spielern kein Scrollen
+
 ## 2026.10.25-4 (25.10.2026 15:09)
 - Minigolf im neuen Greenline-Design: Bahn und Tabelle, einfacher eintragen
 

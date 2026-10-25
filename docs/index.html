@@ -47898,8 +47898,8 @@ function MgHoleCard({ ui, hole, onGo, mg, t }) {
 			disabled: dis,
 			"aria-label": dir < 0 ? t("mgPrevHole") : t("mgNextHole"),
 			style: {
-				width: 46,
-				height: 46,
+				width: 44,
+				height: 44,
 				borderRadius: "50%",
 				border: `1px solid ${mg.ctrlLine}`,
 				background: mg.ctrl,
@@ -47918,16 +47918,19 @@ function MgHoleCard({ ui, hole, onGo, mg, t }) {
 		style: {
 			background: mg.surf,
 			border: `1px solid ${mg.line}`,
-			borderRadius: 24,
-			padding: "14px 14px 14px 12px",
+			borderRadius: 22,
+			padding: "10px 12px 10px 10px",
 			boxShadow: mg.shadow,
-			marginBottom: 12
+			marginBottom: 8
 		}
 	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		alignItems: "center",
 		gap: 10
-	} }, /* @__PURE__ */ import_react.default.createElement(MgFlag, { mg }), /* @__PURE__ */ import_react.default.createElement("div", {
+	} }, /* @__PURE__ */ import_react.default.createElement(MgFlag, {
+		mg,
+		size: 36
+	}), /* @__PURE__ */ import_react.default.createElement("div", {
 		style: {
 			flex: "1 1 auto",
 			minWidth: 0
@@ -47958,7 +47961,7 @@ function MgHoleCard({ ui, hole, onGo, mg, t }) {
 		style: {
 			fontFamily: MINIGOLF_FONT,
 			fontWeight: 700,
-			fontSize: 54,
+			fontSize: 44,
 			lineHeight: 1,
 			color: mg.accInk,
 			letterSpacing: "-0.04em",
@@ -48018,8 +48021,8 @@ function MgPlayerCard({ p, val, isDraft, missing, sofar, countNote, leads, onSte
 		style: {
 			background: leads ? `linear-gradient(${mg.accSoft}, ${mg.accSoft}), ${mg.surf}` : mg.surf,
 			border: `1px solid ${leads ? mg.accLine : mg.line}`,
-			borderRadius: 20,
-			padding: "12px 12px 12px 16px",
+			borderRadius: 18,
+			padding: "8px 10px 8px 14px",
 			boxShadow: mg.shadow
 		}
 	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
@@ -48070,15 +48073,7 @@ function MgPlayerCard({ p, val, isDraft, missing, sofar, countNote, leads, onSte
 			gap: 4,
 			marginLeft: "auto"
 		}
-	}, /* @__PURE__ */ import_react.default.createElement("span", {
-		"aria-hidden": "true",
-		style: {
-			fontSize: 12,
-			color: mg.muted,
-			fontWeight: 600,
-			fontFamily: MG_UI
-		}
-	}, t("strokesPlaceholder")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		alignItems: "center",
 		gap: 6
@@ -48138,9 +48133,9 @@ function MgStandingsBox({ st, onOpen, finished, mg, t, className }) {
 		style: {
 			background: mg.surf2,
 			border: `1px solid ${mg.line}`,
-			borderRadius: 20,
-			padding: "6px 10px 10px",
-			marginTop: 12
+			borderRadius: 18,
+			padding: "2px 10px 8px",
+			marginTop: 8
 		}
 	}, /* @__PURE__ */ import_react.default.createElement("button", {
 		className: "mgPress",
@@ -48148,7 +48143,7 @@ function MgStandingsBox({ st, onOpen, finished, mg, t, className }) {
 		"aria-label": title + ". " + t("mgOpenTable"),
 		style: {
 			width: "100%",
-			minHeight: 44,
+			minHeight: 40,
 			display: "flex",
 			alignItems: "center",
 			justifyContent: "space-between",
@@ -48178,7 +48173,7 @@ function MgStandingsBox({ st, onOpen, finished, mg, t, className }) {
 				display: "flex",
 				alignItems: "center",
 				gap: 8,
-				padding: "8px 12px",
+				padding: "6px 12px",
 				borderRadius: 12,
 				border: `1px solid ${top ? mg.accLine : mg.line}`,
 				background: top ? mg.accSoft : "transparent",
@@ -48483,8 +48478,8 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
 			position: "sticky",
 			bottom: 0,
 			zIndex: 5,
-			margin: "4px -12px 0",
-			padding: "12px 12px calc(8px + env(safe-area-inset-bottom))",
+			margin: "2px -12px 0",
+			padding: "8px 12px calc(6px + env(safe-area-inset-bottom))",
 			...glassBar ? {
 				background: "rgba(13,20,46,0.72)",
 				backdropFilter: "blur(16px) saturate(1.4)",
@@ -48519,7 +48514,7 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
 		"aria-describedby": status ? "mg-status" : void 0,
 		style: {
 			width: "100%",
-			minHeight: 56,
+			minHeight: 52,
 			border: "none",
 			borderRadius: 18,
 			background: main.disabled || main.blocked ? mg.track : mg.acc,
@@ -48552,8 +48547,8 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
 			alignItems: "center",
 			justifyContent: "center",
 			gap: 8,
-			margin: "4px auto 0",
-			minHeight: 44,
+			margin: "2px auto 0",
+			minHeight: 40,
 			padding: "0 16px",
 			border: "none",
 			background: "transparent",
@@ -48661,7 +48656,7 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
 	}), /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		flexDirection: "column",
-		gap: 10
+		gap: 8
 	} }, players.map((p) => {
 		const r = st.rows.find((x) => x.id === p.id);
 		return /* @__PURE__ */ import_react.default.createElement(MgPlayerCard, {
@@ -48735,7 +48730,7 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
 	}))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side2" }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		gap: 8,
-		marginTop: 14
+		marginTop: 8
 	} }, /* @__PURE__ */ import_react.default.createElement("button", {
 		className: "mgPress",
 		...gtHold(() => {
@@ -105496,7 +105491,7 @@ function YatzyGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 }
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.10.25-4";
+var APP_BUILD = "2026.10.25-5";
 // web/src/app/storage.js
 var storage_exports = /* @__PURE__ */ __exportAll({
 	GT_CAT_KEYS: () => GT_CAT_KEYS,
@@ -105618,7 +105613,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.10.25-4");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.10.25-5");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -107912,7 +107907,7 @@ function UpdateBanner() {
 		let alive = true;
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.10.25-4") {
+				if (alive && v && v.build && v.build !== "2026.10.25-5") {
 					setReady(true);
 					setHidden(false);
 					try {

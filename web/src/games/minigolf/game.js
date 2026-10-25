@@ -327,23 +327,23 @@ function MgHoleCard({ ui, hole, onGo, mg, t }) {
         onClick={() => !dis && onGo(hole + dir)}
         disabled={dis}
         aria-label={dir < 0 ? t("mgPrevHole") : t("mgNextHole")}
-        style={{ width: 46, height: 46, borderRadius: "50%", border: `1px solid ${mg.ctrlLine}`, background: mg.ctrl, color: mg.ink, display: "grid", placeItems: "center", cursor: "pointer", opacity: dis ? 0.38 : 1, flexShrink: 0 }}
+        style={{ width: 44, height: 44, borderRadius: "50%", border: `1px solid ${mg.ctrlLine}`, background: mg.ctrl, color: mg.ink, display: "grid", placeItems: "center", cursor: "pointer", opacity: dis ? 0.38 : 1, flexShrink: 0 }}
       >
         <MgSvg size={20}>{dir < 0 ? <path d="M15 5l-7 7 7 7" /> : <path d="M9 5l7 7-7 7" />}</MgSvg>
       </button>
     );
   };
   return (
-    <section aria-label={t("mgHoleOf")(hole + 1, MINIGOLF_HOLES)} className={mg.glass ? "gtL-glass" : undefined} style={{ background: mg.surf, border: `1px solid ${mg.line}`, borderRadius: 24, padding: "14px 14px 14px 12px", boxShadow: mg.shadow, marginBottom: 12 }}>
+    <section aria-label={t("mgHoleOf")(hole + 1, MINIGOLF_HOLES)} className={mg.glass ? "gtL-glass" : undefined} style={{ background: mg.surf, border: `1px solid ${mg.line}`, borderRadius: 22, padding: "10px 12px 10px 10px", boxShadow: mg.shadow, marginBottom: 8 }}>
       <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-        <MgFlag mg={mg} />
+        <MgFlag mg={mg} size={36} />
         <div style={{ flex: "1 1 auto", minWidth: 0 }} aria-live="polite" aria-atomic="true">
           <span className="mgSr">{t("mgHoleOf")(hole + 1, MINIGOLF_HOLES)}</span>
           <div aria-hidden="true" style={{ fontSize: 15, fontWeight: 700, color: mg.ink, fontFamily: MG_UI, lineHeight: 1.1 }}>
             {t("mgTabHole")}
           </div>
           <div aria-hidden="true" style={{ display: "flex", flexWrap: "wrap", alignItems: "baseline", columnGap: 8 }}>
-            <span key={hole} className="mgHoleNum" data-mg-hole={hole + 1} style={{ fontFamily: MINIGOLF_FONT, fontWeight: 700, fontSize: 54, lineHeight: 1, color: mg.accInk, letterSpacing: "-0.04em", fontVariantNumeric: "tabular-nums" }}>
+            <span key={hole} className="mgHoleNum" data-mg-hole={hole + 1} style={{ fontFamily: MINIGOLF_FONT, fontWeight: 700, fontSize: 44, lineHeight: 1, color: mg.accInk, letterSpacing: "-0.04em", fontVariantNumeric: "tabular-nums" }}>
               {String(hole + 1).padStart(2, "0")}
             </span>
             <span style={{ fontSize: 17, color: mg.muted, fontFamily: MG_UI, fontWeight: 600, whiteSpace: "nowrap" }}>{t("mgOf")(MINIGOLF_HOLES)}</span>
@@ -372,7 +372,7 @@ function MgPlayerCard({ p, val, isDraft, missing, sofar, countNote, leads, onSte
     <div
       data-mg-card={p.id}
       className={"mgCard" + (mg.glass ? " gtL-glass-soft" : "")}
-      style={{ background: leads ? `linear-gradient(${mg.accSoft}, ${mg.accSoft}), ${mg.surf}` : mg.surf, border: `1px solid ${leads ? mg.accLine : mg.line}`, borderRadius: 20, padding: "12px 12px 12px 16px", boxShadow: mg.shadow }}
+      style={{ background: leads ? `linear-gradient(${mg.accSoft}, ${mg.accSoft}), ${mg.surf}` : mg.surf, border: `1px solid ${leads ? mg.accLine : mg.line}`, borderRadius: 18, padding: "8px 10px 8px 14px", boxShadow: mg.shadow }}
     >
       <div style={{ flex: "1 1 128px", minWidth: 0 }}>
         <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "2px 8px" }}>
@@ -387,9 +387,7 @@ function MgPlayerCard({ p, val, isDraft, missing, sofar, countNote, leads, onSte
         </div>
       </div>
       <div role="group" aria-label={t("strokesPlaceholder") + ", " + name} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4, marginLeft: "auto" }}>
-        <span aria-hidden="true" style={{ fontSize: 12, color: mg.muted, fontWeight: 600, fontFamily: MG_UI }}>
-          {t("strokesPlaceholder")}
-        </span>
+        
         <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
           <button className="mgPress" data-mg-minus={p.id} onClick={() => !minusDis && onStep(-1)} disabled={minusDis} aria-label={t("mgSub")(name)} style={{ ...round, opacity: minusDis ? 0.38 : 1 }}>
             <MgSvg size={18}>
@@ -432,12 +430,12 @@ function MgStandingsBox({ st, onOpen, finished, mg, t, className }) {
   const title = st.common === 0 ? t("mgStandNone") : st.uniform ? t("mgStandAfter")(st.common) : t("mgStandCommon")(st.common);
   const allTied = st.rows.every((r) => r.rank === 1);
   return (
-    <section className={className} aria-label={title} style={{ background: mg.surf2, border: `1px solid ${mg.line}`, borderRadius: 20, padding: "6px 10px 10px", marginTop: 12 }}>
+    <section className={className} aria-label={title} style={{ background: mg.surf2, border: `1px solid ${mg.line}`, borderRadius: 18, padding: "2px 10px 8px", marginTop: 8 }}>
       <button
         className="mgPress"
         onClick={onOpen}
         aria-label={title + ". " + t("mgOpenTable")}
-        style={{ width: "100%", minHeight: 44, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8, border: "none", background: "transparent", color: mg.muted, fontFamily: MG_UI, fontSize: 14, fontWeight: 600, padding: "0 4px 0 6px", cursor: "pointer", textAlign: "left" }}
+        style={{ width: "100%", minHeight: 40, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8, border: "none", background: "transparent", color: mg.muted, fontFamily: MG_UI, fontSize: 14, fontWeight: 600, padding: "0 4px 0 6px", cursor: "pointer", textAlign: "left" }}
       >
         <span>{title}</span>
         <MgSvg size={18}>
@@ -449,7 +447,7 @@ function MgStandingsBox({ st, onOpen, finished, mg, t, className }) {
           {st.rows.map((r) => {
             const top = r.rank === 1 && !allTied && !finished;
             return (
-              <li key={r.id} style={{ display: "flex", alignItems: "center", gap: 8, padding: "8px 12px", borderRadius: 12, border: `1px solid ${top ? mg.accLine : mg.line}`, background: top ? mg.accSoft : "transparent", minWidth: 0 }}>
+              <li key={r.id} style={{ display: "flex", alignItems: "center", gap: 8, padding: "6px 12px", borderRadius: 12, border: `1px solid ${top ? mg.accLine : mg.line}`, background: top ? mg.accSoft : "transparent", minWidth: 0 }}>
                 <span style={{ color: top ? mg.accInk : mg.muted, fontWeight: 700, fontFamily: MINIGOLF_FONT, fontSize: 15, minWidth: 20, fontVariantNumeric: "tabular-nums" }}>{r.rank}.</span>
                 <span style={{ flex: "1 1 auto", minWidth: 0, color: mg.ink, fontFamily: MG_UI, fontWeight: 600, fontSize: 15, overflowWrap: "anywhere", lineHeight: 1.25 }}>
                   {r.name}
@@ -631,7 +629,7 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
   }
   const glassBar = theme === "vitrum";
   const bar = (
-    <div className="mgBar" style={{ position: "sticky", bottom: 0, zIndex: 5, margin: "4px -12px 0", padding: "12px 12px calc(8px + env(safe-area-inset-bottom))", ...(glassBar ? { background: "rgba(13,20,46,0.72)", backdropFilter: "blur(16px) saturate(1.4)", WebkitBackdropFilter: "blur(16px) saturate(1.4)", borderRadius: "22px 22px 0 0", borderTop: `1px solid ${mg.line}` } : { background: `linear-gradient(180deg, ${mg.bg}00, ${mg.bg}F2 14px, ${mg.bg} 30%)` }) }}>
+    <div className="mgBar" style={{ position: "sticky", bottom: 0, zIndex: 5, margin: "2px -12px 0", padding: "8px 12px calc(6px + env(safe-area-inset-bottom))", ...(glassBar ? { background: "rgba(13,20,46,0.72)", backdropFilter: "blur(16px) saturate(1.4)", WebkitBackdropFilter: "blur(16px) saturate(1.4)", borderRadius: "22px 22px 0 0", borderTop: `1px solid ${mg.line}` } : { background: `linear-gradient(180deg, ${mg.bg}00, ${mg.bg}F2 14px, ${mg.bg} 30%)` }) }}>
       {status && (
         <div id="mg-status" role="status" aria-live="polite" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, textAlign: "center", fontSize: 13.5, fontWeight: 600, color: statusOk ? mg.accInk : mg.muted, fontFamily: MG_UI, margin: "0 4px 8px", lineHeight: 1.35 }}>
           {statusOk && <CheckMark />}
@@ -648,7 +646,7 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
           aria-describedby={status ? "mg-status" : undefined}
           style={{
             width: "100%",
-            minHeight: 56,
+            minHeight: 52,
             border: "none",
             borderRadius: 18,
             background: main.disabled || main.blocked ? mg.track : mg.acc,
@@ -685,7 +683,7 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
         onClick={() => lastUndo && upd((s) => mgUndo(s))}
         disabled={!lastUndo}
         aria-label={lastUndo ? t("mgUndoAria")(holesTxt(lastUndo.holes)) : t("mgUndo")}
-        style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, margin: "4px auto 0", minHeight: 44, padding: "0 16px", border: "none", background: "transparent", color: mg.muted, fontFamily: MG_UI, fontSize: 14.5, fontWeight: 600, cursor: lastUndo ? "pointer" : "default", opacity: lastUndo ? 1 : 0.45 }}
+        style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, margin: "2px auto 0", minHeight: 40, padding: "0 16px", border: "none", background: "transparent", color: mg.muted, fontFamily: MG_UI, fontSize: 14.5, fontWeight: 600, cursor: lastUndo ? "pointer" : "default", opacity: lastUndo ? 1 : 0.45 }}
       >
         <MgSvg size={18} sw={2}>
           <path d="M9 7L5 11l4 4" />
@@ -751,7 +749,7 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
               {tab === "hole" ? (
                 <React.Fragment>
                   <MgHoleCard ui={ui} hole={hole} onGo={(h) => upd((s) => mgGoto(s, h))} mg={mg} t={t} />
-                  <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                     {players.map((p) => {
                       const r = st.rows.find((x) => x.id === p.id);
                       return (
@@ -807,7 +805,7 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
             </div>
           </div>
           <div className="gtL-col-side2">
-            <div style={{ display: "flex", gap: 8, marginTop: 14 }}>
+            <div style={{ display: "flex", gap: 8, marginTop: 8 }}>
               <button
                 className="mgPress"
                 {...gtHold(() => {

@@ -11,6 +11,10 @@
 <meta name="theme-color" content="#12141C" />
 <script>(function(){try{var t=(JSON.parse(localStorage.getItem("spieleblock-app-state-v1")||"{}")||{}).theme;var c={light:"#F8F9FA",vitrum:"#362A52",noir:"#0A0A0A",dark:"#2E2247"}[t]||"#2E2247";document.querySelector('meta[name="theme-color"]').setAttribute("content",c);document.documentElement.style.background=c;}catch(e){}})();</script>
 
+<script>/* Handy-Querformat: Attribut data-phone-landscape vor dem ersten Paint (Regel und Doku: web/src/shared/phone-landscape.js). */(function(){try{
+/*pl-decide-begin*/function plDecide(e){if(!e||e.viewMode==="laptop")return false;if(e.force===true)return true;if(e.force===false)return false;if(!e.touch)return false;var iw=e.innerW||0,ih=e.innerH||0,sw=e.screenW||0,sh=e.screenH||0;var sh2=sw&&sh?Math.min(sw,sh):Math.min(iw,ih);if(!sh2||sh2>500)return false;var l;if(typeof e.orientationType==="string"&&e.orientationType)l=e.orientationType.indexOf("landscape")===0;else if(typeof e.windowOrientation==="number")l=Math.abs(e.windowOrientation)===90;else if(sw&&sh&&sw!==sh)l=sw>sh;else l=!!e.mqLandscape;if(!l)return false;return iw>ih;}/*pl-decide-end*/
+var w=window,s=w.screen||{},mq=function(q){try{return!!(w.matchMedia&&w.matchMedia(q).matches);}catch(x){return false;}};var vm="mobile";try{vm=(JSON.parse(localStorage.getItem("spieleblock-app-state-v1")||"{}")||{}).viewMode==="laptop"?"laptop":"mobile";}catch(x){}var f=null,m=/[?&]pl=([01])\b/.exec(location.search||"");if(m)f=m[1]==="1";else{try{var v=localStorage.getItem("gametab-pl-force");if(v==="1")f=true;else if(v==="0")f=false;}catch(x){}}var ot=null;try{ot=s.orientation&&s.orientation.type?String(s.orientation.type):null;}catch(x){}
+if(plDecide({viewMode:vm,force:f,touch:(w.navigator&&w.navigator.maxTouchPoints>0)||mq("(any-pointer: coarse)"),screenW:s.width||0,screenH:s.height||0,orientationType:ot,windowOrientation:typeof w.orientation==="number"?w.orientation:null,mqLandscape:mq("(orientation: landscape)"),innerW:w.innerWidth||0,innerH:w.innerHeight||0}))document.documentElement.setAttribute("data-phone-landscape","");}catch(e){}})();</script>
 <style id="gt-fonts">
 @font-face{font-family:'Baloo 2';font-style:normal;font-weight:400 700;font-display:swap;src:url("./fonts/Baloo2-400-1.woff2") format('woff2');}
 @font-face{font-family:'Baloo 2';font-style:normal;font-weight:701 900;font-display:swap;src:url("./fonts/Baloo2-701-1.woff2") format('woff2');}
@@ -17736,6 +17740,46 @@ body::after {
   [style*="chalk-draw"] { animation: none !important; stroke-dashoffset: 0 !important; }
   .schieber-sponge-anim { animation: none !important; opacity: 0 !important; }
 }
+
+/* ===== Handy-Querformat (Fundament). Alles NUR unter [data-phone-landscape]; Doku: CLAUDE.md "Querformat", web/src/shared/phone-landscape.js ===== */
+[data-phone-landscape] {
+  --pl-head: 48px;
+  --pl-gap: 12px;
+  --pl-sat: env(safe-area-inset-top, 0px);
+  --pl-sab: env(safe-area-inset-bottom, 0px);
+  --pl-sal: env(safe-area-inset-left, 0px);
+  --pl-sar: env(safe-area-inset-right, 0px);
+  --pl-gutter-l: calc(14px + var(--pl-sal));
+  --pl-gutter-r: calc(14px + var(--pl-sar));
+  --pl-gutter: max(var(--pl-gutter-l), var(--pl-gutter-r));
+  --pl-vh: 100vh;
+  --pl-avail: var(--pl-vvh, var(--pl-vh));
+  --pl-body: calc(var(--pl-avail) - var(--pl-head) - var(--pl-sab));
+}
+@supports (height: 100dvh) { [data-phone-landscape] { --pl-vh: 100dvh; } }
+@media (display-mode: standalone) { [data-phone-landscape] { --pl-vh: 100vh; } }
+:where(html:not([data-phone-landscape])) :is(.pl-split, .pl-main, .pl-side) { display: contents; }
+:where(html:not([data-phone-landscape])) .pl-only { display: none !important; }
+[data-phone-landscape] .pl-hide { display: none !important; }
+[data-phone-landscape] .pl-page { box-sizing: border-box; max-width: none !important; width: 100% !important; padding-left: var(--pl-gutter-l) !important; padding-right: var(--pl-gutter-r) !important; }
+[data-phone-landscape] .pl-wide { max-width: none !important; width: 100% !important; margin-left: 0 !important; margin-right: 0 !important; box-sizing: border-box; }
+[data-phone-landscape] .pl-split { display: grid; grid-template-columns: minmax(0, var(--pl-main-fr, 1fr)) minmax(0, var(--pl-side-fr, 1fr)); gap: var(--pl-gap); align-items: start; width: 100%; box-sizing: border-box; }
+[data-phone-landscape] .pl-split.pl-split-even { --pl-main-fr: 1fr; --pl-side-fr: 1fr; }
+[data-phone-landscape] .pl-split.pl-split-wide { --pl-main-fr: 1.35fr; --pl-side-fr: 1fr; }
+[data-phone-landscape] .pl-main, [data-phone-landscape] .pl-side { min-width: 0; box-sizing: border-box; }
+[data-phone-landscape] .pl-side.pl-sticky { position: sticky; top: calc(var(--pl-sat) + 8px); }
+[data-phone-landscape] .pl-scroll { overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; max-height: max(160px, var(--pl-body)); min-height: 0; }
+[data-phone-landscape] .pl-scroll-x { overflow-x: auto; overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch; max-width: 100%; }
+[data-phone-landscape] .pl-fill { min-height: max(160px, var(--pl-body)); box-sizing: border-box; }
+[data-phone-landscape] .pl-head-compact .gt-gamehead, [data-phone-landscape] .gt-gamehead.pl-head-compact { display: flex; align-items: center; gap: 10px; min-height: var(--pl-head); max-height: 52px; box-sizing: border-box; padding-top: 2px; padding-bottom: 2px; margin-bottom: 8px; }
+[data-phone-landscape] :is(.pl-head-compact .gt-gamehead, .gt-gamehead.pl-head-compact) > div:first-of-type { margin-bottom: 0 !important; flex: none; order: 0; }
+[data-phone-landscape] :is(.pl-head-compact .gt-gamehead, .gt-gamehead.pl-head-compact) > div:nth-of-type(n+2):not(.gt-headbtns) { flex: 1 1 auto; min-width: 0; order: 1; }
+[data-phone-landscape] :is(.pl-head-compact .gt-gamehead, .gt-gamehead.pl-head-compact) > .gt-headbtns { position: static !important; order: 2; flex: none; margin-left: auto; }
+[data-phone-landscape] :is(.pl-head-compact .gt-gamehead, .gt-gamehead.pl-head-compact) h1 { font-size: 20px !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; overflow-wrap: normal !important; }
+[data-phone-landscape] :is(.pl-head-compact .gt-gamehead, .gt-gamehead.pl-head-compact) h1 + div { margin-top: 1px !important; }
+html[data-phone-landscape] body:has(> #root > div.gtL-start) { position: static !important; overflow: visible !important; top: auto !important; width: auto !important; }
+[data-phone-landscape] #root > div.gtL-start { height: auto !important; min-height: var(--pl-vh) !important; overflow: visible !important; }
+@media (display-mode: standalone) { html[data-phone-landscape] body #root > div.gtL-start { height: auto !important; min-height: 100vh !important; padding-top: max(12px, env(safe-area-inset-top, 0px)) !important; } }
 `;
 // web/src/themes/palette.js
 var palette_exports = /* @__PURE__ */ __exportAll({
@@ -40349,9 +40393,10 @@ function StartPage({ onSelect, lang, theme, viewMode, lastPlayed, dismissedResum
 				tX = t.clientX;
 			}
 		};
+		const gtPLon = () => document.documentElement.hasAttribute("data-phone-landscape");
 		const onTM = (e) => {
 			const t = e.touches && e.touches[0];
-			if (!t) return;
+			if (!t || gtPLon()) return;
 			if (Math.abs(t.clientY - tY) > Math.abs(t.clientX - tX)) {
 				let el = e.target;
 				while (el && el !== document.body) {
@@ -40372,6 +40417,7 @@ function StartPage({ onSelect, lang, theme, viewMode, lastPlayed, dismissedResum
 			document.body.style.top = "0";
 		}
 		const resetScroll = () => {
+			if (gtPLon()) return;
 			window.scrollTo(0, 0);
 			document.body.style.top = "0";
 			document.documentElement.scrollTop = 0;
@@ -64627,6 +64673,148 @@ function DartsVariantSelect({ onSelect, onBack, dartsProgress, cricketProgress, 
 		}),
 		onClick: () => onSelect("splitscore")
 	})))));
+}
+// web/src/shared/phone-landscape.js
+var PL_ATTR = "data-phone-landscape";
+var PL_FORCE_KEY = "gametab-pl-force";
+var PL_STATE_KEY = "spieleblock-app-state-v1";
+function decidePhoneLandscape(e) {
+	if (!e || e.viewMode === "laptop") return false;
+	if (e.force === true) return true;
+	if (e.force === false) return false;
+	if (!e.touch) return false;
+	const iw = e.innerW || 0, ih = e.innerH || 0;
+	const sw = e.screenW || 0, sh = e.screenH || 0;
+	const short = sw && sh ? Math.min(sw, sh) : Math.min(iw, ih);
+	if (!short || short > 500) return false;
+	let land;
+	if (typeof e.orientationType === "string" && e.orientationType) land = e.orientationType.indexOf("landscape") === 0;
+	else if (typeof e.windowOrientation === "number") land = Math.abs(e.windowOrientation) === 90;
+	else if (sw && sh && sw !== sh) land = sw > sh;
+	else land = !!e.mqLandscape;
+	if (!land) return false;
+	return iw > ih;
+}
+function plReadForce() {
+	try {
+		const m = /[?&]pl=([01])\b/.exec(window.location.search || "");
+		if (m) return m[1] === "1";
+	} catch (_) {}
+	try {
+		const v = window.localStorage.getItem(PL_FORCE_KEY);
+		if (v === "1") return true;
+		if (v === "0") return false;
+	} catch (_) {}
+	return null;
+}
+function plReadSavedViewMode() {
+	try {
+		return (JSON.parse(window.localStorage.getItem(PL_STATE_KEY) || "{}") || {}).viewMode === "laptop" ? "laptop" : "mobile";
+	} catch (_) {
+		return "mobile";
+	}
+}
+function plMQ(q) {
+	try {
+		return !!(window.matchMedia && window.matchMedia(q).matches);
+	} catch (_) {
+		return false;
+	}
+}
+function plEnv(viewMode, force) {
+	const w = window, s = w.screen || {};
+	let ot = null;
+	try {
+		ot = s.orientation && s.orientation.type ? String(s.orientation.type) : null;
+	} catch (_) {}
+	return {
+		viewMode,
+		force,
+		touch: w.navigator && w.navigator.maxTouchPoints > 0 || plMQ("(any-pointer: coarse)"),
+		screenW: s.width || 0,
+		screenH: s.height || 0,
+		orientationType: ot,
+		windowOrientation: typeof w.orientation === "number" ? w.orientation : null,
+		mqLandscape: plMQ("(orientation: landscape)"),
+		innerW: w.innerWidth || 0,
+		innerH: w.innerHeight || 0
+	};
+}
+var plViewMode = null;
+var plForce;
+var plActive = null;
+var plBound = false;
+var plTimer = 0;
+var plRefs = 0;
+var plSubs = /* @__PURE__ */ new Set();
+function plApply(v) {
+	const root = document.documentElement;
+	if (v) root.setAttribute(PL_ATTR, "");
+	else root.removeAttribute(PL_ATTR);
+	plActive = v;
+	plSubs.forEach((f) => {
+		try {
+			f();
+		} catch (_) {}
+	});
+}
+function plSetVvh() {
+	const root = document.documentElement, vv = window.visualViewport;
+	if (plActive && vv) root.style.setProperty("--pl-vvh", Math.round(vv.height) + "px");
+	else root.style.removeProperty("--pl-vvh");
+}
+function updatePhoneLandscape() {
+	if (typeof window === "undefined") return false;
+	if (plViewMode == null) plViewMode = plReadSavedViewMode();
+	if (plForce === void 0) plForce = plReadForce();
+	const v = decidePhoneLandscape(plEnv(plViewMode, plForce));
+	if (v !== plActive) plApply(v);
+	plSetVvh();
+	return v;
+}
+function plOnChange() {
+	updatePhoneLandscape();
+	clearTimeout(plTimer);
+	plTimer = setTimeout(updatePhoneLandscape, 350);
+}
+function plBind() {
+	if (plBound || typeof window === "undefined") return;
+	plBound = true;
+	window.addEventListener("resize", plOnChange);
+	window.addEventListener("orientationchange", plOnChange);
+	try {
+		if (screen.orientation && screen.orientation.addEventListener) screen.orientation.addEventListener("change", plOnChange);
+	} catch (_) {}
+	if (window.visualViewport) window.visualViewport.addEventListener("resize", plSetVvh);
+}
+function plUnbind() {
+	if (!plBound) return;
+	plBound = false;
+	clearTimeout(plTimer);
+	window.removeEventListener("resize", plOnChange);
+	window.removeEventListener("orientationchange", plOnChange);
+	try {
+		if (screen.orientation && screen.orientation.removeEventListener) screen.orientation.removeEventListener("change", plOnChange);
+	} catch (_) {}
+	if (window.visualViewport) window.visualViewport.removeEventListener("resize", plSetVvh);
+}
+function setPhoneLandscapeViewMode(mode) {
+	plViewMode = mode === "laptop" ? "laptop" : "mobile";
+	return updatePhoneLandscape();
+}
+function plRetain() {
+	plRefs++;
+	plBind();
+	return () => {
+		plRefs = Math.max(0, plRefs - 1);
+		if (!plRefs) plUnbind();
+	};
+}
+function usePhoneLandscapeRoot(viewMode, loaded) {
+	import_react.default.useLayoutEffect(() => plRetain(), []);
+	import_react.default.useLayoutEffect(() => {
+		if (loaded) setPhoneLandscapeViewMode(viewMode);
+	}, [viewMode, loaded]);
 }
 // web/src/games/freeplay/game.js
 var game_exports$8 = /* @__PURE__ */ __exportAll({
@@ -103281,6 +103469,7 @@ function App() {
 			document.documentElement.setAttribute("data-gt-theme", theme || "dark");
 		} catch (e) {}
 	}, [theme, lang]);
+	usePhoneLandscapeRoot(viewMode, loaded);
 	useEffect$15(() => {
 		if (!loaded) return;
 		const root = document.documentElement;

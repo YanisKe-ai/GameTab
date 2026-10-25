@@ -314,5 +314,45 @@ body::after {
   [style*="chalk-draw"] { animation: none !important; stroke-dashoffset: 0 !important; }
   .schieber-sponge-anim { animation: none !important; opacity: 0 !important; }
 }
+
+/* ===== Handy-Querformat (Fundament). Alles NUR unter [data-phone-landscape]; Doku: CLAUDE.md "Querformat", web/src/shared/phone-landscape.js ===== */
+[data-phone-landscape] {
+  --pl-head: 48px;
+  --pl-gap: 12px;
+  --pl-sat: env(safe-area-inset-top, 0px);
+  --pl-sab: env(safe-area-inset-bottom, 0px);
+  --pl-sal: env(safe-area-inset-left, 0px);
+  --pl-sar: env(safe-area-inset-right, 0px);
+  --pl-gutter-l: calc(14px + var(--pl-sal));
+  --pl-gutter-r: calc(14px + var(--pl-sar));
+  --pl-gutter: max(var(--pl-gutter-l), var(--pl-gutter-r));
+  --pl-vh: 100vh;
+  --pl-avail: var(--pl-vvh, var(--pl-vh));
+  --pl-body: calc(var(--pl-avail) - var(--pl-head) - var(--pl-sab));
+}
+@supports (height: 100dvh) { [data-phone-landscape] { --pl-vh: 100dvh; } }
+@media (display-mode: standalone) { [data-phone-landscape] { --pl-vh: 100vh; } }
+:where(html:not([data-phone-landscape])) :is(.pl-split, .pl-main, .pl-side) { display: contents; }
+:where(html:not([data-phone-landscape])) .pl-only { display: none !important; }
+[data-phone-landscape] .pl-hide { display: none !important; }
+[data-phone-landscape] .pl-page { box-sizing: border-box; max-width: none !important; width: 100% !important; padding-left: var(--pl-gutter-l) !important; padding-right: var(--pl-gutter-r) !important; }
+[data-phone-landscape] .pl-wide { max-width: none !important; width: 100% !important; margin-left: 0 !important; margin-right: 0 !important; box-sizing: border-box; }
+[data-phone-landscape] .pl-split { display: grid; grid-template-columns: minmax(0, var(--pl-main-fr, 1fr)) minmax(0, var(--pl-side-fr, 1fr)); gap: var(--pl-gap); align-items: start; width: 100%; box-sizing: border-box; }
+[data-phone-landscape] .pl-split.pl-split-even { --pl-main-fr: 1fr; --pl-side-fr: 1fr; }
+[data-phone-landscape] .pl-split.pl-split-wide { --pl-main-fr: 1.35fr; --pl-side-fr: 1fr; }
+[data-phone-landscape] .pl-main, [data-phone-landscape] .pl-side { min-width: 0; box-sizing: border-box; }
+[data-phone-landscape] .pl-side.pl-sticky { position: sticky; top: calc(var(--pl-sat) + 8px); }
+[data-phone-landscape] .pl-scroll { overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; max-height: max(160px, var(--pl-body)); min-height: 0; }
+[data-phone-landscape] .pl-scroll-x { overflow-x: auto; overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch; max-width: 100%; }
+[data-phone-landscape] .pl-fill { min-height: max(160px, var(--pl-body)); box-sizing: border-box; }
+[data-phone-landscape] .pl-head-compact .gt-gamehead, [data-phone-landscape] .gt-gamehead.pl-head-compact { display: flex; align-items: center; gap: 10px; min-height: var(--pl-head); max-height: 52px; box-sizing: border-box; padding-top: 2px; padding-bottom: 2px; margin-bottom: 8px; }
+[data-phone-landscape] :is(.pl-head-compact .gt-gamehead, .gt-gamehead.pl-head-compact) > div:first-of-type { margin-bottom: 0 !important; flex: none; order: 0; }
+[data-phone-landscape] :is(.pl-head-compact .gt-gamehead, .gt-gamehead.pl-head-compact) > div:nth-of-type(n+2):not(.gt-headbtns) { flex: 1 1 auto; min-width: 0; order: 1; }
+[data-phone-landscape] :is(.pl-head-compact .gt-gamehead, .gt-gamehead.pl-head-compact) > .gt-headbtns { position: static !important; order: 2; flex: none; margin-left: auto; }
+[data-phone-landscape] :is(.pl-head-compact .gt-gamehead, .gt-gamehead.pl-head-compact) h1 { font-size: 20px !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; overflow-wrap: normal !important; }
+[data-phone-landscape] :is(.pl-head-compact .gt-gamehead, .gt-gamehead.pl-head-compact) h1 + div { margin-top: 1px !important; }
+html[data-phone-landscape] body:has(> #root > div.gtL-start) { position: static !important; overflow: visible !important; top: auto !important; width: auto !important; }
+[data-phone-landscape] #root > div.gtL-start { height: auto !important; min-height: var(--pl-vh) !important; overflow: visible !important; }
+@media (display-mode: standalone) { html[data-phone-landscape] body #root > div.gtL-start { height: auto !important; min-height: 100vh !important; padding-top: max(12px, env(safe-area-inset-top, 0px)) !important; } }
 `;/*@gt-body-end*/
 export { GLOBAL_STYLES };

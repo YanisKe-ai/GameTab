@@ -19040,6 +19040,80 @@ function MinigolfLogo({ color }) {
 		opacity: "0.85"
 	}));
 }
+// web/src/shared/pl-shared.js
+var PL_SHARED_ID = "gt-pl-shared-css";
+var PL_SHARED_CSS = `
+/* ---- GameHeader: kompakt (48 px), gilt fuer alle Spiele ---- */
+[data-phone-landscape] .gt-gamehead { display: flex; align-items: center; gap: 10px; min-height: var(--pl-head, 48px); max-height: 52px; box-sizing: border-box; padding-top: 2px; padding-bottom: 2px; margin-bottom: 6px; }
+[data-phone-landscape] .gt-gamehead > div:first-of-type { margin-bottom: 0 !important; min-height: 44px !important; flex: none; order: 0; }
+[data-phone-landscape] .gt-gamehead > div:nth-of-type(n+2):not(.gt-headbtns) { flex: 1 1 auto; min-width: 0; order: 1; }
+[data-phone-landscape] .gt-gamehead > .gt-headbtns { position: static !important; order: 2; flex: none; margin-left: auto; }
+[data-phone-landscape] .gt-gamehead > .gt-headbtns ~ .gt-headbtns { margin-left: 0; }
+[data-phone-landscape] .gt-gamehead h1 { font-size: 20px !important; line-height: 1.1 !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; overflow-wrap: normal !important; }
+[data-phone-landscape] .gt-gamehead h1 + div { margin-top: 1px !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* ---- Regeln-Dialog (RulesSheet): mittig, breit, eigenes Scrollen ---- */
+[data-phone-landscape] div:has(> [role="dialog"][aria-labelledby^="gt-rs-"]) { align-items: center !important; justify-content: center; box-sizing: border-box; padding: max(8px, var(--pl-sat)) max(12px, var(--pl-sar)) max(8px, var(--pl-sab)) max(12px, var(--pl-sal)); }
+[data-phone-landscape] [role="dialog"][aria-labelledby^="gt-rs-"] { max-width: min(640px, 100%) !important; margin: 0 !important; border-radius: 22px !important; padding: 14px 20px !important; max-height: calc(var(--pl-avail) - 16px - var(--pl-sat) - var(--pl-sab)) !important; }
+
+/* ---- Ziffernfeld-Dialoge (gtL-padov / gtL-padsheet, z. B. Skyjo): links Name und Wert, rechts Tastenfeld ---- */
+[data-phone-landscape] .gtL-padov { align-items: center !important; box-sizing: border-box; padding: max(8px, var(--pl-sat)) max(12px, var(--pl-sar)) max(8px, var(--pl-sab)) max(12px, var(--pl-sal)); overflow-y: auto; }
+[data-phone-landscape] .gtL-padsheet { box-sizing: border-box; border-radius: 20px !important; max-width: min(640px, 100%) !important; padding: 12px 16px !important; max-height: calc(var(--pl-avail) - 16px - var(--pl-sat) - var(--pl-sab)) !important; overflow-y: auto !important; overscroll-behavior: contain; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: auto auto 1fr; column-gap: 18px; align-content: start; }
+[data-phone-landscape] .gtL-padsheet > :not([style*="repeat(3"]) { grid-column: 1; min-width: 0; }
+[data-phone-landscape] .gtL-padsheet > [style*="repeat(3"] { grid-column: 2; grid-row: 1 / 4; align-self: start; margin-bottom: 0 !important; }
+[data-phone-landscape] .gtL-padsheet > [style*="repeat(3"] > button { min-height: 44px; padding-top: 8px !important; padding-bottom: 8px !important; }
+[data-phone-landscape] .gtL-padsheet > button:not([style*="repeat(3"]) { align-self: end; min-height: 48px; }
+[data-phone-landscape] .gtL-padsheet > button[data-gt-sound="1"] { position: sticky; bottom: 0; z-index: 2; }
+[data-phone-landscape] .gtL-padsheet button { min-height: 44px; }
+[data-phone-landscape] .gtL-padsheet > :first-child { margin-bottom: 8px !important; }
+[data-phone-landscape] .gtL-padsheet > :first-child > button { min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; margin: -6px -8px -6px 0; }
+[data-phone-landscape] .gtL-padsheet > :nth-child(2) { margin-bottom: 8px !important; }
+
+/* ---- Setup: Startleiste (GtStartBar) flacher ---- */
+[data-phone-landscape] .gt-su-cta { padding: 12px 12px calc(8px + var(--pl-sab, 0px)); margin-top: 4px; }
+[data-phone-landscape] .gt-su-btn { min-height: 48px; border-radius: 16px; }
+[data-phone-landscape] .gt-su-ib, [data-phone-landscape] .gt-su-add { min-height: 44px; }
+[data-phone-landscape] .gt-gm-sb { min-height: 44px !important; min-width: 44px; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; }
+[data-phone-landscape] .gt-gm-in { min-height: 44px; box-sizing: border-box; }
+
+/* ---- Podest (PodiumOverlay): links Sieger, rechts Rangliste und Aktionen ---- */
+[data-phone-landscape] .gtsb-modal { max-width: min(760px, 100%) !important; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); grid-template-rows: auto 1fr; column-gap: 18px; align-items: start; padding: 14px 16px 14px !important; border-radius: 24px !important; max-height: calc(var(--pl-avail) - 16px - var(--pl-sat) - var(--pl-sab)); }
+[data-phone-landscape] .gtsb-hd { grid-column: 1; grid-row: 1; }
+[data-phone-landscape] .gtsb-hd > div { padding: 0 !important; font-size: 20px !important; text-align: left !important; justify-content: flex-start !important; }
+[data-phone-landscape] .gtsb-stage { grid-column: 1; grid-row: 2; align-self: end; margin-top: 8px !important; }
+[data-phone-landscape] .gtsb-side { grid-column: 2; grid-row: 1 / 3; display: flex; flex-direction: column; min-height: 0; max-height: calc(var(--pl-avail) - 16px - var(--pl-sat) - var(--pl-sab) - 28px); padding-top: 38px; box-sizing: border-box; }
+[data-phone-landscape] .gtsb-side .gtsb-list { margin-top: 0; flex: 0 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+[data-phone-landscape] .gtsb-side .gtsb-acts { margin-top: auto; padding-top: 12px; flex: none; }
+[data-phone-landscape] .gtsb-side .gtsb-acts > button { min-height: 48px; }
+
+/* ---- Exportvorschau (ShareImagePreview, Bild links, Hinweis und Aktionen rechts) ---- */
+[data-phone-landscape] .gtsp-ov { padding: max(10px, var(--pl-sat)) max(60px, calc(var(--pl-sar) + 16px)) max(10px, var(--pl-sab)) max(16px, var(--pl-sal)) !important; }
+[data-phone-landscape] .gtsp-in { flex-direction: row !important; align-items: center !important; justify-content: center; gap: 24px !important; width: 100%; }
+[data-phone-landscape] .gtsp-imgs { max-height: calc(var(--pl-avail) - 20px) !important; }
+[data-phone-landscape] .gtsp-imgs img { max-height: calc(var(--pl-avail) - 24px) !important; }
+[data-phone-landscape] .gtsp-side { display: flex; flex-direction: column; align-items: center; gap: 14px; flex: 0 1 260px; min-width: 0; }
+[data-phone-landscape] .gtsp-x { top: calc(6px + var(--pl-sat)) !important; right: calc(6px + var(--pl-sar)) !important; }
+
+/* ---- Turnier-Exportblatt (GtStExportSheet): links Auswahl, rechts Vorschau ---- */
+[data-phone-landscape] .gtstx-ov { padding: max(8px, var(--pl-sat)) max(12px, var(--pl-sar)) max(8px, var(--pl-sab)) max(12px, var(--pl-sal)) !important; }
+[data-phone-landscape] .gtstx-panel { max-width: min(860px, 100%) !important; display: grid !important; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr); grid-template-rows: auto auto auto 1fr auto; }
+[data-phone-landscape] .gtstx-head { grid-column: 1 / 3; grid-row: 1; }
+[data-phone-landscape] .gtstx-design { grid-column: 1; grid-row: 2; }
+[data-phone-landscape] .gtstx-status { grid-column: 1; grid-row: 3; }
+[data-phone-landscape] .gtstx-pages { grid-column: 2; grid-row: 2 / 6; min-height: 0; }
+[data-phone-landscape] .gtstx-foot { grid-column: 1; grid-row: 5; }
+`;
+function plInstallSharedCss() {
+	if (typeof document === "undefined") return;
+	try {
+		if (document.getElementById(PL_SHARED_ID)) return;
+		const s = document.createElement("style");
+		s.id = PL_SHARED_ID;
+		s.textContent = PL_SHARED_CSS;
+		document.head.appendChild(s);
+	} catch (_) {}
+}
+plInstallSharedCss();
 // web/src/shared/game-header.js
 var game_header_exports = /* @__PURE__ */ __exportAll({
 	GT_HEAD_CSS: () => GT_HEAD_CSS,
@@ -21565,6 +21639,7 @@ function GroupManager({ t, tk }) {
 		margin: 0,
 		maxWidth: 260
 	} }, t("groupManagerEmpty")), /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "gt-gm-sb",
 		style: {
 			...smallBtn,
 			color: tk.gold,
@@ -21586,6 +21661,7 @@ function GroupManager({ t, tk }) {
 			alignItems: "center",
 			gap: 8
 		} }, /* @__PURE__ */ import_react.default.createElement("input", {
+			className: "gt-gm-in",
 			value: g.name,
 			onChange: (e) => updateGroup(g.id, { name: e.target.value }),
 			style: nameInput
@@ -21594,9 +21670,11 @@ function GroupManager({ t, tk }) {
 			color: tk.muted,
 			fontFamily: "'Inter', sans-serif"
 		} }, "(", g.players.length, ")"), /* @__PURE__ */ import_react.default.createElement("button", {
+			className: "gt-gm-sb",
 			style: smallBtn,
 			onClick: () => setOpenId(isOpen ? null : g.id)
 		}, isOpen ? /* @__PURE__ */ import_react.default.createElement(TriUp, null) : /* @__PURE__ */ import_react.default.createElement(TriDown, null)), /* @__PURE__ */ import_react.default.createElement("button", {
+			className: "gt-gm-sb",
 			style: {
 				...smallBtn,
 				color: "#E0524A",
@@ -21616,6 +21694,7 @@ function GroupManager({ t, tk }) {
 				gap: 6
 			}
 		}, /* @__PURE__ */ import_react.default.createElement("input", {
+			className: "gt-gm-in",
 			value: name,
 			onChange: (e) => {
 				const next = [...g.players];
@@ -21625,12 +21704,14 @@ function GroupManager({ t, tk }) {
 			placeholder: t("groupManagerPlayerPlaceholder"),
 			style: playerInput
 		}), /* @__PURE__ */ import_react.default.createElement("button", {
+			className: "gt-gm-sb",
 			style: {
 				...smallBtn,
 				padding: "6px 8px"
 			},
 			onClick: () => updateGroup(g.id, { players: g.players.filter((_, j) => j !== i) })
 		}, /* @__PURE__ */ import_react.default.createElement(XMark, null)))), /* @__PURE__ */ import_react.default.createElement("button", {
+			className: "gt-gm-sb",
 			style: {
 				...smallBtn,
 				alignSelf: "flex-start"
@@ -21638,6 +21719,7 @@ function GroupManager({ t, tk }) {
 			onClick: () => updateGroup(g.id, { players: [...g.players, ""] })
 		}, t("addPlayer"))));
 	}), groups.length > 0 && /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "gt-gm-sb",
 		style: {
 			...smallBtn,
 			color: tk.gold,
@@ -34746,6 +34828,7 @@ function GtStExportSheet({ tournament, t, onClose, initialTheme }) {
 	return /* @__PURE__ */ import_react.default.createElement("div", {
 		role: "presentation",
 		onClick: onClose,
+		className: "gtstx-ov",
 		style: {
 			position: "fixed",
 			inset: 0,
@@ -34758,6 +34841,7 @@ function GtStExportSheet({ tournament, t, onClose, initialTheme }) {
 		}
 	}, /* @__PURE__ */ import_react.default.createElement("div", {
 		ref: panelRef,
+		className: "gtstx-panel",
 		role: "dialog",
 		"aria-modal": "true",
 		"aria-labelledby": "gtstx-title",
@@ -34775,12 +34859,15 @@ function GtStExportSheet({ tournament, t, onClose, initialTheme }) {
 			boxShadow: "0 24px 60px rgba(0,0,0,0.5)",
 			overflow: "hidden"
 		}
-	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		alignItems: "center",
-		gap: 12,
-		padding: "14px 14px 10px 18px"
-	} }, /* @__PURE__ */ import_react.default.createElement("h2", {
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtstx-head",
+		style: {
+			display: "flex",
+			alignItems: "center",
+			gap: 12,
+			padding: "14px 14px 10px 18px"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("h2", {
 		id: "gtstx-title",
 		style: {
 			margin: 0,
@@ -34814,7 +34901,10 @@ function GtStExportSheet({ tournament, t, onClose, initialTheme }) {
 		stroke: "#F2F3EE",
 		strokeWidth: 2.2,
 		strokeLinecap: "round"
-	})))), /* @__PURE__ */ import_react.default.createElement("div", { style: { padding: "0 18px 12px" } }, /* @__PURE__ */ import_react.default.createElement("p", { style: {
+	})))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtstx-design",
+		style: { padding: "0 18px 12px" }
+	}, /* @__PURE__ */ import_react.default.createElement("p", { style: {
 		...sub,
 		marginBottom: 8,
 		fontWeight: 600,
@@ -34830,6 +34920,7 @@ function GtStExportSheet({ tournament, t, onClose, initialTheme }) {
 		...sub,
 		marginTop: 8
 	} }, tr("stxDesignHint", "Ändert nur dieses Bild, nicht das Turnier."))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtstx-status",
 		role: "status",
 		"aria-live": "polite",
 		style: {
@@ -34838,15 +34929,18 @@ function GtStExportSheet({ tournament, t, onClose, initialTheme }) {
 			fontWeight: 700,
 			color: "#D9DDDF"
 		}
-	}, state.busy ? tr("stxRendering", "Bild wird erstellt") : state.err ? "" : pageCount), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		flex: 1,
-		overflowY: "auto",
-		padding: "4px 18px 16px",
-		display: "flex",
-		flexDirection: "column",
-		gap: 18,
-		WebkitOverflowScrolling: "touch"
-	} }, state.err ? /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	}, state.busy ? tr("stxRendering", "Bild wird erstellt") : state.err ? "" : pageCount), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtstx-pages",
+		style: {
+			flex: 1,
+			overflowY: "auto",
+			padding: "4px 18px 16px",
+			display: "flex",
+			flexDirection: "column",
+			gap: 18,
+			WebkitOverflowScrolling: "touch"
+		}
+	}, state.err ? /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		padding: "24px 4px",
 		display: "flex",
 		flexDirection: "column",
@@ -34920,13 +35014,16 @@ function GtStExportSheet({ tournament, t, onClose, initialTheme }) {
 			minHeight: 44,
 			boxSizing: "border-box"
 		}
-	}, N > 1 ? tr("stxDownloadPage", "Seite {n} herunterladen", { n: i + 1 }) : tr("shareResultDownload", "Bild herunterladen"))))), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		padding: "12px 18px 16px",
-		borderTop: "1px solid rgba(255,255,255,0.08)",
-		display: "flex",
-		flexDirection: "column",
-		gap: 8
-	} }, note ? /* @__PURE__ */ import_react.default.createElement("p", {
+	}, N > 1 ? tr("stxDownloadPage", "Seite {n} herunterladen", { n: i + 1 }) : tr("shareResultDownload", "Bild herunterladen"))))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtstx-foot",
+		style: {
+			padding: "12px 18px 16px",
+			borderTop: "1px solid rgba(255,255,255,0.08)",
+			display: "flex",
+			flexDirection: "column",
+			gap: 8
+		}
+	}, note ? /* @__PURE__ */ import_react.default.createElement("p", {
 		role: "status",
 		style: {
 			...sub,
@@ -59774,6 +59871,7 @@ function TraitorGame({ state, setState, onBack, onHome, onEndGame, lang = "de", 
 }
 // web/src/games/darts/darts.js
 var darts_exports = /* @__PURE__ */ __exportAll({
+	DARTS_LANDSCAPE_CSS: () => DARTS_LANDSCAPE_CSS,
 	DARTS_PREFS: () => DARTS_PREFS,
 	DartboardSVG: () => DartboardSVG,
 	DartsGame: () => DartsGame,
@@ -60177,7 +60275,7 @@ function DartsPlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewGam
 		setConfirmingReset(false);
 		onNewGame();
 	};
-	return /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-e-block" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, bigThrowNode, /* @__PURE__ */ import_react.default.createElement("div", {
+	return /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("style", null, DARTS_LANDSCAPE_CSS), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-e-block dl-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, bigThrowNode, /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "reveal-1",
 		style: {
 			background: tk.card,
@@ -60485,6 +60583,19 @@ function DartsPlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewGam
 		}
 	}, t("dartsEditPlayers").toUpperCase())))));
 }
+var DARTS_LANDSCAPE_CSS = `
+[data-phone-landscape] .dl-shell{padding-left:0!important;padding-right:0!important;padding-top:calc(var(--pl-sat) + 4px)!important;padding-bottom:calc(var(--pl-sab) + 10px)!important}
+[data-phone-landscape] .dl-split{display:grid;grid-template-columns:minmax(0,1fr) clamp(236px,calc(var(--pl-body) - 8px),46vw);grid-template-rows:repeat(10,auto) 1fr;column-gap:var(--pl-gap);row-gap:0;align-items:start;width:100%;box-sizing:border-box}
+[data-phone-landscape] .dl-split>.gtL-col-main,[data-phone-landscape] .dl-split>.gtL-col-side,[data-phone-landscape] .dl-split .gtL-col-main>div:has(>.gtL-e-board){display:contents}
+[data-phone-landscape] .dl-split :is(.gtL-col-main,.gtL-col-side)>*,[data-phone-landscape] .dl-split .gtL-col-main>div:has(>.gtL-e-board)>*:not(.gtL-e-board){grid-column:1;min-width:0}
+[data-phone-landscape] .dl-split .gtL-e-board{grid-column:2;grid-row:1/-1;position:sticky;top:calc(var(--pl-sat) + 4px);max-width:none!important;width:100%;margin:0!important}
+[data-phone-landscape] .dl-split .gtL-col-main>.reveal-1{padding:8px 12px!important;margin-bottom:8px!important;border-radius:16px!important}
+[data-phone-landscape] .dl-split .gtL-col-side>.dl-hist{order:5}
+[data-phone-landscape] .dl-split .gtL-col-side>*:last-child{order:9}
+[data-phone-landscape] .dl-split .gtL-col-main button,[data-phone-landscape] .dl-split .gtL-col-side button{min-height:44px}
+[data-phone-landscape] .dl-split .gtL-col-side .press-fx{min-height:44px;box-sizing:border-box}
+[data-phone-landscape] .dl-split .gtL-col-side [style*="font-size: 10px"]{font-size:12px!important}
+`;
 function DartsHistoryPanel({ history, players, tk, t, valueKey }) {
 	const [open, setOpen] = useState$11(false);
 	if (!history || history.length === 0) return null;
@@ -60493,7 +60604,10 @@ function DartsHistoryPanel({ history, players, tk, t, valueKey }) {
 		return p ? p.name : "?";
 	};
 	const entries = history.slice().reverse().slice(0, 25);
-	return /* @__PURE__ */ import_react.default.createElement("div", { style: { marginTop: 14 } }, /* @__PURE__ */ import_react.default.createElement("button", {
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "dl-hist",
+		style: { marginTop: 14 }
+	}, /* @__PURE__ */ import_react.default.createElement("button", {
 		onClick: () => setOpen((o) => !o),
 		className: "press-fx",
 		style: {
@@ -60724,14 +60838,14 @@ function DartsGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 		};
 	};
 	const shell = (inner) => /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage",
+		className: "gtL-shellpage dl-shell",
 		style: {
 			minHeight: "100vh",
 			background: tk.pageBg,
 			padding: "12px 12px 16px"
 		}
 	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-page gtL-game",
+		className: "gtL-page gtL-game pl-page pl-head-compact",
 		style: {
 			maxWidth: 380,
 			margin: "0 auto"
@@ -61107,7 +61221,7 @@ function CricketPlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewG
 		setConfirmingReset(false);
 		onNewGame();
 	};
-	return /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-e-block" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, tripleCloseNode, /* @__PURE__ */ import_react.default.createElement("div", {
+	return /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("style", null, DARTS_LANDSCAPE_CSS), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-e-block dl-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, tripleCloseNode, /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "reveal-1",
 		style: {
 			background: tk.card,
@@ -61493,14 +61607,14 @@ function CricketGame({ state, setState, onBack, onHome, onEndGame, lang = "de", 
 	};
 	const variantLabel = state.variant === "cutthroat" ? "Cut Throat" : state.variant === "masters" ? "Masters" : t("gameCricket");
 	const shell = (inner) => /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage",
+		className: "gtL-shellpage dl-shell",
 		style: {
 			minHeight: "100vh",
 			background: tk.pageBg,
 			padding: "12px 12px 16px"
 		}
 	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-page gtL-game",
+		className: "gtL-page gtL-game pl-page pl-head-compact",
 		style: {
 			maxWidth: 380,
 			margin: "0 auto"
@@ -61741,7 +61855,7 @@ function HiScorePlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewG
 		onNewGame();
 	};
 	const ranked = [...state.players].sort((a, b) => (state.scores[b.id] || 0) - (state.scores[a.id] || 0));
-	return /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-e-block" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement("div", {
+	return /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("style", null, DARTS_LANDSCAPE_CSS), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-e-block dl-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "reveal-1",
 		style: {
 			background: tk.card,
@@ -62196,14 +62310,14 @@ function HiScoreGame({ state, setState, onBack, onHome, onEndGame, lang = "de", 
 		});
 	};
 	const shell = (inner) => /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage",
+		className: "gtL-shellpage dl-shell",
 		style: {
 			minHeight: "100vh",
 			background: tk.pageBg,
 			padding: "12px 12px 16px"
 		}
 	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-page gtL-game",
+		className: "gtL-page gtL-game pl-page pl-head-compact",
 		style: {
 			maxWidth: 380,
 			margin: "0 auto"
@@ -62492,7 +62606,7 @@ function SplitScorePlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onN
 		onNewGame();
 	};
 	const ranked = [...state.players].sort((a, b) => (state.scores[b.id] || 0) - (state.scores[a.id] || 0));
-	return /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-e-block" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement("div", {
+	return /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("style", null, DARTS_LANDSCAPE_CSS), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-e-block dl-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "reveal-1",
 		style: {
 			background: tk.card,
@@ -62870,14 +62984,14 @@ function SplitScoreGame({ state, setState, onBack, onHome, onEndGame, lang = "de
 		});
 	};
 	const shell = (inner) => /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage",
+		className: "gtL-shellpage dl-shell",
 		style: {
 			minHeight: "100vh",
 			background: tk.pageBg,
 			padding: "12px 12px 16px"
 		}
 	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-page gtL-game",
+		className: "gtL-page gtL-game pl-page pl-head-compact",
 		style: {
 			maxWidth: 380,
 			margin: "0 auto"
@@ -63034,7 +63148,7 @@ function ShanghaiPlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNew
 	};
 	const ranked = [...state.players].sort((a, b) => (state.scores[b.id] || 0) - (state.scores[a.id] || 0));
 	const multLabel = (m) => m === 1 ? "1×" : m === 2 ? "2×" : "3×";
-	return /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-e-block" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement("div", {
+	return /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("style", null, DARTS_LANDSCAPE_CSS), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-e-block dl-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "reveal-1",
 		style: {
 			background: tk.card,
@@ -63449,14 +63563,14 @@ function ShanghaiGame({ state, setState, onBack, onHome, onEndGame, lang = "de",
 		});
 	};
 	const shell = (inner) => /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage",
+		className: "gtL-shellpage dl-shell",
 		style: {
 			minHeight: "100vh",
 			background: tk.pageBg,
 			padding: "12px 12px 16px"
 		}
 	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-page gtL-game",
+		className: "gtL-page gtL-game pl-page pl-head-compact",
 		style: {
 			maxWidth: 380,
 			margin: "0 auto"
@@ -65001,6 +65115,22 @@ function plRetain() {
 		plRefs = Math.max(0, plRefs - 1);
 		if (!plRefs) plUnbind();
 	};
+}
+function plSubscribe(cb) {
+	plSubs.add(cb);
+	const rel = plRetain();
+	if (plActive == null) updatePhoneLandscape();
+	return () => {
+		plSubs.delete(cb);
+		rel();
+	};
+}
+function plSnapshot() {
+	if (plActive == null) updatePhoneLandscape();
+	return !!plActive;
+}
+function usePhoneLandscape() {
+	return import_react.default.useSyncExternalStore(plSubscribe, plSnapshot, () => false);
 }
 function usePhoneLandscapeRoot(viewMode, loaded) {
 	import_react.default.useLayoutEffect(() => plRetain(), []);
@@ -98851,12 +98981,14 @@ function gtYearReviewImage(model, t, theme) {
 // web/src/export/share-preview.js
 var share_preview_exports = /* @__PURE__ */ __exportAll({ ShareImagePreview: () => ShareImagePreview });
 function ShareImagePreview({ url, onClose, t }) {
+	const plLand = usePhoneLandscape();
 	if (!url) return null;
 	const list = Array.isArray(url) ? url : [url];
 	const stop = (e) => e.stopPropagation();
 	const lim = "min(64vh, calc(100vh - 250px))";
 	return /* @__PURE__ */ import_react.default.createElement("div", {
 		onClick: onClose,
+		className: "gtsp-ov",
 		style: {
 			position: "fixed",
 			inset: 0,
@@ -98873,6 +99005,7 @@ function ShareImagePreview({ url, onClose, t }) {
 	}, /* @__PURE__ */ import_react.default.createElement("button", {
 		type: "button",
 		onClick: onClose,
+		className: "gtsp-x",
 		"aria-label": gtTx("gtxClose"),
 		style: {
 			position: "absolute",
@@ -98904,16 +99037,20 @@ function ShareImagePreview({ url, onClose, t }) {
 			fontWeight: 600,
 			fontFamily: "'Inter', sans-serif"
 		}
-	}, "✕")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		margin: "auto",
-		display: "flex",
-		flexDirection: "column",
-		alignItems: "center",
-		gap: 16,
-		maxWidth: "100%",
-		minWidth: 0
-	} }, /* @__PURE__ */ import_react.default.createElement("div", {
+	}, "✕")), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtsp-in",
+		style: {
+			margin: "auto",
+			display: "flex",
+			flexDirection: "column",
+			alignItems: "center",
+			gap: 16,
+			maxWidth: "100%",
+			minWidth: 0
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
 		onClick: stop,
+		className: "gtsp-imgs",
 		style: {
 			flexShrink: 0,
 			maxHeight: list.length > 1 ? lim : "none",
@@ -98937,7 +99074,10 @@ function ShareImagePreview({ url, onClose, t }) {
 			borderRadius: 6,
 			boxShadow: "0 16px 44px rgba(0,0,0,0.55)"
 		}
-	}))), /* @__PURE__ */ import_react.default.createElement("p", {
+	}))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtsp-side",
+		style: plLand ? void 0 : { display: "contents" }
+	}, /* @__PURE__ */ import_react.default.createElement("p", {
 		onClick: stop,
 		style: {
 			flexShrink: 0,
@@ -98977,7 +99117,7 @@ function ShareImagePreview({ url, onClose, t }) {
 			fontFamily: "'Inter', sans-serif",
 			textDecoration: "none"
 		}
-	}, t("shareResultDownload") + (list.length > 1 ? " " + (i + 1) : ""))))));
+	}, t("shareResultDownload") + (list.length > 1 ? " " + (i + 1) : "")))))));
 }
 // web/src/shared/soft-block.js
 var soft_block_exports = /* @__PURE__ */ __exportAll({
@@ -99179,7 +99319,9 @@ function GtSoftBlock({ H, win, rk, S, lv, solo }) {
 	const light = S.th === "light";
 	const c = win ? S.th === "light" || S.th === "noir" || S.bright ? S.acc : gtSbVivid(S.acc) : S.base;
 	const T = win ? 18 : 22;
-	const fs = lv === 1 ? 92 : lv === 2 ? 70 : 60;
+	const fs0 = lv === 1 ? 92 : lv === 2 ? 70 : 60;
+	const hRef = lv === 1 ? 150 : lv === 2 ? 118 : 100;
+	const fs = H < hRef ? Math.round(fs0 * H / hRef) : fs0;
 	const fl = win ? S.bright ? .14 : .2 : S.fl, fr = win ? S.bright ? .22 : .3 : S.fr, hl = win ? S.bright ? .3 : .15 : S.hl, bev = win ? S.bright ? .5 : .32 : S.bev, bdk = win ? S.bright ? .22 : .34 : S.bdk, lidSh = win ? S.bright ? .14 : .22 : S.lidSh, ridge = win ? S.bright ? .6 : .34 : S.ridge;
 	const front = `linear-gradient(90deg, rgba(0,0,0,${fl}) 0%, rgba(0,0,0,0) 15%, rgba(0,0,0,0) 80%, rgba(0,0,0,${fr}) 100%), radial-gradient(75% 50% at 20% 22%, rgba(255,255,255,${hl}) 0%, rgba(255,255,255,0) 70%), linear-gradient(180deg, ${shadeHex(c, .06)} 0%, ${c} 40%, ${shadeHex(c, light && !win ? -.12 : -.24)} 100%)`;
 	const lid = `linear-gradient(180deg, ${shadeHex(c, light && !win ? .55 : .15)} 0%, ${shadeHex(c, light && !win ? .35 : .08)} 100%)`;
@@ -106434,6 +106576,7 @@ var podium_exports = /* @__PURE__ */ __exportAll({
 });
 function PodiumOverlay({ open, onClose, onRestart, ranked, tk, t, bestRecord, gameLabel, gameId, theme }) {
 	const playCount = usePlayCount(open);
+	const plLand = usePhoneLandscape();
 	const [isSharing, setIsSharing] = useState$11(false);
 	const [previewUrl, setPreviewUrl] = useState$11(null);
 	useEffect$15(() => {
@@ -106526,11 +106669,15 @@ function PodiumOverlay({ open, onClose, onRestart, ranked, tk, t, bestRecord, ga
 		const rk = gtRk[idx] || idx + 1;
 		const lv = Math.min(3, rk);
 		const win = rk === 1;
-		const H = [
+		const H = (plLand ? [
+			104,
+			84,
+			72
+		] : [
 			150,
 			118,
 			100
-		][lv - 1];
+		])[lv - 1];
 		const sc = fmt(entry.score);
 		const front = win && soloWin;
 		return /* @__PURE__ */ import_react.default.createElement("div", {
@@ -106636,7 +106783,7 @@ function PodiumOverlay({ open, onClose, onRestart, ranked, tk, t, bestRecord, ga
 		stroke: "currentColor",
 		strokeWidth: 2.4,
 		strokeLinecap: "round"
-	})))), /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	})))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtsb-hd" }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		position: "relative",
 		textAlign: "center",
 		padding: "0 40px",
@@ -106671,10 +106818,13 @@ function PodiumOverlay({ open, onClose, onRestart, ranked, tk, t, bestRecord, ga
 		name: "starCustom",
 		size: 12,
 		color: S.accText
-	}), t("newPersonalBest")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		position: "relative",
-		marginTop: 20
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtsb-row" }, order.map(col)), /* @__PURE__ */ import_react.default.createElement("div", {
+	}), t("newPersonalBest"))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtsb-stage",
+		style: {
+			position: "relative",
+			marginTop: 20
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtsb-row" }, order.map(col)), /* @__PURE__ */ import_react.default.createElement("div", {
 		"aria-hidden": true,
 		style: {
 			height: 18,
@@ -106682,7 +106832,7 @@ function PodiumOverlay({ open, onClose, onRestart, ranked, tk, t, bestRecord, ga
 			background: `radial-gradient(50% 50% at 50% 50%, ${S.ground} 0%, transparent 100%)`,
 			pointerEvents: "none"
 		}
-	})), rest.length > 0 && /* @__PURE__ */ import_react.default.createElement("ol", { className: "gtsb-list" }, rest.map((e, i) => {
+	})), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtsb-side" }, rest.length > 0 && /* @__PURE__ */ import_react.default.createElement("ol", { className: "gtsb-list" }, rest.map((e, i) => {
 		const k = i + 3;
 		const sc = fmt(e && e.score);
 		return /* @__PURE__ */ import_react.default.createElement("li", { key: k }, /* @__PURE__ */ import_react.default.createElement("span", { style: {
@@ -106761,7 +106911,7 @@ function PodiumOverlay({ open, onClose, onRestart, ranked, tk, t, bestRecord, ga
 		strokeWidth: "2",
 		strokeLinecap: "round",
 		strokeLinejoin: "round"
-	})), t("shareResultLabel")))), /* @__PURE__ */ import_react.default.createElement(ShareImagePreview, {
+	})), t("shareResultLabel"))))), /* @__PURE__ */ import_react.default.createElement(ShareImagePreview, {
 		url: previewUrl,
 		onClose: () => setPreviewUrl(null),
 		t

@@ -19040,6 +19040,80 @@ function MinigolfLogo({ color }) {
 		opacity: "0.85"
 	}));
 }
+// web/src/shared/pl-shared.js
+var PL_SHARED_ID = "gt-pl-shared-css";
+var PL_SHARED_CSS = `
+/* ---- GameHeader: kompakt (48 px), gilt fuer alle Spiele ---- */
+[data-phone-landscape] .gt-gamehead { display: flex; align-items: center; gap: 10px; min-height: var(--pl-head, 48px); max-height: 52px; box-sizing: border-box; padding-top: 2px; padding-bottom: 2px; margin-bottom: 6px; }
+[data-phone-landscape] .gt-gamehead > div:first-of-type { margin-bottom: 0 !important; min-height: 44px !important; flex: none; order: 0; }
+[data-phone-landscape] .gt-gamehead > div:nth-of-type(n+2):not(.gt-headbtns) { flex: 1 1 auto; min-width: 0; order: 1; }
+[data-phone-landscape] .gt-gamehead > .gt-headbtns { position: static !important; order: 2; flex: none; margin-left: auto; }
+[data-phone-landscape] .gt-gamehead > .gt-headbtns ~ .gt-headbtns { margin-left: 0; }
+[data-phone-landscape] .gt-gamehead h1 { font-size: 20px !important; line-height: 1.1 !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; overflow-wrap: normal !important; }
+[data-phone-landscape] .gt-gamehead h1 + div { margin-top: 1px !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* ---- Regeln-Dialog (RulesSheet): mittig, breit, eigenes Scrollen ---- */
+[data-phone-landscape] div:has(> [role="dialog"][aria-labelledby^="gt-rs-"]) { align-items: center !important; justify-content: center; box-sizing: border-box; padding: max(8px, var(--pl-sat)) max(12px, var(--pl-sar)) max(8px, var(--pl-sab)) max(12px, var(--pl-sal)); }
+[data-phone-landscape] [role="dialog"][aria-labelledby^="gt-rs-"] { max-width: min(640px, 100%) !important; margin: 0 !important; border-radius: 22px !important; padding: 14px 20px !important; max-height: calc(var(--pl-avail) - 16px - var(--pl-sat) - var(--pl-sab)) !important; }
+
+/* ---- Ziffernfeld-Dialoge (gtL-padov / gtL-padsheet, z. B. Skyjo): links Name und Wert, rechts Tastenfeld ---- */
+[data-phone-landscape] .gtL-padov { align-items: center !important; box-sizing: border-box; padding: max(8px, var(--pl-sat)) max(12px, var(--pl-sar)) max(8px, var(--pl-sab)) max(12px, var(--pl-sal)); overflow-y: auto; }
+[data-phone-landscape] .gtL-padsheet { box-sizing: border-box; border-radius: 20px !important; max-width: min(640px, 100%) !important; padding: 12px 16px !important; max-height: calc(var(--pl-avail) - 16px - var(--pl-sat) - var(--pl-sab)) !important; overflow-y: auto !important; overscroll-behavior: contain; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: auto auto 1fr; column-gap: 18px; align-content: start; }
+[data-phone-landscape] .gtL-padsheet > :not([style*="repeat(3"]) { grid-column: 1; min-width: 0; }
+[data-phone-landscape] .gtL-padsheet > [style*="repeat(3"] { grid-column: 2; grid-row: 1 / 4; align-self: start; margin-bottom: 0 !important; }
+[data-phone-landscape] .gtL-padsheet > [style*="repeat(3"] > button { min-height: 44px; padding-top: 8px !important; padding-bottom: 8px !important; }
+[data-phone-landscape] .gtL-padsheet > button:not([style*="repeat(3"]) { align-self: end; min-height: 48px; }
+[data-phone-landscape] .gtL-padsheet > button[data-gt-sound="1"] { position: sticky; bottom: 0; z-index: 2; }
+[data-phone-landscape] .gtL-padsheet button { min-height: 44px; }
+[data-phone-landscape] .gtL-padsheet > :first-child { margin-bottom: 8px !important; }
+[data-phone-landscape] .gtL-padsheet > :first-child > button { min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; margin: -6px -8px -6px 0; }
+[data-phone-landscape] .gtL-padsheet > :nth-child(2) { margin-bottom: 8px !important; }
+
+/* ---- Setup: Startleiste (GtStartBar) flacher ---- */
+[data-phone-landscape] .gt-su-cta { padding: 12px 12px calc(8px + var(--pl-sab, 0px)); margin-top: 4px; }
+[data-phone-landscape] .gt-su-btn { min-height: 48px; border-radius: 16px; }
+[data-phone-landscape] .gt-su-ib, [data-phone-landscape] .gt-su-add { min-height: 44px; }
+[data-phone-landscape] .gt-gm-sb { min-height: 44px !important; min-width: 44px; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; }
+[data-phone-landscape] .gt-gm-in { min-height: 44px; box-sizing: border-box; }
+
+/* ---- Podest (PodiumOverlay): links Sieger, rechts Rangliste und Aktionen ---- */
+[data-phone-landscape] .gtsb-modal { max-width: min(760px, 100%) !important; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); grid-template-rows: auto 1fr; column-gap: 18px; align-items: start; padding: 14px 16px 14px !important; border-radius: 24px !important; max-height: calc(var(--pl-avail) - 16px - var(--pl-sat) - var(--pl-sab)); }
+[data-phone-landscape] .gtsb-hd { grid-column: 1; grid-row: 1; }
+[data-phone-landscape] .gtsb-hd > div { padding: 0 !important; font-size: 20px !important; text-align: left !important; justify-content: flex-start !important; }
+[data-phone-landscape] .gtsb-stage { grid-column: 1; grid-row: 2; align-self: end; margin-top: 8px !important; }
+[data-phone-landscape] .gtsb-side { grid-column: 2; grid-row: 1 / 3; display: flex; flex-direction: column; min-height: 0; max-height: calc(var(--pl-avail) - 16px - var(--pl-sat) - var(--pl-sab) - 28px); padding-top: 38px; box-sizing: border-box; }
+[data-phone-landscape] .gtsb-side .gtsb-list { margin-top: 0; flex: 0 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+[data-phone-landscape] .gtsb-side .gtsb-acts { margin-top: auto; padding-top: 12px; flex: none; }
+[data-phone-landscape] .gtsb-side .gtsb-acts > button { min-height: 48px; }
+
+/* ---- Exportvorschau (ShareImagePreview, Bild links, Hinweis und Aktionen rechts) ---- */
+[data-phone-landscape] .gtsp-ov { padding: max(10px, var(--pl-sat)) max(60px, calc(var(--pl-sar) + 16px)) max(10px, var(--pl-sab)) max(16px, var(--pl-sal)) !important; }
+[data-phone-landscape] .gtsp-in { flex-direction: row !important; align-items: center !important; justify-content: center; gap: 24px !important; width: 100%; }
+[data-phone-landscape] .gtsp-imgs { max-height: calc(var(--pl-avail) - 20px) !important; }
+[data-phone-landscape] .gtsp-imgs img { max-height: calc(var(--pl-avail) - 24px) !important; }
+[data-phone-landscape] .gtsp-side { display: flex; flex-direction: column; align-items: center; gap: 14px; flex: 0 1 260px; min-width: 0; }
+[data-phone-landscape] .gtsp-x { top: calc(6px + var(--pl-sat)) !important; right: calc(6px + var(--pl-sar)) !important; }
+
+/* ---- Turnier-Exportblatt (GtStExportSheet): links Auswahl, rechts Vorschau ---- */
+[data-phone-landscape] .gtstx-ov { padding: max(8px, var(--pl-sat)) max(12px, var(--pl-sar)) max(8px, var(--pl-sab)) max(12px, var(--pl-sal)) !important; }
+[data-phone-landscape] .gtstx-panel { max-width: min(860px, 100%) !important; display: grid !important; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr); grid-template-rows: auto auto auto 1fr auto; }
+[data-phone-landscape] .gtstx-head { grid-column: 1 / 3; grid-row: 1; }
+[data-phone-landscape] .gtstx-design { grid-column: 1; grid-row: 2; }
+[data-phone-landscape] .gtstx-status { grid-column: 1; grid-row: 3; }
+[data-phone-landscape] .gtstx-pages { grid-column: 2; grid-row: 2 / 6; min-height: 0; }
+[data-phone-landscape] .gtstx-foot { grid-column: 1; grid-row: 5; }
+`;
+function plInstallSharedCss() {
+	if (typeof document === "undefined") return;
+	try {
+		if (document.getElementById(PL_SHARED_ID)) return;
+		const s = document.createElement("style");
+		s.id = PL_SHARED_ID;
+		s.textContent = PL_SHARED_CSS;
+		document.head.appendChild(s);
+	} catch (_) {}
+}
+plInstallSharedCss();
 // web/src/shared/game-header.js
 var game_header_exports = /* @__PURE__ */ __exportAll({
 	GT_HEAD_CSS: () => GT_HEAD_CSS,
@@ -21565,6 +21639,7 @@ function GroupManager({ t, tk }) {
 		margin: 0,
 		maxWidth: 260
 	} }, t("groupManagerEmpty")), /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "gt-gm-sb",
 		style: {
 			...smallBtn,
 			color: tk.gold,
@@ -21586,6 +21661,7 @@ function GroupManager({ t, tk }) {
 			alignItems: "center",
 			gap: 8
 		} }, /* @__PURE__ */ import_react.default.createElement("input", {
+			className: "gt-gm-in",
 			value: g.name,
 			onChange: (e) => updateGroup(g.id, { name: e.target.value }),
 			style: nameInput
@@ -21594,9 +21670,11 @@ function GroupManager({ t, tk }) {
 			color: tk.muted,
 			fontFamily: "'Inter', sans-serif"
 		} }, "(", g.players.length, ")"), /* @__PURE__ */ import_react.default.createElement("button", {
+			className: "gt-gm-sb",
 			style: smallBtn,
 			onClick: () => setOpenId(isOpen ? null : g.id)
 		}, isOpen ? /* @__PURE__ */ import_react.default.createElement(TriUp, null) : /* @__PURE__ */ import_react.default.createElement(TriDown, null)), /* @__PURE__ */ import_react.default.createElement("button", {
+			className: "gt-gm-sb",
 			style: {
 				...smallBtn,
 				color: "#E0524A",
@@ -21616,6 +21694,7 @@ function GroupManager({ t, tk }) {
 				gap: 6
 			}
 		}, /* @__PURE__ */ import_react.default.createElement("input", {
+			className: "gt-gm-in",
 			value: name,
 			onChange: (e) => {
 				const next = [...g.players];
@@ -21625,12 +21704,14 @@ function GroupManager({ t, tk }) {
 			placeholder: t("groupManagerPlayerPlaceholder"),
 			style: playerInput
 		}), /* @__PURE__ */ import_react.default.createElement("button", {
+			className: "gt-gm-sb",
 			style: {
 				...smallBtn,
 				padding: "6px 8px"
 			},
 			onClick: () => updateGroup(g.id, { players: g.players.filter((_, j) => j !== i) })
 		}, /* @__PURE__ */ import_react.default.createElement(XMark, null)))), /* @__PURE__ */ import_react.default.createElement("button", {
+			className: "gt-gm-sb",
 			style: {
 				...smallBtn,
 				alignSelf: "flex-start"
@@ -21638,6 +21719,7 @@ function GroupManager({ t, tk }) {
 			onClick: () => updateGroup(g.id, { players: [...g.players, ""] })
 		}, t("addPlayer"))));
 	}), groups.length > 0 && /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "gt-gm-sb",
 		style: {
 			...smallBtn,
 			color: tk.gold,
@@ -34746,6 +34828,7 @@ function GtStExportSheet({ tournament, t, onClose, initialTheme }) {
 	return /* @__PURE__ */ import_react.default.createElement("div", {
 		role: "presentation",
 		onClick: onClose,
+		className: "gtstx-ov",
 		style: {
 			position: "fixed",
 			inset: 0,
@@ -34758,6 +34841,7 @@ function GtStExportSheet({ tournament, t, onClose, initialTheme }) {
 		}
 	}, /* @__PURE__ */ import_react.default.createElement("div", {
 		ref: panelRef,
+		className: "gtstx-panel",
 		role: "dialog",
 		"aria-modal": "true",
 		"aria-labelledby": "gtstx-title",
@@ -34775,12 +34859,15 @@ function GtStExportSheet({ tournament, t, onClose, initialTheme }) {
 			boxShadow: "0 24px 60px rgba(0,0,0,0.5)",
 			overflow: "hidden"
 		}
-	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		alignItems: "center",
-		gap: 12,
-		padding: "14px 14px 10px 18px"
-	} }, /* @__PURE__ */ import_react.default.createElement("h2", {
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtstx-head",
+		style: {
+			display: "flex",
+			alignItems: "center",
+			gap: 12,
+			padding: "14px 14px 10px 18px"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("h2", {
 		id: "gtstx-title",
 		style: {
 			margin: 0,
@@ -34814,7 +34901,10 @@ function GtStExportSheet({ tournament, t, onClose, initialTheme }) {
 		stroke: "#F2F3EE",
 		strokeWidth: 2.2,
 		strokeLinecap: "round"
-	})))), /* @__PURE__ */ import_react.default.createElement("div", { style: { padding: "0 18px 12px" } }, /* @__PURE__ */ import_react.default.createElement("p", { style: {
+	})))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtstx-design",
+		style: { padding: "0 18px 12px" }
+	}, /* @__PURE__ */ import_react.default.createElement("p", { style: {
 		...sub,
 		marginBottom: 8,
 		fontWeight: 600,
@@ -34830,6 +34920,7 @@ function GtStExportSheet({ tournament, t, onClose, initialTheme }) {
 		...sub,
 		marginTop: 8
 	} }, tr("stxDesignHint", "Ändert nur dieses Bild, nicht das Turnier."))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtstx-status",
 		role: "status",
 		"aria-live": "polite",
 		style: {
@@ -34838,15 +34929,18 @@ function GtStExportSheet({ tournament, t, onClose, initialTheme }) {
 			fontWeight: 700,
 			color: "#D9DDDF"
 		}
-	}, state.busy ? tr("stxRendering", "Bild wird erstellt") : state.err ? "" : pageCount), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		flex: 1,
-		overflowY: "auto",
-		padding: "4px 18px 16px",
-		display: "flex",
-		flexDirection: "column",
-		gap: 18,
-		WebkitOverflowScrolling: "touch"
-	} }, state.err ? /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	}, state.busy ? tr("stxRendering", "Bild wird erstellt") : state.err ? "" : pageCount), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtstx-pages",
+		style: {
+			flex: 1,
+			overflowY: "auto",
+			padding: "4px 18px 16px",
+			display: "flex",
+			flexDirection: "column",
+			gap: 18,
+			WebkitOverflowScrolling: "touch"
+		}
+	}, state.err ? /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		padding: "24px 4px",
 		display: "flex",
 		flexDirection: "column",
@@ -34920,13 +35014,16 @@ function GtStExportSheet({ tournament, t, onClose, initialTheme }) {
 			minHeight: 44,
 			boxSizing: "border-box"
 		}
-	}, N > 1 ? tr("stxDownloadPage", "Seite {n} herunterladen", { n: i + 1 }) : tr("shareResultDownload", "Bild herunterladen"))))), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		padding: "12px 18px 16px",
-		borderTop: "1px solid rgba(255,255,255,0.08)",
-		display: "flex",
-		flexDirection: "column",
-		gap: 8
-	} }, note ? /* @__PURE__ */ import_react.default.createElement("p", {
+	}, N > 1 ? tr("stxDownloadPage", "Seite {n} herunterladen", { n: i + 1 }) : tr("shareResultDownload", "Bild herunterladen"))))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtstx-foot",
+		style: {
+			padding: "12px 18px 16px",
+			borderTop: "1px solid rgba(255,255,255,0.08)",
+			display: "flex",
+			flexDirection: "column",
+			gap: 8
+		}
+	}, note ? /* @__PURE__ */ import_react.default.createElement("p", {
 		role: "status",
 		style: {
 			...sub,
@@ -46488,6 +46585,33 @@ var game_exports$13 = /* @__PURE__ */ __exportAll({
 	wizardRoundScore: () => wizardRoundScore,
 	wizardTotals: () => wizardTotals
 });
+var WZ_LAND_CSS = `
+:where(html:not([data-phone-landscape])) .wz-tr { display: none !important; }
+[data-phone-landscape] .wz-land { padding-top: calc(var(--pl-sat) + 6px) !important; padding-bottom: calc(var(--pl-sab) + 8px) !important; --wz-edw: clamp(296px, 46vw, 400px); }
+[data-phone-landscape] .wz-inner { max-width: none !important; margin: 0 !important; width: 100% !important; }
+[data-phone-landscape] .wz-split { margin-top: 8px; display: grid !important; grid-template-columns: minmax(0, 1fr) clamp(196px, 32vw, 300px); grid-template-rows: auto minmax(0, 1fr); gap: 0 12px; align-items: start; }
+[data-phone-landscape] .wz-split > .gtL-col-main { display: block; grid-column: 1; grid-row: 1 / span 2; min-width: 0; }
+[data-phone-landscape] .wz-split > .gtL-col-side { display: block; grid-column: 2; grid-row: 1; min-width: 0; }
+[data-phone-landscape] .wz-split > .gtL-col-side2 { display: block; grid-column: 2; grid-row: 2; min-width: 0; max-height: max(180px, calc(var(--pl-body) - 8px)); overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding-bottom: 2px; }
+[data-phone-landscape] .wz-split > .gtL-col-side2 > div:first-child { margin-top: 0 !important; }
+[data-phone-landscape] .wz-land.wz-editing .wz-split { grid-template-columns: minmax(0, 1fr); margin-right: calc(var(--wz-edw) + 10px + var(--pl-sar) - var(--pl-gutter-r)); }
+[data-phone-landscape] .wz-land.wz-editing .wz-split > :is(.gtL-col-side, .gtL-col-side2) { display: none; }
+[data-phone-landscape] .wz-land.wz-editing .wz-split > .gtL-col-main { grid-row: 1; }
+[data-phone-landscape] .wz-scroll { overflow: auto !important; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; max-height: max(180px, calc(var(--pl-body) - 8px)); }
+[data-phone-landscape] .wz-grid { grid-template-columns: 52px repeat(var(--wz-n), 52px 72px minmax(62px, 1fr)) !important; min-width: calc(52px + var(--wz-n) * 186px) !important; width: auto !important; }
+[data-phone-landscape] .wz-th { grid-column: span 3 !important; height: 44px; box-sizing: border-box; padding: 6px 4px !important; display: flex; align-items: center; justify-content: center; }
+[data-phone-landscape] .wz-th.wz-corner { grid-column: auto !important; }
+[data-phone-landscape] .wz-thn { font-size: 14px !important; }
+[data-phone-landscape] .wz-sub { top: 44px !important; font-size: 11.5px !important; padding: 5px 2px !important; line-height: 1.2; display: flex; align-items: center; justify-content: center; min-height: 34px; box-sizing: border-box; }
+[data-phone-landscape] .wz-rd { min-height: 44px; box-sizing: border-box; display: grid; place-items: center; font-size: 15px !important; padding: 0 !important; }
+[data-phone-landscape] .wz-cell { min-height: 44px; box-sizing: border-box; font-size: 16px !important; padding: 0 2px !important; }
+[data-phone-landscape] .wz-editor { left: auto !important; right: 0 !important; bottom: 0 !important; top: calc(var(--pl-sat) + var(--pl-head) + 6px) !important; width: calc(var(--wz-edw) + var(--pl-sar)) !important; box-sizing: border-box; border-radius: 18px 0 0 0; padding: 10px calc(14px + var(--pl-sar)) calc(10px + var(--pl-sab)) 14px !important; overflow-y: auto; overscroll-behavior: contain; border-left: 1px solid rgba(212,175,90,0.35); }
+[data-phone-landscape] .wz-editor .wz-n { flex: 1 0 40px !important; min-height: 44px; font-size: 16px !important; padding: 0 !important; }
+[data-phone-landscape] .wz-editor .wz-x { min-width: 44px; min-height: 44px; display: inline-grid; place-items: center; }
+[data-phone-landscape] .wz-editor .wz-save { position: sticky; bottom: 0; min-height: 48px; box-shadow: 0 -6px 10px -4px rgba(0,0,0,0.25); }
+[data-phone-landscape] .wz-editor .wz-lbl { font-size: 11.5px !important; }
+[data-phone-landscape] .wz-actions button { min-height: 44px; }
+`;
 function wizardRoundCount(playerCount) {
 	return Math.floor(60 / playerCount);
 }
@@ -46639,21 +46763,24 @@ function WizardEditorPanel({ editing, players, rounds, onSave, onClose, theme, t
 		onSave(editing.playerId, editing.round, bidNum, tricksNum);
 	};
 	const maxQuick = Math.min(editing.round, 10);
-	const field = (label, value, setValue) => /* @__PURE__ */ import_react.default.createElement("div", { style: { flex: 1 } }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 10,
-		color: wt.muted,
-		letterSpacing: "0.05em",
-		textTransform: "uppercase",
-		marginBottom: 4,
-		fontFamily: "'Inter', sans-serif"
-	} }, label), editing.round <= 10 ? /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	const field = (label, value, setValue) => /* @__PURE__ */ import_react.default.createElement("div", { style: { flex: 1 } }, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "wz-lbl",
+		style: {
+			fontSize: 10,
+			color: wt.muted,
+			letterSpacing: "0.05em",
+			textTransform: "uppercase",
+			marginBottom: 4,
+			fontFamily: "'Inter', sans-serif"
+		}
+	}, label), editing.round <= 10 ? /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		flexWrap: "wrap",
 		gap: 4
 	} }, Array.from({ length: maxQuick + 1 }, (_, n) => n).map((n) => /* @__PURE__ */ import_react.default.createElement("button", {
 		key: n,
 		onClick: () => setValue(String(n)),
-		className: "press-fx",
+		className: "press-fx wz-n",
 		style: {
 			flex: "1 0 15%",
 			border: `1.5px solid ${String(n) === value ? wt.gold : wt.border}`,
@@ -46687,17 +46814,22 @@ function WizardEditorPanel({ editing, players, rounds, onSave, onClose, theme, t
 			color: wt.parch
 		}
 	}));
-	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		position: "fixed",
-		left: 0,
-		right: 0,
-		bottom: 0,
-		background: wt.card,
-		borderTop: `2px solid ${wt.gold}`,
-		boxShadow: "0 -6px 20px rgba(0,0,0,0.4)",
-		padding: "14px 16px calc(14px + env(safe-area-inset-bottom))",
-		zIndex: 70
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "wz-editor",
+		role: "dialog",
+		"aria-label": t("roundLabel")(editing.round) + " · " + (player ? player.name : ""),
+		style: {
+			position: "fixed",
+			left: 0,
+			right: 0,
+			bottom: 0,
+			background: wt.card,
+			borderTop: `2px solid ${wt.gold}`,
+			boxShadow: "0 -6px 20px rgba(0,0,0,0.4)",
+			padding: "14px 16px calc(14px + env(safe-area-inset-bottom))",
+			zIndex: 70
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		justifyContent: "space-between",
 		alignItems: "center",
@@ -46708,7 +46840,9 @@ function WizardEditorPanel({ editing, players, rounds, onSave, onClose, theme, t
 		fontWeight: 600,
 		color: wt.gold
 	} }, t("roundLabel")(editing.round), " · ", player?.name), /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "wz-x",
 		onClick: onClose,
+		"aria-label": t("mgClose"),
 		style: {
 			border: "none",
 			background: "transparent",
@@ -46726,6 +46860,7 @@ function WizardEditorPanel({ editing, players, rounds, onSave, onClose, theme, t
 		marginBottom: 10,
 		fontFamily: "'Inter', sans-serif"
 	} }, preview !== null ? /* @__PURE__ */ import_react.default.createElement("span", null, "· ", /* @__PURE__ */ import_react.default.createElement("strong", { style: { color: preview >= 0 ? wt.hues[1] : wt.hues[2] } }, preview >= 0 ? `+${preview}` : preview), " ", t("pointsThisRound")) : t("enterBidAndTricks")), /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "wz-save",
 		"data-gt-sound": "1",
 		onClick: commit,
 		disabled: bidNum === null || tricksNum === null,
@@ -46834,12 +46969,12 @@ function WizardPlay({ players, rounds, setRounds, onResetSheet, onEditPlayers, o
 	const ANSAGE_W = 40;
 	const PUNKTE_W = 68;
 	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage wizard-parchment",
+		className: "gtL-shellpage wizard-parchment wz-land pl-page pl-head-compact" + (editing ? " wz-editing" : ""),
 		style: {
 			...wizardPageShellStyle(theme),
 			paddingBottom: editing ? 220 : 32
 		}
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, WIZARD_PARCHMENT_CSS), celebration, perfectBidNode, /* @__PURE__ */ import_react.default.createElement(PodiumOverlay, {
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, WIZARD_PARCHMENT_CSS, WZ_LAND_CSS), celebration, perfectBidNode, /* @__PURE__ */ import_react.default.createElement(PodiumOverlay, {
 		gameId: "wizard",
 		gameLabel: t("gameWizard"),
 		open: podiumOpen,
@@ -46850,7 +46985,7 @@ function WizardPlay({ players, rounds, setRounds, onResetSheet, onEditPlayers, o
 		t,
 		theme
 	}), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "reveal-1 gtL-game",
+		className: "reveal-1 gtL-game wz-inner",
 		style: {
 			maxWidth: 560,
 			margin: "0 auto",
@@ -46867,7 +47002,7 @@ function WizardPlay({ players, rounds, setRounds, onResetSheet, onEditPlayers, o
 		onBack,
 		theme,
 		t
-	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-e-fit" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side" }, winnerIdx !== -1 && /* @__PURE__ */ import_react.default.createElement("div", {
+	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-e-fit wz-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side" }, winnerIdx !== -1 && /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "reveal-1",
 		style: {
 			border: `1px solid ${wt.gold}`,
@@ -46890,33 +47025,44 @@ function WizardPlay({ players, rounds, setRounds, onResetSheet, onEditPlayers, o
 			verticalAlign: "-2px",
 			marginRight: 5
 		}
-	}), gtWinLine(t, "wizardWinsWith", "winsTie", players.filter((_, i) => totalsArr[i] === maxTotal).map((q) => q.name), maxTotal))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		overflowX: "auto",
-		overflowY: "hidden",
-		overscrollBehaviorX: "contain",
-		border: `1px solid ${wt.border}`,
-		borderRadius: 14,
-		background: wt.card,
-		width: "100%",
-		boxSizing: "border-box",
-		margin: "0 auto"
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "grid",
-		gridTemplateColumns: `48px repeat(${players.length}, minmax(${ANSAGE_W}px, 1fr) minmax(${PUNKTE_W}px, 1fr))`,
-		minWidth: 48 + players.length * 108,
-		width: "100%"
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		position: "sticky",
-		left: 0,
-		top: 0,
-		background: wt.card,
-		borderBottom: `1px solid ${wt.border}`,
-		borderRight: `2px solid ${wt.groupLine}`,
-		zIndex: 3
-	} }), players.map((p, i) => {
+	}), gtWinLine(t, "wizardWinsWith", "winsTie", players.filter((_, i) => totalsArr[i] === maxTotal).map((q) => q.name), maxTotal))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "wz-scroll",
+		style: {
+			overflowX: "auto",
+			overflowY: "hidden",
+			overscrollBehaviorX: "contain",
+			border: `1px solid ${wt.border}`,
+			borderRadius: 14,
+			background: wt.card,
+			width: "100%",
+			boxSizing: "border-box",
+			margin: "0 auto"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "wz-grid",
+		style: {
+			"--wz-n": players.length,
+			display: "grid",
+			gridTemplateColumns: `48px repeat(${players.length}, minmax(${ANSAGE_W}px, 1fr) minmax(${PUNKTE_W}px, 1fr))`,
+			minWidth: 48 + players.length * 108,
+			width: "100%"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "wz-th wz-corner",
+		style: {
+			position: "sticky",
+			left: 0,
+			top: 0,
+			background: wt.card,
+			borderBottom: `1px solid ${wt.border}`,
+			borderRight: `2px solid ${wt.groupLine}`,
+			zIndex: 3
+		}
+	}), players.map((p, i) => {
 		const done = filledRoundsPerPlayer(p.id) === roundCount;
 		return /* @__PURE__ */ import_react.default.createElement("div", {
 			key: p.id,
+			className: "wz-th",
 			style: {
 				gridColumn: "span 2",
 				position: "sticky",
@@ -46928,74 +47074,105 @@ function WizardPlay({ players, rounds, setRounds, onResetSheet, onEditPlayers, o
 				background: !finished && !done ? `${wt.hues[i % wt.hues.length]}26` : wt.card,
 				zIndex: 2
 			}
-		}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-			fontSize: 11,
-			fontWeight: 700,
-			color: wt.parch,
-			fontFamily: "'Inter', sans-serif",
-			whiteSpace: "nowrap",
-			overflow: "hidden",
-			textOverflow: "ellipsis"
-		} }, p.name));
-	}), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		position: "sticky",
-		left: 0,
-		top: 30,
-		background: wt.subheadBg,
-		borderBottom: `1px solid ${wt.border}`,
-		borderRight: `2px solid ${wt.groupLine}`,
-		padding: "4px 4px",
-		fontSize: 9,
-		color: wt.muted,
-		textAlign: "center",
-		fontFamily: "'Inter', sans-serif",
-		zIndex: 3
-	} }, t("roundAbbr")), players.map((p) => /* @__PURE__ */ import_react.default.createElement(Fragment$3, { key: `sub-${p.id}` }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		position: "sticky",
-		top: 30,
-		background: wt.subheadBg,
-		borderBottom: `1px solid ${wt.border}`,
-		borderLeft: `2px solid ${wt.groupLine}`,
-		padding: "4px 2px",
-		fontSize: 10,
-		color: wt.muted,
-		textAlign: "center",
-		fontFamily: "'Inter', sans-serif",
-		zIndex: 2
-	} }, t("bidAbbr")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		position: "sticky",
-		top: 30,
-		background: wt.subheadBg,
-		borderBottom: `1px solid ${wt.border}`,
-		borderLeft: `1px solid ${wt.border}`,
-		padding: "4px 2px",
-		fontSize: 10,
-		color: wt.muted,
-		textAlign: "center",
-		fontFamily: "'Inter', sans-serif",
-		zIndex: 2
-	} }, t("ptsAbbr")))), Array.from({ length: roundCount }, (_, idx) => idx + 1).map((round) => {
-		const runningTotals = wizardTotals(players, rounds, round);
-		return /* @__PURE__ */ import_react.default.createElement(Fragment$3, { key: `round-${round}` }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		}, /* @__PURE__ */ import_react.default.createElement("div", {
+			className: "wz-thn",
+			style: {
+				fontSize: 11,
+				fontWeight: 700,
+				color: wt.parch,
+				fontFamily: "'Inter', sans-serif",
+				whiteSpace: "nowrap",
+				overflow: "hidden",
+				textOverflow: "ellipsis"
+			}
+		}, p.name));
+	}), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "wz-sub",
+		style: {
 			position: "sticky",
 			left: 0,
-			background: wt.card,
+			top: 30,
+			background: wt.subheadBg,
 			borderBottom: `1px solid ${wt.border}`,
 			borderRight: `2px solid ${wt.groupLine}`,
-			padding: "8px 4px",
+			padding: "4px 4px",
+			fontSize: 9,
+			color: wt.muted,
 			textAlign: "center",
-			fontSize: 12,
-			fontWeight: 600,
-			color: wt.gold,
-			fontFamily: "'Baloo 2', sans-serif",
-			zIndex: 1
-		} }, round), players.map((p) => {
+			fontFamily: "'Inter', sans-serif",
+			zIndex: 3
+		}
+	}, t("roundAbbr")), players.map((p) => /* @__PURE__ */ import_react.default.createElement(Fragment$3, { key: `sub-${p.id}` }, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "wz-sub",
+		style: {
+			position: "sticky",
+			top: 30,
+			background: wt.subheadBg,
+			borderBottom: `1px solid ${wt.border}`,
+			borderLeft: `2px solid ${wt.groupLine}`,
+			padding: "4px 2px",
+			fontSize: 10,
+			color: wt.muted,
+			textAlign: "center",
+			fontFamily: "'Inter', sans-serif",
+			zIndex: 2
+		}
+	}, t("bidAbbr")), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "wz-sub wz-tr",
+		style: {
+			position: "sticky",
+			top: 30,
+			background: wt.subheadBg,
+			borderBottom: `1px solid ${wt.border}`,
+			borderLeft: `1px solid ${wt.border}`,
+			padding: "4px 2px",
+			fontSize: 10,
+			color: wt.muted,
+			textAlign: "center",
+			fontFamily: "'Inter', sans-serif",
+			zIndex: 2
+		}
+	}, t("tricksMadeLabel")), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "wz-sub",
+		style: {
+			position: "sticky",
+			top: 30,
+			background: wt.subheadBg,
+			borderBottom: `1px solid ${wt.border}`,
+			borderLeft: `1px solid ${wt.border}`,
+			padding: "4px 2px",
+			fontSize: 10,
+			color: wt.muted,
+			textAlign: "center",
+			fontFamily: "'Inter', sans-serif",
+			zIndex: 2
+		}
+	}, t("ptsAbbr")))), Array.from({ length: roundCount }, (_, idx) => idx + 1).map((round) => {
+		const runningTotals = wizardTotals(players, rounds, round);
+		return /* @__PURE__ */ import_react.default.createElement(Fragment$3, { key: `round-${round}` }, /* @__PURE__ */ import_react.default.createElement("div", {
+			className: "wz-rd",
+			style: {
+				position: "sticky",
+				left: 0,
+				background: wt.card,
+				borderBottom: `1px solid ${wt.border}`,
+				borderRight: `2px solid ${wt.groupLine}`,
+				padding: "8px 4px",
+				textAlign: "center",
+				fontSize: 12,
+				fontWeight: 600,
+				color: wt.gold,
+				fontFamily: "'Baloo 2', sans-serif",
+				zIndex: 1
+			}
+		}, round), players.map((p) => {
 			const cell = rounds[round] && rounds[round][p.id] || {
 				bid: null,
 				tricks: null
 			};
 			const isEditingCell = editing && editing.round === round && editing.playerId === p.id;
 			return /* @__PURE__ */ import_react.default.createElement(Fragment$3, { key: `cell-${round}-${p.id}` }, /* @__PURE__ */ import_react.default.createElement("button", {
+				className: "wz-cell",
 				onClick: () => setEditing({
 					round,
 					playerId: p.id
@@ -47015,6 +47192,27 @@ function WizardPlay({ players, rounds, setRounds, onResetSheet, onEditPlayers, o
 					fontFamily: "'Inter', sans-serif"
 				}
 			}, cell.bid !== null ? cell.bid : "·"), /* @__PURE__ */ import_react.default.createElement("button", {
+				className: "wz-cell wz-tr",
+				onClick: () => setEditing({
+					round,
+					playerId: p.id
+				}),
+				style: {
+					borderBottom: `1px solid ${wt.border}`,
+					borderLeft: `1px solid ${wt.border}`,
+					borderTop: "none",
+					borderRight: "none",
+					padding: "8px 2px",
+					textAlign: "center",
+					background: isEditingCell ? wt.cellEditBg : wt.cellEmptyBg,
+					fontSize: 12,
+					fontWeight: 600,
+					color: cell.tricks !== null ? wt.parch : wt.placeholderDot,
+					cursor: "pointer",
+					fontFamily: "'Inter', sans-serif"
+				}
+			}, cell.tricks !== null ? cell.tricks : "·"), /* @__PURE__ */ import_react.default.createElement("button", {
+				className: "wz-cell",
 				onClick: () => setEditing({
 					round,
 					playerId: p.id
@@ -47104,11 +47302,14 @@ function WizardPlay({ players, rounds, setRounds, onResetSheet, onEditPlayers, o
 			fontVariantNumeric: "tabular-nums",
 			fontFamily: "'Baloo 2', sans-serif"
 		}
-	})))), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		gap: 8,
-		marginTop: 14
-	} }, /* @__PURE__ */ import_react.default.createElement("button", {
+	})))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "wz-actions",
+		style: {
+			display: "flex",
+			gap: 8,
+			marginTop: 14
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("button", {
 		...gtHold(() => {
 			onResetSheet();
 			setConfirmingReset(false);
@@ -47259,6 +47460,164 @@ function WizardGame({ state, setState, onBack, onHome, onEndGame, lang = "de", t
 		lang,
 		theme
 	});
+}
+// web/src/shared/phone-landscape.js
+var PL_ATTR = "data-phone-landscape";
+var PL_FORCE_KEY = "gametab-pl-force";
+var PL_STATE_KEY = "spieleblock-app-state-v1";
+function decidePhoneLandscape(e) {
+	if (!e || e.viewMode === "laptop") return false;
+	if (e.force === true) return true;
+	if (e.force === false) return false;
+	if (!e.touch) return false;
+	const iw = e.innerW || 0, ih = e.innerH || 0;
+	const sw = e.screenW || 0, sh = e.screenH || 0;
+	const short = sw && sh ? Math.min(sw, sh) : Math.min(iw, ih);
+	if (!short || short > 500) return false;
+	let land;
+	if (typeof e.orientationType === "string" && e.orientationType) land = e.orientationType.indexOf("landscape") === 0;
+	else if (typeof e.windowOrientation === "number") land = Math.abs(e.windowOrientation) === 90;
+	else if (sw && sh && sw !== sh) land = sw > sh;
+	else land = !!e.mqLandscape;
+	if (!land) return false;
+	return iw > ih;
+}
+function plReadForce() {
+	try {
+		const m = /[?&]pl=([01])\b/.exec(window.location.search || "");
+		if (m) return m[1] === "1";
+	} catch (_) {}
+	try {
+		const v = window.localStorage.getItem(PL_FORCE_KEY);
+		if (v === "1") return true;
+		if (v === "0") return false;
+	} catch (_) {}
+	return null;
+}
+function plReadSavedViewMode() {
+	try {
+		return (JSON.parse(window.localStorage.getItem(PL_STATE_KEY) || "{}") || {}).viewMode === "laptop" ? "laptop" : "mobile";
+	} catch (_) {
+		return "mobile";
+	}
+}
+function plMQ(q) {
+	try {
+		return !!(window.matchMedia && window.matchMedia(q).matches);
+	} catch (_) {
+		return false;
+	}
+}
+function plEnv(viewMode, force) {
+	const w = window, s = w.screen || {};
+	let ot = null;
+	try {
+		ot = s.orientation && s.orientation.type ? String(s.orientation.type) : null;
+	} catch (_) {}
+	return {
+		viewMode,
+		force,
+		touch: w.navigator && w.navigator.maxTouchPoints > 0 || plMQ("(any-pointer: coarse)"),
+		screenW: s.width || 0,
+		screenH: s.height || 0,
+		orientationType: ot,
+		windowOrientation: typeof w.orientation === "number" ? w.orientation : null,
+		mqLandscape: plMQ("(orientation: landscape)"),
+		innerW: w.innerWidth || 0,
+		innerH: w.innerHeight || 0
+	};
+}
+var plViewMode = null;
+var plForce;
+var plActive = null;
+var plBound = false;
+var plTimer = 0;
+var plRefs = 0;
+var plSubs = /* @__PURE__ */ new Set();
+function plApply(v) {
+	const root = document.documentElement;
+	if (v) root.setAttribute(PL_ATTR, "");
+	else root.removeAttribute(PL_ATTR);
+	plActive = v;
+	plSubs.forEach((f) => {
+		try {
+			f();
+		} catch (_) {}
+	});
+}
+function plSetVvh() {
+	const root = document.documentElement, vv = window.visualViewport;
+	if (plActive && vv) root.style.setProperty("--pl-vvh", Math.round(vv.height) + "px");
+	else root.style.removeProperty("--pl-vvh");
+}
+function updatePhoneLandscape() {
+	if (typeof window === "undefined") return false;
+	if (plViewMode == null) plViewMode = plReadSavedViewMode();
+	if (plForce === void 0) plForce = plReadForce();
+	const v = decidePhoneLandscape(plEnv(plViewMode, plForce));
+	if (v !== plActive) plApply(v);
+	plSetVvh();
+	return v;
+}
+function plOnChange() {
+	updatePhoneLandscape();
+	clearTimeout(plTimer);
+	plTimer = setTimeout(updatePhoneLandscape, 350);
+}
+function plBind() {
+	if (plBound || typeof window === "undefined") return;
+	plBound = true;
+	window.addEventListener("resize", plOnChange);
+	window.addEventListener("orientationchange", plOnChange);
+	try {
+		if (screen.orientation && screen.orientation.addEventListener) screen.orientation.addEventListener("change", plOnChange);
+	} catch (_) {}
+	if (window.visualViewport) window.visualViewport.addEventListener("resize", plSetVvh);
+}
+function plUnbind() {
+	if (!plBound) return;
+	plBound = false;
+	clearTimeout(plTimer);
+	window.removeEventListener("resize", plOnChange);
+	window.removeEventListener("orientationchange", plOnChange);
+	try {
+		if (screen.orientation && screen.orientation.removeEventListener) screen.orientation.removeEventListener("change", plOnChange);
+	} catch (_) {}
+	if (window.visualViewport) window.visualViewport.removeEventListener("resize", plSetVvh);
+}
+function setPhoneLandscapeViewMode(mode) {
+	plViewMode = mode === "laptop" ? "laptop" : "mobile";
+	return updatePhoneLandscape();
+}
+function plRetain() {
+	plRefs++;
+	plBind();
+	return () => {
+		plRefs = Math.max(0, plRefs - 1);
+		if (!plRefs) plUnbind();
+	};
+}
+function plSubscribe(cb) {
+	plSubs.add(cb);
+	const rel = plRetain();
+	if (plActive == null) updatePhoneLandscape();
+	return () => {
+		plSubs.delete(cb);
+		rel();
+	};
+}
+function plSnapshot() {
+	if (plActive == null) updatePhoneLandscape();
+	return !!plActive;
+}
+function usePhoneLandscape() {
+	return import_react.default.useSyncExternalStore(plSubscribe, plSnapshot, () => false);
+}
+function usePhoneLandscapeRoot(viewMode, loaded) {
+	import_react.default.useLayoutEffect(() => plRetain(), []);
+	import_react.default.useLayoutEffect(() => {
+		if (loaded) setPhoneLandscapeViewMode(viewMode);
+	}, [viewMode, loaded]);
 }
 function mgOk(v) {
 	return typeof v === "number" && Number.isInteger(v) && v >= 1 && v <= 7;
@@ -47542,6 +47901,35 @@ function minigolfInSum(card) {
 function minigolfFilledCount(card) {
 	return card.filter((v) => v !== null).length;
 }
+var MG_LAND_CSS = `
+[data-phone-landscape] .mg-land { padding-top: calc(var(--pl-sat) + 6px) !important; padding-bottom: calc(var(--pl-sab) + 6px) !important; --mg-edw: clamp(280px, 40vw, 360px); }
+[data-phone-landscape] .mg-inner { max-width: none !important; margin: 0 !important; width: 100% !important; }
+[data-phone-landscape] .mg-split { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); grid-template-rows: auto auto minmax(0, 1fr) auto auto; column-gap: 12px; row-gap: 0; height: max(230px, calc(var(--pl-body) - 6px)); margin-top: 6px; }
+[data-phone-landscape] .mg-split.mg-tab-table { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); }
+[data-phone-landscape] .mg-main { display: contents; }
+[data-phone-landscape] .mg-banner { grid-column: 1 / -1; grid-row: 1; margin-bottom: 8px !important; padding: 8px 12px !important; }
+[data-phone-landscape] .mg-seg { grid-column: 1; grid-row: 2; margin-bottom: 8px !important; }
+[data-phone-landscape] .mg-panel { grid-column: 1; grid-row: 3 / span 3; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding-bottom: 2px; }
+[data-phone-landscape] .mg-split.mg-tab-table .mg-panel { overflow: hidden; }
+[data-phone-landscape] .mg-split.mg-tab-table .mgTableWrap { height: 100%; box-sizing: border-box; overflow: auto; overscroll-behavior: contain; }
+[data-phone-landscape] .mg-side { display: block; grid-column: 2; grid-row: 2 / span 2; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+[data-phone-landscape] .mg-side > .gtL-e-only:first-child { display: block; }
+[data-phone-landscape] .mg-side > .gtL-e-only:first-child > section { margin-top: 0 !important; }
+[data-phone-landscape] .mg-land .mgPhoneOnly { display: none !important; }
+[data-phone-landscape] .mg-land .mgBar { grid-column: 2; grid-row: 4; position: static !important; margin: 8px 0 0 !important; padding: 0 !important; background: transparent !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; border: 0 !important; border-radius: 0 !important; box-shadow: none !important; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+[data-phone-landscape] .mg-land .mgBar #mg-status { flex: 1 0 100%; margin: 0 !important; justify-content: flex-start !important; text-align: left !important; font-size: 13px !important; line-height: 1.3 !important; }
+[data-phone-landscape] .mg-land .mgBar [data-mg-main] { width: auto !important; flex: 1 1 140px; min-height: 48px !important; font-size: 17px !important; }
+[data-phone-landscape] .mg-land .mgBar [data-mg-undo] { margin: 0 !important; min-height: 44px !important; min-width: 44px; padding: 0 12px !important; flex: 0 0 auto; }
+[data-phone-landscape] .mg-side2 { display: block; grid-column: 2; grid-row: 5; }
+[data-phone-landscape] .mg-split .mgTableWrap td button { min-height: 44px !important; }
+[data-phone-landscape] .mg-side > .gtL-e-only:first-child > section > button { min-height: 44px !important; }
+[data-phone-landscape] .mg-side2 > div { margin-top: 6px !important; }
+[data-phone-landscape] .mg-side2 button { min-height: 44px !important; }
+[data-phone-landscape] .mg-editor { left: auto !important; right: 0 !important; bottom: 0 !important; top: calc(var(--pl-sat) + var(--pl-head) + 6px) !important; width: calc(var(--mg-edw) + var(--pl-sar)) !important; box-sizing: border-box; border-radius: 22px 0 0 0 !important; padding: 12px calc(14px + var(--pl-sar)) calc(10px + var(--pl-sab)) 14px !important; overflow-y: auto; overscroll-behavior: contain; box-shadow: -10px 0 28px rgba(0,0,0,0.35) !important; border-top: 2px solid var(--mg-edacc, currentColor); }
+@media (max-width: 700px) { [data-phone-landscape] .mg-land .mgBar .mg-undo-txt { display: none; } }
+@media (max-width: 700px) { [data-phone-landscape] .mg-split { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); } [data-phone-landscape] .mg-split.mg-tab-table { grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); } }
+@media (max-height: 360px) { [data-phone-landscape] .mg-editor .mg-edhint { display: none; } }
+`;
 var MINIGOLF_FONT = "'Space Grotesk', sans-serif";
 var MG_UI = "'Inter', sans-serif";
 var MG_CSS = `
@@ -47719,6 +48107,7 @@ function MinigolfEditorPanel({ editing, players, value: cur, onSave, onClose, t,
 		ref: boxRef,
 		tabIndex: -1,
 		"data-mg-panel": "1",
+		className: "mg-editor",
 		role: "dialog",
 		"aria-label": (player ? player.name : "") + ", " + t("holeLabel")(editing.holeIdx + 1),
 		style: {
@@ -47732,7 +48121,8 @@ function MinigolfEditorPanel({ editing, players, value: cur, onSave, onClose, t,
 			padding: "14px 14px calc(16px + env(safe-area-inset-bottom))",
 			zIndex: 70,
 			borderTop: `2px solid ${mg.acc}`,
-			outline: "none"
+			outline: "none",
+			"--mg-edacc": mg.acc
 		}
 	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		maxWidth: 520,
@@ -47807,13 +48197,16 @@ function MinigolfEditorPanel({ editing, players, value: cur, onSave, onClose, t,
 			lineHeight: 1,
 			letterSpacing: "0.02em"
 		} }, t("mgMaxShort")));
-	})), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 12,
-		color: mg.muted,
-		fontFamily: MG_UI,
-		marginBottom: 10,
-		lineHeight: 1.35
-	} }, t("mgMaxHint")(MAX)), /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	})), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "mg-edhint",
+		style: {
+			fontSize: 12,
+			color: mg.muted,
+			fontFamily: MG_UI,
+			marginBottom: 10,
+			lineHeight: 1.35
+		}
+	}, t("mgMaxHint")(MAX)), /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		gap: 6
 	} }, /* @__PURE__ */ import_react.default.createElement("input", {
@@ -47921,7 +48314,7 @@ function MgSegmented({ tab, onTab, mg, t }) {
 	return /* @__PURE__ */ import_react.default.createElement("div", {
 		role: "tablist",
 		"aria-label": t("mgViewLabel"),
-		className: mg.glass ? "gtL-glass-soft" : void 0,
+		className: "mg-seg" + (mg.glass ? " gtL-glass-soft" : ""),
 		style: {
 			display: "flex",
 			gap: 4,
@@ -48257,6 +48650,14 @@ function MgStandingsBox({ st, onOpen, finished, mg, t, className }) {
 }
 function MgTable({ ui, hole, onCell, mg, t }) {
 	const ps = ui.players;
+	const pl = usePhoneLandscape();
+	const wrapRef = useRef$17(null);
+	useEffect$15(() => {
+		const w = wrapRef.current;
+		if (!pl || !w) return;
+		const row = w.querySelector("tr[aria-current=\"true\"]");
+		if (row) w.scrollTop = Math.max(0, row.offsetTop - w.clientHeight / 2 + row.offsetHeight / 2);
+	}, [pl]);
 	const cellBtn = {
 		width: "100%",
 		minWidth: 44,
@@ -48281,7 +48682,14 @@ function MgTable({ ui, hole, onCell, mg, t }) {
 		color: mg.ink,
 		textAlign: "center",
 		borderBottom: `1px solid ${mg.line}`,
-		verticalAlign: "bottom"
+		verticalAlign: "bottom",
+		...pl ? {
+			position: "sticky",
+			top: 0,
+			zIndex: 2,
+			background: mg.solid,
+			fontSize: 14
+		} : null
 	};
 	const sumRow = (label, fn, strong) => /* @__PURE__ */ import_react.default.createElement("tr", null, /* @__PURE__ */ import_react.default.createElement("th", {
 		scope: "row",
@@ -48356,6 +48764,7 @@ function MgTable({ ui, hole, onCell, mg, t }) {
 		}));
 	};
 	return /* @__PURE__ */ import_react.default.createElement("div", {
+		ref: wrapRef,
 		className: "mgTableWrap" + (mg.glass ? " gtL-glass" : ""),
 		role: "region",
 		"aria-label": t("mgTabTable"),
@@ -48381,7 +48790,8 @@ function MgTable({ ui, hole, onCell, mg, t }) {
 			paddingLeft: 10,
 			color: mg.muted,
 			width: 52,
-			borderTopLeftRadius: 20
+			borderTopLeftRadius: 20,
+			...pl ? { zIndex: 3 } : null
 		}
 	}, t("mgTabHole")), ps.map((p) => /* @__PURE__ */ import_react.default.createElement("th", {
 		key: p.id,
@@ -48608,9 +49018,9 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
 	}, /* @__PURE__ */ import_react.default.createElement(MgSvg, {
 		size: 18,
 		sw: 2
-	}, /* @__PURE__ */ import_react.default.createElement("path", { d: "M9 7L5 11l4 4" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M5 11h9a5 5 0 0 1 0 10h-2" })), /* @__PURE__ */ import_react.default.createElement("span", null, t("mgUndo") + (lastUndo ? " · " + t("holeLabel")(holesTxt(lastUndo.holes)) : ""))));
+	}, /* @__PURE__ */ import_react.default.createElement("path", { d: "M9 7L5 11l4 4" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M5 11h9a5 5 0 0 1 0 10h-2" })), /* @__PURE__ */ import_react.default.createElement("span", { className: "mg-undo-txt" }, t("mgUndo") + (lastUndo ? " · " + t("holeLabel")(holesTxt(lastUndo.holes)) : ""))));
 	const winBanner = winnerIdx !== -1 && /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "reveal-1",
+		className: "reveal-1 mg-banner",
 		role: "status",
 		style: {
 			color: mg.onAcc,
@@ -48648,14 +49058,14 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
 		fontFamily: MG_UI
 	});
 	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage mgGL" + (theme === "vitrum" ? " vitrum-active" : ""),
+		className: "gtL-shellpage mgGL mg-land pl-page pl-head-compact" + (theme === "vitrum" ? " vitrum-active" : ""),
 		style: {
 			...minigolfPageShellStyle(theme),
 			position: "relative",
 			overflowX: "clip",
 			paddingBottom: editing ? 290 : 24
 		}
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, MG_CSS), celebration, /* @__PURE__ */ import_react.default.createElement(PodiumOverlay, {
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, MG_CSS, MG_LAND_CSS), celebration, /* @__PURE__ */ import_react.default.createElement(PodiumOverlay, {
 		gameId: "minigolf",
 		gameLabel: t("gameMinigolf"),
 		open: podiumOpen,
@@ -48667,7 +49077,7 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
 		bestRecord: { isNew: golfIsNew },
 		theme
 	}), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-page gtL-game",
+		className: "gtL-page gtL-game mg-inner",
 		style: {
 			maxWidth: 520,
 			margin: "0 auto",
@@ -48681,7 +49091,7 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
 		onHome,
 		onEndGame,
 		rulesText: t("rulesMinigolf")
-	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-e-block" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, winBanner, /* @__PURE__ */ import_react.default.createElement(MgSegmented, {
+	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-e-block mg-split mg-tab-" + tab }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main mg-main" }, winBanner, /* @__PURE__ */ import_react.default.createElement(MgSegmented, {
 		tab,
 		onTab: (v) => upd((s) => ({
 			...s,
@@ -48691,6 +49101,7 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
 		t
 	}), /* @__PURE__ */ import_react.default.createElement("div", {
 		id: "mg-panel",
+		className: "mg-panel",
 		role: "tabpanel",
 		"aria-labelledby": "mg-tab-" + tab
 	}, tab === "hole" ? /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement(MgHoleCard, {
@@ -48741,7 +49152,7 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
 		}),
 		mg,
 		t
-	})), bar), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-e-only" }, /* @__PURE__ */ import_react.default.createElement(MgStandingsBox, {
+	})), bar), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side mg-side" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-e-only" }, /* @__PURE__ */ import_react.default.createElement(MgStandingsBox, {
 		st,
 		finished,
 		onOpen: () => upd((s) => ({
@@ -48773,7 +49184,7 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
 		border: mg.line,
 		title: t("gtChartTitle"),
 		theme
-	}))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side2" }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	}))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side2 mg-side2" }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		gap: 8,
 		marginTop: 8
@@ -59582,6 +59993,7 @@ function TraitorGame({ state, setState, onBack, onHome, onEndGame, lang = "de", 
 }
 // web/src/games/darts/darts.js
 var darts_exports = /* @__PURE__ */ __exportAll({
+	DARTS_LANDSCAPE_CSS: () => DARTS_LANDSCAPE_CSS,
 	DARTS_PREFS: () => DARTS_PREFS,
 	DartboardSVG: () => DartboardSVG,
 	DartsGame: () => DartsGame,
@@ -59985,7 +60397,7 @@ function DartsPlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewGam
 		setConfirmingReset(false);
 		onNewGame();
 	};
-	return /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-e-block" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, bigThrowNode, /* @__PURE__ */ import_react.default.createElement("div", {
+	return /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("style", null, DARTS_LANDSCAPE_CSS), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-e-block dl-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, bigThrowNode, /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "reveal-1",
 		style: {
 			background: tk.card,
@@ -60293,6 +60705,19 @@ function DartsPlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewGam
 		}
 	}, t("dartsEditPlayers").toUpperCase())))));
 }
+var DARTS_LANDSCAPE_CSS = `
+[data-phone-landscape] .dl-shell{padding-left:0!important;padding-right:0!important;padding-top:calc(var(--pl-sat) + 4px)!important;padding-bottom:calc(var(--pl-sab) + 10px)!important}
+[data-phone-landscape] .dl-split{display:grid;grid-template-columns:minmax(0,1fr) clamp(236px,calc(var(--pl-body) - 8px),46vw);grid-template-rows:repeat(10,auto) 1fr;column-gap:var(--pl-gap);row-gap:0;align-items:start;width:100%;box-sizing:border-box}
+[data-phone-landscape] .dl-split>.gtL-col-main,[data-phone-landscape] .dl-split>.gtL-col-side,[data-phone-landscape] .dl-split .gtL-col-main>div:has(>.gtL-e-board){display:contents}
+[data-phone-landscape] .dl-split :is(.gtL-col-main,.gtL-col-side)>*,[data-phone-landscape] .dl-split .gtL-col-main>div:has(>.gtL-e-board)>*:not(.gtL-e-board){grid-column:1;min-width:0}
+[data-phone-landscape] .dl-split .gtL-e-board{grid-column:2;grid-row:1/-1;position:sticky;top:calc(var(--pl-sat) + 4px);max-width:none!important;width:100%;margin:0!important}
+[data-phone-landscape] .dl-split .gtL-col-main>.reveal-1{padding:8px 12px!important;margin-bottom:8px!important;border-radius:16px!important}
+[data-phone-landscape] .dl-split .gtL-col-side>.dl-hist{order:5}
+[data-phone-landscape] .dl-split .gtL-col-side>*:last-child{order:9}
+[data-phone-landscape] .dl-split .gtL-col-main button,[data-phone-landscape] .dl-split .gtL-col-side button{min-height:44px}
+[data-phone-landscape] .dl-split .gtL-col-side .press-fx{min-height:44px;box-sizing:border-box}
+[data-phone-landscape] .dl-split .gtL-col-side [style*="font-size: 10px"]{font-size:12px!important}
+`;
 function DartsHistoryPanel({ history, players, tk, t, valueKey }) {
 	const [open, setOpen] = useState$11(false);
 	if (!history || history.length === 0) return null;
@@ -60301,7 +60726,10 @@ function DartsHistoryPanel({ history, players, tk, t, valueKey }) {
 		return p ? p.name : "?";
 	};
 	const entries = history.slice().reverse().slice(0, 25);
-	return /* @__PURE__ */ import_react.default.createElement("div", { style: { marginTop: 14 } }, /* @__PURE__ */ import_react.default.createElement("button", {
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "dl-hist",
+		style: { marginTop: 14 }
+	}, /* @__PURE__ */ import_react.default.createElement("button", {
 		onClick: () => setOpen((o) => !o),
 		className: "press-fx",
 		style: {
@@ -60532,14 +60960,14 @@ function DartsGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 		};
 	};
 	const shell = (inner) => /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage",
+		className: "gtL-shellpage dl-shell",
 		style: {
 			minHeight: "100vh",
 			background: tk.pageBg,
 			padding: "12px 12px 16px"
 		}
 	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-page gtL-game",
+		className: "gtL-page gtL-game pl-page pl-head-compact",
 		style: {
 			maxWidth: 380,
 			margin: "0 auto"
@@ -60915,7 +61343,7 @@ function CricketPlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewG
 		setConfirmingReset(false);
 		onNewGame();
 	};
-	return /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-e-block" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, tripleCloseNode, /* @__PURE__ */ import_react.default.createElement("div", {
+	return /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("style", null, DARTS_LANDSCAPE_CSS), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-e-block dl-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, tripleCloseNode, /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "reveal-1",
 		style: {
 			background: tk.card,
@@ -61301,14 +61729,14 @@ function CricketGame({ state, setState, onBack, onHome, onEndGame, lang = "de", 
 	};
 	const variantLabel = state.variant === "cutthroat" ? "Cut Throat" : state.variant === "masters" ? "Masters" : t("gameCricket");
 	const shell = (inner) => /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage",
+		className: "gtL-shellpage dl-shell",
 		style: {
 			minHeight: "100vh",
 			background: tk.pageBg,
 			padding: "12px 12px 16px"
 		}
 	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-page gtL-game",
+		className: "gtL-page gtL-game pl-page pl-head-compact",
 		style: {
 			maxWidth: 380,
 			margin: "0 auto"
@@ -61549,7 +61977,7 @@ function HiScorePlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewG
 		onNewGame();
 	};
 	const ranked = [...state.players].sort((a, b) => (state.scores[b.id] || 0) - (state.scores[a.id] || 0));
-	return /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-e-block" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement("div", {
+	return /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("style", null, DARTS_LANDSCAPE_CSS), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-e-block dl-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "reveal-1",
 		style: {
 			background: tk.card,
@@ -62004,14 +62432,14 @@ function HiScoreGame({ state, setState, onBack, onHome, onEndGame, lang = "de", 
 		});
 	};
 	const shell = (inner) => /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage",
+		className: "gtL-shellpage dl-shell",
 		style: {
 			minHeight: "100vh",
 			background: tk.pageBg,
 			padding: "12px 12px 16px"
 		}
 	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-page gtL-game",
+		className: "gtL-page gtL-game pl-page pl-head-compact",
 		style: {
 			maxWidth: 380,
 			margin: "0 auto"
@@ -62300,7 +62728,7 @@ function SplitScorePlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onN
 		onNewGame();
 	};
 	const ranked = [...state.players].sort((a, b) => (state.scores[b.id] || 0) - (state.scores[a.id] || 0));
-	return /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-e-block" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement("div", {
+	return /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("style", null, DARTS_LANDSCAPE_CSS), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-e-block dl-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "reveal-1",
 		style: {
 			background: tk.card,
@@ -62678,14 +63106,14 @@ function SplitScoreGame({ state, setState, onBack, onHome, onEndGame, lang = "de
 		});
 	};
 	const shell = (inner) => /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage",
+		className: "gtL-shellpage dl-shell",
 		style: {
 			minHeight: "100vh",
 			background: tk.pageBg,
 			padding: "12px 12px 16px"
 		}
 	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-page gtL-game",
+		className: "gtL-page gtL-game pl-page pl-head-compact",
 		style: {
 			maxWidth: 380,
 			margin: "0 auto"
@@ -62842,7 +63270,7 @@ function ShanghaiPlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNew
 	};
 	const ranked = [...state.players].sort((a, b) => (state.scores[b.id] || 0) - (state.scores[a.id] || 0));
 	const multLabel = (m) => m === 1 ? "1×" : m === 2 ? "2×" : "3×";
-	return /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-e-block" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement("div", {
+	return /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("style", null, DARTS_LANDSCAPE_CSS), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-e-block dl-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "reveal-1",
 		style: {
 			background: tk.card,
@@ -63257,14 +63685,14 @@ function ShanghaiGame({ state, setState, onBack, onHome, onEndGame, lang = "de",
 		});
 	};
 	const shell = (inner) => /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage",
+		className: "gtL-shellpage dl-shell",
 		style: {
 			minHeight: "100vh",
 			background: tk.pageBg,
 			padding: "12px 12px 16px"
 		}
 	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-page gtL-game",
+		className: "gtL-page gtL-game pl-page pl-head-compact",
 		style: {
 			maxWidth: 380,
 			margin: "0 auto"
@@ -64673,148 +65101,6 @@ function DartsVariantSelect({ onSelect, onBack, dartsProgress, cricketProgress, 
 		}),
 		onClick: () => onSelect("splitscore")
 	})))));
-}
-// web/src/shared/phone-landscape.js
-var PL_ATTR = "data-phone-landscape";
-var PL_FORCE_KEY = "gametab-pl-force";
-var PL_STATE_KEY = "spieleblock-app-state-v1";
-function decidePhoneLandscape(e) {
-	if (!e || e.viewMode === "laptop") return false;
-	if (e.force === true) return true;
-	if (e.force === false) return false;
-	if (!e.touch) return false;
-	const iw = e.innerW || 0, ih = e.innerH || 0;
-	const sw = e.screenW || 0, sh = e.screenH || 0;
-	const short = sw && sh ? Math.min(sw, sh) : Math.min(iw, ih);
-	if (!short || short > 500) return false;
-	let land;
-	if (typeof e.orientationType === "string" && e.orientationType) land = e.orientationType.indexOf("landscape") === 0;
-	else if (typeof e.windowOrientation === "number") land = Math.abs(e.windowOrientation) === 90;
-	else if (sw && sh && sw !== sh) land = sw > sh;
-	else land = !!e.mqLandscape;
-	if (!land) return false;
-	return iw > ih;
-}
-function plReadForce() {
-	try {
-		const m = /[?&]pl=([01])\b/.exec(window.location.search || "");
-		if (m) return m[1] === "1";
-	} catch (_) {}
-	try {
-		const v = window.localStorage.getItem(PL_FORCE_KEY);
-		if (v === "1") return true;
-		if (v === "0") return false;
-	} catch (_) {}
-	return null;
-}
-function plReadSavedViewMode() {
-	try {
-		return (JSON.parse(window.localStorage.getItem(PL_STATE_KEY) || "{}") || {}).viewMode === "laptop" ? "laptop" : "mobile";
-	} catch (_) {
-		return "mobile";
-	}
-}
-function plMQ(q) {
-	try {
-		return !!(window.matchMedia && window.matchMedia(q).matches);
-	} catch (_) {
-		return false;
-	}
-}
-function plEnv(viewMode, force) {
-	const w = window, s = w.screen || {};
-	let ot = null;
-	try {
-		ot = s.orientation && s.orientation.type ? String(s.orientation.type) : null;
-	} catch (_) {}
-	return {
-		viewMode,
-		force,
-		touch: w.navigator && w.navigator.maxTouchPoints > 0 || plMQ("(any-pointer: coarse)"),
-		screenW: s.width || 0,
-		screenH: s.height || 0,
-		orientationType: ot,
-		windowOrientation: typeof w.orientation === "number" ? w.orientation : null,
-		mqLandscape: plMQ("(orientation: landscape)"),
-		innerW: w.innerWidth || 0,
-		innerH: w.innerHeight || 0
-	};
-}
-var plViewMode = null;
-var plForce;
-var plActive = null;
-var plBound = false;
-var plTimer = 0;
-var plRefs = 0;
-var plSubs = /* @__PURE__ */ new Set();
-function plApply(v) {
-	const root = document.documentElement;
-	if (v) root.setAttribute(PL_ATTR, "");
-	else root.removeAttribute(PL_ATTR);
-	plActive = v;
-	plSubs.forEach((f) => {
-		try {
-			f();
-		} catch (_) {}
-	});
-}
-function plSetVvh() {
-	const root = document.documentElement, vv = window.visualViewport;
-	if (plActive && vv) root.style.setProperty("--pl-vvh", Math.round(vv.height) + "px");
-	else root.style.removeProperty("--pl-vvh");
-}
-function updatePhoneLandscape() {
-	if (typeof window === "undefined") return false;
-	if (plViewMode == null) plViewMode = plReadSavedViewMode();
-	if (plForce === void 0) plForce = plReadForce();
-	const v = decidePhoneLandscape(plEnv(plViewMode, plForce));
-	if (v !== plActive) plApply(v);
-	plSetVvh();
-	return v;
-}
-function plOnChange() {
-	updatePhoneLandscape();
-	clearTimeout(plTimer);
-	plTimer = setTimeout(updatePhoneLandscape, 350);
-}
-function plBind() {
-	if (plBound || typeof window === "undefined") return;
-	plBound = true;
-	window.addEventListener("resize", plOnChange);
-	window.addEventListener("orientationchange", plOnChange);
-	try {
-		if (screen.orientation && screen.orientation.addEventListener) screen.orientation.addEventListener("change", plOnChange);
-	} catch (_) {}
-	if (window.visualViewport) window.visualViewport.addEventListener("resize", plSetVvh);
-}
-function plUnbind() {
-	if (!plBound) return;
-	plBound = false;
-	clearTimeout(plTimer);
-	window.removeEventListener("resize", plOnChange);
-	window.removeEventListener("orientationchange", plOnChange);
-	try {
-		if (screen.orientation && screen.orientation.removeEventListener) screen.orientation.removeEventListener("change", plOnChange);
-	} catch (_) {}
-	if (window.visualViewport) window.visualViewport.removeEventListener("resize", plSetVvh);
-}
-function setPhoneLandscapeViewMode(mode) {
-	plViewMode = mode === "laptop" ? "laptop" : "mobile";
-	return updatePhoneLandscape();
-}
-function plRetain() {
-	plRefs++;
-	plBind();
-	return () => {
-		plRefs = Math.max(0, plRefs - 1);
-		if (!plRefs) plUnbind();
-	};
-}
-function usePhoneLandscapeRoot(viewMode, loaded) {
-	import_react.default.useLayoutEffect(() => plRetain(), []);
-	import_react.default.useLayoutEffect(() => {
-		if (loaded) setPhoneLandscapeViewMode(viewMode);
-	}, [viewMode, loaded]);
 }
 // web/src/games/freeplay/game.js
 var game_exports$8 = /* @__PURE__ */ __exportAll({
@@ -98659,12 +98945,14 @@ function gtYearReviewImage(model, t, theme) {
 // web/src/export/share-preview.js
 var share_preview_exports = /* @__PURE__ */ __exportAll({ ShareImagePreview: () => ShareImagePreview });
 function ShareImagePreview({ url, onClose, t }) {
+	const plLand = usePhoneLandscape();
 	if (!url) return null;
 	const list = Array.isArray(url) ? url : [url];
 	const stop = (e) => e.stopPropagation();
 	const lim = "min(64vh, calc(100vh - 250px))";
 	return /* @__PURE__ */ import_react.default.createElement("div", {
 		onClick: onClose,
+		className: "gtsp-ov",
 		style: {
 			position: "fixed",
 			inset: 0,
@@ -98681,6 +98969,7 @@ function ShareImagePreview({ url, onClose, t }) {
 	}, /* @__PURE__ */ import_react.default.createElement("button", {
 		type: "button",
 		onClick: onClose,
+		className: "gtsp-x",
 		"aria-label": gtTx("gtxClose"),
 		style: {
 			position: "absolute",
@@ -98712,16 +99001,20 @@ function ShareImagePreview({ url, onClose, t }) {
 			fontWeight: 600,
 			fontFamily: "'Inter', sans-serif"
 		}
-	}, "✕")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		margin: "auto",
-		display: "flex",
-		flexDirection: "column",
-		alignItems: "center",
-		gap: 16,
-		maxWidth: "100%",
-		minWidth: 0
-	} }, /* @__PURE__ */ import_react.default.createElement("div", {
+	}, "✕")), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtsp-in",
+		style: {
+			margin: "auto",
+			display: "flex",
+			flexDirection: "column",
+			alignItems: "center",
+			gap: 16,
+			maxWidth: "100%",
+			minWidth: 0
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
 		onClick: stop,
+		className: "gtsp-imgs",
 		style: {
 			flexShrink: 0,
 			maxHeight: list.length > 1 ? lim : "none",
@@ -98745,7 +99038,10 @@ function ShareImagePreview({ url, onClose, t }) {
 			borderRadius: 6,
 			boxShadow: "0 16px 44px rgba(0,0,0,0.55)"
 		}
-	}))), /* @__PURE__ */ import_react.default.createElement("p", {
+	}))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtsp-side",
+		style: plLand ? void 0 : { display: "contents" }
+	}, /* @__PURE__ */ import_react.default.createElement("p", {
 		onClick: stop,
 		style: {
 			flexShrink: 0,
@@ -98785,7 +99081,7 @@ function ShareImagePreview({ url, onClose, t }) {
 			fontFamily: "'Inter', sans-serif",
 			textDecoration: "none"
 		}
-	}, t("shareResultDownload") + (list.length > 1 ? " " + (i + 1) : ""))))));
+	}, t("shareResultDownload") + (list.length > 1 ? " " + (i + 1) : "")))))));
 }
 // web/src/shared/soft-block.js
 var soft_block_exports = /* @__PURE__ */ __exportAll({
@@ -98987,7 +99283,9 @@ function GtSoftBlock({ H, win, rk, S, lv, solo }) {
 	const light = S.th === "light";
 	const c = win ? S.th === "light" || S.th === "noir" || S.bright ? S.acc : gtSbVivid(S.acc) : S.base;
 	const T = win ? 18 : 22;
-	const fs = lv === 1 ? 92 : lv === 2 ? 70 : 60;
+	const fs0 = lv === 1 ? 92 : lv === 2 ? 70 : 60;
+	const hRef = lv === 1 ? 150 : lv === 2 ? 118 : 100;
+	const fs = H < hRef ? Math.round(fs0 * H / hRef) : fs0;
 	const fl = win ? S.bright ? .14 : .2 : S.fl, fr = win ? S.bright ? .22 : .3 : S.fr, hl = win ? S.bright ? .3 : .15 : S.hl, bev = win ? S.bright ? .5 : .32 : S.bev, bdk = win ? S.bright ? .22 : .34 : S.bdk, lidSh = win ? S.bright ? .14 : .22 : S.lidSh, ridge = win ? S.bright ? .6 : .34 : S.ridge;
 	const front = `linear-gradient(90deg, rgba(0,0,0,${fl}) 0%, rgba(0,0,0,0) 15%, rgba(0,0,0,0) 80%, rgba(0,0,0,${fr}) 100%), radial-gradient(75% 50% at 20% 22%, rgba(255,255,255,${hl}) 0%, rgba(255,255,255,0) 70%), linear-gradient(180deg, ${shadeHex(c, .06)} 0%, ${c} 40%, ${shadeHex(c, light && !win ? -.12 : -.24)} 100%)`;
 	const lid = `linear-gradient(180deg, ${shadeHex(c, light && !win ? .55 : .15)} 0%, ${shadeHex(c, light && !win ? .35 : .08)} 100%)`;
@@ -104533,6 +104831,33 @@ var game_exports = /* @__PURE__ */ __exportAll({
 	yatzyUpperSum: () => yatzyUpperSum,
 	yatzyUpperTotal: () => yatzyUpperTotal
 });
+var YZ_LAND_CSS = `
+[data-phone-landscape] .yz-land { padding-top: calc(var(--pl-sat) + 6px) !important; padding-bottom: calc(var(--pl-sab) + 8px) !important; }
+[data-phone-landscape] .yz-land.yz-editing :is(.yz-sheets, .yz-actions, .yz-win) { margin-right: calc(var(--yz-edw) + 10px + var(--pl-sar) - var(--pl-gutter-r)); }
+[data-phone-landscape] .yz-land { --yz-edw: clamp(264px, 40vw, 340px); }
+[data-phone-landscape] .yz-land .yz-paper { box-shadow: none !important; background: transparent !important; border: 0 !important; padding: 0 !important; }
+[data-phone-landscape] .yz-sheets { margin-top: 10px; flex-direction: row !important; align-items: flex-start; gap: 12px !important; overflow: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; max-height: max(180px, calc(var(--pl-body) - 72px)); border-radius: 20px; }
+[data-phone-landscape] .yz-sheet { overflow: visible !important; flex: 1 0 auto !important; width: max-content; min-width: 0; }
+[data-phone-landscape] .yz-grid { grid-template-columns: 92px repeat(var(--yz-n), minmax(60px, 1fr)) !important; min-width: calc(92px + var(--yz-n) * 60px) !important; width: auto !important; }
+[data-phone-landscape] .yz-th { padding: 7px 4px !important; }
+[data-phone-landscape] .yz-thn { font-size: 13px !important; }
+[data-phone-landscape] .yz-turn { font-size: 11px !important; }
+[data-phone-landscape] .yz-sec { font-size: 11px !important; padding: 6px 10px !important; }
+[data-phone-landscape] .yz-lab { min-height: 44px !important; font-size: 13px !important; padding: 4px 8px !important; }
+[data-phone-landscape] .yz-lab.yz-bold { font-size: 14px !important; }
+[data-phone-landscape] .yz-auto { min-height: 44px !important; }
+[data-phone-landscape] .yz-cell { min-height: 44px !important; min-width: 44px; font-size: 16px !important; }
+[data-phone-landscape] .yz-actions { margin-top: 8px !important; }
+[data-phone-landscape] .yz-actions button { min-height: 44px !important; font-size: 12.5px !important; }
+[data-phone-landscape] .yz-hint { display: none; }
+[data-phone-landscape] .yz-editor { left: auto !important; right: 0 !important; bottom: 0 !important; top: calc(var(--pl-sat) + var(--pl-head) + 6px) !important; width: calc(var(--yz-edw) + var(--pl-sar)) !important; box-sizing: border-box; border-radius: 22px 0 0 0 !important; padding: 12px calc(14px + var(--pl-sar)) calc(10px + var(--pl-sab)) 14px !important; overflow-y: auto; overscroll-behavior: contain; box-shadow: -8px 0 24px rgba(21,24,38,0.22) !important; }
+[data-phone-landscape] .yz-editor .yz-opt { min-height: 48px !important; padding-top: 6px !important; padding-bottom: 6px !important; font-size: 18px !important; }
+[data-phone-landscape] .yz-editor .yz-x { min-width: 44px; min-height: 44px; width: 44px !important; height: 44px !important; display: inline-grid; place-items: center; }
+[data-phone-landscape] .yz-editor .yz-del { min-height: 44px; font-size: 13px !important; padding: 0 6px !important; }
+[data-phone-landscape] .yz-editor .yz-opt-in { min-height: 48px; }
+[data-phone-landscape] .yz-editor .yz-chips { display: none !important; }
+@media (prefers-reduced-motion: reduce) { [data-phone-landscape] .yz-editor { transition: none; } }
+`;
 var YATZY_UPPER = [
 	{
 		id: "ones",
@@ -104834,7 +105159,7 @@ function YatzyEditorPanel({ editing, players, scores, totals, category, onSave, 
 		onSave(editing.playerId, editing.catId, v);
 	};
 	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: _YV ? "gtL-editor gtL-sheet-glass" : "gtL-editor",
+		className: (_YV ? "gtL-editor gtL-sheet-glass" : "gtL-editor") + " yz-editor",
 		role: "dialog",
 		"aria-label": (player ? player.name : "") + " · " + catLabel,
 		style: {
@@ -104865,6 +105190,7 @@ function YatzyEditorPanel({ editing, players, scores, totals, category, onSave, 
 		alignItems: "center",
 		gap: 8
 	} }, currentValue !== null && /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "yz-del",
 		onClick: () => commit(null),
 		style: {
 			border: "none",
@@ -104878,7 +105204,9 @@ function YatzyEditorPanel({ editing, players, scores, totals, category, onSave, 
 			padding: 0
 		}
 	}, t("deleteEntry")), /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "yz-x",
 		onClick: onClose,
+		"aria-label": t("mgClose"),
 		style: {
 			border: "none",
 			background: _YBG,
@@ -104889,13 +105217,16 @@ function YatzyEditorPanel({ editing, players, scores, totals, category, onSave, 
 			fontSize: 14,
 			cursor: "pointer"
 		}
-	}, /* @__PURE__ */ import_react.default.createElement(XMark, null)))), totals && players.length > 1 && /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		gap: 6,
-		overflowX: "auto",
-		marginBottom: 12,
-		paddingBottom: 2
-	} }, players.map((p, i) => /* @__PURE__ */ import_react.default.createElement("div", {
+	}, /* @__PURE__ */ import_react.default.createElement(XMark, null)))), totals && players.length > 1 && /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "yz-chips",
+		style: {
+			display: "flex",
+			gap: 6,
+			overflowX: "auto",
+			marginBottom: 12,
+			paddingBottom: 2
+		}
+	}, players.map((p, i) => /* @__PURE__ */ import_react.default.createElement("div", {
 		key: p.id,
 		style: {
 			flexShrink: 0,
@@ -104926,6 +105257,7 @@ function YatzyEditorPanel({ editing, players, scores, totals, category, onSave, 
 		display: "flex",
 		gap: 8
 	} }, /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "yz-opt",
 		"data-gt-sound": "1",
 		onClick: () => commit(category.value),
 		style: {
@@ -104946,6 +105278,7 @@ function YatzyEditorPanel({ editing, players, scores, totals, category, onSave, 
 			gap: 5
 		}
 	}, /* @__PURE__ */ import_react.default.createElement(CheckMark, null), t("reached")(category.value)), /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "yz-opt",
 		onClick: () => commit(0),
 		style: {
 			flex: 1,
@@ -104975,6 +105308,7 @@ function YatzyEditorPanel({ editing, players, scores, totals, category, onSave, 
 		const isCurrent = currentValue === optionValue;
 		return /* @__PURE__ */ import_react.default.createElement("button", {
 			key: n,
+			className: "yz-opt",
 			onClick: () => commit(optionValue),
 			style: {
 				flex: "1 0 28%",
@@ -105218,13 +105552,13 @@ function YatzyPlay({ onRematch, players, scores, setScores, onResetSheet, onEdit
 		return 0;
 	};
 	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage",
+		className: "gtL-shellpage yz-land pl-page pl-head-compact" + (editing ? " yz-editing" : ""),
 		style: {
 			...yatzyPageShellStyle(theme),
 			paddingTop: 20,
 			paddingBottom: editing ? 190 : 32
 		}
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), celebration, milestoneNode, /* @__PURE__ */ import_react.default.createElement(PodiumOverlay, {
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, YZ_LAND_CSS), celebration, milestoneNode, /* @__PURE__ */ import_react.default.createElement(PodiumOverlay, {
 		gameId: "yatzy",
 		gameLabel: t("gameYatzy"),
 		open: podiumOpen,
@@ -105236,7 +105570,7 @@ function YatzyPlay({ onRematch, players, scores, setScores, onResetSheet, onEdit
 		bestRecord: { isNew: yatzyIsNew },
 		theme
 	}), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "paper-grid reveal-1",
+		className: "paper-grid reveal-1 pl-wide yz-paper",
 		style: {
 			borderRadius: 26,
 			maxWidth: 520,
@@ -105254,7 +105588,7 @@ function YatzyPlay({ onRematch, players, scores, setScores, onResetSheet, onEdit
 		theme,
 		t
 	}), winnerIdx !== -1 && /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "reveal-1",
+		className: "reveal-1 yz-win",
 		style: {
 			border: "none",
 			color: "#fff",
@@ -105278,26 +105612,33 @@ function YatzyPlay({ onRematch, players, scores, setScores, onResetSheet, onEdit
 			marginRight: 5
 		}
 	}), gtWinLine(t, "yatzyWinsWith", "winsTie", players.filter((_, i) => totals[i] === maxTotal).map((q) => q.name), maxTotal)), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-yatzy-sheets",
+		className: "gtL-yatzy-sheets yz-sheets",
 		style: {
 			display: "flex",
 			flexDirection: "column",
 			gap: 12,
 			alignItems: "stretch"
 		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "yz-sheet",
+		style: {
+			overflowX: "auto",
+			borderRadius: 20,
+			background: _YCARD,
+			flex: "none",
+			minWidth: 0,
+			boxShadow: "0 1px 3px rgba(21,24,38,0.14)"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "yz-grid",
+		style: {
+			"--yz-n": players.length,
+			display: "grid",
+			gridTemplateColumns: `68px repeat(${players.length}, minmax(52px, 1fr))`,
+			minWidth: 68 + players.length * 52,
+			width: "100%"
+		}
 	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		overflowX: "auto",
-		borderRadius: 20,
-		background: _YCARD,
-		flex: "none",
-		minWidth: 0,
-		boxShadow: "0 1px 3px rgba(21,24,38,0.14)"
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "grid",
-		gridTemplateColumns: `68px repeat(${players.length}, minmax(52px, 1fr))`,
-		minWidth: 68 + players.length * 52,
-		width: "100%"
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		position: "sticky",
 		left: 0,
 		top: 0,
@@ -105307,6 +105648,7 @@ function YatzyPlay({ onRematch, players, scores, setScores, onResetSheet, onEdit
 		zIndex: 3
 	} }), players.map((p, i) => /* @__PURE__ */ import_react.default.createElement("div", {
 		key: p.id,
+		className: "yz-th",
 		style: {
 			position: "sticky",
 			top: 0,
@@ -105317,25 +105659,31 @@ function YatzyPlay({ onRematch, players, scores, setScores, onResetSheet, onEdit
 			background: activeIdx === i && !finished ? `${_YHUES[i % _YHUES.length]}14` : _YCARD,
 			zIndex: 2
 		}
-	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 10.5,
-		fontWeight: 700,
-		color: _YINK,
-		fontFamily: "'Inter', sans-serif",
-		whiteSpace: "nowrap",
-		overflow: "hidden",
-		textOverflow: "ellipsis"
-	} }, p.name), activeIdx === i && !finished && /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 10,
-		lineHeight: 1.15,
-		color: _YHUES[i % _YHUES.length],
-		fontWeight: 700,
-		letterSpacing: "0.02em",
-		marginTop: 1,
-		whiteSpace: "nowrap",
-		overflow: "hidden",
-		textOverflow: "ellipsis"
-	} }, t("yourTurn")))), upperRows.map((row) => /* @__PURE__ */ import_react.default.createElement(RowCells, {
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "yz-thn",
+		style: {
+			fontSize: 10.5,
+			fontWeight: 700,
+			color: _YINK,
+			fontFamily: "'Inter', sans-serif",
+			whiteSpace: "nowrap",
+			overflow: "hidden",
+			textOverflow: "ellipsis"
+		}
+	}, p.name), activeIdx === i && !finished && /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "yz-turn",
+		style: {
+			fontSize: 10,
+			lineHeight: 1.15,
+			color: _YHUES[i % _YHUES.length],
+			fontWeight: 700,
+			letterSpacing: "0.02em",
+			marginTop: 1,
+			whiteSpace: "nowrap",
+			overflow: "hidden",
+			textOverflow: "ellipsis"
+		}
+	}, t("yourTurn")))), upperRows.map((row) => /* @__PURE__ */ import_react.default.createElement(RowCells, {
 		key: row.type === "cat" ? row.cat.id : row.label || row.id,
 		row,
 		players,
@@ -105349,19 +105697,26 @@ function YatzyPlay({ onRematch, players, scores, setScores, onResetSheet, onEdit
 		editing,
 		t,
 		theme
-	})))), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		overflowX: "auto",
-		borderRadius: 20,
-		background: _YCARD,
-		flex: "none",
-		minWidth: 0,
-		boxShadow: "0 1px 3px rgba(21,24,38,0.14)"
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "grid",
-		gridTemplateColumns: `68px repeat(${players.length}, minmax(52px, 1fr))`,
-		minWidth: 68 + players.length * 52,
-		width: "100%"
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	})))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "yz-sheet",
+		style: {
+			overflowX: "auto",
+			borderRadius: 20,
+			background: _YCARD,
+			flex: "none",
+			minWidth: 0,
+			boxShadow: "0 1px 3px rgba(21,24,38,0.14)"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "yz-grid",
+		style: {
+			"--yz-n": players.length,
+			display: "grid",
+			gridTemplateColumns: `68px repeat(${players.length}, minmax(52px, 1fr))`,
+			minWidth: 68 + players.length * 52,
+			width: "100%"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		position: "sticky",
 		left: 0,
 		top: 0,
@@ -105371,6 +105726,7 @@ function YatzyPlay({ onRematch, players, scores, setScores, onResetSheet, onEdit
 		zIndex: 3
 	} }), players.map((p, i) => /* @__PURE__ */ import_react.default.createElement("div", {
 		key: p.id,
+		className: "yz-th",
 		style: {
 			position: "sticky",
 			top: 0,
@@ -105381,25 +105737,31 @@ function YatzyPlay({ onRematch, players, scores, setScores, onResetSheet, onEdit
 			background: activeIdx === i && !finished ? `${_YHUES[i % _YHUES.length]}14` : _YCARD,
 			zIndex: 2
 		}
-	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 10.5,
-		fontWeight: 700,
-		color: _YINK,
-		fontFamily: "'Inter', sans-serif",
-		whiteSpace: "nowrap",
-		overflow: "hidden",
-		textOverflow: "ellipsis"
-	} }, p.name), activeIdx === i && !finished && /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 10,
-		lineHeight: 1.15,
-		color: _YHUES[i % _YHUES.length],
-		fontWeight: 700,
-		letterSpacing: "0.02em",
-		marginTop: 1,
-		whiteSpace: "nowrap",
-		overflow: "hidden",
-		textOverflow: "ellipsis"
-	} }, t("yourTurn")))), lowerRows.map((row) => /* @__PURE__ */ import_react.default.createElement(RowCells, {
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "yz-thn",
+		style: {
+			fontSize: 10.5,
+			fontWeight: 700,
+			color: _YINK,
+			fontFamily: "'Inter', sans-serif",
+			whiteSpace: "nowrap",
+			overflow: "hidden",
+			textOverflow: "ellipsis"
+		}
+	}, p.name), activeIdx === i && !finished && /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "yz-turn",
+		style: {
+			fontSize: 10,
+			lineHeight: 1.15,
+			color: _YHUES[i % _YHUES.length],
+			fontWeight: 700,
+			letterSpacing: "0.02em",
+			marginTop: 1,
+			whiteSpace: "nowrap",
+			overflow: "hidden",
+			textOverflow: "ellipsis"
+		}
+	}, t("yourTurn")))), lowerRows.map((row) => /* @__PURE__ */ import_react.default.createElement(RowCells, {
 		key: row.type === "cat" ? row.cat.id : row.label || row.id,
 		row,
 		players,
@@ -105413,11 +105775,14 @@ function YatzyPlay({ onRematch, players, scores, setScores, onResetSheet, onEdit
 		editing,
 		t,
 		theme
-	}))))), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		gap: 8,
-		marginTop: 10
-	} }, /* @__PURE__ */ import_react.default.createElement("button", {
+	}))))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "yz-actions",
+		style: {
+			display: "flex",
+			gap: 8,
+			marginTop: 10
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("button", {
 		...gtHold(() => {
 			onResetSheet();
 			setConfirmingReset(false);
@@ -105460,13 +105825,16 @@ function YatzyPlay({ onRematch, players, scores, setScores, onResetSheet, onEdit
 			fontFamily: "'Inter', sans-serif",
 			boxShadow: "0 1px 3px rgba(21,24,38,0.11)"
 		}
-	}, confirmingSetup ? t("confirmAgain") : t("changePlayers"))), /* @__PURE__ */ import_react.default.createElement("p", { style: {
-		fontSize: 11,
-		color: theme === "dark" ? tk.muted : _YMUTED,
-		textAlign: "center",
-		marginTop: 8,
-		fontFamily: "'Inter', sans-serif"
-	} }, t("tapCellHint"))), /* @__PURE__ */ import_react.default.createElement(YatzyEditorPanel, {
+	}, confirmingSetup ? t("confirmAgain") : t("changePlayers"))), /* @__PURE__ */ import_react.default.createElement("p", {
+		className: "yz-hint",
+		style: {
+			fontSize: 11,
+			color: theme === "dark" ? tk.muted : _YMUTED,
+			textAlign: "center",
+			marginTop: 8,
+			fontFamily: "'Inter', sans-serif"
+		}
+	}, t("tapCellHint"))), /* @__PURE__ */ import_react.default.createElement(YatzyEditorPanel, {
 		editing,
 		players,
 		scores,
@@ -105493,45 +105861,52 @@ function RowCells({ row, players, scores, autoValue, cellLabelStyle, onCellClick
 	const _YBORDER = theme === "noir" ? "#454545" : _YV ? "rgba(255,255,255,0.14)" : "#333A4D";
 	const _YGRID = theme === "noir" ? "#242424" : _YV ? "rgba(255,255,255,0.10)" : "#DDE2EE";
 	const _YACCENT = theme === "noir" ? noirAccent("yatzy") : _YV ? "#9DB7D8" : "#5B5FEF";
-	if (row.type === "section") return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		gridColumn: "1 / -1",
-		background: `${_YACCENT}0F`,
-		padding: "4px 10px",
-		fontSize: 10,
-		fontWeight: 700,
-		letterSpacing: "0.08em",
-		textTransform: "uppercase",
-		color: _YACCENT,
-		fontFamily: "'Inter', sans-serif"
-	} }, row.label);
+	if (row.type === "section") return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "yz-sec",
+		style: {
+			gridColumn: "1 / -1",
+			background: `${_YACCENT}0F`,
+			padding: "4px 10px",
+			fontSize: 10,
+			fontWeight: 700,
+			letterSpacing: "0.08em",
+			textTransform: "uppercase",
+			color: _YACCENT,
+			fontFamily: "'Inter', sans-serif"
+		}
+	}, row.label);
 	const isAuto = row.type === "auto";
 	const label = isAuto ? row.label : t(row.cat.labelKey);
 	const topBorderColor = row.topDivider ? row.accent ? _YACCENT : _YV ? "rgba(255,255,255,0.38)" : _YINK : _YGRID;
 	const topBorder = row.topDivider ? `2px solid ${topBorderColor}` : `1px solid ${_YGRID}`;
 	const ROW_MIN_H = 38;
-	return /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		position: "sticky",
-		left: 0,
-		minHeight: ROW_MIN_H,
-		boxSizing: "border-box",
-		display: "flex",
-		alignItems: "center",
-		background: row.accent ? `${_YACCENT}14` : isAuto ? _YBG : _YCARD,
-		borderBottom: `1px solid ${_YGRID}`,
-		borderRight: `1px solid ${_YGRID}`,
-		borderTop: topBorder,
-		padding: "4.5px 8px",
-		fontWeight: row.bold ? 700 : 500,
-		color: row.accent ? _YACCENT : isAuto ? _YMUTED : _YINK,
-		zIndex: 1,
-		fontSize: row.bold ? 13 : 12,
-		...cellLabelStyle
-	} }, label), players.map((p) => {
+	return /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "yz-lab" + (row.bold ? " yz-bold" : ""),
+		style: {
+			position: "sticky",
+			left: 0,
+			minHeight: ROW_MIN_H,
+			boxSizing: "border-box",
+			display: "flex",
+			alignItems: "center",
+			background: row.accent ? `${_YACCENT}14` : isAuto ? _YBG : _YCARD,
+			borderBottom: `1px solid ${_YGRID}`,
+			borderRight: `1px solid ${_YGRID}`,
+			borderTop: topBorder,
+			padding: "4.5px 8px",
+			fontWeight: row.bold ? 700 : 500,
+			color: row.accent ? _YACCENT : isAuto ? _YMUTED : _YINK,
+			zIndex: 1,
+			fontSize: row.bold ? 13 : 12,
+			...cellLabelStyle
+		}
+	}, label), players.map((p) => {
 		const card = scores[p.id];
 		if (isAuto) {
 			const val = autoValue(row.id, card);
 			return /* @__PURE__ */ import_react.default.createElement("div", {
 				key: p.id,
+				className: "yz-auto",
 				style: {
 					minHeight: ROW_MIN_H,
 					boxSizing: "border-box",
@@ -105560,6 +105935,7 @@ function RowCells({ row, players, scores, autoValue, cellLabelStyle, onCellClick
 		const isFilled = value !== null;
 		return /* @__PURE__ */ import_react.default.createElement("button", {
 			key: p.id,
+			className: "yz-cell",
 			onClick: () => onCellClick(p.id, row.cat.id),
 			style: {
 				minHeight: ROW_MIN_H,
@@ -106242,6 +106618,7 @@ var podium_exports = /* @__PURE__ */ __exportAll({
 });
 function PodiumOverlay({ open, onClose, onRestart, ranked, tk, t, bestRecord, gameLabel, gameId, theme }) {
 	const playCount = usePlayCount(open);
+	const plLand = usePhoneLandscape();
 	const [isSharing, setIsSharing] = useState$11(false);
 	const [previewUrl, setPreviewUrl] = useState$11(null);
 	useEffect$15(() => {
@@ -106334,11 +106711,15 @@ function PodiumOverlay({ open, onClose, onRestart, ranked, tk, t, bestRecord, ga
 		const rk = gtRk[idx] || idx + 1;
 		const lv = Math.min(3, rk);
 		const win = rk === 1;
-		const H = [
+		const H = (plLand ? [
+			104,
+			84,
+			72
+		] : [
 			150,
 			118,
 			100
-		][lv - 1];
+		])[lv - 1];
 		const sc = fmt(entry.score);
 		const front = win && soloWin;
 		return /* @__PURE__ */ import_react.default.createElement("div", {
@@ -106444,7 +106825,7 @@ function PodiumOverlay({ open, onClose, onRestart, ranked, tk, t, bestRecord, ga
 		stroke: "currentColor",
 		strokeWidth: 2.4,
 		strokeLinecap: "round"
-	})))), /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	})))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtsb-hd" }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		position: "relative",
 		textAlign: "center",
 		padding: "0 40px",
@@ -106479,10 +106860,13 @@ function PodiumOverlay({ open, onClose, onRestart, ranked, tk, t, bestRecord, ga
 		name: "starCustom",
 		size: 12,
 		color: S.accText
-	}), t("newPersonalBest")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		position: "relative",
-		marginTop: 20
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtsb-row" }, order.map(col)), /* @__PURE__ */ import_react.default.createElement("div", {
+	}), t("newPersonalBest"))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtsb-stage",
+		style: {
+			position: "relative",
+			marginTop: 20
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtsb-row" }, order.map(col)), /* @__PURE__ */ import_react.default.createElement("div", {
 		"aria-hidden": true,
 		style: {
 			height: 18,
@@ -106490,7 +106874,7 @@ function PodiumOverlay({ open, onClose, onRestart, ranked, tk, t, bestRecord, ga
 			background: `radial-gradient(50% 50% at 50% 50%, ${S.ground} 0%, transparent 100%)`,
 			pointerEvents: "none"
 		}
-	})), rest.length > 0 && /* @__PURE__ */ import_react.default.createElement("ol", { className: "gtsb-list" }, rest.map((e, i) => {
+	})), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtsb-side" }, rest.length > 0 && /* @__PURE__ */ import_react.default.createElement("ol", { className: "gtsb-list" }, rest.map((e, i) => {
 		const k = i + 3;
 		const sc = fmt(e && e.score);
 		return /* @__PURE__ */ import_react.default.createElement("li", { key: k }, /* @__PURE__ */ import_react.default.createElement("span", { style: {
@@ -106569,7 +106953,7 @@ function PodiumOverlay({ open, onClose, onRestart, ranked, tk, t, bestRecord, ga
 		strokeWidth: "2",
 		strokeLinecap: "round",
 		strokeLinejoin: "round"
-	})), t("shareResultLabel")))), /* @__PURE__ */ import_react.default.createElement(ShareImagePreview, {
+	})), t("shareResultLabel"))))), /* @__PURE__ */ import_react.default.createElement(ShareImagePreview, {
 		url: previewUrl,
 		onClose: () => setPreviewUrl(null),
 		t

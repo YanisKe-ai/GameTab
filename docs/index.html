@@ -38108,11 +38108,14 @@ function GtOnboarding3({ theme, lang, onDone }) {
 			...titleSt,
 			marginBottom: 12
 		}
-	}, t("tourCatTitle")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 8
-	} }, cat("pencilPad", blue, t("scorepadsTitle"), t("tourCatScoreDesc")), cat("feste", purple, t("partyGamesTitle"), t("tourCatPartyDesc")))) : /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	}, t("tourCatTitle")), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gt-onb-cats",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 8
+		}
+	}, cat("pencilPad", blue, t("scorepadsTitle"), t("tourCatScoreDesc")), cat("feste", purple, t("partyGamesTitle"), t("tourCatPartyDesc")))) : /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		justifyContent: "center",
 		marginBottom: 12
@@ -38196,7 +38199,7 @@ function GtOnboarding3({ theme, lang, onDone }) {
 		role: "dialog",
 		"aria-modal": true,
 		"aria-labelledby": "gt-onb-title",
-		className: theme === "vitrum" ? "gtL-glass-strong" : void 0,
+		className: "gt-onb-card" + (theme === "vitrum" ? " gtL-glass-strong" : ""),
 		style: {
 			position: "relative",
 			width: "min(340px, calc(100vw - 32px))",
@@ -38231,18 +38234,21 @@ function GtOnboarding3({ theme, lang, onDone }) {
 		key: step,
 		className: "podium-pop"
 	}, body), dots, btns);
-	return ReactDOM.createPortal(/* @__PURE__ */ import_react.default.createElement("div", { style: {
-		position: "fixed",
-		inset: 0,
-		zIndex: 300,
-		background: overlayBg,
-		display: "flex",
-		alignItems: "center",
-		justifyContent: "center",
-		padding: 16,
-		backdropFilter: "blur(3px)",
-		WebkitBackdropFilter: "blur(3px)"
-	} }, card), document.body);
+	return ReactDOM.createPortal(/* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gt-onb-overlay",
+		style: {
+			position: "fixed",
+			inset: 0,
+			zIndex: 300,
+			background: overlayBg,
+			display: "flex",
+			alignItems: "center",
+			justifyContent: "center",
+			padding: 16,
+			backdropFilter: "blur(3px)",
+			WebkitBackdropFilter: "blur(3px)"
+		}
+	}, card), document.body);
 }
 function SectionLabel({ children, tokens, compact }) {
 	const tk = tokens || {
@@ -40748,7 +40754,7 @@ function StartPage({ onSelect, lang, theme, viewMode, lastPlayed, dismissedResum
 		}
 	}))))), theme === "noir" && !isLaptop && /* @__PURE__ */ import_react.default.createElement("button", {
 		onClick: triggerBeam,
-		className: "press-fx",
+		className: "press-fx pl-hide",
 		"aria-label": t("gtxSpotlight"),
 		style: {
 			position: "fixed",
@@ -40772,7 +40778,7 @@ function StartPage({ onSelect, lang, theme, viewMode, lastPlayed, dismissedResum
 		color: tk.muted
 	})), /* @__PURE__ */ import_react.default.createElement("button", {
 		onClick: () => onSelect("settings"),
-		className: "press-fx gt-hit" + (theme === "vitrum" ? " gtL-glass-soft" : ""),
+		className: "press-fx gt-hit gtL-start-gear" + (theme === "vitrum" ? " gtL-glass-soft" : ""),
 		"data-onboard": "settings",
 		"aria-label": t("settings"),
 		style: {
@@ -40798,17 +40804,23 @@ function StartPage({ onSelect, lang, theme, viewMode, lastPlayed, dismissedResum
 		name: "settingsGear",
 		size: 18,
 		color: tk.muted
-	})), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		flex: 1,
-		display: "flex",
-		flexDirection: "column",
-		justifyContent: "center",
-		minHeight: 0,
-		overflow: isLaptop ? "visible" : "hidden"
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		padding: "14px 20px",
-		position: "relative"
-	} }, /* @__PURE__ */ import_react.default.createElement("div", {
+	})), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtL-startmain",
+		style: {
+			flex: 1,
+			display: "flex",
+			flexDirection: "column",
+			justifyContent: "center",
+			minHeight: 0,
+			overflow: isLaptop ? "visible" : "hidden"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtL-startheadpad",
+		style: {
+			padding: "14px 20px",
+			position: "relative"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-headwrap reveal-1",
 		style: {
 			maxWidth: isLaptop ? 520 : 380,
@@ -40911,7 +40923,10 @@ function StartPage({ onSelect, lang, theme, viewMode, lastPlayed, dismissedResum
 		fontFamily: "'Inter', sans-serif",
 		marginTop: 4,
 		textTransform: "uppercase"
-	} }, t("appSubtitle")))))), theme !== "light" && /* @__PURE__ */ import_react.default.createElement("div", { style: {} }, /* @__PURE__ */ import_react.default.createElement(DecoGapStrip, {
+	} }, t("appSubtitle")))))), theme !== "light" && /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "pl-hide",
+		style: {}
+	}, /* @__PURE__ */ import_react.default.createElement(DecoGapStrip, {
 		theme,
 		items: theme === "noir" ? DECO_GAP_TOP_NOIR : DECO_GAP_TOP,
 		offset: "-6px"
@@ -40972,7 +40987,10 @@ function StartPage({ onSelect, lang, theme, viewMode, lastPlayed, dismissedResum
 		fontSize: 12,
 		color: tk.muted,
 		fontFamily: "'Inter', sans-serif"
-	} }, appTimeAgoLabel(lastPlayed.ts, lang)))))), /* @__PURE__ */ import_react.default.createElement("div", { style: { transform: "translateY(clamp(9px, 1.5vh, 14px))" } }, /* @__PURE__ */ import_react.default.createElement("div", {
+	} }, appTimeAgoLabel(lastPlayed.ts, lang)))))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtL-startmain-tiles",
+		style: { transform: "translateY(clamp(9px, 1.5vh, 14px))" }
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-tiles",
 		style: { marginTop: 2 }
 	}, /* @__PURE__ */ import_react.default.createElement(BlurFade, {
@@ -41033,7 +41051,10 @@ function StartPage({ onSelect, lang, theme, viewMode, lastPlayed, dismissedResum
 		lang,
 		tokens: tk,
 		theme
-	}))), theme !== "light" && /* @__PURE__ */ import_react.default.createElement("div", { style: {} }, /* @__PURE__ */ import_react.default.createElement(DecoGapStrip, {
+	}))), theme !== "light" && /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "pl-hide",
+		style: {}
+	}, /* @__PURE__ */ import_react.default.createElement(DecoGapStrip, {
 		theme,
 		className: "gtL-deco-bottom",
 		items: theme === "noir" ? DECO_GAP_BOTTOM_NOIR : DECO_GAP_BOTTOM,
@@ -57700,6 +57721,88 @@ function GtCustomDeck({ game, skin, t, onChange, withTaboo }) {
 		}
 	}, n >= 5 ? t("customReady")(n) : t("customNeed")(n))));
 }
+var H1_LANDSCAPE_CSS = `
+[data-phone-landscape] .gtL-game.h1l { max-width: none !important; width: 100% !important; margin: 0 !important; box-sizing: border-box; padding: 0 var(--pl-gutter-r) calc(var(--pl-sab) + 8px) var(--pl-gutter-l); }
+[data-phone-landscape] .gtL-shellpage:has(.h1l), [data-phone-landscape] .gtL-shellpage:has(.h1l-root) { padding: max(var(--pl-sat), 8px) 0 0 !important; }
+[data-phone-landscape] .gtL-game:has(> .h1l-root) { max-width: none !important; width: 100% !important; margin: 0 !important; box-sizing: border-box; padding: 0 var(--pl-gutter-r) calc(var(--pl-sab) + 8px) var(--pl-gutter-l); }
+
+/* Kompakter Kopf (nur falls der gemeinsame GameHeader noch nicht kompakt ist) */
+[data-phone-landscape] .gtL-game:is(.h1l, :has(> .h1l-root)) .gt-gamehead { display: flex; align-items: center; gap: 10px; min-height: var(--pl-head); max-height: 52px; box-sizing: border-box; padding-top: 2px; padding-bottom: 2px; margin-bottom: 6px; }
+[data-phone-landscape] .gtL-game:is(.h1l, :has(> .h1l-root)) .gt-gamehead > div:first-of-type { margin-bottom: 0 !important; flex: none; order: 0; }
+[data-phone-landscape] .gtL-game:is(.h1l, :has(> .h1l-root)) .gt-gamehead > div:nth-of-type(n+2):not(.gt-headbtns) { flex: 1 1 auto; min-width: 0; order: 1; }
+[data-phone-landscape] .gtL-game:is(.h1l, :has(> .h1l-root)) .gt-gamehead > .gt-headbtns { position: static !important; order: 2; flex: none; margin-left: auto; }
+[data-phone-landscape] .gtL-game:is(.h1l, :has(> .h1l-root)) .gt-gamehead h1 { font-size: 20px !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Zweispalter (Setup, Verraeter Tag/Nacht): dieselben Wrapper wie im Laptop-Modus */
+[data-phone-landscape] .h1l .gtL-split, [data-phone-landscape] .h1l-root .gtL-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--pl-gap) calc(var(--pl-gap) + 4px); align-items: start; }
+[data-phone-landscape] .h1l .gtL-col-main, [data-phone-landscape] .h1l .gtL-col-side, [data-phone-landscape] .h1l-root .gtL-col-main, [data-phone-landscape] .h1l-root .gtL-col-side { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+
+/* Private Uebergabe: links Name und Fortschritt, rechts die verdeckte Karte (Rolle bleibt bis zum Halten unsichtbar) */
+[data-phone-landscape] .h1l .gt-handover, [data-phone-landscape] .h1l-root .gt-handover { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: calc(var(--pl-gap) + 8px); row-gap: 8px; align-content: center; min-height: max(200px, calc(var(--pl-body) - 22px)) !important; text-align: center; }
+[data-phone-landscape] .h1l .gt-handover > :not(:last-child), [data-phone-landscape] .h1l-root .gt-handover > :not(:last-child) { grid-column: 1; align-self: center; }
+[data-phone-landscape] .h1l .gt-handover > div:not(:last-child):empty, [data-phone-landscape] .h1l-root .gt-handover > div:not(:last-child):empty { display: none; }
+[data-phone-landscape] .h1l .gt-handover > :last-child, [data-phone-landscape] .h1l-root .gt-handover > :last-child { grid-column: 2; grid-row: 1 / span 6; align-self: center; min-height: 0; }
+[data-phone-landscape] .gt-handover > :last-child > div:empty { display: none; }
+[data-phone-landscape] :is(.h1l, .h1l-root) .gt-flip-face { min-height: 150px; }
+[data-phone-landscape] :is(.h1l, .h1l-root) .gt-flip-front { padding: 12px; }
+[data-phone-landscape] :is(.h1l, .h1l-root) .gt-hold-next { min-height: 48px !important; }
+
+[data-phone-landscape] :is(.h1l, .h1l-root) .gt-flip-back { padding: 8px 10px; }
+[data-phone-landscape] :is(.h1l, .h1l-root) .gt-flip-back > div { gap: 8px !important; }
+[data-phone-landscape] .h1l .gt-flip-back .impostor-file { padding: 14px 16px !important; }
+[data-phone-landscape] .h1l-disc .g-cat { display: flex; align-items: baseline; justify-content: center; gap: 10px; }
+[data-phone-landscape] .h1l-disc .g-cat > div { margin-top: 0 !important; }
+[data-phone-landscape] .h1l-disc .g-timer { padding: 10px !important; }
+
+/* Flache Phasen-Raster: Kinder tragen g-cat/g-timer/g-list/g-btn/g-hint, im Hochformat display: contents (pl-split) */
+[data-phone-landscape] .h1l-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--pl-gap) calc(var(--pl-gap) + 4px); align-items: start; }
+[data-phone-landscape] .h1l-grid .g-cat { grid-area: cat; }
+[data-phone-landscape] .h1l-grid .g-timer { grid-area: timer; }
+[data-phone-landscape] .h1l-grid .g-list { grid-area: list; min-height: 0; }
+[data-phone-landscape] .h1l-grid .g-btn { grid-area: btn; }
+[data-phone-landscape] .h1l-grid .g-hint { grid-area: hint; }
+[data-phone-landscape] .h1l-disc { grid-template-areas: "cat list" "timer list" "btn hint"; }
+[data-phone-landscape] .h1l-disc .g-list { overflow-y: auto; overscroll-behavior: contain; max-height: max(180px, calc(var(--pl-body) - 40px)); }
+[data-phone-landscape] .h1l-vote { grid-template-areas: "cat list" "hint list"; }
+[data-phone-landscape] .h1l-vote .g-list.pl-scroll { max-height: max(180px, calc(var(--pl-body) - 8px)); }
+
+/* Mittige Einzelbildschirme (Ergebnis, Gleichstand, Morgen): weniger Luft, volle Breite nutzen */
+[data-phone-landscape] .h1l-ctr { gap: 8px !important; padding-top: 4px !important; padding-bottom: 4px !important; }
+
+/* Auswahl-Schritte (Nachtwahl Werwolf/Mafia, Abstimmung): Kopf und Bestaetigen links, Personenliste rechts */
+[data-phone-landscape] .h1l-pick { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: "head list" "btn list"; align-content: start; align-items: start; gap: 10px calc(var(--pl-gap) + 4px) !important; }
+[data-phone-landscape] .h1l-pick > :nth-child(1) { grid-area: head; }
+[data-phone-landscape] .h1l-pick > :nth-child(2) { grid-area: list; max-height: max(180px, calc(var(--pl-body) - 8px)); overflow-y: auto; overscroll-behavior: contain; }
+[data-phone-landscape] .h1l-pick > :nth-child(3) { grid-area: btn; }
+[data-phone-landscape] .h1l-vote2 { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: "head list" "timer list" "timer btn"; align-content: start; align-items: start; gap: 10px calc(var(--pl-gap) + 4px) !important; }
+[data-phone-landscape] .h1l-vote2 > :nth-child(1) { grid-area: head; }
+[data-phone-landscape] .h1l-vote2 > :nth-child(2) { grid-area: timer; padding: 10px !important; }
+[data-phone-landscape] .h1l-vote2 > :nth-child(3) { grid-area: list; max-height: max(180px, calc(var(--pl-body) - 70px)); overflow-y: auto; overscroll-behavior: contain; }
+[data-phone-landscape] .h1l-vote2 > :nth-child(4) { grid-area: btn; }
+
+/* Touchflaechen in den Partyspielen mindestens 44 px hoch */
+[data-phone-landscape] :is(.h1l, .h1l-root) button { min-height: 44px; }
+
+[data-phone-landscape] .h1l-plist > :last-child { grid-column: 1 / -1; }
+/* Verraeter: Uebergabe-Schritt (Name links, verdeckte Karte rechts) */
+[data-phone-landscape] .h1l-rev { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: "lab card" "name card" "note card"; grid-template-rows: auto auto 1fr; align-items: center; column-gap: calc(var(--pl-gap) + 8px); row-gap: 6px; min-height: max(200px, calc(var(--pl-body) - 22px)) !important; }
+[data-phone-landscape] .h1l-rev > :nth-child(1) { grid-area: lab; align-self: end; }
+[data-phone-landscape] .h1l-rev > :nth-child(2) { grid-area: name; align-self: start; }
+[data-phone-landscape] .h1l-rev > :nth-child(3) { grid-area: card; align-self: center; }
+[data-phone-landscape] .h1l-rev > :nth-child(4) { grid-area: note; align-self: start; }
+
+/* Spielende: Sieger links, Rollenaufloesung rechts, Aktionen unter dem Titel */
+[data-phone-landscape] .h1l-over { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: "icon box" "title box" "txt box" "btn box"; grid-template-rows: auto auto auto 1fr; align-items: center; justify-items: center; gap: 8px calc(var(--pl-gap) + 4px) !important; padding-top: 4px !important; }
+[data-phone-landscape] .h1l-over > svg, [data-phone-landscape] .h1l-over > .g-icon { grid-area: icon; align-self: end; }
+[data-phone-landscape] .h1l-over > .g-title { grid-area: title; align-self: center; }
+[data-phone-landscape] .h1l-over > .g-txt { grid-area: txt; }
+[data-phone-landscape] .h1l-over > .g-box { grid-area: box; max-width: none !important; width: 100%; box-sizing: border-box; max-height: max(180px, calc(var(--pl-body) - 8px)); overflow-y: auto; align-self: start; }
+[data-phone-landscape] .h1l-over > .g-btn { grid-area: btn; align-self: start; margin-top: 0 !important; flex-wrap: wrap; justify-content: center; }
+
+/* Zielauswahl der Geheimrollen (Seherin, Hexe, Detektiv, Arzt, Beschuetzer): Personen in zwei Spalten */
+[data-phone-landscape] .h1l-plist { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px calc(var(--pl-gap) + 4px) !important; align-items: stretch; }
+[data-phone-landscape] .h1l-plist > :first-child { grid-column: 1 / -1; }
+`;
 // web/src/games/impostor/game.js
 var game_exports$10 = /* @__PURE__ */ __exportAll({
 	IMPOSTOR_DOSSIER_CSS: () => IMPOSTOR_DOSSIER_CSS,
@@ -58240,6 +58343,7 @@ function ImpostorReveal({ players, roles, word, onDone, theme, t, gtPeekIdx }) {
 }
 function ImpostorDiscuss({ players, word, hideCategory, discussSeconds, onVote, theme, t }) {
 	const wt = impostorTokens(theme);
+	const pl = usePhoneLandscape();
 	const [order] = useState$11(() => shuffleArray(players));
 	const [seconds, setSeconds] = useState$11(discussSeconds || 90);
 	const [running, setRunning] = useState$11(false);
@@ -58260,7 +58364,10 @@ function ImpostorDiscuss({ players, word, hideCategory, discussSeconds, onVote, 
 		display: "flex",
 		flexDirection: "column",
 		gap: 18
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: { textAlign: "center" } }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	} }, /* @__PURE__ */ import_react.default.createElement("div", { className: "pl-split h1l-grid h1l-disc" }, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "g-cat",
+		style: { textAlign: "center" }
+	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		fontSize: 11,
 		color: wt.muted,
 		letterSpacing: "0.15em",
@@ -58280,22 +58387,25 @@ function ImpostorDiscuss({ players, word, hideCategory, discussSeconds, onVote, 
 		name: word.categoryId,
 		size: 20,
 		color: wt.ink
-	}), " ", word.categoryLabel)), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		background: wt.card,
-		border: `1px solid ${wt.border}`,
-		borderRadius: 24,
-		padding: "20px",
-		textAlign: "center"
-	} }, /* @__PURE__ */ import_react.default.createElement(GtTimerRing, {
+	}), " ", word.categoryLabel)), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "g-timer",
+		style: {
+			background: wt.card,
+			border: `1px solid ${wt.border}`,
+			borderRadius: 24,
+			padding: "20px",
+			textAlign: "center"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement(GtTimerRing, {
 		left: seconds,
 		total: discussSeconds || 90,
 		running,
-		size: 168,
+		size: pl ? 100 : 168,
 		stroke: 3,
 		color: wt.teal,
 		warn: wt.red
 	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 40,
+		fontSize: pl ? 30 : 40,
 		fontWeight: 800,
 		color: wt.teal,
 		fontFamily: IMP_FONT,
@@ -58339,7 +58449,7 @@ function ImpostorDiscuss({ players, word, hideCategory, discussSeconds, onVote, 
 			cursor: "pointer",
 			fontFamily: "'Inter', sans-serif"
 		}
-	}, t("reset")))), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	}, t("reset")))), /* @__PURE__ */ import_react.default.createElement("div", { className: "g-list" }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		fontSize: 11,
 		color: wt.muted,
 		letterSpacing: "0.08em",
@@ -58372,13 +58482,17 @@ function ImpostorDiscuss({ players, word, hideCategory, discussSeconds, onVote, 
 		color: wt.ink,
 		fontFamily: "'Inter', sans-serif",
 		fontWeight: 500
-	} }, p.name))))), /* @__PURE__ */ import_react.default.createElement("p", { style: {
-		fontSize: 11,
-		color: wt.muted,
-		textAlign: "center",
-		fontFamily: "'Inter', sans-serif",
-		margin: 0
-	} }, t("discussHint")), /* @__PURE__ */ import_react.default.createElement("button", {
+	} }, p.name))))), /* @__PURE__ */ import_react.default.createElement("p", {
+		className: "g-hint",
+		style: {
+			fontSize: 11,
+			color: wt.muted,
+			textAlign: "center",
+			fontFamily: "'Inter', sans-serif",
+			margin: 0
+		}
+	}, t("discussHint")), /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "g-btn",
 		onClick: onVote,
 		style: {
 			border: "none",
@@ -58400,7 +58514,7 @@ function ImpostorDiscuss({ players, word, hideCategory, discussSeconds, onVote, 
 			verticalAlign: "-3px",
 			marginLeft: 2
 		}
-	})));
+	}))));
 }
 function ImpostorVoting({ players, onDone, theme, t }) {
 	const wt = impostorTokens(theme);
@@ -58427,7 +58541,10 @@ function ImpostorVoting({ players, onDone, theme, t }) {
 		display: "flex",
 		flexDirection: "column",
 		gap: 16
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: { textAlign: "center" } }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	} }, /* @__PURE__ */ import_react.default.createElement("div", { className: "pl-split h1l-grid h1l-vote" }, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "g-cat",
+		style: { textAlign: "center" }
+	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		fontSize: 11,
 		color: wt.muted,
 		letterSpacing: "0.15em",
@@ -58444,13 +58561,16 @@ function ImpostorVoting({ players, onDone, theme, t }) {
 		color: wt.muted,
 		fontFamily: "'Inter', sans-serif",
 		marginTop: 2
-	} }, t("voteXofY")(idx + 1, players.length))), confirming ? /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 12,
-		alignItems: "center",
-		padding: "20px 0"
-	} }, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+	} }, t("voteXofY")(idx + 1, players.length))), confirming ? /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "g-list h1l-ctr",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 12,
+			alignItems: "center",
+			padding: "20px 0"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
 		name: "ballot",
 		size: 26,
 		color: wt.muted
@@ -58495,11 +58615,14 @@ function ImpostorVoting({ players, onDone, theme, t }) {
 			cursor: "pointer",
 			fontFamily: "'Inter', sans-serif"
 		}
-	}, /* @__PURE__ */ import_react.default.createElement(CheckMark, null), " ", t("confirm")))) : /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 6
-	} }, players.filter((p) => p.id !== voter.id).map((p) => /* @__PURE__ */ import_react.default.createElement("button", {
+	}, /* @__PURE__ */ import_react.default.createElement(CheckMark, null), " ", t("confirm")))) : /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "g-list pl-scroll",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 6
+		}
+	}, players.filter((p) => p.id !== voter.id).map((p) => /* @__PURE__ */ import_react.default.createElement("button", {
 		key: p.id,
 		onClick: () => castVote(p.id),
 		style: {
@@ -58514,13 +58637,16 @@ function ImpostorVoting({ players, onDone, theme, t }) {
 			fontFamily: "'Inter', sans-serif",
 			textAlign: "left"
 		}
-	}, p.name))), /* @__PURE__ */ import_react.default.createElement("p", { style: {
-		fontSize: 11,
-		color: wt.muted,
-		textAlign: "center",
-		fontFamily: "'Inter', sans-serif",
-		margin: 0
-	} }, t("dontShowPhoneHint")));
+	}, p.name))), /* @__PURE__ */ import_react.default.createElement("p", {
+		className: "g-hint",
+		style: {
+			fontSize: 11,
+			color: wt.muted,
+			textAlign: "center",
+			fontFamily: "'Inter', sans-serif",
+			margin: 0
+		}
+	}, t("dontShowPhoneHint"))));
 }
 function impNorm(s) {
 	const raw = String(s == null ? "" : s).trim().toLowerCase();
@@ -58561,14 +58687,17 @@ function ImpostorResults({ players, roles, word, votes, onPlayAgain, onNewSetup,
 		setGuessResult("civilianwin");
 		setGuessPhase(false);
 	};
-	if (tie) return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		alignItems: "center",
-		gap: 16,
-		textAlign: "center",
-		padding: "20px 0"
-	} }, /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+	if (tie) return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "h1l-ctr",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			alignItems: "center",
+			gap: 16,
+			textAlign: "center",
+			padding: "20px 0"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
 		name: "tie",
 		size: 44,
 		color: wt.muted
@@ -58604,14 +58733,17 @@ function ImpostorResults({ players, roles, word, votes, onPlayAgain, onNewSetup,
 		onClick: onNewSetup,
 		style: btnGhostImp(theme)
 	}, t("changePlayers"))));
-	if (caughtImpostorTeam && guessPhase) return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		alignItems: "center",
-		gap: 14,
-		textAlign: "center",
-		padding: "10px 0"
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	if (caughtImpostorTeam && guessPhase) return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "h1l-ctr",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			alignItems: "center",
+			gap: 14,
+			textAlign: "center",
+			padding: "10px 0"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		fontSize: 11,
 		color: wt.muted,
 		letterSpacing: "0.15em",
@@ -58667,14 +58799,17 @@ function ImpostorResults({ players, roles, word, votes, onPlayAgain, onNewSetup,
 		}
 	}, t("guessSubmit"), /* @__PURE__ */ import_react.default.createElement(CheckMark, null))));
 	const civiliansWin = eliminated ? caughtImpostorTeam && guessResult !== "impostorwin" : false;
-	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		alignItems: "center",
-		gap: 14,
-		textAlign: "center",
-		padding: "10px 0"
-	} }, celebration, eliminated && /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "h1l-ctr",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			alignItems: "center",
+			gap: 14,
+			textAlign: "center",
+			padding: "10px 0"
+		}
+	}, celebration, eliminated && /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		fontSize: 12,
 		color: wt.muted,
 		fontFamily: "'Inter', sans-serif"
@@ -58786,8 +58921,8 @@ function ImpostorGame({ state, setState, onBack, onHome, onEndGame, lang = "de",
 	if (state.phase === "setup" || !round) return /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-shellpage",
 		style: impostorPageShellStyle(theme)
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-game",
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, H1_LANDSCAPE_CSS), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtL-game h1l",
 		style: {
 			maxWidth: 380,
 			margin: "0 auto",
@@ -58825,8 +58960,8 @@ function ImpostorGame({ state, setState, onBack, onHome, onEndGame, lang = "de",
 	return /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-shellpage",
 		style: impostorPageShellStyle(theme)
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, IMPOSTOR_DOSSIER_CSS), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-game",
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, H1_LANDSCAPE_CSS, IMPOSTOR_DOSSIER_CSS), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtL-game h1l",
 		style: {
 			maxWidth: 380,
 			margin: "0 auto",
@@ -58999,15 +59134,18 @@ function TrtRoleCard({ isT, allies, tk, t }) {
 	} }, t("trtAllies"), ": ", /* @__PURE__ */ import_react.default.createElement("strong", null, allies.join(", "))));
 }
 function TrtReveal({ player, isT, allies, tk, t, onNext }) {
-	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		alignItems: "center",
-		justifyContent: "center",
-		minHeight: "50vh",
-		textAlign: "center",
-		gap: 18
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "h1l-rev",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			alignItems: "center",
+			justifyContent: "center",
+			minHeight: "50vh",
+			textAlign: "center",
+			gap: 18
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		fontSize: 11,
 		color: tk.muted,
 		letterSpacing: "0.15em",
@@ -59058,14 +59196,17 @@ function TrtReveal({ player, isT, allies, tk, t, onNext }) {
 function TrtNight({ day, cands, tk, t, onPick }) {
 	const [open, setOpen] = useState$11(false);
 	const [sel, setSel] = useState$11(null);
-	if (!open) return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		alignItems: "center",
-		textAlign: "center",
-		gap: 16,
-		padding: "18px 0"
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { className: "reveal-1" }, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+	if (!open) return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "h1l-ctr",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			alignItems: "center",
+			textAlign: "center",
+			gap: 16,
+			padding: "18px 0"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", { className: "reveal-1" }, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
 		name: "moon",
 		size: 52,
 		color: tk.teal
@@ -59098,11 +59239,14 @@ function TrtNight({ day, cands, tk, t, onPick }) {
 			"--gt-hold-c": "rgba(0,0,0,0.22)"
 		}
 	}));
-	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 8
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "h1l-plist",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 8
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		textAlign: "center",
 		marginBottom: 4
 	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
@@ -59156,14 +59300,17 @@ function TrtNight({ day, cands, tk, t, onPick }) {
 	}, t("trtConfirmVictim")));
 }
 function TrtMorning({ name, winner, tk, t, onNext }) {
-	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		alignItems: "center",
-		textAlign: "center",
-		gap: 14,
-		padding: "18px 0"
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { className: "reveal-1" }, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "h1l-ctr",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			alignItems: "center",
+			textAlign: "center",
+			gap: 14,
+			padding: "18px 0"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", { className: "reveal-1" }, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
 		name: "sunrise",
 		size: 52,
 		color: tk.gold
@@ -59204,6 +59351,7 @@ function TrtMorning({ name, winner, tk, t, onNext }) {
 	}, winner ? t("trtToResult") : t("trtToDiscussion")));
 }
 function TrtDay({ day, secs, tk, t, onVote }) {
+	const pl = usePhoneLandscape();
 	const total = secs || 120;
 	const [left, setLeft] = useState$11(total);
 	const [run, setRun] = useState$11(false);
@@ -59222,11 +59370,14 @@ function TrtDay({ day, secs, tk, t, onVote }) {
 	}, [run, left]);
 	const mm = String(Math.floor(left / 60)).padStart(2, "0");
 	const ss = String(left % 60).padStart(2, "0");
-	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 16
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: { textAlign: "center" } }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "h1l-ctr",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 16
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", { style: { textAlign: "center" } }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		fontSize: 11,
 		color: tk.muted,
 		letterSpacing: "0.15em",
@@ -59248,7 +59399,7 @@ function TrtDay({ day, secs, tk, t, onVote }) {
 		left,
 		total,
 		running: run,
-		size: 168,
+		size: pl ? 110 : 168,
 		stroke: 3,
 		color: tk.teal,
 		warn: tk.red
@@ -59342,11 +59493,14 @@ function TrtVote({ voters, cands, tk, t, onDone }) {
 		if (idx + 1 >= voters.length) onDone(nv);
 		else setIdx((i) => i + 1);
 	};
-	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 14
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: { textAlign: "center" } }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "h1l-ctr",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 14
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", { style: { textAlign: "center" } }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		fontSize: 11,
 		color: tk.muted,
 		letterSpacing: "0.15em",
@@ -59431,14 +59585,17 @@ function TrtVote({ voters, cands, tk, t, onDone }) {
 function TrtBanish({ name, isT, winner, tk, t, onNext }) {
 	const [shown, setShown] = useState$11(false);
 	const c = isT ? tk.red : tk.teal;
-	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		alignItems: "center",
-		textAlign: "center",
-		gap: 14,
-		padding: "14px 0"
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { className: "reveal-1" }, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "h1l-ctr",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			alignItems: "center",
+			textAlign: "center",
+			gap: 14,
+			padding: "14px 0"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", { className: "reveal-1" }, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
 		name: "ballot",
 		size: 44,
 		color: tk.muted
@@ -59501,14 +59658,17 @@ function TrtBanish({ name, isT, winner, tk, t, onNext }) {
 	}, winner ? t("trtToResult") : t("trtNextNight"))));
 }
 function TrtTie({ names, tk, t, onRevote, onSkip }) {
-	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		alignItems: "center",
-		textAlign: "center",
-		gap: 14,
-		padding: "18px 0"
-	} }, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "h1l-ctr",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			alignItems: "center",
+			textAlign: "center",
+			gap: 14,
+			padding: "18px 0"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
 		name: "tie",
 		size: 44,
 		color: tk.muted
@@ -59550,19 +59710,22 @@ function TrtEnd({ winner, players, roles, tk, t, theme, onAgain, onSetup }) {
 	useEffect$15(() => {
 		gtRecordSides("traitor", players, (p) => roles[p.id] === "traitor" === !fw, roles, { traitors });
 	}, []);
-	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		alignItems: "center",
-		textAlign: "center",
-		gap: 14,
-		padding: "10px 0"
-	} }, celebration, /* @__PURE__ */ import_react.default.createElement("div", { className: "reveal-1" }, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "h1l-over",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			alignItems: "center",
+			textAlign: "center",
+			gap: 14,
+			padding: "10px 0"
+		}
+	}, celebration, /* @__PURE__ */ import_react.default.createElement("div", { className: "reveal-1 g-icon" }, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
 		name: fw ? "trophy" : "skull",
 		size: 52,
 		color: c
 	})), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "reveal-2",
+		className: "reveal-2 g-title",
 		style: {
 			fontSize: 26,
 			fontWeight: 800,
@@ -59571,7 +59734,7 @@ function TrtEnd({ winner, players, roles, tk, t, theme, onAgain, onSetup }) {
 			letterSpacing: "-0.01em"
 		}
 	}, fw ? t("trtFaithfulWin") : t("trtTraitorWin")), /* @__PURE__ */ import_react.default.createElement("p", {
-		className: "reveal-3",
+		className: "reveal-3 g-txt",
 		style: {
 			fontSize: 13,
 			color: tk.muted,
@@ -59580,7 +59743,7 @@ function TrtEnd({ winner, players, roles, tk, t, theme, onAgain, onSetup }) {
 			maxWidth: 300
 		}
 	}, fw ? t("trtFaithfulWinText") : t("trtTraitorWinText")), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "reveal-3",
+		className: "reveal-3 g-box",
 		style: {
 			background: tk.card,
 			border: `1px solid ${tk.border}`,
@@ -59594,7 +59757,7 @@ function TrtEnd({ winner, players, roles, tk, t, theme, onAgain, onSetup }) {
 			boxSizing: "border-box"
 		}
 	}, t("trtRolesWere"), ": ", /* @__PURE__ */ import_react.default.createElement("strong", { style: { color: tk.red } }, traitors.join(", "))), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "reveal-4",
+		className: "reveal-4 g-btn",
 		style: {
 			display: "flex",
 			gap: 8,
@@ -59736,8 +59899,9 @@ function TraitorGame({ state, setState, onBack, onHome, onEndGame, lang = "de", 
 		onBack,
 		onHome,
 		onEndGame: sub === t("gtNewMatch") ? void 0 : onEndGame,
-		rulesText: t("rulesTraitor")
-	}, kids);
+		rulesText: t("rulesTraitor"),
+		extraCss: H1_LANDSCAPE_CSS
+	}, /* @__PURE__ */ import_react.default.createElement("div", { className: "h1l-root" }, kids));
 	if (!r) {
 		const n = players.length;
 		const tooFew = n < 4;
@@ -63939,7 +64103,7 @@ function GtStatsHeadBtn({ tk, t, theme, onClick }) {
 	return /* @__PURE__ */ import_react.default.createElement("button", {
 		type: "button",
 		onClick,
-		className: "press-fx" + (theme === "vitrum" ? " gtL-glass-soft" : ""),
+		className: "press-fx gtL-statsbtn" + (theme === "vitrum" ? " gtL-glass-soft" : ""),
 		"aria-label": t("statsTitle"),
 		style: {
 			display: "flex",
@@ -63973,7 +64137,7 @@ function CategoryScorepads({ onSelect, onBack, lang, theme, tuttoTarget, tuttoPr
 	const t = useT(lang);
 	const tk = shellTokens(theme);
 	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage" + (theme === "vitrum" ? " vitrum-active" : ""),
+		className: "gtL-shellpage pl-app pl-head-compact" + (theme === "vitrum" ? " vitrum-active" : ""),
 		style: {
 			minHeight: "100vh",
 			background: tk.pageBg,
@@ -64130,7 +64294,7 @@ function CategoryPartyGames({ onSelect, onBack, lang, theme, impostorProgress, w
 	const t = useT(lang);
 	const tk = shellTokens(theme);
 	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage" + (theme === "vitrum" ? " vitrum-active" : ""),
+		className: "gtL-shellpage pl-app pl-head-compact" + (theme === "vitrum" ? " vitrum-active" : ""),
 		style: {
 			minHeight: "100vh",
 			background: tk.pageBg,
@@ -64445,7 +64609,7 @@ function SettingsPage({ onBack, onReplayTour, lang, setLang, theme, setTheme, vi
 	];
 	const currentLang = LANGS.find((l) => l.id === lang) || LANGS[0];
 	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage" + (theme === "vitrum" ? " vitrum-active" : ""),
+		className: "gtL-shellpage pl-app pl-head-compact" + (theme === "vitrum" ? " vitrum-active" : ""),
 		style: {
 			minHeight: "100vh",
 			background: tk.pageBg,
@@ -64830,6 +64994,91 @@ function SettingsPage({ onBack, onReplayTour, lang, setLang, theme, setTheme, vi
 		tokens: tk
 	})));
 }
+// web/src/app/landscape.js
+var APP_LANDSCAPE_CSS = `
+[data-phone-landscape] .pl-app { padding: calc(var(--pl-sat) + 6px) var(--pl-gutter-r) calc(var(--pl-sab) + 20px) var(--pl-gutter-l) !important; min-height: var(--pl-vh) !important; box-sizing: border-box; }
+[data-phone-landscape] .pl-app > .gtL-page { max-width: none !important; width: 100% !important; margin: 0 !important; }
+[data-phone-landscape] .pl-app .gtL-cards, [data-phone-landscape] .pl-app .pl-grid2 { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px !important; align-items: stretch; }
+[data-phone-landscape] .pl-app .gtL-cards > *, [data-phone-landscape] .pl-app .pl-grid2 > * { min-width: 0; }
+[data-phone-landscape] .pl-app .gtL-cards > button, [data-phone-landscape] .pl-app .gtL-cards > a, [data-phone-landscape] .pl-app .pl-grid2 > button { min-height: 64px; height: 100%; box-sizing: border-box; }
+@media (max-width: 600px) { [data-phone-landscape] .pl-app .gtL-cards, [data-phone-landscape] .pl-app .pl-grid2 { gap: 8px !important; } }
+
+/* Startseite */
+[data-phone-landscape] .gtL-startmain { overflow: visible !important; justify-content: flex-start !important; flex: 0 0 auto !important; }
+[data-phone-landscape] .gtL-startheadpad { padding: calc(var(--pl-sat) + 6px) calc(var(--pl-gutter-r) + 52px) 0 var(--pl-gutter-l) !important; }
+[data-phone-landscape] .gtL-headwrap { max-width: none !important; padding-top: 0 !important; }
+[data-phone-landscape] .gtL-headwrap > div { flex-direction: row !important; align-items: center !important; justify-content: flex-start !important; text-align: left !important; gap: 14px; }
+[data-phone-landscape] .gtL-headwrap > div > div:first-child { margin-bottom: 0 !important; flex: none; }
+[data-phone-landscape] .gtL-headwrap .gt-hero-logo { transform: none !important; }
+[data-phone-landscape] .gtL-headwrap .gt-hero-logo > div { width: 92px !important; }
+[data-phone-landscape] .gtL-headwrap > div > div:last-child { transform: none !important; }
+[data-phone-landscape] .gtL-headwrap > div > div:last-child > div:first-child { justify-content: flex-start !important; font-size: 26px !important; }
+[data-phone-landscape] .gtL-headwrap > div > div:last-child > div:first-child > span:nth-child(1), [data-phone-landscape] .gtL-headwrap > div > div:last-child > div:first-child > span:nth-child(3) { font-size: 36px !important; }
+[data-phone-landscape] .gtL-start .gtL-start-gear { top: calc(var(--pl-sat) + 8px) !important; right: calc(var(--pl-gutter-r) - 2px) !important; width: 44px !important; height: 44px !important; }
+[data-phone-landscape] .gtL-startcol { max-width: none !important; margin: 0 !important; width: 100% !important; box-sizing: border-box; padding: 6px var(--pl-gutter-r) 0 var(--pl-gutter-l) !important; display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 16px; align-items: start; }
+[data-phone-landscape] .gtL-startcol > .gtL-startmain-tiles { grid-column: 1; grid-row: 1; transform: none !important; }
+[data-phone-landscape] .gtL-startcol > [data-onboard="showcase"] { grid-column: 1 / -1; grid-row: 2; margin-top: 10px !important; }
+[data-phone-landscape] .gtL-startcol > .gt-resume, [data-phone-landscape] .gtL-startcol > .gtL-tipcard { grid-column: 2; grid-row: 1; margin-top: 0 !important; }
+[data-phone-landscape] .gtL-startcol .gtL-tipcard { padding-right: 6px; }
+[data-phone-landscape] .gtL-startcol .gtL-tiles { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; margin-top: 0 !important; }
+[data-phone-landscape] .gtL-startcol .gtL-tile { margin-bottom: 0 !important; min-height: 56px; padding-top: 6px !important; padding-bottom: 6px !important; }
+[data-phone-landscape] .gtL-startcol .gtL-tile-title { font-size: 20px !important; }
+[data-phone-landscape] .gtL-startcol .gtL-showcase { margin-top: 6px !important; }
+[data-phone-landscape] .gtL-showcase-row { display: grid !important; grid-template-columns: repeat(auto-fill, minmax(88px, 1fr)); gap: 10px 8px !important; overflow: visible !important; scroll-snap-type: none !important; }
+[data-phone-landscape] .gtL-showcase-item { width: auto !important; min-height: 76px; padding: 4px 2px !important; }
+[data-phone-landscape] .gtL-showcase-label { font-size: 12px !important; opacity: 1 !important; overflow-wrap: anywhere; }
+[data-phone-landscape] .gtL-showcase-arrow { display: none !important; }
+[data-phone-landscape] .gtL-startfoot { max-width: none !important; padding: 10px var(--pl-gutter-r) calc(var(--pl-sab) + 14px) var(--pl-gutter-l) !important; }
+[data-phone-landscape] .gtL-startfoot p { font-size: 12px !important; }
+
+/* Kopfknopf Statistiken (Kategorieseiten) */
+[data-phone-landscape] .pl-app .gtL-statsbtn { margin-top: 0 !important; height: 44px !important; }
+
+/* Einfuehrung (Portal) */
+[data-phone-landscape] .gt-onb-overlay { align-items: flex-start !important; overflow-y: auto; overscroll-behavior: contain; padding: calc(var(--pl-sat) + 8px) var(--pl-gutter-r) calc(var(--pl-sab) + 8px) var(--pl-gutter-l) !important; box-sizing: border-box; }
+[data-phone-landscape] .gt-onb-card { width: min(560px, 100%) !important; margin: auto !important; }
+[data-phone-landscape] .gt-onb-card button { min-height: 44px; }
+[data-phone-landscape] .gt-onb-cats { flex-direction: row !important; align-items: stretch; }
+[data-phone-landscape] .gt-onb-cats > * { flex: 1 1 0; min-width: 0; }
+
+/* Jahresrueckblick (Portal) */
+[data-phone-landscape] .gtYR-card { width: 100% !important; height: 100% !important; aspect-ratio: auto !important; border-radius: 0 !important; box-shadow: none !important; padding-left: var(--pl-sal); padding-right: var(--pl-sar); box-sizing: border-box; }
+[data-phone-landscape] .gtYR-card > div[aria-hidden="true"]:not(.gtYR-glow) { padding-top: calc(var(--pl-sat) + 6px) !important; }
+[data-phone-landscape] .gtYR-body { padding: 0 var(--pl-gutter-r) calc(var(--pl-sab) + 10px) var(--pl-gutter-l) !important; gap: 6px !important; }
+[data-phone-landscape] .gtYR-val { font-size: min(22vh, 96px) !important; margin: 0 !important; }
+[data-phone-landscape] .gtYR-val > span { font-size: min(22vh, 96px) !important; }
+[data-phone-landscape] .gtYR-body .gtYR-in:not(.gtYR-val):not(.gtYR-big):not(.gtYR-acts) { max-width: none !important; }
+[data-phone-landscape] .gtYR-body .gtYR-in[style*="line-height: 1.42"] { font-size: 16px !important; }
+[data-phone-landscape] .gtYR-big { font-size: min(9vh, 34px) !important; }
+[data-phone-landscape] .gtYR-acts { flex-direction: row !important; margin-top: 4px !important; }
+[data-phone-landscape] .gtYR-acts > button { flex: 1 1 0; min-height: 48px !important; }
+
+/* Einstellungen */
+[data-phone-landscape] .pl-app .gtL-settings button { min-height: 44px; }
+[data-phone-landscape] .pl-app .gtL-set-split .gtL-toggle-row { flex-wrap: wrap; }
+[data-phone-landscape] .pl-app .gtL-set-split .gtL-toggle-row > button { flex: 1 1 128px !important; min-width: 0; }
+[data-phone-landscape] .pl-app .gtL-set-split { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0 28px; align-items: start; }
+[data-phone-landscape] .pl-app .gtL-set-split > .gtL-col-main, [data-phone-landscape] .pl-app .gtL-set-split > .gtL-col-side { display: block !important; min-width: 0; }
+
+/* Statistik */
+[data-phone-landscape] .pl-app .gt-gamehead { position: relative !important; top: auto !important; }
+[data-phone-landscape] .pl-app .gtSt2-hl { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)); overflow: visible !important; margin: 0 !important; padding: 0 !important; scroll-snap-type: none; }
+[data-phone-landscape] .pl-app .gtSt2-hl > * { min-width: 0; flex: none; }
+[data-phone-landscape] .pl-app .gtSt2-seg button { min-height: 44px; }
+[data-phone-landscape] .pl-app .gtSt2-sel { min-height: 44px !important; height: auto; }
+[data-phone-landscape] .pl-app .gtSt2-sel > * { min-height: 44px; box-sizing: border-box; }
+[data-phone-landscape] [data-onboard="search"] input { min-height: 44px; box-sizing: border-box; }
+[data-phone-landscape] .pl-app .gtL-split.pl-st-split { display: grid !important; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 0 22px; align-items: start; }
+[data-phone-landscape] .pl-app .pl-st-split > .gtL-col-main, [data-phone-landscape] .pl-app .pl-st-split > .gtL-col-side { display: flex !important; flex-direction: column; min-width: 0; }
+`;
+try {
+	if (typeof document !== "undefined" && !document.getElementById("gt-pl-app-css")) {
+		const el = document.createElement("style");
+		el.id = "gt-pl-app-css";
+		el.textContent = APP_LANDSCAPE_CSS;
+		document.head.appendChild(el);
+	}
+} catch (_) {}
 // web/src/app/variant-select.js
 var variant_select_exports = /* @__PURE__ */ __exportAll({
 	DartMachineModeButton: () => DartMachineModeButton,
@@ -64840,7 +65089,7 @@ function JassVariantSelect({ onSelect, onBack, jassProgress, schieberProgress, l
 	const t = useT(lang);
 	const tk = shellTokens(theme);
 	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage",
+		className: "gtL-shellpage pl-app pl-head-compact",
 		style: pageShellStyle(theme)
 	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-page",
@@ -64976,7 +65225,7 @@ function DartsVariantSelect({ onSelect, onBack, dartsProgress, cricketProgress, 
 	const tk = dartMachineTokens(theme);
 	const isLight = theme === "light";
 	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage",
+		className: "gtL-shellpage pl-app pl-head-compact",
 		style: {
 			minHeight: "100vh",
 			padding: "20px 12px 32px",
@@ -65019,11 +65268,14 @@ function DartsVariantSelect({ onSelect, onBack, dartsProgress, cricketProgress, 
 		letterSpacing: "0.22em",
 		textTransform: "uppercase",
 		marginBottom: 14
-	} }, "● " + t("dartsGameSelect")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 10
-	} }, /* @__PURE__ */ import_react.default.createElement(DartMachineModeButton, {
+	} }, "● " + t("dartsGameSelect")), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "pl-grid2",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 10
+		}
+	}, /* @__PURE__ */ import_react.default.createElement(DartMachineModeButton, {
 		tk,
 		label: t("dartsStandardMode"),
 		sub: t("gameDartsDesc"),
@@ -66733,6 +66985,7 @@ function WerewolfModerator({ snap, onSnap, players, initialRoles, spares, enable
 	const useState = gtKeep(snap, onSnap, !!snap, null, "werewolfMod");
 	useState.fin = () => winner !== null;
 	const wt = wolfTokens(theme);
+	const pl = usePhoneLandscape();
 	const ROLES = WEREWOLF_ROLES_FOR(lang);
 	const rolesFlat = {};
 	players.forEach((p) => {
@@ -66855,13 +67108,16 @@ function WerewolfModerator({ snap, onSnap, players, initialRoles, spares, enable
 		setPhase("night");
 		setStepIdx(0);
 	};
-	if (phase === "captain") return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 14,
-		textAlign: "center",
-		alignItems: "center"
-	} }, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+	if (phase === "captain") return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "h1l-ctr",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 14,
+			textAlign: "center",
+			alignItems: "center"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
 		name: "starCustom",
 		size: 40,
 		color: wt.moon
@@ -66901,13 +67157,16 @@ function WerewolfModerator({ snap, onSnap, players, initialRoles, spares, enable
 		}
 	}, p.name))));
 	if (phase === "night") {
-		if (stepIdx >= nightSteps.length) return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-			display: "flex",
-			flexDirection: "column",
-			gap: 14,
-			textAlign: "center",
-			alignItems: "center"
-		} }, /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+		if (stepIdx >= nightSteps.length) return /* @__PURE__ */ import_react.default.createElement("div", {
+			className: "h1l-ctr",
+			style: {
+				display: "flex",
+				flexDirection: "column",
+				gap: 14,
+				textAlign: "center",
+				alignItems: "center"
+			}
+		}, /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
 			name: "sunrise",
 			size: 36,
 			color: wt.moon
@@ -67021,13 +67280,16 @@ function WerewolfModerator({ snap, onSnap, players, initialRoles, spares, enable
 				setPendingRevenge((r) => r.slice(1));
 			}
 		});
-		if (captainId && !alive[captainId] && !winner) return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-			display: "flex",
-			flexDirection: "column",
-			gap: 14,
-			textAlign: "center",
-			alignItems: "center"
-		} }, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+		if (captainId && !alive[captainId] && !winner) return /* @__PURE__ */ import_react.default.createElement("div", {
+			className: "h1l-ctr",
+			style: {
+				display: "flex",
+				flexDirection: "column",
+				gap: 14,
+				textAlign: "center",
+				alignItems: "center"
+			}
+		}, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
 			name: "starCustom",
 			size: 40,
 			color: wt.moon
@@ -67062,13 +67324,16 @@ function WerewolfModerator({ snap, onSnap, players, initialRoles, spares, enable
 				fontFamily: "'Inter', sans-serif"
 			}
 		}, p.name))));
-		return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-			display: "flex",
-			flexDirection: "column",
-			gap: 14,
-			textAlign: "center",
-			alignItems: "center"
-		} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		return /* @__PURE__ */ import_react.default.createElement("div", {
+			className: "h1l-ctr",
+			style: {
+				display: "flex",
+				flexDirection: "column",
+				gap: 14,
+				textAlign: "center",
+				alignItems: "center"
+			}
+		}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 			fontSize: 11,
 			color: wt.muted,
 			letterSpacing: "0.15em",
@@ -67137,11 +67402,14 @@ function WerewolfModerator({ snap, onSnap, players, initialRoles, spares, enable
 			style: wolfBtnPrimary(theme)
 		}, t("toVillageAssembly")));
 	}
-	if (phase === "vote") return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 14
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: { textAlign: "center" } }, /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+	if (phase === "vote") return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "h1l-vote2",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 14
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", { style: { textAlign: "center" } }, /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
 		name: "sun",
 		size: 34,
 		color: wt.moon
@@ -67168,12 +67436,12 @@ function WerewolfModerator({ snap, onSnap, players, initialRoles, spares, enable
 		left: voteSeconds,
 		total: voteSecondsDefault || 90,
 		running: voteTimerRunning,
-		size: 148,
+		size: pl ? 96 : 148,
 		stroke: 3,
 		color: wt.moon,
 		warn: wt.blood
 	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 34,
+		fontSize: pl ? 24 : 34,
 		fontWeight: 800,
 		color: wt.blood,
 		fontFamily: WOLF_FONT,
@@ -67256,13 +67524,16 @@ function WerewolfModerator({ snap, onSnap, players, initialRoles, spares, enable
 				setPendingRevenge((r) => r.slice(1));
 			}
 		});
-		if (captainId && !alive[captainId] && !winner) return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-			display: "flex",
-			flexDirection: "column",
-			gap: 14,
-			textAlign: "center",
-			alignItems: "center"
-		} }, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+		if (captainId && !alive[captainId] && !winner) return /* @__PURE__ */ import_react.default.createElement("div", {
+			className: "h1l-ctr",
+			style: {
+				display: "flex",
+				flexDirection: "column",
+				gap: 14,
+				textAlign: "center",
+				alignItems: "center"
+			}
+		}, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
 			name: "starCustom",
 			size: 40,
 			color: wt.moon
@@ -67297,13 +67568,16 @@ function WerewolfModerator({ snap, onSnap, players, initialRoles, spares, enable
 				fontFamily: "'Inter', sans-serif"
 			}
 		}, p.name))));
-		return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-			display: "flex",
-			flexDirection: "column",
-			gap: 14,
-			textAlign: "center",
-			alignItems: "center"
-		} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		return /* @__PURE__ */ import_react.default.createElement("div", {
+			className: "h1l-ctr",
+			style: {
+				display: "flex",
+				flexDirection: "column",
+				gap: 14,
+				textAlign: "center",
+				alignItems: "center"
+			}
+		}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 			display: "flex",
 			flexDirection: "column",
 			gap: 8,
@@ -67365,14 +67639,17 @@ function WerewolfModerator({ snap, onSnap, players, initialRoles, spares, enable
 }
 function NightInfo({ icon, title, text, onNext, theme, t }) {
 	const wt = wolfTokens(theme);
-	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 14,
-		textAlign: "center",
-		alignItems: "center",
-		padding: "20px 0"
-	} }, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "h1l-ctr",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 14,
+			textAlign: "center",
+			alignItems: "center",
+			padding: "20px 0"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
 		name: icon,
 		size: 40,
 		color: wt.moon
@@ -67402,11 +67679,14 @@ function NightPicker({ icon, title, instruction, players, multi, onConfirm, them
 			return [...p, id];
 		});
 	};
-	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 12
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: { textAlign: "center" } }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "h1l-pick",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 12
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", { style: { textAlign: "center" } }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		justifyContent: "center"
 	} }, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
@@ -67459,14 +67739,17 @@ function SeherinStep({ seherinName, players, rolesFlat, onDone, theme, lang, t }
 	const ROLES = WEREWOLF_ROLES_FOR(lang);
 	const [handedOver, setHandedOver] = useState$11(false);
 	const [target, setTarget] = useState$11(null);
-	if (!handedOver) return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 14,
-		textAlign: "center",
-		alignItems: "center",
-		padding: "20px 0"
-	} }, /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+	if (!handedOver) return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "h1l-ctr",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 14,
+			textAlign: "center",
+			alignItems: "center",
+			padding: "20px 0"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
 		name: "seherin",
 		size: 36,
 		color: wt.moon
@@ -67484,11 +67767,14 @@ function SeherinStep({ seherinName, players, rolesFlat, onDone, theme, lang, t }
 		onClick: () => setHandedOver(true),
 		style: wolfBtnPrimary(theme)
 	}, t("iAmX")(seherinName)));
-	if (!target) return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 10
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	if (!target) return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "h1l-plist",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 10
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		textAlign: "center",
 		fontSize: 12,
 		color: wt.muted,
@@ -67510,14 +67796,17 @@ function SeherinStep({ seherinName, players, rolesFlat, onDone, theme, lang, t }
 	}, p.name)));
 	const role = ROLES[rolesFlat[target]];
 	const targetName = players.find((p) => p.id === target)?.name;
-	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 14,
-		textAlign: "center",
-		alignItems: "center",
-		padding: "20px 0"
-	} }, /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "h1l-ctr",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 14,
+			textAlign: "center",
+			alignItems: "center",
+			padding: "20px 0"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
 		name: role.id,
 		size: 40,
 		color: wt.moon
@@ -67545,14 +67834,17 @@ function HexeStep({ hexeName, victimName, healUsed, poisonUsed, players, onDone,
 	const [handedOver, setHandedOver] = useState$11(false);
 	const [poisonPick, setPoisonPick] = useState$11(false);
 	const [healed, setHealed] = useState$11(false);
-	if (!handedOver) return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 14,
-		textAlign: "center",
-		alignItems: "center",
-		padding: "20px 0"
-	} }, /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+	if (!handedOver) return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "h1l-ctr",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 14,
+			textAlign: "center",
+			alignItems: "center",
+			padding: "20px 0"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
 		name: "hexe",
 		size: 36,
 		color: wt.moon
@@ -67570,11 +67862,14 @@ function HexeStep({ hexeName, victimName, healUsed, poisonUsed, players, onDone,
 		onClick: () => setHandedOver(true),
 		style: wolfBtnPrimary(theme)
 	}, t("iAmX")(hexeName)));
-	if (poisonPick) return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 10
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	if (poisonPick) return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "h1l-plist",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 10
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		textAlign: "center",
 		fontSize: 12,
 		color: wt.muted,
@@ -67600,14 +67895,17 @@ function HexeStep({ hexeName, victimName, healUsed, poisonUsed, players, onDone,
 		onClick: () => setPoisonPick(false),
 		style: wolfBtnGhost(theme)
 	}, t("goBack")));
-	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 12,
-		textAlign: "center",
-		alignItems: "center",
-		padding: "10px 0"
-	} }, /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "h1l-ctr",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 12,
+			textAlign: "center",
+			alignItems: "center",
+			padding: "10px 0"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
 		name: "hexe",
 		size: 36,
 		color: wt.blood
@@ -67728,34 +68026,43 @@ function GameOverPanel({ winner, lovers, players, rolesFlat, onRestart, onNewSet
 			wwWin: winner
 		});
 	}, []);
-	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 14,
-		alignItems: "center"
-	} }, celebration, /* @__PURE__ */ import_react.default.createElement("div", null, civWin ? /* @__PURE__ */ import_react.default.createElement("span", { style: { fontSize: 48 } }, "") : /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "h1l-over",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 14,
+			alignItems: "center"
+		}
+	}, celebration, /* @__PURE__ */ import_react.default.createElement("div", { className: "g-icon" }, civWin ? /* @__PURE__ */ import_react.default.createElement("span", { style: { fontSize: 48 } }, "") : /* @__PURE__ */ import_react.default.createElement(GameIcon, {
 		name: "werwolf",
 		size: 48,
 		color: wt.blood
-	})), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 24,
-		fontWeight: 800,
-		color: civWin ? wt.forest : wt.blood,
-		fontFamily: WOLF_FONT
-	} }, winner === "lovers" ? t("loversWin") : civWin ? t("villageWins") : t("werewolvesWin")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		background: wt.card,
-		border: `1px solid ${wt.border}`,
-		borderRadius: 22,
-		padding: "12px 16px",
-		fontSize: 12,
-		color: wt.muted,
-		fontFamily: "'Inter', sans-serif",
-		maxWidth: 300,
-		display: "flex",
-		flexWrap: "wrap",
-		gap: "4px 10px",
-		justifyContent: "center"
-	} }, players.map((p) => /* @__PURE__ */ import_react.default.createElement("span", {
+	})), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "g-title",
+		style: {
+			fontSize: 24,
+			fontWeight: 800,
+			color: civWin ? wt.forest : wt.blood,
+			fontFamily: WOLF_FONT
+		}
+	}, winner === "lovers" ? t("loversWin") : civWin ? t("villageWins") : t("werewolvesWin")), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "g-box",
+		style: {
+			background: wt.card,
+			border: `1px solid ${wt.border}`,
+			borderRadius: 22,
+			padding: "12px 16px",
+			fontSize: 12,
+			color: wt.muted,
+			fontFamily: "'Inter', sans-serif",
+			maxWidth: 300,
+			display: "flex",
+			flexWrap: "wrap",
+			gap: "4px 10px",
+			justifyContent: "center"
+		}
+	}, players.map((p) => /* @__PURE__ */ import_react.default.createElement("span", {
 		key: p.id,
 		style: {
 			display: "inline-flex",
@@ -67766,10 +68073,13 @@ function GameOverPanel({ winner, lovers, players, rolesFlat, onRestart, onNewSet
 		name: rolesFlat[p.id],
 		size: 13,
 		color: wt.muted
-	}), " ", ROLES[rolesFlat[p.id]].label))), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		gap: 8
-	} }, /* @__PURE__ */ import_react.default.createElement("button", {
+	}), " ", ROLES[rolesFlat[p.id]].label))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "g-btn",
+		style: {
+			display: "flex",
+			gap: 8
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("button", {
 		"data-gt-sound": "1",
 		className: "press-fx",
 		onClick: onRestart,
@@ -67818,8 +68128,8 @@ function WerewolfGame({ state, setState, onBack, onHome, onEndGame, lang = "de",
 	if (state.phase === "setup" || !round) return /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-shellpage",
 		style: wolfPageShellStyle(theme)
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-game",
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, H1_LANDSCAPE_CSS), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtL-game h1l",
 		style: {
 			maxWidth: 380,
 			margin: "0 auto",
@@ -67857,8 +68167,8 @@ function WerewolfGame({ state, setState, onBack, onHome, onEndGame, lang = "de",
 	return /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-shellpage",
 		style: wolfPageShellStyle(theme)
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-game",
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, H1_LANDSCAPE_CSS), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtL-game h1l",
 		style: {
 			maxWidth: 380,
 			margin: "0 auto",
@@ -68078,11 +68388,14 @@ function MafiaNightPicker({ icon, title, instruction, players, multi, onConfirm,
 			return [...p, id];
 		});
 	};
-	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 12
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: { textAlign: "center" } }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "h1l-pick",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 12
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", { style: { textAlign: "center" } }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		justifyContent: "center"
 	} }, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
@@ -68134,14 +68447,17 @@ function MafiaDetectiveStep({ detectiveName, players, rolesFlat, onDone, theme, 
 	const mt = mafiaTokens(theme);
 	const [handedOver, setHandedOver] = useState$11(false);
 	const [target, setTarget] = useState$11(null);
-	if (!handedOver) return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 14,
-		textAlign: "center",
-		alignItems: "center",
-		padding: "20px 0"
-	} }, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+	if (!handedOver) return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "h1l-ctr",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 14,
+			textAlign: "center",
+			alignItems: "center",
+			padding: "20px 0"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
 		name: "detective",
 		size: 36,
 		color: mt.gold
@@ -68159,11 +68475,14 @@ function MafiaDetectiveStep({ detectiveName, players, rolesFlat, onDone, theme, 
 		onClick: () => setHandedOver(true),
 		style: mafiaBtnPrimary(theme)
 	}, t("iAmX")(detectiveName)));
-	if (!target) return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 10
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	if (!target) return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "h1l-plist",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 10
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		textAlign: "center",
 		fontSize: 12,
 		color: mt.muted,
@@ -68187,14 +68506,17 @@ function MafiaDetectiveStep({ detectiveName, players, rolesFlat, onDone, theme, 
 	const isMafiaTeam = targetRole === "mafioso" && targetRole !== "godfather";
 	const resultLabel = isMafiaTeam ? t("detectiveResultMafia") : t("detectiveResultInnocent");
 	const targetName = players.find((p) => p.id === target)?.name;
-	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 14,
-		textAlign: "center",
-		alignItems: "center",
-		padding: "20px 0"
-	} }, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "h1l-ctr",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 14,
+			textAlign: "center",
+			alignItems: "center",
+			padding: "20px 0"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
 		name: isMafiaTeam ? "fedora" : "citizen",
 		size: 40,
 		color: isMafiaTeam ? mt.blood : mt.gold
@@ -68220,14 +68542,17 @@ function MafiaDetectiveStep({ detectiveName, players, rolesFlat, onDone, theme, 
 function MafiaDoctorStep({ doctorName, victimName, lastProtectedId, players, onDone, theme, t }) {
 	const mt = mafiaTokens(theme);
 	const [handedOver, setHandedOver] = useState$11(false);
-	if (!handedOver) return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 14,
-		textAlign: "center",
-		alignItems: "center",
-		padding: "20px 0"
-	} }, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+	if (!handedOver) return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "h1l-ctr",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 14,
+			textAlign: "center",
+			alignItems: "center",
+			padding: "20px 0"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
 		name: "heal",
 		size: 36,
 		color: mt.gold
@@ -68245,11 +68570,14 @@ function MafiaDoctorStep({ doctorName, victimName, lastProtectedId, players, onD
 		onClick: () => setHandedOver(true),
 		style: mafiaBtnPrimary(theme)
 	}, t("iAmX")(doctorName)));
-	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 10
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "h1l-plist",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 10
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		textAlign: "center",
 		fontSize: 12,
 		color: mt.muted,
@@ -68278,14 +68606,17 @@ function MafiaDoctorStep({ doctorName, victimName, lastProtectedId, players, onD
 function MafiaVigilanteStep({ vigilanteName, players, onDone, theme, t }) {
 	const mt = mafiaTokens(theme);
 	const [handedOver, setHandedOver] = useState$11(false);
-	if (!handedOver) return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 14,
-		textAlign: "center",
-		alignItems: "center",
-		padding: "20px 0"
-	} }, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+	if (!handedOver) return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "h1l-ctr",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 14,
+			textAlign: "center",
+			alignItems: "center",
+			padding: "20px 0"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
 		name: "revolver",
 		size: 36,
 		color: mt.gold
@@ -68303,11 +68634,14 @@ function MafiaVigilanteStep({ vigilanteName, players, onDone, theme, t }) {
 		onClick: () => setHandedOver(true),
 		style: mafiaBtnPrimary(theme)
 	}, t("iAmX")(vigilanteName)));
-	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 10
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "h1l-plist",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 10
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		textAlign: "center",
 		fontSize: 12,
 		color: mt.muted,
@@ -68471,44 +68805,56 @@ function MafiaGameOverPanel({ winner, players, rolesFlat, onRestart, onNewSetup,
 	useEffect$15(() => {
 		gtRecordSides("mafia", players, (p) => (ROLES[rolesFlat[p.id]] || {}).team === "mafia" === (winner === "mafia"), rolesFlat, { mafiosi: players.filter((p) => (ROLES[rolesFlat[p.id]] || {}).team === "mafia").map((p) => p.name) });
 	}, []);
-	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 14,
-		alignItems: "center"
-	} }, celebration, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "h1l-over",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 14,
+			alignItems: "center"
+		}
+	}, celebration, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
 		name: townWin ? "scale" : "fedora",
 		size: 48,
 		color: townWin ? mt.gold : mt.blood
-	}), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 24,
-		fontWeight: 800,
-		color: townWin ? mt.gold : mt.blood,
-		fontFamily: MAFIA_FONT
-	} }, townWin ? t("townWins") : t("mafiaWins")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		background: mt.card,
-		border: `1px solid ${mt.border}`,
-		borderRadius: 22,
-		padding: "12px 16px",
-		fontSize: 12,
-		color: mt.muted,
-		fontFamily: "'Inter', sans-serif",
-		maxWidth: 300,
-		display: "flex",
-		flexWrap: "wrap",
-		gap: "4px 10px",
-		justifyContent: "center"
-	} }, players.map((p) => /* @__PURE__ */ import_react.default.createElement("span", {
+	}), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "g-title",
+		style: {
+			fontSize: 24,
+			fontWeight: 800,
+			color: townWin ? mt.gold : mt.blood,
+			fontFamily: MAFIA_FONT
+		}
+	}, townWin ? t("townWins") : t("mafiaWins")), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "g-box",
+		style: {
+			background: mt.card,
+			border: `1px solid ${mt.border}`,
+			borderRadius: 22,
+			padding: "12px 16px",
+			fontSize: 12,
+			color: mt.muted,
+			fontFamily: "'Inter', sans-serif",
+			maxWidth: 300,
+			display: "flex",
+			flexWrap: "wrap",
+			gap: "4px 10px",
+			justifyContent: "center"
+		}
+	}, players.map((p) => /* @__PURE__ */ import_react.default.createElement("span", {
 		key: p.id,
 		style: {
 			display: "inline-flex",
 			alignItems: "center",
 			gap: 4
 		}
-	}, p.name, ": ", ROLES[rolesFlat[p.id]].label))), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		gap: 8
-	} }, /* @__PURE__ */ import_react.default.createElement("button", {
+	}, p.name, ": ", ROLES[rolesFlat[p.id]].label))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "g-btn",
+		style: {
+			display: "flex",
+			gap: 8
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("button", {
 		"data-gt-sound": "1",
 		className: "press-fx",
 		onClick: onRestart,
@@ -68527,6 +68873,7 @@ function MafiaModerator({ snap, onSnap, players, initialRoles, enabledRoles, may
 	const useState = gtKeep(snap, onSnap, !!snap, null, "mafiaMod");
 	useState.fin = () => winner !== null;
 	const mt = mafiaTokens(theme);
+	const pl = usePhoneLandscape();
 	const ROLES = MAFIA_ROLES_BY_LANG_FOR(lang, t);
 	const rolesFlat = {};
 	players.forEach((p) => rolesFlat[p.id] = initialRoles[p.id]);
@@ -68621,13 +68968,16 @@ function MafiaModerator({ snap, onSnap, players, initialRoles, enabledRoles, may
 		setPhase("night");
 		setStepIdx(0);
 	};
-	if (phase === "mayor") return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 14,
-		textAlign: "center",
-		alignItems: "center"
-	} }, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+	if (phase === "mayor") return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "h1l-ctr",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 14,
+			textAlign: "center",
+			alignItems: "center"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
 		name: "starCustom",
 		size: 40,
 		color: mt.gold
@@ -68667,13 +69017,16 @@ function MafiaModerator({ snap, onSnap, players, initialRoles, enabledRoles, may
 		}
 	}, p.name))));
 	if (phase === "night") {
-		if (stepIdx >= nightSteps.length) return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-			display: "flex",
-			flexDirection: "column",
-			gap: 14,
-			textAlign: "center",
-			alignItems: "center"
-		} }, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+		if (stepIdx >= nightSteps.length) return /* @__PURE__ */ import_react.default.createElement("div", {
+			className: "h1l-ctr",
+			style: {
+				display: "flex",
+				flexDirection: "column",
+				gap: 14,
+				textAlign: "center",
+				alignItems: "center"
+			}
+		}, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
 			name: "sunrise",
 			size: 36,
 			color: mt.gold
@@ -68755,13 +69108,16 @@ function MafiaModerator({ snap, onSnap, players, initialRoles, enabledRoles, may
 		}
 		return null;
 	}
-	if (phase === "dawn") return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 14,
-		textAlign: "center",
-		alignItems: "center"
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	if (phase === "dawn") return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "h1l-ctr",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 14,
+			textAlign: "center",
+			alignItems: "center"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		fontSize: 11,
 		color: mt.muted,
 		letterSpacing: "0.15em",
@@ -68820,11 +69176,14 @@ function MafiaModerator({ snap, onSnap, players, initialRoles, enabledRoles, may
 		onClick: startVote,
 		style: mafiaBtnPrimary(theme)
 	}, t("toTownMeeting")));
-	if (phase === "vote") return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 14
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: { textAlign: "center" } }, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+	if (phase === "vote") return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "h1l-vote2",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 14
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", { style: { textAlign: "center" } }, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
 		name: "scale",
 		size: 34,
 		color: mt.gold
@@ -68851,12 +69210,12 @@ function MafiaModerator({ snap, onSnap, players, initialRoles, enabledRoles, may
 		left: voteSeconds,
 		total: voteSecondsDefault || 90,
 		running: voteTimerRunning,
-		size: 148,
+		size: pl ? 96 : 148,
 		stroke: 3,
 		color: mt.gold,
 		warn: mt.blood
 	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 34,
+		fontSize: pl ? 24 : 34,
 		fontWeight: 800,
 		color: mt.blood,
 		fontFamily: MAFIA_FONT,
@@ -68924,13 +69283,16 @@ function MafiaModerator({ snap, onSnap, players, initialRoles, enabledRoles, may
 			opacity: voteTarget ? 1 : .5
 		}
 	}, t("confirmElimination")));
-	if (phase === "dayresult") return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 14,
-		textAlign: "center",
-		alignItems: "center"
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	if (phase === "dayresult") return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "h1l-ctr",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 14,
+			textAlign: "center",
+			alignItems: "center"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		flexDirection: "column",
 		gap: 8,
@@ -69266,8 +69628,8 @@ function MafiaGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 	if (state.phase === "setup" || !round) return /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-shellpage",
 		style: mafiaPageShellStyle(theme)
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-game",
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, H1_LANDSCAPE_CSS), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtL-game h1l",
 		style: {
 			maxWidth: 380,
 			margin: "0 auto",
@@ -69305,8 +69667,8 @@ function MafiaGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 	return /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-shellpage",
 		style: mafiaPageShellStyle(theme)
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-game",
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, H1_LANDSCAPE_CSS), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtL-game h1l",
 		style: {
 			maxWidth: 380,
 			margin: "0 auto",
@@ -69405,7 +69767,7 @@ function TabuTurnIntro2({ teamName, onStart, theme, t, teams, scores, currentId,
 	const wt = tabuTokens(theme);
 	const list = Array.isArray(teams) ? teams : [];
 	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gt-handover",
+		className: "gt-handover tb-intro",
 		style: {
 			display: "flex",
 			flexDirection: "column",
@@ -69414,7 +69776,10 @@ function TabuTurnIntro2({ teamName, onStart, theme, t, teams, scores, currentId,
 			textAlign: "center",
 			gap: 12
 		}
-	}, list.length > 0 && /* @__PURE__ */ import_react.default.createElement("div", { style: { width: "100%" } }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	}, list.length > 0 && /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "tb-stand",
+		style: { width: "100%" }
+	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		fontSize: 10.5,
 		color: wt.muted,
 		letterSpacing: "0.14em",
@@ -69469,33 +69834,45 @@ function TabuTurnIntro2({ teamName, onStart, theme, t, teams, scores, currentId,
 			borderRadius: 2,
 			background: on ? wt.yellow : wt.muted
 		} })));
-	}))), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		flex: 1,
-		minHeight: 8
-	} }), /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	}))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "tb-sp",
+		style: {
+			flex: 1,
+			minHeight: 8
+		}
+	}), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "tb-main",
+		style: { display: "contents" }
+	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		fontSize: 11,
 		color: wt.muted,
 		letterSpacing: "0.15em",
 		textTransform: "uppercase",
 		fontFamily: "'Inter', sans-serif"
-	} }, t("nextTeam")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 44,
-		fontWeight: 800,
-		color: wt.yellow,
-		fontFamily: TABU_FONT,
-		lineHeight: 1.05,
-		overflowWrap: "anywhere"
-	} }, teamName), /* @__PURE__ */ import_react.default.createElement("p", { style: {
+	} }, t("nextTeam")), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "tb-team",
+		style: {
+			fontSize: 44,
+			fontWeight: 800,
+			color: wt.yellow,
+			fontFamily: TABU_FONT,
+			lineHeight: 1.05,
+			overflowWrap: "anywhere"
+		}
+	}, teamName), /* @__PURE__ */ import_react.default.createElement("p", { style: {
 		fontSize: 13,
 		color: wt.muted,
 		fontFamily: "'Inter', sans-serif",
 		maxWidth: 280,
 		margin: 0,
 		lineHeight: 1.45
-	} }, t("passToExplainer")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		flex: 1,
-		minHeight: 16
-	} }), /* @__PURE__ */ import_react.default.createElement("button", {
+	} }, t("passToExplainer")), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "tb-sp",
+		style: {
+			flex: 1,
+			minHeight: 16
+		}
+	}), /* @__PURE__ */ import_react.default.createElement("button", {
 		"data-gt-sound": "1",
 		onClick: onStart,
 		className: "press-fx",
@@ -69506,7 +69883,7 @@ function TabuTurnIntro2({ teamName, onStart, theme, t, teams, scores, currentId,
 			padding: "16px 28px",
 			fontSize: 16
 		}
-	}, t("readyStartRound")));
+	}, t("readyStartRound"))));
 }
 // web/src/content/tabu-words.js
 var tabu_words_exports = /* @__PURE__ */ __exportAll({ TABU_CATEGORIES_BY_LANG: () => TABU_CATEGORIES_BY_LANG });
@@ -88131,6 +88508,45 @@ var game_exports$5 = /* @__PURE__ */ __exportAll({
 	tabuBtnPrimary: () => tabuBtnPrimary,
 	tabuBuildDeck: () => tabuBuildDeck
 });
+var TABU_LANDSCAPE_CSS = `
+[data-phone-landscape] .tb-ls { padding: max(6px, var(--pl-sat)) 0 max(8px, var(--pl-sab)) 0 !important; min-height: var(--pl-vh) !important; box-sizing: border-box; }
+[data-phone-landscape] .tb-ls .gtL-game { padding-top: 0 !important; }
+[data-phone-landscape] .tb-play { display: grid !important; grid-template-columns: minmax(0, 1fr) clamp(200px, 36%, 300px); grid-template-areas: "card status" "card btns"; grid-template-rows: auto minmax(0, 1fr); gap: 8px 12px; height: max(200px, calc(var(--pl-body) - 18px)); align-items: stretch; }
+[data-phone-landscape] .tb-status { grid-area: status; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+[data-phone-landscape] .tb-counts { font-size: 15px !important; gap: 14px !important; }
+[data-phone-landscape] .tb-ringtxt { font-size: 17px !important; }
+[data-phone-landscape] .tb-card { grid-area: card; display: flex; flex-direction: column; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 12px 16px !important; border-radius: 22px !important; overflow-wrap: anywhere; }
+[data-phone-landscape] .tb-card > :first-child { margin-top: auto; }
+[data-phone-landscape] .tb-card > :last-child { margin-bottom: auto; }
+[data-phone-landscape] .tb-word.tb-long { font-size: clamp(20px, 7vh, 30px) !important; }
+[data-phone-landscape] .tb-lbl { margin-bottom: 4px !important; font-size: 11px !important; }
+[data-phone-landscape] .tb-word { font-size: clamp(26px, 10vh, 44px) !important; line-height: 1.08; margin-bottom: 8px !important; }
+[data-phone-landscape] .tb-rule { margin: 0 auto 8px !important; }
+[data-phone-landscape] .tb-taboo { display: grid !important; grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr)); gap: 4px 12px !important; }
+[data-phone-landscape] .tb-taboo > div { font-size: clamp(16px, 5.6vh, 22px) !important; line-height: 1.2; overflow-wrap: anywhere; }
+[data-phone-landscape] .tb-btns { grid-area: btns; flex-direction: column !important; gap: 8px !important; min-height: 0; }
+[data-phone-landscape] .tb-btns > button { flex: 1 1 0 !important; min-height: 48px; font-size: 16px !important; padding: 6px 10px !important; display: flex; align-items: center; justify-content: center; gap: 6px; overflow-wrap: anywhere; }
+[data-phone-landscape] .tb-b-ok { order: 1; }
+[data-phone-landscape] .tb-b-skip { order: 2; }
+[data-phone-landscape] .tb-b-taboo { order: 3; margin-top: 6px; }
+[data-phone-landscape] .tb-intro { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: "stand main"; gap: 8px 18px !important; min-height: max(180px, calc(var(--pl-body) - 18px)) !important; align-items: center; justify-items: stretch; }
+[data-phone-landscape] .tb-intro > .tb-stand { grid-area: stand; align-self: center; }
+[data-phone-landscape] .tb-intro > .tb-main { grid-area: main; display: flex !important; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+[data-phone-landscape] .tb-intro:not(:has(.tb-stand)) { grid-template-columns: minmax(0, 1fr); grid-template-areas: "main"; }
+[data-phone-landscape] .tb-intro .tb-sp { display: none !important; }
+[data-phone-landscape] .tb-intro .tb-team { font-size: clamp(28px, 11vh, 44px) !important; }
+[data-phone-landscape] .tb-intro .tb-main button { min-height: 48px; }
+[data-phone-landscape] .tb-sum { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: "a b"; gap: 8px 20px !important; min-height: max(180px, calc(var(--pl-body) - 18px)) !important; align-items: center; justify-items: center; }
+[data-phone-landscape] .tb-sum-a { grid-area: a; display: flex !important; flex-direction: column; align-items: center; gap: 8px; }
+[data-phone-landscape] .tb-sum-b { grid-area: b; display: flex !important; flex-direction: column; align-items: center; gap: 12px; }
+[data-phone-landscape] .tb-sum button { min-height: 48px; }
+[data-phone-landscape] .tb-over { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: "a b"; gap: 8px 20px !important; align-items: center; justify-items: center; }
+[data-phone-landscape] .tb-over-a { grid-area: a; display: flex !important; flex-direction: column; align-items: center; gap: 10px; }
+[data-phone-landscape] .tb-over-b { grid-area: b; display: flex !important; flex-direction: column; align-items: center; gap: 10px; width: 100%; }
+[data-phone-landscape] .tb-over-b .reveal-3 { max-width: none !important; }
+[data-phone-landscape] .tb-over-b .reveal-4 { margin-top: 0 !important; flex-wrap: wrap; justify-content: center; }
+[data-phone-landscape] .tb-over-b .reveal-4 button { min-height: 48px; }
+`;
 function TABU_CATEGORIES_FOR(lang, game) {
 	const base = TABU_CATEGORIES_BY_LANG[lang] || TABU_CATEGORIES_BY_LANG.de;
 	const c = game ? gtCustomCat(game, lang) : null;
@@ -88386,20 +88802,30 @@ function TabuTurnIntro(p) {
 function TabuPlay({ card, secondsLeft, turnSeconds, correctCount, tabooCount, onCorrect, onSkip, onTaboo, theme, t }) {
 	const wt = tabuTokens(theme);
 	const urgent = secondsLeft <= 10;
-	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 14
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		justifyContent: "space-between",
-		alignItems: "center"
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		gap: 10,
-		fontSize: 12,
-		fontFamily: "'Inter', sans-serif"
-	} }, /* @__PURE__ */ import_react.default.createElement("span", { style: {
+	const land = usePhoneLandscape();
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "tb-play",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 14
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "tb-status",
+		style: {
+			display: "flex",
+			justifyContent: "space-between",
+			alignItems: "center"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "tb-counts",
+		style: {
+			display: "flex",
+			gap: 10,
+			fontSize: 12,
+			fontFamily: "'Inter', sans-serif"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("span", { style: {
 		color: wt.green,
 		fontWeight: 700
 	} }, /* @__PURE__ */ import_react.default.createElement(CheckMark, null), " ", correctCount), /* @__PURE__ */ import_react.default.createElement("span", { style: {
@@ -88415,13 +88841,13 @@ function TabuPlay({ card, secondsLeft, turnSeconds, correctCount, tabooCount, on
 	}), " ", tabooCount)), /* @__PURE__ */ import_react.default.createElement(GtTimerRing, {
 		left: secondsLeft,
 		total: turnSeconds,
-		size: 58,
+		size: land ? 52 : 58,
 		stroke: 3.5,
 		color: wt.yellow,
 		warn: wt.red
 	}, /* @__PURE__ */ import_react.default.createElement("div", {
 		key: secondsLeft,
-		className: "value-pop",
+		className: "value-pop tb-ringtxt",
 		style: {
 			fontSize: 22,
 			fontWeight: 800,
@@ -88429,55 +88855,76 @@ function TabuPlay({ card, secondsLeft, turnSeconds, correctCount, tabooCount, on
 			color: urgent ? wt.red : wt.ink,
 			fontVariantNumeric: "tabular-nums"
 		}
-	}, secondsLeft, "s"))), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		background: `linear-gradient(160deg, ${wt.yellow}18, ${wt.card})`,
-		border: `2px solid ${wt.yellow}`,
-		borderRadius: 26,
-		padding: "28px 22px",
-		textAlign: "center",
-		boxShadow: `0 0 40px -12px ${wt.yellow}77`
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 10,
-		color: wt.muted,
-		letterSpacing: "0.15em",
-		textTransform: "uppercase",
-		fontFamily: "'Inter', sans-serif",
-		marginBottom: 10
-	} }, t("searchTerm")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 30,
-		fontWeight: 800,
-		color: wt.ink,
-		fontFamily: TABU_FONT,
-		marginBottom: 18
-	} }, card.word), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		height: 1,
-		background: wt.border,
-		margin: "0 auto 16px",
-		maxWidth: 180
-	} }), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 10,
-		color: wt.red,
-		letterSpacing: "0.15em",
-		textTransform: "uppercase",
-		fontFamily: "'Inter', sans-serif",
-		marginBottom: 10
-	} }, t("tabooWords")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 6
-	} }, card.taboo.map((w, i) => /* @__PURE__ */ import_react.default.createElement("div", {
+	}, secondsLeft, "s"))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "tb-card",
+		style: {
+			background: `linear-gradient(160deg, ${wt.yellow}18, ${wt.card})`,
+			border: `2px solid ${wt.yellow}`,
+			borderRadius: 26,
+			padding: "28px 22px",
+			textAlign: "center",
+			boxShadow: `0 0 40px -12px ${wt.yellow}77`
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "tb-lbl",
+		style: {
+			fontSize: 10,
+			color: wt.muted,
+			letterSpacing: "0.15em",
+			textTransform: "uppercase",
+			fontFamily: "'Inter', sans-serif",
+			marginBottom: 10
+		}
+	}, t("searchTerm")), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "tb-word" + (String(card.word).length > 20 ? " tb-long" : ""),
+		style: {
+			fontSize: 30,
+			fontWeight: 800,
+			color: wt.ink,
+			fontFamily: TABU_FONT,
+			marginBottom: 18
+		}
+	}, card.word), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "tb-rule",
+		style: {
+			height: 1,
+			background: wt.border,
+			margin: "0 auto 16px",
+			maxWidth: 180
+		}
+	}), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "tb-lbl",
+		style: {
+			fontSize: 10,
+			color: wt.red,
+			letterSpacing: "0.15em",
+			textTransform: "uppercase",
+			fontFamily: "'Inter', sans-serif",
+			marginBottom: 10
+		}
+	}, t("tabooWords")), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "tb-taboo",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 6
+		}
+	}, card.taboo.map((w, i) => /* @__PURE__ */ import_react.default.createElement("div", {
 		key: i,
 		style: {
 			fontSize: 15,
 			color: wt.muted,
 			fontFamily: "'Inter', sans-serif"
 		}
-	}, w)))), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		gap: 8
-	} }, /* @__PURE__ */ import_react.default.createElement("button", {
+	}, w)))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "tb-btns",
+		style: {
+			display: "flex",
+			gap: 8
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("button", {
 		onClick: onTaboo,
-		className: "press-fx",
+		className: "press-fx tb-b-taboo",
 		style: {
 			flex: 1,
 			border: "none",
@@ -88500,7 +88947,7 @@ function TabuPlay({ card, secondsLeft, turnSeconds, correctCount, tabooCount, on
 		}
 	}), t("tabooExclaim")), /* @__PURE__ */ import_react.default.createElement("button", {
 		onClick: onSkip,
-		className: "press-fx",
+		className: "press-fx tb-b-skip",
 		style: {
 			flex: 1,
 			border: `1px solid ${wt.border}`,
@@ -88523,7 +88970,7 @@ function TabuPlay({ card, secondsLeft, turnSeconds, correctCount, tabooCount, on
 		}
 	}), t("skipWord")), /* @__PURE__ */ import_react.default.createElement("button", {
 		onClick: onCorrect,
-		className: "press-fx",
+		className: "press-fx tb-b-ok",
 		style: {
 			flex: 1.3,
 			border: "none",
@@ -88540,15 +88987,21 @@ function TabuPlay({ card, secondsLeft, turnSeconds, correctCount, tabooCount, on
 }
 function TabuTurnSummary({ teamName, correctCount, tabooCount, onContinue, theme, t }) {
 	const wt = tabuTokens(theme);
-	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		alignItems: "center",
-		justifyContent: "center",
-		minHeight: "60vh",
-		textAlign: "center",
-		gap: 16
-	} }, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "tb-sum",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			alignItems: "center",
+			justifyContent: "center",
+			minHeight: "60vh",
+			textAlign: "center",
+			gap: 16
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "tb-sum-a",
+		style: { display: "contents" }
+	}, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
 		name: "stopwatch2",
 		size: 40,
 		color: wt.ink
@@ -88561,7 +89014,10 @@ function TabuTurnSummary({ teamName, correctCount, tabooCount, onContinue, theme
 		fontSize: 13,
 		color: wt.muted,
 		fontFamily: "'Inter', sans-serif"
-	} }, t("teamsRound")(teamName)), /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	} }, t("teamsRound")(teamName))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "tb-sum-b",
+		style: { display: "contents" }
+	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		gap: 20
 	} }, /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("div", { style: {
@@ -88588,7 +89044,7 @@ function TabuTurnSummary({ teamName, correctCount, tabooCount, onContinue, theme
 		onClick: onContinue,
 		className: "press-fx",
 		style: tabuBtnPrimary(theme)
-	}, t("understoodNext")));
+	}, t("understoodNext"))));
 }
 function TabuGameOver({ teams, scores, onRestart, onNewSetup, theme, t }) {
 	const wt = tabuTokens(theme);
@@ -88608,12 +89064,15 @@ function TabuGameOver({ teams, scores, onRestart, onNewSetup, theme, t }) {
 		name: tm.name,
 		score: scores[tm.id] || 0
 	}));
-	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		alignItems: "center",
-		gap: 16
-	} }, celebration, /* @__PURE__ */ import_react.default.createElement(PodiumOverlay, {
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "tb-over",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			alignItems: "center",
+			gap: 16
+		}
+	}, celebration, /* @__PURE__ */ import_react.default.createElement(PodiumOverlay, {
 		gameId: "tabu",
 		gameLabel: t("gameTabu"),
 		open: podiumOpen,
@@ -88623,7 +89082,10 @@ function TabuGameOver({ teams, scores, onRestart, onNewSetup, theme, t }) {
 		tk: wt,
 		t,
 		theme
-	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "reveal-1" }, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+	}), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "tb-over-a",
+		style: { display: "contents" }
+	}, /* @__PURE__ */ import_react.default.createElement("div", { className: "reveal-1" }, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
 		name: "trophy",
 		size: 48,
 		color: wt.yellow
@@ -88636,7 +89098,10 @@ function TabuGameOver({ teams, scores, onRestart, onNewSetup, theme, t }) {
 			fontFamily: TABU_FONT,
 			textAlign: "center"
 		}
-	}, gtWinLine(t, "winnerWins", "winnersTie", ranked.filter((q) => (scores[q.id] || 0) === (scores[winner.id] || 0)).map((q) => q.name))), /* @__PURE__ */ import_react.default.createElement("div", {
+	}, gtWinLine(t, "winnerWins", "winnersTie", ranked.filter((q) => (scores[q.id] || 0) === (scores[winner.id] || 0)).map((q) => q.name)))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "tb-over-b",
+		style: { display: "contents" }
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "reveal-3",
 		style: {
 			display: "flex",
@@ -88694,7 +89159,7 @@ function TabuGameOver({ teams, scores, onRestart, onNewSetup, theme, t }) {
 		onClick: onNewSetup,
 		className: "press-fx",
 		style: tabuBtnGhost(theme)
-	}, t("changeTeams"))));
+	}, t("changeTeams")))));
 }
 function TabuGame({ state, setState, onBack, onHome, onEndGame, lang = "de", theme = "dark" }) {
 	const useState = gtKeep(state.snap, (sn) => setState((x) => ({
@@ -88746,10 +89211,10 @@ function TabuGame({ state, setState, onBack, onHome, onEndGame, lang = "de", the
 		return () => clearTimeout(timer);
 	}, [phase, secondsLeft]);
 	if (state.phase === "setup") return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage",
+		className: "gtL-shellpage tb-ls",
 		style: tabuPageShellStyle(theme)
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-game",
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("style", null, TABU_LANDSCAPE_CSS), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtL-game pl-wide pl-page pl-head-compact",
 		style: {
 			maxWidth: 380,
 			margin: "0 auto",
@@ -88828,10 +89293,10 @@ function TabuGame({ state, setState, onBack, onHome, onEndGame, lang = "de", the
 		}
 	};
 	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage",
+		className: "gtL-shellpage tb-ls",
 		style: tabuPageShellStyle(theme)
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-game",
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("style", null, TABU_LANDSCAPE_CSS), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtL-game pl-wide pl-page pl-head-compact",
 		style: {
 			maxWidth: 380,
 			margin: "0 auto",
@@ -88977,6 +89442,31 @@ var game_exports$4 = /* @__PURE__ */ __exportAll({
 	headsupBtnPrimary: () => headsupBtnPrimary,
 	headsupBuildDeck: () => headsupBuildDeck
 });
+var HEADSUP_LANDSCAPE_CSS = `
+[data-phone-landscape] .hu-ls { padding: max(6px, var(--pl-sat)) 0 max(8px, var(--pl-sab)) 0 !important; height: auto !important; min-height: var(--pl-vh) !important; box-sizing: border-box; }
+[data-phone-landscape] .hu-ls .gtL-headsup-wrap { height: auto; padding-top: 0 !important; }
+[data-phone-landscape] .hu-ls .gtL-hu-land { display: block; height: auto; }
+[data-phone-landscape] .hu-ls .gtL-headsup-play { display: grid !important; flex-direction: initial; grid-template-columns: minmax(0, 1fr) clamp(130px, 26%, 200px); grid-template-areas: "hud hud" "word act" "hint hint"; grid-template-rows: auto minmax(0, 1fr) auto; gap: 8px 12px !important; height: max(190px, calc(var(--pl-body) - 18px)); margin-top: 0; position: static; align-items: stretch; }
+[data-phone-landscape] .hu-ls .gtL-headsup-hud { grid-area: hud; position: static; padding: 0; display: flex !important; justify-content: space-between; align-items: center; gap: 10px; }
+[data-phone-landscape] .hu-ls .gtL-headsup-hud > div:first-child { font-size: 15px !important; }
+[data-phone-landscape] .hu-ls .gtL-headsup-hud button { min-width: 44px; min-height: 44px; font-size: 16px !important; }
+[data-phone-landscape] .hu-ls .gtL-headsup-hud > div:first-child span[style*="border-radius: 999px"], [data-phone-landscape] .hu-ls .gtL-headsup-hud > div:first-child span[style*="border-radius:999px"] { font-size: 11px !important; padding: 3px 8px !important; }
+[data-phone-landscape] .hu-ls .gtL-headsup-word { grid-area: word; min-height: 0 !important; padding: 8px 14px !important; border-radius: 24px !important; overflow-wrap: anywhere; }
+[data-phone-landscape] .hu-ls .gtL-headsup-word-text { font-size: min(14vw, 20vh, 76px) !important; line-height: 1.05; }
+[data-phone-landscape] .hu-ls .gtL-headsup-actions { grid-area: act; flex-direction: column !important; width: auto !important; gap: 10px !important; justify-content: stretch; min-height: 0; }
+[data-phone-landscape] .hu-ls .gtL-headsup-actions button { flex: 1 1 0 !important; width: 100% !important; min-height: 48px; font-size: 16px !important; font-weight: 700 !important; padding: 6px 4px !important; border-radius: 16px !important; }
+[data-phone-landscape] .hu-ls .gtL-headsup-play > :last-child:not(.gtL-headsup-actions):not(.gtL-headsup-word) { grid-area: hint; }
+[data-phone-landscape] .hu-intro { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: "a b"; gap: 8px 22px !important; min-height: max(180px, calc(var(--pl-body) - 18px)) !important; align-items: center; justify-items: center; }
+[data-phone-landscape] .hu-a { grid-area: a; display: flex !important; flex-direction: column; align-items: center; gap: 8px; }
+[data-phone-landscape] .hu-b { grid-area: b; display: flex !important; flex-direction: column; align-items: center; gap: 12px; width: 100%; }
+[data-phone-landscape] .hu-a .hu-name { font-size: clamp(28px, 11vh, 44px) !important; overflow-wrap: anywhere; }
+[data-phone-landscape] .hu-b button { min-height: 48px; }
+[data-phone-landscape] .hu-b > div { max-width: 340px !important; }
+[data-phone-landscape] .hu-over { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: "a b"; gap: 8px 20px !important; align-items: center; justify-items: center; }
+[data-phone-landscape] .hu-over .hu-b .reveal-3 { max-width: none !important; }
+[data-phone-landscape] .hu-over .hu-b .reveal-4 { margin-top: 0 !important; flex-wrap: wrap; justify-content: center; }
+[data-phone-landscape] .hu-over .hu-b .reveal-4 button { min-height: 48px; }
+`;
 var HEADSUP_FONT = "'Space Grotesk', sans-serif";
 function headsupBuildDeck(categoryIds, lang) {
 	const cats = TABU_CATEGORIES_FOR(lang, "headsup");
@@ -89208,32 +89698,44 @@ function HeadsUpTurnIntro({ playerName, onStart, theme, t }) {
 		color: wt.muted,
 		fontFamily: "'Inter', sans-serif"
 	} }, desc)));
-	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		alignItems: "center",
-		justifyContent: "center",
-		minHeight: "60vh",
-		textAlign: "center",
-		gap: 20
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "hu-intro",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			alignItems: "center",
+			justifyContent: "center",
+			minHeight: "60vh",
+			textAlign: "center",
+			gap: 20
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "hu-a",
+		style: { display: "contents" }
+	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		fontSize: 11,
 		color: wt.muted,
 		letterSpacing: "0.15em",
 		textTransform: "uppercase",
 		fontFamily: "'Inter', sans-serif"
-	} }, t("nextPlayerHeadsUp")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 34,
-		fontWeight: 800,
-		color: wt.orange,
-		fontFamily: HEADSUP_FONT
-	} }, playerName), /* @__PURE__ */ import_react.default.createElement("p", { style: {
+	} }, t("nextPlayerHeadsUp")), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "hu-name",
+		style: {
+			fontSize: 34,
+			fontWeight: 800,
+			color: wt.orange,
+			fontFamily: HEADSUP_FONT
+		}
+	}, playerName), /* @__PURE__ */ import_react.default.createElement("p", { style: {
 		fontSize: 12,
 		color: wt.muted,
 		fontFamily: "'Inter', sans-serif",
 		maxWidth: 260,
 		margin: 0
-	} }, t("passToGuesserHeadsUp")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	} }, t("passToGuesserHeadsUp"))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "hu-b",
+		style: { display: "contents" }
+	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		flexDirection: "column",
 		gap: 8,
@@ -89247,7 +89749,7 @@ function HeadsUpTurnIntro({ playerName, onStart, theme, t }) {
 			...headsupBtnPrimary(theme),
 			padding: "14px 28px"
 		}
-	}, t("readyStartRound")));
+	}, t("readyStartRound"))));
 }
 function HeadsUpRotatePrompt({ onSkip, theme, t }) {
 	const wt = headsupTokens(theme);
@@ -89608,15 +90110,21 @@ function HeadsUpPlay({ word, secondsLeft, correctCount, onCorrect, onSkip, motio
 }
 function HeadsUpTurnSummary({ playerName, correctCount, onContinue, theme, t }) {
 	const wt = headsupTokens(theme);
-	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		alignItems: "center",
-		justifyContent: "center",
-		minHeight: "60vh",
-		textAlign: "center",
-		gap: 16
-	} }, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "hu-intro",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			alignItems: "center",
+			justifyContent: "center",
+			minHeight: "60vh",
+			textAlign: "center",
+			gap: 16
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "hu-a",
+		style: { display: "contents" }
+	}, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
 		name: "stopwatch2",
 		size: 40,
 		color: wt.ink
@@ -89629,7 +90137,10 @@ function HeadsUpTurnSummary({ playerName, correctCount, onContinue, theme, t }) 
 		fontSize: 13,
 		color: wt.muted,
 		fontFamily: "'Inter', sans-serif"
-	} }, t("playerTurnSubtitle")(playerName)), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	} }, t("playerTurnSubtitle")(playerName))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "hu-b",
+		style: { display: "contents" }
+	}, /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		fontSize: 40,
 		fontWeight: 800,
 		color: wt.green,
@@ -89643,7 +90154,7 @@ function HeadsUpTurnSummary({ playerName, correctCount, onContinue, theme, t }) 
 		onClick: onContinue,
 		className: "press-fx",
 		style: headsupBtnPrimary(theme)
-	}, t("understoodNext")));
+	}, t("understoodNext"))));
 }
 function HeadsUpGameOver({ players, scores, onRestart, onNewSetup, theme, t }) {
 	const wt = headsupTokens(theme);
@@ -89662,12 +90173,15 @@ function HeadsUpGameOver({ players, scores, onRestart, onNewSetup, theme, t }) {
 		name: tm.name,
 		score: scores[tm.id] || 0
 	}));
-	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		alignItems: "center",
-		gap: 16
-	} }, celebration, /* @__PURE__ */ import_react.default.createElement(PodiumOverlay, {
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "hu-over",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			alignItems: "center",
+			gap: 16
+		}
+	}, celebration, /* @__PURE__ */ import_react.default.createElement(PodiumOverlay, {
 		gameId: "headsup",
 		gameLabel: t("gameHeadsUp"),
 		open: podiumOpen,
@@ -89677,7 +90191,10 @@ function HeadsUpGameOver({ players, scores, onRestart, onNewSetup, theme, t }) {
 		tk: wt,
 		t,
 		theme
-	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "reveal-1" }, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+	}), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "hu-a",
+		style: { display: "contents" }
+	}, /* @__PURE__ */ import_react.default.createElement("div", { className: "reveal-1" }, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
 		name: "trophy",
 		size: 48,
 		color: wt.orange
@@ -89690,7 +90207,10 @@ function HeadsUpGameOver({ players, scores, onRestart, onNewSetup, theme, t }) {
 			fontFamily: HEADSUP_FONT,
 			textAlign: "center"
 		}
-	}, gtWinLine(t, "winnerWins", "winnersTie", ranked.filter((q) => (scores[q.id] || 0) === (scores[winner.id] || 0)).map((q) => q.name))), /* @__PURE__ */ import_react.default.createElement("div", {
+	}, gtWinLine(t, "winnerWins", "winnersTie", ranked.filter((q) => (scores[q.id] || 0) === (scores[winner.id] || 0)).map((q) => q.name)))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "hu-b",
+		style: { display: "contents" }
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "reveal-3",
 		style: {
 			display: "flex",
@@ -89748,7 +90268,7 @@ function HeadsUpGameOver({ players, scores, onRestart, onNewSetup, theme, t }) {
 		onClick: onNewSetup,
 		className: "press-fx",
 		style: headsupBtnGhost(theme)
-	}, t("changePlayers"))));
+	}, t("changePlayers")))));
 }
 function HeadsUpGame({ state, setState, onBack, onHome, onEndGame, lang = "de", theme = "dark" }) {
 	const useState = gtKeep(state.snap, (sn) => setState((x) => ({
@@ -89808,10 +90328,10 @@ function HeadsUpGame({ state, setState, onBack, onHome, onEndGame, lang = "de", 
 		} catch (e) {}
 	}, [phase, orientation]);
 	if (state.phase === "setup") return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage",
+		className: "gtL-shellpage hu-ls",
 		style: headsupPageShellStyle(theme)
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-headsup-wrap gtL-game",
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("style", null, HEADSUP_LANDSCAPE_CSS), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtL-headsup-wrap gtL-game pl-wide pl-page pl-head-compact",
 		style: {
 			maxWidth: 380,
 			margin: "0 auto",
@@ -89884,10 +90404,10 @@ function HeadsUpGame({ state, setState, onBack, onHome, onEndGame, lang = "de", 
 	const needsRotate = phase === "playing" && orientation === "portrait" && touchPhone && motionState === "granted" && !portraitOk;
 	const isLandscapePlay = phase === "playing" && !needsRotate && orientation === "landscape";
 	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage",
+		className: "gtL-shellpage hu-ls",
 		style: headsupPageShellStyle(theme, isLandscapePlay)
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-headsup-wrap gtL-game" + (isLandscapePlay ? " gtL-hu-land" : ""),
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("style", null, HEADSUP_LANDSCAPE_CSS), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtL-headsup-wrap gtL-game pl-wide pl-page pl-head-compact" + (isLandscapePlay ? " gtL-hu-land" : ""),
 		style: {
 			maxWidth: 380,
 			margin: "0 auto",
@@ -92859,6 +93379,31 @@ var game_exports$2 = /* @__PURE__ */ __exportAll({
 	fiveSecBtnGhost: () => fiveSecBtnGhost,
 	fiveSecBtnPrimary: () => fiveSecBtnPrimary
 });
+var FIVESEC_LANDSCAPE_CSS = `
+[data-phone-landscape] .fs-ls { padding: max(6px, var(--pl-sat)) 0 max(8px, var(--pl-sab)) 0 !important; min-height: var(--pl-vh) !important; box-sizing: border-box; }
+[data-phone-landscape] .fs-ls .gtL-game { padding-top: 0 !important; }
+[data-phone-landscape] .fs-play { display: grid !important; grid-template-columns: minmax(0, 1fr) clamp(190px, 34%, 280px); grid-template-areas: "card label" "card ring" "card btns"; grid-template-rows: auto auto minmax(0, 1fr); gap: 6px 14px !important; height: max(200px, calc(var(--pl-body) - 18px)); align-items: stretch !important; }
+[data-phone-landscape] .fs-label { grid-area: label; text-align: center; font-size: 14px !important; overflow-wrap: anywhere; }
+[data-phone-landscape] .fs-ring { grid-area: ring; display: flex !important; justify-content: center; }
+[data-phone-landscape] .fs-ringin { width: 64px !important; height: 64px !important; font-size: 30px !important; border-width: 3px !important; }
+[data-phone-landscape] .fs-card { grid-area: card; min-height: 0 !important; padding: 14px 18px !important; border-radius: 22px !important; overflow-y: auto; overscroll-behavior: contain; overflow-wrap: anywhere; }
+[data-phone-landscape] .fs-card > div { font-size: clamp(22px, 9vh, 38px) !important; line-height: 1.15; margin: auto; }
+[data-phone-landscape] .fs-btns { grid-area: btns; flex-direction: column !important; gap: 8px !important; min-height: 0; }
+[data-phone-landscape] .fs-btns > button { flex: 1 1 0 !important; min-height: 48px; font-size: 16px !important; padding: 6px 10px !important; display: flex; align-items: center; justify-content: center; gap: 6px; }
+[data-phone-landscape] .fs-b-ok { order: 1; }
+[data-phone-landscape] .fs-b-fail { order: 2; }
+[data-phone-landscape] .fs-intro.pl-split { align-items: stretch; }
+[data-phone-landscape] .fs-intro .gtL-col-main, [data-phone-landscape] .fs-intro .gtL-col-side { display: flex !important; flex-direction: column; min-width: 0; }
+[data-phone-landscape] .fs-intro .gtL-col-main { justify-content: center; align-items: center; text-align: center; gap: 14px; min-height: max(160px, calc(var(--pl-body) - 18px)); }
+[data-phone-landscape] .fs-intro .gtL-col-main button { min-height: 52px; padding: 14px 24px !important; width: 100%; max-width: 320px; }
+[data-phone-landscape] .fs-intro .gtL-col-side button { min-height: 48px; }
+[data-phone-landscape] .fs-over { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: "a b"; gap: 8px 20px !important; align-items: center; justify-items: center; }
+[data-phone-landscape] .fs-a { grid-area: a; display: flex !important; flex-direction: column; align-items: center; gap: 10px; }
+[data-phone-landscape] .fs-b { grid-area: b; display: flex !important; flex-direction: column; align-items: center; gap: 10px; width: 100%; }
+[data-phone-landscape] .fs-over .fs-b .reveal-3 { max-width: none !important; }
+[data-phone-landscape] .fs-over .fs-b .reveal-4 { margin-top: 0 !important; flex-wrap: wrap; justify-content: center; }
+[data-phone-landscape] .fs-over .fs-b .reveal-4 button { min-height: 48px; }
+`;
 var FIVESEC_FONT = "'Space Grotesk', sans-serif";
 function fiveSecBtnPrimary(theme) {
 	const fk = fiveSecTokens(theme);
@@ -92966,26 +93511,36 @@ function FiveSecSetup({ state, setState, onStart, theme, t }) {
 function FiveSecPlay({ prompt, playerName, secondsLeft, phase, onSuccess, onFail, theme, lang, t }) {
 	const fk = fiveSecTokens(theme);
 	const urgent = secondsLeft <= 2;
-	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 16,
-		alignItems: "center"
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 12,
-		color: fk.muted,
-		fontFamily: "'Inter', sans-serif",
-		fontWeight: 600
-	} }, t("fiveSecTurnFor")(playerName)), /* @__PURE__ */ import_react.default.createElement(GtTimerRing, {
+	const land = usePhoneLandscape();
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "fs-play",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 16,
+			alignItems: "center"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "fs-label",
+		style: {
+			fontSize: 12,
+			color: fk.muted,
+			fontFamily: "'Inter', sans-serif",
+			fontWeight: 600
+		}
+	}, t("fiveSecTurnFor")(playerName)), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "fs-ring",
+		style: { display: "contents" }
+	}, /* @__PURE__ */ import_react.default.createElement(GtTimerRing, {
 		left: secondsLeft,
 		total: 5,
-		size: 112,
+		size: land ? 84 : 112,
 		stroke: 4,
 		color: fk.blue,
 		warn: "#E5484D"
 	}, /* @__PURE__ */ import_react.default.createElement("div", {
 		key: secondsLeft,
-		className: "value-pop",
+		className: "value-pop fs-ringin",
 		style: {
 			width: 92,
 			height: 92,
@@ -93000,30 +93555,36 @@ function FiveSecPlay({ prompt, playerName, secondsLeft, phase, onSuccess, onFail
 			color: urgent ? fk.orange : fk.ink,
 			boxShadow: urgent ? `0 0 30px -4px ${fk.orange}88` : "none"
 		}
-	}, secondsLeft)), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		background: `linear-gradient(160deg, ${fk.orange}18, ${fk.card})`,
-		border: `2px solid ${fk.orange}`,
-		borderRadius: 26,
-		padding: "28px 22px",
-		textAlign: "center",
-		width: "100%",
-		boxSizing: "border-box",
-		minHeight: 90,
-		display: "flex",
-		alignItems: "center",
-		justifyContent: "center"
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	}, secondsLeft))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "fs-card",
+		style: {
+			background: `linear-gradient(160deg, ${fk.orange}18, ${fk.card})`,
+			border: `2px solid ${fk.orange}`,
+			borderRadius: 26,
+			padding: "28px 22px",
+			textAlign: "center",
+			width: "100%",
+			boxSizing: "border-box",
+			minHeight: 90,
+			display: "flex",
+			alignItems: "center",
+			justifyContent: "center"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		fontSize: 22,
 		fontWeight: 800,
 		color: fk.ink,
 		fontFamily: FIVESEC_FONT
-	} }, lang === "en" ? "Name " : lang === "fr" ? "Cite " : "Nenne ", prompt)), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		gap: 8,
-		width: "100%"
-	} }, /* @__PURE__ */ import_react.default.createElement("button", {
+	} }, lang === "en" ? "Name " : lang === "fr" ? "Cite " : "Nenne ", prompt)), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "fs-btns",
+		style: {
+			display: "flex",
+			gap: 8,
+			width: "100%"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("button", {
 		onClick: onFail,
-		className: "press-fx",
+		className: "press-fx fs-b-fail",
 		style: {
 			flex: 1,
 			border: `1px solid ${fk.border}`,
@@ -93038,7 +93599,7 @@ function FiveSecPlay({ prompt, playerName, secondsLeft, phase, onSuccess, onFail
 		}
 	}, /* @__PURE__ */ import_react.default.createElement(XMark, null), " ", t("fiveSecFail")), /* @__PURE__ */ import_react.default.createElement("button", {
 		onClick: onSuccess,
-		className: "press-fx",
+		className: "press-fx fs-b-ok",
 		style: {
 			flex: 1.4,
 			border: "none",
@@ -93132,12 +93693,15 @@ function FiveSecOver({ players, scores, onRestart, onNewSetup, theme, t }) {
 		name: p.name,
 		score: sc(p)
 	}));
-	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		alignItems: "center",
-		gap: 16
-	} }, celebration, /* @__PURE__ */ import_react.default.createElement(PodiumOverlay, {
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "fs-over",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			alignItems: "center",
+			gap: 16
+		}
+	}, celebration, /* @__PURE__ */ import_react.default.createElement(PodiumOverlay, {
 		gameId: "fivesec",
 		gameLabel: t("game5Seconds"),
 		open: podiumOpen,
@@ -93147,7 +93711,10 @@ function FiveSecOver({ players, scores, onRestart, onNewSetup, theme, t }) {
 		tk: fk,
 		t,
 		theme
-	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "reveal-1" }, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+	}), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "fs-a",
+		style: { display: "contents" }
+	}, /* @__PURE__ */ import_react.default.createElement("div", { className: "reveal-1" }, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
 		name: "trophy",
 		size: 48,
 		color: fk.orange
@@ -93160,7 +93727,10 @@ function FiveSecOver({ players, scores, onRestart, onNewSetup, theme, t }) {
 			fontFamily: "'Space Grotesk', sans-serif",
 			textAlign: "center"
 		}
-	}, gtWinLine(t, "winnerWins", "winnersTie", ranked.filter((q) => sc(q) === sc(top)).map((q) => q.name))), /* @__PURE__ */ import_react.default.createElement("div", {
+	}, gtWinLine(t, "winnerWins", "winnersTie", ranked.filter((q) => sc(q) === sc(top)).map((q) => q.name)))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "fs-b",
+		style: { display: "contents" }
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "reveal-3",
 		style: {
 			display: "flex",
@@ -93217,7 +93787,7 @@ function FiveSecOver({ players, scores, onRestart, onNewSetup, theme, t }) {
 		onClick: onNewSetup,
 		className: "press-fx",
 		style: fiveSecBtnGhost(theme)
-	}, t("changePlayers"))));
+	}, t("changePlayers")))));
 }
 function FiveSecGame({ state, setState, onBack, onHome, onEndGame, lang = "de", theme = "dark" }) {
 	const useState = gtKeep(state.snap, (sn) => setState((x) => ({
@@ -93263,10 +93833,10 @@ function FiveSecGame({ state, setState, onBack, onHome, onEndGame, lang = "de", 
 		return () => clearTimeout(timer);
 	}, [phase, secondsLeft]);
 	if (over && scores) return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage",
+		className: "gtL-shellpage fs-ls",
 		style: fiveSecPageShellStyle(theme)
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-game",
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("style", null, FIVESEC_LANDSCAPE_CSS), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtL-game pl-wide pl-page pl-head-compact",
 		style: {
 			maxWidth: 380,
 			margin: "0 auto",
@@ -93307,10 +93877,10 @@ function FiveSecGame({ state, setState, onBack, onHome, onEndGame, lang = "de", 
 		tokens: fk
 	}));
 	if (state.phase === "setup") return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage",
+		className: "gtL-shellpage fs-ls",
 		style: fiveSecPageShellStyle(theme)
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-game",
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("style", null, FIVESEC_LANDSCAPE_CSS), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtL-game pl-wide pl-page pl-head-compact",
 		style: {
 			maxWidth: 380,
 			margin: "0 auto",
@@ -93373,10 +93943,10 @@ function FiveSecGame({ state, setState, onBack, onHome, onEndGame, lang = "de", 
 		}
 	};
 	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage",
+		className: "gtL-shellpage fs-ls",
 		style: fiveSecPageShellStyle(theme)
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-game",
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("style", null, FIVESEC_LANDSCAPE_CSS), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtL-game pl-wide pl-page pl-head-compact",
 		style: {
 			maxWidth: 380,
 			margin: "0 auto",
@@ -93398,10 +93968,10 @@ function FiveSecGame({ state, setState, onBack, onHome, onEndGame, lang = "de", 
 		alignItems: "center",
 		gap: 18
 	} }, /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-split",
+		className: "gtL-split pl-split fs-intro",
 		style: { alignSelf: "stretch" }
 	}, /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-col-main",
+		className: "gtL-col-main pl-main",
 		style: {
 			alignItems: "center",
 			gap: 18
@@ -93417,7 +93987,7 @@ function FiveSecGame({ state, setState, onBack, onHome, onEndGame, lang = "de", 
 		onClick: startAttempt,
 		className: "press-fx",
 		style: fiveSecBtnPrimary(theme)
-	}, t("fiveSecStartRound"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side" }, /* @__PURE__ */ import_react.default.createElement(FiveSecScoreboard, {
+	}, t("fiveSecStartRound"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side pl-side" }, /* @__PURE__ */ import_react.default.createElement(FiveSecScoreboard, {
 		players: state.players,
 		scores,
 		onEnd: () => {
@@ -95383,6 +95953,19 @@ var game_exports$1 = /* @__PURE__ */ __exportAll({
 	MostLikelyTopBar: () => MostLikelyTopBar,
 	mostLikelyBtnGhost: () => mostLikelyBtnGhost
 });
+var MOSTLIKELY_LANDSCAPE_CSS = `
+[data-phone-landscape] .ml-ls { padding: max(6px, var(--pl-sat)) 0 max(8px, var(--pl-sab)) 0 !important; min-height: var(--pl-vh) !important; box-sizing: border-box; }
+[data-phone-landscape] .ml-ls .gtL-game { padding-top: 0 !important; }
+[data-phone-landscape] .ml-play { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); grid-template-areas: "card who" "card pick" "skip pick"; grid-template-rows: auto minmax(0, 1fr) auto; gap: 8px 14px !important; min-height: max(200px, calc(var(--pl-body) - 18px)); align-items: stretch; }
+[data-phone-landscape] .ml-card { grid-area: card; min-height: 0 !important; padding: 14px 18px !important; border-radius: 22px !important; overflow-wrap: anywhere; }
+[data-phone-landscape] .ml-card > div { font-size: clamp(19px, 7.5vh, 30px) !important; line-height: 1.25 !important; }
+[data-phone-landscape] .ml-who { grid-area: who; align-self: end; }
+[data-phone-landscape] .ml-pick { grid-area: pick; align-self: start; align-content: start; grid-template-columns: repeat(auto-fit, minmax(min(100%, 120px), 1fr)) !important; }
+[data-phone-landscape] .ml-pick > button { min-height: 48px; font-size: 16px !important; padding: 8px 8px !important; overflow-wrap: anywhere; }
+[data-phone-landscape] .ml-skip { grid-area: skip; min-height: 48px; align-self: end; }
+[data-phone-landscape] .ml-tally { margin-top: 12px !important; }
+[data-phone-landscape] .ml-tally button { min-height: 48px; }
+`;
 var MOSTLIKELY_FONT = "'Space Grotesk', sans-serif";
 function mostLikelyBtnGhost(theme) {
 	const mk = mostLikelyTokens(theme);
@@ -95501,39 +96084,51 @@ function MostLikelySetup({ state, setState, onStart, theme, t }) {
 }
 function MostLikelyPlay({ statement, players, tally, onPick, onSkip, theme, t }) {
 	const mk = mostLikelyTokens(theme);
-	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 16
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		background: `linear-gradient(160deg, ${mk.purple}18, ${mk.card})`,
-		border: `2px solid ${mk.purple}`,
-		borderRadius: 26,
-		padding: "32px 22px",
-		textAlign: "center",
-		minHeight: 120,
-		display: "flex",
-		alignItems: "center",
-		justifyContent: "center"
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "ml-play",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 16
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "ml-card",
+		style: {
+			background: `linear-gradient(160deg, ${mk.purple}18, ${mk.card})`,
+			border: `2px solid ${mk.purple}`,
+			borderRadius: 26,
+			padding: "32px 22px",
+			textAlign: "center",
+			minHeight: 120,
+			display: "flex",
+			alignItems: "center",
+			justifyContent: "center"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		fontSize: 19,
 		fontWeight: 700,
 		color: mk.ink,
 		fontFamily: MOSTLIKELY_FONT,
 		lineHeight: 1.4
-	} }, statement)), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 11,
-		color: mk.muted,
-		letterSpacing: "0.08em",
-		textTransform: "uppercase",
-		fontFamily: "'Inter', sans-serif",
-		fontWeight: 600,
-		textAlign: "center"
-	} }, t("mostLikelyWhoFits")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "grid",
-		gridTemplateColumns: "repeat(2, 1fr)",
-		gap: 8
-	} }, players.map((p) => /* @__PURE__ */ import_react.default.createElement("button", {
+	} }, statement)), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "ml-who",
+		style: {
+			fontSize: 11,
+			color: mk.muted,
+			letterSpacing: "0.08em",
+			textTransform: "uppercase",
+			fontFamily: "'Inter', sans-serif",
+			fontWeight: 600,
+			textAlign: "center"
+		}
+	}, t("mostLikelyWhoFits")), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "ml-pick",
+		style: {
+			display: "grid",
+			gridTemplateColumns: "repeat(2, 1fr)",
+			gap: 8
+		}
+	}, players.map((p) => /* @__PURE__ */ import_react.default.createElement("button", {
 		key: p.id,
 		onClick: () => onPick(p.id),
 		className: "press-fx",
@@ -95550,7 +96145,7 @@ function MostLikelyPlay({ statement, players, tally, onPick, onSkip, theme, t })
 		}
 	}, p.name))), /* @__PURE__ */ import_react.default.createElement("button", {
 		onClick: onSkip,
-		className: "press-fx",
+		className: "press-fx ml-skip",
 		style: mostLikelyBtnGhost(theme)
 	}, t("mostLikelySkip"), " · ", t("mostLikelyNextStatement")));
 }
@@ -95635,10 +96230,10 @@ function MostLikelyGame({ state, setState, onBack, onHome, onEndGame, lang = "de
 		if (state.phase === "play" && tally === null) initGame();
 	}, [state.phase]);
 	if (state.phase === "setup") return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage",
+		className: "gtL-shellpage ml-ls",
 		style: mostLikelyPageShellStyle(theme)
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-game",
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("style", null, MOSTLIKELY_LANDSCAPE_CSS), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtL-game pl-wide pl-page pl-head-compact",
 		style: {
 			maxWidth: 380,
 			margin: "0 auto",
@@ -95685,10 +96280,10 @@ function MostLikelyGame({ state, setState, onBack, onHome, onEndGame, lang = "de
 		nextStatement();
 	};
 	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage",
+		className: "gtL-shellpage ml-ls",
 		style: mostLikelyPageShellStyle(theme)
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-game",
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("style", null, MOSTLIKELY_LANDSCAPE_CSS), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtL-game pl-wide pl-page pl-head-compact",
 		style: {
 			maxWidth: 380,
 			margin: "0 auto",
@@ -95712,7 +96307,10 @@ function MostLikelyGame({ state, setState, onBack, onHome, onEndGame, lang = "de
 		onSkip: nextStatement,
 		theme,
 		t
-	})), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side" }, /* @__PURE__ */ import_react.default.createElement("div", { style: { marginTop: 20 } }, /* @__PURE__ */ import_react.default.createElement(MostLikelyTally, {
+	})), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side" }, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "ml-tally",
+		style: { marginTop: 20 }
+	}, /* @__PURE__ */ import_react.default.createElement(MostLikelyTally, {
 		players: state.players,
 		tally,
 		onEnd: () => {
@@ -98369,18 +98967,21 @@ function GtYearReview({ t, theme, onClose, year }) {
 			background: fill
 		}
 	}), txt);
-	if (cur.kind === "empty") body = /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		flex: 1,
-		display: "flex",
-		flexDirection: "column",
-		justifyContent: "center",
-		gap: 14,
-		padding: "0 28px 40px",
-		position: "relative",
-		zIndex: 2,
-		pointerEvents: "none"
-	} }, eyebrow(String(yr)), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtYR-in",
+	if (cur.kind === "empty") body = /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtYR-body",
+		style: {
+			flex: 1,
+			display: "flex",
+			flexDirection: "column",
+			justifyContent: "center",
+			gap: 14,
+			padding: "0 28px 40px",
+			position: "relative",
+			zIndex: 2,
+			pointerEvents: "none"
+		}
+	}, eyebrow(String(yr)), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtYR-in gtYR-big",
 		style: Object.assign({
 			fontSize: 30,
 			fontWeight: 800,
@@ -98414,18 +99015,21 @@ function GtYearReview({ t, theme, onClose, year }) {
 			pointerEvents: "auto"
 		}, d(3))
 	}, t("gtYrClose")));
-	else if (cur.kind === "share") body = /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		flex: 1,
-		display: "flex",
-		flexDirection: "column",
-		justifyContent: "center",
-		gap: 14,
-		padding: "0 28px calc(env(safe-area-inset-bottom,0px) + 40px)",
-		position: "relative",
-		zIndex: 3,
-		pointerEvents: "none"
-	} }, eyebrow(String(yr)), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtYR-in",
+	else if (cur.kind === "share") body = /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtYR-body",
+		style: {
+			flex: 1,
+			display: "flex",
+			flexDirection: "column",
+			justifyContent: "center",
+			gap: 14,
+			padding: "0 28px calc(env(safe-area-inset-bottom,0px) + 40px)",
+			position: "relative",
+			zIndex: 3,
+			pointerEvents: "none"
+		}
+	}, eyebrow(String(yr)), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtYR-in gtYR-big",
 		style: Object.assign({
 			fontSize: 38,
 			fontWeight: 800,
@@ -98442,7 +99046,7 @@ function GtYearReview({ t, theme, onClose, year }) {
 			maxWidth: "30ch"
 		}, d(2))
 	}, t("gtYrShareText")), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtYR-in",
+		className: "gtYR-in gtYR-acts",
 		style: Object.assign({
 			display: "flex",
 			flexDirection: "column",
@@ -98498,18 +99102,21 @@ function GtYearReview({ t, theme, onClose, year }) {
 	else {
 		const val = gtYrVal(cur);
 		const vs = gtYrValSize(Array.from(val).length);
-		body = /* @__PURE__ */ import_react.default.createElement("div", { style: {
-			flex: 1,
-			display: "flex",
-			flexDirection: "column",
-			justifyContent: "center",
-			gap: 12,
-			padding: "0 28px 56px",
-			position: "relative",
-			zIndex: 2,
-			pointerEvents: "none"
-		} }, eyebrow(cur.title || ""), /* @__PURE__ */ import_react.default.createElement("div", {
-			className: "gtYR-in",
+		body = /* @__PURE__ */ import_react.default.createElement("div", {
+			className: "gtYR-body",
+			style: {
+				flex: 1,
+				display: "flex",
+				flexDirection: "column",
+				justifyContent: "center",
+				gap: 12,
+				padding: "0 28px 56px",
+				position: "relative",
+				zIndex: 2,
+				pointerEvents: "none"
+			}
+		}, eyebrow(cur.title || ""), /* @__PURE__ */ import_react.default.createElement("div", {
+			className: "gtYR-in gtYR-val",
 			style: Object.assign({
 				fontSize: Math.round(vs * 3.6),
 				lineHeight: .95,
@@ -102524,7 +103131,7 @@ function GtSt2Profile({ pkey, matches, opts, people, t, tk, lk, theme, lang, acc
 		setCmp,
 		onOpen
 	});
-	return /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main gtSt2-col" }, hero, stats, per, bests, ach, rec), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side gtSt2-col" }, cmpEl, co, weis, merge)), /* @__PURE__ */ import_react.default.createElement(ShareImagePreview, {
+	return /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split pl-st-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main gtSt2-col" }, hero, stats, per, bests, ach, rec), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side gtSt2-col" }, cmpEl, co, weis, merge)), /* @__PURE__ */ import_react.default.createElement(ShareImagePreview, {
 		url: preview,
 		onClose: () => setPreview(null),
 		t
@@ -102892,7 +103499,7 @@ function GtSt2Page({ onBack, lang, theme }) {
 		});
 		body = /* @__PURE__ */ import_react.default.createElement("div", {
 			key: animKey,
-			className: "gtL-split"
+			className: "gtL-split pl-st-split"
 		}, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main gtSt2-col" }, rankCard, hl, peopleEl, weis), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side gtSt2-col" }, yearEl, gamesEl, nightsEl, /* @__PURE__ */ import_react.default.createElement(GtSt2Teams, {
 			teams: m.teams,
 			t,
@@ -102910,7 +103517,7 @@ function GtSt2Page({ onBack, lang, theme }) {
 	}
 	const pname = person && (model && model.names && model.names[person] || ((model && model.people || []).find((x) => x.key === person) || {}).name || person);
 	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage gtSt2" + (theme === "vitrum" ? " vitrum-active" : ""),
+		className: "gtL-shellpage gtSt2 pl-app pl-head-compact" + (theme === "vitrum" ? " vitrum-active" : ""),
 		style: {
 			minHeight: "100vh",
 			background: tk.pageBg,

@@ -492,11 +492,39 @@ def t_wizard(pg, env):
 @test("Minigolf")
 def t_minigolf(pg, env):
     open_game(pg, "Schreibunterlagen", "Minigolf"); press_start(pg)
-    limit = 4 if env.quick else 40
-    n = 0
-    cells = pg.locator("button:text-is('·')")
-    while cells.count() > 0 and n < limit:
-        click(pg, cells.first, FAST + 80); click(pg, btn(pg, "3").last, FAST); n += 1
+    holes = 3 if env.quick else 18
+    plus = pg.locator("[data-mg-plus]")
+    main = pg.locator("[data-mg-main]")
+
+    def total_of(card_idx):
+        # Zwischensumme der Spielerkarte ("bisher"), als Zahlenzeilen gelesen
+        txt = pg.locator("[data-mg-card]").nth(card_idx).inner_text()
+        return [int(x) for x in re.findall(r"(?<!\d)\d+(?!\d)", txt)]
+
+    check(plus.count() >= 2, "Minigolf: Plus-Knoepfe pro Spieler fehlen")
+    n_players = plus.count()
+    for h in range(holes):
+        check(main.count() == 1, f"Minigolf: Hauptaktion fehlt (Bahn {h + 1})")
+        # Hauptaktion bleibt gesperrt, solange nicht alle Spieler einen Wert haben
+        for i in range(n_players):
+            check(main.is_disabled(), f"Minigolf: 'Bahn speichern' schon aktiv vor Eingabe aller (Bahn {h + 1})")
+            for _ in range(2):  # Plus: leer -> 1 -> 2
+                click(pg, plus.nth(i), FAST)
+        check(main.is_enabled(), f"Minigolf: 'Bahn speichern' bleibt gesperrt (Bahn {h + 1})")
+        if h == 0:
+            # Doppelklick darf die Bahn nicht doppelt zaehlen (Summe 2, nicht 4)
+            main.dblclick()
+            wait(pg, 700)
+            sums = total_of(0)
+            check(2 in sums and 4 not in sums, f"Minigolf: Doppelklick zaehlt doppelt, Zahlen {sums}")
+        else:
+            click(pg, main, 500)
+        if h == 1:
+            reload_alive(pg, "Minigolf: Neuladen mitten im Spiel")
+            click(pg, pg.get_by_text("Partie läuft", exact=False).first, 900)  # Weiterspielen auf der Startseite
+            sums = total_of(0)
+            check(4 in sums, f"Minigolf: Stand nach Neuladen weg, Zahlen {sums}")
+        wait(pg, 300)
     wait(pg, 1200)
     if env.quick:
         finish(pg, "Minigolf", env)

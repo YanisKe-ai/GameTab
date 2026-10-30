@@ -10,7 +10,8 @@ function fromModule() {
   const b0 = src.indexOf("function decidePhoneLandscape(");
   const b = src.indexOf("\n}\n", b0);
   if (a < 0 || b0 < 0 || b < 0) throw Error("decidePhoneLandscape nicht gefunden");
-  const body = src.slice(a, src.indexOf("\n", a)) + "\n" + src.slice(b0, b + 2);
+  const c = src.indexOf("const PL_MAX_SHORT_TABLET");
+  const body = src.slice(a, src.indexOf("\n", a)) + "\n" + (c >= 0 ? src.slice(c, src.indexOf("\n", c)) + "\n" : "") + src.slice(b0, b + 2);
   return new Function(body + "\nreturn decidePhoneLandscape;")();
 }
 function fromInline(file) {
@@ -49,6 +50,10 @@ const CASES = [
   ["Uebersteuerung 0 im Querformat", { ...L, force: false }, false],
   ["Ohne screen-Masse, Fenster quer", { ...L, screenW: 0, screenH: 0 }, true],
   ["Leere Umgebung", {}, false],
+  ["Tablet-Skalierung quer 1280x800 (Faktor 1.6)", { ...L, screenW: 1280, screenH: 800, innerW: 800, innerH: 500, scale: 1.6 }, true],
+  ["Tablet-Skalierung hochkant 800x1280", { ...P, screenW: 800, screenH: 1280, innerW: 500, innerH: 800, scale: 1.6 }, false],
+  ["iPad Pro quer 1366x1024 skaliert", { ...L, screenW: 1366, screenH: 1024, innerW: 854, innerH: 640, scale: 1.6 }, true],
+  ["Tablet quer ohne Skalierung (Laptop-Modus)", { ...L, viewMode: "laptop", screenW: 1280, screenH: 800, scale: 1 }, false],
 ];
 
 let fails = 0, oks = 0;
@@ -60,5 +65,9 @@ for (const [label, fn] of impls) {
     if (got === want) oks++; else { fails++; console.log("FAIL [" + label + "] " + name + ": erwartet " + want + ", erhalten " + got); }
   }
 }
+{ const mod = require("fs").readFileSync(require("path").join(__dirname, "..", "..", "web", "src", "shared", "phone-landscape.js"), "utf8");
+  const ts = new Function(mod.slice(mod.indexOf("const TAB_MIN_SHORT"), mod.indexOf("// Setzt die Viewport")) + "\nreturn tabletScale;")();
+  const TC = [["Handy 393x852", { viewMode: "mobile", coarse: true, screenW: 393, screenH: 852 }, 1], ["Tablet 800x1280", { viewMode: "mobile", coarse: true, screenW: 800, screenH: 1280 }, 1.6], ["iPad mini 744x1133", { viewMode: "mobile", coarse: true, screenW: 744, screenH: 1133 }, 1.6], ["Kleines Tablet 600x960", { viewMode: "mobile", coarse: true, screenW: 600, screenH: 960 }, 600 / 460], ["Tablet Laptop-Modus", { viewMode: "laptop", coarse: true, screenW: 800, screenH: 1280 }, 1], ["Desktop ohne Touch", { viewMode: "mobile", coarse: false, screenW: 1512, screenH: 982 }, 1]];
+  for (const [name, env, want] of TC) { const got = ts(env); if (Math.abs(got - want) < 1e-9) oks++; else { fails++; console.log("FAIL [tabletScale] " + name + ": erwartet " + want + ", erhalten " + got); } } }
 console.log((fails ? "FEHLER" : "OK") + " phone-landscape: " + oks + " ok, " + fails + " fehlgeschlagen");
 process.exit(fails ? 1 : 0);

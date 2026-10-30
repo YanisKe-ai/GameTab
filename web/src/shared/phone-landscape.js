@@ -29,6 +29,22 @@ import { React } from "../vendor/react-globals.js";
 
 const PL_ATTR = "data-phone-landscape";
 const PL_MAX_SHORT = 500;
+// Tablets (Handy-Modus, Touch als Hauptzeiger, kurze Bildschirmseite >= 600 CSS px): die ganze App wird
+// per <meta name=viewport width=...> gleichmaessig vergroessert (Faktor bis 1.6). Hochkant entsteht so
+// ein grosses Handy-Layout, quer das Handy-Querformat. Laptop-Modus und Handys bleiben unveraendert.
+const PL_MAX_SHORT_TABLET = 700;
+const TAB_MIN_SHORT = 600;
+const TAB_MAX_SCALE = 1.6;
+const TAB_TARGET = 460;
+const VP_DEFAULT = "width=device-width, initial-scale=1, viewport-fit=cover";
+
+// Reiner Faktor: 1 = keine Vergroesserung. e: {viewMode, coarse, screenW, screenH}.
+function tabletScale(e) {
+  if (!e || e.viewMode === "laptop" || !e.coarse) return 1;
+  const short = Math.min(e.screenW || 0, e.screenH || 0);
+  if (!short || short < TAB_MIN_SHORT) return 1;
+  return Math.min(TAB_MAX_SCALE, Math.max(1, short / TAB_TARGET));
+}
 const PL_FORCE_KEY = "gametab-pl-force";
 const PL_STATE_KEY = "spieleblock-app-state-v1";
 
@@ -41,8 +57,9 @@ function decidePhoneLandscape(e) {
   if (!e.touch) return false;
   const iw = e.innerW || 0, ih = e.innerH || 0;
   const sw = e.screenW || 0, sh = e.screenH || 0;
-  const short = sw && sh ? Math.min(sw, sh) : Math.min(iw, ih);
-  if (!short || short > PL_MAX_SHORT) return false;
+  const k = e.scale > 1 ? e.scale : 1;
+  const short = (sw && sh ? Math.min(sw, sh) : Math.min(iw, ih)) / k;
+  if (!short || short > (k > 1 ? PL_MAX_SHORT_TABLET : PL_MAX_SHORT)) return false;
   let land;
   if (typeof e.orientationType === "string" && e.orientationType) land = e.orientationType.indexOf("landscape") === 0;
   else if (typeof e.windowOrientation === "number") land = Math.abs(e.windowOrientation) === 90;
@@ -71,12 +88,31 @@ function plReadSavedViewMode() {
 
 function plMQ(q) { try { return !!(window.matchMedia && window.matchMedia(q).matches); } catch (_) { return false; } }
 
+// Setzt die Viewport-Breite passend zum Tablet-Faktor (nur wenn sich etwas aendert).
+let tabLastVp = null;
+function applyTabletViewport(viewMode) {
+  const w = window, s = w.screen || {};
+  const k = tabletScale({ viewMode, coarse: plMQ("(pointer: coarse)"), screenW: s.width || 0, screenH: s.height || 0 });
+  let land = false;
+  try { land = s.orientation && s.orientation.type ? String(s.orientation.type).indexOf("landscape") === 0 : (s.width || 0) > (s.height || 0); } catch (_) {}
+  const side = land ? Math.max(s.width || 0, s.height || 0) : Math.min(s.width || 0, s.height || 0);
+  const vp = k > 1 ? "width=" + Math.round(side / k) + ", viewport-fit=cover" : VP_DEFAULT;
+  if (vp !== tabLastVp) {
+    tabLastVp = vp;
+    const m = document.querySelector('meta[name="viewport"]');
+    if (m && m.getAttribute("content") !== vp) m.setAttribute("content", vp);
+  }
+  document.documentElement.toggleAttribute("data-tablet", k > 1);
+  return k;
+}
+
 function plEnv(viewMode, force) {
   const w = window, s = w.screen || {};
   let ot = null;
   try { ot = s.orientation && s.orientation.type ? String(s.orientation.type) : null; } catch (_) {}
+  const scale = applyTabletViewport(viewMode);
   return {
-    viewMode, force,
+    viewMode, force, scale,
     touch: (w.navigator && w.navigator.maxTouchPoints > 0) || plMQ("(any-pointer: coarse)"),
     screenW: s.width || 0, screenH: s.height || 0,
     orientationType: ot,
@@ -169,4 +205,4 @@ function usePhoneLandscapeRoot(viewMode, loaded) {
   React.useLayoutEffect(() => { if (loaded) setPhoneLandscapeViewMode(viewMode); }, [viewMode, loaded]);
 }
 
-export { PL_ATTR, PL_MAX_SHORT, decidePhoneLandscape, updatePhoneLandscape, setPhoneLandscapeViewMode, usePhoneLandscape, usePhoneLandscapeRoot, plUnbind };
+export { PL_ATTR, PL_MAX_SHORT, tabletScale, decidePhoneLandscape, updatePhoneLandscape, setPhoneLandscapeViewMode, usePhoneLandscape, usePhoneLandscapeRoot, plUnbind };

@@ -273,7 +273,9 @@ def sc_neg(b, vps, themes, strict, notes):
     cases = [
         ("Hochformat 393x852", dict(w=393, h=852), None),
         ("Hochformat + Tastatur 393x300", dict(w=393, h=852), "kbd"),
-        ("Tablet quer 1024x768", dict(w=768, h=1024), (1024, 768)),
+        # Tablets im Handy-Modus werden seit 30.10.2026 vergroessert und bekommen quer absichtlich das Querformat;
+        # negativ bleibt das Tablet im Laptop-Modus.
+        ("Tablet quer 1024x768 Laptop-Modus", dict(w=768, h=1024, mode="Laptop"), (1024, 768)),
         ("Laptop-Modus 1512x982", dict(w=1512, h=982, mobile=False, mode="Laptop"), None),
         ("Laptop-Modus 900x600", dict(w=900, h=600, mobile=False, mode="Laptop"), None),
         ("Laptop-Modus Handy quer 844x390 + ?pl=1", dict(w=390, h=844, mode="Laptop", query="pl=1"), (844, 390)),

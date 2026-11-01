@@ -1,0 +1,176 @@
+[
+ {
+  "name": "entwurf",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Team Schwarz",
+    "score": 27
+   },
+   {
+    "name": "Team Weiss",
+    "score": 19
+   }
+  ]
+ },
+ {
+  "name": "drei",
+  "lang": "en",
+  "players": [
+   {
+    "name": "Rot",
+    "score": 30
+   },
+   {
+    "name": "Blau",
+    "score": 24
+   },
+   {
+    "name": "Gruen",
+    "score": 11
+   }
+  ]
+ },
+ {
+  "name": "sechs_max",
+  "lang": "fr",
+  "players": [
+   {
+    "name": "Les Lions",
+    "score": 30
+   },
+   {
+    "name": "Les Aigles",
+    "score": 28
+   },
+   {
+    "name": "Les Loups",
+    "score": 22
+   },
+   {
+    "name": "Les Ours",
+    "score": 19
+   },
+   {
+    "name": "Les Renards",
+    "score": 12
+   },
+   {
+    "name": "Les Cerfs",
+    "score": 4
+   }
+  ]
+ },
+ {
+  "name": "lange_namen",
+  "lang": "it",
+  "players": [
+   {
+    "name": "Maximiliane Huber-Brunner von und zu Hohenstein-Wildenburg",
+    "score": 30
+   },
+   {
+    "name": "Zoë Ölçü-Çağlayan und die wilden Hühner",
+    "score": 25
+   }
+  ]
+ },
+ {
+  "name": "gleichstand",
+  "lang": "es",
+  "players": [
+   {
+    "name": "Tony und Yanis",
+    "score": 30
+   },
+   {
+    "name": "Matteo und Lea",
+    "score": 30
+   },
+   {
+    "name": "Anna",
+    "score": 12
+   }
+  ]
+ },
+ {
+  "name": "cjk",
+  "lang": "de",
+  "players": [
+   {
+    "name": "田中チーム",
+    "score": 30
+   },
+   {
+    "name": "李小龍队",
+    "score": 21
+   }
+  ]
+ },
+ {
+  "name": "pt_vier",
+  "lang": "pt",
+  "players": [
+   {
+    "name": "Equipa A",
+    "score": 41
+   },
+   {
+    "name": "Equipa B",
+    "score": 40
+   },
+   {
+    "name": "Equipa C",
+    "score": 12
+   },
+   {
+    "name": "Equipa D",
+    "score": 0
+   }
+  ]
+ },
+ {
+  "name": "hundert",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Die Unschlagbaren",
+    "score": 100
+   },
+   {
+    "name": "Die Anderen",
+    "score": 99
+   }
+  ]
+ },
+ {
+  "name": "sechs_lang",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Alexandrine-Marie Schmidt und Freunde",
+    "score": 30
+   },
+   {
+    "name": "Bartholomäus mit Anhang",
+    "score": 26
+   },
+   {
+    "name": "Dino",
+    "score": 20
+   },
+   {
+    "name": "Eva",
+    "score": 17
+   },
+   {
+    "name": "Finn",
+    "score": 9
+   },
+   {
+    "name": "Gina",
+    "score": 3
+   }
+  ]
+ }
+]

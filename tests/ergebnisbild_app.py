@@ -132,7 +132,35 @@ def flow_differenzler(pg):
     seeded(pg, ("Schreibunterlagen", "Jass", "Differenzler"), "jass", {"players": [{"id": 1, "name": "Tony"}, {"id": 2, "name": "Zoë Ölçü"}, {"id": 3, "name": "Maximiliane Huber-Brunner"}], "scores": scores})
 
 
-FLOWS = {"Yatzy 2": flow_yatzy2, "Yatzy 4 lang": flow_yatzy4, "Schieber": flow_schieber, "Wizard": flow_wizard, "Minigolf": flow_minigolf, "Phase 10": flow_phase10, "Rommé": flow_romme, "Differenzler": flow_differenzler}
+def tabu_wait(pg):
+    """Zeit vorspulen (Chromium: Fake-Uhr, WebKit: echt warten, dort greift die Fake-Uhr in der App nicht)."""
+    if pg.context.browser.browser_type.name == "webkit":
+        pg.wait_for_timeout(32000)
+    else:
+        pg.clock.run_for(32000)
+
+
+def flow_tabu(pg):
+    pg.clock.install()
+    R.open_game(pg, "Partyspiele", "Tabu")
+    R.wait(pg, 500)
+    pg.evaluate("()=>{const k='spieleblock-app-state-v1';const s=JSON.parse(localStorage.getItem(k));s.tabu.teams=[{id:1,name:'Die Wilden Hühner'},{id:2,name:'Maximiliane Huber-Brunner und Freunde'}];s.tabu.targetScore=1;s.tabu.turnSeconds=30;localStorage.setItem(k,JSON.stringify(s));}")
+    pg.reload(); R.wait(pg, 1000)
+    pg.clock.install()
+    R.open_game(pg, "Partyspiele", "Tabu"); R.press_start(pg)
+    R.click(pg, R.btn_re(pg, "Bereit"), 800)
+    R.click(pg, R.btn(pg, "Richtig"), 500)
+    tabu_wait(pg)
+    R.wait(pg, 600)
+    R.click(pg, R.btn_re(pg, "Verstanden"), 1000)
+    R.click(pg, R.btn_re(pg, "Bereit"), 800)  # zweites Team ohne Punkt: erst nach der vollen Runde endet das Spiel
+    tabu_wait(pg)
+    R.wait(pg, 600)
+    R.click(pg, R.btn_re(pg, "Verstanden"), 1000)
+    R.wait(pg, 600)
+
+
+FLOWS = {"Yatzy 2": flow_yatzy2, "Yatzy 4 lang": flow_yatzy4, "Schieber": flow_schieber, "Wizard": flow_wizard, "Minigolf": flow_minigolf, "Phase 10": flow_phase10, "Rommé": flow_romme, "Differenzler": flow_differenzler, "Tabu": flow_tabu}
 
 
 def share_png(pg, tag):

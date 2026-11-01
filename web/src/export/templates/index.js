@@ -8,9 +8,10 @@ import schieber from "./schieber.js";
 import wizard from "./wizard.js";
 import minigolf from "./minigolf.js";
 import phase10 from "./phase10.js";
+import romme from "./romme.js";
 
 /* Jede Vorlage: { games:[gameId...], fonts:[CSS-Schriftangaben], texts?(d)->[String], accepts?(d)->bool, render(d, kit)->[canvas...] } */
-const TEMPLATES = [yatzy, schieber, wizard, minigolf, phase10];
+const TEMPLATES = [yatzy, schieber, wizard, minigolf, phase10, romme];
 
 const GT_TPL = {};
 TEMPLATES.forEach((tp) => tp.games.forEach((g) => { GT_TPL[g] = tp; }));

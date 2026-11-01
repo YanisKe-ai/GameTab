@@ -1,0 +1,660 @@
+[
+ {
+  "name": "entwurf",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": null
+   },
+   {
+    "name": "Yanis",
+    "score": null
+   },
+   {
+    "name": "Matteo",
+    "score": null
+   }
+  ],
+  "extra": {
+   "outcome": "crew",
+   "players": [
+    {
+     "name": "Tony",
+     "role": "civilian"
+    },
+    {
+     "name": "Yanis",
+     "role": "civilian"
+    },
+    {
+     "name": "Matteo",
+     "role": "impostor"
+    }
+   ],
+   "eliminated": 2,
+   "word": "Banane"
+  }
+ },
+ {
+  "name": "min3_escape",
+  "lang": "en",
+  "players": [
+   {
+    "name": "Tony",
+    "score": null
+   },
+   {
+    "name": "Yanis",
+    "score": null
+   },
+   {
+    "name": "Matteo",
+    "score": null
+   }
+  ],
+  "extra": {
+   "outcome": "escape",
+   "players": [
+    {
+     "name": "Tony",
+     "role": "impostor"
+    },
+    {
+     "name": "Yanis",
+     "role": "civilian"
+    },
+    {
+     "name": "Matteo",
+     "role": "civilian"
+    }
+   ],
+   "eliminated": 1,
+   "word": "Banana"
+  }
+ },
+ {
+  "name": "tie",
+  "lang": "fr",
+  "players": [
+   {
+    "name": "Tony",
+    "score": null
+   },
+   {
+    "name": "Yanis",
+    "score": null
+   },
+   {
+    "name": "Matteo",
+    "score": null
+   },
+   {
+    "name": "Maximiliane Huber-Brunner",
+    "score": null
+   }
+  ],
+  "extra": {
+   "outcome": "tie",
+   "players": [
+    {
+     "name": "Tony",
+     "role": "civilian"
+    },
+    {
+     "name": "Yanis",
+     "role": "impostor"
+    },
+    {
+     "name": "Matteo",
+     "role": "civilian"
+    },
+    {
+     "name": "Maximiliane Huber-Brunner",
+     "role": "civilian"
+    }
+   ],
+   "eliminated": -1,
+   "word": "Banane"
+  }
+ },
+ {
+  "name": "noone",
+  "lang": "it",
+  "players": [
+   {
+    "name": "Tony",
+    "score": null
+   },
+   {
+    "name": "Yanis",
+    "score": null
+   },
+   {
+    "name": "Matteo",
+    "score": null
+   },
+   {
+    "name": "Maximiliane Huber-Brunner",
+    "score": null
+   }
+  ],
+  "extra": {
+   "outcome": "escape",
+   "players": [
+    {
+     "name": "Tony",
+     "role": "civilian"
+    },
+    {
+     "name": "Yanis",
+     "role": "civilian"
+    },
+    {
+     "name": "Matteo",
+     "role": "impostor"
+    },
+    {
+     "name": "Maximiliane Huber-Brunner",
+     "role": "civilian"
+    }
+   ],
+   "eliminated": -1,
+   "word": "Banana"
+  }
+ },
+ {
+  "name": "guess_mrwhite",
+  "lang": "es",
+  "players": [
+   {
+    "name": "Tony",
+    "score": null
+   },
+   {
+    "name": "Yanis",
+    "score": null
+   },
+   {
+    "name": "Matteo",
+    "score": null
+   },
+   {
+    "name": "Maximiliane Huber-Brunner",
+    "score": null
+   },
+   {
+    "name": "Zoë",
+    "score": null
+   }
+  ],
+  "extra": {
+   "outcome": "guess",
+   "players": [
+    {
+     "name": "Tony",
+     "role": "civilian"
+    },
+    {
+     "name": "Yanis",
+     "role": "impostor"
+    },
+    {
+     "name": "Matteo",
+     "role": "civilian"
+    },
+    {
+     "name": "Maximiliane Huber-Brunner",
+     "role": "mrwhite"
+    },
+    {
+     "name": "Zoë",
+     "role": "civilian"
+    }
+   ],
+   "eliminated": 3,
+   "word": "Plátano"
+  }
+ },
+ {
+  "name": "two_imps_lang",
+  "lang": "pt",
+  "players": [
+   {
+    "name": "Tony",
+    "score": null
+   },
+   {
+    "name": "Yanis",
+    "score": null
+   },
+   {
+    "name": "Matteo",
+    "score": null
+   },
+   {
+    "name": "Maximiliane Huber-Brunner",
+    "score": null
+   },
+   {
+    "name": "Zoë",
+    "score": null
+   },
+   {
+    "name": "Ölçü",
+    "score": null
+   },
+   {
+    "name": "Kim",
+    "score": null
+   },
+   {
+    "name": "Lea",
+    "score": null
+   }
+  ],
+  "extra": {
+   "outcome": "crew",
+   "players": [
+    {
+     "name": "Tony",
+     "role": "civilian"
+    },
+    {
+     "name": "Yanis",
+     "role": "impostor"
+    },
+    {
+     "name": "Matteo",
+     "role": "civilian"
+    },
+    {
+     "name": "Maximiliane Huber-Brunner",
+     "role": "civilian"
+    },
+    {
+     "name": "Zoë",
+     "role": "civilian"
+    },
+    {
+     "name": "Ölçü",
+     "role": "impostor"
+    },
+    {
+     "name": "Kim",
+     "role": "civilian"
+    },
+    {
+     "name": "Lea",
+     "role": "civilian"
+    }
+   ],
+   "eliminated": 5,
+   "word": "Banana"
+  }
+ },
+ {
+  "name": "max14",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": null
+   },
+   {
+    "name": "Yanis",
+    "score": null
+   },
+   {
+    "name": "Matteo",
+    "score": null
+   },
+   {
+    "name": "Maximiliane Huber-Brunner",
+    "score": null
+   },
+   {
+    "name": "Zoë",
+    "score": null
+   },
+   {
+    "name": "Ölçü",
+    "score": null
+   },
+   {
+    "name": "Kim",
+    "score": null
+   },
+   {
+    "name": "Lea",
+    "score": null
+   },
+   {
+    "name": "Noah",
+    "score": null
+   },
+   {
+    "name": "Aurélien",
+    "score": null
+   },
+   {
+    "name": "Sofia",
+    "score": null
+   },
+   {
+    "name": "Jonas",
+    "score": null
+   },
+   {
+    "name": "Chiara",
+    "score": null
+   },
+   {
+    "name": "Dominik",
+    "score": null
+   }
+  ],
+  "extra": {
+   "outcome": "crew",
+   "players": [
+    {
+     "name": "Tony",
+     "role": "civilian"
+    },
+    {
+     "name": "Yanis",
+     "role": "civilian"
+    },
+    {
+     "name": "Matteo",
+     "role": "civilian"
+    },
+    {
+     "name": "Maximiliane Huber-Brunner",
+     "role": "impostor"
+    },
+    {
+     "name": "Zoë",
+     "role": "civilian"
+    },
+    {
+     "name": "Ölçü",
+     "role": "civilian"
+    },
+    {
+     "name": "Kim",
+     "role": "civilian"
+    },
+    {
+     "name": "Lea",
+     "role": "civilian"
+    },
+    {
+     "name": "Noah",
+     "role": "civilian"
+    },
+    {
+     "name": "Aurélien",
+     "role": "impostor"
+    },
+    {
+     "name": "Sofia",
+     "role": "civilian"
+    },
+    {
+     "name": "Jonas",
+     "role": "civilian"
+    },
+    {
+     "name": "Chiara",
+     "role": "civilian"
+    },
+    {
+     "name": "Dominik",
+     "role": "civilian"
+    }
+   ],
+   "eliminated": 9,
+   "word": "Wassermelone"
+  }
+ },
+ {
+  "name": "max14_escape",
+  "lang": "en",
+  "players": [
+   {
+    "name": "Tony",
+    "score": null
+   },
+   {
+    "name": "Yanis",
+    "score": null
+   },
+   {
+    "name": "Matteo",
+    "score": null
+   },
+   {
+    "name": "Maximiliane Huber-Brunner",
+    "score": null
+   },
+   {
+    "name": "Zoë",
+    "score": null
+   },
+   {
+    "name": "Ölçü",
+    "score": null
+   },
+   {
+    "name": "Kim",
+    "score": null
+   },
+   {
+    "name": "Lea",
+    "score": null
+   },
+   {
+    "name": "Noah",
+    "score": null
+   },
+   {
+    "name": "Aurélien",
+    "score": null
+   },
+   {
+    "name": "Sofia",
+    "score": null
+   },
+   {
+    "name": "Jonas",
+    "score": null
+   },
+   {
+    "name": "Chiara",
+    "score": null
+   },
+   {
+    "name": "Dominik",
+    "score": null
+   }
+  ],
+  "extra": {
+   "outcome": "escape",
+   "players": [
+    {
+     "name": "Tony",
+     "role": "impostor"
+    },
+    {
+     "name": "Yanis",
+     "role": "civilian"
+    },
+    {
+     "name": "Matteo",
+     "role": "civilian"
+    },
+    {
+     "name": "Maximiliane Huber-Brunner",
+     "role": "civilian"
+    },
+    {
+     "name": "Zoë",
+     "role": "civilian"
+    },
+    {
+     "name": "Ölçü",
+     "role": "civilian"
+    },
+    {
+     "name": "Kim",
+     "role": "civilian"
+    },
+    {
+     "name": "Lea",
+     "role": "civilian"
+    },
+    {
+     "name": "Noah",
+     "role": "civilian"
+    },
+    {
+     "name": "Aurélien",
+     "role": "civilian"
+    },
+    {
+     "name": "Sofia",
+     "role": "civilian"
+    },
+    {
+     "name": "Jonas",
+     "role": "civilian"
+    },
+    {
+     "name": "Chiara",
+     "role": "civilian"
+    },
+    {
+     "name": "Dominik",
+     "role": "impostor"
+    }
+   ],
+   "eliminated": 4,
+   "word": "Kühlschrank mit Gefrierfach"
+  }
+ },
+ {
+  "name": "longnames6",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Maximiliane Huber-Brunner von Hohenstein",
+    "score": null
+   },
+   {
+    "name": "Zoë",
+    "score": null
+   },
+   {
+    "name": "Ölçü Übermütig",
+    "score": null
+   },
+   {
+    "name": "Kim",
+    "score": null
+   },
+   {
+    "name": "Aurélien Çağlayan",
+    "score": null
+   },
+   {
+    "name": "Dominik Vierhundertsechsundvierzig",
+    "score": null
+   }
+  ],
+  "extra": {
+   "outcome": "crew",
+   "players": [
+    {
+     "name": "Maximiliane Huber-Brunner von Hohenstein",
+     "role": "civilian"
+    },
+    {
+     "name": "Zoë",
+     "role": "civilian"
+    },
+    {
+     "name": "Ölçü Übermütig",
+     "role": "impostor"
+    },
+    {
+     "name": "Kim",
+     "role": "civilian"
+    },
+    {
+     "name": "Aurélien Çağlayan",
+     "role": "civilian"
+    },
+    {
+     "name": "Dominik Vierhundertsechsundvierzig",
+     "role": "civilian"
+    }
+   ],
+   "eliminated": 2,
+   "word": "Banane"
+  }
+ },
+ {
+  "name": "cjk",
+  "lang": "de",
+  "players": [
+   {
+    "name": "李小龍",
+    "score": null
+   },
+   {
+    "name": "Yanis",
+    "score": null
+   },
+   {
+    "name": "鈴木一郎",
+    "score": null
+   },
+   {
+    "name": "김민준",
+    "score": null
+   },
+   {
+    "name": "Tony",
+    "score": null
+   }
+  ],
+  "extra": {
+   "outcome": "crew",
+   "players": [
+    {
+     "name": "李小龍",
+     "role": "civilian"
+    },
+    {
+     "name": "Yanis",
+     "role": "impostor"
+    },
+    {
+     "name": "鈴木一郎",
+     "role": "civilian"
+    },
+    {
+     "name": "김민준",
+     "role": "civilian"
+    },
+    {
+     "name": "Tony",
+     "role": "civilian"
+    }
+   ],
+   "eliminated": 1,
+   "word": "苹果"
+  }
+ }
+]

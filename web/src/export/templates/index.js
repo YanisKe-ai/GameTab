@@ -5,9 +5,10 @@ import { GT_EC_TPL } from "../result-card.js";
 import * as kit from "./kit.js";
 import yatzy from "./yatzy.js";
 import schieber from "./schieber.js";
+import impostor from "./impostor.js";
 
 /* Jede Vorlage: { games:[gameId...], fonts:[CSS-Schriftangaben], texts?(d)->[String], accepts?(d)->bool, render(d, kit)->[canvas...] } */
-const TEMPLATES = [yatzy, schieber];
+const TEMPLATES = [yatzy, schieber, impostor];
 
 const GT_TPL = {};
 TEMPLATES.forEach((tp) => tp.games.forEach((g) => { GT_TPL[g] = tp; }));

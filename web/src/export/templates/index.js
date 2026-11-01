@@ -6,9 +6,10 @@ import * as kit from "./kit.js";
 import yatzy from "./yatzy.js";
 import schieber from "./schieber.js";
 import skyjo from "./skyjo.js";
+import flip7 from "./flip7.js";
 
 /* Jede Vorlage: { games:[gameId...], fonts:[CSS-Schriftangaben], texts?(d)->[String], accepts?(d)->bool, render(d, kit)->[canvas...] } */
-const TEMPLATES = [yatzy, schieber, skyjo];
+const TEMPLATES = [yatzy, schieber, skyjo, flip7];
 
 const GT_TPL = {};
 TEMPLATES.forEach((tp) => tp.games.forEach((g) => { GT_TPL[g] = tp; }));

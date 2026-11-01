@@ -1,0 +1,1180 @@
+[
+ {
+  "name": "entwurf",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 203
+   },
+   {
+    "name": "Yanis",
+    "score": 171
+   },
+   {
+    "name": "Matteo",
+    "score": 148
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "Tony",
+     "rounds": [
+      28,
+      36,
+      29,
+      28,
+      32,
+      37,
+      13
+     ],
+     "flip7": 1
+    },
+    {
+     "name": "Yanis",
+     "rounds": [
+      30,
+      29,
+      39,
+      37,
+      8,
+      1,
+      27
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Matteo",
+     "rounds": [
+      23,
+      45,
+      7,
+      44,
+      11,
+      9,
+      9
+     ],
+     "flip7": 0
+    }
+   ]
+  }
+ },
+ {
+  "name": "zwei",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Lea",
+    "score": 212
+   },
+   {
+    "name": "Noah",
+    "score": 160
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "Lea",
+     "rounds": [
+      45,
+      35,
+      45,
+      34,
+      36,
+      17
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Noah",
+     "rounds": [
+      41,
+      20,
+      13,
+      24,
+      34,
+      28
+     ],
+     "flip7": 0
+    }
+   ]
+  }
+ },
+ {
+  "name": "zehn",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 230
+   },
+   {
+    "name": "Yanis",
+    "score": 213
+   },
+   {
+    "name": "Matteo",
+    "score": 196
+   },
+   {
+    "name": "Lea",
+    "score": 179
+   },
+   {
+    "name": "Noah",
+    "score": 162
+   },
+   {
+    "name": "Zoë",
+    "score": 145
+   },
+   {
+    "name": "Ölçü",
+    "score": 128
+   },
+   {
+    "name": "Kim",
+    "score": 111
+   },
+   {
+    "name": "Anna",
+    "score": 94
+   },
+   {
+    "name": "Ben",
+    "score": 77
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "Tony",
+     "rounds": [
+      42,
+      32,
+      13,
+      11,
+      21,
+      33,
+      33,
+      45
+     ],
+     "flip7": 1
+    },
+    {
+     "name": "Yanis",
+     "rounds": [
+      37,
+      39,
+      11,
+      27,
+      19,
+      15,
+      36,
+      29
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Matteo",
+     "rounds": [
+      19,
+      27,
+      8,
+      21,
+      35,
+      23,
+      18,
+      45
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Lea",
+     "rounds": [
+      21,
+      26,
+      30,
+      11,
+      28,
+      36,
+      2,
+      25
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Noah",
+     "rounds": [
+      32,
+      36,
+      10,
+      4,
+      32,
+      24,
+      0,
+      24
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Zoë",
+     "rounds": [
+      14,
+      28,
+      1,
+      7,
+      12,
+      37,
+      22,
+      24
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Ölçü",
+     "rounds": [
+      32,
+      29,
+      26,
+      7,
+      11,
+      8,
+      4,
+      11
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Kim",
+     "rounds": [
+      12,
+      12,
+      10,
+      22,
+      11,
+      10,
+      28,
+      6
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Anna",
+     "rounds": [
+      20,
+      17,
+      3,
+      2,
+      0,
+      17,
+      14,
+      21
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Ben",
+     "rounds": [
+      8,
+      16,
+      0,
+      17,
+      7,
+      17,
+      0,
+      12
+     ],
+     "flip7": 0
+    }
+   ]
+  },
+  "pages": 2
+ },
+ {
+  "name": "vier",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 205
+   },
+   {
+    "name": "Yanis",
+    "score": 180
+   },
+   {
+    "name": "Matteo",
+    "score": 150
+   },
+   {
+    "name": "Kim",
+    "score": 120
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "Tony",
+     "rounds": [
+      39,
+      21,
+      27,
+      45,
+      45,
+      19,
+      9
+     ],
+     "flip7": 2
+    },
+    {
+     "name": "Yanis",
+     "rounds": [
+      36,
+      22,
+      9,
+      12,
+      44,
+      13,
+      44
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Matteo",
+     "rounds": [
+      17,
+      7,
+      36,
+      32,
+      15,
+      13,
+      30
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Kim",
+     "rounds": [
+      19,
+      18,
+      8,
+      13,
+      20,
+      19,
+      23
+     ],
+     "flip7": 0
+    }
+   ]
+  }
+ },
+ {
+  "name": "sechs",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 220
+   },
+   {
+    "name": "Yanis",
+    "score": 199
+   },
+   {
+    "name": "Matteo",
+    "score": 178
+   },
+   {
+    "name": "Lea",
+    "score": 157
+   },
+   {
+    "name": "Noah",
+    "score": 136
+   },
+   {
+    "name": "Zoë",
+    "score": 115
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "Tony",
+     "rounds": [
+      45,
+      23,
+      32,
+      38,
+      25,
+      32,
+      25
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Yanis",
+     "rounds": [
+      34,
+      10,
+      28,
+      45,
+      13,
+      45,
+      24
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Matteo",
+     "rounds": [
+      35,
+      27,
+      13,
+      28,
+      45,
+      12,
+      18
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Lea",
+     "rounds": [
+      27,
+      6,
+      15,
+      11,
+      25,
+      35,
+      38
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Noah",
+     "rounds": [
+      28,
+      13,
+      21,
+      9,
+      20,
+      35,
+      10
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Zoë",
+     "rounds": [
+      11,
+      10,
+      6,
+      25,
+      20,
+      35,
+      8
+     ],
+     "flip7": 0
+    }
+   ]
+  }
+ },
+ {
+  "name": "lange_namen",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Maximiliane Huber-Brunner von Hohenstaufen-Zollern",
+    "score": 233
+   },
+   {
+    "name": "Konstantinopelstrasse-Wanderverein-Vorsitzender",
+    "score": 201
+   },
+   {
+    "name": "Zoë-Ägidius Öztürk",
+    "score": 175
+   },
+   {
+    "name": "Kim",
+    "score": 90
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "Maximiliane Huber-Brunner von Hohenstaufen-Zollern",
+     "rounds": [
+      45,
+      19,
+      43,
+      32,
+      11,
+      45,
+      38
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Konstantinopelstrasse-Wanderverein-Vorsitzender",
+     "rounds": [
+      30,
+      35,
+      14,
+      45,
+      19,
+      13,
+      45
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Zoë-Ägidius Öztürk",
+     "rounds": [
+      23,
+      25,
+      8,
+      40,
+      45,
+      15,
+      19
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Kim",
+     "rounds": [
+      17,
+      11,
+      20,
+      8,
+      6,
+      1,
+      27
+     ],
+     "flip7": 0
+    }
+   ]
+  }
+ },
+ {
+  "name": "langer_name_zwei",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Maximiliane Huber-Brunner",
+    "score": 233
+   },
+   {
+    "name": "Ben",
+    "score": 201
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "Maximiliane Huber-Brunner",
+     "rounds": [
+      18,
+      45,
+      29,
+      30,
+      39,
+      45,
+      27
+     ],
+     "flip7": 1
+    },
+    {
+     "name": "Ben",
+     "rounds": [
+      32,
+      45,
+      16,
+      27,
+      18,
+      37,
+      26
+     ],
+     "flip7": 0
+    }
+   ]
+  }
+ },
+ {
+  "name": "gleichstand",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 205
+   },
+   {
+    "name": "Yanis",
+    "score": 205
+   },
+   {
+    "name": "Matteo",
+    "score": 150
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "Tony",
+     "rounds": [
+      25,
+      36,
+      5,
+      14,
+      41,
+      45,
+      39
+     ],
+     "flip7": 1
+    },
+    {
+     "name": "Yanis",
+     "rounds": [
+      30,
+      19,
+      45,
+      45,
+      25,
+      24,
+      17
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Matteo",
+     "rounds": [
+      0,
+      29,
+      37,
+      19,
+      9,
+      35,
+      21
+     ],
+     "flip7": 0
+    }
+   ]
+  }
+ },
+ {
+  "name": "gleichstand_lang",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Maximiliane Huber-Brunner von Hohenstaufen-Zollern",
+    "score": 205
+   },
+   {
+    "name": "Yanis",
+    "score": 205
+   },
+   {
+    "name": "Matteo und Lea",
+    "score": 205
+   },
+   {
+    "name": "Kim",
+    "score": 150
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "Maximiliane Huber-Brunner von Hohenstaufen-Zollern",
+     "rounds": [
+      44,
+      36,
+      18,
+      31,
+      20,
+      45,
+      11
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Yanis",
+     "rounds": [
+      45,
+      26,
+      22,
+      45,
+      45,
+      12,
+      10
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Matteo und Lea",
+     "rounds": [
+      30,
+      24,
+      35,
+      41,
+      45,
+      13,
+      17
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Kim",
+     "rounds": [
+      27,
+      17,
+      23,
+      19,
+      10,
+      26,
+      28
+     ],
+     "flip7": 0
+    }
+   ]
+  }
+ },
+ {
+  "name": "cjk",
+  "lang": "de",
+  "players": [
+   {
+    "name": "田中太郎",
+    "score": 230
+   },
+   {
+    "name": "王小明",
+    "score": 210
+   },
+   {
+    "name": "김민수",
+    "score": 180
+   },
+   {
+    "name": "Ana",
+    "score": 90
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "田中太郎",
+     "rounds": [
+      31,
+      16,
+      41,
+      41,
+      30,
+      45,
+      26
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "王小明",
+     "rounds": [
+      42,
+      45,
+      19,
+      13,
+      45,
+      5,
+      41
+     ],
+     "flip7": 1
+    },
+    {
+     "name": "김민수",
+     "rounds": [
+      13,
+      31,
+      27,
+      40,
+      34,
+      1,
+      34
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Ana",
+     "rounds": [
+      2,
+      6,
+      13,
+      20,
+      13,
+      19,
+      17
+     ],
+     "flip7": 0
+    }
+   ]
+  }
+ },
+ {
+  "name": "wenig_runden",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 95
+   },
+   {
+    "name": "Yanis",
+    "score": 60
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "Tony",
+     "rounds": [
+      29,
+      22,
+      44
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Yanis",
+     "rounds": [
+      25,
+      28,
+      7
+     ],
+     "flip7": 0
+    }
+   ]
+  }
+ },
+ {
+  "name": "en",
+  "lang": "en",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 203
+   },
+   {
+    "name": "Yanis",
+    "score": 171
+   },
+   {
+    "name": "Matteo",
+    "score": 148
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "Tony",
+     "rounds": [
+      28,
+      44,
+      19,
+      15,
+      27,
+      41,
+      29
+     ],
+     "flip7": 1
+    },
+    {
+     "name": "Yanis",
+     "rounds": [
+      31,
+      15,
+      11,
+      37,
+      18,
+      32,
+      27
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Matteo",
+     "rounds": [
+      28,
+      38,
+      19,
+      40,
+      5,
+      10,
+      8
+     ],
+     "flip7": 0
+    }
+   ]
+  }
+ },
+ {
+  "name": "fr",
+  "lang": "fr",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 203
+   },
+   {
+    "name": "Yanis",
+    "score": 171
+   },
+   {
+    "name": "Matteo",
+    "score": 148
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "Tony",
+     "rounds": [
+      13,
+      36,
+      40,
+      42,
+      39,
+      16,
+      17
+     ],
+     "flip7": 1
+    },
+    {
+     "name": "Yanis",
+     "rounds": [
+      28,
+      35,
+      45,
+      11,
+      20,
+      11,
+      21
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Matteo",
+     "rounds": [
+      7,
+      33,
+      19,
+      43,
+      13,
+      11,
+      22
+     ],
+     "flip7": 0
+    }
+   ]
+  }
+ },
+ {
+  "name": "it",
+  "lang": "it",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 203
+   },
+   {
+    "name": "Yanis",
+    "score": 171
+   },
+   {
+    "name": "Matteo",
+    "score": 148
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "Tony",
+     "rounds": [
+      25,
+      36,
+      34,
+      33,
+      45,
+      17,
+      13
+     ],
+     "flip7": 1
+    },
+    {
+     "name": "Yanis",
+     "rounds": [
+      23,
+      18,
+      17,
+      44,
+      24,
+      25,
+      20
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Matteo",
+     "rounds": [
+      13,
+      35,
+      31,
+      11,
+      41,
+      9,
+      8
+     ],
+     "flip7": 0
+    }
+   ]
+  }
+ },
+ {
+  "name": "es",
+  "lang": "es",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 203
+   },
+   {
+    "name": "Yanis",
+    "score": 171
+   },
+   {
+    "name": "Matteo",
+    "score": 148
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "Tony",
+     "rounds": [
+      9,
+      44,
+      21,
+      33,
+      26,
+      42,
+      28
+     ],
+     "flip7": 1
+    },
+    {
+     "name": "Yanis",
+     "rounds": [
+      26,
+      38,
+      13,
+      27,
+      40,
+      4,
+      23
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Matteo",
+     "rounds": [
+      8,
+      32,
+      19,
+      35,
+      11,
+      8,
+      35
+     ],
+     "flip7": 0
+    }
+   ]
+  }
+ },
+ {
+  "name": "pt",
+  "lang": "pt",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 203
+   },
+   {
+    "name": "Yanis",
+    "score": 171
+   },
+   {
+    "name": "Matteo",
+    "score": 148
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "Tony",
+     "rounds": [
+      45,
+      15,
+      23,
+      13,
+      41,
+      38,
+      28
+     ],
+     "flip7": 1
+    },
+    {
+     "name": "Yanis",
+     "rounds": [
+      35,
+      11,
+      9,
+      37,
+      35,
+      14,
+      30
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Matteo",
+     "rounds": [
+      41,
+      22,
+      6,
+      12,
+      31,
+      36,
+      0
+     ],
+     "flip7": 0
+    }
+   ]
+  }
+ },
+ {
+  "name": "ohne_extra",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 203
+   },
+   {
+    "name": "Yanis",
+    "score": 171
+   }
+  ]
+ }
+]

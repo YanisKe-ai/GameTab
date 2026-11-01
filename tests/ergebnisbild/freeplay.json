@@ -1,0 +1,487 @@
+[
+ {
+  "name": "entwurf",
+  "lang": "de",
+  "lowWins": false,
+  "players": [
+   {
+    "name": "Tony",
+    "score": 48
+   },
+   {
+    "name": "Yanis",
+    "score": 41
+   },
+   {
+    "name": "Matteo",
+    "score": 29
+   }
+  ],
+  "extra": {
+   "lowWins": false,
+   "target": 40
+  }
+ },
+ {
+  "name": "zwei",
+  "lang": "de",
+  "lowWins": false,
+  "players": [
+   {
+    "name": "Lea",
+    "score": 52
+   },
+   {
+    "name": "Noah",
+    "score": 38
+   }
+  ],
+  "extra": {
+   "lowWins": false,
+   "target": 40
+  }
+ },
+ {
+  "name": "vier",
+  "lang": "de",
+  "lowWins": false,
+  "players": [
+   {
+    "name": "Tony",
+    "score": 60
+   },
+   {
+    "name": "Yanis",
+    "score": 55
+   },
+   {
+    "name": "Matteo",
+    "score": 41
+   },
+   {
+    "name": "Kim",
+    "score": 12
+   }
+  ],
+  "extra": {
+   "lowWins": false,
+   "target": 40
+  }
+ },
+ {
+  "name": "acht",
+  "lang": "de",
+  "lowWins": false,
+  "players": [
+   {
+    "name": "Tony",
+    "score": 90
+   },
+   {
+    "name": "Yanis",
+    "score": 80
+   },
+   {
+    "name": "Matteo",
+    "score": 70
+   },
+   {
+    "name": "Lea",
+    "score": 60
+   },
+   {
+    "name": "Noah",
+    "score": 50
+   },
+   {
+    "name": "Zoë",
+    "score": 40
+   },
+   {
+    "name": "Ölçü",
+    "score": 30
+   },
+   {
+    "name": "Kim",
+    "score": 20
+   }
+  ],
+  "extra": {
+   "lowWins": false,
+   "target": 40
+  }
+ },
+ {
+  "name": "zehn_seiten",
+  "lang": "de",
+  "lowWins": false,
+  "players": [
+   {
+    "name": "Tony",
+    "score": 90
+   },
+   {
+    "name": "Yanis",
+    "score": 80
+   },
+   {
+    "name": "Matteo",
+    "score": 70
+   },
+   {
+    "name": "Lea",
+    "score": 60
+   },
+   {
+    "name": "Noah",
+    "score": 50
+   },
+   {
+    "name": "Zoë",
+    "score": 40
+   },
+   {
+    "name": "Ölçü",
+    "score": 30
+   },
+   {
+    "name": "Kim",
+    "score": 20
+   },
+   {
+    "name": "Anna",
+    "score": 10
+   },
+   {
+    "name": "Ben",
+    "score": 5
+   }
+  ],
+  "extra": {
+   "lowWins": false,
+   "target": 40
+  },
+  "pages": 2
+ },
+ {
+  "name": "lange_namen",
+  "lang": "de",
+  "lowWins": false,
+  "players": [
+   {
+    "name": "Maximiliane Huber-Brunner von Hohenstaufen-Zollern",
+    "score": 48
+   },
+   {
+    "name": "Konstantinopelstrasse-Wanderverein-Vorsitzender",
+    "score": 41
+   },
+   {
+    "name": "Zoë-Ägidius Öztürk",
+    "score": 29
+   },
+   {
+    "name": "Kim",
+    "score": 5
+   }
+  ],
+  "extra": {
+   "lowWins": false,
+   "target": 40
+  }
+ },
+ {
+  "name": "langer_sieger_zwei",
+  "lang": "de",
+  "lowWins": false,
+  "players": [
+   {
+    "name": "Maximiliane Huber-Brunner",
+    "score": 48
+   },
+   {
+    "name": "Ben",
+    "score": 41
+   }
+  ],
+  "extra": {
+   "lowWins": false,
+   "target": 40
+  }
+ },
+ {
+  "name": "gleichstand",
+  "lang": "de",
+  "lowWins": false,
+  "players": [
+   {
+    "name": "Tony",
+    "score": 48
+   },
+   {
+    "name": "Yanis",
+    "score": 48
+   },
+   {
+    "name": "Matteo",
+    "score": 29
+   }
+  ],
+  "extra": {
+   "lowWins": false,
+   "target": 40
+  }
+ },
+ {
+  "name": "gleichstand_lang",
+  "lang": "de",
+  "lowWins": false,
+  "players": [
+   {
+    "name": "Maximiliane Huber-Brunner von Hohenstaufen-Zollern",
+    "score": 48
+   },
+   {
+    "name": "Yanis",
+    "score": 48
+   },
+   {
+    "name": "Matteo und Lea",
+    "score": 48
+   },
+   {
+    "name": "Kim",
+    "score": 12
+   }
+  ],
+  "extra": {
+   "lowWins": false,
+   "target": 40
+  }
+ },
+ {
+  "name": "cjk",
+  "lang": "de",
+  "lowWins": false,
+  "players": [
+   {
+    "name": "田中太郎",
+    "score": 48
+   },
+   {
+    "name": "王小明",
+    "score": 41
+   },
+   {
+    "name": "김민수",
+    "score": 29
+   },
+   {
+    "name": "Ana",
+    "score": 12
+   }
+  ],
+  "extra": {
+   "lowWins": false,
+   "target": 40
+  }
+ },
+ {
+  "name": "tief_gewinnt",
+  "lang": "de",
+  "lowWins": true,
+  "players": [
+   {
+    "name": "Tony",
+    "score": 12
+   },
+   {
+    "name": "Yanis",
+    "score": 29
+   },
+   {
+    "name": "Matteo",
+    "score": 41
+   },
+   {
+    "name": "Kim",
+    "score": 48
+   }
+  ],
+  "extra": {
+   "lowWins": true,
+   "target": 40
+  }
+ },
+ {
+  "name": "grosse_zahlen",
+  "lang": "de",
+  "lowWins": false,
+  "players": [
+   {
+    "name": "Tony",
+    "score": 12480
+   },
+   {
+    "name": "Yanis",
+    "score": 9041
+   },
+   {
+    "name": "Matteo",
+    "score": 100
+   }
+  ],
+  "extra": {
+   "lowWins": false,
+   "target": 40
+  }
+ },
+ {
+  "name": "ein_punkt",
+  "lang": "de",
+  "lowWins": false,
+  "players": [
+   {
+    "name": "Tony",
+    "score": 1
+   },
+   {
+    "name": "Yanis",
+    "score": 0
+   }
+  ],
+  "extra": {
+   "lowWins": false,
+   "target": 40
+  }
+ },
+ {
+  "name": "en",
+  "lang": "en",
+  "lowWins": false,
+  "players": [
+   {
+    "name": "Tony",
+    "score": 48
+   },
+   {
+    "name": "Yanis",
+    "score": 41
+   },
+   {
+    "name": "Matteo",
+    "score": 29
+   }
+  ],
+  "extra": {
+   "lowWins": false,
+   "target": 40
+  }
+ },
+ {
+  "name": "fr",
+  "lang": "fr",
+  "lowWins": false,
+  "players": [
+   {
+    "name": "Tony",
+    "score": 48
+   },
+   {
+    "name": "Yanis",
+    "score": 41
+   },
+   {
+    "name": "Matteo",
+    "score": 29
+   }
+  ],
+  "extra": {
+   "lowWins": false,
+   "target": 40
+  }
+ },
+ {
+  "name": "it",
+  "lang": "it",
+  "lowWins": false,
+  "players": [
+   {
+    "name": "Tony",
+    "score": 48
+   },
+   {
+    "name": "Yanis",
+    "score": 41
+   },
+   {
+    "name": "Matteo",
+    "score": 29
+   }
+  ],
+  "extra": {
+   "lowWins": false,
+   "target": 40
+  }
+ },
+ {
+  "name": "es",
+  "lang": "es",
+  "lowWins": false,
+  "players": [
+   {
+    "name": "Tony",
+    "score": 48
+   },
+   {
+    "name": "Yanis",
+    "score": 41
+   },
+   {
+    "name": "Matteo",
+    "score": 29
+   }
+  ],
+  "extra": {
+   "lowWins": false,
+   "target": 40
+  }
+ },
+ {
+  "name": "pt",
+  "lang": "pt",
+  "lowWins": false,
+  "players": [
+   {
+    "name": "Tony",
+    "score": 48
+   },
+   {
+    "name": "Yanis",
+    "score": 41
+   },
+   {
+    "name": "Matteo",
+    "score": 29
+   }
+  ],
+  "extra": {
+   "lowWins": false,
+   "target": 40
+  }
+ },
+ {
+  "name": "ohne_extra",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 48
+   },
+   {
+    "name": "Yanis",
+    "score": 41
+   }
+  ]
+ }
+]

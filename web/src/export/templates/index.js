@@ -8,9 +8,10 @@ import schieber from "./schieber.js";
 import skyjo from "./skyjo.js";
 import flip7 from "./flip7.js";
 import tutto from "./tutto.js";
+import freeplay from "./freeplay.js";
 
 /* Jede Vorlage: { games:[gameId...], fonts:[CSS-Schriftangaben], texts?(d)->[String], accepts?(d)->bool, render(d, kit)->[canvas...] } */
-const TEMPLATES = [yatzy, schieber, skyjo, flip7, tutto];
+const TEMPLATES = [yatzy, schieber, skyjo, flip7, tutto, freeplay];
 
 const GT_TPL = {};
 TEMPLATES.forEach((tp) => tp.games.forEach((g) => { GT_TPL[g] = tp; }));

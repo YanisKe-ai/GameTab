@@ -80,7 +80,7 @@ function page1(d, k, N, rowsData) {
   setI(c, 500, sf.size, F_FRAU); c.fillStyle = GOLD; c.fillText(sf.lines[0], 540, k.cssBase(c, 196, sf.size)); c.textAlign = "left";
   // Karte im verbleibenden Raum
   const top = 290, avail = rowsTop - 24 - top;
-  const s = Math.min(1, avail / 600);
+  const s = Math.min(1.25, avail / 600);
   const cy = top + avail / 2;
   STARS.forEach(([x, y, z, a]) => { if (y < rowsTop - 40) star(c, x, Math.min(y, top + avail - 20), z, GOLD, a); });
   const word = d.tr("tplWzCard", "Zauberer");

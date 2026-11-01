@@ -160,7 +160,29 @@ def flow_tabu(pg):
     R.wait(pg, 600)
 
 
-FLOWS = {"Yatzy 2": flow_yatzy2, "Yatzy 4 lang": flow_yatzy4, "Schieber": flow_schieber, "Wizard": flow_wizard, "Minigolf": flow_minigolf, "Phase 10": flow_phase10, "Rommé": flow_romme, "Differenzler": flow_differenzler, "Tabu": flow_tabu}
+DART_PL = [{"id": 1, "name": "Tony"}, {"id": 2, "name": "Zoë Ölçü"}, {"id": 3, "name": "Maximiliane Huber-Brunner"}]
+
+
+def flow_darts_x01(pg):
+    hist = [{"pid": 1, "darts": [{"l": "T20", "v": 60}, {"l": "D10", "v": 20}], "score": 80, "bust": False, "finish": False},
+            {"pid": 1, "darts": [{"l": "20", "v": 20}, {"l": "D10", "v": 20}], "score": 40, "bust": False, "finish": True}]
+    seeded(pg, ("Schreibunterlagen", "Darts", "STANDARD"), "darts", {"phase": "done", "players": DART_PL, "mode": 501, "inOut": "dido", "legsTarget": 1, "winner": 1,
+                                                                   "legsWon": {"1": 1, "2": 0, "3": 0}, "remaining": {"1": 40, "2": 141, "3": 237}, "opened": {"1": True, "2": True, "3": True}, "history": hist})
+
+
+def flow_darts_shanghai(pg):
+    seeded(pg, ("Schreibunterlagen", "Darts", "SHANGHAI"), "shanghai", {"phase": "done", "players": DART_PL, "winner": 1, "endReason": "shanghai", "scores": {"1": 25, "2": 80, "3": 12}, "currentRound": 3, "history": []})
+
+
+def flow_darts_hiscore(pg):
+    seeded(pg, ("Schreibunterlagen", "Darts", "HI SCORE"), "hiscore", {"phase": "done", "players": DART_PL, "winner": 1, "scores": {"1": 300, "2": 300, "3": 120}, "currentRound": 10, "history": []})
+
+
+def flow_darts_split(pg):
+    seeded(pg, ("Schreibunterlagen", "Darts", "SPLIT SCORE"), "splitscore", {"phase": "done", "players": DART_PL, "winner": 1, "scores": {"1": 55, "2": 30, "3": 12}, "currentRound": 9, "history": []})
+
+
+FLOWS = {"Yatzy 2": flow_yatzy2, "Yatzy 4 lang": flow_yatzy4, "Schieber": flow_schieber, "Wizard": flow_wizard, "Minigolf": flow_minigolf, "Phase 10": flow_phase10, "Rommé": flow_romme, "Differenzler": flow_differenzler, "Tabu": flow_tabu, "Darts X01": flow_darts_x01, "Darts Shanghai": flow_darts_shanghai, "Darts HiScore": flow_darts_hiscore, "Darts Split": flow_darts_split}
 
 
 def share_png(pg, tag):

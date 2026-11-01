@@ -11,9 +11,10 @@ import phase10 from "./phase10.js";
 import romme from "./romme.js";
 import differenzler from "./differenzler.js";
 import tabu from "./tabu.js";
+import darts from "./darts.js";
 
 /* Jede Vorlage: { games:[gameId...], fonts:[CSS-Schriftangaben], texts?(d)->[String], accepts?(d)->bool, render(d, kit)->[canvas...] } */
-const TEMPLATES = [yatzy, schieber, wizard, minigolf, phase10, romme, differenzler, tabu];
+const TEMPLATES = [yatzy, schieber, wizard, minigolf, phase10, romme, differenzler, tabu, darts];
 
 const GT_TPL = {};
 TEMPLATES.forEach((tp) => tp.games.forEach((g) => { GT_TPL[g] = tp; }));

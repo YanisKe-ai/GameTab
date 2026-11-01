@@ -4,7 +4,7 @@
 import { pickRows } from "./util.js";
 
 const LIME = "#D6F23A", SOFT = "#B9D9A8", INK = "#F2F4E0", TILE = "#F7F5E6", TILE_INK = "#0F3A1C", GOLD = "#FFD84A";
-const FIRST_CAP = 5;
+const FIRST_CAP = 10;
 const MONO = '"Space Grotesk","Inter","GT Clean","GT CJK",sans-serif';
 
 function bg(c, k) {
@@ -47,14 +47,15 @@ function stamp(c, k, lines, rightX, top) {
 }
 /* Zeilen: Rang, Name, Kacheln mit den Schlaegen, Abstand */
 function rows(c, k, d, list, gap, top, n) {
-  const sz = (r) => r.winner ? { th: n <= 3 ? 138 : n === 4 ? 110 : 96, nm: n <= 3 ? 96 : n === 4 ? 78 : 66 } : { th: n <= 3 ? 100 : n === 4 ? 64 : 52, nm: n <= 3 ? 64 : n === 4 ? 50 : 44 };
+  const sz = (r) => r.winner ? (n <= 2 ? { th: 190, nm: 120 } : n <= 3 ? { th: 138, nm: 96 } : n === 4 ? { th: 110, nm: 78 } : n <= 6 ? { th: 84, nm: 60 } : { th: 66, nm: 50 }) : (n <= 2 ? { th: 140, nm: 84 } : n <= 3 ? { th: 100, nm: 64 } : n === 4 ? { th: 64, nm: 50 } : n === 5 ? { th: 52, nm: 44 } : n <= 7 ? { th: 42, nm: 36 } : n === 8 ? { th: 38, nm: 34 } : { th: 32, nm: 30 });
+  const ov = n <= 5 ? 29 : 17;
   let y = top;
   list.forEach((r) => {
     const s = sz(r), digits = Array.from(String(r.value).replace(/[^0-9]/g, "")), nd = digits.length || 1;
     const tw = Math.round(s.th * (nd >= 3 ? 0.58 : 0.72)), tg = 8;
-    const prW = r.winner ? 140 : 120, rowH = s.th + 14 + 12 + 3;
+    const prW = r.winner ? 140 : 120, rowH = s.th + ov;
     c.fillStyle = "rgba(214,242,58,0.33)"; c.fillRect(100, y, 880, 3);
-    const ty = y + 3 + 14;
+    const ty = y + 3 + (n <= 5 ? 14 : 7);
     // Kacheln
     const tilesW = nd * tw + (nd - 1) * tg, tx = 980 - prW - 30 - tilesW;
     digits.forEach((ch, i) => tile(c, k, tx + i * (tw + tg), ty, tw, s.th, ch));
@@ -112,7 +113,14 @@ function page1(d, k, extras, rowsList, pageNo, pageCount) {
   if (aces.length && pageNo === 1) {
     const a0 = aces[0];
     const l2 = a0.name + ", " + d.tr("tplMgHole", (l) => l)(a0.holes.join(", ")) + (aces.length > 1 ? " +" + (aces.length - 1) : "");
-    stamp(c, k, [d.up(d.tr("tplMgAce", "Hole in one")), l2], 810, Math.min(Math.max(endY + 6, 870), 985 - 100));
+    if (endY > 872) {
+      // viele Spieler: kleine Marke neben der Beschriftung statt gedrehtem Stempel
+      const txt = d.up(d.tr("tplMgAce", "Hole in one")) + ": " + l2;
+      const bf = k.fit(c, txt, { w: 400, fam: k.F_ANTON, max: 24, min: 14, maxW: 480, lines: 1 });
+      k.setFont(c, 400, bf.size, k.F_ANTON); const bw = c.measureText(bf.lines[0]).width + 28;
+      c.strokeStyle = GOLD; c.lineWidth = 3; k.rrect(c, 980 - bw, gt - 52, bw, 38, 10); c.stroke();
+      c.fillStyle = GOLD; c.textAlign = "center"; c.fillText(bf.lines[0], 980 - bw / 2, gt - 52 + 19 + k.capH(c) / 2); c.textAlign = "left";
+    } else stamp(c, k, [d.up(d.tr("tplMgAce", "Hole in one")), l2], 810, Math.min(Math.max(endY + 6, 870), 985 - 100));
   }
   // Fusszeile
   const win = d.winners, val = win.length ? d.num(win[0].score) : "";

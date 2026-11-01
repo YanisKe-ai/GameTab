@@ -1,0 +1,766 @@
+[
+ {
+  "name": "x01_entwurf",
+  "lang": "de",
+  "gameId": "darts",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 1
+   },
+   {
+    "name": "Yanis",
+    "score": 0
+   },
+   {
+    "name": "Matteo",
+    "score": 0
+   }
+  ],
+  "extra": {
+   "name": "Darts",
+   "sub": [
+    "501, Double In/Out",
+    "Legs zum Sieg: 1"
+   ],
+   "rows": [
+    {
+     "name": "Tony",
+     "rest": 0
+    },
+    {
+     "name": "Yanis",
+     "rest": 141
+    },
+    {
+     "name": "Matteo",
+     "rest": 237
+    }
+   ],
+   "checkout": {
+    "total": 40,
+    "label": "D20"
+   }
+  }
+ },
+ {
+  "name": "x01_zwei_3legs",
+  "lang": "en",
+  "gameId": "darts",
+  "players": [
+   {
+    "name": "Lea",
+    "score": 3
+   },
+   {
+    "name": "Noah",
+    "score": 1
+   }
+  ],
+  "extra": {
+   "name": "Darts",
+   "sub": [
+    "301, Single In/Out",
+    "Legs to win: 3"
+   ],
+   "rows": [
+    {
+     "name": "Lea",
+     "rest": 0
+    },
+    {
+     "name": "Noah",
+     "rest": 56
+    }
+   ],
+   "checkout": {
+    "total": 56,
+    "label": "D28"
+   }
+  }
+ },
+ {
+  "name": "x01_acht",
+  "lang": "fr",
+  "gameId": "darts",
+  "players": [
+   {
+    "name": "Anna",
+    "score": 3
+   },
+   {
+    "name": "Ben",
+    "score": 2
+   },
+   {
+    "name": "Cora",
+    "score": 2
+   },
+   {
+    "name": "Dino",
+    "score": 1
+   },
+   {
+    "name": "Eva",
+    "score": 1
+   },
+   {
+    "name": "Finn",
+    "score": 0
+   },
+   {
+    "name": "Gina",
+    "score": 0
+   },
+   {
+    "name": "Hugo",
+    "score": 0
+   }
+  ],
+  "extra": {
+   "name": "Darts",
+   "sub": [
+    "501, Double In/Out",
+    "Legs zum Sieg: 3"
+   ],
+   "rows": [
+    {
+     "name": "Anna",
+     "rest": 0
+    },
+    {
+     "name": "Ben",
+     "rest": 120
+    },
+    {
+     "name": "Cora",
+     "rest": 60
+    },
+    {
+     "name": "Dino",
+     "rest": 301
+    },
+    {
+     "name": "Eva",
+     "rest": 12
+    },
+    {
+     "name": "Finn",
+     "rest": 200
+    },
+    {
+     "name": "Gina",
+     "rest": 98
+    },
+    {
+     "name": "Hugo",
+     "rest": 501
+    }
+   ],
+   "checkout": {
+    "total": 40,
+    "label": "D20"
+   }
+  }
+ },
+ {
+  "name": "x01_lange_namen",
+  "lang": "it",
+  "gameId": "darts",
+  "players": [
+   {
+    "name": "Maximiliane Huber-Brunner von und zu Hohenstein-Wildenburg",
+    "score": 2
+   },
+   {
+    "name": "Zoë Ölçü-Çağlayan",
+    "score": 1
+   },
+   {
+    "name": "Kim",
+    "score": 0
+   }
+  ],
+  "extra": {
+   "name": "Darts",
+   "sub": [
+    "501, Double In/Out",
+    "Legs zum Sieg: 2"
+   ],
+   "rows": [
+    {
+     "name": "Maximiliane Huber-Brunner von und zu Hohenstein-Wildenburg",
+     "rest": 0
+    },
+    {
+     "name": "Zoë Ölçü-Çağlayan",
+     "rest": 32
+    },
+    {
+     "name": "Kim",
+     "rest": 180
+    }
+   ],
+   "checkout": {
+    "total": 40,
+    "label": "D20"
+   }
+  }
+ },
+ {
+  "name": "x01_cjk",
+  "lang": "de",
+  "gameId": "darts",
+  "players": [
+   {
+    "name": "田中太郎",
+    "score": 1
+   },
+   {
+    "name": "李小龍",
+    "score": 0
+   },
+   {
+    "name": "김민준",
+    "score": 0
+   }
+  ],
+  "extra": {
+   "name": "Darts",
+   "sub": [
+    "501, Double In/Out",
+    "Legs zum Sieg: 1"
+   ],
+   "rows": [
+    {
+     "name": "田中太郎",
+     "rest": 0
+    },
+    {
+     "name": "李小龍",
+     "rest": 77
+    },
+    {
+     "name": "김민준",
+     "rest": 150
+    }
+   ],
+   "checkout": {
+    "total": 40,
+    "label": "D20"
+   }
+  }
+ },
+ {
+  "name": "x01_neun",
+  "lang": "de",
+  "gameId": "darts",
+  "players": [
+   {
+    "name": "Spieler 0",
+    "score": 3
+   },
+   {
+    "name": "Spieler 1",
+    "score": 3
+   },
+   {
+    "name": "Spieler 2",
+    "score": 3
+   },
+   {
+    "name": "Spieler 3",
+    "score": 2
+   },
+   {
+    "name": "Spieler 4",
+    "score": 2
+   },
+   {
+    "name": "Spieler 5",
+    "score": 2
+   },
+   {
+    "name": "Spieler 6",
+    "score": 1
+   },
+   {
+    "name": "Spieler 7",
+    "score": 1
+   },
+   {
+    "name": "Spieler 8",
+    "score": 1
+   }
+  ],
+  "extra": {
+   "name": "Darts",
+   "sub": [
+    "501, Double In/Out",
+    "Legs zum Sieg: 3"
+   ],
+   "rows": [
+    {
+     "name": "Spieler 0",
+     "rest": 0
+    },
+    {
+     "name": "Spieler 1",
+     "rest": 120
+    },
+    {
+     "name": "Spieler 2",
+     "rest": 140
+    },
+    {
+     "name": "Spieler 3",
+     "rest": 160
+    },
+    {
+     "name": "Spieler 4",
+     "rest": 180
+    },
+    {
+     "name": "Spieler 5",
+     "rest": 200
+    },
+    {
+     "name": "Spieler 6",
+     "rest": 220
+    },
+    {
+     "name": "Spieler 7",
+     "rest": 240
+    },
+    {
+     "name": "Spieler 8",
+     "rest": 260
+    }
+   ],
+   "checkout": {
+    "total": 40,
+    "label": "D20"
+   }
+  }
+ },
+ {
+  "name": "x01_zehn_lang",
+  "lang": "en",
+  "gameId": "darts",
+  "players": [
+   {
+    "name": "Maximiliane Huber-Brunner von und zu Hohenstein-Wildenburg",
+    "score": 3
+   },
+   {
+    "name": "Player 1",
+    "score": 1
+   },
+   {
+    "name": "Player 2",
+    "score": 1
+   },
+   {
+    "name": "Player 3",
+    "score": 1
+   },
+   {
+    "name": "Player 4",
+    "score": 1
+   },
+   {
+    "name": "Player 5",
+    "score": 1
+   },
+   {
+    "name": "Player 6",
+    "score": 1
+   },
+   {
+    "name": "Player 7",
+    "score": 1
+   },
+   {
+    "name": "Player 8",
+    "score": 1
+   },
+   {
+    "name": "Player 9",
+    "score": 1
+   }
+  ],
+  "extra": {
+   "name": "Darts",
+   "sub": [
+    "501, Double In/Out",
+    "Legs zum Sieg: 3"
+   ],
+   "rows": [
+    {
+     "name": "Maximiliane Huber-Brunner von und zu Hohenstein-Wildenburg",
+     "rest": 0
+    },
+    {
+     "name": "Player 1",
+     "rest": 50
+    },
+    {
+     "name": "Player 2",
+     "rest": 100
+    },
+    {
+     "name": "Player 3",
+     "rest": 150
+    },
+    {
+     "name": "Player 4",
+     "rest": 200
+    },
+    {
+     "name": "Player 5",
+     "rest": 250
+    },
+    {
+     "name": "Player 6",
+     "rest": 300
+    },
+    {
+     "name": "Player 7",
+     "rest": 350
+    },
+    {
+     "name": "Player 8",
+     "rest": 400
+    },
+    {
+     "name": "Player 9",
+     "rest": 450
+    }
+   ],
+   "checkout": {
+    "total": 40,
+    "label": "D20"
+   }
+  }
+ },
+ {
+  "name": "x01_ohne_checkout",
+  "lang": "es",
+  "gameId": "darts",
+  "players": [
+   {
+    "name": "Anna",
+    "score": 1
+   },
+   {
+    "name": "Ben",
+    "score": 0
+   }
+  ],
+  "extra": {
+   "name": "Darts",
+   "sub": [
+    "501, Double In/Out",
+    "Legs zum Sieg: 1"
+   ],
+   "rows": [
+    {
+     "name": "Anna",
+     "rest": 0
+    },
+    {
+     "name": "Ben",
+     "rest": 99
+    }
+   ]
+  }
+ },
+ {
+  "name": "x01_master",
+  "lang": "pt",
+  "gameId": "darts",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 2
+   },
+   {
+    "name": "Yanis",
+    "score": 0
+   }
+  ],
+  "extra": {
+   "name": "Darts",
+   "sub": [
+    "701, Master In/Out",
+    "Legs: 2"
+   ],
+   "rows": [
+    {
+     "name": "Tony",
+     "rest": 0
+    },
+    {
+     "name": "Yanis",
+     "rest": 17
+    }
+   ],
+   "checkout": {
+    "total": 60,
+    "label": "T20"
+   }
+  }
+ },
+ {
+  "name": "cricket_standard",
+  "lang": "de",
+  "gameId": "cricket",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 2
+   },
+   {
+    "name": "Yanis",
+    "score": 1
+   },
+   {
+    "name": "Matteo",
+    "score": 0
+   }
+  ],
+  "extra": {
+   "name": "Cricket",
+   "sub": [
+    "Legs zum Sieg: 2"
+   ]
+  }
+ },
+ {
+  "name": "cricket_cutthroat",
+  "lang": "en",
+  "gameId": "cricket",
+  "players": [
+   {
+    "name": "Anna",
+    "score": 3
+   },
+   {
+    "name": "Ben",
+    "score": 2
+   }
+  ],
+  "extra": {
+   "name": "Cut Throat",
+   "sub": [
+    "Legs to win: 3"
+   ]
+  }
+ },
+ {
+  "name": "cricket_masters_lang",
+  "lang": "fr",
+  "gameId": "cricket",
+  "players": [
+   {
+    "name": "Maximiliane Huber-Brunner von und zu Hohenstein-Wildenburg",
+    "score": 1
+   },
+   {
+    "name": "Zoë",
+    "score": 0
+   }
+  ],
+  "extra": {
+   "name": "Masters",
+   "sub": [
+    "Manches: 1"
+   ]
+  }
+ },
+ {
+  "name": "shanghai_punkte",
+  "lang": "de",
+  "gameId": "shanghai",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 142
+   },
+   {
+    "name": "Yanis",
+    "score": 120
+   },
+   {
+    "name": "Matteo",
+    "score": 88
+   }
+  ],
+  "extra": {
+   "name": "Shanghai",
+   "sub": []
+  }
+ },
+ {
+  "name": "shanghai_sieg",
+  "lang": "de",
+  "gameId": "shanghai",
+  "players": [
+   {
+    "name": "Yanis",
+    "score": 80
+   },
+   {
+    "name": "Tony",
+    "score": 25
+   },
+   {
+    "name": "Matteo",
+    "score": 12
+   }
+  ],
+  "extra": {
+   "name": "Shanghai",
+   "sub": []
+  },
+  "reason": "shanghai",
+  "winners": [
+   "Tony"
+  ]
+ },
+ {
+  "name": "shanghai_sieg_en",
+  "lang": "en",
+  "gameId": "shanghai",
+  "players": [
+   {
+    "name": "Yanis",
+    "score": 80
+   },
+   {
+    "name": "Tony",
+    "score": 25
+   }
+  ],
+  "extra": {
+   "name": "Shanghai",
+   "sub": []
+  },
+  "reason": "shanghai",
+  "winners": [
+   "Tony"
+  ]
+ },
+ {
+  "name": "hiscore_gleichstand",
+  "lang": "it",
+  "gameId": "hiscore",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 300
+   },
+   {
+    "name": "Yanis",
+    "score": 300
+   },
+   {
+    "name": "Matteo",
+    "score": 120
+   }
+  ],
+  "extra": {
+   "name": "Hi Score",
+   "sub": []
+  },
+  "labelKey": "gameDarts"
+ },
+ {
+  "name": "hiscore_acht",
+  "lang": "es",
+  "gameId": "hiscore",
+  "players": [
+   {
+    "name": "A",
+    "score": 400
+   },
+   {
+    "name": "B",
+    "score": 380
+   },
+   {
+    "name": "C",
+    "score": 350
+   },
+   {
+    "name": "D",
+    "score": 300
+   },
+   {
+    "name": "E",
+    "score": 280
+   },
+   {
+    "name": "F",
+    "score": 200
+   },
+   {
+    "name": "G",
+    "score": 150
+   },
+   {
+    "name": "H",
+    "score": 90
+   }
+  ],
+  "extra": {
+   "name": "Hi Score",
+   "sub": []
+  },
+  "labelKey": "gameDarts"
+ },
+ {
+  "name": "splitscore",
+  "lang": "pt",
+  "gameId": "splitscore",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 55
+   },
+   {
+    "name": "Yanis",
+    "score": 30
+   },
+   {
+    "name": "Matteo",
+    "score": 12
+   }
+  ],
+  "extra": {
+   "name": "Split Score",
+   "sub": []
+  },
+  "labelKey": "gameDarts"
+ },
+ {
+  "name": "splitscore_lang",
+  "lang": "de",
+  "gameId": "splitscore",
+  "players": [
+   {
+    "name": "Maximiliane Huber-Brunner von und zu Hohenstein-Wildenburg",
+    "score": 55
+   },
+   {
+    "name": "Alexandrine-Marie Schmidt",
+    "score": 30
+   }
+  ],
+  "extra": {
+   "name": "Split Score",
+   "sub": []
+  },
+  "labelKey": "gameDarts"
+ }
+]

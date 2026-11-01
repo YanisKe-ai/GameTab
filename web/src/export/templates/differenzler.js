@@ -40,7 +40,7 @@ function head(c, k, d, title) {
 }
 function layoutRows(c, k, d, pts, hasPts, nameW, availH) {
   const n = d.rows.length;
-  const base = n <= 3 ? { w: [92, 60], v: [80, 54], df: [104, 68] } : { w: [70, 48], v: [60, 42], df: [80, 54] };
+  const base = n <= 2 ? { w: [112, 84], v: [96, 72], df: [124, 92] } : n <= 3 ? { w: [92, 60], v: [80, 54], df: [104, 68] } : { w: [70, 48], v: [60, 42], df: [80, 54] };
   for (let s = 1; s >= 0.55; s -= 0.05) {
     const L = d.rows.map((r, i) => {
       const w = r.winner ? 0 : 1, nsz = base.w[w] * s, vs = base.v[w] * s, ds = base.df[w] * s;
@@ -72,8 +72,9 @@ function page1(d, k, extras, title) {
   // Tabelle
   const hasPts = extras.some((e) => e && e.points != null);
   const big = d.rows.length <= 3;
-  k.setFont(c, 700, big ? 104 : 80, F_FRAU); const dw = Math.max(...d.rows.map((r) => c.measureText(signed(d, r.score != null ? r.score : 0)).width));
-  k.setFont(c, 700, big ? 80 : 60, F_FRAU); const pw = hasPts ? Math.max(...extras.map((e) => (e && e.points != null ? c.measureText(d.num(e.points)).width : 0))) : 0;
+  const huge = d.rows.length <= 2;
+  k.setFont(c, 700, huge ? 124 : big ? 104 : 80, F_FRAU); const dw = Math.max(...d.rows.map((r) => c.measureText(signed(d, r.score != null ? r.score : 0)).width));
+  k.setFont(c, 700, huge ? 96 : big ? 80 : 60, F_FRAU); const pw = hasPts ? Math.max(...extras.map((e) => (e && e.points != null ? c.measureText(d.num(e.points)).width : 0))) : 0;
   const colD = Math.min(400, Math.max(170, dw + 30)), colP = hasPts ? Math.min(330, Math.max(150, pw + 30)) : 0, nameW = 880 - colD - colP - 20;
   const top = 800;
   const L = layoutRows(c, k, d, extras.map((e) => (e && e.points != null ? e.points : null)), hasPts, nameW, 1205 - top - 44);

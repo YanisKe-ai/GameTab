@@ -5,12 +5,13 @@ import { GT_EC_TPL } from "../result-card.js";
 import * as kit from "./kit.js";
 import yatzy from "./yatzy.js";
 import schieber from "./schieber.js";
+import verraeter from "./verraeter.js";
 import mafia from "./mafia.js";
 import werwolf from "./werwolf.js";
 import impostor from "./impostor.js";
 
 /* Jede Vorlage: { games:[gameId...], fonts:[CSS-Schriftangaben], texts?(d)->[String], accepts?(d)->bool, render(d, kit)->[canvas...] } */
-const TEMPLATES = [yatzy, schieber, impostor, werwolf, mafia];
+const TEMPLATES = [yatzy, schieber, impostor, werwolf, mafia, verraeter];
 
 const GT_TPL = {};
 TEMPLATES.forEach((tp) => tp.games.forEach((g) => { GT_TPL[g] = tp; }));

@@ -1,0 +1,358 @@
+[
+ {
+  "name": "entwurf",
+  "lang": "de",
+  "labelKey": "gameMostLikely",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 2
+   },
+   {
+    "name": "Yanis",
+    "score": 5
+   },
+   {
+    "name": "Matteo",
+    "score": 1
+   }
+  ]
+ },
+ {
+  "name": "tie2",
+  "lang": "en",
+  "labelKey": "gameMostLikely",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 4
+   },
+   {
+    "name": "Yanis",
+    "score": 4
+   },
+   {
+    "name": "Matteo",
+    "score": 1
+   },
+   {
+    "name": "Maximiliane Huber-Brunner",
+    "score": 0
+   }
+  ]
+ },
+ {
+  "name": "tie3_fr",
+  "lang": "fr",
+  "labelKey": "gameMostLikely",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 3
+   },
+   {
+    "name": "Yanis",
+    "score": 3
+   },
+   {
+    "name": "Matteo",
+    "score": 3
+   }
+  ]
+ },
+ {
+  "name": "n6",
+  "lang": "it",
+  "labelKey": "gameMostLikely",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 7
+   },
+   {
+    "name": "Yanis",
+    "score": 3
+   },
+   {
+    "name": "Matteo",
+    "score": 3
+   },
+   {
+    "name": "Maximiliane Huber-Brunner",
+    "score": 2
+   },
+   {
+    "name": "Zoë",
+    "score": 1
+   },
+   {
+    "name": "Ölçü",
+    "score": 0
+   }
+  ]
+ },
+ {
+  "name": "n10",
+  "lang": "es",
+  "labelKey": "gameMostLikely",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 9
+   },
+   {
+    "name": "Yanis",
+    "score": 8
+   },
+   {
+    "name": "Matteo",
+    "score": 7
+   },
+   {
+    "name": "Maximiliane Huber-Brunner",
+    "score": 6
+   },
+   {
+    "name": "Zoë",
+    "score": 5
+   },
+   {
+    "name": "Ölçü",
+    "score": 4
+   },
+   {
+    "name": "Kim",
+    "score": 3
+   },
+   {
+    "name": "Lea",
+    "score": 2
+   },
+   {
+    "name": "Noah",
+    "score": 1
+   },
+   {
+    "name": "Aurélien",
+    "score": 0
+   }
+  ]
+ },
+ {
+  "name": "n14_pages",
+  "lang": "pt",
+  "labelKey": "gameMostLikely",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 14
+   },
+   {
+    "name": "Yanis",
+    "score": 13
+   },
+   {
+    "name": "Matteo",
+    "score": 12
+   },
+   {
+    "name": "Maximiliane Huber-Brunner",
+    "score": 11
+   },
+   {
+    "name": "Zoë",
+    "score": 10
+   },
+   {
+    "name": "Ölçü",
+    "score": 9
+   },
+   {
+    "name": "Kim",
+    "score": 8
+   },
+   {
+    "name": "Lea",
+    "score": 7
+   },
+   {
+    "name": "Noah",
+    "score": 6
+   },
+   {
+    "name": "Aurélien",
+    "score": 5
+   },
+   {
+    "name": "Sofia",
+    "score": 4
+   },
+   {
+    "name": "Jonas",
+    "score": 3
+   },
+   {
+    "name": "Chiara",
+    "score": 2
+   },
+   {
+    "name": "Dominik",
+    "score": 1
+   }
+  ],
+  "pages": 2
+ },
+ {
+  "name": "n22_pages",
+  "lang": "de",
+  "labelKey": "gameMostLikely",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 3
+   },
+   {
+    "name": "Yanis",
+    "score": 3
+   },
+   {
+    "name": "Matteo",
+    "score": 3
+   },
+   {
+    "name": "Maximiliane Huber-Brunner",
+    "score": 3
+   },
+   {
+    "name": "Zoë",
+    "score": 3
+   },
+   {
+    "name": "Ölçü",
+    "score": 2
+   },
+   {
+    "name": "Kim",
+    "score": 2
+   },
+   {
+    "name": "Lea",
+    "score": 2
+   },
+   {
+    "name": "Noah",
+    "score": 2
+   },
+   {
+    "name": "Aurélien",
+    "score": 2
+   },
+   {
+    "name": "Sofia",
+    "score": 2
+   },
+   {
+    "name": "Jonas",
+    "score": 2
+   },
+   {
+    "name": "Chiara",
+    "score": 2
+   },
+   {
+    "name": "Dominik",
+    "score": 1
+   },
+   {
+    "name": "Ida",
+    "score": 1
+   },
+   {
+    "name": "Emil",
+    "score": 1
+   },
+   {
+    "name": "Mira",
+    "score": 1
+   },
+   {
+    "name": "Finn",
+    "score": 1
+   },
+   {
+    "name": "Anna",
+    "score": 1
+   },
+   {
+    "name": "Ben",
+    "score": 0
+   },
+   {
+    "name": "Carl",
+    "score": 0
+   },
+   {
+    "name": "Dora",
+    "score": 0
+   }
+  ],
+  "pages": 3
+ },
+ {
+  "name": "long",
+  "lang": "de",
+  "labelKey": "gameMostLikely",
+  "players": [
+   {
+    "name": "Maximiliane Huber-Brunner von Hohenstein",
+    "score": 6
+   },
+   {
+    "name": "Dominik Vierhundertsechsundvierzig",
+    "score": 3
+   },
+   {
+    "name": "Ölçü",
+    "score": 2
+   }
+  ]
+ },
+ {
+  "name": "cjk",
+  "lang": "de",
+  "labelKey": "gameMostLikely",
+  "players": [
+   {
+    "name": "李小龍",
+    "score": 5
+   },
+   {
+    "name": "鈴木一郎",
+    "score": 2
+   },
+   {
+    "name": "김민준",
+    "score": 1
+   }
+  ]
+ },
+ {
+  "name": "onevote",
+  "lang": "en",
+  "labelKey": "gameMostLikely",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 1
+   },
+   {
+    "name": "Yanis",
+    "score": 0
+   },
+   {
+    "name": "Matteo",
+    "score": 0
+   }
+  ]
+ }
+]

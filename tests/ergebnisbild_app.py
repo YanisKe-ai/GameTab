@@ -76,7 +76,98 @@ def flow_schieber(pg):
         R.click(pg, R.btn_re(pg, "Punkte eintragen").last, 1500)
 
 
-FLOWS = {"Yatzy 2": flow_yatzy2, "Yatzy 4 lang": flow_yatzy4, "Schieber": flow_schieber}
+def fill_names(pg, names):
+    """Spielernamen in der Einrichtung setzen (Felder 'Spieler N' / 'Team N')."""
+    R.set_players(pg, len(names))
+    inp = [i for i in pg.locator("input").all() if re.match(r"^(Spieler|Team)", i.input_value() or i.get_attribute("placeholder") or "")]
+    for i, el in enumerate(inp[: len(names)]):
+        el.fill(names[i]); R.wait(pg, 150)
+
+
+def flow_skyjo(pg):
+    names = ["Maximiliane Huber-Brunner", "Zoë", "Ölçü"]
+    R.open_game(pg, "Schreibunterlagen", "Skyjo"); fill_names(pg, names); R.press_start(pg)
+    for sc in ([5, 20, 31], [3, 120, 44]):
+        for nm, v in zip(names, sc):
+            R.numpad(pg, nm, v)
+        R.click(pg, R.btn(pg, names[0])); R.click(pg, R.btn(pg, "Runde speichern"), 900)
+    R.expect_text(pg, r"gewinnt", "Skyjo: Sieger nicht angezeigt")
+
+
+def flow_flip7(pg):
+    names = ["Zoë", "Maximiliane Huber-Brunner", "Kim"]
+    R.open_game(pg, "Schreibunterlagen", "Flip 7"); fill_names(pg, names); R.press_start(pg)
+    for sc in ([60, 40, 20], [70, 30, 10], [85, 90, 50]):
+        for nm, v in zip(names, sc):
+            R.numpad(pg, nm, v)
+        R.click(pg, R.btn(pg, "Runde speichern"), 900)
+    R.expect_text(pg, r"gewinnt", "Flip 7: Sieger nicht angezeigt")
+
+
+def flow_tutto(pg):
+    names = ["Zoë", "Maximiliane Huber-Brunner", "Kim"]
+    R.open_game(pg, "Schreibunterlagen", "Tutto"); fill_names(pg, names); R.press_start(pg)
+    pg.get_by_placeholder("Punkte").first.fill("3500"); pg.keyboard.press("Enter"); R.wait(pg, 700)
+    pg.get_by_placeholder("Punkte").nth(1).fill("2250"); pg.keyboard.press("Enter"); R.wait(pg, 700)
+    pg.get_by_placeholder("Punkte").first.fill("3000"); pg.keyboard.press("Enter"); R.wait(pg, 900)
+    R.expect_text(pg, r"gewinnt", "Tutto: Sieger nicht angezeigt")
+
+
+def flow_freeplay(pg):
+    R.open_game(pg, "Schreibunterlagen", "Freies Spiel")
+    pg.get_by_placeholder("offen").fill("20"); R.wait(pg, 400)
+    R.click(pg, R.btn(pg, "25").first, 900)
+    R.expect_text(pg, r"gewinnt", "Freies Spiel: Sieger nicht angezeigt")
+
+
+CUR = {"eng": "chromium"}
+
+
+def advance_t(pg, ms):
+    """Zeit vorspulen. WebKit: die Fake-Uhr greift in der App nicht, dort wird echt gewartet."""
+    if CUR["eng"] == "webkit":
+        pg.wait_for_timeout(ms)
+    else:
+        pg.clock.run_for(ms)
+    R.wait(pg, 600)
+
+
+def flow_headsup(pg):
+    pg.clock.install()
+    names = ["Zoë", "Maximiliane Huber-Brunner", "Kim"]
+    R.open_game(pg, "Partyspiele", "HeadsUp"); fill_names(pg, names)
+    R.click(pg, R.btn(pg, "30s")); R.press_start(pg)
+    rights = [4, 2, 1]
+    for rnd in range(6):
+        t = R.body(pg)
+        if re.search(r"ERGEBNIS", t) and R.btn(pg, "Revanche").count():
+            break
+        R.click(pg, R.btn_re(pg, "Bereit"), 600)
+        pg.set_viewport_size({"width": 852, "height": 393}); R.wait(pg)
+        for _ in range(rights[rnd % 3]):
+            R.click(pg, R.btn_re(pg, "Richtig"), 350)
+        advance_t(pg, 32000)
+        pg.set_viewport_size({"width": 393, "height": 852}); R.wait(pg)
+        R.click(pg, R.btn_re(pg, "Verstanden"), 700)
+    R.check(R.btn(pg, "Revanche").count() > 0, "HeadsUp: Spiel endet nicht")
+
+
+def flow_fivesec(pg):
+    names = ["Zoë", "Maximiliane Huber-Brunner", "Kim"]
+    R.open_game(pg, "Partyspiele", "5 Sekunden"); fill_names(pg, names); R.press_start(pg)
+    for ok in [True, True, False, True, False, True, True, True, False]:
+        R.click(pg, R.btn(pg, "Kategorie aufdecken"), 700)
+        R.click(pg, R.btn_re(pg, "Geschafft" if ok else "Nicht geschafft"), 700)
+        nxt = R.btn_re(pg, "Nächste Kategorie")
+        if nxt.count():
+            R.click(pg, nxt, 500)
+    R.click(pg, R.btn(pg, "Spiel beenden").last, 600)
+    conf = R.btn_re(pg, "Wirklich beenden")
+    if conf.count():
+        R.click(pg, conf.last, 900)
+
+
+FLOWS = {"Yatzy 2": flow_yatzy2, "Yatzy 4 lang": flow_yatzy4, "Schieber": flow_schieber, "Skyjo": flow_skyjo, "Flip 7": flow_flip7, "Tutto": flow_tutto, "Freies Spiel": flow_freeplay, "HeadsUp": flow_headsup, "5 Sekunden": flow_fivesec}
 
 
 def share_png(pg, tag):
@@ -105,6 +196,7 @@ def main():
     with sync_playwright() as p:
         for eng in ENG:
             b = launch(p, eng)
+            CUR["eng"] = eng
             for name, fn in FLOWS.items():
                 if ONLY and not any(o.lower() in name.lower() for o in ONLY):
                     continue

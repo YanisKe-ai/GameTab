@@ -1,0 +1,960 @@
+[
+ {
+  "name": "min6_mafia",
+  "lang": "de",
+  "labelKey": "gameMafia",
+  "players": [
+   {
+    "name": "Tony",
+    "score": null
+   },
+   {
+    "name": "Yanis",
+    "score": null
+   },
+   {
+    "name": "Matteo",
+    "score": null
+   },
+   {
+    "name": "Maximiliane Huber-Brunner",
+    "score": null
+   },
+   {
+    "name": "Zoë",
+    "score": null
+   },
+   {
+    "name": "Ölçü",
+    "score": null
+   }
+  ],
+  "extra": {
+   "winner": "mafia",
+   "players": [
+    {
+     "name": "Tony",
+     "role": "Pate",
+     "team": "mafia",
+     "alive": true
+    },
+    {
+     "name": "Yanis",
+     "role": "Ermittler",
+     "team": "town",
+     "alive": false
+    },
+    {
+     "name": "Matteo",
+     "role": "Mafioso",
+     "team": "mafia",
+     "alive": true
+    },
+    {
+     "name": "Maximiliane Huber-Brunner",
+     "role": "Bürger",
+     "team": "town",
+     "alive": false
+    },
+    {
+     "name": "Zoë",
+     "role": "Selbstjustiz",
+     "team": "town",
+     "alive": true
+    },
+    {
+     "name": "Ölçü",
+     "role": "Bürger",
+     "team": "town",
+     "alive": false
+    }
+   ]
+  }
+ },
+ {
+  "name": "entwurf3",
+  "lang": "de",
+  "labelKey": "gameMafia",
+  "players": [
+   {
+    "name": "Tony",
+    "score": null
+   },
+   {
+    "name": "Yanis",
+    "score": null
+   },
+   {
+    "name": "Matteo",
+    "score": null
+   }
+  ],
+  "extra": {
+   "winner": "mafia",
+   "players": [
+    {
+     "name": "Tony",
+     "role": "Pate",
+     "team": "mafia",
+     "alive": true
+    },
+    {
+     "name": "Yanis",
+     "role": "Mafioso",
+     "team": "mafia",
+     "alive": true
+    },
+    {
+     "name": "Matteo",
+     "role": "Arzt",
+     "team": "town",
+     "alive": false
+    }
+   ]
+  }
+ },
+ {
+  "name": "n8_town",
+  "lang": "en",
+  "labelKey": "gameMafia",
+  "players": [
+   {
+    "name": "Tony",
+    "score": null
+   },
+   {
+    "name": "Yanis",
+    "score": null
+   },
+   {
+    "name": "Matteo",
+    "score": null
+   },
+   {
+    "name": "Maximiliane Huber-Brunner",
+    "score": null
+   },
+   {
+    "name": "Zoë",
+    "score": null
+   },
+   {
+    "name": "Ölçü",
+    "score": null
+   },
+   {
+    "name": "Kim",
+    "score": null
+   },
+   {
+    "name": "Lea",
+    "score": null
+   }
+  ],
+  "extra": {
+   "winner": "town",
+   "players": [
+    {
+     "name": "Tony",
+     "role": "Bürger",
+     "team": "town",
+     "alive": true
+    },
+    {
+     "name": "Yanis",
+     "role": "Ermittler",
+     "team": "town",
+     "alive": true
+    },
+    {
+     "name": "Matteo",
+     "role": "Pate",
+     "team": "mafia",
+     "alive": false
+    },
+    {
+     "name": "Maximiliane Huber-Brunner",
+     "role": "Bürger",
+     "team": "town",
+     "alive": true
+    },
+    {
+     "name": "Zoë",
+     "role": "Selbstjustiz",
+     "team": "town",
+     "alive": true
+    },
+    {
+     "name": "Ölçü",
+     "role": "Bürger",
+     "team": "town",
+     "alive": true
+    },
+    {
+     "name": "Kim",
+     "role": "Mafioso",
+     "team": "mafia",
+     "alive": false
+    },
+    {
+     "name": "Lea",
+     "role": "Arzt",
+     "team": "town",
+     "alive": false
+    }
+   ]
+  }
+ },
+ {
+  "name": "n10",
+  "lang": "fr",
+  "labelKey": "gameMafia",
+  "players": [
+   {
+    "name": "Tony",
+    "score": null
+   },
+   {
+    "name": "Yanis",
+    "score": null
+   },
+   {
+    "name": "Matteo",
+    "score": null
+   },
+   {
+    "name": "Maximiliane Huber-Brunner",
+    "score": null
+   },
+   {
+    "name": "Zoë",
+    "score": null
+   },
+   {
+    "name": "Ölçü",
+    "score": null
+   },
+   {
+    "name": "Kim",
+    "score": null
+   },
+   {
+    "name": "Lea",
+    "score": null
+   },
+   {
+    "name": "Noah",
+    "score": null
+   },
+   {
+    "name": "Aurélien",
+    "score": null
+   }
+  ],
+  "extra": {
+   "winner": "mafia",
+   "players": [
+    {
+     "name": "Tony",
+     "role": "Bürger",
+     "team": "town",
+     "alive": false
+    },
+    {
+     "name": "Yanis",
+     "role": "Pate",
+     "team": "mafia",
+     "alive": true
+    },
+    {
+     "name": "Matteo",
+     "role": "Arzt",
+     "team": "town",
+     "alive": false
+    },
+    {
+     "name": "Maximiliane Huber-Brunner",
+     "role": "Mafioso",
+     "team": "mafia",
+     "alive": true
+    },
+    {
+     "name": "Zoë",
+     "role": "Selbstjustiz",
+     "team": "town",
+     "alive": false
+    },
+    {
+     "name": "Ölçü",
+     "role": "Bürger",
+     "team": "town",
+     "alive": false
+    },
+    {
+     "name": "Kim",
+     "role": "Ermittler",
+     "team": "town",
+     "alive": true
+    },
+    {
+     "name": "Lea",
+     "role": "Mafioso",
+     "team": "mafia",
+     "alive": true
+    },
+    {
+     "name": "Noah",
+     "role": "Bürger",
+     "team": "town",
+     "alive": true
+    },
+    {
+     "name": "Aurélien",
+     "role": "Selbstjustiz",
+     "team": "town",
+     "alive": true
+    }
+   ]
+  }
+ },
+ {
+  "name": "n12",
+  "lang": "it",
+  "labelKey": "gameMafia",
+  "players": [
+   {
+    "name": "Tony",
+    "score": null
+   },
+   {
+    "name": "Yanis",
+    "score": null
+   },
+   {
+    "name": "Matteo",
+    "score": null
+   },
+   {
+    "name": "Maximiliane Huber-Brunner",
+    "score": null
+   },
+   {
+    "name": "Zoë",
+    "score": null
+   },
+   {
+    "name": "Ölçü",
+    "score": null
+   },
+   {
+    "name": "Kim",
+    "score": null
+   },
+   {
+    "name": "Lea",
+    "score": null
+   },
+   {
+    "name": "Noah",
+    "score": null
+   },
+   {
+    "name": "Aurélien",
+    "score": null
+   },
+   {
+    "name": "Sofia",
+    "score": null
+   },
+   {
+    "name": "Jonas",
+    "score": null
+   }
+  ],
+  "extra": {
+   "winner": "town",
+   "players": [
+    {
+     "name": "Tony",
+     "role": "Pate",
+     "team": "mafia",
+     "alive": false
+    },
+    {
+     "name": "Yanis",
+     "role": "Ermittler",
+     "team": "town",
+     "alive": false
+    },
+    {
+     "name": "Matteo",
+     "role": "Arzt",
+     "team": "town",
+     "alive": true
+    },
+    {
+     "name": "Maximiliane Huber-Brunner",
+     "role": "Bürger",
+     "team": "town",
+     "alive": true
+    },
+    {
+     "name": "Zoë",
+     "role": "Mafioso",
+     "team": "mafia",
+     "alive": false
+    },
+    {
+     "name": "Ölçü",
+     "role": "Bürger",
+     "team": "town",
+     "alive": true
+    },
+    {
+     "name": "Kim",
+     "role": "Ermittler",
+     "team": "town",
+     "alive": true
+    },
+    {
+     "name": "Lea",
+     "role": "Arzt",
+     "team": "town",
+     "alive": true
+    },
+    {
+     "name": "Noah",
+     "role": "Bürger",
+     "team": "town",
+     "alive": true
+    },
+    {
+     "name": "Aurélien",
+     "role": "Mafioso",
+     "team": "mafia",
+     "alive": false
+    },
+    {
+     "name": "Sofia",
+     "role": "Bürger",
+     "team": "town",
+     "alive": true
+    },
+    {
+     "name": "Jonas",
+     "role": "Ermittler",
+     "team": "town",
+     "alive": true
+    }
+   ]
+  }
+ },
+ {
+  "name": "n15",
+  "lang": "es",
+  "labelKey": "gameMafia",
+  "players": [
+   {
+    "name": "Tony",
+    "score": null
+   },
+   {
+    "name": "Yanis",
+    "score": null
+   },
+   {
+    "name": "Matteo",
+    "score": null
+   },
+   {
+    "name": "Maximiliane Huber-Brunner",
+    "score": null
+   },
+   {
+    "name": "Zoë",
+    "score": null
+   },
+   {
+    "name": "Ölçü",
+    "score": null
+   },
+   {
+    "name": "Kim",
+    "score": null
+   },
+   {
+    "name": "Lea",
+    "score": null
+   },
+   {
+    "name": "Noah",
+    "score": null
+   },
+   {
+    "name": "Aurélien",
+    "score": null
+   },
+   {
+    "name": "Sofia",
+    "score": null
+   },
+   {
+    "name": "Jonas",
+    "score": null
+   },
+   {
+    "name": "Chiara",
+    "score": null
+   },
+   {
+    "name": "Dominik",
+    "score": null
+   },
+   {
+    "name": "Ida",
+    "score": null
+   }
+  ],
+  "extra": {
+   "winner": "mafia",
+   "players": [
+    {
+     "name": "Tony",
+     "role": "Bürger",
+     "team": "town",
+     "alive": false
+    },
+    {
+     "name": "Yanis",
+     "role": "Ermittler",
+     "team": "town",
+     "alive": false
+    },
+    {
+     "name": "Matteo",
+     "role": "Pate",
+     "team": "mafia",
+     "alive": true
+    },
+    {
+     "name": "Maximiliane Huber-Brunner",
+     "role": "Bürger",
+     "team": "town",
+     "alive": false
+    },
+    {
+     "name": "Zoë",
+     "role": "Selbstjustiz",
+     "team": "town",
+     "alive": false
+    },
+    {
+     "name": "Ölçü",
+     "role": "Mafioso",
+     "team": "mafia",
+     "alive": true
+    },
+    {
+     "name": "Kim",
+     "role": "Ermittler",
+     "team": "town",
+     "alive": false
+    },
+    {
+     "name": "Lea",
+     "role": "Arzt",
+     "team": "town",
+     "alive": true
+    },
+    {
+     "name": "Noah",
+     "role": "Mafioso",
+     "team": "mafia",
+     "alive": true
+    },
+    {
+     "name": "Aurélien",
+     "role": "Selbstjustiz",
+     "team": "town",
+     "alive": true
+    },
+    {
+     "name": "Sofia",
+     "role": "Bürger",
+     "team": "town",
+     "alive": true
+    },
+    {
+     "name": "Jonas",
+     "role": "Mafioso",
+     "team": "mafia",
+     "alive": true
+    },
+    {
+     "name": "Chiara",
+     "role": "Arzt",
+     "team": "town",
+     "alive": true
+    },
+    {
+     "name": "Dominik",
+     "role": "Bürger",
+     "team": "town",
+     "alive": true
+    },
+    {
+     "name": "Ida",
+     "role": "Selbstjustiz",
+     "team": "town",
+     "alive": true
+    }
+   ]
+  }
+ },
+ {
+  "name": "max18",
+  "lang": "pt",
+  "labelKey": "gameMafia",
+  "players": [
+   {
+    "name": "Tony",
+    "score": null
+   },
+   {
+    "name": "Yanis",
+    "score": null
+   },
+   {
+    "name": "Matteo",
+    "score": null
+   },
+   {
+    "name": "Maximiliane Huber-Brunner",
+    "score": null
+   },
+   {
+    "name": "Zoë",
+    "score": null
+   },
+   {
+    "name": "Ölçü",
+    "score": null
+   },
+   {
+    "name": "Kim",
+    "score": null
+   },
+   {
+    "name": "Lea",
+    "score": null
+   },
+   {
+    "name": "Noah",
+    "score": null
+   },
+   {
+    "name": "Aurélien",
+    "score": null
+   },
+   {
+    "name": "Sofia",
+    "score": null
+   },
+   {
+    "name": "Jonas",
+    "score": null
+   },
+   {
+    "name": "Chiara",
+    "score": null
+   },
+   {
+    "name": "Dominik",
+    "score": null
+   },
+   {
+    "name": "Ida",
+    "score": null
+   },
+   {
+    "name": "Emil",
+    "score": null
+   },
+   {
+    "name": "Mira",
+    "score": null
+   },
+   {
+    "name": "Finn",
+    "score": null
+   }
+  ],
+  "extra": {
+   "winner": "town",
+   "players": [
+    {
+     "name": "Tony",
+     "role": "Pate",
+     "team": "mafia",
+     "alive": false
+    },
+    {
+     "name": "Yanis",
+     "role": "Ermittler",
+     "team": "town",
+     "alive": true
+    },
+    {
+     "name": "Matteo",
+     "role": "Arzt",
+     "team": "town",
+     "alive": false
+    },
+    {
+     "name": "Maximiliane Huber-Brunner",
+     "role": "Bürger",
+     "team": "town",
+     "alive": false
+    },
+    {
+     "name": "Zoë",
+     "role": "Selbstjustiz",
+     "team": "town",
+     "alive": true
+    },
+    {
+     "name": "Ölçü",
+     "role": "Mafioso",
+     "team": "mafia",
+     "alive": false
+    },
+    {
+     "name": "Kim",
+     "role": "Ermittler",
+     "team": "town",
+     "alive": true
+    },
+    {
+     "name": "Lea",
+     "role": "Arzt",
+     "team": "town",
+     "alive": true
+    },
+    {
+     "name": "Noah",
+     "role": "Bürger",
+     "team": "town",
+     "alive": true
+    },
+    {
+     "name": "Aurélien",
+     "role": "Selbstjustiz",
+     "team": "town",
+     "alive": true
+    },
+    {
+     "name": "Sofia",
+     "role": "Mafioso",
+     "team": "mafia",
+     "alive": false
+    },
+    {
+     "name": "Jonas",
+     "role": "Ermittler",
+     "team": "town",
+     "alive": true
+    },
+    {
+     "name": "Chiara",
+     "role": "Arzt",
+     "team": "town",
+     "alive": true
+    },
+    {
+     "name": "Dominik",
+     "role": "Bürger",
+     "team": "town",
+     "alive": true
+    },
+    {
+     "name": "Ida",
+     "role": "Selbstjustiz",
+     "team": "town",
+     "alive": true
+    },
+    {
+     "name": "Emil",
+     "role": "Mafioso",
+     "team": "mafia",
+     "alive": false
+    },
+    {
+     "name": "Mira",
+     "role": "Ermittler",
+     "team": "town",
+     "alive": true
+    },
+    {
+     "name": "Finn",
+     "role": "Mafioso",
+     "team": "mafia",
+     "alive": false
+    }
+   ]
+  }
+ },
+ {
+  "name": "long",
+  "lang": "de",
+  "labelKey": "gameMafia",
+  "players": [
+   {
+    "name": "Maximiliane Huber-Brunner von Hohenstein",
+    "score": null
+   },
+   {
+    "name": "Zoë",
+    "score": null
+   },
+   {
+    "name": "Ölçü Übermütig",
+    "score": null
+   },
+   {
+    "name": "Kim",
+    "score": null
+   },
+   {
+    "name": "Aurélien Çağlayan",
+    "score": null
+   },
+   {
+    "name": "Dominik Vierhundertsechsundvierzig",
+    "score": null
+   },
+   {
+    "name": "Ida",
+    "score": null
+   }
+  ],
+  "extra": {
+   "winner": "mafia",
+   "players": [
+    {
+     "name": "Maximiliane Huber-Brunner von Hohenstein",
+     "role": "Selbstjustiz-Kämpfer",
+     "team": "town",
+     "alive": true
+    },
+    {
+     "name": "Zoë",
+     "role": "Pate",
+     "team": "mafia",
+     "alive": true
+    },
+    {
+     "name": "Ölçü Übermütig",
+     "role": "Mafioso",
+     "team": "mafia",
+     "alive": true
+    },
+    {
+     "name": "Kim",
+     "role": "Bürger",
+     "team": "town",
+     "alive": false
+    },
+    {
+     "name": "Aurélien Çağlayan",
+     "role": "Selbstjustiz-Kämpfer",
+     "team": "town",
+     "alive": true
+    },
+    {
+     "name": "Dominik Vierhundertsechsundvierzig",
+     "role": "Bürger",
+     "team": "town",
+     "alive": true
+    },
+    {
+     "name": "Ida",
+     "role": "Selbstjustiz-Kämpfer",
+     "team": "town",
+     "alive": true
+    }
+   ]
+  }
+ },
+ {
+  "name": "cjk",
+  "lang": "de",
+  "labelKey": "gameMafia",
+  "players": [
+   {
+    "name": "李小龍",
+    "score": null
+   },
+   {
+    "name": "鈴木一郎",
+    "score": null
+   },
+   {
+    "name": "김민준",
+    "score": null
+   },
+   {
+    "name": "Tony",
+    "score": null
+   },
+   {
+    "name": "Yanis",
+    "score": null
+   },
+   {
+    "name": "王",
+    "score": null
+   }
+  ],
+  "extra": {
+   "winner": "town",
+   "players": [
+    {
+     "name": "李小龍",
+     "role": "Bürger",
+     "team": "town",
+     "alive": true
+    },
+    {
+     "name": "鈴木一郎",
+     "role": "Pate",
+     "team": "mafia",
+     "alive": false
+    },
+    {
+     "name": "김민준",
+     "role": "Arzt",
+     "team": "town",
+     "alive": true
+    },
+    {
+     "name": "Tony",
+     "role": "Bürger",
+     "team": "town",
+     "alive": true
+    },
+    {
+     "name": "Yanis",
+     "role": "Selbstjustiz",
+     "team": "town",
+     "alive": true
+    },
+    {
+     "name": "王",
+     "role": "Bürger",
+     "team": "town",
+     "alive": true
+    }
+   ]
+  }
+ }
+]

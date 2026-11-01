@@ -76,7 +76,31 @@ def flow_schieber(pg):
         R.click(pg, R.btn_re(pg, "Punkte eintragen").last, 1500)
 
 
-FLOWS = {"Yatzy 2": flow_yatzy2, "Yatzy 4 lang": flow_yatzy4, "Schieber": flow_schieber}
+def seed_state(pg, game, patch):
+    """Spielstand eines Spiels direkt in den Speicher schreiben (fertige Partie), App neu laden. Spart hunderte Klicks, der Teilen-Weg bleibt echt."""
+    import json as _j
+    pg.evaluate("([g,p])=>{const k='spieleblock-app-state-v1';const s=JSON.parse(localStorage.getItem(k));s[g]=Object.assign({},s[g],p);localStorage.setItem(k,JSON.stringify(s));}", [game, patch])
+    pg.evaluate("()=>{window.onbeforeunload=null}")
+
+
+def reopen(pg, cat, name, sub=None):
+    R.open_game(pg, cat, name, sub)
+    R.wait(pg, 800)
+
+
+def flow_wizard(pg):
+    R.open_game(pg, "Schreibunterlagen", "Wizard"); R.press_start(pg)
+    R.wait(pg, 600)
+    rounds = {}
+    for r in range(1, 31):
+        b1 = r % 3
+        rounds[str(r)] = {"1": {"bid": b1, "tricks": b1}, "2": {"bid": 0, "tricks": r - b1}}
+    pg.evaluate("([p])=>{const k='spieleblock-app-state-v1';const s=JSON.parse(localStorage.getItem(k));s.wizard.players=[{id:1,name:'Zoë Ölçü'},{id:2,name:'Maximiliane Huber-Brunner'}];s.wizard.rounds=p;localStorage.setItem(k,JSON.stringify(s));}", [rounds])
+    pg.reload(); R.wait(pg, 1000)
+    reopen(pg, "Schreibunterlagen", "Wizard")
+
+
+FLOWS = {"Yatzy 2": flow_yatzy2, "Yatzy 4 lang": flow_yatzy4, "Schieber": flow_schieber, "Wizard": flow_wizard}
 
 
 def share_png(pg, tag):

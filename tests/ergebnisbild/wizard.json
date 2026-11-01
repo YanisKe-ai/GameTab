@@ -1,0 +1,380 @@
+[
+ {
+  "name": "entwurf_perfekt",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 1340
+   },
+   {
+    "name": "Yanis",
+    "score": 610
+   },
+   {
+    "name": "Matteo",
+    "score": 90
+   }
+  ],
+  "extra": {
+   "roundCount": 20,
+   "players": [
+    {
+     "name": "Tony",
+     "total": 1340,
+     "hits": 20
+    },
+    {
+     "name": "Yanis",
+     "total": 610,
+     "hits": 12
+    },
+    {
+     "name": "Matteo",
+     "total": 90,
+     "hits": 6
+    }
+   ]
+  }
+ },
+ {
+  "name": "zwei",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Lea",
+    "score": 880
+   },
+   {
+    "name": "Noah",
+    "score": 540
+   }
+  ],
+  "extra": {
+   "roundCount": 30,
+   "players": [
+    {
+     "name": "Lea",
+     "total": 880,
+     "hits": 21
+    },
+    {
+     "name": "Noah",
+     "total": 540,
+     "hits": 14
+    }
+   ]
+  }
+ },
+ {
+  "name": "sechs_max",
+  "lang": "en",
+  "players": [
+   {
+    "name": "Anna",
+    "score": 520
+   },
+   {
+    "name": "Ben",
+    "score": 410
+   },
+   {
+    "name": "Cora",
+    "score": 300
+   },
+   {
+    "name": "Dino",
+    "score": 120
+   },
+   {
+    "name": "Eva",
+    "score": -30
+   },
+   {
+    "name": "Finn",
+    "score": -90
+   }
+  ],
+  "extra": {
+   "roundCount": 10,
+   "players": [
+    {
+     "name": "Anna",
+     "total": 520,
+     "hits": 7
+    },
+    {
+     "name": "Ben",
+     "total": 410,
+     "hits": 6
+    },
+    {
+     "name": "Cora",
+     "total": 300,
+     "hits": 5
+    },
+    {
+     "name": "Dino",
+     "total": 120,
+     "hits": 4
+    },
+    {
+     "name": "Eva",
+     "total": -30,
+     "hits": 3
+    },
+    {
+     "name": "Finn",
+     "total": -90,
+     "hits": 2
+    }
+   ]
+  }
+ },
+ {
+  "name": "lange_namen",
+  "lang": "fr",
+  "players": [
+   {
+    "name": "Maximiliane Huber-Brunner von und zu Hohenstein-Wildenburg",
+    "score": 640
+   },
+   {
+    "name": "Zoë Ölçü-Çağlayan",
+    "score": 420
+   },
+   {
+    "name": "Kim",
+    "score": 100
+   }
+  ],
+  "extra": {
+   "roundCount": 20,
+   "players": [
+    {
+     "name": "Maximiliane Huber-Brunner von und zu Hohenstein-Wildenburg",
+     "total": 640,
+     "hits": 14
+    },
+    {
+     "name": "Zoë Ölçü-Çağlayan",
+     "total": 420,
+     "hits": 11
+    },
+    {
+     "name": "Kim",
+     "total": 100,
+     "hits": 6
+    }
+   ]
+  }
+ },
+ {
+  "name": "gleichstand",
+  "lang": "it",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 330
+   },
+   {
+    "name": "Yanis",
+    "score": 330
+   },
+   {
+    "name": "Matteo",
+    "score": 100
+   }
+  ],
+  "extra": {
+   "roundCount": 15,
+   "players": [
+    {
+     "name": "Tony",
+     "total": 330,
+     "hits": 8
+    },
+    {
+     "name": "Yanis",
+     "total": 330,
+     "hits": 9
+    },
+    {
+     "name": "Matteo",
+     "total": 100,
+     "hits": 4
+    }
+   ]
+  }
+ },
+ {
+  "name": "gleichstand_perfekt",
+  "lang": "es",
+  "players": [
+   {
+    "name": "Anna",
+    "score": 700
+   },
+   {
+    "name": "Ben",
+    "score": 700
+   },
+   {
+    "name": "Cora",
+    "score": 200
+   }
+  ],
+  "extra": {
+   "roundCount": 15,
+   "players": [
+    {
+     "name": "Anna",
+     "total": 700,
+     "hits": 15
+    },
+    {
+     "name": "Ben",
+     "total": 700,
+     "hits": 15
+    },
+    {
+     "name": "Cora",
+     "total": 200,
+     "hits": 7
+    }
+   ]
+  }
+ },
+ {
+  "name": "cjk",
+  "lang": "de",
+  "players": [
+   {
+    "name": "田中太郎",
+    "score": 460
+   },
+   {
+    "name": "李小龍",
+    "score": 300
+   },
+   {
+    "name": "김민준",
+    "score": 120
+   }
+  ],
+  "extra": {
+   "roundCount": 20,
+   "players": [
+    {
+     "name": "田中太郎",
+     "total": 460,
+     "hits": 12
+    },
+    {
+     "name": "李小龍",
+     "total": 300,
+     "hits": 10
+    },
+    {
+     "name": "김민준",
+     "total": 120,
+     "hits": 5
+    }
+   ]
+  }
+ },
+ {
+  "name": "negativ",
+  "lang": "pt",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 40
+   },
+   {
+    "name": "Yanis",
+    "score": -50
+   }
+  ],
+  "extra": {
+   "roundCount": 30,
+   "players": [
+    {
+     "name": "Tony",
+     "total": 40,
+     "hits": 5
+    },
+    {
+     "name": "Yanis",
+     "total": -50,
+     "hits": 3
+    }
+   ]
+  }
+ },
+ {
+  "name": "sechs_lang",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Maximiliane Huber-Brunner von und zu Hohenstein-Wildenburg",
+    "score": 500
+   },
+   {
+    "name": "Alexandrine-Marie Schmidt",
+    "score": 410
+   },
+   {
+    "name": "Bartholomäus",
+    "score": 300
+   },
+   {
+    "name": "Dino",
+    "score": 120
+   },
+   {
+    "name": "Eva",
+    "score": 30
+   },
+   {
+    "name": "Finn",
+    "score": -90
+   }
+  ],
+  "extra": {
+   "roundCount": 10,
+   "players": [
+    {
+     "name": "Maximiliane Huber-Brunner von und zu Hohenstein-Wildenburg",
+     "total": 500,
+     "hits": 7
+    },
+    {
+     "name": "Alexandrine-Marie Schmidt",
+     "total": 410,
+     "hits": 6
+    },
+    {
+     "name": "Bartholomäus",
+     "total": 300,
+     "hits": 5
+    },
+    {
+     "name": "Dino",
+     "total": 120,
+     "hits": 4
+    },
+    {
+     "name": "Eva",
+     "total": 30,
+     "hits": 3
+    },
+    {
+     "name": "Finn",
+     "total": -90,
+     "hits": 2
+    }
+   ]
+  }
+ }
+]

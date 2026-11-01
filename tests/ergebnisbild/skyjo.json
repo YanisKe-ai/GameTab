@@ -3244,5 +3244,2193 @@
     "score": 42
    }
   ]
+ },
+ {
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 24
+   },
+   {
+    "name": "Yanis",
+    "score": 31
+   },
+   {
+    "name": "Matteo",
+    "score": 39
+   },
+   {
+    "name": "Lea",
+    "score": 48
+   },
+   {
+    "name": "Noah",
+    "score": 57
+   },
+   {
+    "name": "Zoë",
+    "score": 67
+   },
+   {
+    "name": "Ölçü",
+    "score": 78
+   },
+   {
+    "name": "Kim",
+    "score": 89
+   },
+   {
+    "name": "Anna",
+    "score": 101
+   }
+  ],
+  "lowWins": true,
+  "extra": {
+   "rounds": [
+    [
+     {
+      "score": 4,
+      "doubled": false
+     },
+     {
+      "score": 5,
+      "doubled": false
+     },
+     {
+      "score": 0,
+      "doubled": false
+     },
+     {
+      "score": 0,
+      "doubled": false
+     },
+     {
+      "score": -1,
+      "doubled": false
+     },
+     {
+      "score": 2,
+      "doubled": true
+     },
+     {
+      "score": 5,
+      "doubled": false
+     },
+     {
+      "score": 2,
+      "doubled": true
+     }
+    ],
+    [
+     {
+      "score": 5,
+      "doubled": true
+     },
+     {
+      "score": 8,
+      "doubled": false
+     },
+     {
+      "score": 2,
+      "doubled": false
+     },
+     {
+      "score": 8,
+      "doubled": false
+     },
+     {
+      "score": 8,
+      "doubled": false
+     },
+     {
+      "score": -1,
+      "doubled": false
+     },
+     {
+      "score": -1,
+      "doubled": false
+     },
+     {
+      "score": 1,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 1,
+      "doubled": false
+     },
+     {
+      "score": 8,
+      "doubled": false
+     },
+     {
+      "score": 12,
+      "doubled": false
+     },
+     {
+      "score": 0,
+      "doubled": false
+     },
+     {
+      "score": 9,
+      "doubled": false
+     },
+     {
+      "score": 0,
+      "doubled": false
+     },
+     {
+      "score": 0,
+      "doubled": false
+     },
+     {
+      "score": 8,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 9,
+      "doubled": false
+     },
+     {
+      "score": 11,
+      "doubled": false
+     },
+     {
+      "score": 8,
+      "doubled": false
+     },
+     {
+      "score": 4,
+      "doubled": false
+     },
+     {
+      "score": 11,
+      "doubled": false
+     },
+     {
+      "score": 11,
+      "doubled": false
+     },
+     {
+      "score": 8,
+      "doubled": false
+     },
+     {
+      "score": 6,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 10,
+      "doubled": false
+     },
+     {
+      "score": 8,
+      "doubled": false
+     },
+     {
+      "score": 0,
+      "doubled": false
+     },
+     {
+      "score": 1,
+      "doubled": false
+     },
+     {
+      "score": 1,
+      "doubled": false
+     },
+     {
+      "score": 5,
+      "doubled": true
+     },
+     {
+      "score": 9,
+      "doubled": true
+     },
+     {
+      "score": 7,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 12,
+      "doubled": false
+     },
+     {
+      "score": 10,
+      "doubled": false
+     },
+     {
+      "score": 6,
+      "doubled": false
+     },
+     {
+      "score": 6,
+      "doubled": true
+     },
+     {
+      "score": 0,
+      "doubled": false
+     },
+     {
+      "score": 6,
+      "doubled": false
+     },
+     {
+      "score": 0,
+      "doubled": true
+     },
+     {
+      "score": 10,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 8,
+      "doubled": false
+     },
+     {
+      "score": 12,
+      "doubled": false
+     },
+     {
+      "score": 10,
+      "doubled": false
+     },
+     {
+      "score": 9,
+      "doubled": false
+     },
+     {
+      "score": 6,
+      "doubled": false
+     },
+     {
+      "score": 8,
+      "doubled": false
+     },
+     {
+      "score": -1,
+      "doubled": false
+     },
+     {
+      "score": 3,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 2,
+      "doubled": false
+     },
+     {
+      "score": 12,
+      "doubled": false
+     },
+     {
+      "score": 1,
+      "doubled": false
+     },
+     {
+      "score": 7,
+      "doubled": false
+     },
+     {
+      "score": 1,
+      "doubled": false
+     },
+     {
+      "score": 12,
+      "doubled": false
+     },
+     {
+      "score": 10,
+      "doubled": false
+     },
+     {
+      "score": 4,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 5,
+      "doubled": false
+     },
+     {
+      "score": 1,
+      "doubled": true
+     },
+     {
+      "score": 1,
+      "doubled": false
+     },
+     {
+      "score": 2,
+      "doubled": true
+     },
+     {
+      "score": 12,
+      "doubled": false
+     },
+     {
+      "score": 3,
+      "doubled": false
+     },
+     {
+      "score": 1,
+      "doubled": false
+     },
+     {
+      "score": 4,
+      "doubled": false
+     }
+    ]
+   ]
+  },
+  "name": "n9",
+  "pages": 1
+ },
+ {
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 24
+   },
+   {
+    "name": "Yanis",
+    "score": 31
+   },
+   {
+    "name": "Matteo",
+    "score": 39
+   },
+   {
+    "name": "Lea",
+    "score": 48
+   },
+   {
+    "name": "Noah",
+    "score": 57
+   },
+   {
+    "name": "Zoë",
+    "score": 67
+   },
+   {
+    "name": "Ölçü",
+    "score": 78
+   },
+   {
+    "name": "Kim",
+    "score": 89
+   },
+   {
+    "name": "Anna",
+    "score": 101
+   },
+   {
+    "name": "Ben",
+    "score": 114
+   }
+  ],
+  "lowWins": true,
+  "extra": {
+   "rounds": [
+    [
+     {
+      "score": 4,
+      "doubled": false
+     },
+     {
+      "score": 10,
+      "doubled": false
+     },
+     {
+      "score": 8,
+      "doubled": false
+     },
+     {
+      "score": 10,
+      "doubled": true
+     },
+     {
+      "score": 12,
+      "doubled": false
+     },
+     {
+      "score": 12,
+      "doubled": false
+     },
+     {
+      "score": 7,
+      "doubled": false
+     },
+     {
+      "score": 5,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 6,
+      "doubled": false
+     },
+     {
+      "score": -1,
+      "doubled": false
+     },
+     {
+      "score": 2,
+      "doubled": false
+     },
+     {
+      "score": 0,
+      "doubled": false
+     },
+     {
+      "score": -1,
+      "doubled": false
+     },
+     {
+      "score": 8,
+      "doubled": false
+     },
+     {
+      "score": 0,
+      "doubled": false
+     },
+     {
+      "score": 8,
+      "doubled": true
+     }
+    ],
+    [
+     {
+      "score": 12,
+      "doubled": false
+     },
+     {
+      "score": 5,
+      "doubled": false
+     },
+     {
+      "score": 3,
+      "doubled": false
+     },
+     {
+      "score": 8,
+      "doubled": false
+     },
+     {
+      "score": 0,
+      "doubled": false
+     },
+     {
+      "score": 6,
+      "doubled": false
+     },
+     {
+      "score": 6,
+      "doubled": false
+     },
+     {
+      "score": 3,
+      "doubled": true
+     }
+    ],
+    [
+     {
+      "score": 0,
+      "doubled": false
+     },
+     {
+      "score": 10,
+      "doubled": false
+     },
+     {
+      "score": 12,
+      "doubled": false
+     },
+     {
+      "score": 7,
+      "doubled": true
+     },
+     {
+      "score": 7,
+      "doubled": false
+     },
+     {
+      "score": 10,
+      "doubled": false
+     },
+     {
+      "score": -1,
+      "doubled": false
+     },
+     {
+      "score": 3,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 12,
+      "doubled": true
+     },
+     {
+      "score": 12,
+      "doubled": false
+     },
+     {
+      "score": 4,
+      "doubled": false
+     },
+     {
+      "score": 4,
+      "doubled": false
+     },
+     {
+      "score": 7,
+      "doubled": false
+     },
+     {
+      "score": 7,
+      "doubled": false
+     },
+     {
+      "score": 2,
+      "doubled": false
+     },
+     {
+      "score": 11,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 12,
+      "doubled": false
+     },
+     {
+      "score": 2,
+      "doubled": false
+     },
+     {
+      "score": 10,
+      "doubled": false
+     },
+     {
+      "score": 2,
+      "doubled": false
+     },
+     {
+      "score": 4,
+      "doubled": false
+     },
+     {
+      "score": -1,
+      "doubled": false
+     },
+     {
+      "score": 6,
+      "doubled": false
+     },
+     {
+      "score": 10,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 4,
+      "doubled": false
+     },
+     {
+      "score": 10,
+      "doubled": false
+     },
+     {
+      "score": 4,
+      "doubled": true
+     },
+     {
+      "score": 0,
+      "doubled": false
+     },
+     {
+      "score": 2,
+      "doubled": false
+     },
+     {
+      "score": 6,
+      "doubled": false
+     },
+     {
+      "score": 8,
+      "doubled": false
+     },
+     {
+      "score": 6,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 4,
+      "doubled": false
+     },
+     {
+      "score": 0,
+      "doubled": false
+     },
+     {
+      "score": 0,
+      "doubled": false
+     },
+     {
+      "score": 11,
+      "doubled": false
+     },
+     {
+      "score": 2,
+      "doubled": false
+     },
+     {
+      "score": 1,
+      "doubled": false
+     },
+     {
+      "score": 9,
+      "doubled": false
+     },
+     {
+      "score": 11,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 10,
+      "doubled": false
+     },
+     {
+      "score": 5,
+      "doubled": false
+     },
+     {
+      "score": 0,
+      "doubled": false
+     },
+     {
+      "score": 1,
+      "doubled": false
+     },
+     {
+      "score": -1,
+      "doubled": false
+     },
+     {
+      "score": 6,
+      "doubled": false
+     },
+     {
+      "score": 1,
+      "doubled": false
+     },
+     {
+      "score": 8,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 9,
+      "doubled": false
+     },
+     {
+      "score": 1,
+      "doubled": false
+     },
+     {
+      "score": 1,
+      "doubled": true
+     },
+     {
+      "score": 11,
+      "doubled": false
+     },
+     {
+      "score": 9,
+      "doubled": false
+     },
+     {
+      "score": 10,
+      "doubled": false
+     },
+     {
+      "score": 5,
+      "doubled": false
+     },
+     {
+      "score": 2,
+      "doubled": false
+     }
+    ]
+   ]
+  },
+  "name": "n10",
+  "pages": 1
+ },
+ {
+  "lang": "de",
+  "players": [
+   {
+    "name": "Alexandra",
+    "score": 24
+   },
+   {
+    "name": "Sebastian",
+    "score": 31
+   },
+   {
+    "name": "Christoph",
+    "score": 39
+   },
+   {
+    "name": "Valentina",
+    "score": 48
+   },
+   {
+    "name": "Maximilian",
+    "score": 57
+   },
+   {
+    "name": "Johanna",
+    "score": 67
+   },
+   {
+    "name": "Bartholomäus",
+    "score": 78
+   },
+   {
+    "name": "Katharina",
+    "score": 89
+   },
+   {
+    "name": "Tobias",
+    "score": 101
+   },
+   {
+    "name": "Annabelle",
+    "score": 114
+   }
+  ],
+  "lowWins": true,
+  "extra": {
+   "rounds": [
+    [
+     {
+      "score": 2,
+      "doubled": true
+     },
+     {
+      "score": 2,
+      "doubled": false
+     },
+     {
+      "score": 2,
+      "doubled": false
+     },
+     {
+      "score": 4,
+      "doubled": false
+     },
+     {
+      "score": 5,
+      "doubled": false
+     },
+     {
+      "score": -1,
+      "doubled": false
+     },
+     {
+      "score": 4,
+      "doubled": false
+     },
+     {
+      "score": 9,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 7,
+      "doubled": false
+     },
+     {
+      "score": 7,
+      "doubled": false
+     },
+     {
+      "score": 1,
+      "doubled": false
+     },
+     {
+      "score": -1,
+      "doubled": false
+     },
+     {
+      "score": 11,
+      "doubled": false
+     },
+     {
+      "score": -1,
+      "doubled": false
+     },
+     {
+      "score": 1,
+      "doubled": false
+     },
+     {
+      "score": 6,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 0,
+      "doubled": false
+     },
+     {
+      "score": 4,
+      "doubled": false
+     },
+     {
+      "score": 7,
+      "doubled": false
+     },
+     {
+      "score": 11,
+      "doubled": false
+     },
+     {
+      "score": 7,
+      "doubled": true
+     },
+     {
+      "score": 2,
+      "doubled": false
+     },
+     {
+      "score": 11,
+      "doubled": true
+     },
+     {
+      "score": 6,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 11,
+      "doubled": false
+     },
+     {
+      "score": 0,
+      "doubled": false
+     },
+     {
+      "score": 8,
+      "doubled": false
+     },
+     {
+      "score": 8,
+      "doubled": false
+     },
+     {
+      "score": 10,
+      "doubled": false
+     },
+     {
+      "score": 7,
+      "doubled": false
+     },
+     {
+      "score": 6,
+      "doubled": false
+     },
+     {
+      "score": 2,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 3,
+      "doubled": false
+     },
+     {
+      "score": 2,
+      "doubled": false
+     },
+     {
+      "score": 1,
+      "doubled": false
+     },
+     {
+      "score": 5,
+      "doubled": false
+     },
+     {
+      "score": 0,
+      "doubled": false
+     },
+     {
+      "score": 5,
+      "doubled": true
+     },
+     {
+      "score": 9,
+      "doubled": false
+     },
+     {
+      "score": 0,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 1,
+      "doubled": false
+     },
+     {
+      "score": 9,
+      "doubled": false
+     },
+     {
+      "score": 1,
+      "doubled": false
+     },
+     {
+      "score": 1,
+      "doubled": false
+     },
+     {
+      "score": 2,
+      "doubled": false
+     },
+     {
+      "score": 0,
+      "doubled": false
+     },
+     {
+      "score": 6,
+      "doubled": false
+     },
+     {
+      "score": 9,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 1,
+      "doubled": false
+     },
+     {
+      "score": 7,
+      "doubled": false
+     },
+     {
+      "score": 5,
+      "doubled": false
+     },
+     {
+      "score": 4,
+      "doubled": true
+     },
+     {
+      "score": 4,
+      "doubled": true
+     },
+     {
+      "score": 7,
+      "doubled": false
+     },
+     {
+      "score": 10,
+      "doubled": true
+     },
+     {
+      "score": 4,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 3,
+      "doubled": false
+     },
+     {
+      "score": 0,
+      "doubled": false
+     },
+     {
+      "score": 11,
+      "doubled": false
+     },
+     {
+      "score": 0,
+      "doubled": true
+     },
+     {
+      "score": 3,
+      "doubled": true
+     },
+     {
+      "score": 11,
+      "doubled": false
+     },
+     {
+      "score": 11,
+      "doubled": false
+     },
+     {
+      "score": 5,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 9,
+      "doubled": false
+     },
+     {
+      "score": 3,
+      "doubled": false
+     },
+     {
+      "score": 7,
+      "doubled": false
+     },
+     {
+      "score": 8,
+      "doubled": false
+     },
+     {
+      "score": 4,
+      "doubled": true
+     },
+     {
+      "score": -1,
+      "doubled": false
+     },
+     {
+      "score": 1,
+      "doubled": false
+     },
+     {
+      "score": 0,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": -1,
+      "doubled": false
+     },
+     {
+      "score": 11,
+      "doubled": false
+     },
+     {
+      "score": 8,
+      "doubled": false
+     },
+     {
+      "score": 0,
+      "doubled": false
+     },
+     {
+      "score": 0,
+      "doubled": false
+     },
+     {
+      "score": 4,
+      "doubled": false
+     },
+     {
+      "score": 5,
+      "doubled": false
+     },
+     {
+      "score": 3,
+      "doubled": false
+     }
+    ]
+   ]
+  },
+  "name": "n10_lang",
+  "pages": 1
+ },
+ {
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 24
+   },
+   {
+    "name": "Yanis",
+    "score": 31
+   },
+   {
+    "name": "Matteo",
+    "score": 39
+   },
+   {
+    "name": "Lea",
+    "score": 48
+   },
+   {
+    "name": "Noah",
+    "score": 57
+   },
+   {
+    "name": "Zoë",
+    "score": 67
+   },
+   {
+    "name": "Ölçü",
+    "score": 78
+   },
+   {
+    "name": "Kim",
+    "score": 89
+   },
+   {
+    "name": "Anna",
+    "score": 101
+   },
+   {
+    "name": "Ben",
+    "score": 114
+   },
+   {
+    "name": "Mia",
+    "score": 127
+   }
+  ],
+  "lowWins": true,
+  "extra": {
+   "rounds": [
+    [
+     {
+      "score": -1,
+      "doubled": false
+     },
+     {
+      "score": 2,
+      "doubled": false
+     },
+     {
+      "score": 1,
+      "doubled": false
+     },
+     {
+      "score": 1,
+      "doubled": false
+     },
+     {
+      "score": 3,
+      "doubled": false
+     },
+     {
+      "score": 7,
+      "doubled": false
+     },
+     {
+      "score": 3,
+      "doubled": false
+     },
+     {
+      "score": 9,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 4,
+      "doubled": false
+     },
+     {
+      "score": 3,
+      "doubled": true
+     },
+     {
+      "score": -1,
+      "doubled": false
+     },
+     {
+      "score": 7,
+      "doubled": false
+     },
+     {
+      "score": 7,
+      "doubled": false
+     },
+     {
+      "score": 6,
+      "doubled": false
+     },
+     {
+      "score": 12,
+      "doubled": false
+     },
+     {
+      "score": 9,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 12,
+      "doubled": false
+     },
+     {
+      "score": 7,
+      "doubled": false
+     },
+     {
+      "score": 2,
+      "doubled": false
+     },
+     {
+      "score": 4,
+      "doubled": false
+     },
+     {
+      "score": 10,
+      "doubled": false
+     },
+     {
+      "score": 1,
+      "doubled": false
+     },
+     {
+      "score": 4,
+      "doubled": false
+     },
+     {
+      "score": 12,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 0,
+      "doubled": false
+     },
+     {
+      "score": 3,
+      "doubled": false
+     },
+     {
+      "score": -1,
+      "doubled": true
+     },
+     {
+      "score": 12,
+      "doubled": false
+     },
+     {
+      "score": 7,
+      "doubled": false
+     },
+     {
+      "score": 3,
+      "doubled": false
+     },
+     {
+      "score": 10,
+      "doubled": false
+     },
+     {
+      "score": 6,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 3,
+      "doubled": false
+     },
+     {
+      "score": 3,
+      "doubled": false
+     },
+     {
+      "score": 4,
+      "doubled": false
+     },
+     {
+      "score": 7,
+      "doubled": false
+     },
+     {
+      "score": -1,
+      "doubled": false
+     },
+     {
+      "score": 3,
+      "doubled": false
+     },
+     {
+      "score": 1,
+      "doubled": true
+     },
+     {
+      "score": 5,
+      "doubled": true
+     }
+    ],
+    [
+     {
+      "score": 3,
+      "doubled": false
+     },
+     {
+      "score": 2,
+      "doubled": false
+     },
+     {
+      "score": 11,
+      "doubled": true
+     },
+     {
+      "score": 3,
+      "doubled": false
+     },
+     {
+      "score": 1,
+      "doubled": false
+     },
+     {
+      "score": -1,
+      "doubled": false
+     },
+     {
+      "score": 3,
+      "doubled": false
+     },
+     {
+      "score": 2,
+      "doubled": true
+     }
+    ],
+    [
+     {
+      "score": 7,
+      "doubled": false
+     },
+     {
+      "score": 1,
+      "doubled": false
+     },
+     {
+      "score": 10,
+      "doubled": false
+     },
+     {
+      "score": 8,
+      "doubled": false
+     },
+     {
+      "score": 4,
+      "doubled": false
+     },
+     {
+      "score": 6,
+      "doubled": false
+     },
+     {
+      "score": 10,
+      "doubled": false
+     },
+     {
+      "score": 1,
+      "doubled": true
+     }
+    ],
+    [
+     {
+      "score": 12,
+      "doubled": false
+     },
+     {
+      "score": 7,
+      "doubled": false
+     },
+     {
+      "score": 10,
+      "doubled": false
+     },
+     {
+      "score": 7,
+      "doubled": false
+     },
+     {
+      "score": 7,
+      "doubled": false
+     },
+     {
+      "score": 8,
+      "doubled": false
+     },
+     {
+      "score": 11,
+      "doubled": true
+     },
+     {
+      "score": 9,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 10,
+      "doubled": false
+     },
+     {
+      "score": 10,
+      "doubled": false
+     },
+     {
+      "score": 0,
+      "doubled": true
+     },
+     {
+      "score": 1,
+      "doubled": false
+     },
+     {
+      "score": 0,
+      "doubled": false
+     },
+     {
+      "score": 6,
+      "doubled": false
+     },
+     {
+      "score": 9,
+      "doubled": true
+     },
+     {
+      "score": 7,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 6,
+      "doubled": false
+     },
+     {
+      "score": 6,
+      "doubled": false
+     },
+     {
+      "score": 10,
+      "doubled": false
+     },
+     {
+      "score": 7,
+      "doubled": true
+     },
+     {
+      "score": 7,
+      "doubled": true
+     },
+     {
+      "score": 10,
+      "doubled": false
+     },
+     {
+      "score": 11,
+      "doubled": true
+     },
+     {
+      "score": 3,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 11,
+      "doubled": false
+     },
+     {
+      "score": 10,
+      "doubled": false
+     },
+     {
+      "score": 6,
+      "doubled": false
+     },
+     {
+      "score": 5,
+      "doubled": true
+     },
+     {
+      "score": 9,
+      "doubled": false
+     },
+     {
+      "score": -1,
+      "doubled": false
+     },
+     {
+      "score": 9,
+      "doubled": false
+     },
+     {
+      "score": 8,
+      "doubled": false
+     }
+    ]
+   ]
+  },
+  "name": "n11",
+  "pages": 2
+ },
+ {
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 24
+   },
+   {
+    "name": "Yanis",
+    "score": 31
+   },
+   {
+    "name": "Matteo",
+    "score": 39
+   },
+   {
+    "name": "Lea",
+    "score": 48
+   },
+   {
+    "name": "Noah",
+    "score": 57
+   },
+   {
+    "name": "Zoë",
+    "score": 67
+   },
+   {
+    "name": "Ölçü",
+    "score": 78
+   },
+   {
+    "name": "Kim",
+    "score": 89
+   },
+   {
+    "name": "Anna",
+    "score": 101
+   },
+   {
+    "name": "Ben",
+    "score": 114
+   },
+   {
+    "name": "Mia",
+    "score": 127
+   },
+   {
+    "name": "Luca",
+    "score": 141
+   },
+   {
+    "name": "Sara",
+    "score": 156
+   },
+   {
+    "name": "Jonas",
+    "score": 171
+   },
+   {
+    "name": "Elena",
+    "score": 187
+   },
+   {
+    "name": "Fabian",
+    "score": 204
+   }
+  ],
+  "lowWins": true,
+  "extra": {
+   "rounds": [
+    [
+     {
+      "score": 3,
+      "doubled": false
+     },
+     {
+      "score": 10,
+      "doubled": false
+     },
+     {
+      "score": 8,
+      "doubled": false
+     },
+     {
+      "score": 6,
+      "doubled": true
+     },
+     {
+      "score": 3,
+      "doubled": false
+     },
+     {
+      "score": 0,
+      "doubled": false
+     },
+     {
+      "score": 9,
+      "doubled": false
+     },
+     {
+      "score": 10,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 6,
+      "doubled": false
+     },
+     {
+      "score": 11,
+      "doubled": false
+     },
+     {
+      "score": 7,
+      "doubled": false
+     },
+     {
+      "score": 0,
+      "doubled": false
+     },
+     {
+      "score": -1,
+      "doubled": false
+     },
+     {
+      "score": 0,
+      "doubled": false
+     },
+     {
+      "score": 6,
+      "doubled": false
+     },
+     {
+      "score": 5,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 2,
+      "doubled": true
+     },
+     {
+      "score": 0,
+      "doubled": false
+     },
+     {
+      "score": 7,
+      "doubled": false
+     },
+     {
+      "score": 4,
+      "doubled": false
+     },
+     {
+      "score": 12,
+      "doubled": false
+     },
+     {
+      "score": 3,
+      "doubled": false
+     },
+     {
+      "score": 10,
+      "doubled": false
+     },
+     {
+      "score": 6,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 6,
+      "doubled": false
+     },
+     {
+      "score": 1,
+      "doubled": true
+     },
+     {
+      "score": 6,
+      "doubled": false
+     },
+     {
+      "score": 5,
+      "doubled": false
+     },
+     {
+      "score": 1,
+      "doubled": false
+     },
+     {
+      "score": 5,
+      "doubled": false
+     },
+     {
+      "score": 12,
+      "doubled": false
+     },
+     {
+      "score": 4,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 12,
+      "doubled": false
+     },
+     {
+      "score": 2,
+      "doubled": false
+     },
+     {
+      "score": 10,
+      "doubled": false
+     },
+     {
+      "score": 4,
+      "doubled": true
+     },
+     {
+      "score": 5,
+      "doubled": false
+     },
+     {
+      "score": 8,
+      "doubled": true
+     },
+     {
+      "score": 5,
+      "doubled": false
+     },
+     {
+      "score": 12,
+      "doubled": true
+     }
+    ],
+    [
+     {
+      "score": 0,
+      "doubled": true
+     },
+     {
+      "score": 9,
+      "doubled": false
+     },
+     {
+      "score": 1,
+      "doubled": false
+     },
+     {
+      "score": 3,
+      "doubled": false
+     },
+     {
+      "score": 4,
+      "doubled": false
+     },
+     {
+      "score": 4,
+      "doubled": false
+     },
+     {
+      "score": 5,
+      "doubled": false
+     },
+     {
+      "score": 11,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 5,
+      "doubled": false
+     },
+     {
+      "score": 7,
+      "doubled": false
+     },
+     {
+      "score": 10,
+      "doubled": true
+     },
+     {
+      "score": 10,
+      "doubled": false
+     },
+     {
+      "score": 8,
+      "doubled": false
+     },
+     {
+      "score": 9,
+      "doubled": false
+     },
+     {
+      "score": 6,
+      "doubled": true
+     },
+     {
+      "score": 7,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 6,
+      "doubled": false
+     },
+     {
+      "score": 3,
+      "doubled": false
+     },
+     {
+      "score": 10,
+      "doubled": false
+     },
+     {
+      "score": 9,
+      "doubled": false
+     },
+     {
+      "score": 9,
+      "doubled": false
+     },
+     {
+      "score": 6,
+      "doubled": false
+     },
+     {
+      "score": 5,
+      "doubled": false
+     },
+     {
+      "score": 9,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 2,
+      "doubled": false
+     },
+     {
+      "score": 11,
+      "doubled": false
+     },
+     {
+      "score": 2,
+      "doubled": false
+     },
+     {
+      "score": 4,
+      "doubled": false
+     },
+     {
+      "score": 6,
+      "doubled": false
+     },
+     {
+      "score": 7,
+      "doubled": false
+     },
+     {
+      "score": 0,
+      "doubled": false
+     },
+     {
+      "score": 7,
+      "doubled": true
+     }
+    ],
+    [
+     {
+      "score": 2,
+      "doubled": false
+     },
+     {
+      "score": 11,
+      "doubled": false
+     },
+     {
+      "score": -1,
+      "doubled": false
+     },
+     {
+      "score": 5,
+      "doubled": false
+     },
+     {
+      "score": 10,
+      "doubled": false
+     },
+     {
+      "score": 5,
+      "doubled": false
+     },
+     {
+      "score": 11,
+      "doubled": true
+     },
+     {
+      "score": 3,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 4,
+      "doubled": false
+     },
+     {
+      "score": 7,
+      "doubled": false
+     },
+     {
+      "score": 11,
+      "doubled": false
+     },
+     {
+      "score": 2,
+      "doubled": true
+     },
+     {
+      "score": 2,
+      "doubled": false
+     },
+     {
+      "score": 9,
+      "doubled": false
+     },
+     {
+      "score": 3,
+      "doubled": false
+     },
+     {
+      "score": 12,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 1,
+      "doubled": true
+     },
+     {
+      "score": 10,
+      "doubled": false
+     },
+     {
+      "score": 11,
+      "doubled": false
+     },
+     {
+      "score": 8,
+      "doubled": false
+     },
+     {
+      "score": 0,
+      "doubled": false
+     },
+     {
+      "score": 12,
+      "doubled": false
+     },
+     {
+      "score": 6,
+      "doubled": false
+     },
+     {
+      "score": 2,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 2,
+      "doubled": false
+     },
+     {
+      "score": 7,
+      "doubled": false
+     },
+     {
+      "score": 0,
+      "doubled": false
+     },
+     {
+      "score": 10,
+      "doubled": false
+     },
+     {
+      "score": 12,
+      "doubled": false
+     },
+     {
+      "score": 6,
+      "doubled": true
+     },
+     {
+      "score": 11,
+      "doubled": true
+     },
+     {
+      "score": 11,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 8,
+      "doubled": false
+     },
+     {
+      "score": 9,
+      "doubled": false
+     },
+     {
+      "score": 1,
+      "doubled": false
+     },
+     {
+      "score": 7,
+      "doubled": false
+     },
+     {
+      "score": 10,
+      "doubled": false
+     },
+     {
+      "score": 0,
+      "doubled": true
+     },
+     {
+      "score": 7,
+      "doubled": false
+     },
+     {
+      "score": 2,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 2,
+      "doubled": false
+     },
+     {
+      "score": -1,
+      "doubled": true
+     },
+     {
+      "score": 3,
+      "doubled": false
+     },
+     {
+      "score": 3,
+      "doubled": false
+     },
+     {
+      "score": 9,
+      "doubled": false
+     },
+     {
+      "score": 2,
+      "doubled": false
+     },
+     {
+      "score": 2,
+      "doubled": false
+     },
+     {
+      "score": -1,
+      "doubled": false
+     }
+    ],
+    [
+     {
+      "score": 10,
+      "doubled": false
+     },
+     {
+      "score": -1,
+      "doubled": true
+     },
+     {
+      "score": 6,
+      "doubled": false
+     },
+     {
+      "score": 9,
+      "doubled": false
+     },
+     {
+      "score": 3,
+      "doubled": false
+     },
+     {
+      "score": 5,
+      "doubled": false
+     },
+     {
+      "score": 2,
+      "doubled": false
+     },
+     {
+      "score": 10,
+      "doubled": false
+     }
+    ]
+   ]
+  },
+  "name": "n16",
+  "pages": 2
  }
 ]

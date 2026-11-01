@@ -31,6 +31,7 @@ OUT = ROOT / "tests" / "out" / "ergebnisbild"
 OUT.mkdir(parents=True, exist_ok=True)
 ARGS = sys.argv[1:]
 GAMES = [ARGS[i + 1] for i, a in enumerate(ARGS) if a == "--game" and i + 1 < len(ARGS)]
+CASES = [ARGS[i + 1] for i, a in enumerate(ARGS) if a == "--case" and i + 1 < len(ARGS)]
 ENG = [ARGS[i + 1] for i, a in enumerate(ARGS) if a == "--engine" and i + 1 < len(ARGS)] or ["chromium", "webkit"]
 PORT = 8790 + os.getpid() % 100
 
@@ -71,6 +72,8 @@ def main():
             continue
         for c in json.loads(f.read_text(encoding="utf-8")):
             c.setdefault("gameId", gid)
+            if CASES and c["name"] not in CASES:
+                continue
             cases.append(c)
     if not cases:
         print("Keine Faelle gefunden")

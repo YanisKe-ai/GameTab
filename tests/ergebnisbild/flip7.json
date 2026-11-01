@@ -291,7 +291,7 @@
     }
    ]
   },
-  "pages": 2
+  "pages": 1
  },
  {
   "name": "vier",
@@ -1176,5 +1176,1012 @@
     "score": 171
    }
   ]
+ },
+ {
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 230
+   },
+   {
+    "name": "Yanis",
+    "score": 217
+   },
+   {
+    "name": "Matteo",
+    "score": 204
+   },
+   {
+    "name": "Lea",
+    "score": 191
+   },
+   {
+    "name": "Noah",
+    "score": 178
+   },
+   {
+    "name": "Zoë",
+    "score": 165
+   },
+   {
+    "name": "Ölçü",
+    "score": 152
+   },
+   {
+    "name": "Kim",
+    "score": 139
+   },
+   {
+    "name": "Anna",
+    "score": 126
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "Tony",
+     "rounds": [
+      31,
+      28,
+      30,
+      17,
+      5,
+      23,
+      37
+     ],
+     "flip7": 1
+    },
+    {
+     "name": "Yanis",
+     "rounds": [
+      9,
+      18,
+      36,
+      17,
+      24,
+      17,
+      19
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Matteo",
+     "rounds": [
+      34,
+      19,
+      21,
+      23,
+      11,
+      44,
+      36
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Lea",
+     "rounds": [
+      44,
+      16,
+      19,
+      36,
+      31,
+      8,
+      43
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Noah",
+     "rounds": [
+      14,
+      30,
+      8,
+      18,
+      6,
+      43,
+      14
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Zoë",
+     "rounds": [
+      31,
+      8,
+      8,
+      16,
+      30,
+      33,
+      25
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Ölçü",
+     "rounds": [
+      12,
+      10,
+      15,
+      26,
+      17,
+      16,
+      38
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Kim",
+     "rounds": [
+      34,
+      7,
+      24,
+      29,
+      28,
+      26,
+      33
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Anna",
+     "rounds": [
+      15,
+      11,
+      5,
+      10,
+      22,
+      10,
+      27
+     ],
+     "flip7": 0
+    }
+   ]
+  },
+  "name": "n9",
+  "pages": 1
+ },
+ {
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 230
+   },
+   {
+    "name": "Yanis",
+    "score": 217
+   },
+   {
+    "name": "Matteo",
+    "score": 204
+   },
+   {
+    "name": "Lea",
+    "score": 191
+   },
+   {
+    "name": "Noah",
+    "score": 178
+   },
+   {
+    "name": "Zoë",
+    "score": 165
+   },
+   {
+    "name": "Ölçü",
+    "score": 152
+   },
+   {
+    "name": "Kim",
+    "score": 139
+   },
+   {
+    "name": "Anna",
+    "score": 126
+   },
+   {
+    "name": "Ben",
+    "score": 113
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "Tony",
+     "rounds": [
+      31,
+      12,
+      40,
+      18,
+      29,
+      27,
+      24
+     ],
+     "flip7": 1
+    },
+    {
+     "name": "Yanis",
+     "rounds": [
+      32,
+      10,
+      8,
+      35,
+      17,
+      28,
+      39
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Matteo",
+     "rounds": [
+      33,
+      17,
+      25,
+      28,
+      35,
+      6,
+      45
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Lea",
+     "rounds": [
+      31,
+      20,
+      45,
+      30,
+      7,
+      29,
+      7
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Noah",
+     "rounds": [
+      34,
+      9,
+      8,
+      21,
+      17,
+      9,
+      43
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Zoë",
+     "rounds": [
+      26,
+      28,
+      22,
+      26,
+      44,
+      7,
+      21
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Ölçü",
+     "rounds": [
+      25,
+      22,
+      24,
+      5,
+      43,
+      45,
+      9
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Kim",
+     "rounds": [
+      6,
+      19,
+      11,
+      35,
+      34,
+      29,
+      21
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Anna",
+     "rounds": [
+      32,
+      36,
+      13,
+      36,
+      16,
+      5,
+      24
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Ben",
+     "rounds": [
+      14,
+      43,
+      20,
+      25,
+      25,
+      34,
+      28
+     ],
+     "flip7": 0
+    }
+   ]
+  },
+  "name": "n10",
+  "pages": 1
+ },
+ {
+  "lang": "de",
+  "players": [
+   {
+    "name": "Alexandra",
+    "score": 230
+   },
+   {
+    "name": "Sebastian",
+    "score": 217
+   },
+   {
+    "name": "Christoph",
+    "score": 204
+   },
+   {
+    "name": "Valentina",
+    "score": 191
+   },
+   {
+    "name": "Maximilian",
+    "score": 178
+   },
+   {
+    "name": "Johanna",
+    "score": 165
+   },
+   {
+    "name": "Bartholomäus",
+    "score": 152
+   },
+   {
+    "name": "Katharina",
+    "score": 139
+   },
+   {
+    "name": "Tobias",
+    "score": 126
+   },
+   {
+    "name": "Annabelle",
+    "score": 113
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "Alexandra",
+     "rounds": [
+      43,
+      10,
+      37,
+      17,
+      30,
+      15,
+      20
+     ],
+     "flip7": 1
+    },
+    {
+     "name": "Sebastian",
+     "rounds": [
+      31,
+      9,
+      7,
+      35,
+      40,
+      39,
+      25
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Christoph",
+     "rounds": [
+      15,
+      32,
+      11,
+      9,
+      21,
+      44,
+      10
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Valentina",
+     "rounds": [
+      18,
+      11,
+      31,
+      36,
+      33,
+      16,
+      19
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Maximilian",
+     "rounds": [
+      13,
+      31,
+      34,
+      44,
+      20,
+      39,
+      12
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Johanna",
+     "rounds": [
+      23,
+      23,
+      22,
+      41,
+      22,
+      28,
+      21
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Bartholomäus",
+     "rounds": [
+      21,
+      17,
+      33,
+      20,
+      16,
+      20,
+      20
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Katharina",
+     "rounds": [
+      14,
+      23,
+      42,
+      17,
+      25,
+      9,
+      30
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Tobias",
+     "rounds": [
+      21,
+      20,
+      37,
+      38,
+      19,
+      11,
+      34
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Annabelle",
+     "rounds": [
+      7,
+      11,
+      5,
+      35,
+      19,
+      33,
+      28
+     ],
+     "flip7": 0
+    }
+   ]
+  },
+  "name": "n10_lang",
+  "pages": 1
+ },
+ {
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 230
+   },
+   {
+    "name": "Yanis",
+    "score": 217
+   },
+   {
+    "name": "Matteo",
+    "score": 204
+   },
+   {
+    "name": "Lea",
+    "score": 191
+   },
+   {
+    "name": "Noah",
+    "score": 178
+   },
+   {
+    "name": "Zoë",
+    "score": 165
+   },
+   {
+    "name": "Ölçü",
+    "score": 152
+   },
+   {
+    "name": "Kim",
+    "score": 139
+   },
+   {
+    "name": "Anna",
+    "score": 126
+   },
+   {
+    "name": "Ben",
+    "score": 113
+   },
+   {
+    "name": "Mia",
+    "score": 100
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "Tony",
+     "rounds": [
+      7,
+      23,
+      19,
+      12,
+      8,
+      17,
+      43
+     ],
+     "flip7": 1
+    },
+    {
+     "name": "Yanis",
+     "rounds": [
+      42,
+      17,
+      9,
+      28,
+      37,
+      16,
+      33
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Matteo",
+     "rounds": [
+      43,
+      21,
+      5,
+      11,
+      45,
+      43,
+      44
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Lea",
+     "rounds": [
+      27,
+      18,
+      7,
+      28,
+      26,
+      14,
+      7
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Noah",
+     "rounds": [
+      18,
+      21,
+      7,
+      43,
+      18,
+      5,
+      25
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Zoë",
+     "rounds": [
+      31,
+      28,
+      16,
+      44,
+      24,
+      9,
+      18
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Ölçü",
+     "rounds": [
+      7,
+      36,
+      40,
+      35,
+      9,
+      31,
+      11
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Kim",
+     "rounds": [
+      30,
+      40,
+      14,
+      45,
+      39,
+      10,
+      15
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Anna",
+     "rounds": [
+      30,
+      22,
+      31,
+      23,
+      24,
+      31,
+      8
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Ben",
+     "rounds": [
+      24,
+      41,
+      27,
+      31,
+      31,
+      6,
+      28
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Mia",
+     "rounds": [
+      17,
+      30,
+      30,
+      18,
+      5,
+      32,
+      15
+     ],
+     "flip7": 0
+    }
+   ]
+  },
+  "name": "n11",
+  "pages": 2
+ },
+ {
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 230
+   },
+   {
+    "name": "Yanis",
+    "score": 217
+   },
+   {
+    "name": "Matteo",
+    "score": 204
+   },
+   {
+    "name": "Lea",
+    "score": 191
+   },
+   {
+    "name": "Noah",
+    "score": 178
+   },
+   {
+    "name": "Zoë",
+    "score": 165
+   },
+   {
+    "name": "Ölçü",
+    "score": 152
+   },
+   {
+    "name": "Kim",
+    "score": 139
+   },
+   {
+    "name": "Anna",
+    "score": 126
+   },
+   {
+    "name": "Ben",
+    "score": 113
+   },
+   {
+    "name": "Mia",
+    "score": 100
+   },
+   {
+    "name": "Luca",
+    "score": 87
+   },
+   {
+    "name": "Sara",
+    "score": 74
+   },
+   {
+    "name": "Jonas",
+    "score": 61
+   },
+   {
+    "name": "Elena",
+    "score": 48
+   },
+   {
+    "name": "Fabian",
+    "score": 35
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "Tony",
+     "rounds": [
+      32,
+      12,
+      10,
+      30,
+      41,
+      28,
+      34
+     ],
+     "flip7": 1
+    },
+    {
+     "name": "Yanis",
+     "rounds": [
+      15,
+      13,
+      5,
+      8,
+      40,
+      14,
+      30
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Matteo",
+     "rounds": [
+      10,
+      41,
+      44,
+      28,
+      37,
+      15,
+      14
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Lea",
+     "rounds": [
+      27,
+      23,
+      15,
+      38,
+      15,
+      9,
+      11
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Noah",
+     "rounds": [
+      29,
+      36,
+      17,
+      24,
+      13,
+      7,
+      35
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Zoë",
+     "rounds": [
+      25,
+      8,
+      43,
+      45,
+      29,
+      10,
+      44
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Ölçü",
+     "rounds": [
+      15,
+      45,
+      19,
+      44,
+      30,
+      44,
+      17
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Kim",
+     "rounds": [
+      35,
+      16,
+      41,
+      18,
+      7,
+      30,
+      38
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Anna",
+     "rounds": [
+      15,
+      29,
+      27,
+      12,
+      14,
+      20,
+      17
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Ben",
+     "rounds": [
+      7,
+      40,
+      7,
+      25,
+      12,
+      29,
+      43
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Mia",
+     "rounds": [
+      34,
+      40,
+      45,
+      24,
+      31,
+      24,
+      42
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Luca",
+     "rounds": [
+      20,
+      32,
+      29,
+      28,
+      33,
+      37,
+      33
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Sara",
+     "rounds": [
+      16,
+      6,
+      5,
+      44,
+      36,
+      34,
+      20
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Jonas",
+     "rounds": [
+      33,
+      44,
+      34,
+      16,
+      35,
+      30,
+      11
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Elena",
+     "rounds": [
+      9,
+      13,
+      27,
+      32,
+      28,
+      10,
+      33
+     ],
+     "flip7": 0
+    },
+    {
+     "name": "Fabian",
+     "rounds": [
+      37,
+      37,
+      7,
+      7,
+      45,
+      13,
+      10
+     ],
+     "flip7": 0
+    }
+   ]
+  },
+  "name": "n16",
+  "pages": 2
  }
 ]

@@ -5,7 +5,6 @@
 import { F_ARCHIVO, F_BRUSH } from "./fonts-a.js";
 
 const BG = "#0A2D33", ACC = "#2FD9A8", INK = "#FFFFFF", ON_ACC = "#06302A";
-const FIRST_CAP = 12; // Plaettchen auf Seite 1
 
 function cardColors(v) {
   if (v <= -2) return ["#1B3A8C", "#FFFFFF"];
@@ -94,7 +93,7 @@ function pills(c, k, rows, cols, top, rowH, fs) {
     const base = y + rowH / 2 + fs * 0.34;
     c.fillStyle = r.winner ? ON_ACC : INK;
     k.setFont(c, 400, fs, k.F_ANTON); c.textAlign = "right"; c.fillText(r.value, x + pw - 18, base); const vw = c.measureText(r.value).width; c.textAlign = "left";
-    const rs = String(r.rank); k.setFont(c, 400, fs * 0.56, F_ARCHIVO); c.globalAlpha = 0.7; c.fillText(rs, x + 18, base); const rw = c.measureText(rs).width + 10; c.globalAlpha = 1;
+    const rs = String(r.rank); k.setFont(c, 400, fs * 0.66, F_ARCHIVO); c.globalAlpha = 0.75; c.fillText(rs, x + 18, base); const rw = c.measureText(rs).width + 10; c.globalAlpha = 1;
     const f = k.fit(c, r.name, { w: 400, fam: k.F_ANTON, max: fs, min: Math.max(16, fs * 0.5), maxW: pw - 18 - 18 - vw - rw - 14, lines: 1 });
     k.setFont(c, 400, f.size, k.F_ANTON); c.fillText(f.lines[0], x + 18 + rw, base);
   });
@@ -104,6 +103,7 @@ function page1(d, k, rest) {
   const { cv, c } = k.tplCanvas();
   bg(c, k);
   const accTxt = ACC;
+  const noCards = !(d.rounds && d.rounds.length);
   /* Titel und Regel */
   const tf = k.fit(c, d.up(d.gameLabel), { w: 400, fam: F_ARCHIVO, max: 112, min: 56, maxW: 520, lines: 1 });
   k.setFont(c, 400, tf.size, F_ARCHIVO); c.fillStyle = accTxt; c.fillText(tf.lines[0], 56, 30 + 0.78 * tf.size + (112 - tf.size) * 0.1); const titleW = c.measureText(tf.lines[0]).width;
@@ -113,42 +113,54 @@ function page1(d, k, rest) {
   /* Sieger */
   const win = d.winners.length ? d.winners : d.rows.slice(0, 1);
   const name = d.up(win.map((r) => r.name).join(" & "));
-  const hv = k.fit(c, win[0].value, { w: 400, fam: k.F_ANTON, max: 190, min: 110, maxW: 400, lines: 1 });
+  const hs = noCards ? 230 : 190;
+  const hv = k.fit(c, win[0].value, { w: 400, fam: k.F_ANTON, max: hs, min: 110, maxW: noCards ? 480 : 400, lines: 1 });
   k.setFont(c, 400, hv.size, k.F_ANTON); const vw = c.measureText(win[0].value).width;
-  const fo = { w: 400, fam: k.F_ANTON, maxW: 960 - 4 - vw - 40 };
-  let nf = k.fit(c, name, Object.assign({}, fo, { max: 190, min: 118, lines: 1 }));
-  if (nf.cut) nf = k.fit(c, name, Object.assign({}, fo, { max: 104, min: 60, lines: 2 }));
-  if (nf.cut) nf = k.fit(c, name, Object.assign({}, fo, { max: 66, min: 44, lines: 3 }));
+  const fo = { w: 400, fam: k.F_ANTON, maxW: 960 - 4 - vw - 50 };
+  const nf = k.heroFit(c, name, fo, [{ max: hs, min: 118, lines: 1 }, { max: 110, min: 60, lines: 2 }, { max: 70, min: 30, lines: 3 }]);
   k.setFont(c, 400, nf.size, k.F_ANTON); const cap = k.capH(c);
   const asc = nf.lines.map((l) => Math.max(cap, c.measureText(l).actualBoundingBoxAscent || cap));
   const dsc = nf.lines.map((l) => Math.max(0, c.measureText(l).actualBoundingBoxDescent || 0));
-  const heroBase = nf.lines.length === 1 ? 310 : 330;
+  const gapL = (i) => asc[i + 1] + dsc[i] + nf.size * 0.1;
+  let heroH = asc[0]; for (let i = 0; i < nf.lines.length - 1; i++) heroH += gapL(i);
+  const n = Math.min(rest.length, k.ONE_PAGE);
+  /* Plaettchen: ohne Rundenwerte gross und zusammen mit dem Sieger mittig, sonst kompakt unten */
+  const pillGap = 16;
+  const needs = (Lx) => { const pw = (960 - pillGap * (Lx.cols - 1)) / Lx.cols; k.setFont(c, 400, Lx.fs, k.F_ANTON); return rest.slice(0, n).every((r) => { const vw2 = c.measureText(r.value).width, nw = c.measureText(r.name).width; return nw <= pw - 36 - vw2 - Lx.fs * 0.6 - 24 - 14; }); };
+  let L, heroBase, pillsTop;
+  if (noCards) {
+    const tieH = d.tie ? 60 : 0, zoneTop = 160, zoneBot = 1190, avail = zoneBot - zoneTop, heroBlock = heroH + tieH, gapHP = 80;
+    const mk = (cols) => { const prow = Math.ceil(n / cols), rowH = Math.max(60, Math.min(140, (avail - heroBlock - gapHP) / prow - 16)); const vg = Math.min(16, rowH * 0.18); return { cols, prow, rowH, fs: Math.round(Math.min(68, rowH * 0.5)), vg, h: prow * rowH + (prow - 1) * vg }; };
+    const pref = n <= 4 ? 1 : n <= 8 ? 2 : 3;
+    L = mk(pref);
+    for (let cc = pref; cc >= 1; cc--) { L = mk(cc); if (needs(L)) break; }
+    const stack = heroBlock + (n ? gapHP + L.h : 0), top = zoneTop + Math.max(0, (avail - stack) * 0.42);
+    heroBase = top + heroH; pillsTop = heroBase + tieH + gapHP;
+  } else {
+    const lay = (cols) => { const prow = Math.ceil(n / cols), rowH = prow <= 1 ? 96 : prow === 2 ? 84 : 72, fs = rowH >= 96 ? 46 : rowH >= 84 ? 42 : 38; const vg = Math.min(16, rowH * 0.18); return { cols, prow, rowH, fs, vg, h: prow * rowH + (prow - 1) * vg }; };
+    /* Spalten: moeglichst 3; sind Namen dort zu eng, weniger Spalten, solange der Block hoechstens 440 px hoch bleibt */
+    L = lay(Math.max(1, Math.min(3, n)));
+    if (!needs(L)) for (const cc of [2, 1]) { if (cc >= L.cols) continue; const Lx = lay(cc); if (Lx.h <= 440 || cc === 2 && Lx.h <= 470) { L = Lx; if (needs(Lx)) break; } }
+    pillsTop = 1190 - L.h; heroBase = nf.lines.length === 1 ? 310 : 330;
+  }
   const bl = new Array(nf.lines.length); bl[nf.lines.length - 1] = heroBase;
-  for (let i = nf.lines.length - 2; i >= 0; i--) bl[i] = bl[i + 1] - (asc[i + 1] + dsc[i] + nf.size * 0.1);
+  for (let i = nf.lines.length - 2; i >= 0; i--) bl[i] = bl[i + 1] - gapL(i);
   c.fillStyle = INK; k.setFont(c, 400, nf.size, k.F_ANTON); nf.lines.forEach((ln, i) => c.fillText(ln, 56, bl[i]));
   k.setFont(c, 400, hv.size, k.F_ANTON); c.fillStyle = ACC; c.textAlign = "right"; c.fillText(win[0].value, 1020, heroBase); c.textAlign = "left";
   /* Unterzeile: Runden von <Sieger> (links), Gleichstand (rechts) */
-  const sub = d.rounds && d.rounds.length ? d.tr("tplSkyjoRounds", (n) => n) : "";
+  const sub = d.rounds && d.rounds.length ? d.tr("tplSkyjoRounds", (n2) => n2) : "";
   const subY = heroBase + 56;
   let tieW = 0;
-  if (d.tie) { const tl = d.tr("ecTied", "Gemeinsamer erster Platz"); k.setFont(c, 700, 34, k.F_BRUSH); const tf2 = k.fit(c, tl, { w: 400, fam: F_BRUSH, max: 38, min: 24, maxW: 460, lines: 1 }); k.setFont(c, 400, tf2.size, F_BRUSH); c.fillStyle = ACC; c.textAlign = "right"; c.fillText(tf2.lines[0], 1020, subY); tieW = c.measureText(tf2.lines[0]).width + 30; c.textAlign = "left"; }
+  if (d.tie) { const tl = d.tr("ecTied", "Gemeinsamer erster Platz"); const tf2 = k.fit(c, tl, { w: 400, fam: F_BRUSH, max: noCards ? 48 : 38, min: 24, maxW: 460, lines: 1 }); k.setFont(c, 400, tf2.size, F_BRUSH); c.fillStyle = ACC; c.textAlign = noCards ? "left" : "right"; c.fillText(tf2.lines[0], noCards ? 60 : 1020, subY); tieW = c.measureText(tf2.lines[0]).width + 30; c.textAlign = "left"; if (noCards) tieW = 0; }
   if (sub && typeof sub === "function") {
     const txt = sub(win[0].name);
     const sf = k.fit(c, txt, { w: 400, fam: F_BRUSH, max: 38, min: 26, maxW: 960 - tieW, lines: 1 });
     k.setFont(c, 400, sf.size, F_BRUSH); c.fillStyle = "rgba(255,255,255,0.85)"; c.fillText(sf.lines[0], 60, subY);
   }
-  /* Plaettchen unten */
-  const n = Math.min(rest.length, FIRST_CAP);
-  const lay = (cols) => { const prow = Math.ceil(n / cols), rowH = prow <= 1 ? 96 : prow === 2 ? 84 : 72, fs = rowH >= 96 ? 46 : rowH >= 84 ? 42 : 38; const vg = Math.min(16, rowH * 0.18); return { cols, prow, rowH, fs, vg, h: prow * rowH + (prow - 1) * vg }; };
-  /* Spalten: moeglichst 3; sind Namen dort zu eng, weniger Spalten, solange der Block hoechstens 440 px hoch bleibt */
-  let L = lay(Math.max(1, Math.min(3, n)));
-  const needs = (Lx) => { const pw = (960 - 16 * (Lx.cols - 1)) / Lx.cols; k.setFont(c, 400, Lx.fs, k.F_ANTON); return rest.slice(0, n).every((r) => { const vw = c.measureText(r.value).width, nw = c.measureText(r.name).width; return nw <= pw - 36 - vw - Lx.fs * 0.56 - 24 - 14; }); };
-  if (!needs(L)) for (const cc of [2, 1]) { if (cc >= L.cols) continue; const Lx = lay(cc); if (Lx.h <= 440 || cc === 2 && Lx.h <= 470) { L = Lx; if (needs(Lx)) break; } }
-  const pillsTop = 1190 - L.h;
   pills(c, k, rest.slice(0, n), L.cols, pillsTop, L.rowH, L.fs);
   /* Karten dazwischen */
   const y0 = subY + 28, y1 = pillsTop - 22;
-  if (d.rounds && d.rounds.length) cardsBlock(c, k, d.rounds, y0, y1 - y0);
+  if (!noCards) cardsBlock(c, k, d.rounds, y0, y1 - y0);
   footer(c, k, d);
   return cv;
 }
@@ -169,11 +181,12 @@ export default {
   texts: (d) => [d.tr("tplSkyjoLow", ""), d.up(d.gameLabel), d.tr("ecTied", ""), "−×0123456789", d.winners.map((r) => r.name).join(" ")],
   render(d, k) {
     d.rounds = winnerRounds(d);
-    const out = [page1(d, k, d.rows.slice(0, FIRST_CAP))];
-    const rest = d.rows.slice(FIRST_CAP);
+    const out = [page1(d, k, d.rows.slice(0, k.ONE_PAGE))];
+    const rest = d.rows.slice(k.ONE_PAGE);
     const parts = k.chunks(rest, 12, 12).filter((p) => p.length);
-    const sty = { bg: (c) => bg(c, k), ink: INK, sub: "rgba(47,217,168,0.8)", acc: ACC, line: "rgba(47,217,168,0.3)", fam: k.F_ANTON, logo: ACC };
-    parts.forEach((p, i) => out.push(k.listPage(d, p, i + 2, parts.length + 1, sty)));
+    const sty = { bg: (c) => bg(c, k), ink: INK, sub: "rgba(47,217,168,0.8)", acc: ACC, line: "rgba(47,217,168,0.3)", fam: k.F_ANTON, logo: ACC, titleFam: F_ARCHIVO, titleCase: true, subFam: F_BRUSH,
+      rowFill: BG, rowFillWin: ACC, rowEdge: "rgba(47,217,168,0.33)", winInk: ON_ACC };
+    parts.forEach((p, i) => out.push(k.continuationPage(d, p, i + 2, parts.length + 1, sty)));
     return out;
   },
 };

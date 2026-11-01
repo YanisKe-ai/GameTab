@@ -5,7 +5,6 @@
 import { F_ARCHIVO } from "./fonts-a.js";
 
 const BG = "#150A07", CREAM = "#FFF1DC", ORG = "#FF7A3D", RED = "#D9431F";
-const FIRST_CAP = 8;
 const NUM_COL = ["#FF7A3D", "#E8552B", "#FF7A3D", "#D9431F", "#FF7A3D", "#E8552B", "#FF7A3D"];
 const BURST = [[50, 0], [60, 14], [77, 7], [79, 25], [97, 28], [88, 44], [100, 58], [83, 66], [86, 85], [67, 83], [58, 100], [47, 86], [30, 96], [26, 78], [7, 75], [15, 59], [0, 46], [17, 37], [13, 18], [32, 21]];
 
@@ -124,37 +123,49 @@ function grid(c, k, rows, top, fs, pitch) {
 function page1(d, k, others) {
   const { cv, c } = k.tplCanvas();
   bg(c, k);
-  const n = others.length, R = Math.ceil(n / 2);
-  const fs = R <= 2 ? 44 : 40, pitch = R <= 2 ? 72 : 64;
-  const gridTop = n ? Math.min(1090, 1196 - R * pitch) : 1196;
-  const heroBase = gridTop - 35;
+  const n = others.length, R = Math.ceil(n / 2), hasFan = d.fanVals.length > 0;
   const win = d.winners.length ? d.winners : d.rows.slice(0, 1);
   const name = d.up(win.map((r) => r.name).join(" & "));
   const val = win[0].value;
-  let hs = 190;
-  const hv = k.fit(c, val, { w: 400, fam: k.F_ANTON, max: hs, min: 110, maxW: 400, lines: 1 });
+  /* Ohne Rundendaten (kein Faecher): Sieger und Rangliste gross und mittig statt Leerflaeche */
+  const hs = hasFan ? 190 : 230;
+  const hv = k.fit(c, val, { w: 400, fam: k.F_ANTON, max: hs, min: 110, maxW: hasFan ? 400 : 480, lines: 1 });
   k.setFont(c, 400, hv.size, k.F_ANTON); const vw = c.measureText(val).width;
-  const fo = { w: 400, fam: k.F_ANTON, maxW: 960 - vw - 40 };
-  let nf = k.fit(c, name, Object.assign({}, fo, { max: hs, min: 118, lines: 1 }));
-  if (nf.cut) nf = k.fit(c, name, Object.assign({}, fo, { max: 104, min: 60, lines: 2 }));
-  if (nf.cut) nf = k.fit(c, name, Object.assign({}, fo, { max: 66, min: 44, lines: 3 }));
+  const fo = { w: 400, fam: k.F_ANTON, maxW: 960 - vw - 60 };
+  const nf = k.heroFit(c, name, fo, [{ max: hs, min: 118, lines: 1 }, { max: Math.min(hs, 120), min: 60, lines: 2 }, { max: 72, min: 30, lines: 3 }]);
   k.setFont(c, 400, nf.size, k.F_ANTON); const cap = k.capH(c);
   const asc = nf.lines.map((l) => Math.max(cap, c.measureText(l).actualBoundingBoxAscent || cap));
   const dsc = nf.lines.map((l) => Math.max(0, c.measureText(l).actualBoundingBoxDescent || 0));
+  const gap = (i) => asc[i + 1] + dsc[i] + nf.size * 0.1;
+  let heroH = asc[nf.lines.length - 1]; for (let i = 0; i < nf.lines.length - 1; i++) heroH += gap(i);
+  heroH += asc[0] - asc[nf.lines.length - 1] + (nf.lines.length > 1 ? 0 : 0);
+  const big = !hasFan;
+  const fs = big ? (R <= 1 ? 62 : R <= 2 ? 54 : R <= 3 ? 48 : 42) : (R <= 2 ? 44 : 40);
+  const pitch = big ? Math.round(fs * 1.5) : (R <= 2 ? 72 : 64);
+  let gridTop, heroBase;
+  if (big) {
+    /* Block (Sieger + Rangliste) mittig zwischen Schild und Fusszeile */
+    const gridH = n ? R * pitch : 0, blockH = heroH + (n ? 90 : 0) + gridH, zoneTop = 430, zoneBot = 1180;
+    const top = zoneTop + Math.max(0, (zoneBot - zoneTop - blockH) / 2);
+    heroBase = top + heroH; gridTop = heroBase + 90;
+  } else {
+    gridTop = n ? Math.min(1090, 1196 - R * pitch) : 1196;
+    heroBase = gridTop - 35;
+  }
   const bl = new Array(nf.lines.length); bl[nf.lines.length - 1] = heroBase;
-  for (let i = nf.lines.length - 2; i >= 0; i--) bl[i] = bl[i + 1] - (asc[i + 1] + dsc[i] + nf.size * 0.1);
+  for (let i = nf.lines.length - 2; i >= 0; i--) bl[i] = bl[i + 1] - gap(i);
   const heroTop = bl[0] - asc[0];
   /* Fachermassstab: bei vielen Spielern oder hohem Namen weniger Platz */
   const dy = d.tie ? 34 : 0;
-  const sc = Math.max(0.42, Math.min(1, (heroTop + (nf.lines.length === 1 ? 22 : -8) - 420 - dy) / 485));
+  const sc = Math.max(0.42, Math.min(1, (heroTop + (R <= 2 ? (nf.lines.length === 1 ? 22 : -8) : -8) - 420 - dy) / 485));
   sign(c, k, d);
   const f7 = d.flip7;
-  fan(c, k, d.fanVals, sc, dy);
-  if (f7 > 0) burst(c, k, d, f7, sc, dy);
+  if (hasFan) fan(c, k, d.fanVals, sc, dy);
+  if (hasFan && f7 > 0) burst(c, k, d, f7, sc, dy);
   /* Beschriftung links unter dem Schild: Gleichstand und/oder "Beste Runden von ..." */
   let ly = 440;
-  if (d.tie) { const tl = d.tr("ecTied", "Gemeinsamer erster Platz"); const tf = k.fit(c, tl, { w: 700, fam: k.F_BALOO, max: 38, min: 24, maxW: 600, lines: 1 }); k.setFont(c, 700, tf.size, k.F_BALOO); c.fillStyle = ORG; c.fillText(tf.lines[0], 70, ly + 14); ly += 44; }
-  if (d.fanVals.length && sc > 0.6) { const f = d.tr("tplFlip7Best"); if (typeof f === "function") { const txt = f(win[0].name); const bf = k.fit(c, txt, { w: 600, fam: k.F_BALOO, max: 32, min: 22, maxW: 560, lines: 1 }); k.setFont(c, 600, bf.size, k.F_BALOO); c.fillStyle = "rgba(255,241,220,0.85)"; c.fillText(bf.lines[0], 70, ly + 14); } }
+  if (d.tie) { const tl = d.tr("ecTied", "Gemeinsamer erster Platz"); const tf = k.fit(c, tl, { w: 700, fam: k.F_BALOO, max: 38, min: 24, maxW: hasFan ? 600 : 900, lines: 1 }); k.setFont(c, 700, tf.size, k.F_BALOO); c.fillStyle = ORG; c.fillText(tf.lines[0], 70, big ? Math.max(ly + 14, heroTop - 30) : ly + 14); ly += 44; }
+  if (hasFan && sc > 0.6) { const f = d.tr("tplFlip7Best"); if (typeof f === "function") { const txt = f(win[0].name); const bf = k.fit(c, txt, { w: 600, fam: k.F_BALOO, max: 32, min: 22, maxW: 560, lines: 1 }); k.setFont(c, 600, bf.size, k.F_BALOO); c.fillStyle = "rgba(255,241,220,0.85)"; c.fillText(bf.lines[0], 70, ly + 14); } }
   c.fillStyle = CREAM; k.setFont(c, 400, nf.size, k.F_ANTON); nf.lines.forEach((ln, i) => c.fillText(ln, 60, bl[i]));
   k.setFont(c, 400, hv.size, k.F_ANTON); c.fillStyle = ORG; c.textAlign = "right"; c.fillText(val, 1020, heroBase); c.textAlign = "left";
   grid(c, k, others, gridTop, fs, pitch);
@@ -179,10 +190,11 @@ export default {
     prepare(d);
     const win = d.winners.length ? d.winners : d.rows.slice(0, 1);
     const rest = d.rows.filter((r) => win.indexOf(r) < 0);
-    const parts = k.chunks(rest, FIRST_CAP, 12);
+    const parts = k.chunks(rest, Math.max(1, k.ONE_PAGE - win.length), 12);
     const out = [page1(d, k, parts[0])];
-    const sty = { bg: (c) => bg(c, k), ink: CREAM, sub: "rgba(255,241,220,0.7)", acc: ORG, line: "rgba(255,122,61,0.35)", fam: k.F_ANTON, logo: ORG };
-    parts.slice(1).forEach((p, i) => out.push(k.listPage(d, p, i + 2, parts.length, sty)));
+    const sty = { bg: (c) => bg(c, k), ink: CREAM, sub: "rgba(255,241,220,0.7)", acc: ORG, line: "rgba(255,122,61,0.35)", fam: k.F_ANTON, logo: ORG, titleFam: F_ARCHIVO, titleCase: true, subFam: k.F_BALOO,
+      rowFill: "rgba(255,122,61,0.12)", rowEdge: "rgba(255,122,61,0.4)", brand: ORG };
+    parts.slice(1).forEach((p, i) => out.push(k.continuationPage(d, p, i + 2, parts.length, sty)));
     return out;
   },
 };

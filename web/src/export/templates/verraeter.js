@@ -26,12 +26,58 @@ function shield(c, x, y, s, traitor) {
 function render(d, k) {
   const { cv, c } = k.tplCanvas();
   const ex = d.extra, P = ex.players, N = P.length, fw = ex.winner === "faithful";
+  // Plan: Platz jedes Spielenden (Wappen, Name, Status). Runder Tisch nur, wenn sich nichts beruehrt, sonst Raster.
+  const alive = d.tr("tplPartyAlive", "lebt"), dead = d.tr("tplPartyDead", "tot");
+  const faith = d.tr("tplTrtFaithful", "treu"), trait = d.tr("tplTrtTraitor", "Verraeter");
+  const makePlan = (mode, dr) => {
+    const isRing = mode === "ring", place = [];
+    if (isRing) {
+      const s = N <= 4 ? 1 : N <= 6 ? 0.82 : 0.68, R = (N <= 4 ? 240 : N <= 6 ? 250 : 262) - (dr || 0);
+      P.forEach((_, i) => { const a = (i / N) * Math.PI * 2 - Math.PI / 2; place.push({ cx: 540 + Math.cos(a) * R, cy: 705 + Math.sin(a) * R * 0.98, s, bw: 250 * s + 60 }); });
+      if (N === 3) { place.length = 0; [-90, 30, 150].forEach((deg) => { const a = deg * Math.PI / 180; place.push({ cx: 540 + Math.cos(a) * (268 - (dr || 0)), cy: 705 + Math.sin(a) * (268 - (dr || 0)), s, bw: 270 }); }); }
+    } else {
+      const cols = N <= 9 ? 3 : 4, rows = Math.ceil(N / cols), cw = 800 / cols, ch = Math.min(250, 720 / rows), s = N <= 9 ? 0.66 : N <= 12 ? 0.6 : 0.5;
+      P.forEach((_, i) => { const r = Math.floor(i / cols), inRow = Math.min(cols, N - r * cols), c0 = i - r * cols; place.push({ cx: 540 + (c0 - (inRow - 1) / 2) * cw, cy: 685 + (r - (rows - 1) / 2) * ch, s, bw: cw - 12 }); });
+    }
+    const items = P.map((p, i) => {
+      const q = place[i], sh = 172 * q.s, sw = 120 * q.s;
+      const nameSize = isRing ? 40 * Math.max(0.75, q.s) : N <= 9 ? 36 : N <= 12 ? 32 : 28, roleSize = isRing ? 30 * Math.max(0.75, q.s) : N <= 9 ? 26 : N <= 12 ? 22 : 20;
+      const nf = fitWords(c, k, d.clean(p.name), { w: 700, fam: F_FRAUNCES, max: nameSize, min: 24, floor: 16, maxW: q.bw - 6, lines: 2 });
+      const role = (p.traitor ? trait : faith) + ", " + (p.alive ? alive : dead);
+      const rf = k.fit(c, role, { w: 500, fam: F_FRAUNCES, max: roleSize, min: 16, maxW: q.bw, lines: 2 });
+      const nlh = nf.size * 1.06, rlh = rf.size * 1.12;
+      const tot = sh + 16 + nlh * nf.lines.length + rlh * rf.lines.length, y0 = q.cy - tot / 2;
+      k.setFont(c, 700, nf.size, F_FRAUNCES); let nw = 0, rw = 0;
+      nf.lines.forEach((ln) => { nw = Math.max(nw, c.measureText(ln).width); });
+      c.font = "italic 500 " + Math.round(rf.size * 10) / 10 + "px " + F_FRAUNCES;
+      rf.lines.forEach((ln) => { rw = Math.max(rw, c.measureText(ln).width); });
+      const ny = y0 + sh + 16, ry = ny + nlh * nf.lines.length;
+      // Teile: Wappen, Name, Status (je eigenes Rechteck, genau so breit wie der Text)
+      const parts = [{ x: q.cx - sw / 2, y: y0, w: sw, h: sh }, { x: q.cx - nw / 2, y: ny, w: nw, h: nlh * nf.lines.length }, { x: q.cx - rw / 2, y: ry, w: rw, h: rlh * rf.lines.length }];
+      return { p, q, sh, sw, nf, rf, nlh, rlh, tot, y0, parts };
+    });
+    // Kollisionspruefung: kein Teil beruehrt ein Teil eines anderen Spielenden, und alle Teile liegen im Tisch
+    let clash = false;
+    for (let i = 0; i < items.length && !clash; i++) {
+      items[i].parts.forEach((a, pi) => {
+        if (isRing) [[a.x, a.y], [a.x + a.w, a.y], [a.x, a.y + a.h], [a.x + a.w, a.y + a.h]].forEach(([px, py]) => { if (Math.hypot(px - 540, py - 705) > (pi === 0 ? 412 : 402)) clash = true; });
+        if (a.x < 60 || a.x + a.w > 1020) clash = true;
+      });
+      for (let j = i + 1; j < items.length && !clash; j++) {
+        items[i].parts.forEach((a) => items[j].parts.forEach((b2) => { if (a.x < b2.x + b2.w + 10 && a.x + a.w + 10 > b2.x && a.y < b2.y + b2.h + 6 && a.y + a.h + 6 > b2.y) clash = true; }));
+      }
+    }
+    return { items, clash };
+  };
+  let plan = null;
+  if (N <= 8) for (const dr of [0, 14, 28, 42]) { plan = makePlan("ring", dr); if (!plan.clash) break; }
+  const ring = !!plan && !plan.clash;
+  if (!ring) plan = makePlan("grid");
   // Hintergrund und Tisch
   c.fillStyle = "#0d0705"; c.fillRect(0, 0, 1080, 1350);
   c.save(); c.translate(540, 702); c.scale(648, 810);
   const bg = c.createRadialGradient(0, 0, 0, 0, 0, 1); bg.addColorStop(0, "#7a3d12"); bg.addColorStop(0.45, "#2d1509"); bg.addColorStop(1, "#0d0705");
   c.fillStyle = bg; c.fillRect(-3, -3, 6, 6); c.restore();
-  const ring = N <= 8;
   c.fillStyle = "#2b150c";
   if (ring) for (let i = 0; i < Math.max(6, Math.min(N, 12)); i++) {
     const n = Math.max(6, Math.min(N, 12)), a = (i / n) * Math.PI * 2 - Math.PI / 2;
@@ -60,29 +106,8 @@ function render(d, k) {
   k.setFont(c, 700, t1.size, F_FRAUNCES); c.fillStyle = CREAM; k.spaced(c, t1.lines[0], 540, k.cssBase(c, 36, 112), 0.01 * t1.size, "center");
   k.setFont(c, 700, t2.size, F_FRAUNCES); c.fillStyle = RED2; c.fillText(t2.lines[0], 540, k.cssBase(c, 148, 92));
   // Spielende
-  const alive = d.tr("tplPartyAlive", "lebt"), dead = d.tr("tplPartyDead", "tot");
-  const faith = d.tr("tplTrtFaithful", "treu"), trait = d.tr("tplTrtTraitor", "Verraeter");
-  const items = P.map((p, i) => ({ p, i }));
-  const place = [];
-  if (ring) {
-    const s = N <= 4 ? 1 : N <= 6 ? 0.82 : 0.68, R = N <= 4 ? 240 : N <= 6 ? 250 : 262;
-    items.forEach(({ i }) => { const a = (i / N) * Math.PI * 2 - Math.PI / 2; place.push({ cx: 540 + Math.cos(a) * R * (N === 3 ? 1 : 1), cy: 705 + Math.sin(a) * R * 0.98 - 0, s, bw: 250 * s + 60 }); });
-    if (N === 3) { place.length = 0; [[-90], [30], [150]].forEach(([deg], i) => { const a = deg * Math.PI / 180; place.push({ cx: 540 + Math.cos(a) * 268, cy: 705 + Math.sin(a) * 268, s, bw: 270 }); }); }
-  } else {
-    const cols = N <= 9 ? 3 : 4, rows = Math.ceil(N / cols), cw = 800 / cols, ch = Math.min(250, 720 / rows), s = N <= 12 ? 0.6 : 0.5;
-    items.forEach(({ i }) => { const r = Math.floor(i / cols), inRow = Math.min(cols, N - r * cols), c0 = i - r * cols; place.push({ cx: 540 + (c0 - (inRow - 1) / 2) * cw, cy: 685 + (r - (rows - 1) / 2) * ch, s, bw: cw - 12 }); });
-  }
-  items.forEach(({ p, i }, n) => {
-    const q = place[n], sh = 172 * q.s, sw = 120 * q.s;
-    const big = ring, nameSize = ring ? 40 * Math.max(0.75, q.s) : N <= 12 ? 32 : 28, roleSize = ring ? 30 * Math.max(0.75, q.s) : N <= 12 ? 22 : 20;
-    const col = p.traitor ? "#ff7a7a" : CREAM;
-    const nf = fitWords(c, k, d.clean(p.name), { w: 700, fam: F_FRAUNCES, max: nameSize, min: 24, floor: 16, maxW: q.bw - 6, lines: 2 });
-    const role = (p.traitor ? trait : faith) + ", " + (p.alive ? alive : dead);
-    k.setFont(c, 600, roleSize, F_FRAUNCES);
-    const rf = k.fit(c, role, { w: 500, fam: F_FRAUNCES, max: roleSize, min: 11, maxW: q.bw, lines: 2 });
-    const nlh = nf.size * 1.06, rlh = rf.size * 1.12;
-    const tot = sh + 16 + nlh * nf.lines.length + rlh * rf.lines.length;
-    const y0 = q.cy - tot / 2;
+  plan.items.forEach((it) => {
+    const { p, q, sh, sw, nf, rf, nlh, rlh, y0 } = it, col = p.traitor ? "#ff7a7a" : CREAM;
     c.globalAlpha = p.alive ? 1 : 0.78;
     shield(c, q.cx - sw / 2, y0, q.s, p.traitor);
     c.textAlign = "center";

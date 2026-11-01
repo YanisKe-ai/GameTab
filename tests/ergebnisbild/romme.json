@@ -362,5 +362,72 @@
     }
    ]
   }
+ },
+ {
+  "name": "sechs_lang",
+  "lang": "de",
+  "lowWins": true,
+  "players": [
+   {
+    "name": "Maximiliane Huber-Brunner von und zu Hohenstein-Wildenburg",
+    "score": 48,
+    "rk": 48
+   },
+   {
+    "name": "Alexandrine-Marie Schmidt",
+    "score": 95,
+    "rk": 95
+   },
+   {
+    "name": "Bartholomäus",
+    "score": 140,
+    "rk": 140
+   },
+   {
+    "name": "Dino",
+    "score": 210,
+    "rk": 210
+   },
+   {
+    "name": "Eva",
+    "score": 380,
+    "rk": 380
+   },
+   {
+    "name": "Finn",
+    "score": 505,
+    "rk": 505
+   }
+  ],
+  "extra": {
+   "rounds": 9,
+   "target": 500,
+   "players": [
+    {
+     "name": "Maximiliane Huber-Brunner von und zu Hohenstein-Wildenburg",
+     "total": 48
+    },
+    {
+     "name": "Alexandrine-Marie Schmidt",
+     "total": 95
+    },
+    {
+     "name": "Bartholomäus",
+     "total": 140
+    },
+    {
+     "name": "Dino",
+     "total": 210
+    },
+    {
+     "name": "Eva",
+     "total": 380
+    },
+    {
+     "name": "Finn",
+     "total": 505
+    }
+   ]
+  }
  }
 ]

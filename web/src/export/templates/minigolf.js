@@ -46,9 +46,13 @@ function stamp(c, k, lines, rightX, top) {
   c.restore();
 }
 /* Zeilen: Rang, Name, Kacheln mit den Schlaegen, Abstand */
-function rows(c, k, d, list, gap, top, n) {
-  const sz = (r) => r.winner ? (n <= 2 ? { th: 190, nm: 120 } : n <= 3 ? { th: 138, nm: 96 } : n === 4 ? { th: 110, nm: 78 } : n <= 6 ? { th: 84, nm: 60 } : { th: 66, nm: 50 }) : (n <= 2 ? { th: 140, nm: 84 } : n <= 3 ? { th: 100, nm: 64 } : n === 4 ? { th: 64, nm: 50 } : n === 5 ? { th: 52, nm: 44 } : n <= 7 ? { th: 42, nm: 36 } : n === 8 ? { th: 38, nm: 34 } : { th: 32, nm: 30 });
+function rows(c, k, d, list, gap, top, n, limit) {
+  const sz0 = (r) => r.winner ? (n <= 2 ? { th: 190, nm: 120 } : n <= 3 ? { th: 138, nm: 96 } : n === 4 ? { th: 110, nm: 78 } : n <= 6 ? { th: 84, nm: 60 } : { th: 66, nm: 50 }) : (n <= 2 ? { th: 140, nm: 84 } : n <= 3 ? { th: 100, nm: 64 } : n === 4 ? { th: 64, nm: 50 } : n === 5 ? { th: 52, nm: 44 } : n <= 7 ? { th: 42, nm: 36 } : n === 8 ? { th: 38, nm: 34 } : { th: 32, nm: 30 });
   const ov = n <= 5 ? 29 : 17;
+  // Viele Spieler: Zeilenhoehe aus dem freien Platz ableiten (Kacheln und Namen so gross wie moeglich)
+  const dense = n >= 8 && limit;
+  const pitchD = dense ? (limit - top - 14) / n : 0;
+  const sz = (r) => { if (!dense) return sz0(r); const th = Math.min(72, pitchD - ov) + (r.winner ? 14 : 0); return { th, nm: Math.min(th * 0.8, r.winner ? 60 : 52) }; };
   let y = top;
   list.forEach((r) => {
     const s = sz(r), digits = Array.from(String(r.value).replace(/[^0-9]/g, "")), nd = digits.length || 1;
@@ -63,10 +67,8 @@ function rows(c, k, d, list, gap, top, n) {
     k.setFont(c, 400, s.nm * 0.94, k.F_ANTON); c.fillStyle = LIME; const cap = k.capH(c);
     c.fillText(String(r.rank), 100, bl + cap / 2);
     const nx = 170, nw = tx - 30 - nx;
-    let f = k.fit(c, r.name, { w: 400, fam: k.F_ANTON, max: s.nm, min: s.nm * 0.5, maxW: nw, lines: 1, ls: 0.04 });
-    let sp = !f.cut;
-    if (f.cut) f = k.fit(c, r.name, { w: 400, fam: k.F_ANTON, max: s.nm * 0.62, min: 30, maxW: nw, lines: 2 });
-    if (f.cut) f = k.fit(c, r.name, { w: 400, fam: k.F_ANTON, max: s.nm * 0.45, min: 18, maxW: nw, lines: 3 });
+    const f = k.nameFit(c, r.name, { w: 400, fam: k.F_ANTON, max: s.nm, maxW: nw, ls: 0.04, oneMin: 0.78, max2: Math.max(24, (s.th + ov - 8) / 2.2) });
+    const sp = f.sp;
     k.setFont(c, 400, f.size, k.F_ANTON); c.fillStyle = r.winner ? "#FFFFFF" : INK;
     const lh = f.size * 1.08, capN = k.capH(c);
     f.lines.forEach((ln, i) => { const yy = bl - ((f.lines.length - 1) * lh) / 2 + i * lh + capN / 2; if (sp) k.spaced(c, ln, nx, yy, f.size * 0.04, "left"); else c.fillText(ln, nx, yy); });
@@ -89,12 +91,13 @@ function page1(d, k, extras, rowsList, pageNo, pageCount) {
   const best = d.winners.length ? d.winners[0].score : null;
   const gap = {}; d.rows.forEach((r) => { if (best != null && r.score != null) gap[r.rank] = r.score - best; });
   const nShown = rowsList.length;
-  const endY = rows(c, k, d, rowsList, gap, 440, nShown);
+  const compact = nShown >= 8;
+  const endY = rows(c, k, d, rowsList, gap, 440, nShown, compact ? (extras.aces.length ? 1135 : 1180) : 0);
   // Schlaege des Siegers pro Bahn
   const w0 = d.winners[0] || d.rows[0], st = extras.byRow[d.rows.indexOf(w0)];
   const strokes = st && Array.isArray(st.strokes) ? st.strokes : null;
   const gt = 1010;
-  if (strokes && strokes.length === holes) {
+  if (strokes && strokes.length === holes && !compact) {
     const lab = d.up(d.tr("tplMgPer", (nm) => nm)(w0.name));
     const lf = k.fit(c, lab, { w: 600, fam: MONO, max: 22, min: 14, maxW: 500, lines: 1, ls: 0.14 });
     k.setFont(c, 500, lf.size, MONO); c.fillStyle = SOFT; k.spaced(c, lf.lines[0], 100, gt - 12 - 6, lf.size * 0.14, "left");
@@ -113,14 +116,15 @@ function page1(d, k, extras, rowsList, pageNo, pageCount) {
   if (aces.length && pageNo === 1) {
     const a0 = aces[0];
     const l2 = a0.name + ", " + d.tr("tplMgHole", (l) => l)(a0.holes.join(", ")) + (aces.length > 1 ? " +" + (aces.length - 1) : "");
-    if (endY > 872) {
+    if (endY > 872 || compact) {
       // viele Spieler: kleine Marke neben der Beschriftung statt gedrehtem Stempel
       const txt = d.up(d.tr("tplMgAce", "Hole in one")) + ": " + l2;
       const bf = k.fit(c, txt, { w: 400, fam: k.F_ANTON, max: 24, min: 14, maxW: 480, lines: 1 });
+      const ay = compact ? 1155 : gt - 52;
       k.setFont(c, 400, bf.size, k.F_ANTON); const bw = c.measureText(bf.lines[0]).width + 28;
-      c.strokeStyle = GOLD; c.lineWidth = 3; k.rrect(c, 980 - bw, gt - 52, bw, 38, 10); c.stroke();
-      c.fillStyle = GOLD; c.textAlign = "center"; c.fillText(bf.lines[0], 980 - bw / 2, gt - 52 + 19 + k.capH(c) / 2); c.textAlign = "left";
-    } else stamp(c, k, [d.up(d.tr("tplMgAce", "Hole in one")), l2], 810, Math.min(Math.max(endY + 6, 870), 985 - 100));
+      c.strokeStyle = GOLD; c.lineWidth = 3; k.rrect(c, 980 - bw, ay, bw, 38, 10); c.stroke();
+      c.fillStyle = GOLD; c.textAlign = "center"; c.fillText(bf.lines[0], 980 - bw / 2, ay + 19 + k.capH(c) / 2); c.textAlign = "left";
+    } else stamp(c, k, [d.up(d.tr("tplMgAce", "Hole in one")), l2], 810, Math.min(Math.max(endY + 22, 870), 985 - 100));
   }
   // Fusszeile
   const win = d.winners, val = win.length ? d.num(win[0].score) : "";

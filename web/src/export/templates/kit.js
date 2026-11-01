@@ -4,6 +4,7 @@
 // Eine Vorlage = eine Datei in diesem Ordner, Registry in index.js. Anleitung: dev-notes/ERGEBNISBILD_EINBAU.md.
 import { gtEcModel, gtEcFonts, gtEcNum, gtEcTr, gtEcNoEmoji, GT_EC_CJK } from "../result-card.js";
 import { APP_LOGO_URI_GOLD } from "../../assets/logo-data.js";
+import { breakHy, unHy } from "./util.js";
 
 const TPL_W = 1080, TPL_H = 1350;
 /* Schrift-Stapel: Fallback auf GT Clean (DejaVu, viele Schriftsysteme) und GT CJK (nur geladen, wenn CJK-Text vorkommt). Keine Emoji-Schrift. */
@@ -176,6 +177,19 @@ function heroFit(c, text, o, tiers) {
   for (const t of tiers) { f = fit(c, text, Object.assign({}, o, t)); if (!f.cut) return f; }
   return f;
 }
+/* Namen in Ranglisten: erst eine Zeile (bis max*oneMin, nie unter 24 px), dann Umbruch auf bis zu o.lines (Standard 2) Zeilen
+   (an Bindestrichen und Woertern, nie unter 24 px), erst danach Kuerzen mit Auslassung. o: {w, fam, max, maxW, min=24, lines=2, ls=0 (nur einzeilig), oneMin=0.62, max2}.
+   Rueckgabe wie fit() plus sp (true = Zeichenabstand ls wurde fuer die einzeilige Fassung genutzt). */
+const NAME_MIN = 24;
+function nameFit(c, text, o) {
+  const min = Math.max(NAME_MIN, o.min || NAME_MIN), max = Math.max(o.max, min), L = o.lines || 2;
+  const base = { w: o.w, fam: o.fam, maxW: o.maxW };
+  let f = fit(c, text, Object.assign({}, base, { max, min: Math.max(min, max * (o.oneMin || 0.62)), lines: 1, ls: o.ls || 0 }));
+  if (!f.cut) { f.sp = !!o.ls; return f; }
+  f = fit(c, breakHy(text), Object.assign({}, base, { max: Math.max(min, Math.min(max, o.max2 || max)), min, lines: L }));
+  f.lines = unHy(f.lines); f.sp = false;
+  return f;
+}
 /* Alle Eintraege, die auf EIN Bild passen (bis 10 Spieler). Ab dem 11. Eintrag kommt eine Folgeseite. */
 const ONE_PAGE = 10;
 /* Folgeseite ab dem 11. Spieler, gemeinsam fuer alle Vorlagen.
@@ -186,7 +200,7 @@ const ONE_PAGE = 10;
    rows: die Zeilen dieser Seite, no: Seitennummer (ab 2), count: Seitenzahl insgesamt. */
 function continuationPage(d, rows, no, count, sty) {
   const { cv, c } = tplCanvas(); sty.bg(c);
-  const fam = sty.fam || F_INTER, tfam = sty.titleFam || fam, tw = sty.titleW || 400, sfam = sty.subFam || F_BALOO;
+  const fam = sty.fam || F_INTER, nwt = fam.indexOf("Anton") >= 0 ? 400 : 700, tfam = sty.titleFam || fam, tw = sty.titleW || 400, sfam = sty.subFam || F_BALOO;
   /* Kopf: Logo, Marke, Seitenzahl */
   const lh = 64, lw = logo(c, d.logo, 60, 50, lh, sty.logo || sty.ink);
   setFont(c, 800, 36, F_BALOO); c.fillStyle = sty.logo || sty.ink; c.fillText("GameTab", 60 + lw + 16, 50 + lh * 0.66);
@@ -206,9 +220,9 @@ function continuationPage(d, rows, no, count, sty) {
   if (sty.deco) sty.deco(c, sepY);
   /* Rangliste: Block mittig im freien Bereich, Zeilenhoehe waechst bei wenigen Zeilen */
   const top = sepY + 22, bottom = 1170, avail = bottom - top, n = Math.max(rows.length, 1);
-  const pitch = Math.min(n <= 4 ? 124 : 104, avail / n), blockH = pitch * n;
-  const y0 = top + (n >= 8 ? 0 : (avail - blockH) * 0.3);
-  const fs = Math.max(28, Math.min(n <= 4 ? 60 : 52, pitch * 0.5)), gapR = Math.min(10, pitch * 0.14), rh = pitch - gapR;
+  const pitch = Math.min(n === 1 ? 250 : n === 2 ? 210 : n <= 4 ? 150 : 104, avail / n), blockH = pitch * n;
+  const y0 = top + (n >= 8 ? 0 : (avail - blockH) * (n <= 4 ? 0.5 : 0.3));
+  const fs = Math.max(28, Math.min(n === 1 ? 84 : n === 2 ? 76 : n <= 4 ? 64 : 52, pitch * 0.5)), gapR = Math.min(12, pitch * 0.14), rh = pitch - gapR;
   rows.forEach((r, i) => {
     const y = y0 + i * pitch, base = y + rh / 2 + fs * 0.36, hot = r.winner;
     if (sty.rowFill) {
@@ -219,11 +233,13 @@ function continuationPage(d, rows, no, count, sty) {
     const px = sty.rowFill ? 24 : 0;
     setFont(c, 800, fs * 0.9, F_INTER); c.fillStyle = hot ? accR : sty.sub; c.fillText(String(r.rank), 60 + px, base);
     const rankW = Math.max(c.measureText("00").width, c.measureText(String(r.rank)).width) + 22;
-    setFont(c, 700, fs, fam); c.fillStyle = hot ? accR : inkR; c.textAlign = "right";
-    const vf = fit(c, r.value, { w: 700, fam, max: fs, min: fs * 0.6, maxW: 330, lines: 1 }); setFont(c, 700, vf.size, fam);
+    setFont(c, nwt, fs, fam); c.fillStyle = hot ? accR : inkR; c.textAlign = "right";
+    const vf = fit(c, r.value, { w: nwt, fam, max: fs, min: fs * 0.6, maxW: 330, lines: 1 }); setFont(c, nwt, vf.size, fam);
     const vw = c.measureText(r.value).width; c.fillText(r.value, 1020 - px, base); c.textAlign = "left";
-    const f = fit(c, r.name, { w: 700, fam, max: fs, min: Math.max(22, fs * 0.6), maxW: 960 - px * 2 - rankW - vw - 36, lines: 1 });
-    setFont(c, 700, f.size, fam); c.fillStyle = inkR; c.fillText(f.lines[0], 60 + px + rankW, base);
+    const f = nameFit(c, r.name, { w: nwt, fam, max: fs, maxW: 960 - px * 2 - rankW - vw - 36, lines: 2 });
+    setFont(c, nwt, f.size, fam); c.fillStyle = inkR;
+    const nlh = f.size * 1.1, nb = base - fs * 0.36 + f.size * 0.36 - ((f.lines.length - 1) * nlh) / 2;
+    f.lines.forEach((ln, j) => c.fillText(ln, 60 + px + rankW, nb + j * nlh));
   });
   /* Fuss: Datum */
   setFont(c, 600, 26, F_BALOO); c.fillStyle = sty.sub; c.fillText(d.date, 60, 1275);
@@ -232,4 +248,4 @@ function continuationPage(d, rows, no, count, sty) {
 /* Alter Name, bleibt fuer bestehende Aufrufe (yatzy) gueltig */
 const listPage = continuationPage;
 
-export { TPL_W, TPL_H, F_ANTON, F_INTER, F_BALOO, F_KALAM, LOGO_AR, tplFonts, tplLogo, tplWarm, tplCanvas, rrect, cssEllipse, insetShadow, setFont, seg, wrap, ellipsize, fit, spaced, spacedW, cssBase, capH, logo, tplDate, tplData, chunks, listPage, continuationPage, heroFit, ONE_PAGE };
+export { TPL_W, TPL_H, F_ANTON, F_INTER, F_BALOO, F_KALAM, LOGO_AR, tplFonts, tplLogo, tplWarm, tplCanvas, rrect, cssEllipse, insetShadow, setFont, seg, wrap, ellipsize, fit, nameFit, NAME_MIN, spaced, spacedW, cssBase, capH, logo, tplDate, tplData, chunks, listPage, continuationPage, heroFit, ONE_PAGE };

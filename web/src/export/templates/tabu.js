@@ -53,33 +53,34 @@ function footer(c, k, d) {
   parts.forEach((ln, i) => c.fillText(ln, 1010, 1264 - (parts.length - 1) * f.size * 0.65 + i * f.size * 1.3));
   c.textAlign = "left";
 }
-function board(c, k, d, rows, top, pitch) {
-  const h = pitch - 18, big = h >= 120;
+/* Teamtafeln: eine Spalte (bis 4 Teams, Breite 620) oder zwei Spalten (ab 5 Teams, je 470), Reihenfolge zeilenweise */
+function board(c, k, d, rows, top, pitch, cols) {
+  const h = pitch - 18, w = cols === 2 ? 470 : 620, gx = 20, x00 = cols === 2 ? 70 : 80;
   rows.forEach((r, i) => {
-    const y = top + i * pitch, dark = r.winner;
-    if (dark) { c.fillStyle = INK; k.rrect(c, 80, y, 620, h, 22); c.fill(); }
-    else { c.fillStyle = INK; k.rrect(c, 80, y, 620, h, 22); c.fill(); c.fillStyle = "#fff"; k.rrect(c, 88, y + 8, 604, h - 16, 15); c.fill(); }
+    const col = cols === 2 ? i % 2 : 0, row = cols === 2 ? Math.floor(i / 2) : i;
+    const x0 = x00 + col * (w + gx), y = top + row * pitch, dark = r.winner;
+    c.fillStyle = INK; k.rrect(c, x0, y, w, h, 22); c.fill();
+    if (!dark) { c.fillStyle = "#fff"; k.rrect(c, x0 + 8, y + 8, w - 16, h - 16, 15); c.fill(); }
     const ink = dark ? YEL : INK;
-    const ss = Math.min(110, h * 0.78);
+    const ss = Math.min(110, h * 0.78, cols === 2 ? 76 : 110);
     k.setFont(c, 400, ss, k.F_ANTON); const vw = c.measureText(r.value).width; const cap = k.capH(c);
-    c.fillStyle = ink; c.textAlign = "right"; c.fillText(r.value, 664, y + h / 2 + cap / 2); c.textAlign = "left";
-    const ns = Math.min(60, h * 0.5), nw = 620 - 36 - 28 - vw - 20;
-    let f = k.fit(c, r.name, { w: 400, fam: k.F_ANTON, max: ns, min: ns * 0.6, maxW: nw, lines: 1 });
-    if (f.cut) { f = k.fit(c, breakHy(r.name), { w: 400, fam: k.F_ANTON, max: Math.min(ns * 0.8, (h - 20) / 2.1), min: 14, maxW: nw, lines: 2 }); f.lines = unHy(f.lines); }
-    if (f.cut) { f = k.fit(c, breakHy(r.name), { w: 400, fam: k.F_ANTON, max: (h - 14) / 3.2, min: 12, maxW: nw, lines: big ? 3 : 2 }); f.lines = unHy(f.lines); }
+    c.fillStyle = ink; c.textAlign = "right"; c.fillText(r.value, x0 + w - 36, y + h / 2 + cap / 2); c.textAlign = "left";
+    const ns = Math.min(60, h * 0.5), nw = w - 36 - 28 - vw - 20;
+    const f = k.nameFit(c, r.name, { w: 400, fam: k.F_ANTON, max: ns, maxW: nw, oneMin: 0.7, lines: h >= 120 ? 3 : 2, max2: Math.max(24, Math.min(ns * 0.8, (h - 24) / ((h >= 120 ? 3 : 2) * 1.08))) });
     k.setFont(c, 400, f.size, k.F_ANTON); c.fillStyle = ink;
     const lh = f.size * 1.08, cp = k.capH(c);
-    f.lines.forEach((ln, q) => c.fillText(ln, 116, y + h / 2 - ((f.lines.length - 1) * lh) / 2 + q * lh + cp / 2));
+    f.lines.forEach((ln, q) => c.fillText(ln, x0 + 36, y + h / 2 - ((f.lines.length - 1) * lh) / 2 + q * lh + cp / 2));
   });
 }
 function page1(d, k, rows, wordsArr) {
   const { cv, c } = k.tplCanvas();
   c.fillStyle = YEL; c.fillRect(0, 0, k.TPL_W, k.TPL_H);
-  const n = rows.length, many = n > 3;
-  if (many) { card(c, k, wordsArr, 540, 70 + 360 * 0.62, 0.62); buzzer(c, 885, 700, 230); }
-  else { card(c, k, wordsArr, 540, 430, 1); buzzer(c, 885, 935, 230); }
-  const top = many ? 590 : 830, pitch = Math.min(158, (1196 - top) / n);
-  board(c, k, d, rows, top, pitch);
+  const n = rows.length, many = n > 3, two = n > 4;
+  // Karte immer mittig, ab 4 Teams mit mindestens 60 Prozent der Bildbreite (820 * 0.8 = 656 px)
+  if (many) card(c, k, wordsArr, 540, 40 + 360 * 0.8 + 6, 0.8); else card(c, k, wordsArr, 540, 430, 1);
+  const top = many ? 650 : 830, rowsN = two ? Math.ceil(n / 2) : n, pitch = Math.min(two ? 150 : 158, (1196 - top) / rowsN);
+  if (two) buzzer(c, 935, 585, 170); else if (many) buzzer(c, 885, 840, 230); else buzzer(c, 885, 935, 230);
+  board(c, k, d, rows, top, pitch, two ? 2 : 1);
   footer(c, k, d);
   return cv;
 }

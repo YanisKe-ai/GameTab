@@ -62,19 +62,18 @@ function rowsBlock(c, k, d, list, info, top, bottom) {
     k.setFont(c, 400, fs, k.F_ANTON); const vw = c.measureText(r.value).width, cap = k.capH(c);
     const un = info.unit(r.score);
     let uw = 0;
-    if (un) { const uf = k.fit(c, un, { w: 600, fam: MONO, max: Math.max(15, fs * 0.36), min: 11, maxW: 130, lines: 1 }); k.setFont(c, 600, uf.size, MONO); uw = c.measureText(uf.lines[0]).width + 12; c.fillStyle = "rgba(255,255,255,0.85)"; c.textAlign = "right"; c.fillText(uf.lines[0], 1010, mid + cap / 2); c.textAlign = "left"; k.setFont(c, 400, fs, k.F_ANTON); }
+    if (un) { const uf = k.fit(c, un, { w: 600, fam: MONO, max: Math.max(22, fs * 0.5), min: 20, maxW: 130, lines: 1 }); k.setFont(c, 600, uf.size, MONO); uw = c.measureText(uf.lines[0]).width + 12; c.fillStyle = "rgba(255,255,255,0.85)"; c.textAlign = "right"; c.fillText(uf.lines[0], 1010, mid + cap / 2); c.textAlign = "left"; k.setFont(c, 400, fs, k.F_ANTON); }
     c.fillStyle = "#fff"; c.textAlign = "right"; c.fillText(r.value, 1010 - uw, mid + cap / 2); c.textAlign = "left";
     const mt = info.mid[i];
     const ux = 1010 - uw - Math.max(vw, 60) - 24;
     let mw = 0;
     if (mt) {
-      const mf = k.fit(c, mt, { w: 600, fam: MONO, max: Math.max(16, fs * 0.5), min: 12, maxW: 420, lines: 1, ls: 0.04 });
+      const mf = k.fit(c, mt, { w: 600, fam: MONO, max: Math.max(22, fs * 0.5), min: 20, maxW: 420, lines: 1, ls: 0.04 });
       k.setFont(c, 600, mf.size, MONO); mw = k.spacedW(c, mf.lines[0], mf.size * 0.04);
       c.fillStyle = "#fff"; k.spaced(c, mf.lines[0], ux - mw, mid + mf.size * 0.35, mf.size * 0.04, "left");
     }
     const nw = ux - (mw ? mw + 30 : 0) - 70 - 16;
-    let f = k.fit(c, r.name, { w: 400, fam: k.F_ANTON, max: fs, min: fs * 0.6, maxW: nw, lines: 1 });
-    if (f.cut) { f = k.fit(c, breakHy(r.name), { w: 400, fam: k.F_ANTON, max: fs * 0.62, min: 14, maxW: nw, lines: 2 }); f.lines = unHy(f.lines); }
+    const f = k.nameFit(c, r.name, { w: 400, fam: k.F_ANTON, max: Math.max(24, fs), maxW: nw, oneMin: 0.7, max2: Math.max(24, (h - 8) / 2.2) });
     k.setFont(c, 400, f.size, k.F_ANTON); c.fillStyle = "#fff";
     const lh = f.size * 1.06, cp = k.capH(c);
     f.lines.forEach((ln, q) => c.fillText(ln, 70, mid - ((f.lines.length - 1) * lh) / 2 + q * lh + cp / 2));
@@ -84,9 +83,11 @@ function rowsBlock(c, k, d, list, info, top, bottom) {
 function page1(d, k, info, list) {
   const { cv, c } = k.tplCanvas();
   c.fillStyle = BGC; c.fillRect(0, 0, k.TPL_W, k.TPL_H);
-  const many = list.length > 5, Y0 = many ? 740 : 880;
+  const nL = list.length, dense = nL >= 8, many = nL > 5;
+  // Viele Spieler: Scheibe kleiner und weiter nach oben (Dartspitzen bleiben unter dem Kopf), das rote Band beginnt hoeher
+  const Y0 = dense ? 600 : many ? 700 : 880, bs = dense ? 0.6 : many ? 0.745 : 1, bcy = dense ? 407 : many ? 466 : 545;
   c.fillStyle = RED; c.fillRect(0, Y0, 1080, 1350 - Y0); stripes(c, Y0, 1350);
-  c.save(); if (many) { c.translate(0, -80); c.translate(540, 545); c.scale(0.9, 0.9); c.translate(-540, -545); }
+  c.save(); if (many) { c.translate(540, bcy); c.scale(bs, bs); c.translate(-540, -545); }
   board(c, k);
   dart(c, 528, 383, 3); dart(c, 546, 294, 9); dart(c, 582, 372, 12);
   c.restore();
@@ -112,11 +113,11 @@ function page1(d, k, info, list) {
   const df = k.fit(c, parts.reduce((a, b) => (a.length > b.length ? a : b), ""), { w: 500, fam: MONO, max: 22, min: 14, maxW: 250, lines: 1 });
   k.setFont(c, 500, df.size, MONO); c.fillStyle = SOFT; c.textAlign = "right"; parts.forEach((ln, i) => c.fillText(ln, 1010, 270 + i * df.size * 1.4)); c.textAlign = "left";
   // Banner
-  const bf = k.fit(c, info.banner, { w: 400, fam: k.F_ANTON, max: many ? 100 : 120, min: 52, maxW: 940, lines: 1 });
+  const bf = k.fit(c, info.banner, { w: 400, fam: k.F_ANTON, max: dense ? 84 : many ? 100 : 120, min: 52, maxW: 940, lines: 1 });
   k.setFont(c, 400, bf.size, k.F_ANTON); c.textAlign = "center";
   const by = Y0 + 15 + (bf.size - k.capH(c)) / 2 + k.capH(c) - bf.size * 0.12;
   c.fillStyle = BGC; c.fillText(bf.lines[0], 540, by + 6); c.fillStyle = "#fff"; c.fillText(bf.lines[0], 540, by); c.textAlign = "left";
-  rowsBlock(c, k, d, list, info, Y0 + 150 + (bf.size - 120) * 0.5, 1300);
+  rowsBlock(c, k, d, list, info, dense ? Y0 + 112 : Y0 + 150 + (bf.size - 120) * 0.5, dense ? 1310 : 1300);
   return cv;
 }
 

@@ -60,18 +60,23 @@ function page1(d, k, rows, rounds, target) {
   const n = rows.length, pitch = Math.min(91, (1190 - 884) / n), fs = Math.min(70, pitch * 0.74);
   const lf2 = k.fit(c, lab, { w: 700, fam: F_FRAU, max: 34, min: 20, maxW: 440, lines: 1 });
   k.setFont(c, 700, lf2.size, F_FRAU); c.fillStyle = GOLD; c.fillText(lf2.lines[0], 560, 868);
+  // Namen: eine Zeile, sonst bis 2 Zeilen (nie unter 24 px). Zeilen mit Umbruch werden hoeher, kurze Zeilen rutschen etwas zusammen.
+  const AV = 1200 - 884;
+  const fits = rows.map((r) => {
+    k.setFont(c, 400, fs, k.F_ANTON);
+    return k.nameFit(c, r.name, { w: 400, fam: k.F_ANTON, max: fs, maxW: 456 - c.measureText(r.value).width - 24, max2: Math.max(24, (pitch - 6) / 2.2) });
+  });
+  const need = fits.map((f) => (f.lines.length > 1 ? f.lines.length * f.size * 1.08 + 12 : 0));
+  const tall = need.filter((v) => v > pitch);
+  const basePitch = tall.length ? Math.max(42, Math.min(pitch, (AV - tall.reduce((a2, v) => a2 + v, 0)) / Math.max(1, n - tall.length))) : pitch;
+  let yy = 884;
   rows.forEach((r, i) => {
-    const y = 884 + i * pitch;
-    c.fillStyle = "rgba(232,216,168,0.33)"; c.fillRect(560, y + pitch - 3, 456, 3);
-    k.setFont(c, 400, fs, k.F_ANTON); const vw2 = c.measureText(r.value).width;
-    const mw = 456 - vw2 - 24;
-    let f = k.fit(c, r.name, { w: 400, fam: k.F_ANTON, max: fs, min: fs * 0.62, maxW: mw, lines: 1 });
-    if (f.cut) { f = k.fit(c, breakHy(r.name), { w: 400, fam: k.F_ANTON, max: pitch * 0.4, min: 14, maxW: mw, lines: 2 }); f.lines = unHy(f.lines); }
-    if (f.cut && pitch >= 70) { f = k.fit(c, breakHy(r.name), { w: 400, fam: k.F_ANTON, max: pitch * 0.3, min: 12, maxW: mw, lines: 3 }); f.lines = unHy(f.lines); }
-    c.fillStyle = r.winner ? GOLD : "#fff"; k.setFont(c, 400, fs, k.F_ANTON); c.textAlign = "right"; c.fillText(r.value, 1016, y + pitch / 2 + k.capH(c) / 2);
+    const f = fits[i], ph = Math.max(basePitch, need[i]), y = yy; yy += ph;
+    c.fillStyle = "rgba(232,216,168,0.33)"; c.fillRect(560, y + ph - 3, 456, 3);
+    c.fillStyle = r.winner ? GOLD : "#fff"; k.setFont(c, 400, fs, k.F_ANTON); c.textAlign = "right"; c.fillText(r.value, 1016, y + ph / 2 + k.capH(c) / 2);
     c.textAlign = "left"; k.setFont(c, 400, f.size, k.F_ANTON);
     const lh = f.size * 1.08, cp = k.capH(c);
-    f.lines.forEach((ln, q) => c.fillText(ln, 560, y + pitch / 2 - ((f.lines.length - 1) * lh) / 2 + q * lh + cp / 2));
+    f.lines.forEach((ln, q) => c.fillText(ln, 560, y + ph / 2 - ((f.lines.length - 1) * lh) / 2 + q * lh + cp / 2));
   });
   footer(c, k, d);
   return cv;

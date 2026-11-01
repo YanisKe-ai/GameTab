@@ -53,10 +53,15 @@ function layoutRows(c, k, d, extras, N) {
     setI(c, 500, 28, NAME_FAM); const rw = ra ? Math.min(c.measureText(ra).width, 340) : 0;
     const maxW = 1020 - 152 - vw - 22 - (rw ? rw + 22 : 0);
     const b = base(r);
-    let f = k.fit(c, r.name, { w: 700, fam: NAME_FAM, max: b, min: b * 0.62, maxW, lines: 1 });
-    if (f.cut) f = k.fit(c, r.name, { w: 700, fam: NAME_FAM, max: b * 0.72, min: 24, maxW, lines: 2 });
-    const h = Math.max(r.winner ? (n <= 3 ? 132 : 112) : (n <= 3 ? 88 : n === 4 ? 76 : n === 5 ? 66 : 58), f.lines.length * f.size * 1.1 + 24);
-    return { r, f, ra, vw, rw, h, sc: sc(r) };
+    let f = k.nameFit(c, r.name, { w: 700, fam: NAME_FAM, max: b, maxW, max2: b * 0.72 });
+    // Name wird sonst zu klein: Ansagen-Text wandert unter den Namen, der Name bekommt die ganze Breite
+    let raBelow = false;
+    if (ra && (f.cut || f.size < 30)) {
+      const wide = k.nameFit(c, r.name, { w: 700, fam: NAME_FAM, max: b, maxW: maxW + rw + 22, max2: b * 0.72 });
+      if (wide.size > f.size || (f.cut && !wide.cut)) { f = wide; raBelow = true; }
+    }
+    const h = Math.max(r.winner ? (n <= 3 ? 132 : 112) : (n <= 3 ? 88 : n === 4 ? 76 : n === 5 ? 66 : 58), f.lines.length * f.size * 1.1 + 24 + (raBelow ? 30 : 0));
+    return { r, f, ra, vw, rw, h, sc: sc(r), raBelow };
   });
 }
 function page1(d, k, N, rowsData) {
@@ -96,9 +101,12 @@ function page1(d, k, N, rowsData) {
     setI(c, 500, 40, F_FRAU); c.fillStyle = GOLD; c.fillText(String(r.rank), 60, bl);
     k.setFont(c, 700, l.sc, NAME_FAM); c.fillStyle = r.winner ? HERO : GOLD; c.textAlign = "right"; c.fillText(r.value, 1020, bl); c.textAlign = "left";
     k.setFont(c, 700, l.f.size, NAME_FAM); c.fillStyle = r.winner ? HERO : GOLD;
-    const lh = l.f.size * 1.1, first = bl - (l.f.lines.length - 1) * lh;
+    const lh = l.f.size * 1.1, shift = l.raBelow ? 15 : 0, first = bl - (l.f.lines.length - 1) * lh - shift;
     l.f.lines.forEach((ln, j) => c.fillText(ln, 152, first + j * lh));
-    if (l.ra) {
+    if (l.ra && l.raBelow) {
+      const rf = k.fit(c, l.ra, { w: 500, fam: NAME_FAM, max: 28, min: 24, maxW: 700, lines: 1 });
+      setI(c, 500, rf.size, NAME_FAM); c.fillStyle = GOLD; c.globalAlpha = 0.85; c.fillText(rf.lines[0], 152, first + (l.f.lines.length - 1) * lh + 34); c.globalAlpha = 1;
+    } else if (l.ra) {
       const rf = k.fit(c, l.ra, { w: 500, fam: NAME_FAM, max: 28, min: 18, maxW: 340, lines: 1 });
       setI(c, 500, rf.size, NAME_FAM); c.fillStyle = GOLD; c.globalAlpha = 0.85; c.textAlign = "right"; c.fillText(rf.lines[0], 1020 - l.vw - 22, bl); c.textAlign = "left"; c.globalAlpha = 1;
     }

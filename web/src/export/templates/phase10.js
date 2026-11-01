@@ -20,19 +20,36 @@ function stairs(c, k) {
   c.fillStyle = "rgba(255,255,255,0.2)"; c.fillRect(0, BASE, 1080, 8);
 }
 /* Spielfigur: cx Mitte, feet = Fusspunkt, sc Massstab, lift = Etikett hoeher setzen (bei mehreren Figuren auf einer Stufe) */
-function pawn(c, k, cx, feet, sc, col, name, crown, lift) {
+function pawn(c, k, cx, feet, sc, col, name, crown, chips, obst) {
   const T = feet - 158 * sc;
   c.fillStyle = col; c.beginPath(); c.arc(cx, T + 70 * sc, 26 * sc, 0, 7); c.fill();
   c.save(); c.translate(cx - 44 * sc, T + 92 * sc); c.scale(sc, sc);
   c.beginPath(); c.moveTo(44, 0); c.arcTo(88, 0, 88, 12, 44); c.lineTo(88, 58); c.arcTo(88, 70, 76, 70, 12); c.lineTo(12, 70); c.arcTo(0, 70, 0, 58, 12); c.lineTo(0, 44); c.arcTo(0, 0, 44, 0, 44); c.closePath(); c.fill(); c.restore();
   if (crown) { c.save(); c.translate(cx - 30 * sc, T + 18 * sc); c.scale(sc, sc); c.fillStyle = YEL; c.fill(new Path2D("M2 34 L6 8 L20 22 L30 2 L40 22 L54 8 L58 34Z")); c.restore(); }
-  const fs = 24 * Math.max(sc, 0.8);
-  const f = k.fit(c, name, { w: 800, fam: k.F_BALOO, max: fs, min: 14, maxW: 170, lines: 1 });
+  const fs = 24 * Math.max(sc, 0.85);
+  const f = k.fit(c, name, { w: 800, fam: k.F_BALOO, max: fs, min: 20, maxW: 230, lines: 1 });
   k.setFont(c, 800, f.size, k.F_BALOO);
-  const w = c.measureText(f.lines[0]).width + 24, h = f.size * 1.5, y = T - 34 * sc - lift;
-  const px = Math.max(16, Math.min(1064 - w, cx - w / 2));
-  c.fillStyle = col; k.rrect(c, px, y, w, h, 14); c.fill();
-  c.fillStyle = DARKINK; c.textAlign = "center"; c.fillText(f.lines[0], px + w / 2, y + h / 2 + k.capH(c) / 2); c.textAlign = "left";
+  const w = c.measureText(f.lines[0]).width + 24, h = f.size * 1.5;
+  chips.push({ cx, w, h, y: T - 34 * sc - h, text: f.lines[0], size: f.size, col, T, sc });
+  obst.push({ x: cx - 44 * sc, y: T + 14 * sc, w: 88 * sc, h: feet - T - 14 * sc });
+}
+/* Namensschildchen ohne Ueberlappung: von links nach rechts, jedes Schild so weit nach oben, bis es kein anderes beruehrt */
+function drawChips(c, k, chips, obst) {
+  const placed = [], hit = (a, q) => a.x < q.x + q.w + 6 && a.x + a.w + 6 > q.x && a.y < q.y + q.h + 6 && a.y + a.h + 6 > q.y;
+  const clampX = (x, w) => Math.max(16, Math.min(1064 - w, x));
+  chips.slice().sort((a, b) => a.cx - b.cx || b.y - a.y).forEach((ch) => {
+    const y0 = ch.y, hy = ch.T + 70 * ch.sc - ch.h / 2;
+    const cands = [{ x: ch.cx - ch.w / 2, y: y0 }, { x: ch.cx - 46 * ch.sc - 8 - ch.w, y: hy }, { x: ch.cx + 46 * ch.sc + 8, y: hy }];
+    for (let q = 1; q < 40; q++) cands.push({ x: ch.cx - ch.w / 2, y: y0 - q * (ch.h + 6) });
+    let pick = null;
+    for (const cd of cands) { const t = { x: clampX(cd.x, ch.w), y: cd.y, w: ch.w, h: ch.h }; if (!placed.some((o) => hit(t, o)) && !obst.some((o) => hit(t, o))) { pick = t; break; } }
+    if (!pick) pick = { x: clampX(ch.cx - ch.w / 2, ch.w), y: y0, w: ch.w, h: ch.h };
+    ch.x = pick.x; ch.y = pick.y; placed.push(ch);
+  });
+  placed.forEach((ch) => {
+    c.fillStyle = ch.col; k.rrect(c, ch.x, ch.y, ch.w, ch.h, 14); c.fill();
+    k.setFont(c, 800, ch.size, k.F_BALOO); c.fillStyle = DARKINK; c.textAlign = "center"; c.fillText(ch.text, ch.x + ch.w / 2, ch.y + ch.h / 2 + k.capH(c) / 2); c.textAlign = "left";
+  });
 }
 function footer(c, k, d) {
   const lw = k.logo(c, d.logo, 60, 1210, 100, YEL);
@@ -47,25 +64,25 @@ function cell(c, k, d, x, y, w, r, col, pen, big) {
   k.setFont(c, 400, rs, k.F_ANTON); c.fillStyle = col; const rw = c.measureText(String(r.rank)).width;
   c.fillText(String(r.rank), x, top + (big ? 66 : 42));
   const nx = x + rw + 12, nw = w - rw - 12;
-  let f = k.fit(c, r.name, { w: 400, fam: k.F_ANTON, max: nsz, min: nsz * 0.55, maxW: nw, lines: 1 });
-  if (f.cut) { f = k.fit(c, breakHy(r.name), { w: 400, fam: k.F_ANTON, max: nsz * 0.7, min: big ? 22 : 20, maxW: nw, lines: 2 }); f.lines = unHy(f.lines); }
-  if (f.cut) { f = k.fit(c, breakHy(r.name), { w: 400, fam: k.F_ANTON, max: nsz * 0.5, min: big ? 18 : 15, maxW: nw, lines: big ? 3 : 2 }); f.lines = unHy(f.lines); }
+  const f = k.nameFit(c, r.name, { w: 400, fam: k.F_ANTON, max: nsz, maxW: nw, oneMin: 0.7, lines: big ? 3 : 2, max2: big ? 44 : 30 });
   k.setFont(c, 400, f.size, k.F_ANTON); c.fillStyle = "#fff";
   const nb = top + (big ? 56 : 38), lh = f.size * 1.05;
   f.lines.forEach((ln, i) => c.fillText(ln, nx, nb + i * lh));
   const nameBottom = nb + (f.lines.length - 1) * lh;
   const ph = d.tr("tplP10Phases", (n) => n + "/10")(r.score);
-  const sf = k.fit(c, ph, { w: 700, fam: k.F_BALOO, max: big ? 26 : 21, min: 13, maxW: nw, lines: 1 });
+  const sf = k.fit(c, ph, { w: 700, fam: k.F_BALOO, max: big ? 26 : 21, min: 18, maxW: nw, lines: 1 });
   const pyb = Math.max(top + (big ? 90 : 66), nameBottom + sf.size * 1.15);
   k.setFont(c, 700, sf.size, k.F_BALOO); c.fillStyle = "rgba(255,255,255,0.8)"; c.fillText(sf.lines[0], nx, pyb);
   if (pen != null) {
     const v = d.num(pen), lab = d.tr("tplP10Pen", "Strafpunkte");
     const vs = big ? 58 : 36; k.setFont(c, 400, vs, k.F_ANTON); const vw = c.measureText(v).width;
-    const pb = Math.max(top + (big ? 150 : 100), pyb + (big ? 58 : 34));
+    const pb = Math.max(top + (big ? 150 : 100), pyb + (big ? 58 : 32));
     c.fillStyle = "#fff"; c.fillText(v, x, pb);
-    const lf = k.fit(c, lab, { w: 700, fam: k.F_BALOO, max: big ? 26 : 19, min: 12, maxW: Math.max(40, w - vw - 14), lines: 1 });
+    const lf = k.fit(c, lab, { w: 700, fam: k.F_BALOO, max: big ? 26 : 19, min: 15, maxW: Math.max(40, w - vw - 14), lines: 1 });
     k.setFont(c, 700, lf.size, k.F_BALOO); c.fillStyle = "rgba(255,255,255,0.67)"; c.fillText(lf.lines[0], x + vw + 8, pb);
+    return pb + 10 - y;
   }
+  return pyb + 12 - y;
 }
 function page1(d, k, pens) {
   const { cv, c } = k.tplCanvas();
@@ -91,9 +108,12 @@ function page1(d, k, pens) {
   else sub = d.tr("tplP10Reach", (n) => n + "/10")(w0 ? w0.score : 0);
   const sf = k.fit(c, sub, { w: 700, fam: '"Kalam","Inter","GT Clean","GT CJK",sans-serif', max: 60, min: 28, maxW: 760, lines: 1 });
   k.setFont(c, 700, sf.size, '"Kalam","Inter","GT Clean","GT CJK",sans-serif'); c.fillStyle = YEL; c.fillText(sf.lines[0], 60, subBase); void lh;
+  const subW = c.measureText(sf.lines[0]).width;
+  k.setFont(c, 400, nf.size, k.F_ANTON); const titW = Math.max.apply(null, nf.lines.map((l) => c.measureText(l).width));
   // Figuren
   const groups = {};
   d.rows.forEach((r, i) => { const s = Math.max(0, Math.min(10, Math.round(r.score || 0))); (groups[s] = groups[s] || []).push(i); });
+  const chips = [], obst = [{ x: 52, y: ny - cap - 10, w: Math.max(titW, subW + 8) + 10, h: subBase - ny + cap + 30 }];
   Object.keys(groups).forEach((s) => {
     const idx = groups[s], m = idx.length, n = Number(s);
     const sc = m === 1 ? 1 : m === 2 ? 0.85 : 0.74;
@@ -103,15 +123,18 @@ function page1(d, k, pens) {
     idx.forEach((ri, j) => {
       const r = d.rows[ri];
       const cx = Math.min(1030 - 40, Math.max(60, cx0 + (j - (m - 1) / 2) * span));
-      pawn(c, k, cx, top, sc, PAWN_COL[ri % PAWN_COL.length], r.name, r.winner, (j % 2) * 34);
+      pawn(c, k, cx, top, sc, PAWN_COL[ri % PAWN_COL.length], r.name, r.winner, chips, obst);
     });
   });
+  drawChips(c, k, chips, obst);
   // Rangliste unten
   const n = d.rows.length, big = n <= 3, cols = Math.min(3, n), cw = (1000 - 18 * (cols - 1)) / cols;
+  let rowY = big ? 960 : 948, rowH = 0;
   d.rows.forEach((r, i) => {
-    const col = i % 3, row = Math.floor(i / 3);
-    const x = 40 + col * (cw + 18), y = big ? 960 : 948 + row * 126;
-    cell(c, k, d, x, y, cw, r, PAWN_COL[i % PAWN_COL.length], pens[i], big);
+    const col = i % 3;
+    if (i > 0 && col === 0) { rowY += Math.max(rowH, 112) + 6; rowH = 0; }
+    const x = 40 + col * (cw + 18);
+    rowH = Math.max(rowH, cell(c, k, d, x, rowY, cw, r, PAWN_COL[i % PAWN_COL.length], pens[i], big));
   });
   footer(c, k, d);
   return cv;

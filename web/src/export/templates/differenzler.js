@@ -44,8 +44,7 @@ function layoutRows(c, k, d, pts, hasPts, nameW, availH) {
   for (let s = 1; s >= 0.55; s -= 0.05) {
     const L = d.rows.map((r, i) => {
       const w = r.winner ? 0 : 1, nsz = base.w[w] * s, vs = base.v[w] * s, ds = base.df[w] * s;
-      let f = k.fit(c, r.name, { w: 700, fam: F_FRAU, max: nsz, min: nsz * 0.7, maxW: nameW, lines: 1 });
-      if (f.cut) { f = k.fit(c, breakHy(r.name), { w: 700, fam: F_FRAU, max: nsz * 0.62, min: 18, maxW: nameW, lines: 2 }); f.lines = unHy(f.lines); }
+      const f = k.nameFit(c, r.name, { w: 700, fam: F_FRAU, max: nsz, maxW: nameW, max2: nsz * 0.7, lines: r.winner ? 3 : 2 });
       const h = Math.max(ds * 1.12, f.lines.length * f.size * 1.08) + 24;
       return { r, f, nsz, vs, ds, h, pts: pts[i] };
     });

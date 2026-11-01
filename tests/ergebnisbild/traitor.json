@@ -1,0 +1,788 @@
+[
+ {
+  "name": "entwurf",
+  "lang": "de",
+  "labelKey": "gameTraitor",
+  "players": [
+   {
+    "name": "Tony",
+    "score": null
+   },
+   {
+    "name": "Yanis",
+    "score": null
+   },
+   {
+    "name": "Matteo",
+    "score": null
+   }
+  ],
+  "extra": {
+   "winner": "faithful",
+   "players": [
+    {
+     "name": "Tony",
+     "traitor": false,
+     "alive": true
+    },
+    {
+     "name": "Yanis",
+     "traitor": false,
+     "alive": true
+    },
+    {
+     "name": "Matteo",
+     "traitor": true,
+     "alive": false
+    }
+   ]
+  }
+ },
+ {
+  "name": "min4_traitor",
+  "lang": "en",
+  "labelKey": "gameTraitor",
+  "players": [
+   {
+    "name": "Tony",
+    "score": null
+   },
+   {
+    "name": "Yanis",
+    "score": null
+   },
+   {
+    "name": "Matteo",
+    "score": null
+   },
+   {
+    "name": "Maximiliane Huber-Brunner",
+    "score": null
+   }
+  ],
+  "extra": {
+   "winner": "traitor",
+   "players": [
+    {
+     "name": "Tony",
+     "traitor": false,
+     "alive": false
+    },
+    {
+     "name": "Yanis",
+     "traitor": true,
+     "alive": true
+    },
+    {
+     "name": "Matteo",
+     "traitor": false,
+     "alive": true
+    },
+    {
+     "name": "Maximiliane Huber-Brunner",
+     "traitor": false,
+     "alive": false
+    }
+   ]
+  }
+ },
+ {
+  "name": "n5_two",
+  "lang": "fr",
+  "labelKey": "gameTraitor",
+  "players": [
+   {
+    "name": "Tony",
+    "score": null
+   },
+   {
+    "name": "Yanis",
+    "score": null
+   },
+   {
+    "name": "Matteo",
+    "score": null
+   },
+   {
+    "name": "Maximiliane Huber-Brunner",
+    "score": null
+   },
+   {
+    "name": "Zoë",
+    "score": null
+   }
+  ],
+  "extra": {
+   "winner": "faithful",
+   "players": [
+    {
+     "name": "Tony",
+     "traitor": true,
+     "alive": false
+    },
+    {
+     "name": "Yanis",
+     "traitor": false,
+     "alive": true
+    },
+    {
+     "name": "Matteo",
+     "traitor": false,
+     "alive": true
+    },
+    {
+     "name": "Maximiliane Huber-Brunner",
+     "traitor": true,
+     "alive": false
+    },
+    {
+     "name": "Zoë",
+     "traitor": false,
+     "alive": true
+    }
+   ]
+  }
+ },
+ {
+  "name": "n6",
+  "lang": "it",
+  "labelKey": "gameTraitor",
+  "players": [
+   {
+    "name": "Tony",
+    "score": null
+   },
+   {
+    "name": "Yanis",
+    "score": null
+   },
+   {
+    "name": "Matteo",
+    "score": null
+   },
+   {
+    "name": "Maximiliane Huber-Brunner",
+    "score": null
+   },
+   {
+    "name": "Zoë",
+    "score": null
+   },
+   {
+    "name": "Ölçü",
+    "score": null
+   }
+  ],
+  "extra": {
+   "winner": "traitor",
+   "players": [
+    {
+     "name": "Tony",
+     "traitor": false,
+     "alive": true
+    },
+    {
+     "name": "Yanis",
+     "traitor": false,
+     "alive": false
+    },
+    {
+     "name": "Matteo",
+     "traitor": true,
+     "alive": true
+    },
+    {
+     "name": "Maximiliane Huber-Brunner",
+     "traitor": false,
+     "alive": true
+    },
+    {
+     "name": "Zoë",
+     "traitor": false,
+     "alive": false
+    },
+    {
+     "name": "Ölçü",
+     "traitor": false,
+     "alive": false
+    }
+   ]
+  }
+ },
+ {
+  "name": "n8",
+  "lang": "es",
+  "labelKey": "gameTraitor",
+  "players": [
+   {
+    "name": "Tony",
+    "score": null
+   },
+   {
+    "name": "Yanis",
+    "score": null
+   },
+   {
+    "name": "Matteo",
+    "score": null
+   },
+   {
+    "name": "Maximiliane Huber-Brunner",
+    "score": null
+   },
+   {
+    "name": "Zoë",
+    "score": null
+   },
+   {
+    "name": "Ölçü",
+    "score": null
+   },
+   {
+    "name": "Kim",
+    "score": null
+   },
+   {
+    "name": "Lea",
+    "score": null
+   }
+  ],
+  "extra": {
+   "winner": "faithful",
+   "players": [
+    {
+     "name": "Tony",
+     "traitor": false,
+     "alive": true
+    },
+    {
+     "name": "Yanis",
+     "traitor": true,
+     "alive": false
+    },
+    {
+     "name": "Matteo",
+     "traitor": false,
+     "alive": false
+    },
+    {
+     "name": "Maximiliane Huber-Brunner",
+     "traitor": false,
+     "alive": true
+    },
+    {
+     "name": "Zoë",
+     "traitor": false,
+     "alive": true
+    },
+    {
+     "name": "Ölçü",
+     "traitor": true,
+     "alive": false
+    },
+    {
+     "name": "Kim",
+     "traitor": false,
+     "alive": true
+    },
+    {
+     "name": "Lea",
+     "traitor": false,
+     "alive": true
+    }
+   ]
+  }
+ },
+ {
+  "name": "n10",
+  "lang": "pt",
+  "labelKey": "gameTraitor",
+  "players": [
+   {
+    "name": "Tony",
+    "score": null
+   },
+   {
+    "name": "Yanis",
+    "score": null
+   },
+   {
+    "name": "Matteo",
+    "score": null
+   },
+   {
+    "name": "Maximiliane Huber-Brunner",
+    "score": null
+   },
+   {
+    "name": "Zoë",
+    "score": null
+   },
+   {
+    "name": "Ölçü",
+    "score": null
+   },
+   {
+    "name": "Kim",
+    "score": null
+   },
+   {
+    "name": "Lea",
+    "score": null
+   },
+   {
+    "name": "Noah",
+    "score": null
+   },
+   {
+    "name": "Aurélien",
+    "score": null
+   }
+  ],
+  "extra": {
+   "winner": "traitor",
+   "players": [
+    {
+     "name": "Tony",
+     "traitor": true,
+     "alive": true
+    },
+    {
+     "name": "Yanis",
+     "traitor": false,
+     "alive": false
+    },
+    {
+     "name": "Matteo",
+     "traitor": false,
+     "alive": false
+    },
+    {
+     "name": "Maximiliane Huber-Brunner",
+     "traitor": false,
+     "alive": false
+    },
+    {
+     "name": "Zoë",
+     "traitor": true,
+     "alive": true
+    },
+    {
+     "name": "Ölçü",
+     "traitor": false,
+     "alive": false
+    },
+    {
+     "name": "Kim",
+     "traitor": false,
+     "alive": true
+    },
+    {
+     "name": "Lea",
+     "traitor": true,
+     "alive": true
+    },
+    {
+     "name": "Noah",
+     "traitor": false,
+     "alive": true
+    },
+    {
+     "name": "Aurélien",
+     "traitor": false,
+     "alive": true
+    }
+   ]
+  }
+ },
+ {
+  "name": "n13",
+  "lang": "de",
+  "labelKey": "gameTraitor",
+  "players": [
+   {
+    "name": "Tony",
+    "score": null
+   },
+   {
+    "name": "Yanis",
+    "score": null
+   },
+   {
+    "name": "Matteo",
+    "score": null
+   },
+   {
+    "name": "Maximiliane Huber-Brunner",
+    "score": null
+   },
+   {
+    "name": "Zoë",
+    "score": null
+   },
+   {
+    "name": "Ölçü",
+    "score": null
+   },
+   {
+    "name": "Kim",
+    "score": null
+   },
+   {
+    "name": "Lea",
+    "score": null
+   },
+   {
+    "name": "Noah",
+    "score": null
+   },
+   {
+    "name": "Aurélien",
+    "score": null
+   },
+   {
+    "name": "Sofia",
+    "score": null
+   },
+   {
+    "name": "Jonas",
+    "score": null
+   },
+   {
+    "name": "Chiara",
+    "score": null
+   }
+  ],
+  "extra": {
+   "winner": "faithful",
+   "players": [
+    {
+     "name": "Tony",
+     "traitor": false,
+     "alive": true
+    },
+    {
+     "name": "Yanis",
+     "traitor": false,
+     "alive": false
+    },
+    {
+     "name": "Matteo",
+     "traitor": false,
+     "alive": true
+    },
+    {
+     "name": "Maximiliane Huber-Brunner",
+     "traitor": true,
+     "alive": false
+    },
+    {
+     "name": "Zoë",
+     "traitor": false,
+     "alive": true
+    },
+    {
+     "name": "Ölçü",
+     "traitor": false,
+     "alive": true
+    },
+    {
+     "name": "Kim",
+     "traitor": false,
+     "alive": true
+    },
+    {
+     "name": "Lea",
+     "traitor": false,
+     "alive": true
+    },
+    {
+     "name": "Noah",
+     "traitor": true,
+     "alive": false
+    },
+    {
+     "name": "Aurélien",
+     "traitor": false,
+     "alive": true
+    },
+    {
+     "name": "Sofia",
+     "traitor": false,
+     "alive": true
+    },
+    {
+     "name": "Jonas",
+     "traitor": false,
+     "alive": true
+    },
+    {
+     "name": "Chiara",
+     "traitor": false,
+     "alive": true
+    }
+   ]
+  }
+ },
+ {
+  "name": "max16",
+  "lang": "en",
+  "labelKey": "gameTraitor",
+  "players": [
+   {
+    "name": "Tony",
+    "score": null
+   },
+   {
+    "name": "Yanis",
+    "score": null
+   },
+   {
+    "name": "Matteo",
+    "score": null
+   },
+   {
+    "name": "Maximiliane Huber-Brunner",
+    "score": null
+   },
+   {
+    "name": "Zoë",
+    "score": null
+   },
+   {
+    "name": "Ölçü",
+    "score": null
+   },
+   {
+    "name": "Kim",
+    "score": null
+   },
+   {
+    "name": "Lea",
+    "score": null
+   },
+   {
+    "name": "Noah",
+    "score": null
+   },
+   {
+    "name": "Aurélien",
+    "score": null
+   },
+   {
+    "name": "Sofia",
+    "score": null
+   },
+   {
+    "name": "Jonas",
+    "score": null
+   },
+   {
+    "name": "Chiara",
+    "score": null
+   },
+   {
+    "name": "Dominik",
+    "score": null
+   },
+   {
+    "name": "Ida",
+    "score": null
+   },
+   {
+    "name": "Emil",
+    "score": null
+   }
+  ],
+  "extra": {
+   "winner": "traitor",
+   "players": [
+    {
+     "name": "Tony",
+     "traitor": true,
+     "alive": true
+    },
+    {
+     "name": "Yanis",
+     "traitor": false,
+     "alive": false
+    },
+    {
+     "name": "Matteo",
+     "traitor": false,
+     "alive": false
+    },
+    {
+     "name": "Maximiliane Huber-Brunner",
+     "traitor": false,
+     "alive": false
+    },
+    {
+     "name": "Zoë",
+     "traitor": false,
+     "alive": false
+    },
+    {
+     "name": "Ölçü",
+     "traitor": true,
+     "alive": true
+    },
+    {
+     "name": "Kim",
+     "traitor": false,
+     "alive": false
+    },
+    {
+     "name": "Lea",
+     "traitor": false,
+     "alive": true
+    },
+    {
+     "name": "Noah",
+     "traitor": false,
+     "alive": true
+    },
+    {
+     "name": "Aurélien",
+     "traitor": false,
+     "alive": true
+    },
+    {
+     "name": "Sofia",
+     "traitor": true,
+     "alive": true
+    },
+    {
+     "name": "Jonas",
+     "traitor": false,
+     "alive": true
+    },
+    {
+     "name": "Chiara",
+     "traitor": false,
+     "alive": true
+    },
+    {
+     "name": "Dominik",
+     "traitor": false,
+     "alive": true
+    },
+    {
+     "name": "Ida",
+     "traitor": false,
+     "alive": true
+    },
+    {
+     "name": "Emil",
+     "traitor": true,
+     "alive": true
+    }
+   ]
+  }
+ },
+ {
+  "name": "long",
+  "lang": "de",
+  "labelKey": "gameTraitor",
+  "players": [
+   {
+    "name": "Maximiliane Huber-Brunner von Hohenstein",
+    "score": null
+   },
+   {
+    "name": "Zoë Ölçü Übermütig",
+    "score": null
+   },
+   {
+    "name": "Kim",
+    "score": null
+   },
+   {
+    "name": "Aurélien Çağlayan",
+    "score": null
+   },
+   {
+    "name": "Dominik Vierhundertsechsundvierzig",
+    "score": null
+   }
+  ],
+  "extra": {
+   "winner": "faithful",
+   "players": [
+    {
+     "name": "Maximiliane Huber-Brunner von Hohenstein",
+     "traitor": false,
+     "alive": true
+    },
+    {
+     "name": "Zoë Ölçü Übermütig",
+     "traitor": true,
+     "alive": false
+    },
+    {
+     "name": "Kim",
+     "traitor": false,
+     "alive": true
+    },
+    {
+     "name": "Aurélien Çağlayan",
+     "traitor": false,
+     "alive": true
+    },
+    {
+     "name": "Dominik Vierhundertsechsundvierzig",
+     "traitor": false,
+     "alive": true
+    }
+   ]
+  }
+ },
+ {
+  "name": "cjk",
+  "lang": "de",
+  "labelKey": "gameTraitor",
+  "players": [
+   {
+    "name": "李小龍",
+    "score": null
+   },
+   {
+    "name": "鈴木一郎",
+    "score": null
+   },
+   {
+    "name": "김민준",
+    "score": null
+   },
+   {
+    "name": "Tony",
+    "score": null
+   }
+  ],
+  "extra": {
+   "winner": "traitor",
+   "players": [
+    {
+     "name": "李小龍",
+     "traitor": false,
+     "alive": true
+    },
+    {
+     "name": "鈴木一郎",
+     "traitor": true,
+     "alive": true
+    },
+    {
+     "name": "김민준",
+     "traitor": false,
+     "alive": false
+    },
+    {
+     "name": "Tony",
+     "traitor": false,
+     "alive": true
+    }
+   ]
+  }
+ }
+]

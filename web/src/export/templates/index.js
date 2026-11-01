@@ -11,9 +11,14 @@ import tutto from "./tutto.js";
 import freeplay from "./freeplay.js";
 import headsup from "./headsup.js";
 import fivesec from "./fivesec.js";
+import mostlikely from "./mostlikely.js";
+import verraeter from "./verraeter.js";
+import mafia from "./mafia.js";
+import werwolf from "./werwolf.js";
+import impostor from "./impostor.js";
 
 /* Jede Vorlage: { games:[gameId...], fonts:[CSS-Schriftangaben], texts?(d)->[String], accepts?(d)->bool, render(d, kit)->[canvas...] } */
-const TEMPLATES = [yatzy, schieber, skyjo, flip7, tutto, freeplay, headsup, fivesec];
+const TEMPLATES = [yatzy, schieber, skyjo, flip7, tutto, freeplay, headsup, fivesec, impostor, werwolf, mafia, verraeter, mostlikely];
 
 const GT_TPL = {};
 TEMPLATES.forEach((tp) => tp.games.forEach((g) => { GT_TPL[g] = tp; }));

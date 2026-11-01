@@ -23,6 +23,7 @@ from PIL import Image  # noqa: E402
 ARGS = sys.argv[1:]
 ENG = ["chromium", "webkit"] if "all" in ARGS else [a for a in ARGS if a in ("chromium", "webkit")] or ["chromium"]
 ONLY = [ARGS[i + 1] for i, a in enumerate(ARGS) if a == "--only" and i + 1 < len(ARGS)]
+NOWAIT = [a for a in ARGS if a == '--fast']
 OUT = R.ROOT / "tests" / "out" / "ergebnisbild"
 OUT.mkdir(parents=True, exist_ok=True)
 
@@ -80,6 +81,12 @@ def fill_names(pg, names):
     """Spielernamen in der Einrichtung setzen (Felder 'Spieler N' / 'Team N')."""
     R.set_players(pg, len(names))
     inp = [i for i in pg.locator("input").all() if re.match(r"^(Spieler|Team)", i.input_value() or i.get_attribute("placeholder") or "")]
+    for i, el in enumerate(inp[: len(names)]):
+        el.fill(names[i]); R.wait(pg, 150)
+
+
+def set_names(pg, names):
+    inp = [i for i in pg.locator("input").all() if re.match(r"^Spieler", i.input_value() or i.get_attribute("placeholder") or "")]
     for i, el in enumerate(inp[: len(names)]):
         el.fill(names[i]); R.wait(pg, 150)
 
@@ -167,13 +174,97 @@ def flow_fivesec(pg):
         R.click(pg, conf.last, 900)
 
 
-FLOWS = {"Yatzy 2": flow_yatzy2, "Yatzy 4 lang": flow_yatzy4, "Schieber": flow_schieber, "Skyjo": flow_skyjo, "Flip 7": flow_flip7, "Tutto": flow_tutto, "Freies Spiel": flow_freeplay, "HeadsUp": flow_headsup, "5 Sekunden": flow_fivesec}
+def flow_impostor(pg):
+    R.open_game(pg, "Partyspiele", "Impostor")
+    set_names(pg, ["Tony", "Maximiliane Huber-Brunner", "Ölçü"])
+    R.press_start(pg)
+    R.check(R.deal_roles(pg) == 3, "Impostor: Rollenverteilung")
+    R.click(pg, R.btn(pg, "Zur Abstimmung"), 700)
+    names = ["Tony", "Maximiliane Huber-Brunner", "Ölçü"]
+    for i in range(3):  # alle waehlen den gleichen Namen (Spieler 1)
+        R.click(pg, pg.get_by_role("button", name=re.compile(r"^(?!.*Bestätigen)(Tony|Maximiliane|Ölçü)")).nth(1 if i == 0 else 0), 500)
+        R.click(pg, R.btn_re(pg, "Bestätigen"), 900)
+    R.wait(pg, 600)
+    if R.btn(pg, "Aufgeben").count():
+        R.click(pg, R.btn(pg, "Aufgeben"), 1000)
+    R.wait(pg, 800)
+
+
+def flow_amehesten(pg):
+    R.open_game(pg, "Partyspiele", "Am ehesten")
+    set_names(pg, ["Tony", "Maximiliane Huber-Brunner", "Ölçü"])
+    R.press_start(pg)
+    for nm in ["Tony", "Ölçü", "Ölçü", "Maximiliane Huber-Brunner", "Ölçü"]:
+        R.click(pg, R.btn(pg, nm).first, 500)
+    R.click(pg, pg.locator("[data-ml-result]").first, 700)
+
+
+PREF = [r"Ich bin", r"[Bb]estätigen", r"Diskussion starten", r"Zur Abstimmung", r"Rolle aufdecken", r"Weiter zur Nacht", r"Nächste Nacht", r"Zum Stadt", r"Abstimmung", r"Weiter", r"Verstanden", r"Fortfahren", r"Verbannen|Hinrichten|Ausschalten"]
+
+
+def drive(pg, maxsteps=120, pick=0):
+    """Spielleiter-Spiele (Verraeter, Werwolf, Mafia) greedy bis zum Endpanel mit 'Bild teilen' durchspielen."""
+    for _ in range(maxsteps):
+        if pg.get_by_role("button", name=re.compile("Bild teilen")).count():
+            return
+        R.assert_alive(pg, "drive")
+        names = pg.evaluate("[...document.querySelectorAll('button')].filter(b=>b.offsetParent&&!b.disabled).map(b=>(b.getAttribute('aria-label')||b.innerText||'').trim().replace(/\\s+/g,' ')).filter(Boolean)")
+        if os.environ.get('DRV'):
+            print('  ', names[4:])
+        hold = [n for n in names if "gedrückt halten" in n]
+        if hold:
+            R.hold(pg, R.btn_re(pg, re.escape(hold[0])).first, 1500); R.wait(pg, 400); continue
+        done = False
+        for pat in PREF:
+            loc = pg.get_by_role("button", name=re.compile(pat), disabled=False)
+            if loc.count():
+                R.click(pg, loc.first, 450); done = True; break
+        if done:
+            continue
+        cand = [n for n in names if n not in ("Spiel beenden", "Zur Startseite", "Regeln anzeigen", "Zurück", "Start", "Reset")]
+        if cand:
+            R.click(pg, R.btn(pg, cand[min(pick, len(cand) - 1)]).first, 400); continue
+        R.wait(pg, 400)
+        print("   (kein Zug) Buttons:", names)
+    raise R.Fail("drive: Spielende nicht erreicht")
+
+
+def flow_verraeter(pg):
+    R.open_game(pg, "Partyspiele", "Verräter")
+    set_names(pg, ["Tony", "Maximiliane Huber-Brunner", "Ölçü", "Kim"])
+    R.press_start(pg)
+    R.deal_roles(pg)
+    drive(pg)
+    R.wait(pg, 800)
+
+
+def flow_werwolf(pg):
+    R.open_game(pg, "Partyspiele", "Werwolf")
+    set_names(pg, ["Tony", "Maximiliane Huber-Brunner", "Ölçü", "Kim", "Zoë"])
+    R.press_start(pg)
+    R.deal_roles(pg)
+    drive(pg)
+    R.wait(pg, 800)
+
+
+def flow_mafia(pg):
+    R.open_game(pg, "Partyspiele", "Mafia")
+    set_names(pg, ["Tony", "Maximiliane Huber-Brunner", "Ölçü", "Kim", "Zoë", "Lea"])
+    R.press_start(pg)
+    R.deal_roles(pg)
+    R.click(pg, pg.get_by_role("button", name=re.compile(r"^Tony$")).first, 500)
+    R.click(pg, R.btn(pg, "Bestätigen"), 900)
+    drive(pg)
+    R.wait(pg, 800)
+
+
+FLOWS = {"Yatzy 2": flow_yatzy2, "Yatzy 4 lang": flow_yatzy4, "Schieber": flow_schieber, "Skyjo": flow_skyjo, "Flip 7": flow_flip7, "Tutto": flow_tutto, "Freies Spiel": flow_freeplay, "HeadsUp": flow_headsup, "5 Sekunden": flow_fivesec, "Impostor": flow_impostor, "Am ehesten": flow_amehesten, "Verraeter": flow_verraeter, "Werwolf": flow_werwolf, "Mafia": flow_mafia}
 
 
 def share_png(pg, tag):
     share = pg.get_by_role("button", name=re.compile(r"Bild teilen"))
     R.check(share.count() > 0, f"{tag}: Knopf 'Als Bild teilen' fehlt")
-    pg.wait_for_timeout(4000)  # Podest-Einlauf (3.6 s) faengt Klicks ab, sonst nur Ueberspringen
+    pg.wait_for_timeout(4000 if not NOWAIT else 800)  # Podest-Einlauf (3.6 s) faengt Klicks ab, sonst nur Ueberspringen
     R.click(pg, share.first, 500)
     js = "()=>{const i=[...document.querySelectorAll('img')].find(i=>i.naturalWidth>500&&i.src.startsWith('data:image/png'));return i?i.src:null}"
     src = None

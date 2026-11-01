@@ -23,4 +23,7 @@ function star(c, cx, cy, size, color, alpha) {
 function signed(d, n) { return (n > 0 ? "+" : "") + d.num(n); }
 /* Kursive Schrift direkt setzen (kein Umweg ueber c.font, das je nach Browser anders ausgegeben wird) */
 function setI(c, w, s, fam) { c.font = "italic " + w + " " + Math.round(s * 10) / 10 + "px " + fam; }
-export { pickRows, star, signed, setI };
+/* Bei Zeilenumbruch an Bindestrichen trennen statt mitten im Wort: vor dem Umbruch breakHy(text), danach unHy(lines) */
+function breakHy(s) { return String(s).replace(/-(?=[^\s-])/g, "- "); }
+function unHy(lines) { return lines.map((l) => l.replace(/- (?=\S)/g, "-")); }
+export { pickRows, star, signed, setI, breakHy, unHy };

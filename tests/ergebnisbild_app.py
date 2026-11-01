@@ -114,7 +114,13 @@ def flow_minigolf(pg):
     seeded(pg, ("Schreibunterlagen", "Minigolf"), "minigolf", {"players": [{"id": 1, "name": "Tony"}, {"id": 2, "name": "Zoë Ölçü"}, {"id": 3, "name": "Maximiliane Huber-Brunner"}], "scores": {"1": holes[0], "2": holes[1], "3": holes[2]}})
 
 
-FLOWS = {"Yatzy 2": flow_yatzy2, "Yatzy 4 lang": flow_yatzy4, "Schieber": flow_schieber, "Wizard": flow_wizard, "Minigolf": flow_minigolf}
+def flow_phase10(pg):
+    hist = [{"scores": {"1": 0, "2": 25, "3": 40}, "done": {"1": True, "2": r < 8, "3": r < 6}} for r in range(10)]
+    hist[3]["scores"]["1"] = 15
+    seeded(pg, ("Schreibunterlagen", "Phase 10"), "phase10", {"players": [{"id": 1, "name": "Tony"}, {"id": 2, "name": "Zoë Ölçü"}, {"id": 3, "name": "Maximiliane Huber-Brunner"}], "history": hist})
+
+
+FLOWS = {"Yatzy 2": flow_yatzy2, "Yatzy 4 lang": flow_yatzy4, "Schieber": flow_schieber, "Wizard": flow_wizard, "Minigolf": flow_minigolf, "Phase 10": flow_phase10}
 
 
 def share_png(pg, tag):

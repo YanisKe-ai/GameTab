@@ -51,7 +51,8 @@ JS = """async (c) => {
   const D = TRANSLATIONS[c.lang] || TRANSLATIONS.de;
   const t = (k) => D[k] || TRANSLATIONS.de[k] || k;
   const label = c.label || t(c.labelKey || ("game" + c.gameId.charAt(0).toUpperCase() + c.gameId.slice(1)));
-  const ranked = rankedPodium(c.players.map((p, i) => ({ id: i + 1, name: p.name, score: p.score })), (p) => p.score, { lowWins: !!c.lowWins });
+  // rk gesetzt (Phase 10, Romme): Reihenfolge und rk wie im Spiel, sonst Rangfolge per rankedPodium
+  const ranked = c.players.some((p) => p.rk != null) ? c.players.map((p) => ({ name: p.name, score: p.score, rk: p.rk })) : rankedPodium(c.players.map((p, i) => ({ id: i + 1, name: p.name, score: p.score })), (p) => p.score, { lowWins: !!c.lowWins });
   if (!GT_EC_TPL.has || !GT_EC_TPL.has(c.gameId)) return { err: "keine Vorlage registriert" };
   const t0 = performance.now();
   const cvs = await GT_EC_TPL.render(c.gameId, label, ranked, t, c.extra || null);

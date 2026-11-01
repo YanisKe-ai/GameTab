@@ -195,7 +195,9 @@ if(!gtEcFontP)gtEcFontP=Promise.all([gtEcFace("GT Clean","DejaVuSans.ttf","400")
 let p=gtEcFontP;
 if(needCjk){if(!gtEcCjkP)gtEcCjkP=gtEcFace("GT CJK","NotoSansCJKsc-Regular.otf","100 900").catch(e=>{gtEcCjkP=null;throw e;});p=Promise.all([p,gtEcCjkP]);}
 return p.then(()=>document.fonts.ready);}
-function gtEcWarm(){try{gtEcFonts(false).catch(()=>{});}catch(_){}}
+/* Ergebnisbild pro Spiel: Vorlagen haengen sich hier ein (web/src/export/templates/index.js). Ohne Vorlage bleibt das bisherige Bild. */
+const GT_EC_TPL={render:null,warm:null,has:null};
+function gtEcWarm(gameId){try{gtEcFonts(false).catch(()=>{});}catch(_){}try{if(gameId&&GT_EC_TPL.warm)GT_EC_TPL.warm(gameId);}catch(_){}}
 function gtEcNum(n,loc){if(n==null||!isFinite(n))return"—";let s;try{s=new Intl.NumberFormat(loc,{maximumFractionDigits:2}).format(Math.abs(n));}catch(_){s=String(Math.abs(n));}return(n<0?"−":"")+s.replace(/ /g," ");}
 function gtEcTr(t,key,fb){try{const v=t&&t(key);if(v!=null&&v!==key)return v;}catch(_){}return fb;}
 function gtEcNoEmoji(s){return String(s).replace(/\p{Extended_Pictographic}|\p{Regional_Indicator}|[\u200D\uFE0F\u20E3]|[\u{1F3FB}-\u{1F3FF}]|[\u{E0020}-\u{E007F}]/gu,"").replace(/\s+/g," ").trim();}
@@ -222,10 +224,11 @@ const m=gtEcModel(gameId,gameLabel,ranked,t,opts);
 const all=[m.slogan,m.winWord,m.gameLabel,m.statusLabel,m.heroLabel,m.heroNames.join(" "),m.detail,m.unitLabel,m.rankLabel,m.playerLabel,m.resultLabel,m.footerLabel].concat(m.rows.map(r=>r.name)).join("");
 await gtEcFonts(GT_EC_CJK.test(all));
 return gtEcPages(m,t);}
-async function shareResultImage(gameId,gameLabel,ranked,setSharing,setPreviewUrl,t,appTheme){
+async function shareResultImage(gameId,gameLabel,ranked,setSharing,setPreviewUrl,t,appTheme,extra){
 const seq=++gtEcSeq;setSharing(true);
 try{
-const cvs=await renderResultCanvas(gameId,gameLabel,ranked,null,t,appTheme);
+let cvs=null;if(GT_EC_TPL.render){try{cvs=await GT_EC_TPL.render(gameId,gameLabel,ranked,t,extra);}catch(e){cvs=null;try{console.warn("GameTab Ergebnisbild-Vorlage, Rueckfall auf Standardbild:",e);}catch(_){}}}
+if(!cvs||!cvs.length)cvs=await renderResultCanvas(gameId,gameLabel,ranked,null,t,appTheme);
 const blobs=await Promise.all(cvs.map(c=>new Promise((res,rej)=>c.toBlob(b=>b?res(b):rej(Error("toBlob")),"image/png"))));
 if(seq!==gtEcSeq)return;
 const files=blobs.map((b,i)=>new File([b],"gametab-ergebnis"+(blobs.length>1?"-"+(i+1):"")+".png",{type:"image/png"}));
@@ -234,5 +237,6 @@ if(navigator.share&&navigator.canShare){try{if(navigator.canShare({files:files})
 if(seq!==gtEcSeq)return;
 setSharing(false);
 if(!handled){const urls=cvs.map(c=>c.toDataURL("image/png"));setPreviewUrl(urls.length===1?urls[0]:urls);}
+try{cvs.forEach(c=>{c.width=c.height=0;});}catch(_){}
 }catch(e){try{console.warn("GameTab Bildexport:",e);}catch(_){}if(seq===gtEcSeq){setSharing(false);try{alert(gtEcTr(t,"ecError","Das Bild konnte nicht erstellt werden."));}catch(_){}}}}/*@gt-body-end*/
-export { GT_EC, gtEcExt, gtEcSeg, GT_EC_TEAM, GT_EC_UNIT, GT_EC_LOWSLOG, GT_EC_LOC, GT_EC_CJK, gtEcFontP, gtEcCjkP, gtEcSeq, gtEcFace, gtEcFonts, gtEcWarm, gtEcNum, gtEcTr, gtEcNoEmoji, gtEcModel, gtEcIsPag, gtEcPages, renderResultCanvas, shareResultImage };
+export { GT_EC, GT_EC_TPL, gtEcExt, gtEcSeg, GT_EC_TEAM, GT_EC_UNIT, GT_EC_LOWSLOG, GT_EC_LOC, GT_EC_CJK, gtEcFontP, gtEcCjkP, gtEcSeq, gtEcFace, gtEcFonts, gtEcWarm, gtEcNum, gtEcTr, gtEcNoEmoji, gtEcModel, gtEcIsPag, gtEcPages, renderResultCanvas, shareResultImage };

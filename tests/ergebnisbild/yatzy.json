@@ -1,0 +1,228 @@
+[
+ {
+  "name": "entwurf",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 302
+   },
+   {
+    "name": "Yanis",
+    "score": 248
+   },
+   {
+    "name": "Matteo",
+    "score": 171
+   }
+  ]
+ },
+ {
+  "name": "zwei",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Lea",
+    "score": 231
+   },
+   {
+    "name": "Noah",
+    "score": 198
+   }
+  ]
+ },
+ {
+  "name": "vier",
+  "lang": "en",
+  "players": [
+   {
+    "name": "Anna",
+    "score": 287
+   },
+   {
+    "name": "Ben",
+    "score": 254
+   },
+   {
+    "name": "Cora",
+    "score": 254
+   },
+   {
+    "name": "Dino",
+    "score": 140
+   }
+  ]
+ },
+ {
+  "name": "acht_lang",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Maximiliane Huber-Brunner",
+    "score": 341
+   },
+   {
+    "name": "Jean-Baptiste Lefèvre",
+    "score": 305
+   },
+   {
+    "name": "Ölçü Ğüneş",
+    "score": 298
+   },
+   {
+    "name": "Zoë",
+    "score": 250
+   },
+   {
+    "name": "Bartholomäus von Allmen",
+    "score": 233
+   },
+   {
+    "name": "Kim",
+    "score": 199
+   },
+   {
+    "name": "Priya Ramanathan",
+    "score": 181
+   },
+   {
+    "name": "Ueli",
+    "score": 150
+   }
+  ]
+ },
+ {
+  "name": "gleichstand",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 280
+   },
+   {
+    "name": "Yanis",
+    "score": 280
+   },
+   {
+    "name": "Matteo",
+    "score": 171
+   }
+  ]
+ },
+ {
+  "name": "gleichstand_drei",
+  "lang": "fr",
+  "players": [
+   {
+    "name": "Élodie",
+    "score": 250
+   },
+   {
+    "name": "François",
+    "score": 250
+   },
+   {
+    "name": "Hélène",
+    "score": 250
+   },
+   {
+    "name": "Gérard",
+    "score": 120
+   }
+  ]
+ },
+ {
+  "name": "riesenname",
+  "lang": "it",
+  "players": [
+   {
+    "name": "Alessandro Bartolomeo della Gherardesca",
+    "score": 312
+   },
+   {
+    "name": "Giulia",
+    "score": 290
+   }
+  ]
+ },
+ {
+  "name": "cjk",
+  "lang": "en",
+  "players": [
+   {
+    "name": "王小明",
+    "score": 276
+   },
+   {
+    "name": "さくら",
+    "score": 240
+   },
+   {
+    "name": "김민준",
+    "score": 201
+   }
+  ]
+ },
+ {
+  "name": "es",
+  "lang": "es",
+  "players": [
+   {
+    "name": "Lucía",
+    "score": 265
+   },
+   {
+    "name": "Mateo",
+    "score": 230
+   },
+   {
+    "name": "Sofía",
+    "score": 222
+   },
+   {
+    "name": "Hugo",
+    "score": 101
+   },
+   {
+    "name": "Valentina",
+    "score": 99
+   }
+  ]
+ },
+ {
+  "name": "pt",
+  "lang": "pt",
+  "players": [
+   {
+    "name": "João",
+    "score": 222
+   },
+   {
+    "name": "Inês",
+    "score": 219
+   }
+  ]
+ },
+ {
+  "name": "alle_gleich",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Maximiliane Huber-Brunner",
+    "score": 106
+   },
+   {
+    "name": "Zoë",
+    "score": 106
+   },
+   {
+    "name": "Ölçü",
+    "score": 106
+   },
+   {
+    "name": "Kim",
+    "score": 106
+   }
+  ]
+ }
+]

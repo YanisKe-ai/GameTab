@@ -1,0 +1,503 @@
+[
+ {
+  "name": "entwurf",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony und Yanis",
+    "score": 1042
+   },
+   {
+    "name": "Matteo und Lea",
+    "score": 874
+   }
+  ],
+  "extra": {
+   "teams": [
+    {
+     "name": "Tony und Yanis",
+     "entries": [
+      157,
+      93,
+      212,
+      180,
+      150,
+      250
+     ]
+    },
+    {
+     "name": "Matteo und Lea",
+     "entries": [
+      140,
+      86,
+      110,
+      160,
+      200,
+      178
+     ]
+    }
+   ],
+   "target": 1000
+  }
+ },
+ {
+  "name": "standardnamen",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Team 1",
+    "score": 1085
+   },
+   {
+    "name": "Team 2",
+    "score": 451
+   }
+  ],
+  "extra": {
+   "teams": [
+    {
+     "name": "Team 1",
+     "entries": [
+      257,
+      157,
+      157,
+      257,
+      257
+     ]
+    },
+    {
+     "name": "Team 2",
+     "entries": [
+      100,
+      57,
+      157,
+      -20,
+      157
+     ]
+    }
+   ],
+   "target": 1000
+  }
+ },
+ {
+  "name": "lang_2500",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Alexandra und Maximilian",
+    "score": 2487
+   },
+   {
+    "name": "Jean-Baptiste und Sophie",
+    "score": 2501
+   }
+  ],
+  "extra": {
+   "teams": [
+    {
+     "name": "Alexandra und Maximilian",
+     "entries": [
+      164,
+      271,
+      196,
+      121,
+      228,
+      154,
+      261,
+      186,
+      293,
+      218,
+      144,
+      251
+     ]
+    },
+    {
+     "name": "Jean-Baptiste und Sophie",
+     "entries": [
+      133,
+      242,
+      166,
+      275,
+      199,
+      123,
+      232,
+      156,
+      265,
+      189,
+      298,
+      223
+     ]
+    }
+   ],
+   "target": 2500
+  }
+ },
+ {
+  "name": "kurz",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Al und Bo",
+    "score": 312
+   },
+   {
+    "name": "Cy und Di",
+    "score": 1000
+   }
+  ],
+  "extra": {
+   "teams": [
+    {
+     "name": "Al und Bo",
+     "entries": [
+      144,
+      104,
+      64
+     ]
+    },
+    {
+     "name": "Cy und Di",
+     "entries": [
+      196,
+      134,
+      222,
+      161,
+      100,
+      187
+     ]
+    }
+   ],
+   "target": 1000
+  }
+ },
+ {
+  "name": "gleichstand",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony und Yanis",
+    "score": 1028
+   },
+   {
+    "name": "Matteo und Lea",
+    "score": 1028
+   }
+  ],
+  "extra": {
+   "teams": [
+    {
+     "name": "Tony und Yanis",
+     "entries": [
+      257,
+      257,
+      257,
+      257
+     ]
+    },
+    {
+     "name": "Matteo und Lea",
+     "entries": [
+      157,
+      257,
+      257,
+      357
+     ]
+    }
+   ],
+   "target": 1000
+  }
+ },
+ {
+  "name": "riesig",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Team Bartholomäus Wettstein-Oberholzer",
+    "score": 1477
+   },
+   {
+    "name": "Die unglaublich langen Namen vom Stammtisch Kleinbasel",
+    "score": 1300
+   }
+  ],
+  "extra": {
+   "teams": [
+    {
+     "name": "Team Bartholomäus Wettstein-Oberholzer",
+     "entries": [
+      1257,
+      157,
+      93,
+      -30
+     ]
+    },
+    {
+     "name": "Die unglaublich langen Namen vom Stammtisch Kleinbasel",
+     "entries": [
+      124,
+      91,
+      58,
+      105,
+      72,
+      119,
+      86,
+      53,
+      101,
+      68,
+      115,
+      82,
+      129,
+      97
+     ]
+    }
+   ],
+   "target": 1500
+  }
+ },
+ {
+  "name": "en",
+  "lang": "en",
+  "players": [
+   {
+    "name": "Team Red",
+    "score": 1042
+   },
+   {
+    "name": "Anna and Ben",
+    "score": 874
+   }
+  ],
+  "extra": {
+   "teams": [
+    {
+     "name": "Team Red",
+     "entries": [
+      157,
+      93,
+      212,
+      180,
+      150,
+      250
+     ]
+    },
+    {
+     "name": "Anna and Ben",
+     "entries": [
+      140,
+      86,
+      110,
+      160,
+      200,
+      178
+     ]
+    }
+   ],
+   "target": 1000
+  }
+ },
+ {
+  "name": "fr",
+  "lang": "fr",
+  "players": [
+   {
+    "name": "Équipe 1",
+    "score": 1042
+   },
+   {
+    "name": "Équipe 2",
+    "score": 874
+   }
+  ],
+  "extra": {
+   "teams": [
+    {
+     "name": "Équipe 1",
+     "entries": [
+      157,
+      93,
+      212,
+      180,
+      150,
+      250
+     ]
+    },
+    {
+     "name": "Équipe 2",
+     "entries": [
+      140,
+      86,
+      110,
+      160,
+      200,
+      178
+     ]
+    }
+   ],
+   "target": 1000
+  }
+ },
+ {
+  "name": "it",
+  "lang": "it",
+  "players": [
+   {
+    "name": "Squadra 1",
+    "score": 874
+   },
+   {
+    "name": "Marco e Luca",
+    "score": 1042
+   }
+  ],
+  "extra": {
+   "teams": [
+    {
+     "name": "Squadra 1",
+     "entries": [
+      140,
+      86,
+      110,
+      160,
+      200,
+      178
+     ]
+    },
+    {
+     "name": "Marco e Luca",
+     "entries": [
+      157,
+      93,
+      212,
+      180,
+      150,
+      250
+     ]
+    }
+   ],
+   "target": 1000
+  }
+ },
+ {
+  "name": "es",
+  "lang": "es",
+  "players": [
+   {
+    "name": "Equipo 1",
+    "score": 1042
+   },
+   {
+    "name": "Equipo 2",
+    "score": 874
+   }
+  ],
+  "extra": {
+   "teams": [
+    {
+     "name": "Equipo 1",
+     "entries": [
+      157,
+      93,
+      212,
+      180,
+      150,
+      250
+     ]
+    },
+    {
+     "name": "Equipo 2",
+     "entries": [
+      140,
+      86,
+      110,
+      160,
+      200,
+      178
+     ]
+    }
+   ],
+   "target": 1000
+  }
+ },
+ {
+  "name": "pt",
+  "lang": "pt",
+  "players": [
+   {
+    "name": "Equipa 1",
+    "score": 1042
+   },
+   {
+    "name": "Equipa 2",
+    "score": 874
+   }
+  ],
+  "extra": {
+   "teams": [
+    {
+     "name": "Equipa 1",
+     "entries": [
+      157,
+      93,
+      212,
+      180,
+      150,
+      250
+     ]
+    },
+    {
+     "name": "Equipa 2",
+     "entries": [
+      140,
+      86,
+      110,
+      160,
+      200,
+      178
+     ]
+    }
+   ],
+   "target": 1000
+  }
+ },
+ {
+  "name": "cjk",
+  "lang": "de",
+  "players": [
+   {
+    "name": "王小明和李华",
+    "score": 1042
+   },
+   {
+    "name": "さくら",
+    "score": 874
+   }
+  ],
+  "extra": {
+   "teams": [
+    {
+     "name": "王小明和李华",
+     "entries": [
+      157,
+      93,
+      212,
+      180,
+      150,
+      250
+     ]
+    },
+    {
+     "name": "さくら",
+     "entries": [
+      140,
+      86,
+      110,
+      160,
+      200,
+      178
+     ]
+    }
+   ],
+   "target": 1000
+  }
+ }
+]

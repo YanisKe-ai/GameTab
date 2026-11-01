@@ -429,5 +429,269 @@
     "score": 4
    }
   ]
+ },
+ {
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 24
+   },
+   {
+    "name": "Yanis",
+    "score": 23
+   },
+   {
+    "name": "Matteo",
+    "score": 22
+   },
+   {
+    "name": "Lea",
+    "score": 21
+   },
+   {
+    "name": "Noah",
+    "score": 20
+   },
+   {
+    "name": "Zoë",
+    "score": 19
+   },
+   {
+    "name": "Ölçü",
+    "score": 18
+   },
+   {
+    "name": "Kim",
+    "score": 17
+   },
+   {
+    "name": "Anna",
+    "score": 16
+   }
+  ],
+  "labelKey": "game5Seconds",
+  "name": "n9",
+  "pages": 1
+ },
+ {
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 24
+   },
+   {
+    "name": "Yanis",
+    "score": 23
+   },
+   {
+    "name": "Matteo",
+    "score": 22
+   },
+   {
+    "name": "Lea",
+    "score": 21
+   },
+   {
+    "name": "Noah",
+    "score": 20
+   },
+   {
+    "name": "Zoë",
+    "score": 19
+   },
+   {
+    "name": "Ölçü",
+    "score": 18
+   },
+   {
+    "name": "Kim",
+    "score": 17
+   },
+   {
+    "name": "Anna",
+    "score": 16
+   },
+   {
+    "name": "Ben",
+    "score": 15
+   }
+  ],
+  "labelKey": "game5Seconds",
+  "name": "n10",
+  "pages": 1
+ },
+ {
+  "lang": "de",
+  "players": [
+   {
+    "name": "Alexandra",
+    "score": 24
+   },
+   {
+    "name": "Sebastian",
+    "score": 23
+   },
+   {
+    "name": "Christoph",
+    "score": 22
+   },
+   {
+    "name": "Valentina",
+    "score": 21
+   },
+   {
+    "name": "Maximilian",
+    "score": 20
+   },
+   {
+    "name": "Johanna",
+    "score": 19
+   },
+   {
+    "name": "Bartholomäus",
+    "score": 18
+   },
+   {
+    "name": "Katharina",
+    "score": 17
+   },
+   {
+    "name": "Tobias",
+    "score": 16
+   },
+   {
+    "name": "Annabelle",
+    "score": 15
+   }
+  ],
+  "labelKey": "game5Seconds",
+  "name": "n10_lang",
+  "pages": 1
+ },
+ {
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 24
+   },
+   {
+    "name": "Yanis",
+    "score": 23
+   },
+   {
+    "name": "Matteo",
+    "score": 22
+   },
+   {
+    "name": "Lea",
+    "score": 21
+   },
+   {
+    "name": "Noah",
+    "score": 20
+   },
+   {
+    "name": "Zoë",
+    "score": 19
+   },
+   {
+    "name": "Ölçü",
+    "score": 18
+   },
+   {
+    "name": "Kim",
+    "score": 17
+   },
+   {
+    "name": "Anna",
+    "score": 16
+   },
+   {
+    "name": "Ben",
+    "score": 15
+   },
+   {
+    "name": "Mia",
+    "score": 14
+   }
+  ],
+  "labelKey": "game5Seconds",
+  "name": "n11",
+  "pages": 2
+ },
+ {
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 24
+   },
+   {
+    "name": "Yanis",
+    "score": 23
+   },
+   {
+    "name": "Matteo",
+    "score": 22
+   },
+   {
+    "name": "Lea",
+    "score": 21
+   },
+   {
+    "name": "Noah",
+    "score": 20
+   },
+   {
+    "name": "Zoë",
+    "score": 19
+   },
+   {
+    "name": "Ölçü",
+    "score": 18
+   },
+   {
+    "name": "Kim",
+    "score": 17
+   },
+   {
+    "name": "Anna",
+    "score": 16
+   },
+   {
+    "name": "Ben",
+    "score": 15
+   },
+   {
+    "name": "Mia",
+    "score": 14
+   },
+   {
+    "name": "Luca",
+    "score": 13
+   },
+   {
+    "name": "Sara",
+    "score": 12
+   },
+   {
+    "name": "Jonas",
+    "score": 11
+   },
+   {
+    "name": "Elena",
+    "score": 10
+   },
+   {
+    "name": "Fabian",
+    "score": 9
+   }
+  ],
+  "labelKey": "game5Seconds",
+  "name": "n16",
+  "pages": 2
  }
 ]

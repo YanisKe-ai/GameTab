@@ -108,7 +108,9 @@ function fit(c, text, o) {
   for (; size >= o.min; size -= step) {
     setFont(c, o.w, size, o.fam);
     const lines = ls ? [String(text)] : wrap(c, text, o.maxW);
-    if (lines.length <= L && lines.every((l) => tw(l, size) <= o.maxW)) return { size, lines, cut: false };
+    // Kein Bruch mitten im Wort, solange noch verkleinert werden kann: lieber kleinere Schrift
+    const wordsFit = ls || String(text).split(/\s+/u).every((w) => !w || c.measureText(w).width <= o.maxW);
+    if (wordsFit && lines.length <= L && lines.every((l) => tw(l, size) <= o.maxW)) return { size, lines, cut: false };
   }
   size = o.min; setFont(c, o.w, size, o.fam);
   let lines = wrap(c, text, o.maxW);
@@ -167,26 +169,67 @@ function tplData(gameId, gameLabel, ranked, t, extra) {
 }
 /* Seitenaufteilung: erste Seite first Eintraege, danach je next */
 function chunks(list, first, next) { const out = [list.slice(0, first)]; for (let i = first; i < list.length; i += next) out.push(list.slice(i, i + next)); return out; }
-/* Folgeseite bei vielen Spielern: schlichte Rangliste im Stil der Vorlage. sty: {bg(c), ink, sub, acc, line, fam, logo} */
-function listPage(d, rows, no, count, sty) {
+/* Sieger- oder Titelname: stufenweise 1, 2, 3 Zeilen, dann noch kleiner, gekuerzt (...) nur im aeussersten Notfall.
+   tiers: [{max, min, lines}], o: {w, fam, maxW}. Rueckgabe wie fit(): {size, lines, cut}. */
+function heroFit(c, text, o, tiers) {
+  let f = null;
+  for (const t of tiers) { f = fit(c, text, Object.assign({}, o, t)); if (!f.cut) return f; }
+  return f;
+}
+/* Alle Eintraege, die auf EIN Bild passen (bis 10 Spieler). Ab dem 11. Eintrag kommt eine Folgeseite. */
+const ONE_PAGE = 10;
+/* Folgeseite ab dem 11. Spieler, gemeinsam fuer alle Vorlagen.
+   Im Look des Spiels: sty.bg(c) zeichnet den Hintergrund des Spiels, Kopf mit Logo, Spielname gross in der Spielschrift, Hinweis "Fortsetzung",
+   Rangliste einspaltig (bis 12 Zeilen), unten Datum.
+   sty: {bg(c), ink, sub, acc, line, logo (Farbe), fam (Schrift fuer Namen und Werte), titleFam, titleW, titleCase (true = Grossbuchstaben),
+         subFam, rowFill (Farbe der Zeilenflaeche, optional), rowFillWin (fuer Sieger), rowEdge (Randfarbe, optional), winInk (Textfarbe auf rowFillWin), brand (Schrift/Farbe der Marke, optional), deco(c, y) (optional)}
+   rows: die Zeilen dieser Seite, no: Seitennummer (ab 2), count: Seitenzahl insgesamt. */
+function continuationPage(d, rows, no, count, sty) {
   const { cv, c } = tplCanvas(); sty.bg(c);
-  const fam = sty.fam || F_INTER;
-  logo(c, d.logo, 60, 60, 70, sty.logo || sty.ink);
-  setFont(c, 800, 40, F_BALOO); c.fillStyle = sty.ink; c.fillText("GameTab", 60 + 70 * LOGO_AR + 18, 108);
-  const pg = d.tr("ecPage", (x, y) => "Seite " + x + "/" + y);
-  setFont(c, 600, 28, F_INTER); c.fillStyle = sty.sub; c.textAlign = "right"; c.fillText(d.gameLabel + " · " + (typeof pg === "function" ? pg(no, count) : no + "/" + count), 1020, 108); c.textAlign = "left";
-  const top = 190, bottom = 1240, n = Math.max(rows.length, 1), pitch = Math.min(96, (bottom - top) / n);
-  const fs = Math.min(44, pitch * 0.5);
+  const fam = sty.fam || F_INTER, tfam = sty.titleFam || fam, tw = sty.titleW || 400, sfam = sty.subFam || F_BALOO;
+  /* Kopf: Logo, Marke, Seitenzahl */
+  const lh = 64, lw = logo(c, d.logo, 60, 50, lh, sty.logo || sty.ink);
+  setFont(c, 800, 36, F_BALOO); c.fillStyle = sty.logo || sty.ink; c.fillText("GameTab", 60 + lw + 16, 50 + lh * 0.66);
+  const pg = d.tr("ecPage", (x, y) => x + "/" + y);
+  setFont(c, 700, 30, F_BALOO); c.fillStyle = sty.sub; c.textAlign = "right"; c.fillText(typeof pg === "function" ? pg(no, count) : no + "/" + count, 1020, 50 + lh * 0.66); c.textAlign = "left";
+  /* Titel */
+  const title = sty.titleCase ? d.up(d.gameLabel) : d.gameLabel;
+  const tf = fit(c, title, { w: tw, fam: tfam, max: 112, min: 52, maxW: 960, lines: 1 });
+  setFont(c, tw, tf.size, tfam); const cap = capH(c);
+  const tBase = 150 + cap + 10;
+  c.fillStyle = sty.acc; c.fillText(tf.lines[0], 60, tBase);
+  const cont = d.tr("ecContinued", "Fortsetzung");
+  const cf = fit(c, cont, { w: 700, fam: sfam, max: 46, min: 26, maxW: 600, lines: 1 });
+  setFont(c, 700, cf.size, sfam); c.fillStyle = sty.ink; c.globalAlpha = 0.9; c.fillText(cf.lines[0], 62, tBase + 24 + cf.size * 0.8); c.globalAlpha = 1;
+  const sepY = tBase + 24 + cf.size * 0.8 + 26;
+  c.fillStyle = sty.line; c.fillRect(60, sepY, 960, 3);
+  if (sty.deco) sty.deco(c, sepY);
+  /* Rangliste: Block mittig im freien Bereich, Zeilenhoehe waechst bei wenigen Zeilen */
+  const top = sepY + 22, bottom = 1170, avail = bottom - top, n = Math.max(rows.length, 1);
+  const pitch = Math.min(n <= 4 ? 124 : 104, avail / n), blockH = pitch * n;
+  const y0 = top + (n >= 8 ? 0 : (avail - blockH) * 0.3);
+  const fs = Math.max(28, Math.min(n <= 4 ? 60 : 52, pitch * 0.5)), gapR = Math.min(10, pitch * 0.14), rh = pitch - gapR;
   rows.forEach((r, i) => {
-    const y = top + i * pitch, base = y + pitch / 2 + fs * 0.36;
-    setFont(c, 800, fs, F_INTER); c.fillStyle = r.winner ? sty.acc : sty.sub; c.fillText(String(r.rank).padStart(2, "0"), 60, base);
-    setFont(c, 700, fs, fam); c.textAlign = "right"; c.fillStyle = r.winner ? sty.acc : sty.ink; const vw = c.measureText(r.value).width; c.fillText(r.value, 1020, base); c.textAlign = "left";
-    const f = fit(c, r.name, { w: 700, fam, max: fs, min: Math.max(18, fs * 0.6), maxW: 1020 - vw - 30 - 150, lines: 1 });
-    setFont(c, 700, f.size, fam); c.fillStyle = sty.ink; c.fillText(f.lines[0], 150, base);
-    c.fillStyle = sty.line; c.fillRect(60, y + pitch - 2, 960, 2);
+    const y = y0 + i * pitch, base = y + rh / 2 + fs * 0.36, hot = r.winner;
+    if (sty.rowFill) {
+      c.fillStyle = hot && sty.rowFillWin ? sty.rowFillWin : sty.rowFill; rrect(c, 60, y, 960, rh, rh * 0.22); c.fill();
+      if (sty.rowEdge && !hot) { c.strokeStyle = sty.rowEdge; c.lineWidth = 3; rrect(c, 61.5, y + 1.5, 957, rh - 3, rh * 0.22); c.stroke(); }
+    } else { c.fillStyle = sty.line; c.fillRect(60, y + pitch - 3, 960, 2); }
+    const inkR = hot && sty.winInk ? sty.winInk : sty.ink, accR = hot && sty.winInk ? sty.winInk : sty.acc;
+    const px = sty.rowFill ? 24 : 0;
+    setFont(c, 800, fs * 0.9, F_INTER); c.fillStyle = hot ? accR : sty.sub; c.fillText(String(r.rank), 60 + px, base);
+    const rankW = Math.max(c.measureText("00").width, c.measureText(String(r.rank)).width) + 22;
+    setFont(c, 700, fs, fam); c.fillStyle = hot ? accR : inkR; c.textAlign = "right";
+    const vf = fit(c, r.value, { w: 700, fam, max: fs, min: fs * 0.6, maxW: 330, lines: 1 }); setFont(c, 700, vf.size, fam);
+    const vw = c.measureText(r.value).width; c.fillText(r.value, 1020 - px, base); c.textAlign = "left";
+    const f = fit(c, r.name, { w: 700, fam, max: fs, min: Math.max(22, fs * 0.6), maxW: 960 - px * 2 - rankW - vw - 36, lines: 1 });
+    setFont(c, 700, f.size, fam); c.fillStyle = inkR; c.fillText(f.lines[0], 60 + px + rankW, base);
   });
-  setFont(c, 600, 26, F_INTER); c.fillStyle = sty.sub; c.fillText(d.date, 60, 1300);
+  /* Fuss: Datum */
+  setFont(c, 600, 26, F_BALOO); c.fillStyle = sty.sub; c.fillText(d.date, 60, 1275);
   return cv;
 }
+/* Alter Name, bleibt fuer bestehende Aufrufe (yatzy) gueltig */
+const listPage = continuationPage;
 
-export { TPL_W, TPL_H, F_ANTON, F_INTER, F_BALOO, F_KALAM, LOGO_AR, tplFonts, tplLogo, tplWarm, tplCanvas, rrect, cssEllipse, insetShadow, setFont, seg, wrap, ellipsize, fit, spaced, spacedW, cssBase, capH, logo, tplDate, tplData, chunks, listPage };
+export { TPL_W, TPL_H, F_ANTON, F_INTER, F_BALOO, F_KALAM, LOGO_AR, tplFonts, tplLogo, tplWarm, tplCanvas, rrect, cssEllipse, insetShadow, setFont, seg, wrap, ellipsize, fit, spaced, spacedW, cssBase, capH, logo, tplDate, tplData, chunks, listPage, continuationPage, heroFit, ONE_PAGE };

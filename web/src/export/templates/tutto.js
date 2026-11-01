@@ -4,7 +4,6 @@
 import { F_INTERBI } from "./fonts-a.js";
 
 const INK = "#14101C", RED = "#D7141F", BARRED = "#C8102E", YEL = "#F7C32E", CARD = "#C1798F";
-const FIRST_CAP = 8;
 const DICE = [[60, 540, -8, 1], [225, 565, 6, 1], [390, 535, -4, 1], [100, 700, 7, 5], [270, 720, -9, 5], [440, 700, 5, 5]];
 const PIPS = { 1: [[1, 1]], 5: [[0, 0], [2, 0], [1, 1], [0, 2], [2, 2]] };
 const BONUS = [["500", -8], ["2x", 5], ["1000", -3]];
@@ -72,32 +71,39 @@ function page1(d, k, rows) {
   const win = d.winners.length ? d.winners : d.rows.slice(0, 1);
   const name = d.up(win.map((r) => r.name).join(" & "));
   const val = win[0].value;
-  const hv = k.fit(c, val, { w: 400, fam: k.F_ANTON, max: 150, min: 90, maxW: 380, lines: 1 });
+  const N = rows.length, dense = N >= 8, hmax = dense ? 118 : 150;
+  const hv = k.fit(c, val, { w: 400, fam: k.F_ANTON, max: hmax, min: 90, maxW: 380, lines: 1 });
   k.setFont(c, 400, hv.size, k.F_ANTON); const vw = c.measureText(val).width;
-  const fo = { w: 400, fam: k.F_ANTON, maxW: 960 - vw - 40 };
-  let nf = k.fit(c, name, Object.assign({}, fo, { max: 150, min: 96, lines: 1 }));
-  if (nf.cut) nf = k.fit(c, name, Object.assign({}, fo, { max: 90, min: 52, lines: 2 }));
-  if (nf.cut) nf = k.fit(c, name, Object.assign({}, fo, { max: 56, min: 38, lines: 3 }));
+  const fo = { w: 400, fam: k.F_ANTON, maxW: 960 - vw - 50 };
+  const nf = k.heroFit(c, name, fo, [{ max: hmax, min: dense ? 80 : 96, lines: 1 }, { max: dense ? 80 : 90, min: 52, lines: 2 }, { max: 56, min: 30, lines: 3 }]);
   k.setFont(c, 400, nf.size, k.F_ANTON); const cap = k.capH(c);
   const asc = nf.lines.map((l) => Math.max(cap, c.measureText(l).actualBoundingBoxAscent || cap));
   const dsc = nf.lines.map((l) => Math.max(0, c.measureText(l).actualBoundingBoxDescent || 0));
-  const heroBase = nf.lines.length === 1 ? 497 : 515;
+  const gapL = (i) => asc[i + 1] + dsc[i] + nf.size * 0.1;
+  let heroH = asc[0]; for (let i = 0; i < nf.lines.length - 1; i++) heroH += gapL(i);
+  /* Sieger direkt unter dem Titelschild, bei vielen Spielern naeher am Titel (mehr Platz fuer die Balken) */
+  const base0 = dense ? (nf.lines.length === 1 ? 450 : 470) : (nf.lines.length === 1 ? 497 : 515);
+  const heroBase = Math.max(base0, 340 + (d.tie ? 48 : 0) + heroH);
   const bl = new Array(nf.lines.length); bl[nf.lines.length - 1] = heroBase;
-  for (let i = nf.lines.length - 2; i >= 0; i--) bl[i] = bl[i + 1] - (asc[i + 1] + dsc[i] + nf.size * 0.1);
-  c.fillStyle = INK; nf.lines.forEach((ln, i) => c.fillText(ln, 60, bl[i]));
+  for (let i = nf.lines.length - 2; i >= 0; i--) bl[i] = bl[i + 1] - gapL(i);
+  c.fillStyle = INK; k.setFont(c, 400, nf.size, k.F_ANTON); nf.lines.forEach((ln, i) => c.fillText(ln, 60, bl[i]));
   k.setFont(c, 400, hv.size, k.F_ANTON); c.fillStyle = RED; c.textAlign = "right"; c.fillText(val, 1020, heroBase); c.textAlign = "left";
   if (d.tie) { const tl = d.up(d.tr("ecTied", "")); k.setFont(c, 700, 28, k.F_INTER); c.fillStyle = INK; k.spaced(c, tl, 62, bl[0] - asc[0] - 16, 3, "left"); }
   /* Balken */
-  const N = rows.length, p = N <= 3 ? 90 : N <= 5 ? 72 : N === 6 ? 62 : N === 7 ? 54 : 48, rowH = Math.round(p * 0.82);
-  const endY = 1160, rowsTop = endY - (N - 1) * p - rowH;
+  const endY = 1160;
+  const p = dense ? Math.min(72, (endY - (heroBase + 78)) / (N - 1 + 0.82)) : N <= 3 ? 90 : N <= 5 ? 72 : N === 6 ? 62 : 58;
+  const rowH = Math.round(p * 0.82);
+  const rowsTop = endY - (N - 1) * p - rowH;
   const target = d.target;
-  /* Dekoration (Wuerfel und Karten) im Platz zwischen Sieger und Balken, bei vielen Spielern kleiner */
+  /* Dekoration (Wuerfel und Karten) im Platz zwischen Sieger und Balken, bei vielen Spielern kleiner, bei zu wenig Platz weggelassen */
   const zoneTop = heroBase + 30, zoneBottom = rowsTop - 62;
-  const sc = Math.max(0.38, Math.min(1, (zoneBottom - zoneTop) / 330));
-  c.save(); c.translate(60, 540); c.scale(sc, sc); c.translate(-60, -540 + (zoneTop - 540) / sc);
-  DICE.forEach(([x, y, r, n]) => die(c, k, x, y, r, n, 140));
-  BONUS.forEach((_, i) => bonus(c, k, d, i, 0, 0));
-  c.restore();
+  const sc = Math.min(1, (zoneBottom - zoneTop) / 330);
+  if (sc >= 0.4) {
+    c.save(); c.translate(60, 540); c.scale(sc, sc); c.translate(-60, -540 + (zoneTop - 540) / sc);
+    DICE.forEach(([x, y, r, n]) => die(c, k, x, y, r, n, 140));
+    BONUS.forEach((_, i) => bonus(c, k, d, i, 0, 0));
+    c.restore();
+  }
   /* Namen- und Wertespalte nach Inhalt */
   k.setFont(c, 400, rowH * 0.74, k.F_ANTON);
   const vwMax = Math.max(...rows.map((r) => c.measureText(r.value).width));
@@ -141,10 +147,11 @@ export default {
   texts: (d) => [d.up(d.gameLabel), d.up(d.tr("ecTied", "")), "×0123456789", d.winners.map((r) => r.name).join(" ")],
   render(d, k) {
     if (!d.target) { const t = Number(d.extra && d.extra.target); d.target = isFinite(t) && t > 0 ? t : Math.max(1, ...d.rows.map((r) => r.score || 0)); }
-    const parts = k.chunks(d.rows, FIRST_CAP, 12);
+    const parts = k.chunks(d.rows, k.ONE_PAGE, 12);
     const out = [page1(d, k, parts[0])];
-    const sty = { bg: (c) => bg(c, k), ink: INK, sub: "rgba(20,16,28,0.7)", acc: RED, line: "rgba(20,16,28,0.25)", fam: k.F_ANTON, logo: INK };
-    parts.slice(1).forEach((p, i) => out.push(k.listPage(d, p, i + 2, parts.length, sty)));
+    const sty = { bg: (c) => bg(c, k), ink: INK, sub: "rgba(20,16,28,0.7)", acc: RED, line: "rgba(20,16,28,0.25)", fam: k.F_ANTON, logo: INK, titleFam: F_INTERBI, titleW: 900, titleCase: true, subFam: k.F_INTER,
+      rowFill: "#FFFFFF", rowEdge: INK };
+    parts.slice(1).forEach((p, i) => out.push(k.continuationPage(d, p, i + 2, parts.length, sty)));
     return out;
   },
 };

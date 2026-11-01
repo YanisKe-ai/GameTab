@@ -5,7 +5,6 @@
 import { F_MONO, F_SPACE } from "./fonts-a.js";
 
 const BG = "#1B1209", ORG = "#FF9640", PEACH = "#FFD7B0", INK = "#FFFFFF";
-const FIRST_CAP = 9;
 
 function bg(c, k) { c.fillStyle = BG; c.fillRect(0, 0, k.TPL_W, k.TPL_H); }
 function clock(c, k, frac) {
@@ -45,10 +44,12 @@ function page1(d, k, rows) {
   /* Liste */
   const win = d.winners.length ? d.winners : d.rows.slice(0, 1);
   const nW = rows.filter((r) => r.winner).length, N = rows.length;
-  const pitch = Math.max(36, Math.min(83, 560 / (N + 0.4 * nW)));
-  const wExtra = pitch * 0.2;
-  const H = N * pitch + nW * wExtra;
-  const bottom = N <= 3 ? 1125 : Math.min(1185, 1125 + (N - 3) * 15);
+  /* Ab 7 Spielern zweispaltig (links Rang 1 bis ...), damit die Uhr gross bleibt und die Namen gross lesbar sind */
+  const dense = N >= 7, RR = Math.ceil(N / 2);
+  const pitch = dense ? (RR <= 4 ? 84 : 76) : Math.max(36, Math.min(83, 560 / (N + 0.4 * nW)));
+  const wExtra = dense ? 0 : pitch * 0.2;
+  const H = dense ? RR * pitch : N * pitch + nW * wExtra;
+  const bottom = dense ? 1185 : N <= 3 ? 1125 : Math.min(1185, 1125 + (N - 3) * 15);
   const listTop = bottom - H;
   /* Uhr: Mittelpunkt (540, 550), bei viel Liste verkleinert */
   const total = d.rows.reduce((a, r) => a + (r.score > 0 ? r.score : 0), 0);
@@ -64,17 +65,30 @@ function page1(d, k, rows) {
   k.setFont(c, 700, uf.size, F_SPACE); c.fillStyle = PEACH; c.fillText(unit, 540, 590 + (300 - vf.size) * 0.2 + 36);
   c.textAlign = "left"; c.restore();
   /* Rangliste */
-  let y = listTop;
-  rows.forEach((r) => {
-    const h = pitch + (r.winner ? wExtra : 0), fs = Math.min(r.winner ? 64 : 50, h * 0.62);
-    const base = y + h * 0.5 + fs * 0.36;
-    c.fillStyle = r.winner ? ORG : INK;
-    k.setFont(c, 700, fs, F_SPACE); c.textAlign = "right"; c.fillText(r.value, 1010, base); const vw = c.measureText(r.value).width; c.textAlign = "left";
-    const f = k.fit(c, r.name, { w: 700, fam: F_SPACE, max: fs, min: Math.max(16, fs * 0.5), maxW: 940 - vw - 24, lines: 1 });
-    k.setFont(c, 700, f.size, F_SPACE); c.fillText(f.lines[0], 70, base);
-    c.fillStyle = "rgba(255,255,255,0.13)"; c.fillRect(70, y + h - 3, 940, 3);
-    y += h;
-  });
+  if (dense) {
+    const colW = 450, fs = Math.min(48, pitch * 0.6);
+    rows.forEach((r, i) => {
+      const col = Math.floor(i / RR), rw = i % RR, x = col ? 1010 - colW : 70, y = listTop + rw * pitch, base = y + pitch / 2 + fs * 0.36;
+      k.setFont(c, 700, fs * 0.8, F_SPACE); c.fillStyle = r.winner ? ORG : PEACH; c.globalAlpha = r.winner ? 1 : 0.75; c.fillText(String(r.rank), x, base); c.globalAlpha = 1;
+      const rkW = c.measureText("00").width + 16;
+      k.setFont(c, 700, fs, F_SPACE); c.fillStyle = r.winner ? ORG : INK; c.textAlign = "right"; c.fillText(r.value, x + colW, base); const vw = c.measureText(r.value).width; c.textAlign = "left";
+      const f = k.fit(c, r.name, { w: 700, fam: F_SPACE, max: fs, min: Math.max(22, fs * 0.55), maxW: colW - rkW - vw - 20, lines: 1 });
+      k.setFont(c, 700, f.size, F_SPACE); c.fillText(f.lines[0], x + rkW, base);
+      c.fillStyle = "rgba(255,255,255,0.13)"; c.fillRect(x, y + pitch - 3, colW, 3);
+    });
+  } else {
+    let y = listTop;
+    rows.forEach((r) => {
+      const h = pitch + (r.winner ? wExtra : 0), fs = Math.min(r.winner ? 64 : 50, h * 0.62);
+      const base = y + h * 0.5 + fs * 0.36;
+      c.fillStyle = r.winner ? ORG : INK;
+      k.setFont(c, 700, fs, F_SPACE); c.textAlign = "right"; c.fillText(r.value, 1010, base); const vw = c.measureText(r.value).width; c.textAlign = "left";
+      const f = k.fit(c, r.name, { w: 700, fam: F_SPACE, max: fs, min: Math.max(16, fs * 0.5), maxW: 940 - vw - 24, lines: 1 });
+      k.setFont(c, 700, f.size, F_SPACE); c.fillText(f.lines[0], 70, base);
+      c.fillStyle = "rgba(255,255,255,0.13)"; c.fillRect(70, y + h - 3, 940, 3);
+      y += h;
+    });
+  }
   if (d.tie) { const tl = d.up(d.tr("ecTied", "")); k.setFont(c, 600, 24, F_MONO); c.fillStyle = PEACH; k.spaced(c, tl, 540, 190 + 0.0, 2, "center"); }
   footer(c, k, d);
   return cv;
@@ -85,10 +99,11 @@ export default {
   fonts: ["400 100px \"GTR Anton\"", "700 50px \"Space Grotesk\"", "700 28px \"Space Grotesk\"", "800 52px \"Baloo 2\"", "600 26px \"GTR Mono\""],
   texts: (d) => [d.up(d.gameLabel), d.tr("fiveSecScoreLabel", ""), d.up(d.tr("ecTied", "")), "0123456789", d.date],
   render(d, k) {
-    const parts = k.chunks(d.rows, FIRST_CAP, 12);
+    const parts = k.chunks(d.rows, k.ONE_PAGE, 12);
     const out = [page1(d, k, parts[0])];
-    const sty = { bg: (c) => bg(c, k), ink: INK, sub: PEACH, acc: ORG, line: "rgba(255,255,255,0.15)", fam: F_SPACE, logo: ORG };
-    parts.slice(1).forEach((p, i) => out.push(k.listPage(d, p, i + 2, parts.length, sty)));
+    const sty = { bg: (c) => bg(c, k), ink: INK, sub: PEACH, acc: ORG, line: "rgba(255,255,255,0.15)", fam: F_SPACE, logo: ORG, titleFam: k.F_ANTON, titleCase: true, subFam: F_MONO,
+      rowFill: "#2A1B0D", rowEdge: "rgba(255,150,64,0.35)", rowFillWin: "#2A1B0D" };
+    parts.slice(1).forEach((p, i) => out.push(k.continuationPage(d, p, i + 2, parts.length, sty)));
     return out;
   },
 };

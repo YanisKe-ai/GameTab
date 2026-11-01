@@ -4,7 +4,6 @@
 import { F_MONO } from "./fonts-a.js";
 
 const BG = "#6C7FE8", NAVY = "#12163A", LILA = "#B7C1FF", GREEN = "#2FD9A8";
-const FIRST_CAP = 12;
 
 function bg(c, k) {
   c.fillStyle = BG; c.fillRect(0, 0, k.TPL_W, k.TPL_H);
@@ -78,6 +77,21 @@ function pills(c, k, d, rows, top, ph, cols) {
     c.textAlign = "left";
   });
 }
+/* Viele Spieler (ab 7): zweispaltig, je Zeile Rang, Name und Zahl in einer Reihe, Sieger gruen */
+function pillsRow(c, k, rows, top, ph) {
+  const cols = 2, gap = 16, vg = 12, pw = (920 - gap) / 2;
+  rows.forEach((r, i) => {
+    const col = i % cols, row = Math.floor(i / cols), x = 80 + col * (pw + gap), y = top + row * (ph + vg);
+    const hot = r.winner;
+    c.fillStyle = hot ? GREEN : NAVY; k.rrect(c, x, y, pw, ph, 22); c.fill();
+    const fs = Math.min(42, ph * 0.46), base = y + ph / 2 + fs * 0.34;
+    k.setFont(c, 800, fs, k.F_BALOO); c.fillStyle = hot ? "#06241B" : GREEN; c.textAlign = "right"; c.fillText(r.value, x + pw - 24, base); const vw = c.measureText(r.value).width;
+    c.textAlign = "left"; c.fillStyle = hot ? "#06241B" : LILA; k.setFont(c, 800, fs * 0.9, k.F_BALOO); c.fillText(String(r.rank), x + 24, base);
+    const nx = x + 24 + c.measureText("00").width + 14;
+    const f = k.fit(c, r.name, { w: 800, fam: k.F_BALOO, max: fs, min: Math.max(22, fs * 0.6), maxW: x + pw - 24 - vw - 16 - nx, lines: 1 });
+    k.setFont(c, 800, f.size, k.F_BALOO); c.fillStyle = hot ? "#06241B" : "#FFFFFF"; c.fillText(f.lines[0], nx, base);
+  });
+}
 function footer(c, k, d) {
   const lw = k.logo(c, d.logo, 70, 1220, 100, "#FFFFFF");
   const x = 70 + lw + 22;
@@ -111,9 +125,9 @@ function page1(d, k, rows) {
   sf.lines.forEach((l, i) => c.fillText(l, 80, subTop + sf.size * 0.82 + i * sf.size * 1.1));
   const subBottom = subTop + sf.lines.length * sf.size * 1.1;
   /* Pillen unten */
-  const n = rows.length, cols = Math.max(1, Math.min(3, n)), nr = Math.ceil(n / cols);
-  const ph = nr <= 1 ? 140 : nr === 2 ? 120 : nr === 3 ? 100 : 86;
-  const pillsTop = 1140 - nr * ph - (nr - 1) * 16;
+  const n = rows.length, dense = n >= 7, cols = dense ? 2 : Math.max(1, Math.min(3, n)), nr = Math.ceil(n / cols);
+  const ph = dense ? (nr <= 4 ? 96 : 86) : nr <= 1 ? 140 : nr === 2 ? 120 : nr === 3 ? 100 : 86, pgap = dense ? 12 : 16;
+  const pillsTop = 1140 - nr * ph - (nr - 1) * pgap;
   /* Person, Handy und Kartenstapel; bei vielen Zeilen verkleinert */
   const topY = Math.max(340, subBottom + 10);
   const sc = Math.max(0.4, Math.min(1, (pillsTop - 14 - topY) / 720));
@@ -122,7 +136,7 @@ function page1(d, k, rows) {
   phone(c, k, d, win[0].value, d.tie ? d.tr("ecWonMany", "Gemeinsam gewonnen") : d.tr("ecWon", "Gewonnen"));
   stack(c, k);
   c.restore();
-  pills(c, k, d, rows, pillsTop, ph, cols);
+  if (dense) pillsRow(c, k, rows, pillsTop, ph); else pills(c, k, d, rows, pillsTop, ph, cols);
   footer(c, k, d);
   return cv;
 }
@@ -132,10 +146,11 @@ export default {
   fonts: ["400 100px \"GTR Anton\"", "800 58px \"Baloo 2\"", "600 26px \"Baloo 2\"", "600 26px \"GTR Mono\""],
   texts: (d) => [d.up(d.gameLabel), d.tr("tplHeadsGuessed", ""), d.tr("ecWon", ""), d.tr("ecWonMany", ""), d.tr("ecRank", ""), d.tr("stuAnd", ""), "?0123456789", d.winners.map((r) => r.name).join(" "), d.date],
   render(d, k) {
-    const parts = k.chunks(d.rows, FIRST_CAP, 12);
+    const parts = k.chunks(d.rows, k.ONE_PAGE, 12);
     const out = [page1(d, k, parts[0])];
-    const sty = { bg: (c) => bg(c, k), ink: "#FFFFFF", sub: LILA, acc: "#FFFFFF", line: "rgba(255,255,255,0.25)", fam: k.F_BALOO, logo: "#FFFFFF" };
-    parts.slice(1).forEach((p, i) => out.push(k.listPage(d, p, i + 2, parts.length, sty)));
+    const sty = { bg: (c) => bg(c, k), ink: "#FFFFFF", sub: LILA, acc: "#FFFFFF", line: "rgba(255,255,255,0.25)", fam: k.F_BALOO, logo: "#FFFFFF", titleFam: k.F_ANTON, titleCase: true, subFam: k.F_BALOO,
+      rowFill: NAVY, rowFillWin: GREEN, winInk: "#06241B" };
+    parts.slice(1).forEach((p, i) => out.push(k.continuationPage(d, p, i + 2, parts.length, sty)));
     return out;
   },
 };

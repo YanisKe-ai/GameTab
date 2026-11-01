@@ -117,8 +117,9 @@ export default {
     const rest = d.rows.filter((r) => win.indexOf(r) < 0);
     const parts = k.chunks(rest, FIRST_CAP, 12);
     const out = [page1(d, k, parts[0])];
-    const sty = { bg: (c) => bg(c, k), ink: INK, sub: ACC, acc: ACC, line: "rgba(157,184,214,0.35)", fam: k.F_ANTON, logo: INK };
-    parts.slice(1).forEach((p, i) => out.push(k.listPage(d, p, i + 2, parts.length, sty)));
+    const sty = { bg: (c) => bg(c, k), ink: INK, sub: ACC, acc: ACC, line: "rgba(157,184,214,0.35)", fam: k.F_ANTON, logo: INK, titleFam: k.F_ANTON, titleCase: true, subFam: k.F_BALOO,
+      rowFill: "rgba(157,184,214,0.1)", rowEdge: "rgba(157,184,214,0.32)" };
+    parts.slice(1).forEach((p, i) => out.push(k.continuationPage(d, p, i + 2, parts.length, sty)));
     return out;
   },
 };

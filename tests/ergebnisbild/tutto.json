@@ -184,7 +184,7 @@
   "extra": {
    "target": 6000
   },
-  "pages": 2
+  "pages": 1
  },
  {
   "name": "lange_namen",
@@ -459,5 +459,279 @@
     "score": 4800
    }
   ]
+ },
+ {
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 6100
+   },
+   {
+    "name": "Yanis",
+    "score": 5720
+   },
+   {
+    "name": "Matteo",
+    "score": 5340
+   },
+   {
+    "name": "Lea",
+    "score": 4960
+   },
+   {
+    "name": "Noah",
+    "score": 4580
+   },
+   {
+    "name": "Zoë",
+    "score": 4200
+   },
+   {
+    "name": "Ölçü",
+    "score": 3820
+   },
+   {
+    "name": "Kim",
+    "score": 3440
+   },
+   {
+    "name": "Anna",
+    "score": 3060
+   }
+  ],
+  "extra": {
+   "target": 6000
+  },
+  "name": "n9",
+  "pages": 1
+ },
+ {
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 6100
+   },
+   {
+    "name": "Yanis",
+    "score": 5720
+   },
+   {
+    "name": "Matteo",
+    "score": 5340
+   },
+   {
+    "name": "Lea",
+    "score": 4960
+   },
+   {
+    "name": "Noah",
+    "score": 4580
+   },
+   {
+    "name": "Zoë",
+    "score": 4200
+   },
+   {
+    "name": "Ölçü",
+    "score": 3820
+   },
+   {
+    "name": "Kim",
+    "score": 3440
+   },
+   {
+    "name": "Anna",
+    "score": 3060
+   },
+   {
+    "name": "Ben",
+    "score": 2680
+   }
+  ],
+  "extra": {
+   "target": 6000
+  },
+  "name": "n10",
+  "pages": 1
+ },
+ {
+  "lang": "de",
+  "players": [
+   {
+    "name": "Alexandra",
+    "score": 6100
+   },
+   {
+    "name": "Sebastian",
+    "score": 5720
+   },
+   {
+    "name": "Christoph",
+    "score": 5340
+   },
+   {
+    "name": "Valentina",
+    "score": 4960
+   },
+   {
+    "name": "Maximilian",
+    "score": 4580
+   },
+   {
+    "name": "Johanna",
+    "score": 4200
+   },
+   {
+    "name": "Bartholomäus",
+    "score": 3820
+   },
+   {
+    "name": "Katharina",
+    "score": 3440
+   },
+   {
+    "name": "Tobias",
+    "score": 3060
+   },
+   {
+    "name": "Annabelle",
+    "score": 2680
+   }
+  ],
+  "extra": {
+   "target": 6000
+  },
+  "name": "n10_lang",
+  "pages": 1
+ },
+ {
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 6100
+   },
+   {
+    "name": "Yanis",
+    "score": 5720
+   },
+   {
+    "name": "Matteo",
+    "score": 5340
+   },
+   {
+    "name": "Lea",
+    "score": 4960
+   },
+   {
+    "name": "Noah",
+    "score": 4580
+   },
+   {
+    "name": "Zoë",
+    "score": 4200
+   },
+   {
+    "name": "Ölçü",
+    "score": 3820
+   },
+   {
+    "name": "Kim",
+    "score": 3440
+   },
+   {
+    "name": "Anna",
+    "score": 3060
+   },
+   {
+    "name": "Ben",
+    "score": 2680
+   },
+   {
+    "name": "Mia",
+    "score": 2300
+   }
+  ],
+  "extra": {
+   "target": 6000
+  },
+  "name": "n11",
+  "pages": 2
+ },
+ {
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 6100
+   },
+   {
+    "name": "Yanis",
+    "score": 5720
+   },
+   {
+    "name": "Matteo",
+    "score": 5340
+   },
+   {
+    "name": "Lea",
+    "score": 4960
+   },
+   {
+    "name": "Noah",
+    "score": 4580
+   },
+   {
+    "name": "Zoë",
+    "score": 4200
+   },
+   {
+    "name": "Ölçü",
+    "score": 3820
+   },
+   {
+    "name": "Kim",
+    "score": 3440
+   },
+   {
+    "name": "Anna",
+    "score": 3060
+   },
+   {
+    "name": "Ben",
+    "score": 2680
+   },
+   {
+    "name": "Mia",
+    "score": 2300
+   },
+   {
+    "name": "Luca",
+    "score": 1920
+   },
+   {
+    "name": "Sara",
+    "score": 1540
+   },
+   {
+    "name": "Jonas",
+    "score": 1160
+   },
+   {
+    "name": "Elena",
+    "score": 780
+   },
+   {
+    "name": "Fabian",
+    "score": 400
+   }
+  ],
+  "extra": {
+   "target": 6000
+  },
+  "name": "n16",
+  "pages": 2
  }
 ]

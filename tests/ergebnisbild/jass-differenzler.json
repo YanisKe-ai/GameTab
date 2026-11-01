@@ -1,0 +1,369 @@
+[
+ {
+  "name": "entwurf",
+  "lang": "de",
+  "labelKey": "gameJass",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 42
+   },
+   {
+    "name": "Yanis",
+    "score": -11
+   },
+   {
+    "name": "Matteo",
+    "score": -31
+   }
+  ],
+  "extra": {
+   "title": "Differenzler",
+   "players": [
+    {
+     "name": "Tony",
+     "diff": 42,
+     "points": 1180
+    },
+    {
+     "name": "Yanis",
+     "diff": -11,
+     "points": 903
+    },
+    {
+     "name": "Matteo",
+     "diff": -31,
+     "points": 812
+    }
+   ]
+  }
+ },
+ {
+  "name": "zwei",
+  "lang": "de",
+  "labelKey": "gameJass",
+  "players": [
+   {
+    "name": "Lea",
+    "score": 25
+   },
+   {
+    "name": "Noah",
+    "score": -25
+   }
+  ],
+  "extra": {
+   "title": "Differenzler",
+   "players": [
+    {
+     "name": "Lea",
+     "diff": 25,
+     "points": 1010
+    },
+    {
+     "name": "Noah",
+     "diff": -25,
+     "points": 960
+    }
+   ]
+  }
+ },
+ {
+  "name": "vier",
+  "lang": "en",
+  "labelKey": "gameJass",
+  "players": [
+   {
+    "name": "Anna",
+    "score": 60
+   },
+   {
+    "name": "Ben",
+    "score": 5
+   },
+   {
+    "name": "Cora",
+    "score": -20
+   },
+   {
+    "name": "Dino",
+    "score": -45
+   }
+  ],
+  "extra": {
+   "title": "Differenzler",
+   "players": [
+    {
+     "name": "Anna",
+     "diff": 60,
+     "points": 1210
+    },
+    {
+     "name": "Ben",
+     "diff": 5,
+     "points": 1000
+    },
+    {
+     "name": "Cora",
+     "diff": -20,
+     "points": 900
+    },
+    {
+     "name": "Dino",
+     "diff": -45,
+     "points": 820
+    }
+   ]
+  }
+ },
+ {
+  "name": "lange_namen",
+  "lang": "fr",
+  "labelKey": "gameJass",
+  "players": [
+   {
+    "name": "Maximiliane Huber-Brunner von und zu Hohenstein-Wildenburg",
+    "score": 40
+   },
+   {
+    "name": "Zoë Ölçü-Çağlayan",
+    "score": 0
+   },
+   {
+    "name": "Kim",
+    "score": -40
+   }
+  ],
+  "extra": {
+   "title": "Differenzler",
+   "players": [
+    {
+     "name": "Maximiliane Huber-Brunner von und zu Hohenstein-Wildenburg",
+     "diff": 40,
+     "points": 1150
+    },
+    {
+     "name": "Zoë Ölçü-Çağlayan",
+     "diff": 0,
+     "points": 950
+    },
+    {
+     "name": "Kim",
+     "diff": -40,
+     "points": 800
+    }
+   ]
+  }
+ },
+ {
+  "name": "gleichstand",
+  "lang": "it",
+  "labelKey": "gameJass",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 30
+   },
+   {
+    "name": "Yanis",
+    "score": 30
+   },
+   {
+    "name": "Matteo",
+    "score": -60
+   }
+  ],
+  "extra": {
+   "title": "Differenzler",
+   "players": [
+    {
+     "name": "Tony",
+     "diff": 30,
+     "points": 1100
+    },
+    {
+     "name": "Yanis",
+     "diff": 30,
+     "points": 1090
+    },
+    {
+     "name": "Matteo",
+     "diff": -60,
+     "points": 700
+    }
+   ]
+  }
+ },
+ {
+  "name": "cjk",
+  "lang": "de",
+  "labelKey": "gameJass",
+  "players": [
+   {
+    "name": "田中太郎",
+    "score": 35
+   },
+   {
+    "name": "李小龍",
+    "score": -5
+   },
+   {
+    "name": "김민준",
+    "score": -30
+   }
+  ],
+  "extra": {
+   "title": "Differenzler",
+   "players": [
+    {
+     "name": "田中太郎",
+     "diff": 35,
+     "points": 1120
+    },
+    {
+     "name": "李小龍",
+     "diff": -5,
+     "points": 940
+    },
+    {
+     "name": "김민준",
+     "diff": -30,
+     "points": 880
+    }
+   ]
+  }
+ },
+ {
+  "name": "alle_negativ_ausser_sieger",
+  "lang": "es",
+  "labelKey": "gameJass",
+  "players": [
+   {
+    "name": "Anna",
+    "score": 3
+   },
+   {
+    "name": "Ben",
+    "score": -1
+   },
+   {
+    "name": "Cora",
+    "score": -2
+   }
+  ],
+  "extra": {
+   "title": "Differenzler",
+   "players": [
+    {
+     "name": "Anna",
+     "diff": 3,
+     "points": 1000
+    },
+    {
+     "name": "Ben",
+     "diff": -1,
+     "points": 990
+    },
+    {
+     "name": "Cora",
+     "diff": -2,
+     "points": 985
+    }
+   ]
+  }
+ },
+ {
+  "name": "grosse_zahlen",
+  "lang": "pt",
+  "labelKey": "gameJass",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 1203
+   },
+   {
+    "name": "Yanis",
+    "score": -1203
+   }
+  ],
+  "extra": {
+   "title": "Differenzler",
+   "players": [
+    {
+     "name": "Tony",
+     "diff": 1203,
+     "points": 12500
+    },
+    {
+     "name": "Yanis",
+     "diff": -1203,
+     "points": 9800
+    }
+   ]
+  }
+ },
+ {
+  "name": "ohne_zusatz",
+  "lang": "de",
+  "labelKey": "gameJass",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 12
+   },
+   {
+    "name": "Yanis",
+    "score": -12
+   }
+  ],
+  "extra": {}
+ },
+ {
+  "name": "vier_lang",
+  "lang": "de",
+  "labelKey": "gameJass",
+  "players": [
+   {
+    "name": "Alexandrine-Marie Schmidt",
+    "score": 55
+   },
+   {
+    "name": "Bartholomäus",
+    "score": 2
+   },
+   {
+    "name": "Dino",
+    "score": -20
+   },
+   {
+    "name": "Eva",
+    "score": -37
+   }
+  ],
+  "extra": {
+   "title": "Differenzler",
+   "players": [
+    {
+     "name": "Alexandrine-Marie Schmidt",
+     "diff": 55,
+     "points": 1190
+    },
+    {
+     "name": "Bartholomäus",
+     "diff": 2,
+     "points": 1001
+    },
+    {
+     "name": "Dino",
+     "diff": -20,
+     "points": 910
+    },
+    {
+     "name": "Eva",
+     "diff": -37,
+     "points": 822
+    }
+   ]
+  }
+ }
+]

@@ -258,7 +258,113 @@ def flow_mafia(pg):
     R.wait(pg, 800)
 
 
-FLOWS = {"Yatzy 2": flow_yatzy2, "Yatzy 4 lang": flow_yatzy4, "Schieber": flow_schieber, "Skyjo": flow_skyjo, "Flip 7": flow_flip7, "Tutto": flow_tutto, "Freies Spiel": flow_freeplay, "HeadsUp": flow_headsup, "5 Sekunden": flow_fivesec, "Impostor": flow_impostor, "Am ehesten": flow_amehesten, "Verraeter": flow_verraeter, "Werwolf": flow_werwolf, "Mafia": flow_mafia}
+def seed_state(pg, game, patch):
+    """Spielstand eines Spiels direkt in den Speicher schreiben (fertige Partie), App neu laden. Spart hunderte Klicks, der Teilen-Weg bleibt echt."""
+    import json as _j
+    pg.evaluate("([g,p])=>{const k='spieleblock-app-state-v1';const s=JSON.parse(localStorage.getItem(k));s[g]=Object.assign({},s[g],p);localStorage.setItem(k,JSON.stringify(s));}", [game, patch])
+    pg.evaluate("()=>{window.onbeforeunload=null}")
+
+
+def reopen(pg, cat, name, sub=None):
+    R.open_game(pg, cat, name, sub)
+    R.wait(pg, 800)
+
+
+def flow_wizard(pg):
+    R.open_game(pg, "Schreibunterlagen", "Wizard"); R.press_start(pg)
+    R.wait(pg, 600)
+    rounds = {}
+    for r in range(1, 31):
+        b1 = r % 3
+        rounds[str(r)] = {"1": {"bid": b1, "tricks": b1}, "2": {"bid": 0, "tricks": r - b1}}
+    pg.evaluate("([p])=>{const k='spieleblock-app-state-v1';const s=JSON.parse(localStorage.getItem(k));s.wizard.players=[{id:1,name:'Zoë Ölçü'},{id:2,name:'Maximiliane Huber-Brunner'}];s.wizard.rounds=p;localStorage.setItem(k,JSON.stringify(s));}", [rounds])
+    pg.reload(); R.wait(pg, 1000)
+    reopen(pg, "Schreibunterlagen", "Wizard")
+
+
+def seeded(pg, open_args, game, patch):
+    """Spiel starten, fertigen Spielstand in den Speicher schreiben, neu laden, Spiel wieder oeffnen (echter Teilen-Weg)."""
+    R.open_game(pg, *open_args); R.press_start(pg)
+    R.wait(pg, 600)
+    pg.evaluate("([g,p])=>{const k='spieleblock-app-state-v1';const s=JSON.parse(localStorage.getItem(k));s[g]=Object.assign({},s[g],p);localStorage.setItem(k,JSON.stringify(s));}", [game, patch])
+    pg.reload(); R.wait(pg, 1000)
+    reopen(pg, *open_args)
+
+
+def flow_minigolf(pg):
+    holes = [[3, 2, 3, 2, 4, 3, 1, 3, 2, 3, 4, 2, 3, 3, 2, 3, 3, 2], [4, 3, 3, 4, 3, 4, 3, 3, 4, 3, 3, 4, 3, 3, 4, 3, 4, 3], [5, 4, 4, 3, 5, 4, 4, 5, 4, 3, 4, 5, 4, 4, 3, 4, 5, 4]]
+    seeded(pg, ("Schreibunterlagen", "Minigolf"), "minigolf", {"players": [{"id": 1, "name": "Tony"}, {"id": 2, "name": "Zoë Ölçü"}, {"id": 3, "name": "Maximiliane Huber-Brunner"}], "scores": {"1": holes[0], "2": holes[1], "3": holes[2]}})
+
+
+def flow_phase10(pg):
+    hist = [{"scores": {"1": 0, "2": 25, "3": 40}, "done": {"1": True, "2": r < 8, "3": r < 6}} for r in range(10)]
+    hist[3]["scores"]["1"] = 15
+    seeded(pg, ("Schreibunterlagen", "Phase 10"), "phase10", {"players": [{"id": 1, "name": "Tony"}, {"id": 2, "name": "Zoë Ölçü"}, {"id": 3, "name": "Maximiliane Huber-Brunner"}], "history": hist})
+
+
+def flow_romme(pg):
+    hist = [{"scores": {"1": 5, "2": 30, "3": 400}, "outId": 1}, {"scores": {"1": 7, "2": 34, "3": 120}, "outId": 1}]
+    seeded(pg, ("Schreibunterlagen", "Rommé"), "romme", {"players": [{"id": 1, "name": "Tony"}, {"id": 2, "name": "Zoë Ölçü"}, {"id": 3, "name": "Maximiliane Huber-Brunner"}], "history": hist, "target": 500})
+
+
+def flow_differenzler(pg):
+    cats = [("herz", 1), ("ecke", 2), ("kreuz", 3), ("schaufel", 4), ("unte", 5), ("obe", 6), ("joker1", 7), ("joker2", 8), ("slalom", 9), ("guschti", 10)]
+    raws = {"1": [30, 25, 28, 22, 31, 20, 26, 27, 24, 29], "2": [20, 18, 22, 25, 15, 19, 21, 17, 23, 16], "3": [10, 12, 8, 14, 9, 11, 13, 7, 12, 10]}
+    scores = {pid: {c: {"raw": rs[i], "total": rs[i] * m} for i, (c, m) in enumerate(cats)} for pid, rs in raws.items()}
+    seeded(pg, ("Schreibunterlagen", "Jass", "Differenzler"), "jass", {"players": [{"id": 1, "name": "Tony"}, {"id": 2, "name": "Zoë Ölçü"}, {"id": 3, "name": "Maximiliane Huber-Brunner"}], "scores": scores})
+
+
+def tabu_wait(pg):
+    """Zeit vorspulen (Chromium: Fake-Uhr, WebKit: echt warten, dort greift die Fake-Uhr in der App nicht)."""
+    if pg.context.browser.browser_type.name == "webkit":
+        pg.wait_for_timeout(32000)
+    else:
+        pg.clock.run_for(32000)
+
+
+def flow_tabu(pg):
+    pg.clock.install()
+    R.open_game(pg, "Partyspiele", "Tabu")
+    R.wait(pg, 500)
+    pg.evaluate("()=>{const k='spieleblock-app-state-v1';const s=JSON.parse(localStorage.getItem(k));s.tabu.teams=[{id:1,name:'Die Wilden Hühner'},{id:2,name:'Maximiliane Huber-Brunner und Freunde'}];s.tabu.targetScore=1;s.tabu.turnSeconds=30;localStorage.setItem(k,JSON.stringify(s));}")
+    pg.reload(); R.wait(pg, 1000)
+    pg.clock.install()
+    R.open_game(pg, "Partyspiele", "Tabu"); R.press_start(pg)
+    R.click(pg, R.btn_re(pg, "Bereit"), 800)
+    R.click(pg, R.btn(pg, "Richtig"), 500)
+    tabu_wait(pg)
+    R.wait(pg, 600)
+    R.click(pg, R.btn_re(pg, "Verstanden"), 1000)
+    R.click(pg, R.btn_re(pg, "Bereit"), 800)  # zweites Team ohne Punkt: erst nach der vollen Runde endet das Spiel
+    tabu_wait(pg)
+    R.wait(pg, 600)
+    R.click(pg, R.btn_re(pg, "Verstanden"), 1000)
+    R.wait(pg, 600)
+
+
+DART_PL = [{"id": 1, "name": "Tony"}, {"id": 2, "name": "Zoë Ölçü"}, {"id": 3, "name": "Maximiliane Huber-Brunner"}]
+
+
+def flow_darts_x01(pg):
+    hist = [{"pid": 1, "darts": [{"l": "T20", "v": 60}, {"l": "D10", "v": 20}], "score": 80, "bust": False, "finish": False},
+            {"pid": 1, "darts": [{"l": "20", "v": 20}, {"l": "D10", "v": 20}], "score": 40, "bust": False, "finish": True}]
+    seeded(pg, ("Schreibunterlagen", "Darts", "STANDARD"), "darts", {"phase": "done", "players": DART_PL, "mode": 501, "inOut": "dido", "legsTarget": 1, "winner": 1,
+                                                                   "legsWon": {"1": 1, "2": 0, "3": 0}, "remaining": {"1": 40, "2": 141, "3": 237}, "opened": {"1": True, "2": True, "3": True}, "history": hist})
+
+
+def flow_darts_shanghai(pg):
+    seeded(pg, ("Schreibunterlagen", "Darts", "SHANGHAI"), "shanghai", {"phase": "done", "players": DART_PL, "winner": 1, "endReason": "shanghai", "scores": {"1": 25, "2": 80, "3": 12}, "currentRound": 3, "history": []})
+
+
+def flow_darts_hiscore(pg):
+    seeded(pg, ("Schreibunterlagen", "Darts", "HI SCORE"), "hiscore", {"phase": "done", "players": DART_PL, "winner": 1, "scores": {"1": 300, "2": 300, "3": 120}, "currentRound": 10, "history": []})
+
+
+def flow_darts_split(pg):
+    seeded(pg, ("Schreibunterlagen", "Darts", "SPLIT SCORE"), "splitscore", {"phase": "done", "players": DART_PL, "winner": 1, "scores": {"1": 55, "2": 30, "3": 12}, "currentRound": 9, "history": []})
+
+
+FLOWS = {"Yatzy 2": flow_yatzy2, "Yatzy 4 lang": flow_yatzy4, "Schieber": flow_schieber, "Skyjo": flow_skyjo, "Flip 7": flow_flip7, "Tutto": flow_tutto, "Freies Spiel": flow_freeplay, "HeadsUp": flow_headsup, "5 Sekunden": flow_fivesec, "Impostor": flow_impostor, "Am ehesten": flow_amehesten, "Verraeter": flow_verraeter, "Werwolf": flow_werwolf, "Mafia": flow_mafia, "Wizard": flow_wizard, "Minigolf": flow_minigolf, "Phase 10": flow_phase10, "Rommé": flow_romme, "Differenzler": flow_differenzler, "Tabu": flow_tabu, "Darts X01": flow_darts_x01, "Darts Shanghai": flow_darts_shanghai, "Darts HiScore": flow_darts_hiscore, "Darts Split": flow_darts_split}
 
 
 def share_png(pg, tag):

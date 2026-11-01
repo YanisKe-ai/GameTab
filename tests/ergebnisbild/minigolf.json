@@ -1,0 +1,1523 @@
+[
+ {
+  "name": "entwurf_ace",
+  "lang": "de",
+  "lowWins": true,
+  "players": [
+   {
+    "name": "Tony",
+    "score": 49
+   },
+   {
+    "name": "Yanis",
+    "score": 56
+   },
+   {
+    "name": "Matteo",
+    "score": 63
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "Tony",
+     "total": 49,
+     "strokes": [
+      3,
+      3,
+      3,
+      4,
+      3,
+      3,
+      1,
+      3,
+      4,
+      3,
+      3,
+      3,
+      3,
+      2,
+      2,
+      2,
+      2,
+      2
+     ]
+    },
+    {
+     "name": "Yanis",
+     "total": 56,
+     "strokes": [
+      4,
+      4,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "name": "Matteo",
+     "total": 63,
+     "strokes": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "name": "zwei",
+  "lang": "de",
+  "lowWins": true,
+  "players": [
+   {
+    "name": "Lea",
+    "score": 41
+   },
+   {
+    "name": "Noah",
+    "score": 52
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "Lea",
+     "total": 41,
+     "strokes": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+     ]
+    },
+    {
+     "name": "Noah",
+     "total": 52,
+     "strokes": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      2,
+      2
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "name": "acht_max",
+  "lang": "en",
+  "lowWins": true,
+  "players": [
+   {
+    "name": "Anna",
+    "score": 47
+   },
+   {
+    "name": "Ben",
+    "score": 51
+   },
+   {
+    "name": "Cora",
+    "score": 52
+   },
+   {
+    "name": "Dino",
+    "score": 58
+   },
+   {
+    "name": "Eva",
+    "score": 61
+   },
+   {
+    "name": "Finn",
+    "score": 66
+   },
+   {
+    "name": "Gina",
+    "score": 70
+   },
+   {
+    "name": "Hugo",
+    "score": 83
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "Anna",
+     "total": 47,
+     "strokes": [
+      3,
+      3,
+      3,
+      1,
+      3,
+      3,
+      3,
+      3,
+      4,
+      3,
+      3,
+      2,
+      2,
+      3,
+      2,
+      2,
+      2,
+      2
+     ]
+    },
+    {
+     "name": "Ben",
+     "total": 51,
+     "strokes": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      2,
+      2,
+      2
+     ]
+    },
+    {
+     "name": "Cora",
+     "total": 52,
+     "strokes": [
+      3,
+      3,
+      3,
+      5,
+      3,
+      3,
+      3,
+      3,
+      1,
+      3,
+      3,
+      3,
+      3,
+      5,
+      1,
+      3,
+      2,
+      2
+     ]
+    },
+    {
+     "name": "Dino",
+     "total": 58,
+     "strokes": [
+      4,
+      4,
+      4,
+      4,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "name": "Eva",
+     "total": 61,
+     "strokes": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "name": "Finn",
+     "total": 66,
+     "strokes": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "name": "Gina",
+     "total": 70,
+     "strokes": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      3,
+      3
+     ]
+    },
+    {
+     "name": "Hugo",
+     "total": 83,
+     "strokes": [
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "name": "lange_namen",
+  "lang": "fr",
+  "lowWins": true,
+  "players": [
+   {
+    "name": "Maximiliane Huber-Brunner von und zu Hohenstein-Wildenburg",
+    "score": 55
+   },
+   {
+    "name": "Zoë Ölçü-Çağlayan",
+    "score": 60
+   },
+   {
+    "name": "Kim",
+    "score": 71
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "Maximiliane Huber-Brunner von und zu Hohenstein-Wildenburg",
+     "total": 55,
+     "strokes": [
+      4,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "name": "Zoë Ölçü-Çağlayan",
+     "total": 60,
+     "strokes": [
+      4,
+      1,
+      4,
+      5,
+      4,
+      4,
+      3,
+      3,
+      4,
+      3,
+      3,
+      3,
+      3,
+      4,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "name": "Kim",
+     "total": 71,
+     "strokes": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      3
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "name": "gleichstand",
+  "lang": "it",
+  "lowWins": true,
+  "players": [
+   {
+    "name": "Tony",
+    "score": 50
+   },
+   {
+    "name": "Yanis",
+    "score": 50
+   },
+   {
+    "name": "Matteo",
+    "score": 64
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "Tony",
+     "total": 50,
+     "strokes": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      2,
+      2,
+      2,
+      2
+     ]
+    },
+    {
+     "name": "Yanis",
+     "total": 50,
+     "strokes": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      2,
+      2,
+      2,
+      2
+     ]
+    },
+    {
+     "name": "Matteo",
+     "total": 64,
+     "strokes": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "name": "cjk",
+  "lang": "de",
+  "lowWins": true,
+  "players": [
+   {
+    "name": "田中太郎",
+    "score": 45
+   },
+   {
+    "name": "李小龍",
+    "score": 58
+   },
+   {
+    "name": "김민준",
+    "score": 61
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "田中太郎",
+     "total": 45,
+     "strokes": [
+      3,
+      3,
+      3,
+      4,
+      3,
+      1,
+      3,
+      3,
+      4,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+     ]
+    },
+    {
+     "name": "李小龍",
+     "total": 58,
+     "strokes": [
+      4,
+      4,
+      4,
+      4,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "name": "김민준",
+     "total": 61,
+     "strokes": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "name": "mehrere_aces",
+  "lang": "es",
+  "lowWins": true,
+  "players": [
+   {
+    "name": "Anna",
+    "score": 44
+   },
+   {
+    "name": "Ben",
+    "score": 48
+   },
+   {
+    "name": "Cora",
+    "score": 53
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "Anna",
+     "total": 44,
+     "strokes": [
+      3,
+      3,
+      1,
+      6,
+      3,
+      3,
+      3,
+      3,
+      3,
+      2,
+      1,
+      2,
+      2,
+      2,
+      2,
+      2,
+      1,
+      2
+     ]
+    },
+    {
+     "name": "Ben",
+     "total": 48,
+     "strokes": [
+      3,
+      3,
+      3,
+      4,
+      1,
+      3,
+      3,
+      3,
+      4,
+      3,
+      3,
+      3,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+     ]
+    },
+    {
+     "name": "Cora",
+     "total": 53,
+     "strokes": [
+      3,
+      3,
+      3,
+      4,
+      3,
+      3,
+      3,
+      1,
+      4,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      2
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "name": "dreistellig",
+  "lang": "pt",
+  "lowWins": true,
+  "players": [
+   {
+    "name": "Tony",
+    "score": 102
+   },
+   {
+    "name": "Yanis",
+    "score": 118
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "Tony",
+     "total": 102,
+     "strokes": [
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      5,
+      5,
+      5,
+      5,
+      5,
+      5
+     ]
+    },
+    {
+     "name": "Yanis",
+     "total": 118,
+     "strokes": [
+      7,
+      7,
+      7,
+      7,
+      7,
+      7,
+      7,
+      7,
+      7,
+      7,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6,
+      6
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "name": "vier_lang",
+  "lang": "de",
+  "lowWins": true,
+  "players": [
+   {
+    "name": "Alexandrine-Marie Schmidt",
+    "score": 48
+   },
+   {
+    "name": "Bartholomäus",
+    "score": 52
+   },
+   {
+    "name": "Dino",
+    "score": 53
+   },
+   {
+    "name": "Eva",
+    "score": 60
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "Alexandrine-Marie Schmidt",
+     "total": 48,
+     "strokes": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+     ]
+    },
+    {
+     "name": "Bartholomäus",
+     "total": 52,
+     "strokes": [
+      1,
+      3,
+      3,
+      4,
+      3,
+      3,
+      3,
+      3,
+      4,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      2,
+      2
+     ]
+    },
+    {
+     "name": "Dino",
+     "total": 53,
+     "strokes": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      2
+     ]
+    },
+    {
+     "name": "Eva",
+     "total": 60,
+     "strokes": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "name": "neun",
+  "lang": "de",
+  "lowWins": true,
+  "players": [
+   {
+    "name": "Spieler 0",
+    "score": 45
+   },
+   {
+    "name": "Spieler 1",
+    "score": 48
+   },
+   {
+    "name": "Spieler 2",
+    "score": 51
+   },
+   {
+    "name": "Spieler 3",
+    "score": 54
+   },
+   {
+    "name": "Spieler 4",
+    "score": 57
+   },
+   {
+    "name": "Spieler 5",
+    "score": 60
+   },
+   {
+    "name": "Spieler 6",
+    "score": 63
+   },
+   {
+    "name": "Spieler 7",
+    "score": 66
+   },
+   {
+    "name": "Spieler 8",
+    "score": 69
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "Spieler 0",
+     "total": 45,
+     "strokes": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+     ]
+    },
+    {
+     "name": "Spieler 1",
+     "total": 48,
+     "strokes": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+     ]
+    },
+    {
+     "name": "Spieler 2",
+     "total": 51,
+     "strokes": [
+      3,
+      3,
+      3,
+      1,
+      3,
+      3,
+      3,
+      3,
+      4,
+      3,
+      3,
+      3,
+      3,
+      4,
+      3,
+      2,
+      2,
+      2
+     ]
+    },
+    {
+     "name": "Spieler 3",
+     "total": 54,
+     "strokes": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "name": "Spieler 4",
+     "total": 57,
+     "strokes": [
+      4,
+      4,
+      4,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "name": "Spieler 5",
+     "total": 60,
+     "strokes": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "name": "Spieler 6",
+     "total": 63,
+     "strokes": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "name": "Spieler 7",
+     "total": 66,
+     "strokes": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "name": "Spieler 8",
+     "total": 69,
+     "strokes": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      3,
+      3,
+      3
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "name": "zehn_lang",
+  "lang": "en",
+  "lowWins": true,
+  "players": [
+   {
+    "name": "Maximiliane Huber-Brunner von Hohenstein",
+    "score": 45
+   },
+   {
+    "name": "Player 1",
+    "score": 48
+   },
+   {
+    "name": "Player 2",
+    "score": 51
+   },
+   {
+    "name": "Player 3",
+    "score": 54
+   },
+   {
+    "name": "Player 4",
+    "score": 57
+   },
+   {
+    "name": "Player 5",
+    "score": 60
+   },
+   {
+    "name": "Player 6",
+    "score": 63
+   },
+   {
+    "name": "Player 7",
+    "score": 66
+   },
+   {
+    "name": "Player 8",
+    "score": 69
+   },
+   {
+    "name": "Player 9",
+    "score": 72
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "Maximiliane Huber-Brunner von Hohenstein",
+     "total": 45,
+     "strokes": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+     ]
+    },
+    {
+     "name": "Player 1",
+     "total": 48,
+     "strokes": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+     ]
+    },
+    {
+     "name": "Player 2",
+     "total": 51,
+     "strokes": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      2,
+      2,
+      2
+     ]
+    },
+    {
+     "name": "Player 3",
+     "total": 54,
+     "strokes": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "name": "Player 4",
+     "total": 57,
+     "strokes": [
+      4,
+      4,
+      4,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "name": "Player 5",
+     "total": 60,
+     "strokes": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "name": "Player 6",
+     "total": 63,
+     "strokes": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "name": "Player 7",
+     "total": 66,
+     "strokes": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "name": "Player 8",
+     "total": 69,
+     "strokes": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "name": "Player 9",
+     "total": 72,
+     "strokes": [
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4
+     ]
+    }
+   ]
+  }
+ }
+]

@@ -1,0 +1,366 @@
+[
+ {
+  "name": "entwurf",
+  "lang": "de",
+  "lowWins": true,
+  "players": [
+   {
+    "name": "Tony",
+    "score": 12,
+    "rk": 12
+   },
+   {
+    "name": "Yanis",
+    "score": 64,
+    "rk": 64
+   },
+   {
+    "name": "Matteo",
+    "score": 118,
+    "rk": 118
+   }
+  ],
+  "extra": {
+   "rounds": 6,
+   "target": 500,
+   "players": [
+    {
+     "name": "Tony",
+     "total": 12
+    },
+    {
+     "name": "Yanis",
+     "total": 64
+    },
+    {
+     "name": "Matteo",
+     "total": 118
+    }
+   ]
+  }
+ },
+ {
+  "name": "zwei",
+  "lang": "de",
+  "lowWins": true,
+  "players": [
+   {
+    "name": "Lea",
+    "score": 48,
+    "rk": 48
+   },
+   {
+    "name": "Noah",
+    "score": 512,
+    "rk": 512
+   }
+  ],
+  "extra": {
+   "rounds": 8,
+   "target": 500,
+   "players": [
+    {
+     "name": "Lea",
+     "total": 48
+    },
+    {
+     "name": "Noah",
+     "total": 512
+    }
+   ]
+  }
+ },
+ {
+  "name": "sechs_max",
+  "lang": "en",
+  "lowWins": true,
+  "players": [
+   {
+    "name": "Anna",
+    "score": 30,
+    "rk": 30
+   },
+   {
+    "name": "Ben",
+    "score": 95,
+    "rk": 95
+   },
+   {
+    "name": "Cora",
+    "score": 140,
+    "rk": 140
+   },
+   {
+    "name": "Dino",
+    "score": 210,
+    "rk": 210
+   },
+   {
+    "name": "Eva",
+    "score": 380,
+    "rk": 380
+   },
+   {
+    "name": "Finn",
+    "score": 505,
+    "rk": 505
+   }
+  ],
+  "extra": {
+   "rounds": 9,
+   "target": 500,
+   "players": [
+    {
+     "name": "Anna",
+     "total": 30
+    },
+    {
+     "name": "Ben",
+     "total": 95
+    },
+    {
+     "name": "Cora",
+     "total": 140
+    },
+    {
+     "name": "Dino",
+     "total": 210
+    },
+    {
+     "name": "Eva",
+     "total": 380
+    },
+    {
+     "name": "Finn",
+     "total": 505
+    }
+   ]
+  }
+ },
+ {
+  "name": "lange_namen",
+  "lang": "fr",
+  "lowWins": true,
+  "players": [
+   {
+    "name": "Maximiliane Huber-Brunner von und zu Hohenstein-Wildenburg",
+    "score": 55,
+    "rk": 55
+   },
+   {
+    "name": "Zoë Ölçü-Çağlayan",
+    "score": 160,
+    "rk": 160
+   },
+   {
+    "name": "Kim",
+    "score": 401,
+    "rk": 401
+   }
+  ],
+  "extra": {
+   "rounds": 6,
+   "target": 1000,
+   "players": [
+    {
+     "name": "Maximiliane Huber-Brunner von und zu Hohenstein-Wildenburg",
+     "total": 55
+    },
+    {
+     "name": "Zoë Ölçü-Çağlayan",
+     "total": 160
+    },
+    {
+     "name": "Kim",
+     "total": 401
+    }
+   ]
+  }
+ },
+ {
+  "name": "gleichstand",
+  "lang": "it",
+  "lowWins": true,
+  "players": [
+   {
+    "name": "Tony",
+    "score": 70,
+    "rk": 70
+   },
+   {
+    "name": "Yanis",
+    "score": 70,
+    "rk": 70
+   },
+   {
+    "name": "Matteo",
+    "score": 200,
+    "rk": 200
+   }
+  ],
+  "extra": {
+   "rounds": 6,
+   "target": 500,
+   "players": [
+    {
+     "name": "Tony",
+     "total": 70
+    },
+    {
+     "name": "Yanis",
+     "total": 70
+    },
+    {
+     "name": "Matteo",
+     "total": 200
+    }
+   ]
+  }
+ },
+ {
+  "name": "cjk",
+  "lang": "de",
+  "lowWins": true,
+  "players": [
+   {
+    "name": "田中太郎",
+    "score": 95,
+    "rk": 95
+   },
+   {
+    "name": "李小龍",
+    "score": 150,
+    "rk": 150
+   },
+   {
+    "name": "김민준",
+    "score": 170,
+    "rk": 170
+   }
+  ],
+  "extra": {
+   "rounds": 6,
+   "target": 500,
+   "players": [
+    {
+     "name": "田中太郎",
+     "total": 95
+    },
+    {
+     "name": "李小龍",
+     "total": 150
+    },
+    {
+     "name": "김민준",
+     "total": 170
+    }
+   ]
+  }
+ },
+ {
+  "name": "ohne_zusatz",
+  "lang": "es",
+  "lowWins": true,
+  "players": [
+   {
+    "name": "Anna",
+    "score": 33,
+    "rk": 33
+   },
+   {
+    "name": "Ben",
+    "score": 100,
+    "rk": 100
+   }
+  ]
+ },
+ {
+  "name": "tief_gewinnt_null",
+  "lang": "pt",
+  "lowWins": true,
+  "players": [
+   {
+    "name": "Tony",
+    "score": 0,
+    "rk": 0
+   },
+   {
+    "name": "Yanis",
+    "score": 35,
+    "rk": 35
+   },
+   {
+    "name": "Eva",
+    "score": 520,
+    "rk": 520
+   }
+  ],
+  "extra": {
+   "rounds": 3,
+   "target": 500,
+   "players": [
+    {
+     "name": "Tony",
+     "total": 0
+    },
+    {
+     "name": "Yanis",
+     "total": 35
+    },
+    {
+     "name": "Eva",
+     "total": 520
+    }
+   ]
+  }
+ },
+ {
+  "name": "vier_lang",
+  "lang": "de",
+  "lowWins": true,
+  "players": [
+   {
+    "name": "Alexandrine-Marie Schmidt",
+    "score": 48,
+    "rk": 48
+   },
+   {
+    "name": "Bartholomäus",
+    "score": 52,
+    "rk": 52
+   },
+   {
+    "name": "Dino",
+    "score": 53,
+    "rk": 53
+   },
+   {
+    "name": "Eva",
+    "score": 600,
+    "rk": 600
+   }
+  ],
+  "extra": {
+   "rounds": 6,
+   "target": 1000,
+   "players": [
+    {
+     "name": "Alexandrine-Marie Schmidt",
+     "total": 48
+    },
+    {
+     "name": "Bartholomäus",
+     "total": 52
+    },
+    {
+     "name": "Dino",
+     "total": 53
+    },
+    {
+     "name": "Eva",
+     "total": 600
+    }
+   ]
+  }
+ }
+]

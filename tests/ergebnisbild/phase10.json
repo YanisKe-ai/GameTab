@@ -1,0 +1,411 @@
+[
+ {
+  "name": "entwurf",
+  "lang": "de",
+  "lowWins": false,
+  "players": [
+   {
+    "name": "Tony",
+    "score": 10,
+    "rk": 45
+   },
+   {
+    "name": "Yanis",
+    "score": 8,
+    "rk": 112
+   },
+   {
+    "name": "Matteo",
+    "score": 6,
+    "rk": 187
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "Tony",
+     "done": 10,
+     "total": 45
+    },
+    {
+     "name": "Yanis",
+     "done": 8,
+     "total": 112
+    },
+    {
+     "name": "Matteo",
+     "done": 6,
+     "total": 187
+    }
+   ]
+  }
+ },
+ {
+  "name": "zwei",
+  "lang": "de",
+  "lowWins": false,
+  "players": [
+   {
+    "name": "Lea",
+    "score": 10,
+    "rk": 80
+   },
+   {
+    "name": "Noah",
+    "score": 9,
+    "rk": 95
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "Lea",
+     "done": 10,
+     "total": 80
+    },
+    {
+     "name": "Noah",
+     "done": 9,
+     "total": 95
+    }
+   ]
+  }
+ },
+ {
+  "name": "sechs_max",
+  "lang": "en",
+  "lowWins": false,
+  "players": [
+   {
+    "name": "Anna",
+    "score": 10,
+    "rk": 60
+   },
+   {
+    "name": "Ben",
+    "score": 9,
+    "rk": 90
+   },
+   {
+    "name": "Cora",
+    "score": 9,
+    "rk": 140
+   },
+   {
+    "name": "Dino",
+    "score": 7,
+    "rk": 200
+   },
+   {
+    "name": "Eva",
+    "score": 7,
+    "rk": 260
+   },
+   {
+    "name": "Finn",
+    "score": 0,
+    "rk": 310
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "Anna",
+     "done": 10,
+     "total": 60
+    },
+    {
+     "name": "Ben",
+     "done": 9,
+     "total": 90
+    },
+    {
+     "name": "Cora",
+     "done": 9,
+     "total": 140
+    },
+    {
+     "name": "Dino",
+     "done": 7,
+     "total": 200
+    },
+    {
+     "name": "Eva",
+     "done": 7,
+     "total": 260
+    },
+    {
+     "name": "Finn",
+     "done": 0,
+     "total": 310
+    }
+   ]
+  }
+ },
+ {
+  "name": "lange_namen",
+  "lang": "fr",
+  "lowWins": false,
+  "players": [
+   {
+    "name": "Maximiliane Huber-Brunner von und zu Hohenstein-Wildenburg",
+    "score": 10,
+    "rk": 55
+   },
+   {
+    "name": "Zoë Ölçü-Çağlayan",
+    "score": 7,
+    "rk": 160
+   },
+   {
+    "name": "Kim",
+    "score": 3,
+    "rk": 400
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "Maximiliane Huber-Brunner von und zu Hohenstein-Wildenburg",
+     "done": 10,
+     "total": 55
+    },
+    {
+     "name": "Zoë Ölçü-Çağlayan",
+     "done": 7,
+     "total": 160
+    },
+    {
+     "name": "Kim",
+     "done": 3,
+     "total": 400
+    }
+   ]
+  }
+ },
+ {
+  "name": "gleichstand",
+  "lang": "it",
+  "lowWins": false,
+  "players": [
+   {
+    "name": "Tony",
+    "score": 10,
+    "rk": 70
+   },
+   {
+    "name": "Yanis",
+    "score": 10,
+    "rk": 70
+   },
+   {
+    "name": "Matteo",
+    "score": 4,
+    "rk": 200
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "Tony",
+     "done": 10,
+     "total": 70
+    },
+    {
+     "name": "Yanis",
+     "done": 10,
+     "total": 70
+    },
+    {
+     "name": "Matteo",
+     "done": 4,
+     "total": 200
+    }
+   ]
+  }
+ },
+ {
+  "name": "cjk",
+  "lang": "de",
+  "lowWins": false,
+  "players": [
+   {
+    "name": "田中太郎",
+    "score": 10,
+    "rk": 95
+   },
+   {
+    "name": "李小龍",
+    "score": 8,
+    "rk": 150
+   },
+   {
+    "name": "김민준",
+    "score": 8,
+    "rk": 170
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "田中太郎",
+     "done": 10,
+     "total": 95
+    },
+    {
+     "name": "李小龍",
+     "done": 8,
+     "total": 150
+    },
+    {
+     "name": "김민준",
+     "done": 8,
+     "total": 170
+    }
+   ]
+  }
+ },
+ {
+  "name": "nicht_oben",
+  "lang": "es",
+  "lowWins": false,
+  "players": [
+   {
+    "name": "Anna",
+    "score": 6,
+    "rk": 120
+   },
+   {
+    "name": "Ben",
+    "score": 5,
+    "rk": 100
+   },
+   {
+    "name": "Cora",
+    "score": 5,
+    "rk": 130
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "Anna",
+     "done": 6,
+     "total": 120
+    },
+    {
+     "name": "Ben",
+     "done": 5,
+     "total": 100
+    },
+    {
+     "name": "Cora",
+     "done": 5,
+     "total": 130
+    }
+   ]
+  }
+ },
+ {
+  "name": "alle_null",
+  "lang": "pt",
+  "lowWins": false,
+  "players": [
+   {
+    "name": "Tony",
+    "score": 0,
+    "rk": 20
+   },
+   {
+    "name": "Yanis",
+    "score": 0,
+    "rk": 35
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "Tony",
+     "done": 0,
+     "total": 20
+    },
+    {
+     "name": "Yanis",
+     "done": 0,
+     "total": 35
+    }
+   ]
+  }
+ },
+ {
+  "name": "vier_lang",
+  "lang": "de",
+  "lowWins": false,
+  "players": [
+   {
+    "name": "Alexandrine-Marie Schmidt",
+    "score": 10,
+    "rk": 48
+   },
+   {
+    "name": "Bartholomäus",
+    "score": 10,
+    "rk": 52
+   },
+   {
+    "name": "Dino",
+    "score": 10,
+    "rk": 53
+   },
+   {
+    "name": "Eva",
+    "score": 2,
+    "rk": 600
+   }
+  ],
+  "extra": {
+   "players": [
+    {
+     "name": "Alexandrine-Marie Schmidt",
+     "done": 10,
+     "total": 48
+    },
+    {
+     "name": "Bartholomäus",
+     "done": 10,
+     "total": 52
+    },
+    {
+     "name": "Dino",
+     "done": 10,
+     "total": 53
+    },
+    {
+     "name": "Eva",
+     "done": 2,
+     "total": 600
+    }
+   ]
+  }
+ },
+ {
+  "name": "ohne_strafpunkte",
+  "lang": "de",
+  "lowWins": false,
+  "players": [
+   {
+    "name": "Tony",
+    "score": 10,
+    "rk": 45
+   },
+   {
+    "name": "Yanis",
+    "score": 8,
+    "rk": 112
+   }
+  ],
+  "extra": {
+   "players": []
+  }
+ }
+]

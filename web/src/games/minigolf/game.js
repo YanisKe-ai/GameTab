@@ -786,6 +786,7 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
         t={t}
         bestRecord={{ isNew: golfIsNew }}
         theme={theme}
+        shareExtra={() => ({ players: players.map((p, i) => ({ name: p.name, total: totals[i], strokes: Array.from({ length: MINIGOLF_HOLES }, (_, h) => { const v = (scores[p.id] || [])[h]; return v == null || v === "" ? null : Number(v); }) })) })}
       />
       <div className="gtL-page gtL-game mg-inner" style={{ maxWidth: 520, margin: "0 auto", position: "relative" }}>
         <MinigolfTopBar subtitle={t("minigolfSubtitle")} onBack={onBack} theme={theme} t={t} onHome={onHome} onEndGame={onEndGame} rulesText={t("rulesMinigolf")} />

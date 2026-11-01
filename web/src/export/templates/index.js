@@ -6,9 +6,10 @@ import * as kit from "./kit.js";
 import yatzy from "./yatzy.js";
 import schieber from "./schieber.js";
 import wizard from "./wizard.js";
+import minigolf from "./minigolf.js";
 
 /* Jede Vorlage: { games:[gameId...], fonts:[CSS-Schriftangaben], texts?(d)->[String], accepts?(d)->bool, render(d, kit)->[canvas...] } */
-const TEMPLATES = [yatzy, schieber, wizard];
+const TEMPLATES = [yatzy, schieber, wizard, minigolf];
 
 const GT_TPL = {};
 TEMPLATES.forEach((tp) => tp.games.forEach((g) => { GT_TPL[g] = tp; }));

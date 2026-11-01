@@ -100,7 +100,21 @@ def flow_wizard(pg):
     reopen(pg, "Schreibunterlagen", "Wizard")
 
 
-FLOWS = {"Yatzy 2": flow_yatzy2, "Yatzy 4 lang": flow_yatzy4, "Schieber": flow_schieber, "Wizard": flow_wizard}
+def seeded(pg, open_args, game, patch):
+    """Spiel starten, fertigen Spielstand in den Speicher schreiben, neu laden, Spiel wieder oeffnen (echter Teilen-Weg)."""
+    R.open_game(pg, *open_args); R.press_start(pg)
+    R.wait(pg, 600)
+    pg.evaluate("([g,p])=>{const k='spieleblock-app-state-v1';const s=JSON.parse(localStorage.getItem(k));s[g]=Object.assign({},s[g],p);localStorage.setItem(k,JSON.stringify(s));}", [game, patch])
+    pg.reload(); R.wait(pg, 1000)
+    reopen(pg, *open_args)
+
+
+def flow_minigolf(pg):
+    holes = [[3, 2, 3, 2, 4, 3, 1, 3, 2, 3, 4, 2, 3, 3, 2, 3, 3, 2], [4, 3, 3, 4, 3, 4, 3, 3, 4, 3, 3, 4, 3, 3, 4, 3, 4, 3], [5, 4, 4, 3, 5, 4, 4, 5, 4, 3, 4, 5, 4, 4, 3, 4, 5, 4]]
+    seeded(pg, ("Schreibunterlagen", "Minigolf"), "minigolf", {"players": [{"id": 1, "name": "Tony"}, {"id": 2, "name": "Zoë Ölçü"}, {"id": 3, "name": "Maximiliane Huber-Brunner"}], "scores": {"1": holes[0], "2": holes[1], "3": holes[2]}})
+
+
+FLOWS = {"Yatzy 2": flow_yatzy2, "Yatzy 4 lang": flow_yatzy4, "Schieber": flow_schieber, "Wizard": flow_wizard, "Minigolf": flow_minigolf}
 
 
 def share_png(pg, tag):

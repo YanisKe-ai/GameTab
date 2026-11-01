@@ -1,0 +1,1012 @@
+[
+ {
+  "name": "entwurf",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": null
+   },
+   {
+    "name": "Yanis",
+    "score": null
+   },
+   {
+    "name": "Matteo",
+    "score": null
+   }
+  ],
+  "extra": {
+   "winner": "dorf",
+   "players": [
+    {
+     "name": "Tony",
+     "role": "Seherin",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Yanis",
+     "role": "Dorfbewohner",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Matteo",
+     "role": "Werwolf",
+     "team": "wolf",
+     "alive": false,
+     "lover": false
+    }
+   ]
+  },
+  "labelKey": "gameWerewolf"
+ },
+ {
+  "name": "min5_wolf",
+  "lang": "en",
+  "players": [
+   {
+    "name": "Tony",
+    "score": null
+   },
+   {
+    "name": "Yanis",
+    "score": null
+   },
+   {
+    "name": "Matteo",
+    "score": null
+   },
+   {
+    "name": "Maximiliane Huber-Brunner",
+    "score": null
+   },
+   {
+    "name": "Zoë",
+    "score": null
+   }
+  ],
+  "extra": {
+   "winner": "wolf",
+   "players": [
+    {
+     "name": "Tony",
+     "role": "Seherin",
+     "team": "dorf",
+     "alive": false,
+     "lover": false
+    },
+    {
+     "name": "Yanis",
+     "role": "Werwolf",
+     "team": "wolf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Matteo",
+     "role": "Dorfbewohner",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Maximiliane Huber-Brunner",
+     "role": "Werwolf",
+     "team": "wolf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Zoë",
+     "role": "Jäger",
+     "team": "dorf",
+     "alive": false,
+     "lover": false
+    }
+   ]
+  },
+  "labelKey": "gameWerewolf"
+ },
+ {
+  "name": "lovers",
+  "lang": "fr",
+  "players": [
+   {
+    "name": "Tony",
+    "score": null
+   },
+   {
+    "name": "Yanis",
+    "score": null
+   },
+   {
+    "name": "Matteo",
+    "score": null
+   },
+   {
+    "name": "Maximiliane Huber-Brunner",
+    "score": null
+   },
+   {
+    "name": "Zoë",
+    "score": null
+   },
+   {
+    "name": "Ölçü",
+    "score": null
+   }
+  ],
+  "extra": {
+   "winner": "lovers",
+   "players": [
+    {
+     "name": "Tony",
+     "role": "Seherin",
+     "team": "dorf",
+     "alive": false,
+     "lover": false
+    },
+    {
+     "name": "Yanis",
+     "role": "Dorfbewohner",
+     "team": "dorf",
+     "alive": true,
+     "lover": true
+    },
+    {
+     "name": "Matteo",
+     "role": "Werwolf",
+     "team": "wolf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Maximiliane Huber-Brunner",
+     "role": "Hexe",
+     "team": "dorf",
+     "alive": true,
+     "lover": true
+    },
+    {
+     "name": "Zoë",
+     "role": "Jäger",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Ölçü",
+     "role": "Amor",
+     "team": "dorf",
+     "alive": false,
+     "lover": false
+    }
+   ]
+  },
+  "labelKey": "gameWerewolf"
+ },
+ {
+  "name": "n8",
+  "lang": "it",
+  "players": [
+   {
+    "name": "Tony",
+    "score": null
+   },
+   {
+    "name": "Yanis",
+    "score": null
+   },
+   {
+    "name": "Matteo",
+    "score": null
+   },
+   {
+    "name": "Maximiliane Huber-Brunner",
+    "score": null
+   },
+   {
+    "name": "Zoë",
+    "score": null
+   },
+   {
+    "name": "Ölçü",
+    "score": null
+   },
+   {
+    "name": "Kim",
+    "score": null
+   },
+   {
+    "name": "Lea",
+    "score": null
+   }
+  ],
+  "extra": {
+   "winner": "dorf",
+   "players": [
+    {
+     "name": "Tony",
+     "role": "Seherin",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Yanis",
+     "role": "Dorfbewohner",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Matteo",
+     "role": "Werwolf",
+     "team": "wolf",
+     "alive": false,
+     "lover": false
+    },
+    {
+     "name": "Maximiliane Huber-Brunner",
+     "role": "Hexe",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Zoë",
+     "role": "Jäger",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Ölçü",
+     "role": "Amor",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Kim",
+     "role": "Werwolf",
+     "team": "wolf",
+     "alive": false,
+     "lover": false
+    },
+    {
+     "name": "Lea",
+     "role": "Dieb",
+     "team": "dorf",
+     "alive": false,
+     "lover": false
+    }
+   ]
+  },
+  "labelKey": "gameWerewolf"
+ },
+ {
+  "name": "n12",
+  "lang": "es",
+  "players": [
+   {
+    "name": "Tony",
+    "score": null
+   },
+   {
+    "name": "Yanis",
+    "score": null
+   },
+   {
+    "name": "Matteo",
+    "score": null
+   },
+   {
+    "name": "Maximiliane Huber-Brunner",
+    "score": null
+   },
+   {
+    "name": "Zoë",
+    "score": null
+   },
+   {
+    "name": "Ölçü",
+    "score": null
+   },
+   {
+    "name": "Kim",
+    "score": null
+   },
+   {
+    "name": "Lea",
+    "score": null
+   },
+   {
+    "name": "Noah",
+    "score": null
+   },
+   {
+    "name": "Aurélien",
+    "score": null
+   },
+   {
+    "name": "Sofia",
+    "score": null
+   },
+   {
+    "name": "Jonas",
+    "score": null
+   }
+  ],
+  "extra": {
+   "winner": "wolf",
+   "players": [
+    {
+     "name": "Tony",
+     "role": "Seherin",
+     "team": "dorf",
+     "alive": false,
+     "lover": false
+    },
+    {
+     "name": "Yanis",
+     "role": "Dorfbewohner",
+     "team": "dorf",
+     "alive": false,
+     "lover": true
+    },
+    {
+     "name": "Matteo",
+     "role": "Werwolf",
+     "team": "wolf",
+     "alive": true,
+     "lover": true
+    },
+    {
+     "name": "Maximiliane Huber-Brunner",
+     "role": "Hexe",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Zoë",
+     "role": "Jäger",
+     "team": "dorf",
+     "alive": false,
+     "lover": false
+    },
+    {
+     "name": "Ölçü",
+     "role": "Amor",
+     "team": "dorf",
+     "alive": false,
+     "lover": false
+    },
+    {
+     "name": "Kim",
+     "role": "Werwolf",
+     "team": "wolf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Lea",
+     "role": "Dieb",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Noah",
+     "role": "Seherin",
+     "team": "dorf",
+     "alive": false,
+     "lover": false
+    },
+    {
+     "name": "Aurélien",
+     "role": "Werwolf",
+     "team": "wolf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Sofia",
+     "role": "Dorfbewohner",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Jonas",
+     "role": "Hexe",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    }
+   ]
+  },
+  "labelKey": "gameWerewolf"
+ },
+ {
+  "name": "max18",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": null
+   },
+   {
+    "name": "Yanis",
+    "score": null
+   },
+   {
+    "name": "Matteo",
+    "score": null
+   },
+   {
+    "name": "Maximiliane Huber-Brunner",
+    "score": null
+   },
+   {
+    "name": "Zoë",
+    "score": null
+   },
+   {
+    "name": "Ölçü",
+    "score": null
+   },
+   {
+    "name": "Kim",
+    "score": null
+   },
+   {
+    "name": "Lea",
+    "score": null
+   },
+   {
+    "name": "Noah",
+    "score": null
+   },
+   {
+    "name": "Aurélien",
+    "score": null
+   },
+   {
+    "name": "Sofia",
+    "score": null
+   },
+   {
+    "name": "Jonas",
+    "score": null
+   },
+   {
+    "name": "Chiara",
+    "score": null
+   },
+   {
+    "name": "Dominik",
+    "score": null
+   },
+   {
+    "name": "Ida",
+    "score": null
+   },
+   {
+    "name": "Emil",
+    "score": null
+   },
+   {
+    "name": "Mira",
+    "score": null
+   },
+   {
+    "name": "Finn",
+    "score": null
+   }
+  ],
+  "extra": {
+   "winner": "dorf",
+   "players": [
+    {
+     "name": "Tony",
+     "role": "Seherin",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Yanis",
+     "role": "Dorfbewohner",
+     "team": "dorf",
+     "alive": false,
+     "lover": false
+    },
+    {
+     "name": "Matteo",
+     "role": "Dorfbewohner",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Maximiliane Huber-Brunner",
+     "role": "Werwolf",
+     "team": "wolf",
+     "alive": false,
+     "lover": false
+    },
+    {
+     "name": "Zoë",
+     "role": "Jäger",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Ölçü",
+     "role": "Amor",
+     "team": "dorf",
+     "alive": false,
+     "lover": false
+    },
+    {
+     "name": "Kim",
+     "role": "Kleines Mädchen",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Lea",
+     "role": "Dieb",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Noah",
+     "role": "Seherin",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Aurélien",
+     "role": "Werwolf",
+     "team": "wolf",
+     "alive": false,
+     "lover": false
+    },
+    {
+     "name": "Sofia",
+     "role": "Dorfbewohner",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Jonas",
+     "role": "Hexe",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Chiara",
+     "role": "Jäger",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Dominik",
+     "role": "Amor",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Ida",
+     "role": "Werwolf",
+     "team": "wolf",
+     "alive": false,
+     "lover": false
+    },
+    {
+     "name": "Emil",
+     "role": "Dieb",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Mira",
+     "role": "Werwolf",
+     "team": "wolf",
+     "alive": false,
+     "lover": false
+    },
+    {
+     "name": "Finn",
+     "role": "Dorfbewohner",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    }
+   ]
+  },
+  "labelKey": "gameWerewolf"
+ },
+ {
+  "name": "max18_wolf",
+  "lang": "pt",
+  "players": [
+   {
+    "name": "Tony",
+    "score": null
+   },
+   {
+    "name": "Yanis",
+    "score": null
+   },
+   {
+    "name": "Matteo",
+    "score": null
+   },
+   {
+    "name": "Maximiliane Huber-Brunner",
+    "score": null
+   },
+   {
+    "name": "Zoë",
+    "score": null
+   },
+   {
+    "name": "Ölçü",
+    "score": null
+   },
+   {
+    "name": "Kim",
+    "score": null
+   },
+   {
+    "name": "Lea",
+    "score": null
+   },
+   {
+    "name": "Noah",
+    "score": null
+   },
+   {
+    "name": "Aurélien",
+    "score": null
+   },
+   {
+    "name": "Sofia",
+    "score": null
+   },
+   {
+    "name": "Jonas",
+    "score": null
+   },
+   {
+    "name": "Chiara",
+    "score": null
+   },
+   {
+    "name": "Dominik",
+    "score": null
+   },
+   {
+    "name": "Ida",
+    "score": null
+   },
+   {
+    "name": "Emil",
+    "score": null
+   },
+   {
+    "name": "Mira",
+    "score": null
+   },
+   {
+    "name": "Finn",
+    "score": null
+   }
+  ],
+  "extra": {
+   "winner": "wolf",
+   "players": [
+    {
+     "name": "Tony",
+     "role": "Werwolf",
+     "team": "wolf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Yanis",
+     "role": "Dorfbewohner",
+     "team": "dorf",
+     "alive": false,
+     "lover": false
+    },
+    {
+     "name": "Matteo",
+     "role": "Dorfbewohner",
+     "team": "dorf",
+     "alive": false,
+     "lover": true
+    },
+    {
+     "name": "Maximiliane Huber-Brunner",
+     "role": "Hexe",
+     "team": "dorf",
+     "alive": false,
+     "lover": false
+    },
+    {
+     "name": "Zoë",
+     "role": "Jäger",
+     "team": "dorf",
+     "alive": false,
+     "lover": false
+    },
+    {
+     "name": "Ölçü",
+     "role": "Werwolf",
+     "team": "wolf",
+     "alive": true,
+     "lover": true
+    },
+    {
+     "name": "Kim",
+     "role": "Kleines Mädchen",
+     "team": "dorf",
+     "alive": false,
+     "lover": false
+    },
+    {
+     "name": "Lea",
+     "role": "Dieb",
+     "team": "dorf",
+     "alive": false,
+     "lover": false
+    },
+    {
+     "name": "Noah",
+     "role": "Seherin",
+     "team": "dorf",
+     "alive": false,
+     "lover": false
+    },
+    {
+     "name": "Aurélien",
+     "role": "Dorfbewohner",
+     "team": "dorf",
+     "alive": false,
+     "lover": false
+    },
+    {
+     "name": "Sofia",
+     "role": "Werwolf",
+     "team": "wolf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Jonas",
+     "role": "Hexe",
+     "team": "dorf",
+     "alive": false,
+     "lover": false
+    },
+    {
+     "name": "Chiara",
+     "role": "Jäger",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Dominik",
+     "role": "Amor",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Ida",
+     "role": "Kleines Mädchen",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Emil",
+     "role": "Werwolf",
+     "team": "wolf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Mira",
+     "role": "Seherin",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Finn",
+     "role": "Dorfbewohner",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    }
+   ]
+  },
+  "labelKey": "gameWerewolf"
+ },
+ {
+  "name": "long",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Maximiliane Huber-Brunner von Hohenstein",
+    "score": null
+   },
+   {
+    "name": "Zoë",
+    "score": null
+   },
+   {
+    "name": "Ölçü Übermütig",
+    "score": null
+   },
+   {
+    "name": "Kim",
+    "score": null
+   },
+   {
+    "name": "Aurélien Çağlayan",
+    "score": null
+   },
+   {
+    "name": "Dominik Vierhundertsechsundvierzig",
+    "score": null
+   },
+   {
+    "name": "Ida",
+    "score": null
+   }
+  ],
+  "extra": {
+   "winner": "dorf",
+   "players": [
+    {
+     "name": "Maximiliane Huber-Brunner von Hohenstein",
+     "role": "Kleines Mädchen",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Zoë",
+     "role": "Werwolf",
+     "team": "wolf",
+     "alive": false,
+     "lover": false
+    },
+    {
+     "name": "Ölçü Übermütig",
+     "role": "Dorfbewohner",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Kim",
+     "role": "Kleines Mädchen",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Aurélien Çağlayan",
+     "role": "Dorfbewohner",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Dominik Vierhundertsechsundvierzig",
+     "role": "Dorfbewohner",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Ida",
+     "role": "Kleines Mädchen",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    }
+   ]
+  },
+  "labelKey": "gameWerewolf"
+ },
+ {
+  "name": "cjk",
+  "lang": "de",
+  "players": [
+   {
+    "name": "李小龍",
+    "score": null
+   },
+   {
+    "name": "鈴木一郎",
+    "score": null
+   },
+   {
+    "name": "김민준",
+    "score": null
+   },
+   {
+    "name": "Tony",
+    "score": null
+   },
+   {
+    "name": "Yanis",
+    "score": null
+   }
+  ],
+  "extra": {
+   "winner": "dorf",
+   "players": [
+    {
+     "name": "李小龍",
+     "role": "Seherin",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "鈴木一郎",
+     "role": "Werwolf",
+     "team": "wolf",
+     "alive": false,
+     "lover": false
+    },
+    {
+     "name": "김민준",
+     "role": "Dorfbewohner",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Tony",
+     "role": "Hexe",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    },
+    {
+     "name": "Yanis",
+     "role": "Jäger",
+     "team": "dorf",
+     "alive": true,
+     "lover": false
+    }
+   ]
+  },
+  "labelKey": "gameWerewolf"
+ }
+]

@@ -1,0 +1,433 @@
+[
+ {
+  "name": "entwurf",
+  "lang": "de",
+  "labelKey": "gameHeadsUp",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 14
+   },
+   {
+    "name": "Yanis",
+    "score": 11
+   },
+   {
+    "name": "Matteo",
+    "score": 7
+   }
+  ]
+ },
+ {
+  "name": "zwei",
+  "lang": "de",
+  "labelKey": "gameHeadsUp",
+  "players": [
+   {
+    "name": "Lea",
+    "score": 21
+   },
+   {
+    "name": "Noah",
+    "score": 8
+   }
+  ]
+ },
+ {
+  "name": "vier",
+  "lang": "de",
+  "labelKey": "gameHeadsUp",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 30
+   },
+   {
+    "name": "Yanis",
+    "score": 26
+   },
+   {
+    "name": "Matteo",
+    "score": 22
+   },
+   {
+    "name": "Kim",
+    "score": 19
+   }
+  ]
+ },
+ {
+  "name": "sechs",
+  "lang": "de",
+  "labelKey": "gameHeadsUp",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 30
+   },
+   {
+    "name": "Yanis",
+    "score": 26
+   },
+   {
+    "name": "Matteo",
+    "score": 22
+   },
+   {
+    "name": "Lea",
+    "score": 19
+   },
+   {
+    "name": "Noah",
+    "score": 16
+   },
+   {
+    "name": "Zoë",
+    "score": 14
+   }
+  ]
+ },
+ {
+  "name": "zehn",
+  "lang": "de",
+  "labelKey": "gameHeadsUp",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 30
+   },
+   {
+    "name": "Yanis",
+    "score": 26
+   },
+   {
+    "name": "Matteo",
+    "score": 22
+   },
+   {
+    "name": "Lea",
+    "score": 19
+   },
+   {
+    "name": "Noah",
+    "score": 16
+   },
+   {
+    "name": "Zoë",
+    "score": 14
+   },
+   {
+    "name": "Ölçü",
+    "score": 11
+   },
+   {
+    "name": "Kim",
+    "score": 9
+   },
+   {
+    "name": "Anna",
+    "score": 6
+   },
+   {
+    "name": "Ben",
+    "score": 3
+   }
+  ]
+ },
+ {
+  "name": "vierzehn",
+  "lang": "de",
+  "labelKey": "gameHeadsUp",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 30
+   },
+   {
+    "name": "Yanis",
+    "score": 26
+   },
+   {
+    "name": "Matteo",
+    "score": 22
+   },
+   {
+    "name": "Lea",
+    "score": 19
+   },
+   {
+    "name": "Noah",
+    "score": 16
+   },
+   {
+    "name": "Zoë",
+    "score": 14
+   },
+   {
+    "name": "Ölçü",
+    "score": 11
+   },
+   {
+    "name": "Kim",
+    "score": 9
+   },
+   {
+    "name": "Anna",
+    "score": 6
+   },
+   {
+    "name": "Ben",
+    "score": 3
+   },
+   {
+    "name": "Eva",
+    "score": 1
+   },
+   {
+    "name": "Lars",
+    "score": 1
+   },
+   {
+    "name": "Mia",
+    "score": 1
+   },
+   {
+    "name": "Jan",
+    "score": 1
+   }
+  ],
+  "pages": 2
+ },
+ {
+  "name": "lange_namen",
+  "lang": "de",
+  "labelKey": "gameHeadsUp",
+  "players": [
+   {
+    "name": "Maximiliane Huber-Brunner von Hohenstaufen-Zollern",
+    "score": 30
+   },
+   {
+    "name": "Konstantinopelstrasse-Wanderverein-Vorsitzender",
+    "score": 26
+   },
+   {
+    "name": "Zoë-Ägidius Öztürk",
+    "score": 22
+   },
+   {
+    "name": "Kim",
+    "score": 19
+   }
+  ]
+ },
+ {
+  "name": "langer_sieger_zwei",
+  "lang": "de",
+  "labelKey": "gameHeadsUp",
+  "players": [
+   {
+    "name": "Maximiliane Huber-Brunner",
+    "score": 21
+   },
+   {
+    "name": "Ben",
+    "score": 8
+   }
+  ]
+ },
+ {
+  "name": "gleichstand",
+  "lang": "de",
+  "labelKey": "gameHeadsUp",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 14
+   },
+   {
+    "name": "Yanis",
+    "score": 14
+   },
+   {
+    "name": "Matteo",
+    "score": 7
+   }
+  ]
+ },
+ {
+  "name": "gleichstand_lang",
+  "lang": "de",
+  "labelKey": "gameHeadsUp",
+  "players": [
+   {
+    "name": "Maximiliane Huber-Brunner von Hohenstaufen-Zollern",
+    "score": 30
+   },
+   {
+    "name": "Yanis",
+    "score": 30
+   },
+   {
+    "name": "Matteo und Lea",
+    "score": 30
+   },
+   {
+    "name": "Kim",
+    "score": 19
+   }
+  ]
+ },
+ {
+  "name": "cjk",
+  "lang": "de",
+  "labelKey": "gameHeadsUp",
+  "players": [
+   {
+    "name": "田中太郎",
+    "score": 30
+   },
+   {
+    "name": "王小明",
+    "score": 26
+   },
+   {
+    "name": "김민수",
+    "score": 22
+   },
+   {
+    "name": "Ana",
+    "score": 19
+   }
+  ]
+ },
+ {
+  "name": "einstellig",
+  "lang": "de",
+  "labelKey": "gameHeadsUp",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 3
+   },
+   {
+    "name": "Yanis",
+    "score": 2
+   }
+  ]
+ },
+ {
+  "name": "vierstellig",
+  "lang": "de",
+  "labelKey": "gameHeadsUp",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 1042
+   },
+   {
+    "name": "Yanis",
+    "score": 987
+   },
+   {
+    "name": "Matteo",
+    "score": 55
+   }
+  ]
+ },
+ {
+  "name": "en",
+  "lang": "en",
+  "labelKey": "gameHeadsUp",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 14
+   },
+   {
+    "name": "Yanis",
+    "score": 11
+   },
+   {
+    "name": "Matteo",
+    "score": 7
+   }
+  ]
+ },
+ {
+  "name": "fr",
+  "lang": "fr",
+  "labelKey": "gameHeadsUp",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 14
+   },
+   {
+    "name": "Yanis",
+    "score": 11
+   },
+   {
+    "name": "Matteo",
+    "score": 7
+   }
+  ]
+ },
+ {
+  "name": "it",
+  "lang": "it",
+  "labelKey": "gameHeadsUp",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 14
+   },
+   {
+    "name": "Yanis",
+    "score": 11
+   },
+   {
+    "name": "Matteo",
+    "score": 7
+   }
+  ]
+ },
+ {
+  "name": "es",
+  "lang": "es",
+  "labelKey": "gameHeadsUp",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 14
+   },
+   {
+    "name": "Yanis",
+    "score": 11
+   },
+   {
+    "name": "Matteo",
+    "score": 7
+   }
+  ]
+ },
+ {
+  "name": "pt",
+  "lang": "pt",
+  "labelKey": "gameHeadsUp",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 14
+   },
+   {
+    "name": "Yanis",
+    "score": 11
+   },
+   {
+    "name": "Matteo",
+    "score": 7
+   }
+  ]
+ }
+]

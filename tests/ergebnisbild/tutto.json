@@ -1,0 +1,463 @@
+[
+ {
+  "name": "entwurf",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 6200
+   },
+   {
+    "name": "Yanis",
+    "score": 4800
+   },
+   {
+    "name": "Matteo",
+    "score": 3250
+   }
+  ],
+  "extra": {
+   "target": 6000
+  }
+ },
+ {
+  "name": "zwei",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Lea",
+    "score": 6150
+   },
+   {
+    "name": "Noah",
+    "score": 5400
+   }
+  ],
+  "extra": {
+   "target": 6000
+  }
+ },
+ {
+  "name": "vier",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 6300
+   },
+   {
+    "name": "Yanis",
+    "score": 5100
+   },
+   {
+    "name": "Matteo",
+    "score": 4650
+   },
+   {
+    "name": "Kim",
+    "score": 900
+   }
+  ],
+  "extra": {
+   "target": 6000
+  }
+ },
+ {
+  "name": "sechs",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 6050
+   },
+   {
+    "name": "Yanis",
+    "score": 5400
+   },
+   {
+    "name": "Matteo",
+    "score": 4200
+   },
+   {
+    "name": "Lea",
+    "score": 3300
+   },
+   {
+    "name": "Noah",
+    "score": 1500
+   },
+   {
+    "name": "Zoë",
+    "score": 250
+   }
+  ],
+  "extra": {
+   "target": 6000
+  }
+ },
+ {
+  "name": "acht",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 6100
+   },
+   {
+    "name": "Yanis",
+    "score": 5800
+   },
+   {
+    "name": "Matteo",
+    "score": 5000
+   },
+   {
+    "name": "Lea",
+    "score": 4400
+   },
+   {
+    "name": "Noah",
+    "score": 3600
+   },
+   {
+    "name": "Zoë",
+    "score": 2800
+   },
+   {
+    "name": "Ölçü",
+    "score": 1200
+   },
+   {
+    "name": "Kim",
+    "score": 100
+   }
+  ],
+  "extra": {
+   "target": 6000
+  }
+ },
+ {
+  "name": "zehn_seiten",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 6100
+   },
+   {
+    "name": "Yanis",
+    "score": 5800
+   },
+   {
+    "name": "Matteo",
+    "score": 5000
+   },
+   {
+    "name": "Lea",
+    "score": 4400
+   },
+   {
+    "name": "Noah",
+    "score": 3600
+   },
+   {
+    "name": "Zoë",
+    "score": 2800
+   },
+   {
+    "name": "Ölçü",
+    "score": 1200
+   },
+   {
+    "name": "Kim",
+    "score": 1100
+   },
+   {
+    "name": "Anna",
+    "score": 700
+   },
+   {
+    "name": "Ben",
+    "score": 100
+   }
+  ],
+  "extra": {
+   "target": 6000
+  },
+  "pages": 2
+ },
+ {
+  "name": "lange_namen",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Maximiliane Huber-Brunner von Hohenstaufen-Zollern",
+    "score": 6200
+   },
+   {
+    "name": "Konstantinopelstrasse-Wanderverein-Vorsitzender",
+    "score": 4800
+   },
+   {
+    "name": "Zoë-Ägidius Öztürk",
+    "score": 3250
+   },
+   {
+    "name": "Kim",
+    "score": 1000
+   }
+  ],
+  "extra": {
+   "target": 6000
+  }
+ },
+ {
+  "name": "langer_sieger_zwei",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Maximiliane Huber-Brunner",
+    "score": 6200
+   },
+   {
+    "name": "Ben",
+    "score": 4800
+   }
+  ],
+  "extra": {
+   "target": 6000
+  }
+ },
+ {
+  "name": "gleichstand",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 6200
+   },
+   {
+    "name": "Yanis",
+    "score": 6200
+   },
+   {
+    "name": "Matteo",
+    "score": 3250
+   }
+  ],
+  "extra": {
+   "target": 6000
+  }
+ },
+ {
+  "name": "gleichstand_lang",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Maximiliane Huber-Brunner von Hohenstaufen-Zollern",
+    "score": 6200
+   },
+   {
+    "name": "Yanis",
+    "score": 6200
+   },
+   {
+    "name": "Matteo und Lea",
+    "score": 6200
+   },
+   {
+    "name": "Kim",
+    "score": 3250
+   }
+  ],
+  "extra": {
+   "target": 6000
+  }
+ },
+ {
+  "name": "cjk",
+  "lang": "de",
+  "players": [
+   {
+    "name": "田中太郎",
+    "score": 6200
+   },
+   {
+    "name": "王小明",
+    "score": 4800
+   },
+   {
+    "name": "김민수",
+    "score": 3250
+   },
+   {
+    "name": "Ana",
+    "score": 900
+   }
+  ],
+  "extra": {
+   "target": 6000
+  }
+ },
+ {
+  "name": "ziel_10000",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 10250
+   },
+   {
+    "name": "Yanis",
+    "score": 7800
+   },
+   {
+    "name": "Matteo",
+    "score": 3000
+   }
+  ],
+  "extra": {
+   "target": 10000
+  }
+ },
+ {
+  "name": "ziel_ungerade",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 4250
+   },
+   {
+    "name": "Yanis",
+    "score": 3000
+   },
+   {
+    "name": "Matteo",
+    "score": 1000
+   }
+  ],
+  "extra": {
+   "target": 4000
+  }
+ },
+ {
+  "name": "en",
+  "lang": "en",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 6200
+   },
+   {
+    "name": "Yanis",
+    "score": 4800
+   },
+   {
+    "name": "Matteo",
+    "score": 3250
+   }
+  ],
+  "extra": {
+   "target": 6000
+  }
+ },
+ {
+  "name": "fr",
+  "lang": "fr",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 6200
+   },
+   {
+    "name": "Yanis",
+    "score": 4800
+   },
+   {
+    "name": "Matteo",
+    "score": 3250
+   }
+  ],
+  "extra": {
+   "target": 6000
+  }
+ },
+ {
+  "name": "it",
+  "lang": "it",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 6200
+   },
+   {
+    "name": "Yanis",
+    "score": 4800
+   },
+   {
+    "name": "Matteo",
+    "score": 3250
+   }
+  ],
+  "extra": {
+   "target": 6000
+  }
+ },
+ {
+  "name": "es",
+  "lang": "es",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 6200
+   },
+   {
+    "name": "Yanis",
+    "score": 4800
+   },
+   {
+    "name": "Matteo",
+    "score": 3250
+   }
+  ],
+  "extra": {
+   "target": 6000
+  }
+ },
+ {
+  "name": "pt",
+  "lang": "pt",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 6200
+   },
+   {
+    "name": "Yanis",
+    "score": 4800
+   },
+   {
+    "name": "Matteo",
+    "score": 3250
+   }
+  ],
+  "extra": {
+   "target": 6000
+  }
+ },
+ {
+  "name": "ohne_extra",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 6200
+   },
+   {
+    "name": "Yanis",
+    "score": 4800
+   }
+  ]
+ }
+]

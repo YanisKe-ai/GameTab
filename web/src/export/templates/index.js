@@ -7,9 +7,10 @@ import yatzy from "./yatzy.js";
 import schieber from "./schieber.js";
 import skyjo from "./skyjo.js";
 import flip7 from "./flip7.js";
+import tutto from "./tutto.js";
 
 /* Jede Vorlage: { games:[gameId...], fonts:[CSS-Schriftangaben], texts?(d)->[String], accepts?(d)->bool, render(d, kit)->[canvas...] } */
-const TEMPLATES = [yatzy, schieber, skyjo, flip7];
+const TEMPLATES = [yatzy, schieber, skyjo, flip7, tutto];
 
 const GT_TPL = {};
 TEMPLATES.forEach((tp) => tp.games.forEach((g) => { GT_TPL[g] = tp; }));

@@ -12,9 +12,10 @@
 <script>(function(){try{var t=(JSON.parse(localStorage.getItem("spieleblock-app-state-v1")||"{}")||{}).theme;var c={light:"#F8F9FA",vitrum:"#362A52",noir:"#0A0A0A",dark:"#2E2247"}[t]||"#2E2247";document.querySelector('meta[name="theme-color"]').setAttribute("content",c);document.documentElement.style.background=c;}catch(e){}})();</script>
 
 <script>/* Handy-Querformat: Attribut data-phone-landscape vor dem ersten Paint (Regel und Doku: web/src/shared/phone-landscape.js). */(function(){try{
-/*pl-decide-begin*/function plDecide(e){if(!e||e.viewMode==="laptop")return false;if(e.force===true)return true;if(e.force===false)return false;if(!e.touch)return false;var iw=e.innerW||0,ih=e.innerH||0,sw=e.screenW||0,sh=e.screenH||0;var sh2=sw&&sh?Math.min(sw,sh):Math.min(iw,ih);if(!sh2||sh2>500)return false;var l;if(typeof e.orientationType==="string"&&e.orientationType)l=e.orientationType.indexOf("landscape")===0;else if(typeof e.windowOrientation==="number")l=Math.abs(e.windowOrientation)===90;else if(sw&&sh&&sw!==sh)l=sw>sh;else l=!!e.mqLandscape;if(!l)return false;return iw>ih;}/*pl-decide-end*/
+/*pl-decide-begin*/function plDecide(e){if(!e||e.viewMode==="laptop")return false;if(e.force===true)return true;if(e.force===false)return false;if(!e.touch)return false;var iw=e.innerW||0,ih=e.innerH||0,sw=e.screenW||0,sh=e.screenH||0;var k=e.scale>1?e.scale:1;var sh2=(sw&&sh?Math.min(sw,sh):Math.min(iw,ih))/k;if(!sh2||sh2>(k>1?700:500))return false;var l;if(typeof e.orientationType==="string"&&e.orientationType)l=e.orientationType.indexOf("landscape")===0;else if(typeof e.windowOrientation==="number")l=Math.abs(e.windowOrientation)===90;else if(sw&&sh&&sw!==sh)l=sw>sh;else l=!!e.mqLandscape;if(!l)return false;return iw>ih;}/*pl-decide-end*/
 var w=window,s=w.screen||{},mq=function(q){try{return!!(w.matchMedia&&w.matchMedia(q).matches);}catch(x){return false;}};var vm="mobile";try{vm=(JSON.parse(localStorage.getItem("spieleblock-app-state-v1")||"{}")||{}).viewMode==="laptop"?"laptop":"mobile";}catch(x){}var f=null,m=/[?&]pl=([01])\b/.exec(location.search||"");if(m)f=m[1]==="1";else{try{var v=localStorage.getItem("gametab-pl-force");if(v==="1")f=true;else if(v==="0")f=false;}catch(x){}}var ot=null;try{ot=s.orientation&&s.orientation.type?String(s.orientation.type):null;}catch(x){}
-if(plDecide({viewMode:vm,force:f,touch:(w.navigator&&w.navigator.maxTouchPoints>0)||mq("(any-pointer: coarse)"),screenW:s.width||0,screenH:s.height||0,orientationType:ot,windowOrientation:typeof w.orientation==="number"?w.orientation:null,mqLandscape:mq("(orientation: landscape)"),innerW:w.innerWidth||0,innerH:w.innerHeight||0}))document.documentElement.setAttribute("data-phone-landscape","");}catch(e){}})();</script>
+var tk=1,tsh=Math.min(s.width||0,s.height||0);if(vm!=="laptop"&&mq("(pointer: coarse)")&&tsh>=600)tk=Math.min(1.6,Math.max(1,tsh/460));if(tk>1){var tl=s.orientation&&s.orientation.type?String(s.orientation.type).indexOf("landscape")===0:(s.width||0)>(s.height||0);var vpm=document.querySelector('meta[name="viewport"]');if(vpm)vpm.setAttribute("content","width="+Math.round((tl?Math.max(s.width,s.height):tsh)/tk)+", viewport-fit=cover");document.documentElement.setAttribute("data-tablet","");}
+if(plDecide({viewMode:vm,force:f,scale:tk,touch:(w.navigator&&w.navigator.maxTouchPoints>0)||mq("(any-pointer: coarse)"),screenW:s.width||0,screenH:s.height||0,orientationType:ot,windowOrientation:typeof w.orientation==="number"?w.orientation:null,mqLandscape:mq("(orientation: landscape)"),innerW:w.innerWidth||0,innerH:w.innerHeight||0}))document.documentElement.setAttribute("data-phone-landscape","");}catch(e){}})();</script>
 <style id="gt-fonts">
 @font-face{font-family:'Baloo 2';font-style:normal;font-weight:400 700;font-display:swap;src:url("./fonts/Baloo2-400-1.woff2") format('woff2');}
 @font-face{font-family:'Baloo 2';font-style:normal;font-weight:701 900;font-display:swap;src:url("./fonts/Baloo2-701-1.woff2") format('woff2');}
@@ -23135,6 +23136,17 @@ function pageShellStyle(theme) {
 }
 // web/src/shared/phone-landscape.js
 var PL_ATTR = "data-phone-landscape";
+var PL_MAX_SHORT_TABLET = 700;
+var TAB_MIN_SHORT = 600;
+var TAB_MAX_SCALE = 1.6;
+var TAB_TARGET = 460;
+var VP_DEFAULT = "width=device-width, initial-scale=1, viewport-fit=cover";
+function tabletScale(e) {
+	if (!e || e.viewMode === "laptop" || !e.coarse) return 1;
+	const short = Math.min(e.screenW || 0, e.screenH || 0);
+	if (!short || short < TAB_MIN_SHORT) return 1;
+	return Math.min(TAB_MAX_SCALE, Math.max(1, short / TAB_TARGET));
+}
 var PL_FORCE_KEY = "gametab-pl-force";
 var PL_STATE_KEY = "spieleblock-app-state-v1";
 function decidePhoneLandscape(e) {
@@ -23144,8 +23156,9 @@ function decidePhoneLandscape(e) {
 	if (!e.touch) return false;
 	const iw = e.innerW || 0, ih = e.innerH || 0;
 	const sw = e.screenW || 0, sh = e.screenH || 0;
-	const short = sw && sh ? Math.min(sw, sh) : Math.min(iw, ih);
-	if (!short || short > 500) return false;
+	const k = e.scale > 1 ? e.scale : 1;
+	const short = (sw && sh ? Math.min(sw, sh) : Math.min(iw, ih)) / k;
+	if (!short || short > (k > 1 ? PL_MAX_SHORT_TABLET : 500)) return false;
 	let land;
 	if (typeof e.orientationType === "string" && e.orientationType) land = e.orientationType.indexOf("landscape") === 0;
 	else if (typeof e.windowOrientation === "number") land = Math.abs(e.windowOrientation) === 90;
@@ -23180,6 +23193,29 @@ function plMQ(q) {
 		return false;
 	}
 }
+var tabLastVp = null;
+function applyTabletViewport(viewMode) {
+	const s = window.screen || {};
+	const k = tabletScale({
+		viewMode,
+		coarse: plMQ("(pointer: coarse)"),
+		screenW: s.width || 0,
+		screenH: s.height || 0
+	});
+	let land = false;
+	try {
+		land = s.orientation && s.orientation.type ? String(s.orientation.type).indexOf("landscape") === 0 : (s.width || 0) > (s.height || 0);
+	} catch (_) {}
+	const side = land ? Math.max(s.width || 0, s.height || 0) : Math.min(s.width || 0, s.height || 0);
+	const vp = k > 1 ? "width=" + Math.round(side / k) + ", viewport-fit=cover" : VP_DEFAULT;
+	if (vp !== tabLastVp) {
+		tabLastVp = vp;
+		const m = document.querySelector("meta[name=\"viewport\"]");
+		if (m && m.getAttribute("content") !== vp) m.setAttribute("content", vp);
+	}
+	document.documentElement.toggleAttribute("data-tablet", k > 1);
+	return k;
+}
 function plEnv(viewMode, force) {
 	const w = window, s = w.screen || {};
 	let ot = null;
@@ -23189,6 +23225,7 @@ function plEnv(viewMode, force) {
 	return {
 		viewMode,
 		force,
+		scale: applyTabletViewport(viewMode),
 		touch: w.navigator && w.navigator.maxTouchPoints > 0 || plMQ("(any-pointer: coarse)"),
 		screenW: s.width || 0,
 		screenH: s.height || 0,
@@ -40889,7 +40926,7 @@ function StartPage({ onSelect, lang, theme, viewMode, lastPlayed, dismissedResum
 			flexDirection: "column",
 			overflow: isLaptop ? "visible" : "hidden"
 		}
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, "@media (max-height:700px){.gt-hero-logo{transform:translateY(4px) scale(1.5)!important}}"), theme === "noir" && beamOn && beamGeo && /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, { key: "beamfx" + beamGeo.k }, /* @__PURE__ */ import_react.default.createElement("div", {
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, "@media (max-height:700px){.gt-hero-logo{transform:translateY(4px) scale(1.5)!important}}@media (max-height:700px){html[data-tablet]:not([data-phone-landscape]) .gt-hero-logo{transform:translateY(0) scale(1.05)!important}}"), theme === "noir" && beamOn && beamGeo && /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, { key: "beamfx" + beamGeo.k }, /* @__PURE__ */ import_react.default.createElement("div", {
 		"aria-hidden": true,
 		className: "gt-beam-w",
 		ref: (el) => gtWowInit(el, beamGeo),
@@ -43961,6 +43998,7 @@ var PLD_CSS = `
 [data-phone-landscape] .gtL-padsheet.pld-pad > .pld-padR { display: flex; flex-direction: column; grid-column: 2; grid-row: 2 / span 3; min-width: 0; }
 [data-phone-landscape] .pld-pad .pld-padR > * { margin-bottom: 8px !important; }
 [data-phone-landscape] .pld-pad .pld-padR > button[data-gt-sound="1"] { margin-top: auto; margin-bottom: 0 !important; position: sticky; bottom: 0; }
+[data-tablet] .pld-free :is(button, input) { min-height: 44px !important; min-width: 44px !important; }
 @media (prefers-reduced-motion: reduce) { [data-phone-landscape] .pld * { scroll-behavior: auto !important; } }
 `;
 // web/src/games/tutto/game.js
@@ -107066,7 +107104,7 @@ function YatzyGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 }
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.10.25-7";
+var APP_BUILD = "2026.11.01-1";
 // web/src/app/storage.js
 var storage_exports = /* @__PURE__ */ __exportAll({
 	GT_CAT_KEYS: () => GT_CAT_KEYS,
@@ -107188,7 +107226,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.10.25-7");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.01-1");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -109490,7 +109528,7 @@ function UpdateBanner() {
 		let alive = true;
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.10.25-7") {
+				if (alive && v && v.build && v.build !== "2026.11.01-1") {
 					setReady(true);
 					setHidden(false);
 					try {

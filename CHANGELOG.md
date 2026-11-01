@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.01-1 (01.11.2026 01:06)
+- Tablets: App passt sich jetzt an, hochkant gross, quer zweispaltig
+
 ## 2026.10.25-7 (25.10.2026 18:14)
 - Querformat verfeinert: Setups, Statistik, Partyspiele, lange Namen
 

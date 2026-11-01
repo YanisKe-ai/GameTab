@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.01-2 (01.11.2026 03:34)
+- Neu: jedes Spiel hat sein eigenes Ergebnisbild, Partyspiele können jetzt auch teilen
+
 ## 2026.11.01-1 (01.11.2026 01:06)
 - Tablets: App passt sich jetzt an, hochkant gross, quer zweispaltig
 

@@ -68,3 +68,7 @@ Siehe NEXT_STEPS.md Schritt 2. Referenz-Screenshots in `reference/screenshots/`.
 - Der Inhaltsbereich der Startseite darf nicht `overflow:hidden` sein, sonst wird der nach oben skalierte Drachenkopf (scale 1.85) abgeschnitten.
 - Messen statt raten: eine temporäre Messanzeige (innerHeight, screen.height, safe-area) hat das Problem in einem Durchgang gelöst.
 - Releases: `python3 tools/release.py "Text"` erhöht APP_BUILD, version.json, sw.js-Cache und CHANGELOG.md. Die App zeigt dann den goldenen Hinweis «Neue Version ist da».
+
+## Projektnotiz im Vault
+Übersicht, Stand und Entscheidungen (nur lesen, Pflege per `/abschluss`):
+@~/Yanis/10\ Projekte/GameTab.md

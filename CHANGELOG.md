@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.05-3 (05.11.2026 00:49)
+- Schieber: Wyys-Liste scrollt ab 2 Einträgen, Stöck-Bild freigestellt
+
 ## 2026.11.05-2 (05.11.2026 00:44)
 - Schieber: Wyys & Stöck neu mit Knopf pro Team, Ziel löst keinen falschen Sieg mehr aus
 

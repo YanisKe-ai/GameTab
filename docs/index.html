@@ -42776,7 +42776,7 @@ var SCHIEBER_PL_CSS = `
 .gt-wy-card{position:absolute;left:50%;top:6px;width:42px;height:60px;margin-left:-21px;box-sizing:border-box;padding:4px 0 0 4px;border-radius:5px;background:var(--wy-card);box-shadow:0 0 0 1px rgba(90,70,40,.4),0 2px 3px rgba(60,40,20,.25);transform-origin:50% 130%;font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:15px;line-height:1;text-align:left;color:var(--wy-red)}
 .gt-wy-card.is-k{color:var(--wy-black)}
 .gt-wy-card svg{position:absolute;left:3px;top:20px;width:13px;height:13px}
-.gt-wy-st{display:block;height:74px;width:100%;object-fit:contain;mix-blend-mode:multiply;pointer-events:none}
+.gt-wy-st{display:block;height:74px;width:100%;object-fit:contain;pointer-events:none}
 .gt-wy-qty{display:flex;align-items:center;justify-content:center;gap:4px;padding:0 6px 8px;font-family:'Inter',sans-serif;font-weight:700;font-size:14px;color:var(--wy-ink)}
 .gt-wy-qty span{min-width:18px;text-align:center;font-variant-numeric:tabular-nums}
 .gt-wy-qty button{width:44px;height:40px;padding:0;border:1px solid var(--wy-fir);border-radius:8px;background:none;color:var(--wy-fir);font:700 17px 'Inter',sans-serif;cursor:pointer}
@@ -42799,6 +42799,7 @@ var SCHIEBER_PL_CSS = `
 .gt-wy-seg button{width:48px;height:46px;padding:0;border:1px solid var(--wy-edge);border-radius:12px;background:none;color:var(--wy-ink);font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:16px;cursor:pointer;transition:transform 140ms ease-out}
 .gt-wy-seg button:active{transform:scale(.96)}
 .gt-wy-seg button[aria-pressed="true"]{background:var(--wy-fir);border-color:var(--wy-fir);color:var(--wy-on)}
+.gt-wy-rows{display:flex;flex-direction:column;gap:7px;max-height:62px;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
 .gt-wy-foot{flex:none;padding:8px 14px calc(14px + env(safe-area-inset-bottom));background:var(--wy-bg)}
 .gt-wy-flip .gt-wy-foot{padding-bottom:calc(14px + env(safe-area-inset-top))}
 .gtL-content .gt-wy-flip .gt-wy-foot,[data-phone-landscape] .gt-wy-flip .gt-wy-foot{padding-bottom:calc(14px + env(safe-area-inset-bottom))}
@@ -43525,7 +43526,7 @@ function weisAggregate(recs) {
 	});
 	return Object.values(m).sort((a, b) => b.pts - a.pts || b.n - a.n);
 }
-function WeisStatsTable({ rows, tk, t }) {
+function WeisStatsTable({ rows, tk, t, scroll }) {
 	const cols = "minmax(0,1fr) 38px 56px 50px 40px";
 	const hd = {
 		fontSize: 9.5,
@@ -43562,7 +43563,10 @@ function WeisStatsTable({ rows, tk, t }) {
 	}, /* @__PURE__ */ import_react.default.createElement("span", { style: {
 		...hd,
 		textAlign: "left"
-	} }, t("weisColWho")), /* @__PURE__ */ import_react.default.createElement("span", { style: hd }, t("weisColN")), /* @__PURE__ */ import_react.default.createElement("span", { style: hd }, t("weisColPts")), /* @__PURE__ */ import_react.default.createElement("span", { style: hd }, t("weisColBest")), /* @__PURE__ */ import_react.default.createElement("span", { style: hd }, t("weisColSt"))), rows.map((r, i) => /* @__PURE__ */ import_react.default.createElement("div", {
+	} }, t("weisColWho")), /* @__PURE__ */ import_react.default.createElement("span", { style: hd }, t("weisColN")), /* @__PURE__ */ import_react.default.createElement("span", { style: hd }, t("weisColPts")), /* @__PURE__ */ import_react.default.createElement("span", { style: hd }, t("weisColBest")), /* @__PURE__ */ import_react.default.createElement("span", { style: hd }, t("weisColSt"))), ((list) => scroll ? /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gt-wy-rows",
+		tabIndex: 0
+	}, list) : list)(rows.map((r, i) => /* @__PURE__ */ import_react.default.createElement("div", {
 		key: r.name + i,
 		role: "row",
 		style: {
@@ -43588,7 +43592,7 @@ function WeisStatsTable({ rows, tk, t }) {
 		...cell,
 		color: tk.gold,
 		fontWeight: 800
-	} }, r.pts), /* @__PURE__ */ import_react.default.createElement("span", { style: cell }, r.best || "·"), /* @__PURE__ */ import_react.default.createElement("span", { style: cell }, r.st || "·"))));
+	} }, r.pts), /* @__PURE__ */ import_react.default.createElement("span", { style: cell }, r.best || "·"), /* @__PURE__ */ import_react.default.createElement("span", { style: cell }, r.st || "·")))));
 }
 function SchieberWeisBtn({ tm, onOpen, t, theme, cls }) {
 	const acc = theme === "noir" ? noirAccent("schieber") : theme === "light" ? "#2F6B52" : "#5FB38C";
@@ -43812,7 +43816,8 @@ function SchieberWeisPanel({ open, teamId, teams, onSave, onClose, t, theme }) {
 		...tk,
 		ink: "var(--wy-ink)",
 		muted: "var(--wy-ink2)",
-		border: "var(--wy-edge)"
+		border: "var(--wy-edge)",
+		gold: "var(--wy-red)"
 	};
 	return /* @__PURE__ */ import_react.default.createElement("div", {
 		role: "dialog",
@@ -43959,7 +43964,8 @@ function SchieberWeisPanel({ open, teamId, teams, onSave, onClose, t, theme }) {
 	} }, t("weisGameTitle")), /* @__PURE__ */ import_react.default.createElement(WeisStatsTable, {
 		rows: gameRows,
 		tk: sumTk,
-		t
+		t,
+		scroll: true
 	}))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gt-wy-foot" }, /* @__PURE__ */ import_react.default.createElement("button", {
 		type: "button",
 		"data-gt-sound": "1",
@@ -108543,7 +108549,7 @@ function YatzyGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 }
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.05-2";
+var APP_BUILD = "2026.11.05-3";
 // web/src/app/storage.js
 var storage_exports = /* @__PURE__ */ __exportAll({
 	GT_CAT_KEYS: () => GT_CAT_KEYS,
@@ -108665,7 +108671,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.05-2");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.05-3");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -111186,7 +111192,7 @@ function UpdateBanner() {
 		let alive = true;
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.05-2") {
+				if (alive && v && v.build && v.build !== "2026.11.05-3") {
 					setReady(true);
 					setHidden(false);
 					try {

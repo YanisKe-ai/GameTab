@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.05-1 (05.11.2026 00:27)
+- Massive 3D-Blöcke auf Podest und Statistik, Schieber: Zielzahl auf dem Mittelstrich, längere Punktestriche
+
 ## 2026.11.04-8 (04.11.2026 23:51)
 - Schieber: Wyys statt Weis
 

@@ -198,15 +198,9 @@ def numpad(pg, row_name, value):
 
 def podium_ranks(pg):
     """Raenge auf dem Podest als sortierte Liste, z.B. ['1','2','2'].
-    Podest-Text je Person: Name, Punkte, Rang (Zaehl-Animation der Punkte stoert nicht)."""
+    Liest den Rang aus dem Screenreader-Text jeder Beschriftung."""
     wait(pg, 1500)
-    t = body(pg)
-    a = t.find("ENDSTAND")
-    lines = [x.strip() for x in (t[a:t.find("Revanche", a)] if a >= 0 else t).split("\n") if x.strip()]
-    ranks = []
-    for i in range(len(lines) - 2):
-        if not re.fullmatch(r"-?\d+", lines[i]) and re.fullmatch(r"-?\d+", lines[i + 1]) and re.fullmatch(r"[1-9]", lines[i + 2]):
-            ranks.append(lines[i + 2])
+    ranks = [x.strip().rstrip(".") for x in pg.locator("[data-gt-podium] .gtsb-name .gtsb-sr").all_text_contents()]
     return sorted(ranks)
 
 

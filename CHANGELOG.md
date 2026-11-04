@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.04-4 (04.11.2026 23:11)
+- Schieber: im Punktefeld nur noch Mal-Taste, Eingabe aufgeräumt
+
 ## 2026.11.04-3 (04.11.2026 22:59)
 - Mehr-Menü in allen Spielen mit Fussknöpfen, Schieber ohne Führt-Hinweis
 

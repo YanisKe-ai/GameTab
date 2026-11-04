@@ -42684,22 +42684,8 @@ var SCHIEBER_PL_CSS = `
 [data-phone-landscape] .gt-weis-sf button{min-width:44px}
 `;
 function schCalc(s) {
-	const tk = String(s || "").match(/\d+|[+−×]/g) || [];
-	while (tk.length && !/\d/.test(tk[tk.length - 1])) tk.pop();
-	if (!tk.length) return null;
-	const terms = [];
-	let sign = 1, cur = null;
-	for (let i = 0; i < tk.length; i++) {
-		const x = tk[i];
-		if (x === "×") cur *= parseInt(tk[++i], 10);
-		else if (x === "+" || x === "−") {
-			terms.push(sign * cur);
-			sign = x === "+" ? 1 : -1;
-			cur = null;
-		} else cur = parseInt(x, 10);
-	}
-	terms.push(sign * cur);
-	return Math.max(-99999, Math.min(99999, terms.reduce((a, b) => a + b, 0)));
+	const n = String(s || "").split("×").filter(Boolean).map((x) => parseInt(x, 10));
+	return n.length ? Math.min(99999, n.reduce((a, b) => a * b, 1)) : null;
 }
 function SchieberEditorPanel({ editing, teams, onSave, onClose, t, theme }) {
 	const _SBORDER = theme === "noir" ? "#454545" : BORDER;
@@ -42721,7 +42707,7 @@ function SchieberEditorPanel({ editing, teams, onSave, onClose, t, theme }) {
 	const idx = teams.findIndex((tm) => tm.id === editing.teamId);
 	const flipped = idx === 1;
 	const team = teams[idx];
-	const hasOp = /[+−×]/.test(value);
+	const hasOp = value.includes("×");
 	const result = schCalc(value);
 	const commit = () => {
 		if (result === null || result === 0) {
@@ -42735,17 +42721,9 @@ function SchieberEditorPanel({ editing, teams, onSave, onClose, t, theme }) {
 		const m = v.match(/\d*$/)[0];
 		return m.length >= 5 ? v : m === "0" ? v.slice(0, -1) + d : v + d;
 	});
-	const addQuick = (n) => setValue((v) => {
-		const m = v.match(/\d*$/)[0];
-		return v.slice(0, v.length - m.length) + String(Math.min(99999, parseInt(m || "0", 10) + n));
-	});
+	const addQuick = (n) => setValue((v) => String(Math.min(99999, (schCalc(v) || 0) + n)));
 	const backspace = () => setValue((v) => v.slice(0, -1));
-	const pressOp = (o) => setValue((v) => v === "" ? v : /[+−×]$/.test(v) ? v.slice(0, -1) + o : v.length >= 24 ? v : v + o);
-	const pressEq = () => {
-		if (result === null) return;
-		if (result < 0) setSign((x) => -x);
-		setValue(String(Math.abs(result)));
-	};
+	const pressMul = () => setValue((v) => v === "" || v.endsWith("×") || v.length >= 24 ? v : v + "×");
 	const padBtn = (label, onClick, opts) => {
 		opts = opts || {};
 		return /* @__PURE__ */ import_react.default.createElement("button", {
@@ -42889,21 +42867,21 @@ function SchieberEditorPanel({ editing, teams, onSave, onClose, t, theme }) {
 		"1",
 		"2",
 		"3"
-	].map((d) => padBtn(d, () => pressDigit(d))), padBtn("×", () => pressOp("×"), { op: 1 }), [
+	].map((d) => padBtn(d, () => pressDigit(d))), padBtn("×", pressMul, { op: 1 }), [
 		"4",
 		"5",
 		"6"
-	].map((d) => padBtn(d, () => pressDigit(d))), padBtn("−", () => pressOp("−"), { op: 1 }), [
+	].map((d) => padBtn(d, () => pressDigit(d))), padBtn("+50", () => addQuick(50), {
+		fontSize: 15,
+		key: "q50"
+	}), [
 		"7",
 		"8",
 		"9"
-	].map((d) => padBtn(d, () => pressDigit(d))), padBtn("+", () => pressOp("+"), { op: 1 }), padBtn("+50", () => addQuick(50), {
-		fontSize: 15,
-		key: "q50"
-	}), padBtn("0", () => pressDigit("0")), padBtn("+100", () => addQuick(100), {
+	].map((d) => padBtn(d, () => pressDigit(d))), padBtn("+100", () => addQuick(100), {
 		fontSize: 15,
 		key: "q100"
-	}), padBtn("=", pressEq, { op: 1 })), /* @__PURE__ */ import_react.default.createElement("button", {
+	}), /* @__PURE__ */ import_react.default.createElement("div", { style: { gridColumn: "1 / -1" } }, padBtn("0", () => pressDigit("0")))), /* @__PURE__ */ import_react.default.createElement("button", {
 		"data-gt-sound": "1",
 		className: "press-fx gt-sch-edok",
 		onClick: commit,
@@ -108439,7 +108417,7 @@ function YatzyGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 }
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.04-3";
+var APP_BUILD = "2026.11.04-4";
 // web/src/app/storage.js
 var storage_exports = /* @__PURE__ */ __exportAll({
 	GT_CAT_KEYS: () => GT_CAT_KEYS,
@@ -108561,7 +108539,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.04-3");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.04-4");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -110867,7 +110845,7 @@ function UpdateBanner() {
 		let alive = true;
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.04-3") {
+				if (alive && v && v.build && v.build !== "2026.11.04-4") {
 					setReady(true);
 					setHidden(false);
 					try {

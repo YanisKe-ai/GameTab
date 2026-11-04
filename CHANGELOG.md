@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.04-6 (04.11.2026 23:36)
+- Schieber: Noir schwarz-weiss, Tafel ohne Grünstich
+
 ## 2026.11.04-5 (04.11.2026 23:29)
 - Schieber im neuen Design: Creme, Schiefertafel, Bauer und Dame
 

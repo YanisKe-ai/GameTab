@@ -42106,9 +42106,9 @@ var game_exports$16 = /* @__PURE__ */ __exportAll({
 	weisRecordsOf: () => weisRecordsOf
 });
 var CHALK_BG = "#1E3A2F";
-var CHALK_BG_DARK = "#16291F";
+var CHALK_BG_DARK = "#1F2021";
 var CHALK_COLOR = "#F4F1E8";
-var CHALK_MUTED = "#8FB09E";
+var CHALK_MUTED = "#C9C7C0";
 var CHALK_FONT = "'Kalam', cursive";
 function seededJitter(seed) {
 	const x = Math.sin(seed * 12.9898) * 43758.5453;
@@ -42660,6 +42660,13 @@ var SCHIEBER_PL_CSS = `
 .gt-sch-classic .gt-sch-split label{color:#23211E!important}
 .gt-sch-classic .gt-sch-tourtag,.gt-sch-classic .gt-sch-win{color:#23211E!important;border-color:#23211E!important}
 .gt-sch-classic .gt-foot-acts .gt-sch-act-q{background:#1F2021!important;color:#F5EAD6!important;border-color:#1F2021!important}
+.gt-sch-classic.gt-sch-noir{background:#0A0A0A!important}
+.gt-sch-noir .gt-gamehead h1{color:#EDEDED!important}
+.gt-sch-noir .gt-gamehead h1+*{color:#A5A5A5!important}
+.gt-sch-noir .gt-gamehead.is-stuck{background:#0A0A0A!important;box-shadow:0 1px 0 rgba(255,255,255,.14)!important}
+.gt-sch-noir .gt-hf,.gt-sch-noir .gt-weis-open,.gt-sch-noir .gt-sch-target,.gt-sch-noir .gt-foot-acts .gt-sch-act-q{background:#1E1E1E!important;color:#EDEDED!important;border-color:#454545!important}
+.gt-sch-noir .gt-sch-split label,.gt-sch-noir .gt-sch-tourtag,.gt-sch-noir .gt-sch-win{color:#EDEDED!important;border-color:#EDEDED!important}
+.gt-sch-noir .gt-sch-deco img{filter:grayscale(1) contrast(1.05)}
 .gt-sch-deco{flex:1 1 0;min-height:0;position:relative;overflow:hidden;margin:0 -12px;container-type:size;pointer-events:none}
 .gt-sch-deco img{position:absolute;top:max(8px,calc(100cqh - min(39.3cqw,240px)*.92));width:min(39.3cqw,240px);height:auto;pointer-events:none;-webkit-user-select:none;user-select:none}
 .gt-sch-bauer{left:0}
@@ -42998,7 +43005,7 @@ function SchieberTeamHalf({ team, target, onOpenEntry, onUndo, onRename, t }) {
 		borderTop: `1px solid rgba(244,241,232,0.15)`
 	} }, team.entries.length === 0 ? /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		fontSize: 12,
-		color: "#8FB09E",
+		color: "#C9C7C0",
 		fontFamily: "'Inter', sans-serif"
 	} }, t("noPointsYetChalk")) : /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, team.entries.map((e, i) => ({
 		e,
@@ -43009,7 +43016,7 @@ function SchieberTeamHalf({ team, target, onOpenEntry, onUndo, onRename, t }) {
 			display: "flex",
 			justifyContent: "space-between",
 			fontSize: 12,
-			color: "#8FB09E",
+			color: "#C9C7C0",
 			fontVariantNumeric: "tabular-nums",
 			fontFamily: "'Inter', sans-serif"
 		}
@@ -43022,7 +43029,7 @@ function SchieberTeamHalf({ team, target, onOpenEntry, onUndo, onRename, t }) {
 			marginTop: 3,
 			border: "none",
 			background: "transparent",
-			color: "#8FB09E",
+			color: "#C9C7C0",
 			fontSize: 11,
 			cursor: "pointer",
 			padding: 0,
@@ -44384,7 +44391,7 @@ function SchieberGame({ teams, setTeams, target, setTarget, phase, setPhase, onB
 		theme
 	})));
 	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage gt-sch-page gt-sch-classic",
+		className: "gtL-shellpage gt-sch-page gt-sch-classic" + (theme === "noir" ? " gt-sch-noir" : ""),
 		style: {
 			...pageShellStyle(theme),
 			padding: `20px 12px ${editing ? 140 : 32}px`
@@ -108454,7 +108461,7 @@ function YatzyGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 }
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.04-5";
+var APP_BUILD = "2026.11.04-6";
 // web/src/app/storage.js
 var storage_exports = /* @__PURE__ */ __exportAll({
 	GT_CAT_KEYS: () => GT_CAT_KEYS,
@@ -108576,7 +108583,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.04-5");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.04-6");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -110882,7 +110889,7 @@ function UpdateBanner() {
 		let alive = true;
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.04-5") {
+				if (alive && v && v.build && v.build !== "2026.11.04-6") {
 					setReady(true);
 					setHidden(false);
 					try {

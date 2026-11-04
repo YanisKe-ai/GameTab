@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.04-2 (04.11.2026 22:49)
+- Schieber: Rechnen im Eingabefeld, Weis-Spielerauswahl, Turnierpartie auf die Tafel übernehmen
+
 ## 2026.11.04-1 (04.11.2026 22:25)
 - Schieber: kein Scrollen mehr, Weis kompakt, Neues Spiel und Teams im Menü
 

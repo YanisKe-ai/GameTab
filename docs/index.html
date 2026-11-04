@@ -8685,7 +8685,12 @@ var TRANSLATIONS = {
 		chooseVariant: "Variante wählen",
 		differenzlerTitle: "Differenzler",
 		differenzlerDesc: "Jeder für sich, 2 bis 4 Spieler, 10 Spiele",
-		schMore: "Mehr",
+		schTourTitle: "Turnier läuft",
+		schTourNone: "Noch keine Partie läuft. Starte sie im Turnier an einem Tisch.",
+		schTourSave: "Ins Turnier eintragen",
+		schTourFail: "Eintragen hat nicht geklappt. Prüfe die Partie im Turnier.",
+		schTourBadge: "Turnierpartie",
+		gtMore: "Mehr",
 		weisBtn: "Weis und Stöck",
 		weisTitle: "Weis melden",
 		weisWho: "Wer hat gewiesen? (optional)",
@@ -10185,7 +10190,12 @@ var TRANSLATIONS = {
 		chooseVariant: "Choose variant",
 		differenzlerTitle: "Differenzler",
 		differenzlerDesc: "Every player for themselves, 2 to 4 players, 10 games",
-		schMore: "More",
+		schTourTitle: "Tournament running",
+		schTourNone: "No match is running yet. Start one at a table in the tournament.",
+		schTourSave: "Add to tournament",
+		schTourFail: "Could not add the result. Check the match in the tournament.",
+		schTourBadge: "Tournament match",
+		gtMore: "More",
 		weisBtn: "Weis and Stöck",
 		weisTitle: "Declare Weis",
 		weisWho: "Who declared? (optional)",
@@ -11685,7 +11695,12 @@ var TRANSLATIONS = {
 		chooseVariant: "Choisir la variante",
 		differenzlerTitle: "Differenzler",
 		differenzlerDesc: "Chacun pour soi, 2 à 4 joueurs, 10 jeux",
-		schMore: "Plus",
+		schTourTitle: "Tournoi en cours",
+		schTourNone: "Aucune partie en cours. Lance-la à une table dans le tournoi.",
+		schTourSave: "Ajouter au tournoi",
+		schTourFail: "Impossible d'ajouter le résultat. Vérifie la partie dans le tournoi.",
+		schTourBadge: "Partie de tournoi",
+		gtMore: "Plus",
 		weisBtn: "Annonces et Stöck",
 		weisTitle: "Annoncer",
 		weisWho: "Qui a annoncé ? (facultatif)",
@@ -13185,7 +13200,12 @@ var TRANSLATIONS = {
 		chooseVariant: "Scegli variante",
 		differenzlerTitle: "Differenzler",
 		differenzlerDesc: "Ognuno per sé, 2 a 4 giocatori, 10 partite",
-		schMore: "Altro",
+		schTourTitle: "Torneo in corso",
+		schTourNone: "Nessuna partita in corso. Avviala a un tavolo nel torneo.",
+		schTourSave: "Aggiungi al torneo",
+		schTourFail: "Impossibile aggiungere il risultato. Controlla la partita nel torneo.",
+		schTourBadge: "Partita del torneo",
+		gtMore: "Altro",
 		weisBtn: "Annunci e Stöck",
 		weisTitle: "Annuncia",
 		weisWho: "Chi ha annunciato? (facoltativo)",
@@ -14685,7 +14705,12 @@ var TRANSLATIONS = {
 		chooseVariant: "Elegir variante",
 		differenzlerTitle: "Differenzler",
 		differenzlerDesc: "Cada uno por su cuenta, 2 a 4 jugadores, 10 partidas",
-		schMore: "Más",
+		schTourTitle: "Torneo en curso",
+		schTourNone: "Aún no hay ninguna partida. Iníciala en una mesa del torneo.",
+		schTourSave: "Añadir al torneo",
+		schTourFail: "No se pudo añadir el resultado. Revisa la partida en el torneo.",
+		schTourBadge: "Partida de torneo",
+		gtMore: "Más",
 		weisBtn: "Cantes y Stöck",
 		weisTitle: "Cantar",
 		weisWho: "¿Quién cantó? (opcional)",
@@ -16185,7 +16210,12 @@ var TRANSLATIONS = {
 		chooseVariant: "Escolher variante",
 		differenzlerTitle: "Differenzler",
 		differenzlerDesc: "Cada um por si, 2 a 4 jogadores, 10 jogos",
-		schMore: "Mais",
+		schTourTitle: "Torneio a decorrer",
+		schTourNone: "Ainda não há nenhuma partida. Inicia-a numa mesa do torneio.",
+		schTourSave: "Adicionar ao torneio",
+		schTourFail: "Não foi possível adicionar o resultado. Verifica a partida no torneio.",
+		schTourBadge: "Partida de torneio",
+		gtMore: "Mais",
 		weisBtn: "Cantos e Stöck",
 		weisTitle: "Cantar",
 		weisWho: "Quem cantou? (opcional)",
@@ -23655,6 +23685,50 @@ function pageShellStyle(theme) {
 		background: `radial-gradient(ellipse at 50% -10%, ${PAGE_BG_2} 0%, ${PAGE_BG} 55%, ${NEARBLACK} 100%)`,
 		padding: "20px 12px 32px"
 	};
+}
+// web/src/shared/more-sheet.js
+var GT_MORE_CSS = `.gt-foot-acts{display:none}
+.gtL-content .gt-foot-acts{display:block}
+.gtL-content .gt-hb-more{display:none}
+.gt-more-sheet button{min-height:48px}`;
+function GtMoreSheet({ open, onClose, label, tk, theme, children }) {
+	import_react.default.useEffect(() => {
+		if (!open) return void 0;
+		const onKey = (e) => {
+			if (e.key === "Escape") onClose();
+		};
+		window.addEventListener("keydown", onKey);
+		return () => window.removeEventListener("keydown", onKey);
+	}, [open, onClose]);
+	return /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("style", null, GT_MORE_CSS), open && /* @__PURE__ */ import_react.default.createElement("div", {
+		role: "dialog",
+		"aria-modal": "true",
+		"aria-label": label,
+		className: "gt-more-sheet",
+		style: {
+			position: "fixed",
+			inset: 0,
+			zIndex: 72,
+			display: "flex",
+			flexDirection: "column",
+			justifyContent: "flex-end",
+			background: "rgba(0,0,0,0.38)"
+		},
+		onClick: onClose
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: theme === "vitrum" ? "gtL-sheet-glass" : void 0,
+		onClick: (e) => e.stopPropagation(),
+		style: {
+			background: theme === "light" ? "#FFFFFF" : theme === "noir" ? "#111111" : "#1A1D27",
+			borderTop: `1px solid ${tk.border}`,
+			borderRadius: "16px 16px 0 0",
+			boxShadow: "0 -8px 28px rgba(0,0,0,0.3)",
+			padding: "4px 16px calc(16px + env(safe-area-inset-bottom))"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		maxWidth: 480,
+		margin: "0 auto"
+	} }, children))));
 }
 // web/src/shared/phone-landscape.js
 var PL_ATTR = "data-phone-landscape";
@@ -41990,7 +42064,6 @@ var game_exports$16 = /* @__PURE__ */ __exportAll({
 	CHALK_COLOR: () => CHALK_COLOR,
 	CHALK_FONT: () => CHALK_FONT,
 	CHALK_MUTED: () => CHALK_MUTED,
-	CalculatorModal: () => CalculatorModal,
 	FiftyMark: () => FiftyMark,
 	FiftyRow: () => FiftyRow,
 	JassWeisStats: () => JassWeisStats,
@@ -42572,10 +42645,9 @@ var SCHIEBER_PL_CSS = `
 [data-phone-landscape] .gt-sch-split>.gtL-col-side{grid-column:1;grid-row:2;margin-top:12px}
 [data-phone-landscape] .gt-sch-split>.gtL-col-side2{grid-column:1;grid-row:3}}
 [data-phone-landscape] .gt-sch-target{min-height:44px;width:84px!important;box-sizing:border-box}
-.gt-sch-acts,.gt-weis-lap{display:none}
-.gtL-content .gt-sch-acts,.gtL-content .gt-weis-lap{display:block}
-.gtL-content .gt-hb-more,.gtL-content .gt-weis-sum,.gtL-content .gt-weis-brief{display:none}
-.gt-sch-more .gt-sch-act{min-height:48px}
+.gt-weis-lap{display:none}
+.gtL-content .gt-weis-lap{display:block}
+.gtL-content .gt-weis-sum,.gtL-content .gt-weis-brief{display:none}
 [data-phone-landscape] .gt-sch-act,[data-phone-landscape] .gt-weis-open{min-height:44px}
 [data-phone-landscape] .gt-sch-board{display:grid;grid-template-columns:minmax(0,1fr) 1px minmax(0,1fr)}
 [data-phone-landscape] .gt-sch-board>.gt-sch-t2{transform:none!important;grid-column:1;grid-row:1;min-width:0}
@@ -42592,13 +42664,6 @@ var SCHIEBER_PL_CSS = `
 [data-phone-landscape] .gt-sch-edin>.gt-sch-edok{grid-area:ok;align-self:end;min-height:52px}
 [data-phone-landscape] .gt-sch-edpad>button{min-height:48px}
 [data-phone-landscape] .gt-sch-x{min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center;margin-right:-10px}
-[data-phone-landscape] .gt-sch-calc{padding:8px var(--pl-gutter-r) 8px var(--pl-gutter-l)!important}
-[data-phone-landscape] .gt-sch-calcin{width:min(580px,100%)!important;max-height:calc(var(--pl-avail) - 16px);overflow-y:auto;overscroll-behavior:contain;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);grid-template-rows:auto auto 1fr;grid-template-areas:"h g" "d g" "p g";column-gap:14px;align-items:start}
-[data-phone-landscape] .gt-sch-calcin>.gt-sch-calch{grid-area:h}
-[data-phone-landscape] .gt-sch-calcin>.gt-sch-calcd{grid-area:d;margin-bottom:0!important}
-[data-phone-landscape] .gt-sch-calcin>.gt-sch-calcg{grid-area:g;grid-auto-rows:48px!important}
-[data-phone-landscape] .gt-sch-calcin>.gt-sch-calcp{grid-area:p;align-self:end;text-align:left!important}
-[data-phone-landscape] .gt-sch-calcg button{padding:0!important}
 [data-phone-landscape] .gt-weis-ov{padding:6px var(--pl-gutter-r) 0 var(--pl-gutter-l)}
 [data-phone-landscape] .gt-weis-panel{width:100%;max-width:860px;margin:0 auto;box-sizing:border-box;max-height:calc(var(--pl-avail) - 6px)!important;padding:8px 16px calc(10px + var(--pl-sab))!important}
 [data-phone-landscape] .gt-weis-in{max-width:none!important;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);grid-template-areas:"h h" "teams tl" "wl types" "who types" "sf types" "save rm" "sum sum";column-gap:16px;align-items:start}
@@ -42615,8 +42680,25 @@ var SCHIEBER_PL_CSS = `
 [data-phone-landscape] .gt-weis-panel button,[data-phone-landscape] .gt-weis-panel input{min-height:44px!important}
 [data-phone-landscape] .gt-weis-h button{min-width:44px}
 [data-phone-landscape] .gt-weis-sf button{min-width:44px}
-[data-phone-landscape] .gt-sch-div>button{width:44px!important;height:44px!important}
 `;
+function schCalc(s) {
+	const tk = String(s || "").match(/\d+|[+−×]/g) || [];
+	while (tk.length && !/\d/.test(tk[tk.length - 1])) tk.pop();
+	if (!tk.length) return null;
+	const terms = [];
+	let sign = 1, cur = null;
+	for (let i = 0; i < tk.length; i++) {
+		const x = tk[i];
+		if (x === "×") cur *= parseInt(tk[++i], 10);
+		else if (x === "+" || x === "−") {
+			terms.push(sign * cur);
+			sign = x === "+" ? 1 : -1;
+			cur = null;
+		} else cur = parseInt(x, 10);
+	}
+	terms.push(sign * cur);
+	return Math.max(-99999, Math.min(99999, terms.reduce((a, b) => a + b, 0)));
+}
 function SchieberEditorPanel({ editing, teams, onSave, onClose, t, theme }) {
 	const _SBORDER = theme === "noir" ? "#454545" : BORDER;
 	const _SPAGEBG = theme === "noir" ? "#0A0A0A" : PAGE_BG;
@@ -42637,18 +42719,31 @@ function SchieberEditorPanel({ editing, teams, onSave, onClose, t, theme }) {
 	const idx = teams.findIndex((tm) => tm.id === editing.teamId);
 	const flipped = idx === 1;
 	const team = teams[idx];
+	const hasOp = /[+−×]/.test(value);
+	const result = schCalc(value);
 	const commit = () => {
-		const raw = parseInt(value, 10);
-		if (isNaN(raw) || raw === 0) {
+		if (result === null || result === 0) {
 			onClose();
 			return;
 		}
-		onSave(editing.teamId, sign * Math.abs(raw));
+		onSave(editing.teamId, sign * result);
 		setValue("");
 	};
-	const pressDigit = (d) => setValue((v) => v.length >= 5 ? v : v === "0" ? d : v + d);
-	const addQuick = (n) => setValue((v) => String(Math.min(99999, parseInt(v || "0", 10) + n)));
+	const pressDigit = (d) => setValue((v) => {
+		const m = v.match(/\d*$/)[0];
+		return m.length >= 5 ? v : m === "0" ? v.slice(0, -1) + d : v + d;
+	});
+	const addQuick = (n) => setValue((v) => {
+		const m = v.match(/\d*$/)[0];
+		return v.slice(0, v.length - m.length) + String(Math.min(99999, parseInt(m || "0", 10) + n));
+	});
 	const backspace = () => setValue((v) => v.slice(0, -1));
+	const pressOp = (o) => setValue((v) => v === "" ? v : /[+−×]$/.test(v) ? v.slice(0, -1) + o : v.length >= 24 ? v : v + o);
+	const pressEq = () => {
+		if (result === null) return;
+		if (result < 0) setSign((x) => -x);
+		setValue(String(Math.abs(result)));
+	};
 	const padBtn = (label, onClick, opts) => {
 		opts = opts || {};
 		return /* @__PURE__ */ import_react.default.createElement("button", {
@@ -42659,9 +42754,9 @@ function SchieberEditorPanel({ editing, teams, onSave, onClose, t, theme }) {
 				border: "1px solid " + _SBORDER,
 				borderRadius: 8,
 				background: _SPAGEBG,
-				color: _SINK,
+				color: opts.op ? _SGOLD : _SINK,
 				fontSize: opts.fontSize || 20,
-				fontWeight: 600,
+				fontWeight: opts.op ? 700 : 600,
 				padding: "12px 0",
 				cursor: "pointer",
 				fontFamily: "'Baloo 2', sans-serif",
@@ -42760,11 +42855,12 @@ function SchieberEditorPanel({ editing, teams, onSave, onClose, t, theme }) {
 		fontFamily: "'Baloo 2', sans-serif",
 		background: _SPAGEBG,
 		color: value === "" ? _SMUTED : _SINK,
-		textAlign: "right",
+		display: "flex",
+		justifyContent: "flex-end",
 		lineHeight: "24px",
 		overflow: "hidden",
 		whiteSpace: "nowrap"
-	} }, value === "" ? t("pointsPlaceholder") : (sign === -1 ? "−" : "") + value), /* @__PURE__ */ import_react.default.createElement("button", {
+	} }, value === "" ? t("pointsPlaceholder") : (sign === -1 ? "−" : "") + value + (hasOp && result !== null ? " = " + result : "")), /* @__PURE__ */ import_react.default.createElement("button", {
 		onClick: backspace,
 		className: "press-fx",
 		"aria-label": "Löschen",
@@ -42783,27 +42879,29 @@ function SchieberEditorPanel({ editing, teams, onSave, onClose, t, theme }) {
 		className: "gt-sch-edpad",
 		style: {
 			display: "grid",
-			gridTemplateColumns: "repeat(3, 1fr)",
+			gridTemplateColumns: "repeat(4, 1fr)",
 			gap: 6,
 			marginBottom: 8
 		}
 	}, [
 		"1",
 		"2",
-		"3",
+		"3"
+	].map((d) => padBtn(d, () => pressDigit(d))), padBtn("×", () => pressOp("×"), { op: 1 }), [
 		"4",
 		"5",
-		"6",
+		"6"
+	].map((d) => padBtn(d, () => pressDigit(d))), padBtn("−", () => pressOp("−"), { op: 1 }), [
 		"7",
 		"8",
 		"9"
-	].map((d) => padBtn(d, () => pressDigit(d))), padBtn("+50", () => addQuick(50), {
+	].map((d) => padBtn(d, () => pressDigit(d))), padBtn("+", () => pressOp("+"), { op: 1 }), padBtn("+50", () => addQuick(50), {
 		fontSize: 15,
 		key: "q50"
 	}), padBtn("0", () => pressDigit("0")), padBtn("+100", () => addQuick(100), {
 		fontSize: 15,
 		key: "q100"
-	})), /* @__PURE__ */ import_react.default.createElement("button", {
+	}), padBtn("=", pressEq, { op: 1 })), /* @__PURE__ */ import_react.default.createElement("button", {
 		"data-gt-sound": "1",
 		className: "press-fx gt-sch-edok",
 		onClick: commit,
@@ -42820,168 +42918,6 @@ function SchieberEditorPanel({ editing, teams, onSave, onClose, t, theme }) {
 			fontFamily: "'Inter', sans-serif"
 		}
 	}, "✓")));
-}
-function CalculatorModal({ open, onClose, t }) {
-	const [display, setDisplay] = useState$11("0");
-	const [stored, setStored] = useState$11(null);
-	const [operator, setOperator] = useState$11(null);
-	const [waitingForNew, setWaitingForNew] = useState$11(false);
-	if (!open) return null;
-	const apply = (a, b, op) => {
-		if (op === "+") return a + b;
-		if (op === "−") return a - b;
-		if (op === "×") return a * b;
-		return b;
-	};
-	const inputDigit = (d) => {
-		if (waitingForNew) {
-			setDisplay(d);
-			setWaitingForNew(false);
-		} else setDisplay(display === "0" ? d : display.length < 10 ? display + d : display);
-	};
-	const inputDot = () => {
-		if (waitingForNew) {
-			setDisplay("0.");
-			setWaitingForNew(false);
-			return;
-		}
-		if (!display.includes(".")) setDisplay(display + ".");
-	};
-	const clearAll = () => {
-		setDisplay("0");
-		setStored(null);
-		setOperator(null);
-		setWaitingForNew(false);
-	};
-	const chooseOperator = (op) => {
-		const current = parseFloat(display);
-		if (operator && !waitingForNew) {
-			const result = apply(stored, current, operator);
-			setDisplay(String(result));
-			setStored(result);
-		} else setStored(current);
-		setOperator(op);
-		setWaitingForNew(true);
-	};
-	const equals = () => {
-		if (operator === null || stored === null) return;
-		const result = apply(stored, parseFloat(display), operator);
-		setDisplay(String(result));
-		setStored(null);
-		setOperator(null);
-		setWaitingForNew(true);
-	};
-	const btn = (label, onClick, variant) => /* @__PURE__ */ import_react.default.createElement("button", {
-		key: label,
-		onClick,
-		style: {
-			border: "none",
-			borderRadius: 10,
-			background: variant === "op" ? "#3A3128" : variant === "eq" ? "#B8862E" : "#26201A",
-			color: "#F4F1E8",
-			fontSize: 24,
-			fontWeight: 600,
-			padding: "20px 0",
-			cursor: "pointer",
-			fontFamily: "'Inter', sans-serif",
-			width: "100%",
-			height: "100%"
-		}
-	}, label);
-	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gt-sch-calc",
-		style: {
-			position: "fixed",
-			inset: 0,
-			background: "rgba(20,16,12,0.55)",
-			display: "flex",
-			alignItems: "center",
-			justifyContent: "center",
-			zIndex: 90,
-			padding: 20
-		},
-		onClick: onClose
-	}, /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gt-sch-calcin",
-		onClick: (e) => e.stopPropagation(),
-		style: {
-			width: 300,
-			maxWidth: "100%",
-			background: "#171310",
-			borderRadius: 16,
-			padding: 16,
-			boxShadow: "0 12px 32px rgba(0,0,0,0.5)",
-			border: "1px solid #3A3128"
-		}
-	}, /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gt-sch-calch",
-		style: {
-			display: "flex",
-			justifyContent: "space-between",
-			alignItems: "center",
-			marginBottom: 10
-		}
-	}, /* @__PURE__ */ import_react.default.createElement("span", { style: {
-		fontSize: 11,
-		color: "#8A7F6E",
-		fontFamily: "'Inter', sans-serif",
-		letterSpacing: "0.08em",
-		textTransform: "uppercase"
-	} }, t("calculatorTitle")), /* @__PURE__ */ import_react.default.createElement("button", {
-		className: "gt-sch-x",
-		"aria-label": t("weisClose"),
-		onClick: onClose,
-		style: {
-			border: "none",
-			background: "transparent",
-			color: "#8A7F6E",
-			fontSize: 18,
-			cursor: "pointer"
-		}
-	}, /* @__PURE__ */ import_react.default.createElement(XMark, null))), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gt-sch-calcd",
-		style: {
-			background: "#0B0F0C",
-			borderRadius: 10,
-			padding: "10px 14px",
-			marginBottom: 12,
-			textAlign: "right"
-		}
-	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontFamily: "'Courier New', monospace",
-		fontSize: 13,
-		color: "#5A7A67",
-		minHeight: 16,
-		overflow: "hidden",
-		textOverflow: "ellipsis",
-		whiteSpace: "nowrap"
-	} }, stored !== null ? `${stored} ${operator}` : "\xA0"), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontFamily: "'Courier New', monospace",
-		fontSize: 34,
-		fontWeight: 700,
-		color: "#8FE3A8",
-		lineHeight: 1.2,
-		overflow: "hidden",
-		textOverflow: "ellipsis",
-		whiteSpace: "nowrap"
-	} }, display)), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gt-sch-calcg",
-		style: {
-			display: "grid",
-			gridTemplateColumns: "repeat(4, 1fr)",
-			gridAutoRows: "56px",
-			gap: 8
-		}
-	}, btn("C", clearAll), btn("7", () => inputDigit("7")), btn("8", () => inputDigit("8")), btn("9", () => inputDigit("9")), btn("×", () => chooseOperator("×"), "op"), btn("4", () => inputDigit("4")), btn("5", () => inputDigit("5")), btn("6", () => inputDigit("6")), btn("−", () => chooseOperator("−"), "op"), btn("1", () => inputDigit("1")), btn("2", () => inputDigit("2")), btn("3", () => inputDigit("3")), btn("+", () => chooseOperator("+"), "op"), btn("0", () => inputDigit("0")), btn(".", inputDot), /* @__PURE__ */ import_react.default.createElement("div", { style: { gridColumn: "span 1" } }, btn("=", equals, "eq"))), /* @__PURE__ */ import_react.default.createElement("p", {
-		className: "gt-sch-calcp",
-		style: {
-			fontSize: 10,
-			color: "#5A5044",
-			textAlign: "center",
-			marginTop: 12,
-			fontFamily: "'Inter', sans-serif"
-		}
-	}, t("calculatorHint"))));
 }
 function SchieberTeamHalf({ team, target, isLeader, onOpenEntry, onUndo, onRename, t }) {
 	const [open, setOpen] = useState$11(false);
@@ -43199,7 +43135,6 @@ function SchieberWipeOverlay() {
 }
 function SchieberBigBoard({ teams, target, isLeaderList, onOpenEntry, onUndo, onRename, wiping, t, theme }) {
 	const _SV = theme === "vitrum";
-	const [calcOpen, setCalcOpen] = useState$11(false);
 	return /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gt-sch-board",
 		style: {
@@ -43227,65 +43162,7 @@ function SchieberBigBoard({ teams, target, isLeaderList, onOpenEntry, onUndo, on
 			height: 1,
 			background: "rgba(244,241,232,0.25)"
 		}
-	}, /* @__PURE__ */ import_react.default.createElement("button", {
-		onClick: () => setCalcOpen(true),
-		"aria-label": t("openCalculator"),
-		style: {
-			position: "absolute",
-			top: "50%",
-			left: "50%",
-			transform: "translate(-50%, -50%)",
-			width: 40,
-			height: 40,
-			borderRadius: "50%",
-			border: `1.5px solid rgba(244,241,232,0.4)`,
-			background: _SV ? "#171B23" : CHALK_BG_DARK,
-			color: CHALK_COLOR,
-			cursor: "pointer",
-			boxShadow: "0 2px 8px rgba(0,0,0,0.4)",
-			display: "flex",
-			alignItems: "center",
-			justifyContent: "center"
-		}
-	}, /* @__PURE__ */ import_react.default.createElement("svg", {
-		width: "20",
-		height: "20",
-		viewBox: "0 0 20 20",
-		fill: "none"
-	}, /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "2.5",
-		y: "1.5",
-		width: "15",
-		height: "17",
-		rx: "2",
-		stroke: CHALK_COLOR,
-		strokeWidth: "1.4"
-	}), /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "5",
-		y: "4",
-		width: "10",
-		height: "3.4",
-		rx: "0.6",
-		fill: CHALK_COLOR,
-		opacity: "0.85"
-	}), [
-		0,
-		1,
-		2
-	].map((row) => [
-		0,
-		1,
-		2
-	].map((col) => /* @__PURE__ */ import_react.default.createElement("rect", {
-		key: `${row}-${col}`,
-		x: 5 + col * 3.6,
-		y: 10 + row * 2.9,
-		width: "2.4",
-		height: "2",
-		rx: "0.4",
-		fill: CHALK_COLOR,
-		opacity: "0.85"
-	})))))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gt-sch-t1" + (wiping ? " schieber-fade-bottom" : "") }, /* @__PURE__ */ import_react.default.createElement(SchieberTeamHalf, {
+	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "gt-sch-t1" + (wiping ? " schieber-fade-bottom" : "") }, /* @__PURE__ */ import_react.default.createElement(SchieberTeamHalf, {
 		team: teams[0],
 		target,
 		isLeader: isLeaderList[0],
@@ -43293,13 +43170,85 @@ function SchieberBigBoard({ teams, target, isLeaderList, onOpenEntry, onUndo, on
 		onUndo: () => onUndo(0),
 		onRename: (name) => onRename(0, name),
 		t
-	})), wiping && /* @__PURE__ */ import_react.default.createElement(SchieberWipeOverlay, null), /* @__PURE__ */ import_react.default.createElement(CalculatorModal, {
-		open: calcOpen,
-		onClose: () => setCalcOpen(false),
-		t
-	}));
+	})), wiping && /* @__PURE__ */ import_react.default.createElement(SchieberWipeOverlay, null));
 }
-function SchieberSetup({ teams, setTeams, target, setTarget, onStart, tk, t, theme }) {
+function SchieberTourPick({ onPick, compact, tk, t, theme }) {
+	const open = (useGtStStore().tournaments || []).filter((x) => x && !x.deletedAt && x.status !== "completed");
+	if (!open.length) return null;
+	const acc = theme === "noir" ? noirAccent("schieber") : theme === "light" ? "#2F6B52" : "#5FB38C";
+	const rows = [];
+	open.forEach((T) => {
+		const nm = (id) => {
+			const q = (T.participants || []).find((x) => x.id === id);
+			return q ? q.displayName : "?";
+		};
+		(T.matches || []).filter((m) => m.status === "running").forEach((m) => {
+			const tb = (T.tables || []).find((x) => x.id === m.tableId);
+			rows.push({
+				T,
+				m,
+				label: tb ? tb.label : "",
+				a: m.teamA.map(nm).join(" & "),
+				b: m.teamB.map(nm).join(" & ")
+			});
+		});
+	});
+	if (!rows.length && compact) return null;
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: theme === "vitrum" ? "gt-sch-tour gtL-glass-soft" : "gt-sch-tour",
+		style: {
+			border: `1px solid ${acc}`,
+			borderRadius: 8,
+			padding: "10px 12px",
+			background: tk.card,
+			marginTop: compact ? 14 : 0
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		fontSize: 10.5,
+		fontWeight: 700,
+		letterSpacing: "0.12em",
+		textTransform: "uppercase",
+		color: acc,
+		fontFamily: "'Inter', sans-serif",
+		marginBottom: rows.length ? 8 : 4
+	} }, t("schTourTitle")), rows.length ? /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		display: "flex",
+		flexDirection: "column",
+		gap: 6
+	} }, rows.map((r) => /* @__PURE__ */ import_react.default.createElement("button", {
+		key: r.m.id,
+		type: "button",
+		className: "press-fx",
+		onClick: () => onPick(r),
+		style: {
+			width: "100%",
+			minHeight: 48,
+			textAlign: "left",
+			border: `1px solid ${tk.border}`,
+			borderRadius: 8,
+			background: "transparent",
+			color: tk.ink,
+			padding: "8px 12px",
+			cursor: "pointer",
+			fontFamily: "'Inter', sans-serif",
+			fontSize: 14,
+			fontWeight: 600,
+			lineHeight: 1.3,
+			overflowWrap: "anywhere"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("span", { style: {
+		display: "block",
+		fontSize: 11.5,
+		fontWeight: 700,
+		color: tk.muted
+	} }, r.label), r.a + " : " + r.b))) : /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		fontSize: 13,
+		color: tk.muted,
+		fontFamily: "'Inter', sans-serif",
+		lineHeight: 1.35
+	} }, t("schTourNone")));
+}
+function SchieberSetup({ teams, setTeams, target, setTarget, onStart, onTourPick, tk, t, theme }) {
 	const gtS = gtSkin(theme, tk, "schieber", { acc: theme === "noir" ? void 0 : theme === "light" ? "#2F6B52" : "#3F8A68" });
 	const _STC = theme === "noir" ? ["#C4C4C4", "#9A9A9A"] : SCHIEBER_TEAM_COLORS;
 	const rename = (idx, name) => setTeams((ts) => ts.map((t, i) => i === idx ? {
@@ -43313,7 +43262,12 @@ function SchieberSetup({ teams, setTeams, target, setTarget, onStart, tk, t, the
 	} }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-split-setup gt-sch-setsplit" }, /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-col-main",
 		style: { gap: 8 }
-	}, /* @__PURE__ */ import_react.default.createElement(GroupPicker, {
+	}, /* @__PURE__ */ import_react.default.createElement(SchieberTourPick, {
+		onPick: onTourPick,
+		tk,
+		t,
+		theme
+	}), /* @__PURE__ */ import_react.default.createElement(GroupPicker, {
 		getNames: () => teams.map((x) => x.name),
 		setNames: (names) => setTeams((ts) => ts.map((tm, i) => names[i] ? {
 			...tm,
@@ -43574,6 +43528,10 @@ function SchieberWeisBar({ teams, onOpen, t, theme }) {
 		t
 	})));
 }
+function weisMembers(name) {
+	const parts = String(name || "").split(/\s+(?:und|and|et|e|y)\s+|\s*[&+\/,]\s*/i).map((s) => s.trim().slice(0, 24)).filter(Boolean);
+	return parts.length > 1 ? parts : [];
+}
 function SchieberWeisPanel({ open, teams, onSave, onClose, t, theme }) {
 	const tk = shellTokens(theme);
 	const [team, setTeam] = useState$11(0);
@@ -43596,6 +43554,10 @@ function SchieberWeisPanel({ open, teams, onSave, onClose, t, theme }) {
 	const tcol = (theme === "noir" ? ["#C4C4C4", "#9A9A9A"] : SCHIEBER_TEAM_COLORS)[ti % 2];
 	const pts = (items.reduce((s, k) => s + (WEIS_PTS[k] || 0), 0) + (stoeck ? 20 : 0)) * factor;
 	const known = [];
+	const addKnown = (n) => {
+		if (n && !known.some((k) => normalizeName(k) === normalizeName(n))) known.push(n);
+	};
+	weisMembers(tm.name).forEach(addKnown);
 	(Array.isArray(tm.weis) ? tm.weis : []).forEach((w) => {
 		const n = w && typeof w.player === "string" ? w.player.trim() : "";
 		if (n && !known.some((k) => normalizeName(k) === normalizeName(n))) known.push(n);
@@ -44251,6 +44213,42 @@ function SchieberGame({ teams, setTeams, target, setTarget, phase, setPhase, onB
 		lowWins: false,
 		extra: { weis: weisRecordsOf(teams) }
 	}));
+	const tourSnap = useGtStStore();
+	const link = teams[0] && teams[0].link || null;
+	const linkT = link ? (tourSnap.tournaments || []).find((x) => x.id === link.tid) : null;
+	const linkM = linkT ? (linkT.matches || []).find((x) => x.id === link.mid) : null;
+	const linkLive = !!(linkM && linkM.status === "running");
+	const linkTable = linkLive ? (linkT.tables || []).find((x) => x.id === linkM.tableId) : null;
+	const canSaveTour = linkLive && winnerIdx !== -1 && totals[0] !== totals[1];
+	const [tourErr, setTourErr] = useState$11(false);
+	const pickTour = (r) => {
+		setTeams((ts) => ts.map((tm, i) => ({
+			...tm,
+			name: i === 0 ? r.a : r.b,
+			entries: [],
+			weis: [],
+			link: i === 0 ? {
+				tid: r.T.id,
+				mid: r.m.id
+			} : void 0
+		})));
+		setPhase("play");
+	};
+	const saveTour = () => {
+		if (!GT_ST_STORE.commit(link.tid, (x) => GT_ST.completeMatch(x, link.mid, totals[0] > totals[1] ? "A" : "B")).ok) {
+			setTourErr(true);
+			return;
+		}
+		setTourErr(false);
+		setPodiumOpen(false);
+		setTeams((ts) => ts.map((tm) => ({
+			...tm,
+			entries: [],
+			weis: [],
+			link: void 0
+		})));
+		setPhase("setup");
+	};
 	const isLeaderList = totals.map((t) => maxTotal > 0 && t === maxTotal);
 	const celebration = useCelebration(winnerIdx !== -1);
 	const [podiumOpen, setPodiumOpen] = useState$11(false);
@@ -44302,6 +44300,10 @@ function SchieberGame({ teams, setTeams, target, setTarget, phase, setPhase, onB
 			setTimeout(() => setConfirmingSetup(false), 3e3);
 			return;
 		}
+		setTeams((ts) => ts.map((tm) => ({
+			...tm,
+			link: void 0
+		})));
 		setPhase("setup");
 		setConfirmingSetup(false);
 	};
@@ -44385,6 +44387,7 @@ function SchieberGame({ teams, setTeams, target, setTarget, phase, setPhase, onB
 		target,
 		setTarget,
 		onStart: () => setPhase("play"),
+		onTourPick: pickTour,
 		tk,
 		t,
 		theme
@@ -44400,7 +44403,11 @@ function SchieberGame({ teams, setTeams, target, setTarget, phase, setPhase, onB
 		gameLabel: t("gameSchieber"),
 		open: podiumOpen,
 		onClose: () => setPodiumOpen(false),
-		onRestart: performReset,
+		onRestart: canSaveTour ? void 0 : performReset,
+		extraAct: canSaveTour ? {
+			label: t("schTourSave"),
+			onClick: saveTour
+		} : null,
 		ranked: podiumRanked,
 		tk,
 		t,
@@ -44428,7 +44435,7 @@ function SchieberGame({ teams, setTeams, target, setTarget, phase, setPhase, onB
 			setEditing(null);
 			setMoreOpen(true);
 		},
-		moreLabel: t("schMore"),
+		moreLabel: t("gtMore"),
 		title: t("gameSchieber"),
 		subtitle: t("schieberPlaySubtitle"),
 		onBack,
@@ -44437,8 +44444,20 @@ function SchieberGame({ teams, setTeams, target, setTarget, phase, setPhase, onB
 	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gt-sch-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side" }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		justifyContent: "flex-end",
+		alignItems: "center",
+		gap: 8,
 		marginBottom: 12
-	} }, /* @__PURE__ */ import_react.default.createElement("label", { style: {
+	} }, linkLive && /* @__PURE__ */ import_react.default.createElement("span", {
+		className: "gt-sch-tourtag",
+		style: {
+			marginRight: "auto",
+			minWidth: 0,
+			fontSize: 12,
+			fontWeight: 700,
+			color: theme === "noir" ? noirAccent("schieber") : theme === "light" ? "#2F6B52" : "#5FB38C",
+			fontFamily: "'Inter', sans-serif"
+		}
+	}, t("schTourBadge") + (linkTable ? ", " + linkTable.label : "")), /* @__PURE__ */ import_react.default.createElement("label", { style: {
 		fontSize: 11,
 		color: tk.muted,
 		display: "flex",
@@ -44517,7 +44536,38 @@ function SchieberGame({ teams, setTeams, target, setTarget, phase, setPhase, onB
 			name
 		})),
 		t
-	})), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side2" }, /* @__PURE__ */ import_react.default.createElement(SchieberWeisBar, {
+	})), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side2" }, canSaveTour && /* @__PURE__ */ import_react.default.createElement("button", {
+		type: "button",
+		className: "press-fx gt-sch-toursave",
+		onClick: saveTour,
+		style: {
+			width: "100%",
+			minHeight: 48,
+			marginTop: 14,
+			border: "none",
+			borderRadius: 8,
+			background: theme === "noir" ? noirAccent("schieber") : "#2F6B52",
+			color: theme === "noir" ? "#111" : "#fff",
+			fontSize: 15,
+			fontWeight: 700,
+			cursor: "pointer",
+			fontFamily: "'Inter', sans-serif"
+		}
+	}, t("schTourSave")), tourErr && /* @__PURE__ */ import_react.default.createElement("div", {
+		role: "alert",
+		style: {
+			marginTop: 8,
+			fontSize: 13,
+			color: HUES[0],
+			fontFamily: "'Inter', sans-serif"
+		}
+	}, t("schTourFail")), !link && teams.every((tm) => tm.entries.length === 0) && /* @__PURE__ */ import_react.default.createElement(SchieberTourPick, {
+		compact: true,
+		onPick: pickTour,
+		tk,
+		t,
+		theme
+	}), /* @__PURE__ */ import_react.default.createElement(SchieberWeisBar, {
 		teams,
 		onOpen: () => {
 			setEditing(null);
@@ -44525,42 +44575,20 @@ function SchieberGame({ teams, setTeams, target, setTarget, phase, setPhase, onB
 		},
 		t,
 		theme
-	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "gt-sch-acts" }, schActs)))), /* @__PURE__ */ import_react.default.createElement(SchieberEditorPanel, {
+	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "gt-foot-acts" }, schActs)))), /* @__PURE__ */ import_react.default.createElement(SchieberEditorPanel, {
 		editing,
 		teams,
 		onSave: saveEntry,
 		onClose: () => setEditing(null),
 		t,
 		theme
-	}), moreOpen && /* @__PURE__ */ import_react.default.createElement("div", {
-		role: "dialog",
-		"aria-modal": "true",
-		"aria-label": t("schMore"),
-		className: "gt-sch-more",
-		style: {
-			position: "fixed",
-			inset: 0,
-			zIndex: 72,
-			display: "flex",
-			flexDirection: "column",
-			justifyContent: "flex-end",
-			background: "rgba(0,0,0,0.38)"
-		},
-		onClick: () => setMoreOpen(false)
-	}, /* @__PURE__ */ import_react.default.createElement("div", {
-		className: theme === "vitrum" ? "gtL-sheet-glass" : void 0,
-		onClick: (e) => e.stopPropagation(),
-		style: {
-			background: theme === "light" ? "#FFFFFF" : theme === "noir" ? "#111111" : "#1A1D27",
-			borderTop: `1px solid ${tk.border}`,
-			borderRadius: "16px 16px 0 0",
-			boxShadow: "0 -8px 28px rgba(0,0,0,0.3)",
-			padding: "4px 16px calc(16px + env(safe-area-inset-bottom))"
-		}
-	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		maxWidth: 480,
-		margin: "0 auto"
-	} }, schActs))), /* @__PURE__ */ import_react.default.createElement(SchieberWeisPanel, {
+	}), /* @__PURE__ */ import_react.default.createElement(GtMoreSheet, {
+		open: moreOpen,
+		onClose: () => setMoreOpen(false),
+		label: t("gtMore"),
+		tk,
+		theme
+	}, schActs), /* @__PURE__ */ import_react.default.createElement(SchieberWeisPanel, {
 		open: weisOpen && !editing,
 		teams,
 		onSave: saveWeis,
@@ -108176,7 +108204,7 @@ function YatzyGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 }
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.04-1";
+var APP_BUILD = "2026.11.04-2";
 // web/src/app/storage.js
 var storage_exports = /* @__PURE__ */ __exportAll({
 	GT_CAT_KEYS: () => GT_CAT_KEYS,
@@ -108298,7 +108326,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.04-1");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.04-2");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -108736,7 +108764,7 @@ var podium_exports = /* @__PURE__ */ __exportAll({
 	useCelebration: () => useCelebration,
 	useMilestoneBurst: () => useMilestoneBurst
 });
-function PodiumOverlay({ open, onClose, onRestart, ranked, tk, t, bestRecord, gameLabel, gameId, theme, shareExtra }) {
+function PodiumOverlay({ open, onClose, onRestart, extraAct, ranked, tk, t, bestRecord, gameLabel, gameId, theme, shareExtra }) {
 	const playCount = usePlayCount(open);
 	const plLand = usePhoneLandscape();
 	const [isSharing, setIsSharing] = useState$11(false);
@@ -109021,8 +109049,12 @@ function PodiumOverlay({ open, onClose, onRestart, ranked, tk, t, bestRecord, ga
 		items: achv,
 		t,
 		S
-	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtsb-acts" }, onRestart && /* @__PURE__ */ import_react.default.createElement("button", {
+	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtsb-acts" }, (onRestart || extraAct) && /* @__PURE__ */ import_react.default.createElement("button", {
 		onClick: () => {
+			if (extraAct) {
+				extraAct.onClick();
+				return;
+			}
 			onRestart();
 			onClose();
 		},
@@ -109040,7 +109072,7 @@ function PodiumOverlay({ open, onClose, onRestart, ranked, tk, t, bestRecord, ga
 			fontFamily: "'Inter', sans-serif",
 			boxShadow: `0 8px 20px -8px ${S.acc}99`
 		}
-	}, t("rematch")), /* @__PURE__ */ import_react.default.createElement("button", {
+	}, extraAct ? extraAct.label : t("rematch")), /* @__PURE__ */ import_react.default.createElement("button", {
 		onClick: () => shareResultImage(gameId, gameLabel || "GameTab", ranked, setIsSharing, setPreviewUrl, t, theme, shareExtra),
 		disabled: isSharing,
 		className: "press-fx",
@@ -110600,7 +110632,7 @@ function UpdateBanner() {
 		let alive = true;
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.04-1") {
+				if (alive && v && v.build && v.build !== "2026.11.04-2") {
 					setReady(true);
 					setHidden(false);
 					try {

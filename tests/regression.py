@@ -368,7 +368,7 @@ def t_schieber(pg, env):
     check(has_text(pg, r"157×2 = 314"), "Schieber: Rechnung im Eingabefeld fehlt")
     click(pg, pg.locator(".gt-sch-x").first)
     for _ in range(2):
-        click(pg, btn_re(pg, "Weis und Stöck"))
+        click(pg, btn_re(pg, "Wyys und Stöck"))
         click(pg, pg.get_by_role("button", name=re.compile("^Neunblatt")))
         click(pg, btn(pg, "×3"))
         click(pg, btn_re(pg, "Punkte eintragen").last, 1500)

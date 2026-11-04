@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.04-8 (04.11.2026 23:51)
+- Schieber: Wyys statt Weis
+
 ## 2026.11.04-7 (04.11.2026 23:49)
 - Schieber: mehr Platz für die Punktestriche
 

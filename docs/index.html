@@ -8691,21 +8691,21 @@ var TRANSLATIONS = {
 		schTourFail: "Eintragen hat nicht geklappt. Prüfe die Partie im Turnier.",
 		schTourBadge: "Turnierpartie",
 		gtMore: "Mehr",
-		weisBtn: "Weis und Stöck",
-		weisTitle: "Weis melden",
-		weisWho: "Wer hat gewiesen? (optional)",
+		weisBtn: "Wyys und Stöck",
+		weisTitle: "Wyys melden",
+		weisWho: "Wer hat gewyyst? (optional)",
 		weisNamePh: "Name",
-		weisTypesLabel: "Weis antippen (mehrfach möglich)",
+		weisTypesLabel: "Wyys antippen (mehrfach möglich)",
 		weisFactor: "Faktor",
 		weisStoeck: "Stöck 20",
 		weisSave: (n) => `${n} Punkte eintragen`,
-		weisPickHint: "Weis oder Stöck wählen",
+		weisPickHint: "Wyys oder Stöck wählen",
 		weisRemoveHint: "Antippen zum Entfernen:",
 		weisClose: "Schliessen",
-		weisStatsTitle: "Weis und Stöck",
-		weisGameTitle: "Weis in dieser Partie",
+		weisStatsTitle: "Wyys und Stöck",
+		weisGameTitle: "Wyys in dieser Partie",
 		weisColWho: "Wer",
-		weisColN: "Weis",
+		weisColN: "Wyys",
 		weisColPts: "Punkte",
 		weisColBest: "Bester",
 		weisColSt: "Stöck",
@@ -108475,7 +108475,7 @@ function YatzyGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 }
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.04-7";
+var APP_BUILD = "2026.11.04-8";
 // web/src/app/storage.js
 var storage_exports = /* @__PURE__ */ __exportAll({
 	GT_CAT_KEYS: () => GT_CAT_KEYS,
@@ -108597,7 +108597,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.04-7");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.04-8");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -110903,7 +110903,7 @@ function UpdateBanner() {
 		let alive = true;
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.04-7") {
+				if (alive && v && v.build && v.build !== "2026.11.04-8") {
 					setReady(true);
 					setHidden(false);
 					try {

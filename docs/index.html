@@ -20000,7 +20000,7 @@ var shell_exports = /* @__PURE__ */ __exportAll({
 function dartsAccent(theme) {
 	return theme === "light" ? "#B8331F" : theme === "noir" ? "#C9C9C9" : "#E4402E";
 }
-function dartsHead(title, onBack, onHome, onEndGame, onRules, tk, t, theme, subtitle, rulesText) {
+function dartsHead(title, onBack, onHome, onEndGame, onRules, tk, t, theme, subtitle, rulesText, onMore, moreLabel) {
 	const ac = dartsAccent(theme);
 	return /* @__PURE__ */ import_react.default.createElement(GameHeader, {
 		title,
@@ -20014,6 +20014,8 @@ function dartsHead(title, onBack, onHome, onEndGame, onRules, tk, t, theme, subt
 		onHome,
 		onEndGame,
 		onRules,
+		onMore,
+		moreLabel,
 		rulesText,
 		rulesTitle: rulesText ? title : void 0
 	});
@@ -23425,6 +23427,50 @@ function RommeGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 		})
 	}))));
 }
+// web/src/shared/more-sheet.js
+var GT_MORE_CSS = `.gt-foot-acts{display:none}
+.gtL-content .gt-foot-acts{display:block}
+.gtL-content .gt-hb-more{display:none}
+.gt-more-sheet button{min-height:48px}`;
+function GtMoreSheet({ open, onClose, label, tk, theme, children }) {
+	import_react.default.useEffect(() => {
+		if (!open) return void 0;
+		const onKey = (e) => {
+			if (e.key === "Escape") onClose();
+		};
+		window.addEventListener("keydown", onKey);
+		return () => window.removeEventListener("keydown", onKey);
+	}, [open, onClose]);
+	return /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("style", null, GT_MORE_CSS), open && /* @__PURE__ */ import_react.default.createElement("div", {
+		role: "dialog",
+		"aria-modal": "true",
+		"aria-label": label,
+		className: "gt-more-sheet",
+		style: {
+			position: "fixed",
+			inset: 0,
+			zIndex: 72,
+			display: "flex",
+			flexDirection: "column",
+			justifyContent: "flex-end",
+			background: "rgba(0,0,0,0.38)"
+		},
+		onClick: onClose
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: theme === "vitrum" ? "gtL-sheet-glass" : void 0,
+		onClick: (e) => e.stopPropagation(),
+		style: {
+			background: theme === "light" ? "#FFFFFF" : theme === "noir" ? "#111111" : "#1A1D27",
+			borderTop: `1px solid ${tk.border}`,
+			borderRadius: "16px 16px 0 0",
+			boxShadow: "0 -8px 28px rgba(0,0,0,0.3)",
+			padding: "4px 16px calc(16px + env(safe-area-inset-bottom))"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		maxWidth: 480,
+		margin: "0 auto"
+	} }, children))));
+}
 // web/src/shared/standings.js
 var standings_exports = /* @__PURE__ */ __exportAll({
 	GtLStandings: () => GtLStandings,
@@ -23685,50 +23731,6 @@ function pageShellStyle(theme) {
 		background: `radial-gradient(ellipse at 50% -10%, ${PAGE_BG_2} 0%, ${PAGE_BG} 55%, ${NEARBLACK} 100%)`,
 		padding: "20px 12px 32px"
 	};
-}
-// web/src/shared/more-sheet.js
-var GT_MORE_CSS = `.gt-foot-acts{display:none}
-.gtL-content .gt-foot-acts{display:block}
-.gtL-content .gt-hb-more{display:none}
-.gt-more-sheet button{min-height:48px}`;
-function GtMoreSheet({ open, onClose, label, tk, theme, children }) {
-	import_react.default.useEffect(() => {
-		if (!open) return void 0;
-		const onKey = (e) => {
-			if (e.key === "Escape") onClose();
-		};
-		window.addEventListener("keydown", onKey);
-		return () => window.removeEventListener("keydown", onKey);
-	}, [open, onClose]);
-	return /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("style", null, GT_MORE_CSS), open && /* @__PURE__ */ import_react.default.createElement("div", {
-		role: "dialog",
-		"aria-modal": "true",
-		"aria-label": label,
-		className: "gt-more-sheet",
-		style: {
-			position: "fixed",
-			inset: 0,
-			zIndex: 72,
-			display: "flex",
-			flexDirection: "column",
-			justifyContent: "flex-end",
-			background: "rgba(0,0,0,0.38)"
-		},
-		onClick: onClose
-	}, /* @__PURE__ */ import_react.default.createElement("div", {
-		className: theme === "vitrum" ? "gtL-sheet-glass" : void 0,
-		onClick: (e) => e.stopPropagation(),
-		style: {
-			background: theme === "light" ? "#FFFFFF" : theme === "noir" ? "#111111" : "#1A1D27",
-			borderTop: `1px solid ${tk.border}`,
-			borderRadius: "16px 16px 0 0",
-			boxShadow: "0 -8px 28px rgba(0,0,0,0.3)",
-			padding: "4px 16px calc(16px + env(safe-area-inset-bottom))"
-		}
-	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		maxWidth: 480,
-		margin: "0 auto"
-	} }, children))));
 }
 // web/src/shared/phone-landscape.js
 var PL_ATTR = "data-phone-landscape";
@@ -42919,7 +42921,7 @@ function SchieberEditorPanel({ editing, teams, onSave, onClose, t, theme }) {
 		}
 	}, "✓")));
 }
-function SchieberTeamHalf({ team, target, isLeader, onOpenEntry, onUndo, onRename, t }) {
+function SchieberTeamHalf({ team, target, onOpenEntry, onUndo, onRename, t }) {
 	const [open, setOpen] = useState$11(false);
 	return /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gt-sch-half",
@@ -42930,13 +42932,7 @@ function SchieberTeamHalf({ team, target, isLeader, onOpenEntry, onUndo, onRenam
 		justifyContent: "flex-end",
 		gap: 8,
 		marginBottom: 10
-	} }, isLeader && /* @__PURE__ */ import_react.default.createElement("span", { style: {
-		fontSize: 10,
-		color: "#C9A15C",
-		letterSpacing: "0.08em",
-		fontFamily: "'Inter', sans-serif",
-		fontWeight: 700
-	} }, t("leadsChalk")), /* @__PURE__ */ import_react.default.createElement("input", {
+	} }, /* @__PURE__ */ import_react.default.createElement("input", {
 		className: "gt-sch-name",
 		value: team.name,
 		onChange: (e) => onRename(e.target.value),
@@ -43133,7 +43129,7 @@ function SchieberWipeOverlay() {
 		}
 	}, /* @__PURE__ */ import_react.default.createElement(SchieberSponge, null)));
 }
-function SchieberBigBoard({ teams, target, isLeaderList, onOpenEntry, onUndo, onRename, wiping, t, theme }) {
+function SchieberBigBoard({ teams, target, onOpenEntry, onUndo, onRename, wiping, t, theme }) {
 	const _SV = theme === "vitrum";
 	return /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gt-sch-board",
@@ -43150,7 +43146,6 @@ function SchieberBigBoard({ teams, target, isLeaderList, onOpenEntry, onUndo, on
 	}, /* @__PURE__ */ import_react.default.createElement(SchieberTeamHalf, {
 		team: teams[1],
 		target,
-		isLeader: isLeaderList[1],
 		onOpenEntry: () => onOpenEntry(teams[1].id),
 		onUndo: () => onUndo(1),
 		onRename: (name) => onRename(1, name),
@@ -43165,7 +43160,6 @@ function SchieberBigBoard({ teams, target, isLeaderList, onOpenEntry, onUndo, on
 	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "gt-sch-t1" + (wiping ? " schieber-fade-bottom" : "") }, /* @__PURE__ */ import_react.default.createElement(SchieberTeamHalf, {
 		team: teams[0],
 		target,
-		isLeader: isLeaderList[0],
 		onOpenEntry: () => onOpenEntry(teams[0].id),
 		onUndo: () => onUndo(0),
 		onRename: (name) => onRename(0, name),
@@ -44249,7 +44243,6 @@ function SchieberGame({ teams, setTeams, target, setTarget, phase, setPhase, onB
 		})));
 		setPhase("setup");
 	};
-	const isLeaderList = totals.map((t) => maxTotal > 0 && t === maxTotal);
 	const celebration = useCelebration(winnerIdx !== -1);
 	const [podiumOpen, setPodiumOpen] = useState$11(false);
 	useEffect$15(() => {
@@ -44523,7 +44516,6 @@ function SchieberGame({ teams, setTeams, target, setTarget, phase, setPhase, onB
 		theme,
 		teams,
 		target,
-		isLeaderList,
 		wiping,
 		onOpenEntry: (teamId) => setEditing({ teamId }),
 		onUndo: (idx) => update(idx, (tm) => ({
@@ -45371,6 +45363,7 @@ function TuttoWordmark({ theme }) {
 function TuttoPlay({ players, setPlayers, target, onBack, onHome, onEndGame, onEditPlayers, lang = "de", theme = "dark" }) {
 	const plLand = usePhoneLandscape();
 	const [confirmingReset, setConfirmingReset] = useState$11(false);
+	const [moreOpen, setMoreOpen] = useState$11(false);
 	const [confirmingSetup, setConfirmingSetup] = useState$11(false);
 	const [rulesOpen, setRulesOpen] = useState$11(false);
 	const t = useT(lang);
@@ -45442,6 +45435,61 @@ function TuttoPlay({ players, setPlayers, target, onBack, onHome, onEndGame, onE
 		onEditPlayers();
 		setConfirmingSetup(false);
 	};
+	const resetDone = () => {
+		setMoreOpen(false);
+		performReset();
+	};
+	const resetTap = () => {
+		if (confirmingReset) setMoreOpen(false);
+		reset();
+	};
+	const teamsTap = () => {
+		if (confirmingSetup) setMoreOpen(false);
+		editPlayers();
+	};
+	const tutActs = /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		display: "flex",
+		gap: 8,
+		marginTop: 14
+	} }, /* @__PURE__ */ import_react.default.createElement("button", {
+		...gtHold(resetDone, resetTap),
+		style: {
+			flex: 1,
+			border: "1px solid " + (confirmingReset ? HUES[0] : tk.border),
+			borderRadius: 14,
+			background: confirmingReset ? HUES[0] : "transparent",
+			color: confirmingReset ? "#FFFFFF" : tk.muted,
+			fontSize: 12,
+			fontWeight: 500,
+			letterSpacing: "0.05em",
+			textTransform: "uppercase",
+			padding: "11px 0",
+			cursor: "pointer",
+			fontFamily: "'Inter', sans-serif",
+			transition: "background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease"
+		}
+	}, confirmingReset ? t("confirmAgain") : /* @__PURE__ */ import_react.default.createElement(GtHoldLabel, {
+		label: t("newRound"),
+		hint: t("gtHoldHint"),
+		again: t("confirmAgain")
+	})), /* @__PURE__ */ import_react.default.createElement("button", {
+		onClick: teamsTap,
+		style: {
+			flex: 1,
+			border: "1px solid " + (confirmingSetup ? tk.gold : tk.border),
+			borderRadius: 14,
+			background: confirmingSetup ? tk.accentFill : "transparent",
+			color: confirmingSetup ? tk.onAccent : tk.muted,
+			fontSize: 12,
+			fontWeight: 500,
+			letterSpacing: "0.05em",
+			textTransform: "uppercase",
+			padding: "11px 0",
+			cursor: "pointer",
+			fontFamily: "'Inter', sans-serif",
+			transition: "background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease"
+		}
+	}, confirmingSetup ? t("confirmAgain") : t("changePlayers")));
 	return /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-shellpage pld-shell",
 		style: {
@@ -45471,6 +45519,10 @@ function TuttoPlay({ players, setPlayers, target, onBack, onHome, onEndGame, onE
 		onClick: () => setRulesOpen(true),
 		onHome,
 		onEndGame,
+		onMore: () => {
+			setMoreOpen(true);
+		},
+		moreLabel: t("gtMore"),
 		tokens: tk
 	}), /* @__PURE__ */ import_react.default.createElement(TuttoTopBar, {
 		onBack,
@@ -45571,49 +45623,13 @@ function TuttoPlay({ players, setPlayers, target, onBack, onHome, onEndGame, onE
 		selfLead: totals[i] === tcMax,
 		tk,
 		t
-	})))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side2" }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		gap: 8,
-		marginTop: 14
-	} }, /* @__PURE__ */ import_react.default.createElement("button", {
-		...gtHold(performReset, reset),
-		style: {
-			flex: 1,
-			border: "1px solid " + (confirmingReset ? HUES[0] : tk.border),
-			borderRadius: 14,
-			background: confirmingReset ? HUES[0] : "transparent",
-			color: confirmingReset ? "#FFFFFF" : tk.muted,
-			fontSize: 12,
-			fontWeight: 500,
-			letterSpacing: "0.05em",
-			textTransform: "uppercase",
-			padding: "11px 0",
-			cursor: "pointer",
-			fontFamily: "'Inter', sans-serif",
-			transition: "background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease"
-		}
-	}, confirmingReset ? t("confirmAgain") : /* @__PURE__ */ import_react.default.createElement(GtHoldLabel, {
-		label: t("newRound"),
-		hint: t("gtHoldHint"),
-		again: t("confirmAgain")
-	})), /* @__PURE__ */ import_react.default.createElement("button", {
-		onClick: editPlayers,
-		style: {
-			flex: 1,
-			border: "1px solid " + (confirmingSetup ? tk.gold : tk.border),
-			borderRadius: 14,
-			background: confirmingSetup ? tk.accentFill : "transparent",
-			color: confirmingSetup ? tk.onAccent : tk.muted,
-			fontSize: 12,
-			fontWeight: 500,
-			letterSpacing: "0.05em",
-			textTransform: "uppercase",
-			padding: "11px 0",
-			cursor: "pointer",
-			fontFamily: "'Inter', sans-serif",
-			transition: "background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease"
-		}
-	}, confirmingSetup ? t("confirmAgain") : t("changePlayers")))))), /* @__PURE__ */ import_react.default.createElement(RulesSheet, {
+	})))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side2" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gt-foot-acts" }, tutActs)))), /* @__PURE__ */ import_react.default.createElement(GtMoreSheet, {
+		open: moreOpen,
+		onClose: () => setMoreOpen(false),
+		label: t("gtMore"),
+		tk,
+		theme
+	}, tutActs), /* @__PURE__ */ import_react.default.createElement(RulesSheet, {
 		open: rulesOpen,
 		onClose: () => setRulesOpen(false),
 		title: t("gameTutto"),
@@ -47385,6 +47401,7 @@ function JassPlay({ players, scores, setScores, onResetSheet, onEditPlayers, onB
 	] : JASS_HUES;
 	const [editing, setEditing] = useState$11(null);
 	const [confirmingReset, setConfirmingReset] = useState$11(false);
+	const [moreOpen, setMoreOpen] = useState$11(false);
 	const [confirmingSetup, setConfirmingSetup] = useState$11(false);
 	const { node: jassMilestoneNode, fire: fireJassMilestone } = useMilestoneBurst();
 	const [rulesOpen, setRulesOpen] = useState$11(false);
@@ -47449,6 +47466,62 @@ function JassPlay({ players, scores, setScores, onResetSheet, onEditPlayers, onB
 		onEditPlayers();
 		setConfirmingSetup(false);
 	};
+	const resetDone = () => {
+		setMoreOpen(false);
+		onResetSheet();
+		setConfirmingReset(false);
+	};
+	const resetTap = () => {
+		if (confirmingReset) setMoreOpen(false);
+		reset();
+	};
+	const teamsTap = () => {
+		if (confirmingSetup) setMoreOpen(false);
+		editPlayers();
+	};
+	const jasActs = /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		display: "flex",
+		gap: 8,
+		marginTop: 14
+	} }, /* @__PURE__ */ import_react.default.createElement("button", {
+		...gtHold(resetDone, resetTap),
+		style: {
+			flex: 1,
+			border: `1px solid ${confirmingReset ? _JRED : _JP_BORDER}`,
+			borderRadius: 14,
+			background: confirmingReset ? _JRED : "transparent",
+			color: confirmingReset ? "#FFFFFF" : _JP_MUTED,
+			fontSize: 12,
+			fontWeight: 600,
+			letterSpacing: "0.05em",
+			textTransform: "uppercase",
+			minHeight: 44,
+			padding: "11px 0",
+			cursor: "pointer",
+			fontFamily: "'Inter', sans-serif"
+		}
+	}, confirmingReset ? t("confirmAgain") : /* @__PURE__ */ import_react.default.createElement(GtHoldLabel, {
+		label: t("newRound"),
+		hint: t("gtHoldHint"),
+		again: t("confirmAgain")
+	})), /* @__PURE__ */ import_react.default.createElement("button", {
+		onClick: teamsTap,
+		style: {
+			flex: 1,
+			border: `1px solid ${confirmingSetup ? _JWOOD : _JP_BORDER}`,
+			borderRadius: 14,
+			background: confirmingSetup ? _JWOOD : "transparent",
+			color: confirmingSetup ? "#FFFFFF" : _JP_MUTED,
+			fontSize: 12,
+			fontWeight: 600,
+			letterSpacing: "0.05em",
+			textTransform: "uppercase",
+			minHeight: 44,
+			padding: "11px 0",
+			cursor: "pointer",
+			fontFamily: "'Inter', sans-serif"
+		}
+	}, confirmingSetup ? t("confirmAgain") : t("changePlayers")));
 	return /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-shellpage gt-jd-page",
 		style: {
@@ -47488,6 +47561,11 @@ function JassPlay({ players, scores, setScores, onResetSheet, onEditPlayers, onB
 		onClick: () => setRulesOpen(true),
 		onHome,
 		onEndGame,
+		onMore: () => {
+			setEditing(null);
+			setMoreOpen(true);
+		},
+		moreLabel: t("gtMore"),
 		tokens: tk
 	}), /* @__PURE__ */ import_react.default.createElement(JassTopBar, {
 		title: t("jassDifferenzlerSubtitle"),
@@ -47696,52 +47774,7 @@ function JassPlay({ players, scores, setScores, onResetSheet, onEditPlayers, onB
 			fontVariantNumeric: "tabular-nums",
 			fontFamily: "'Baloo 2', sans-serif"
 		}
-	})))), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		gap: 8,
-		marginTop: 14
-	} }, /* @__PURE__ */ import_react.default.createElement("button", {
-		...gtHold(() => {
-			onResetSheet();
-			setConfirmingReset(false);
-		}, reset),
-		style: {
-			flex: 1,
-			border: `1px solid ${confirmingReset ? _JRED : _JP_BORDER}`,
-			borderRadius: 14,
-			background: confirmingReset ? _JRED : "transparent",
-			color: confirmingReset ? "#FFFFFF" : _JP_MUTED,
-			fontSize: 12,
-			fontWeight: 600,
-			letterSpacing: "0.05em",
-			textTransform: "uppercase",
-			minHeight: 44,
-			padding: "11px 0",
-			cursor: "pointer",
-			fontFamily: "'Inter', sans-serif"
-		}
-	}, confirmingReset ? t("confirmAgain") : /* @__PURE__ */ import_react.default.createElement(GtHoldLabel, {
-		label: t("newRound"),
-		hint: t("gtHoldHint"),
-		again: t("confirmAgain")
-	})), /* @__PURE__ */ import_react.default.createElement("button", {
-		onClick: editPlayers,
-		style: {
-			flex: 1,
-			border: `1px solid ${confirmingSetup ? _JWOOD : _JP_BORDER}`,
-			borderRadius: 14,
-			background: confirmingSetup ? _JWOOD : "transparent",
-			color: confirmingSetup ? "#FFFFFF" : _JP_MUTED,
-			fontSize: 12,
-			fontWeight: 600,
-			letterSpacing: "0.05em",
-			textTransform: "uppercase",
-			minHeight: 44,
-			padding: "11px 0",
-			cursor: "pointer",
-			fontFamily: "'Inter', sans-serif"
-		}
-	}, confirmingSetup ? t("confirmAgain") : t("changePlayers"))), /* @__PURE__ */ import_react.default.createElement("p", { style: {
+	})))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gt-foot-acts" }, jasActs), /* @__PURE__ */ import_react.default.createElement("p", { style: {
 		fontSize: 11.5,
 		color: _JP_MUTED,
 		textAlign: "center",
@@ -47756,7 +47789,13 @@ function JassPlay({ players, scores, setScores, onResetSheet, onEditPlayers, onB
 		onClose: () => setEditing(null),
 		t,
 		theme
-	}), /* @__PURE__ */ import_react.default.createElement(RulesSheet, {
+	}), /* @__PURE__ */ import_react.default.createElement(GtMoreSheet, {
+		open: moreOpen,
+		onClose: () => setMoreOpen(false),
+		label: t("gtMore"),
+		tk,
+		theme
+	}, jasActs), /* @__PURE__ */ import_react.default.createElement(RulesSheet, {
 		open: rulesOpen,
 		onClose: () => setRulesOpen(false),
 		title: t("gameJass"),
@@ -48156,6 +48195,7 @@ function WizardPlay({ players, rounds, setRounds, onResetSheet, onEditPlayers, o
 	const wt = wizardTokens(theme);
 	const [editing, setEditing] = useState$11(null);
 	const [confirmingReset, setConfirmingReset] = useState$11(false);
+	const [moreOpen, setMoreOpen] = useState$11(false);
 	const [confirmingSetup, setConfirmingSetup] = useState$11(false);
 	const [rulesOpen, setRulesOpen] = useState$11(false);
 	const { node: perfectBidNode, fire: firePerfectBid } = useMilestoneBurst();
@@ -48236,6 +48276,63 @@ function WizardPlay({ players, rounds, setRounds, onResetSheet, onEditPlayers, o
 		onEditPlayers();
 		setConfirmingSetup(false);
 	};
+	const resetDone = () => {
+		setMoreOpen(false);
+		onResetSheet();
+		setConfirmingReset(false);
+	};
+	const resetTap = () => {
+		if (confirmingReset) setMoreOpen(false);
+		reset();
+	};
+	const teamsTap = () => {
+		if (confirmingSetup) setMoreOpen(false);
+		editPlayers();
+	};
+	const wizActs = /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "wz-actions",
+		style: {
+			display: "flex",
+			gap: 8,
+			marginTop: 14
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("button", {
+		...gtHold(resetDone, resetTap),
+		style: {
+			flex: 1,
+			border: `1px solid ${confirmingReset ? wt.hues[2] : wt.border}`,
+			borderRadius: 14,
+			background: confirmingReset ? wt.hues[2] : "transparent",
+			color: confirmingReset ? "#FFFFFF" : wt.muted,
+			fontSize: 12,
+			fontWeight: 500,
+			letterSpacing: "0.05em",
+			textTransform: "uppercase",
+			padding: "11px 0",
+			cursor: "pointer",
+			fontFamily: "'Inter', sans-serif"
+		}
+	}, confirmingReset ? t("confirmAgain") : /* @__PURE__ */ import_react.default.createElement(GtHoldLabel, {
+		label: t("newRound"),
+		hint: t("gtHoldHint"),
+		again: t("confirmAgain")
+	})), /* @__PURE__ */ import_react.default.createElement("button", {
+		onClick: teamsTap,
+		style: {
+			flex: 1,
+			border: `1px solid ${confirmingSetup ? wt.hues[1] : wt.border}`,
+			borderRadius: 14,
+			background: confirmingSetup ? wt.hues[1] : "transparent",
+			color: confirmingSetup ? "#FFFFFF" : wt.muted,
+			fontSize: 12,
+			fontWeight: 500,
+			letterSpacing: "0.05em",
+			textTransform: "uppercase",
+			padding: "11px 0",
+			cursor: "pointer",
+			fontFamily: "'Inter', sans-serif"
+		}
+	}, confirmingSetup ? t("confirmAgain") : t("changePlayers")));
 	const gtBox = useRef$17(null);
 	useGtFlip(gtBox);
 	const gtFx = useGtLead("wiz", gtLeader(players.map((p) => [p.id, totals[p.id]]), false), players.reduce((s, p) => s + filledRoundsPerPlayer(p.id), 0));
@@ -48284,6 +48381,11 @@ function WizardPlay({ players, rounds, setRounds, onResetSheet, onEditPlayers, o
 		onClick: () => setRulesOpen(true),
 		onHome,
 		onEndGame,
+		onMore: () => {
+			setEditing(null);
+			setMoreOpen(true);
+		},
+		moreLabel: t("gtMore"),
 		tokens: wt
 	}), /* @__PURE__ */ import_react.default.createElement(WizardTopBar, {
 		subtitle: t("wizardSubtitle")(roundCount),
@@ -48590,53 +48692,7 @@ function WizardPlay({ players, rounds, setRounds, onResetSheet, onEditPlayers, o
 			fontVariantNumeric: "tabular-nums",
 			fontFamily: "'Baloo 2', sans-serif"
 		}
-	})))), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "wz-actions",
-		style: {
-			display: "flex",
-			gap: 8,
-			marginTop: 14
-		}
-	}, /* @__PURE__ */ import_react.default.createElement("button", {
-		...gtHold(() => {
-			onResetSheet();
-			setConfirmingReset(false);
-		}, reset),
-		style: {
-			flex: 1,
-			border: `1px solid ${confirmingReset ? wt.hues[2] : wt.border}`,
-			borderRadius: 14,
-			background: confirmingReset ? wt.hues[2] : "transparent",
-			color: confirmingReset ? "#FFFFFF" : wt.muted,
-			fontSize: 12,
-			fontWeight: 500,
-			letterSpacing: "0.05em",
-			textTransform: "uppercase",
-			padding: "11px 0",
-			cursor: "pointer",
-			fontFamily: "'Inter', sans-serif"
-		}
-	}, confirmingReset ? t("confirmAgain") : /* @__PURE__ */ import_react.default.createElement(GtHoldLabel, {
-		label: t("newRound"),
-		hint: t("gtHoldHint"),
-		again: t("confirmAgain")
-	})), /* @__PURE__ */ import_react.default.createElement("button", {
-		onClick: editPlayers,
-		style: {
-			flex: 1,
-			border: `1px solid ${confirmingSetup ? wt.hues[1] : wt.border}`,
-			borderRadius: 14,
-			background: confirmingSetup ? wt.hues[1] : "transparent",
-			color: confirmingSetup ? "#FFFFFF" : wt.muted,
-			fontSize: 12,
-			fontWeight: 500,
-			letterSpacing: "0.05em",
-			textTransform: "uppercase",
-			padding: "11px 0",
-			cursor: "pointer",
-			fontFamily: "'Inter', sans-serif"
-		}
-	}, confirmingSetup ? t("confirmAgain") : t("changePlayers"))), /* @__PURE__ */ import_react.default.createElement("p", { style: {
+	})))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gt-foot-acts" }, wizActs), /* @__PURE__ */ import_react.default.createElement("p", { style: {
 		fontSize: 11,
 		color: wt.muted,
 		textAlign: "center",
@@ -48674,7 +48730,13 @@ function WizardPlay({ players, rounds, setRounds, onResetSheet, onEditPlayers, o
 		onClose: () => setEditing(null),
 		theme,
 		t
-	}), /* @__PURE__ */ import_react.default.createElement(RulesSheet, {
+	}), /* @__PURE__ */ import_react.default.createElement(GtMoreSheet, {
+		open: moreOpen,
+		onClose: () => setMoreOpen(false),
+		label: t("gtMore"),
+		tk: wt,
+		theme
+	}, wizActs), /* @__PURE__ */ import_react.default.createElement(RulesSheet, {
 		open: rulesOpen,
 		onClose: () => setRulesOpen(false),
 		title: t("gameWizard"),
@@ -49128,7 +49190,7 @@ function MgFlag({ mg, size = 44 }) {
 		fill: mg.flag
 	}));
 }
-function MinigolfTopBar({ subtitle, onBack, theme, t, onHome, rulesText, onEndGame }) {
+function MinigolfTopBar({ subtitle, onBack, theme, t, onHome, rulesText, onEndGame, onMore, moreLabel }) {
 	const mg = minigolfTokens(theme);
 	return /* @__PURE__ */ import_react.default.createElement(GameHeader, {
 		title: t("gameMinigolf"),
@@ -49141,6 +49203,8 @@ function MinigolfTopBar({ subtitle, onBack, theme, t, onHome, rulesText, onEndGa
 		icon: /* @__PURE__ */ import_react.default.createElement(MinigolfLogo, { color: mg.accInk }),
 		onHome,
 		onEndGame,
+		onMore,
+		moreLabel,
 		rulesText
 	});
 }
@@ -49942,6 +50006,7 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
 	const scores = state.scores;
 	const [editing, setEditing] = useState$11(null);
 	const [confirmingReset, setConfirmingReset] = useState$11(false);
+	const [moreOpen, setMoreOpen] = useState$11(false);
 	const [confirmingSetup, setConfirmingSetup] = useState$11(false);
 	const t = useT(lang);
 	const mg = minigolfTokens(theme);
@@ -49998,6 +50063,36 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
 		onEditPlayers();
 		setConfirmingSetup(false);
 	};
+	const resetDone = () => {
+		setMoreOpen(false);
+		onResetSheet();
+		setConfirmingReset(false);
+	};
+	const resetTap = () => {
+		if (confirmingReset) setMoreOpen(false);
+		reset();
+	};
+	const teamsTap = () => {
+		if (confirmingSetup) setMoreOpen(false);
+		editPlayers();
+	};
+	const mgActs = () => /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		display: "flex",
+		gap: 8,
+		marginTop: 8
+	} }, /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "mgPress",
+		...gtHold(resetDone, resetTap),
+		style: sideBtn(confirmingReset, mg.err, "#FFFFFF")
+	}, confirmingReset ? t("confirmAgain") : /* @__PURE__ */ import_react.default.createElement(GtHoldLabel, {
+		label: t("newRound"),
+		hint: t("gtHoldHint"),
+		again: t("confirmAgain")
+	})), /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "mgPress",
+		onClick: teamsTap,
+		style: sideBtn(confirmingSetup, mg.acc, mg.onAcc)
+	}, confirmingSetup ? t("confirmAgain") : t("changePlayers")));
 	const names = (list) => gtJoinNames(list.map((p) => p.name), t);
 	const holesTxt = (hs) => hs.map((h) => h + 1).join(", ");
 	const showMissing = () => {
@@ -50228,6 +50323,11 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
 		t,
 		onHome,
 		onEndGame,
+		onMore: () => {
+			setEditing(null);
+			setMoreOpen(true);
+		},
+		moreLabel: t("gtMore"),
 		rulesText: t("rulesMinigolf")
 	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-e-block mg-split mg-tab-" + tab }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main mg-main" }, winBanner, /* @__PURE__ */ import_react.default.createElement(MgSegmented, {
 		tab,
@@ -50322,26 +50422,13 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
 		border: mg.line,
 		title: t("gtChartTitle"),
 		theme
-	}))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side2 mg-side2" }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		gap: 8,
-		marginTop: 8
-	} }, /* @__PURE__ */ import_react.default.createElement("button", {
-		className: "mgPress",
-		...gtHold(() => {
-			onResetSheet();
-			setConfirmingReset(false);
-		}, reset),
-		style: sideBtn(confirmingReset, mg.err, "#FFFFFF")
-	}, confirmingReset ? t("confirmAgain") : /* @__PURE__ */ import_react.default.createElement(GtHoldLabel, {
-		label: t("newRound"),
-		hint: t("gtHoldHint"),
-		again: t("confirmAgain")
-	})), /* @__PURE__ */ import_react.default.createElement("button", {
-		className: "mgPress",
-		onClick: editPlayers,
-		style: sideBtn(confirmingSetup, mg.acc, mg.onAcc)
-	}, confirmingSetup ? t("confirmAgain") : t("changePlayers")))))), /* @__PURE__ */ import_react.default.createElement(MinigolfEditorPanel, {
+	}))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side2 mg-side2" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gt-foot-acts" }, mgActs())))), /* @__PURE__ */ import_react.default.createElement(GtMoreSheet, {
+		open: moreOpen,
+		onClose: () => setMoreOpen(false),
+		label: t("gtMore"),
+		tk,
+		theme
+	}, mgActs()), /* @__PURE__ */ import_react.default.createElement(MinigolfEditorPanel, {
 		editing,
 		players,
 		value: editing ? mgEff(ui, editing.playerId, editing.holeIdx) : null,
@@ -61840,7 +61927,7 @@ function DartsSetup({ state, setState, onStart, tk, t, theme }) {
 		tokens: tk
 	}));
 }
-function DartsPlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewGame, onEditPlayers }) {
+function DartsPlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewGame, onEditPlayers, theme, moreOpen, setMoreOpen }) {
 	const AC = "#C8102E";
 	const GN = "#2F6B52";
 	const [turn, setTurn] = useState$11([]);
@@ -61902,6 +61989,60 @@ function DartsPlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewGam
 		setConfirmingReset(false);
 		onNewGame();
 	};
+	const resetDone = () => {
+		setMoreOpen(false);
+		setConfirmingReset(false);
+		onNewGame();
+	};
+	const resetTap = () => {
+		if (confirmingReset) setMoreOpen(false);
+		reset();
+	};
+	const teamsTap = () => {
+		setMoreOpen(false);
+		onEditPlayers();
+	};
+	const dtActs = /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		display: "flex",
+		gap: 10,
+		marginTop: 10
+	} }, /* @__PURE__ */ import_react.default.createElement("button", {
+		...gtHold(resetDone, resetTap),
+		className: "press-fx",
+		style: {
+			flex: 1,
+			border: "1px solid " + (confirmingReset ? AC : tk.border),
+			borderRadius: 22,
+			background: tk.card,
+			color: confirmingReset ? AC : tk.muted,
+			fontSize: 12,
+			fontWeight: 700,
+			letterSpacing: "0.06em",
+			padding: "10px 0",
+			cursor: "pointer",
+			fontFamily: "'Inter', sans-serif"
+		}
+	}, confirmingReset ? t("dartsConfirmNew").toUpperCase() : /* @__PURE__ */ import_react.default.createElement(GtHoldLabel, {
+		label: t("dartsNewGame").toUpperCase(),
+		hint: t("gtHoldHint"),
+		again: t("confirmAgain")
+	})), /* @__PURE__ */ import_react.default.createElement("button", {
+		onClick: teamsTap,
+		className: "press-fx",
+		style: {
+			flex: 1,
+			border: "1px solid " + tk.border,
+			borderRadius: 22,
+			background: tk.card,
+			color: tk.muted,
+			fontSize: 12,
+			fontWeight: 700,
+			letterSpacing: "0.06em",
+			padding: "10px 0",
+			cursor: "pointer",
+			fontFamily: "'Inter', sans-serif"
+		}
+	}, t("dartsEditPlayers").toUpperCase()));
 	return /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("style", null, DARTS_LANDSCAPE_CSS), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-e-block dl-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, bigThrowNode, /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "reveal-1",
 		style: {
@@ -62165,50 +62306,13 @@ function DartsPlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewGam
 			fontFamily: "'Baloo 2', sans-serif",
 			fontVariantNumeric: "tabular-nums"
 		} }, state.remaining[p.id] !== void 0 ? state.remaining[p.id] : state.mode));
-	})), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		gap: 10,
-		marginTop: 10
-	} }, /* @__PURE__ */ import_react.default.createElement("button", {
-		...gtHold(() => {
-			setConfirmingReset(false);
-			onNewGame();
-		}, reset),
-		className: "press-fx",
-		style: {
-			flex: 1,
-			border: "1px solid " + (confirmingReset ? AC : tk.border),
-			borderRadius: 22,
-			background: tk.card,
-			color: confirmingReset ? AC : tk.muted,
-			fontSize: 12,
-			fontWeight: 700,
-			letterSpacing: "0.06em",
-			padding: "10px 0",
-			cursor: "pointer",
-			fontFamily: "'Inter', sans-serif"
-		}
-	}, confirmingReset ? t("dartsConfirmNew").toUpperCase() : /* @__PURE__ */ import_react.default.createElement(GtHoldLabel, {
-		label: t("dartsNewGame").toUpperCase(),
-		hint: t("gtHoldHint"),
-		again: t("confirmAgain")
-	})), /* @__PURE__ */ import_react.default.createElement("button", {
-		onClick: onEditPlayers,
-		className: "press-fx",
-		style: {
-			flex: 1,
-			border: "1px solid " + tk.border,
-			borderRadius: 22,
-			background: tk.card,
-			color: tk.muted,
-			fontSize: 12,
-			fontWeight: 700,
-			letterSpacing: "0.06em",
-			padding: "10px 0",
-			cursor: "pointer",
-			fontFamily: "'Inter', sans-serif"
-		}
-	}, t("dartsEditPlayers").toUpperCase())))));
+	})), /* @__PURE__ */ import_react.default.createElement("div", { className: "gt-foot-acts" }, dtActs), /* @__PURE__ */ import_react.default.createElement(GtMoreSheet, {
+		open: moreOpen,
+		onClose: () => setMoreOpen(false),
+		label: t("gtMore"),
+		tk,
+		theme
+	}, dtActs))));
 }
 var DARTS_LANDSCAPE_CSS = `
 [data-phone-landscape] .dl-shell{padding-left:0!important;padding-right:0!important;padding-top:calc(var(--pl-sat) + 4px)!important;padding-bottom:calc(var(--pl-sab) + 10px)!important}
@@ -62296,6 +62400,7 @@ function DartsGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 	const t = useT(lang);
 	const tk = dartMachineTokens(theme);
 	const [rulesOpen, setRulesOpen] = useState$11(false);
+	const [moreOpen, setMoreOpen] = useState$11(false);
 	const legsMargin = state.phase === "done" ? (() => {
 		const vals = state.players.map((p) => state.legsWon[p.id] || 0).sort((a, b) => b - a);
 		return (vals[0] || 0) - (vals[1] || 0);
@@ -62477,7 +62582,7 @@ function DartsGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 			maxWidth: 380,
 			margin: "0 auto"
 		}
-	}, dartsHead(t("gameDarts"), onBack, onHome, state.phase === "setup" ? void 0 : onEndGame, () => setRulesOpen(true), tk, t, theme, state.phase === "setup" ? t("gtNewMatch") : void 0), inner), /* @__PURE__ */ import_react.default.createElement(RulesSheet, {
+	}, dartsHead(t("gameDarts"), onBack, onHome, state.phase === "setup" ? void 0 : onEndGame, () => setRulesOpen(true), tk, t, theme, state.phase === "setup" ? t("gtNewMatch") : void 0, void 0, state.phase === "play" ? () => setMoreOpen(true) : void 0, t("gtMore")), inner), /* @__PURE__ */ import_react.default.createElement(RulesSheet, {
 		open: rulesOpen,
 		onClose: () => setRulesOpen(false),
 		title: t("gameDarts"),
@@ -62623,6 +62728,9 @@ function DartsGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 		setState,
 		tk,
 		t,
+		theme,
+		moreOpen,
+		setMoreOpen,
 		onConfirmTurn: confirmTurn,
 		onUndoTurn: undoTurn,
 		onNewGame: startGame,
@@ -62829,7 +62937,7 @@ function CricketSetup({ state, setState, onStart, tk, t, theme }) {
 		skin: gtS
 	}))), null);
 }
-function CricketPlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewGame, onEditPlayers }) {
+function CricketPlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewGame, onEditPlayers, theme, moreOpen, setMoreOpen }) {
 	const AC = "#1B8A5A";
 	const GN = "#2F6B52";
 	const [turn, setTurn] = useState$11([]);
@@ -62871,6 +62979,51 @@ function CricketPlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewG
 		setConfirmingReset(false);
 		onNewGame();
 	};
+	const resetTap = () => {
+		if (confirmingReset) setMoreOpen(false);
+		reset();
+	};
+	const teamsTap = () => {
+		setMoreOpen(false);
+		onEditPlayers();
+	};
+	const dtActs = /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		display: "flex",
+		gap: 10,
+		marginTop: 14
+	} }, /* @__PURE__ */ import_react.default.createElement("button", {
+		onClick: resetTap,
+		className: "press-fx",
+		style: {
+			flex: 1,
+			border: "1px solid " + (confirmingReset ? "#C8102E" : tk.border),
+			borderRadius: 12,
+			background: tk.card,
+			color: confirmingReset ? "#C8102E" : tk.muted,
+			fontSize: 12,
+			fontWeight: 700,
+			letterSpacing: "0.06em",
+			padding: "12px 0",
+			cursor: "pointer",
+			fontFamily: "'Inter', sans-serif"
+		}
+	}, (confirmingReset ? t("dartsConfirmNew") : t("dartsNewGame")).toUpperCase()), /* @__PURE__ */ import_react.default.createElement("button", {
+		onClick: teamsTap,
+		className: "press-fx",
+		style: {
+			flex: 1,
+			border: "1px solid " + tk.border,
+			borderRadius: 12,
+			background: tk.card,
+			color: tk.muted,
+			fontSize: 12,
+			fontWeight: 700,
+			letterSpacing: "0.06em",
+			padding: "12px 0",
+			cursor: "pointer",
+			fontFamily: "'Inter', sans-serif"
+		}
+	}, t("dartsEditPlayers").toUpperCase()));
 	return /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("style", null, DARTS_LANDSCAPE_CSS), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-e-block dl-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, tripleCloseNode, /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "reveal-1",
 		style: {
@@ -63050,48 +63203,19 @@ function CricketPlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewG
 		marksByPlayer: previewMap,
 		currentIdx: state.currentIdx,
 		tk
-	})), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		gap: 10,
-		marginTop: 14
-	} }, /* @__PURE__ */ import_react.default.createElement("button", {
-		onClick: reset,
-		className: "press-fx",
-		style: {
-			flex: 1,
-			border: "1px solid " + (confirmingReset ? "#C8102E" : tk.border),
-			borderRadius: 12,
-			background: tk.card,
-			color: confirmingReset ? "#C8102E" : tk.muted,
-			fontSize: 12,
-			fontWeight: 700,
-			letterSpacing: "0.06em",
-			padding: "12px 0",
-			cursor: "pointer",
-			fontFamily: "'Inter', sans-serif"
-		}
-	}, (confirmingReset ? t("dartsConfirmNew") : t("dartsNewGame")).toUpperCase()), /* @__PURE__ */ import_react.default.createElement("button", {
-		onClick: onEditPlayers,
-		className: "press-fx",
-		style: {
-			flex: 1,
-			border: "1px solid " + tk.border,
-			borderRadius: 12,
-			background: tk.card,
-			color: tk.muted,
-			fontSize: 12,
-			fontWeight: 700,
-			letterSpacing: "0.06em",
-			padding: "12px 0",
-			cursor: "pointer",
-			fontFamily: "'Inter', sans-serif"
-		}
-	}, t("dartsEditPlayers").toUpperCase())))));
+	})), /* @__PURE__ */ import_react.default.createElement("div", { className: "gt-foot-acts" }, dtActs), /* @__PURE__ */ import_react.default.createElement(GtMoreSheet, {
+		open: moreOpen,
+		onClose: () => setMoreOpen(false),
+		label: t("gtMore"),
+		tk,
+		theme
+	}, dtActs))));
 }
 function CricketGame({ state, setState, onBack, onHome, onEndGame, lang = "de", theme = "dark" }) {
 	const t = useT(lang);
 	const tk = dartMachineTokens(theme);
 	const [rulesOpen, setRulesOpen] = useState$11(false);
+	const [moreOpen, setMoreOpen] = useState$11(false);
 	const legsMargin = state.phase === "done" ? (() => {
 		const vals = state.players.map((p) => state.legsWon[p.id] || 0).sort((a, b) => b - a);
 		return (vals[0] || 0) - (vals[1] || 0);
@@ -63269,7 +63393,7 @@ function CricketGame({ state, setState, onBack, onHome, onEndGame, lang = "de", 
 			maxWidth: 380,
 			margin: "0 auto"
 		}
-	}, dartsHead(variantLabel, onBack, onHome, state.phase === "setup" ? void 0 : onEndGame, () => setRulesOpen(true), tk, t, theme, state.phase === "setup" ? t("gtNewMatch") : void 0), inner), /* @__PURE__ */ import_react.default.createElement(RulesSheet, {
+	}, dartsHead(variantLabel, onBack, onHome, state.phase === "setup" ? void 0 : onEndGame, () => setRulesOpen(true), tk, t, theme, state.phase === "setup" ? t("gtNewMatch") : void 0, void 0, state.phase === "play" ? () => setMoreOpen(true) : void 0, t("gtMore")), inner), /* @__PURE__ */ import_react.default.createElement(RulesSheet, {
 		open: rulesOpen,
 		onClose: () => setRulesOpen(false),
 		title: variantLabel,
@@ -63393,6 +63517,9 @@ function CricketGame({ state, setState, onBack, onHome, onEndGame, lang = "de", 
 		setState,
 		tk,
 		t,
+		theme,
+		moreOpen,
+		setMoreOpen,
 		onConfirmTurn: confirmTurn,
 		onUndoTurn: undoTurn,
 		onNewGame: startGame,
@@ -63476,7 +63603,7 @@ function HiScoreSetup({ state, setState, onStart, tk, t, theme }) {
 		skin: gtS
 	}))), null);
 }
-function HiScorePlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewGame, onEditPlayers }) {
+function HiScorePlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewGame, onEditPlayers, theme, moreOpen, setMoreOpen }) {
 	const AC = tk.gold;
 	const GN = "#2F6B52";
 	const [turn, setTurn] = useState$11([]);
@@ -63508,6 +63635,51 @@ function HiScorePlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewG
 		setConfirmingReset(false);
 		onNewGame();
 	};
+	const resetTap = () => {
+		if (confirmingReset) setMoreOpen(false);
+		reset();
+	};
+	const teamsTap = () => {
+		setMoreOpen(false);
+		onEditPlayers();
+	};
+	const dtActs = /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		display: "flex",
+		gap: 10,
+		marginTop: 14
+	} }, /* @__PURE__ */ import_react.default.createElement("button", {
+		onClick: resetTap,
+		className: "press-fx",
+		style: {
+			flex: 1,
+			border: "1px solid " + (confirmingReset ? "#C8102E" : tk.border),
+			borderRadius: 12,
+			background: tk.card,
+			color: confirmingReset ? "#C8102E" : tk.muted,
+			fontSize: 12,
+			fontWeight: 700,
+			letterSpacing: "0.06em",
+			padding: "12px 0",
+			cursor: "pointer",
+			fontFamily: "'Inter', sans-serif"
+		}
+	}, (confirmingReset ? t("dartsConfirmNew") : t("dartsNewGame")).toUpperCase()), /* @__PURE__ */ import_react.default.createElement("button", {
+		onClick: teamsTap,
+		className: "press-fx",
+		style: {
+			flex: 1,
+			border: "1px solid " + tk.border,
+			borderRadius: 12,
+			background: tk.card,
+			color: tk.muted,
+			fontSize: 12,
+			fontWeight: 700,
+			letterSpacing: "0.06em",
+			padding: "12px 0",
+			cursor: "pointer",
+			fontFamily: "'Inter', sans-serif"
+		}
+	}, t("dartsEditPlayers").toUpperCase()));
 	const ranked = [...state.players].sort((a, b) => (state.scores[b.id] || 0) - (state.scores[a.id] || 0));
 	return /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("style", null, DARTS_LANDSCAPE_CSS), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-e-block dl-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "reveal-1",
@@ -63714,43 +63886,13 @@ function HiScorePlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewG
 		color: tk.ink,
 		fontFamily: "'Baloo 2', sans-serif",
 		fontVariantNumeric: "tabular-nums"
-	} }, state.scores[p.id] || 0)))), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		gap: 10,
-		marginTop: 14
-	} }, /* @__PURE__ */ import_react.default.createElement("button", {
-		onClick: reset,
-		className: "press-fx",
-		style: {
-			flex: 1,
-			border: "1px solid " + (confirmingReset ? "#C8102E" : tk.border),
-			borderRadius: 12,
-			background: tk.card,
-			color: confirmingReset ? "#C8102E" : tk.muted,
-			fontSize: 12,
-			fontWeight: 700,
-			letterSpacing: "0.06em",
-			padding: "12px 0",
-			cursor: "pointer",
-			fontFamily: "'Inter', sans-serif"
-		}
-	}, (confirmingReset ? t("dartsConfirmNew") : t("dartsNewGame")).toUpperCase()), /* @__PURE__ */ import_react.default.createElement("button", {
-		onClick: onEditPlayers,
-		className: "press-fx",
-		style: {
-			flex: 1,
-			border: "1px solid " + tk.border,
-			borderRadius: 12,
-			background: tk.card,
-			color: tk.muted,
-			fontSize: 12,
-			fontWeight: 700,
-			letterSpacing: "0.06em",
-			padding: "12px 0",
-			cursor: "pointer",
-			fontFamily: "'Inter', sans-serif"
-		}
-	}, t("dartsEditPlayers").toUpperCase())))));
+	} }, state.scores[p.id] || 0)))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gt-foot-acts" }, dtActs), /* @__PURE__ */ import_react.default.createElement(GtMoreSheet, {
+		open: moreOpen,
+		onClose: () => setMoreOpen(false),
+		label: t("gtMore"),
+		tk,
+		theme
+	}, dtActs))));
 }
 function gtDsStart(st) {
 	const n = (st.players || []).length;
@@ -63847,6 +63989,7 @@ function HiScoreGame({ state, setState, onBack, onHome, onEndGame, lang = "de", 
 	const t = useT(lang);
 	const tk = dartMachineTokens(theme);
 	const [rulesOpen, setRulesOpen] = useState$11(false);
+	const [moreOpen, setMoreOpen] = useState$11(false);
 	const scoreMargin = state.phase === "done" ? (() => {
 		const vals = state.players.map((p) => state.scores[p.id] || 0).sort((a, b) => b - a);
 		return {
@@ -63976,7 +64119,7 @@ function HiScoreGame({ state, setState, onBack, onHome, onEndGame, lang = "de", 
 			maxWidth: 380,
 			margin: "0 auto"
 		}
-	}, dartsHead(t("gameHiScore"), onBack, onHome, state.phase === "setup" ? void 0 : onEndGame, () => setRulesOpen(true), tk, t, theme, state.phase === "setup" ? t("gtNewMatch") : void 0), inner), /* @__PURE__ */ import_react.default.createElement(RulesSheet, {
+	}, dartsHead(t("gameHiScore"), onBack, onHome, state.phase === "setup" ? void 0 : onEndGame, () => setRulesOpen(true), tk, t, theme, state.phase === "setup" ? t("gtNewMatch") : void 0, void 0, state.phase === "play" ? () => setMoreOpen(true) : void 0, t("gtMore")), inner), /* @__PURE__ */ import_react.default.createElement(RulesSheet, {
 		open: rulesOpen,
 		onClose: () => setRulesOpen(false),
 		title: t("gameHiScore"),
@@ -64014,6 +64157,9 @@ function HiScoreGame({ state, setState, onBack, onHome, onEndGame, lang = "de", 
 		setState,
 		tk,
 		t,
+		theme,
+		moreOpen,
+		setMoreOpen,
 		onConfirmTurn: confirmTurn,
 		onUndoTurn: undoTurn,
 		onNewGame: onEndGame,
@@ -64229,7 +64375,7 @@ function SplitScoreSetup({ state, setState, onStart, tk, t, theme }) {
 		skin: gtS
 	}))), null);
 }
-function SplitScorePlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewGame, onEditPlayers }) {
+function SplitScorePlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewGame, onEditPlayers, theme, moreOpen, setMoreOpen }) {
 	const AC = "#8653C0";
 	const GN = "#2F6B52";
 	const [turn, setTurn] = useState$11([]);
@@ -64263,6 +64409,51 @@ function SplitScorePlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onN
 		setConfirmingReset(false);
 		onNewGame();
 	};
+	const resetTap = () => {
+		if (confirmingReset) setMoreOpen(false);
+		reset();
+	};
+	const teamsTap = () => {
+		setMoreOpen(false);
+		onEditPlayers();
+	};
+	const dtActs = /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		display: "flex",
+		gap: 10,
+		marginTop: 14
+	} }, /* @__PURE__ */ import_react.default.createElement("button", {
+		onClick: resetTap,
+		className: "press-fx",
+		style: {
+			flex: 1,
+			border: "1px solid " + (confirmingReset ? "#C8102E" : tk.border),
+			borderRadius: 12,
+			background: tk.card,
+			color: confirmingReset ? "#C8102E" : tk.muted,
+			fontSize: 12,
+			fontWeight: 700,
+			letterSpacing: "0.06em",
+			padding: "12px 0",
+			cursor: "pointer",
+			fontFamily: "'Inter', sans-serif"
+		}
+	}, (confirmingReset ? t("dartsConfirmNew") : t("dartsNewGame")).toUpperCase()), /* @__PURE__ */ import_react.default.createElement("button", {
+		onClick: teamsTap,
+		className: "press-fx",
+		style: {
+			flex: 1,
+			border: "1px solid " + tk.border,
+			borderRadius: 12,
+			background: tk.card,
+			color: tk.muted,
+			fontSize: 12,
+			fontWeight: 700,
+			letterSpacing: "0.06em",
+			padding: "12px 0",
+			cursor: "pointer",
+			fontFamily: "'Inter', sans-serif"
+		}
+	}, t("dartsEditPlayers").toUpperCase()));
 	const ranked = [...state.players].sort((a, b) => (state.scores[b.id] || 0) - (state.scores[a.id] || 0));
 	return /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("style", null, DARTS_LANDSCAPE_CSS), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-e-block dl-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "reveal-1",
@@ -64479,48 +64670,19 @@ function SplitScorePlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onN
 		color: tk.ink,
 		fontFamily: "'Baloo 2', sans-serif",
 		fontVariantNumeric: "tabular-nums"
-	} }, state.scores[p.id] || 0)))), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		gap: 10,
-		marginTop: 14
-	} }, /* @__PURE__ */ import_react.default.createElement("button", {
-		onClick: reset,
-		className: "press-fx",
-		style: {
-			flex: 1,
-			border: "1px solid " + (confirmingReset ? "#C8102E" : tk.border),
-			borderRadius: 12,
-			background: tk.card,
-			color: confirmingReset ? "#C8102E" : tk.muted,
-			fontSize: 12,
-			fontWeight: 700,
-			letterSpacing: "0.06em",
-			padding: "12px 0",
-			cursor: "pointer",
-			fontFamily: "'Inter', sans-serif"
-		}
-	}, (confirmingReset ? t("dartsConfirmNew") : t("dartsNewGame")).toUpperCase()), /* @__PURE__ */ import_react.default.createElement("button", {
-		onClick: onEditPlayers,
-		className: "press-fx",
-		style: {
-			flex: 1,
-			border: "1px solid " + tk.border,
-			borderRadius: 12,
-			background: tk.card,
-			color: tk.muted,
-			fontSize: 12,
-			fontWeight: 700,
-			letterSpacing: "0.06em",
-			padding: "12px 0",
-			cursor: "pointer",
-			fontFamily: "'Inter', sans-serif"
-		}
-	}, t("dartsEditPlayers").toUpperCase())))));
+	} }, state.scores[p.id] || 0)))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gt-foot-acts" }, dtActs), /* @__PURE__ */ import_react.default.createElement(GtMoreSheet, {
+		open: moreOpen,
+		onClose: () => setMoreOpen(false),
+		label: t("gtMore"),
+		tk,
+		theme
+	}, dtActs))));
 }
 function SplitScoreGame({ state, setState, onBack, onHome, onEndGame, lang = "de", theme = "dark" }) {
 	const t = useT(lang);
 	const tk = dartMachineTokens(theme);
 	const [rulesOpen, setRulesOpen] = useState$11(false);
+	const [moreOpen, setMoreOpen] = useState$11(false);
 	const scoreMargin = state.phase === "done" ? (() => {
 		const vals = state.players.map((p) => state.scores[p.id] || 0).sort((a, b) => b - a);
 		return {
@@ -64654,7 +64816,7 @@ function SplitScoreGame({ state, setState, onBack, onHome, onEndGame, lang = "de
 			maxWidth: 380,
 			margin: "0 auto"
 		}
-	}, dartsHead(t("gameSplitScore"), onBack, onHome, state.phase === "setup" ? void 0 : onEndGame, () => setRulesOpen(true), tk, t, theme, state.phase === "setup" ? t("gtNewMatch") : void 0), inner), /* @__PURE__ */ import_react.default.createElement(RulesSheet, {
+	}, dartsHead(t("gameSplitScore"), onBack, onHome, state.phase === "setup" ? void 0 : onEndGame, () => setRulesOpen(true), tk, t, theme, state.phase === "setup" ? t("gtNewMatch") : void 0, void 0, state.phase === "play" ? () => setMoreOpen(true) : void 0, t("gtMore")), inner), /* @__PURE__ */ import_react.default.createElement(RulesSheet, {
 		open: rulesOpen,
 		onClose: () => setRulesOpen(false),
 		title: t("gameSplitScore"),
@@ -64692,6 +64854,9 @@ function SplitScoreGame({ state, setState, onBack, onHome, onEndGame, lang = "de
 		setState,
 		tk,
 		t,
+		theme,
+		moreOpen,
+		setMoreOpen,
 		onConfirmTurn: confirmTurn,
 		onUndoTurn: undoTurn,
 		onNewGame: onEndGame,
@@ -64766,7 +64931,7 @@ function ShanghaiSetup({ state, setState, onStart, tk, t, theme }) {
 		skin: gtS
 	}))), null);
 }
-function ShanghaiPlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewGame, onEditPlayers }) {
+function ShanghaiPlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewGame, onEditPlayers, theme, moreOpen, setMoreOpen }) {
 	const AC = "#2E86C1";
 	const GN = "#2F6B52";
 	const [turn, setTurn] = useState$11([]);
@@ -64808,6 +64973,51 @@ function ShanghaiPlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNew
 		setConfirmingReset(false);
 		onNewGame();
 	};
+	const resetTap = () => {
+		if (confirmingReset) setMoreOpen(false);
+		reset();
+	};
+	const teamsTap = () => {
+		setMoreOpen(false);
+		onEditPlayers();
+	};
+	const dtActs = /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		display: "flex",
+		gap: 10,
+		marginTop: 14
+	} }, /* @__PURE__ */ import_react.default.createElement("button", {
+		onClick: resetTap,
+		className: "press-fx",
+		style: {
+			flex: 1,
+			border: "1px solid " + (confirmingReset ? "#C8102E" : tk.border),
+			borderRadius: 12,
+			background: tk.card,
+			color: confirmingReset ? "#C8102E" : tk.muted,
+			fontSize: 12,
+			fontWeight: 700,
+			letterSpacing: "0.06em",
+			padding: "12px 0",
+			cursor: "pointer",
+			fontFamily: "'Inter', sans-serif"
+		}
+	}, (confirmingReset ? t("dartsConfirmNew") : t("dartsNewGame")).toUpperCase()), /* @__PURE__ */ import_react.default.createElement("button", {
+		onClick: teamsTap,
+		className: "press-fx",
+		style: {
+			flex: 1,
+			border: "1px solid " + tk.border,
+			borderRadius: 12,
+			background: tk.card,
+			color: tk.muted,
+			fontSize: 12,
+			fontWeight: 700,
+			letterSpacing: "0.06em",
+			padding: "12px 0",
+			cursor: "pointer",
+			fontFamily: "'Inter', sans-serif"
+		}
+	}, t("dartsEditPlayers").toUpperCase()));
 	const ranked = [...state.players].sort((a, b) => (state.scores[b.id] || 0) - (state.scores[a.id] || 0));
 	const multLabel = (m) => m === 1 ? "1×" : m === 2 ? "2×" : "3×";
 	return /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("style", null, DARTS_LANDSCAPE_CSS), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-e-block dl-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement("div", {
@@ -65046,48 +65256,19 @@ function ShanghaiPlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNew
 		color: tk.ink,
 		fontFamily: "'Baloo 2', sans-serif",
 		fontVariantNumeric: "tabular-nums"
-	} }, state.scores[p.id] || 0)))), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		gap: 10,
-		marginTop: 14
-	} }, /* @__PURE__ */ import_react.default.createElement("button", {
-		onClick: reset,
-		className: "press-fx",
-		style: {
-			flex: 1,
-			border: "1px solid " + (confirmingReset ? "#C8102E" : tk.border),
-			borderRadius: 12,
-			background: tk.card,
-			color: confirmingReset ? "#C8102E" : tk.muted,
-			fontSize: 12,
-			fontWeight: 700,
-			letterSpacing: "0.06em",
-			padding: "12px 0",
-			cursor: "pointer",
-			fontFamily: "'Inter', sans-serif"
-		}
-	}, (confirmingReset ? t("dartsConfirmNew") : t("dartsNewGame")).toUpperCase()), /* @__PURE__ */ import_react.default.createElement("button", {
-		onClick: onEditPlayers,
-		className: "press-fx",
-		style: {
-			flex: 1,
-			border: "1px solid " + tk.border,
-			borderRadius: 12,
-			background: tk.card,
-			color: tk.muted,
-			fontSize: 12,
-			fontWeight: 700,
-			letterSpacing: "0.06em",
-			padding: "12px 0",
-			cursor: "pointer",
-			fontFamily: "'Inter', sans-serif"
-		}
-	}, t("dartsEditPlayers").toUpperCase())))));
+	} }, state.scores[p.id] || 0)))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gt-foot-acts" }, dtActs), /* @__PURE__ */ import_react.default.createElement(GtMoreSheet, {
+		open: moreOpen,
+		onClose: () => setMoreOpen(false),
+		label: t("gtMore"),
+		tk,
+		theme
+	}, dtActs))));
 }
 function ShanghaiGame({ state, setState, onBack, onHome, onEndGame, lang = "de", theme = "dark" }) {
 	const t = useT(lang);
 	const tk = dartMachineTokens(theme);
 	const [rulesOpen, setRulesOpen] = useState$11(false);
+	const [moreOpen, setMoreOpen] = useState$11(false);
 	const scoreMargin = state.phase === "done" ? (() => {
 		const vals = state.players.map((p) => state.scores[p.id] || 0).sort((a, b) => b - a);
 		return {
@@ -65237,7 +65418,7 @@ function ShanghaiGame({ state, setState, onBack, onHome, onEndGame, lang = "de",
 			maxWidth: 380,
 			margin: "0 auto"
 		}
-	}, dartsHead(t("gameShanghai"), onBack, onHome, state.phase === "setup" ? void 0 : onEndGame, () => setRulesOpen(true), tk, t, theme, state.phase === "setup" ? t("gtNewMatch") : void 0), inner), /* @__PURE__ */ import_react.default.createElement(RulesSheet, {
+	}, dartsHead(t("gameShanghai"), onBack, onHome, state.phase === "setup" ? void 0 : onEndGame, () => setRulesOpen(true), tk, t, theme, state.phase === "setup" ? t("gtNewMatch") : void 0, void 0, state.phase === "play" ? () => setMoreOpen(true) : void 0, t("gtMore")), inner), /* @__PURE__ */ import_react.default.createElement(RulesSheet, {
 		open: rulesOpen,
 		onClose: () => setRulesOpen(false),
 		title: t("gameShanghai"),
@@ -65375,6 +65556,9 @@ function ShanghaiGame({ state, setState, onBack, onHome, onEndGame, lang = "de",
 		setState,
 		tk,
 		t,
+		theme,
+		moreOpen,
+		setMoreOpen,
 		onConfirmTurn: confirmTurn,
 		onUndoTurn: undoTurn,
 		onNewGame: startGame,
@@ -67010,6 +67194,7 @@ function FreeplayLeaderRow({ gtLead, gtGood, player, color, rank, medalColor, re
 }
 function FreeplayGame({ players, setPlayers, target, setTarget, lowWins, setLowWins, onBack, onHome, onEndGame, lang = "de", theme = "dark" }) {
 	const [confirmingReset, setConfirmingReset] = useState$11(false);
+	const [moreOpen, setMoreOpen] = useState$11(false);
 	const [rulesOpen, setRulesOpen] = useState$11(false);
 	const t = useT(lang);
 	const tk = shellTokens(theme);
@@ -67075,6 +67260,40 @@ function FreeplayGame({ players, setPlayers, target, setTarget, lowWins, setLowW
 		}
 		performReset();
 	};
+	const resetDone = () => {
+		setMoreOpen(false);
+		performReset();
+	};
+	const resetTap = () => {
+		if (confirmingReset) setMoreOpen(false);
+		reset();
+	};
+	const fpActs = /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		display: "flex",
+		gap: 8,
+		marginTop: 14
+	} }, /* @__PURE__ */ import_react.default.createElement("button", {
+		...gtHold(resetDone, resetTap),
+		style: {
+			width: "100%",
+			border: `1px solid ${confirmingReset ? HUES[0] : tk.border}`,
+			borderRadius: 14,
+			background: confirmingReset ? HUES[0] : "transparent",
+			color: confirmingReset ? "#FFFFFF" : tk.muted,
+			fontSize: 12,
+			fontWeight: 500,
+			letterSpacing: "0.05em",
+			textTransform: "uppercase",
+			padding: "11px 0",
+			cursor: "pointer",
+			fontFamily: "'Inter', sans-serif",
+			transition: "background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease"
+		}
+	}, confirmingReset ? t("confirmAgain") : /* @__PURE__ */ import_react.default.createElement(GtHoldLabel, {
+		label: t("newGame"),
+		hint: t("gtHoldHint"),
+		again: t("confirmAgain")
+	})));
 	return /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-shellpage pld-shell",
 		style: pageShellStyle(theme)
@@ -67104,6 +67323,8 @@ function FreeplayGame({ players, setPlayers, target, setTarget, lowWins, setLowW
 		onRules: () => setRulesOpen(true),
 		onHome,
 		onEndGame,
+		onMore: () => setMoreOpen(true),
+		moreLabel: t("gtMore"),
 		title: t("gameFreeplay"),
 		subtitle: t("freeplaySubtitle"),
 		onBack,
@@ -67314,28 +67535,19 @@ function FreeplayGame({ players, setPlayers, target, setTarget, lowWins, setLowW
 			cursor: players.length >= 8 ? "default" : "pointer",
 			fontFamily: "'Inter', sans-serif"
 		}
-	}, t("addPlayer")), /* @__PURE__ */ import_react.default.createElement("button", {
-		...gtHold(performReset, reset),
+	}, t("addPlayer")), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gt-foot-acts fp-newgame",
 		style: {
 			flex: 1,
-			border: `1px solid ${confirmingReset ? HUES[0] : tk.border}`,
-			borderRadius: 14,
-			background: confirmingReset ? HUES[0] : "transparent",
-			color: confirmingReset ? "#FFFFFF" : tk.muted,
-			fontSize: 12,
-			fontWeight: 500,
-			letterSpacing: "0.05em",
-			textTransform: "uppercase",
-			padding: "11px 0",
-			cursor: "pointer",
-			fontFamily: "'Inter', sans-serif",
-			transition: "background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease"
+			marginTop: -14
 		}
-	}, confirmingReset ? t("confirmAgain") : /* @__PURE__ */ import_react.default.createElement(GtHoldLabel, {
-		label: t("newGame"),
-		hint: t("gtHoldHint"),
-		again: t("confirmAgain")
-	})))))), /* @__PURE__ */ import_react.default.createElement(RulesSheet, {
+	}, fpActs))))), /* @__PURE__ */ import_react.default.createElement(GtMoreSheet, {
+		open: moreOpen,
+		onClose: () => setMoreOpen(false),
+		label: t("gtMore"),
+		tk,
+		theme
+	}, fpActs), /* @__PURE__ */ import_react.default.createElement(RulesSheet, {
 		open: rulesOpen,
 		onClose: () => setRulesOpen(false),
 		title: t("gameFreeplay"),
@@ -107538,6 +107750,7 @@ function YatzyEditorPanel({ editing, players, scores, totals, category, onSave, 
 function YatzyPlay({ onRematch, players, scores, setScores, onResetSheet, onEditPlayers, onBack, onHome, onEndGame, lang = "de", theme = "dark" }) {
 	const [editing, setEditing] = useState$11(null);
 	const [confirmingReset, setConfirmingReset] = useState$11(false);
+	const [moreOpen, setMoreOpen] = useState$11(false);
 	const [confirmingSetup, setConfirmingSetup] = useState$11(false);
 	const [rulesOpen, setRulesOpen] = useState$11(false);
 	const t = useT(lang);
@@ -107639,6 +107852,67 @@ function YatzyPlay({ onRematch, players, scores, setScores, onResetSheet, onEdit
 		onEditPlayers();
 		setConfirmingSetup(false);
 	};
+	const resetDone = () => {
+		setMoreOpen(false);
+		onResetSheet();
+		setConfirmingReset(false);
+	};
+	const resetTap = () => {
+		if (confirmingReset) setMoreOpen(false);
+		reset();
+	};
+	const teamsTap = () => {
+		if (confirmingSetup) setMoreOpen(false);
+		editPlayers();
+	};
+	const yzActs = /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "yz-actions",
+		style: {
+			display: "flex",
+			gap: 8,
+			marginTop: 10
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("button", {
+		...gtHold(resetDone, resetTap),
+		style: {
+			flex: 1,
+			border: "none",
+			borderRadius: 16,
+			background: confirmingReset ? _YHUES[2] : _YCARD,
+			color: confirmingReset ? "#FFFFFF" : _YMUTED,
+			fontSize: 11.5,
+			fontWeight: 700,
+			letterSpacing: "0.03em",
+			textTransform: "uppercase",
+			minHeight: 44,
+			padding: "9px 0",
+			cursor: "pointer",
+			fontFamily: "'Inter', sans-serif",
+			boxShadow: "0 1px 3px rgba(21,24,38,0.11)"
+		}
+	}, confirmingReset ? t("confirmAgain") : /* @__PURE__ */ import_react.default.createElement(GtHoldLabel, {
+		label: t("newRound"),
+		hint: t("gtHoldHint"),
+		again: t("confirmAgain")
+	})), /* @__PURE__ */ import_react.default.createElement("button", {
+		onClick: teamsTap,
+		style: {
+			flex: 1,
+			border: "none",
+			borderRadius: 16,
+			background: confirmingSetup ? _YACCENT : _YCARD,
+			color: confirmingSetup ? "#FFFFFF" : _YMUTED,
+			fontSize: 11.5,
+			fontWeight: 700,
+			letterSpacing: "0.03em",
+			textTransform: "uppercase",
+			minHeight: 44,
+			padding: "9px 0",
+			cursor: "pointer",
+			fontFamily: "'Inter', sans-serif",
+			boxShadow: "0 1px 3px rgba(21,24,38,0.11)"
+		}
+	}, confirmingSetup ? t("confirmAgain") : t("changePlayers")));
 	const cellLabelStyle = {
 		fontSize: 11,
 		color: _YMUTED,
@@ -107729,6 +108003,11 @@ function YatzyPlay({ onRematch, players, scores, setScores, onResetSheet, onEdit
 		onClick: () => setRulesOpen(true),
 		onHome,
 		onEndGame,
+		onMore: () => {
+			setEditing(null);
+			setMoreOpen(true);
+		},
+		moreLabel: t("gtMore"),
 		tokens: tk
 	}), /* @__PURE__ */ import_react.default.createElement(YatzyTopBar, {
 		subtitle: t("yatzySubtitle"),
@@ -107923,57 +108202,7 @@ function YatzyPlay({ onRematch, players, scores, setScores, onResetSheet, onEdit
 		editing,
 		t,
 		theme
-	}))))), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "yz-actions",
-		style: {
-			display: "flex",
-			gap: 8,
-			marginTop: 10
-		}
-	}, /* @__PURE__ */ import_react.default.createElement("button", {
-		...gtHold(() => {
-			onResetSheet();
-			setConfirmingReset(false);
-		}, reset),
-		style: {
-			flex: 1,
-			border: "none",
-			borderRadius: 16,
-			background: confirmingReset ? _YHUES[2] : _YCARD,
-			color: confirmingReset ? "#FFFFFF" : _YMUTED,
-			fontSize: 11.5,
-			fontWeight: 700,
-			letterSpacing: "0.03em",
-			textTransform: "uppercase",
-			minHeight: 44,
-			padding: "9px 0",
-			cursor: "pointer",
-			fontFamily: "'Inter', sans-serif",
-			boxShadow: "0 1px 3px rgba(21,24,38,0.11)"
-		}
-	}, confirmingReset ? t("confirmAgain") : /* @__PURE__ */ import_react.default.createElement(GtHoldLabel, {
-		label: t("newRound"),
-		hint: t("gtHoldHint"),
-		again: t("confirmAgain")
-	})), /* @__PURE__ */ import_react.default.createElement("button", {
-		onClick: editPlayers,
-		style: {
-			flex: 1,
-			border: "none",
-			borderRadius: 16,
-			background: confirmingSetup ? _YACCENT : _YCARD,
-			color: confirmingSetup ? "#FFFFFF" : _YMUTED,
-			fontSize: 11.5,
-			fontWeight: 700,
-			letterSpacing: "0.03em",
-			textTransform: "uppercase",
-			minHeight: 44,
-			padding: "9px 0",
-			cursor: "pointer",
-			fontFamily: "'Inter', sans-serif",
-			boxShadow: "0 1px 3px rgba(21,24,38,0.11)"
-		}
-	}, confirmingSetup ? t("confirmAgain") : t("changePlayers"))), /* @__PURE__ */ import_react.default.createElement("p", {
+	}))))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gt-foot-acts" }, yzActs), /* @__PURE__ */ import_react.default.createElement("p", {
 		className: "yz-hint",
 		style: {
 			fontSize: 11,
@@ -107982,7 +108211,13 @@ function YatzyPlay({ onRematch, players, scores, setScores, onResetSheet, onEdit
 			marginTop: 8,
 			fontFamily: "'Inter', sans-serif"
 		}
-	}, t("tapCellHint"))), /* @__PURE__ */ import_react.default.createElement(YatzyEditorPanel, {
+	}, t("tapCellHint"))), /* @__PURE__ */ import_react.default.createElement(GtMoreSheet, {
+		open: moreOpen,
+		onClose: () => setMoreOpen(false),
+		label: t("gtMore"),
+		tk,
+		theme
+	}, yzActs), /* @__PURE__ */ import_react.default.createElement(YatzyEditorPanel, {
 		editing,
 		players,
 		scores,
@@ -108204,7 +108439,7 @@ function YatzyGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 }
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.04-2";
+var APP_BUILD = "2026.11.04-3";
 // web/src/app/storage.js
 var storage_exports = /* @__PURE__ */ __exportAll({
 	GT_CAT_KEYS: () => GT_CAT_KEYS,
@@ -108326,7 +108561,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.04-2");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.04-3");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -110632,7 +110867,7 @@ function UpdateBanner() {
 		let alive = true;
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.04-2") {
+				if (alive && v && v.build && v.build !== "2026.11.04-3") {
 					setReady(true);
 					setHidden(false);
 					try {

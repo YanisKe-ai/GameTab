@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.04-3 (04.11.2026 22:59)
+- Mehr-Menü in allen Spielen mit Fussknöpfen, Schieber ohne Führt-Hinweis
+
 ## 2026.11.04-2 (04.11.2026 22:49)
 - Schieber: Rechnen im Eingabefeld, Weis-Spielerauswahl, Turnierpartie auf die Tafel übernehmen
 

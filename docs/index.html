@@ -42647,6 +42647,26 @@ var SCHIEBER_PL_CSS = `
 [data-phone-landscape] .gt-sch-split>.gtL-col-side{grid-column:1;grid-row:2;margin-top:12px}
 [data-phone-landscape] .gt-sch-split>.gtL-col-side2{grid-column:1;grid-row:3}}
 [data-phone-landscape] .gt-sch-target{min-height:44px;width:84px!important;box-sizing:border-box}
+.gt-sch-classic{background:#F5EAD6 url(./img/sch-papier.webp)!important;display:flex;flex-direction:column;box-sizing:border-box}
+.gt-sch-classic>.gt-sch-sheet{width:100%;flex:none;background:none!important;box-shadow:none!important}
+.gt-sch-classic>.gt-sch-sheet.paper-grid::before,.gt-sch-classic>.gt-sch-sheet.paper-grid::after{display:none!important}
+.gt-sch-classic .gt-sch-board{background:#2D2F30 url(./img/sch-schiefer.webp)!important;box-shadow:inset 0 0 0 1px rgba(245,234,214,.28)!important}
+.gt-sch-classic .gt-sch-div{background:rgba(245,234,214,.55)!important}
+.gt-sch-classic .gt-gamehead h1{color:#23211E!important}
+.gt-sch-classic .gt-gamehead h1+*{color:#3B3833!important}
+.gt-sch-classic .gt-gamehead.is-stuck{background:#F5EAD6!important;background-image:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;box-shadow:0 1px 0 rgba(35,33,30,.16)!important}
+.gt-sch-classic .gt-hf{background:#1F2021!important;color:#F5EAD6!important;border-color:#1F2021!important}
+.gt-sch-classic .gt-weis-open,.gt-sch-classic .gt-sch-target{background:#1F2021!important;background-image:none!important;color:#F5EAD6!important;border-color:#1F2021!important}
+.gt-sch-classic .gt-sch-split label{color:#23211E!important}
+.gt-sch-classic .gt-sch-tourtag,.gt-sch-classic .gt-sch-win{color:#23211E!important;border-color:#23211E!important}
+.gt-sch-classic .gt-foot-acts .gt-sch-act-q{background:#1F2021!important;color:#F5EAD6!important;border-color:#1F2021!important}
+.gt-sch-deco{flex:1 1 0;min-height:0;position:relative;overflow:hidden;margin:0 -12px;container-type:size;pointer-events:none}
+.gt-sch-deco img{position:absolute;top:max(8px,calc(100cqh - min(39.3cqw,240px)*.92));width:min(39.3cqw,240px);height:auto;pointer-events:none;-webkit-user-select:none;user-select:none}
+.gt-sch-bauer{left:0}
+.gt-sch-dame{right:0}
+@container (max-height:60px){.gt-sch-deco img{display:none}}
+[data-phone-landscape] .gt-sch-deco{display:none}
+@media (display-mode:standalone){.gt-sch-classic::before{content:"";position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top);background:#1F2021;z-index:30}}
 .gt-weis-lap{display:none}
 .gtL-content .gt-weis-lap{display:block}
 .gtL-content .gt-weis-sum,.gtL-content .gt-weis-brief{display:none}
@@ -44296,7 +44316,7 @@ function SchieberGame({ teams, setTeams, target, setTarget, phase, setPhase, onB
 		marginTop: 14
 	} }, /* @__PURE__ */ import_react.default.createElement("button", {
 		...gtHold(resetDone, resetTap),
-		className: "gt-sch-act",
+		className: "gt-sch-act" + (confirmingReset ? "" : " gt-sch-act-q"),
 		style: {
 			flex: 1,
 			border: `1px solid ${confirmingReset ? HUES[0] : tk.border}`,
@@ -44317,7 +44337,7 @@ function SchieberGame({ teams, setTeams, target, setTarget, phase, setPhase, onB
 		again: t("confirmAgain")
 	})), /* @__PURE__ */ import_react.default.createElement("button", {
 		onClick: teamsTap,
-		className: "gt-sch-act",
+		className: "gt-sch-act" + (confirmingSetup ? "" : " gt-sch-act-q"),
 		style: {
 			flex: 1,
 			border: `1px solid ${confirmingSetup ? "#2F6B52" : tk.border}`,
@@ -44364,7 +44384,7 @@ function SchieberGame({ teams, setTeams, target, setTarget, phase, setPhase, onB
 		theme
 	})));
 	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage gt-sch-page",
+		className: "gtL-shellpage gt-sch-page gt-sch-classic",
 		style: {
 			...pageShellStyle(theme),
 			padding: `20px 12px ${editing ? 140 : 32}px`
@@ -44456,19 +44476,22 @@ function SchieberGame({ teams, setTeams, target, setTarget, phase, setPhase, onB
 			background: tk.card,
 			color: tk.ink
 		}
-	}))), winnerIdx !== -1 && /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		border: `1px solid ${tk.gold}`,
-		color: tk.gold,
-		borderRadius: 4,
-		padding: "12px 14px",
-		marginBottom: 12,
-		fontSize: 13,
-		fontWeight: 600,
-		textAlign: "center",
-		letterSpacing: "0.03em",
-		fontFamily: "'Baloo 2', sans-serif",
-		background: "rgba(168,119,32,0.07)"
-	} }, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+	}))), winnerIdx !== -1 && /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gt-sch-win",
+		style: {
+			border: `1px solid ${tk.gold}`,
+			color: tk.gold,
+			borderRadius: 4,
+			padding: "12px 14px",
+			marginBottom: 12,
+			fontSize: 13,
+			fontWeight: 600,
+			textAlign: "center",
+			letterSpacing: "0.03em",
+			fontFamily: "'Baloo 2', sans-serif",
+			background: "rgba(168,119,32,0.07)"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
 		name: "party",
 		size: 14,
 		color: "currentColor",
@@ -44545,7 +44568,21 @@ function SchieberGame({ teams, setTeams, target, setTarget, phase, setPhase, onB
 		},
 		t,
 		theme
-	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "gt-foot-acts" }, schActs)))), /* @__PURE__ */ import_react.default.createElement(SchieberEditorPanel, {
+	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "gt-foot-acts" }, schActs)))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gt-sch-deco",
+		"aria-hidden": "true",
+		style: { marginBottom: -(editing ? 140 : 32) }
+	}, /* @__PURE__ */ import_react.default.createElement("img", {
+		className: "gt-sch-bauer",
+		src: "./img/sch-bauer.webp",
+		alt: "",
+		draggable: false
+	}), /* @__PURE__ */ import_react.default.createElement("img", {
+		className: "gt-sch-dame",
+		src: "./img/sch-dame.webp",
+		alt: "",
+		draggable: false
+	})), /* @__PURE__ */ import_react.default.createElement(SchieberEditorPanel, {
 		editing,
 		teams,
 		onSave: saveEntry,
@@ -108417,7 +108454,7 @@ function YatzyGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 }
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.04-4";
+var APP_BUILD = "2026.11.04-5";
 // web/src/app/storage.js
 var storage_exports = /* @__PURE__ */ __exportAll({
 	GT_CAT_KEYS: () => GT_CAT_KEYS,
@@ -108539,7 +108576,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.04-4");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.04-5");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -110845,7 +110882,7 @@ function UpdateBanner() {
 		let alive = true;
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.04-4") {
+				if (alive && v && v.build && v.build !== "2026.11.04-5") {
 					setReady(true);
 					setHidden(false);
 					try {

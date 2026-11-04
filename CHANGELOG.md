@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.04-5 (04.11.2026 23:29)
+- Schieber im neuen Design: Creme, Schiefertafel, Bauer und Dame
+
 ## 2026.11.04-4 (04.11.2026 23:11)
 - Schieber: im Punktefeld nur noch Mal-Taste, Eingabe aufgeräumt
 

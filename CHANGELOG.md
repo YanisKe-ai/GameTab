@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.04-1 (04.11.2026 22:25)
+- Schieber: kein Scrollen mehr, Weis kompakt, Neues Spiel und Teams im Menü
+
 ## 2026.11.01-2 (01.11.2026 03:34)
 - Neu: jedes Spiel hat sein eigenes Ergebnisbild, Partyspiele können jetzt auch teilen
 

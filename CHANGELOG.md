@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.04-7 (04.11.2026 23:49)
+- Schieber: mehr Platz für die Punktestriche
+
 ## 2026.11.04-6 (04.11.2026 23:36)
 - Schieber: Noir schwarz-weiss, Tafel ohne Grünstich
 

@@ -42549,29 +42549,37 @@ function SchieberBoardContent({ team, target, t }) {
 	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		position: "relative",
 		padding: "0 60px 0 0"
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 8
-	} }, row(renderTallyPlan(hundredsPlan, hundredsOldLen, counter)), row(FiftyRow({
+	} }, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gt-sch-rows",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 30,
+			margin: "-17px 0 -27px"
+		}
+	}, row(renderTallyPlan(hundredsPlan, hundredsOldLen, counter)), row(FiftyRow({
 		oldCount: oldFifties,
 		newCount: allFifties - oldFifties
-	}, counter)), row(renderTallyPlan(twentiesPlan, twentiesOldLen, counter))), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		position: "absolute",
-		top: 0,
-		right: 34,
-		bottom: 0,
-		display: "flex",
-		alignItems: "center"
-	} }, /* @__PURE__ */ import_react.default.createElement(PendingNumbers, { pending })), /* @__PURE__ */ import_react.default.createElement("button", {
+	}, counter)), row(renderTallyPlan(twentiesPlan, twentiesOldLen, counter))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gt-sch-pend",
+		style: {
+			position: "absolute",
+			top: 10,
+			right: 34,
+			bottom: 0,
+			display: "flex",
+			alignItems: "center"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement(PendingNumbers, { pending })), /* @__PURE__ */ import_react.default.createElement("button", {
 		onClick: (e) => {
 			e.stopPropagation();
 			setShowDigits((s) => !s);
 		},
 		"aria-label": t("showDigitalScore"),
+		className: "gt-sch-hash",
 		style: {
 			position: "absolute",
-			top: "50%",
+			top: "calc(50% + 5px)",
 			right: -9,
 			transform: "translateY(-50%)",
 			width: 44,
@@ -42598,18 +42606,21 @@ function SchieberBoardContent({ team, target, t }) {
 		display: "flex",
 		alignItems: "center",
 		justifyContent: "center"
-	} }, "#")), showDigits && /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		position: "absolute",
-		top: "50%",
-		right: 32,
-		transform: "translateY(-50%)",
-		background: "#0B0F0C",
-		border: "1px solid rgba(244,241,232,0.25)",
-		borderRadius: 5,
-		padding: "6px 10px",
-		boxShadow: "0 4px 12px rgba(0,0,0,0.4)",
-		zIndex: 2
-	} }, /* @__PURE__ */ import_react.default.createElement(GtCount, {
+	} }, "#")), showDigits && /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gt-sch-hash",
+		style: {
+			position: "absolute",
+			top: "calc(50% + 5px)",
+			right: 32,
+			transform: "translateY(-50%)",
+			background: "#0B0F0C",
+			border: "1px solid rgba(244,241,232,0.25)",
+			borderRadius: 5,
+			padding: "6px 10px",
+			boxShadow: "0 4px 12px rgba(0,0,0,0.4)",
+			zIndex: 2
+		}
+	}, /* @__PURE__ */ import_react.default.createElement(GtCount, {
 		as: "div",
 		value: total,
 		good: "high",
@@ -42683,6 +42694,9 @@ var SCHIEBER_PL_CSS = `
 [data-phone-landscape] .gt-sch-board>.gt-sch-div{height:auto!important;grid-column:2;grid-row:1;align-self:stretch}
 [data-phone-landscape] .gt-sch-board>.gt-sch-t1{grid-column:3;grid-row:1;min-width:0}
 [data-phone-landscape] .gt-sch-half{padding:10px 14px 8px!important}
+[data-phone-landscape] .gt-sch-rows{gap:8px!important;margin:0!important}
+[data-phone-landscape] .gt-sch-pend{top:0!important}
+[data-phone-landscape] .gt-sch-hash{top:50%!important}
 [data-phone-landscape] .gt-sch-name{min-height:44px;width:auto!important;flex:1 1 auto;min-width:0;max-width:200px;text-overflow:ellipsis}
 [data-phone-landscape] .gt-sch-ed{top:0!important;bottom:0!important;left:auto!important;right:0!important;transform:none!important;width:min(500px,64vw);box-sizing:border-box;border-top:none!important;border-left:2px solid var(--gt-sch-acc);box-shadow:-10px 0 28px rgba(0,0,0,.32)!important;padding:calc(8px + var(--pl-sat)) calc(14px + var(--pl-sar)) calc(8px + var(--pl-sab)) 16px!important;overflow-y:auto;overscroll-behavior:contain;display:flex;align-items:center}
 [data-phone-landscape] .gt-sch-ed[data-side=t1]{right:auto!important;left:0!important;border-left:none;border-right:2px solid var(--gt-sch-acc);box-shadow:10px 0 28px rgba(0,0,0,.32)!important;padding:calc(8px + var(--pl-sat)) 16px calc(8px + var(--pl-sab)) calc(14px + var(--pl-sal))!important}
@@ -108461,7 +108475,7 @@ function YatzyGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 }
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.04-6";
+var APP_BUILD = "2026.11.04-7";
 // web/src/app/storage.js
 var storage_exports = /* @__PURE__ */ __exportAll({
 	GT_CAT_KEYS: () => GT_CAT_KEYS,
@@ -108583,7 +108597,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.04-6");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.04-7");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -110889,7 +110903,7 @@ function UpdateBanner() {
 		let alive = true;
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.04-6") {
+				if (alive && v && v.build && v.build !== "2026.11.04-7") {
 					setReady(true);
 					setHidden(false);
 					try {

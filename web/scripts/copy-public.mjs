@@ -8,8 +8,9 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", ".
 const PUB = path.join(ROOT, "web", "public");
 const ITEMS = ["sw.js", "version.json", "manifest.webmanifest", "fonts", "icons", "img", "datenschutz.html", "impressum.html"];
 
-fs.rmSync(PUB, { recursive: true, force: true });
+// Ordner selbst behalten: seine Markierung "nicht in iCloud" ginge sonst verloren (iCloud loescht sonst frisch kopierte Dateien).
 fs.mkdirSync(PUB, { recursive: true });
+for (const e of fs.readdirSync(PUB)) fs.rmSync(path.join(PUB, e), { recursive: true, force: true });
 let n = 0;
 for (const it of ITEMS) {
   const src = path.join(ROOT, it);

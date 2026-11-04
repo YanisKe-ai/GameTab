@@ -362,10 +362,11 @@ def t_differenzler(pg, env):
 @test("Jass Schieber")
 def t_schieber(pg, env):
     open_game(pg, "Schreibunterlagen", "Jass", "Schieber"); press_start(pg)
-    click(pg, pg.get_by_label("Taschenrechner öffnen").first)
-    check(has_text(pg, r"TASCHENRECHNER"), "Schieber: Taschenrechner fehlt")
-    click(pg, pg.get_by_text("TASCHENRECHNER").locator("xpath=..").locator("button").first)  # Schliessen-Kreuz
-    check(not has_text(pg, r"TASCHENRECHNER"), "Schieber: Taschenrechner schliesst nicht")
+    click(pg, btn_re(pg, "Punkte eintragen").last)  # Rechnen im Eingabefeld
+    for k in ["1", "5", "7", "×", "2", "−", "1", "4"]:
+        click(pg, pg.locator(".gt-sch-edpad button", has_text=re.compile("^" + re.escape(k) + "$")).first, 120)
+    check(has_text(pg, r"157×2−14 = 300"), "Schieber: Rechnung im Eingabefeld fehlt")
+    click(pg, pg.locator(".gt-sch-x").first)
     for _ in range(2):
         click(pg, btn_re(pg, "Weis und Stöck"))
         click(pg, pg.get_by_role("button", name=re.compile("^Neunblatt")))

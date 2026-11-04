@@ -1,7 +1,7 @@
 // Mehr-Menue: Fussknoepfe einer Partie (Neues Spiel, Spieler aendern ...) liegen im Handy-Modus in diesem Fenster,
 // geoeffnet ueber die drei Punkte im Kopf (GameHeader onMore/moreLabel). Im Laptop-Modus bleiben sie sichtbar in der Seite.
 // Nutzung: const acts=<...Knoepfe...>; in der Seite <div className="gt-foot-acts">{acts}</div>, dazu <GtMoreSheet open onClose label tk theme>{acts}</GtMoreSheet>.
-import { React, useEffect } from "../vendor/react-globals.js";
+import { React } from "../vendor/react-globals.js";
 
 const GT_MORE_CSS = `.gt-foot-acts{display:none}
 .gtL-content .gt-foot-acts{display:block}
@@ -9,7 +9,7 @@ const GT_MORE_CSS = `.gt-foot-acts{display:none}
 .gt-more-sheet button{min-height:48px}`;
 
 function GtMoreSheet({ open, onClose, label, tk, theme, children }) {
-  useEffect(() => {
+  React.useEffect(() => {
     if (!open) return undefined;
     const onKey = (e) => { if (e.key === "Escape") onClose(); };
     window.addEventListener("keydown", onKey);

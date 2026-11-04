@@ -71,10 +71,11 @@ def flow_yatzy4(pg):
 def flow_schieber(pg):
     R.open_game(pg, "Schreibunterlagen", "Jass", "Schieber"); R.press_start(pg)
     for _ in range(2):
-        R.click(pg, R.btn_re(pg, "Wyys und Stöck"))
+        R.click(pg, R.btn_re(pg, "Wyys und Stöck, Team 1"))
+        R.click(pg, R.btn_re(pg, "Weitere Wyys"))
         R.click(pg, pg.get_by_role("button", name=re.compile("^Neunblatt")))
         R.click(pg, R.btn(pg, "×3"))
-        R.click(pg, R.btn_re(pg, "Punkte eintragen").last, 1500)
+        R.click(pg, R.btn_re(pg, "Punkte für Team 1 buchen"), 1500)
 
 
 def fill_names(pg, names):

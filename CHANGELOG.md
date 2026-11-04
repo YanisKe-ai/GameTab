@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.05-2 (05.11.2026 00:44)
+- Schieber: Wyys & Stöck neu mit Knopf pro Team, Ziel löst keinen falschen Sieg mehr aus
+
 ## 2026.11.05-1 (05.11.2026 00:27)
 - Massive 3D-Blöcke auf Podest und Statistik, Schieber: Zielzahl auf dem Mittelstrich, längere Punktestriche
 

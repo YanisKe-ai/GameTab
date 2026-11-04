@@ -353,6 +353,30 @@ def t_differenzler(pg, env):
         finish(pg, "Differenzler", env, True)
 
 
+@test("Schieber Wyys pro Team und Ziel")
+def t_schieber_wyys(pg, env):
+    open_game(pg, "Schreibunterlagen", "Jass", "Schieber"); press_start(pg)
+    goal = pg.locator(".gt-sch-target")
+    goal.click(); pg.keyboard.press("Backspace"); wait(pg, 300); pg.keyboard.type("5"); wait(pg, 300)
+    check(pg.locator("[data-gt-podium]").count() == 0, "Ziel tippen loest Sieg aus")
+    pg.keyboard.type("00"); pg.keyboard.press("Enter"); wait(pg, 300)
+    check(goal.input_value() == "500", f"Ziel {goal.input_value()}")
+    tile = lambda n: pg.get_by_role("button", name=re.compile("^" + n))
+    click(pg, btn_re(pg, "Wyys und Stöck, Team 1"), 500); click(pg, tile("Dreiblatt")); click(pg, tile("Vierblatt"))
+    check(has_text(pg, r"70 Punkte für Team 1 buchen"), "Summe 70 fehlt")
+    click(pg, tile("Vierblatt")); check(has_text(pg, r"20 Punkte für Team 1 buchen"), "Abwaehlen falsch")
+    pg.get_by_role("button", name=re.compile("Punkte für Team 1 buchen")).dblclick(); wait(pg, 800)
+    phone = pg.viewport_size["width"] < 768  # Laptop zeigt die Tabelle statt der Kurzzeile
+    check(not phone or has_text(pg, r"Team 1: 20"), "Team 1 hat nicht genau 20")
+    click(pg, btn_re(pg, "Wyys und Stöck, Team 2"), 500)
+    check(pg.get_by_role("button", name=re.compile("^Team 1$")).count() == 0, "Teamwahl noch da")
+    click(pg, tile("Vierblatt")); click(pg, btn(pg, "×2")); click(pg, btn_re(pg, "100 Punkte für Team 2 buchen"), 800)
+    check(not phone or has_text(pg, r"Team 2: 100"), "Team 2 hat nicht genau 100")
+    click(pg, btn_re(pg, "Wyys und Stöck, Team 1"), 500); click(pg, tile("Fünfblatt"))
+    click(pg, pg.get_by_role("button", name="Schliessen").first, 500)
+    check(not phone or has_text(pg, r"Team 1: 20"), "Abbrechen hat geschrieben")
+
+
 @test("Jass Schieber")
 def t_schieber(pg, env):
     open_game(pg, "Schreibunterlagen", "Jass", "Schieber"); press_start(pg)
@@ -362,10 +386,11 @@ def t_schieber(pg, env):
     check(has_text(pg, r"157×2 = 314"), "Schieber: Rechnung im Eingabefeld fehlt")
     click(pg, pg.locator(".gt-sch-x").first)
     for _ in range(2):
-        click(pg, btn_re(pg, "Wyys und Stöck"))
+        click(pg, btn_re(pg, "Wyys und Stöck, Team 1"))
+        click(pg, btn_re(pg, "Weitere Wyys"))
         click(pg, pg.get_by_role("button", name=re.compile("^Neunblatt")))
         click(pg, btn(pg, "×3"))
-        click(pg, btn_re(pg, "Punkte eintragen").last, 1500)
+        click(pg, btn_re(pg, "Punkte für Team 1 buchen"), 1500)
     expect_text(pg, r"Team 1 gewinnt", "Schieber: Sieger nicht angezeigt")
     finish(pg, "Schieber", env, True)
 

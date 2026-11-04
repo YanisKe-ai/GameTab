@@ -2,6 +2,7 @@
 import { React } from "../../vendor/react-globals.js";
 import { useEffect, useRef, useState } from "../../prelude.js";
 import { GtHoldLabel, gtHold } from "../../shared/fx.js";
+import { GtMoreSheet } from "../../shared/more-sheet.js";
 import { GLOBAL_STYLES } from "../../styles/global.js";
 import { useT } from "../../i18n/use-t.js";
 import { minigolfPageShellStyle, minigolfTokens, shellTokens } from "../../themes/tokens.js";
@@ -117,7 +118,7 @@ function MgFlag({ mg, size = 44 }) {
     </svg>
   );
 }
-function MinigolfTopBar({ subtitle, onBack, theme, t, onHome, rulesText, onEndGame }) {
+function MinigolfTopBar({ subtitle, onBack, theme, t, onHome, rulesText, onEndGame, onMore, moreLabel }) {
   const mg = minigolfTokens(theme);
   return (
     <GameHeader
@@ -131,6 +132,8 @@ function MinigolfTopBar({ subtitle, onBack, theme, t, onHome, rulesText, onEndGa
       icon={<MinigolfLogo color={mg.accInk} />}
       onHome={onHome}
       onEndGame={onEndGame}
+      onMore={onMore}
+      moreLabel={moreLabel}
       rulesText={rulesText}
     />
   );
@@ -586,6 +589,7 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
   const scores = state.scores;
   const [editing, setEditing] = useState(null);
   const [confirmingReset, setConfirmingReset] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
   const [confirmingSetup, setConfirmingSetup] = useState(false);
   const t = useT(lang);
   const mg = minigolfTokens(theme);
@@ -636,6 +640,31 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
     onEditPlayers();
     setConfirmingSetup(false);
   };
+  const resetDone = () => {
+    setMoreOpen(false);
+    onResetSheet();
+    setConfirmingReset(false);
+  };
+  const resetTap = () => {
+    if (confirmingReset) setMoreOpen(false);
+    reset();
+  };
+  const teamsTap = () => {
+    if (confirmingSetup) setMoreOpen(false);
+    editPlayers();
+  };
+  const mgActs = () => (<div style={{ display: "flex", gap: 8, marginTop: 8 }}>
+              <button
+                className="mgPress"
+                {...gtHold(resetDone, resetTap)}
+                style={sideBtn(confirmingReset, mg.err, "#FFFFFF")}
+              >
+                {confirmingReset ? t("confirmAgain") : <GtHoldLabel label={t("newRound")} hint={t("gtHoldHint")} again={t("confirmAgain")} />}
+              </button>
+              <button className="mgPress" onClick={teamsTap} style={sideBtn(confirmingSetup, mg.acc, mg.onAcc)}>
+                {confirmingSetup ? t("confirmAgain") : t("changePlayers")}
+              </button>
+            </div>);
   const names = (list) => gtJoinNames(list.map((p) => p.name), t);
   const holesTxt = (hs) => hs.map((h) => h + 1).join(", ");
   // Gesperrte Hauptaktion bleibt antippbar und fuehrt zur ersten fehlenden Person
@@ -789,7 +818,7 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
         shareExtra={() => ({ players: players.map((p, i) => ({ name: p.name, total: totals[i], strokes: Array.from({ length: MINIGOLF_HOLES }, (_, h) => { const v = (scores[p.id] || [])[h]; return v == null || v === "" ? null : Number(v); }) })) })}
       />
       <div className="gtL-page gtL-game mg-inner" style={{ maxWidth: 520, margin: "0 auto", position: "relative" }}>
-        <MinigolfTopBar subtitle={t("minigolfSubtitle")} onBack={onBack} theme={theme} t={t} onHome={onHome} onEndGame={onEndGame} rulesText={t("rulesMinigolf")} />
+        <MinigolfTopBar subtitle={t("minigolfSubtitle")} onBack={onBack} theme={theme} t={t} onHome={onHome} onEndGame={onEndGame} onMore={() => { setEditing(null); setMoreOpen(true); }} moreLabel={t("gtMore")} rulesText={t("rulesMinigolf")} />
         <div className={"gtL-split gtL-e-block mg-split mg-tab-" + tab}>
           <div className="gtL-col-main mg-main">
             {winBanner}
@@ -854,24 +883,11 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
             </div>
           </div>
           <div className="gtL-col-side2 mg-side2">
-            <div style={{ display: "flex", gap: 8, marginTop: 8 }}>
-              <button
-                className="mgPress"
-                {...gtHold(() => {
-                  onResetSheet();
-                  setConfirmingReset(false);
-                }, reset)}
-                style={sideBtn(confirmingReset, mg.err, "#FFFFFF")}
-              >
-                {confirmingReset ? t("confirmAgain") : <GtHoldLabel label={t("newRound")} hint={t("gtHoldHint")} again={t("confirmAgain")} />}
-              </button>
-              <button className="mgPress" onClick={editPlayers} style={sideBtn(confirmingSetup, mg.acc, mg.onAcc)}>
-                {confirmingSetup ? t("confirmAgain") : t("changePlayers")}
-              </button>
-            </div>
+            <div className="gt-foot-acts">{mgActs()}</div>
           </div>
         </div>
       </div>
+      <GtMoreSheet open={moreOpen} onClose={() => setMoreOpen(false)} label={t("gtMore")} tk={tk} theme={theme}>{mgActs()}</GtMoreSheet>
       <MinigolfEditorPanel editing={editing} players={players} value={editing ? mgEff(ui, editing.playerId, editing.holeIdx) : null} onSave={saveDraft} onClose={() => setEditing(null)} t={t} mg={mg} />
     </div>
   );

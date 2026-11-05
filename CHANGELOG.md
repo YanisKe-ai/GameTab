@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.06-2 (06.11.2026 00:27)
+- Grundgerüst, Punktespiele und Texte bereinigt
+
 ## 2026.11.06-1 (06.11.2026 00:03)
 - Partyspiele: Timer, Abstimmung, Rollen, Inhalte bereinigt
 

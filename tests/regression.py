@@ -213,12 +213,16 @@ def podium_and_share(pg, where):
     check(share.count() > 0, f"{where}: Knopf 'Als Bild teilen' fehlt")
     click(pg, share.first, 300)
     t0 = time.time()
+    retried = False
     while True:  # Bilder mit eigenen Grafiken brauchen je nach Rechnerlast mehrere Sekunden
         ok = pg.evaluate(
             "()=>[...document.querySelectorAll('.gtsp-ov img')].some(i=>i.naturalWidth>50)"
         )
-        if ok or time.time() - t0 > 12:
+        if ok or time.time() - t0 > 14:
             break
+        if not retried and time.time() - t0 > 6:  # Podest-Einlauf kann den ersten Klick als Ueberspringen nehmen
+            retried = True
+            click(pg, share.first, 300)
         pg.wait_for_timeout(200)
     if time.time() - t0 > 1.2:
         print(f"      Bildvorschau nach {time.time() - t0:.1f} s: {where}")

@@ -1,221 +1,175 @@
-// Ergebnisbild Schieber (Entwurf dev-notes/ergebnisbild-entwuerfe/pro-spiel/schieber.png, Look der App-Tafel).
-// Daten (shareExtra aus SchieberGame): teams[{name, entries}], target. Striche mit der echten Strich-Logik der App.
-// Oben Team 2, unten Team 1 wie in der App. Das Schieber-TURNIER hat eigene Exporte (schieber-sheet.js) und nutzt diese Vorlage nicht.
-import { schieberTallyPlan, schieberCumulativeCount, schieberTwentiesAndPending, seededJitter } from "../../games/schieber/game.js";
+// Ergebnisbild Schieber: Titelseite einer Wirtshaus-Zeitung (Entwurf F, dev-notes/schieber-export/neu/, von Yanis gewaehlt am 05.11.2026).
+// Daten (shareExtra aus SchieberGame): teams[{name, entries}], target. Jedes Team traegt selbst ein, darum heissen die Zeilen Eintraege, nicht Runden.
+// Das Schieber-TURNIER hat eigene Exporte (schieber-sheet.js) und nutzt diese Vorlage nicht.
+import BAUER_URL from "../../assets/img/sch-bauer.webp";
+import DAME_URL from "../../assets/img/sch-dame.webp";
+import PAPIER_URL from "../../assets/img/sch-papier.webp";
 
-const CH = "#F4F1E8", GOLD = "#E9C46A", GOLD2 = "#D9A94C", MUTE = "#8A93A8";
-const S = 3; // SVG-Einheiten der App-Striche -> px
-const BX = 60, BY = 520, BW = 960, BH = 770, HALF = 385;
-
-/* ---------- Striche (gleiche Formen und Zitter-Werte wie KiloMark, VMark, TallyGroup, FiftyMark der App) ---------- */
-function stroke(c, w, a) { c.strokeStyle = CH; c.lineWidth = w; c.lineCap = "round"; c.lineJoin = "round"; c.globalAlpha = a; c.stroke(); c.globalAlpha = 1; }
-function rotAbout(c, deg, x, y) { c.translate(x, y); c.rotate(deg * Math.PI / 180); c.translate(-x, -y); }
-function line(c, x1, y1, x2, y2, w, a, deg, ox, oy) { c.save(); if (deg) rotAbout(c, deg, ox, oy); c.beginPath(); c.moveTo(x1, y1); c.lineTo(x2, y2); stroke(c, w, a); c.restore(); }
-const MARK = {
-  K: { w: 38, h: 34, draw(c, seed) { const j = seededJitter(seed * 3 + 11) * 2; c.save(); rotAbout(c, j, 19, 17); c.beginPath(); c.moveTo(6, 4); c.lineTo(32, 30); stroke(c, 2.9, 0.95); c.beginPath(); c.moveTo(32, 4); c.lineTo(6, 30); stroke(c, 2.9, 0.95); c.restore(); } },
-  V: { w: 30, h: 30, draw(c, seed) { c.save(); rotAbout(c, seededJitter(seed) * 2, 15, 15); c.beginPath(); c.moveTo(4, 4); c.lineTo(15, 26); c.lineTo(26, 4); stroke(c, 2.6, 0.92); c.restore(); } },
-};
-function groupW(n) { return 6 + n * 7; }
-function drawGroup(c, n, seed) {
-  const w = groupW(n), vc = n === 5 ? 4 : n;
-  for (let i = 0; i < vc; i++) { const x = 5 + i * 7; line(c, x, 4, x, 26, 2.4, 0.92, seededJitter(seed * 5 + i) * 3, x, 15); }
-  if (n === 5) line(c, 2, 3, w - 2, 27, 2.6, 0.92);
-}
-function drawFifty(c, pair, seed) {
-  line(c, 4, 20, 20, 4, 2.4, 0.92, seededJitter(seed) * 3, 12, 12);
-  if (pair === 2) line(c, 4, 4, 20, 20, 2.4, 0.92, seededJitter(seed + 50) * 4, 12, 12);
-}
-/* Plan der App -> Elemente mit Breite/Hoehe in px (wie renderTallyPlan: K, V, Gruppen nach groupSeed) */
-function clusters(plan) {
-  const out = []; let i = 0;
-  while (i < plan.length) {
-    const it = plan[i];
-    if (it.kind === "K" || it.kind === "V") { const m = MARK[it.kind]; const ci = out.length; out.push({ w: m.w * S, h: m.h * S, draw: (c) => m.draw(c, ci) }); i++; continue; }
-    const sd = it.groupSeed; let n = 0; while (i < plan.length && plan[i].kind === "stroke" && plan[i].groupSeed === sd) { n++; i++; }
-    const ci = out.length; out.push({ w: groupW(n) * S, h: 30 * S, draw: (c) => drawGroup(c, n, ci) });
-  }
-  return out;
-}
-function marks(entries) {
-  const fif = []; let left = schieberCumulativeCount(entries, "fifties"), k = 0;
-  while (left > 0) { const sz = Math.min(2, left); const gi = k++; fif.push({ w: 24 * S, h: 24 * S, draw: (c) => drawFifty(c, sz, gi) }); left -= sz; }
-  const tw = schieberTwentiesAndPending(entries);
-  return { rows: [clusters(schieberTallyPlan(entries, "hundreds")), fif, clusters(tw.plan)], pending: tw.pending.map((p) => p.value) };
-}
-/* Zeilen umbrechen (wie flex-wrap der App), Massstab so waehlen, dass alles in maxW x maxH passt */
-const GAP = 14, RGAP = 10, RMIN = 104, PGAP = 22;
-function layoutMarks(c, k, m) {
-  k.setFont(c, 400, 56, k.F_KALAM);
-  const pw = m.pending.length ? Math.max(50, ...m.pending.map((v) => c.measureText(String(v)).width + 16)) : 0;
-  const ph = m.pending.length ? m.pending.length * 60 + (m.pending.length - 1) * 12 : 0;
-  for (let s = 1; s >= 0.3; s -= 0.05) {
-    const rowsW = 452 / s - (pw ? pw + PGAP : 0);
-    const lines = m.rows.map((r) => { const ls = [[]]; let w = 0; r.forEach((cl) => { const add = (ls[ls.length - 1].length ? GAP : 0) + cl.w; if (w + add > rowsW && ls[ls.length - 1].length) { ls.push([cl]); w = cl.w; } else { ls[ls.length - 1].push(cl); w += add; } }); return ls; });
-    const rowsH = lines.reduce((a, ls) => a + ls.length * RMIN + (ls.length - 1) * 6, 0) + RGAP * 2;
-    const lw = (l) => l.reduce((a, cl, i) => a + cl.w + (i ? GAP : 0), 0);
-    const contentW = Math.max(0, ...lines.flat().map(lw));
-    if (rowsH * s <= 340 && Math.max(rowsH, ph) * s <= 340 + 1) return { s, lines, pw, ph, rowsH, contentW, w: contentW + (pw ? pw + PGAP : 0), h: Math.max(rowsH, ph) };
-    if (s <= 0.3 + 1e-6) return { s, lines, pw, ph, rowsH, contentW, w: contentW + (pw ? pw + PGAP : 0), h: Math.max(rowsH, ph), clip: true };
-  }
-}
-/* Strichblock zeichnen. right=true: wie .marks.rt (Zahlen links, Striche rechtsbuendig, Anker oben rechts) */
-function drawMarks(c, k, m, ax, ay, right) {
-  const L = layoutMarks(c, k, m);
-  c.save();
-  if (L.clip) { c.beginPath(); c.rect(BX, ay - 10, BW, HALF - 20); c.clip(); }
-  c.translate(ax, ay); c.scale(L.s, L.s);
-  const totalW = Math.min(L.w, 452 / L.s);
-  const x0 = right ? -totalW : 0;
-  const rowsX = right ? x0 + (L.pw ? L.pw + PGAP : 0) : 0;
-  const rowsRight = rowsX + L.contentW;
-  let y = 0;
-  L.lines.forEach((ls) => {
-    ls.forEach((l) => {
-      const lw = l.reduce((a, cl, i) => a + cl.w + (i ? GAP : 0), 0);
-      let x = right ? rowsRight - lw : rowsX;
-      l.forEach((cl) => { c.save(); c.translate(x, y + (RMIN - cl.h) / 2); c.scale(S, S); cl.draw(c); c.restore(); x += cl.w + GAP; });
-      y += RMIN + 6;
-    });
-    y += RGAP - 6;
-  });
-  if (L.pw) {
-    const px = right ? x0 + L.pw / 2 : L.contentW + PGAP + L.pw / 2;
-    let py = (L.h - L.ph) / 2;
-    k.setFont(c, 400, 56, k.F_KALAM); c.fillStyle = CH; c.textAlign = "center";
-    m.pending.forEach((v) => {
-      const s = String(v).replace("-", "−"); c.fillText(s, px, py + 46);
-      if (v < 0) { const w = c.measureText(s).width + 16; c.fillRect(px - w / 2, py + 60, w, 3.5); }
-      py += 72;
-    });
-    c.textAlign = "left";
-  }
-  c.restore();
-}
-
-/* ---------- Bausteine ---------- */
-function bg(c, k) {
-  c.fillStyle = "#0B0E18"; c.fillRect(0, 0, k.TPL_W, k.TPL_H);
-  k.cssEllipse(c, 0, 0, k.TPL_W, k.TPL_H, 540, 0, [[0, "#1A2030"], [0.6, "#0F1320"], [1, "#0B0E18"]]);
-  const o = document.createElement("canvas"); o.width = k.TPL_W; o.height = k.TPL_H; const g = o.getContext("2d");
-  g.fillStyle = "rgba(255,255,255,0.035)";
-  for (let y = 0; y < k.TPL_H; y += 54) g.fillRect(0, y, k.TPL_W, 1);
-  for (let x = 0; x < k.TPL_W; x += 54) g.fillRect(x, 0, 1, k.TPL_H);
-  g.globalCompositeOperation = "destination-in";
-  const m = g.createLinearGradient(0, 0, 0, k.TPL_H); m.addColorStop(0, "#000"); m.addColorStop(0.7, "rgba(0,0,0,0.4)"); m.addColorStop(1, "rgba(0,0,0,0.2)");
-  g.fillStyle = m; g.fillRect(0, 0, k.TPL_W, k.TPL_H);
-  c.drawImage(o, 0, 0); o.width = o.height = 0;
-}
-function star(c, x, y, s, col) {
-  const p = [[10, 1], [12, 8], [19, 10], [12, 12], [10, 19], [8, 12], [1, 10], [8, 8]];
-  c.save(); c.translate(x, y); c.scale(s / 20, s / 20); c.beginPath(); p.forEach(([a, b], i) => (i ? c.lineTo(a, b) : c.moveTo(a, b))); c.closePath(); c.fillStyle = col; c.fill(); c.restore();
-}
-/* Punkte-Kasten: "874" gross, darunter "von 1'000". anchor: {x,y} und Ausrichtung */
-function scoreBox(c, k, d, val, win, target, x, y, alignRight, alignBottom) {
-  k.setFont(c, 700, 100, k.F_INTER); const vw = c.measureText(val).width;
-  const sub = typeof d.tr("tplOf") === "function" ? d.tr("tplOf")(target) : "/ " + target;
-  k.setFont(c, 500, 26, k.F_INTER); const sw = c.measureText(sub).width;
-  const w = Math.max(vw, sw) + 48, h = 154;
-  const bx = alignRight ? x - w : x, by = alignBottom ? y - h : y;
-  c.save(); c.shadowColor = "rgba(0,0,0,0.4)"; c.shadowBlur = 24; c.shadowOffsetY = 8; c.fillStyle = "#0B0F0C"; k.rrect(c, bx, by, w, h, 12); c.fill(); c.restore();
-  if (win) { c.strokeStyle = "rgba(217,169,76,0.33)"; c.lineWidth = 2; k.rrect(c, bx - 2, by - 2, w + 4, h + 4, 14); c.stroke(); }
-  c.strokeStyle = win ? GOLD2 : "rgba(244,241,232,0.25)"; c.lineWidth = 2; k.rrect(c, bx + 1, by + 1, w - 2, h - 2, 11); c.stroke();
-  k.setFont(c, 700, 100, k.F_INTER); c.fillStyle = win ? GOLD : "#7EE0A8"; c.fillText(val, bx + 24, k.cssBase(c, by + 10, 100));
-  k.setFont(c, 500, 26, k.F_INTER); c.fillStyle = "#8FB09E"; c.fillText(sub, bx + 24, k.cssBase(c, by + 114, 31.5));
-}
-function teamName(c, k, name, x, y, right, fromBottom) {
-  let f = k.fit(c, name, { w: 700, fam: k.F_INTER, max: 56, min: 34, maxW: 420, lines: 2 });
-  if (f.cut) f = k.fit(c, name, { w: 700, fam: k.F_INTER, max: 42, min: 24, maxW: 420, lines: 3 });
-  k.setFont(c, 700, f.size, k.F_INTER); c.fillStyle = "#FFFFFF"; c.textAlign = right ? "right" : "left";
-  const lh = f.size * 1.08, top = fromBottom ? y - lh * f.lines.length : y;
-  f.lines.forEach((ln, i) => c.fillText(ln, x, k.cssBase(c, top + i * lh, lh)));
-  c.textAlign = "left";
-}
-function half(c, k, d, team, top, isTop, win, tgt) {
-  const m = marks(team.entries);
-  const val = d.num(team.total);
-  if (isTop) {
-    drawMarks(c, k, m, BX + BW - 48, top + 18, true);
-    teamName(c, k, team.name, BX + 48, top + HALF - 58, false, true);
-    scoreBox(c, k, d, val, win, tgt, BX + 48, top + 30, false, false);
-  } else {
-    drawMarks(c, k, m, BX + 48, top + 46, false);
-    teamName(c, k, team.name, BX + BW - 48, top + 58, true, false);
-    scoreBox(c, k, d, val, win, tgt, BX + BW - 48, top + HALF - 30, true, true);
-  }
-}
+const FR_STACK = '"Fraunces","Inter","GT Clean","GT CJK",serif';
+const INK = "#241C14", TAU = Math.PI * 2;
 /* Verbform: Teamname mit Konjunktion ("Tony und Yanis") -> Mehrzahl */
 const PLURAL = /\s(und|and|et|e|y|&|\+)\s|,|\//iu;
 
-function render(d, k) {
-  const { cv, c } = k.tplCanvas();
-  const ex = d.extra;
-  const tgt = d.num(ex.target);
-  const teams = ex.teams.map((tm, i) => ({ name: d.clean(tm.name || "") || d.rows[i] && d.rows[i].name || "Team " + (i + 1), entries: tm.entries.filter((v) => typeof v === "number" && isFinite(v)), total: tm.entries.reduce((a, b) => a + (Number(b) || 0), 0) }));
+function buildModel(d) {
+  const teams = d.extra.teams.map((tm, i) => {
+    const entries = tm.entries.filter((v) => typeof v === "number" && isFinite(v));
+    return { name: d.clean(tm.name || "") || (d.rows[i] && d.rows[i].name) || "Team " + (i + 1), entries, total: entries.reduce((a, b) => a + b, 0) };
+  });
   /* Sieger aus gtEcModel (Name + Punkte), keine eigene Berechnung */
   const byName = teams.filter((tm) => d.winners.some((r) => r.name === tm.name && r.score === tm.total));
   const wins = byName.length ? byName : teams.filter((tm) => d.winners.some((r) => r.score === tm.total));
-  const isWin = (tm) => wins.indexOf(tm) >= 0;
-  bg(c, k);
-  /* Kopf: Logo, Marke, Datum */
-  const lw = k.logo(c, d.logo, 60, 56, 90, GOLD);
-  k.setFont(c, 800, 46, k.F_BALOO); c.fillStyle = GOLD; const gx = 60 + lw + 20; c.fillText("GameTab", gx, k.cssBase(c, 101 - 23, 46));
-  const gw = c.measureText("GameTab").width;
-  const df = k.fit(c, d.date, { w: 500, fam: k.F_INTER, max: 28, min: 18, maxW: 1020 - gx - gw - 30 });
-  k.setFont(c, 500, df.size, k.F_INTER); c.fillStyle = MUTE; c.textAlign = "right"; c.fillText(df.lines[0], 1020, k.cssBase(c, 101 - df.size * 0.6, df.size * 1.2)); c.textAlign = "left";
-  /* Titel */
-  const tf = k.fit(c, d.gameLabel, { w: 800, fam: k.F_BALOO, max: 176, min: 90, maxW: 960 });
-  k.setFont(c, 800, tf.size, k.F_BALOO); c.fillStyle = "#FFFFFF"; c.fillText(tf.lines[0], 60, k.cssBase(c, 166 + (176 - tf.size) / 2, tf.size));
-  /* Ziel-Kasten rechts */
-  k.setFont(c, 500, 40, k.F_INTER); const zw = Math.max(190, c.measureText(tgt).width + 44);
-  const zx = 1020 - zw;
-  c.fillStyle = "#141A29"; k.rrect(c, zx, 322, zw, 64, 12); c.fill(); c.strokeStyle = "#2A3248"; c.lineWidth = 2; k.rrect(c, zx + 1, 323, zw - 2, 62, 11); c.stroke();
-  c.fillStyle = "#FFFFFF"; c.fillText(tgt, zx + 22, k.cssBase(c, 330, 48));
-  const zl = d.up(d.tr("targetLabel", "Ziel"));
-  k.setFont(c, 600, 28, k.F_INTER); c.fillStyle = MUTE; const zlw = k.spaced(c, zl, zx - 20, k.cssBase(c, 354 - 17, 34), 3.9, "right");
-  /* Untertitel links, so breit wie Platz bis zum Ziel */
-  const sub = d.up(d.tr("schieberPlaySubtitle", ""));
-  if (sub) {
-    const maxW = zx - 20 - zlw - 40 - 66;
-    let fs = 26; k.setFont(c, 600, fs, k.F_INTER);
-    while (fs > 16 && k.spacedW(c, sub, fs * 0.14) > maxW) { fs -= 1; k.setFont(c, 600, fs, k.F_INTER); }
-    c.fillStyle = MUTE; k.spaced(c, sub, 66, k.cssBase(c, 350, 32), fs * 0.14, "left");
-  }
-  /* Banner */
-  c.fillStyle = "rgba(32,24,8,0.55)"; k.rrect(c, 60, 408, 960, 84, 14); c.fill();
-  c.strokeStyle = GOLD2; c.lineWidth = 2.5; k.rrect(c, 61.25, 409.25, 957.5, 81.5, 13); c.stroke();
+  teams.forEach((tm) => { tm.win = wins.indexOf(tm) >= 0; tm.bestIdx = tm.entries.length ? tm.entries.indexOf(Math.max(...tm.entries)) : -1; });
   let msg;
   if (wins.length !== 1) { const f = d.tr("tplSchTie"); msg = typeof f === "function" ? f(d.num(teams[0].total)) : d.tr("ecTied", ""); }
   else { const w = wins[0]; const f = d.tr(PLURAL.test(" " + w.name + " ") ? "tplSchWinN" : "tplSchWin1"); msg = typeof f === "function" ? f(w.name, d.num(w.total)) : w.name; }
-  let bf = k.fit(c, msg, { w: 700, fam: k.F_BALOO, max: 44, min: 30, maxW: 830, lines: 1 });
-  if (bf.cut) bf = k.fit(c, msg, { w: 700, fam: k.F_BALOO, max: 32, min: 20, maxW: 830, lines: 2 });
-  k.setFont(c, 700, bf.size, k.F_BALOO); const bw = Math.max(...bf.lines.map((l) => c.measureText(l).width)); const bx = 540 - (bw + 34 + 16) / 2;
-  star(c, bx, 450 - 17, 34, GOLD); c.fillStyle = GOLD;
-  const blh = bf.size * 1.12, bt = 450 - blh * bf.lines.length / 2;
-  bf.lines.forEach((l, i) => c.fillText(l, bx + 50, k.cssBase(c, bt + i * blh, blh)));
-  /* Tafel */
-  c.save(); c.shadowColor = "rgba(0,0,0,0.53)"; c.shadowBlur = 50; c.shadowOffsetY = 20; c.fillStyle = "#16291F"; k.rrect(c, BX, BY, BW, BH, 22); c.fill(); c.restore();
-  c.save(); k.rrect(c, BX, BY, BW, BH, 22); c.clip();
-  k.cssEllipse(c, BX, BY, BW, BH, BX + BW / 2, BY + BH / 2, [[0, "#1E3A2F"], [1, "#16291F"]]);
-  c.restore();
-  k.insetShadow(c, BX, BY, BW, BH, 22, 70, "rgba(0,0,0,0.6)");
-  c.save(); k.rrect(c, BX, BY, BW, BH, 22); c.clip();
-  half(c, k, d, teams[1], BY, true, isWin(teams[1]), tgt);
-  half(c, k, d, teams[0], BY + HALF, false, isWin(teams[0]), tgt);
-  c.fillStyle = "rgba(244,241,232,0.25)"; c.fillRect(BX, BY + HALF - 1, BW, 2);
-  c.restore();
-  /* Ziel-Pille in der Mitte */
-  const pill = d.tr("targetLabel", "Ziel") + " " + tgt;
-  k.setFont(c, 700, 40, k.F_KALAM); const pw = c.measureText(pill).width + 68; const ph = 66, py = BY + HALF - ph / 2;
-  c.save(); c.shadowColor = "rgba(0,0,0,0.53)"; c.shadowBlur = 14; c.shadowOffsetY = 4; c.fillStyle = "#16291F"; k.rrect(c, 540 - pw / 2, py, pw, ph, 33); c.fill(); c.restore();
-  c.strokeStyle = "rgba(244,241,232,0.4)"; c.lineWidth = 2.5; k.rrect(c, 540 - pw / 2 + 1.25, py + 1.25, pw - 2.5, ph - 2.5, 32); c.stroke();
-  c.fillStyle = CH; c.textAlign = "center"; c.fillText(pill, 540, k.cssBase(c, py + 6, 52)); c.textAlign = "left";
+  return { teams, tgt: d.num(d.extra.target), tie: wins.length !== 1, msg, date: d.date, gameLabel: d.gameLabel, logo: d.logo, img: d.img, num: d.num, up: d.up,
+    rounds: Math.max(...teams.map((t) => t.entries.length)), lblTarget: d.tr("targetLabel", "Ziel"), lblEntries: d.tr("tplNewsEntries", "Einträge"), lblWinner: d.up(d.tr("tplNewsWinner", "Sieger")), lblSum: d.tr("tplNewsSum", "Summe") };
+}
+
+function rng(seed) { let s = seed >>> 0; return () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; }; }
+function put(c, k, s, x, y, w, size, fam, col, align, sp) { // y = Grundlinie
+  k.setFont(c, w, size, fam); c.fillStyle = col;
+  if (sp) return k.spaced(c, s, x, y, sp, align || "left");
+  c.textAlign = align || "left"; c.fillText(s, x, y); c.textAlign = "left"; return c.measureText(s).width;
+}
+function tiers(c, k, s, w, fam, maxW, list) { let f = null; for (const t of list) { f = k.fit(c, s, { w, fam, maxW, max: t.max, min: t.min, lines: t.lines }); if (!f.cut) return f; } return f; }
+function star(c, x, y, s, col) {
+  const p = [[10, 1], [12, 8], [19, 10], [12, 12], [10, 19], [8, 12], [1, 10], [8, 8]];
+  c.save(); c.translate(x - s / 2, y - s / 2); c.scale(s / 20, s / 20); c.beginPath(); p.forEach(([a, b], i) => (i ? c.lineTo(a, b) : c.moveTo(a, b))); c.closePath(); c.fillStyle = col; c.fill(); c.restore();
+}
+const SUITS = {
+  heart: ["M50 92 C8 60 0 42 0 26 C0 9 14 0 27 0 C38 0 46 6 50 15 C54 6 62 0 73 0 C86 0 100 9 100 26 C100 42 92 60 50 92Z", 100, 92],
+  spade: ["M50 0 C50 0 100 38 100 62 C100 80 84 88 70 82 C68 82 66 81 65 80 C67 90 73 96 82 100 L18 100 C27 96 33 90 35 80 C34 81 32 82 30 82 C16 88 0 80 0 62 C0 38 50 0 50 0Z", 100, 100],
+  diamond: ["M50 0 L92 50 L50 100 L8 50Z", 100, 100],
+  club: ["M50 4a22 22 0 1 0 0.01 0Z M26 36a22 22 0 1 0 0.01 0Z M74 36a22 22 0 1 0 0.01 0Z M44 50 L36 100 L64 100 L56 50Z", 100, 100],
+};
+const CROP = { bauer: [300, 450, 300, 380], dame: [640, 470, 310, 360] };
+function portrait(img, which, oh, ink) {
+  const [cx, cy, rx, ry] = CROP[which], ow = Math.round(oh * rx / ry), s = 2;
+  const o = document.createElement("canvas"); o.width = ow * s; o.height = oh * s; const g = o.getContext("2d");
+  g.imageSmoothingQuality = "high"; g.drawImage(img, cx - rx, cy - ry, rx * 2, ry * 2, 0, 0, o.width, o.height);
+  if (ink) {
+    const id = g.getImageData(0, 0, o.width, o.height), d = id.data;
+    for (let i = 0; i < d.length; i += 4) {
+      const r = d[i], gg = d[i + 1], b = d[i + 2], lum = 0.3 * r + 0.59 * gg + 0.11 * b;
+      let t = Math.min(1, Math.max(0, (lum - 30) / 205)); t = Math.pow(t, 1.1); const L = t * 255;
+      const ta = 1 - Math.min(1, Math.max(0, (t - 0.72) / 0.22)); const sr = L, sg = L * (1 - 0.1 * ta), sb = L * (1 - 0.28 * ta); // Sepia, helle Flaechen bleiben neutral
+      const sat = Math.max(r, gg, b) - Math.min(r, gg, b); const keep = Math.min(0.62, sat / 255 * 1.0);
+      d[i] = Math.min(255, sr * (1 - keep) + r * keep * 0.95); d[i + 1] = Math.min(255, sg * (1 - keep) + gg * keep * 0.8); d[i + 2] = Math.min(255, sb * (1 - keep) + b * keep * 0.72);
+    }
+    g.putImageData(id, 0, 0);
+  }
+  g.globalCompositeOperation = "destination-in"; g.save(); g.translate(o.width / 2, o.height / 2); g.scale(o.width / 2, o.height / 2);
+  const gr = g.createRadialGradient(0, 0, 0, 0, 0, 1); gr.addColorStop(0, "#000"); gr.addColorStop(0.8, "#000"); gr.addColorStop(1, "rgba(0,0,0,0)"); g.fillStyle = gr; g.fillRect(-1, -1, 2, 2); g.restore();
+  return { cv: o, w: ow, h: oh };
+}
+function drawPortrait(c, p, cx, cy, mode) { c.save(); if (mode) c.globalCompositeOperation = mode; c.drawImage(p.cv, cx - p.w / 2, cy - p.h / 2, p.w, p.h); c.restore(); }
+function newsPaper(c, k, m) {
+  const W = k.TPL_W, H = k.TPL_H, r = rng(23);
+  c.fillStyle = "#EBDFC2"; c.fillRect(0, 0, W, H);
+  const pat = c.createPattern(m.img.papier, "repeat"); c.save(); c.globalAlpha = 0.75; c.fillStyle = pat; c.fillRect(0, 0, W, H); c.restore();
+  c.save(); c.globalCompositeOperation = "multiply"; c.fillStyle = "rgba(226,204,152,0.45)"; c.fillRect(0, 0, W, H); c.restore();
+  for (let i = 0; i < 22; i++) { const x = r() * W, y = r() * H, rad = 40 + r() * 140, g = c.createRadialGradient(x, y, 0, x, y, rad); g.addColorStop(0, "rgba(140,96,40," + (0.03 + r() * 0.06) + ")"); g.addColorStop(1, "rgba(140,96,40,0)"); c.fillStyle = g; c.fillRect(x - rad, y - rad, rad * 2, rad * 2); }
+  const id = c.getImageData(0, 0, W, H), d = id.data; for (let p = 0; p < d.length; p += 4) { const n = (r() - 0.5) * 14; d[p] += n; d[p + 1] += n; d[p + 2] += n; } c.putImageData(id, 0, 0);
+}
+function newsFinish(c, k) {
+  const W = k.TPL_W, H = k.TPL_H;
+  // Falz (Querbruch und Laengsbruch)
+  [[0, H * 0.5, W, 3, true], [W / 2, 0, 3, H, false]].forEach(([x, y, w, h, horiz]) => {
+    const g = horiz ? c.createLinearGradient(0, y - 18, 0, y + 20) : c.createLinearGradient(x - 18, 0, x + 20, 0);
+    g.addColorStop(0, "rgba(255,255,255,0)"); g.addColorStop(0.45, "rgba(0,0,0,0.10)"); g.addColorStop(0.52, "rgba(255,255,255,0.18)"); g.addColorStop(1, "rgba(255,255,255,0)");
+    c.fillStyle = g; if (horiz) c.fillRect(0, y - 18, W, 38); else c.fillRect(x - 18, 0, 38, H);
+  });
+  k.cssEllipse(c, 0, 0, W, H, W / 2, H / 2, [[0, "rgba(0,0,0,0)"], [0.7, "rgba(70,40,10,0.06)"], [1, "rgba(60,32,8,0.34)"]]);
+}
+function rule(c, x1, x2, y, th) { c.fillStyle = INK; c.fillRect(x1, y, x2 - x1, th); }
+function dblRule(c, x1, x2, y) { rule(c, x1, x2, y, 5); rule(c, x1, x2, y + 9, 1.8); }
+function inkText(c, k, s, x, y, w, size, fam, align, sp, col) { return put(c, k, s, x, y, w, size, fam, col || INK, align, sp); }
+function boldFrau(c, k, s, x, y, size, align, col) { // Fraunces 700 mit leichter Verstaerkung
+  const F = FR_STACK; k.setFont(c, 700, size, F); c.fillStyle = col || INK; c.strokeStyle = col || INK; c.lineWidth = size * 0.012; c.textAlign = align || "left"; c.strokeText(s, x, y); c.fillText(s, x, y); c.textAlign = "left";
+}
+function drawF(c, k, m) {
+  const W = k.TPL_W, H = k.TPL_H, INT = k.F_INTER, FR = FR_STACK, X1 = 60, X2 = 1020;
+  newsPaper(c, k, m);
+  // Kopf
+  dblRule(c, X1, X2, 52);
+  const lw = k.logo(c, m.logo, X1, 78, 40, INK); inkText(c, k, "GameTab", X1 + lw + 12, 78 + 30, 800, 28, k.F_BALOO, "left");
+  const df = k.fit(c, m.date, { w: 600, fam: INT, max: 24, min: 15, maxW: 1020 - X1 - lw - 190 }); inkText(c, k, df.lines[0], X2, 106, 600, df.size, INT, "right");
+  rule(c, X1, X2, 128, 1.8);
+  // Zeitungstitel
+  const title = m.gameLabel; const tf = k.fit(c, title, { w: 700, fam: FR, max: 150, min: 80, maxW: 860 });
+  k.setFont(c, 700, tf.size, FR); const cap = k.capH(c); const by = 142 + 18 + cap;
+  boldFrau(c, k, tf.lines[0], W / 2, by, tf.size, "center");
+  const tw2 = c.measureText(tf.lines[0]).width; star(c, W / 2 - tw2 / 2 - 44, by - cap / 2, 30, INK); star(c, W / 2 + tw2 / 2 + 44, by - cap / 2, 30, INK);
+  const ry = by + 26; dblRule(c, X1, X2, ry);
+  // Leiste: Ziel | Runden
+  const sy = ry + 46; const left = m.lblTarget + " " + m.tgt, right = m.rounds + " " + m.lblEntries;
+  inkText(c, k, m.up(left), X1, sy, 700, 24, INT, "left", 3); inkText(c, k, m.up(right), X2, sy, 700, 24, INT, "right", 3);
+  star(c, W / 2, sy - 8, 22, INK); rule(c, X1, X2, sy + 20, 1.8);
+  // Schlagzeile
+  const hf = tiers(c, k, m.msg, 700, FR, 940, [{ max: 80, min: 50, lines: 1 }, { max: 60, min: 30, lines: 2 }]);
+  const hy = sy + 20 + 18 + hf.size * 0.8, hlh = hf.size * 1.06;
+  c.save(); c.globalAlpha = 1; hf.lines.forEach((l, i) => boldFrau(c, k, l, W / 2, hy + i * hlh, hf.size, "center")); c.restore();
+  const hbot = hy + (hf.lines.length - 1) * hlh + 22; dblRule(c, X1, X2, hbot);
+  // Stich-Illustration: zwei Felder, Bauer und Dame blicken sich an
+  const iy = hbot + 28, ih = 332, cw = 450, xs = [X1, X2 - cw];
+  const arts = ["bauer", "dame"];
+  m.teams.forEach((tm, i) => {
+    const x = xs[i];
+    c.strokeStyle = INK; c.lineWidth = 3; c.strokeRect(x, iy, cw, ih); c.lineWidth = 1.2; c.strokeRect(x + 7, iy + 7, cw - 14, ih - 14);
+    const p = portrait(m.img[arts[i]], arts[i], ih - 22, true);
+    drawPortrait(c, p, x + cw / 2, iy + ih / 2, "multiply");
+  });
+  // Mittelsaeule zwischen den Bildern
+  const mx = W / 2; c.fillStyle = INK; c.fillRect(mx - 1, iy, 2, ih); star(c, mx, iy + ih / 2, 26, INK);
+  // Unterschriften mit Punktfuehrung
+  const cy = iy + ih + 48;
+  m.teams.forEach((tm, i) => {
+    const x = xs[i], sc = m.num(tm.total); k.setFont(c, 700, 46, FR); const sw = c.measureText(sc).width + 4;
+    boldFrau(c, k, sc, x + cw, cy, 46, "right");
+    const nf = k.fit(c, tm.name, { w: 700, fam: FR, max: 36, min: 20, maxW: cw - sw - 70, lines: 1 }); k.setFont(c, 700, nf.size, FR); const nw = c.measureText(nf.lines[0]).width;
+    boldFrau(c, k, nf.lines[0], x, cy, nf.size, "left");
+    c.fillStyle = INK; for (let q = x + nw + 14; q < x + cw - sw - 12; q += 9) { c.beginPath(); c.arc(q, cy - 5, 1.7, 0, TAU); c.fill(); }
+    if (tm.win && !m.tie) { const t = m.lblWinner; k.setFont(c, 800, 34, INT); const w = k.spacedW(c, t, 6) + 40; c.save(); c.translate(xs[i] + 116, iy + ih - 46); c.rotate(-0.17); c.globalAlpha = 0.9; c.strokeStyle = "#B2231A"; c.lineWidth = 4; c.strokeRect(-w / 2, -28, w, 56); c.lineWidth = 1.5; c.strokeRect(-w / 2 + 5, -23, w - 10, 46); put(c, k, t, 0, 12, 800, 34, INT, "#B2231A", "center", 6); c.restore(); }
+  });
+  // Tabelle Runde fuer Runde
+  const ty = cy + 34; dblRule(c, X1, X2, ty);
+  const colw = [140, 410, 410]; const cxs = [X1, X1 + colw[0], X1 + colw[0] + colw[1]];
+  const hy2 = ty + 22 + 28, maxRows = 9, shown = Math.min(m.rounds, maxRows), extra = m.rounds > maxRows ? 1 : 0;
+  const rowH = Math.max(26, Math.min(76, Math.floor((1292 - (hy2 + 10) - 70) / Math.max(1, shown + extra)))), fs = Math.max(25, Math.min(40, Math.round(rowH * 0.66)));
+  inkText(c, k, "#", cxs[0] + 6, hy2, 800, 19, INT, "left", 3);
+  const cc = (i) => cxs[i + 1] + colw[i + 1] / 2;
+  m.teams.forEach((tm, i) => { const f = k.fit(c, tm.name, { w: 700, fam: FR, max: 26, min: 18, maxW: colw[i + 1] - 40, lines: 1 }); boldFrau(c, k, f.lines[0], cc(i), hy2 + 1, f.size, "center"); });
+  rule(c, X1, X2, hy2 + 12, 1.8);
+  let yy = hy2 + 12; const first = m.rounds - shown;
+  if (extra) { yy += rowH; inkText(c, k, "...", cxs[0] + 6, yy - 10, 700, 22, FR, "left"); }
+  for (let j = first; j < m.rounds; j++) {
+    yy += rowH; const bl = yy - Math.round(rowH * 0.28);
+    inkText(c, k, String(j + 1), cxs[0] + 6, bl, 600, fs - 3, FR, "left");
+    m.teams.forEach((tm, i) => { const v = tm.entries[j]; if (v == null) return; const best = tm.bestIdx === j; k.setFont(c, best ? 700 : 500, fs, FR); const tw3 = c.measureText(m.num(v)).width;
+      if (best) { c.fillStyle = "rgba(213,43,30,0.16)"; k.rrect(c, cc(i) - tw3 / 2 - 14, yy - rowH + 3, tw3 + 28, rowH - 6, 6); c.fill(); }
+      inkText(c, k, m.num(v), cc(i), bl, best ? 700 : 500, fs, FR, "center", 0, best ? "#A81D12" : INK); });
+    c.fillStyle = "rgba(36,28,20,0.28)"; c.fillRect(X1, yy, X2 - X1, 1.2);
+  }
+  yy += 10; rule(c, X1, X2, yy, 3);
+  inkText(c, k, m.up(m.lblSum), cxs[0] + 6, yy + 44, 800, 20, INT, "left", 3);
+  m.teams.forEach((tm, i) => boldFrau(c, k, m.num(tm.total), cc(i), yy + 46, 42, "center", tm.win ? "#A81D12" : INK));
+  // Spaltenlinien
+  c.fillStyle = "rgba(36,28,20,0.4)"; [cxs[1], cxs[2]].forEach((x) => c.fillRect(x, hy2 - 24, 1.4, yy - hy2 + 24));
+  newsFinish(c, k);
+}
+
+function render(d, k) {
+  const { cv, c } = k.tplCanvas();
+  drawF(c, k, buildModel(d));
   return [cv];
 }
 
 export default {
   games: ["schieber"],
-  fonts: ["800 46px \"Baloo 2\"", "700 44px \"Baloo 2\"", "500 28px Inter", "600 28px Inter", "700 56px Inter", "700 40px Kalam", "400 56px Kalam"],
+  fonts: ["700 80px Fraunces", "500 25px Fraunces", "800 28px \"Baloo 2\"", "600 24px Inter", "700 24px Inter", "800 34px Inter"],
   accepts: (d) => !!(d.extra && Array.isArray(d.extra.teams) && d.extra.teams.length === 2 && d.extra.teams.every((tm) => tm && Array.isArray(tm.entries)) && isFinite(Number(d.extra.target))),
-  texts: (d) => [d.tr("schieberPlaySubtitle", ""), d.up(d.tr("schieberPlaySubtitle", "") + d.tr("targetLabel", "")), "−'’!¡ " + (d.extra ? d.extra.teams.map((t) => t.name).join(" ") : "")],
+  prepare: async (k) => { const [bauer, dame, papier] = await Promise.all([BAUER_URL, DAME_URL, PAPIER_URL].map((u) => k.tplImg(u))); return { bauer, dame, papier }; },
+  texts: (d) => ["−'’!¡#… " + d.tr("tplNewsEntries", "") + d.up(d.tr("tplNewsWinner", "") + d.tr("tplNewsSum", "") + d.tr("targetLabel", "")) + (d.extra ? d.extra.teams.map((t) => t.name).join(" ") : "")],
   render,
 };

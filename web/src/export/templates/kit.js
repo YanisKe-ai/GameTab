@@ -248,4 +248,5 @@ function continuationPage(d, rows, no, count, sty) {
 /* Alter Name, bleibt fuer bestehende Aufrufe (yatzy) gueltig */
 const listPage = continuationPage;
 
+export { tplImg };
 export { TPL_W, TPL_H, F_ANTON, F_INTER, F_BALOO, F_KALAM, LOGO_AR, tplFonts, tplLogo, tplWarm, tplCanvas, rrect, cssEllipse, insetShadow, setFont, seg, wrap, ellipsize, fit, nameFit, NAME_MIN, spaced, spacedW, cssBase, capH, logo, tplDate, tplData, chunks, listPage, continuationPage, heroFit, ONE_PAGE };

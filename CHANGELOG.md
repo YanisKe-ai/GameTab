@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.05-9 (05.11.2026 11:35)
+- Schieber: neues Ergebnisbild als Wirtshaus-Zeitung
+
 ## 2026.11.05-8 (05.11.2026 10:44)
 - Laptop: mehr Platz in allen Spielen, grosse Schieber-Tafel
 

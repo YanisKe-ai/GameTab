@@ -40,6 +40,7 @@ async function gtTplRender(gameId, gameLabel, ranked, t, extra) {
   const text = [d.gameLabel, d.date, d.rows.map((r) => r.name + r.value).join(""), d.up(d.rows.map((r) => r.name).join("") + d.gameLabel)].concat([d.tr("ecContinued", "Fortsetzung"), "GameTab/"], tp.texts ? tp.texts(d) : []).join(" ");
   const [, img] = await Promise.all([kit.tplFonts(tp.fonts, text), kit.tplLogo()]);
   d.logo = img;
+  if (tp.prepare) d.img = await tp.prepare(kit);
   const pages = tp.render(d, kit);
   if (!Array.isArray(pages) || !pages.length) return null;
   return pages;

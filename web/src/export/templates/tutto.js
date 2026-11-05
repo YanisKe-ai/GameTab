@@ -6,7 +6,7 @@ import { F_INTERBI } from "./fonts-a.js";
 const INK = "#14101C", RED = "#D7141F", BARRED = "#C8102E", YEL = "#F7C32E", CARD = "#C1798F";
 const DICE = [[60, 540, -8, 1], [225, 565, 6, 1], [390, 535, -4, 1], [100, 700, 7, 5], [270, 720, -9, 5], [440, 700, 5, 5]];
 const PIPS = { 1: [[1, 1]], 5: [[0, 0], [2, 0], [1, 1], [0, 2], [2, 2]] };
-const BONUS = [["500", -8], ["2x", 5], ["1000", -3]];
+const BONUS = [["500", -8], ["2x", 5], ["±1000", -3]];
 
 function bg(c, k) {
   c.fillStyle = YEL; c.fillRect(0, 0, k.TPL_W, k.TPL_H);
@@ -121,7 +121,7 @@ function page1(d, k, rows) {
     const y = rowsTop + i * p, hot = r.winner, col = hot ? BARRED : INK;
     const fs = rowH * 0.74;
     const two = rowH >= 44;
-    let f = k.fit(c, r.name, { w: 400, fam: k.F_ANTON, max: fs, min: Math.max(18, fs * 0.5), maxW: nameW, lines: 1 });
+    let f = k.fit(c, r.name, { w: 400, fam: k.F_ANTON, max: fs, min: two ? fs * 0.72 : Math.max(18, fs * 0.5), maxW: nameW, lines: 1 });
     if (f.cut && two) f = k.fit(c, r.name, { w: 400, fam: k.F_ANTON, max: Math.min(fs, rowH * 0.42), min: 20, maxW: nameW, lines: 2 });
     k.setFont(c, 400, f.size, k.F_ANTON); c.fillStyle = INK;
     const lh = f.size * 1.05, cy = y + rowH / 2, n0 = f.lines.length;

@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.05-8 (05.11.2026 10:44)
+- Laptop: mehr Platz in allen Spielen, grosse Schieber-Tafel
+
 ## 2026.11.05-7 (05.11.2026 10:26)
 - Podest füllt sich wie echte Flüssigkeit im Glasblock, Wyys-Karten links tief, rechts hoch
 

@@ -45,6 +45,9 @@ import { GroupPicker, GtChips, GtPlayerList, GtStartBar, gtSkin, gtSkinTk } from
 .gt-sch-noir .gt-sch-target{color:#EDEDED}
 [data-phone-landscape] .gt-sch-line{-webkit-mask-image:linear-gradient(180deg,#000 calc(32% - 22px),transparent calc(32% - 22px),transparent calc(32% + 22px),#000 calc(32% + 22px));mask-image:linear-gradient(180deg,#000 calc(32% - 22px),transparent calc(32% - 22px),transparent calc(32% + 22px),#000 calc(32% + 22px))}
 [data-phone-landscape] .gt-sch-target{top:32%}
+.gtL-content .gt-sch-board{display:flex;flex-direction:column;min-height:calc(100dvh - 156px)}
+.gtL-content .gt-sch-board>.gt-sch-t1,.gtL-content .gt-sch-board>.gt-sch-t2{flex:1 1 0;display:flex;min-height:0}
+.gtL-content .gt-sch-board .gt-sch-half{flex:1 1 auto;display:flex;flex-direction:column;justify-content:space-between;zoom:1.3}
 .gt-sch-classic{background:#F5EAD6 url(./img/sch-papier.webp)!important;display:flex;flex-direction:column;box-sizing:border-box}
 .gt-sch-classic>.gt-sch-sheet{width:100%;flex:none;background:none!important;box-shadow:none!important}
 .gt-sch-classic>.gt-sch-sheet.paper-grid::before,.gt-sch-classic>.gt-sch-sheet.paper-grid::after{display:none!important}
@@ -71,6 +74,7 @@ import { GroupPicker, GtChips, GtPlayerList, GtStartBar, gtSkin, gtSkinTk } from
 .gt-sch-dame{right:0}
 @container (max-height:60px){.gt-sch-deco img{display:none}}
 [data-phone-landscape] .gt-sch-deco{display:none}
+.gtL-content .gt-sch-deco{position:fixed;right:clamp(20px,2.6vw,44px);bottom:0;width:clamp(280px,29%,400px);height:38dvh;margin:0;flex:none}
 @media (display-mode:standalone){.gt-sch-classic::before{content:"";position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top);background:#1F2021;z-index:30}}
 .gt-weis-lap{display:none}
 .gtL-content .gt-weis-lap{display:block}

@@ -10,7 +10,7 @@ html[data-gt-theme="noir"] { --gt-focus: #FFFFFF; }
 .gtL-content .gtL-e-only { display: block; }
 .gtL-content .gtL-page.gtL-game { max-width: 640px !important; margin-left: auto !important; margin-right: auto !important; }
 .gtL-content .gtL-page.gtL-game > * { max-width: none; }
-.gtL-content .gtL-page.gtL-game:has(.gtL-split) { max-width: 1180px !important; }
+.gtL-content .gtL-page.gtL-game:has(.gtL-split) { max-width: 1440px !important; }
 .gtL-content .gtL-e-block > .gtL-col-main, .gtL-content .gtL-e-block > .gtL-col-side, .gtL-content .gtL-e-block > .gtL-col-side2 { display: block; }
 .gtL-content .gtL-col-side2 { display: flex; flex-direction: column; min-width: 0; grid-column: 2; grid-row: 2; }
 .gtL-content .gtL-split:has(> .gtL-col-side2) { grid-template-rows: auto 1fr; }

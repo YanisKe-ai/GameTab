@@ -67,7 +67,7 @@ function RulesButton({onClick,onHome,onEndGame,onMore,moreLabel,tokens}){const[c
         .gtL-sidebar .gtL-navbtn:hover { filter: brightness(1.15); }
         .gtL-split, .gtL-col-main, .gtL-col-side { display: contents; }
         .gtL-content .gtL-game { max-width: 640px !important; }
-        .gtL-content .gtL-game:has(.gtL-split) { max-width: 1180px !important; }
+        .gtL-content .gtL-game:has(.gtL-split) { max-width: 1440px !important; }
         .gtL-content .gtL-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, 420px); gap: 0 36px; align-items: start; }
         .gtL-content .gtL-col-main, .gtL-content .gtL-col-side { display: flex; flex-direction: column; min-width: 0; }
         .gtL-content .gtL-col-side { position: sticky; top: 16px; }
@@ -79,7 +79,7 @@ function RulesButton({onClick,onHome,onEndGame,onMore,moreLabel,tokens}){const[c
         .gtL-content .gtL-split-setup > .gtL-col-side > .gt-su-cta { margin-top: auto; }
         .gtL-content .gtL-page.gtL-narrow > div:has(.gt-su-cta) { margin-top: 9vh !important; padding: 22px 24px; border-radius: 24px; border: 1px solid rgba(128,128,128,0.2); background: rgba(128,128,128,0.07); box-sizing: border-box; }
         .gtL-content .gtL-page.gtL-narrow > * { max-width: 640px; }
-        .gtL-content .paper-grid:has(.gtL-yatzy-sheets), .gtL-content .paper-grid:has(.gtL-split) { max-width: 1180px !important; }
+        .gtL-content .paper-grid:has(.gtL-yatzy-sheets), .gtL-content .paper-grid:has(.gtL-split) { max-width: 1440px !important; }
         .gtL-content .gtL-yatzy-sheets { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px !important; align-items: start !important; }
         .gtL-content { flex: 1 1 auto; min-width: 0; height: 100%; overflow-y: auto; position: relative; }
         /* transform erzeugt einen neuen Containing Block, damit "position: fixed"-Overlays
@@ -137,6 +137,17 @@ function RulesButton({onClick,onHome,onEndGame,onMore,moreLabel,tokens}){const[c
         .gtL-content .gtL-shellpage > .paper-grid { max-width: min(760px, calc(100% - 32px)) !important; margin-left: max(16px, calc((100% - var(--gtl-col)) / 2)) !important; margin-right: auto !important; }
         .gtL-content .gtL-shellpage > .paper-grid:has(.gtL-yatzy-sheets), .gtL-content .gtL-shellpage > .paper-grid:has(.gtL-split) { max-width: min(var(--gtl-col), calc(100% - 32px)) !important; }
         .gtL-content .gtL-startcol > *, .gtL-content .gtL-startfoot > * { width: min(100%, var(--gtl-col)); box-sizing: border-box; }
+        /* Platzverteilung Laptop: Inhalt nutzt die Fensterbreite, Haupt- zu Nebenspalte etwa 70 zu 30 */
+        .gtL-content { --gtl-col: 1440px; }
+        .gtL-content .gtL-page { padding-left: clamp(20px, 2.6vw, 44px) !important; padding-right: clamp(20px, 2.6vw, 44px) !important; }
+        .gtL-content .gtL-split:not(.gtL-e-fit) { grid-template-columns: minmax(0, 1fr) clamp(280px, 30%, 400px); gap: 0 28px; }
+        .gtL-content .gtL-split.wz-split { grid-template-columns: minmax(0, 1fr) clamp(280px, 30%, 400px) !important; gap: 0 28px; justify-content: stretch !important; }
+        .gtL-content .wz-split > .gtL-col-main > * { width: 100% !important; max-width: none !important; }
+        .gtL-content .gtL-split.gtL-split-setup { grid-template-columns: minmax(0, 1fr) clamp(340px, 42%, 540px); }
+        .gtL-content .gtL-game:not(:has(.gtL-split)), .gtL-content .gtL-shellpage > .paper-grid:not(:has(.gtL-yatzy-sheets)):not(:has(.gtL-split)) { max-width: min(760px, calc(100% - 32px)) !important; margin-left: auto !important; margin-right: auto !important; }
+        @media (min-width: 1400px) and (min-height: 880px) {
+          .gtL-content .gtL-split:not(.gtL-e-fit):not(.gtL-split-setup):not(.gt-sch-split) > :is(.gtL-col-main, .gtL-col-side, .gtL-col-side2) { zoom: 1.14; }
+        }
         /* C9 Einstellungen schmal */
         .gtL-content .gtL-settings > * { max-width: 720px !important; }
         .gtL-content .gtL-settings .gtL-seclabel { margin-top: 30px !important; margin-bottom: 12px !important; padding-top: 18px; border-top: 1px solid rgba(127,127,127,0.18); }

@@ -127,9 +127,14 @@ function drawF(c, k, m) {
   m.teams.forEach((tm, i) => {
     const x = xs[i], sc = m.num(tm.total); k.setFont(c, 700, 46, FR); const sw = c.measureText(sc).width + 4;
     boldFrau(c, k, sc, x + cw, cy, 46, "right");
-    const nf = k.fit(c, tm.name, { w: 700, fam: FR, max: 36, min: 20, maxW: cw - sw - 70, lines: 1 }); k.setFont(c, 700, nf.size, FR); const nw = c.measureText(nf.lines[0]).width;
-    boldFrau(c, k, nf.lines[0], x, cy, nf.size, "left");
-    c.fillStyle = INK; for (let q = x + nw + 14; q < x + cw - sw - 12; q += 9) { c.beginPath(); c.arc(q, cy - 5, 1.7, 0, TAU); c.fill(); }
+    // Langer Name: erst eine Zeile bis 26 px, sonst zwei Zeilen (Name bleibt ganz lesbar), ohne Punktfuehrung
+    const nf = tiers(c, k, tm.name, 700, FR, cw - sw - 70, [{ max: 36, min: 26, lines: 1 }, { max: 26, min: 20, lines: 2 }]);
+    if (nf.lines.length > 1) { nf.lines.forEach((l, li) => boldFrau(c, k, l, x, cy - 26 + li * (nf.size * 1.08), nf.size, "left")); }
+    else {
+      k.setFont(c, 700, nf.size, FR); const nw = c.measureText(nf.lines[0]).width;
+      boldFrau(c, k, nf.lines[0], x, cy, nf.size, "left");
+      c.fillStyle = INK; for (let q = x + nw + 14; q < x + cw - sw - 12; q += 9) { c.beginPath(); c.arc(q, cy - 5, 1.7, 0, TAU); c.fill(); }
+    }
     if (tm.win && !m.tie) { const t = m.lblWinner; k.setFont(c, 800, 34, INT); const w = k.spacedW(c, t, 6) + 40; c.save(); c.translate(xs[i] + 116, iy + ih - 46); c.rotate(-0.17); c.globalAlpha = 0.9; c.strokeStyle = "#B2231A"; c.lineWidth = 4; c.strokeRect(-w / 2, -28, w, 56); c.lineWidth = 1.5; c.strokeRect(-w / 2 + 5, -23, w - 10, 46); put(c, k, t, 0, 12, 800, 34, INT, "#B2231A", "center", 6); c.restore(); }
   });
   // Tabelle Runde fuer Runde

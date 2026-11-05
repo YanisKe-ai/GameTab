@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.05-10 (05.11.2026 12:05)
+- Namen ohne Silbentrennung, Podest-Namen ohne Überschneidung
+
 ## 2026.11.05-9 (05.11.2026 11:35)
 - Schieber: neues Ergebnisbild als Wirtshaus-Zeitung
 

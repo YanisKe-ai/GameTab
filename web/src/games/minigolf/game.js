@@ -221,7 +221,7 @@ function MinigolfEditorPanel({ editing, players, value: cur, onSave, onClose, t,
     >
       <div style={{ maxWidth: 520, margin: "0 auto" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10, marginBottom: 12 }}>
-          <span style={{ fontFamily: MINIGOLF_FONT, fontSize: 17, fontWeight: 700, color: mg.ink, minWidth: 0, overflowWrap: "anywhere" }}>
+          <span style={{ fontFamily: MINIGOLF_FONT, fontSize: 17, fontWeight: 700, color: mg.ink, minWidth: 0, overflowWrap: "break-word" }}>
             {player?.name}
             <span style={{ color: mg.muted, fontWeight: 600 }}>
               {" · "}
@@ -417,7 +417,7 @@ function MgPlayerCard({ p, val, isDraft, missing, sofar, countNote, leads, onSte
     >
       <div style={{ flex: "1 1 128px", minWidth: 0 }}>
         <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "2px 8px" }}>
-          <span style={{ fontFamily: MINIGOLF_FONT, fontWeight: 700, fontSize: 19, color: mg.ink, lineHeight: 1.2, overflowWrap: "anywhere", letterSpacing: "-0.01em" }}>{name}</span>
+          <span style={{ fontFamily: MINIGOLF_FONT, fontWeight: 700, fontSize: 19, color: mg.ink, lineHeight: 1.2, overflowWrap: "break-word", letterSpacing: "-0.01em" }}>{name}</span>
           {leads && (
             <span style={{ fontFamily: MG_UI, fontSize: 11, fontWeight: 700, letterSpacing: "0.05em", textTransform: "uppercase", padding: "2px 8px", borderRadius: 999, color: mg.accInk, border: `1px solid ${mg.accLine}`, lineHeight: 1.4 }}>{t("mgLeads")}</span>
           )}
@@ -490,7 +490,7 @@ function MgStandingsBox({ st, onOpen, finished, mg, t, className }) {
             return (
               <li key={r.id} style={{ display: "flex", alignItems: "center", gap: 8, padding: "6px 12px", borderRadius: 12, border: `1px solid ${top ? mg.accLine : mg.line}`, background: top ? mg.accSoft : "transparent", minWidth: 0 }}>
                 <span style={{ color: top ? mg.accInk : mg.muted, fontWeight: 700, fontFamily: MINIGOLF_FONT, fontSize: 15, minWidth: 20, fontVariantNumeric: "tabular-nums" }}>{r.rank}.</span>
-                <span style={{ flex: "1 1 auto", minWidth: 0, color: mg.ink, fontFamily: MG_UI, fontWeight: 600, fontSize: 15, overflowWrap: "anywhere", lineHeight: 1.25 }}>
+                <span style={{ flex: "1 1 auto", minWidth: 0, color: mg.ink, fontFamily: MG_UI, fontWeight: 600, fontSize: 15, overflowWrap: "break-word", lineHeight: 1.25 }}>
                   {r.name}
                   {top && <span className="mgSr">{", " + t("mgLeads")}</span>}
                   {!st.uniform && <span style={{ display: "block", fontSize: 12, fontWeight: 500, color: mg.muted }}>{t("mgHolesN")(r.count) + " · " + t("minigolfTotalRow") + " " + r.total}</span>}
@@ -568,7 +568,7 @@ function MgTable({ ui, hole, onCell, mg, t }) {
             </th>
             {ps.map((p) => (
               <th key={p.id} scope="col" title={p.name} style={thBase}>
-                <span style={{ display: "block", maxWidth: 110, margin: "0 auto", overflowWrap: "anywhere", hyphens: "auto", lineHeight: 1.2 }}>{p.name}</span>
+                <span style={{ display: "block", maxWidth: 110, margin: "0 auto", overflowWrap: "break-word", hyphens:"none", lineHeight: 1.2 }}>{p.name}</span>
               </th>
             ))}
           </tr>

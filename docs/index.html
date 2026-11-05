@@ -18277,8 +18277,8 @@ input[type="number"] { -moz-appearance: textfield; }
 .gtsb-lab { position: absolute; left: 0; top: 0; width: max-content; text-align: center; padding-bottom: 7px; pointer-events: none; z-index: 2; }
 .gtsb-mini { position: relative; perspective: 620px; }
 .gtsb-mini-r { position: absolute; left: 50%; bottom: 16px; width: 64px; margin-left: -32px; height: 0; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; transform: rotateX(-14deg) rotateY(-20deg); }
-.gtsb-name { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 14px; line-height: 1.18; overflow-wrap: anywhere; hyphens: auto; }
-.gtsb-score { font-family: 'Baloo 2', 'Inter', sans-serif; font-weight: 800; line-height: 1.05; margin-top: 2px; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.gtsb-name { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 14px; line-height: 1.18; overflow-wrap: normal; word-break: normal; -webkit-hyphens: none; hyphens: none; }
+.gtsb-score { font-family: 'Baloo 2', 'Inter', sans-serif; font-weight: 800; line-height: 1.05; margin-top: 2px; font-variant-numeric: tabular-nums; overflow-wrap: break-word; }
 .gtsb-num { display: block; font-family: 'Baloo 2', 'Inter', sans-serif; font-weight: 800; line-height: 1; padding-top: 0.1em; font-variant-numeric: tabular-nums; pointer-events: none; }
 .gtsb-sheen { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
 .gtsb-sheen > i { position: absolute; top: 0; bottom: 0; left: 0; width: 38%; background: linear-gradient(100deg, rgba(255,255,255,0), rgba(255,255,255,0.22) 50%, rgba(255,255,255,0)); opacity: 0; transform: translateX(-110%); }
@@ -19668,8 +19668,8 @@ var POP_ID = "gt-pl-fullname";
 var CSS_ID = "gt-pl-names-css";
 var PL_NAMES_CSS = `
 [data-phone-landscape] :is(button, [role="button"]) [style*="text-overflow: ellipsis"],
-[data-phone-landscape] :is(button, [role="button"])[style*="text-overflow: ellipsis"] { white-space: normal !important; overflow: visible !important; text-overflow: clip !important; overflow-wrap: anywhere; min-width: 0; }
-#${POP_ID} { position: fixed; z-index: 100000; max-width: min(78vw, 420px); box-sizing: border-box; padding: 8px 12px; border-radius: 12px; background: rgba(18,18,24,0.97); color: #fff; border: 1px solid rgba(255,255,255,0.28); box-shadow: 0 6px 24px rgba(0,0,0,0.45); font: 600 15px/1.3 'Inter', system-ui, sans-serif; overflow-wrap: anywhere; pointer-events: none; }
+[data-phone-landscape] :is(button, [role="button"])[style*="text-overflow: ellipsis"] { white-space: normal !important; overflow: visible !important; text-overflow: clip !important; overflow-wrap: break-word; min-width: 0; }
+#${POP_ID} { position: fixed; z-index: 100000; max-width: min(78vw, 420px); box-sizing: border-box; padding: 8px 12px; border-radius: 12px; background: rgba(18,18,24,0.97); color: #fff; border: 1px solid rgba(255,255,255,0.28); box-shadow: 0 6px 24px rgba(0,0,0,0.45); font: 600 15px/1.3 'Inter', system-ui, sans-serif; overflow-wrap: break-word; pointer-events: none; }
 `;
 var timer = null;
 function plHideFullName() {
@@ -20062,7 +20062,7 @@ function GameHeader({ title, subtitle, icon, accent, onBack, backLabel, tk, titl
 		letterSpacing: "-0.01em",
 		color: accent || tk.ink,
 		fontFamily: titleFont || "'Baloo 2', sans-serif",
-		overflowWrap: "anywhere"
+		overflowWrap: "break-word"
 	} }, title), subtitle && /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		fontSize: 11,
 		fontWeight: 600,
@@ -36418,7 +36418,7 @@ var { SchieberTournament, GtStuLogo } = (function() {
 .gtst input,.gtst select,.gtst button{font-family:inherit}
 .gtst-head{position:relative;color:var(--st-hink);padding:2px 2px 14px;overflow-x:clip}
 .gtst[data-d=grandslam] .gtst-head{padding-right:120px} @media (max-width:380px){.gtst[data-d=grandslam] .gtst-head{padding-right:92px} .gtst-grandart{transform:scale(.7);transform-origin:100% 0} .gtst[data-d=grandslam] .gtst-title{font-size:28px}}
-.gtst-title{margin:4px 0 0;font:var(--st-title-font);letter-spacing:var(--st-title-track);line-height:1.12;color:var(--st-hink);overflow-wrap:anywhere;word-break:normal;text-wrap:balance}
+.gtst-title{margin:4px 0 0;font:var(--st-title-font);letter-spacing:var(--st-title-track);line-height:1.12;color:var(--st-hink);overflow-wrap:break-word;word-break:normal;text-wrap:balance}
 .gtst-titlerow{display:flex;align-items:flex-start;gap:6px;position:relative;z-index:1}
 .gtst-under{display:block;margin-top:2px;height:8px;width:min(70%,260px);color:var(--st-uline)}
 .gtst-meta{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;margin-top:10px;font:500 13.5px/1.35 var(--st-data);color:var(--st-hmuted);position:relative;z-index:1}
@@ -36463,7 +36463,7 @@ var { SchieberTournament, GtStuLogo } = (function() {
 .gtst-hrow>*{font:600 10.5px/1.2 var(--st-ui);letter-spacing:.04em;white-space:nowrap;text-transform:uppercase;color:var(--st-muted)}
 .gtst-rk{font:700 16px/1 var(--st-data);font-variant-numeric:tabular-nums;color:var(--st-ink)}
 .gtst-row.is-lead .gtst-rk,.gtst-row.is-lead .gtst-pt{color:var(--st-lead-ink)}
-.gtst-nm{font:600 16px/1.25 var(--st-ui);overflow-wrap:anywhere;min-width:0}
+.gtst-nm{font:600 16px/1.25 var(--st-ui);overflow-wrap:break-word;min-width:0}
 .gtst-sub{display:block;font:500 12.5px/1.35 var(--st-ui);color:var(--st-muted);margin-top:2px;font-variant-numeric:tabular-nums}
 .gtst-pt{font:700 17px/1 var(--st-data);font-variant-numeric:tabular-nums;text-align:right;min-width:40px;color:var(--st-pt)}
 .gtst-pt.is-pos{color:var(--st-pos)}
@@ -36479,7 +36479,7 @@ var { SchieberTournament, GtStuLogo } = (function() {
 .gtst-lead{border-radius:14px;padding:14px 14px 12px;margin-bottom:12px;background:var(--st-leadbox);color:var(--st-leadbox-ink);border:var(--st-leadbox-line)}
 .gtst-lead .gtst-cap{color:var(--st-leadbox-cap)}
 .gtst-talker{margin-top:10px;padding-top:9px;border-top:1px solid color-mix(in srgb,currentColor 22%,transparent)}
-.gtst-lname{font:var(--st-lname-font);letter-spacing:-.01em;overflow-wrap:anywhere;margin-top:4px}
+.gtst-lname{font:var(--st-lname-font);letter-spacing:-.01em;overflow-wrap:break-word;margin-top:4px}
 .gtst-lpts{font:700 15px/1.2 var(--st-data);color:var(--st-leadbox-cap)}
 .gtst-lhint{font:500 13px/1.4 var(--st-ui);margin-top:4px;opacity:.92}
 .gtst-empty{padding:22px 16px;text-align:left;font:500 14.5px/1.5 var(--st-ui);color:var(--st-muted)}
@@ -36493,7 +36493,7 @@ var { SchieberTournament, GtStuLogo } = (function() {
 .gtst-teams{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:8px;align-items:center;margin:4px 0 10px}
 .gtst-team{border:1px solid var(--st-rline);border-radius:10px;padding:8px 10px;min-width:0}
 .gtst-team b{display:block;font:700 11px/1.2 var(--st-ui);letter-spacing:.08em;text-transform:uppercase;color:var(--st-muted);margin-bottom:3px}
-.gtst-team span{font:600 14.5px/1.3 var(--st-ui);overflow-wrap:anywhere}
+.gtst-team span{font:600 14.5px/1.3 var(--st-ui);overflow-wrap:break-word}
 .gtst-vs{font:600 12px/1 var(--st-ui);color:var(--st-muted)}
 .gtst-acts{display:flex;flex-wrap:wrap;gap:8px}
 .gtst-acts>.gtst-btn{flex:1 1 auto;white-space:nowrap}
@@ -36509,8 +36509,8 @@ var { SchieberTournament, GtStuLogo } = (function() {
 .gtst-mx{overflow-x:auto;border-radius:12px;border:1px solid var(--st-rline);-webkit-overflow-scrolling:touch}
 .gtst-mx table{border-collapse:separate;border-spacing:0;font:500 13px/1.25 var(--st-data);font-variant-numeric:tabular-nums}
 .gtst-mx th,.gtst-mx td{padding:8px 8px;border-bottom:1px solid var(--st-rline);border-right:1px solid var(--st-rline);text-align:center;min-width:64px;background:var(--st-panel)}
-.gtst-mx thead th{position:sticky;top:0;z-index:1;font:600 12px/1.2 var(--st-ui);color:var(--st-ink);max-width:110px;overflow-wrap:anywhere}
-.gtst-mx th[scope=row]{position:sticky;left:0;z-index:2;text-align:left;font:600 13px/1.25 var(--st-ui);min-width:110px;max-width:150px;overflow-wrap:anywhere}
+.gtst-mx thead th{position:sticky;top:0;z-index:1;font:600 12px/1.2 var(--st-ui);color:var(--st-ink);max-width:110px;overflow-wrap:break-word}
+.gtst-mx th[scope=row]{position:sticky;left:0;z-index:2;text-align:left;font:600 13px/1.25 var(--st-ui);min-width:110px;max-width:150px;overflow-wrap:break-word}
 .gtst-mx thead th:first-child{left:0;z-index:3}
 .gtst-mx td.is-self{background:var(--st-self)}
 .gtst-mx td b{display:block;font:700 15px/1.1 var(--st-data)}
@@ -36535,7 +36535,7 @@ var { SchieberTournament, GtStuLogo } = (function() {
 .gtst-sheet{width:100%;max-width:560px;max-height:calc(100dvh - env(safe-area-inset-top,0px) - 10px);display:flex;flex-direction:column;background:var(--st-body-solid);color:var(--st-ink);border-radius:20px 20px 0 0;box-shadow:0 -12px 40px -12px rgba(0,0,0,.5);animation:gtstUp .24s cubic-bezier(.23,1,.32,1);border:var(--st-sheet-line)}
 @media (min-width:700px){.gtst-ovl{align-items:center;padding:24px}.gtst-sheet{border-radius:20px;max-height:calc(100dvh - 48px)}}
 .gtst-shead{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 10px 6px 18px}
-.gtst-shead h2{margin:0;font:700 18px/1.25 var(--st-ui);overflow-wrap:anywhere}
+.gtst-shead h2{margin:0;font:700 18px/1.25 var(--st-ui);overflow-wrap:break-word}
 .gtst-sbody{overflow-y:auto;padding:4px 18px 16px;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
 .gtst-sfoot{padding:10px 18px calc(env(safe-area-inset-bottom,0px) + 14px);border-top:1px solid var(--st-rline);display:grid;gap:8px;background:var(--st-body-solid);border-radius:0 0 20px 20px}
 @keyframes gtstFade{from{opacity:0}to{opacity:1}}
@@ -36547,28 +36547,28 @@ var { SchieberTournament, GtStuLogo } = (function() {
 .gtst-slot{min-height:48px;width:100%;border-radius:10px;border:1.5px dashed var(--st-bline);background:transparent;color:var(--st-muted);display:flex;align-items:center;gap:8px;padding:6px 8px;font:600 14px/1.25 var(--st-ui);text-align:left;cursor:pointer;min-width:0}
 .gtst-slot.is-full{border-style:solid;color:var(--st-ink);background:var(--st-field)}
 .gtst-slot.is-active{border:2px solid var(--st-focus);border-style:solid}
-.gtst-slot>span.nm{flex:1;min-width:0;overflow-wrap:anywhere}
+.gtst-slot>span.nm{flex:1;min-width:0;overflow-wrap:break-word}
 .gtst-plist2{display:grid;gap:6px;margin-top:8px}
 .gtst-pbtn{min-height:52px;width:100%;border-radius:12px;border:1px solid var(--st-rline);background:transparent;color:var(--st-ink);display:flex;align-items:center;gap:10px;padding:8px 10px;text-align:left;cursor:pointer;font:600 15px/1.25 var(--st-ui)}
 .gtst-pbtn:disabled{cursor:not-allowed;opacity:.5}
 .gtst-pbtn[aria-pressed=true]{border-color:var(--st-focus);background:var(--st-accent-soft)}
-.gtst-pbtn .nm{flex:1;min-width:0;overflow-wrap:anywhere}
+.gtst-pbtn .nm{flex:1;min-width:0;overflow-wrap:break-word}
 .gtst-pbtn .why{font:500 12px/1.3 var(--st-ui);color:var(--st-muted);text-align:right;max-width:46%}
 .gtst-tag{min-width:26px;height:26px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font:800 13px/1 var(--st-ui);background:var(--st-accent);color:var(--st-on-accent)}
 .gtst-win{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .gtst-wbtn{min-height:64px;border-radius:12px;border:1.5px solid var(--st-bline);background:transparent;color:var(--st-ink);padding:8px 10px;text-align:left;cursor:pointer;display:grid;gap:2px;font:700 15px/1.25 var(--st-ui)}
-.gtst-wbtn small{font:500 12.5px/1.3 var(--st-ui);color:var(--st-muted);overflow-wrap:anywhere}
+.gtst-wbtn small{font:500 12.5px/1.3 var(--st-ui);color:var(--st-muted);overflow-wrap:break-word}
 .gtst-wbtn[aria-pressed=true]{background:var(--st-accent);border-color:var(--st-accent);color:var(--st-on-accent)}
 .gtst-wbtn[aria-pressed=true] small{color:var(--st-on-accent);opacity:.88}
 .gtst-wbtn:disabled{opacity:.42;cursor:not-allowed}
 .gtst-when{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--st-rline);border-radius:12px;padding:8px 8px 8px 12px}
 .gtst[data-d=app] .gtst-input{color-scheme:dark}
-.gtst-sum{border-radius:12px;padding:12px;background:var(--st-accent-soft);font:600 15px/1.4 var(--st-ui);overflow-wrap:anywhere}
+.gtst-sum{border-radius:12px;padding:12px;background:var(--st-accent-soft);font:600 15px/1.4 var(--st-ui);overflow-wrap:break-word}
 .gtst-prev{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 .gtst-prev span{border-radius:999px;padding:4px 10px;font:600 12.5px/1.2 var(--st-data);border:1px solid var(--st-bline);background:var(--st-panel)}
 .gtst-note{border-radius:12px;padding:10px 12px;border:1px solid var(--st-bline);font:500 13.5px/1.45 var(--st-ui);color:var(--st-ink);background:var(--st-panel)}
 .gtst-toast{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 12px);bottom:auto;transform:translateX(-50%);z-index:96;width:min(520px,calc(100vw - 24px));display:flex;align-items:center;gap:10px;padding:8px 8px 8px 16px;border-radius:14px;background:var(--st-toast);color:var(--st-toast-ink);box-shadow:0 14px 34px -14px rgba(0,0,0,.6);font:600 14px/1.35 var(--st-ui);animation:gtstUp .22s cubic-bezier(.23,1,.32,1)}
-.gtst-toast>span{flex:1;min-width:0;overflow-wrap:anywhere}
+.gtst-toast>span{flex:1;min-width:0;overflow-wrap:break-word}
 .gtst-toast .gtst-btn{color:var(--st-toast-ink);border-color:currentColor}
 .gtst-mini{border:1.5px solid var(--st-bline);border-radius:14px;padding:8px;background:transparent;color:var(--st-ink);cursor:pointer;display:grid;gap:8px;text-align:left;font:600 14px/1.2 var(--st-ui);min-height:44px}
 .gtst-mini[aria-checked=true]{border:2px solid var(--st-focus);box-shadow:0 0 0 3px var(--st-accent-soft)}
@@ -36578,7 +36578,7 @@ var { SchieberTournament, GtStuLogo } = (function() {
 .gtst-step output{min-width:44px;text-align:center;font:700 20px/1 var(--st-data);font-variant-numeric:tabular-nums}
 .gtst-lrow{display:flex;align-items:center;gap:4px;padding:6px 6px 6px 14px;margin-bottom:10px}
 .gtst-lrow>button.main{flex:1;min-width:0;background:none;border:none;color:inherit;text-align:left;padding:8px 0;cursor:pointer;min-height:56px}
-.gtst-lrow .nm{font:700 16.5px/1.25 var(--st-ui);overflow-wrap:anywhere}
+.gtst-lrow .nm{font:700 16.5px/1.25 var(--st-ui);overflow-wrap:break-word}
 .gtst-mrow{width:100%;min-height:52px;display:flex;align-items:center;gap:12px;border:none;border-bottom:1px solid var(--st-rline);background:none;color:var(--st-ink);font:600 15.5px/1.25 var(--st-ui);text-align:left;padding:8px 4px;cursor:pointer}
 .gtst-mrow:disabled{opacity:.45;cursor:not-allowed}
 .gtst-mrow>span{flex:1}
@@ -40428,7 +40428,7 @@ function GameShowcaseStrip({ lang, theme, tokens, onSelect, fixedOrder }) {
 			color: tokens.ink,
 			opacity: .82,
 			maxWidth: "100%",
-			overflowWrap: "anywhere",
+			overflowWrap: "break-word",
 			fontFamily: "'Inter', sans-serif",
 			textAlign: "center",
 			lineHeight: 1.15,
@@ -43681,7 +43681,7 @@ function SchieberTourPick({ onPick, compact, tk, t, theme }) {
 			fontSize: 14,
 			fontWeight: 600,
 			lineHeight: 1.3,
-			overflowWrap: "anywhere"
+			overflowWrap: "break-word"
 		}
 	}, /* @__PURE__ */ import_react.default.createElement("span", { style: {
 		display: "block",
@@ -47554,11 +47554,11 @@ var JASS_PL_CSS = `
 [data-phone-landscape] .gt-jd-side>div:first-child{margin-top:0!important}
 [data-phone-landscape] .gt-jd-table{overflow:auto!important;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;max-height:max(200px,calc(var(--pl-avail) - var(--pl-head) - 30px - var(--pl-sab)))!important}
 [data-phone-landscape] .gt-jd-cell{min-height:44px;justify-content:center}
-[data-phone-landscape] .gt-jd-pname{white-space:normal!important;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+[data-phone-landscape] .gt-jd-pname{white-space:normal!important;overflow-wrap:break-word;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 [data-phone-landscape] .gt-jd-editor{left:auto!important;right:var(--pl-gutter-r)!important;top:calc(var(--pl-sat) + 6px)!important;bottom:auto!important;width:max(290px,calc((100vw - var(--pl-gutter-l) - var(--pl-gutter-r) - var(--pl-gap)) * .4));max-width:calc(100vw - var(--pl-gutter-l) - var(--pl-gutter-r));box-sizing:border-box;max-height:calc(var(--pl-avail) - 12px);overflow-y:auto;overscroll-behavior:contain;border:1px solid rgba(127,127,127,.35);border-radius:16px;padding:8px 12px 12px!important;box-shadow:0 12px 30px rgba(0,0,0,.38)!important}
 [data-phone-landscape] .gt-jd-editor input,[data-phone-landscape] .gt-jd-editor button{min-height:44px}
 [data-phone-landscape] .gt-jd-x{min-width:44px;display:flex;align-items:center;justify-content:center;margin-right:-10px}
-[data-phone-landscape] .gt-jd-edtitle{overflow-wrap:anywhere;min-width:0}
+[data-phone-landscape] .gt-jd-edtitle{overflow-wrap:break-word;min-width:0}
 `;
 function JassTopBar({ title, subtitle, onBack, theme, t, onHome, rulesText, rulesTitle, onEndGame }) {
 	const stage = shellTokens(theme);
@@ -49780,7 +49780,7 @@ function MinigolfEditorPanel({ editing, players, value: cur, onSave, onClose, t,
 		fontWeight: 700,
 		color: mg.ink,
 		minWidth: 0,
-		overflowWrap: "anywhere"
+		overflowWrap: "break-word"
 	} }, player?.name, /* @__PURE__ */ import_react.default.createElement("span", { style: {
 		color: mg.muted,
 		fontWeight: 600
@@ -50119,7 +50119,7 @@ function MgPlayerCard({ p, val, isDraft, missing, sofar, countNote, leads, onSte
 		fontSize: 19,
 		color: mg.ink,
 		lineHeight: 1.2,
-		overflowWrap: "anywhere",
+		overflowWrap: "break-word",
 		letterSpacing: "-0.01em"
 	} }, name), leads && /* @__PURE__ */ import_react.default.createElement("span", { style: {
 		fontFamily: MG_UI,
@@ -50273,7 +50273,7 @@ function MgStandingsBox({ st, onOpen, finished, mg, t, className }) {
 			fontFamily: MG_UI,
 			fontWeight: 600,
 			fontSize: 15,
-			overflowWrap: "anywhere",
+			overflowWrap: "break-word",
 			lineHeight: 1.25
 		} }, r.name, top && /* @__PURE__ */ import_react.default.createElement("span", { className: "mgSr" }, ", " + t("mgLeads")), !st.uniform && /* @__PURE__ */ import_react.default.createElement("span", { style: {
 			display: "block",
@@ -50443,8 +50443,8 @@ function MgTable({ ui, hole, onCell, mg, t }) {
 		display: "block",
 		maxWidth: 110,
 		margin: "0 auto",
-		overflowWrap: "anywhere",
-		hyphens: "auto",
+		overflowWrap: "break-word",
+		hyphens: "none",
 		lineHeight: 1.2
 	} }, p.name))))), /* @__PURE__ */ import_react.default.createElement("tbody", null, Array.from({ length: 9 }, (_, h) => holeRow(h)), sumRow(t("minigolfOutRow"), minigolfOutSum), Array.from({ length: 9 }, (_, k) => holeRow(9 + k)), sumRow(t("minigolfInRow"), minigolfInSum), sumRow(t("minigolfTotalRow"), minigolfTotal, true))));
 }
@@ -59990,7 +59990,7 @@ function ImpostorReveal({ players, roles, word, onDone, theme, t, gtPeekIdx }) {
 		color: wt.ink,
 		fontFamily: IMP_FONT,
 		lineHeight: 1.05,
-		overflowWrap: "anywhere",
+		overflowWrap: "break-word",
 		marginBottom: 6
 	} }, player.name), /* @__PURE__ */ import_react.default.createElement(GtRoleHold, {
 		dock: true,
@@ -60160,7 +60160,6 @@ function ImpostorReveal({ players, roles, word, onDone, theme, t, gtPeekIdx }) {
 		fontFamily: IMP_FONT,
 		marginTop: 8,
 		overflowWrap: "break-word",
-		wordBreak: "break-word",
 		padding: "0 4px"
 	} }, word.word), /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		fontSize: 12,
@@ -67037,7 +67036,7 @@ var APP_LANDSCAPE_CSS = `
 [data-phone-landscape] .gtL-startcol .gtL-showcase { margin-top: 6px !important; }
 [data-phone-landscape] .gtL-showcase-row { display: grid !important; grid-template-columns: repeat(auto-fill, minmax(88px, 1fr)); gap: 10px 8px !important; overflow: visible !important; scroll-snap-type: none !important; }
 [data-phone-landscape] .gtL-showcase-item { width: auto !important; min-height: 76px; padding: 4px 2px !important; }
-[data-phone-landscape] .gtL-showcase-label { font-size: 12px !important; opacity: 1 !important; overflow-wrap: anywhere; }
+[data-phone-landscape] .gtL-showcase-label { font-size: 12px !important; opacity: 1 !important; overflow-wrap: break-word; }
 [data-phone-landscape] .gtL-showcase-arrow { display: none !important; }
 [data-phone-landscape] .gtL-startfoot { max-width: none !important; padding: 10px var(--pl-gutter-r) calc(var(--pl-sab) + 14px) var(--pl-gutter-l) !important; }
 [data-phone-landscape] .gtL-startfoot p { font-size: 12px !important; }
@@ -67084,7 +67083,7 @@ var APP_LANDSCAPE_CSS = `
 
 /* Statistik: Touchziele, volle Namen ohne Abschneiden (Handy hat kein Hover) */
 [data-phone-landscape] .pl-app .gtSt2-btn { min-height: 44px !important; }
-[data-phone-landscape] .pl-app .gtSt2-nm { white-space: normal !important; overflow: visible !important; text-overflow: clip !important; overflow-wrap: anywhere; }
+[data-phone-landscape] .pl-app .gtSt2-nm { white-space: normal !important; overflow: visible !important; text-overflow: clip !important; overflow-wrap: break-word; }
 [data-phone-landscape] .pl-app .gtSt2-pod div[dir="auto"] { -webkit-line-clamp: 4 !important; }
 [data-phone-landscape] .pl-app .gtSt2-achv { grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)) !important; }
 
@@ -68639,13 +68638,13 @@ function WerewolfSetup({ state, setState, onStart, theme, lang, t }) {
 		color: wt.blood,
 		fontFamily: WOLF_FONT
 	} }, wolves), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 11,
+		fontSize: "clamp(8.5px, 2.9vw, 11px)",
 		color: wt.muted,
 		textTransform: "uppercase",
 		letterSpacing: "0.03em",
 		fontFamily: "'Inter', sans-serif",
-		overflowWrap: "anywhere",
-		hyphens: "auto",
+		overflowWrap: "break-word",
+		hyphens: "none",
 		lineHeight: 1.25
 	} }, t("werewolvesLabel"))), /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		flex: "1 1 0",
@@ -68656,13 +68655,13 @@ function WerewolfSetup({ state, setState, onStart, theme, lang, t }) {
 		color: wt.moon,
 		fontFamily: WOLF_FONT
 	} }, activeSpecialCount), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 11,
+		fontSize: "clamp(8.5px, 2.9vw, 11px)",
 		color: wt.muted,
 		textTransform: "uppercase",
 		letterSpacing: "0.03em",
 		fontFamily: "'Inter', sans-serif",
-		overflowWrap: "anywhere",
-		hyphens: "auto",
+		overflowWrap: "break-word",
+		hyphens: "none",
 		lineHeight: 1.25
 	} }, t("specialRolesLabel"))), /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		flex: "1 1 0",
@@ -68673,13 +68672,13 @@ function WerewolfSetup({ state, setState, onStart, theme, lang, t }) {
 		color: wt.forest,
 		fontFamily: WOLF_FONT
 	} }, villagerCount), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 11,
+		fontSize: "clamp(8.5px, 2.9vw, 11px)",
 		color: wt.muted,
 		textTransform: "uppercase",
 		letterSpacing: "0.03em",
 		fontFamily: "'Inter', sans-serif",
-		overflowWrap: "anywhere",
-		hyphens: "auto",
+		overflowWrap: "break-word",
+		hyphens: "none",
 		lineHeight: 1.25
 	} }, t("villagersLabel")))), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		fontSize: 11,
@@ -68881,7 +68880,7 @@ function WerewolfReveal({ players, roles, spares, hauptmannOn, onDone, onDiebSwa
 		color: wt.moon === "#7A6C3B" ? wt.ink : wt.moon,
 		fontFamily: WOLF_FONT,
 		lineHeight: 1.05,
-		overflowWrap: "anywhere",
+		overflowWrap: "break-word",
 		marginBottom: 6
 	} }, player.name), /* @__PURE__ */ import_react.default.createElement(GtRoleHold, {
 		dock: true,
@@ -70777,7 +70776,7 @@ function MafiaReveal({ players, roles, onDone, theme, lang, t, gtPeekIdx }) {
 		color: mt.gold,
 		fontFamily: MAFIA_FONT,
 		lineHeight: 1.05,
-		overflowWrap: "anywhere",
+		overflowWrap: "break-word",
 		marginBottom: 6
 	} }, player.name), /* @__PURE__ */ import_react.default.createElement(GtRoleHold, {
 		dock: true,
@@ -71946,7 +71945,7 @@ function TabuTurnIntro2({ teamName, onStart, theme, t, teams, scores, currentId,
 			color: wt.yellow,
 			fontFamily: TABU_FONT,
 			lineHeight: 1.05,
-			overflowWrap: "anywhere"
+			overflowWrap: "break-word"
 		}
 	}, teamName), /* @__PURE__ */ import_react.default.createElement("p", { style: {
 		fontSize: 13,
@@ -90604,7 +90603,7 @@ var TABU_LANDSCAPE_CSS = `
 [data-phone-landscape] .tb-status { grid-area: status; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
 [data-phone-landscape] .tb-counts { font-size: 15px !important; gap: 14px !important; }
 [data-phone-landscape] .tb-ringtxt { font-size: 17px !important; }
-[data-phone-landscape] .tb-card { grid-area: card; display: flex; flex-direction: column; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 12px 16px !important; border-radius: 22px !important; overflow-wrap: anywhere; }
+[data-phone-landscape] .tb-card { grid-area: card; display: flex; flex-direction: column; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 12px 16px !important; border-radius: 22px !important; overflow-wrap: break-word; }
 [data-phone-landscape] .tb-card > :first-child { margin-top: auto; }
 [data-phone-landscape] .tb-card > :last-child { margin-bottom: auto; }
 [data-phone-landscape] .tb-word.tb-long { font-size: clamp(20px, 7vh, 30px) !important; }
@@ -90612,9 +90611,9 @@ var TABU_LANDSCAPE_CSS = `
 [data-phone-landscape] .tb-word { font-size: clamp(26px, 10vh, 44px) !important; line-height: 1.08; margin-bottom: 8px !important; }
 [data-phone-landscape] .tb-rule { margin: 0 auto 8px !important; }
 [data-phone-landscape] .tb-taboo { display: grid !important; grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr)); gap: 4px 12px !important; }
-[data-phone-landscape] .tb-taboo > div { font-size: clamp(16px, 5.6vh, 22px) !important; line-height: 1.2; overflow-wrap: anywhere; }
+[data-phone-landscape] .tb-taboo > div { font-size: clamp(16px, 5.6vh, 22px) !important; line-height: 1.2; overflow-wrap: break-word; }
 [data-phone-landscape] .tb-btns { grid-area: btns; flex-direction: column !important; gap: 8px !important; min-height: 0; }
-[data-phone-landscape] .tb-btns > button { flex: 1 1 0 !important; min-height: 48px; font-size: 16px !important; padding: 6px 10px !important; display: flex; align-items: center; justify-content: center; gap: 6px; overflow-wrap: anywhere; }
+[data-phone-landscape] .tb-btns > button { flex: 1 1 0 !important; min-height: 48px; font-size: 16px !important; padding: 6px 10px !important; display: flex; align-items: center; justify-content: center; gap: 6px; overflow-wrap: break-word; }
 [data-phone-landscape] .tb-b-ok { order: 1; }
 [data-phone-landscape] .tb-b-skip { order: 2; }
 [data-phone-landscape] .tb-b-taboo { order: 3; margin-top: 6px; }
@@ -91540,7 +91539,7 @@ var HEADSUP_LANDSCAPE_CSS = `
 [data-phone-landscape] .hu-ls .gtL-headsup-hud > div:first-child { font-size: 15px !important; }
 [data-phone-landscape] .hu-ls .gtL-headsup-hud button { min-width: 44px; min-height: 44px; font-size: 16px !important; }
 [data-phone-landscape] .hu-ls .gtL-headsup-hud > div:first-child span[style*="border-radius: 999px"], [data-phone-landscape] .hu-ls .gtL-headsup-hud > div:first-child span[style*="border-radius:999px"] { font-size: 11px !important; padding: 3px 8px !important; }
-[data-phone-landscape] .hu-ls .gtL-headsup-word { grid-area: word; min-height: 0 !important; padding: 8px 14px !important; border-radius: 24px !important; overflow-wrap: anywhere; }
+[data-phone-landscape] .hu-ls .gtL-headsup-word { grid-area: word; min-height: 0 !important; padding: 8px 14px !important; border-radius: 24px !important; overflow-wrap: break-word; }
 [data-phone-landscape] .hu-ls .gtL-headsup-word-text { font-size: min(14vw, 20vh, 76px) !important; line-height: 1.05; }
 [data-phone-landscape] .hu-ls .gtL-headsup-actions { grid-area: act; flex-direction: column !important; width: auto !important; gap: 10px !important; justify-content: stretch; min-height: 0; }
 [data-phone-landscape] .hu-ls .gtL-headsup-actions button { flex: 1 1 0 !important; width: 100% !important; min-height: 48px; font-size: 16px !important; font-weight: 700 !important; padding: 6px 4px !important; border-radius: 16px !important; }
@@ -91548,7 +91547,7 @@ var HEADSUP_LANDSCAPE_CSS = `
 [data-phone-landscape] .hu-intro { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: "a b"; gap: 8px 22px !important; min-height: max(180px, calc(var(--pl-body) - 18px)) !important; align-items: center; justify-items: center; }
 [data-phone-landscape] .hu-a { grid-area: a; display: flex !important; flex-direction: column; align-items: center; gap: 8px; }
 [data-phone-landscape] .hu-b { grid-area: b; display: flex !important; flex-direction: column; align-items: center; gap: 12px; width: 100%; }
-[data-phone-landscape] .hu-a .hu-name { font-size: clamp(28px, 11vh, 44px) !important; overflow-wrap: anywhere; }
+[data-phone-landscape] .hu-a .hu-name { font-size: clamp(28px, 11vh, 44px) !important; overflow-wrap: break-word; }
 [data-phone-landscape] .hu-b button { min-height: 48px; }
 [data-phone-landscape] .hu-b > div { max-width: 340px !important; }
 [data-phone-landscape] .hu-over { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: "a b"; gap: 8px 20px !important; align-items: center; justify-items: center; }
@@ -95480,10 +95479,10 @@ var FIVESEC_LANDSCAPE_CSS = `
 [data-phone-landscape] .fs-ls { padding: max(6px, var(--pl-sat)) 0 max(8px, var(--pl-sab)) 0 !important; min-height: var(--pl-vh) !important; box-sizing: border-box; }
 [data-phone-landscape] .fs-ls .gtL-game { padding-top: 0 !important; }
 [data-phone-landscape] .fs-play { display: grid !important; grid-template-columns: minmax(0, 1fr) clamp(190px, 34%, 280px); grid-template-areas: "card label" "card ring" "card btns"; grid-template-rows: auto auto minmax(0, 1fr); gap: 6px 14px !important; height: max(200px, calc(var(--pl-body) - 18px)); align-items: stretch !important; }
-[data-phone-landscape] .fs-label { grid-area: label; text-align: center; font-size: 14px !important; overflow-wrap: anywhere; }
+[data-phone-landscape] .fs-label { grid-area: label; text-align: center; font-size: 14px !important; overflow-wrap: break-word; }
 [data-phone-landscape] .fs-ring { grid-area: ring; display: flex !important; justify-content: center; }
 [data-phone-landscape] .fs-ringin { width: 64px !important; height: 64px !important; font-size: 30px !important; border-width: 3px !important; }
-[data-phone-landscape] .fs-card { grid-area: card; min-height: 0 !important; padding: 14px 18px !important; border-radius: 22px !important; overflow-y: auto; overscroll-behavior: contain; overflow-wrap: anywhere; }
+[data-phone-landscape] .fs-card { grid-area: card; min-height: 0 !important; padding: 14px 18px !important; border-radius: 22px !important; overflow-y: auto; overscroll-behavior: contain; overflow-wrap: break-word; }
 [data-phone-landscape] .fs-card > div { font-size: clamp(22px, 9vh, 38px) !important; line-height: 1.15; margin: auto; }
 [data-phone-landscape] .fs-btns { grid-area: btns; flex-direction: column !important; gap: 8px !important; min-height: 0; }
 [data-phone-landscape] .fs-btns > button { flex: 1 1 0 !important; min-height: 48px; font-size: 16px !important; padding: 6px 10px !important; display: flex; align-items: center; justify-content: center; gap: 6px; }
@@ -98056,11 +98055,11 @@ var MOSTLIKELY_LANDSCAPE_CSS = `
 [data-phone-landscape] .ml-ls { padding: max(6px, var(--pl-sat)) 0 max(8px, var(--pl-sab)) 0 !important; min-height: var(--pl-vh) !important; box-sizing: border-box; }
 [data-phone-landscape] .ml-ls .gtL-game { padding-top: 0 !important; }
 [data-phone-landscape] .ml-play { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); grid-template-areas: "card who" "card pick" "skip pick"; grid-template-rows: auto minmax(0, 1fr) auto; gap: 8px 14px !important; min-height: max(200px, calc(var(--pl-body) - 18px)); align-items: stretch; }
-[data-phone-landscape] .ml-card { grid-area: card; min-height: 0 !important; padding: 14px 18px !important; border-radius: 22px !important; overflow-wrap: anywhere; }
+[data-phone-landscape] .ml-card { grid-area: card; min-height: 0 !important; padding: 14px 18px !important; border-radius: 22px !important; overflow-wrap: break-word; }
 [data-phone-landscape] .ml-card > div { font-size: clamp(19px, 7.5vh, 30px) !important; line-height: 1.25 !important; }
 [data-phone-landscape] .ml-who { grid-area: who; align-self: end; }
 [data-phone-landscape] .ml-pick { grid-area: pick; align-self: start; align-content: start; grid-template-columns: repeat(auto-fit, minmax(min(100%, 120px), 1fr)) !important; }
-[data-phone-landscape] .ml-pick > button { min-height: 48px; font-size: 16px !important; padding: 8px 8px !important; overflow-wrap: anywhere; }
+[data-phone-landscape] .ml-pick > button { min-height: 48px; font-size: 16px !important; padding: 8px 8px !important; overflow-wrap: break-word; }
 [data-phone-landscape] .ml-skip { grid-area: skip; min-height: 48px; align-self: end; }
 [data-phone-landscape] .ml-tally { margin-top: 12px !important; }
 [data-phone-landscape] .ml-tally button { min-height: 48px; }
@@ -98403,7 +98402,7 @@ function MostLikelyResult({ players, tally, onClose, onEnd, theme, t }) {
 			fontWeight: 800,
 			fontSize: 26,
 			color: mk.purple,
-			overflowWrap: "anywhere",
+			overflowWrap: "break-word",
 			marginTop: 2
 		}
 	}, win.map((e) => e.name).join(" & "))), /* @__PURE__ */ import_react.default.createElement("div", { style: {
@@ -98425,7 +98424,7 @@ function MostLikelyResult({ players, tally, onClose, onEnd, theme, t }) {
 			fontWeight: 700,
 			color: mk.ink,
 			fontFamily: "'Inter', sans-serif",
-			overflowWrap: "anywhere"
+			overflowWrap: "break-word"
 		}
 	}, e.name), /* @__PURE__ */ import_react.default.createElement("div", {
 		"aria-hidden": true,
@@ -101423,8 +101422,8 @@ function GtYearReview({ t, theme, onClose, year }) {
 				fontWeight: 800,
 				letterSpacing: "-0.04em",
 				color: pal.ink,
-				wordBreak: "break-word",
-				overflowWrap: "anywhere",
+				overflowWrap: "break-word",
+				overflowWrap: "break-word",
 				textWrap: "balance",
 				margin: "4px 0 2px"
 			}, d(1))
@@ -103474,7 +103473,7 @@ function GtSt2Podium({ rows, theme, game, t, tk, onOpen, animKey }) {
 				display: "-webkit-box",
 				WebkitLineClamp: 2,
 				WebkitBoxOrient: "vertical",
-				overflowWrap: "anywhere"
+				overflowWrap: "break-word"
 			}
 		}, r.name), /* @__PURE__ */ import_react.default.createElement("div", { style: {
 			fontSize: win ? 21 : 18,
@@ -103525,7 +103524,7 @@ function GtSt2Kpis({ s, t, tk, lk, animKey }) {
 		display: "flex",
 		alignItems: "center",
 		justifyContent: "center",
-		overflowWrap: "anywhere"
+		overflowWrap: "break-word"
 	} }, typeof val === "number" ? /* @__PURE__ */ import_react.default.createElement(GtSt2Num, {
 		v: val,
 		key: animKey
@@ -103675,7 +103674,7 @@ function GtSt2Highlights({ items, t, tk, theme, lk, acc, onOpen }) {
 					fontFamily: "'Baloo 2', sans-serif",
 					lineHeight: 1.05,
 					margin: "12px 0 4px",
-					overflowWrap: "anywhere"
+					overflowWrap: "break-word"
 				}
 			}, typeof x.value === "number" ? /* @__PURE__ */ import_react.default.createElement(GtSt2Num, { v: x.value }) : String(x.value == null ? "" : x.value)),
 			/* @__PURE__ */ import_react.default.createElement("p", {
@@ -104389,7 +104388,7 @@ function GtSt2Stat({ theme, tk, title, value, text, icon, acc, lk, onClick, i, m
 				fontFamily: typeof value === "number" ? "'Baloo 2', sans-serif" : "'Inter', sans-serif",
 				lineHeight: 1.15,
 				margin: "8px 0 4px",
-				overflowWrap: "anywhere"
+				overflowWrap: "break-word"
 			}
 		}, typeof value === "number" ? /* @__PURE__ */ import_react.default.createElement(GtSt2Num, { v: value }) : value),
 		/* @__PURE__ */ import_react.default.createElement("p", {
@@ -104643,7 +104642,7 @@ function GtSt2Achievements({ matches, pname, t, tk, lk, theme, acc, i }) {
 				color: a.unlocked ? tk.ink : tk.muted,
 				fontFamily: "'Inter', sans-serif",
 				marginTop: 3,
-				overflowWrap: "anywhere"
+				overflowWrap: "break-word"
 			}
 		}, title), /* @__PURE__ */ import_react.default.createElement("span", {
 			dir: "auto",
@@ -104653,7 +104652,7 @@ function GtSt2Achievements({ matches, pname, t, tk, lk, theme, acc, i }) {
 				color: tk.muted,
 				opacity: a.unlocked ? 1 : .9,
 				fontFamily: "'Inter', sans-serif",
-				overflowWrap: "anywhere"
+				overflowWrap: "break-word"
 			}
 		}, desc), !a.bool && !a.maxed && /* @__PURE__ */ import_react.default.createElement("span", { style: {
 			width: "72%",
@@ -104942,7 +104941,7 @@ function GtSt2Profile({ pkey, matches, opts, people, t, tk, lk, theme, lang, acc
 			fontFamily: "'Inter', sans-serif",
 			letterSpacing: "-0.02em",
 			lineHeight: 1.15,
-			overflowWrap: "anywhere"
+			overflowWrap: "break-word"
 		}
 	}, p.name), /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		fontSize: 12.5,
@@ -106117,7 +106116,7 @@ function RulesSheet({ open, onClose, title, text, tokens }) {
 			color: tk.ink,
 			fontFamily: "'Baloo 2', sans-serif",
 			minWidth: 0,
-			overflowWrap: "anywhere"
+			overflowWrap: "break-word"
 		}
 	}, title), /* @__PURE__ */ import_react.default.createElement("button", {
 		ref: closeRef,
@@ -108926,7 +108925,7 @@ function YatzyGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 }
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.05-9";
+var APP_BUILD = "2026.11.05-10";
 // web/src/app/storage.js
 var storage_exports = /* @__PURE__ */ __exportAll({
 	GT_CAT_KEYS: () => GT_CAT_KEYS,
@@ -109048,7 +109047,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.05-9");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.05-10");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -109732,7 +109731,7 @@ function PodiumOverlay({ open, onClose, onRestart, extraAct, ranked, tk, t, best
 			style: {
 				color: S.ink,
 				fontWeight: 700,
-				overflowWrap: "anywhere"
+				overflowWrap: "break-word"
 			}
 		}, e && e.name), /* @__PURE__ */ import_react.default.createElement("span", {
 			dir: "ltr",
@@ -109846,13 +109845,14 @@ function GtPodiumBlocks({ items, S, play, land }) {
 			k: 1
 		};
 		let raf = 0, drag = null, lastW = -1;
+		const offs = [];
 		const ans = Array.from(st.querySelectorAll(".gtsb-an")), labs = Array.from(st.querySelectorAll(".gtsb-lab"));
 		const paint = () => {
 			rig.style.transform = `translateY(${R.dip.toFixed(2)}px) scale(${R.k}) rotateX(-17deg) rotateY(${R.yaw.toFixed(2)}deg)`;
 			const b = st.getBoundingClientRect();
 			ans.forEach((a, i) => {
 				const q = a.getBoundingClientRect();
-				labs[i].style.transform = `translate(${(q.left - b.left).toFixed(1)}px,${(q.top - b.top).toFixed(1)}px) translate(-50%,-100%)`;
+				labs[i].style.transform = `translate(${(q.left - b.left + (offs[i] || 0)).toFixed(1)}px,${(q.top - b.top).toFixed(1)}px) translate(-50%,-100%)`;
 			});
 		};
 		const fit = () => {
@@ -109860,11 +109860,40 @@ function GtPodiumBlocks({ items, S, play, land }) {
 			if (!w || w === lastW) return;
 			lastW = w;
 			R.k = Math.min(1, w / 300);
-			labs.forEach((l) => {
-				l.style.maxWidth = Math.round(step * R.k + 4) + "px";
-			});
 			const y = R.yaw;
 			R.yaw = REST;
+			paint();
+			const b0 = st.getBoundingClientRect(), xs = ans.map((q) => q.getBoundingClientRect().left - b0.left);
+			labs.forEach((l, i) => {
+				const lo = i ? (xs[i - 1] + xs[i]) / 2 + 4 : 4, hi = i < xs.length - 1 ? (xs[i] + xs[i + 1]) / 2 - 4 : w - 4;
+				l.style.maxWidth = Math.floor(hi - lo) + "px";
+				const nm = l.querySelector(".gtsb-name");
+				if (nm) {
+					const over = () => nm.scrollWidth > nm.clientWidth + .5;
+					const f0 = parseFloat(nm.dataset.fs || nm.style.fontSize || 14);
+					nm.dataset.fs = f0;
+					let fs = f0;
+					nm.style.overflowWrap = "";
+					nm.style.whiteSpace = "nowrap";
+					nm.style.fontSize = fs + "px";
+					while (over() && fs > 12) {
+						fs -= .5;
+						nm.style.fontSize = fs + "px";
+					}
+					if (over()) {
+						nm.style.whiteSpace = "";
+						fs = f0;
+						nm.style.fontSize = fs + "px";
+						while (over() && fs > 10) {
+							fs -= .5;
+							nm.style.fontSize = fs + "px";
+						}
+						if (over()) nm.style.overflowWrap = "break-word";
+					}
+				}
+				const hw = l.offsetWidth / 2;
+				offs[i] = Math.min(Math.max(xs[i], lo + hw), Math.max(lo + hw, hi - hw)) - xs[i];
+			});
 			paint();
 			const b = st.getBoundingClientRect();
 			let top = b.bottom;
@@ -110146,7 +110175,7 @@ function GtAchvHint({ items, t, S }) {
 				fontWeight: 800,
 				color: S.ink,
 				lineHeight: 1.25,
-				overflowWrap: "anywhere"
+				overflowWrap: "break-word"
 			}
 		}, String(t("avHint")).replace("{n}", nm)), /* @__PURE__ */ import_react.default.createElement("div", {
 			dir: "auto",
@@ -110155,7 +110184,7 @@ function GtAchvHint({ items, t, S }) {
 				fontWeight: 600,
 				color: S.sub,
 				lineHeight: 1.3,
-				overflowWrap: "anywhere"
+				overflowWrap: "break-word"
 			}
 		}, a.name, a.multi ? " · " + tier[a.tier] : "")));
 	}));
@@ -111599,7 +111628,7 @@ function UpdateBanner() {
 		let alive = true;
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.05-9") {
+				if (alive && v && v.build && v.build !== "2026.11.05-10") {
 					setReady(true);
 					setHidden(false);
 					try {

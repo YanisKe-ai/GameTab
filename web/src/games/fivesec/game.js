@@ -19,10 +19,10 @@ import { usePhoneLandscape } from "../../shared/phone-landscape.js";
 [data-phone-landscape] .fs-ls { padding: max(6px, var(--pl-sat)) 0 max(8px, var(--pl-sab)) 0 !important; min-height: var(--pl-vh) !important; box-sizing: border-box; }
 [data-phone-landscape] .fs-ls .gtL-game { padding-top: 0 !important; }
 [data-phone-landscape] .fs-play { display: grid !important; grid-template-columns: minmax(0, 1fr) clamp(190px, 34%, 280px); grid-template-areas: "card label" "card ring" "card btns"; grid-template-rows: auto auto minmax(0, 1fr); gap: 6px 14px !important; height: max(200px, calc(var(--pl-body) - 18px)); align-items: stretch !important; }
-[data-phone-landscape] .fs-label { grid-area: label; text-align: center; font-size: 14px !important; overflow-wrap: anywhere; }
+[data-phone-landscape] .fs-label { grid-area: label; text-align: center; font-size: 14px !important; overflow-wrap: break-word; }
 [data-phone-landscape] .fs-ring { grid-area: ring; display: flex !important; justify-content: center; }
 [data-phone-landscape] .fs-ringin { width: 64px !important; height: 64px !important; font-size: 30px !important; border-width: 3px !important; }
-[data-phone-landscape] .fs-card { grid-area: card; min-height: 0 !important; padding: 14px 18px !important; border-radius: 22px !important; overflow-y: auto; overscroll-behavior: contain; overflow-wrap: anywhere; }
+[data-phone-landscape] .fs-card { grid-area: card; min-height: 0 !important; padding: 14px 18px !important; border-radius: 22px !important; overflow-y: auto; overscroll-behavior: contain; overflow-wrap: break-word; }
 [data-phone-landscape] .fs-card > div { font-size: clamp(22px, 9vh, 38px) !important; line-height: 1.15; margin: auto; }
 [data-phone-landscape] .fs-btns { grid-area: btns; flex-direction: column !important; gap: 8px !important; min-height: 0; }
 [data-phone-landscape] .fs-btns > button { flex: 1 1 0 !important; min-height: 48px; font-size: 16px !important; padding: 6px 10px !important; display: flex; align-items: center; justify-content: center; gap: 6px; }

@@ -32,7 +32,7 @@ export const APP_LANDSCAPE_CSS = `
 [data-phone-landscape] .gtL-startcol .gtL-showcase { margin-top: 6px !important; }
 [data-phone-landscape] .gtL-showcase-row { display: grid !important; grid-template-columns: repeat(auto-fill, minmax(88px, 1fr)); gap: 10px 8px !important; overflow: visible !important; scroll-snap-type: none !important; }
 [data-phone-landscape] .gtL-showcase-item { width: auto !important; min-height: 76px; padding: 4px 2px !important; }
-[data-phone-landscape] .gtL-showcase-label { font-size: 12px !important; opacity: 1 !important; overflow-wrap: anywhere; }
+[data-phone-landscape] .gtL-showcase-label { font-size: 12px !important; opacity: 1 !important; overflow-wrap: break-word; }
 [data-phone-landscape] .gtL-showcase-arrow { display: none !important; }
 [data-phone-landscape] .gtL-startfoot { max-width: none !important; padding: 10px var(--pl-gutter-r) calc(var(--pl-sab) + 14px) var(--pl-gutter-l) !important; }
 [data-phone-landscape] .gtL-startfoot p { font-size: 12px !important; }
@@ -79,7 +79,7 @@ export const APP_LANDSCAPE_CSS = `
 
 /* Statistik: Touchziele, volle Namen ohne Abschneiden (Handy hat kein Hover) */
 [data-phone-landscape] .pl-app .gtSt2-btn { min-height: 44px !important; }
-[data-phone-landscape] .pl-app .gtSt2-nm { white-space: normal !important; overflow: visible !important; text-overflow: clip !important; overflow-wrap: anywhere; }
+[data-phone-landscape] .pl-app .gtSt2-nm { white-space: normal !important; overflow: visible !important; text-overflow: clip !important; overflow-wrap: break-word; }
 [data-phone-landscape] .pl-app .gtSt2-pod div[dir="auto"] { -webkit-line-clamp: 4 !important; }
 [data-phone-landscape] .pl-app .gtSt2-achv { grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)) !important; }
 

@@ -26,7 +26,7 @@ import { TABU_CATEGORIES_FOR } from "../tabu/game.js";
 [data-phone-landscape] .hu-ls .gtL-headsup-hud > div:first-child { font-size: 15px !important; }
 [data-phone-landscape] .hu-ls .gtL-headsup-hud button { min-width: 44px; min-height: 44px; font-size: 16px !important; }
 [data-phone-landscape] .hu-ls .gtL-headsup-hud > div:first-child span[style*="border-radius: 999px"], [data-phone-landscape] .hu-ls .gtL-headsup-hud > div:first-child span[style*="border-radius:999px"] { font-size: 11px !important; padding: 3px 8px !important; }
-[data-phone-landscape] .hu-ls .gtL-headsup-word { grid-area: word; min-height: 0 !important; padding: 8px 14px !important; border-radius: 24px !important; overflow-wrap: anywhere; }
+[data-phone-landscape] .hu-ls .gtL-headsup-word { grid-area: word; min-height: 0 !important; padding: 8px 14px !important; border-radius: 24px !important; overflow-wrap: break-word; }
 [data-phone-landscape] .hu-ls .gtL-headsup-word-text { font-size: min(14vw, 20vh, 76px) !important; line-height: 1.05; }
 [data-phone-landscape] .hu-ls .gtL-headsup-actions { grid-area: act; flex-direction: column !important; width: auto !important; gap: 10px !important; justify-content: stretch; min-height: 0; }
 [data-phone-landscape] .hu-ls .gtL-headsup-actions button { flex: 1 1 0 !important; width: 100% !important; min-height: 48px; font-size: 16px !important; font-weight: 700 !important; padding: 6px 4px !important; border-radius: 16px !important; }
@@ -34,7 +34,7 @@ import { TABU_CATEGORIES_FOR } from "../tabu/game.js";
 [data-phone-landscape] .hu-intro { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: "a b"; gap: 8px 22px !important; min-height: max(180px, calc(var(--pl-body) - 18px)) !important; align-items: center; justify-items: center; }
 [data-phone-landscape] .hu-a { grid-area: a; display: flex !important; flex-direction: column; align-items: center; gap: 8px; }
 [data-phone-landscape] .hu-b { grid-area: b; display: flex !important; flex-direction: column; align-items: center; gap: 12px; width: 100%; }
-[data-phone-landscape] .hu-a .hu-name { font-size: clamp(28px, 11vh, 44px) !important; overflow-wrap: anywhere; }
+[data-phone-landscape] .hu-a .hu-name { font-size: clamp(28px, 11vh, 44px) !important; overflow-wrap: break-word; }
 [data-phone-landscape] .hu-b button { min-height: 48px; }
 [data-phone-landscape] .hu-b > div { max-width: 340px !important; }
 [data-phone-landscape] .hu-over { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: "a b"; gap: 8px 20px !important; align-items: center; justify-items: center; }

@@ -25,7 +25,7 @@ import { usePhoneLandscape } from "../../shared/phone-landscape.js";
 [data-phone-landscape] .tb-status { grid-area: status; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
 [data-phone-landscape] .tb-counts { font-size: 15px !important; gap: 14px !important; }
 [data-phone-landscape] .tb-ringtxt { font-size: 17px !important; }
-[data-phone-landscape] .tb-card { grid-area: card; display: flex; flex-direction: column; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 12px 16px !important; border-radius: 22px !important; overflow-wrap: anywhere; }
+[data-phone-landscape] .tb-card { grid-area: card; display: flex; flex-direction: column; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 12px 16px !important; border-radius: 22px !important; overflow-wrap: break-word; }
 [data-phone-landscape] .tb-card > :first-child { margin-top: auto; }
 [data-phone-landscape] .tb-card > :last-child { margin-bottom: auto; }
 [data-phone-landscape] .tb-word.tb-long { font-size: clamp(20px, 7vh, 30px) !important; }
@@ -33,9 +33,9 @@ import { usePhoneLandscape } from "../../shared/phone-landscape.js";
 [data-phone-landscape] .tb-word { font-size: clamp(26px, 10vh, 44px) !important; line-height: 1.08; margin-bottom: 8px !important; }
 [data-phone-landscape] .tb-rule { margin: 0 auto 8px !important; }
 [data-phone-landscape] .tb-taboo { display: grid !important; grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr)); gap: 4px 12px !important; }
-[data-phone-landscape] .tb-taboo > div { font-size: clamp(16px, 5.6vh, 22px) !important; line-height: 1.2; overflow-wrap: anywhere; }
+[data-phone-landscape] .tb-taboo > div { font-size: clamp(16px, 5.6vh, 22px) !important; line-height: 1.2; overflow-wrap: break-word; }
 [data-phone-landscape] .tb-btns { grid-area: btns; flex-direction: column !important; gap: 8px !important; min-height: 0; }
-[data-phone-landscape] .tb-btns > button { flex: 1 1 0 !important; min-height: 48px; font-size: 16px !important; padding: 6px 10px !important; display: flex; align-items: center; justify-content: center; gap: 6px; overflow-wrap: anywhere; }
+[data-phone-landscape] .tb-btns > button { flex: 1 1 0 !important; min-height: 48px; font-size: 16px !important; padding: 6px 10px !important; display: flex; align-items: center; justify-content: center; gap: 6px; overflow-wrap: break-word; }
 [data-phone-landscape] .tb-b-ok { order: 1; }
 [data-phone-landscape] .tb-b-skip { order: 2; }
 [data-phone-landscape] .tb-b-taboo { order: 3; margin-top: 6px; }

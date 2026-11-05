@@ -231,8 +231,8 @@ input[type="number"] { -moz-appearance: textfield; }
 .gtsb-lab { position: absolute; left: 0; top: 0; width: max-content; text-align: center; padding-bottom: 7px; pointer-events: none; z-index: 2; }
 .gtsb-mini { position: relative; perspective: 620px; }
 .gtsb-mini-r { position: absolute; left: 50%; bottom: 16px; width: 64px; margin-left: -32px; height: 0; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; transform: rotateX(-14deg) rotateY(-20deg); }
-.gtsb-name { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 14px; line-height: 1.18; overflow-wrap: anywhere; hyphens: auto; }
-.gtsb-score { font-family: 'Baloo 2', 'Inter', sans-serif; font-weight: 800; line-height: 1.05; margin-top: 2px; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.gtsb-name { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 14px; line-height: 1.18; overflow-wrap: normal; word-break: normal; -webkit-hyphens: none; hyphens: none; }
+.gtsb-score { font-family: 'Baloo 2', 'Inter', sans-serif; font-weight: 800; line-height: 1.05; margin-top: 2px; font-variant-numeric: tabular-nums; overflow-wrap: break-word; }
 .gtsb-num { display: block; font-family: 'Baloo 2', 'Inter', sans-serif; font-weight: 800; line-height: 1; padding-top: 0.1em; font-variant-numeric: tabular-nums; pointer-events: none; }
 .gtsb-sheen { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
 .gtsb-sheen > i { position: absolute; top: 0; bottom: 0; left: 0; width: 38%; background: linear-gradient(100deg, rgba(255,255,255,0), rgba(255,255,255,0.22) 50%, rgba(255,255,255,0)); opacity: 0; transform: translateX(-110%); }

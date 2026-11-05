@@ -8695,6 +8695,11 @@ var TRANSLATIONS = {
 		jassDifferenzlerSubtitle: "Differenzler",
 		jassWinsWith: (name, score) => `${name} gewinnt mit ${score} Differenzpunkten!`,
 		jassTapHint: "Feld antippen: eigene Punkte eintragen. Differenz erscheint, sobald alle das Spiel gemacht haben.",
+		jassDiffLeads: "führt mit",
+		jassDiffTied: "Gleichstand an der Spitze",
+		jassDiffStand: "Stand",
+		jassDiffEnter: "Eintragen",
+		jassDiffBack: "Letzte Ziffer löschen",
 		chooseVariant: "Variante wählen",
 		differenzlerTitle: "Differenzler",
 		differenzlerDesc: "Jeder für sich, 2 bis 4 Spieler, 10 Spiele",
@@ -10222,6 +10227,11 @@ var TRANSLATIONS = {
 		jassDifferenzlerSubtitle: "Differenzler",
 		jassWinsWith: (name, score) => `${name} wins with ${score} difference points!`,
 		jassTapHint: "Tap a box: enter your own points. The difference appears once everyone has played the game.",
+		jassDiffLeads: "leads with",
+		jassDiffTied: "Tied for the lead",
+		jassDiffStand: "Total",
+		jassDiffEnter: "Enter",
+		jassDiffBack: "Delete last digit",
 		chooseVariant: "Choose variant",
 		differenzlerTitle: "Differenzler",
 		differenzlerDesc: "Every player for themselves, 2 to 4 players, 10 games",
@@ -11749,6 +11759,11 @@ var TRANSLATIONS = {
 		jassDifferenzlerSubtitle: "Differenzler",
 		jassWinsWith: (name, score) => `${name} gagne avec ${score} points d'écart !`,
 		jassTapHint: "Touche une case : saisis tes propres points. L'écart apparaît une fois que tout le monde a joué.",
+		jassDiffLeads: "mène avec",
+		jassDiffTied: "Égalité en tête",
+		jassDiffStand: "Total",
+		jassDiffEnter: "Valider",
+		jassDiffBack: "Effacer le dernier chiffre",
 		chooseVariant: "Choisir la variante",
 		differenzlerTitle: "Differenzler",
 		differenzlerDesc: "Chacun pour soi, 2 à 4 joueurs, 10 jeux",
@@ -13276,6 +13291,11 @@ var TRANSLATIONS = {
 		jassDifferenzlerSubtitle: "Differenzler",
 		jassWinsWith: (name, score) => `${name} vince con ${score} punti di differenza!`,
 		jassTapHint: "Tocca una casella: inserisci i tuoi punti. La differenza appare non appena tutti hanno giocato la partita.",
+		jassDiffLeads: "è in testa con",
+		jassDiffTied: "Pari in testa",
+		jassDiffStand: "Totale",
+		jassDiffEnter: "Inserisci",
+		jassDiffBack: "Cancella l'ultima cifra",
 		chooseVariant: "Scegli variante",
 		differenzlerTitle: "Differenzler",
 		differenzlerDesc: "Ognuno per sé, 2 a 4 giocatori, 10 partite",
@@ -14803,6 +14823,11 @@ var TRANSLATIONS = {
 		jassDifferenzlerSubtitle: "Differenzler",
 		jassWinsWith: (name, score) => `¡${name} gana con ${score} puntos de diferencia!`,
 		jassTapHint: "Toca una casilla: anota tus propios puntos. La diferencia aparece en cuanto todos hayan jugado la partida.",
+		jassDiffLeads: "lidera con",
+		jassDiffTied: "Empate en cabeza",
+		jassDiffStand: "Total",
+		jassDiffEnter: "Anotar",
+		jassDiffBack: "Borrar la última cifra",
 		chooseVariant: "Elegir variante",
 		differenzlerTitle: "Differenzler",
 		differenzlerDesc: "Cada uno por su cuenta, 2 a 4 jugadores, 10 partidas",
@@ -16330,6 +16355,11 @@ var TRANSLATIONS = {
 		jassDifferenzlerSubtitle: "Differenzler",
 		jassWinsWith: (name, score) => `${name} ganha com ${score} pontos de diferença!`,
 		jassTapHint: "Toca numa casa: anota os teus próprios pontos. A diferença aparece assim que todos tiverem jogado o jogo.",
+		jassDiffLeads: "lidera com",
+		jassDiffTied: "Empate na frente",
+		jassDiffStand: "Total",
+		jassDiffEnter: "Registar",
+		jassDiffBack: "Apagar o último algarismo",
 		chooseVariant: "Escolher variante",
 		differenzlerTitle: "Differenzler",
 		differenzlerDesc: "Cada um por si, 2 a 4 jogadores, 10 jogos",
@@ -47716,14 +47746,109 @@ var JASS_PL_CSS = `
 [data-phone-landscape] .gt-jd-split{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:var(--pl-gap);align-items:start}
 [data-phone-landscape] .gt-jd-split>.gt-jd-main,[data-phone-landscape] .gt-jd-split>.gt-jd-side{display:block;min-width:0}
 [data-phone-landscape] .gt-jd-side>div:first-child{margin-top:0!important}
-[data-phone-landscape] .gt-jd-table{overflow:auto!important;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;max-height:max(200px,calc(var(--pl-avail) - var(--pl-head) - 30px - var(--pl-sab)))!important}
-[data-phone-landscape] .gt-jd-cell{min-height:44px;justify-content:center}
-[data-phone-landscape] .gt-jd-editor{left:auto!important;right:var(--pl-gutter-r)!important;top:calc(var(--pl-sat) + 6px)!important;bottom:auto!important;width:max(290px,calc((100vw - var(--pl-gutter-l) - var(--pl-gutter-r) - var(--pl-gap)) * .4));max-width:calc(100vw - var(--pl-gutter-l) - var(--pl-gutter-r));box-sizing:border-box;max-height:calc(var(--pl-avail) - 12px);overflow-y:auto;overscroll-behavior:contain;border:1px solid rgba(127,127,127,.35);border-radius:16px;padding:8px 12px 12px!important;box-shadow:0 12px 30px rgba(0,0,0,.38)!important}
-[data-phone-landscape] .gt-jd-editor input,[data-phone-landscape] .gt-jd-editor button{min-height:44px}
-[data-phone-landscape] .gt-jd-x{min-width:44px;display:flex;align-items:center;justify-content:center;margin-right:-10px}
-[data-phone-landscape] .gt-jd-edtitle{overflow-wrap:break-word;min-width:0}
 `;
-function JassTopBar({ title, subtitle, onBack, theme, t, onHome, rulesText, rulesTitle, onEndGame }) {
+var JASS_PAPER_CSS = `
+.jdp{--ink:#1C1815;--paper:#F5EAD6;--red:#B3261E;--line:rgba(28,24,21,.35);--strong:rgba(28,24,21,.6);--zebra:rgba(120,90,40,.10);--cur:rgba(179,38,30,.10);--lead:rgba(179,38,30,.14);--slip:#FBF6E8;--key:#FFFDF5;--onred:#FBF7EA;--head:'Fraunces',Georgia,'Times New Roman',serif;background:#F5EAD6 url(./img/sch-papier.webp)!important;color:var(--ink)}
+.jdp.jdp-noir{--ink:#EDEDED;--paper:#0A0A0A;--red:#FFFFFF;--line:rgba(237,237,237,.35);--strong:rgba(237,237,237,.6);--zebra:rgba(255,255,255,.06);--cur:rgba(255,255,255,.12);--lead:rgba(255,255,255,.14);--slip:#161616;--key:#0A0A0A;--onred:#0A0A0A;background:#0A0A0A!important}
+.jdp>.gt-jd-sheet{background:none!important;box-shadow:none!important}
+.jdp .gt-gamehead.is-stuck{background:var(--paper)!important;background-image:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;box-shadow:0 1px 0 var(--line)!important}
+.jdp .gt-hf{border-width:1.5px!important}
+.jdp-top{display:block}
+.jdp-mast{margin:4px 4px 0;border-top:4px solid var(--ink);border-bottom:1px solid var(--ink);padding-top:2px}
+.jdp-mast::after{content:"";display:block;border-top:1px solid var(--ink);margin-top:3px}
+.jdp-mast h1{margin:0;font-family:var(--head);font-weight:700;font-size:clamp(30px,11vw,48px);line-height:1.2;text-align:center;letter-spacing:-.01em;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.jdp-head{margin:8px 4px 0;min-height:37px;display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline;column-gap:.32em;font-family:var(--head);font-weight:700;font-size:20px;line-height:28px;padding-bottom:8px;border-bottom:1px solid var(--ink);color:var(--ink)}
+.jdp-head>span{white-space:nowrap}
+.jdp-head .jdp-hn{min-width:0;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.jdp-head b{color:var(--red);font-variant-numeric:tabular-nums}
+.jdp-led{margin:0 4px;container-type:inline-size;font-family:var(--head);color:var(--ink)}
+.jdp-led.is-box{overflow:auto;max-height:58vh;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.jdp-grid{display:grid;grid-template-columns:minmax(0,auto) repeat(var(--n),minmax(0,1fr))}
+.jdp-led.is-box .jdp-grid{grid-template-columns:max-content repeat(var(--n),minmax(56px,1fr))}
+.jdp-led.is-box .jdp-lab{position:sticky;left:0;z-index:2;background:var(--paper)}
+.jdp-led.is-box .jdp-lab.z{background:linear-gradient(var(--zebra),var(--zebra)),var(--paper)}
+.jdp-led.is-box .jdp-lab.cur{background:linear-gradient(var(--cur),var(--cur)),var(--paper)}
+.jdp-led.is-box .jdp-hd:first-child,.jdp-led.is-box .jdp-st.first{left:0;z-index:4;position:sticky}
+.jdp-hd{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;min-height:34px;padding:0 3px 5px;border-bottom:2px solid var(--ink);border-left:1px solid var(--line);font-size:11px;line-height:1.3;letter-spacing:.08em;text-transform:uppercase;font-weight:700;min-width:0}
+.jdp-hd:first-child{border-left:0}
+.jdp-hd>span{display:block;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.jdp-lab{display:flex;align-items:center;gap:5px;min-height:54px;padding:0 6px;align-self:stretch;min-width:0;font-weight:700;scroll-margin:100px 0 calc(var(--jd-slip,0px) + 110px)}
+.jdp-lab .cn{font-size:clamp(14px,4.3vw,17px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.jdp-lab .cf{font-size:12px;color:var(--red);flex:none}
+.jdp-c{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:54px;min-width:0;margin:0;padding:2px 0;border:0;border-left:1px solid var(--line);border-radius:0;background:none;color:var(--ink);font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;scroll-margin:100px 0 calc(var(--jd-slip,0px) + 110px)}
+.jdp-c:focus-visible{outline:2px solid var(--ink);outline-offset:-3px}
+.jdp .z{background:var(--zebra)}
+.jdp .cur{background:var(--cur)}
+.jdp-lab.cur{box-shadow:inset 3px 0 0 var(--red)}
+.jdp-v{font-weight:700;font-size:21px;line-height:22px;font-variant-numeric:tabular-nums}
+.jdp-d{font-weight:700;font-size:13px;line-height:15px;font-variant-numeric:tabular-nums}
+.jdp-d.m{color:var(--red)}
+.jdp-blank{display:block;width:min(44px,70%);border-bottom:2px dotted var(--strong)}
+.jdp-pen{position:absolute;left:2px;top:5px;width:calc(100% - 4px);height:calc(100% - 10px);pointer-events:none;overflow:visible;animation:jdpFade .18s ease-out}
+.jdp-pen path{fill:none;stroke:var(--red);stroke-width:2.4;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.jdp-st{position:sticky;bottom:var(--jd-slip,0px);z-index:3;background:var(--paper);border-top:4px double var(--ink);margin-top:2px;min-height:64px;display:flex;align-items:center;justify-content:center;min-width:0;border-left:1px solid var(--line)}
+.jdp-st.first{justify-content:flex-start;padding-left:6px;border-left:0;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
+.jdp-led.is-box .jdp-st{bottom:0}
+.jdp-led.is-box .jdp-hd{position:sticky;top:0;z-index:3;background:var(--paper)}
+.jdp-tot{font-weight:700;font-size:clamp(16px,calc((100cqw - 90px) / var(--n) / 2.7),30px);line-height:1.2;padding:2px 4px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.jdp-tot.m{color:var(--red)}
+.jdp-tot.w{padding:1px 3px;background:var(--lead);box-shadow:inset 0 0 0 1.5px var(--red)}
+.jdp-head>span.jdp-win,.jdp-head>span.jdp-hintx{white-space:normal;text-align:center}
+.jdp-head>span.jdp-hintx{font-weight:400;font-size:13px;line-height:18px;white-space:normal;text-align:center}
+.jdp-slipw{position:fixed;left:0;right:0;bottom:0;z-index:70;filter:drop-shadow(0 -6px 12px rgba(40,25,10,.4));animation:jdpUp .24s cubic-bezier(.23,1,.32,1)}
+.jdp-slip{max-width:520px;margin:0 auto;box-sizing:border-box;background:var(--slip);color:var(--ink);padding:20px 16px calc(14px + env(safe-area-inset-bottom));font-family:var(--head);clip-path:var(--zig);outline:none}
+.jdp-sh{display:flex;align-items:center;gap:10px;min-height:44px}
+.jdp-t{flex:none;max-width:60%;font-weight:700;font-size:26px;line-height:1.15;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.jdp-n{margin-left:auto;min-width:0;font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.jdp-x{flex:none;width:44px;height:44px;margin:0 -10px 0 0;display:grid;place-items:center;border:0;background:none;color:var(--ink);cursor:pointer;touch-action:manipulation}
+.jdp-x:focus-visible,.jdp-bk:focus-visible,.jdp-k:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.jdp-inp{display:flex;align-items:flex-end;gap:8px;min-height:56px;margin:2px 0 10px;border-bottom:2px solid var(--ink);padding:0 0 4px 2px}
+.jdp-val{flex:1;min-width:0;display:flex;align-items:center;height:44px;font-weight:700;font-size:34px;font-variant-numeric:tabular-nums}
+.jdp-caret{width:2px;height:32px;margin-left:2px;background:var(--red);animation:jdpBl 1.1s steps(1) infinite}
+.jdp-calc{flex:none;font-weight:700;font-size:20px;line-height:44px;color:var(--red);white-space:nowrap;font-variant-numeric:tabular-nums}
+.jdp-bk{flex:none;width:44px;height:44px;margin:0 -8px 0 0;display:grid;place-items:center;border:0;background:none;color:var(--ink);cursor:pointer;touch-action:manipulation}
+.jdp-err{margin:-4px 0 8px;font-size:13px;font-weight:700;line-height:1.3;color:var(--red)}
+.jdp-keys{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.jdp-k{height:48px;min-height:44px;margin:0;padding:0;border:1.5px solid var(--ink);border-radius:0;background:var(--key);color:var(--ink);font-family:var(--head);font-weight:700;font-size:26px;display:grid;place-items:center;cursor:pointer;touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;transition:transform .12s ease-out,background-color .12s ease-out}
+.jdp-k:active{transform:scale(.97);background:var(--zebra)}
+.jdp-k.s{font-size:15px;font-weight:600;text-decoration:line-through;text-decoration-thickness:1.5px}
+.jdp-k.ok{background:var(--red);border-color:var(--red);color:var(--onred);font-size:15px;letter-spacing:.03em}
+.jdp-k.ok:active{background:var(--red);filter:brightness(.9)}
+.jdp-k.ok[aria-disabled=true]{opacity:.4}
+.jdp-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (hover:hover) and (pointer:fine){.jdp-k:hover{background:var(--zebra)}.jdp-k.ok:hover{background:var(--red);filter:brightness(1.08)}}
+@keyframes jdpBl{50%{opacity:0}}
+@keyframes jdpUp{from{transform:translateY(24px);opacity:0}to{transform:none;opacity:1}}
+@keyframes jdpFade{from{opacity:0}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.jdp-slipw,.jdp-pen,.jdp-caret{animation:none!important}.jdp-k{transition:none}.jdp-k:active{transform:none}}
+.gtL-content .jdp .gt-jd-sheet{max-width:none!important}
+.gtL-content .jdp{padding-bottom:32px!important}
+.gtL-content .jdp-slipw{position:sticky;top:16px;bottom:auto;left:auto;right:auto;margin-top:12px;filter:none;animation:none}
+.gtL-content .jdp-slip{max-width:none;clip-path:none;border:1.5px solid var(--ink);padding:10px 16px 16px}
+.gtL-content .jdp-st{bottom:0}
+.gtL-content .jdp-c,.gtL-content .jdp-lab{scroll-margin:16px 0 90px}
+.gtL-content .jdp-mast h1{font-size:46px}
+.gtL-content .jdp-c,.gtL-content .jdp-lab{min-height:46px}
+.gtL-content .jdp-st{min-height:56px}
+.gtL-content .jdp-head{font-size:22px}
+[data-phone-landscape] .jdp{--jd-slip:0px!important}
+[data-phone-landscape] .jdp-top{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;column-gap:14px}
+[data-phone-landscape] .jdp-mast{margin:0}
+[data-phone-landscape] .jdp-mast h1{font-size:30px;padding:0 10px}
+[data-phone-landscape] .jdp-head{margin:0;min-height:0;border-bottom:0;padding:0;justify-content:flex-end;font-size:18px;line-height:24px}
+[data-phone-landscape] .jdp-led{overflow:auto;max-height:calc(var(--pl-avail) - var(--pl-head) - 72px - var(--pl-sab));overscroll-behavior:contain;-webkit-overflow-scrolling:touch;margin:8px 0 0}
+[data-phone-landscape] .jdp-st{bottom:0;min-height:52px}
+[data-phone-landscape] .jdp-hd{position:sticky;top:0;z-index:3;background:var(--paper)}
+[data-phone-landscape] .jdp-c,[data-phone-landscape] .jdp-lab{min-height:44px}
+[data-phone-landscape] .jdp-c,[data-phone-landscape] .jdp-lab{scroll-margin:44px 0 66px}
+[data-phone-landscape] .jdp-slipw{left:auto;right:var(--pl-gutter-r);top:calc(var(--pl-sat) + 6px);bottom:auto;width:max(300px,40vw);max-width:calc(100vw - var(--pl-gutter-l) - var(--pl-gutter-r));filter:none;animation:none}
+[data-phone-landscape] .jdp-slip{max-width:none;clip-path:none;border:1.5px solid var(--ink);padding:4px 12px 8px;max-height:calc(var(--pl-avail) - 12px);overflow-y:auto;overscroll-behavior:contain;box-shadow:0 12px 30px rgba(0,0,0,.38)}
+[data-phone-landscape] .jdp-inp{min-height:48px;margin:0 0 8px}
+[data-phone-landscape] .jdp-keys{gap:6px}
+[data-phone-landscape] .jdp-k{height:44px}
+`;
+var JD_ZIG = "polygon(" + Array.from({ length: 34 }, (_, i) => i * 3 + "% " + (i % 2 === 0 ? 8 : 0) + "px").join(",") + ",100% 0,100% 100%,0 100%)";
+function JassTopBar({ title, subtitle, onBack, theme, t, onHome, rulesText, rulesTitle, onEndGame, hideTitle, tkOv }) {
 	const stage = shellTokens(theme);
 	const acc = theme === "noir" ? noirAccent("jass-differenzler") : theme === "light" ? JASS_RED : "#F0584A";
 	return /* @__PURE__ */ import_react.default.createElement(GameHeader, {
@@ -47731,7 +47856,8 @@ function JassTopBar({ title, subtitle, onBack, theme, t, onHome, rulesText, rule
 		subtitle,
 		onBack,
 		backLabel: t("back"),
-		tk: stage,
+		tk: tkOv || stage,
+		hideTitle,
 		accent: acc,
 		icon: /* @__PURE__ */ import_react.default.createElement(JassLogo, {
 			color: acc,
@@ -47826,200 +47952,180 @@ function JassSetup({ players, setPlayers, onStart, t, theme }) {
 	}))));
 }
 function JassEditorPanel({ editing, players, scores, category, onSave, onClose, t, theme }) {
-	const _JCARD = theme === "noir" ? "#1E1E1E" : JASS_CARD;
-	const _JBG = theme === "noir" ? "#0A0A0A" : JASS_BG;
-	const _JINK = theme === "noir" ? "#EDEDED" : JASS_INK;
-	const _JMUTED = theme === "noir" ? "#8A8A8A" : JASS_MUTED;
-	const _JBORDER = theme === "noir" ? "#454545" : JASS_BORDER;
-	const _JWOOD = theme === "noir" ? noirAccent("jass-differenzler") : JASS_WOOD;
-	const _JRED = theme === "noir" ? noirAccent("jass-differenzler") : JASS_RED;
 	const [value, setValue] = useState$11("");
+	const [fresh, setFresh] = useState$11(false);
 	const [gtErr, setGtErr] = useState$11(false);
-	const gtIn = useRef$17(null);
+	const inpRef = useRef$17(null);
+	const slipRef = useRef$17(null);
+	const open = !!(editing && category);
 	useEffect$15(() => {
 		setGtErr(false);
 		if (editing) {
 			const current = scores[editing.playerId][editing.catId];
 			setValue(current !== null ? String(current.raw) : "");
+			setFresh(current !== null);
 		}
 	}, [editing]);
-	useGtlKeys(!!(editing && category), (e) => {
-		if (e.key === "Escape") {
-			e.preventDefault();
-			onClose();
-		}
-	}, true);
-	if (!editing || !category) return null;
-	const player = players.find((p) => p.id === editing.playerId);
-	const mult = category.mult;
-	const rawNum = value === "" ? 0 : parseInt(value, 10) || 0;
-	const previewTotal = rawNum * mult;
+	useEffect$15(() => {
+		if (!open) return;
+		const el = slipRef.current;
+		const pg = el && el.closest(".gt-jd-page");
+		if (!el) return;
+		try {
+			el.focus({ preventScroll: true });
+		} catch (e) {}
+		if (!pg) return;
+		const set = () => pg.style.setProperty("--jd-slip", Math.round(el.getBoundingClientRect().height) + "px");
+		set();
+		let ro = null;
+		try {
+			ro = new ResizeObserver(set);
+			ro.observe(el);
+		} catch (e) {}
+		return () => {
+			if (ro) ro.disconnect();
+			pg.style.removeProperty("--jd-slip");
+		};
+	}, [open, editing]);
+	const mult = category ? category.mult : 1;
+	const press = (d) => {
+		setGtErr(false);
+		setValue((prev) => fresh || prev === "0" ? d : prev.length >= 3 ? prev : prev + d);
+		setFresh(false);
+	};
+	const back = () => {
+		setGtErr(false);
+		setValue((prev) => fresh ? "" : prev.slice(0, -1));
+		setFresh(false);
+	};
 	const commit = (rawValue) => {
+		if (!editing) return;
 		const val = Math.max(0, parseInt(rawValue, 10) || 0);
 		if (val > 257) {
 			setGtErr(true);
-			gtShake(gtIn.current);
+			gtShake(inpRef.current);
 			return;
 		}
 		onSave(editing.playerId, editing.catId, jassCellValue(val, mult));
 	};
-	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-editor gt-jd-editor",
+	useGtlKeys(open, (e) => {
+		if (e.key === "Escape") {
+			e.preventDefault();
+			onClose();
+			return;
+		}
+		if (/^[0-9]$/.test(e.key)) {
+			e.preventDefault();
+			press(e.key);
+			return;
+		}
+		if (e.key === "Backspace") {
+			e.preventDefault();
+			back();
+			return;
+		}
+		if (e.key === "Enter") {
+			if (e.target && e.target.closest && e.target.closest("button")) return;
+			e.preventDefault();
+			if (value !== "") commit(value);
+		}
+	}, true);
+	if (!open) return null;
+	const player = players.find((p) => p.id === editing.playerId);
+	const raw = value === "" ? null : parseInt(value, 10) || 0;
+	const total = raw === null ? null : raw * mult;
+	const jk = category.id === "joker1" ? " I" : category.id === "joker2" ? " II" : "";
+	const sum = raw === null ? "" : raw + " × " + mult + " = " + total;
+	return /* @__PURE__ */ import_react.default.createElement("div", { className: "jdp-slipw" }, /* @__PURE__ */ import_react.default.createElement("div", {
+		ref: slipRef,
+		className: "jdp-slip",
 		role: "dialog",
-		"aria-label": category.label + " · " + (player ? player.name : ""),
-		style: {
-			position: "fixed",
-			left: 0,
-			right: 0,
-			bottom: 0,
-			background: _JCARD,
-			borderTop: `3px solid ${_JWOOD}`,
-			boxShadow: "0 -6px 20px rgba(59,42,30,0.18)",
-			padding: "14px 16px calc(14px + env(safe-area-inset-bottom))",
-			zIndex: 70
-		}
-	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		justifyContent: "space-between",
-		alignItems: "center",
-		marginBottom: 2
-	} }, /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gt-jd-edtitle",
-		style: {
-			fontFamily: JASS_FONT,
-			fontSize: 17,
-			fontWeight: 700,
-			color: _JINK
-		}
-	}, category.label, " · ", player?.name), /* @__PURE__ */ import_react.default.createElement("button", {
-		className: "gt-jd-x",
+		"aria-label": category.label + jk + " · " + (player ? player.name : ""),
+		tabIndex: -1,
+		style: { "--zig": JD_ZIG }
+	}, /* @__PURE__ */ import_react.default.createElement("div", { className: "jdp-sh" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "jdp-t" }, category.label, jk), /* @__PURE__ */ import_react.default.createElement("span", {
+		className: "jdp-n",
+		title: player ? player.name : ""
+	}, player ? player.name : ""), /* @__PURE__ */ import_react.default.createElement("button", {
+		type: "button",
+		className: "jdp-x",
 		"aria-label": t("weisClose"),
-		onClick: onClose,
-		style: {
-			border: "none",
-			background: "transparent",
-			color: _JMUTED,
-			fontSize: 16,
-			cursor: "pointer",
-			minWidth: 44,
-			minHeight: 44,
-			display: "flex",
-			alignItems: "center",
-			justifyContent: "center",
-			marginRight: -10
-		}
-	}, /* @__PURE__ */ import_react.default.createElement(XMark, null))), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 11,
-		color: _JMUTED,
-		marginBottom: 8,
-		fontFamily: "'Inter', sans-serif"
-	} }, t("jassMultiplier")(mult)), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		gap: 6
-	} }, /* @__PURE__ */ import_react.default.createElement("input", {
-		type: "text",
-		inputMode: "numeric",
-		pattern: "[0-9]*",
-		autoFocus: true,
-		ref: gtIn,
-		placeholder: t("myPointsPlaceholder"),
-		value,
-		"aria-invalid": gtErr || void 0,
-		onChange: (e) => {
-			setGtErr(false);
-			setValue(e.target.value.replace(/[^0-9]/g, ""));
-		},
-		onKeyDown: (e) => {
-			if (e.key === "Enter") {
-				e.preventDefault();
-				commit(value === "" ? 0 : value);
-			}
-		},
-		style: {
-			flex: 1,
-			minWidth: 0,
-			border: `1px solid ${_JBORDER}`,
-			borderRadius: 14,
-			padding: "10px 10px",
-			fontSize: 16,
-			outline: "none",
-			fontFamily: "'Inter', sans-serif",
-			background: _JBG,
-			color: _JINK
-		}
-	}), /* @__PURE__ */ import_react.default.createElement("button", {
-		onClick: () => commit(0),
-		style: {
-			border: `1px solid ${_JBORDER}`,
-			borderRadius: 14,
-			background: "transparent",
-			color: _JMUTED,
-			fontSize: 12,
-			fontWeight: 600,
-			padding: "0 12px",
-			cursor: "pointer",
-			fontFamily: "'Inter', sans-serif"
-		}
+		onClick: onClose
+	}, /* @__PURE__ */ import_react.default.createElement(XMark, null))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "jdp-inp",
+		ref: inpRef
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "jdp-val",
+		"aria-hidden": "true"
+	}, value, /* @__PURE__ */ import_react.default.createElement("span", { className: "jdp-caret" })), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "jdp-calc",
+		"aria-hidden": "true"
+	}, raw === null ? "×" + mult : "× " + mult + " = " + total), /* @__PURE__ */ import_react.default.createElement("button", {
+		type: "button",
+		className: "jdp-bk",
+		"aria-label": t("jassDiffBack"),
+		onClick: back,
+		style: { visibility: value === "" ? "hidden" : "visible" }
+	}, /* @__PURE__ */ import_react.default.createElement("svg", {
+		width: "24",
+		height: "24",
+		viewBox: "0 0 24 24",
+		fill: "none",
+		stroke: "currentColor",
+		strokeWidth: "2",
+		strokeLinecap: "round",
+		strokeLinejoin: "round",
+		"aria-hidden": "true"
+	}, /* @__PURE__ */ import_react.default.createElement("path", { d: "M21 5H9l-6 7 6 7h12z" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M13 9.5l5 5M18 9.5l-5 5" }))), /* @__PURE__ */ import_react.default.createElement("span", {
+		className: "jdp-sr",
+		role: "status"
+	}, sum)), gtErr && /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "jdp-err",
+		role: "alert"
+	}, t("gtJassMax")), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "jdp-keys",
+		onMouseDown: (e) => e.preventDefault()
+	}, [
+		1,
+		2,
+		3,
+		4,
+		5,
+		6,
+		7,
+		8,
+		9
+	].map((d) => /* @__PURE__ */ import_react.default.createElement("button", {
+		key: d,
+		type: "button",
+		className: "jdp-k",
+		onClick: () => press(String(d))
+	}, d)), /* @__PURE__ */ import_react.default.createElement("button", {
+		type: "button",
+		className: "jdp-k s",
+		onClick: () => commit(0)
 	}, t("strike")), /* @__PURE__ */ import_react.default.createElement("button", {
+		type: "button",
+		className: "jdp-k",
+		onClick: () => press("0")
+	}, "0"), /* @__PURE__ */ import_react.default.createElement("button", {
+		type: "button",
 		"data-gt-sound": "1",
-		onClick: () => commit(value === "" ? 0 : value),
-		style: {
-			border: "none",
-			borderRadius: 14,
-			background: _JRED,
-			color: theme === "noir" ? "#0A0A0A" : "#fff",
-			fontSize: 14,
-			fontWeight: 600,
-			padding: "0 16px",
-			cursor: "pointer"
+		className: "jdp-k ok",
+		"aria-disabled": value === "" ? "true" : void 0,
+		onClick: () => {
+			if (value !== "") commit(value);
 		}
-	}, /* @__PURE__ */ import_react.default.createElement(CheckMark, null))), gtErr && /* @__PURE__ */ import_react.default.createElement("div", {
-		role: "alert",
-		style: {
-			fontSize: 12,
-			fontWeight: 600,
-			color: "#D64545",
-			marginTop: 8,
-			fontFamily: "'Inter', sans-serif"
-		}
-	}, t("gtJassMax")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 12,
-		color: _JMUTED,
-		marginTop: 8,
-		fontFamily: "'Inter', sans-serif"
-	} }, value !== "" ? /* @__PURE__ */ import_react.default.createElement("span", null, rawNum, " × ", mult, " = ", /* @__PURE__ */ import_react.default.createElement("strong", { style: { color: _JINK } }, previewTotal), " ", t("gamePoints")) : t("jassRawPointsHint")(mult)), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-only gtL-keyhint",
-		style: {
-			fontSize: 11.5,
-			color: _JMUTED,
-			marginTop: 8,
-			fontFamily: "'Inter', sans-serif"
-		}
-	}, t("gtlKeysInput")));
+	}, t("jassDiffEnter")))));
 }
 function JassPlay({ players, scores, setScores, onResetSheet, onEditPlayers, onBack, onHome, onEndGame, lang = "de", theme = "dark" }) {
 	const t = useT(lang);
 	const tk = shellTokens(theme);
 	const _JV = theme === "vitrum";
-	const _JCARD = theme === "noir" ? "#1E1E1E" : _JV ? "rgba(255,255,255,0.07)" : JASS_CARD;
 	const _JP_MUTED = theme === "light" ? JASS_MUTED : theme === "noir" ? "#A5A5A5" : "#C9B9A2";
 	const _JP_BORDER = theme === "light" ? JASS_BORDER : theme === "noir" ? "#5A5A5A" : "#6E5B45";
-	const _JINK = theme === "noir" ? "#EDEDED" : _JV ? "#F2F4F8" : JASS_INK;
-	const _JMUTED = theme === "noir" ? "#A5A5A5" : _JV ? "#A3A7B0" : JASS_MUTED;
-	const _JBORDER = theme === "noir" ? "#454545" : _JV ? "rgba(255,255,255,0.12)" : JASS_BORDER;
 	const _JWOOD = theme === "noir" ? noirAccent("jass-differenzler") : _JV ? "#9A6A3E" : JASS_WOOD;
 	const _JRED = theme === "noir" ? noirAccent("jass-differenzler") : _JV ? "#FF7A6B" : JASS_RED;
-	const _JGREEN = theme === "noir" ? "#7FBF9E" : _JV ? "#86D9A6" : JASS_GREEN;
-	const _JHUES = theme === "noir" ? [
-		"#E0E0E0",
-		"#B8B8B8",
-		"#949494",
-		"#F2F2F2",
-		"#CACACA",
-		"#A2A2A2",
-		"#DEDEDE",
-		"#888888"
-	] : JASS_HUES;
 	const [editing, setEditing] = useState$11(null);
 	const [confirmingReset, setConfirmingReset] = useState$11(false);
 	const [moreOpen, setMoreOpen] = useState$11(false);
@@ -48048,18 +48154,17 @@ function JassPlay({ players, scores, setScores, onResetSheet, onEditPlayers, onB
 		if (winnerIdx !== -1) setPodiumOpen(true);
 	}, [winnerIdx]);
 	const podiumRanked = winnerIdx !== -1 ? rankedPodium(players, (p) => jassTotal(scores, players, p.id)) : [];
-	const gtBox = useRef$17(null);
-	useGtFlip(gtBox);
-	const gtFx = useGtLead("jass", gtLeader(players.map((p, i) => [p.id, totals[i]]), false), filledCounts.reduce((a, b) => a + b, 0));
 	const category = editing ? JASS_CATEGORIES.find((c) => c.id === editing.catId) : null;
 	const saveScore = (playerId, catId, val) => {
-		if (crossedRoundMilestone(jassTotal(scores, players, playerId), jassTotal({
+		const before = jassTotal(scores, players, playerId);
+		const newScores = {
 			...scores,
 			[playerId]: {
 				...scores[playerId],
 				[catId]: val
 			}
-		}, players, playerId), 100)) fireJassMilestone();
+		};
+		if (crossedRoundMilestone(before, jassTotal(newScores, players, playerId), 100)) fireJassMilestone();
 		setScores((prev) => ({
 			...prev,
 			[playerId]: {
@@ -48067,7 +48172,20 @@ function JassPlay({ players, scores, setScores, onResetSheet, onEditPlayers, onB
 				[catId]: val
 			}
 		}));
-		setEditing(null);
+		const jdOrder = players.map((q) => q.id);
+		const jdI = jdOrder.indexOf(playerId);
+		let jdNx = null;
+		for (let k = 1; k < jdOrder.length; k++) {
+			const id = jdOrder[(jdI + k) % jdOrder.length];
+			if (newScores[id][catId] === null) {
+				jdNx = id;
+				break;
+			}
+		}
+		setEditing(jdNx !== null ? {
+			playerId: jdNx,
+			catId
+		} : null);
 	};
 	const reset = () => {
 		if (!confirmingReset) {
@@ -48100,56 +48218,109 @@ function JassPlay({ players, scores, setScores, onResetSheet, onEditPlayers, onB
 		if (confirmingSetup) setMoreOpen(false);
 		editPlayers();
 	};
-	const jasActs = /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		gap: 8,
-		marginTop: 14
-	} }, /* @__PURE__ */ import_react.default.createElement("button", {
-		...gtHold(resetDone, resetTap),
-		style: {
-			flex: 1,
-			border: `1px solid ${confirmingReset ? _JRED : _JP_BORDER}`,
-			borderRadius: 14,
-			background: confirmingReset ? _JRED : "transparent",
-			color: confirmingReset ? theme === "noir" ? "#0A0A0A" : "#FFFFFF" : _JP_MUTED,
-			fontSize: 12,
-			fontWeight: 600,
-			letterSpacing: "0.05em",
-			textTransform: "uppercase",
-			minHeight: 44,
-			padding: "11px 0",
-			cursor: "pointer",
-			fontFamily: "'Inter', sans-serif"
-		}
-	}, confirmingReset ? t("confirmAgain") : /* @__PURE__ */ import_react.default.createElement(GtHoldLabel, {
-		label: t("newRound"),
-		hint: t("gtHoldHint"),
-		again: t("confirmAgain")
-	})), /* @__PURE__ */ import_react.default.createElement("button", {
-		onClick: teamsTap,
-		style: {
-			flex: 1,
-			border: `1px solid ${confirmingSetup ? _JWOOD : _JP_BORDER}`,
-			borderRadius: 14,
-			background: confirmingSetup ? _JWOOD : "transparent",
-			color: confirmingSetup ? theme === "noir" ? "#0A0A0A" : "#FFFFFF" : _JP_MUTED,
-			fontSize: 12,
-			fontWeight: 600,
-			letterSpacing: "0.05em",
-			textTransform: "uppercase",
-			minHeight: 44,
-			padding: "11px 0",
-			cursor: "pointer",
-			fontFamily: "'Inter', sans-serif"
-		}
-	}, confirmingSetup ? t("confirmAgain") : t("changePlayers")));
+	const jasActsF = (paper) => {
+		const pInk = theme === "noir" ? "#EDEDED" : "#1C1815";
+		const pRed = theme === "noir" ? "#EDEDED" : "#B3261E";
+		const pOn = theme === "noir" ? "#0A0A0A" : "#FBF7EA";
+		const cB = paper ? pInk : _JP_BORDER;
+		const cM = paper ? pInk : _JP_MUTED;
+		const cR = paper ? pRed : _JRED;
+		const cW = paper ? pRed : _JWOOD;
+		const cOn = paper ? pOn : theme === "noir" ? "#0A0A0A" : "#FFFFFF";
+		const rad = paper ? 0 : 14;
+		const ff = paper ? "var(--head)" : "'Inter', sans-serif";
+		return /* @__PURE__ */ import_react.default.createElement("div", { style: {
+			display: "flex",
+			gap: 8,
+			marginTop: 14
+		} }, /* @__PURE__ */ import_react.default.createElement("button", {
+			...gtHold(resetDone, resetTap),
+			style: {
+				flex: 1,
+				border: `1px solid ${confirmingReset ? cR : cB}`,
+				borderRadius: rad,
+				background: confirmingReset ? cR : "transparent",
+				color: confirmingReset ? cOn : cM,
+				fontSize: 12,
+				fontWeight: 600,
+				letterSpacing: "0.05em",
+				textTransform: "uppercase",
+				minHeight: 44,
+				padding: "11px 0",
+				cursor: "pointer",
+				fontFamily: ff
+			}
+		}, confirmingReset ? t("confirmAgain") : /* @__PURE__ */ import_react.default.createElement(GtHoldLabel, {
+			label: t("newRound"),
+			hint: t("gtHoldHint"),
+			again: t("confirmAgain")
+		})), /* @__PURE__ */ import_react.default.createElement("button", {
+			onClick: teamsTap,
+			style: {
+				flex: 1,
+				border: `1px solid ${confirmingSetup ? cW : cB}`,
+				borderRadius: rad,
+				background: confirmingSetup ? cW : "transparent",
+				color: confirmingSetup ? cOn : cM,
+				fontSize: 12,
+				fontWeight: 600,
+				letterSpacing: "0.05em",
+				textTransform: "uppercase",
+				minHeight: 44,
+				padding: "11px 0",
+				cursor: "pointer",
+				fontFamily: ff
+			}
+		}, confirmingSetup ? t("confirmAgain") : t("changePlayers")));
+	};
+	const jasActs = jasActsF(false);
+	const jasActsPaper = jasActsF(true);
+	const jdNoir = theme === "noir";
+	const jdInk = jdNoir ? "#EDEDED" : "#1C1815";
+	const jdHk = {
+		ink: jdInk,
+		border: jdInk,
+		card: "transparent",
+		muted: jdInk
+	};
+	const jdFmt = (v) => v > 0 ? "+" + v : v < 0 ? "−" + Math.abs(v) : "0";
+	const jdAny = JASS_CATEGORIES.some((c) => players.every((p) => scores[p.id][c.id] !== null));
+	const jdTop = players.filter((_, i) => totals[i] === maxTotal);
+	const jdLead = jdAny && jdTop.length === 1;
+	const jdCur = editing ? editing.catId : (JASS_CATEGORIES.find((c) => players.some((p) => scores[p.id][c.id] === null)) || {}).id;
+	const jdNext = !editing && jdCur ? (players.find((p) => scores[p.id][jdCur] === null) || {}).id : null;
+	const jdBox = players.length > 4;
+	useEffect$15(() => {
+		if (!editing) return;
+		const id = setTimeout(() => {
+			const el = document.querySelector("[data-jd-cell=\"" + editing.playerId + "-" + editing.catId + "\"]");
+			if (el && el.scrollIntoView) el.scrollIntoView({
+				block: "nearest",
+				inline: "nearest"
+			});
+		}, 60);
+		return () => clearTimeout(id);
+	}, [editing]);
+	useEffect$15(() => {
+		if (editing || !jdCur) return;
+		const id = setTimeout(() => {
+			const el = document.querySelector(".jdp-lab.cur");
+			if (el && el.scrollIntoView) el.scrollIntoView({
+				block: "nearest",
+				inline: "nearest"
+			});
+		}, 120);
+		return () => clearTimeout(id);
+	}, [jdCur]);
+	const jdHead = winnerIdx !== -1 ? gtWinLine(t, "jassWinsWith", "winsTie", jdTop.map((q) => q.name), maxTotal) : null;
 	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage gt-jd-page",
+		className: "gtL-shellpage gt-jd-page jdp" + (jdNoir ? " jdp-noir" : ""),
 		style: {
 			...jassPageShellStyle(theme),
-			padding: `20px 12px ${editing ? 140 : 32}px`
+			padding: "20px 12px calc(32px + var(--jd-slip, 0px))",
+			"--n": players.length
 		}
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, JASS_PL_CSS), celebration, jassMilestoneNode, /* @__PURE__ */ import_react.default.createElement(PodiumOverlay, {
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, JASS_PL_CSS, JASS_PAPER_CSS), celebration, jassMilestoneNode, /* @__PURE__ */ import_react.default.createElement(PodiumOverlay, {
 		gameId: "jass-differenzler",
 		gameLabel: t("gameJass"),
 		open: podiumOpen,
@@ -48171,9 +48342,8 @@ function JassPlay({ players, scores, setScores, onResetSheet, onEditPlayers, onB
 			}))
 		})
 	}), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "paper-grid gt-jd-sheet pl-head-compact",
+		className: "gt-jd-sheet pl-head-compact",
 		style: {
-			borderRadius: 26,
 			maxWidth: 520,
 			margin: "0 auto",
 			position: "relative"
@@ -48187,233 +48357,63 @@ function JassPlay({ players, scores, setScores, onResetSheet, onEditPlayers, onB
 			setMoreOpen(true);
 		},
 		moreLabel: t("gtMore"),
-		tokens: tk
+		tokens: jdHk
 	}), /* @__PURE__ */ import_react.default.createElement(JassTopBar, {
 		title: t("jassDifferenzlerSubtitle"),
 		subtitle: t("gameJass"),
 		onBack,
 		theme,
-		t
-	}), winnerIdx !== -1 && /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "reveal-1",
-		style: {
-			border: `2px solid ${_JWOOD}`,
-			color: _JRED,
-			borderRadius: 14,
-			padding: "12px 14px",
-			marginBottom: 12,
-			fontSize: 14,
-			fontWeight: 700,
-			textAlign: "center",
-			letterSpacing: "0.02em",
-			fontFamily: "'Kalam', cursive",
-			background: _JCARD
-		}
-	}, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
-		name: "party",
-		size: 14,
-		color: "currentColor",
-		style: {
-			verticalAlign: "-2px",
-			marginRight: 5
-		}
-	}), gtWinLine(t, "jassWinsWith", "winsTie", players.filter((_, i) => totals[i] === maxTotal).map((q) => q.name), maxTotal)), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gt-jd-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main gt-jd-main" }, /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gt-jd-table",
-		style: {
-			overflow: players.length > 3 ? "auto" : "clip",
-			maxHeight: players.length > 3 ? "58vh" : void 0,
-			border: `1.5px solid ${_JWOOD}`,
-			borderRadius: 14,
-			background: _JCARD,
-			width: "100%",
-			maxWidth: "100%",
-			margin: "0 auto"
-		}
-	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "grid",
-		gridTemplateColumns: `auto repeat(${players.length}, minmax(${players.length > 3 ? 52 : 60}px, 1fr))`,
-		width: "100%"
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		position: "sticky",
-		left: 0,
-		top: 0,
-		background: _JCARD,
-		borderBottom: `1.5px solid ${_JWOOD}`,
-		borderRight: `1.5px solid ${_JWOOD}`,
-		zIndex: 3
-	} }), players.map((p, i) => /* @__PURE__ */ import_react.default.createElement("div", {
+		t,
+		hideTitle: true,
+		tkOv: jdHk
+	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "jdp-top" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "jdp-mast" }, /* @__PURE__ */ import_react.default.createElement("h1", null, t("jassDifferenzlerSubtitle"))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "jdp-head",
+		role: "status",
+		"aria-live": "polite"
+	}, jdHead ? /* @__PURE__ */ import_react.default.createElement("span", { className: "jdp-win" }, jdHead) : jdLead ? /* @__PURE__ */ import_react.default.createElement(Fragment$3, null, /* @__PURE__ */ import_react.default.createElement("span", {
+		className: "jdp-hn",
+		title: jdTop[0].name
+	}, jdTop[0].name), /* @__PURE__ */ import_react.default.createElement("span", null, t("jassDiffLeads")), /* @__PURE__ */ import_react.default.createElement("b", null, jdFmt(maxTotal))) : jdAny ? /* @__PURE__ */ import_react.default.createElement("span", null, t("jassDiffTied")) : filledCounts.every((c) => c === 0) ? /* @__PURE__ */ import_react.default.createElement("span", { className: "jdp-hintx" }, t("jassTapHint")) : null)), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gt-jd-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main gt-jd-main" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "jdp-led" + (jdBox ? " is-box" : "") }, /* @__PURE__ */ import_react.default.createElement("div", { className: "jdp-grid" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "jdp-hd" }), players.map((p) => /* @__PURE__ */ import_react.default.createElement("div", {
 		key: p.id,
-		style: {
-			position: "sticky",
-			top: 0,
-			borderBottom: `1.5px solid ${_JWOOD}`,
-			borderLeft: `1px solid ${_JBORDER}`,
-			padding: "8px 6px",
-			textAlign: "center",
-			background: _JCARD,
-			zIndex: 2
-		}
-	}, /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gt-jd-pname",
-		style: {
-			fontSize: 12,
-			fontWeight: 700,
-			color: _JINK,
-			fontFamily: "'Inter', sans-serif",
-			lineHeight: 1.2
-		},
+		className: "jdp-hd",
 		title: p.name
 	}, (() => {
 		const w = String(p.name).trim().split(/\s+/);
-		return (w.length > 1 ? [w[0], w.slice(1).join(" ")] : w).map((x, k) => /* @__PURE__ */ import_react.default.createElement("span", {
-			key: k,
-			style: {
-				display: "block",
-				whiteSpace: "nowrap",
-				overflow: "hidden",
-				textOverflow: "ellipsis"
-			}
-		}, x));
-	})()))), JASS_CATEGORIES.map((cat, catIdx) => /* @__PURE__ */ import_react.default.createElement(Fragment$3, { key: `${cat.id}-${catIdx}` }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		position: "sticky",
-		left: 0,
-		background: _JCARD,
-		borderBottom: `1px solid ${_JBORDER}`,
-		borderRight: `1.5px solid ${_JWOOD}`,
-		padding: "10px 8px",
-		fontSize: 13,
-		fontWeight: 600,
-		color: _JINK,
-		fontFamily: "'Inter', sans-serif",
-		zIndex: 1,
-		whiteSpace: "nowrap"
-	} }, cat.label, (cat.id === "joker1" || cat.id === "joker2") && /* @__PURE__ */ import_react.default.createElement("span", { style: {
-		color: _JMUTED,
-		fontSize: 10
-	} }, " ", cat.id === "joker1" ? "I" : "II"), /* @__PURE__ */ import_react.default.createElement("span", { style: {
-		color: _JMUTED,
-		fontSize: 10
-	} }, " ×", cat.mult)), players.map((p) => {
-		const cell = scores[p.id][cat.id];
-		const value = cell ? cell.total : null;
-		const diff = jassDiff(scores, players, cat.id, p.id);
-		const isEditingCell = editing && editing.playerId === p.id && editing.catId === cat.id;
-		return /* @__PURE__ */ import_react.default.createElement("button", {
-			key: p.id,
-			className: "gt-jd-cell",
-			onClick: () => setEditing({
-				playerId: p.id,
-				catId: cat.id
-			}),
-			style: {
-				borderBottom: `1px solid ${_JBORDER}`,
-				borderLeft: `1px solid ${_JBORDER}`,
-				borderTop: "none",
-				borderRight: "none",
-				padding: "8px 4px",
-				minHeight: 44,
-				justifyContent: "center",
-				textAlign: "center",
-				background: isEditingCell ? `${_JRED}14` : value !== null ? theme === "noir" ? "#282828" : _JV ? "rgba(255,255,255,0.10)" : "#FFFCF4" : theme === "noir" ? _JCARD : _JV ? "rgba(255,255,255,0.03)" : "#FFFFFF",
-				cursor: "pointer",
-				fontFamily: "'Inter', sans-serif",
-				display: "flex",
-				flexDirection: "column",
-				alignItems: "center",
-				gap: 1
-			}
-		}, /* @__PURE__ */ import_react.default.createElement("span", { style: {
-			fontSize: 13,
-			fontWeight: value !== null ? 700 : 400,
-			color: value !== null ? _JINK : _JBORDER
-		} }, value !== null ? value : "·"), diff !== null && /* @__PURE__ */ import_react.default.createElement("span", { style: {
-			fontSize: 10,
-			fontWeight: 700,
-			color: diff > 0 ? _JGREEN : diff < 0 ? _JRED : _JMUTED
-		} }, diff > 0 ? `+${diff}` : diff));
-	})))))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side gt-jd-side" }, /* @__PURE__ */ import_react.default.createElement("div", {
-		ref: gtBox,
-		style: {
-			border: `1.5px solid ${_JWOOD}`,
-			borderRadius: 14,
-			background: _JCARD,
-			marginTop: 12,
-			overflow: "hidden"
-		}
-	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		padding: "7px 12px",
-		fontSize: 10,
-		fontWeight: 700,
-		letterSpacing: "0.12em",
-		textTransform: "uppercase",
-		color: theme === "noir" ? "#0A0A0A" : "#fff",
-		background: _JWOOD,
-		fontFamily: "'Inter', sans-serif"
-	} }, t("finalResult")), players.map((p, i) => ({
-		p,
-		i,
-		total: totals[i]
-	})).sort((a, b) => b.total - a.total).map(({ p, i, total }, rank) => /* @__PURE__ */ import_react.default.createElement("div", {
+		return (w.length > 1 ? [w[0], w.slice(1).join(" ")] : w).map((x, k) => /* @__PURE__ */ import_react.default.createElement("span", { key: k }, x));
+	})())), JASS_CATEGORIES.map((cat, catIdx) => {
+		const z = catIdx % 2 === 1;
+		const isCur = cat.id === jdCur;
+		const jk = cat.id === "joker1" ? " I" : cat.id === "joker2" ? " II" : "";
+		return /* @__PURE__ */ import_react.default.createElement(Fragment$3, { key: `${cat.id}-${catIdx}` }, /* @__PURE__ */ import_react.default.createElement("div", { className: "jdp-lab" + (z ? " z" : "") + (isCur ? " cur" : "") }, /* @__PURE__ */ import_react.default.createElement("span", { className: "cn" }, cat.label, jk), /* @__PURE__ */ import_react.default.createElement("span", { className: "cf" }, "×", cat.mult)), players.map((p) => {
+			const cell = scores[p.id][cat.id];
+			const value = cell ? cell.total : null;
+			const diff = jassDiff(scores, players, cat.id, p.id);
+			const pen = !!(editing && editing.playerId === p.id && editing.catId === cat.id) || !editing && cat.id === jdCur && p.id === jdNext;
+			return /* @__PURE__ */ import_react.default.createElement("button", {
+				key: p.id,
+				type: "button",
+				className: "jdp-c gt-jd-cell" + (z ? " z" : "") + (isCur ? " cur" : ""),
+				"data-jd-cell": p.id + "-" + cat.id,
+				"aria-haspopup": "dialog",
+				"aria-label": p.name + ", " + cat.label + jk + (value !== null ? ": " + value : ""),
+				onClick: () => setEditing({
+					playerId: p.id,
+					catId: cat.id
+				})
+			}, pen && /* @__PURE__ */ import_react.default.createElement("svg", {
+				className: "jdp-pen",
+				viewBox: "0 0 95 54",
+				preserveAspectRatio: "none",
+				"aria-hidden": "true"
+			}, /* @__PURE__ */ import_react.default.createElement("path", { d: "M70 7C56 1 26 3 15 13 6 22 10 41 27 46c15 5 42 3 54-8 9-9 5-25-9-30-5-2-10-2-14-2" })), value !== null ? /* @__PURE__ */ import_react.default.createElement("span", { className: "jdp-v" }, value) : /* @__PURE__ */ import_react.default.createElement("span", {
+				className: "jdp-blank",
+				"aria-hidden": "true"
+			}), value !== null && diff !== null && /* @__PURE__ */ import_react.default.createElement("span", { className: "jdp-d" + (diff < 0 ? " m" : "") }, jdFmt(diff)));
+		}));
+	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "jdp-st first" }, t("jassDiffStand")), players.map((p, i) => /* @__PURE__ */ import_react.default.createElement("div", {
 		key: p.id,
-		"data-gt-flip": p.id,
-		"data-gt-lh": "1",
-		style: {
-			"--gt-lead-c": _JRED,
-			display: "flex",
-			alignItems: "center",
-			gap: 10,
-			padding: "9px 12px",
-			borderBottom: rank === players.length - 1 ? "none" : `1px solid ${_JBORDER}`,
-			background: rank === 0 && total > 0 ? `${_JRED}0F` : "transparent"
-		}
-	}, gtFx === p.id && /* @__PURE__ */ import_react.default.createElement(GtLeadFx, { key: "gtlf" }), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		width: 22,
-		height: 22,
-		borderRadius: "50%",
-		flexShrink: 0,
-		display: "flex",
-		alignItems: "center",
-		justifyContent: "center",
-		background: `${_JHUES[i % _JHUES.length]}22`,
-		color: _JHUES[i % _JHUES.length],
-		fontSize: 11,
-		fontWeight: 800,
-		fontFamily: "'Baloo 2', sans-serif"
-	} }, i + 1), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		flex: 1,
-		minWidth: 0,
-		fontSize: 13,
-		color: _JINK,
-		fontFamily: "'Inter', sans-serif",
-		fontWeight: 500,
-		whiteSpace: "nowrap",
-		overflow: "hidden",
-		textOverflow: "ellipsis"
-	} }, p.name), rank === 0 && total > 0 && /* @__PURE__ */ import_react.default.createElement(GameIcon, {
-		name: "crown",
-		size: 14,
-		color: _JRED
-	}), /* @__PURE__ */ import_react.default.createElement(GtCount, {
-		as: "div",
-		value: total,
-		good: "high",
-		dpos: "l",
-		format: (v) => v > 0 ? "+" + v : String(v),
-		style: {
-			display: "inline-block",
-			fontSize: 18,
-			fontWeight: 700,
-			color: rank === 0 && total > 0 ? _JRED : _JINK,
-			fontVariantNumeric: "tabular-nums",
-			fontFamily: "'Baloo 2', sans-serif"
-		}
-	})))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gt-foot-acts" }, jasActs), filledCounts.every((c) => c === 0) && /* @__PURE__ */ import_react.default.createElement("p", { style: {
-		fontSize: 11.5,
-		color: _JP_MUTED,
-		textAlign: "center",
-		marginTop: 10,
-		fontFamily: "'Inter', sans-serif"
-	} }, t("jassTapHint"))))), /* @__PURE__ */ import_react.default.createElement(JassEditorPanel, {
+		className: "jdp-st"
+	}, /* @__PURE__ */ import_react.default.createElement("span", { className: "jdp-tot" + (jdLead && totals[i] === maxTotal ? " w" : "") + (totals[i] < 0 ? " m" : "") }, jdFmt(totals[i]))))))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side gt-jd-side" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gt-foot-acts" }, jasActsPaper), /* @__PURE__ */ import_react.default.createElement(JassEditorPanel, {
 		editing,
 		players,
 		scores,
@@ -48422,7 +48422,7 @@ function JassPlay({ players, scores, setScores, onResetSheet, onEditPlayers, onB
 		onClose: () => setEditing(null),
 		t,
 		theme
-	}), /* @__PURE__ */ import_react.default.createElement(GtMoreSheet, {
+	}))), /* @__PURE__ */ import_react.default.createElement(GtMoreSheet, {
 		open: moreOpen,
 		onClose: () => setMoreOpen(false),
 		label: t("gtMore"),
@@ -48434,7 +48434,7 @@ function JassPlay({ players, scores, setScores, onResetSheet, onEditPlayers, onB
 		title: t("gameJass"),
 		text: t("rulesJass"),
 		tokens: tk
-	}));
+	})));
 }
 function JassGame({ state, setState, onBack, onHome, onEndGame, lang = "de", theme = "dark" }) {
 	const t = useT(lang);
@@ -109227,7 +109227,7 @@ function YatzyGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 }
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.05-18";
+var APP_BUILD = "2026.11.05-19";
 // web/src/app/storage.js
 var storage_exports = /* @__PURE__ */ __exportAll({
 	GT_CAT_KEYS: () => GT_CAT_KEYS,
@@ -109349,7 +109349,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.05-18");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.05-19");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -111930,7 +111930,7 @@ function UpdateBanner() {
 		let alive = true;
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.05-18") {
+				if (alive && v && v.build && v.build !== "2026.11.05-19") {
 					setReady(true);
 					setHidden(false);
 					try {
@@ -118755,7 +118755,6 @@ function page1$2(d, k, extras, title) {
 	const L = layoutRows(c, k, d, extras.map((e) => e && e.points != null ? e.points : null), hasPts, nameW, 361);
 	k.setFont(c, 500, 22, MONO$1);
 	c.fillStyle = SOFT$1;
-	k.spaced(c, d.up(d.model.playerLabel), 100, 822, 2, "left");
 	if (hasPts) k.spaced(c, d.up(d.tr("tplDfPts", "Punkte")), 980 - colD, 822, 2, "right");
 	k.spaced(c, d.up(d.tr("tplDfDiff", "Differenz")), 980, 822, 2, "right");
 	let y = 844;

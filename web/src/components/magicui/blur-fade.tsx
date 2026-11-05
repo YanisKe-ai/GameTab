@@ -7,6 +7,7 @@ import {
   LazyMotion,
   domAnimation,
   useInView,
+  useReducedMotion,
   type MotionProps,
   type UseInViewOptions,
   type Variants,
@@ -47,6 +48,8 @@ export function BlurFade({
   ...props
 }: BlurFadeProps) {
   const ref = useRef(null)
+  const reduce = useReducedMotion()
+  if (reduce) { offset = 0; blur = "0px" }
   const inViewResult = useInView(ref, { once: true, margin: inViewMargin })
   const isInView = !inView || inViewResult
   const defaultVariants: Variants = {

@@ -463,6 +463,8 @@ def t_yatzy(pg, env):
         click(pg, btn(pg, "·").first, FAST + 80)
         if btn_re(pg, "^Erreicht").count():
             click(pg, btn_re(pg, "^Erreicht").last, FAST)
+        elif btn(pg, "Anderer Wert").count():
+            click(pg, pg.locator(".yz-val").last, FAST)
         elif pg.get_by_placeholder("Punkte").count():
             click(pg, btn(pg, "Streichen").last, FAST)
         else:

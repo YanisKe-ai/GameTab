@@ -44,6 +44,8 @@ def fill_yatzy(pg, limit=200):
         R.click(pg, R.btn(pg, "·").first, 200)
         if R.btn_re(pg, "^Erreicht").count():
             R.click(pg, R.btn_re(pg, "^Erreicht").last, 130)
+        elif R.btn(pg, "Anderer Wert").count():
+            R.click(pg, pg.locator(".yz-val").last, 130)
         elif pg.get_by_placeholder("Punkte").count():
             R.click(pg, R.btn(pg, "Streichen").last, 130)
         else:

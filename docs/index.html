@@ -8642,6 +8642,8 @@ var TRANSLATIONS = {
 		changePlayers: "Spieler ändern",
 		tapCellHint: "Feld antippen, um Punkte einzutragen oder zu streichen.",
 		yatzyImpossible: "Mit 5 Würfeln nicht möglich",
+		yatzyOtherValue: "Anderer Wert",
+		yatzyPossible: "Mögliche Werte",
 		strike: "Streichen",
 		deleteEntry: "Eintrag löschen",
 		reached: (val) => `Erreicht (${val} Punkte)`,
@@ -10174,6 +10176,8 @@ var TRANSLATIONS = {
 		changePlayers: "Change players",
 		tapCellHint: "Tap a box to enter or clear a score.",
 		yatzyImpossible: "Not possible with 5 dice",
+		yatzyOtherValue: "Other value",
+		yatzyPossible: "Possible values",
 		strike: "Cross out",
 		deleteEntry: "Delete entry",
 		reached: (val) => `Got it (${val} points)`,
@@ -11706,6 +11710,8 @@ var TRANSLATIONS = {
 		changePlayers: "Changer les joueurs",
 		tapCellHint: "Touche une case pour saisir ou effacer un score.",
 		yatzyImpossible: "Impossible avec 5 dés",
+		yatzyOtherValue: "Autre valeur",
+		yatzyPossible: "Valeurs possibles",
 		strike: "Barrer",
 		deleteEntry: "Supprimer l'entrée",
 		reached: (val) => `Atteint (${val} points)`,
@@ -13238,6 +13244,8 @@ var TRANSLATIONS = {
 		changePlayers: "Cambia giocatori",
 		tapCellHint: "Tocca una casella per inserire o cancellare un punteggio.",
 		yatzyImpossible: "Non possibile con 5 dadi",
+		yatzyOtherValue: "Altro valore",
+		yatzyPossible: "Valori possibili",
 		strike: "Cancella",
 		deleteEntry: "Elimina voce",
 		reached: (val) => `Raggiunto (${val} punti)`,
@@ -14770,6 +14778,8 @@ var TRANSLATIONS = {
 		changePlayers: "Cambiar jugadores",
 		tapCellHint: "Toca una casilla para anotar o borrar una puntuación.",
 		yatzyImpossible: "No es posible con 5 dados",
+		yatzyOtherValue: "Otro valor",
+		yatzyPossible: "Valores posibles",
 		strike: "Tachar",
 		deleteEntry: "Eliminar entrada",
 		reached: (val) => `Conseguido (${val} puntos)`,
@@ -16302,6 +16312,8 @@ var TRANSLATIONS = {
 		changePlayers: "Mudar jogadores",
 		tapCellHint: "Toca numa casa para anotar ou apagar uma pontuação.",
 		yatzyImpossible: "Não é possível com 5 dados",
+		yatzyOtherValue: "Outro valor",
+		yatzyPossible: "Valores possíveis",
 		strike: "Riscar",
 		deleteEntry: "Eliminar entrada",
 		reached: (val) => `Conseguido (${val} pontos)`,
@@ -18503,7 +18515,7 @@ html[data-phone-landscape] body:has(> #root > div.gtL-start) { position: static 
 // web/src/themes/palette.js
 var palette_exports = /* @__PURE__ */ __exportAll({
 	BORDER: () => BORDER,
-	CARD: () => CARD$1,
+	CARD: () => CARD,
 	DICE_BG: () => DICE_BG,
 	GOLD: () => GOLD$6,
 	GRID_LINE: () => GRID_LINE,
@@ -18556,7 +18568,7 @@ function playerHue(i, theme) {
 var GOLD$6 = "#C9A15C";
 var PAGE_BG = "#12141C";
 var PAGE_BG_2 = "#181B25";
-var CARD$1 = "#1D212D";
+var CARD = "#1D212D";
 var BORDER = "#2A2F3D";
 var GRID_LINE = "#333A4A";
 var INK$10 = "#F0F1F5";
@@ -43313,7 +43325,7 @@ function SchieberEditorPanel({ editing, teams, onSave, onClose, t, theme }) {
 	const _SBORDER = theme === "noir" ? "#454545" : BORDER;
 	const _SPAGEBG = theme === "noir" ? "#0A0A0A" : PAGE_BG;
 	const _SINK = theme === "noir" ? "#EDEDED" : INK$10;
-	const _SCARD = theme === "noir" ? "#1E1E1E" : CARD$1;
+	const _SCARD = theme === "noir" ? "#1E1E1E" : CARD;
 	const _SGOLD = theme === "noir" ? noirAccent("schieber") : GOLD$6;
 	const _SMUTED = theme === "noir" ? "#8A8A8A" : MUTED;
 	const _SHUE0 = theme === "noir" ? noirAccent("schieber") : HUES[0];
@@ -46465,7 +46477,7 @@ function startPageTokens(theme) {
 		headerBg: NEARBLACK,
 		headerInk: "#FBF6EA",
 		headerMuted: "#9C8F7C",
-		card: CARD$1,
+		card: CARD,
 		cardElevated: "#262B3A",
 		ink: INK$10,
 		muted: MUTED,
@@ -46519,7 +46531,7 @@ function shellTokens(theme) {
 		headerBg: NEARBLACK,
 		headerInk: "#FBF6EA",
 		headerMuted: "#9C8F7C",
-		card: CARD$1,
+		card: CARD,
 		cardElevated: "#262B3A",
 		ink: INK$10,
 		muted: MUTED,
@@ -46587,7 +46599,7 @@ function tuttoTokens(theme) {
 		headerBg: NEARBLACK,
 		headerInk: "#FBF6EA",
 		headerMuted: "#9C8F7C",
-		card: CARD$1,
+		card: CARD,
 		cardElevated: "#262B3A",
 		ink: INK$10,
 		muted: MUTED,
@@ -108222,10 +108234,14 @@ function YatzyEditorPanel({ editing, players, scores, totals, category, onSave, 
 		"#888888"
 	] : YATZY_HUES;
 	const [value, setValue] = useState$11("");
+	const [other, setOther] = useState$11(false);
+	const pset = category ? YATZY_POSSIBLE[category.id] : null;
+	const gridVals = category && category.kind === "free" && pset && pset.size <= 12 ? [...pset].sort((a, b) => a - b) : null;
 	useEffect$15(() => {
 		if (editing) {
 			const current = scores[editing.playerId][editing.catId];
 			setValue(current !== null ? String(current) : "");
+			setOther(!!(gridVals && current !== null && current !== 0 && !pset.has(current)));
 		}
 	}, [editing]);
 	useGtlKeys(!!(editing && category), (e) => {
@@ -108245,6 +108261,15 @@ function YatzyEditorPanel({ editing, players, scores, totals, category, onSave, 
 			} else if (k === "0" || k === "-") {
 				e.preventDefault();
 				onSave(editing.playerId, editing.catId, 0);
+			}
+		} else if (gridVals && !other) {
+			if (k === "0" || k === "-") {
+				e.preventDefault();
+				onSave(editing.playerId, editing.catId, 0);
+			} else if (/^[1-9]$/.test(k)) {
+				e.preventDefault();
+				setValue(k);
+				setOther(true);
 			}
 		} else if (category.face) {
 			if (/^[0-5]$/.test(k)) {
@@ -108326,8 +108351,8 @@ function YatzyEditorPanel({ editing, players, scores, totals, category, onSave, 
 			border: "none",
 			background: _YBG,
 			borderRadius: "50%",
-			width: 40,
-			height: 40,
+			width: 44,
+			height: 44,
 			display: "inline-grid",
 			placeItems: "center",
 			color: _YMUTED,
@@ -108436,11 +108461,83 @@ function YatzyEditorPanel({ editing, players, scores, totals, category, onSave, 
 				fontSize: 16,
 				fontWeight: 700,
 				padding: "9px 0",
+				minHeight: 48,
 				cursor: "pointer",
 				fontFamily: YATZY_FONT
 			}
 		}, n === 0 ? "–" : optionValue);
-	})) : /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	})) : gridVals && !other ? /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		fontSize: 11.5,
+		fontWeight: 600,
+		color: _YMUTED,
+		marginBottom: 8,
+		fontFamily: "'Inter', sans-serif"
+	} }, t("yatzyPossible")), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "yz-vals",
+		style: {
+			display: "grid",
+			gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+			gap: 8
+		}
+	}, gridVals.map((v) => {
+		const isCurrent = currentValue === v;
+		return /* @__PURE__ */ import_react.default.createElement("button", {
+			key: v,
+			className: "yz-opt yz-val",
+			"data-gt-sound": "1",
+			onClick: () => commit(v),
+			style: {
+				minHeight: 48,
+				border: isCurrent ? `2px solid ${_YACCENT}` : "2px solid transparent",
+				borderRadius: 22,
+				background: isCurrent ? `${_YACCENT}22` : _YBG,
+				color: _YINK,
+				fontSize: 18,
+				fontWeight: 700,
+				padding: "0",
+				cursor: "pointer",
+				fontFamily: YATZY_FONT,
+				fontVariantNumeric: "tabular-nums"
+			}
+		}, v);
+	})), /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		display: "flex",
+		gap: 8,
+		marginTop: 8
+	} }, /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "yz-opt yz-strike",
+		onClick: () => commit(0),
+		style: {
+			flex: 1,
+			minHeight: 48,
+			border: currentValue === 0 ? `2px solid ${_YMUTED}` : "2px solid transparent",
+			borderRadius: 22,
+			background: _YBG,
+			color: theme === "noir" ? _YMUTED : _YV ? "#FF8F8A" : "#C0392B",
+			fontSize: 13,
+			fontWeight: 700,
+			cursor: "pointer",
+			fontFamily: "'Inter', sans-serif"
+		}
+	}, t("strike")), /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "yz-opt yz-other",
+		onClick: () => {
+			setValue("");
+			setOther(true);
+		},
+		style: {
+			flex: 1,
+			minHeight: 48,
+			border: "2px solid transparent",
+			borderRadius: 22,
+			background: _YBG,
+			color: _YMUTED,
+			fontSize: 13,
+			fontWeight: 700,
+			cursor: "pointer",
+			fontFamily: "'Inter', sans-serif"
+		}
+	}, t("yatzyOtherValue")))) : /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		gap: 6
 	} }, /* @__PURE__ */ import_react.default.createElement("input", {
@@ -108494,7 +108591,22 @@ function YatzyEditorPanel({ editing, players, scores, totals, category, onSave, 
 			padding: "0 18px",
 			cursor: "pointer"
 		}
-	}, /* @__PURE__ */ import_react.default.createElement(CheckMark, null))), impossible && /* @__PURE__ */ import_react.default.createElement("div", {
+	}, /* @__PURE__ */ import_react.default.createElement(CheckMark, null))), gridVals && other && /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "yz-back",
+		onClick: () => setOther(false),
+		style: {
+			marginTop: 8,
+			minHeight: 44,
+			border: "none",
+			background: "transparent",
+			color: _YACCENT,
+			fontSize: 13,
+			fontWeight: 700,
+			cursor: "pointer",
+			fontFamily: "'Inter', sans-serif",
+			padding: "0 4px"
+		}
+	}, t("yatzyPossible")), impossible && /* @__PURE__ */ import_react.default.createElement("div", {
 		role: "status",
 		style: {
 			marginTop: 6,
@@ -109227,7 +109339,7 @@ function YatzyGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 }
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.05-19";
+var APP_BUILD = "2026.11.05-20";
 // web/src/app/storage.js
 var storage_exports = /* @__PURE__ */ __exportAll({
 	GT_CAT_KEYS: () => GT_CAT_KEYS,
@@ -109349,7 +109461,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.05-19");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.05-20");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -111930,7 +112042,7 @@ function UpdateBanner() {
 		let alive = true;
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.05-19") {
+				if (alive && v && v.build && v.build !== "2026.11.05-20") {
 					setReady(true);
 					setHidden(false);
 					try {
@@ -112544,7 +112656,7 @@ var INK$9 = "#FFFFFF";
 var DIE = "#F4EFE3";
 var PIP = "#1B2431";
 var FIRST_CAP$4 = 7;
-var DICE$1 = [
+var DICE = [
 	[
 		90,
 		420,
@@ -112611,7 +112723,7 @@ function cup(c) {
 	});
 	c.restore();
 }
-function die$1(c, k, x, y, s, rot) {
+function die(c, k, x, y, s, rot) {
 	const h = s / 2;
 	c.save();
 	c.translate(x + h, y + h);
@@ -112643,13 +112755,13 @@ function dice(c, k, bottom) {
 	const s2 = Math.min(1, (bottom - 410) / 440);
 	if (s2 >= .7) {
 		const ax = 445, ay = 410;
-		DICE$1.forEach(([x, y, r]) => die$1(c, k, ax + (x - ax) * s2, ay + (y - ay) * s2, 190 * s2, r));
+		DICE.forEach(([x, y, r]) => die(c, k, ax + (x - ax) * s2, ay + (y - ay) * s2, 190 * s2, r));
 		return;
 	}
 	const full = Math.min(172, bottom - 505 - 12), left = Math.min(112, bottom - 330 - 12);
 	const useFull = full >= left, sz = Math.max(48, useFull ? full : left), gap = Math.min(24, sz * .14);
 	const w = 5 * sz + 4 * gap, x0 = useFull ? 540 - w / 2 : 70, top = useFull ? 505 : 330;
-	DICE$1.forEach(([, , r], i) => die$1(c, k, x0 + i * (sz + gap), top, sz, r));
+	DICE.forEach(([, , r], i) => die(c, k, x0 + i * (sz + gap), top, sz, r));
 }
 function footer$11(c, k, d) {
 	const x = 60 + k.logo(c, d.logo, 60, 1210, 100, INK$9) + 20;
@@ -114198,60 +114310,6 @@ var INK$6 = "#14101C";
 var RED$5 = "#D7141F";
 var BARRED = "#C8102E";
 var YEL$2 = "#F7C32E";
-var CARD = "#C1798F";
-var DICE = [
-	[
-		60,
-		540,
-		-8,
-		1
-	],
-	[
-		225,
-		565,
-		6,
-		1
-	],
-	[
-		390,
-		535,
-		-4,
-		1
-	],
-	[
-		100,
-		700,
-		7,
-		5
-	],
-	[
-		270,
-		720,
-		-9,
-		5
-	],
-	[
-		440,
-		700,
-		5,
-		5
-	]
-];
-var PIPS = {
-	1: [[1, 1]],
-	5: [
-		[0, 0],
-		[2, 0],
-		[1, 1],
-		[0, 2],
-		[2, 2]
-	]
-};
-var BONUS = [
-	["500", -8],
-	["2x", 5],
-	["±1000", -3]
-];
 function bg$7(c, k) {
 	c.fillStyle = YEL$2;
 	c.fillRect(0, 0, k.TPL_W, k.TPL_H);
@@ -114299,58 +114357,6 @@ function hero(c, k, d) {
 	pass(0, 0, "#FFFFFF", true);
 	c.fillStyle = RED$5;
 	pass(0, 0, RED$5, false);
-	c.restore();
-}
-function die(c, k, x, y, rot, n, s) {
-	const h = s / 2;
-	c.save();
-	c.translate(x + h, y + h);
-	c.rotate(rot * Math.PI / 180);
-	c.fillStyle = INK$6;
-	k.rrect(c, -h + 10 * s / 140, -h + 12 * s / 140, s, s, 26 * s / 140);
-	c.fill();
-	c.fillStyle = INK$6;
-	k.rrect(c, -h, -h, s, s, 26 * s / 140);
-	c.fill();
-	c.fillStyle = "#FFFFFF";
-	const b = 6 * s / 140;
-	k.rrect(c, -h + b, -h + b, s - 2 * b, s - 2 * b, Math.max(2, 20 * s / 140));
-	c.fill();
-	c.fillStyle = INK$6;
-	const inner = s - 2 * b, pr = s / 5 / 2;
-	PIPS[n].forEach(([px, py]) => {
-		c.beginPath();
-		c.arc(-h + b + (.18 + px * .32) * inner, -h + b + (.18 + py * .32) * inner, pr, 0, Math.PI * 2);
-		c.fill();
-	});
-	c.restore();
-}
-function bonus(c, k, d, i, dx, dy) {
-	const [lab, rot] = BONUS[i];
-	const x = 610 + i * 135, y = 560 + i % 2 * 40, w = 130, h = 190;
-	c.save();
-	c.translate(x + w / 2 + dx, y + h / 2 + dy);
-	c.rotate(rot * Math.PI / 180);
-	c.fillStyle = INK$6;
-	k.rrect(c, -57, -85, w, h, 16);
-	c.fill();
-	k.rrect(c, -65, -95, w, h, 16);
-	c.fill();
-	c.fillStyle = CARD;
-	k.rrect(c, -59, -89, 118, 178, 11);
-	c.fill();
-	c.fillStyle = "#FFFFFF";
-	c.textAlign = "center";
-	const f = k.fit(c, lab, {
-		w: 400,
-		fam: k.F_ANTON,
-		max: 58,
-		min: 30,
-		maxW: 102
-	});
-	k.setFont(c, 400, f.size, k.F_ANTON);
-	c.fillText(lab, 0, k.capH(c) / 2);
-	c.textAlign = "left";
 	c.restore();
 }
 function footer$8(c, k, d) {
@@ -114437,24 +114443,15 @@ function page1$10(d, k, rows) {
 		k.spaced(c, tl, 62, bl[0] - asc[0] - 16, 3, "left");
 	}
 	const endY = 1160;
-	const p = dense ? Math.min(72, (endY - (heroBase + 78)) / (N - 1 + .82)) : N <= 3 ? 90 : N <= 5 ? 72 : N === 6 ? 62 : 58;
+	const zoneTop = heroBase + 96;
+	const p = Math.min(N <= 3 ? 170 : N <= 5 ? 130 : 118, (endY - zoneTop) / (N - .18));
 	const rowH = Math.round(p * .82);
-	const rowsTop = endY - (N - 1) * p - rowH;
+	const blockH = (N - 1) * p + rowH;
+	const rowsTop = Math.round(zoneTop + Math.max(0, (endY - zoneTop - blockH) / 2));
 	const target = d.target;
-	const zoneTop = heroBase + 30, zoneBottom = rowsTop - 62;
-	const sc = Math.min(1, (zoneBottom - zoneTop) / 330);
-	if (sc >= .4) {
-		c.save();
-		c.translate(60, 540);
-		c.scale(sc, sc);
-		c.translate(-60, -540 + (zoneTop - 540) / sc);
-		DICE.forEach(([x, y, r, n]) => die(c, k, x, y, r, n, 140));
-		BONUS.forEach((_, i) => bonus(c, k, d, i, 0, 0));
-		c.restore();
-	}
 	k.setFont(c, 400, rowH * .74, k.F_ANTON);
 	const vwMax = Math.max(...rows.map((r) => c.measureText(r.value).width));
-	const nameW = Math.min(340, Math.max(200, Math.max(...rows.map((r) => c.measureText(r.name).width)) + 6));
+	const nameW = Math.min(360, Math.max(200, Math.max(...rows.map((r) => c.measureText(r.name).width)) + 6));
 	const valW = Math.max(130, vwMax + 4);
 	const tx = 60 + nameW + 20, tw = 1020 - valW - 20 - tx;
 	const sl = [
@@ -114480,21 +114477,15 @@ function page1$10(d, k, rows) {
 		const y = rowsTop + i * p, col = r.winner ? BARRED : INK$6;
 		const fs = rowH * .74;
 		const two = rowH >= 44;
-		let f = k.fit(c, r.name, {
+		const f = k.nameFit(c, r.name, {
 			w: 400,
 			fam: k.F_ANTON,
 			max: fs,
-			min: two ? fs * .72 : Math.max(18, fs * .5),
 			maxW: nameW,
-			lines: 1
-		});
-		if (f.cut && two) f = k.fit(c, r.name, {
-			w: 400,
-			fam: k.F_ANTON,
-			max: Math.min(fs, rowH * .42),
-			min: 20,
-			maxW: nameW,
-			lines: 2
+			min: two ? 24 : Math.max(18, fs * .5),
+			lines: two ? 2 : 1,
+			oneMin: .72,
+			max2: Math.min(fs, rowH * .46)
 		});
 		k.setFont(c, 400, f.size, k.F_ANTON);
 		c.fillStyle = INK$6;

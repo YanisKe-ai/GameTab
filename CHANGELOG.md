@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.05-20 (05.11.2026 22:54)
+- Tutto-Karte ohne Deko, Yatzy mit Werte antippen
+
 ## 2026.11.05-19 (05.11.2026 22:48)
 - Differenzler im neuen Wirtshaus-Block-Design
 

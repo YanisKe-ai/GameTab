@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.05-18 (05.11.2026 22:33)
+- Namen in der Einrichtung mit Ellipse, Schieber-Eingabe besser bedienbar
+
 ## 2026.11.05-17 (05.11.2026 22:01)
 - Skyjo-Karte ohne doppelte Unterzeile
 

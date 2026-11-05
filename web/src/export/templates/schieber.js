@@ -23,7 +23,7 @@ function buildModel(d) {
   if (wins.length !== 1) { const f = d.tr("tplSchTie"); msg = typeof f === "function" ? f(d.num(teams[0].total)) : d.tr("ecTied", ""); }
   else { const w = wins[0]; const f = d.tr(PLURAL.test(" " + w.name + " ") ? "tplSchWinN" : "tplSchWin1"); msg = typeof f === "function" ? f(w.name, d.num(w.total)) : w.name; }
   return { teams, tgt: d.num(d.extra.target), tie: wins.length !== 1, msg, date: d.date, gameLabel: d.gameLabel, logo: d.logo, img: d.img, num: d.num, up: d.up,
-    rounds: Math.max(...teams.map((t) => t.entries.length)), lblTarget: d.tr("targetLabel", "Ziel"), lblEntries: d.tr("tplNewsEntries", "Einträge"), lblWinner: d.up(d.tr("tplNewsWinner", "Sieger")), lblSum: d.tr("tplNewsSum", "Summe") };
+    rounds: Math.max(...teams.map((t) => t.entries.length)), lblTarget: d.tr("targetLabel", "Ziel"), lblEntries: d.tr("tplNewsEntries", "Einträge"), lblEntryOne: d.tr("schieberEntryOne", "Eintrag"), lblWinner: d.up(d.tr("tplNewsWinner", "Sieger")), lblSum: d.tr("tplNewsSum", "Summe") };
 }
 
 function rng(seed) { let s = seed >>> 0; return () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; }; }
@@ -103,7 +103,7 @@ function drawF(c, k, m) {
   const tw2 = c.measureText(tf.lines[0]).width; star(c, W / 2 - tw2 / 2 - 44, by - cap / 2, 30, INK); star(c, W / 2 + tw2 / 2 + 44, by - cap / 2, 30, INK);
   const ry = by + 26; dblRule(c, X1, X2, ry);
   // Leiste: Ziel | Runden
-  const sy = ry + 46; const left = m.lblTarget + " " + m.tgt, right = m.rounds + " " + m.lblEntries;
+  const sy = ry + 46; const left = m.lblTarget + " " + m.tgt, right = m.rounds + " " + (m.rounds === 1 ? m.lblEntryOne : m.lblEntries);
   inkText(c, k, m.up(left), X1, sy, 700, 24, INT, "left", 3); inkText(c, k, m.up(right), X2, sy, 700, 24, INT, "right", 3);
   star(c, W / 2, sy - 8, 22, INK); rule(c, X1, X2, sy + 20, 1.8);
   // Schlagzeile
@@ -112,7 +112,9 @@ function drawF(c, k, m) {
   c.save(); c.globalAlpha = 1; hf.lines.forEach((l, i) => boldFrau(c, k, l, W / 2, hy + i * hlh, hf.size, "center")); c.restore();
   const hbot = hy + (hf.lines.length - 1) * hlh + 22; dblRule(c, X1, X2, hbot);
   // Stich-Illustration: zwei Felder, Bauer und Dame blicken sich an
-  const iy = hbot + 28, ih = 332, cw = 450, xs = [X1, X2 - cw];
+  // Wenige Eintraege: freie Flaeche unten geht ans Bild (sonst bleibt das untere Drittel leer), bei 6 oder mehr Zeilen unveraendert
+  const iy = hbot + 28, cw = 450, xs = [X1, X2 - cw], nRows = Math.min(m.rounds, 9) + (m.rounds > 9 ? 1 : 0);
+  const ih = 332 + Math.max(0, Math.min(210, 1292 - (iy + 332 + 132 + 80 + nRows * 76)));
   const arts = ["bauer", "dame"];
   m.teams.forEach((tm, i) => {
     const x = xs[i];
@@ -175,6 +177,6 @@ export default {
   fonts: ["700 80px Fraunces", "500 25px Fraunces", "800 28px \"Baloo 2\"", "600 24px Inter", "700 24px Inter", "800 34px Inter"],
   accepts: (d) => !!(d.extra && Array.isArray(d.extra.teams) && d.extra.teams.length === 2 && d.extra.teams.every((tm) => tm && Array.isArray(tm.entries)) && isFinite(Number(d.extra.target))),
   prepare: async (k) => { const [bauer, dame, papier] = await Promise.all([BAUER_URL, DAME_URL, PAPIER_URL].map((u) => k.tplImg(u))); return { bauer, dame, papier }; },
-  texts: (d) => ["−'’!¡#… " + d.tr("tplNewsEntries", "") + d.up(d.tr("tplNewsWinner", "") + d.tr("tplNewsSum", "") + d.tr("targetLabel", "")) + (d.extra ? d.extra.teams.map((t) => t.name).join(" ") : "")],
+  texts: (d) => ["−'’!¡#… " + d.tr("tplNewsEntries", "") + d.tr("schieberEntryOne", "") + d.up(d.tr("tplNewsWinner", "") + d.tr("tplNewsSum", "") + d.tr("targetLabel", "")) + (d.extra ? d.extra.teams.map((t) => t.name).join(" ") : "")],
   render,
 };

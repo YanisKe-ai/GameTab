@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.05-24 (05.11.2026 23:42)
+- Tutto-Karte: Karten statt doppelter Siegerzeile
+
 ## 2026.11.05-23 (05.11.2026 23:41)
 - Differenzler: Stand bleibt sichtbar, Namen einzeilig, 257 schon beim Tippen
 

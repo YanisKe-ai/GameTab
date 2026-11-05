@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.05-22 (05.11.2026 23:33)
+- Tutto: neuer Würfeltisch mit Strecke zum Ziel
+
 ## 2026.11.05-21 (05.11.2026 23:25)
 - Differenzler im modernen Heatmap-Design
 

@@ -153,8 +153,8 @@ def ui_freeplay(pg):
     ok(re.search(r"1\.\s*Spieler 2", txt) and re.search(r"2\.\s*Spieler 1", txt), "UI Podest tief: Spieler 2 Platz 1, Spieler 1 Platz 2")
     pg.screenshot(path=str(OUT / "fp_low_podium.png"))
     pg.get_by_role("button", name=re.compile("Bild teilen")).first.click(); pg.wait_for_timeout(2500)
-    src = pg.evaluate("()=>{const i=[...document.querySelectorAll('img')].find(i=>i.naturalWidth>=1000&&i.src.startsWith('data:image'));return i?i.src:null}")
-    imgs = pg.locator("img[src^='data:image']")
+    src = pg.evaluate("async()=>{const i=[...document.querySelectorAll('.gtsp-ov img')].find(i=>i.naturalWidth>=1000);if(!i)return null;const b=await (await fetch(i.src)).blob();return await new Promise(r=>{const f=new FileReader();f.onload=()=>r(f.result);f.readAsDataURL(b);});}")
+    imgs = pg.locator(".gtsp-ov img")
     if src:
         import base64
         (OUT / "fp_low_export.png").write_bytes(base64.b64decode(src.split(",", 1)[1]))

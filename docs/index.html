@@ -9157,7 +9157,7 @@ var TRANSLATIONS = {
 		needSixPlayersMafia: "Mindestens 6 Spieler nötig",
 		whoIsMayor: "Wer ist Bürgermeister?",
 		mayorVoteHint: "Wählt gemeinsam, wer als Bürgermeister die doppelte Stimme bei Abstimmungen erhält.",
-		mayorVoteCountsDouble: (name) => ` ${name}s Stimme zählt doppelt.`,
+		mayorVoteCountsDouble: (name) => ` Die Stimme von ${name} zählt doppelt.`,
 		packmatesLabelMafia: "Mit-Mafiosi:",
 		gtS2HlStreakTitle: "Aktuelle Serie",
 		gtS2HlStreakText: (p) => `${p.name} hat die letzten ${p.n} Partien gewonnen.`,
@@ -55967,7 +55967,7 @@ var IMPOSTOR_CATEGORIES_BY_LANG = {
 				"Industrielle Revolution",
 				"Apollo 11",
 				"Kubakrise",
-				"Grosse Mauer China",
+				"Chinesische Mauer",
 				"Erster Weltkrieg",
 				"Attentat auf JFK",
 				"Gutenberg-Druckerpresse",
@@ -60508,10 +60508,13 @@ var game_exports$10 = /* @__PURE__ */ __exportAll({
 	ImpostorVoting: () => ImpostorVoting,
 	btnGhostImp: () => btnGhostImp,
 	btnPrimaryImp: () => btnPrimaryImp,
+	gtFitFs: () => gtFitFs,
+	gtNameFs: () => gtNameFs,
 	impNorm: () => impNorm,
 	impostorAssignRoles: () => impostorAssignRoles,
 	impostorPickWord: () => impostorPickWord,
-	shuffleArray: () => shuffleArray
+	shuffleArray: () => shuffleArray,
+	useDeadline: () => useDeadline
 });
 var IMPOSTOR_DOSSIER_CSS = ".impostor-file{position:relative;overflow:hidden;}.impostor-file::before{content:'';position:absolute;inset:0;pointer-events:none;z-index:0;background-image:repeating-linear-gradient(0deg, rgba(128,128,128,0.10) 0px, rgba(128,128,128,0.10) 3px, transparent 3px, transparent 13px);mask-image:linear-gradient(180deg, transparent 0%, black 22%, black 78%, transparent 100%);-webkit-mask-image:linear-gradient(180deg, transparent 0%, black 22%, black 78%, transparent 100%);}.impostor-stamp{position:absolute;top:10px;right:-6px;transform:rotate(9deg);border:2px solid;border-radius:5px;padding:2px 7px;font-family:'Inter', sans-serif;font-size:10px;font-weight:800;letter-spacing:0.07em;text-transform:uppercase;z-index:2;pointer-events:none;}";
 function impostorPickWord(categoryIds, lang) {
@@ -60544,6 +60547,35 @@ function impostorAssignRoles(players, numImpostors, mrWhite) {
 		else roles[p.id] = "civilian";
 	});
 	return roles;
+}
+function useDeadline(left, setLeft, running, onEnd) {
+	const endRef = useRef$17(0);
+	const remRef = useRef$17(null);
+	const cb = useRef$17(onEnd);
+	cb.current = onEnd;
+	useEffect$15(() => {
+		if (!running) return;
+		const ms = remRef.current != null && Math.ceil(remRef.current / 1e3) === left ? remRef.current : left * 1e3;
+		endRef.current = Date.now() + ms;
+		const tick = () => {
+			const rem = Math.max(0, endRef.current - Date.now());
+			remRef.current = rem;
+			setLeft(Math.ceil(rem / 1e3));
+			if (rem <= 0) {
+				clearInterval(id);
+				if (cb.current) cb.current();
+			}
+		};
+		const id = setInterval(tick, 250);
+		return () => clearInterval(id);
+	}, [running]);
+}
+function gtFitFs(text, base, avail, min) {
+	const L = String(text == null ? "" : text).split(/\s+/).reduce((m, w) => Math.max(m, w.length), 1);
+	return Math.max(min, Math.min(base, Math.floor(avail / (L * .56))));
+}
+function gtNameFs(name, base) {
+	return gtFitFs(name, base || 42, 320, 20);
 }
 var IMP_FONT = "'Space Grotesk', sans-serif";
 function ImpostorTopBar({ subtitle, onBack, theme, t }) {
@@ -60835,13 +60867,13 @@ function ImpostorReveal({ players, roles, word, onDone, theme, t, gtPeekIdx }) {
 		textTransform: "uppercase",
 		fontFamily: "'Inter', sans-serif"
 	} }, t("passPhoneTo")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 42,
+		fontSize: gtNameFs(player.name),
 		fontWeight: 700,
 		color: wt.ink,
 		fontFamily: IMP_FONT,
 		lineHeight: 1.05,
-		overflowWrap: "break-word",
-		marginBottom: 6
+		marginBottom: 6,
+		maxWidth: "100%"
 	} }, player.name), /* @__PURE__ */ import_react.default.createElement(GtRoleHold, {
 		dock: true,
 		below: /* @__PURE__ */ import_react.default.createElement("div", { style: {
@@ -61004,12 +61036,11 @@ function ImpostorReveal({ players, roles, word, onDone, theme, t, gtPeekIdx }) {
 		size: 13,
 		color: wt.muted
 	}), " ", word.categoryLabel), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: word.word.length > 11 ? 22 : 28,
+		fontSize: gtFitFs(word.word, 28, 172, 12),
 		fontWeight: 800,
 		color: wt.ink,
 		fontFamily: IMP_FONT,
 		marginTop: 8,
-		overflowWrap: "break-word",
 		padding: "0 4px"
 	} }, word.word), /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		fontSize: 12,
@@ -61038,17 +61069,10 @@ function ImpostorDiscuss({ players, word, hideCategory, discussSeconds, onVote, 
 	const [order] = useState$11(() => shuffleArray(players));
 	const [seconds, setSeconds] = useState$11(discussSeconds || 90);
 	const [running, setRunning] = useState$11(false);
-	useEffect$15(() => {
-		if (!running || seconds <= 0) return;
-		const timer = setTimeout(() => setSeconds((s) => {
-			if (s <= 1) {
-				timeUpAlert();
-				return 0;
-			}
-			return s - 1;
-		}), 1e3);
-		return () => clearTimeout(timer);
-	}, [running, seconds]);
+	useDeadline(seconds, setSeconds, running, () => {
+		timeUpAlert();
+		setRunning(false);
+	});
 	const mm = String(Math.floor(seconds / 60)).padStart(2, "0");
 	const ss = String(seconds % 60).padStart(2, "0");
 	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
@@ -61121,6 +61145,7 @@ function ImpostorDiscuss({ players, word, hideCategory, discussSeconds, onVote, 
 			fontSize: 13,
 			fontWeight: 700,
 			padding: "9px 18px",
+			minHeight: 44,
 			cursor: "pointer",
 			fontFamily: "'Inter', sans-serif"
 		}
@@ -61137,6 +61162,7 @@ function ImpostorDiscuss({ players, word, hideCategory, discussSeconds, onVote, 
 			fontSize: 13,
 			fontWeight: 700,
 			padding: "9px 18px",
+			minHeight: 44,
 			cursor: "pointer",
 			fontFamily: "'Inter', sans-serif"
 		}
@@ -61806,7 +61832,7 @@ function trtValid(s) {
 	const r = s && s.round;
 	return gtIsObj(r) && gtIsObj(r.roles) && gtIsObj(r.alive) && typeof r.step === "string" && Array.isArray(r.log) && Array.isArray(s.players) && s.players.length >= 3 && s.players.every((p) => r.roles[p.id] === "traitor" || r.roles[p.id] === "faithful");
 }
-function TrtRoleCard({ isT, allies, tk, t }) {
+function TrtRoleCard({ isT, allies, tk, t, noHint }) {
 	const c = isT ? tk.red : tk.teal;
 	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
@@ -61828,10 +61854,10 @@ function TrtRoleCard({ isT, allies, tk, t }) {
 		color: c,
 		fontFamily: S8F,
 		letterSpacing: "-0.01em"
-	} }, isT ? t("trtTraitor") : t("trtFaithful")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	} }, isT ? t("trtTraitor") : t("trtFaithful")), !noHint && /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		fontSize: 12,
 		color: tk.muted,
-		fontFamily: S8I,
+		fontFamily: "'Inter', sans-serif",
 		lineHeight: 1.4,
 		maxWidth: 240
 	} }, isT ? t("trtTraitorHint") : t("trtFaithfulHint")), isT && allies.length > 0 && /* @__PURE__ */ import_react.default.createElement("div", { style: {
@@ -61860,10 +61886,11 @@ function TrtReveal({ player, isT, allies, tk, t, onNext }) {
 		textTransform: "uppercase",
 		fontFamily: S8I
 	} }, t("passPhoneTo")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 32,
+		fontSize: gtNameFs(player.name, 32),
 		fontWeight: 700,
 		color: tk.ink,
-		fontFamily: S8F
+		fontFamily: S8F,
+		maxWidth: "100%"
 	} }, player.name), /* @__PURE__ */ import_react.default.createElement(GtRoleHold, {
 		tk,
 		hint: t("holdToView"),
@@ -62063,19 +62090,12 @@ function TrtDay({ day, secs, tk, t, onVote }) {
 	const total = secs || 120;
 	const [left, setLeft] = useState$11(total);
 	const [run, setRun] = useState$11(false);
-	useEffect$15(() => {
-		if (!run || left <= 0) return;
-		const tm = setTimeout(() => setLeft((s) => {
-			if (s <= 1) {
-				try {
-					timeUpAlert();
-				} catch (e) {}
-				return 0;
-			}
-			return s - 1;
-		}), 1e3);
-		return () => clearTimeout(tm);
-	}, [run, left]);
+	useDeadline(left, setLeft, run, () => {
+		try {
+			timeUpAlert();
+		} catch (e) {}
+		setRun(false);
+	});
 	const mm = String(Math.floor(left / 60)).padStart(2, "0");
 	const ss = String(left % 60).padStart(2, "0");
 	return /* @__PURE__ */ import_react.default.createElement("div", {
@@ -62138,6 +62158,7 @@ function TrtDay({ day, secs, tk, t, onVote }) {
 			fontSize: 13,
 			fontWeight: 700,
 			padding: "9px 18px",
+			minHeight: 44,
 			cursor: "pointer",
 			fontFamily: S8I
 		}
@@ -62155,6 +62176,7 @@ function TrtDay({ day, secs, tk, t, onVote }) {
 			fontSize: 13,
 			fontWeight: 700,
 			padding: "9px 18px",
+			minHeight: 44,
 			cursor: "pointer",
 			fontFamily: S8I
 		}
@@ -62345,7 +62367,8 @@ function TrtBanish({ name, isT, winner, tk, t, onNext }) {
 		isT,
 		allies: [],
 		tk,
-		t
+		t,
+		noHint: true
 	})), /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "reveal-2",
 		style: {
@@ -68923,7 +68946,7 @@ var WEREWOLF_ROLES_BY_LANG = {
 			id: "amor",
 			label: "Amor",
 			team: "dorf",
-			desc: "Verkuppelt in der ersten Nacht zwei Spieler. Stirbt eine_r der Verliebten, stirbt die andere Person mit.",
+			desc: "Verkuppelt in der ersten Nacht zwei Spieler. Stirbt eine verliebte Person, stirbt auch die andere.",
 			optional: true,
 			minPlayers: 9,
 			defaultOn: true
@@ -69725,13 +69748,13 @@ function WerewolfReveal({ players, roles, spares, hauptmannOn, onDone, onDiebSwa
 		textTransform: "uppercase",
 		fontFamily: "'Inter', sans-serif"
 	} }, t("passPhoneTo")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 42,
+		fontSize: gtNameFs(player.name),
 		fontWeight: 700,
 		color: wt.moon === "#7A6C3B" ? wt.ink : wt.moon,
 		fontFamily: WOLF_FONT,
 		lineHeight: 1.05,
-		overflowWrap: "break-word",
-		marginBottom: 6
+		marginBottom: 6,
+		maxWidth: "100%"
 	} }, player.name), /* @__PURE__ */ import_react.default.createElement(GtRoleHold, {
 		dock: true,
 		below: /* @__PURE__ */ import_react.default.createElement("div", { style: {
@@ -69909,17 +69932,10 @@ function WerewolfModerator({ snap, onSnap, players, initialRoles, spares, enable
 	const [phase, setPhase] = useState(hauptmannOn ? "captain" : "night");
 	const [voteSeconds, setVoteSeconds] = useState(voteSecondsDefault || 90, "!");
 	const [voteTimerRunning, setVoteTimerRunning] = useState(false, "!");
-	useEffect$15(() => {
-		if (!voteTimerRunning || voteSeconds <= 0) return;
-		const timer = setTimeout(() => setVoteSeconds((sVal) => {
-			if (sVal <= 1) {
-				timeUpAlert();
-				return 0;
-			}
-			return sVal - 1;
-		}), 1e3);
-		return () => clearTimeout(timer);
-	}, [voteTimerRunning, voteSeconds]);
+	useDeadline(voteSeconds, setVoteSeconds, voteTimerRunning, () => {
+		timeUpAlert();
+		setVoteTimerRunning(false);
+	});
 	const [stepIdx, setStepIdx] = useState(0);
 	const [nightData, setNightData] = useState({
 		wolfVictim: null,
@@ -69953,7 +69969,7 @@ function WerewolfModerator({ snap, onSnap, players, initialRoles, spares, enable
 		let deaths = [];
 		if (nightData.wolfVictim && !nightData.witchHeal) deaths.push(nightData.wolfVictim);
 		if (nightData.witchPoison) deaths.push(nightData.witchPoison);
-		deaths = resolveLoversAndRevenge(deaths);
+		deaths = resolveLoversAndRevenge([...new Set(deaths)]);
 		setLastDeaths(deaths);
 		applyDeaths(deaths);
 		setPhase("dawn");
@@ -70354,8 +70370,14 @@ function WerewolfModerator({ snap, onSnap, players, initialRoles, spares, enable
 		justifyContent: "center",
 		marginTop: 10
 	} }, /* @__PURE__ */ import_react.default.createElement("button", {
-		onClick: () => setVoteTimerRunning((r) => !r),
+		onClick: () => {
+			if (voteSeconds <= 0) {
+				setVoteSeconds(voteSecondsDefault || 90);
+				setVoteTimerRunning(true);
+			} else setVoteTimerRunning((r) => !r);
+		},
 		style: {
+			minHeight: 44,
 			border: "none",
 			borderRadius: 18,
 			background: wt.blood,
@@ -70372,6 +70394,7 @@ function WerewolfModerator({ snap, onSnap, players, initialRoles, spares, enable
 			setVoteSeconds(voteSecondsDefault || 90);
 		},
 		style: {
+			minHeight: 44,
 			border: `1px solid ${wt.border}`,
 			borderRadius: 18,
 			background: "transparent",
@@ -70937,7 +70960,11 @@ function GameOverPanel({ winner, lovers, players, rolesFlat, alive, onRestart, o
 			gap: 14,
 			alignItems: "center"
 		}
-	}, celebration, /* @__PURE__ */ import_react.default.createElement("div", { className: "g-icon" }, civWin ? /* @__PURE__ */ import_react.default.createElement("span", { style: { fontSize: 48 } }, "") : /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+	}, celebration, /* @__PURE__ */ import_react.default.createElement("div", { className: "g-icon" }, civWin ? /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+		name: "trophy",
+		size: 48,
+		color: wt.forest
+	}) : /* @__PURE__ */ import_react.default.createElement(GameIcon, {
 		name: "werwolf",
 		size: 48,
 		color: wt.blood
@@ -71176,6 +71203,15 @@ var MAFIA_OPTIONAL_IDS = [
 	"godfather",
 	"vigilante"
 ];
+var MAFIA_MIN_PLAYERS = {
+	detective: 6,
+	doctor: 6,
+	godfather: 8,
+	vigilante: 9
+};
+function mafiaRoleOn(enabledRoles, id, n) {
+	return !!(enabledRoles && enabledRoles[id]) && n >= MAFIA_MIN_PLAYERS[id];
+}
 function MAFIA_ROLES_BY_LANG_FOR(lang, t) {
 	return {
 		mafioso: {
@@ -71239,12 +71275,12 @@ function mafiaAssignRoles(players, enabledRoles) {
 	const n = players.length;
 	const mCount = mafiaCount(n);
 	const deck = [];
-	if (enabledRoles.godfather) {
+	if (mafiaRoleOn(enabledRoles, "godfather", n)) {
 		deck.push("godfather");
 		for (let i = 1; i < mCount; i++) deck.push("mafioso");
 	} else for (let i = 0; i < mCount; i++) deck.push("mafioso");
 	MAFIA_OPTIONAL_IDS.forEach((id) => {
-		if (id !== "godfather" && enabledRoles[id]) deck.push(id);
+		if (id !== "godfather" && mafiaRoleOn(enabledRoles, id, n)) deck.push(id);
 	});
 	while (deck.length < n) deck.push("civilian");
 	const shuffled = shuffleArray(deck).slice(0, n);
@@ -71621,13 +71657,13 @@ function MafiaReveal({ players, roles, onDone, theme, lang, t, gtPeekIdx }) {
 		textTransform: "uppercase",
 		fontFamily: "'Inter', sans-serif"
 	} }, t("passPhoneTo")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 42,
+		fontSize: gtNameFs(player.name),
 		fontWeight: 700,
 		color: mt.gold,
 		fontFamily: MAFIA_FONT,
 		lineHeight: 1.05,
-		overflowWrap: "break-word",
-		marginBottom: 6
+		marginBottom: 6,
+		maxWidth: "100%"
 	} }, player.name), /* @__PURE__ */ import_react.default.createElement(GtRoleHold, {
 		dock: true,
 		below: /* @__PURE__ */ import_react.default.createElement("div", { style: {
@@ -71826,17 +71862,10 @@ function MafiaModerator({ snap, onSnap, players, initialRoles, enabledRoles, may
 	const [phase, setPhase] = useState(mayorOn ? "mayor" : "night");
 	const [voteSeconds, setVoteSeconds] = useState(voteSecondsDefault || 90, "!");
 	const [voteTimerRunning, setVoteTimerRunning] = useState(false, "!");
-	useEffect$15(() => {
-		if (!voteTimerRunning || voteSeconds <= 0) return;
-		const timer = setTimeout(() => setVoteSeconds((sVal) => {
-			if (sVal <= 1) {
-				timeUpAlert();
-				return 0;
-			}
-			return sVal - 1;
-		}), 1e3);
-		return () => clearTimeout(timer);
-	}, [voteTimerRunning, voteSeconds]);
+	useDeadline(voteSeconds, setVoteSeconds, voteTimerRunning, () => {
+		timeUpAlert();
+		setVoteTimerRunning(false);
+	});
 	const [stepIdx, setStepIdx] = useState(0);
 	const [nightData, setNightData] = useState({
 		mafiaVictim: null,
@@ -72005,7 +72034,7 @@ function MafiaModerator({ snap, onSnap, players, initialRoles, enabledRoles, may
 				theme,
 				t,
 				onDone: (targetId) => {
-					setVigilanteUsed(true);
+					if (targetId) setVigilanteUsed(true);
 					setNightData((d) => ({
 						...d,
 						vigilanteTarget: targetId || null
@@ -72163,8 +72192,14 @@ function MafiaModerator({ snap, onSnap, players, initialRoles, enabledRoles, may
 		justifyContent: "center",
 		marginTop: 10
 	} }, /* @__PURE__ */ import_react.default.createElement("button", {
-		onClick: () => setVoteTimerRunning((r) => !r),
+		onClick: () => {
+			if (voteSeconds <= 0) {
+				setVoteSeconds(voteSecondsDefault || 90);
+				setVoteTimerRunning(true);
+			} else setVoteTimerRunning((r) => !r);
+		},
 		style: {
+			minHeight: 44,
 			border: "none",
 			borderRadius: 18,
 			background: mt.blood,
@@ -72181,6 +72216,7 @@ function MafiaModerator({ snap, onSnap, players, initialRoles, enabledRoles, may
 			setVoteSeconds(voteSecondsDefault || 90);
 		},
 		style: {
+			minHeight: 44,
 			border: `1px solid ${mt.border}`,
 			borderRadius: 18,
 			background: "transparent",
@@ -72304,8 +72340,8 @@ function MafiaSetup({ state, setState, onStart, theme, lang, t }) {
 	const removePlayer = (idx) => setPlayers((ps) => ps.filter((_, i) => i !== idx));
 	const tooFew = n < 6;
 	const mCount = mafiaCount(n);
-	const activeSpecialCount = MAFIA_OPTIONAL_IDS.filter((id) => enabledRoles[id]).length;
-	const civilianCount = Math.max(0, n - mCount - activeSpecialCount + (enabledRoles.godfather ? 1 : 0));
+	const activeSpecialCount = MAFIA_OPTIONAL_IDS.filter((id) => mafiaRoleOn(enabledRoles, id, n)).length;
+	const civilianCount = Math.max(0, n - mCount - activeSpecialCount + (mafiaRoleOn(enabledRoles, "godfather", n) ? 1 : 0));
 	const toggleRole = (id) => {
 		setState((s) => ({
 			...s,
@@ -72641,7 +72677,7 @@ function MafiaGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 		players: state.players,
 		initialRoles: round.roles,
 		enabledRoles: state.enabledRoles,
-		mayorOn: state.mayorOn,
+		mayorOn: !!state.mayorOn && state.players.length >= 8,
 		voteSecondsDefault: state.voteSecondsDefault,
 		onRestart: startRound,
 		onNewSetup: () => {
@@ -72790,12 +72826,12 @@ function TabuTurnIntro2({ teamName, onStart, theme, t, teams, scores, currentId,
 	} }, t("nextTeam")), /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "tb-team",
 		style: {
-			fontSize: 44,
+			fontSize: gtFitFs(teamName, 44, 320, 22),
 			fontWeight: 800,
 			color: wt.yellow,
 			fontFamily: TABU_FONT,
 			lineHeight: 1.05,
-			overflowWrap: "break-word"
+			maxWidth: "100%"
 		}
 	}, teamName), /* @__PURE__ */ import_react.default.createElement("p", { style: {
 		fontSize: 13,
@@ -73147,7 +73183,7 @@ var TABU_CATEGORIES_BY_LANG = {
 				},
 				{
 					word: "Kuh",
-					taboo: ["Milch", "Muhen"]
+					taboo: ["Milch", "muhen"]
 				},
 				{
 					word: "Schwein",
@@ -73483,7 +73519,7 @@ var TABU_CATEGORIES_BY_LANG = {
 				},
 				{
 					word: "Park",
-					taboo: ["Bäume", "Spazieren"]
+					taboo: ["Bäume", "spazieren"]
 				},
 				{
 					word: "Museum",
@@ -73495,7 +73531,7 @@ var TABU_CATEGORIES_BY_LANG = {
 				},
 				{
 					word: "Supermarkt",
-					taboo: ["Einkaufen", "Regal"]
+					taboo: ["einkaufen", "Regal"]
 				},
 				{
 					word: "Kirche",
@@ -73519,7 +73555,7 @@ var TABU_CATEGORIES_BY_LANG = {
 				},
 				{
 					word: "See",
-					taboo: ["Wasser", "Angeln"]
+					taboo: ["Wasser", "angeln"]
 				},
 				{
 					word: "Fluss",
@@ -74137,7 +74173,7 @@ var TABU_CATEGORIES_BY_LANG = {
 				},
 				{
 					word: "Joggen",
-					taboo: ["Laufen", "Ausdauer"]
+					taboo: ["laufen", "Ausdauer"]
 				},
 				{
 					word: "Sprint",
@@ -74750,7 +74786,7 @@ var TABU_CATEGORIES_BY_LANG = {
 					taboo: ["Raketen", "USA"]
 				},
 				{
-					word: "Grosse Mauer China",
+					word: "Chinesische Mauer",
 					taboo: ["China", "lang"]
 				},
 				{
@@ -76699,7 +76735,7 @@ var TABU_CATEGORIES_BY_LANG = {
 				},
 				{
 					word: "Impermeabile",
-					taboo: ["pioggia", "impermeabile"]
+					taboo: ["pioggia", "idrorepellente"]
 				},
 				{
 					word: "Cuffie",
@@ -78801,7 +78837,7 @@ var TABU_CATEGORIES_BY_LANG = {
 				},
 				{
 					word: "Remo",
-					taboo: ["barco", "Remo"]
+					taboo: ["barco", "agua"]
 				}
 			]
 		},
@@ -78967,7 +79003,7 @@ var TABU_CATEGORIES_BY_LANG = {
 				},
 				{
 					word: "Impermeable",
-					taboo: ["lluvia", "impermeable"]
+					taboo: ["lluvia", "agua"]
 				},
 				{
 					word: "Auriculares",
@@ -81069,7 +81105,7 @@ var TABU_CATEGORIES_BY_LANG = {
 				},
 				{
 					word: "Remo",
-					taboo: ["barco", "Remo"]
+					taboo: ["barco", "água"]
 				}
 			]
 		},
@@ -81235,7 +81271,7 @@ var TABU_CATEGORIES_BY_LANG = {
 				},
 				{
 					word: "Impermeável",
-					taboo: ["chuva", "impermeável"]
+					taboo: ["chuva", "água"]
 				},
 				{
 					word: "Auscultadores",
@@ -86465,7 +86501,7 @@ var TABU_CATEGORIES_BY_LANG = {
 				},
 				{
 					"word": "Taschenmesser",
-					"taboo": ["Victorinox", "Rot"]
+					"taboo": ["Victorinox", "rot"]
 				},
 				{
 					"word": "Cervelat",
@@ -86533,7 +86569,7 @@ var TABU_CATEGORIES_BY_LANG = {
 				},
 				{
 					"word": "Postauto",
-					"taboo": ["Gelb", "Berge"]
+					"taboo": ["gelb", "Berge"]
 				},
 				{
 					"word": "Franken",
@@ -86561,7 +86597,7 @@ var TABU_CATEGORIES_BY_LANG = {
 				},
 				{
 					"word": "Murmeltier",
-					"taboo": ["Pfeifen", "Winterschlaf"]
+					"taboo": ["pfeifen", "Winterschlaf"]
 				},
 				{
 					"word": "Appenzeller",
@@ -86623,7 +86659,7 @@ var TABU_CATEGORIES_BY_LANG = {
 				},
 				{
 					"word": "Geige",
-					"taboo": ["Bogen", "Streichen"]
+					"taboo": ["Bogen", "streichen"]
 				},
 				{
 					"word": "Trompete",
@@ -86639,11 +86675,11 @@ var TABU_CATEGORIES_BY_LANG = {
 				},
 				{
 					"word": "Harfe",
-					"taboo": ["Zupfen", "Engel"]
+					"taboo": ["zupfen", "Engel"]
 				},
 				{
 					"word": "Mundharmonika",
-					"taboo": ["Blues", "Blasen"]
+					"taboo": ["Blues", "blasen"]
 				},
 				{
 					"word": "Dirigent",
@@ -86821,7 +86857,7 @@ var TABU_CATEGORIES_BY_LANG = {
 				},
 				{
 					"word": "Algorithmus",
-					"taboo": ["Rechnen", "Schritte"]
+					"taboo": ["rechnen", "Schritte"]
 				},
 				{
 					"word": "Strom",
@@ -86897,11 +86933,11 @@ var TABU_CATEGORIES_BY_LANG = {
 				},
 				{
 					"word": "3D-Drucker",
-					"taboo": ["Drucken", "Kunststoff"]
+					"taboo": ["drucken", "Kunststoff"]
 				},
 				{
 					"word": "Drohne",
-					"taboo": ["Fliegen", "Fernsteuerung"]
+					"taboo": ["fliegen", "Fernsteuerung"]
 				},
 				{
 					"word": "WLAN",
@@ -86933,7 +86969,7 @@ var TABU_CATEGORIES_BY_LANG = {
 				},
 				{
 					"word": "Gehirn",
-					"taboo": ["Denken", "Kopf"]
+					"taboo": ["denken", "Kopf"]
 				}
 			]
 		},
@@ -87039,7 +87075,7 @@ var TABU_CATEGORIES_BY_LANG = {
 				},
 				{
 					"word": "Sonnenblume",
-					"taboo": ["Gelb", "Kerne"]
+					"taboo": ["gelb", "Kerne"]
 				},
 				{
 					"word": "Rose",
@@ -87109,7 +87145,7 @@ var TABU_CATEGORIES_BY_LANG = {
 			"cards": [
 				{
 					"word": "Flugzeug",
-					"taboo": ["Fliegen", "Flügel"]
+					"taboo": ["fliegen", "Flügel"]
 				},
 				{
 					"word": "Zug",
@@ -87145,7 +87181,7 @@ var TABU_CATEGORIES_BY_LANG = {
 				},
 				{
 					"word": "Helikopter",
-					"taboo": ["Rotor", "Fliegen"]
+					"taboo": ["Rotor", "fliegen"]
 				},
 				{
 					"word": "Heissluftballon",
@@ -91816,7 +91852,7 @@ function TabuPlay({ card, secondsLeft, turnSeconds, correctCount, tabooCount, on
 	}, t("searchTerm")), /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "tb-word" + (String(card.word).length > 20 ? " tb-long" : ""),
 		style: {
-			fontSize: 30,
+			fontSize: gtFitFs(card.word, 30, 240, 15),
 			fontWeight: 800,
 			color: wt.ink,
 			fontFamily: TABU_FONT,
@@ -92138,16 +92174,10 @@ function TabuGame({ state, setState, onBack, onHome, onEndGame, lang = "de", the
 	useEffect$15(() => {
 		if (state.phase === "play" && scores === null) initGame();
 	}, [state.phase]);
-	useEffect$15(() => {
-		if (phase !== "playing") return;
-		if (secondsLeft <= 0) {
-			timeUpAlert();
-			setPhase("summary");
-			return;
-		}
-		const timer = setTimeout(() => setSecondsLeft((s) => s - 1), 1e3);
-		return () => clearTimeout(timer);
-	}, [phase, secondsLeft]);
+	useDeadline(secondsLeft, setSecondsLeft, phase === "playing", () => {
+		timeUpAlert();
+		setPhase("summary");
+	});
 	if (state.phase === "setup") return /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-shellpage tb-ls",
 		style: tabuPageShellStyle(theme)
@@ -92397,7 +92427,7 @@ var HEADSUP_LANDSCAPE_CSS = `
 [data-phone-landscape] .hu-intro { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: "a b"; gap: 8px 22px !important; min-height: max(180px, calc(var(--pl-body) - 18px)) !important; align-items: center; justify-items: center; }
 [data-phone-landscape] .hu-a { grid-area: a; display: flex !important; flex-direction: column; align-items: center; gap: 8px; }
 [data-phone-landscape] .hu-b { grid-area: b; display: flex !important; flex-direction: column; align-items: center; gap: 12px; width: 100%; }
-[data-phone-landscape] .hu-a .hu-name { font-size: clamp(28px, 11vh, 44px) !important; overflow-wrap: break-word; }
+[data-phone-landscape] .hu-a .hu-name { font-size: clamp(28px, 11vh, 44px) !important; }
 [data-phone-landscape] .hu-b button { min-height: 48px; }
 [data-phone-landscape] .hu-b > div { max-width: 340px !important; }
 [data-phone-landscape] .hu-over { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: "a b"; gap: 8px 20px !important; align-items: center; justify-items: center; }
@@ -92659,10 +92689,11 @@ function HeadsUpTurnIntro({ playerName, onStart, theme, t }) {
 	} }, t("nextPlayerHeadsUp")), /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "hu-name",
 		style: {
-			fontSize: 34,
+			fontSize: gtFitFs(playerName, 34, 320, 20),
 			fontWeight: 800,
 			color: wt.orange,
-			fontFamily: HEADSUP_FONT
+			fontFamily: HEADSUP_FONT,
+			maxWidth: "100%"
 		}
 	}, playerName), /* @__PURE__ */ import_react.default.createElement("p", { style: {
 		fontSize: 12,
@@ -92679,7 +92710,11 @@ function HeadsUpTurnIntro({ playerName, onStart, theme, t }) {
 		gap: 8,
 		width: "100%",
 		maxWidth: 280
-	} }, tiltRow("arrowDown", t("tiltHintDown"), t("tiltHintDownDesc"), wt.green), tiltRow("arrowUp", t("tiltHintUp"), t("tiltHintUpDesc"), wt.blue)), /* @__PURE__ */ import_react.default.createElement("button", {
+	} }, gtHuCoarse() ? /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, tiltRow("arrowDown", t("tiltHintDown"), t("tiltHintDownDesc"), wt.green), tiltRow("arrowUp", t("tiltHintUp"), t("tiltHintUpDesc"), wt.blue)) : /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		fontSize: 12,
+		color: wt.muted,
+		fontFamily: "'Inter', sans-serif"
+	} }, t("huKeyHint"))), /* @__PURE__ */ import_react.default.createElement("button", {
 		"data-gt-sound": "1",
 		onClick: onStart,
 		className: "press-fx",
@@ -92875,15 +92910,18 @@ function HeadsUpPlay({ word, secondsLeft, correctCount, onCorrect, onSkip, motio
 		flexWrap: "wrap"
 	} }, /* @__PURE__ */ import_react.default.createElement("span", { style: {
 		color: wt.green,
-		fontWeight: 700
-	} }, "✓ ", correctCount), tiltOn && /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		fontWeight: 700,
+		display: "inline-flex",
+		alignItems: "center",
+		gap: 4
+	} }, /* @__PURE__ */ import_react.default.createElement(CheckMark, null), correctCount), tiltOn && /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		alignItems: "center",
 		gap: 5
 	} }, /* @__PURE__ */ import_react.default.createElement("span", {
 		className: flash === "correct" ? "value-pop" : void 0,
 		style: {
-			fontSize: 9,
+			fontSize: 10,
 			color: wt.green,
 			border: `1px solid ${wt.green}55`,
 			background: `${wt.green}14`,
@@ -92892,10 +92930,18 @@ function HeadsUpPlay({ word, secondsLeft, correctCount, onCorrect, onSkip, motio
 			letterSpacing: "0.02em",
 			fontWeight: 700
 		}
-	}, "⬇ ", t("tiltHintDownDesc")), /* @__PURE__ */ import_react.default.createElement("span", {
+	}, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+		name: tiltInverted ? "arrowUp" : "arrowDown",
+		size: 10,
+		color: wt.green,
+		style: {
+			marginRight: 3,
+			verticalAlign: "-1px"
+		}
+	}), t("tiltHintDownDesc")), /* @__PURE__ */ import_react.default.createElement("span", {
 		className: flash === "skip" ? "value-pop" : void 0,
 		style: {
-			fontSize: 9,
+			fontSize: 10,
 			color: wt.blue,
 			border: `1px solid ${wt.blue}55`,
 			background: `${wt.blue}14`,
@@ -92904,7 +92950,15 @@ function HeadsUpPlay({ word, secondsLeft, correctCount, onCorrect, onSkip, motio
 			letterSpacing: "0.02em",
 			fontWeight: 700
 		}
-	}, "⬆ ", t("tiltHintUpDesc")), /* @__PURE__ */ import_react.default.createElement("button", {
+	}, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+		name: tiltInverted ? "arrowDown" : "arrowUp",
+		size: 10,
+		color: wt.blue,
+		style: {
+			marginRight: 3,
+			verticalAlign: "-1px"
+		}
+	}), t("tiltHintUpDesc")), /* @__PURE__ */ import_react.default.createElement("button", {
 		onClick: () => setTiltInverted((v) => !v),
 		"aria-label": t("tiltSwapButton"),
 		title: t("tiltSwapLabel"),
@@ -92913,8 +92967,8 @@ function HeadsUpPlay({ word, secondsLeft, correctCount, onCorrect, onSkip, motio
 			borderRadius: 999,
 			background: tiltInverted ? `${wt.orange}22` : "transparent",
 			color: tiltInverted ? wt.orange : wt.muted,
-			fontSize: 11,
-			padding: "2px 6px",
+			fontSize: 13,
+			padding: "8px 12px",
 			cursor: "pointer",
 			lineHeight: 1
 		}
@@ -92981,7 +93035,7 @@ function HeadsUpPlay({ word, secondsLeft, correctCount, onCorrect, onSkip, motio
 	} }, t("searchTerm")), /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-headsup-word-text",
 		style: {
-			fontSize: 32,
+			fontSize: gtFitFs(word, 32, 290, 16),
 			fontWeight: 800,
 			color: wt.ink,
 			fontFamily: HEADSUP_FONT,
@@ -93001,7 +93055,11 @@ function HeadsUpPlay({ word, secondsLeft, correctCount, onCorrect, onSkip, motio
 			pointerEvents: "none",
 			textShadow: `0 4px 24px ${flashColor}`
 		}
-	}, flash === "correct" ? "✓" : "⏭")), /* @__PURE__ */ import_react.default.createElement("div", {
+	}, flash === "correct" ? /* @__PURE__ */ import_react.default.createElement(CheckMark, { size: 76 }) : /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+		name: "skipFwd",
+		size: 72,
+		color: flashColor
+	}))), /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-headsup-actions",
 		style: {
 			display: "flex",
@@ -93016,14 +93074,23 @@ function HeadsUpPlay({ word, secondsLeft, correctCount, onCorrect, onSkip, motio
 			borderRadius: 14,
 			background: "transparent",
 			color: wt.muted,
-			fontSize: 11,
+			fontSize: 13,
 			fontWeight: 600,
-			padding: "9px 0",
+			padding: "13px 0",
+			minHeight: 44,
 			cursor: "pointer",
 			fontFamily: "'Inter', sans-serif",
 			letterSpacing: "0.01em"
 		}
-	}, "⏭ ", t("skipWord")), /* @__PURE__ */ import_react.default.createElement("button", {
+	}, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+		name: "skipFwd",
+		size: 14,
+		color: wt.muted,
+		style: {
+			verticalAlign: "-2px",
+			marginRight: 5
+		}
+	}), t("skipWord")), /* @__PURE__ */ import_react.default.createElement("button", {
 		onClick: onCorrect,
 		className: "press-fx",
 		style: {
@@ -93032,14 +93099,15 @@ function HeadsUpPlay({ word, secondsLeft, correctCount, onCorrect, onSkip, motio
 			borderRadius: 14,
 			background: `linear-gradient(135deg, ${wt.okFrom}, ${wt.okTo})`,
 			color: wt.onOk,
-			fontSize: 11,
+			fontSize: 13,
 			fontWeight: 700,
-			padding: "9px 0",
+			padding: "13px 0",
+			minHeight: 44,
 			cursor: "pointer",
 			fontFamily: "'Inter', sans-serif",
 			letterSpacing: "0.01em"
 		}
-	}, "✓ ", t("correctWord"))), !tiltOn && !gtHuCoarse() && /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	}, /* @__PURE__ */ import_react.default.createElement(CheckMark, null), " ", t("correctWord"))), !tiltOn && !gtHuCoarse() && /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		fontSize: 11,
 		color: wt.muted,
 		textAlign: "center",
@@ -93247,16 +93315,10 @@ function HeadsUpGame({ state, setState, onBack, onHome, onEndGame, lang = "de", 
 	useEffect$15(() => {
 		if (state.phase === "play" && scores === null) initGame();
 	}, [state.phase]);
-	useEffect$15(() => {
-		if (phase !== "playing") return;
-		if (secondsLeft <= 0) {
-			timeUpAlert();
-			setPhase("summary");
-			return;
-		}
-		const timer = setTimeout(() => setSecondsLeft((s) => s - 1), 1e3);
-		return () => clearTimeout(timer);
-	}, [phase, secondsLeft]);
+	useDeadline(secondsLeft, setSecondsLeft, phase === "playing" && !(orientation === "portrait" && gtHuCoarse() && motionState === "granted" && !portraitOk), () => {
+		timeUpAlert();
+		setPhase("summary");
+	});
 	useEffect$15(() => {
 		if (phase === "playing") headsupTryLockLandscape();
 	}, [phase]);
@@ -96351,6 +96413,14 @@ var FIVESEC_LANDSCAPE_CSS = `
 [data-phone-landscape] .fs-over .fs-b .reveal-4 button { min-height: 48px; }
 `;
 var FIVESEC_FONT = "'Space Grotesk', sans-serif";
+var FIVESEC_VERB = {
+	de: "Nenne ",
+	en: "Name ",
+	fr: "Cite ",
+	it: "Nomina ",
+	es: "Nombra ",
+	pt: "Indica "
+};
 function fiveSecBtnPrimary(theme) {
 	const fk = fiveSecTokens(theme);
 	return {
@@ -96521,7 +96591,7 @@ function FiveSecPlay({ prompt, playerName, secondsLeft, phase, onSuccess, onFail
 		fontWeight: 800,
 		color: fk.ink,
 		fontFamily: FIVESEC_FONT
-	} }, lang === "en" ? "Name " : lang === "fr" ? "Cite " : "Nenne ", prompt)), /* @__PURE__ */ import_react.default.createElement("div", {
+	} }, FIVESEC_VERB[lang] || FIVESEC_VERB.de, prompt)), /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "fs-btns",
 		style: {
 			display: "flex",
@@ -96768,16 +96838,10 @@ function FiveSecGame({ state, setState, onBack, onHome, onEndGame, lang = "de", 
 	useEffect$15(() => {
 		if (state.phase === "play" && scores === null) initGame();
 	}, [state.phase]);
-	useEffect$15(() => {
-		if (phase !== "playing") return;
-		if (secondsLeft <= 0) {
-			timeUpAlert();
-			handleFail();
-			return;
-		}
-		const timer = setTimeout(() => setSecondsLeft((s) => s - 1), 1e3);
-		return () => clearTimeout(timer);
-	}, [phase, secondsLeft]);
+	useDeadline(secondsLeft, setSecondsLeft, phase === "playing", () => {
+		timeUpAlert();
+		handleFail();
+	});
 	if (over && scores) return /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-shellpage fs-ls",
 		style: fiveSecPageShellStyle(theme)
@@ -99079,8 +99143,13 @@ function MostLikelyPlay({ statement, players, tally, onPick, onSkip, theme, t })
 	}, players.map((p) => /* @__PURE__ */ import_react.default.createElement("button", {
 		key: p.id,
 		onClick: () => onPick(p.id),
+		title: p.name,
 		className: "press-fx",
 		style: {
+			minWidth: 0,
+			overflow: "hidden",
+			textOverflow: "ellipsis",
+			whiteSpace: "nowrap",
 			border: `1.5px solid ${mk.border}`,
 			borderRadius: 22,
 			background: mk.card,
@@ -99095,7 +99164,7 @@ function MostLikelyPlay({ statement, players, tally, onPick, onSkip, theme, t })
 		onClick: onSkip,
 		className: "press-fx ml-skip",
 		style: mostLikelyBtnGhost(theme)
-	}, t("mostLikelySkip"), " · ", t("mostLikelyNextStatement")));
+	}, t("mostLikelySkip")));
 }
 function MostLikelyTally({ players, tally, onEnd, onResult, theme, t }) {
 	const mk = mostLikelyTokens(theme);
@@ -99250,9 +99319,8 @@ function MostLikelyResult({ players, tally, onClose, onEnd, theme, t }) {
 		style: {
 			fontFamily: MOSTLIKELY_FONT,
 			fontWeight: 800,
-			fontSize: 26,
+			fontSize: gtFitFs(win.map((e) => e.name).join(" & "), 26, 300, 16),
 			color: mk.purple,
-			overflowWrap: "break-word",
 			marginTop: 2
 		}
 	}, win.map((e) => e.name).join(" & "))), /* @__PURE__ */ import_react.default.createElement("div", { style: {
@@ -99274,7 +99342,9 @@ function MostLikelyResult({ players, tally, onClose, onEnd, theme, t }) {
 			fontWeight: 700,
 			color: mk.ink,
 			fontFamily: "'Inter', sans-serif",
-			overflowWrap: "break-word"
+			overflow: "hidden",
+			textOverflow: "ellipsis",
+			whiteSpace: "nowrap"
 		}
 	}, e.name), /* @__PURE__ */ import_react.default.createElement("div", {
 		"aria-hidden": true,
@@ -109887,7 +109957,7 @@ function YatzyGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 }
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.05-24";
+var APP_BUILD = "2026.11.06-1";
 // web/src/app/storage.js
 var storage_exports = /* @__PURE__ */ __exportAll({
 	GT_CAT_KEYS: () => GT_CAT_KEYS,
@@ -110009,7 +110079,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.05-24");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.06-1");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -112590,7 +112660,7 @@ function UpdateBanner() {
 		let alive = true;
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.05-24") {
+				if (alive && v && v.build && v.build !== "2026.11.06-1") {
 					setReady(true);
 					setHidden(false);
 					try {

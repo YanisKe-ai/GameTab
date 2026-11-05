@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.06-1 (06.11.2026 00:03)
+- Partyspiele: Timer, Abstimmung, Rollen, Inhalte bereinigt
+
 ## 2026.11.05-24 (05.11.2026 23:42)
 - Tutto-Karte: Karten statt doppelter Siegerzeile
 

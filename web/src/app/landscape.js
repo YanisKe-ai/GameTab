@@ -85,6 +85,10 @@ export const APP_LANDSCAPE_CSS = `
 
 /* Regel-/Datenschutz-Blatt (RulesSheet) */
 [data-phone-landscape] .gt-rules-box { max-height: calc(var(--pl-vh) - var(--pl-sat) - 8px) !important; width: min(620px, calc(100% - var(--pl-sal) - var(--pl-sar))) !important; max-width: none !important; padding-left: 22px !important; padding-right: 22px !important; }
+/* Sehr kurze Handys im Hochformat (z. B. 320x568): Tipp-Karte weglassen, bei laufender Partie auch die Spieleleiste, sonst ragen sie unter die Fusszeile. */
+/* Sehr schmale Handys: Knopf Statistiken nur als Symbol, sonst verdeckt er den Titel der Kategorieseite. */
+@media (max-width: 360px) { .gtL-statsbtn-txt { display: none; } .gtL-statsbtn { padding: 0 11px !important; } }
+@media (max-height: 600px) and (max-width: 480px) { html:not([data-phone-landscape]) .gtL-startcol > .gtL-tipcard, html:not([data-phone-landscape]) .gtL-startcol:has(.gt-resume) .gtL-showcase { display: none !important; } }
 `;
 
 // Einmal ins <head> setzen (idempotent), damit kein <style> im App-Baum die Geschwister-Reihenfolge veraendert.

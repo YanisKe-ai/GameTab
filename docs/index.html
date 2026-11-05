@@ -7811,6 +7811,7 @@ var TRANSLATIONS = {
 		stxTalker: "Grösster Schwätzer",
 		stxTalkerPts: "{p} Punkte Wyys",
 		tplNewsEntries: "Einträge",
+		schieberEntryOne: "Eintrag",
 		tplNewsSum: "Summe",
 		tplNewsWinner: "Sieger",
 		stxWinner: "Turniersieger",
@@ -9337,6 +9338,7 @@ var TRANSLATIONS = {
 		stxTalker: "Biggest Talker",
 		stxTalkerPts: "{p} Weis points",
 		tplNewsEntries: "entries",
+		schieberEntryOne: "entry",
 		tplNewsSum: "Total",
 		tplNewsWinner: "Winner",
 		stxWinner: "Tournament winner",
@@ -10863,6 +10865,7 @@ var TRANSLATIONS = {
 		stxTalker: "Plus grand bavard",
 		stxTalkerPts: "{p} points d'annonces",
 		tplNewsEntries: "entrées",
+		schieberEntryOne: "entrée",
 		tplNewsSum: "Total",
 		tplNewsWinner: "Vainqueur",
 		stxWinner: "Vainqueur du tournoi",
@@ -12389,6 +12392,7 @@ var TRANSLATIONS = {
 		stxTalker: "Più gran chiacchierone",
 		stxTalkerPts: "{p} punti di annunci",
 		tplNewsEntries: "voci",
+		schieberEntryOne: "voce",
 		tplNewsSum: "Totale",
 		tplNewsWinner: "Vincitore",
 		stxWinner: "Vincitore del torneo",
@@ -13915,6 +13919,7 @@ var TRANSLATIONS = {
 		stxTalker: "Mayor charlatán",
 		stxTalkerPts: "{p} puntos de cantes",
 		tplNewsEntries: "entradas",
+		schieberEntryOne: "entrada",
 		tplNewsSum: "Total",
 		tplNewsWinner: "Ganador",
 		stxWinner: "Ganador del torneo",
@@ -15441,6 +15446,7 @@ var TRANSLATIONS = {
 		stxTalker: "Maior tagarela",
 		stxTalkerPts: "{p} pontos de cantos",
 		tplNewsEntries: "entradas",
+		schieberEntryOne: "entrada",
 		tplNewsSum: "Total",
 		tplNewsWinner: "Vencedor",
 		stxWinner: "Vencedor do torneio",
@@ -109212,7 +109218,7 @@ function YatzyGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 }
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.05-15";
+var APP_BUILD = "2026.11.05-16";
 // web/src/app/storage.js
 var storage_exports = /* @__PURE__ */ __exportAll({
 	GT_CAT_KEYS: () => GT_CAT_KEYS,
@@ -109334,7 +109340,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.05-15");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.05-16");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -111915,7 +111921,7 @@ function UpdateBanner() {
 		let alive = true;
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.05-15") {
+				if (alive && v && v.build && v.build !== "2026.11.05-16") {
 					setReady(true);
 					setHidden(false);
 					try {
@@ -112842,6 +112848,7 @@ function buildModel(d) {
 		rounds: Math.max(...teams.map((t) => t.entries.length)),
 		lblTarget: d.tr("targetLabel", "Ziel"),
 		lblEntries: d.tr("tplNewsEntries", "Einträge"),
+		lblEntryOne: d.tr("schieberEntryOne", "Eintrag"),
 		lblWinner: d.up(d.tr("tplNewsWinner", "Sieger")),
 		lblSum: d.tr("tplNewsSum", "Summe")
 	};
@@ -113078,7 +113085,7 @@ function drawF(c, k, m) {
 	const ry = by + 26;
 	dblRule(c, X1, X2, ry);
 	const sy = ry + 46;
-	const left = m.lblTarget + " " + m.tgt, right = m.rounds + " " + m.lblEntries;
+	const left = m.lblTarget + " " + m.tgt, right = m.rounds + " " + (m.rounds === 1 ? m.lblEntryOne : m.lblEntries);
 	inkText(c, k, m.up(left), X1, sy, 700, 24, INT, "left", 3);
 	inkText(c, k, m.up(right), X2, sy, 700, 24, INT, "right", 3);
 	star(c, W / 2, sy - 8, 22, INK$8);
@@ -113099,7 +113106,8 @@ function drawF(c, k, m) {
 	c.restore();
 	const hbot = hy + (hf.lines.length - 1) * hlh + 22;
 	dblRule(c, X1, X2, hbot);
-	const iy = hbot + 28, ih = 332, cw = 450, xs = [X1, 570];
+	const iy = hbot + 28, cw = 450, xs = [X1, 570], nRows = Math.min(m.rounds, 9) + (m.rounds > 9 ? 1 : 0);
+	const ih = 332 + Math.max(0, Math.min(210, 1292 - (iy + 332 + 132 + 80 + nRows * 76)));
 	const arts = ["bauer", "dame"];
 	m.teams.forEach((tm, i) => {
 		const x = xs[i];
@@ -113107,8 +113115,8 @@ function drawF(c, k, m) {
 		c.lineWidth = 3;
 		c.strokeRect(x, iy, cw, ih);
 		c.lineWidth = 1.2;
-		c.strokeRect(x + 7, iy + 7, 436, 318);
-		drawPortrait(c, portrait(m.img[arts[i]], arts[i], 310, true), x + cw / 2, iy + ih / 2, "multiply");
+		c.strokeRect(x + 7, iy + 7, 436, ih - 14);
+		drawPortrait(c, portrait(m.img[arts[i]], arts[i], ih - 22, true), x + cw / 2, iy + ih / 2, "multiply");
 	});
 	const mx = W / 2;
 	c.fillStyle = INK$8;
@@ -113248,7 +113256,7 @@ var schieber_default = {
 			papier
 		};
 	},
-	texts: (d) => ["−'’!¡#… " + d.tr("tplNewsEntries", "") + d.up(d.tr("tplNewsWinner", "") + d.tr("tplNewsSum", "") + d.tr("targetLabel", "")) + (d.extra ? d.extra.teams.map((t) => t.name).join(" ") : "")],
+	texts: (d) => ["−'’!¡#… " + d.tr("tplNewsEntries", "") + d.tr("schieberEntryOne", "") + d.up(d.tr("tplNewsWinner", "") + d.tr("tplNewsSum", "") + d.tr("targetLabel", "")) + (d.extra ? d.extra.teams.map((t) => t.name).join(" ") : "")],
 	render: render$5
 };
 // web/src/export/templates/fonts-a.js

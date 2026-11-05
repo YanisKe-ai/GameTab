@@ -215,7 +215,7 @@ def podium_and_share(pg, where):
     t0 = time.time()
     while True:  # Bilder mit eigenen Grafiken brauchen je nach Rechnerlast mehrere Sekunden
         ok = pg.evaluate(
-            "()=>[...document.querySelectorAll('img')].some(i=>i.naturalWidth>50&&(i.src.startsWith('data:image')||i.src.startsWith('blob:')))"
+            "()=>[...document.querySelectorAll('.gtsp-ov img')].some(i=>i.naturalWidth>50)"
         )
         if ok or time.time() - t0 > 12:
             break

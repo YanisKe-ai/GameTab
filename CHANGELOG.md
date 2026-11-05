@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.05-16 (05.11.2026 21:56)
+- Schieber: Ergebnisbild bei wenigen Einträgen, lange Teamnamen
+
 ## 2026.11.05-15 (05.11.2026 21:40)
 - Yatzy: Kopf lesbar, Namen ohne Abschnitt, Warnung bei unmöglichen Punkten
 

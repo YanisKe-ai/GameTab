@@ -79,7 +79,6 @@ function page1(d, k, extras, title) {
   const L = layoutRows(c, k, d, extras.map((e) => (e && e.points != null ? e.points : null)), hasPts, nameW, 1205 - top - 44);
   const hfs = 22;
   k.setFont(c, 500, hfs, MONO); c.fillStyle = SOFT;
-  k.spaced(c, d.up(d.model.playerLabel), 100, top + hfs, 2, "left");
   if (hasPts) k.spaced(c, d.up(d.tr("tplDfPts", "Punkte")), 980 - colD, top + hfs, 2, "right");
   k.spaced(c, d.up(d.tr("tplDfDiff", "Differenz")), 980, top + hfs, 2, "right");
   let y = top + 44;

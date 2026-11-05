@@ -350,12 +350,31 @@ def t_romme(pg, env):
 @test("Jass Differenzler")
 def t_differenzler(pg, env):
     open_game(pg, "Schreibunterlagen", "Jass", "Differenzler"); press_start(pg)
+    blank = pg.locator(".jdp-c:has(.jdp-blank)")
+    check(blank.count() == 20, "Differenzler: Startbild hat nicht 20 leere Felder")
+    # Eingabe per Ziffernblock: Eintragen springt zur naechsten Person derselben Kategorie, nach der letzten schliesst das Blatt
     cells = 4 if env.quick else 20
     for i in range(cells):
-        click(pg, btn(pg, "·").first, 350)
-        pg.get_by_placeholder("Meine Punkte").fill(str(40 + i * 7)); pg.keyboard.press("Enter"); wait(pg, 350)
+        if pg.get_by_role("dialog").count() == 0:
+            click(pg, blank.first, 350)
+        for ch in str(40 + i * 7):
+            click(pg, btn(pg, ch), 120)
+        if i == 0:
+            expect_text(pg, r"×\s*1\s*=\s*40", "Differenzler: Rechnung nicht sichtbar")
+        click(pg, btn(pg, "Eintragen"), 350)
     if env.quick:
-        check(btn(pg, "·").count() == 16, "Differenzler: Felder nicht eingetragen")
+        wait(pg, 300)
+        check(blank.count() == 16, "Differenzler: Felder nicht eingetragen")
+        expect_text(pg, r"führt mit|Gleichstand", "Differenzler: Schlagzeile fehlt")
+        # Tastatur (Laptop): Ziffern, Rücktaste, Escape schliesst ohne Speichern, Enter speichert
+        click(pg, blank.first, 350)
+        pg.keyboard.type("62"); pg.keyboard.press("Backspace"); pg.keyboard.type("5"); wait(pg, 200)
+        pg.keyboard.press("Escape"); wait(pg, 300)
+        check(pg.get_by_role("dialog").count() == 0 and blank.count() == 16, "Differenzler: Escape soll ohne Speichern schliessen")
+        click(pg, blank.first, 350)
+        pg.keyboard.type("25"); pg.keyboard.press("Enter"); wait(pg, 350)
+        check(blank.count() == 15, "Differenzler: Enter soll speichern")
+        pg.keyboard.press("Escape"); wait(pg, 300)
         finish(pg, "Differenzler", env)
     else:
         expect_text(pg, r"gewinnt mit", "Differenzler: Sieger nicht angezeigt")

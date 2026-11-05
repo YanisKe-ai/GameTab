@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.05-11 (05.11.2026 21:10)
+- Bildexport: Vorschau mit Speichern auf dem Laptop, zuverlässiges Teilen auf dem Handy
+
 ## 2026.11.05-10 (05.11.2026 12:05)
 - Namen ohne Silbentrennung, Podest-Namen ohne Überschneidung
 

@@ -373,7 +373,7 @@ def share_png(pg, tag):
     R.check(share.count() > 0, f"{tag}: Knopf 'Als Bild teilen' fehlt")
     pg.wait_for_timeout(4000 if not NOWAIT else 800)  # Podest-Einlauf (3.6 s) faengt Klicks ab, sonst nur Ueberspringen
     R.click(pg, share.first, 500)
-    js = "()=>{const i=[...document.querySelectorAll('img')].find(i=>i.naturalWidth>500&&i.src.startsWith('data:image/png'));return i?i.src:null}"
+    js = "async()=>{const i=[...document.querySelectorAll('img')].find(i=>i.naturalWidth>500&&i.src.startsWith('blob:'));if(!i)return null;const b=await (await fetch(i.src)).blob();return await new Promise(r=>{const f=new FileReader();f.onload=()=>r(f.result);f.readAsDataURL(b);});}"
     src = None
     for _ in range(40):  # WebKit braucht laenger (Schriften), bis 20 s warten
         src = pg.evaluate(js)

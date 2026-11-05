@@ -10,6 +10,8 @@ import { GT_EC_CJK } from "../export/result-card.js";
 import { gtStxF, gtStxFit, gtStxFitLines, gtStxFonts, gtStxG, gtStxWrap } from "../export/schieber-sheet.js";
 import { GT_SU_ACC, gtHexRgb, gtMixDark, gtRgbHex } from "../shared/setup-ui.js";
 import { STATS_GAME_COLORS } from "./legacy-ui.js";
+import { gtImgFree, gtImgItems } from "../export/save-image.js";
+import { ShareImagePreview } from "../export/share-preview.js";
 /*@gt-body-begin*//*GT_STATS_END*/
 /*GT_YR_BEGIN*/
 const GT_YR_SUIT={spade:"M12 2C9 6 4 9.5 4 13.5a4 4 0 0 0 6.5 3.1C10.3 18.8 9.5 20.5 8 22h8c-1.5-1.5-2.3-3.2-2.5-5.4A4 4 0 0 0 20 13.5C20 9.5 15 6 12 2z",heart:"M12 21C5 15.5 2 12 2 8.5A5 5 0 0 1 12 6a5 5 0 0 1 10 2.5c0 3.5-3 7-10 12.5z",diamond:"M12 2l7 10-7 10-7-10z",club:"M12 2a4.5 4.5 0 0 0-2.2 8.4A4.5 4.5 0 1 0 11 16.5c-.1 2-.8 3.7-2.2 5.5h6.4c-1.4-1.8-2.1-3.5-2.2-5.5a4.5 4.5 0 1 0 1.2-6.1A4.5 4.5 0 0 0 12 2z"};
@@ -46,7 +48,7 @@ function GtYearReview({t,theme,onClose,year}){
   const tk=shellTokens(theme);
   const model=useMemo(()=>{try{const log=loadMatchLog();const o={t:t,now:new Date(),tournaments:GT_STATS.storeTournaments?GT_STATS.storeTournaments():[]};const m=GT_STATS.yearReview(log,yr,o);let nm={};try{nm=GT_STATS.build(log,{range:"year",year:yr,now:o.now,tournaments:o.tournaments,t:t}).names||{};}catch(_){}return m&&Array.isArray(m.cards)?Object.assign({},m,{nameMap:nm}):{year:yr,cards:[],nameMap:{}};}catch(err){try{console.warn("GameTab Rueckblick:",err);}catch(_){}return{year:yr,cards:[]};}},[yr]);
   const seq=useMemo(()=>{const cs=model.cards||[];if(!cs.length)return[{kind:"empty"}];return cs.concat([{kind:"share"}]);},[model]);
-  const[i,setI]=useState(0);const[busy,setBusy]=useState(false);const[note,setNote]=useState("");
+  const[i,setI]=useState(0);const[busy,setBusy]=useState(false);const[note,setNote]=useState("");const[preview,setPreview]=useState(null);
   const cardRef=useRef(null);const alive=useRef(true);const lastFocus=useRef(null);
   const n=seq.length;const cur=seq[Math.min(i,n-1)];
   const go=d=>setI(x=>Math.max(0,Math.min(n-1,x+d)));
@@ -56,7 +58,7 @@ function GtYearReview({t,theme,onClose,year}){
   const acc=gtYrAccent(game,theme,pal.gold);const accRaw=gtYrRaw(game,theme,pal.gold);
   const fill=theme==="light"?acc:accRaw;
   const names=gtYrNames(cur,model.nameMap);
-  const doShare=async()=>{if(busy)return;setBusy(true);setNote("");try{const cvs=await gtYearReviewImage(model,t,theme);const blobs=await Promise.all(cvs.map(c=>new Promise((res,rej)=>c.toBlob(b=>b?res(b):rej(Error("toBlob")),"image/png"))));const files=blobs.map((b,k)=>new File([b],"gametab-rueckblick-"+yr+"-"+(k+1)+".png",{type:"image/png"}));let done=false;try{if(navigator.share&&navigator.canShare&&navigator.canShare({files:files})){await navigator.share({files:files,title:"GameTab "+yr});done=true;}}catch(err){if(err&&err.name==="AbortError")done=true;}if(!done){files.forEach((f,k)=>setTimeout(()=>{const u=URL.createObjectURL(f);const a=document.createElement("a");a.href=u;a.download=f.name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000);},k*350));if(alive.current)setNote(t("gtYrSaved"));}}catch(err){try{console.warn("GameTab Rueckblick Bild:",err);}catch(_){}if(alive.current)setNote(t("gtYrFail"));}if(alive.current)setBusy(false);};
+  const doShare=async()=>{if(busy)return;setBusy(true);setNote("");try{const cvs=await gtYearReviewImage(model,t,theme);const items=await gtImgItems(cvs,"gametab-rueckblick-"+yr);if(alive.current)setPreview(items);else gtImgFree(items);}catch(err){try{console.warn("GameTab Rueckblick Bild:",err);}catch(_){}if(alive.current)setNote(t("gtYrFail"));}if(alive.current)setBusy(false);};
   const cardBg=pal.vit?tk.pageBg:"linear-gradient(180deg,"+pal.bg+" 0%,"+pal.bg2+" 100%)";
   const d=k=>({animationDelay:(k*70)+"ms"});
   const closeBtn=<button type="button" className="gtYR-btn" onClick={onClose} aria-label={t("gtYrClose")} style={{width:44,height:44,borderRadius:22,border:"none",background:pal.chip,color:pal.ink,display:"flex",alignItems:"center",justifyContent:"center",position:"relative",zIndex:3,padding:0}}><svg width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>;
@@ -89,7 +91,7 @@ function GtYearReview({t,theme,onClose,year}){
 <div key={i} style={{flex:1,display:"flex",flexDirection:"column",minHeight:0,position:"relative"}}>{body}</div>
 {zonesOn&&i>0?<button type="button" className="gtYR-zone" aria-label={t("gtYrPrev")} onClick={()=>go(-1)} style={{left:0,width:"32%",color:pal.ink}}/>:null}
 {zonesOn&&i<n-1?<button type="button" className="gtYR-zone" aria-label={t("gtYrNext")} onClick={()=>go(1)} style={{right:0,width:i>0?"68%":"100%",color:pal.ink}}/>:null}
-<div className="gtYR-sr" role="status" aria-live="polite" style={{position:"absolute",width:1,height:1,overflow:"hidden",clip:"rect(0 0 0 0)",whiteSpace:"nowrap"}}>{t("gtYrCardOf").replace("{n}",String(i+1)).replace("{m}",String(n))}</div></div></div>;
+<div className="gtYR-sr" role="status" aria-live="polite" style={{position:"absolute",width:1,height:1,overflow:"hidden",clip:"rect(0 0 0 0)",whiteSpace:"nowrap"}}>{t("gtYrCardOf").replace("{n}",String(i+1)).replace("{m}",String(n))}</div></div><ShareImagePreview url={preview} onClose={()=>setPreview(null)} t={t}/></div>;
 }
 /* Bild-Export: 1080x1920 je Karte, Fonts aus fonts/, keine Emoji, Kartenzeichen als Pfade */
 let gtYrLogoP=null;

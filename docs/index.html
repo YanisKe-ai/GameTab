@@ -7866,6 +7866,12 @@ var TRANSLATIONS = {
 		stxClose: "Schliessen",
 		shareResultSaveHint: "Zum Speichern das Bild gedrückt halten, oder unten herunterladen.",
 		shareResultDownload: "Bild herunterladen",
+		shareSaveImage: "Bild speichern",
+		shareSaveAll: "Alle {n} Bilder speichern",
+		shareShareAll: "Alle {n} Bilder teilen",
+		shareSaveOrShare: "Sichern oder teilen",
+		shareIosHint: "Danach «Bild sichern» für Fotos oder «In Dateien sichern» wählen.",
+		shareSavedNote: "Gespeichert im Ordner Downloads.",
 		shareResultLabel: "Als Bild teilen",
 		shareResultAria: "Ergebnis als Bild teilen",
 		shareWinnerBadge: "SIEGER",
@@ -9382,6 +9388,12 @@ var TRANSLATIONS = {
 		stxClose: "Close",
 		shareResultSaveHint: "Press and hold the image to save it, or download it below.",
 		shareResultDownload: "Download image",
+		shareSaveImage: "Save image",
+		shareSaveAll: "Save all {n} images",
+		shareShareAll: "Share all {n} images",
+		shareSaveOrShare: "Save or share",
+		shareIosHint: "Then choose Save Image for Photos, or Save to Files.",
+		shareSavedNote: "Saved to your Downloads folder.",
 		shareResultLabel: "Share as image",
 		shareResultAria: "Share result as image",
 		shareWinnerBadge: "WINNER",
@@ -10898,6 +10910,12 @@ var TRANSLATIONS = {
 		stxClose: "Fermer",
 		shareResultSaveHint: "Maintiens l'image appuyée pour l'enregistrer, ou télécharge-la ci-dessous.",
 		shareResultDownload: "Télécharger l'image",
+		shareSaveImage: "Enregistrer l'image",
+		shareSaveAll: "Enregistrer les {n} images",
+		shareShareAll: "Partager les {n} images",
+		shareSaveOrShare: "Enregistrer ou partager",
+		shareIosHint: "Choisis ensuite Enregistrer l'image pour Photos, ou Enregistrer dans Fichiers.",
+		shareSavedNote: "Enregistrement dans le dossier Téléchargements.",
 		shareResultLabel: "Partager en image",
 		shareResultAria: "Partager le résultat en image",
 		shareWinnerBadge: "VAINQUEUR",
@@ -12414,6 +12432,12 @@ var TRANSLATIONS = {
 		stxClose: "Chiudi",
 		shareResultSaveHint: "Tieni premuto sull'immagine per salvarla, oppure scaricala qui sotto.",
 		shareResultDownload: "Scarica immagine",
+		shareSaveImage: "Salva immagine",
+		shareSaveAll: "Salva tutte le {n} immagini",
+		shareShareAll: "Condividi tutte le {n} immagini",
+		shareSaveOrShare: "Salva o condividi",
+		shareIosHint: "Poi scegli Salva immagine per Foto, oppure Salva su File.",
+		shareSavedNote: "Salvataggio nella cartella Download.",
 		shareResultLabel: "Condividi come immagine",
 		shareResultAria: "Condividi il risultato come immagine",
 		shareWinnerBadge: "VINCITORE",
@@ -13930,6 +13954,12 @@ var TRANSLATIONS = {
 		stxClose: "Cerrar",
 		shareResultSaveHint: "Mantén pulsada la imagen para guardarla, o descárgala abajo.",
 		shareResultDownload: "Descargar imagen",
+		shareSaveImage: "Guardar imagen",
+		shareSaveAll: "Guardar las {n} imágenes",
+		shareShareAll: "Compartir las {n} imágenes",
+		shareSaveOrShare: "Guardar o compartir",
+		shareIosHint: "Luego elige Guardar imagen para Fotos, o Guardar en Archivos.",
+		shareSavedNote: "Guardado en la carpeta Descargas.",
 		shareResultLabel: "Compartir como imagen",
 		shareResultAria: "Compartir resultado como imagen",
 		shareWinnerBadge: "GANADOR",
@@ -15446,6 +15476,12 @@ var TRANSLATIONS = {
 		stxClose: "Fechar",
 		shareResultSaveHint: "Mantém premida a imagem para a guardar, ou descarrega-a abaixo.",
 		shareResultDownload: "Descarregar imagem",
+		shareSaveImage: "Guardar imagem",
+		shareSaveAll: "Guardar as {n} imagens",
+		shareShareAll: "Partilhar as {n} imagens",
+		shareSaveOrShare: "Guardar ou partilhar",
+		shareIosHint: "Depois escolhe Guardar imagem para Fotos, ou Guardar em Ficheiros.",
+		shareSavedNote: "Guardado na pasta Transferências.",
 		shareResultLabel: "Partilhar como imagem",
 		shareResultAria: "Partilhar resultado como imagem",
 		shareWinnerBadge: "VENCEDOR",
@@ -32397,6 +32433,94 @@ function BlurFade({ children, className, variant, duration = .4, delay = 0, offs
 		...props
 	}, children)));
 }
+// web/src/export/save-image.js
+function gtImgDevice() {
+	const n = window.navigator || {};
+	const ua = n.userAgent || "";
+	const ios = /iP(hone|ad|od)/.test(ua) || /Macintosh/.test(ua) && n.maxTouchPoints > 1;
+	let touchOnly = false;
+	try {
+		touchOnly = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+	} catch (_) {}
+	return {
+		ios,
+		desktop: !ios && !touchOnly
+	};
+}
+function gtImgCanShare(files) {
+	try {
+		return !!(navigator.share && navigator.canShare && navigator.canShare({ files }));
+	} catch (_) {
+		return false;
+	}
+}
+function gtImgPlan({ ios, desktop, canShare }) {
+	if (!canShare) return {
+		primary: "save",
+		secondary: null,
+		iosHint: false
+	};
+	if (desktop) return {
+		primary: "save",
+		secondary: "share",
+		iosHint: false
+	};
+	if (ios) return {
+		primary: "share",
+		secondary: null,
+		iosHint: true
+	};
+	return {
+		primary: "share",
+		secondary: "save",
+		iosHint: false
+	};
+}
+function gtImgBlob(canvas) {
+	return new Promise((res, rej) => canvas.toBlob((b) => b ? res(b) : rej(Error("toBlob")), "image/png"));
+}
+async function gtImgItems(canvases, baseName) {
+	const blobs = await Promise.all(canvases.map(gtImgBlob));
+	return blobs.map((b, i) => {
+		const file = new File([b], baseName + (blobs.length > 1 ? "-" + (i + 1) : "") + ".png", { type: "image/png" });
+		return {
+			file,
+			url: URL.createObjectURL(file)
+		};
+	});
+}
+function gtImgFree(items) {
+	setTimeout(() => items.forEach((it) => {
+		try {
+			URL.revokeObjectURL(it.url);
+		} catch (_) {}
+	}), 6e4);
+}
+function gtImgDownloadOne(it) {
+	const a = document.createElement("a");
+	a.href = it.url;
+	a.download = it.file.name;
+	document.body.appendChild(a);
+	a.click();
+	a.remove();
+}
+function gtImgDownload(items) {
+	items.forEach((it, i) => {
+		if (i === 0) gtImgDownloadOne(it);
+		else setTimeout(() => gtImgDownloadOne(it), i * 350);
+	});
+}
+async function gtImgShare(items, title) {
+	try {
+		await navigator.share({
+			files: items.map((it) => it.file),
+			title: title || "GameTab"
+		});
+		return true;
+	} catch (e) {
+		return !!(e && e.name === "AbortError");
+	}
+}
 // web/src/export/result-card.js
 var result_card_exports = /* @__PURE__ */ __exportAll({
 	GT_EC: () => GT_EC,
@@ -33660,27 +33784,13 @@ async function shareResultImage(gameId, gameLabel, ranked, setSharing, setPrevie
 			} catch (_) {}
 		}
 		if (!cvs || !cvs.length) cvs = await renderResultCanvas(gameId, gameLabel, ranked, null, t, appTheme);
-		const blobs = await Promise.all(cvs.map((c) => new Promise((res, rej) => c.toBlob((b) => b ? res(b) : rej(Error("toBlob")), "image/png"))));
-		if (seq !== gtEcSeq) return;
-		const files = blobs.map((b, i) => new File([b], "gametab-ergebnis" + (blobs.length > 1 ? "-" + (i + 1) : "") + ".png", { type: "image/png" }));
-		let handled = false;
-		if (navigator.share && navigator.canShare) try {
-			if (navigator.canShare({ files })) {
-				await navigator.share({
-					files,
-					title: "GameTab"
-				});
-				handled = true;
-			}
-		} catch (err) {
-			if (err && err.name === "AbortError") handled = true;
+		const items = await gtImgItems(cvs, "gametab-ergebnis");
+		if (seq !== gtEcSeq) {
+			gtImgFree(items);
+			return;
 		}
-		if (seq !== gtEcSeq) return;
 		setSharing(false);
-		if (!handled) {
-			const urls = cvs.map((c) => c.toDataURL("image/png"));
-			setPreviewUrl(urls.length === 1 ? urls[0] : urls);
-		}
+		setPreviewUrl(items);
 		try {
 			cvs.forEach((c) => {
 				c.width = c.height = 0;
@@ -35795,36 +35905,31 @@ function GtStExportSheet({ tournament, t, onClose, initialTheme }) {
 		bg: "#85D1F5",
 		fg: "#0B1A22"
 	};
+	const items = import_react.default.useMemo(() => pages.map((p) => ({
+		url: p.url,
+		file: new File([p.blob], p.name, { type: "image/png" })
+	})), [pages]);
+	const plan = gtImgPlan({
+		...gtImgDevice(),
+		canShare: N > 0 && gtImgCanShare(items.map((x) => x.file))
+	});
+	const save = () => {
+		if (!N) return;
+		gtImgDownload(items);
+		setNote(gtImgDevice().desktop ? tr("shareSavedNote", "Gespeichert im Ordner Downloads.") : "");
+	};
 	const share = async () => {
 		if (!N || sharing) return;
 		setSharing(true);
 		setNote("");
-		let done = false;
-		try {
-			const files = pages.map((p) => new File([p.blob], p.name, { type: "image/png" }));
-			if (navigator.share && navigator.canShare && navigator.canShare({ files })) {
-				await navigator.share({
-					files,
-					title: "GameTab"
-				});
-				done = true;
-			}
-		} catch (e) {
-			if (e && e.name === "AbortError") done = true;
-		}
-		if (!done) {
-			pages.forEach((p, i) => setTimeout(() => {
-				const a = document.createElement("a");
-				a.href = p.url;
-				a.download = p.name;
-				document.body.appendChild(a);
-				a.click();
-				a.remove();
-			}, i * 350));
+		if (!await gtImgShare(items)) {
+			gtImgDownload(items);
 			setNote(tr("shareResultSaveHint", "Zum Speichern das Bild gedrückt halten, oder unten herunterladen."));
 		}
 		setSharing(false);
 	};
+	const saveLabel = N > 1 ? tr("shareSaveAll", "Alle {n} Bilder speichern", { n: N }) : tr("shareSaveImage", "Bild speichern");
+	const shareLabel = plan.iosHint ? tr("shareSaveOrShare", "Sichern oder teilen") : N > 1 ? tr("stxShareAll", "Alle {n} Seiten teilen", { n: N }) : tr("stxShare", "Bild teilen");
 	const txt = {
 		color: "#F2F3EE",
 		fontFamily: "'Inter', sans-serif"
@@ -36047,7 +36152,7 @@ function GtStExportSheet({ tournament, t, onClose, initialTheme }) {
 			display: "block",
 			boxShadow: "0 10px 28px rgba(0,0,0,0.45)"
 		}
-	}), /* @__PURE__ */ import_react.default.createElement("a", {
+	}), plan.primary === "save" && N === 1 ? null : /* @__PURE__ */ import_react.default.createElement("a", {
 		href: p.url,
 		download: p.name,
 		style: {
@@ -36076,11 +36181,14 @@ function GtStExportSheet({ tournament, t, onClose, initialTheme }) {
 			...sub,
 			textAlign: "center"
 		}
-	}, note) : null, /* @__PURE__ */ import_react.default.createElement("button", {
+	}, note) : null, plan.iosHint && !note ? /* @__PURE__ */ import_react.default.createElement("p", { style: {
+		...sub,
+		textAlign: "center"
+	} }, tr("shareIosHint", "Danach «Bild sichern» für Fotos oder «In Dateien sichern» wählen.")) : null, /* @__PURE__ */ import_react.default.createElement("button", {
 		type: "button",
 		className: "press-fx",
 		disabled: !N || state.busy || sharing,
-		onClick: share,
+		onClick: plan.primary === "save" ? save : share,
 		style: {
 			...btnBase,
 			width: "100%",
@@ -36089,7 +36197,19 @@ function GtStExportSheet({ tournament, t, onClose, initialTheme }) {
 			color: acc.fg,
 			opacity: !N || state.busy ? .55 : 1
 		}
-	}, N > 1 ? tr("stxShareAll", "Alle {n} Seiten teilen", { n: N }) : tr("stxShare", "Bild teilen")))));
+	}, plan.primary === "save" ? saveLabel : shareLabel), plan.secondary ? /* @__PURE__ */ import_react.default.createElement("button", {
+		type: "button",
+		className: "press-fx",
+		disabled: !N || state.busy || sharing,
+		onClick: plan.secondary === "save" ? save : share,
+		style: {
+			...btnBase,
+			width: "100%",
+			border: "1px solid rgba(255,255,255,0.28)",
+			background: "transparent",
+			color: "#F2F3EE"
+		}
+	}, plan.secondary === "save" ? saveLabel : shareLabel) : null)));
 }
 // web/src/games/schieber/tournament.js
 var tournament_exports = /* @__PURE__ */ __exportAll({
@@ -54411,12 +54531,84 @@ function s8NumPad(tk, theme, t, players, pad, setPad, inst, setInst, sc, setSc, 
 var share_preview_exports = /* @__PURE__ */ __exportAll({ ShareImagePreview: () => ShareImagePreview });
 function ShareImagePreview({ url, onClose, t }) {
 	const plLand = usePhoneLandscape();
+	const [note, setNote] = useState$11("");
+	const [forceSave, setForceSave] = useState$11(false);
+	const [busy, setBusy] = useState$11(false);
+	const firstRef = useRef$17(null);
+	useEffect$15(() => {
+		setNote("");
+		setForceSave(false);
+		if (!url) return;
+		const items = Array.isArray(url) ? url : [url];
+		try {
+			firstRef.current && firstRef.current.focus({ preventScroll: true });
+		} catch (_) {}
+		return () => gtImgFree(items);
+	}, [url]);
+	useEffect$15(() => {
+		if (!url) return;
+		const k = (e) => {
+			if (e.key === "Escape") {
+				e.preventDefault();
+				e.stopPropagation();
+				onClose();
+			}
+		};
+		document.addEventListener("keydown", k, true);
+		return () => document.removeEventListener("keydown", k, true);
+	}, [url, onClose]);
 	if (!url) return null;
 	const list = Array.isArray(url) ? url : [url];
+	const many = list.length > 1;
 	const stop = (e) => e.stopPropagation();
 	const lim = "min(64vh, calc(100vh - 250px))";
+	const plan = gtImgPlan({
+		...gtImgDevice(),
+		canShare: gtImgCanShare(list.map((it) => it.file))
+	});
+	const save = () => {
+		gtImgDownload(list);
+		if (gtImgDevice().desktop) setNote(t("shareSavedNote"));
+	};
+	const share = async () => {
+		if (busy) return;
+		setBusy(true);
+		setNote("");
+		const ok = await gtImgShare(list);
+		setBusy(false);
+		if (!ok) {
+			setForceSave(true);
+			setNote(t("shareResultSaveHint"));
+		}
+	};
+	const label = {
+		save: many ? t("shareSaveAll").replace("{n}", list.length) : t("shareSaveImage"),
+		share: plan.iosHint ? t("shareSaveOrShare") : many ? t("shareShareAll").replace("{n}", list.length) : t("stxShare")
+	};
+	const act = {
+		save,
+		share
+	};
+	const btn = {
+		borderRadius: 18,
+		fontSize: 14,
+		fontWeight: 700,
+		padding: "12px 26px",
+		minHeight: 44,
+		boxSizing: "border-box",
+		display: "inline-flex",
+		alignItems: "center",
+		justifyContent: "center",
+		cursor: "pointer",
+		fontFamily: "'Inter', sans-serif"
+	};
+	const second = forceSave && plan.primary !== "save" ? "save" : plan.secondary;
+	const hint = note || (plan.iosHint ? t("shareIosHint") : "");
 	return /* @__PURE__ */ import_react.default.createElement("div", {
 		onClick: onClose,
+		role: "dialog",
+		"aria-modal": "true",
+		"aria-label": t("shareResultLabel"),
 		className: "gtsp-ov",
 		style: {
 			position: "fixed",
@@ -54482,22 +54674,22 @@ function ShareImagePreview({ url, onClose, t }) {
 		className: "gtsp-imgs",
 		style: {
 			flexShrink: 0,
-			maxHeight: list.length > 1 ? lim : "none",
+			maxHeight: many ? lim : "none",
 			maxWidth: "100%",
-			overflowY: list.length > 1 ? "auto" : "visible",
+			overflowY: many ? "auto" : "visible",
 			display: "flex",
 			flexDirection: "column",
 			alignItems: "center",
 			gap: 10
 		}
-	}, list.map((u, i) => /* @__PURE__ */ import_react.default.createElement("img", {
+	}, list.map((it, i) => /* @__PURE__ */ import_react.default.createElement("img", {
 		key: i,
-		src: u,
+		src: it.url,
 		alt: "",
 		style: {
 			display: "block",
 			maxWidth: "100%",
-			maxHeight: list.length > 1 ? "none" : lim,
+			maxHeight: lim,
 			width: "auto",
 			height: "auto",
 			borderRadius: 6,
@@ -54506,47 +54698,53 @@ function ShareImagePreview({ url, onClose, t }) {
 	}))), /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtsp-side",
 		style: plLand ? void 0 : { display: "contents" }
-	}, /* @__PURE__ */ import_react.default.createElement("p", {
+	}, hint ? /* @__PURE__ */ import_react.default.createElement("p", {
 		onClick: stop,
+		role: "status",
 		style: {
 			flexShrink: 0,
 			color: "#F0F1F5",
 			fontSize: 13,
 			textAlign: "center",
 			fontFamily: "'Inter', sans-serif",
-			maxWidth: 300,
+			maxWidth: 320,
 			opacity: .88,
 			margin: 0,
 			lineHeight: 1.45
 		}
-	}, t("shareResultSaveHint")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		flexShrink: 0,
-		display: "flex",
-		gap: 8,
-		flexWrap: "wrap",
-		justifyContent: "center"
-	} }, list.map((u, i) => /* @__PURE__ */ import_react.default.createElement("a", {
-		key: i,
+	}, hint) : null, /* @__PURE__ */ import_react.default.createElement("div", {
 		onClick: stop,
-		href: u,
-		download: "gametab-ergebnis" + (list.length > 1 ? "-" + (i + 1) : "") + ".png",
 		style: {
-			border: "none",
-			borderRadius: 18,
-			background: "#C9A15C",
-			color: "#1A1408",
-			fontSize: 14,
-			fontWeight: 700,
-			padding: "12px 26px",
-			minHeight: 44,
-			boxSizing: "border-box",
-			display: "inline-flex",
-			alignItems: "center",
-			cursor: "pointer",
-			fontFamily: "'Inter', sans-serif",
-			textDecoration: "none"
+			flexShrink: 0,
+			display: "flex",
+			gap: 8,
+			flexWrap: "wrap",
+			justifyContent: "center"
 		}
-	}, t("shareResultDownload") + (list.length > 1 ? " " + (i + 1) : "")))))));
+	}, /* @__PURE__ */ import_react.default.createElement("button", {
+		ref: firstRef,
+		type: "button",
+		className: "press-fx",
+		disabled: busy,
+		onClick: act[plan.primary],
+		style: {
+			...btn,
+			border: "none",
+			background: "#C9A15C",
+			color: "#1A1408"
+		}
+	}, label[plan.primary]), second ? /* @__PURE__ */ import_react.default.createElement("button", {
+		type: "button",
+		className: "press-fx",
+		disabled: busy,
+		onClick: act[second],
+		style: {
+			...btn,
+			border: "1px solid rgba(240,241,245,0.4)",
+			background: "transparent",
+			color: "#F0F1F5"
+		}
+	}, label[second]) : null))));
 }
 // web/src/export/share-button.js
 function ShareImageButton({ gameId, gameLabel, ranked, extra, theme, t, style }) {
@@ -100863,25 +101061,9 @@ async function renderPlayerCardCanvas(stats, rivalries, t, appSubtitle, appTheme
 async function sharePlayerCardImage(stats, rivalries, t, appSubtitle, setSharing, setPreviewUrl, appTheme) {
 	setSharing(true);
 	try {
-		const canvas = await renderPlayerCardCanvas(stats, rivalries, t, appSubtitle, appTheme);
-		const dataUrl = canvas.toDataURL("image/png");
-		canvas.toBlob(async (blob) => {
-			let handled = false;
-			if (blob && navigator.share && navigator.canShare) try {
-				const file = new File([blob], "gametab-statistik.png", { type: "image/png" });
-				if (navigator.canShare({ files: [file] })) {
-					await navigator.share({
-						files: [file],
-						title: "GameTab"
-					});
-					handled = true;
-				}
-			} catch (err) {
-				if (err && err.name === "AbortError") handled = true;
-			}
-			setSharing(false);
-			if (!handled) setPreviewUrl(dataUrl);
-		}, "image/png");
+		const items = await gtImgItems([await renderPlayerCardCanvas(stats, rivalries, t, appSubtitle, appTheme)], "gametab-statistik");
+		setSharing(false);
+		setPreviewUrl(items);
 	} catch {
 		setSharing(false);
 	}
@@ -101085,6 +101267,7 @@ function GtYearReview({ t, theme, onClose, year }) {
 	const [i, setI] = useState$11(0);
 	const [busy, setBusy] = useState$11(false);
 	const [note, setNote] = useState$11("");
+	const [preview, setPreview] = useState$11(null);
 	const cardRef = useRef$17(null);
 	const alive = useRef$17(true);
 	const lastFocus = useRef$17(null);
@@ -101130,33 +101313,9 @@ function GtYearReview({ t, theme, onClose, year }) {
 		setBusy(true);
 		setNote("");
 		try {
-			const cvs = await gtYearReviewImage(model, t, theme);
-			const files = (await Promise.all(cvs.map((c) => new Promise((res, rej) => c.toBlob((b) => b ? res(b) : rej(Error("toBlob")), "image/png"))))).map((b, k) => new File([b], "gametab-rueckblick-" + yr + "-" + (k + 1) + ".png", { type: "image/png" }));
-			let done = false;
-			try {
-				if (navigator.share && navigator.canShare && navigator.canShare({ files })) {
-					await navigator.share({
-						files,
-						title: "GameTab " + yr
-					});
-					done = true;
-				}
-			} catch (err) {
-				if (err && err.name === "AbortError") done = true;
-			}
-			if (!done) {
-				files.forEach((f, k) => setTimeout(() => {
-					const u = URL.createObjectURL(f);
-					const a = document.createElement("a");
-					a.href = u;
-					a.download = f.name;
-					document.body.appendChild(a);
-					a.click();
-					a.remove();
-					setTimeout(() => URL.revokeObjectURL(u), 4e3);
-				}, k * 350));
-				if (alive.current) setNote(t("gtYrSaved"));
-			}
+			const items = await gtImgItems(await gtYearReviewImage(model, t, theme), "gametab-rueckblick-" + yr);
+			if (alive.current) setPreview(items);
+			else gtImgFree(items);
 		} catch (err) {
 			try {
 				console.warn("GameTab Rueckblick Bild:", err);
@@ -101584,7 +101743,11 @@ function GtYearReview({ t, theme, onClose, year }) {
 			clip: "rect(0 0 0 0)",
 			whiteSpace: "nowrap"
 		}
-	}, t("gtYrCardOf").replace("{n}", String(i + 1)).replace("{m}", String(n)))));
+	}, t("gtYrCardOf").replace("{n}", String(i + 1)).replace("{m}", String(n)))), /* @__PURE__ */ import_react.default.createElement(ShareImagePreview, {
+		url: preview,
+		onClose: () => setPreview(null),
+		t
+	}));
 }
 var gtYrLogoP = null;
 function gtYrLogo() {
@@ -104505,25 +104668,9 @@ async function gtSt2ProfileCanvas(p, t, theme) {
 async function gtSt2ShareProfile(p, t, theme, setSharing, setPreview) {
 	setSharing(true);
 	try {
-		const canvas = await gtSt2ProfileCanvas(p, t, theme);
-		const url = canvas.toDataURL("image/png");
-		canvas.toBlob(async (blob) => {
-			let done = false;
-			if (blob && navigator.share && navigator.canShare) try {
-				const file = new File([blob], "gametab-statistik.png", { type: "image/png" });
-				if (navigator.canShare({ files: [file] })) {
-					await navigator.share({
-						files: [file],
-						title: "GameTab"
-					});
-					done = true;
-				}
-			} catch (err) {
-				if (err && err.name === "AbortError") done = true;
-			}
-			setSharing(false);
-			if (!done) setPreview(url);
-		}, "image/png");
+		const items = await gtImgItems([await gtSt2ProfileCanvas(p, t, theme)], "gametab-statistik");
+		setSharing(false);
+		setPreview(items);
 	} catch (e) {
 		setSharing(false);
 	}
@@ -108925,7 +109072,7 @@ function YatzyGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 }
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.05-10";
+var APP_BUILD = "2026.11.05-11";
 // web/src/app/storage.js
 var storage_exports = /* @__PURE__ */ __exportAll({
 	GT_CAT_KEYS: () => GT_CAT_KEYS,
@@ -109047,7 +109194,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.05-10");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.05-11");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -111628,7 +111775,7 @@ function UpdateBanner() {
 		let alive = true;
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.05-10") {
+				if (alive && v && v.build && v.build !== "2026.11.05-11") {
 					setReady(true);
 					setHidden(false);
 					try {

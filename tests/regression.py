@@ -147,8 +147,10 @@ def new_page(browser, w, h, mode, errors, theme=None, touch=False):
         "try{if(!sessionStorage.getItem('__gt_seed')){const d=" + _STATE[key] + ";"
         "for(const k in d)localStorage.setItem(k,d[k]);sessionStorage.setItem('__gt_seed','1');}}catch(e){}"
     )
+    # Keine App-Toene aus den Tests: WebKit spielt sie sonst ueber die echten Lautsprecher ab
+    ctx.add_init_script("try{Object.defineProperty(window,'AudioContext',{value:undefined,configurable:true});Object.defineProperty(window,'webkitAudioContext',{value:undefined,configurable:true});}catch(e){}")
     # Web Share API abschalten (WebKit hat sie, headless gibt es aber kein Teilen-Blatt): so wird der Bildvorschau-Weg geprueft
-    ctx.add_init_script("try{Object.defineProperty(navigator,'share',{value:undefined});Object.defineProperty(navigator,'canShare',{value:undefined});}catch(e){}")
+    ctx.add_init_script("try{Object.defineProperty(navigator,'share',{value:undefined,configurable:true});Object.defineProperty(navigator,'canShare',{value:undefined,configurable:true});}catch(e){}")
     pg = ctx.new_page()
     pg.on("pageerror", lambda e: errors.append(f"pageerror: {str(e)[:220]}"))
 
@@ -214,7 +216,7 @@ def podium_and_share(pg, where):
         "()=>[...document.querySelectorAll('img')].some(i=>i.naturalWidth>50&&(i.src.startsWith('data:image')||i.src.startsWith('blob:')))"
     )
     check(ok, f"{where}: Bildvorschau (img) nicht gerendert")
-    check(pg.get_by_text("Bild herunterladen").count() > 0, f"{where}: 'Bild herunterladen' fehlt")
+    check(pg.get_by_role("button", name=re.compile(r"speichern")).count() > 0, f"{where}: 'Bild speichern' fehlt")
     pg.screenshot(path=str(OUT / (re.sub(r"\W+", "_", where) + "_share.png")))
     assert_alive(pg, where + " nach Bildvorschau")
 

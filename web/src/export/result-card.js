@@ -1,4 +1,5 @@
 // Erzeugt von tools/split.mjs aus index.html. Inhalt zwischen den gt-body-Markern ist 1:1 Originalcode.
+import { gtImgFree, gtImgItems } from "./save-image.js";
 /*@gt-body-begin*//* Ergebnisbild "Night League" ohne Koernung: Renderer (Canvas 2D) mit Adapter. Schriften als Dateien in fonts/ (Anton OFL, DejaVu Sans, Noto Sans CJK SC nur bei CJK-Text). */
 const GT_EC=(function(){'use strict';
 /* Night League Ergebnisbild. Farben und Texte aus dem Designpaket (themes.json). Schriften: GT Anton (Name, 01), GT InterBI (gewinnt., Score), GT Inter (Tabelle), Baloo 2 (Logo).
@@ -229,14 +230,10 @@ const seq=++gtEcSeq;setSharing(true);
 try{
 let cvs=null;if(GT_EC_TPL.render){try{cvs=await GT_EC_TPL.render(gameId,gameLabel,ranked,t,extra);}catch(e){cvs=null;try{console.warn("GameTab Ergebnisbild-Vorlage, Rueckfall auf Standardbild:",e);}catch(_){}}}
 if(!cvs||!cvs.length)cvs=await renderResultCanvas(gameId,gameLabel,ranked,null,t,appTheme);
-const blobs=await Promise.all(cvs.map(c=>new Promise((res,rej)=>c.toBlob(b=>b?res(b):rej(Error("toBlob")),"image/png"))));
-if(seq!==gtEcSeq)return;
-const files=blobs.map((b,i)=>new File([b],"gametab-ergebnis"+(blobs.length>1?"-"+(i+1):"")+".png",{type:"image/png"}));
-let handled=false;
-if(navigator.share&&navigator.canShare){try{if(navigator.canShare({files:files})){await navigator.share({files:files,title:"GameTab"});handled=true;}}catch(err){if(err&&err.name==="AbortError")handled=true;}}
-if(seq!==gtEcSeq)return;
+const items=await gtImgItems(cvs,"gametab-ergebnis");
+if(seq!==gtEcSeq){gtImgFree(items);return;}
 setSharing(false);
-if(!handled){const urls=cvs.map(c=>c.toDataURL("image/png"));setPreviewUrl(urls.length===1?urls[0]:urls);}
+setPreviewUrl(items);
 try{cvs.forEach(c=>{c.width=c.height=0;});}catch(_){}
 }catch(e){try{console.warn("GameTab Bildexport:",e);}catch(_){}if(seq===gtEcSeq){setSharing(false);try{alert(gtEcTr(t,"ecError","Das Bild konnte nicht erstellt werden."));}catch(_){}}}}/*@gt-body-end*/
 export { GT_EC, GT_EC_TPL, gtEcExt, gtEcSeg, GT_EC_TEAM, GT_EC_UNIT, GT_EC_LOWSLOG, GT_EC_LOC, GT_EC_CJK, gtEcFontP, gtEcCjkP, gtEcSeq, gtEcFace, gtEcFonts, gtEcWarm, gtEcNum, gtEcTr, gtEcNoEmoji, gtEcModel, gtEcIsPag, gtEcPages, renderResultCanvas, shareResultImage };

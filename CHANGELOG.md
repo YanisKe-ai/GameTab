@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.06-3 (06.11.2026 00:51)
+- Flip 7, Phase 10, Rommé, Wizard, Darts: Feinschliff
+
 ## 2026.11.06-2 (06.11.2026 00:27)
 - Grundgerüst, Punktespiele und Texte bereinigt
 

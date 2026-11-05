@@ -8772,6 +8772,7 @@ var TRANSLATIONS = {
 		changeTeams: "Teams ändern",
 		showDigitalScore: "Zwischenstand als Zahl anzeigen",
 		enterPointsAria: "Punkte eintragen",
+		tuttoMinusAria: "Minuspunkte eintragen",
 		noPointsYetChalk: "Noch keine Punkte",
 		deleteLastRoundChalk: "Letzte Runde löschen",
 		calculatorTitle: "Taschenrechner",
@@ -10296,6 +10297,7 @@ var TRANSLATIONS = {
 		changeTeams: "Change teams",
 		showDigitalScore: "Show score as number",
 		enterPointsAria: "Enter points",
+		tuttoMinusAria: "Enter as minus points",
 		noPointsYetChalk: "No points yet",
 		deleteLastRoundChalk: "Delete last round",
 		calculatorTitle: "Calculator",
@@ -11820,6 +11822,7 @@ var TRANSLATIONS = {
 		changeTeams: "Changer les équipes",
 		showDigitalScore: "Afficher le score en chiffres",
 		enterPointsAria: "Saisir les points",
+		tuttoMinusAria: "Saisir en points négatifs",
 		noPointsYetChalk: "Pas encore de points",
 		deleteLastRoundChalk: "Supprimer la dernière manche",
 		calculatorTitle: "Calculatrice",
@@ -13344,6 +13347,7 @@ var TRANSLATIONS = {
 		changeTeams: "Cambia squadre",
 		showDigitalScore: "Mostra punteggio come numero",
 		enterPointsAria: "Inserisci punti",
+		tuttoMinusAria: "Inserisci come punti negativi",
 		noPointsYetChalk: "Ancora nessun punto",
 		deleteLastRoundChalk: "Elimina ultimo round",
 		calculatorTitle: "Calcolatrice",
@@ -14868,6 +14872,7 @@ var TRANSLATIONS = {
 		changeTeams: "Cambiar equipos",
 		showDigitalScore: "Mostrar resultado como número",
 		enterPointsAria: "Anotar puntos",
+		tuttoMinusAria: "Introducir como puntos negativos",
 		noPointsYetChalk: "Aún sin puntos",
 		deleteLastRoundChalk: "Eliminar última ronda",
 		calculatorTitle: "Calculadora",
@@ -16392,6 +16397,7 @@ var TRANSLATIONS = {
 		changeTeams: "Mudar equipas",
 		showDigitalScore: "Mostrar resultado como número",
 		enterPointsAria: "Anotar pontos",
+		tuttoMinusAria: "Anotar como pontos negativos",
 		noPointsYetChalk: "Ainda sem pontos",
 		deleteLastRoundChalk: "Eliminar última ronda",
 		calculatorTitle: "Calculadora",
@@ -45610,6 +45616,7 @@ function TuttoPlayerRow({ onCard, pmLeaders, selfLead, gtLead, player, color, ta
 			flex: 1,
 			minWidth: 0,
 			padding: 0,
+			textOverflow: "ellipsis",
 			fontFamily: "'Inter', sans-serif"
 		}
 	}), isLeader && /* @__PURE__ */ import_react.default.createElement("span", { style: {
@@ -45709,6 +45716,8 @@ function TuttoPlayerRow({ onCard, pmLeaders, selfLead, gtLead, player, color, ta
 		gap: 5
 	} }, /* @__PURE__ */ import_react.default.createElement("button", {
 		onClick: () => setSign((s) => -s),
+		"aria-label": t("tuttoMinusAria"),
+		"aria-pressed": sign === -1,
 		className: "gt-hit",
 		style: {
 			border: `1px solid ${sign === 1 ? tk.border : color}`,
@@ -45748,6 +45757,7 @@ function TuttoPlayerRow({ onCard, pmLeaders, selfLead, gtLead, player, color, ta
 		}
 	}), /* @__PURE__ */ import_react.default.createElement("button", {
 		"data-gt-sound": "1",
+		"aria-label": t("enterPointsAria"),
 		className: "press-fx gt-hit",
 		onClick: add,
 		style: {
@@ -45830,14 +45840,15 @@ function TuttoPlayerRow({ onCard, pmLeaders, selfLead, gtLead, player, color, ta
 	} }, e > 0 ? `+${e}` : e))), /* @__PURE__ */ import_react.default.createElement("button", {
 		onClick: onUndo,
 		style: {
-			marginTop: 5,
+			marginTop: 2,
 			border: "none",
 			background: "transparent",
 			color: tk.muted,
-			fontSize: 11,
+			fontSize: 12,
 			letterSpacing: "0.03em",
 			cursor: "pointer",
-			padding: 0,
+			padding: "10px 0",
+			minHeight: 40,
 			textAlign: "left",
 			fontFamily: "'Inter', sans-serif"
 		}
@@ -109111,7 +109122,7 @@ function YatzyGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 }
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.05-12";
+var APP_BUILD = "2026.11.05-13";
 // web/src/app/storage.js
 var storage_exports = /* @__PURE__ */ __exportAll({
 	GT_CAT_KEYS: () => GT_CAT_KEYS,
@@ -109233,7 +109244,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.05-12");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.05-13");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -111814,7 +111825,7 @@ function UpdateBanner() {
 		let alive = true;
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.05-12") {
+				if (alive && v && v.build && v.build !== "2026.11.05-13") {
 					setReady(true);
 					setHidden(false);
 					try {
@@ -113019,22 +113030,26 @@ function drawF(c, k, m) {
 		k.setFont(c, 700, 46, FR);
 		const sw = c.measureText(sc).width + 4;
 		boldFrau(c, k, sc, x + cw, cy, 46, "right");
-		const nf = k.fit(c, tm.name, {
-			w: 700,
-			fam: FR,
+		const nf = tiers(c, k, tm.name, 700, FR, cw - sw - 70, [{
 			max: 36,
-			min: 20,
-			maxW: cw - sw - 70,
+			min: 26,
 			lines: 1
-		});
-		k.setFont(c, 700, nf.size, FR);
-		const nw = c.measureText(nf.lines[0]).width;
-		boldFrau(c, k, nf.lines[0], x, cy, nf.size, "left");
-		c.fillStyle = INK$8;
-		for (let q = x + nw + 14; q < x + cw - sw - 12; q += 9) {
-			c.beginPath();
-			c.arc(q, cy - 5, 1.7, 0, TAU);
-			c.fill();
+		}, {
+			max: 26,
+			min: 20,
+			lines: 2
+		}]);
+		if (nf.lines.length > 1) nf.lines.forEach((l, li) => boldFrau(c, k, l, x, cy - 26 + li * (nf.size * 1.08), nf.size, "left"));
+		else {
+			k.setFont(c, 700, nf.size, FR);
+			const nw = c.measureText(nf.lines[0]).width;
+			boldFrau(c, k, nf.lines[0], x, cy, nf.size, "left");
+			c.fillStyle = INK$8;
+			for (let q = x + nw + 14; q < x + cw - sw - 12; q += 9) {
+				c.beginPath();
+				c.arc(q, cy - 5, 1.7, 0, TAU);
+				c.fill();
+			}
 		}
 		if (tm.win && !m.tie) {
 			const t = m.lblWinner;
@@ -114144,7 +114159,7 @@ var PIPS = {
 var BONUS = [
 	["500", -8],
 	["2x", 5],
-	["1000", -3]
+	["±1000", -3]
 ];
 function bg$7(c, k) {
 	c.fillStyle = YEL$2;
@@ -114378,7 +114393,7 @@ function page1$10(d, k, rows) {
 			w: 400,
 			fam: k.F_ANTON,
 			max: fs,
-			min: Math.max(18, fs * .5),
+			min: two ? fs * .72 : Math.max(18, fs * .5),
 			maxW: nameW,
 			lines: 1
 		});

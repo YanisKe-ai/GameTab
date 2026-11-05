@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.05-13 (05.11.2026 21:31)
+- Tutto und Schieber: Namen auf Karten und im Spiel, Beschriftungen
+
 ## 2026.11.05-12 (05.11.2026 21:20)
 - Skyjo: Verdoppelung sichtbar, Beender Pflicht, Total lesbar, grössere Rundenkarten
 

@@ -211,10 +211,17 @@ def podium_and_share(pg, where):
     check(has_text(pg, r"gewinnt|Sieger|Endstand|Ergebnis|Rangliste|Podest"), f"{where}: kein Spielende/Podium sichtbar")
     share = pg.get_by_role("button", name=re.compile(r"Bild teilen"))
     check(share.count() > 0, f"{where}: Knopf 'Als Bild teilen' fehlt")
-    click(pg, share.first, 1500)
-    ok = pg.evaluate(
-        "()=>[...document.querySelectorAll('img')].some(i=>i.naturalWidth>50&&(i.src.startsWith('data:image')||i.src.startsWith('blob:')))"
-    )
+    click(pg, share.first, 300)
+    t0 = time.time()
+    while True:  # Bilder mit eigenen Grafiken brauchen je nach Rechnerlast mehrere Sekunden
+        ok = pg.evaluate(
+            "()=>[...document.querySelectorAll('img')].some(i=>i.naturalWidth>50&&(i.src.startsWith('data:image')||i.src.startsWith('blob:')))"
+        )
+        if ok or time.time() - t0 > 12:
+            break
+        pg.wait_for_timeout(200)
+    if time.time() - t0 > 1.2:
+        print(f"      Bildvorschau nach {time.time() - t0:.1f} s: {where}")
     check(ok, f"{where}: Bildvorschau (img) nicht gerendert")
     check(pg.get_by_role("button", name=re.compile(r"speichern")).count() > 0, f"{where}: 'Bild speichern' fehlt")
     pg.screenshot(path=str(OUT / (re.sub(r"\W+", "_", where) + "_share.png")))

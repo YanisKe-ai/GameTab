@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.05-12 (05.11.2026 21:20)
+- Skyjo: Verdoppelung sichtbar, Beender Pflicht, Total lesbar, grössere Rundenkarten
+
 ## 2026.11.05-11 (05.11.2026 21:10)
 - Bildexport: Vorschau mit Speichern auf dem Laptop, zuverlässiges Teilen auf dem Handy
 

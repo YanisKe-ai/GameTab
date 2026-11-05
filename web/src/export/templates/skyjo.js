@@ -52,18 +52,18 @@ function card(c, k, x, y, w, h, v, dbl) {
     c.fillStyle = ACC; k.setFont(c, 400, 22 * s, F_ARCHIVO); c.textAlign = "center"; c.fillText("×2", x + w / 2, y - bh / 2 + 2 * s + bh * 0.7); c.textAlign = "left";
   }
 }
-/* Karten im Bereich [x0,x0+aw] x [y0,y0+ah]: groesste Kartenbreite (hoechstens 170), die alle Runden fasst */
+/* Karten im Bereich [x0,x0+aw] x [y0,y0+ah]: groesste Kartenbreite, die alle Runden fasst. Wenige Runden duerfen groesser werden, sonst bleibt die Mitte leer */
 function cardsBlock(c, k, rounds, y0, ah) {
   const n = rounds.length; if (!n || ah < 70) return;
-  const gap = 16, aw = 728, ar = 225 / 170;
+  const gap = 16, aw = 728, ar = 225 / 170, cap = n <= 2 ? 300 : n <= 4 ? 240 : n <= 6 ? 200 : 170;
   let best = null;
   for (let cols = 1; cols <= 12; cols++) {
     const rows = Math.ceil(n / cols);
     // Kartenbreite: so gross wie Breite und Hoehe es erlauben (Abstand waechst mit der Karte, Schatten 14/170 der Breite)
-    let cw = Math.min(170, (aw - (cols - 1) * 6) / cols);
+    let cw = Math.min(cap, (aw - (cols - 1) * 6) / cols);
     for (let it = 0; it < 3; it++) {
       const g = cw < 120 ? Math.max(6, gap * cw / 170) : gap;
-      cw = Math.min(170, (aw - (cols - 1) * g) / cols, (ah - (rows - 1) * g) / (rows * ar + 14 / 170));
+      cw = Math.min(cap, (aw - (cols - 1) * g) / cols, (ah - (rows - 1) * g) / (rows * ar + 14 / 170));
     }
     const g = cw < 120 ? Math.max(6, gap * cw / 170) : gap;
     if (cw > 24 && (!best || cw >= best.cw - 0.01)) best = { cols, rows, cw, ch: cw * ar, g };

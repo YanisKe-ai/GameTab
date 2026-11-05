@@ -165,6 +165,7 @@ function RulesButton({onClick,onHome,onEndGame,onMore,moreLabel,tokens}){const[c
         .gtL-content .gtL-entryname { font-size: 16px !important; flex: 1 1 auto; min-width: 0; }
         .gtL-content .gtL-entrytotal { margin-top: 0 !important; font-size: 13px !important; font-variant-numeric: tabular-nums; white-space: nowrap; }
         .gtL-content .gtL-entrytotal::before { content: attr(data-label) " "; opacity: .8; }
+        .gtL-content .gtL-entrytotal .gtsk-tl { display: none; }
         .gtL-content .gtL-entryval { font-size: 24px !important; min-width: 72px !important; }
         .gtL-content .gtL-entryval[data-empty] { font-size: 0 !important; }
         .gtL-content .gtL-entryval[data-empty]::after { content: attr(data-hint); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; font-family: 'Inter', sans-serif; color: var(--gtl-hint); }

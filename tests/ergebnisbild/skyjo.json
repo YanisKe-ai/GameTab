@@ -5432,5 +5432,38 @@
   },
   "name": "n16",
   "pages": 2
+ },
+ {
+  "name": "zwei_runden_lang",
+  "lang": "de",
+  "lowWins": true,
+  "players": [
+   {
+    "name": "Maximiliane Huber-Brunner",
+    "score": 8
+   },
+   {
+    "name": "Kim",
+    "score": 75
+   },
+   {
+    "name": "Zoë",
+    "score": 140
+   }
+  ],
+  "extra": {
+   "rounds": [
+    [
+     {
+      "score": 5,
+      "doubled": false
+     },
+     {
+      "score": 3,
+      "doubled": false
+     }
+    ]
+   ]
+  }
  }
 ]

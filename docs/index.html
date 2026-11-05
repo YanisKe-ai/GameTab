@@ -8957,6 +8957,8 @@ var TRANSLATIONS = {
 		skyjoEditRound: "Runde korrigieren",
 		skyjoRoundEnderQuestion: "Wer hat die Runde beendet (letzte Karte aufgedeckt)?",
 		skyjoRoundEnderNone: "Niemand / weiss nicht mehr",
+		skyjoDoubleNow: "{name}: {a} wird zu {b}, weil nicht allein am tiefsten.",
+		skyjoPickEnder: "Wähle noch, wer die Runde beendet hat.",
 		skyjoPointsThisRound: "Punkte dieser Runde",
 		skyjoColumnRuleHint: "3 gleiche offene Karten in einer Spalte = 0 Punkte",
 		skyjoDoubledNote: "Punkte wurden verdoppelt (nicht die wenigsten dieser Runde)",
@@ -10479,6 +10481,8 @@ var TRANSLATIONS = {
 		skyjoEditRound: "Edit round",
 		skyjoRoundEnderQuestion: "Who ended the round (revealed their last card)?",
 		skyjoRoundEnderNone: "No one / not sure",
+		skyjoDoubleNow: "{name}: {a} becomes {b}, not the sole lowest score.",
+		skyjoPickEnder: "Choose who ended the round.",
 		skyjoPointsThisRound: "Points this round",
 		skyjoColumnRuleHint: "3 matching revealed cards in one column = 0 points",
 		skyjoDoubledNote: "Points were doubled (not the lowest this round)",
@@ -12001,6 +12005,8 @@ var TRANSLATIONS = {
 		skyjoEditRound: "Corriger la manche",
 		skyjoRoundEnderQuestion: "Qui a terminé la manche (dernière carte révélée) ?",
 		skyjoRoundEnderNone: "Personne / je ne sais plus",
+		skyjoDoubleNow: "{name} : {a} devient {b}, pas le seul score le plus bas.",
+		skyjoPickEnder: "Choisis qui a terminé la manche.",
 		skyjoPointsThisRound: "Points de cette manche",
 		skyjoColumnRuleHint: "3 cartes identiques révélées dans une colonne = 0 point",
 		skyjoDoubledNote: "Points doublés (pas le score le plus bas de la manche)",
@@ -13523,6 +13529,8 @@ var TRANSLATIONS = {
 		skyjoEditRound: "Correggi round",
 		skyjoRoundEnderQuestion: "Chi ha terminato il round (scoperto l'ultima carta)?",
 		skyjoRoundEnderNone: "Nessuno / non ricordo",
+		skyjoDoubleNow: "{name}: {a} diventa {b}, non è l'unico punteggio più basso.",
+		skyjoPickEnder: "Scegli chi ha chiuso il round.",
 		skyjoPointsThisRound: "Punti di questo round",
 		skyjoColumnRuleHint: "3 carte scoperte uguali in una colonna = 0 punti",
 		skyjoDoubledNote: "Punti raddoppiati (non i più bassi di questo round)",
@@ -15045,6 +15053,8 @@ var TRANSLATIONS = {
 		skyjoEditRound: "Corregir ronda",
 		skyjoRoundEnderQuestion: "¿Quién terminó la ronda (descubrió la última carta)?",
 		skyjoRoundEnderNone: "Nadie / no lo recuerdo",
+		skyjoDoubleNow: "{name}: {a} pasa a {b}, no es la única puntuación más baja.",
+		skyjoPickEnder: "Elige quién terminó la ronda.",
 		skyjoPointsThisRound: "Puntos de esta ronda",
 		skyjoColumnRuleHint: "3 cartas iguales descubiertas en una columna = 0 puntos",
 		skyjoDoubledNote: "Los puntos se duplicaron (no eran los más bajos de esta ronda)",
@@ -16567,6 +16577,8 @@ var TRANSLATIONS = {
 		skyjoEditRound: "Corrigir ronda",
 		skyjoRoundEnderQuestion: "Quem terminou a ronda (revelou a última carta)?",
 		skyjoRoundEnderNone: "Ninguém / já não me lembro",
+		skyjoDoubleNow: "{name}: {a} passa a {b}, não é a única pontuação mais baixa.",
+		skyjoPickEnder: "Escolhe quem terminou a ronda.",
 		skyjoPointsThisRound: "Pontos desta ronda",
 		skyjoColumnRuleHint: "3 cartas iguais reveladas numa coluna = 0 pontos",
 		skyjoDoubledNote: "Os pontos foram duplicados (não eram os mais baixos desta ronda)",
@@ -52268,7 +52280,7 @@ function SkyjoNumPad({ player, initialValue, onConfirm, onClose, theme, t, sk, o
 	}, []);
 	const pressDigit = (d) => setValue((v) => {
 		const neg = v.startsWith("-");
-		const next = ((neg ? v.slice(1) : v).replace(/^0+(?=\d)/, "") + d).slice(0, 6);
+		const next = ((neg ? v.slice(1) : v).replace(/^0+(?=\d)/, "") + d).slice(0, 3);
 		return (neg ? "-" : "") + next;
 	});
 	const backspace = () => setValue((v) => v.slice(0, -1) === "-" ? "" : v.slice(0, -1));
@@ -52493,7 +52505,18 @@ function SkyjoRoundEntry({ players, initialScores, isEdit, onSave, onCancel, the
 		focusSaveRef.current = false;
 		gtlRestoreFocus(listRef.current && listRef.current.querySelector("[data-gtl-row=\"" + last + "\"]"));
 	}, [padPlayerId]);
-	const canSave = players.every((p) => scores[p.id] !== "" && !isNaN(parseInt(scores[p.id], 10)));
+	const pointsDone = players.every((p) => scores[p.id] !== "" && !isNaN(parseInt(scores[p.id], 10)));
+	const canSave = pointsDone && (isEdit || enderId !== null);
+	const realEnder = enderId !== null && enderId !== "none" ? enderId : null;
+	const dblNote = (() => {
+		if (isEdit || !pointsDone || realEnder == null) return null;
+		const v = players.map((p) => parseInt(scores[p.id], 10) || 0);
+		const a = parseInt(scores[realEnder], 10) || 0;
+		const min = Math.min(...v);
+		if (a <= 0 || a === min && v.filter((x) => x === min).length === 1) return null;
+		const pl = players.find((p) => p.id === realEnder);
+		return t("skyjoDoubleNow").replace("{name}", pl ? pl.name : "").replace("{a}", a).replace("{b}", a * 2);
+	})();
 	const leaderId = !isEdit && players.length > 1 && (gtRound || 0) > 0 ? [...players].sort((a, b) => a.total - b.total)[0].id : null;
 	const gtFx = useGtLead(isEdit ? null : "sk-e", isEdit ? null : gtLeader(players.map((p) => [p.id, p.total]), true), gtRound || 0);
 	const handleSave = () => {
@@ -52506,10 +52529,10 @@ function SkyjoRoundEntry({ players, initialScores, isEdit, onSave, onCancel, the
 		const countAtMin = Object.values(raw).filter((v) => v === minScore).length;
 		const finalScores = { ...raw };
 		let doubledId = null;
-		if (enderId != null) {
-			if (!(raw[enderId] === minScore && countAtMin === 1) && raw[enderId] > 0) {
-				finalScores[enderId] = raw[enderId] * 2;
-				doubledId = enderId;
+		if (realEnder != null) {
+			if (!(raw[realEnder] === minScore && countAtMin === 1) && raw[realEnder] > 0) {
+				finalScores[realEnder] = raw[realEnder] * 2;
+				doubledId = realEnder;
 			}
 		}
 		onSave(finalScores, doubledId);
@@ -52531,7 +52554,7 @@ function SkyjoRoundEntry({ players, initialScores, isEdit, onSave, onCancel, the
 		textTransform: "uppercase",
 		fontFamily: "'Inter', sans-serif",
 		fontWeight: 600
-	} }, t("skyjoPointsThisRound")), !isEdit && /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	} }, t("skyjoPointsThisRound")), !isEdit && (gtRound || 0) === 0 && /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		alignItems: "center",
 		gap: 6,
@@ -52591,9 +52614,6 @@ function SkyjoRoundEntry({ players, initialScores, isEdit, onSave, onCancel, the
 				fontWeight: 700,
 				color: sk.ink,
 				fontFamily: "'Inter', sans-serif",
-				whiteSpace: "nowrap",
-				overflow: "hidden",
-				textOverflow: "ellipsis",
 				display: "flex",
 				alignItems: "center",
 				gap: 6
@@ -52602,17 +52622,24 @@ function SkyjoRoundEntry({ players, initialScores, isEdit, onSave, onCancel, the
 			name: "crown",
 			size: 14,
 			color: sk.gold,
+			style: { flexShrink: 0 },
 			className: gtFx === p.id ? "gt-crown-in" : void 0
-		}), p.name), !isEdit && /* @__PURE__ */ import_react.default.createElement("div", {
+		}), /* @__PURE__ */ import_react.default.createElement("span", { style: {
+			minWidth: 0,
+			whiteSpace: "nowrap",
+			overflow: "hidden",
+			textOverflow: "ellipsis"
+		} }, p.name)), !isEdit && /* @__PURE__ */ import_react.default.createElement("div", {
 			className: "gtL-entrytotal",
 			"data-label": t("gtlTotal"),
 			style: {
-				fontSize: 12.5,
+				fontSize: 13.5,
+				fontWeight: 600,
 				color: sk.muted,
 				fontFamily: "'Inter', sans-serif",
 				marginTop: 2
 			}
-		}, gtTarget > 0 && /* @__PURE__ */ import_react.default.createElement(GtRing, {
+		}, /* @__PURE__ */ import_react.default.createElement("span", { className: "gtsk-tl" }, t("gtlTotal"), " "), gtTarget > 0 && /* @__PURE__ */ import_react.default.createElement(GtRing, {
 			value: p.total / gtTarget,
 			size: 13,
 			color: sk.teal,
@@ -52655,6 +52682,7 @@ function SkyjoRoundEntry({ players, initialScores, isEdit, onSave, onCancel, the
 	} }, players.map((p) => /* @__PURE__ */ import_react.default.createElement("button", {
 		key: p.id,
 		onClick: () => setEnderId(p.id),
+		"aria-pressed": enderId === p.id,
 		style: {
 			border: `1.5px solid ${enderId === p.id ? sk.teal : sk.border}`,
 			borderRadius: 999,
@@ -52668,12 +52696,13 @@ function SkyjoRoundEntry({ players, initialScores, isEdit, onSave, onCancel, the
 			fontFamily: "'Inter', sans-serif"
 		}
 	}, p.name)), /* @__PURE__ */ import_react.default.createElement("button", {
-		onClick: () => setEnderId(null),
+		onClick: () => setEnderId("none"),
+		"aria-pressed": enderId === "none",
 		style: {
-			border: `1.5px dashed ${sk.border}`,
+			border: `1.5px ${enderId === "none" ? "solid" : "dashed"} ${enderId === "none" ? sk.teal : sk.border}`,
 			borderRadius: 999,
-			background: "transparent",
-			color: sk.muted,
+			background: enderId === "none" ? `${sk.teal}22` : "transparent",
+			color: enderId === "none" ? sk.teal : sk.muted,
 			fontSize: 13.5,
 			fontWeight: 600,
 			minHeight: 44,
@@ -52681,7 +52710,16 @@ function SkyjoRoundEntry({ players, initialScores, isEdit, onSave, onCancel, the
 			cursor: "pointer",
 			fontFamily: "'Inter', sans-serif"
 		}
-	}, t("skyjoRoundEnderNone"))))), /* @__PURE__ */ import_react.default.createElement("div", { className: "pld-foot" }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	}, t("skyjoRoundEnderNone"))), dblNote && /* @__PURE__ */ import_react.default.createElement("div", {
+		role: "status",
+		style: {
+			fontSize: 13,
+			fontWeight: 600,
+			color: sk.ink,
+			lineHeight: 1.35,
+			fontFamily: "'Inter', sans-serif"
+		}
+	}, dblNote))), /* @__PURE__ */ import_react.default.createElement("div", { className: "pld-foot" }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		gap: 8,
 		marginTop: 2
@@ -52715,7 +52753,7 @@ function SkyjoRoundEntry({ players, initialScores, isEdit, onSave, onCancel, the
 			marginTop: 8,
 			fontFamily: "'Inter', sans-serif"
 		}
-	}, t("enterPointsFirst"))), padPlayer && /* @__PURE__ */ import_react.default.createElement(SkyjoNumPad, {
+	}, t(pointsDone ? "skyjoPickEnder" : "enterPointsFirst"))), padPlayer && /* @__PURE__ */ import_react.default.createElement(SkyjoNumPad, {
 		key: padPlayer.id,
 		instant: padInstant,
 		onAdvance: (v, dir) => {
@@ -107580,6 +107618,7 @@ function App() {
         .gtL-content .gtL-entryname { font-size: 16px !important; flex: 1 1 auto; min-width: 0; }
         .gtL-content .gtL-entrytotal { margin-top: 0 !important; font-size: 13px !important; font-variant-numeric: tabular-nums; white-space: nowrap; }
         .gtL-content .gtL-entrytotal::before { content: attr(data-label) " "; opacity: .8; }
+        .gtL-content .gtL-entrytotal .gtsk-tl { display: none; }
         .gtL-content .gtL-entryval { font-size: 24px !important; min-width: 72px !important; }
         .gtL-content .gtL-entryval[data-empty] { font-size: 0 !important; }
         .gtL-content .gtL-entryval[data-empty]::after { content: attr(data-hint); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; font-family: 'Inter', sans-serif; color: var(--gtl-hint); }
@@ -109072,7 +109111,7 @@ function YatzyGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 }
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.05-11";
+var APP_BUILD = "2026.11.05-12";
 // web/src/app/storage.js
 var storage_exports = /* @__PURE__ */ __exportAll({
 	GT_CAT_KEYS: () => GT_CAT_KEYS,
@@ -109194,7 +109233,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.05-11");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.05-12");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -111775,7 +111814,7 @@ function UpdateBanner() {
 		let alive = true;
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.05-11") {
+				if (alive && v && v.build && v.build !== "2026.11.05-12") {
 					setReady(true);
 					setHidden(false);
 					try {
@@ -113259,14 +113298,14 @@ function card$2(c, k, x, y, w, h, v, dbl) {
 function cardsBlock(c, k, rounds, y0, ah) {
 	const n = rounds.length;
 	if (!n || ah < 70) return;
-	const gap = 16, aw = 728, ar = 225 / 170;
+	const gap = 16, aw = 728, ar = 225 / 170, cap = n <= 2 ? 300 : n <= 4 ? 240 : n <= 6 ? 200 : 170;
 	let best = null;
 	for (let cols = 1; cols <= 12; cols++) {
 		const rows = Math.ceil(n / cols);
-		let cw = Math.min(170, (aw - (cols - 1) * 6) / cols);
+		let cw = Math.min(cap, (aw - (cols - 1) * 6) / cols);
 		for (let it = 0; it < 3; it++) {
 			const g = cw < 120 ? Math.max(6, gap * cw / 170) : gap;
-			cw = Math.min(170, (aw - (cols - 1) * g) / cols, (ah - (rows - 1) * g) / (rows * ar + 14 / 170));
+			cw = Math.min(cap, (aw - (cols - 1) * g) / cols, (ah - (rows - 1) * g) / (rows * ar + 14 / 170));
 		}
 		const g = cw < 120 ? Math.max(6, gap * cw / 170) : gap;
 		if (cw > 24 && (!best || cw >= best.cw - .01)) best = {

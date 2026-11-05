@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.05-5 (05.11.2026 07:23)
+- Stöck-Karten mit König und Dame, Podest-Blöcke füllen sich nach dem Aufprall
+
 ## 2026.11.05-4 (05.11.2026 01:03)
 - Turnier: Preis Grösster Schwätzer auf der Finalkarte, Stöck-Kachel mit gezeichneten Karten
 

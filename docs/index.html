@@ -18244,7 +18244,11 @@ input[type="number"] { -moz-appearance: textfield; }
 .gtsb-rig { position: absolute; left: 50%; width: 0; height: 0; }
 .gtsb-c3 { position: absolute; left: 0; bottom: 0; }
 .gtsb-b3 { position: absolute; left: 0; bottom: 0; }
-.gtsb-f { position: absolute; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+.gtsb-f { position: absolute; overflow: hidden; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+.gtsb-cv, .gtsb-cvt { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.gtsb-cv { transform: translateY(-104%); will-change: transform; }
+.gtsb-cv::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: rgba(255,255,255,0.6); box-shadow: 0 0 7px rgba(255,255,255,0.45); }
+.gtsb-cvt { opacity: 0; }
 .gtsb-ff { display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: inset 0 2px 0 rgba(255,255,255,0.3), inset 2px 0 0 rgba(255,255,255,0.1), inset -2px 0 0 rgba(0,0,0,0.14), inset 0 -3px 0 rgba(0,0,0,0.18); }
 .gtsb-sh3 { position: absolute; transform: rotateX(90deg); pointer-events: none; }
 .gtsb-an { position: absolute; width: 0; height: 0; }
@@ -18269,7 +18273,7 @@ input[type="number"] { -moz-appearance: textfield; }
 .gtsb-x:focus-visible > span { box-shadow: 0 0 0 2px currentColor; }
 .gtsb-sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 @media (prefers-reduced-motion: reduce) { .gtsb-sheen > i { animation: none !important; } }
-@media (forced-colors: active) { .gtsb-f { border: 1px solid CanvasText; } .gtsb-sheen, .gtsb-sh3 { display: none; } }
+@media (forced-colors: active) { .gtsb-f { border: 1px solid CanvasText; } .gtsb-sheen, .gtsb-sh3, .gtsb-cv, .gtsb-cvt { display: none; } }
 @keyframes podium-rise { from { opacity: 0; transform: translateY(24px); filter: blur(6px); } to { opacity: 1; transform: translateY(0); filter: none; } }
 .podium-block-3 { opacity: 0; animation: podium-rise 0.45s var(--gt-ease-spring, cubic-bezier(.34,1.3,.64,1)) 0.10s forwards; }
 .podium-block-2 { opacity: 0; animation: podium-rise 0.45s var(--gt-ease-spring, cubic-bezier(.34,1.3,.64,1)) 0.22s forwards; }
@@ -42160,6 +42164,158 @@ function StartPage({ onSelect, lang, theme, viewMode, lastPlayed, dismissedResum
 		} }, t("gamesPlayedTogether")(totalPlayed)) : null;
 	})()));
 }
+// web/src/games/schieber/wy-court.js
+var WY_HALF = {
+	K: /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-b",
+		d: "M48 82V48H56C63 50 72 53 86 58V82Z"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-r",
+		d: "M48 82H10V58C24 53 33 50 40 48H48Z"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-g",
+		d: "M43 49H53L56 82H40Z"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-l",
+		d: "M46 52H50M45.6 57H50.4M45 62H51M44.6 67H51.4"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-w",
+		d: "M36 47C41 51 55 51 60 47L62 52C56 56 40 56 34 52Z"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-l",
+		d: "M40 52V52.1M46 53.6V53.7M52 53.5V53.6M57 51.8V51.9"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-hair",
+		d: "M36 28C33 34 33 41 37 45L41 40V30ZM60 28C63 34 63 41 59 45L55 40V30Z"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-skin",
+		d: "M39 26H57V38C57 45 53 48 48 48S39 45 39 38Z"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-hair",
+		d: "M39 36C42 39 45 37 48 37S54 39 57 36C58 44 53 51 48 51S38 44 39 36Z"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-skin",
+		d: "M45.5 39.6C47 38.8 49 38.8 50.5 39.6 49.6 41.4 46.4 41.4 45.5 39.6Z"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-e",
+		d: "M43.5 31.6V31.7M52.5 31.6V31.7"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-t",
+		d: "M41.4 28.8H45.4M50.6 28.8H54.6M48 31V34.6L46.8 35.2"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-r",
+		d: "M38 19H58V26H38Z"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-g",
+		d: "M37 27 34 12 41.5 18 48 9 54.5 18 62 12 59 27C52 25 44 25 37 27Z"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-r",
+		d: "M46.4 20H49.6V23H46.4ZM40 21.5H42V23.8H40ZM54 21.5H56V23.8H54Z"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-st",
+		d: "M71 24 69 60"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-g",
+		d: "M71.2 13C74 15 74.4 18 71 25 67.6 18 68 15 71.2 13ZM66 19C69 18 71 21 71 25 68 25 65 23 66 19ZM76.4 19C73.4 18 71 21 71 25 74 25 77.4 23 76.4 19Z"
+	})),
+	D: /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-r",
+		d: "M48 82H10V58C24 53 33 50 40 48H48Z"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-b",
+		d: "M48 82V48H56C63 50 72 53 86 58V82Z"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-g",
+		d: "M42.5 52H53.5L57 82H39Z"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-l",
+		d: "M44 56 52 62M52 56 44 62M43.4 62 52.8 69M52.6 62 43.2 69.6"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-skin",
+		d: "M41 44H55L57 51C52 55 44 55 39 51Z"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-w",
+		d: "M37 49C42 56 54 56 59 49L61 51C55 59 41 59 35 51Z"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-hairq",
+		d: "M48 15C37 15 32 23 32 33 32 41 31 46 27 50 33 53 39 51 41 45H55C57 51 63 53 69 50 65 46 64 41 64 33 64 23 59 15 48 15Z"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-skin",
+		d: "M39.5 28C42 25 54 25 56.5 28V37C56.5 43 52.5 47 48 47S39.5 43 39.5 37Z"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-hairq",
+		d: "M39 30C43 29 46 27 48 24 50 27 53 29 57 30L57.5 24H38.5Z"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-e",
+		d: "M44 33.6V33.7M52 33.6V33.7"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-t",
+		d: "M42 30.8H46M50 30.8H54M48 33.6V37L46.9 37.6"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-lip",
+		d: "M45.8 41.6C47 40.8 49 40.8 50.2 41.6 49 43 47 43 45.8 41.6Z"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-g",
+		d: "M38 23 36 12 42 17 48 10 54 17 60 12 58 23C52 21 44 21 38 23Z"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-r",
+		d: "M46.6 16.6H49.4V19.4H46.6Z"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-b",
+		d: "M40.6 18.4H42.6V20.4H40.6ZM53.4 18.4H55.4V20.4H53.4Z"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-stem",
+		d: "M71 28C70 38 72 48 70 60M70.6 42C74 40 76 41 77 43 74 45 72 44 70.6 42Z"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-r",
+		d: "M71 15C75 15 77.6 18 77 22 76.4 26 73 29 71 29S65.6 26 65 22C64.4 18 67 15 71 15Z"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-g",
+		d: "M71 19.4C72.6 19.4 73.6 20.6 73.4 22 73 23.6 71.8 24.4 71 24.4S69 23.6 68.6 22C68.4 20.6 69.4 19.4 71 19.4Z"
+	}))
+};
+var WY_HEART = "M12 21C5 15 2 11.5 2 7.6 2 4.8 4.2 3 6.6 3c2.2 0 4 1.2 5.4 3.4C13.4 4.2 15.2 3 17.4 3 19.8 3 22 4.8 22 7.6 22 11.5 19 15 12 21Z";
+function WyIdx({ r }) {
+	return /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("text", {
+		className: "wc-i",
+		x: "10",
+		y: "20"
+	}, r), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-p",
+		transform: "translate(4.6 23) scale(.45)",
+		d: WY_HEART
+	}));
+}
+function WyCourt({ r }) {
+	const f = WY_HALF[r];
+	return /* @__PURE__ */ import_react.default.createElement("svg", {
+		className: "wc",
+		viewBox: "0 0 96 136"
+	}, /* @__PURE__ */ import_react.default.createElement("clipPath", { id: "wc-half" }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M19 8H77V60.6L19 75.4Z" })), /* @__PURE__ */ import_react.default.createElement("rect", {
+		className: "wc-f",
+		x: "19",
+		y: "8",
+		width: "58",
+		height: "120",
+		rx: "3"
+	}), /* @__PURE__ */ import_react.default.createElement("g", { clipPath: "url(#wc-half)" }, f), /* @__PURE__ */ import_react.default.createElement("g", { transform: "rotate(180 48 68)" }, /* @__PURE__ */ import_react.default.createElement("g", { clipPath: "url(#wc-half)" }, f)), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-m",
+		d: "M19 75.4 77 60.6"
+	}), /* @__PURE__ */ import_react.default.createElement(WyIdx, { r }), /* @__PURE__ */ import_react.default.createElement("g", { transform: "rotate(180 48 68)" }, /* @__PURE__ */ import_react.default.createElement(WyIdx, { r })));
+}
+function WyCourtFan() {
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gt-wy-fan",
+		"aria-hidden": "true"
+	}, ["D", "K"].map((r, i) => {
+		const o = i - .5;
+		return /* @__PURE__ */ import_react.default.createElement("span", {
+			key: r,
+			className: "gt-wy-card gt-wy-face",
+			style: { transform: `translateX(${o * 32}px) rotate(${o * 12}deg)` }
+		}, /* @__PURE__ */ import_react.default.createElement(WyCourt, { r }));
+	}));
+}
 // web/src/games/schieber/game.js
 var game_exports$16 = /* @__PURE__ */ __exportAll({
 	CHALK_BG: () => CHALK_BG,
@@ -42845,6 +43001,11 @@ var SCHIEBER_PL_CSS = `
 .gt-wy-card{position:absolute;left:50%;top:6px;width:42px;height:60px;margin-left:-21px;box-sizing:border-box;padding:4px 0 0 4px;border-radius:5px;background:var(--wy-card);box-shadow:0 0 0 1px rgba(90,70,40,.4),0 2px 3px rgba(60,40,20,.25);transform-origin:50% 130%;font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:15px;line-height:1;text-align:left;color:var(--wy-red)}
 .gt-wy-card.is-k{color:var(--wy-black)}
 .gt-wy-card svg{position:absolute;left:3px;top:20px;width:13px;height:13px}
+.gt-wy-card.gt-wy-face{top:3px;width:48px;height:68px;margin-left:-24px;padding:0}
+.gt-wy-card svg.wc{left:0;top:0;width:100%;height:100%;--c-r:#C22A2A;--c-b:#27407E;--c-g:#E2B23C;--c-w:#FBF6EA;--c-s:#F4D6B4;--c-h:#3A2A20;--c-q:#9A5A22;--c-l:#1E1A16;--c-t:#3E7A4A;--c-f:#27304F}
+.gt-wy-noir .gt-wy-card svg.wc{--c-r:#2A2A2A;--c-b:#6E6E6E;--c-g:#BDBDBD;--c-w:#FFF;--c-s:#EDEDED;--c-h:#1A1A1A;--c-q:#5A5A5A;--c-l:#111;--c-t:#444;--c-f:#111}
+.wc-f,.wc-m{fill:none;stroke:var(--c-f);stroke-width:1}.wc-m{stroke-width:1.2}.wc-i{fill:var(--c-r);font-size:18px;font-weight:700;text-anchor:middle}.wc-p,.wc-r,.wc-lip{fill:var(--c-r)}.wc-b{fill:var(--c-b)}.wc-g{fill:var(--c-g)}.wc-w{fill:var(--c-w)}.wc-skin{fill:var(--c-s)}.wc-hair{fill:var(--c-h)}.wc-hairq{fill:var(--c-q)}
+.wc-l,.wc-e,.wc-t,.wc-st{fill:none;stroke-linecap:round;stroke-linejoin:round}.wc-l{stroke:var(--c-l);stroke-width:1.3}.wc-e{stroke:var(--c-l);stroke-width:2.4}.wc-t{stroke:var(--c-h);stroke-width:1}.wc-st{stroke:var(--c-g);stroke-width:2.6}.wc-stem{fill:var(--c-t);stroke:var(--c-t);stroke-width:1.6;stroke-linecap:round}
 .gt-wy-qty{display:flex;align-items:center;justify-content:center;gap:4px;padding:0 6px 8px;font-family:'Inter',sans-serif;font-weight:700;font-size:14px;color:var(--wy-ink)}
 .gt-wy-qty span{min-width:18px;text-align:center;font-variant-numeric:tabular-nums}
 .gt-wy-qty button{width:44px;height:40px;padding:0;border:1px solid var(--wy-fir);border-radius:8px;background:none;color:var(--wy-fir);font:700 17px 'Inter',sans-serif;cursor:pointer}
@@ -43948,10 +44109,7 @@ function SchieberWeisPanel({ open, teamId, teams, onSave, onClose, t, theme }) {
 		className: "gt-wy-tb",
 		"aria-pressed": stoeck,
 		onClick: () => setStoeck((s) => !s)
-	}, stoeck && chk, /* @__PURE__ */ import_react.default.createElement(WyFan, {
-		c: ["D", "K"],
-		s: "h"
-	}), /* @__PURE__ */ import_react.default.createElement("b", null, "Stöck"), /* @__PURE__ */ import_react.default.createElement("i", null, t("weisPts")(20))))), /* @__PURE__ */ import_react.default.createElement("button", {
+	}, stoeck && chk, /* @__PURE__ */ import_react.default.createElement(WyCourtFan, null), /* @__PURE__ */ import_react.default.createElement("b", null, "Stöck"), /* @__PURE__ */ import_react.default.createElement("i", null, t("weisPts")(20))))), /* @__PURE__ */ import_react.default.createElement("button", {
 		type: "button",
 		className: "gt-wy-more",
 		"aria-expanded": more,
@@ -101795,19 +101953,28 @@ function gtSbVivid(hex) {
 	const to = (v) => Math.round((v + m) * 255).toString(16).padStart(2, "0");
 	return "#" + to(a) + to(bq) + to(cq);
 }
-function GtBlock3D({ W, D, H, win, rk, S, fs }) {
+function GtBlock3D({ W, D, H, win, rk, S, fs, fill }) {
 	const c = win ? S.th === "light" || S.th === "noir" || S.bright ? S.acc : gtSbVivid(S.acc) : S.base;
-	const face = (cls, w, h, tr, bg, extra) => /* @__PURE__ */ import_react.default.createElement("div", {
+	const pale = S.th === "light";
+	const shell = (k) => shadeHex(c, pale ? .72 + k * .5 : -.66 - k);
+	const cv = (k, cls) => fill ? /* @__PURE__ */ import_react.default.createElement("i", {
+		className: cls || "gtsb-cv",
+		style: {
+			background: shell(k),
+			boxShadow: `inset 0 0 0 1.5px ${c}66`
+		}
+	}) : null;
+	const face = (cls, w, h, tr, bg, k, top) => /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtsb-f " + cls,
-		style: Object.assign({
+		style: {
 			width: w,
 			height: h,
 			left: (W - w) / 2,
 			top: (H - h) / 2,
 			transform: tr,
 			background: bg
-		}, extra)
-	});
+		}
+	}, cv(k, top ? "gtsb-cvt" : null));
 	return /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtsb-b3",
 		"aria-hidden": true,
@@ -101815,7 +101982,7 @@ function GtBlock3D({ W, D, H, win, rk, S, fs }) {
 			width: W,
 			height: H
 		}
-	}, face("gtsb-fl", D, H, `rotateY(-90deg) translateZ(${W / 2}px)`, `linear-gradient(270deg, ${shadeHex(c, -.24)}, ${shadeHex(c, -.44)})`), face("gtsb-fr", D, H, `rotateY(90deg) translateZ(${W / 2}px)`, `linear-gradient(90deg, ${shadeHex(c, -.3)}, ${shadeHex(c, -.5)})`), face("gtsb-ft", W, D, `rotateX(90deg) translateZ(${H / 2}px)`, `linear-gradient(180deg, ${shadeHex(c, .34)}, ${shadeHex(c, .16)})`), /* @__PURE__ */ import_react.default.createElement("div", {
+	}, face("gtsb-fl", D, H, `rotateY(-90deg) translateZ(${W / 2}px)`, `linear-gradient(270deg, ${shadeHex(c, -.24)}, ${shadeHex(c, -.44)})`, .08), face("gtsb-fr", D, H, `rotateY(90deg) translateZ(${W / 2}px)`, `linear-gradient(90deg, ${shadeHex(c, -.3)}, ${shadeHex(c, -.5)})`, .12), face("gtsb-ft", W, D, `rotateX(90deg) translateZ(${H / 2}px)`, `linear-gradient(180deg, ${shadeHex(c, .34)}, ${shadeHex(c, .16)})`, -.08, true), /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtsb-f gtsb-ff",
 		style: {
 			width: W,
@@ -101832,7 +101999,7 @@ function GtBlock3D({ W, D, H, win, rk, S, fs }) {
 			color: win ? S.accNum : S.num,
 			textShadow: win ? S.accNumSh : S.numSh
 		}
-	}, rk), win && /* @__PURE__ */ import_react.default.createElement("span", { className: "gtsb-sheen" }, /* @__PURE__ */ import_react.default.createElement("i", null))));
+	}, rk), win && /* @__PURE__ */ import_react.default.createElement("span", { className: "gtsb-sheen" }, /* @__PURE__ */ import_react.default.createElement("i", null)), cv(0)));
 }
 function GtSoftBlock({ H, win, rk, S, lv }) {
 	return /* @__PURE__ */ import_react.default.createElement("div", {
@@ -108623,7 +108790,7 @@ function YatzyGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 }
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.05-4";
+var APP_BUILD = "2026.11.05-5";
 // web/src/app/storage.js
 var storage_exports = /* @__PURE__ */ __exportAll({
 	GT_CAT_KEYS: () => GT_CAT_KEYS,
@@ -108745,7 +108912,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.05-4");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.05-5");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -109211,7 +109378,7 @@ function PodiumOverlay({ open, onClose, onRestart, extraAct, ranked, tk, t, best
 		}
 		gtSbSeen.add(sig);
 		setSbPh("run");
-		const tm = [setTimeout(() => setSbPh("fin"), 1500), setTimeout(() => setSbPh("done"), 2100)];
+		const tm = [setTimeout(() => setSbPh("fin"), 2750), setTimeout(() => setSbPh("done"), 3350)];
 		const stop = () => {
 			tm.forEach(clearTimeout);
 			setSbPh("done");
@@ -109634,6 +109801,19 @@ function GtPodiumBlocks({ items, S, play, land }) {
 					easing: "cubic-bezier(.23,1,.32,1)",
 					fill: "backwards"
 				}));
+				const f0 = d + t, fd = 700 + items[i].H * 4;
+				blks[i].querySelectorAll(".gtsb-cv").forEach((c) => run.push(c.animate([{ transform: "translateY(0)" }, { transform: "translateY(-104%)" }], {
+					duration: fd,
+					delay: f0,
+					easing: "cubic-bezier(.45,.05,.35,1)",
+					fill: "backwards"
+				})));
+				blks[i].querySelectorAll(".gtsb-cvt").forEach((c) => run.push(c.animate([{ opacity: 1 }, { opacity: 0 }], {
+					duration: 240,
+					delay: f0 + fd - 170,
+					easing: "ease-out",
+					fill: "backwards"
+				})));
 				tms.push(setTimeout(() => {
 					R.vd += n === seq.length - 1 ? 150 : 80;
 					go();
@@ -109731,6 +109911,7 @@ function GtPodiumBlocks({ items, S, play, land }) {
 			win: it.win,
 			rk: it.rk,
 			S,
+			fill: true,
 			fs: Math.round((it.lv === 1 ? 82 : it.lv === 2 ? 62 : 54) * (land ? .72 : 1))
 		}), /* @__PURE__ */ import_react.default.createElement("i", {
 			className: "gtsb-an",
@@ -111266,7 +111447,7 @@ function UpdateBanner() {
 		let alive = true;
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.05-4") {
+				if (alive && v && v.build && v.build !== "2026.11.05-5") {
 					setReady(true);
 					setHidden(false);
 					try {

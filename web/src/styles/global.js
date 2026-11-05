@@ -216,7 +216,11 @@ input[type="number"] { -moz-appearance: textfield; }
 .gtsb-rig { position: absolute; left: 50%; width: 0; height: 0; }
 .gtsb-c3 { position: absolute; left: 0; bottom: 0; }
 .gtsb-b3 { position: absolute; left: 0; bottom: 0; }
-.gtsb-f { position: absolute; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+.gtsb-f { position: absolute; overflow: hidden; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+.gtsb-cv, .gtsb-cvt { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.gtsb-cv { transform: translateY(-104%); will-change: transform; }
+.gtsb-cv::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: rgba(255,255,255,0.6); box-shadow: 0 0 7px rgba(255,255,255,0.45); }
+.gtsb-cvt { opacity: 0; }
 .gtsb-ff { display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: inset 0 2px 0 rgba(255,255,255,0.3), inset 2px 0 0 rgba(255,255,255,0.1), inset -2px 0 0 rgba(0,0,0,0.14), inset 0 -3px 0 rgba(0,0,0,0.18); }
 .gtsb-sh3 { position: absolute; transform: rotateX(90deg); pointer-events: none; }
 .gtsb-an { position: absolute; width: 0; height: 0; }
@@ -241,7 +245,7 @@ input[type="number"] { -moz-appearance: textfield; }
 .gtsb-x:focus-visible > span { box-shadow: 0 0 0 2px currentColor; }
 .gtsb-sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 @media (prefers-reduced-motion: reduce) { .gtsb-sheen > i { animation: none !important; } }
-@media (forced-colors: active) { .gtsb-f { border: 1px solid CanvasText; } .gtsb-sheen, .gtsb-sh3 { display: none; } }
+@media (forced-colors: active) { .gtsb-f { border: 1px solid CanvasText; } .gtsb-sheen, .gtsb-sh3, .gtsb-cv, .gtsb-cvt { display: none; } }
 @keyframes podium-rise { from { opacity: 0; transform: translateY(24px); filter: blur(6px); } to { opacity: 1; transform: translateY(0); filter: none; } }
 .podium-block-3 { opacity: 0; animation: podium-rise 0.45s var(--gt-ease-spring, cubic-bezier(.34,1.3,.64,1)) 0.10s forwards; }
 .podium-block-2 { opacity: 0; animation: podium-rise 0.45s var(--gt-ease-spring, cubic-bezier(.34,1.3,.64,1)) 0.22s forwards; }

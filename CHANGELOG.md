@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.05-15 (05.11.2026 21:40)
+- Yatzy: Kopf lesbar, Namen ohne Abschnitt, Warnung bei unmöglichen Punkten
+
 ## 2026.11.05-14 (05.11.2026 21:38)
 - Differenzler: Enter, Tabelle auf kleinen Handys, Noir-Kontrast, Namen ohne Trennung
 

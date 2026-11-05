@@ -8640,6 +8640,7 @@ var TRANSLATIONS = {
 		bonusOut: "Bonus nicht mehr möglich",
 		changePlayers: "Spieler ändern",
 		tapCellHint: "Feld antippen, um Punkte einzutragen oder zu streichen.",
+		yatzyImpossible: "Mit 5 Würfeln nicht möglich",
 		strike: "Streichen",
 		deleteEntry: "Eintrag löschen",
 		reached: (val) => `Erreicht (${val} Punkte)`,
@@ -10165,6 +10166,7 @@ var TRANSLATIONS = {
 		bonusOut: "Bonus out of reach",
 		changePlayers: "Change players",
 		tapCellHint: "Tap a box to enter or clear a score.",
+		yatzyImpossible: "Not possible with 5 dice",
 		strike: "Cross out",
 		deleteEntry: "Delete entry",
 		reached: (val) => `Got it (${val} points)`,
@@ -11690,6 +11692,7 @@ var TRANSLATIONS = {
 		bonusOut: "Bonus hors de portée",
 		changePlayers: "Changer les joueurs",
 		tapCellHint: "Touche une case pour saisir ou effacer un score.",
+		yatzyImpossible: "Impossible avec 5 dés",
 		strike: "Barrer",
 		deleteEntry: "Supprimer l'entrée",
 		reached: (val) => `Atteint (${val} points)`,
@@ -13215,6 +13218,7 @@ var TRANSLATIONS = {
 		bonusOut: "Bonus non più possibile",
 		changePlayers: "Cambia giocatori",
 		tapCellHint: "Tocca una casella per inserire o cancellare un punteggio.",
+		yatzyImpossible: "Non possibile con 5 dadi",
 		strike: "Cancella",
 		deleteEntry: "Elimina voce",
 		reached: (val) => `Raggiunto (${val} punti)`,
@@ -14740,6 +14744,7 @@ var TRANSLATIONS = {
 		bonusOut: "Bono ya no es posible",
 		changePlayers: "Cambiar jugadores",
 		tapCellHint: "Toca una casilla para anotar o borrar una puntuación.",
+		yatzyImpossible: "No es posible con 5 dados",
 		strike: "Tachar",
 		deleteEntry: "Eliminar entrada",
 		reached: (val) => `Conseguido (${val} puntos)`,
@@ -16265,6 +16270,7 @@ var TRANSLATIONS = {
 		bonusOut: "Bónus já não é possível",
 		changePlayers: "Mudar jogadores",
 		tapCellHint: "Toca numa casa para anotar ou apagar uma pontuação.",
+		yatzyImpossible: "Não é possível com 5 dados",
 		strike: "Riscar",
 		deleteEntry: "Eliminar entrada",
 		reached: (val) => `Conseguido (${val} pontos)`,
@@ -108152,6 +108158,29 @@ function YatzySetup({ players, setPlayers, onStart, t, theme }) {
 		skin: gtS
 	}))));
 }
+var YATZY_POSSIBLE = (() => {
+	const o = {
+		onePair: [],
+		twoPairs: [],
+		threeKind: [],
+		fourKind: [],
+		fullHouse: [],
+		chance: []
+	};
+	for (let a = 1; a <= 6; a++) {
+		o.onePair.push(2 * a);
+		o.threeKind.push(3 * a);
+		o.fourKind.push(4 * a);
+		for (let b = 1; b <= 6; b++) {
+			if (a < b) o.twoPairs.push(2 * a + 2 * b);
+			if (a !== b) o.fullHouse.push(2 * a + 3 * b);
+		}
+	}
+	for (let v = 5; v <= 30; v++) o.chance.push(v);
+	const r = {};
+	Object.keys(o).forEach((k) => r[k] = new Set(o[k]));
+	return r;
+})();
 var YATZY_MAXV = {
 	onePair: 12,
 	twoPairs: 22,
@@ -108217,6 +108246,12 @@ function YatzyEditorPanel({ editing, players, scores, totals, category, onSave, 
 		}
 	}, true);
 	if (!editing || !category) return null;
+	const impossible = (() => {
+		const set = YATZY_POSSIBLE[category.id];
+		if (!set || value === "") return false;
+		const n = parseInt(value, 10);
+		return n > 0 && !set.has(n);
+	})();
 	const player = players.find((p) => p.id === editing.playerId);
 	const catLabel = t(category.labelKey);
 	const currentValue = scores[editing.playerId][editing.catId];
@@ -108276,8 +108311,10 @@ function YatzyEditorPanel({ editing, players, scores, totals, category, onSave, 
 			border: "none",
 			background: _YBG,
 			borderRadius: "50%",
-			width: 28,
-			height: 28,
+			width: 40,
+			height: 40,
+			display: "inline-grid",
+			placeItems: "center",
 			color: _YMUTED,
 			fontSize: 14,
 			cursor: "pointer"
@@ -108388,7 +108425,7 @@ function YatzyEditorPanel({ editing, players, scores, totals, category, onSave, 
 				fontFamily: YATZY_FONT
 			}
 		}, n === 0 ? "–" : optionValue);
-	})) : /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	})) : /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		gap: 6
 	} }, /* @__PURE__ */ import_react.default.createElement("input", {
@@ -108442,7 +108479,16 @@ function YatzyEditorPanel({ editing, players, scores, totals, category, onSave, 
 			padding: "0 18px",
 			cursor: "pointer"
 		}
-	}, /* @__PURE__ */ import_react.default.createElement(CheckMark, null))), /* @__PURE__ */ import_react.default.createElement("div", {
+	}, /* @__PURE__ */ import_react.default.createElement(CheckMark, null))), impossible && /* @__PURE__ */ import_react.default.createElement("div", {
+		role: "status",
+		style: {
+			marginTop: 6,
+			fontSize: 12,
+			fontWeight: 700,
+			color: "#D9534F",
+			fontFamily: "'Inter', sans-serif"
+		}
+	}, t("yatzyImpossible"))), /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-only gtL-keyhint",
 		style: {
 			fontSize: 11.5,
@@ -108766,8 +108812,8 @@ function YatzyPlay({ onRematch, players, scores, setScores, onResetSheet, onEdit
 		style: {
 			"--yz-n": players.length,
 			display: "grid",
-			gridTemplateColumns: `68px repeat(${players.length}, minmax(52px, 1fr))`,
-			minWidth: 68 + players.length * 52,
+			gridTemplateColumns: `76px repeat(${players.length}, minmax(52px, 1fr))`,
+			minWidth: 76 + players.length * 52,
 			width: "100%"
 		}
 	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
@@ -108793,14 +108839,24 @@ function YatzyPlay({ onRematch, players, scores, setScores, onResetSheet, onEdit
 		}
 	}, /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "yz-thn",
+		title: p.name,
 		style: {
 			fontSize: 10.5,
 			fontWeight: 700,
+			lineHeight: 1.15,
 			color: _YINK,
 			fontFamily: "'Inter', sans-serif",
-			whiteSpace: "nowrap",
 			overflow: "hidden",
-			textOverflow: "ellipsis"
+			wordBreak: "keep-all",
+			hyphens: "none",
+			.../\s/.test(p.name.trim()) ? {
+				display: "-webkit-box",
+				WebkitLineClamp: 2,
+				WebkitBoxOrient: "vertical"
+			} : {
+				whiteSpace: "nowrap",
+				textOverflow: "ellipsis"
+			}
 		}
 	}, p.name), activeIdx === i && !finished && /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "yz-turn",
@@ -108811,6 +108867,7 @@ function YatzyPlay({ onRematch, players, scores, setScores, onResetSheet, onEdit
 			fontWeight: 700,
 			letterSpacing: "0.02em",
 			marginTop: 1,
+			fontFamily: "'Inter', sans-serif",
 			whiteSpace: "nowrap",
 			overflow: "hidden",
 			textOverflow: "ellipsis"
@@ -108844,8 +108901,8 @@ function YatzyPlay({ onRematch, players, scores, setScores, onResetSheet, onEdit
 		style: {
 			"--yz-n": players.length,
 			display: "grid",
-			gridTemplateColumns: `68px repeat(${players.length}, minmax(52px, 1fr))`,
-			minWidth: 68 + players.length * 52,
+			gridTemplateColumns: `76px repeat(${players.length}, minmax(52px, 1fr))`,
+			minWidth: 76 + players.length * 52,
 			width: "100%"
 		}
 	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
@@ -108871,14 +108928,24 @@ function YatzyPlay({ onRematch, players, scores, setScores, onResetSheet, onEdit
 		}
 	}, /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "yz-thn",
+		title: p.name,
 		style: {
 			fontSize: 10.5,
 			fontWeight: 700,
+			lineHeight: 1.15,
 			color: _YINK,
 			fontFamily: "'Inter', sans-serif",
-			whiteSpace: "nowrap",
 			overflow: "hidden",
-			textOverflow: "ellipsis"
+			wordBreak: "keep-all",
+			hyphens: "none",
+			.../\s/.test(p.name.trim()) ? {
+				display: "-webkit-box",
+				WebkitLineClamp: 2,
+				WebkitBoxOrient: "vertical"
+			} : {
+				whiteSpace: "nowrap",
+				textOverflow: "ellipsis"
+			}
 		}
 	}, p.name), activeIdx === i && !finished && /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "yz-turn",
@@ -108889,6 +108956,7 @@ function YatzyPlay({ onRematch, players, scores, setScores, onResetSheet, onEdit
 			fontWeight: 700,
 			letterSpacing: "0.02em",
 			marginTop: 1,
+			fontFamily: "'Inter', sans-serif",
 			whiteSpace: "nowrap",
 			overflow: "hidden",
 			textOverflow: "ellipsis"
@@ -109144,7 +109212,7 @@ function YatzyGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 }
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.05-14";
+var APP_BUILD = "2026.11.05-15";
 // web/src/app/storage.js
 var storage_exports = /* @__PURE__ */ __exportAll({
 	GT_CAT_KEYS: () => GT_CAT_KEYS,
@@ -109266,7 +109334,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.05-14");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.05-15");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -111847,7 +111915,7 @@ function UpdateBanner() {
 		let alive = true;
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.05-14") {
+				if (alive && v && v.build && v.build !== "2026.11.05-15") {
 					setReady(true);
 					setHidden(false);
 					try {

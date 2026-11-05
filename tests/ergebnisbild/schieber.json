@@ -499,5 +499,67 @@
    ],
    "target": 1000
   }
+ },
+ {
+  "name": "wenige",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony und Yanis",
+    "score": 1057
+   },
+   {
+    "name": "Matteo und Lea",
+    "score": 157
+   }
+  ],
+  "extra": {
+   "teams": [
+    {
+     "name": "Tony und Yanis",
+     "entries": [
+      1057
+     ]
+    },
+    {
+     "name": "Matteo und Lea",
+     "entries": [
+      157
+     ]
+    }
+   ],
+   "target": 1000
+  }
+ },
+ {
+  "name": "zwei",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Team 1",
+    "score": 1077
+   },
+   {
+    "name": "Team 2",
+    "score": 0
+   }
+  ],
+  "extra": {
+   "teams": [
+    {
+     "name": "Team 1",
+     "entries": [
+      157,
+      20,
+      900
+     ]
+    },
+    {
+     "name": "Team 2",
+     "entries": []
+    }
+   ],
+   "target": 1000
+  }
  }
 ]

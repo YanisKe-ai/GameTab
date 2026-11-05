@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.05-14 (05.11.2026 21:38)
+- Differenzler: Enter, Tabelle auf kleinen Handys, Noir-Kontrast, Namen ohne Trennung
+
 ## 2026.11.05-13 (05.11.2026 21:31)
 - Tutto und Schieber: Namen auf Karten und im Spiel, Beschriftungen
 

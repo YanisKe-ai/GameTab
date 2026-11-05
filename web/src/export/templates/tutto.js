@@ -1,13 +1,9 @@
 // Ergebnisbild Tutto (Entwurf dev-notes/ergebnisbild-entwuerfe/pro-spiel/tutto.png).
 // Daten: gtEcModel (Raenge, Gleichstand, Summen) plus shareExtra {target}. Balken = Summe / Ziel (bei mehr als dem Ziel gekappt, nie negativ).
-// Wuerfel und Bonuskarten sind Spielsymbole (Dekoration, keine Wurf- oder Kartendaten).
+// Keine Deko: nur echte Daten, die Balken nutzen den Platz zwischen Sieger und Fussleiste.
 import { F_INTERBI } from "./fonts-a.js";
 
-const INK = "#14101C", RED = "#D7141F", BARRED = "#C8102E", YEL = "#F7C32E", CARD = "#C1798F";
-const DICE = [[60, 540, -8, 1], [225, 565, 6, 1], [390, 535, -4, 1], [100, 700, 7, 5], [270, 720, -9, 5], [440, 700, 5, 5]];
-const PIPS = { 1: [[1, 1]], 5: [[0, 0], [2, 0], [1, 1], [0, 2], [2, 2]] };
-const BONUS = [["500", -8], ["2x", 5], ["±1000", -3]];
-
+const INK = "#14101C", RED = "#D7141F", BARRED = "#C8102E", YEL = "#F7C32E";
 function bg(c, k) {
   c.fillStyle = YEL; c.fillRect(0, 0, k.TPL_W, k.TPL_H);
   const rx = Math.hypot(540, 1350 - 297);
@@ -31,29 +27,6 @@ function hero(c, k, d) {
   c.strokeStyle = "#FFFFFF"; pass(0, 0, "#FFFFFF", true);
   c.fillStyle = RED; pass(0, 0, RED, false);
   c.restore();
-}
-function die(c, k, x, y, rot, n, s) {
-  const h = s / 2;
-  c.save(); c.translate(x + h, y + h); c.rotate(rot * Math.PI / 180);
-  c.fillStyle = INK; k.rrect(c, -h + 10 * s / 140, -h + 12 * s / 140, s, s, 26 * s / 140); c.fill();
-  c.fillStyle = INK; k.rrect(c, -h, -h, s, s, 26 * s / 140); c.fill();
-  c.fillStyle = "#FFFFFF"; const b = 6 * s / 140; k.rrect(c, -h + b, -h + b, s - 2 * b, s - 2 * b, Math.max(2, 20 * s / 140)); c.fill();
-  c.fillStyle = INK;
-  const inner = s - 2 * b, pr = s / 5 / 2;
-  PIPS[n].forEach(([px, py]) => { c.beginPath(); c.arc(-h + b + (0.18 + px * 0.32) * inner, -h + b + (0.18 + py * 0.32) * inner, pr, 0, Math.PI * 2); c.fill(); });
-  c.restore();
-}
-function bonus(c, k, d, i, dx, dy) {
-  const [lab, rot] = BONUS[i];
-  const x = 610 + i * 135, y = 560 + (i % 2) * 40, w = 130, h = 190;
-  c.save(); c.translate(x + w / 2 + dx, y + h / 2 + dy); c.rotate(rot * Math.PI / 180);
-  c.fillStyle = INK; k.rrect(c, -w / 2 + 8, -h / 2 + 10, w, h, 16); c.fill();
-  k.rrect(c, -w / 2, -h / 2, w, h, 16); c.fill();
-  c.fillStyle = CARD; k.rrect(c, -w / 2 + 6, -h / 2 + 6, w - 12, h - 12, 11); c.fill();
-  c.fillStyle = "#FFFFFF"; c.textAlign = "center";
-  const f = k.fit(c, lab, { w: 400, fam: k.F_ANTON, max: 58, min: 30, maxW: w - 28 });
-  k.setFont(c, 400, f.size, k.F_ANTON); c.fillText(lab, 0, k.capH(c) / 2);
-  c.textAlign = "left"; c.restore();
 }
 function footer(c, k, d) {
   const lw = k.logo(c, d.logo, 60, 1210, 100, INK);
@@ -91,23 +64,17 @@ function page1(d, k, rows) {
   if (d.tie) { const tl = d.up(d.tr("ecTied", "")); k.setFont(c, 700, 28, k.F_INTER); c.fillStyle = INK; k.spaced(c, tl, 62, bl[0] - asc[0] - 16, 3, "left"); }
   /* Balken */
   const endY = 1160;
-  const p = dense ? Math.min(72, (endY - (heroBase + 78)) / (N - 1 + 0.82)) : N <= 3 ? 90 : N <= 5 ? 72 : N === 6 ? 62 : 58;
+  /* Skala-Beschriftung braucht ca. 60 px ueber dem ersten Balken, der Block wird im freien Platz zentriert */
+  const zoneTop = heroBase + 96;
+  const p = Math.min(N <= 3 ? 170 : N <= 5 ? 130 : 118, (endY - zoneTop) / (N - 0.18));
   const rowH = Math.round(p * 0.82);
-  const rowsTop = endY - (N - 1) * p - rowH;
+  const blockH = (N - 1) * p + rowH;
+  const rowsTop = Math.round(zoneTop + Math.max(0, (endY - zoneTop - blockH) / 2));
   const target = d.target;
-  /* Dekoration (Wuerfel und Karten) im Platz zwischen Sieger und Balken, bei vielen Spielern kleiner, bei zu wenig Platz weggelassen */
-  const zoneTop = heroBase + 30, zoneBottom = rowsTop - 62;
-  const sc = Math.min(1, (zoneBottom - zoneTop) / 330);
-  if (sc >= 0.4) {
-    c.save(); c.translate(60, 540); c.scale(sc, sc); c.translate(-60, -540 + (zoneTop - 540) / sc);
-    DICE.forEach(([x, y, r, n]) => die(c, k, x, y, r, n, 140));
-    BONUS.forEach((_, i) => bonus(c, k, d, i, 0, 0));
-    c.restore();
-  }
   /* Namen- und Wertespalte nach Inhalt */
   k.setFont(c, 400, rowH * 0.74, k.F_ANTON);
   const vwMax = Math.max(...rows.map((r) => c.measureText(r.value).width));
-  const nameW = Math.min(340, Math.max(200, Math.max(...rows.map((r) => c.measureText(r.name).width)) + 6));
+  const nameW = Math.min(360, Math.max(200, Math.max(...rows.map((r) => c.measureText(r.name).width)) + 6));
   const valW = Math.max(130, vwMax + 4);
   const tx = 60 + nameW + 20, tw = 1020 - valW - 20 - tx;
   /* Skala */
@@ -121,8 +88,8 @@ function page1(d, k, rows) {
     const y = rowsTop + i * p, hot = r.winner, col = hot ? BARRED : INK;
     const fs = rowH * 0.74;
     const two = rowH >= 44;
-    let f = k.fit(c, r.name, { w: 400, fam: k.F_ANTON, max: fs, min: two ? fs * 0.72 : Math.max(18, fs * 0.5), maxW: nameW, lines: 1 });
-    if (f.cut && two) f = k.fit(c, r.name, { w: 400, fam: k.F_ANTON, max: Math.min(fs, rowH * 0.42), min: 20, maxW: nameW, lines: 2 });
+    /* Umbruch nur an Leerstellen und Bindestrichen, nie mitten im Wort: lieber kleinere Schrift */
+    const f = k.nameFit(c, r.name, { w: 400, fam: k.F_ANTON, max: fs, maxW: nameW, min: two ? 24 : Math.max(18, fs * 0.5), lines: two ? 2 : 1, oneMin: 0.72, max2: Math.min(fs, rowH * 0.46) });
     k.setFont(c, 400, f.size, k.F_ANTON); c.fillStyle = INK;
     const lh = f.size * 1.05, cy = y + rowH / 2, n0 = f.lines.length;
     f.lines.forEach((ln, li) => c.fillText(ln, 60, cy - (n0 - 1) * lh / 2 + li * lh + k.capH(c) / 2));

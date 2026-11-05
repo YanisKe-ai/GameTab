@@ -415,6 +415,36 @@ def t_schieber_turnier(pg, env):
     reload_alive(pg, "Turnier: Neuladen")
 
 
+@test("Schieber-Turnier: Groesster Schwaetzer")
+def t_schieber_schwaetzer(pg, env):
+    if pg.viewport_size["width"] >= 768:
+        return  # Laptop stellt nach dem Neuladen die letzte Seite wieder her, der Ablauf ist derselbe
+    open_game(pg, "Schreibunterlagen", "Jass", "Schieber-Turnier")
+    inp = pg.get_by_placeholder("Name eingeben")
+    for n in ["Anna", "Ben", "Cora", "Dino"]:
+        inp.fill(n); pg.keyboard.press("Enter"); wait(pg, 400)
+    click(pg, btn(pg, "Turnier anlegen"), 1200)
+    click(pg, btn(pg, "Partie starten"), 900)
+    for n in ["Anna", "Ben", "Cora", "Dino"]:
+        click(pg, pg.get_by_role("button", name=re.compile(n)).last, 400)
+    click(pg, btn(pg, "Partie starten").last, 900)
+    pg.goto(URL); wait(pg, 800)
+    open_game(pg, "Schreibunterlagen", "Jass", "Schieber"); wait(pg, 700)
+    click(pg, pg.get_by_role("button", name=re.compile("Anna")).first, 900)
+    open_w = lambda: click(pg, pg.get_by_role("button", name=re.compile("Wyys und Stöck, Anna & Ben")).first, 500)
+    open_w(); click(pg, btn(pg, "Ben"), 200); click(pg, btn_re(pg, "Weitere Wyys"), 200)
+    click(pg, pg.get_by_role("button", name=re.compile("^Neunblatt")), 200); click(pg, btn(pg, "×3"), 200); click(pg, btn_re(pg, "900 Punkte für"), 900)
+    open_w(); click(pg, btn(pg, "Anna"), 200); click(pg, pg.get_by_role("button", name=re.compile("^Fünfblatt")), 200); click(pg, btn_re(pg, "100 Punkte für"), 3200)
+    click(pg, btn(pg, "Ins Turnier eintragen").first, 1000)
+    pg.goto(URL); wait(pg, 800)
+    open_game(pg, "Schreibunterlagen", "Jass", "Schieber-Turnier"); wait(pg, 900)
+    click(pg, pg.get_by_role("button", name=re.compile("Turniermenü")).first, 700)
+    click(pg, pg.locator(".gtst-ovl").get_by_role("button", name=re.compile("Turnier beenden")).last, 800)
+    click(pg, pg.locator(".gtst-ovl").get_by_role("button", name="Turnier beenden").last, 1500)
+    txt = " ".join(pg.locator(".gtst-talker").all_inner_texts())
+    check("Ben · 900 Punkte Wyys" in txt, f"Schwaetzer fehlt: {txt!r}")
+
+
 @test("Yatzy")
 def t_yatzy(pg, env):
     open_game(pg, "Schreibunterlagen", "Yatzy"); press_start(pg)

@@ -7808,6 +7808,8 @@ var TRANSLATIONS = {
 		stxAsOf: "Stand {d}",
 		stxDateRange: "{a} bis {b}",
 		stxAnd: "und",
+		stxTalker: "Grösster Schwätzer",
+		stxTalkerPts: "{p} Punkte Wyys",
 		stxWinner: "Turniersieger",
 		stxWinners: "Gemeinsame Turniersieger",
 		stxLeader: "Aktuell vorne",
@@ -9319,6 +9321,8 @@ var TRANSLATIONS = {
 		stxAsOf: "As of {d}",
 		stxDateRange: "{a} to {b}",
 		stxAnd: "and",
+		stxTalker: "Biggest Talker",
+		stxTalkerPts: "{p} Weis points",
 		stxWinner: "Tournament winner",
 		stxWinners: "Joint tournament winners",
 		stxLeader: "Currently leading",
@@ -10830,6 +10834,8 @@ var TRANSLATIONS = {
 		stxAsOf: "État au {d}",
 		stxDateRange: "du {a} au {b}",
 		stxAnd: "et",
+		stxTalker: "Plus grand bavard",
+		stxTalkerPts: "{p} points d'annonces",
 		stxWinner: "Vainqueur du tournoi",
 		stxWinners: "Vainqueurs ex aequo",
 		stxLeader: "Actuellement en tête",
@@ -12341,6 +12347,8 @@ var TRANSLATIONS = {
 		stxAsOf: "Aggiornato al {d}",
 		stxDateRange: "dal {a} al {b}",
 		stxAnd: "e",
+		stxTalker: "Più gran chiacchierone",
+		stxTalkerPts: "{p} punti di annunci",
 		stxWinner: "Vincitore del torneo",
 		stxWinners: "Vincitori a pari merito",
 		stxLeader: "Attualmente in testa",
@@ -13852,6 +13860,8 @@ var TRANSLATIONS = {
 		stxAsOf: "Actualizado el {d}",
 		stxDateRange: "del {a} al {b}",
 		stxAnd: "y",
+		stxTalker: "Mayor charlatán",
+		stxTalkerPts: "{p} puntos de cantes",
 		stxWinner: "Ganador del torneo",
 		stxWinners: "Ganadores empatados",
 		stxLeader: "Ahora en cabeza",
@@ -15363,6 +15373,8 @@ var TRANSLATIONS = {
 		stxAsOf: "Atualizado a {d}",
 		stxDateRange: "de {a} a {b}",
 		stxAnd: "e",
+		stxTalker: "Maior tagarela",
+		stxTalkerPts: "{p} pontos de cantos",
 		stxWinner: "Vencedor do torneio",
 		stxWinners: "Vencedores empatados",
 		stxLeader: "Agora na frente",
@@ -17133,7 +17145,25 @@ var GT_ST = (function() {
 			completedAt: now,
 			revision: m.revision + 1,
 			updatedAt: now
-		}), o);
+		}, o && Array.isArray(o.weis) && o.weis.length ? { weis: o.weis.slice() } : {}), o);
+	}
+	function talkerOf(t) {
+		const sum = /* @__PURE__ */ new Map();
+		t.matches.forEach((m) => {
+			if (m.status !== "completed" || !Array.isArray(m.weis)) return;
+			m.weis.forEach((w) => {
+				if (w && typeof w.pid === "string" && typeof w.pts === "number" && isFinite(w.pts) && w.pts > 0 && findPerson(t, w.pid)) sum.set(w.pid, (sum.get(w.pid) || 0) + w.pts);
+			});
+		});
+		let pts = 0;
+		sum.forEach((v) => {
+			if (v > pts) pts = v;
+		});
+		if (!pts) return null;
+		return {
+			pts,
+			ids: t.participants.filter((p) => sum.get(p.id) === pts).sort((a, b) => a.stableOrder - b.stableOrder).map((p) => p.id)
+		};
 	}
 	function abortMatch(t, matchId, o) {
 		const m = findMatch(t, matchId);
@@ -17487,6 +17517,7 @@ var GT_ST = (function() {
 			ranked,
 			unplayed,
 			winners,
+			talker: talkerOf(t),
 			leadersLabelKind: counted === 0 ? "none" : t.status === "completed" ? "final" : "current",
 			pairs,
 			partnersOf,
@@ -34115,6 +34146,10 @@ function gtStxModel(tn, t) {
 		winners,
 		rows,
 		unplayed,
+		talker: kind === "final" && d.talker ? {
+			label: tr("stxTalker", "Grösster Schwätzer"),
+			text: list(d.talker.ids.map(nm)) + " · " + tr("stxTalkerPts", "{p} Punkte Wyys", { p: num(d.talker.pts) })
+		} : null,
 		stats: plural(d.summary.matches, "stxMatchesOne", "stxMatches", "1 Partie", "{n} Partien") + " · " + plural(snap.participants.length, "stxPersonsOne", "stxPersons", "1 Person", "{n} Personen"),
 		pointsWord: (n) => n === 1 || n === -1 ? tr("stxPointOne", "Punkt") : tr("stxPointsWord", "Punkte"),
 		head: {
@@ -34559,6 +34594,23 @@ function gtStxSlLayout(m, mc, opt) {
 		blocks.push({
 			h: 36,
 			draw: () => {}
+		});
+	}
+	if (m.talker) {
+		const tl = gtStxWrap(mc, m.talker.text, R - M, F.mono(600, 30));
+		blocks.push({
+			h: 58 + tl.length * 40 + 34,
+			draw: (cx, y) => {
+				gtStxT(cx, m.up(m.talker.label), M, y + 24, {
+					font: F.mono(400, 21),
+					color: c.dim,
+					ls: 4
+				});
+				tl.forEach((s, i) => gtStxT(cx, s, M, y + 68 + i * 40, {
+					font: F.mono(600, 30),
+					color: c.ivory
+				}));
+			}
 		});
 	}
 	const mw = (f, a) => {
@@ -35211,6 +35263,23 @@ function gtStxGsLayout(m, mc, opt) {
 						});
 					}
 				});
+			}
+		});
+	}
+	if (m.talker) {
+		const tl = gtStxWrap(mc, m.talker.text, R - M, F.inter(800, 29));
+		blocks.push({
+			h: 54 + tl.length * 38 + 28,
+			draw: (cx, y) => {
+				gtStxT(cx, m.up(m.talker.label), M, y + 24, {
+					font: F.inter(800, 20),
+					color: c.soft,
+					ls: 5
+				});
+				tl.forEach((s, i) => gtStxT(cx, s, M, y + 64 + i * 38, {
+					font: F.inter(800, 29),
+					color: c.white
+				}));
 			}
 		});
 	}
@@ -36383,6 +36452,7 @@ var { SchieberTournament, GtStuLogo } = (function() {
 @container (min-width:560px){.gtst-lg{display:inline}.gtst-sh{display:none}}
 .gtst-lead{border-radius:14px;padding:14px 14px 12px;margin-bottom:12px;background:var(--st-leadbox);color:var(--st-leadbox-ink);border:var(--st-leadbox-line)}
 .gtst-lead .gtst-cap{color:var(--st-leadbox-cap)}
+.gtst-talker{margin-top:10px;padding-top:9px;border-top:1px solid color-mix(in srgb,currentColor 22%,transparent)}
 .gtst-lname{font:var(--st-lname-font);letter-spacing:-.01em;overflow-wrap:anywhere;margin-top:4px}
 .gtst-lpts{font:700 15px/1.2 var(--st-data);color:var(--st-leadbox-cap)}
 .gtst-lhint{font:500 13px/1.4 var(--st-ui);margin-top:4px;opacity:.92}
@@ -37434,7 +37504,7 @@ var { SchieberTournament, GtStuLogo } = (function() {
 			alignItems: "baseline",
 			justifyContent: "space-between",
 			gap: 10
-		} }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtst-lname" }, lbl(w.id)), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtst-lpts" }, fmt(t(Math.abs(w.points) === 1 ? "stuPointsOne" : "stuPointsOther"), { p: pts(w.points) }))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtst-lhint" }, w.topPartners && w.topPartners.length ? bestLine(t, w.topPartners.map((x) => lbl(x.id)), w.topPartners[0].wins) : t("stuNoSharedWin"))))), /* @__PURE__ */ import_react.default.createElement("div", {
+		} }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtst-lname" }, lbl(w.id)), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtst-lpts" }, fmt(t(Math.abs(w.points) === 1 ? "stuPointsOne" : "stuPointsOther"), { p: pts(w.points) }))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtst-lhint" }, w.topPartners && w.topPartners.length ? bestLine(t, w.topPartners.map((x) => lbl(x.id)), w.topPartners[0].wins) : t("stuNoSharedWin")))), final && d.talker && /* @__PURE__ */ import_react.default.createElement("div", { className: "gtst-talker" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtst-cap" }, t("stxTalker")), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtst-lhint" }, d.talker.ids.map(lbl).join(", ") + " · " + fmt(t("stxTalkerPts"), { p: d.talker.pts })))), /* @__PURE__ */ import_react.default.createElement("div", {
 			className: "gtst-panel",
 			role: "table",
 			"aria-label": t("stuTabRank")
@@ -42756,7 +42826,6 @@ var SCHIEBER_PL_CSS = `
 .gtL-content .gt-wy-flip,[data-phone-landscape] .gt-wy-flip{transform:none}
 .gt-wy{--wy-bg:#FBEEDD;--wy-edge:#E3D0B4;--wy-ink:#1F1A15;--wy-ink2:#5C5145;--wy-red:#A3161B;--wy-black:#17140F;--wy-fir:#0E5A34;--wy-firbg:#D9E0BC;--wy-on:#FFF6E6;--wy-off:#E6D6BD;--wy-offink:#6E6152;--wy-card:linear-gradient(170deg,#FFF9EE,#F3E5CC);display:flex;flex-direction:column;max-height:88vh;background:var(--wy-bg);color:var(--wy-ink);border-radius:24px 24px 0 0;box-shadow:0 -8px 28px rgba(0,0,0,.3);overflow:hidden;animation:gtWyIn 320ms cubic-bezier(.32,.72,0,1) both}
 .gt-wy-noir{--wy-bg:#F0F0F0;--wy-edge:#C8C8C8;--wy-ink:#111;--wy-ink2:#555;--wy-red:#111;--wy-black:#111;--wy-fir:#111;--wy-firbg:#D6D6D6;--wy-on:#FFF;--wy-off:#D6D6D6;--wy-offink:#555;--wy-card:linear-gradient(170deg,#FFF,#E8E8E8)}
-.gt-wy-noir .gt-wy-st{filter:grayscale(1)}
 @keyframes gtWyIn{from{transform:translateY(100%)}to{transform:none}}
 @media (prefers-reduced-motion:reduce){.gt-wy{animation:none}}
 .gt-wy>*{box-sizing:border-box;width:100%;max-width:460px;margin-left:auto;margin-right:auto}
@@ -42776,7 +42845,6 @@ var SCHIEBER_PL_CSS = `
 .gt-wy-card{position:absolute;left:50%;top:6px;width:42px;height:60px;margin-left:-21px;box-sizing:border-box;padding:4px 0 0 4px;border-radius:5px;background:var(--wy-card);box-shadow:0 0 0 1px rgba(90,70,40,.4),0 2px 3px rgba(60,40,20,.25);transform-origin:50% 130%;font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:15px;line-height:1;text-align:left;color:var(--wy-red)}
 .gt-wy-card.is-k{color:var(--wy-black)}
 .gt-wy-card svg{position:absolute;left:3px;top:20px;width:13px;height:13px}
-.gt-wy-st{display:block;height:74px;width:100%;object-fit:contain;pointer-events:none}
 .gt-wy-qty{display:flex;align-items:center;justify-content:center;gap:4px;padding:0 6px 8px;font-family:'Inter',sans-serif;font-weight:700;font-size:14px;color:var(--wy-ink)}
 .gt-wy-qty span{min-width:18px;text-align:center;font-variant-numeric:tabular-nums}
 .gt-wy-qty button{width:44px;height:40px;padding:0;border:1px solid var(--wy-fir);border-radius:8px;background:none;color:var(--wy-fir);font:700 17px 'Inter',sans-serif;cursor:pointer}
@@ -43880,15 +43948,10 @@ function SchieberWeisPanel({ open, teamId, teams, onSave, onClose, t, theme }) {
 		className: "gt-wy-tb",
 		"aria-pressed": stoeck,
 		onClick: () => setStoeck((s) => !s)
-	}, stoeck && chk, /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gt-wy-fan",
-		"aria-hidden": "true"
-	}, /* @__PURE__ */ import_react.default.createElement("img", {
-		className: "gt-wy-st",
-		src: "./img/sch-stoeck.webp",
-		alt: "",
-		draggable: false
-	})), /* @__PURE__ */ import_react.default.createElement("b", null, "Stöck"), /* @__PURE__ */ import_react.default.createElement("i", null, t("weisPts")(20))))), /* @__PURE__ */ import_react.default.createElement("button", {
+	}, stoeck && chk, /* @__PURE__ */ import_react.default.createElement(WyFan, {
+		c: ["D", "K"],
+		s: "h"
+	}), /* @__PURE__ */ import_react.default.createElement("b", null, "Stöck"), /* @__PURE__ */ import_react.default.createElement("i", null, t("weisPts")(20))))), /* @__PURE__ */ import_react.default.createElement("button", {
 		type: "button",
 		className: "gt-wy-more",
 		"aria-expanded": more,
@@ -44364,7 +44427,18 @@ function SchieberGame({ teams, setTeams, target, setTarget, phase, setPhase, onB
 		setPhase("play");
 	};
 	const saveTour = () => {
-		if (!GT_ST_STORE.commit(link.tid, (x) => GT_ST.completeMatch(x, link.mid, totals[0] > totals[1] ? "A" : "B")).ok) {
+		const ppl = (linkT.participants || []).filter((p) => linkM.teamA.concat(linkM.teamB).includes(p.id));
+		const weis = [];
+		teams.forEach((tm) => (Array.isArray(tm.weis) ? tm.weis : []).forEach((w) => {
+			const who = w && typeof w.player === "string" ? normalizeName(w.player) : "";
+			const p = who && ppl.find((q) => normalizeName(q.displayName) === who);
+			const pts = w && Array.isArray(w.items) ? w.items.reduce((s, k) => s + (WEIS_PTS[k] || 0), 0) * (w.factor || 1) : 0;
+			if (p && pts > 0) weis.push({
+				pid: p.id,
+				pts
+			});
+		}));
+		if (!GT_ST_STORE.commit(link.tid, (x) => GT_ST.completeMatch(x, link.mid, totals[0] > totals[1] ? "A" : "B", { weis })).ok) {
 			setTourErr(true);
 			return;
 		}
@@ -108549,7 +108623,7 @@ function YatzyGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 }
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.05-3";
+var APP_BUILD = "2026.11.05-4";
 // web/src/app/storage.js
 var storage_exports = /* @__PURE__ */ __exportAll({
 	GT_CAT_KEYS: () => GT_CAT_KEYS,
@@ -108671,7 +108745,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.05-3");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.05-4");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -111192,7 +111266,7 @@ function UpdateBanner() {
 		let alive = true;
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.05-3") {
+				if (alive && v && v.build && v.build !== "2026.11.05-4") {
 					setReady(true);
 					setHidden(false);
 					try {

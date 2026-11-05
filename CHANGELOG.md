@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.05-4 (05.11.2026 01:03)
+- Turnier: Preis Grösster Schwätzer auf der Finalkarte, Stöck-Kachel mit gezeichneten Karten
+
 ## 2026.11.05-3 (05.11.2026 00:49)
 - Schieber: Wyys-Liste scrollt ab 2 Einträgen, Stöck-Bild freigestellt
 

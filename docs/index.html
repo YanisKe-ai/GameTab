@@ -18245,14 +18245,14 @@ input[type="number"] { -moz-appearance: textfield; }
 .gtsb-c3 { position: absolute; left: 0; bottom: 0; }
 .gtsb-b3 { position: absolute; left: 0; bottom: 0; }
 .gtsb-f { position: absolute; overflow: hidden; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
-.gtsb-cv, .gtsb-cvt { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
-.gtsb-cv { transform: translateY(calc(-100% - 26px)); will-change: transform; }
-.gtsb-wr { position: absolute; left: 0; right: 0; top: calc(100% - 1px); height: 12px; transform-origin: 50% 0; }
-.gtsb-w1, .gtsb-w2 { position: absolute; left: 0; width: 200%; display: block; }
-.gtsb-w1 { top: 0; height: 12px; }
-.gtsb-w2 { top: -4px; height: 12px; }
-.gtsb-bb { position: absolute; bottom: -8px; width: 7px; height: 7px; border-radius: 50%; z-index: 2; opacity: 0; pointer-events: none; background: radial-gradient(circle at 35% 30%, rgba(255,255,255,0.95), rgba(255,255,255,0.25) 60%, rgba(255,255,255,0.1)); }
-.gtsb-cvt { opacity: 0; }
+.gtsb-gl { -webkit-backface-visibility: visible; backface-visibility: visible; }
+.gtsb-lq { position: absolute; left: 0; top: 0; width: 100%; height: 135%; transform-origin: 50% 0; }
+.gtsb-lq::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1.5px; background: rgba(255,255,255,0.3); }
+.gtsb-lqn { position: absolute; inset: 0; transform-origin: 50% 0; }
+.gtsb-lqc { position: absolute; left: 0; right: 0; top: 0; display: flex; align-items: center; justify-content: center; }
+.gtsb-tp { position: absolute; inset: 0; }
+.gtsb-pl { position: absolute; opacity: 0; pointer-events: none; }
+.gtsb-ed { position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 2px 0 rgba(255,255,255,0.3), inset 2px 0 0 rgba(255,255,255,0.1), inset -2px 0 0 rgba(0,0,0,0.14), inset 0 -3px 0 rgba(0,0,0,0.18); }
 .gtsb-ff { display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: inset 0 2px 0 rgba(255,255,255,0.3), inset 2px 0 0 rgba(255,255,255,0.1), inset -2px 0 0 rgba(0,0,0,0.14), inset 0 -3px 0 rgba(0,0,0,0.18); }
 .gtsb-sh3 { position: absolute; transform: rotateX(90deg); pointer-events: none; }
 .gtsb-an { position: absolute; width: 0; height: 0; }
@@ -18277,7 +18277,7 @@ input[type="number"] { -moz-appearance: textfield; }
 .gtsb-x:focus-visible > span { box-shadow: 0 0 0 2px currentColor; }
 .gtsb-sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 @media (prefers-reduced-motion: reduce) { .gtsb-sheen > i { animation: none !important; } }
-@media (forced-colors: active) { .gtsb-f { border: 1px solid CanvasText; } .gtsb-sheen, .gtsb-sh3, .gtsb-cv, .gtsb-cvt, .gtsb-bb { display: none; } }
+@media (forced-colors: active) { .gtsb-f { border: 1px solid CanvasText; } .gtsb-sheen, .gtsb-sh3, .gtsb-pl { display: none; } }
 @keyframes podium-rise { from { opacity: 0; transform: translateY(24px); filter: blur(6px); } to { opacity: 1; transform: translateY(0); filter: none; } }
 .podium-block-3 { opacity: 0; animation: podium-rise 0.45s var(--gt-ease-spring, cubic-bezier(.34,1.3,.64,1)) 0.10s forwards; }
 .podium-block-2 { opacity: 0; animation: podium-rise 0.45s var(--gt-ease-spring, cubic-bezier(.34,1.3,.64,1)) 0.22s forwards; }
@@ -43061,6 +43061,7 @@ var SCHIEBER_PL_CSS = `
 .gt-wy-card.gt-wy-face{top:3px;width:48px;height:68px;margin-left:-24px;padding:0}
 .gt-wy-card svg.wc{left:0;top:0;width:100%;height:100%;--c-r:#C22A2A;--c-b:#27407E;--c-g:#E2B23C;--c-w:#FBF6EA;--c-s:#F4D6B4;--c-h:#3A2A20;--c-q:#9A5A22;--c-l:#1E1A16;--c-t:#3E7A4A;--c-f:#27304F}
 .gt-wy-noir .gt-wy-card svg.wc{--c-r:#2A2A2A;--c-b:#6E6E6E;--c-g:#BDBDBD;--c-w:#FFF;--c-s:#EDEDED;--c-h:#1A1A1A;--c-q:#5A5A5A;--c-l:#111;--c-t:#444;--c-f:#111}
+.gt-wy-card svg.wy-ace{left:14px;top:22px;width:22px;height:22px}
 .wc-k .wc-i,.wc-k .wc-p{fill:var(--c-l)}
 .wc-f,.wc-m{fill:none;stroke:var(--c-f);stroke-width:1}.wc-m{stroke-width:1.2}.wc-i{fill:var(--c-r);font-size:18px;font-weight:700;text-anchor:middle}.wc-p,.wc-r,.wc-lip{fill:var(--c-r)}.wc-b{fill:var(--c-b)}.wc-g{fill:var(--c-g)}.wc-w{fill:var(--c-w)}.wc-skin{fill:var(--c-s)}.wc-hair{fill:var(--c-h)}.wc-hairq{fill:var(--c-q)}
 .wc-l,.wc-e,.wc-t,.wc-st{fill:none;stroke-linecap:round;stroke-linejoin:round}.wc-l{stroke:var(--c-l);stroke-width:1.3}.wc-e{stroke:var(--c-l);stroke-width:2.4}.wc-t{stroke:var(--c-h);stroke-width:1}.wc-st{stroke:var(--c-g);stroke-width:2.6}.wc-stem{fill:var(--c-t);stroke:var(--c-t);stroke-width:1.6;stroke-linecap:round}
@@ -43983,9 +43984,9 @@ var WY_TILES = [
 	[
 		"w3",
 		[
-			"A",
+			"D",
 			"K",
-			"D"
+			"A"
 		],
 		"h"
 	],
@@ -44025,7 +44026,7 @@ var WY_MORE = [
 	"g4b"
 ];
 function WyFan({ c, s }) {
-	const n = c.length, sp = n > 4 ? 15 : n > 3 ? 17 : 19;
+	const n = c.length, sp = n > 4 ? 15 : n > 3 ? 17 : 22;
 	return /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gt-wy-fan",
 		"aria-hidden": "true"
@@ -44039,6 +44040,10 @@ function WyFan({ c, s }) {
 			r,
 			s: u
 		}) : /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, r, /* @__PURE__ */ import_react.default.createElement("svg", {
+			viewBox: "0 0 24 24",
+			fill: "currentColor"
+		}, /* @__PURE__ */ import_react.default.createElement("path", { d: WY_SUIT[u] })), r === "A" && /* @__PURE__ */ import_react.default.createElement("svg", {
+			className: "wy-ace",
 			viewBox: "0 0 24 24",
 			fill: "currentColor"
 		}, /* @__PURE__ */ import_react.default.createElement("path", { d: WY_SUIT[u] }))));
@@ -102019,55 +102024,38 @@ function gtSbVivid(hex) {
 	const to = (v) => Math.round((v + m) * 255).toString(16).padStart(2, "0");
 	return "#" + to(a) + to(bq) + to(cq);
 }
-var GT_SB_WAVE = "M0 8Q12.5 2 25 8T50 8T75 8T100 8T125 8T150 8T175 8T200 8";
 function GtBlock3D({ W, D, H, win, rk, S, fs, fill }) {
 	const c = win ? S.th === "light" || S.th === "noir" || S.bright ? S.acc : gtSbVivid(S.acc) : S.base;
-	const pale = S.th === "light";
-	const shell = (k) => shadeHex(c, pale ? .72 + k * .5 : -.66 - k);
-	const edge = `inset 1.5px 0 0 ${c}66, inset -1.5px 0 0 ${c}66, inset 0 1.5px 0 ${c}66`;
-	const tint = shadeHex(c, pale ? .42 : -.34);
-	const cv = (k, cls) => !fill ? null : cls ? /* @__PURE__ */ import_react.default.createElement("i", {
-		className: cls,
-		style: { background: shell(k) }
-	}) : /* @__PURE__ */ import_react.default.createElement("i", {
-		className: "gtsb-cv",
+	const glass = c + (S.th === "light" ? "30" : "24");
+	const sizes = (w, h, tr) => ({
+		width: w,
+		height: h,
+		left: (W - w) / 2,
+		top: (H - h) / 2,
+		transform: tr
+	});
+	const lq = (g) => /* @__PURE__ */ import_react.default.createElement("i", {
+		className: "gtsb-lq",
 		style: {
-			background: shell(k),
-			boxShadow: edge
+			background: g,
+			backgroundColor: c,
+			backgroundSize: `100% ${H}px`,
+			backgroundRepeat: "no-repeat"
 		}
-	}, /* @__PURE__ */ import_react.default.createElement("span", { className: "gtsb-wr" }, /* @__PURE__ */ import_react.default.createElement("svg", {
-		className: "gtsb-w1",
-		viewBox: "0 0 200 16",
-		preserveAspectRatio: "none"
-	}, /* @__PURE__ */ import_react.default.createElement("path", {
-		d: GT_SB_WAVE + "V0H0Z",
-		fill: tint
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: GT_SB_WAVE,
-		fill: "none",
-		stroke: "#fff",
-		strokeOpacity: ".6",
-		strokeWidth: "1.6",
-		vectorEffect: "non-scaling-stroke"
-	})), /* @__PURE__ */ import_react.default.createElement("svg", {
-		className: "gtsb-w2",
-		viewBox: "0 0 200 16",
-		preserveAspectRatio: "none"
-	}, /* @__PURE__ */ import_react.default.createElement("path", {
-		d: GT_SB_WAVE + "V0H0Z",
-		fill: shell(k)
-	}))));
-	const face = (cls, w, h, tr, bg, k, top) => /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtsb-f " + cls,
+	});
+	const side = (cls, tr, g) => /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtsb-f " + cls + (fill ? " gtsb-gl" : ""),
+		style: Object.assign(sizes(D, H, tr), { background: fill ? glass : g })
+	}, fill && lq(g));
+	const gTop = `linear-gradient(180deg, ${shadeHex(c, .34)}, ${shadeHex(c, .16)})`, gFront = `linear-gradient(175deg, ${shadeHex(c, .1)}, ${c} 46%, ${shadeHex(c, -.2)})`;
+	const num = /* @__PURE__ */ import_react.default.createElement("span", {
+		className: "gtsb-num",
 		style: {
-			width: w,
-			height: h,
-			left: (W - w) / 2,
-			top: (H - h) / 2,
-			transform: tr,
-			background: bg
+			fontSize: fs,
+			color: win ? S.accNum : S.num,
+			textShadow: win ? S.accNumSh : S.numSh
 		}
-	}, cv(k, top ? "gtsb-cvt" : null));
+	}, rk);
 	return /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtsb-b3",
 		"aria-hidden": true,
@@ -102075,7 +102063,25 @@ function GtBlock3D({ W, D, H, win, rk, S, fs, fill }) {
 			width: W,
 			height: H
 		}
-	}, face("gtsb-fl", D, H, `rotateY(-90deg) translateZ(${W / 2}px)`, `linear-gradient(270deg, ${shadeHex(c, -.24)}, ${shadeHex(c, -.44)})`, .08), face("gtsb-fr", D, H, `rotateY(90deg) translateZ(${W / 2}px)`, `linear-gradient(90deg, ${shadeHex(c, -.3)}, ${shadeHex(c, -.5)})`, .12), face("gtsb-ft", W, D, `rotateX(90deg) translateZ(${H / 2}px)`, `linear-gradient(180deg, ${shadeHex(c, .34)}, ${shadeHex(c, .16)})`, -.08, true), /* @__PURE__ */ import_react.default.createElement("div", {
+	}, fill && /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtsb-f",
+		style: Object.assign(sizes(W, H, `translateZ(${-D / 2}px)`), { background: glass })
+	}), fill && /* @__PURE__ */ import_react.default.createElement("i", {
+		className: "gtsb-pl",
+		style: {
+			width: W - 2,
+			height: D - 2,
+			left: 1,
+			top: H - (D - 2) / 2,
+			background: `linear-gradient(180deg, ${shadeHex(c, .3)}, ${shadeHex(c, .12)})`
+		}
+	}), side("gtsb-fl", `rotateY(-90deg) translateZ(${W / 2}px)`, `linear-gradient(270deg, ${shadeHex(c, -.24)}, ${shadeHex(c, -.44)})`), side("gtsb-fr", `rotateY(90deg) translateZ(${W / 2}px)`, `linear-gradient(90deg, ${shadeHex(c, -.3)}, ${shadeHex(c, -.5)})`), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtsb-f gtsb-ft",
+		style: Object.assign(sizes(W, D, `rotateX(90deg) translateZ(${H / 2}px)`), { background: fill ? glass : gTop })
+	}, fill && /* @__PURE__ */ import_react.default.createElement("i", {
+		className: "gtsb-tp",
+		style: { background: gTop }
+	})), /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtsb-f gtsb-ff",
 		style: {
 			width: W,
@@ -102083,25 +102089,20 @@ function GtBlock3D({ W, D, H, win, rk, S, fs, fill }) {
 			left: 0,
 			top: 0,
 			transform: `translateZ(${D / 2}px)`,
-			background: `linear-gradient(175deg, ${shadeHex(c, .1)}, ${c} 46%, ${shadeHex(c, -.2)})`
+			background: fill ? glass : gFront
 		}
-	}, /* @__PURE__ */ import_react.default.createElement("span", {
-		className: "gtsb-num",
+	}, fill ? /* @__PURE__ */ import_react.default.createElement("i", {
+		className: "gtsb-lq gtsb-lqf",
 		style: {
-			fontSize: fs,
-			color: win ? S.accNum : S.num,
-			textShadow: win ? S.accNumSh : S.numSh
+			background: gFront,
+			backgroundColor: c,
+			backgroundSize: `100% ${H}px`,
+			backgroundRepeat: "no-repeat"
 		}
-	}, rk), win && /* @__PURE__ */ import_react.default.createElement("span", { className: "gtsb-sheen" }, /* @__PURE__ */ import_react.default.createElement("i", null)), fill && [
-		18,
-		41,
-		63,
-		82
-	].map((x) => /* @__PURE__ */ import_react.default.createElement("i", {
-		key: x,
-		className: "gtsb-bb",
-		style: { left: x + "%" }
-	})), cv(0)));
+	}, /* @__PURE__ */ import_react.default.createElement("span", { className: "gtsb-lqn" }, /* @__PURE__ */ import_react.default.createElement("span", {
+		className: "gtsb-lqc",
+		style: { height: H }
+	}, num))) : num, win && /* @__PURE__ */ import_react.default.createElement("span", { className: "gtsb-sheen" }, /* @__PURE__ */ import_react.default.createElement("i", null)), fill && /* @__PURE__ */ import_react.default.createElement("i", { className: "gtsb-ed" })));
 }
 function GtSoftBlock({ H, win, rk, S, lv }) {
 	return /* @__PURE__ */ import_react.default.createElement("div", {
@@ -108892,7 +108893,7 @@ function YatzyGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 }
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.05-6";
+var APP_BUILD = "2026.11.05-7";
 // web/src/app/storage.js
 var storage_exports = /* @__PURE__ */ __exportAll({
 	GT_CAT_KEYS: () => GT_CAT_KEYS,
@@ -109014,7 +109015,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.05-6");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.05-7");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -109480,7 +109481,7 @@ function PodiumOverlay({ open, onClose, onRestart, extraAct, ranked, tk, t, best
 		}
 		gtSbSeen.add(sig);
 		setSbPh("run");
-		const tm = [setTimeout(() => setSbPh("fin"), 3050), setTimeout(() => setSbPh("done"), 3650)];
+		const tm = [setTimeout(() => setSbPh("fin"), 3250), setTimeout(() => setSbPh("done"), 3850)];
 		const stop = () => {
 			tm.forEach(clearTimeout);
 			setSbPh("done");
@@ -109903,61 +109904,32 @@ function GtPodiumBlocks({ items, S, play, land }) {
 					easing: "cubic-bezier(.23,1,.32,1)",
 					fill: "backwards"
 				}));
-				const f0 = d + t * .8, fd = 1e3 + items[i].H * 4;
-				blks[i].querySelectorAll(".gtsb-cv").forEach((c) => run.push(c.animate([{ transform: "translateY(0)" }, { transform: "translateY(calc(-100% - 26px))" }], {
+				const H = items[i].H, f0 = d + t * .8, fd = 1300 + H * 5, kF = [], kN = [], kL = [], kR = [], kP = [];
+				for (let q = 0; q <= 48; q++) {
+					const u = q / 48, lv = H * (1 - Math.pow(1 - u, 1.5)), a = W * .09 * Math.exp(-3.4 * u) * Math.sin(u * 21.4) * (1 - u) * Math.min(1, lv / 14), p = H - lv, th = -Math.atan(2 * a / W) * 57.3;
+					kF.push({ transform: `translateY(${p.toFixed(1)}px) skewY(${th.toFixed(2)}deg)` });
+					kN.push({ transform: `skewY(${(-th).toFixed(2)}deg) translateY(${(-p).toFixed(1)}px)` });
+					kL.push({ transform: `translateY(${(p + a).toFixed(1)}px)` });
+					kR.push({ transform: `translateY(${(p - a).toFixed(1)}px)` });
+					kP.push({
+						opacity: q ? 1 : 0,
+						transform: `translateY(${(-lv).toFixed(1)}px) rotateX(90deg) rotateY(${th.toFixed(2)}deg)`
+					});
+				}
+				const pour = (sel, kf) => blks[i].querySelectorAll(sel).forEach((c) => run.push(c.animate(kf, {
 					duration: fd,
 					delay: f0,
-					easing: "cubic-bezier(.3,.3,.45,1)",
+					easing: "linear",
 					fill: "backwards"
 				})));
-				const wave = (sel, kf, ms) => blks[i].querySelectorAll(sel).forEach((c) => run.push(c.animate(kf, {
-					duration: ms,
-					delay: f0,
-					iterations: Math.ceil(fd / ms) + 1,
-					easing: "linear"
-				})));
-				wave(".gtsb-w1", [{ transform: "translateX(0)" }, { transform: "translateX(-50%)" }], 1300);
-				wave(".gtsb-w2", [{ transform: "translateX(-50%)" }, { transform: "translateX(0)" }], 900);
-				blks[i].querySelectorAll(".gtsb-wr").forEach((c) => run.push(c.animate([
-					{ transform: "scaleY(2.1)" },
-					{
-						transform: "scaleY(1.2)",
-						offset: .35
-					},
-					{ transform: "scaleY(0.55)" }
-				], {
-					duration: fd,
-					delay: f0,
-					easing: "ease-out"
-				})));
-				blks[i].querySelectorAll(".gtsb-bb").forEach((c, j) => {
-					const h = items[i].H, s = j % 2 ? 5 : -5;
-					run.push(c.animate([
-						{
-							opacity: 0,
-							transform: "translate(0,0) scale(.6)"
-						},
-						{
-							opacity: .55,
-							offset: .15
-						},
-						{
-							transform: `translate(${s}px,${-h * .5}px) scale(1)`,
-							offset: .55
-						},
-						{
-							opacity: .55,
-							transform: `translate(${-s}px,${-h}px) scale(1.25)`
-						}
-					], {
-						duration: fd * .72,
-						delay: f0 + 120 + j * fd * .08,
-						easing: "ease-in"
-					}));
-				});
-				blks[i].querySelectorAll(".gtsb-cvt").forEach((c) => run.push(c.animate([{ opacity: 1 }, { opacity: 0 }], {
-					duration: 320,
-					delay: f0 + fd - 300,
+				pour(".gtsb-lqf", kF);
+				pour(".gtsb-lqn", kN);
+				pour(".gtsb-fl .gtsb-lq", kL);
+				pour(".gtsb-fr .gtsb-lq", kR);
+				pour(".gtsb-pl", kP);
+				blks[i].querySelectorAll(".gtsb-tp").forEach((c) => run.push(c.animate([{ opacity: 0 }, { opacity: 1 }], {
+					duration: 260,
+					delay: f0 + fd - 260,
 					easing: "ease-out",
 					fill: "backwards"
 				})));
@@ -111594,7 +111566,7 @@ function UpdateBanner() {
 		let alive = true;
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.05-6") {
+				if (alive && v && v.build && v.build !== "2026.11.05-7") {
 					setReady(true);
 					setHidden(false);
 					try {

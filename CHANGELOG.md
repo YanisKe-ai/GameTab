@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.05-7 (05.11.2026 10:26)
+- Podest füllt sich wie echte Flüssigkeit im Glasblock, Wyys-Karten links tief, rechts hoch
+
 ## 2026.11.05-6 (05.11.2026 07:36)
 - Podest füllt sich wie Flüssigkeit, Wyys-Kacheln mit Bildkarten und 4 Gleiche
 

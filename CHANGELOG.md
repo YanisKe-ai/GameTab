@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.05-6 (05.11.2026 07:36)
+- Podest füllt sich wie Flüssigkeit, Wyys-Kacheln mit Bildkarten und 4 Gleiche
+
 ## 2026.11.05-5 (05.11.2026 07:23)
 - Stöck-Karten mit König und Dame, Podest-Blöcke füllen sich nach dem Aufprall
 

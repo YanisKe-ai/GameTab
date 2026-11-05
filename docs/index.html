@@ -18246,8 +18246,12 @@ input[type="number"] { -moz-appearance: textfield; }
 .gtsb-b3 { position: absolute; left: 0; bottom: 0; }
 .gtsb-f { position: absolute; overflow: hidden; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
 .gtsb-cv, .gtsb-cvt { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
-.gtsb-cv { transform: translateY(-104%); will-change: transform; }
-.gtsb-cv::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: rgba(255,255,255,0.6); box-shadow: 0 0 7px rgba(255,255,255,0.45); }
+.gtsb-cv { transform: translateY(calc(-100% - 26px)); will-change: transform; }
+.gtsb-wr { position: absolute; left: 0; right: 0; top: calc(100% - 1px); height: 12px; transform-origin: 50% 0; }
+.gtsb-w1, .gtsb-w2 { position: absolute; left: 0; width: 200%; display: block; }
+.gtsb-w1 { top: 0; height: 12px; }
+.gtsb-w2 { top: -4px; height: 12px; }
+.gtsb-bb { position: absolute; bottom: -8px; width: 7px; height: 7px; border-radius: 50%; z-index: 2; opacity: 0; pointer-events: none; background: radial-gradient(circle at 35% 30%, rgba(255,255,255,0.95), rgba(255,255,255,0.25) 60%, rgba(255,255,255,0.1)); }
 .gtsb-cvt { opacity: 0; }
 .gtsb-ff { display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: inset 0 2px 0 rgba(255,255,255,0.3), inset 2px 0 0 rgba(255,255,255,0.1), inset -2px 0 0 rgba(0,0,0,0.14), inset 0 -3px 0 rgba(0,0,0,0.18); }
 .gtsb-sh3 { position: absolute; transform: rotateX(90deg); pointer-events: none; }
@@ -18273,7 +18277,7 @@ input[type="number"] { -moz-appearance: textfield; }
 .gtsb-x:focus-visible > span { box-shadow: 0 0 0 2px currentColor; }
 .gtsb-sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 @media (prefers-reduced-motion: reduce) { .gtsb-sheen > i { animation: none !important; } }
-@media (forced-colors: active) { .gtsb-f { border: 1px solid CanvasText; } .gtsb-sheen, .gtsb-sh3, .gtsb-cv, .gtsb-cvt { display: none; } }
+@media (forced-colors: active) { .gtsb-f { border: 1px solid CanvasText; } .gtsb-sheen, .gtsb-sh3, .gtsb-cv, .gtsb-cvt, .gtsb-bb { display: none; } }
 @keyframes podium-rise { from { opacity: 0; transform: translateY(24px); filter: blur(6px); } to { opacity: 1; transform: translateY(0); filter: none; } }
 .podium-block-3 { opacity: 0; animation: podium-rise 0.45s var(--gt-ease-spring, cubic-bezier(.34,1.3,.64,1)) 0.10s forwards; }
 .podium-block-2 { opacity: 0; animation: podium-rise 0.45s var(--gt-ease-spring, cubic-bezier(.34,1.3,.64,1)) 0.22s forwards; }
@@ -42166,6 +42170,52 @@ function StartPage({ onSelect, lang, theme, viewMode, lastPlayed, dismissedResum
 }
 // web/src/games/schieber/wy-court.js
 var WY_HALF = {
+	B: /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-b",
+		d: "M48 82H10V58C24 53 33 50 40 48H48Z"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-g",
+		d: "M48 82V48H56C63 50 72 53 86 58V82Z"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-r",
+		d: "M43 49H53L56 82H40Z"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-l",
+		d: "M48 52V70"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-w",
+		d: "M38 47C43 51 53 51 58 47L60 51C55 55 41 55 36 51Z"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-hairq",
+		d: "M37 26C34 33 34 41 38 45L42 40V30ZM59 26C62 33 62 41 58 45L54 40V30Z"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-skin",
+		d: "M39 26H57V38C57 44 53 48 48 48S39 44 39 38Z"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-e",
+		d: "M43.5 33V33.1M52.5 33V33.1"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-t",
+		d: "M41.6 30.2H45.4M50.6 30.2H54.4M48 32.6V36.4L46.9 37"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-lip",
+		d: "M45.8 41C47 40.2 49 40.2 50.2 41 49 42.4 47 42.4 45.8 41Z"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-r",
+		d: "M36 27C36 17 43 13 50 13 57 13 61 19 60 27 52 24 44 24 36 27Z"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-g",
+		d: "M35 27C43 23 53 23 61 27L60 30C53 27 43 27 36 30Z"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-b",
+		d: "M38 18C32 12 28 11 24 12 28 17 32 20 37 21Z"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-st",
+		d: "M71 14 69 60"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		className: "wc-b",
+		d: "M71 12 76 20 71 26 65 24 68 20Z"
+	})),
 	K: /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("path", {
 		className: "wc-b",
 		d: "M48 82V48H56C63 50 72 53 86 58V82Z"
@@ -42274,8 +42324,9 @@ var WY_HALF = {
 		d: "M71 19.4C72.6 19.4 73.6 20.6 73.4 22 73 23.6 71.8 24.4 71 24.4S69 23.6 68.6 22C68.4 20.6 69.4 19.4 71 19.4Z"
 	}))
 };
+var WY_PIP = { s: "M12 2C8 7 3 10 3 14.5 3 17 5 19 7.4 19c1.4 0 2.7-.6 3.5-1.7-.2 1.7-.9 3-2.2 4.2h6.6c-1.3-1.2-2-2.5-2.2-4.2.8 1.1 2.1 1.7 3.5 1.7C19 19 21 17 21 14.5 21 10 16 7 12 2Z" };
 var WY_HEART = "M12 21C5 15 2 11.5 2 7.6 2 4.8 4.2 3 6.6 3c2.2 0 4 1.2 5.4 3.4C13.4 4.2 15.2 3 17.4 3 19.8 3 22 4.8 22 7.6 22 11.5 19 15 12 21Z";
-function WyIdx({ r }) {
+function WyIdx({ r, s }) {
 	return /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("text", {
 		className: "wc-i",
 		x: "10",
@@ -42283,13 +42334,13 @@ function WyIdx({ r }) {
 	}, r), /* @__PURE__ */ import_react.default.createElement("path", {
 		className: "wc-p",
 		transform: "translate(4.6 23) scale(.45)",
-		d: WY_HEART
+		d: WY_PIP[s] || WY_HEART
 	}));
 }
-function WyCourt({ r }) {
+function WyCourt({ r, s }) {
 	const f = WY_HALF[r];
 	return /* @__PURE__ */ import_react.default.createElement("svg", {
-		className: "wc",
+		className: "wc" + (s === "s" ? " wc-k" : ""),
 		viewBox: "0 0 96 136"
 	}, /* @__PURE__ */ import_react.default.createElement("clipPath", { id: "wc-half" }, /* @__PURE__ */ import_react.default.createElement("path", { d: "M19 8H77V60.6L19 75.4Z" })), /* @__PURE__ */ import_react.default.createElement("rect", {
 		className: "wc-f",
@@ -42301,7 +42352,13 @@ function WyCourt({ r }) {
 	}), /* @__PURE__ */ import_react.default.createElement("g", { clipPath: "url(#wc-half)" }, f), /* @__PURE__ */ import_react.default.createElement("g", { transform: "rotate(180 48 68)" }, /* @__PURE__ */ import_react.default.createElement("g", { clipPath: "url(#wc-half)" }, f)), /* @__PURE__ */ import_react.default.createElement("path", {
 		className: "wc-m",
 		d: "M19 75.4 77 60.6"
-	}), /* @__PURE__ */ import_react.default.createElement(WyIdx, { r }), /* @__PURE__ */ import_react.default.createElement("g", { transform: "rotate(180 48 68)" }, /* @__PURE__ */ import_react.default.createElement(WyIdx, { r })));
+	}), /* @__PURE__ */ import_react.default.createElement(WyIdx, {
+		r,
+		s
+	}), /* @__PURE__ */ import_react.default.createElement("g", { transform: "rotate(180 48 68)" }, /* @__PURE__ */ import_react.default.createElement(WyIdx, {
+		r,
+		s
+	})));
 }
 function WyCourtFan() {
 	return /* @__PURE__ */ import_react.default.createElement("div", {
@@ -43004,6 +43061,7 @@ var SCHIEBER_PL_CSS = `
 .gt-wy-card.gt-wy-face{top:3px;width:48px;height:68px;margin-left:-24px;padding:0}
 .gt-wy-card svg.wc{left:0;top:0;width:100%;height:100%;--c-r:#C22A2A;--c-b:#27407E;--c-g:#E2B23C;--c-w:#FBF6EA;--c-s:#F4D6B4;--c-h:#3A2A20;--c-q:#9A5A22;--c-l:#1E1A16;--c-t:#3E7A4A;--c-f:#27304F}
 .gt-wy-noir .gt-wy-card svg.wc{--c-r:#2A2A2A;--c-b:#6E6E6E;--c-g:#BDBDBD;--c-w:#FFF;--c-s:#EDEDED;--c-h:#1A1A1A;--c-q:#5A5A5A;--c-l:#111;--c-t:#444;--c-f:#111}
+.wc-k .wc-i,.wc-k .wc-p{fill:var(--c-l)}
 .wc-f,.wc-m{fill:none;stroke:var(--c-f);stroke-width:1}.wc-m{stroke-width:1.2}.wc-i{fill:var(--c-r);font-size:18px;font-weight:700;text-anchor:middle}.wc-p,.wc-r,.wc-lip{fill:var(--c-r)}.wc-b{fill:var(--c-b)}.wc-g{fill:var(--c-g)}.wc-w{fill:var(--c-w)}.wc-skin{fill:var(--c-s)}.wc-hair{fill:var(--c-h)}.wc-hairq{fill:var(--c-q)}
 .wc-l,.wc-e,.wc-t,.wc-st{fill:none;stroke-linecap:round;stroke-linejoin:round}.wc-l{stroke:var(--c-l);stroke-width:1.3}.wc-e{stroke:var(--c-l);stroke-width:2.4}.wc-t{stroke:var(--c-h);stroke-width:1}.wc-st{stroke:var(--c-g);stroke-width:2.6}.wc-stem{fill:var(--c-t);stroke:var(--c-t);stroke-width:1.6;stroke-linecap:round}
 .gt-wy-qty{display:flex;align-items:center;justify-content:center;gap:4px;padding:0 6px 8px;font-family:'Inter',sans-serif;font-weight:700;font-size:14px;color:var(--wy-ink)}
@@ -43918,46 +43976,51 @@ function weisMembers(name) {
 var WY_SUIT = {
 	h: "M12 21C5 15 2 11.5 2 7.6 2 4.8 4.2 3 6.6 3c2.2 0 4 1.2 5.4 3.4C13.4 4.2 15.2 3 17.4 3 19.8 3 22 4.8 22 7.6 22 11.5 19 15 12 21Z",
 	d: "M12 2 20 12 12 22 4 12Z",
+	c: "M12 2a5 5 0 0 1 4.6 7 5 5 0 1 1-2.9 7.6c.2 1.9.9 3.4 2.2 5.4H8.1c1.3-2 2-3.5 2.2-5.4A5 5 0 1 1 7.4 9 5 5 0 0 1 12 2Z",
 	s: "M12 2C8 7 3 10 3 14.5 3 17 5 19 7.4 19c1.4 0 2.7-.6 3.5-1.7-.2 1.7-.9 3-2.2 4.2h6.6c-1.3-1.2-2-2.5-2.2-4.2.8 1.1 2.1 1.7 3.5 1.7C19 19 21 17 21 14.5 21 10 16 7 12 2Z"
 };
 var WY_TILES = [
 	[
 		"w3",
 		[
-			"7",
-			"8",
-			"9"
+			"A",
+			"K",
+			"D"
 		],
 		"h"
 	],
 	[
 		"w4",
 		[
-			"6",
-			"7",
-			"8",
-			"9"
+			"9",
+			"10",
+			"B",
+			"D"
 		],
 		"s"
 	],
 	[
-		"w5",
+		"g4",
 		[
-			"6",
-			"7",
-			"8",
-			"9",
-			"10"
+			"A",
+			"A",
+			"A",
+			"A"
 		],
-		"d"
+		[
+			"h",
+			"s",
+			"d",
+			"c"
+		]
 	]
 ];
 var WY_MORE = [
+	"w5",
 	"w6",
 	"w7",
 	"w8",
 	"w9",
-	"g4",
 	"g4n",
 	"g4b"
 ];
@@ -43967,15 +44030,18 @@ function WyFan({ c, s }) {
 		className: "gt-wy-fan",
 		"aria-hidden": "true"
 	}, c.map((r, i) => {
-		const o = i - (n - 1) / 2;
+		const o = i - (n - 1) / 2, u = Array.isArray(s) ? s[i] : s;
 		return /* @__PURE__ */ import_react.default.createElement("span", {
-			key: r,
-			className: "gt-wy-card" + (s === "s" ? " is-k" : ""),
+			key: i,
+			className: "gt-wy-card" + (u === "s" || u === "c" ? " is-k" : ""),
 			style: { transform: `translateX(${o * sp}px) rotate(${o * 8}deg)` }
-		}, r, /* @__PURE__ */ import_react.default.createElement("svg", {
+		}, r === "K" || r === "D" || r === "B" ? /* @__PURE__ */ import_react.default.createElement(WyCourt, {
+			r,
+			s: u
+		}) : /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, r, /* @__PURE__ */ import_react.default.createElement("svg", {
 			viewBox: "0 0 24 24",
 			fill: "currentColor"
-		}, /* @__PURE__ */ import_react.default.createElement("path", { d: WY_SUIT[s] })));
+		}, /* @__PURE__ */ import_react.default.createElement("path", { d: WY_SUIT[u] }))));
 	}));
 }
 function SchieberWeisPanel({ open, teamId, teams, onSave, onClose, t, theme }) {
@@ -101953,17 +102019,44 @@ function gtSbVivid(hex) {
 	const to = (v) => Math.round((v + m) * 255).toString(16).padStart(2, "0");
 	return "#" + to(a) + to(bq) + to(cq);
 }
+var GT_SB_WAVE = "M0 8Q12.5 2 25 8T50 8T75 8T100 8T125 8T150 8T175 8T200 8";
 function GtBlock3D({ W, D, H, win, rk, S, fs, fill }) {
 	const c = win ? S.th === "light" || S.th === "noir" || S.bright ? S.acc : gtSbVivid(S.acc) : S.base;
 	const pale = S.th === "light";
 	const shell = (k) => shadeHex(c, pale ? .72 + k * .5 : -.66 - k);
-	const cv = (k, cls) => fill ? /* @__PURE__ */ import_react.default.createElement("i", {
-		className: cls || "gtsb-cv",
+	const edge = `inset 1.5px 0 0 ${c}66, inset -1.5px 0 0 ${c}66, inset 0 1.5px 0 ${c}66`;
+	const tint = shadeHex(c, pale ? .42 : -.34);
+	const cv = (k, cls) => !fill ? null : cls ? /* @__PURE__ */ import_react.default.createElement("i", {
+		className: cls,
+		style: { background: shell(k) }
+	}) : /* @__PURE__ */ import_react.default.createElement("i", {
+		className: "gtsb-cv",
 		style: {
 			background: shell(k),
-			boxShadow: `inset 0 0 0 1.5px ${c}66`
+			boxShadow: edge
 		}
-	}) : null;
+	}, /* @__PURE__ */ import_react.default.createElement("span", { className: "gtsb-wr" }, /* @__PURE__ */ import_react.default.createElement("svg", {
+		className: "gtsb-w1",
+		viewBox: "0 0 200 16",
+		preserveAspectRatio: "none"
+	}, /* @__PURE__ */ import_react.default.createElement("path", {
+		d: GT_SB_WAVE + "V0H0Z",
+		fill: tint
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: GT_SB_WAVE,
+		fill: "none",
+		stroke: "#fff",
+		strokeOpacity: ".6",
+		strokeWidth: "1.6",
+		vectorEffect: "non-scaling-stroke"
+	})), /* @__PURE__ */ import_react.default.createElement("svg", {
+		className: "gtsb-w2",
+		viewBox: "0 0 200 16",
+		preserveAspectRatio: "none"
+	}, /* @__PURE__ */ import_react.default.createElement("path", {
+		d: GT_SB_WAVE + "V0H0Z",
+		fill: shell(k)
+	}))));
 	const face = (cls, w, h, tr, bg, k, top) => /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtsb-f " + cls,
 		style: {
@@ -101999,7 +102092,16 @@ function GtBlock3D({ W, D, H, win, rk, S, fs, fill }) {
 			color: win ? S.accNum : S.num,
 			textShadow: win ? S.accNumSh : S.numSh
 		}
-	}, rk), win && /* @__PURE__ */ import_react.default.createElement("span", { className: "gtsb-sheen" }, /* @__PURE__ */ import_react.default.createElement("i", null)), cv(0)));
+	}, rk), win && /* @__PURE__ */ import_react.default.createElement("span", { className: "gtsb-sheen" }, /* @__PURE__ */ import_react.default.createElement("i", null)), fill && [
+		18,
+		41,
+		63,
+		82
+	].map((x) => /* @__PURE__ */ import_react.default.createElement("i", {
+		key: x,
+		className: "gtsb-bb",
+		style: { left: x + "%" }
+	})), cv(0)));
 }
 function GtSoftBlock({ H, win, rk, S, lv }) {
 	return /* @__PURE__ */ import_react.default.createElement("div", {
@@ -108790,7 +108892,7 @@ function YatzyGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 }
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.05-5";
+var APP_BUILD = "2026.11.05-6";
 // web/src/app/storage.js
 var storage_exports = /* @__PURE__ */ __exportAll({
 	GT_CAT_KEYS: () => GT_CAT_KEYS,
@@ -108912,7 +109014,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.05-5");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.05-6");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -109378,7 +109480,7 @@ function PodiumOverlay({ open, onClose, onRestart, extraAct, ranked, tk, t, best
 		}
 		gtSbSeen.add(sig);
 		setSbPh("run");
-		const tm = [setTimeout(() => setSbPh("fin"), 2750), setTimeout(() => setSbPh("done"), 3350)];
+		const tm = [setTimeout(() => setSbPh("fin"), 3050), setTimeout(() => setSbPh("done"), 3650)];
 		const stop = () => {
 			tm.forEach(clearTimeout);
 			setSbPh("done");
@@ -109801,16 +109903,61 @@ function GtPodiumBlocks({ items, S, play, land }) {
 					easing: "cubic-bezier(.23,1,.32,1)",
 					fill: "backwards"
 				}));
-				const f0 = d + t, fd = 700 + items[i].H * 4;
-				blks[i].querySelectorAll(".gtsb-cv").forEach((c) => run.push(c.animate([{ transform: "translateY(0)" }, { transform: "translateY(-104%)" }], {
+				const f0 = d + t * .8, fd = 1e3 + items[i].H * 4;
+				blks[i].querySelectorAll(".gtsb-cv").forEach((c) => run.push(c.animate([{ transform: "translateY(0)" }, { transform: "translateY(calc(-100% - 26px))" }], {
 					duration: fd,
 					delay: f0,
-					easing: "cubic-bezier(.45,.05,.35,1)",
+					easing: "cubic-bezier(.3,.3,.45,1)",
 					fill: "backwards"
 				})));
+				const wave = (sel, kf, ms) => blks[i].querySelectorAll(sel).forEach((c) => run.push(c.animate(kf, {
+					duration: ms,
+					delay: f0,
+					iterations: Math.ceil(fd / ms) + 1,
+					easing: "linear"
+				})));
+				wave(".gtsb-w1", [{ transform: "translateX(0)" }, { transform: "translateX(-50%)" }], 1300);
+				wave(".gtsb-w2", [{ transform: "translateX(-50%)" }, { transform: "translateX(0)" }], 900);
+				blks[i].querySelectorAll(".gtsb-wr").forEach((c) => run.push(c.animate([
+					{ transform: "scaleY(2.1)" },
+					{
+						transform: "scaleY(1.2)",
+						offset: .35
+					},
+					{ transform: "scaleY(0.55)" }
+				], {
+					duration: fd,
+					delay: f0,
+					easing: "ease-out"
+				})));
+				blks[i].querySelectorAll(".gtsb-bb").forEach((c, j) => {
+					const h = items[i].H, s = j % 2 ? 5 : -5;
+					run.push(c.animate([
+						{
+							opacity: 0,
+							transform: "translate(0,0) scale(.6)"
+						},
+						{
+							opacity: .55,
+							offset: .15
+						},
+						{
+							transform: `translate(${s}px,${-h * .5}px) scale(1)`,
+							offset: .55
+						},
+						{
+							opacity: .55,
+							transform: `translate(${-s}px,${-h}px) scale(1.25)`
+						}
+					], {
+						duration: fd * .72,
+						delay: f0 + 120 + j * fd * .08,
+						easing: "ease-in"
+					}));
+				});
 				blks[i].querySelectorAll(".gtsb-cvt").forEach((c) => run.push(c.animate([{ opacity: 1 }, { opacity: 0 }], {
-					duration: 240,
-					delay: f0 + fd - 170,
+					duration: 320,
+					delay: f0 + fd - 300,
 					easing: "ease-out",
 					fill: "backwards"
 				})));
@@ -111447,7 +111594,7 @@ function UpdateBanner() {
 		let alive = true;
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.05-5") {
+				if (alive && v && v.build && v.build !== "2026.11.05-6") {
 					setReady(true);
 					setHidden(false);
 					try {

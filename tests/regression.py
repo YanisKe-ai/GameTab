@@ -372,7 +372,7 @@ def t_schieber_wyys(pg, env):
     check(pg.get_by_role("button", name=re.compile("^Team 1$")).count() == 0, "Teamwahl noch da")
     click(pg, tile("Vierblatt")); click(pg, btn(pg, "×2")); click(pg, btn_re(pg, "100 Punkte für Team 2 buchen"), 800)
     check(not phone or has_text(pg, r"Team 2: 100"), "Team 2 hat nicht genau 100")
-    click(pg, btn_re(pg, "Wyys und Stöck, Team 1"), 500); click(pg, tile("Fünfblatt"))
+    click(pg, btn_re(pg, "Wyys und Stöck, Team 1"), 500); click(pg, tile("Dreiblatt"))
     click(pg, pg.get_by_role("button", name="Schliessen").first, 500)
     check(not phone or has_text(pg, r"Team 1: 20"), "Abbrechen hat geschrieben")
 
@@ -434,7 +434,7 @@ def t_schieber_schwaetzer(pg, env):
     open_w = lambda: click(pg, pg.get_by_role("button", name=re.compile("Wyys und Stöck, Anna & Ben")).first, 500)
     open_w(); click(pg, btn(pg, "Ben"), 200); click(pg, btn_re(pg, "Weitere Wyys"), 200)
     click(pg, pg.get_by_role("button", name=re.compile("^Neunblatt")), 200); click(pg, btn(pg, "×3"), 200); click(pg, btn_re(pg, "900 Punkte für"), 900)
-    open_w(); click(pg, btn(pg, "Anna"), 200); click(pg, pg.get_by_role("button", name=re.compile("^Fünfblatt")), 200); click(pg, btn_re(pg, "100 Punkte für"), 3200)
+    open_w(); click(pg, btn(pg, "Anna"), 200); click(pg, btn_re(pg, "Weitere Wyys"), 200); click(pg, pg.get_by_role("button", name=re.compile("^Fünfblatt")), 200); click(pg, btn_re(pg, "100 Punkte für"), 3200)
     click(pg, btn(pg, "Ins Turnier eintragen").first, 1000)
     pg.goto(URL); wait(pg, 800)
     open_game(pg, "Schreibunterlagen", "Jass", "Schieber-Turnier"); wait(pg, 900)

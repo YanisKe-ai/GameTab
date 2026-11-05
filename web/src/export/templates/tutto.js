@@ -1,6 +1,6 @@
 // Ergebnisbild Tutto (Entwurf dev-notes/ergebnisbild-entwuerfe/pro-spiel/tutto.png).
 // Daten: gtEcModel (Raenge, Gleichstand, Summen) plus shareExtra {target}. Balken = Summe / Ziel (bei mehr als dem Ziel gekappt, nie negativ).
-// Keine Deko: nur echte Daten, die Balken nutzen den Platz zwischen Sieger und Fussleiste.
+// Oben Kartenfaecher als reine Deko (kleiner bei vielen Personen), darunter die Liste; Sieger nur in der Liste (roter Balken).
 import { F_INTERBI } from "./fonts-a.js";
 
 const INK = "#14101C", RED = "#D7141F", BARRED = "#C8102E", YEL = "#F7C32E";
@@ -36,61 +36,84 @@ function footer(c, k, d) {
   k.setFont(c, 700, f.size, k.F_BALOO); c.globalAlpha = 0.9; c.fillText(f.lines[0], x, 1293); c.globalAlpha = 1;
 }
 
+/* Deko: gefaecherte Tutto-Karten, eigenes Canvas-Zeichnen (Bonus 500, Bonus 300, x2, Plus/Minus), ohne Spieldaten */
+const CARDS = [
+  { v: "500", face: "#C8102E", ink: "#FFFFFF", top: "BONUS" },
+  { v: "300", face: "#F08A1C", ink: "#14101C", top: "BONUS" },
+  { v: "×2", face: "#1E6FB8", ink: "#FFFFFF", top: "" },
+  { v: "±", face: "#2E8B57", ink: "#FFFFFF", top: "" },
+];
+function card(c, k, cd, w, h) {
+  const r = w * 0.09;
+  c.save(); c.shadowColor = "rgba(20,16,28,0.38)"; c.shadowBlur = w * 0.14; c.shadowOffsetY = w * 0.05; c.shadowOffsetX = w * 0.015;
+  c.fillStyle = "#FFFDF6"; k.rrect(c, -w / 2, -h / 2, w, h, r); c.fill(); c.restore();
+  c.strokeStyle = "rgba(20,16,28,0.25)"; c.lineWidth = 2; k.rrect(c, -w / 2, -h / 2, w, h, r); c.stroke();
+  const m = w * 0.07, iw = w - 2 * m, ih = h - 2 * m;
+  c.fillStyle = cd.face; k.rrect(c, -iw / 2, -ih / 2, iw, ih, r * 0.6); c.fill();
+  c.strokeStyle = "rgba(255,255,255,0.55)"; c.lineWidth = Math.max(2, w * 0.012); k.rrect(c, -iw / 2 + w * 0.035, -ih / 2 + w * 0.035, iw - w * 0.07, ih - w * 0.07, r * 0.4); c.stroke();
+  c.fillStyle = cd.ink; c.textAlign = "center";
+  const mid = cd.v.length > 2 ? w * 0.4 : w * 0.56;
+  k.setFont(c, 400, mid, k.F_ANTON); c.fillText(cd.v, 0, k.capH(c) / 2 + (cd.top ? h * 0.03 : 0));
+  if (cd.top) { k.setFont(c, 700, w * 0.085, k.F_INTER); c.fillText(cd.top, 0, -h * 0.2); }
+  const cs = w * 0.17, cx = -iw / 2 + w * 0.13, cy = -ih / 2 + w * 0.17;
+  k.setFont(c, 400, cs, k.F_ANTON);
+  const q = cd.v === "500" || cd.v === "300" ? cd.v : cd.v;
+  c.fillText(q, cx + (q.length > 2 ? w * 0.04 : 0), cy + k.capH(c) / 2);
+  c.save(); c.rotate(Math.PI); c.fillText(q, cx + (q.length > 2 ? w * 0.04 : 0), cy + k.capH(c) / 2); c.restore();
+  c.textAlign = "left";
+}
+function fan(c, k, cx, cy, avail) {
+  const h = Math.min(avail * 0.86, 440), w = h * 0.7, n = CARDS.length, ang = [-21, -7, 7, 21];
+  c.save(); c.translate(cx, cy + h * 0.06);
+  CARDS.forEach((cd, i) => {
+    c.save();
+    c.translate((i - (n - 1) / 2) * w * 0.62, Math.abs(i - (n - 1) / 2) * h * 0.035);
+    c.rotate(ang[i] * Math.PI / 180);
+    card(c, k, cd, w, h);
+    c.restore();
+  });
+  c.restore();
+}
+
 function page1(d, k, rows) {
   const { cv, c } = k.tplCanvas();
   bg(c, k);
   hero(c, k, d);
-  /* Sieger */
-  const win = d.winners.length ? d.winners : d.rows.slice(0, 1);
-  const name = d.up(win.map((r) => r.name).join(" & "));
-  const val = win[0].value;
-  const N = rows.length, dense = N >= 8, hmax = dense ? 118 : 150;
-  const hv = k.fit(c, val, { w: 400, fam: k.F_ANTON, max: hmax, min: 90, maxW: 380, lines: 1 });
-  k.setFont(c, 400, hv.size, k.F_ANTON); const vw = c.measureText(val).width;
-  const fo = { w: 400, fam: k.F_ANTON, maxW: 960 - vw - 50 };
-  const nf = k.heroFit(c, name, fo, [{ max: hmax, min: dense ? 80 : 96, lines: 1 }, { max: dense ? 80 : 90, min: 52, lines: 2 }, { max: 56, min: 30, lines: 3 }]);
-  k.setFont(c, 400, nf.size, k.F_ANTON); const cap = k.capH(c);
-  const asc = nf.lines.map((l) => Math.max(cap, c.measureText(l).actualBoundingBoxAscent || cap));
-  const dsc = nf.lines.map((l) => Math.max(0, c.measureText(l).actualBoundingBoxDescent || 0));
-  const gapL = (i) => asc[i + 1] + dsc[i] + nf.size * 0.1;
-  let heroH = asc[0]; for (let i = 0; i < nf.lines.length - 1; i++) heroH += gapL(i);
-  /* Sieger direkt unter dem Titelschild, bei vielen Spielern naeher am Titel (mehr Platz fuer die Balken) */
-  const base0 = dense ? (nf.lines.length === 1 ? 450 : 470) : (nf.lines.length === 1 ? 497 : 515);
-  const heroBase = Math.max(base0, 340 + (d.tie ? 48 : 0) + heroH);
-  const bl = new Array(nf.lines.length); bl[nf.lines.length - 1] = heroBase;
-  for (let i = nf.lines.length - 2; i >= 0; i--) bl[i] = bl[i + 1] - gapL(i);
-  c.fillStyle = INK; k.setFont(c, 400, nf.size, k.F_ANTON); nf.lines.forEach((ln, i) => c.fillText(ln, 60, bl[i]));
-  k.setFont(c, 400, hv.size, k.F_ANTON); c.fillStyle = RED; c.textAlign = "right"; c.fillText(val, 1020, heroBase); c.textAlign = "left";
-  if (d.tie) { const tl = d.up(d.tr("ecTied", "")); k.setFont(c, 700, 28, k.F_INTER); c.fillStyle = INK; k.spaced(c, tl, 62, bl[0] - asc[0] - 16, 3, "left"); }
-  /* Balken */
-  const endY = 1160;
-  /* Skala-Beschriftung braucht ca. 60 px ueber dem ersten Balken, der Block wird im freien Platz zentriert */
-  const zoneTop = heroBase + 96;
-  const p = Math.min(N <= 3 ? 170 : N <= 5 ? 130 : 118, (endY - zoneTop) / (N - 0.18));
-  const rowH = Math.round(p * 0.82);
-  const blockH = (N - 1) * p + rowH;
-  const rowsTop = Math.round(zoneTop + Math.max(0, (endY - zoneTop - blockH) / 2));
+  /* Layout: Deko (Kartenfaecher) oben, Liste darunter. Viele Personen: Deko schrumpft, Liste geht vor. */
+  const N = rows.length, endY = 1160, topY = 356;
+  const pMax = N <= 3 ? 150 : N <= 5 ? 124 : 112, pMin = 70, SCALE = 64, GAP = 22, MINDECO = 190;
+  let p = pMax, decoH = 0;
+  for (; p >= pMin; p -= 2) {
+    const rh = Math.round(p * 0.82), listH = (N - 1) * p + rh;
+    const free = endY - topY - SCALE - listH - GAP;
+    if (free >= MINDECO) { decoH = Math.min(470, free); break; }
+  }
+  if (!decoH) p = Math.min(pMax, (endY - topY - SCALE) / (N - 0.18));
+  const rowH = Math.round(p * 0.82), blockH = (N - 1) * p + rowH;
   const target = d.target;
+  const listTop = decoH ? endY - blockH : Math.round(topY + SCALE + Math.max(0, (endY - topY - SCALE - blockH) / 2));
+  const rowsTop = listTop;
+  if (decoH) fan(c, k, 540, topY + (rowsTop - SCALE - topY) / 2 + 6, rowsTop - SCALE - topY - GAP / 2);
   /* Namen- und Wertespalte nach Inhalt */
   k.setFont(c, 400, rowH * 0.74, k.F_ANTON);
   const vwMax = Math.max(...rows.map((r) => c.measureText(r.value).width));
   const nameW = Math.min(360, Math.max(200, Math.max(...rows.map((r) => c.measureText(r.name).width)) + 6));
   const valW = Math.max(130, vwMax + 4);
   const tx = 60 + nameW + 20, tw = 1020 - valW - 20 - tx;
-  /* Skala */
-  const sl = [0, target / 3, target * 2 / 3, target].map((v) => Math.round(v));
-  const nice = target % 3 === 0;
-  const marks = nice ? sl : [0, Math.round(target / 2), target];
+  /* Skala: nur 0 und Ziel, ueberlappt nie */
   k.setFont(c, 700, 24, k.F_INTER); c.fillStyle = INK;
-  marks.forEach((m, i) => { const t = d.num(m); c.textAlign = i === 0 ? "left" : i === marks.length - 1 ? "right" : "center"; c.fillText(t, i === 0 ? tx : i === marks.length - 1 ? tx + tw : tx + tw * i / (marks.length - 1), rowsTop - 18); });
+  c.textAlign = "left"; c.fillText(d.num(0), tx, rowsTop - 18);
+  c.textAlign = "right"; c.fillText(d.num(target), tx + tw, rowsTop - 18);
   c.textAlign = "left";
+  /* Gleichstand: in der Liste erkennbar (alle Sieger rot, Hinweis ueber den Namen) */
+  if (d.tie) { const tl = d.up(d.tr("ecTied", "")); const tf = k.fit(c, tl, { w: 700, fam: k.F_INTER, max: 22, min: 13, maxW: nameW - 4 }); k.setFont(c, 700, tf.size, k.F_INTER); c.fillStyle = BARRED; c.fillText(tf.lines[0], 60, rowsTop - 18); }
   rows.forEach((r, i) => {
     const y = rowsTop + i * p, hot = r.winner, col = hot ? BARRED : INK;
     const fs = rowH * 0.74;
     const two = rowH >= 44;
     /* Umbruch nur an Leerstellen und Bindestrichen, nie mitten im Wort: lieber kleinere Schrift */
     const f = k.nameFit(c, r.name, { w: 400, fam: k.F_ANTON, max: fs, maxW: nameW, min: two ? 24 : Math.max(18, fs * 0.5), lines: two ? 2 : 1, oneMin: 0.72, max2: Math.min(fs, rowH * 0.46) });
-    k.setFont(c, 400, f.size, k.F_ANTON); c.fillStyle = INK;
+    k.setFont(c, 400, f.size, k.F_ANTON); c.fillStyle = hot ? BARRED : INK;
     const lh = f.size * 1.05, cy = y + rowH / 2, n0 = f.lines.length;
     f.lines.forEach((ln, li) => c.fillText(ln, 60, cy - (n0 - 1) * lh / 2 + li * lh + k.capH(c) / 2));
     const bh = Math.round(rowH * 0.6), by = y + (rowH - bh) / 2, bw = 6 * Math.max(0.6, bh / 44);

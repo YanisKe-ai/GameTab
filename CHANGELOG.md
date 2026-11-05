@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.05-17 (05.11.2026 22:01)
+- Skyjo-Karte ohne doppelte Unterzeile
+
 ## 2026.11.05-16 (05.11.2026 21:56)
 - Schieber: Ergebnisbild bei wenigen Einträgen, lange Teamnamen
 

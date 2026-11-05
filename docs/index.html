@@ -109218,7 +109218,7 @@ function YatzyGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 }
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.05-16";
+var APP_BUILD = "2026.11.05-17";
 // web/src/app/storage.js
 var storage_exports = /* @__PURE__ */ __exportAll({
 	GT_CAT_KEYS: () => GT_CAT_KEYS,
@@ -109340,7 +109340,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.05-16");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.05-17");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -111921,7 +111921,7 @@ function UpdateBanner() {
 		let alive = true;
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.05-16") {
+				if (alive && v && v.build && v.build !== "2026.11.05-17") {
 					setReady(true);
 					setHidden(false);
 					try {
@@ -113640,9 +113640,7 @@ function page1$12(d, k, rest) {
 	c.textAlign = "right";
 	c.fillText(win[0].value, 1020, heroBase);
 	c.textAlign = "left";
-	const sub = d.rounds && d.rounds.length ? d.tr("tplSkyjoRounds", (n2) => n2) : "";
-	const subY = heroBase + 56;
-	let tieW = 0;
+	const subY = heroBase + (d.tie ? 56 : 10);
 	if (d.tie) {
 		const tl = d.tr("ecTied", "Gemeinsamer erster Platz");
 		const tf2 = k.fit(c, tl, {
@@ -113657,23 +113655,9 @@ function page1$12(d, k, rest) {
 		c.fillStyle = ACC;
 		c.textAlign = noCards ? "left" : "right";
 		c.fillText(tf2.lines[0], noCards ? 60 : 1020, subY);
-		tieW = c.measureText(tf2.lines[0]).width + 30;
+		c.measureText(tf2.lines[0]).width + 30;
 		c.textAlign = "left";
-		if (noCards) tieW = 0;
-	}
-	if (sub && typeof sub === "function") {
-		const txt = sub(win[0].name);
-		const sf = k.fit(c, txt, {
-			w: 400,
-			fam: F_BRUSH,
-			max: 38,
-			min: 26,
-			maxW: 960 - tieW,
-			lines: 1
-		});
-		k.setFont(c, 400, sf.size, F_BRUSH);
-		c.fillStyle = "rgba(255,255,255,0.85)";
-		c.fillText(sf.lines[0], 60, subY);
+		if (noCards);
 	}
 	pills$1(c, k, rest.slice(0, n), L.cols, pillsTop, L.rowH, L.fs);
 	const y0 = subY + 28, y1 = pillsTop - 22;

@@ -147,16 +147,10 @@ function page1(d, k, rest) {
   for (let i = nf.lines.length - 2; i >= 0; i--) bl[i] = bl[i + 1] - gapL(i);
   c.fillStyle = INK; k.setFont(c, 400, nf.size, k.F_ANTON); nf.lines.forEach((ln, i) => c.fillText(ln, 56, bl[i]));
   k.setFont(c, 400, hv.size, k.F_ANTON); c.fillStyle = ACC; c.textAlign = "right"; c.fillText(win[0].value, 1020, heroBase); c.textAlign = "left";
-  /* Unterzeile: Runden von <Sieger> (links), Gleichstand (rechts) */
-  const sub = d.rounds && d.rounds.length ? d.tr("tplSkyjoRounds", (n2) => n2) : "";
-  const subY = heroBase + 56;
+  /* Unterzeile nur bei Gleichstand (rechts) */
+  const subY = heroBase + (d.tie ? 56 : 10);
   let tieW = 0;
   if (d.tie) { const tl = d.tr("ecTied", "Gemeinsamer erster Platz"); const tf2 = k.fit(c, tl, { w: 400, fam: F_BRUSH, max: noCards ? 48 : 38, min: 24, maxW: 460, lines: 1 }); k.setFont(c, 400, tf2.size, F_BRUSH); c.fillStyle = ACC; c.textAlign = noCards ? "left" : "right"; c.fillText(tf2.lines[0], noCards ? 60 : 1020, subY); tieW = c.measureText(tf2.lines[0]).width + 30; c.textAlign = "left"; if (noCards) tieW = 0; }
-  if (sub && typeof sub === "function") {
-    const txt = sub(win[0].name);
-    const sf = k.fit(c, txt, { w: 400, fam: F_BRUSH, max: 38, min: 26, maxW: 960 - tieW, lines: 1 });
-    k.setFont(c, 400, sf.size, F_BRUSH); c.fillStyle = "rgba(255,255,255,0.85)"; c.fillText(sf.lines[0], 60, subY);
-  }
   pills(c, k, rest.slice(0, n), L.cols, pillsTop, L.rowH, L.fs);
   /* Karten dazwischen */
   const y0 = subY + 28, y1 = pillsTop - 22;

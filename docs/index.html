@@ -8702,6 +8702,7 @@ var TRANSLATIONS = {
 		jassDiffStand: "Stand",
 		jassDiffEnter: "Eintragen",
 		jassDiffBack: "Letzte Ziffer löschen",
+		jassDiffNextCat: "{c} eintragen",
 		chooseVariant: "Variante wählen",
 		differenzlerTitle: "Differenzler",
 		differenzlerDesc: "Jeder für sich, 2 bis 4 Spieler, 10 Spiele",
@@ -10236,6 +10237,7 @@ var TRANSLATIONS = {
 		jassDiffStand: "Total",
 		jassDiffEnter: "Enter",
 		jassDiffBack: "Delete last digit",
+		jassDiffNextCat: "Enter {c}",
 		chooseVariant: "Choose variant",
 		differenzlerTitle: "Differenzler",
 		differenzlerDesc: "Every player for themselves, 2 to 4 players, 10 games",
@@ -11770,6 +11772,7 @@ var TRANSLATIONS = {
 		jassDiffStand: "Total",
 		jassDiffEnter: "Valider",
 		jassDiffBack: "Effacer le dernier chiffre",
+		jassDiffNextCat: "Saisir {c}",
 		chooseVariant: "Choisir la variante",
 		differenzlerTitle: "Differenzler",
 		differenzlerDesc: "Chacun pour soi, 2 à 4 joueurs, 10 jeux",
@@ -13304,6 +13307,7 @@ var TRANSLATIONS = {
 		jassDiffStand: "Totale",
 		jassDiffEnter: "Inserisci",
 		jassDiffBack: "Cancella l'ultima cifra",
+		jassDiffNextCat: "Inserisci {c}",
 		chooseVariant: "Scegli variante",
 		differenzlerTitle: "Differenzler",
 		differenzlerDesc: "Ognuno per sé, 2 a 4 giocatori, 10 partite",
@@ -14838,6 +14842,7 @@ var TRANSLATIONS = {
 		jassDiffStand: "Total",
 		jassDiffEnter: "Anotar",
 		jassDiffBack: "Borrar la última cifra",
+		jassDiffNextCat: "Anotar {c}",
 		chooseVariant: "Elegir variante",
 		differenzlerTitle: "Differenzler",
 		differenzlerDesc: "Cada uno por su cuenta, 2 a 4 jugadores, 10 partidas",
@@ -16372,6 +16377,7 @@ var TRANSLATIONS = {
 		jassDiffStand: "Total",
 		jassDiffEnter: "Registar",
 		jassDiffBack: "Apagar o último algarismo",
+		jassDiffNextCat: "Registar {c}",
 		chooseVariant: "Escolher variante",
 		differenzlerTitle: "Differenzler",
 		differenzlerDesc: "Cada um por si, 2 a 4 jogadores, 10 jogos",
@@ -47755,111 +47761,175 @@ var JASS_PL_CSS = `
 [data-phone-landscape] .gt-jd-page{padding:6px var(--pl-gutter-r) calc(14px + var(--pl-sab)) var(--pl-gutter-l)!important}
 [data-phone-landscape] .gt-jd-sheet{max-width:none!important}
 [data-phone-landscape] .gt-jd-setpage{max-width:640px!important;padding-left:var(--pl-gutter-l);padding-right:var(--pl-gutter-r);box-sizing:border-box}
-[data-phone-landscape] .gt-jd-split{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:var(--pl-gap);align-items:start}
+[data-phone-landscape] .gt-jd-split{display:block}
 [data-phone-landscape] .gt-jd-split>.gt-jd-main,[data-phone-landscape] .gt-jd-split>.gt-jd-side{display:block;min-width:0}
 [data-phone-landscape] .gt-jd-side>div:first-child{margin-top:0!important}
 `;
-var JASS_PAPER_CSS = `
-.jdp{--ink:#1C1815;--paper:#F5EAD6;--red:#B3261E;--line:rgba(28,24,21,.35);--strong:rgba(28,24,21,.6);--zebra:rgba(120,90,40,.10);--cur:rgba(179,38,30,.10);--lead:rgba(179,38,30,.14);--slip:#FBF6E8;--key:#FFFDF5;--onred:#FBF7EA;--head:'Fraunces',Georgia,'Times New Roman',serif;background:#F5EAD6 url(./img/sch-papier.webp)!important;color:var(--ink)}
-.jdp.jdp-noir{--ink:#EDEDED;--paper:#0A0A0A;--red:#FFFFFF;--line:rgba(237,237,237,.35);--strong:rgba(237,237,237,.6);--zebra:rgba(255,255,255,.06);--cur:rgba(255,255,255,.12);--lead:rgba(255,255,255,.14);--slip:#161616;--key:#0A0A0A;--onred:#0A0A0A;background:#0A0A0A!important}
-.jdp>.gt-jd-sheet{background:none!important;box-shadow:none!important}
-.jdp .gt-gamehead.is-stuck{background:var(--paper)!important;background-image:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;box-shadow:0 1px 0 var(--line)!important}
-.jdp .gt-hf{border-width:1.5px!important}
-.jdp-top{display:block}
-.jdp-mast{margin:4px 4px 0;border-top:4px solid var(--ink);border-bottom:1px solid var(--ink);padding-top:2px}
-.jdp-mast::after{content:"";display:block;border-top:1px solid var(--ink);margin-top:3px}
-.jdp-mast h1{margin:0;font-family:var(--head);font-weight:700;font-size:clamp(30px,11vw,48px);line-height:1.2;text-align:center;letter-spacing:-.01em;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.jdp-head{margin:8px 4px 0;min-height:37px;display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline;column-gap:.32em;font-family:var(--head);font-weight:700;font-size:20px;line-height:28px;padding-bottom:8px;border-bottom:1px solid var(--ink);color:var(--ink)}
-.jdp-head>span{white-space:nowrap}
-.jdp-head .jdp-hn{min-width:0;max-width:100%;overflow:hidden;text-overflow:ellipsis}
-.jdp-head b{color:var(--red);font-variant-numeric:tabular-nums}
-.jdp-led{margin:0 4px;container-type:inline-size;font-family:var(--head);color:var(--ink)}
-.jdp-led.is-box{overflow:auto;max-height:58vh;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
-.jdp-grid{display:grid;grid-template-columns:minmax(0,auto) repeat(var(--n),minmax(0,1fr))}
-.jdp-led.is-box .jdp-grid{grid-template-columns:max-content repeat(var(--n),minmax(56px,1fr))}
-.jdp-led.is-box .jdp-lab{position:sticky;left:0;z-index:2;background:var(--paper)}
-.jdp-led.is-box .jdp-lab.z{background:linear-gradient(var(--zebra),var(--zebra)),var(--paper)}
-.jdp-led.is-box .jdp-lab.cur{background:linear-gradient(var(--cur),var(--cur)),var(--paper)}
-.jdp-led.is-box .jdp-hd:first-child,.jdp-led.is-box .jdp-st.first{left:0;z-index:4;position:sticky}
-.jdp-hd{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;min-height:34px;padding:0 3px 5px;border-bottom:2px solid var(--ink);border-left:1px solid var(--line);font-size:11px;line-height:1.3;letter-spacing:.08em;text-transform:uppercase;font-weight:700;min-width:0}
-.jdp-hd:first-child{border-left:0}
-.jdp-hd>span{display:block;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.jdp-lab{display:flex;align-items:center;gap:5px;min-height:54px;padding:0 6px;align-self:stretch;min-width:0;font-weight:700;scroll-margin:100px 0 calc(var(--jd-slip,0px) + 110px)}
-.jdp-lab .cn{font-size:clamp(14px,4.3vw,17px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
-.jdp-lab .cf{font-size:12px;color:var(--red);flex:none}
-.jdp-c{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:54px;min-width:0;margin:0;padding:2px 0;border:0;border-left:1px solid var(--line);border-radius:0;background:none;color:var(--ink);font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;scroll-margin:100px 0 calc(var(--jd-slip,0px) + 110px)}
-.jdp-c:focus-visible{outline:2px solid var(--ink);outline-offset:-3px}
-.jdp .z{background:var(--zebra)}
-.jdp .cur{background:var(--cur)}
-.jdp-lab.cur{box-shadow:inset 3px 0 0 var(--red)}
-.jdp-v{font-weight:700;font-size:21px;line-height:22px;font-variant-numeric:tabular-nums}
-.jdp-d{font-weight:700;font-size:13px;line-height:15px;font-variant-numeric:tabular-nums}
-.jdp-d.m{color:var(--red)}
-.jdp-blank{display:block;width:min(44px,70%);border-bottom:2px dotted var(--strong)}
-.jdp-pen{position:absolute;left:2px;top:5px;width:calc(100% - 4px);height:calc(100% - 10px);pointer-events:none;overflow:visible;animation:jdpFade .18s ease-out}
-.jdp-pen path{fill:none;stroke:var(--red);stroke-width:2.4;stroke-linecap:round;vector-effect:non-scaling-stroke}
-.jdp-st{position:sticky;bottom:var(--jd-slip,0px);z-index:3;background:var(--paper);border-top:4px double var(--ink);margin-top:2px;min-height:64px;display:flex;align-items:center;justify-content:center;min-width:0;border-left:1px solid var(--line)}
-.jdp-st.first{justify-content:flex-start;padding-left:6px;border-left:0;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
-.jdp-led.is-box .jdp-st{bottom:0}
-.jdp-led.is-box .jdp-hd{position:sticky;top:0;z-index:3;background:var(--paper)}
-.jdp-tot{font-weight:700;font-size:clamp(16px,calc((100cqw - 90px) / var(--n) / 2.7),30px);line-height:1.2;padding:2px 4px;font-variant-numeric:tabular-nums;white-space:nowrap}
-.jdp-tot.m{color:var(--red)}
-.jdp-tot.w{padding:1px 3px;background:var(--lead);box-shadow:inset 0 0 0 1.5px var(--red)}
-.jdp-head>span.jdp-win,.jdp-head>span.jdp-hintx{white-space:normal;text-align:center}
-.jdp-head>span.jdp-hintx{font-weight:400;font-size:13px;line-height:18px;white-space:normal;text-align:center}
-.jdp-slipw{position:fixed;left:0;right:0;bottom:0;z-index:70;filter:drop-shadow(0 -6px 12px rgba(40,25,10,.4));animation:jdpUp .24s cubic-bezier(.23,1,.32,1)}
-.jdp-slip{max-width:520px;margin:0 auto;box-sizing:border-box;background:var(--slip);color:var(--ink);padding:20px 16px calc(14px + env(safe-area-inset-bottom));font-family:var(--head);clip-path:var(--zig);outline:none}
-.jdp-sh{display:flex;align-items:center;gap:10px;min-height:44px}
-.jdp-t{flex:none;max-width:60%;font-weight:700;font-size:26px;line-height:1.15;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.jdp-n{margin-left:auto;min-width:0;font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.jdp-x{flex:none;width:44px;height:44px;margin:0 -10px 0 0;display:grid;place-items:center;border:0;background:none;color:var(--ink);cursor:pointer;touch-action:manipulation}
-.jdp-x:focus-visible,.jdp-bk:focus-visible,.jdp-k:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
-.jdp-inp{display:flex;align-items:flex-end;gap:8px;min-height:56px;margin:2px 0 10px;border-bottom:2px solid var(--ink);padding:0 0 4px 2px}
-.jdp-val{flex:1;min-width:0;display:flex;align-items:center;height:44px;font-weight:700;font-size:34px;font-variant-numeric:tabular-nums}
-.jdp-caret{width:2px;height:32px;margin-left:2px;background:var(--red);animation:jdpBl 1.1s steps(1) infinite}
-.jdp-calc{flex:none;font-weight:700;font-size:20px;line-height:44px;color:var(--red);white-space:nowrap;font-variant-numeric:tabular-nums}
-.jdp-bk{flex:none;width:44px;height:44px;margin:0 -8px 0 0;display:grid;place-items:center;border:0;background:none;color:var(--ink);cursor:pointer;touch-action:manipulation}
-.jdp-err{margin:-4px 0 8px;font-size:13px;font-weight:700;line-height:1.3;color:var(--red)}
-.jdp-keys{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
-.jdp-k{height:48px;min-height:44px;margin:0;padding:0;border:1.5px solid var(--ink);border-radius:0;background:var(--key);color:var(--ink);font-family:var(--head);font-weight:700;font-size:26px;display:grid;place-items:center;cursor:pointer;touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;transition:transform .12s ease-out,background-color .12s ease-out}
-.jdp-k:active{transform:scale(.97);background:var(--zebra)}
-.jdp-k.s{font-size:15px;font-weight:600;text-decoration:line-through;text-decoration-thickness:1.5px}
-.jdp-k.ok{background:var(--red);border-color:var(--red);color:var(--onred);font-size:15px;letter-spacing:.03em}
-.jdp-k.ok:active{background:var(--red);filter:brightness(.9)}
-.jdp-k.ok[aria-disabled=true]{opacity:.4}
+var JASS_DIFF_CSS = `
+.jdp{font-family:'Inter',system-ui,sans-serif;font-weight:600;font-variant-numeric:tabular-nums;color:var(--tx);-webkit-font-smoothing:antialiased}
+.jdp-body{padding:0 4px}
+.jdp-status{margin:14px 0 0;min-height:20px;text-align:center;font-size:14px;font-weight:600;line-height:1.35;color:var(--mu)}
+.jdp-status .win{display:block;font-size:17px;font-weight:800;color:var(--tx)}
+.jdp-status .hn{display:inline-block;vertical-align:bottom;max-width:60%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:800;color:var(--tx)}
+.jdp-status b{font-weight:800;color:var(--pos)}
+.jdp-hm{container-type:inline-size;margin-top:10px}
+.jdp-grid{--lw:76px;display:grid;grid-template-columns:var(--lw) repeat(var(--n),minmax(0,1fr));gap:6px;align-items:stretch}
+@container (max-width:300px){.jdp-grid{--lw:66px;gap:5px}}
+.jdp-colh{min-width:0;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding-bottom:4px;text-align:center}
+.jdp-nm{display:block;max-width:100%;font-size:13px;font-weight:800;line-height:1.25;color:var(--mu);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.jdp-tot{display:block;max-width:100%;font-size:clamp(16px,calc((100cqw - 76px) / var(--n) / 3.3),28px);font-weight:800;letter-spacing:-.02em;line-height:1.2;padding:0 4px;border-radius:10px;white-space:nowrap;color:var(--tx)}
+.jdp-tot.p{color:var(--pos)}
+.jdp-tot.m{color:var(--neg)}
+.jdp-tot.w{background:color-mix(in srgb,var(--pos) 16%,transparent)}
+.jdp-lab{min-width:0;display:flex;flex-direction:column;justify-content:center;font-size:14px;font-weight:800;line-height:1.15;white-space:nowrap;scroll-margin:100px 0 calc(var(--jd-slip,0px) + 16px)}
+.jdp-lab .cn{overflow:hidden;text-overflow:ellipsis}
+.jdp-lab .cf{font-size:12px;color:var(--mu)}
+.jdp-lab.cur::before{content:"";width:18px;height:4px;border-radius:2px;background:var(--acc);margin-bottom:4px}
+.jdp-c{appearance:none;-webkit-appearance:none;margin:0;padding:0;border:0;min-width:0;min-height:49px;border-radius:15px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--s2);color:var(--tx);font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:transform .12s ease-out;scroll-margin:100px 0 calc(var(--jd-slip,0px) + 16px)}
+.jdp-c:active{transform:scale(.96)}
+.jdp-c:focus-visible,.jdp-k:focus-visible,.jdp-cta:focus-visible,.jdp-grab:focus-visible,.jdp-strike:focus-visible,.jdp-act:focus-visible{outline:2px solid var(--tx);outline-offset:2px}
+.jdp-c.p,.jdp-c.n{color:var(--tt);background:color-mix(in srgb,var(--hue) calc(var(--a) * 100%),transparent)}
+.jdp-c.p{--hue:var(--hue-p)}
+.jdp-c.n{--hue:var(--hue-n)}
+.jdp-noir .jdp-c.p,.jdp-noir .jdp-c.n{background:color-mix(in srgb,#fff calc(var(--a) * 60%),transparent)}
+.jdp-c.e{background:color-mix(in srgb,var(--s1) 70%,transparent)}
+.jdp-c.nx,.jdp-c.ed{background:var(--s1);box-shadow:inset 0 0 0 2px var(--acc)}
+.jdp-c b{display:block;max-width:100%;font-size:clamp(12px,calc((100cqw - 76px) / var(--n) / 3.5),20px);font-weight:800;line-height:1.05;letter-spacing:-.01em;white-space:nowrap}
+.jdp-c em{display:block;font-style:normal;font-size:11px;font-weight:600;line-height:1.2}
+.jdp-blank{display:none}
+.jdp-cta{appearance:none;-webkit-appearance:none;position:sticky;bottom:calc(16px + env(safe-area-inset-bottom));z-index:5;display:grid;place-items:center;width:100%;min-height:56px;margin:18px 0 0;padding:0 16px;border:0;border-radius:20px;background:var(--acc);color:var(--onacc);font:inherit;font-size:17px;font-weight:800;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;box-shadow:0 10px 26px -8px rgba(0,0,0,.45);transition:transform .12s ease-out}
+.jdp-cta:active{transform:scale(.98)}
+.jdp-cta span{display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.jdp .gt-foot-acts{margin-top:6px}
+.jdp-scrim{position:fixed;inset:0;z-index:60;background:var(--scrim);animation:jdpFade .2s ease-out}
+.jdp-slipw{position:fixed;left:0;right:0;bottom:0;z-index:70;animation:jdpUp .26s cubic-bezier(.23,1,.32,1)}
+.jdp-slip{max-width:520px;margin:0 auto;box-sizing:border-box;background:var(--s1);color:var(--tx);border-radius:30px 30px 0 0;padding:0 16px calc(18px + env(safe-area-inset-bottom));box-shadow:0 -20px 50px rgba(0,0,0,.35);outline:none}
+.jdp-grab{appearance:none;-webkit-appearance:none;display:flex;align-items:center;justify-content:center;width:100%;height:44px;margin:0;padding:0;border:0;background:none;cursor:pointer;touch-action:manipulation}
+.jdp-grab i{display:block;width:40px;height:5px;border-radius:3px;background:var(--mu);opacity:.6}
+.jdp-sh{display:flex;align-items:center;gap:6px;min-height:44px}
+.jdp-who{flex:1 1 auto;min-width:0;margin:0;font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.jdp-strike{appearance:none;-webkit-appearance:none;flex:none;min-height:44px;margin:0;padding:0 8px;border:0;background:none;color:var(--mu);font:inherit;font-size:15px;font-weight:800;text-decoration:underline;text-underline-offset:3px;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.jdp-cat{flex:none;height:34px;padding:0 14px;border-radius:17px;background:var(--s2);display:grid;place-items:center;font-size:15px;font-weight:800;white-space:nowrap}
+.jdp-big{text-align:center;margin:6px 0 12px}
+.jdp-val{display:flex;align-items:center;justify-content:center;height:70px;font-size:64px;font-weight:800;line-height:1.1}
+.jdp-caret{width:3px;height:.8em;margin-left:2px;border-radius:2px;background:var(--acc);animation:jdpBl 1.1s steps(1) infinite}
+.jdp-calc{min-height:26px;font-size:20px;font-weight:800;line-height:26px;color:var(--mu)}
+.jdp-err{margin:-4px 0 8px;text-align:center;font-size:14px;font-weight:800;line-height:1.3;color:var(--neg)}
+.jdp-keys{display:grid;grid-template-columns:repeat(3,64px);justify-content:space-between;row-gap:10px;padding:0 22px}
+.jdp-k{appearance:none;-webkit-appearance:none;width:64px;height:64px;margin:0;padding:0;border:0;border-radius:50%;background:var(--s2);color:var(--tx);font:inherit;font-size:26px;font-weight:800;display:grid;place-items:center;cursor:pointer;touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;transition:transform .12s ease-out}
+.jdp-k:active{transform:scale(.94)}
+.jdp-k svg{width:26px;height:26px}
+.jdp-k.ok{background:var(--acc);color:var(--onacc)}
+.jdp-k[aria-disabled=true]{opacity:.45}
 .jdp-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-@media (hover:hover) and (pointer:fine){.jdp-k:hover{background:var(--zebra)}.jdp-k.ok:hover{background:var(--red);filter:brightness(1.08)}}
+.jdp-act{appearance:none;-webkit-appearance:none;flex:1;min-height:44px;margin:0;padding:11px 8px;border-radius:14px;font:inherit;font-size:13px;font-weight:800;letter-spacing:.02em;cursor:pointer;touch-action:manipulation}
+@media (max-height:700px){.jdp-keys{grid-template-columns:repeat(3,52px);row-gap:8px}.jdp-k{width:52px;height:52px;font-size:24px}.jdp-val{height:56px;font-size:52px}.jdp-big{margin:2px 0 8px}}
+@media (max-width:359px){.jdp-who{font-size:22px}.jdp-cat{padding:0 10px;font-size:14px}.jdp-strike{padding:0 4px;font-size:14px}}
+@media (hover:hover) and (pointer:fine){.jdp-k:hover{filter:brightness(1.12)}.jdp-c:hover{filter:brightness(1.08)}.jdp-cta:hover{filter:brightness(1.08)}}
 @keyframes jdpBl{50%{opacity:0}}
 @keyframes jdpUp{from{transform:translateY(24px);opacity:0}to{transform:none;opacity:1}}
 @keyframes jdpFade{from{opacity:0}to{opacity:1}}
-@media (prefers-reduced-motion:reduce){.jdp-slipw,.jdp-pen,.jdp-caret{animation:none!important}.jdp-k{transition:none}.jdp-k:active{transform:none}}
+@media (prefers-reduced-motion:reduce){.jdp-slipw,.jdp-scrim,.jdp-caret{animation:none!important}.jdp-c,.jdp-k,.jdp-cta{transition:none}.jdp-c:active,.jdp-k:active,.jdp-cta:active{transform:none}}
 .gtL-content .jdp .gt-jd-sheet{max-width:none!important}
 .gtL-content .jdp{padding-bottom:32px!important}
-.gtL-content .jdp-slipw{position:sticky;top:16px;bottom:auto;left:auto;right:auto;margin-top:12px;filter:none;animation:none}
-.gtL-content .jdp-slip{max-width:none;clip-path:none;border:1.5px solid var(--ink);padding:10px 16px 16px}
-.gtL-content .jdp-st{bottom:0}
-.gtL-content .jdp-c,.gtL-content .jdp-lab{scroll-margin:16px 0 90px}
-.gtL-content .jdp-mast h1{font-size:46px}
-.gtL-content .jdp-c,.gtL-content .jdp-lab{min-height:46px}
-.gtL-content .jdp-st{min-height:56px}
-.gtL-content .jdp-head{font-size:22px}
+.gtL-content .jdp-scrim{display:none}
+.gtL-content .jdp-slipw{position:sticky;top:16px;bottom:auto;left:auto;right:auto;margin-top:12px;animation:none}
+.gtL-content .jdp-slip{max-width:none;border-radius:24px;padding:0 16px 18px;box-shadow:0 10px 30px -10px rgba(0,0,0,.4)}
+.gtL-content .jdp-grid{--lw:110px;gap:8px}
+.gtL-content .jdp-c{min-height:54px}
+.gtL-content .jdp-c b{font-size:22px}
+.gtL-content .jdp-c em{font-size:12px}
+.gtL-content .jdp-tot{font-size:32px}
+.gtL-content .jdp-cta{position:static;max-width:420px}
+.gtL-content .jdp-lab,.gtL-content .jdp-c{scroll-margin:16px}
 [data-phone-landscape] .jdp{--jd-slip:0px!important}
-[data-phone-landscape] .jdp-top{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;column-gap:14px}
-[data-phone-landscape] .jdp-mast{margin:0}
-[data-phone-landscape] .jdp-mast h1{font-size:30px;padding:0 10px}
-[data-phone-landscape] .jdp-head{margin:0;min-height:0;border-bottom:0;padding:0;justify-content:flex-end;font-size:18px;line-height:24px}
-[data-phone-landscape] .jdp-led{overflow:auto;max-height:calc(var(--pl-avail) - var(--pl-head) - 72px - var(--pl-sab));overscroll-behavior:contain;-webkit-overflow-scrolling:touch;margin:8px 0 0}
-[data-phone-landscape] .jdp-st{bottom:0;min-height:52px}
-[data-phone-landscape] .jdp-hd{position:sticky;top:0;z-index:3;background:var(--paper)}
-[data-phone-landscape] .jdp-c,[data-phone-landscape] .jdp-lab{min-height:44px}
-[data-phone-landscape] .jdp-c,[data-phone-landscape] .jdp-lab{scroll-margin:44px 0 66px}
-[data-phone-landscape] .jdp-slipw{left:auto;right:var(--pl-gutter-r);top:calc(var(--pl-sat) + 6px);bottom:auto;width:max(300px,40vw);max-width:calc(100vw - var(--pl-gutter-l) - var(--pl-gutter-r));filter:none;animation:none}
-[data-phone-landscape] .jdp-slip{max-width:none;clip-path:none;border:1.5px solid var(--ink);padding:4px 12px 8px;max-height:calc(var(--pl-avail) - 12px);overflow-y:auto;overscroll-behavior:contain;box-shadow:0 12px 30px rgba(0,0,0,.38)}
-[data-phone-landscape] .jdp-inp{min-height:48px;margin:0 0 8px}
-[data-phone-landscape] .jdp-keys{gap:6px}
-[data-phone-landscape] .jdp-k{height:44px}
+[data-phone-landscape] .jdp-hm{overflow:auto;max-height:calc(var(--pl-avail) - var(--pl-head) - 64px - var(--pl-sab));overscroll-behavior:contain;-webkit-overflow-scrolling:touch;margin-top:6px}
+[data-phone-landscape] .jdp-colh{position:sticky;top:0;z-index:2;background:var(--bgs)}
+[data-phone-landscape] .jdp-c{min-height:44px}
+[data-phone-landscape] .jdp-tot{font-size:clamp(16px,calc((100cqw - 76px) / var(--n) / 4),24px)}
+[data-phone-landscape] .jdp-colh{padding-bottom:2px}
+[data-phone-landscape] .jdp-lab,[data-phone-landscape] .jdp-c{scroll-margin:48px 0 8px}
+[data-phone-landscape] .jdp-status{margin-top:6px;min-height:0;font-size:13px}
+[data-phone-landscape] .jdp-cta{position:static;min-height:44px;margin-top:8px;border-radius:16px;font-size:16px;box-shadow:none}
+[data-phone-landscape] .jdp .gt-foot-acts{display:none}
+[data-phone-landscape] .jdp-scrim{display:none}
+[data-phone-landscape] .jdp.is-ed .gt-jd-main{padding-right:calc(max(300px,40vw) + var(--pl-gap))}
+[data-phone-landscape] .jdp-slipw{left:auto;right:var(--pl-gutter-r);top:calc(var(--pl-sat) + 6px);bottom:auto;width:max(300px,40vw);max-width:calc(100vw - var(--pl-gutter-l) - var(--pl-gutter-r));animation:none}
+[data-phone-landscape] .jdp-slip{max-width:none;border-radius:22px;padding:0 12px 10px;max-height:calc(var(--pl-avail) - 12px);overflow-y:auto;overscroll-behavior:contain;box-shadow:0 12px 30px rgba(0,0,0,.38)}
+[data-phone-landscape] .jdp-grab{height:44px;margin-bottom:-6px}
+[data-phone-landscape] .jdp-who{font-size:22px}
+[data-phone-landscape] .jdp-big{margin:0 0 6px}
+[data-phone-landscape] .jdp-val{height:48px;font-size:44px}
+[data-phone-landscape] .jdp-calc{min-height:22px;font-size:17px;line-height:22px}
+[data-phone-landscape] .jdp-keys{grid-template-columns:repeat(3,44px);row-gap:6px;padding:0 24px}
+[data-phone-landscape] .jdp-k{width:44px;height:44px;font-size:21px}
+[data-phone-landscape] .jdp-k svg{width:22px;height:22px}
 `;
-var JD_ZIG = "polygon(" + Array.from({ length: 34 }, (_, i) => i * 3 + "% " + (i % 2 === 0 ? 8 : 0) + "px").join(",") + ",100% 0,100% 100%,0 100%)";
+function jdTokens(theme) {
+	const dark = {
+		bg: "#0d1120",
+		bg2: "#18203a",
+		bgs: "#0d1120",
+		s1: "#171d31",
+		s2: "#212a45",
+		tx: "#f3f5fb",
+		mu: "#98a1ba",
+		pos: "#43e0a0",
+		neg: "#ff8074",
+		acc: "#D52B1E",
+		onacc: "#FFFFFF",
+		scrim: "rgba(5,8,18,.66)",
+		"hue-p": "#1fa97a",
+		"hue-n": "#e2483b",
+		tt: "#FFFFFF"
+	};
+	if (theme === "light") return {
+		...dark,
+		bg: "#eef1f8",
+		bg2: "#FFFFFF",
+		bgs: "#eef1f8",
+		s1: "#FFFFFF",
+		s2: "#e4e9f4",
+		tx: "#0e1328",
+		mu: "#566079",
+		pos: "#0b7a51",
+		neg: "#c1281c",
+		scrim: "rgba(14,19,40,.4)",
+		"hue-p": "#34c791",
+		"hue-n": "#f26a5e",
+		tt: "#0e1328"
+	};
+	if (theme === "vitrum") return {
+		...dark,
+		bgs: "#0D1430",
+		s1: "rgba(255,255,255,0.08)",
+		s2: "rgba(255,255,255,0.12)",
+		mu: "#B4BBD0"
+	};
+	if (theme === "noir") return {
+		...dark,
+		bg: "#0A0A0A",
+		bg2: "#0A0A0A",
+		bgs: "#0A0A0A",
+		s1: "#1E1E1E",
+		s2: "#2A2A2A",
+		tx: "#EDEDED",
+		mu: "#A5A5A5",
+		pos: "#EDEDED",
+		neg: "#EDEDED",
+		acc: "#EDEDED",
+		onacc: "#0A0A0A",
+		scrim: "rgba(0,0,0,.7)",
+		tt: "#FFFFFF"
+	};
+	return dark;
+}
+var JD_HEAT_MIN = .14;
+var JD_HEAT_STEP = .003;
+var JD_HEAT_MAX = .62;
+function jdHeat(diff) {
+	return Math.min(JD_HEAT_MAX, JD_HEAT_MIN + JD_HEAT_STEP * Math.abs(diff));
+}
 function JassTopBar({ title, subtitle, onBack, theme, t, onHome, rulesText, rulesTitle, onEndGame, hideTitle, tkOv }) {
 	const stage = shellTokens(theme);
 	const acc = theme === "noir" ? noirAccent("jass-differenzler") : theme === "light" ? JASS_RED : "#F0584A";
@@ -48048,23 +48118,31 @@ function JassEditorPanel({ editing, players, scores, category, onSave, onClose, 
 	const total = raw === null ? null : raw * mult;
 	const jk = category.id === "joker1" ? " I" : category.id === "joker2" ? " II" : "";
 	const sum = raw === null ? "" : raw + " × " + mult + " = " + total;
-	return /* @__PURE__ */ import_react.default.createElement("div", { className: "jdp-slipw" }, /* @__PURE__ */ import_react.default.createElement("div", {
+	const pname = player ? player.name : "";
+	return /* @__PURE__ */ import_react.default.createElement(Fragment$3, null, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "jdp-scrim",
+		onClick: onClose,
+		"aria-hidden": "true"
+	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "jdp-slipw" }, /* @__PURE__ */ import_react.default.createElement("div", {
 		ref: slipRef,
-		className: "jdp-slip",
+		className: "jdp-slip" + (theme === "vitrum" ? " gtL-glass-strong" : ""),
 		role: "dialog",
-		"aria-label": category.label + jk + " · " + (player ? player.name : ""),
-		tabIndex: -1,
-		style: { "--zig": JD_ZIG }
-	}, /* @__PURE__ */ import_react.default.createElement("div", { className: "jdp-sh" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "jdp-t" }, category.label, jk), /* @__PURE__ */ import_react.default.createElement("span", {
-		className: "jdp-n",
-		title: player ? player.name : ""
-	}, player ? player.name : ""), /* @__PURE__ */ import_react.default.createElement("button", {
+		"aria-label": category.label + jk + " · " + pname,
+		tabIndex: -1
+	}, /* @__PURE__ */ import_react.default.createElement("button", {
 		type: "button",
-		className: "jdp-x",
+		className: "jdp-grab",
 		"aria-label": t("weisClose"),
 		onClick: onClose
-	}, /* @__PURE__ */ import_react.default.createElement(XMark, null))), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "jdp-inp",
+	}, /* @__PURE__ */ import_react.default.createElement("i", null)), /* @__PURE__ */ import_react.default.createElement("div", { className: "jdp-sh" }, /* @__PURE__ */ import_react.default.createElement("h2", {
+		className: "jdp-who",
+		title: pname
+	}, pname), /* @__PURE__ */ import_react.default.createElement("button", {
+		type: "button",
+		className: "jdp-strike",
+		onClick: () => commit(0)
+	}, t("strike")), /* @__PURE__ */ import_react.default.createElement("span", { className: "jdp-cat" }, category.label, jk, " × ", mult)), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "jdp-big",
 		ref: inpRef
 	}, /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "jdp-val",
@@ -48072,23 +48150,7 @@ function JassEditorPanel({ editing, players, scores, category, onSave, onClose, 
 	}, value, /* @__PURE__ */ import_react.default.createElement("span", { className: "jdp-caret" })), /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "jdp-calc",
 		"aria-hidden": "true"
-	}, raw === null ? "×" + mult : "× " + mult + " = " + total), /* @__PURE__ */ import_react.default.createElement("button", {
-		type: "button",
-		className: "jdp-bk",
-		"aria-label": t("jassDiffBack"),
-		onClick: back,
-		style: { visibility: value === "" ? "hidden" : "visible" }
-	}, /* @__PURE__ */ import_react.default.createElement("svg", {
-		width: "24",
-		height: "24",
-		viewBox: "0 0 24 24",
-		fill: "none",
-		stroke: "currentColor",
-		strokeWidth: "2",
-		strokeLinecap: "round",
-		strokeLinejoin: "round",
-		"aria-hidden": "true"
-	}, /* @__PURE__ */ import_react.default.createElement("path", { d: "M21 5H9l-6 7 6 7h12z" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M13 9.5l5 5M18 9.5l-5 5" }))), /* @__PURE__ */ import_react.default.createElement("span", {
+	}, raw === null ? "×" + mult : "× " + mult + " = " + total), /* @__PURE__ */ import_react.default.createElement("span", {
 		className: "jdp-sr",
 		role: "status"
 	}, sum)), gtErr && /* @__PURE__ */ import_react.default.createElement("div", {
@@ -48114,9 +48176,19 @@ function JassEditorPanel({ editing, players, scores, category, onSave, onClose, 
 		onClick: () => press(String(d))
 	}, d)), /* @__PURE__ */ import_react.default.createElement("button", {
 		type: "button",
-		className: "jdp-k s",
-		onClick: () => commit(0)
-	}, t("strike")), /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "jdp-k",
+		"aria-label": t("jassDiffBack"),
+		"aria-disabled": value === "" ? "true" : void 0,
+		onClick: back
+	}, /* @__PURE__ */ import_react.default.createElement("svg", {
+		viewBox: "0 0 24 24",
+		fill: "none",
+		stroke: "currentColor",
+		strokeWidth: "2",
+		strokeLinecap: "round",
+		strokeLinejoin: "round",
+		"aria-hidden": "true"
+	}, /* @__PURE__ */ import_react.default.createElement("path", { d: "M9 6h10a1 1 0 011 1v10a1 1 0 01-1 1H9l-6-6zM11.5 10l4 4M15.5 10l-4 4" }))), /* @__PURE__ */ import_react.default.createElement("button", {
 		type: "button",
 		className: "jdp-k",
 		onClick: () => press("0")
@@ -48124,20 +48196,24 @@ function JassEditorPanel({ editing, players, scores, category, onSave, onClose, 
 		type: "button",
 		"data-gt-sound": "1",
 		className: "jdp-k ok",
+		"aria-label": t("jassDiffEnter"),
 		"aria-disabled": value === "" ? "true" : void 0,
 		onClick: () => {
 			if (value !== "") commit(value);
 		}
-	}, t("jassDiffEnter")))));
+	}, /* @__PURE__ */ import_react.default.createElement("svg", {
+		viewBox: "0 0 24 24",
+		fill: "none",
+		stroke: "currentColor",
+		strokeWidth: "3",
+		strokeLinecap: "round",
+		strokeLinejoin: "round",
+		"aria-hidden": "true"
+	}, /* @__PURE__ */ import_react.default.createElement("path", { d: "M5 12.5l4.5 4.5L19 7.5" })))))));
 }
 function JassPlay({ players, scores, setScores, onResetSheet, onEditPlayers, onBack, onHome, onEndGame, lang = "de", theme = "dark" }) {
 	const t = useT(lang);
 	const tk = shellTokens(theme);
-	const _JV = theme === "vitrum";
-	const _JP_MUTED = theme === "light" ? JASS_MUTED : theme === "noir" ? "#A5A5A5" : "#C9B9A2";
-	const _JP_BORDER = theme === "light" ? JASS_BORDER : theme === "noir" ? "#5A5A5A" : "#6E5B45";
-	const _JWOOD = theme === "noir" ? noirAccent("jass-differenzler") : _JV ? "#9A6A3E" : JASS_WOOD;
-	const _JRED = theme === "noir" ? noirAccent("jass-differenzler") : _JV ? "#FF7A6B" : JASS_RED;
 	const [editing, setEditing] = useState$11(null);
 	const [confirmingReset, setConfirmingReset] = useState$11(false);
 	const [moreOpen, setMoreOpen] = useState$11(false);
@@ -48230,37 +48306,28 @@ function JassPlay({ players, scores, setScores, onResetSheet, onEditPlayers, onB
 		if (confirmingSetup) setMoreOpen(false);
 		editPlayers();
 	};
-	const jasActsF = (paper) => {
-		const pInk = theme === "noir" ? "#EDEDED" : "#1C1815";
-		const pRed = theme === "noir" ? "#EDEDED" : "#B3261E";
-		const pOn = theme === "noir" ? "#0A0A0A" : "#FBF7EA";
-		const cB = paper ? pInk : _JP_BORDER;
-		const cM = paper ? pInk : _JP_MUTED;
-		const cR = paper ? pRed : _JRED;
-		const cW = paper ? pRed : _JWOOD;
-		const cOn = paper ? pOn : theme === "noir" ? "#0A0A0A" : "#FFFFFF";
-		const rad = paper ? 0 : 14;
-		const ff = paper ? "var(--head)" : "'Inter', sans-serif";
+	const jd = jdTokens(theme);
+	const jdVars = {};
+	Object.keys(jd).forEach((k) => {
+		jdVars["--" + k] = jd[k];
+	});
+	const jdBg = theme === "vitrum" ? jassPageShellStyle(theme).background : "radial-gradient(ellipse at 50% -8%, " + jd.bg2 + " 0%, " + jd.bg + " 62%)";
+	const jasActs = (() => {
+		const cB = tk.border;
+		const cM = tk.muted;
+		const cR = jd.acc;
+		const cOn = jd.onacc;
 		return /* @__PURE__ */ import_react.default.createElement("div", { style: {
 			display: "flex",
 			gap: 8,
 			marginTop: 14
 		} }, /* @__PURE__ */ import_react.default.createElement("button", {
 			...gtHold(resetDone, resetTap),
+			className: "jdp-act",
 			style: {
-				flex: 1,
 				border: `1px solid ${confirmingReset ? cR : cB}`,
-				borderRadius: rad,
 				background: confirmingReset ? cR : "transparent",
-				color: confirmingReset ? cOn : cM,
-				fontSize: 12,
-				fontWeight: 600,
-				letterSpacing: "0.05em",
-				textTransform: "uppercase",
-				minHeight: 44,
-				padding: "11px 0",
-				cursor: "pointer",
-				fontFamily: ff
+				color: confirmingReset ? cOn : cM
 			}
 		}, confirmingReset ? t("confirmAgain") : /* @__PURE__ */ import_react.default.createElement(GtHoldLabel, {
 			label: t("newRound"),
@@ -48268,40 +48335,21 @@ function JassPlay({ players, scores, setScores, onResetSheet, onEditPlayers, onB
 			again: t("confirmAgain")
 		})), /* @__PURE__ */ import_react.default.createElement("button", {
 			onClick: teamsTap,
+			className: "jdp-act",
 			style: {
-				flex: 1,
-				border: `1px solid ${confirmingSetup ? cW : cB}`,
-				borderRadius: rad,
-				background: confirmingSetup ? cW : "transparent",
-				color: confirmingSetup ? cOn : cM,
-				fontSize: 12,
-				fontWeight: 600,
-				letterSpacing: "0.05em",
-				textTransform: "uppercase",
-				minHeight: 44,
-				padding: "11px 0",
-				cursor: "pointer",
-				fontFamily: ff
+				border: `1px solid ${confirmingSetup ? cR : cB}`,
+				background: confirmingSetup ? cR : "transparent",
+				color: confirmingSetup ? cOn : cM
 			}
 		}, confirmingSetup ? t("confirmAgain") : t("changePlayers")));
-	};
-	const jasActs = jasActsF(false);
-	const jasActsPaper = jasActsF(true);
-	const jdNoir = theme === "noir";
-	const jdInk = jdNoir ? "#EDEDED" : "#1C1815";
-	const jdHk = {
-		ink: jdInk,
-		border: jdInk,
-		card: "transparent",
-		muted: jdInk
-	};
+	})();
 	const jdFmt = (v) => v > 0 ? "+" + v : v < 0 ? "−" + Math.abs(v) : "0";
 	const jdAny = JASS_CATEGORIES.some((c) => players.every((p) => scores[p.id][c.id] !== null));
 	const jdTop = players.filter((_, i) => totals[i] === maxTotal);
 	const jdLead = jdAny && jdTop.length === 1;
 	const jdCur = editing ? editing.catId : (JASS_CATEGORIES.find((c) => players.some((p) => scores[p.id][c.id] === null)) || {}).id;
 	const jdNext = !editing && jdCur ? (players.find((p) => scores[p.id][jdCur] === null) || {}).id : null;
-	const jdBox = players.length > 4;
+	players.length;
 	useEffect$15(() => {
 		if (!editing) return;
 		const id = setTimeout(() => {
@@ -48325,14 +48373,22 @@ function JassPlay({ players, scores, setScores, onResetSheet, onEditPlayers, onB
 		return () => clearTimeout(id);
 	}, [jdCur]);
 	const jdHead = winnerIdx !== -1 ? gtWinLine(t, "jassWinsWith", "winsTie", jdTop.map((q) => q.name), maxTotal) : null;
+	const jdStatus = jdHead ? /* @__PURE__ */ import_react.default.createElement("span", { className: "win" }, jdHead) : jdLead ? /* @__PURE__ */ import_react.default.createElement(Fragment$3, null, /* @__PURE__ */ import_react.default.createElement("span", {
+		className: "hn",
+		title: jdTop[0].name
+	}, jdTop[0].name), " ", t("jassDiffLeads"), " ", /* @__PURE__ */ import_react.default.createElement("b", null, jdFmt(maxTotal))) : jdAny ? /* @__PURE__ */ import_react.default.createElement("span", null, t("jassDiffTied")) : filledCounts.every((c) => c === 0) ? /* @__PURE__ */ import_react.default.createElement("span", null, t("jassTapHint")) : null;
+	const jdCurCat = jdCur ? JASS_CATEGORIES.find((c) => c.id === jdCur) : null;
+	const jdCurJk = jdCur === "joker1" ? " I" : jdCur === "joker2" ? " II" : "";
 	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage gt-jd-page jdp" + (jdNoir ? " jdp-noir" : ""),
+		className: "gtL-shellpage gt-jd-page jdp jdp-" + theme + (editing ? " is-ed" : ""),
 		style: {
 			...jassPageShellStyle(theme),
-			padding: "20px 12px calc(32px + var(--jd-slip, 0px))",
+			background: jdBg,
+			...jdVars,
+			padding: "20px 12px calc(24px + var(--jd-slip, 0px))",
 			"--n": players.length
 		}
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, JASS_PL_CSS, JASS_PAPER_CSS), celebration, jassMilestoneNode, /* @__PURE__ */ import_react.default.createElement(PodiumOverlay, {
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, JASS_PL_CSS, JASS_DIFF_CSS), celebration, jassMilestoneNode, /* @__PURE__ */ import_react.default.createElement(PodiumOverlay, {
 		gameId: "jass-differenzler",
 		gameLabel: t("gameJass"),
 		open: podiumOpen,
@@ -48369,63 +48425,64 @@ function JassPlay({ players, scores, setScores, onResetSheet, onEditPlayers, onB
 			setMoreOpen(true);
 		},
 		moreLabel: t("gtMore"),
-		tokens: jdHk
+		tokens: tk
 	}), /* @__PURE__ */ import_react.default.createElement(JassTopBar, {
 		title: t("jassDifferenzlerSubtitle"),
 		subtitle: t("gameJass"),
 		onBack,
 		theme,
 		t,
-		hideTitle: true,
-		tkOv: jdHk
-	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "jdp-top" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "jdp-mast" }, /* @__PURE__ */ import_react.default.createElement("h1", null, t("jassDifferenzlerSubtitle"))), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "jdp-head",
-		role: "status",
-		"aria-live": "polite"
-	}, jdHead ? /* @__PURE__ */ import_react.default.createElement("span", { className: "jdp-win" }, jdHead) : jdLead ? /* @__PURE__ */ import_react.default.createElement(Fragment$3, null, /* @__PURE__ */ import_react.default.createElement("span", {
-		className: "jdp-hn",
-		title: jdTop[0].name
-	}, jdTop[0].name), /* @__PURE__ */ import_react.default.createElement("span", null, t("jassDiffLeads")), /* @__PURE__ */ import_react.default.createElement("b", null, jdFmt(maxTotal))) : jdAny ? /* @__PURE__ */ import_react.default.createElement("span", null, t("jassDiffTied")) : filledCounts.every((c) => c === 0) ? /* @__PURE__ */ import_react.default.createElement("span", { className: "jdp-hintx" }, t("jassTapHint")) : null)), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gt-jd-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main gt-jd-main" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "jdp-led" + (jdBox ? " is-box" : "") }, /* @__PURE__ */ import_react.default.createElement("div", { className: "jdp-grid" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "jdp-hd" }), players.map((p) => /* @__PURE__ */ import_react.default.createElement("div", {
-		key: p.id,
-		className: "jdp-hd",
-		title: p.name
-	}, (() => {
+		tkOv: tk
+	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gt-jd-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main gt-jd-main" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "jdp-body" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "jdp-hm" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "jdp-grid" }, /* @__PURE__ */ import_react.default.createElement("div", null), players.map((p, i) => {
 		const w = String(p.name).trim().split(/\s+/);
-		return (w.length > 1 ? [w[0], w.slice(1).join(" ")] : w).map((x, k) => /* @__PURE__ */ import_react.default.createElement("span", { key: k }, x));
-	})())), JASS_CATEGORIES.map((cat, catIdx) => {
-		const z = catIdx % 2 === 1;
+		const parts = w.length > 1 ? [w[0], w.slice(1).join(" ")] : w;
+		return /* @__PURE__ */ import_react.default.createElement("div", {
+			key: p.id,
+			className: "jdp-colh",
+			title: p.name
+		}, parts.map((x, k) => /* @__PURE__ */ import_react.default.createElement("span", {
+			key: k,
+			className: "jdp-nm"
+		}, x)), /* @__PURE__ */ import_react.default.createElement("span", { className: "jdp-tot" + (totals[i] > 0 ? " p" : totals[i] < 0 ? " m" : "") + (jdLead && totals[i] === maxTotal ? " w" : "") }, jdFmt(totals[i])));
+	}), JASS_CATEGORIES.map((cat, catIdx) => {
 		const isCur = cat.id === jdCur;
 		const jk = cat.id === "joker1" ? " I" : cat.id === "joker2" ? " II" : "";
-		return /* @__PURE__ */ import_react.default.createElement(Fragment$3, { key: `${cat.id}-${catIdx}` }, /* @__PURE__ */ import_react.default.createElement("div", { className: "jdp-lab" + (z ? " z" : "") + (isCur ? " cur" : "") }, /* @__PURE__ */ import_react.default.createElement("span", { className: "cn" }, cat.label, jk), /* @__PURE__ */ import_react.default.createElement("span", { className: "cf" }, "×", cat.mult)), players.map((p) => {
+		return /* @__PURE__ */ import_react.default.createElement(Fragment$3, { key: `${cat.id}-${catIdx}` }, /* @__PURE__ */ import_react.default.createElement("div", { className: "jdp-lab" + (isCur ? " cur" : "") }, /* @__PURE__ */ import_react.default.createElement("span", { className: "cn" }, cat.label, jk), /* @__PURE__ */ import_react.default.createElement("span", { className: "cf" }, "×", cat.mult)), players.map((p) => {
 			const cell = scores[p.id][cat.id];
 			const value = cell ? cell.total : null;
 			const diff = jassDiff(scores, players, cat.id, p.id);
-			const pen = !!(editing && editing.playerId === p.id && editing.catId === cat.id) || !editing && cat.id === jdCur && p.id === jdNext;
+			const isEd = !!(editing && editing.playerId === p.id && editing.catId === cat.id);
+			const isNx = !editing && cat.id === jdCur && p.id === jdNext;
+			const tone = value === null ? " e" : diff === null || diff === 0 ? "" : diff > 0 ? " p" : " n";
 			return /* @__PURE__ */ import_react.default.createElement("button", {
 				key: p.id,
 				type: "button",
-				className: "jdp-c gt-jd-cell" + (z ? " z" : "") + (isCur ? " cur" : ""),
+				className: "jdp-c gt-jd-cell" + tone + (isEd ? " ed" : "") + (isNx ? " nx" : "") + (theme === "vitrum" ? " gtL-glass-soft" : ""),
+				style: tone === " p" || tone === " n" ? { "--a": jdHeat(diff) } : void 0,
 				"data-jd-cell": p.id + "-" + cat.id,
 				"aria-haspopup": "dialog",
-				"aria-label": p.name + ", " + cat.label + jk + (value !== null ? ": " + value : ""),
+				"aria-label": p.name + ", " + cat.label + jk + (value !== null ? ": " + value : "") + (value !== null && diff !== null ? ", " + jdFmt(diff) : ""),
 				onClick: () => setEditing({
 					playerId: p.id,
 					catId: cat.id
 				})
-			}, pen && /* @__PURE__ */ import_react.default.createElement("svg", {
-				className: "jdp-pen",
-				viewBox: "0 0 95 54",
-				preserveAspectRatio: "none",
-				"aria-hidden": "true"
-			}, /* @__PURE__ */ import_react.default.createElement("path", { d: "M70 7C56 1 26 3 15 13 6 22 10 41 27 46c15 5 42 3 54-8 9-9 5-25-9-30-5-2-10-2-14-2" })), value !== null ? /* @__PURE__ */ import_react.default.createElement("span", { className: "jdp-v" }, value) : /* @__PURE__ */ import_react.default.createElement("span", {
+			}, value !== null ? diff !== null ? /* @__PURE__ */ import_react.default.createElement(Fragment$3, null, /* @__PURE__ */ import_react.default.createElement("b", null, jdFmt(diff)), /* @__PURE__ */ import_react.default.createElement("em", null, value)) : /* @__PURE__ */ import_react.default.createElement("b", null, value) : /* @__PURE__ */ import_react.default.createElement("span", {
 				className: "jdp-blank",
 				"aria-hidden": "true"
-			}), value !== null && diff !== null && /* @__PURE__ */ import_react.default.createElement("span", { className: "jdp-d" + (diff < 0 ? " m" : "") }, jdFmt(diff)));
+			}));
 		}));
-	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "jdp-st first" }, t("jassDiffStand")), players.map((p, i) => /* @__PURE__ */ import_react.default.createElement("div", {
-		key: p.id,
-		className: "jdp-st"
-	}, /* @__PURE__ */ import_react.default.createElement("span", { className: "jdp-tot" + (jdLead && totals[i] === maxTotal ? " w" : "") + (totals[i] < 0 ? " m" : "") }, jdFmt(totals[i]))))))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side gt-jd-side" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gt-foot-acts" }, jasActsPaper), /* @__PURE__ */ import_react.default.createElement(JassEditorPanel, {
+	}))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "jdp-status",
+		role: "status",
+		"aria-live": "polite"
+	}, jdStatus), !editing && jdCurCat && jdNext != null && /* @__PURE__ */ import_react.default.createElement("button", {
+		type: "button",
+		className: "jdp-cta",
+		onClick: () => setEditing({
+			playerId: jdNext,
+			catId: jdCur
+		})
+	}, /* @__PURE__ */ import_react.default.createElement("span", null, t("jassDiffNextCat").replace("{c}", jdCurCat.label + jdCurJk))))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side gt-jd-side" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gt-foot-acts" }, jasActs), /* @__PURE__ */ import_react.default.createElement(JassEditorPanel, {
 		editing,
 		players,
 		scores,
@@ -109339,7 +109396,7 @@ function YatzyGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 }
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.05-20";
+var APP_BUILD = "2026.11.05-21";
 // web/src/app/storage.js
 var storage_exports = /* @__PURE__ */ __exportAll({
 	GT_CAT_KEYS: () => GT_CAT_KEYS,
@@ -109461,7 +109518,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.05-20");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.05-21");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -112042,7 +112099,7 @@ function UpdateBanner() {
 		let alive = true;
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.05-20") {
+				if (alive && v && v.build && v.build !== "2026.11.05-21") {
 					setReady(true);
 					setHidden(false);
 					try {

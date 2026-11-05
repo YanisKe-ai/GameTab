@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.05-21 (05.11.2026 23:25)
+- Differenzler im modernen Heatmap-Design
+
 ## 2026.11.05-20 (05.11.2026 22:54)
 - Tutto-Karte ohne Deko, Yatzy mit Werte antippen
 

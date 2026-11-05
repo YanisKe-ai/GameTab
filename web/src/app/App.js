@@ -179,7 +179,7 @@ function RulesButton({onClick,onHome,onEndGame,onMore,moreLabel,tokens}){const[c
         @keyframes gtlFadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes gtlDialogIn { from { opacity: 0; transform: translateY(8px) scale(.97); } to { opacity: 1; transform: none; } }
         @keyframes gtlEditorIn { from { opacity: 0; transform: translateX(-50%) translateY(10px) scale(.98); } to { opacity: 1; transform: translateX(-50%); } }
-        @media (prefers-reduced-motion: reduce) { .gtL-content .gtL-padov, .gtL-content .gtL-padsheet, .gtL-content .gtL-editor { animation-duration: 1ms !important; } }
+        @media (prefers-reduced-motion: reduce) { .gtL-sidebar { transition: none; } .gtL-content .gtL-padov, .gtL-content .gtL-padsheet, .gtL-content .gtL-editor { animation-duration: 1ms !important; } }
         /* C8 Fokus und Hover */
         .gtL-shell :is(button, a, input, select, textarea, [tabindex]:not([tabindex="-1"])):focus-visible { outline: 2px solid var(--gtl-focus) !important; outline-offset: 2px !important; }
         .gtL-shell .gtL-sidebar :is(.gtL-navbtn, .gtL-side-brand):focus-visible { outline-offset: -2px !important; }

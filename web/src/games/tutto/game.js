@@ -51,8 +51,8 @@ function TuttoSetup({players,setPlayers,target,setTarget,onStart,tk:gtTk0,t,them
 .tt-track{position:relative;height:var(--tt-th,58px);margin:0 46px 0 4px;}
 .tt-path{position:absolute;left:0;right:0;top:50%;border-top:3px dashed;transform:translateY(-1.5px);}
 .tt-mk{position:absolute;top:50%;width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:3px;}
-.tt-trail{position:absolute;left:0;top:50%;height:8px;margin-top:-4px;border-radius:4px;transition:width .55s cubic-bezier(.23,1,.32,1);}
-.tt-die{position:absolute;top:50%;width:var(--tt-dw);height:var(--tt-dw);margin-top:calc(var(--tt-dw) / -2);transition:left .55s cubic-bezier(.23,1,.32,1);}
+.tt-trail{position:absolute;left:0;top:50%;height:8px;margin-top:-4px;border-radius:4px;transition:width .32s cubic-bezier(.23,1,.32,1);}
+.tt-die{position:absolute;top:50%;width:var(--tt-dw);height:var(--tt-dw);margin-top:calc(var(--tt-dw) / -2);transition:left .32s cubic-bezier(.23,1,.32,1);}
 .tt-hop{animation:ttHop .4s cubic-bezier(.23,1,.32,1);}
 @keyframes ttHop{0%{transform:translateY(0);}35%{transform:translateY(-7px);}100%{transform:translateY(0);}}
 .tt-fl{position:absolute;right:-42px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;font-size:12px;font-weight:800;gap:1px;}

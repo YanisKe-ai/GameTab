@@ -180,6 +180,7 @@ def ui_tutto(pg):
     pg.keyboard.press("Escape"); pg.wait_for_timeout(500)
     if pg.locator("[data-gt-podium]").count():
         pg.locator(".gtsb-x").first.click(); pg.wait_for_timeout(600)
+    pg.locator(".tt-lane").first.click(); pg.wait_for_timeout(300)  # Zug zurueck auf Person 1 (Eingabe gilt der Person am Zug)
     pg.get_by_placeholder("Punkte").first.fill("100"); pg.keyboard.press("Enter"); pg.wait_for_timeout(1200)
     lg = log()
     ok(len(lg) == 1 and lg[0]["participants"][0]["score"] == 6100, f"UI Tutto Korrektur +100 nach Abschluss: Statistik 6100 {[p['score'] for p in lg[0]['participants']] if lg else lg}")

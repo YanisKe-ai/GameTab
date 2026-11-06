@@ -23734,6 +23734,48 @@ function GtMoreSheet({ open, onClose, label, tk, theme, children }) {
 		margin: "0 auto"
 	} }, children))));
 }
+// web/src/lib/utils.ts
+function cn(...a) {
+	return a.filter(Boolean).join(" ");
+}
+// web/src/components/magicui/border-beam.tsx
+/**
+* Border Beam (Magic UI, angepasst): ein weicher Lichtpunkt wandert um den Rand.
+* Nur sichtbar, wenn offset-path rect() unterstuetzt wird und keine reduzierte Bewegung gewuenscht ist.
+*/
+function BorderBeam({ size = 56, duration = 7, borderWidth = 2, radius = 22, colorFrom = "#ffaa40", colorTo = "#9c40ff", className, style, ...props }) {
+	const [ok, setOk] = import_react.useState(false);
+	import_react.useEffect(() => {
+		try {
+			const rm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+			setOk(!rm && !!(window.CSS && CSS.supports && CSS.supports("offset-path", "rect(0 auto auto 0)")));
+		} catch (_e) {
+			setOk(false);
+		}
+	}, []);
+	if (!ok) return null;
+	return /* @__PURE__ */ import_react.createElement("div", {
+		"aria-hidden": true,
+		className: "tw:pointer-events-none tw:absolute tw:inset-0 tw:rounded-[inherit]",
+		style: {
+			padding: borderWidth,
+			mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+			WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+			WebkitMaskComposite: "xor",
+			maskComposite: "exclude"
+		}
+	}, /* @__PURE__ */ import_react.createElement("div", {
+		className: cn("tw:absolute tw:aspect-square tw:animate-border-beam", className),
+		style: {
+			width: size,
+			offsetPath: `rect(0 auto auto 0 round ${radius}px)`,
+			"--duration": duration,
+			backgroundImage: `linear-gradient(to left, ${colorFrom}, ${colorTo}, transparent)`,
+			...style
+		},
+		...props
+	}));
+}
 // web/src/shared/standings.js
 var standings_exports = /* @__PURE__ */ __exportAll({
 	GtLStandings: () => GtLStandings,
@@ -32535,6 +32577,10 @@ function useInView(ref, { root, margin, amount, once = false, initial = false } 
 var getFilter = (v) => typeof v === "function" ? void 0 : v.filter;
 function BlurFade({ children, className, variant, duration = .4, delay = 0, offset = 6, direction = "down", inView = false, inViewMargin = "-50px", blur = "6px", ...props }) {
 	const ref = (0, import_react.useRef)(null);
+	if (useReducedMotion()) {
+		offset = 0;
+		blur = "0px";
+	}
 	const inViewResult = useInView(ref, {
 		once: true,
 		margin: inViewMargin
@@ -45883,7 +45929,14 @@ function TuttoPlayerRow({ player, total, color, target, playerNumber, isLeader, 
 			background: onTurn ? tk.cardElevated : tk.card,
 			borderColor: onTurn ? theme === "light" ? TUTTO_RED : sk.Y : tk.border
 		}
-	}, gtLead && /* @__PURE__ */ import_react.default.createElement(GtLeadFx, { key: "gtlf" }), /* @__PURE__ */ import_react.default.createElement("div", { className: "tt-lt" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "tt-nm" }, /* @__PURE__ */ import_react.default.createElement("span", {
+	}, gtLead && /* @__PURE__ */ import_react.default.createElement(GtLeadFx, { key: "gtlf" }), onTurn && !compact && /* @__PURE__ */ import_react.default.createElement(BorderBeam, {
+		size: 64,
+		duration: 8,
+		borderWidth: 2,
+		radius: 22,
+		colorFrom: sk.acc,
+		colorTo: "transparent"
+	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "tt-lt" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "tt-nm" }, /* @__PURE__ */ import_react.default.createElement("span", {
 		className: "tt-dot",
 		style: { background: color }
 	}), /* @__PURE__ */ import_react.default.createElement("span", { className: "tt-nmt" }, player.name), onTurn && /* @__PURE__ */ import_react.default.createElement("span", {
@@ -45913,15 +45966,15 @@ function TuttoPlayerRow({ player, total, color, target, playerNumber, isLeader, 
 			left: (i + 1) / segs * 100 + "%",
 			background: sk.path
 		}
-	})), /* @__PURE__ */ import_react.default.createElement("div", {
+	})), /* @__PURE__ */ import_react.default.createElement("div", { className: "tt-trailw" }, /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "tt-trail",
 		style: {
-			width: `calc((100% - ${dw}px)*${progress.toFixed(4)} + ${dw / 2}px)`,
+			transform: `translateX(calc((100cqw - ${dw}px)*${progress.toFixed(4)} + ${dw / 2}px - 100cqw))`,
 			background: color
 		}
-	}), /* @__PURE__ */ import_react.default.createElement("div", {
+	})), /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "tt-die",
-		style: { left: `calc((100% - ${dw}px)*${progress.toFixed(4)})` }
+		style: { transform: `translateX(calc((100cqw - ${dw}px)*${progress.toFixed(4)}))` }
 	}, /* @__PURE__ */ import_react.default.createElement("div", {
 		key: total,
 		className: total !== 0 ? "tt-hop" : void 0
@@ -46019,11 +46072,11 @@ var TUTTO_PLAY_CSS = `@font-face{font-family:'Inter';font-style:italic;font-weig
 .tt-pill{flex:none;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;border-radius:10px;padding:3px 8px;}
 .tt-lead{flex:none;font-size:10px;font-weight:700;letter-spacing:.08em;}
 .tt-num{flex:none;font-size:34px;font-weight:800;letter-spacing:-.02em;line-height:1;white-space:nowrap;}
-.tt-track{position:relative;height:var(--tt-th,58px);margin:0 46px 0 4px;}
+.tt-track{position:relative;container-type:inline-size;height:var(--tt-th,58px);margin:0 46px 0 4px;}
 .tt-path{position:absolute;left:0;right:0;top:50%;border-top:3px dashed;transform:translateY(-1.5px);}
 .tt-mk{position:absolute;top:50%;width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:3px;}
-.tt-trail{position:absolute;left:0;top:50%;height:8px;margin-top:-4px;border-radius:4px;transition:width .55s cubic-bezier(.23,1,.32,1);}
-.tt-die{position:absolute;top:50%;width:var(--tt-dw);height:var(--tt-dw);margin-top:calc(var(--tt-dw) / -2);transition:left .55s cubic-bezier(.23,1,.32,1);}
+.tt-trailw{position:absolute;left:0;right:0;top:50%;height:8px;margin-top:-4px;border-radius:4px;overflow:hidden;}.tt-trail{position:absolute;inset:0;border-radius:4px;transition:transform .32s cubic-bezier(.23,1,.32,1);}
+.tt-die{position:absolute;top:50%;width:var(--tt-dw);height:var(--tt-dw);margin-top:calc(var(--tt-dw) / -2);left:0;transition:transform .32s cubic-bezier(.23,1,.32,1);}
 .tt-hop{animation:ttHop .4s cubic-bezier(.23,1,.32,1);}
 @keyframes ttHop{0%{transform:translateY(0);}35%{transform:translateY(-7px);}100%{transform:translateY(0);}}
 .tt-fl{position:absolute;right:-42px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;font-size:12px;font-weight:800;gap:1px;}
@@ -46069,7 +46122,8 @@ var TUTTO_PLAY_CSS = `@font-face{font-family:'Inter';font-style:italic;font-weig
 @media (max-width:1099px){.gtL-content .tt-split{grid-template-columns:minmax(0,1fr);}.gtL-content .gtL-col-side{position:static;}}
 [data-phone-landscape] .tt-root{min-height:0;display:block;}
 [data-phone-landscape] .tt-logo{margin:0 0 6px;}
-[data-phone-landscape] .tt-logo h1{font-size:30px;}
+[data-phone-landscape] .tt-logo{justify-content:flex-end;}
+[data-phone-landscape] .tt-logo h1{display:none;}
 [data-phone-landscape] .tt-chip{height:30px;font-size:13px;}
 [data-phone-landscape] .tt-split{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,44%);gap:12px;align-items:start;}
 [data-phone-landscape] .tt-split>.gtL-col-main,[data-phone-landscape] .tt-split>.gtL-col-side{display:block;min-width:0;}
@@ -48338,7 +48392,7 @@ var JASS_DIFF_CSS = `
 .gtL-content .jdp-cta{position:static;max-width:420px}
 .gtL-content .jdp-lab,.gtL-content .jdp-c{scroll-margin:16px}
 [data-phone-landscape] .jdp{--jd-slip:0px!important}
-[data-phone-landscape] .jdp-hm{overflow:auto;max-height:calc(var(--pl-avail) - var(--pl-head) - 64px - var(--pl-sab));overscroll-behavior:contain;-webkit-overflow-scrolling:touch;margin-top:6px}
+[data-phone-landscape] .jdp-hm{overflow:auto;max-height:calc(var(--pl-avail) - var(--pl-head) - 104px - var(--pl-sab));overscroll-behavior:contain;-webkit-overflow-scrolling:touch;margin-top:6px}
 [data-phone-landscape] .jdp-colh{position:sticky;top:0;z-index:2;background:var(--bgs)}
 [data-phone-landscape] .jdp-c{min-height:44px}
 [data-phone-landscape] .jdp-tot{font-size:clamp(16px,calc((100cqw - 76px) / var(--n) / 4),24px)}
@@ -55293,7 +55347,7 @@ function ShareImagePreview({ url, onClose, t }) {
 		role: "dialog",
 		"aria-modal": "true",
 		"aria-label": t("shareResultLabel"),
-		className: "gtsp-ov",
+		className: "gtsp-ov gt-scrim-in",
 		style: {
 			position: "fixed",
 			inset: 0,
@@ -55366,8 +55420,15 @@ function ShareImagePreview({ url, onClose, t }) {
 			alignItems: "center",
 			gap: 10
 		}
-	}, list.map((it, i) => /* @__PURE__ */ import_react.default.createElement("img", {
+	}, list.map((it, i) => /* @__PURE__ */ import_react.default.createElement(BlurFade, {
 		key: i,
+		direction: "up",
+		offset: 8,
+		blur: "5px",
+		duration: .3,
+		delay: .05 + i * .05,
+		className: "tw:max-w-full"
+	}, /* @__PURE__ */ import_react.default.createElement("img", {
 		src: it.url,
 		alt: "",
 		style: {
@@ -55379,7 +55440,7 @@ function ShareImagePreview({ url, onClose, t }) {
 			borderRadius: 6,
 			boxShadow: "0 16px 44px rgba(0,0,0,0.55)"
 		}
-	}))), /* @__PURE__ */ import_react.default.createElement("div", {
+	})))), /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtsp-side",
 		style: plLand ? void 0 : { display: "contents" }
 	}, hint ? /* @__PURE__ */ import_react.default.createElement("p", {
@@ -108393,7 +108454,7 @@ function App() {
         @keyframes gtlFadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes gtlDialogIn { from { opacity: 0; transform: translateY(8px) scale(.97); } to { opacity: 1; transform: none; } }
         @keyframes gtlEditorIn { from { opacity: 0; transform: translateX(-50%) translateY(10px) scale(.98); } to { opacity: 1; transform: translateX(-50%); } }
-        @media (prefers-reduced-motion: reduce) { .gtL-content .gtL-padov, .gtL-content .gtL-padsheet, .gtL-content .gtL-editor { animation-duration: 1ms !important; } }
+        @media (prefers-reduced-motion: reduce) { .gtL-sidebar { transition: none; } .gtL-content .gtL-padov, .gtL-content .gtL-padsheet, .gtL-content .gtL-editor { animation-duration: 1ms !important; } }
         /* C8 Fokus und Hover */
         .gtL-shell :is(button, a, input, select, textarea, [tabindex]:not([tabindex="-1"])):focus-visible { outline: 2px solid var(--gtl-focus) !important; outline-offset: 2px !important; }
         .gtL-shell .gtL-sidebar :is(.gtL-navbtn, .gtL-side-brand):focus-visible { outline-offset: -2px !important; }
@@ -110034,7 +110095,7 @@ function YatzyGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 }
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.06-3";
+var APP_BUILD = "2026.11.06-4";
 // web/src/app/storage.js
 var storage_exports = /* @__PURE__ */ __exportAll({
 	GT_CAT_KEYS: () => GT_CAT_KEYS,
@@ -110156,7 +110217,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.06-3");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.06-4");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -110494,10 +110555,6 @@ function usePlayCount(trigger) {
 		});
 	}, [trigger]);
 	return count;
-}
-// web/src/lib/utils.ts
-function cn(...a) {
-	return a.filter(Boolean).join(" ");
 }
 // web/src/components/magicui/number-ticker.tsx
 function NumberTicker({ value, startValue = 0, direction = "up", delay = 0, className, decimalPlaces = 0, ...props }) {
@@ -112738,7 +112795,7 @@ function UpdateBanner() {
 		let shown = false;
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && !shown && v && v.build && v.build !== "2026.11.06-3") {
+				if (alive && !shown && v && v.build && v.build !== "2026.11.06-4") {
 					shown = true;
 					setReady(true);
 					setHidden(false);
@@ -120324,6 +120381,10 @@ gtExpose([
     display: inline-block;
   }
 
+  .tw\:aspect-square {
+    aspect-ratio: 1;
+  }
+
   .tw\:size-full {
     width: 100%;
     height: 100%;
@@ -120331,6 +120392,14 @@ gtExpose([
 
   .tw\:w-full {
     width: 100%;
+  }
+
+  .tw\:max-w-full {
+    max-width: 100%;
+  }
+
+  .tw\:animate-border-beam {
+    animation: border-beam calc(var(--duration) * 1s) infinite linear;
   }
 
   .tw\:rounded-\[inherit\] {
@@ -120376,6 +120445,12 @@ gtExpose([
 @property --tw-numeric-fraction {
   syntax: "*";
   inherits: false
+}
+
+@keyframes border-beam {
+  100% {
+    offset-distance: 100%;
+  }
 }
 
 @keyframes shine {

@@ -105,7 +105,7 @@ import { useGtlKeys } from "../../shared/laptop-keys.js";
 .gtL-content .jdp-cta{position:static;max-width:420px}
 .gtL-content .jdp-lab,.gtL-content .jdp-c{scroll-margin:16px}
 [data-phone-landscape] .jdp{--jd-slip:0px!important}
-[data-phone-landscape] .jdp-hm{overflow:auto;max-height:calc(var(--pl-avail) - var(--pl-head) - 64px - var(--pl-sab));overscroll-behavior:contain;-webkit-overflow-scrolling:touch;margin-top:6px}
+[data-phone-landscape] .jdp-hm{overflow:auto;max-height:calc(var(--pl-avail) - var(--pl-head) - 104px - var(--pl-sab));overscroll-behavior:contain;-webkit-overflow-scrolling:touch;margin-top:6px}
 [data-phone-landscape] .jdp-colh{position:sticky;top:0;z-index:2;background:var(--bgs)}
 [data-phone-landscape] .jdp-c{min-height:44px}
 [data-phone-landscape] .jdp-tot{font-size:clamp(16px,calc((100cqw - 76px) / var(--n) / 4),24px)}

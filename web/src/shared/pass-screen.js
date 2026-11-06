@@ -22,7 +22,7 @@ const GT_PASS_CSS = `
 .gt-pass-wrap .gt-flip-front{gap:14px;color:var(--gt-p-ink)}
 .gt-pass-wrap .gt-flip-front p{margin:0;font:600 18px/1.25 'Inter',sans-serif}
 .gt-pass-wrap .gt-flip-back{padding:18px 14px;display:flex;align-items:center;justify-content:center;overflow:visible}
-@media (max-height:700px){.gt-pass-name{font-size:min(var(--gt-p-fs),50px);margin-bottom:12px}.gt-pass-label{margin-top:14px}.gt-pass-wrap>.gt-flip{min-height:170px}.gt-pass-wrap .gt-flip-back{padding:12px 10px}}
+@media (max-height:700px){.gt-pass-wrap .gt-u-dock{position:static}.gt-pass-name{font-size:min(var(--gt-p-fs),50px);margin-bottom:12px}.gt-pass-label{margin-top:14px}.gt-pass-wrap>.gt-flip{min-height:170px}.gt-pass-wrap .gt-flip-back{padding:12px 10px}}
 .gt-pass-wrap .gt-flip-back>div{width:100%}
 .gt-pass-note{font:500 13px/1.35 'Inter',sans-serif;color:var(--gt-p-muted);max-width:300px;margin:2px 0 0}
 .gt-pass-wrap .gt-u-dock{align-self:stretch;margin-top:6px}

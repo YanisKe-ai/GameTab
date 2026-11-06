@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.07-2 (07.11.2026 00:16)
+- Einstellungen: Spielergruppen einklappbar
+
 ## 2026.11.07-1 (07.11.2026 00:06)
 - Tutto: Karten passen sich der Spielerzahl an, iPhone: Seite wackelt nicht mehr, Einstellungen: alle laufenden Spiele beenden
 

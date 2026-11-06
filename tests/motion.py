@@ -121,7 +121,7 @@ def run(pw, vp, theme, mode):
         note(f"{tag}: kein 'Bild teilen' sichtbar")
     # 4. haengende Animationen
     w(pg, 1500)
-    stuck = pg.evaluate("""()=>document.getAnimations().filter(a=>{const e=a.effect&&a.effect.getTiming();return a.playState==='running'&&e&&e.iterations!==Infinity&&e.duration>0&&a.currentTime>e.duration*e.iterations+500}).length""")
+    stuck = pg.evaluate("""()=>document.getAnimations().filter(a=>{const e=a.effect&&a.effect.getTiming();return a.playState==='running'&&e&&e.iterations!==Infinity&&e.duration>0&&a.currentTime>a.effect.getComputedTiming().endTime+500}).length""")
     check(stuck == 0, f"{tag}: {stuck} haengende Animationen")
     inf = pg.evaluate("document.getAnimations().filter(a=>a.effect&&a.effect.getTiming().iterations===Infinity).length")
     note(f"{tag}: endlose Animationen auf dieser Seite: {inf}")

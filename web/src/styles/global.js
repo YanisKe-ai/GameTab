@@ -5,6 +5,9 @@ html[data-gt-theme="light"] { --gt-focus: #1B4FA0; }
 html[data-gt-theme="noir"] { --gt-focus: #FFFFFF; }
 :where(button, a[href], summary, [role="button"], [tabindex]:not([tabindex="-1"])):focus-visible { outline: 2px solid var(--gt-focus); outline-offset: 2px; }
 :root { --gt-ease-out: cubic-bezier(.23,1,.32,1); --gt-ease-io: cubic-bezier(.77,0,.175,1); --gt-ease-spring: cubic-bezier(.34,1.3,.64,1); }
+/* Motion-Tokens (eine Quelle): Dauer, Abstand, Skala. Nur transform und opacity animieren, nichts wartet auf das Ende. */
+:root { --gt-dur-feedback: 90ms; --gt-dur-small: 160ms; --gt-dur-large: 240ms; --gt-dur-count: 300ms; --gt-dist-s: 4px; --gt-dist-m: 8px; --gt-dist-l: 16px; --gt-scale-press: .97; --gt-scale-enter: .95; }
+@media (prefers-reduced-motion: reduce) { :root { --gt-dist-s: 0px; --gt-dist-m: 0px; --gt-dist-l: 0px; --gt-scale-press: 1; --gt-scale-enter: 1; --gt-dur-small: 120ms; --gt-dur-large: 160ms; --gt-dur-count: 1ms; } }
 .gtL-col-side2, .gtL-e-c { display: contents; }
 .gtL-e-only { display: none; }
 .gtL-content .gtL-e-only { display: block; }
@@ -98,9 +101,9 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 input[type="number"] { -moz-appearance: textfield; }
 * { box-sizing: border-box; }
-.press-fx, .card-fx { transition: transform 200ms var(--gt-ease-out, cubic-bezier(.23,1,.32,1)), box-shadow 180ms ease, opacity 150ms ease; -webkit-tap-highlight-color: transparent; }
-.press-fx:active { transform: scale(0.96); opacity: 0.9; transition: transform 90ms var(--gt-ease-out, cubic-bezier(.23,1,.32,1)), opacity 90ms ease; }
-.card-fx:active { transform: scale(0.98); transition: transform 90ms var(--gt-ease-out, cubic-bezier(.23,1,.32,1)); }
+.press-fx, .card-fx { transition: transform var(--gt-dur-large) var(--gt-ease-out, cubic-bezier(.23,1,.32,1)), box-shadow var(--gt-dur-small) ease, opacity var(--gt-dur-small) ease; -webkit-tap-highlight-color: transparent; }
+.press-fx:active { transform: scale(var(--gt-scale-press)); opacity: 0.9; transition: transform var(--gt-dur-feedback) var(--gt-ease-out, cubic-bezier(.23,1,.32,1)), opacity var(--gt-dur-feedback) ease; }
+.card-fx:active { transform: scale(0.98); transition: transform var(--gt-dur-feedback) var(--gt-ease-out, cubic-bezier(.23,1,.32,1)); }
 .paper-grid {
   background-image:
     linear-gradient(rgba(120,120,140,0.07) 1px, transparent 1px),
@@ -114,7 +117,7 @@ input[type="number"] { -moz-appearance: textfield; }
 .gt-met::after { content: ""; position: absolute; top: 50%; left: 0; width: 56px; height: 1px; transform: translateY(-50%); background: linear-gradient(90deg, var(--mc, #fff), transparent); }
 @keyframes gtGlowPulse { 0% { opacity: 0; transform: scale(.85); } 35% { opacity: 1; } 100% { opacity: 0; transform: scale(1.15); } }
 .gt-glow { position: absolute; inset: 0; pointer-events: none; opacity: 0; animation: gtGlowPulse 1.7s cubic-bezier(.23,1,.32,1) both; }
-@keyframes gtBlurFade { from { opacity: 0; transform: translateY(6px); filter: blur(6px); } to { opacity: 1; transform: none; filter: none; } }
+@keyframes gtBlurFade { from { opacity: 0; transform: translateY(var(--gt-dist-m)); filter: blur(6px); } to { opacity: 1; transform: none; filter: none; } }
 .gt-su-row { animation: gtBlurFade .4s cubic-bezier(.23,1,.32,1) both; }
 @keyframes gtShimmerOnce { from { transform: translateX(-120%) skewX(-18deg); } to { transform: translateX(260%) skewX(-18deg); } }
 .gt-su-btn:not(:disabled) { position: relative; overflow: hidden; }
@@ -198,14 +201,14 @@ input[type="number"] { -moz-appearance: textfield; }
   [data-gt-hold].is-holding { transform: none; }
 }
 @keyframes reveal-up {
-  from { opacity: 0; transform: translateY(8px); }
+  from { opacity: 0; transform: translateY(var(--gt-dist-m)); }
   to { opacity: 1; transform: translateY(0); }
 }
-.reveal-1, .reveal-2, .reveal-3, .reveal-4 { transform: translateY(0); animation: reveal-up 260ms var(--gt-ease-out, cubic-bezier(.23,1,.32,1)) backwards; }
+.reveal-1, .reveal-2, .reveal-3, .reveal-4 { transform: translateY(0); animation: reveal-up var(--gt-dur-large) var(--gt-ease-out, cubic-bezier(.23,1,.32,1)) backwards; }
 .reveal-2 { animation-delay: 50ms; }
 .reveal-3 { animation-delay: 100ms; }
 .reveal-4 { animation-delay: 150ms; }
-::view-transition-old(root) { animation: gtVtOut 90ms cubic-bezier(0.23, 1, 0.32, 1) both; } ::view-transition-new(root) { animation: gtVtIn 200ms cubic-bezier(0.23, 1, 0.32, 1) 40ms both; } @keyframes gtVtOut { to { opacity: 0; } } @keyframes gtVtIn { from { opacity: 0; transform: translateY(6px); } } .gt-scrim-in { animation: gtScrimIn 160ms ease-out both; } @keyframes gtScrimIn { from { opacity: 0; } } 
+::view-transition-old(root) { animation: gtVtOut var(--gt-dur-feedback) cubic-bezier(0.23, 1, 0.32, 1) both; } ::view-transition-new(root) { animation: gtVtIn var(--gt-dur-large) cubic-bezier(0.23, 1, 0.32, 1) 40ms both; } @keyframes gtVtOut { to { opacity: 0; } } @keyframes gtVtIn { from { opacity: 0; transform: translateY(var(--gt-dist-m)); } } .gt-scrim-in { animation: gtScrimIn var(--gt-dur-small) ease-out both; } @keyframes gtScrimIn { from { opacity: 0; } } 
 @media (prefers-reduced-motion: reduce) { ::view-transition-old(root), ::view-transition-new(root) { animation: none !important; } .gt-scrim-in { animation: none; } }
 @keyframes podium-pop { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
 .podium-pop { animation: podium-pop 0.28s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
@@ -357,5 +360,10 @@ body::after {
 html[data-phone-landscape] body:has(> #root > div.gtL-start) { position: static !important; overflow: visible !important; top: auto !important; width: auto !important; }
 [data-phone-landscape] #root > div.gtL-start { height: auto !important; min-height: var(--pl-vh) !important; overflow: visible !important; }
 @media (display-mode: standalone) { html[data-phone-landscape] body #root > div.gtL-start { height: auto !important; min-height: 100vh !important; padding-top: max(12px, env(safe-area-inset-top, 0px)) !important; } }
+/* Lesbarkeit Handy: Kleintext mindestens 13 px (Grossbuchstaben-Kleinlabels 12 px). Ausnahmen: Tabellenzellen, Laptop, .gt-nofloor. */
+@media (max-width: 700px) {
+  :is([style*="font-size: 9.5px"],[style*="font-size: 10px"],[style*="font-size: 10.5px"],[style*="font-size: 11px"],[style*="font-size: 11.5px"],[style*="font-size: 12px"],[style*="font-size: 12.5px"]):not(td, th, .gtL-content *, .gt-nofloor, .gt-nofloor *) { font-size: 13px !important; }
+  :is([style*="font-size: 9.5px"],[style*="font-size: 10px"],[style*="font-size: 10.5px"],[style*="font-size: 11px"],[style*="font-size: 11.5px"],[style*="font-size: 12px"],[style*="font-size: 12.5px"])[style*="text-transform: uppercase"]:not(td, th, .gtL-content *, .gt-nofloor, .gt-nofloor *) { font-size: 12px !important; }
+}
 `;/*@gt-body-end*/
 export { GLOBAL_STYLES };

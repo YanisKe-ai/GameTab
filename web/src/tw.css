@@ -3,8 +3,9 @@
 @import "tailwindcss/theme.css" layer(theme) prefix(tw);
 @import "tailwindcss/utilities.css" layer(utilities) prefix(tw);
 @theme inline {
-  --animate-shine: shine var(--duration) infinite linear;
-  --animate-border-beam: border-beam calc(var(--duration) * 1s) infinite linear;
+  --animate-shine: shine var(--duration) 2 linear;
+  --animate-border-beam: border-beam calc(var(--duration) * 1s) linear 1 forwards, beam-out 400ms ease-out calc(var(--duration) * 1s - 400ms) forwards;
   @keyframes border-beam { 100% { offset-distance: 100%; } }
+  @keyframes beam-out { to { opacity: 0; } }
   @keyframes shine { 0% { background-position: 0% 0%; } 50% { background-position: 100% 100%; } to { background-position: 0% 0%; } }
 }

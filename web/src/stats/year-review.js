@@ -33,7 +33,7 @@ const GT_YR_CSS=".gtYR{position:fixed;left:0;top:0;right:0;height:100vh;height:1
 "@media (min-width:640px){.gtYR-card{width:auto;height:min(94%,880px);aspect-ratio:9/16;border-radius:28px;box-shadow:0 30px 80px rgba(0,0,0,.5)}}"+
 ".gtYR-in{animation:gtYRin .56s cubic-bezier(.23,1,.32,1) both}"+
 ".gtYR-glow{animation:gtYRfade .9s ease-out both}"+
-".gtYR-drift{animation:gtYRdrift 9s ease-in-out infinite alternate}"+
+".gtYR-drift{animation:gtYRdrift 9s ease-in-out 2 alternate}"+
 ".gtYR-zone{position:absolute;top:84px;bottom:0;border:0;padding:0;margin:0;background:transparent;cursor:pointer;z-index:1;-webkit-tap-highlight-color:transparent}"+
 ".gtYR-zone:focus-visible,.gtYR-btn:focus-visible{outline:2px solid currentColor;outline-offset:-4px}"+
 ".gtYR-btn{transition:transform .14s cubic-bezier(.23,1,.32,1),opacity .14s;cursor:pointer;-webkit-tap-highlight-color:transparent}"+

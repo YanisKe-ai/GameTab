@@ -91,7 +91,7 @@ const MINIGOLF_FONT = "'Space Grotesk', sans-serif";
 const MG_UI = "'Inter', sans-serif";
 const MG_CSS = `
 .mgGL button { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
-.mgGL .mgPress { transition: transform 140ms var(--gt-ease-out), background-color 160ms ease, border-color 160ms ease, color 160ms ease, opacity 160ms ease, box-shadow 160ms ease; }
+.mgGL .mgPress { min-height: 44px; transition: transform 140ms var(--gt-ease-out), background-color 160ms ease, border-color 160ms ease, color 160ms ease, opacity 160ms ease, box-shadow 160ms ease; }
 .mgGL .mgPress:active:not(:disabled) { transform: scale(0.97); }
 .mgGL .mgPress:disabled { cursor: default; }
 @media (hover: hover) and (pointer: fine) { .mgGL .mgPress:hover:not(:disabled) { filter: brightness(1.07); } }
@@ -483,7 +483,7 @@ function MgStandingsBox({ st, onOpen, finished, mg, t, className }) {
         className="mgPress"
         onClick={onOpen}
         aria-label={title + ". " + t("mgOpenTable")}
-        style={{ width: "100%", minHeight: 40, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8, border: "none", background: "transparent", color: mg.muted, fontFamily: MG_UI, fontSize: 14, fontWeight: 600, padding: "0 4px 0 6px", cursor: "pointer", textAlign: "left" }}
+        style={{ width: "100%", minHeight: 44, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8, border: "none", background: "transparent", color: mg.muted, fontFamily: MG_UI, fontSize: 14, fontWeight: 600, padding: "0 4px 0 6px", cursor: "pointer", textAlign: "left" }}
       >
         <span>{title}</span>
         <MgSvg size={18}>
@@ -766,7 +766,7 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
         onClick={() => lastUndo && upd((s) => mgUndo(s))}
         disabled={!lastUndo}
         aria-label={lastUndo ? t("mgUndoAria")(holesTxt(lastUndo.holes)) : t("mgUndo")}
-        style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, margin: "2px auto 0", minHeight: 40, padding: "0 16px", border: "none", background: "transparent", color: mg.muted, fontFamily: MG_UI, fontSize: 14.5, fontWeight: 600, cursor: lastUndo ? "pointer" : "default", opacity: lastUndo ? 1 : 0.45 }}
+        style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, margin: "2px auto 0", minHeight: 44, padding: "0 16px", border: "none", background: "transparent", color: mg.muted, fontFamily: MG_UI, fontSize: 14.5, fontWeight: 600, cursor: lastUndo ? "pointer" : "default", opacity: lastUndo ? 1 : 0.45 }}
       >
         <MgSvg size={18} sw={2}>
           <path d="M9 7L5 11l4 4" />

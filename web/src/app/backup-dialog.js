@@ -5,7 +5,7 @@ import { useGtDialog } from "../shared/dialog.js";
 import { RADIUS_SM } from "../themes/palette.js";
 
 function BackupRestoreDialog({ plan, current, onConfirm, onCancel, t, tk }) {
-  const ref = useGtDialog({ open: !!plan, onClose: onCancel });
+  const ref = useGtDialog({ open: !!plan, onClose: onCancel, outside: false });
   if (!plan) return null;
   const info = plan.info;
   const fill = (s, v) => Object.keys(v).reduce((a, k) => a.split("{" + k + "}").join(String(v[k])), s);

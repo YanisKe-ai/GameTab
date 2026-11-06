@@ -3,6 +3,8 @@
 // Macht: Startfokus ([data-gt-autofocus], sonst erstes Bedienelement, sonst der Dialog selbst), Tab-Schleife,
 // Hintergrund inert, Escape schliesst (onClose fehlt oder escape:false = fachlich nicht erlaubt), Fokus zurueck auf den Ausloeser.
 // Verschachtelte Dialoge: nur der oberste reagiert, beim Schliessen ist der darunter wieder bedienbar.
+// outside: Tippen auf die Flaeche ausserhalb des Overlays (z. B. Seitenleiste im Laptop-Modus, die der Overlay nicht ueberdeckt) schliesst wie ein Tippen auf den Hintergrund.
+//   Standard: schliesst per onClose. false = nie (Onboarding, Backup-Vorschau). Funktion = eigene Reaktion. Tippen im Overlay selbst regeln dessen eigene Handler.
 import { React } from "../vendor/react-globals.js";
 
 const FOCUSABLE = 'a[href],button:not([disabled]),input:not([disabled]):not([type="hidden"]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"]),[contenteditable="true"]';
@@ -25,10 +27,10 @@ function gtDialogInert(root) {
   return () => done.forEach((n) => n.removeAttribute("inert"));
 }
 
-function useGtDialog({ open, onClose, escape = true }) {
+function useGtDialog({ open, onClose, escape = true, outside = true }) {
   const ref = React.useRef(null);
-  const latest = React.useRef({ onClose, escape });
-  latest.current = { onClose, escape };
+  const latest = React.useRef({ onClose, escape, outside });
+  latest.current = { onClose, escape, outside };
   React.useEffect(() => {
     const root = ref.current;
     if (!open || !root) return undefined;
@@ -58,9 +60,22 @@ function useGtDialog({ open, onClose, escape = true }) {
       if (e.shiftKey) (at <= 0 ? last : items[at - 1]).focus();
       else (at < 0 || at === items.length - 1 ? first : items[at + 1]).focus();
     };
+    const born = performance.now();
+    // Inerte Flaechen nehmen keine Ereignisse an: ein Tipp daneben trifft Vorfahren des Overlays (Rahmen, Seite). Nur das zaehlt als "ausserhalb".
+    const onTap = (e) => {
+      if (stack[stack.length - 1] !== entry) return;
+      const t = e.target;
+      if (!t || !t.contains || t === root || root.contains(t) || !t.contains(root)) return;
+      if (e.timeStamp && performance.now() - born < 120) return;
+      const l = latest.current;
+      const o = l.outside === true ? l.onClose : l.outside;
+      if (typeof o === "function") { e.stopPropagation(); o(); }
+    };
     document.addEventListener("keydown", onKey, true);
+    document.addEventListener("click", onTap, true);
     return () => {
       document.removeEventListener("keydown", onKey, true);
+      document.removeEventListener("click", onTap, true);
       const i = stack.indexOf(entry);
       if (i >= 0) stack.splice(i, 1);
       undoInert();

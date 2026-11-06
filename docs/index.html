@@ -12,10 +12,10 @@
 <script>(function(){try{var t=(JSON.parse(localStorage.getItem("spieleblock-app-state-v1")||"{}")||{}).theme;var c={light:"#F8F9FA",vitrum:"#362A52",noir:"#0A0A0A",dark:"#2E2247"}[t]||"#2E2247";document.querySelector('meta[name="theme-color"]').setAttribute("content",c);document.documentElement.style.background=c;}catch(e){}})();</script>
 
 <script>/* Handy-Querformat: Attribut data-phone-landscape vor dem ersten Paint (Regel und Doku: web/src/shared/phone-landscape.js). */(function(){try{
-/*pl-decide-begin*/function plDecide(e){if(!e||e.viewMode==="laptop")return false;if(e.force===true)return true;if(e.force===false)return false;if(!e.touch)return false;var iw=e.innerW||0,ih=e.innerH||0,sw=e.screenW||0,sh=e.screenH||0;var k=e.scale>1?e.scale:1;var sh2=(sw&&sh?Math.min(sw,sh):Math.min(iw,ih))/k;if(!sh2||sh2>(k>1?700:500))return false;var l;if(typeof e.orientationType==="string"&&e.orientationType)l=e.orientationType.indexOf("landscape")===0;else if(typeof e.windowOrientation==="number")l=Math.abs(e.windowOrientation)===90;else if(sw&&sh&&sw!==sh)l=sw>sh;else l=!!e.mqLandscape;if(!l)return false;return iw>ih;}/*pl-decide-end*/
-var w=window,s=w.screen||{},mq=function(q){try{return!!(w.matchMedia&&w.matchMedia(q).matches);}catch(x){return false;}};var vm="mobile";try{vm=(JSON.parse(localStorage.getItem("spieleblock-app-state-v1")||"{}")||{}).viewMode==="laptop"?"laptop":"mobile";}catch(x){}var f=null,m=/[?&]pl=([01])\b/.exec(location.search||"");if(m)f=m[1]==="1";else{try{var v=localStorage.getItem("gametab-pl-force");if(v==="1")f=true;else if(v==="0")f=false;}catch(x){}}var ot=null;try{ot=s.orientation&&s.orientation.type?String(s.orientation.type):null;}catch(x){}
-var tk=1,tsh=Math.min(s.width||0,s.height||0);if(vm!=="laptop"&&mq("(pointer: coarse)")&&tsh>=600)tk=Math.min(1.6,Math.max(1,tsh/460));if(tk>1){var tl=s.orientation&&s.orientation.type?String(s.orientation.type).indexOf("landscape")===0:(s.width||0)>(s.height||0);var vpm=document.querySelector('meta[name="viewport"]');if(vpm)vpm.setAttribute("content","width="+Math.round((tl?Math.max(s.width,s.height):tsh)/tk)+", viewport-fit=cover");document.documentElement.setAttribute("data-tablet","");}
-if(plDecide({viewMode:vm,force:f,scale:tk,touch:(w.navigator&&w.navigator.maxTouchPoints>0)||mq("(any-pointer: coarse)"),screenW:s.width||0,screenH:s.height||0,orientationType:ot,windowOrientation:typeof w.orientation==="number"?w.orientation:null,mqLandscape:mq("(orientation: landscape)"),innerW:w.innerWidth||0,innerH:w.innerHeight||0}))document.documentElement.setAttribute("data-phone-landscape","");}catch(e){}})();</script>
+/*pl-decide-begin*/function plDecide(e){if(!e||e.viewMode==="laptop")return false;if(e.force===true)return true;if(e.force===false)return false;if(!e.touch)return false;var iw=e.innerW||0,ih=e.innerH||0,sw=e.screenW||0,sh=e.screenH||0;var sh2=sw&&sh?Math.min(sw,sh):Math.min(iw,ih);if(!sh2||sh2>500)return false;var l;if(typeof e.orientationType==="string"&&e.orientationType)l=e.orientationType.indexOf("landscape")===0;else if(typeof e.windowOrientation==="number")l=Math.abs(e.windowOrientation)===90;else if(sw&&sh&&sw!==sh)l=sw>sh;else l=!!e.mqLandscape;if(!l)return false;return iw>ih;}/*pl-decide-end*/
+/*vm-resolve-begin*/function resolveViewMode(pref,plActive,w){if(pref==="laptop")return"laptop";if(pref==="mobile")return"mobile";return!plActive&&w>=600?"laptop":"mobile";}/*vm-resolve-end*/
+var w=window,s=w.screen||{},mq=function(q){try{return!!(w.matchMedia&&w.matchMedia(q).matches);}catch(x){return false;}};var vm="auto";try{var sv=JSON.parse(localStorage.getItem("spieleblock-app-state-v1")||"{}")||{};var ch=sv.viewModeChosen===true||(sv.viewModeChosen===undefined&&sv.viewMode==="laptop");vm=ch?(sv.viewMode==="laptop"?"laptop":"mobile"):"auto";}catch(x){}var f=null,m=/[?&]pl=([01])\b/.exec(location.search||"");if(m)f=m[1]==="1";else{try{var v=localStorage.getItem("gametab-pl-force");if(v==="1")f=true;else if(v==="0")f=false;}catch(x){}}var ot=null;try{ot=s.orientation&&s.orientation.type?String(s.orientation.type):null;}catch(x){}
+var pld=plDecide({viewMode:vm==="laptop"?"laptop":"mobile",force:f,touch:(w.navigator&&w.navigator.maxTouchPoints>0)||mq("(any-pointer: coarse)"),screenW:s.width||0,screenH:s.height||0,orientationType:ot,windowOrientation:typeof w.orientation==="number"?w.orientation:null,mqLandscape:mq("(orientation: landscape)"),innerW:w.innerWidth||0,innerH:w.innerHeight||0});if(pld)document.documentElement.setAttribute("data-phone-landscape","");var iw=w.innerWidth||0;document.documentElement.setAttribute("data-layout",iw>=1024?"expanded":iw>=600?"medium":"compact");document.documentElement.classList.toggle("gt-laptopmode",resolveViewMode(vm,pld,iw)==="laptop");}catch(e){}})();</script>
 <style id="gt-fonts">
 @font-face{font-family:'Baloo 2';font-style:normal;font-weight:400 700;font-display:swap;src:url("./fonts/Baloo2-400-1.woff2") format('woff2');}
 @font-face{font-family:'Baloo 2';font-style:normal;font-weight:701 900;font-display:swap;src:url("./fonts/Baloo2-701-1.woff2") format('woff2');}
@@ -7873,6 +7873,28 @@ var TRANSLATIONS = {
 		shareSaveOrShare: "Sichern oder teilen",
 		shareIosHint: "Danach «Bild sichern» für Fotos oder «In Dateien sichern» wählen.",
 		shareSavedNote: "Gespeichert im Ordner Downloads.",
+		shareDoneNote: "Geteilt.",
+		shareDownloadNote: "Download gestartet.",
+		shareFailNote: "Teilen hat nicht geklappt. Du kannst das Bild stattdessen speichern.",
+		shareTimeoutNote: "Keine Antwort vom Teilen-Fenster. Versuche es nochmals oder speichere das Bild.",
+		shareNoShareNote: "Teilen wird hier nicht unterstützt. Speichere das Bild und teile die Datei danach.",
+		backupExportDone: "Sicherung erstellt: {name}",
+		backupExportFail: "Die Sicherung konnte nicht erstellt werden.",
+		backupRestoreTitle: "Sicherung wiederherstellen?",
+		backupRestoreFile: "Datei: {name}, Version {v}, erstellt {date}",
+		backupRestoreContains: "Die Datei enthält:",
+		backupRestoreNowTitle: "Aktuell auf diesem Gerät:",
+		backupRestoreCounts: "{m} Partien in der Statistik, {g} Spielergruppen, {t} Schieber-Turniere.",
+		backupRestoreKeys: "Dazu {k} gespeicherte Einträge, zum Beispiel laufende Partien und Einstellungen.",
+		backupRestoreWarn: "Die aktuellen Daten auf diesem Gerät werden ersetzt. Das lässt sich nicht rückgängig machen. Sichere sie vorher, wenn du sie behalten willst.",
+		backupRestoreCancel: "Abbrechen",
+		backupRestoreConfirm: "Wiederherstellen",
+		backupRestoreCancelled: "Wiederherstellen abgebrochen. Es wurde nichts geändert.",
+		backupErrRead: "Diese Datei konnte nicht gelesen werden. Es wurde nichts geändert.",
+		backupErrNotBackup: "Das ist keine GameTab-Sicherung. Es wurde nichts geändert.",
+		backupErrNewer: "Diese Sicherung stammt aus einer neueren Version (Format {v}). Aktualisiere GameTab und versuche es nochmals. Es wurde nichts geändert.",
+		backupErrDamaged: "Die Sicherung ist beschädigt oder unvollständig. Es wurde nichts geändert.",
+		backupErrWrite: "Wiederherstellen ging nicht, der Speicher ist voll oder gesperrt. Es wurde nichts geändert.",
 		shareResultLabel: "Als Bild teilen",
 		shareResultAria: "Ergebnis als Bild teilen",
 		shareWinnerBadge: "SIEGER",
@@ -9418,6 +9440,28 @@ var TRANSLATIONS = {
 		shareSaveOrShare: "Save or share",
 		shareIosHint: "Then choose Save Image for Photos, or Save to Files.",
 		shareSavedNote: "Saved to your Downloads folder.",
+		shareDoneNote: "Shared.",
+		shareDownloadNote: "Download started.",
+		shareFailNote: "Sharing did not work. You can save the image instead.",
+		shareTimeoutNote: "No answer from the share window. Try again or save the image.",
+		shareNoShareNote: "Sharing is not supported here. Save the image and share the file afterwards.",
+		backupExportDone: "Backup created: {name}",
+		backupExportFail: "The backup could not be created.",
+		backupRestoreTitle: "Restore backup?",
+		backupRestoreFile: "File: {name}, version {v}, created {date}",
+		backupRestoreContains: "The file contains:",
+		backupRestoreNowTitle: "Currently on this device:",
+		backupRestoreCounts: "{m} games in the statistics, {g} player groups, {t} Schieber tournaments.",
+		backupRestoreKeys: "Plus {k} stored entries, for example games in progress and settings.",
+		backupRestoreWarn: "The current data on this device will be replaced. This cannot be undone. Back it up first if you want to keep it.",
+		backupRestoreCancel: "Cancel",
+		backupRestoreConfirm: "Restore",
+		backupRestoreCancelled: "Restore cancelled. Nothing was changed.",
+		backupErrRead: "This file could not be read. Nothing was changed.",
+		backupErrNotBackup: "This is not a GameTab backup. Nothing was changed.",
+		backupErrNewer: "This backup comes from a newer version (format {v}). Update GameTab and try again. Nothing was changed.",
+		backupErrDamaged: "The backup is damaged or incomplete. Nothing was changed.",
+		backupErrWrite: "Restoring did not work, storage is full or blocked. Nothing was changed.",
 		shareResultLabel: "Share as image",
 		shareResultAria: "Share result as image",
 		shareWinnerBadge: "WINNER",
@@ -10963,6 +11007,28 @@ var TRANSLATIONS = {
 		shareSaveOrShare: "Enregistrer ou partager",
 		shareIosHint: "Choisis ensuite Enregistrer l'image pour Photos, ou Enregistrer dans Fichiers.",
 		shareSavedNote: "Enregistrement dans le dossier Téléchargements.",
+		shareDoneNote: "Partagé.",
+		shareDownloadNote: "Téléchargement lancé.",
+		shareFailNote: "Le partage n'a pas fonctionné. Tu peux enregistrer l'image à la place.",
+		shareTimeoutNote: "Pas de réponse de la fenêtre de partage. Réessaie ou enregistre l'image.",
+		shareNoShareNote: "Le partage n'est pas pris en charge ici. Enregistre l'image et partage le fichier ensuite.",
+		backupExportDone: "Sauvegarde créée : {name}",
+		backupExportFail: "La sauvegarde n'a pas pu être créée.",
+		backupRestoreTitle: "Restaurer la sauvegarde ?",
+		backupRestoreFile: "Fichier : {name}, version {v}, créé {date}",
+		backupRestoreContains: "Le fichier contient :",
+		backupRestoreNowTitle: "Actuellement sur cet appareil :",
+		backupRestoreCounts: "{m} parties dans les statistiques, {g} groupes de joueurs, {t} tournois de Schieber.",
+		backupRestoreKeys: "Plus {k} entrées enregistrées, par exemple parties en cours et réglages.",
+		backupRestoreWarn: "Les données actuelles de cet appareil seront remplacées. Impossible d'annuler. Sauvegarde-les d'abord si tu veux les garder.",
+		backupRestoreCancel: "Annuler",
+		backupRestoreConfirm: "Restaurer",
+		backupRestoreCancelled: "Restauration annulée. Rien n'a été modifié.",
+		backupErrRead: "Ce fichier n'a pas pu être lu. Rien n'a été modifié.",
+		backupErrNotBackup: "Ce n'est pas une sauvegarde GameTab. Rien n'a été modifié.",
+		backupErrNewer: "Cette sauvegarde vient d'une version plus récente (format {v}). Mets GameTab à jour et réessaie. Rien n'a été modifié.",
+		backupErrDamaged: "La sauvegarde est endommagée ou incomplète. Rien n'a été modifié.",
+		backupErrWrite: "La restauration a échoué, le stockage est plein ou bloqué. Rien n'a été modifié.",
 		shareResultLabel: "Partager en image",
 		shareResultAria: "Partager le résultat en image",
 		shareWinnerBadge: "VAINQUEUR",
@@ -12508,6 +12574,28 @@ var TRANSLATIONS = {
 		shareSaveOrShare: "Salva o condividi",
 		shareIosHint: "Poi scegli Salva immagine per Foto, oppure Salva su File.",
 		shareSavedNote: "Salvataggio nella cartella Download.",
+		shareDoneNote: "Condiviso.",
+		shareDownloadNote: "Download avviato.",
+		shareFailNote: "La condivisione non è riuscita. Puoi salvare l'immagine.",
+		shareTimeoutNote: "Nessuna risposta dalla finestra di condivisione. Riprova o salva l'immagine.",
+		shareNoShareNote: "La condivisione non è supportata qui. Salva l'immagine e condividi poi il file.",
+		backupExportDone: "Backup creato: {name}",
+		backupExportFail: "Impossibile creare il backup.",
+		backupRestoreTitle: "Ripristinare il backup?",
+		backupRestoreFile: "File: {name}, versione {v}, creato {date}",
+		backupRestoreContains: "Il file contiene:",
+		backupRestoreNowTitle: "Attualmente su questo dispositivo:",
+		backupRestoreCounts: "{m} partite nelle statistiche, {g} gruppi di giocatori, {t} tornei di Schieber.",
+		backupRestoreKeys: "Inoltre {k} voci salvate, ad esempio partite in corso e impostazioni.",
+		backupRestoreWarn: "I dati attuali su questo dispositivo verranno sostituiti. L'operazione non si può annullare. Salvali prima se vuoi conservarli.",
+		backupRestoreCancel: "Annulla",
+		backupRestoreConfirm: "Ripristina",
+		backupRestoreCancelled: "Ripristino annullato. Non è stato modificato nulla.",
+		backupErrRead: "Impossibile leggere questo file. Non è stato modificato nulla.",
+		backupErrNotBackup: "Questo non è un backup di GameTab. Non è stato modificato nulla.",
+		backupErrNewer: "Questo backup proviene da una versione più recente (formato {v}). Aggiorna GameTab e riprova. Non è stato modificato nulla.",
+		backupErrDamaged: "Il backup è danneggiato o incompleto. Non è stato modificato nulla.",
+		backupErrWrite: "Ripristino non riuscito, la memoria è piena o bloccata. Non è stato modificato nulla.",
 		shareResultLabel: "Condividi come immagine",
 		shareResultAria: "Condividi il risultato come immagine",
 		shareWinnerBadge: "VINCITORE",
@@ -14053,6 +14141,28 @@ var TRANSLATIONS = {
 		shareSaveOrShare: "Guardar o compartir",
 		shareIosHint: "Luego elige Guardar imagen para Fotos, o Guardar en Archivos.",
 		shareSavedNote: "Guardado en la carpeta Descargas.",
+		shareDoneNote: "Compartido.",
+		shareDownloadNote: "Descarga iniciada.",
+		shareFailNote: "No se pudo compartir. Puedes guardar la imagen en su lugar.",
+		shareTimeoutNote: "Sin respuesta de la ventana de compartir. Inténtalo de nuevo o guarda la imagen.",
+		shareNoShareNote: "Compartir no es compatible aquí. Guarda la imagen y comparte el archivo después.",
+		backupExportDone: "Copia creada: {name}",
+		backupExportFail: "No se pudo crear la copia de seguridad.",
+		backupRestoreTitle: "¿Restaurar la copia de seguridad?",
+		backupRestoreFile: "Archivo: {name}, versión {v}, creado {date}",
+		backupRestoreContains: "El archivo contiene:",
+		backupRestoreNowTitle: "Ahora en este dispositivo:",
+		backupRestoreCounts: "{m} partidas en las estadísticas, {g} grupos de jugadores, {t} torneos de Schieber.",
+		backupRestoreKeys: "Además {k} entradas guardadas, por ejemplo partidas en curso y ajustes.",
+		backupRestoreWarn: "Los datos actuales de este dispositivo se reemplazarán. No se puede deshacer. Haz antes una copia si quieres conservarlos.",
+		backupRestoreCancel: "Cancelar",
+		backupRestoreConfirm: "Restaurar",
+		backupRestoreCancelled: "Restauración cancelada. No se cambió nada.",
+		backupErrRead: "No se pudo leer este archivo. No se cambió nada.",
+		backupErrNotBackup: "Esto no es una copia de seguridad de GameTab. No se cambió nada.",
+		backupErrNewer: "Esta copia procede de una versión más reciente (formato {v}). Actualiza GameTab e inténtalo de nuevo. No se cambió nada.",
+		backupErrDamaged: "La copia está dañada o incompleta. No se cambió nada.",
+		backupErrWrite: "No se pudo restaurar, el almacenamiento está lleno o bloqueado. No se cambió nada.",
 		shareResultLabel: "Compartir como imagen",
 		shareResultAria: "Compartir resultado como imagen",
 		shareWinnerBadge: "GANADOR",
@@ -15598,6 +15708,28 @@ var TRANSLATIONS = {
 		shareSaveOrShare: "Guardar ou partilhar",
 		shareIosHint: "Depois escolhe Guardar imagem para Fotos, ou Guardar em Ficheiros.",
 		shareSavedNote: "Guardado na pasta Transferências.",
+		shareDoneNote: "Partilhado.",
+		shareDownloadNote: "Transferência iniciada.",
+		shareFailNote: "A partilha não funcionou. Podes guardar a imagem.",
+		shareTimeoutNote: "Sem resposta da janela de partilha. Tenta de novo ou guarda a imagem.",
+		shareNoShareNote: "A partilha não é suportada aqui. Guarda a imagem e partilha o ficheiro depois.",
+		backupExportDone: "Cópia criada: {name}",
+		backupExportFail: "Não foi possível criar a cópia de segurança.",
+		backupRestoreTitle: "Restaurar a cópia de segurança?",
+		backupRestoreFile: "Ficheiro: {name}, versão {v}, criado {date}",
+		backupRestoreContains: "O ficheiro contém:",
+		backupRestoreNowTitle: "Atualmente neste dispositivo:",
+		backupRestoreCounts: "{m} jogos nas estatísticas, {g} grupos de jogadores, {t} torneios de Schieber.",
+		backupRestoreKeys: "Mais {k} entradas guardadas, por exemplo jogos em curso e definições.",
+		backupRestoreWarn: "Os dados atuais deste dispositivo serão substituídos. Não é possível anular. Guarda-os antes, se os quiseres manter.",
+		backupRestoreCancel: "Cancelar",
+		backupRestoreConfirm: "Restaurar",
+		backupRestoreCancelled: "Restauro cancelado. Nada foi alterado.",
+		backupErrRead: "Não foi possível ler este ficheiro. Nada foi alterado.",
+		backupErrNotBackup: "Isto não é uma cópia de segurança do GameTab. Nada foi alterado.",
+		backupErrNewer: "Esta cópia vem de uma versão mais recente (formato {v}). Atualiza o GameTab e tenta de novo. Nada foi alterado.",
+		backupErrDamaged: "A cópia está danificada ou incompleta. Nada foi alterado.",
+		backupErrWrite: "O restauro falhou, o armazenamento está cheio ou bloqueado. Nada foi alterado.",
 		shareResultLabel: "Partilhar como imagem",
 		shareResultAria: "Partilhar resultado como imagem",
 		shareWinnerBadge: "VENCEDOR",
@@ -18238,7 +18370,7 @@ html[data-gt-theme="noir"] { --gt-focus: #FFFFFF; }
 .gtL-content .gtL-split:has(> .gtL-col-side2) > .gtL-col-side { grid-column: 2; grid-row: 1; position: static; }
 .gtL-content .gtL-split.gtL-e-fit { grid-template-columns: minmax(0, max-content) minmax(320px, 420px); justify-content: center; }
 .gtL-content .gtL-e-board { max-width: min(460px, calc(100dvh - 330px)) !important; }
-@media (max-width: 1100px) {
+@container gtl (max-width: 759px) {
   .gtL-content .gtL-split:has(> .gtL-col-side2) > * { grid-column: 1 !important; grid-row: auto !important; }
 }
 .gt-hit { position: relative; }
@@ -23402,6 +23534,11 @@ function useGtlKeys(active, handler, restoreOnClose) {
 		const back = GTL_FOCUS.el;
 		const fn = (e) => {
 			if (e.defaultPrevented || e.altKey || e.metaKey || e.ctrlKey || e.isComposing) return;
+			const tg = e.target, dl = tg && tg.closest ? tg.closest("[role=\"dialog\"]") : null;
+			if (dl) {
+				if (e.key === "Tab" && (tg !== dl || !document.querySelector(".gtL-content"))) return;
+				if ((e.key === "Enter" || e.key === " ") && tg.closest("button,a[href],[role=\"button\"]")) return;
+			}
 			ref.current && ref.current(e);
 		};
 		window.addEventListener("keydown", fn);
@@ -23962,21 +24099,93 @@ function RommeGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 		})
 	}))));
 }
+// web/src/shared/dialog.js
+var FOCUSABLE = "a[href],button:not([disabled]),input:not([disabled]):not([type=\"hidden\"]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex=\"-1\"]),[contenteditable=\"true\"]";
+var stack$1 = [];
+function gtDialogFocusables(root) {
+	return Array.from(root.querySelectorAll(FOCUSABLE)).filter((el) => !el.closest("[inert]") && el.getClientRects().length > 0);
+}
+function gtDialogInert(root) {
+	const done = [];
+	for (let el = root; el && el !== document.body && el.parentElement; el = el.parentElement) Array.from(el.parentElement.children).forEach((sib) => {
+		if (sib === el || sib.tagName === "SCRIPT" || sib.tagName === "STYLE" || sib.hasAttribute("inert") || sib.hasAttribute("data-gt-keep")) return;
+		sib.setAttribute("inert", "");
+		done.push(sib);
+	});
+	return () => done.forEach((n) => n.removeAttribute("inert"));
+}
+function useGtDialog({ open, onClose, escape = true }) {
+	const ref = import_react.default.useRef(null);
+	const latest = import_react.default.useRef({
+		onClose,
+		escape
+	});
+	latest.current = {
+		onClose,
+		escape
+	};
+	import_react.default.useEffect(() => {
+		const root = ref.current;
+		if (!open || !root) return void 0;
+		const trigger = document.activeElement;
+		const entry = { root };
+		stack$1.push(entry);
+		const undoInert = gtDialogInert(root);
+		if (!root.hasAttribute("tabindex")) root.setAttribute("tabindex", "-1");
+		if (!root.contains(document.activeElement)) {
+			const start = root.querySelector("[data-gt-autofocus]") || gtDialogFocusables(root)[0] || root;
+			try {
+				start.focus({ preventScroll: true });
+			} catch (_) {}
+		}
+		const onKey = (e) => {
+			if (stack$1[stack$1.length - 1] !== entry) return;
+			if (e.key === "Escape") {
+				const l = latest.current;
+				if (l.escape && l.onClose) {
+					e.stopPropagation();
+					l.onClose();
+				}
+				return;
+			}
+			if (e.key !== "Tab") return;
+			const items = gtDialogFocusables(root);
+			if (!items.length) {
+				e.preventDefault();
+				root.focus();
+				return;
+			}
+			const first = items[0], last = items[items.length - 1], cur = document.activeElement;
+			const at = items.indexOf(cur);
+			e.preventDefault();
+			if (e.shiftKey) (at <= 0 ? last : items[at - 1]).focus();
+			else (at < 0 || at === items.length - 1 ? first : items[at + 1]).focus();
+		};
+		document.addEventListener("keydown", onKey, true);
+		return () => {
+			document.removeEventListener("keydown", onKey, true);
+			const i = stack$1.indexOf(entry);
+			if (i >= 0) stack$1.splice(i, 1);
+			undoInert();
+			if (trigger && trigger.isConnected && trigger !== document.body) try {
+				trigger.focus({ preventScroll: true });
+			} catch (_) {}
+		};
+	}, [open]);
+	return ref;
+}
 // web/src/shared/more-sheet.js
 var GT_MORE_CSS = `.gt-foot-acts{display:none}
 .gtL-content .gt-foot-acts{display:block}
 .gtL-content .gt-hb-more{display:none}
 .gt-more-sheet button{min-height:48px}`;
 function GtMoreSheet({ open, onClose, label, tk, theme, children }) {
-	import_react.default.useEffect(() => {
-		if (!open) return void 0;
-		const onKey = (e) => {
-			if (e.key === "Escape") onClose();
-		};
-		window.addEventListener("keydown", onKey);
-		return () => window.removeEventListener("keydown", onKey);
-	}, [open, onClose]);
+	const dlgRef = useGtDialog({
+		open,
+		onClose
+	});
 	return /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("style", null, GT_MORE_CSS), open && /* @__PURE__ */ import_react.default.createElement("div", {
+		ref: dlgRef,
 		role: "dialog",
 		"aria-modal": "true",
 		"aria-label": label,
@@ -24311,16 +24520,13 @@ function pageShellStyle(theme) {
 }
 // web/src/shared/phone-landscape.js
 var PL_ATTR = "data-phone-landscape";
-var PL_MAX_SHORT_TABLET = 700;
-var TAB_MIN_SHORT = 600;
-var TAB_MAX_SCALE = 1.6;
-var TAB_TARGET = 460;
-var VP_DEFAULT = "width=device-width, initial-scale=1, viewport-fit=cover";
-function tabletScale(e) {
-	if (!e || e.viewMode === "laptop" || !e.coarse) return 1;
-	const short = Math.min(e.screenW || 0, e.screenH || 0);
-	if (!short || short < TAB_MIN_SHORT) return 1;
-	return Math.min(TAB_MAX_SCALE, Math.max(1, short / TAB_TARGET));
+function layoutClass(w) {
+	return w >= 1024 ? "expanded" : w >= 600 ? "medium" : "compact";
+}
+function resolveViewMode(pref, plActive, w) {
+	if (pref === "laptop") return "laptop";
+	if (pref === "mobile") return "mobile";
+	return !plActive && w >= 600 ? "laptop" : "mobile";
 }
 var PL_FORCE_KEY = "gametab-pl-force";
 var PL_STATE_KEY = "spieleblock-app-state-v1";
@@ -24331,9 +24537,8 @@ function decidePhoneLandscape(e) {
 	if (!e.touch) return false;
 	const iw = e.innerW || 0, ih = e.innerH || 0;
 	const sw = e.screenW || 0, sh = e.screenH || 0;
-	const k = e.scale > 1 ? e.scale : 1;
-	const short = (sw && sh ? Math.min(sw, sh) : Math.min(iw, ih)) / k;
-	if (!short || short > (k > 1 ? PL_MAX_SHORT_TABLET : 500)) return false;
+	const short = sw && sh ? Math.min(sw, sh) : Math.min(iw, ih);
+	if (!short || short > 500) return false;
 	let land;
 	if (typeof e.orientationType === "string" && e.orientationType) land = e.orientationType.indexOf("landscape") === 0;
 	else if (typeof e.windowOrientation === "number") land = Math.abs(e.windowOrientation) === 90;
@@ -24356,9 +24561,10 @@ function plReadForce() {
 }
 function plReadSavedViewMode() {
 	try {
-		return (JSON.parse(window.localStorage.getItem(PL_STATE_KEY) || "{}") || {}).viewMode === "laptop" ? "laptop" : "mobile";
+		const s = JSON.parse(window.localStorage.getItem(PL_STATE_KEY) || "{}") || {};
+		return s.viewModeChosen === true || s.viewModeChosen === void 0 && s.viewMode === "laptop" ? s.viewMode === "laptop" ? "laptop" : "mobile" : "auto";
 	} catch (_) {
-		return "mobile";
+		return "auto";
 	}
 }
 function plMQ(q) {
@@ -24367,29 +24573,6 @@ function plMQ(q) {
 	} catch (_) {
 		return false;
 	}
-}
-var tabLastVp = null;
-function applyTabletViewport(viewMode) {
-	const s = window.screen || {};
-	const k = tabletScale({
-		viewMode,
-		coarse: plMQ("(pointer: coarse)"),
-		screenW: s.width || 0,
-		screenH: s.height || 0
-	});
-	let land = false;
-	try {
-		land = s.orientation && s.orientation.type ? String(s.orientation.type).indexOf("landscape") === 0 : (s.width || 0) > (s.height || 0);
-	} catch (_) {}
-	const side = land ? Math.max(s.width || 0, s.height || 0) : Math.min(s.width || 0, s.height || 0);
-	const vp = k > 1 ? "width=" + Math.round(side / k) + ", viewport-fit=cover" : VP_DEFAULT;
-	if (vp !== tabLastVp) {
-		tabLastVp = vp;
-		const m = document.querySelector("meta[name=\"viewport\"]");
-		if (m && m.getAttribute("content") !== vp) m.setAttribute("content", vp);
-	}
-	document.documentElement.toggleAttribute("data-tablet", k > 1);
-	return k;
 }
 function plEnv(viewMode, force) {
 	const w = window, s = w.screen || {};
@@ -24400,7 +24583,6 @@ function plEnv(viewMode, force) {
 	return {
 		viewMode,
 		force,
-		scale: applyTabletViewport(viewMode),
 		touch: w.navigator && w.navigator.maxTouchPoints > 0 || plMQ("(any-pointer: coarse)"),
 		screenW: s.width || 0,
 		screenH: s.height || 0,
@@ -24412,6 +24594,8 @@ function plEnv(viewMode, force) {
 	};
 }
 var plViewMode = null;
+var plMode = "mobile";
+var plLayout = "compact";
 var plForce;
 var plActive = null;
 var plBound = false;
@@ -24423,6 +24607,9 @@ function plApply(v) {
 	if (v) root.setAttribute(PL_ATTR, "");
 	else root.removeAttribute(PL_ATTR);
 	plActive = v;
+	plNotify();
+}
+function plNotify() {
 	plSubs.forEach((f) => {
 		try {
 			f();
@@ -24438,8 +24625,15 @@ function updatePhoneLandscape() {
 	if (typeof window === "undefined") return false;
 	if (plViewMode == null) plViewMode = plReadSavedViewMode();
 	if (plForce === void 0) plForce = plReadForce();
-	const v = decidePhoneLandscape(plEnv(plViewMode, plForce));
+	const v = decidePhoneLandscape(plEnv(plViewMode === "laptop" ? "laptop" : "mobile", plForce));
+	const iw = window.innerWidth || 0;
+	const mode = resolveViewMode(plViewMode, v, iw), lc = layoutClass(iw);
+	document.documentElement.setAttribute("data-layout", lc);
+	const changed = mode !== plMode || lc !== plLayout;
+	plMode = mode;
+	plLayout = lc;
 	if (v !== plActive) plApply(v);
+	else if (changed) plNotify();
 	plSetVvh();
 	return v;
 }
@@ -24470,7 +24664,7 @@ function plUnbind() {
 	if (window.visualViewport) window.visualViewport.removeEventListener("resize", plSetVvh);
 }
 function setPhoneLandscapeViewMode(mode) {
-	plViewMode = mode === "laptop" ? "laptop" : "mobile";
+	plViewMode = mode === "laptop" || mode === "mobile" ? mode : "auto";
 	return updatePhoneLandscape();
 }
 function plRetain() {
@@ -24497,11 +24691,15 @@ function plSnapshot() {
 function usePhoneLandscape() {
 	return import_react.default.useSyncExternalStore(plSubscribe, plSnapshot, () => false);
 }
+function plModeSnapshot() {
+	return plMode;
+}
 function usePhoneLandscapeRoot(viewMode, loaded) {
 	import_react.default.useLayoutEffect(() => plRetain(), []);
 	import_react.default.useLayoutEffect(() => {
 		if (loaded) setPhoneLandscapeViewMode(viewMode);
 	}, [viewMode, loaded]);
+	return import_react.default.useSyncExternalStore(plSubscribe, plModeSnapshot, () => "mobile");
 }
 // web/src/app/install.js
 var install_exports = /* @__PURE__ */ __exportAll({
@@ -32906,7 +33104,8 @@ function gtImgDevice() {
 }
 function gtImgCanShare(files) {
 	try {
-		return !!(navigator.share && navigator.canShare && navigator.canShare({ files }));
+		if (window.isSecureContext === false) return false;
+		return typeof navigator.share === "function" && typeof navigator.canShare === "function" && !!navigator.canShare({ files });
 	} catch (_) {
 		return false;
 	}
@@ -32967,16 +33166,33 @@ function gtImgDownload(items) {
 		else setTimeout(() => gtImgDownloadOne(it), i * 350);
 	});
 }
-async function gtImgShare(items, title) {
-	try {
-		await navigator.share({
-			files: items.map((it) => it.file),
-			title: title || "GameTab"
-		});
-		return true;
-	} catch (e) {
-		return !!(e && e.name === "AbortError");
-	}
+var GT_IMG_SHARE_TIMEOUT = 6e4;
+function gtImgShareRun(shareFn, timeoutMs) {
+	return new Promise((resolve) => {
+		let done = false;
+		let timer = null;
+		const end = (r) => {
+			if (done) return;
+			done = true;
+			clearTimeout(timer);
+			resolve(r);
+		};
+		timer = setTimeout(() => end("timeout"), timeoutMs == null ? GT_IMG_SHARE_TIMEOUT : timeoutMs);
+		let p;
+		try {
+			p = Promise.resolve(shareFn());
+		} catch (_) {
+			end("fail");
+			return;
+		}
+		p.then(() => end("ok"), (e) => end(e && e.name === "AbortError" ? "abort" : "fail"));
+	});
+}
+async function gtImgShare(items, title, timeoutMs) {
+	return gtImgShareRun(() => navigator.share({
+		files: items.map((it) => it.file),
+		title: title || "GameTab"
+	}), timeoutMs);
 }
 // web/src/export/result-card.js
 var result_card_exports = /* @__PURE__ */ __exportAll({
@@ -34970,7 +35186,7 @@ function gtStxSlLayout(m, mc, opt) {
 	};
 	let TF = gtStxFitLines(mc, m.title, 900, F.chalk, 150, 112, 4, 1);
 	if (!TF.ok) TF = gtStxFitLines(mc, m.title, 900, F.chalk, 132, 84, 4, 2);
-	const ts = TF.s, tl = TF.l;
+	const ts = TF.s, tl = TF.l.filter((s) => s.trim() !== "·");
 	const tlh = ts * 1.04;
 	const stl = gtStxWrap(mc, m.status, 900, F.mono(400, 27));
 	const h1 = {
@@ -35557,6 +35773,7 @@ function gtStxGsLayout(m, mc, opt) {
 			l: gtStxWrap(mc, m.title, R - M, F.arch(72))
 		};
 	}
+	T.l = T.l.filter((s) => s.trim() !== "·");
 	const tlh = T.s * .98;
 	const stl = gtStxWrap(mc, m.status, deco ? 600 : R - M, F.inter(600, 28));
 	const outlineLine = (s) => /^[\d\s.,:'’\/+\-]+$/.test(s) && /\d/.test(s);
@@ -36255,26 +36472,15 @@ function GtStExportSheet({ tournament, t, onClose, initialTheme }) {
 	const [note, setNote] = import_react.default.useState("");
 	const [retry, setRetry] = import_react.default.useState(0);
 	const [sharing, setSharing] = import_react.default.useState(false);
-	const panelRef = import_react.default.useRef(null);
-	const backRef = import_react.default.useRef(null);
+	const panelRef = useGtDialog({
+		open: true,
+		onClose
+	});
 	const snap = import_react.default.useMemo(() => tournament ? JSON.parse(JSON.stringify(tournament)) : null, [
 		tournament && tournament.id,
 		tournament && tournament.revision,
 		tournament && tournament.name
 	]);
-	import_react.default.useEffect(() => {
-		backRef.current = document.activeElement;
-		const p = panelRef.current;
-		if (p) try {
-			p.focus({ preventScroll: true });
-		} catch (_) {}
-		return () => {
-			const b = backRef.current;
-			if (b && b.focus) try {
-				b.focus();
-			} catch (_) {}
-		};
-	}, []);
 	import_react.default.useEffect(() => {
 		if (!snap) return;
 		let alive = true;
@@ -36332,27 +36538,6 @@ function GtStExportSheet({ tournament, t, onClose, initialTheme }) {
 		theme,
 		retry
 	]);
-	import_react.default.useEffect(() => {
-		const onKey = (e) => {
-			if (e.key === "Escape") {
-				e.preventDefault();
-				onClose && onClose();
-			} else if (e.key === "Tab" && panelRef.current) {
-				const f = Array.from(panelRef.current.querySelectorAll("button,a[href]")).filter((x) => !x.disabled);
-				if (!f.length) return;
-				const a = f[0], z = f[f.length - 1];
-				if (e.shiftKey && (document.activeElement === a || document.activeElement === panelRef.current)) {
-					e.preventDefault();
-					z.focus();
-				} else if (!e.shiftKey && document.activeElement === z) {
-					e.preventDefault();
-					a.focus();
-				}
-			}
-		};
-		window.addEventListener("keydown", onKey);
-		return () => window.removeEventListener("keydown", onKey);
-	}, [onClose]);
 	const pages = state.pages;
 	const N = pages.length;
 	const acc = theme === "grandslam" ? {
@@ -36373,17 +36558,19 @@ function GtStExportSheet({ tournament, t, onClose, initialTheme }) {
 	const save = () => {
 		if (!N) return;
 		gtImgDownload(items);
-		setNote(gtImgDevice().desktop ? tr("shareSavedNote", "Gespeichert im Ordner Downloads.") : "");
+		setNote(gtImgDevice().desktop ? tr("shareSavedNote", "Gespeichert im Ordner Downloads.") : tr("shareDownloadNote", "Download gestartet."));
 	};
 	const share = async () => {
 		if (!N || sharing) return;
 		setSharing(true);
 		setNote("");
-		if (!await gtImgShare(items)) {
-			gtImgDownload(items);
-			setNote(tr("shareResultSaveHint", "Zum Speichern das Bild gedrückt halten, oder unten herunterladen."));
-		}
+		const r = await gtImgShare(items);
 		setSharing(false);
+		if (r === "ok") setNote(tr("shareDoneNote", "Geteilt."));
+		else if (r === "fail") {
+			gtImgDownload(items);
+			setNote(tr("shareFailNote", "Teilen hat nicht geklappt. Du kannst das Bild stattdessen speichern."));
+		} else if (r === "timeout") setNote(tr("shareTimeoutNote", "Keine Antwort vom Teilen-Fenster. Versuche es nochmals oder speichere das Bild."));
 	};
 	const saveLabel = N > 1 ? tr("shareSaveAll", "Alle {n} Bilder speichern", { n: N }) : tr("shareSaveImage", "Bild speichern");
 	const shareLabel = plan.iosHint ? tr("shareSaveOrShare", "Sichern oder teilen") : N > 1 ? tr("stxShareAll", "Alle {n} Seiten teilen", { n: N }) : tr("stxShare", "Bild teilen");
@@ -37245,8 +37432,10 @@ var { SchieberTournament, GtStuLogo } = (function() {
 		}, initials(name));
 	}
 	function Sheet({ title, onClose, children, footer, labelId }) {
-		const ref = useRef$17(null);
-		const opener = useRef$17(typeof document !== "undefined" ? document.activeElement : null);
+		const ref = useGtDialog({
+			open: true,
+			onClose
+		});
 		const lid = useRef$17(labelId || "gtst-s-" + GT_ST.uid().slice(0, 6)).current;
 		useEffect$15(() => {
 			const el = ref.current;
@@ -37256,33 +37445,8 @@ var { SchieberTournament, GtStuLogo } = (function() {
 			if (f && f.focus) try {
 				f.focus({ preventScroll: true });
 			} catch (e) {}
-			const key = (e) => {
-				if (e.key === "Escape") {
-					e.stopPropagation();
-					onClose();
-					return;
-				}
-				if (e.key === "Tab" && el) {
-					const q = [...el.querySelectorAll("button:not(:disabled),input:not(:disabled),select:not(:disabled),[tabindex=\"0\"]")].filter((x) => x.offsetParent !== null);
-					if (!q.length) return;
-					const a = q[0], b = q[q.length - 1];
-					if (e.shiftKey && document.activeElement === a) {
-						e.preventDefault();
-						b.focus();
-					} else if (!e.shiftKey && document.activeElement === b) {
-						e.preventDefault();
-						a.focus();
-					}
-				}
-			};
-			document.addEventListener("keydown", key, true);
 			return () => {
-				document.removeEventListener("keydown", key, true);
 				document.body.style.overflow = prev;
-				const o = opener.current;
-				if (o && o.isConnected && o.focus) try {
-					o.focus({ preventScroll: true });
-				} catch (e) {}
 			};
 		}, []);
 		return /* @__PURE__ */ import_react.default.createElement("div", {
@@ -39696,13 +39860,10 @@ function GtOnboarding3({ theme, lang, onDone }) {
 	const [step, setStep] = useState$11(0);
 	const btnRef = useRef$17(null);
 	const last = step === 2;
-	useEffect$15(() => {
-		const k = (e) => {
-			if (e.key === "Escape") onDone();
-		};
-		window.addEventListener("keydown", k);
-		return () => window.removeEventListener("keydown", k);
-	}, []);
+	const dlgRef = useGtDialog({
+		open: true,
+		onClose: onDone
+	});
 	const overlayBg = theme === "light" ? "rgba(30,32,38,0.55)" : "rgba(0,0,0,0.74)";
 	const blue = theme === "light" ? "#3071CD" : theme === "noir" ? "#C4C4C4" : "#4FA8F5";
 	const purple = showcaseAccent("impostor", "#C042E0", theme);
@@ -39847,6 +40008,7 @@ function GtOnboarding3({ theme, lang, onDone }) {
 	}, t("tourBack")), /* @__PURE__ */ import_react.default.createElement("button", {
 		type: "button",
 		ref: btnRef,
+		"data-gt-autofocus": "1",
 		onClick: () => last ? onDone() : setStep((s) => s + 1),
 		className: "press-fx",
 		style: {
@@ -39864,8 +40026,9 @@ function GtOnboarding3({ theme, lang, onDone }) {
 		}
 	}, last ? t("tourGoCta") : t("tourNext")));
 	const card = /* @__PURE__ */ import_react.default.createElement("div", {
+		ref: dlgRef,
 		role: "dialog",
-		"aria-modal": true,
+		"aria-modal": "true",
 		"aria-labelledby": "gt-onb-title",
 		className: "gt-onb-card" + (theme === "vitrum" ? " gtL-glass-strong" : ""),
 		style: {
@@ -43706,6 +43869,9 @@ var SCHIEBER_PL_CSS = `
 .gt-weis-save:active{transform:scale(.98)}
 .gt-weis-save:disabled{background:var(--wy-off);color:var(--wy-offink);cursor:default;transform:none}
 .gt-wy button:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+.gt-sch-hit:focus-visible{outline:2px solid #F4F1E8;outline-offset:-3px;border-radius:8px}
+.gt-sch-ed:focus{outline:0}
+.gt-sch-ed button:focus-visible{outline:2px solid currentColor;outline-offset:2px}
 [data-phone-landscape] .gt-wy{max-width:860px;margin:0 auto;max-height:calc(var(--pl-avail) - 6px)}
 [data-phone-landscape] .gt-wy>*{max-width:none}
 [data-phone-landscape] .gt-wy-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
@@ -43728,12 +43894,43 @@ function SchieberEditorPanel({ editing, teams, onSave, onClose, t, theme }) {
 	const _SHUE0 = theme === "noir" ? noirAccent("schieber") : HUES[0];
 	const [value, setValue] = useState$11("");
 	const [sign, setSign] = useState$11(1);
+	const edRef = useRef$17(null);
+	const edClose = useRef$17(onClose);
+	edClose.current = onClose;
 	useEffect$15(() => {
 		if (editing) {
 			setValue("");
 			setSign(1);
 		}
 	}, [editing]);
+	const edTeam = editing ? editing.teamId : null;
+	useEffect$15(() => {
+		if (edTeam === null) return void 0;
+		const trig = document.activeElement;
+		const trigLbl = trig && trig.getAttribute ? trig.getAttribute("aria-label") : null;
+		const el = edRef.current;
+		try {
+			el && el.focus({ preventScroll: true });
+		} catch (e) {}
+		const k = (e) => {
+			if (e.key === "Escape" && !e.defaultPrevented && !document.querySelector("[aria-modal=\"true\"]")) {
+				e.preventDefault();
+				edClose.current && edClose.current();
+			}
+		};
+		document.addEventListener("keydown", k);
+		return () => {
+			document.removeEventListener("keydown", k);
+			const a = document.activeElement;
+			if (trig && trig !== document.body && (!a || a === document.body || el && el.contains(a))) {
+				let tg = trig.isConnected ? trig : null;
+				if (!tg && trigLbl) tg = Array.from(document.querySelectorAll("button.gt-sch-hit")).find((x) => x.getAttribute("aria-label") === trigLbl) || null;
+				try {
+					tg && tg.focus({ preventScroll: true });
+				} catch (e) {}
+			}
+		};
+	}, [edTeam]);
 	if (!editing) return null;
 	const idx = teams.findIndex((tm) => tm.id === editing.teamId);
 	const flipped = idx === 1;
@@ -43793,6 +43990,10 @@ function SchieberEditorPanel({ editing, teams, onSave, onClose, t, theme }) {
 		panelStyle.padding = "14px 16px calc(14px + env(safe-area-inset-bottom))";
 	}
 	return /* @__PURE__ */ import_react.default.createElement("div", {
+		ref: edRef,
+		role: "dialog",
+		"aria-labelledby": "gt-sch-edt",
+		tabIndex: -1,
 		className: "gt-sch-ed",
 		"data-side": flipped ? "t2" : "t1",
 		style: {
@@ -43813,12 +44014,15 @@ function SchieberEditorPanel({ editing, teams, onSave, onClose, t, theme }) {
 			alignItems: "center",
 			marginBottom: 10
 		}
-	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontFamily: "'Baloo 2', sans-serif",
-		fontSize: 15,
-		fontWeight: 600,
-		color: _SINK
-	} }, "Punkte · ", team?.name), /* @__PURE__ */ import_react.default.createElement("button", {
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
+		id: "gt-sch-edt",
+		style: {
+			fontFamily: "'Baloo 2', sans-serif",
+			fontSize: 15,
+			fontWeight: 600,
+			color: _SINK
+		}
+	}, "Punkte · ", team?.name), /* @__PURE__ */ import_react.default.createElement("button", {
 		className: "gt-sch-x",
 		"aria-label": t("weisClose"),
 		onClick: onClose,
@@ -43967,11 +44171,24 @@ function SchieberTeamHalf({ team, target, onOpenEntry, onUndo, onRename, t }) {
 			padding: 0,
 			fontFamily: "'Inter', sans-serif"
 		}
-	})), /* @__PURE__ */ import_react.default.createElement("div", {
+	})), /* @__PURE__ */ import_react.default.createElement("button", {
+		type: "button",
+		className: "gt-sch-hit",
 		onClick: onOpenEntry,
-		role: "button",
-		"aria-label": t("enterPointsAria"),
-		style: { cursor: "pointer" }
+		"aria-label": t("enterPointsAria") + ", " + team.name,
+		style: {
+			display: "block",
+			width: "100%",
+			margin: 0,
+			padding: 0,
+			border: 0,
+			background: "none",
+			color: "inherit",
+			font: "inherit",
+			textAlign: "inherit",
+			cursor: "pointer",
+			touchAction: "manipulation"
+		}
 	}, /* @__PURE__ */ import_react.default.createElement(SchieberBoardContent, {
 		team,
 		target,
@@ -44673,6 +44890,10 @@ function SchieberWeisPanel({ open, teamId, teams, onSave, onClose, t, theme }) {
 	const [factor, setFactor] = useState$11(1);
 	const [more, setMore] = useState$11(false);
 	const booked = useRef$17(false);
+	const weisRef = useGtDialog({
+		open: !!(open && teams && teams.length),
+		onClose
+	});
 	useEffect$15(() => {
 		if (open) {
 			setItems([]);
@@ -44736,6 +44957,7 @@ function SchieberWeisPanel({ open, teamId, teams, onSave, onClose, t, theme }) {
 		gold: "var(--wy-red)"
 	};
 	return /* @__PURE__ */ import_react.default.createElement("div", {
+		ref: weisRef,
 		role: "dialog",
 		"aria-modal": "true",
 		className: "gt-weis-ov" + (ti === 1 ? " gt-wy-flip" : ""),
@@ -44753,7 +44975,7 @@ function SchieberWeisPanel({ open, teamId, teams, onSave, onClose, t, theme }) {
 	}, /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gt-weis-panel gt-wy" + (theme === "noir" ? " gt-wy-noir" : ""),
 		onClick: (e) => e.stopPropagation()
-	}, /* @__PURE__ */ import_react.default.createElement("div", { className: "gt-wy-head" }, /* @__PURE__ */ import_react.default.createElement("h2", null, t("weisSheetTitle")), /* @__PURE__ */ import_react.default.createElement("button", {
+	}, /* @__PURE__ */ import_react.default.createElement("div", { className: "gt-wy-head" }, /* @__PURE__ */ import_react.default.createElement("h2", { id: "gt-weis-title" }, t("weisSheetTitle")), /* @__PURE__ */ import_react.default.createElement("button", {
 		type: "button",
 		className: "gt-wy-x",
 		onClick: onClose,
@@ -45702,7 +45924,6 @@ var PLD_CSS = `
 [data-phone-landscape] .gtL-padsheet.pld-pad > .pld-padR { display: flex; flex-direction: column; grid-column: 2; grid-row: 2 / span 3; min-width: 0; }
 [data-phone-landscape] .pld-pad .pld-padR > * { margin-bottom: 8px !important; }
 [data-phone-landscape] .pld-pad .pld-padR > button[data-gt-sound="1"] { margin-top: auto; margin-bottom: 0 !important; position: sticky; bottom: 0; }
-[data-tablet] .pld-free :is(button, input) { min-height: 44px !important; min-width: 44px !important; }
 @media (prefers-reduced-motion: reduce) { [data-phone-landscape] .pld * { scroll-behavior: auto !important; } }
 `;
 // web/src/games/tutto/game.js
@@ -46392,7 +46613,7 @@ var TUTTO_PLAY_CSS = `@font-face{font-family:'Inter';font-style:italic;font-weig
 .gtL-content .tt-tray{position:static;margin:0 0 14px;border-radius:24px;padding:14px 14px 16px;box-shadow:0 8px 24px -10px rgba(0,0,0,.4);}
 .gtL-content .gtL-col-side{position:sticky;top:12px;}
 .gtL-content .tt-cards{max-height:none;}
-@media (max-width:1099px){.gtL-content .tt-split{grid-template-columns:minmax(0,1fr);}.gtL-content .gtL-col-side{position:static;}}
+@container gtl (max-width:759px){.gtL-content .tt-split{grid-template-columns:minmax(0,1fr);}.gtL-content .gtL-col-side{position:static;}}
 [data-phone-landscape] .tt-root{min-height:0;display:block;}
 [data-phone-landscape] .tt-logo{margin:0 0 6px;}
 [data-phone-landscape] .tt-logo{justify-content:flex-end;}
@@ -48859,8 +49080,11 @@ function JassEditorPanel({ editing, players, scores, category, onSave, onClose, 
 	const [fresh, setFresh] = useState$11(false);
 	const [gtErr, setGtErr] = useState$11(false);
 	const inpRef = useRef$17(null);
-	const slipRef = useRef$17(null);
 	const open = !!(editing && category);
+	const slipRef = useGtDialog({
+		open,
+		onClose
+	});
 	useEffect$15(() => {
 		setGtErr(false);
 		if (editing) {
@@ -48948,6 +49172,7 @@ function JassEditorPanel({ editing, players, scores, category, onSave, onClose, 
 	const pname = player ? player.name : "";
 	return /* @__PURE__ */ import_react.default.createElement(Fragment$3, null, /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "jdp-scrim",
+		"data-gt-keep": "1",
 		onClick: onClose,
 		"aria-hidden": "true"
 	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "jdp-slipw" }, /* @__PURE__ */ import_react.default.createElement("div", {
@@ -53286,7 +53511,10 @@ function SkyjoSetup({ state, setState, onStart, theme, t }) {
 }
 function SkyjoNumPad({ player, initialValue, onConfirm, onClose, theme, t, sk, onAdvance, instant }) {
 	const [value, setValue] = useState$11(initialValue || "");
-	const sheetRef = useRef$17(null);
+	const sheetRef = useGtDialog({
+		open: true,
+		onClose
+	});
 	useEffect$15(() => {
 		try {
 			sheetRef.current && sheetRef.current.focus({ preventScroll: true });
@@ -55628,29 +55856,25 @@ function ShareImagePreview({ url, onClose, t }) {
 	const [note, setNote] = useState$11("");
 	const [forceSave, setForceSave] = useState$11(false);
 	const [busy, setBusy] = useState$11(false);
-	const firstRef = useRef$17(null);
+	const alive = useRef$17(true);
+	const dlg = useGtDialog({
+		open: !!url,
+		onClose
+	});
+	useEffect$15(() => {
+		alive.current = true;
+		return () => {
+			alive.current = false;
+		};
+	}, []);
 	useEffect$15(() => {
 		setNote("");
 		setForceSave(false);
+		setBusy(false);
 		if (!url) return;
 		const items = Array.isArray(url) ? url : [url];
-		try {
-			firstRef.current && firstRef.current.focus({ preventScroll: true });
-		} catch (_) {}
 		return () => gtImgFree(items);
 	}, [url]);
-	useEffect$15(() => {
-		if (!url) return;
-		const k = (e) => {
-			if (e.key === "Escape") {
-				e.preventDefault();
-				e.stopPropagation();
-				onClose();
-			}
-		};
-		document.addEventListener("keydown", k, true);
-		return () => document.removeEventListener("keydown", k, true);
-	}, [url, onClose]);
 	if (!url) return null;
 	const list = Array.isArray(url) ? url : [url];
 	const many = list.length > 1;
@@ -55660,19 +55884,25 @@ function ShareImagePreview({ url, onClose, t }) {
 		...gtImgDevice(),
 		canShare: gtImgCanShare(list.map((it) => it.file))
 	});
+	const dev = gtImgDevice();
 	const save = () => {
 		gtImgDownload(list);
-		if (gtImgDevice().desktop) setNote(t("shareSavedNote"));
+		setNote(dev.desktop ? t("shareSavedNote") : t("shareDownloadNote"));
 	};
 	const share = async () => {
 		if (busy) return;
 		setBusy(true);
 		setNote("");
-		const ok = await gtImgShare(list);
+		const r = await gtImgShare(list);
+		if (!alive.current) return;
 		setBusy(false);
-		if (!ok) {
+		if (r === "ok") setNote(t("shareDoneNote"));
+		else if (r === "fail") {
 			setForceSave(true);
-			setNote(t("shareResultSaveHint"));
+			setNote(t("shareFailNote"));
+		} else if (r === "timeout") {
+			setForceSave(true);
+			setNote(t("shareTimeoutNote"));
 		}
 	};
 	const label = {
@@ -55697,8 +55927,9 @@ function ShareImagePreview({ url, onClose, t }) {
 		fontFamily: "'Inter', sans-serif"
 	};
 	const second = forceSave && plan.primary !== "save" ? "save" : plan.secondary;
-	const hint = note || (plan.iosHint ? t("shareIosHint") : "");
+	const hint = note || (plan.iosHint ? t("shareIosHint") : !dev.desktop && plan.primary === "save" && !plan.secondary ? t("shareNoShareNote") : "");
 	return /* @__PURE__ */ import_react.default.createElement("div", {
+		ref: dlg,
 		onClick: onClose,
 		role: "dialog",
 		"aria-modal": "true",
@@ -55823,9 +56054,10 @@ function ShareImagePreview({ url, onClose, t }) {
 			justifyContent: "center"
 		}
 	}, /* @__PURE__ */ import_react.default.createElement("button", {
-		ref: firstRef,
+		"data-gt-autofocus": "",
 		type: "button",
 		className: "press-fx",
+		"aria-busy": busy,
 		disabled: busy,
 		onClick: act[plan.primary],
 		style: {
@@ -67909,6 +68141,331 @@ Diese App wird über GitHub Pages ausgeliefert (GitHub Inc., USA). Beim Aufruf d
 RECHTLICHES ZU DEN SPIELNAMEN
 
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
+// web/src/app/build.js
+var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
+var APP_BUILD = "2026.11.06-7";
+// web/src/app/backup.js
+var GT_BK_TYPE = "gametab-backup";
+var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
+var GT_BK_STATE_KEY = "spieleblock-app-state-v1";
+var GT_BK_MAX_BYTES = 41943040;
+function gtBkPad(n) {
+	return String(n).padStart(2, "0");
+}
+function gtBkFileName(d) {
+	const x = d || /* @__PURE__ */ new Date();
+	return "gametab-backup-v2-" + x.getFullYear() + "-" + gtBkPad(x.getMonth() + 1) + "-" + gtBkPad(x.getDate()) + "-" + gtBkPad(x.getHours()) + gtBkPad(x.getMinutes()) + ".json";
+}
+function gtBkParse(raw, fb) {
+	try {
+		return raw ? JSON.parse(raw) : fb;
+	} catch (_) {
+		return fb;
+	}
+}
+function gtBkBuild(now) {
+	const d = now || /* @__PURE__ */ new Date();
+	const storage = {};
+	for (let i = 0; i < localStorage.length; i++) {
+		const k = localStorage.key(i);
+		if (k && GT_BK_KEY_RE.test(k)) storage[k] = localStorage.getItem(k);
+	}
+	const payload = {
+		type: GT_BK_TYPE,
+		version: 2,
+		appBuild: APP_BUILD,
+		exportedAt: d.toISOString(),
+		schieberTournaments: (() => {
+			try {
+				return GT_ST_STORE.forSave().schieberTournaments;
+			} catch (_e) {
+				return [];
+			}
+		})(),
+		matchLog: gtBkParse(localStorage.getItem(MATCH_LOG_KEY), []),
+		groups: gtBkParse(localStorage.getItem("gt_playerGroups"), []),
+		storage
+	};
+	const text = JSON.stringify(payload, null, 2);
+	if (!text || text.length < 20) throw new Error("empty");
+	return {
+		text,
+		fileName: gtBkFileName(d)
+	};
+}
+function gtBkDownload(text, fileName) {
+	const blob = new Blob([text], { type: "application/json" });
+	const url = URL.createObjectURL(blob);
+	const a = document.createElement("a");
+	a.href = url;
+	a.download = fileName;
+	document.body.appendChild(a);
+	a.click();
+	document.body.removeChild(a);
+	setTimeout(() => {
+		try {
+			URL.revokeObjectURL(url);
+		} catch (_) {}
+	}, 6e4);
+}
+function gtBkInspect(text) {
+	if (typeof text !== "string" || !text.trim()) return {
+		ok: false,
+		reason: "empty"
+	};
+	if (text.length > GT_BK_MAX_BYTES) return {
+		ok: false,
+		reason: "big"
+	};
+	let data;
+	try {
+		data = JSON.parse(text);
+	} catch (_) {
+		return {
+			ok: false,
+			reason: "notjson"
+		};
+	}
+	if (!gtIsObj(data)) return {
+		ok: false,
+		reason: "notbackup"
+	};
+	if (data.type !== void 0 && data.type !== "gametab-backup") return {
+		ok: false,
+		reason: "notbackup"
+	};
+	if (!(Array.isArray(data.matchLog) || Array.isArray(data.groups) || gtIsObj(data.storage))) return {
+		ok: false,
+		reason: "notbackup"
+	};
+	const version = typeof data.version === "number" && isFinite(data.version) ? data.version : data.version === void 0 ? 1 : NaN;
+	if (!(version >= 1)) return {
+		ok: false,
+		reason: "damaged"
+	};
+	if (version > 2) return {
+		ok: false,
+		reason: "newer",
+		version
+	};
+	try {
+		if (!Array.isArray(data.matchLog) || !Array.isArray(data.groups)) throw new Error("invalid");
+		let stSt = null;
+		if (data.storage !== void 0 && !gtIsObj(data.storage)) throw new Error("invalid");
+		if (gtIsObj(data.storage)) {
+			Object.keys(data.storage).forEach((k) => {
+				if (GT_BK_KEY_RE.test(k) && typeof data.storage[k] !== "string") throw new Error("invalid");
+			});
+			if (typeof data.storage[GT_BK_STATE_KEY] === "string") {
+				stSt = JSON.parse(data.storage[GT_BK_STATE_KEY]);
+				if (!gtIsObj(stSt)) throw new Error("invalid");
+			}
+		}
+		if (data.schieberTournaments !== void 0 && data.schieberTournaments !== null && !Array.isArray(data.schieberTournaments)) throw new Error("invalid-st");
+		if (Array.isArray(data.schieberTournaments) && !GT_ST.validateImport(data.schieberTournaments).ok) throw new Error("invalid-st");
+		if (stSt && stSt.schieberTournaments !== void 0 && stSt.schieberTournaments !== null && (!Array.isArray(stSt.schieberTournaments) || !GT_ST.validateImport(stSt.schieberTournaments).ok)) throw new Error("invalid-st");
+		const storage = Object.assign({}, gtIsObj(data.storage) ? data.storage : {});
+		if (Array.isArray(data.schieberTournaments) && data.schieberTournaments.length && !(stSt && Array.isArray(stSt.schieberTournaments) && stSt.schieberTournaments.length)) {
+			stSt = Object.assign({}, stSt || {}, { schieberTournaments: data.schieberTournaments });
+			storage[GT_BK_STATE_KEY] = JSON.stringify(stSt);
+		}
+		const entries = [];
+		Object.keys(storage).forEach((k) => {
+			const v = storage[k];
+			if (GT_BK_KEY_RE.test(k) && typeof v === "string") entries.push([k, v]);
+		});
+		entries.push([MATCH_LOG_KEY, JSON.stringify(data.matchLog)]);
+		entries.push(["gt_playerGroups", JSON.stringify(data.groups)]);
+		const tn = stSt && Array.isArray(stSt.schieberTournaments) ? stSt.schieberTournaments.length : 0;
+		return {
+			ok: true,
+			version,
+			exportedAt: typeof data.exportedAt === "string" ? data.exportedAt : "",
+			appBuild: typeof data.appBuild === "string" ? data.appBuild : "",
+			counts: {
+				matches: data.matchLog.length,
+				groups: data.groups.length,
+				tournaments: tn,
+				keys: entries.length
+			},
+			entries
+		};
+	} catch (_) {
+		return {
+			ok: false,
+			reason: "damaged",
+			version
+		};
+	}
+}
+function gtBkCurrent() {
+	let tn = 0;
+	try {
+		const s = gtBkParse(localStorage.getItem(GT_BK_STATE_KEY), null);
+		if (gtIsObj(s) && Array.isArray(s.schieberTournaments)) tn = s.schieberTournaments.length;
+	} catch (_) {}
+	const ml = gtBkParse(localStorage.getItem(MATCH_LOG_KEY), []);
+	const gr = gtBkParse(localStorage.getItem("gt_playerGroups"), []);
+	return {
+		matches: Array.isArray(ml) ? ml.length : 0,
+		groups: Array.isArray(gr) ? gr.length : 0,
+		tournaments: tn
+	};
+}
+function gtBkApply(entries, isQuota) {
+	window.__gtImporting = true;
+	const prev = {};
+	entries.forEach((en) => {
+		if (!(en[0] in prev)) prev[en[0]] = localStorage.getItem(en[0]);
+	});
+	try {
+		entries.forEach((en) => localStorage.setItem(en[0], en[1]));
+		return { ok: true };
+	} catch (err) {
+		Object.keys(prev).forEach((k) => {
+			try {
+				if (prev[k] === null) localStorage.removeItem(k);
+				else localStorage.setItem(k, prev[k]);
+			} catch (_r) {}
+		});
+		window.__gtImporting = false;
+		return {
+			ok: false,
+			quota: !!(isQuota && isQuota(err))
+		};
+	}
+}
+// web/src/app/backup-dialog.js
+function BackupRestoreDialog({ plan, current, onConfirm, onCancel, t, tk }) {
+	const ref = useGtDialog({
+		open: !!plan,
+		onClose: onCancel
+	});
+	if (!plan) return null;
+	const info = plan.info;
+	const fill = (s, v) => Object.keys(v).reduce((a, k) => a.split("{" + k + "}").join(String(v[k])), s);
+	let when = "";
+	if (info.exportedAt) try {
+		when = new Date(info.exportedAt).toLocaleString(document.documentElement.lang || void 0, {
+			dateStyle: "medium",
+			timeStyle: "short"
+		});
+	} catch (_) {
+		when = info.exportedAt.slice(0, 10);
+	}
+	const row = {
+		margin: "0 0 4px",
+		fontSize: 13,
+		lineHeight: 1.45,
+		color: tk.ink
+	};
+	const btn = {
+		flex: 1,
+		minHeight: 44,
+		borderRadius: 18,
+		fontSize: 14,
+		fontWeight: 700,
+		cursor: "pointer",
+		fontFamily: "'Inter', sans-serif",
+		padding: "10px 14px"
+	};
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		"data-gt-backup-dialog": "",
+		style: {
+			position: "fixed",
+			inset: 0,
+			zIndex: 160,
+			background: "rgba(8,9,12,0.72)",
+			display: "flex",
+			alignItems: "center",
+			justifyContent: "center",
+			padding: 16,
+			boxSizing: "border-box"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
+		ref,
+		role: "dialog",
+		"aria-modal": "true",
+		"aria-labelledby": "gt-bk-title",
+		"aria-describedby": "gt-bk-desc",
+		tabIndex: -1,
+		className: "podium-pop",
+		style: {
+			width: "100%",
+			maxWidth: 380,
+			maxHeight: "100%",
+			overflowY: "auto",
+			boxSizing: "border-box",
+			background: tk.card,
+			color: tk.ink,
+			border: "1.5px solid " + tk.border,
+			borderRadius: 18,
+			padding: 18,
+			fontFamily: "'Inter', sans-serif",
+			outline: "none",
+			boxShadow: "0 18px 50px rgba(0,0,0,0.5)"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("h2", {
+		id: "gt-bk-title",
+		style: {
+			margin: "0 0 8px",
+			fontSize: 17,
+			fontWeight: 800
+		}
+	}, t("backupRestoreTitle")), /* @__PURE__ */ import_react.default.createElement("div", { id: "gt-bk-desc" }, /* @__PURE__ */ import_react.default.createElement("p", { style: {
+		...row,
+		color: tk.muted
+	} }, fill(t("backupRestoreFile"), {
+		name: plan.name,
+		v: info.version,
+		date: when || "-"
+	})), /* @__PURE__ */ import_react.default.createElement("p", { style: {
+		...row,
+		fontWeight: 700,
+		marginTop: 10
+	} }, t("backupRestoreContains")), /* @__PURE__ */ import_react.default.createElement("p", { style: row }, fill(t("backupRestoreCounts"), {
+		m: info.counts.matches,
+		g: info.counts.groups,
+		t: info.counts.tournaments
+	})), /* @__PURE__ */ import_react.default.createElement("p", { style: row }, fill(t("backupRestoreKeys"), { k: info.counts.keys })), /* @__PURE__ */ import_react.default.createElement("p", { style: {
+		...row,
+		fontWeight: 700,
+		marginTop: 10
+	} }, t("backupRestoreNowTitle")), /* @__PURE__ */ import_react.default.createElement("p", { style: row }, fill(t("backupRestoreCounts"), {
+		m: current.matches,
+		g: current.groups,
+		t: current.tournaments
+	})), /* @__PURE__ */ import_react.default.createElement("p", { style: {
+		...row,
+		marginTop: 10,
+		fontWeight: 600
+	} }, t("backupRestoreWarn"))), /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		display: "flex",
+		gap: 8,
+		marginTop: 14
+	} }, /* @__PURE__ */ import_react.default.createElement("button", {
+		type: "button",
+		"data-gt-autofocus": "",
+		className: "press-fx",
+		onClick: onCancel,
+		style: {
+			...btn,
+			border: "1.5px solid " + tk.border,
+			background: "transparent",
+			color: tk.ink
+		}
+	}, t("backupRestoreCancel")), /* @__PURE__ */ import_react.default.createElement("button", {
+		type: "button",
+		className: "press-fx",
+		onClick: onConfirm,
+		style: {
+			...btn,
+			border: "none",
+			background: tk.gold,
+			color: "#1A1408"
+		}
+	}, t("backupRestoreConfirm")))));
+}
 // web/src/app/settings.js
 var settings_exports = /* @__PURE__ */ __exportAll({ SettingsPage: () => SettingsPage });
 function SettingsPage({ onBack, onReplayTour, lang, setLang, theme, setTheme, viewMode, setViewMode, soundEnabled, setSoundEnabled, hapticEnabled, setHapticEnabled }) {
@@ -67929,109 +68486,79 @@ function SettingsPage({ onBack, onReplayTour, lang, setLang, theme, setTheme, vi
 		} catch {}
 		setConfirmingStatsReset(false);
 	};
-	const [importStatus, setImportStatus] = useState$11(null);
+	const [backupMsg, setBackupMsg] = useState$11(null);
+	const [restorePlan, setRestorePlan] = useState$11(null);
 	const fileInputRef = useRef$17(null);
+	const msgTimer = useRef$17(null);
+	const say = (kind, text, ms) => {
+		clearTimeout(msgTimer.current);
+		setBackupMsg({
+			kind,
+			text
+		});
+		if (ms) msgTimer.current = setTimeout(() => setBackupMsg(null), ms);
+	};
 	const exportBackup = () => {
 		try {
-			const matchLog = localStorage.getItem(MATCH_LOG_KEY);
-			const groups = localStorage.getItem("gt_playerGroups");
-			const storage = {};
-			for (let i = 0; i < localStorage.length; i++) {
-				const k = localStorage.key(i);
-				if (k && /^(gt_|gametab-|spieleblock-)/.test(k)) storage[k] = localStorage.getItem(k);
-			}
-			const payload = {
-				type: "gametab-backup",
-				version: 2,
-				exportedAt: (/* @__PURE__ */ new Date()).toISOString(),
-				schieberTournaments: (() => {
-					try {
-						return GT_ST_STORE.forSave().schieberTournaments;
-					} catch (_e) {
-						return [];
-					}
-				})(),
-				matchLog: matchLog ? JSON.parse(matchLog) : [],
-				groups: groups ? JSON.parse(groups) : [],
-				storage
-			};
-			const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
-			const url = URL.createObjectURL(blob);
-			const a = document.createElement("a");
-			const dateStr = (/* @__PURE__ */ new Date()).toISOString().slice(0, 10);
-			a.href = url;
-			a.download = `gametab-backup-${dateStr}.json`;
-			document.body.appendChild(a);
-			a.click();
-			document.body.removeChild(a);
-			URL.revokeObjectURL(url);
-		} catch {}
+			const b = gtBkBuild();
+			gtBkDownload(b.text, b.fileName);
+			say("ok", t("backupExportDone").replace("{name}", b.fileName), 9e3);
+		} catch (_e) {
+			say("error", t("backupExportFail"), 9e3);
+		}
 	};
-	const triggerImport = () => {
+	const triggerImport = (e) => {
+		try {
+			if (e && e.currentTarget) e.currentTarget.focus({ preventScroll: true });
+		} catch (_f) {}
 		if (fileInputRef.current) fileInputRef.current.click();
 	};
+	const REASONS = {
+		empty: "backupErrRead",
+		big: "backupErrRead",
+		notjson: "backupErrRead",
+		notbackup: "backupErrNotBackup",
+		newer: "backupErrNewer",
+		damaged: "backupErrDamaged"
+	};
 	const handleImportFile = (e) => {
-		const file = e.target.files && e.target.files[0];
+		const input = e.target;
+		const file = input.files && input.files[0];
 		if (!file) return;
 		const reader = new FileReader();
 		reader.onload = (ev) => {
-			try {
-				const data = JSON.parse(ev.target.result);
-				if (!gtIsObj(data) || !Array.isArray(data.matchLog) || !Array.isArray(data.groups)) throw new Error("invalid");
-				{
-					const stKey = "spieleblock-app-state-v1";
-					let stSt = null;
-					if (gtIsObj(data.storage) && typeof data.storage[stKey] === "string") {
-						stSt = JSON.parse(data.storage[stKey]);
-						if (!gtIsObj(stSt)) throw new Error("invalid");
-					}
-					if (data.schieberTournaments !== void 0 && data.schieberTournaments !== null && !Array.isArray(data.schieberTournaments)) throw new Error("invalid-st");
-					if (Array.isArray(data.schieberTournaments) && !GT_ST.validateImport(data.schieberTournaments).ok) throw new Error("invalid-st");
-					if (stSt && stSt.schieberTournaments !== void 0 && stSt.schieberTournaments !== null && (!Array.isArray(stSt.schieberTournaments) || !GT_ST.validateImport(stSt.schieberTournaments).ok)) throw new Error("invalid-st");
-					if (Array.isArray(data.schieberTournaments) && data.schieberTournaments.length && !(stSt && Array.isArray(stSt.schieberTournaments) && stSt.schieberTournaments.length)) {
-						stSt = Object.assign({}, stSt || {}, { schieberTournaments: data.schieberTournaments });
-						data.storage = Object.assign({}, gtIsObj(data.storage) ? data.storage : {});
-						data.storage[stKey] = JSON.stringify(stSt);
-					}
-				}
-				window.__gtImporting = true;
-				const gtEnts = [];
-				if (gtIsObj(data.storage)) Object.keys(data.storage).forEach((k) => {
-					const v = data.storage[k];
-					if (/^(gt_|gametab-|spieleblock-)/.test(k) && typeof v === "string") gtEnts.push([k, v]);
-				});
-				gtEnts.push([MATCH_LOG_KEY, JSON.stringify(data.matchLog || [])]);
-				gtEnts.push(["gt_playerGroups", JSON.stringify(data.groups || [])]);
-				const gtPrev = {};
-				gtEnts.forEach((en) => {
-					if (!(en[0] in gtPrev)) gtPrev[en[0]] = localStorage.getItem(en[0]);
-				});
-				try {
-					gtEnts.forEach((en) => localStorage.setItem(en[0], en[1]));
-				} catch (wErr) {
-					Object.keys(gtPrev).forEach((k) => {
-						try {
-							if (gtPrev[k] === null) localStorage.removeItem(k);
-							else localStorage.setItem(k, gtPrev[k]);
-						} catch (_r) {}
-					});
-					window.__gtImporting = false;
-					if (gtIsQuotaErr(wErr)) gtStorageFullNotice(lang);
-					throw wErr;
-				}
-				setImportStatus("success");
-				setTimeout(() => window.location.reload(), 900);
-			} catch {
-				setImportStatus("error");
-				setTimeout(() => setImportStatus(null), 3e3);
+			const r = gtBkInspect(String(ev.target.result || ""));
+			if (!r.ok) {
+				say("error", t(REASONS[r.reason] || "backupErrRead").replace("{v}", String(r.version)), 12e3);
+				return;
 			}
+			setBackupMsg(null);
+			setRestorePlan({
+				name: file.name,
+				info: r,
+				current: gtBkCurrent()
+			});
 		};
-		reader.onerror = () => {
-			setImportStatus("error");
-			setTimeout(() => setImportStatus(null), 3e3);
-		};
+		reader.onerror = () => say("error", t("backupErrRead"), 12e3);
 		reader.readAsText(file);
-		e.target.value = "";
+		input.value = "";
+	};
+	const confirmRestore = () => {
+		const plan = restorePlan;
+		if (!plan) return;
+		const res = gtBkApply(plan.info.entries, gtIsQuotaErr);
+		setRestorePlan(null);
+		if (!res.ok) {
+			if (res.quota) gtStorageFullNotice(lang);
+			say("error", t("backupErrWrite"), 12e3);
+			return;
+		}
+		say("ok", t("backupImportSuccess"));
+		setTimeout(() => window.location.reload(), 900);
+	};
+	const cancelRestore = () => {
+		setRestorePlan(null);
+		say("ok", t("backupRestoreCancelled"), 8e3);
 	};
 	const LANGS = [
 		{
@@ -68333,7 +68860,7 @@ function SettingsPage({ onBack, onReplayTour, lang, setLang, theme, setTheme, vi
 	} }, t("backupExportHint")), /* @__PURE__ */ import_react.default.createElement("input", {
 		ref: fileInputRef,
 		type: "file",
-		accept: "application/json",
+		accept: "application/json,.json",
 		style: { display: "none" },
 		onChange: handleImportFile
 	}), /* @__PURE__ */ import_react.default.createElement("div", { style: {
@@ -68371,14 +68898,26 @@ function SettingsPage({ onBack, onReplayTour, lang, setLang, theme, setTheme, vi
 			cursor: "pointer",
 			fontFamily: "'Inter', sans-serif"
 		}
-	}, t("backupImport"))), importStatus && /* @__PURE__ */ import_react.default.createElement("p", { style: {
-		fontSize: 11.5,
-		color: importStatus === "success" ? tk.gold : "#D6202A",
-		textAlign: "center",
-		marginTop: 8,
-		fontFamily: "'Inter', sans-serif",
-		fontWeight: 600
-	} }, importStatus === "success" ? t("backupImportSuccess") : t("backupImportError")), /* @__PURE__ */ import_react.default.createElement(SectionLabel, {
+	}, t("backupImport"))), backupMsg && /* @__PURE__ */ import_react.default.createElement("p", {
+		role: "status",
+		"aria-live": "polite",
+		style: {
+			fontSize: 12,
+			color: backupMsg.kind === "ok" ? tk.gold : "#D6202A",
+			textAlign: "center",
+			marginTop: 8,
+			fontFamily: "'Inter', sans-serif",
+			fontWeight: 600,
+			lineHeight: 1.4
+		}
+	}, backupMsg.text), /* @__PURE__ */ import_react.default.createElement(BackupRestoreDialog, {
+		plan: restorePlan,
+		current: restorePlan ? restorePlan.current : null,
+		onConfirm: confirmRestore,
+		onCancel: cancelRestore,
+		t,
+		tk
+	}), /* @__PURE__ */ import_react.default.createElement(SectionLabel, {
 		tokens: tk,
 		compact: true
 	}, t("statsResetLabel")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
@@ -94197,7 +94736,10 @@ function Flip7Setup({ state, setState, onStart, theme, t }) {
 	}))));
 }
 function Flip7RoundPad({ player, initial, onConfirm, onClose, theme, t, onAdvance, instant }) {
-	const sheetRef = useRef$17(null);
+	const sheetRef = useGtDialog({
+		open: true,
+		onClose
+	});
 	useEffect$15(() => {
 		try {
 			sheetRef.current && sheetRef.current.focus({ preventScroll: true });
@@ -99934,13 +100476,10 @@ function MostLikelyResult({ players, tally, onClose, onEnd, theme, t }) {
 	const win = ranked.filter((e) => e.rk === 1);
 	const tie = win.length > 1;
 	const total = ranked.reduce((a, e) => a + e.score, 0);
-	useEffect$15(() => {
-		const k = (e) => {
-			if (e.key === "Escape") onClose();
-		};
-		window.addEventListener("keydown", k);
-		return () => window.removeEventListener("keydown", k);
-	}, []);
+	const dlgRef = useGtDialog({
+		open: true,
+		onClose
+	});
 	return /* @__PURE__ */ import_react.default.createElement("div", {
 		onClick: onClose,
 		className: "gt-scrim-in",
@@ -99957,6 +100496,7 @@ function MostLikelyResult({ players, tally, onClose, onEnd, theme, t }) {
 			padding: 16
 		}
 	}, /* @__PURE__ */ import_react.default.createElement("div", {
+		ref: dlgRef,
 		onClick: (e) => e.stopPropagation(),
 		"data-ml-result-panel": "1",
 		role: "dialog",
@@ -102675,29 +103215,25 @@ function GtYearReview({ t, theme, onClose, year }) {
 	const [preview, setPreview] = useState$11(null);
 	const cardRef = useRef$17(null);
 	const alive = useRef$17(true);
-	const lastFocus = useRef$17(null);
+	const dlgRef = useGtDialog({
+		open: true,
+		onClose
+	});
 	const n = seq.length;
 	const cur = seq[Math.min(i, n - 1)];
 	const go = (d) => setI((x) => Math.max(0, Math.min(n - 1, x + d)));
 	useEffect$15(() => {
 		alive.current = true;
-		lastFocus.current = document.activeElement;
 		try {
 			cardRef.current && cardRef.current.focus({ preventScroll: true });
 		} catch (_) {}
 		return () => {
 			alive.current = false;
-			try {
-				lastFocus.current && lastFocus.current.focus && lastFocus.current.focus({ preventScroll: true });
-			} catch (_) {}
 		};
 	}, []);
 	useEffect$15(() => {
 		const k = (ev) => {
-			if (ev.key === "Escape") {
-				ev.preventDefault();
-				onClose && onClose();
-			} else if (ev.key === "ArrowRight") {
+			if (ev.key === "ArrowRight") {
 				ev.preventDefault();
 				go(1);
 			} else if (ev.key === "ArrowLeft") {
@@ -103093,6 +103629,7 @@ function GtYearReview({ t, theme, onClose, year }) {
 	const zonesOn = cur.kind !== "empty";
 	return /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtYR",
+		ref: dlgRef,
 		role: "dialog",
 		"aria-modal": "true",
 		"aria-label": t("gtYrAria").replace("{year}", String(yr)),
@@ -107573,53 +108110,13 @@ function RulesButton({ onClick, onHome, onEndGame, onMore, moreLabel, tokens }) 
 	}, "?")));
 }
 function RulesSheet({ open, onClose, title, text, tokens }) {
-	const boxRef = useRef$17(null);
+	const boxRef = useGtDialog({
+		open,
+		onClose
+	});
 	const closeRef = useRef$17(null);
-	const ocRef = useRef$17(onClose);
-	ocRef.current = onClose;
 	const idRef = useRef$17("");
 	if (!idRef.current) idRef.current = "gt-rs-" + ++GT_RS_SEQ;
-	useEffect$15(() => {
-		if (!open) return;
-		const prev = document.activeElement;
-		const raf = requestAnimationFrame(() => {
-			try {
-				closeRef.current && closeRef.current.focus({ preventScroll: true });
-			} catch (e) {}
-		});
-		const onKey = (e) => {
-			if (e.key === "Escape") {
-				e.preventDefault();
-				e.stopPropagation();
-				if (ocRef.current) ocRef.current();
-				return;
-			}
-			if (e.key !== "Tab") return;
-			const box = boxRef.current;
-			if (!box) return;
-			const f = [...box.querySelectorAll("button,[href],input,select,textarea,[tabindex]:not([tabindex=\"-1\"])")].filter((x) => !x.disabled);
-			if (!f.length) return;
-			const a = f[0], z = f[f.length - 1], ae = document.activeElement;
-			if (!box.contains(ae)) {
-				e.preventDefault();
-				a.focus();
-			} else if (e.shiftKey && ae === a) {
-				e.preventDefault();
-				z.focus();
-			} else if (!e.shiftKey && ae === z) {
-				e.preventDefault();
-				a.focus();
-			}
-		};
-		document.addEventListener("keydown", onKey, true);
-		return () => {
-			cancelAnimationFrame(raf);
-			document.removeEventListener("keydown", onKey, true);
-			try {
-				if (prev && prev.focus && document.contains(prev)) prev.focus({ preventScroll: true });
-			} catch (e) {}
-		};
-	}, [open]);
 	if (!open) return null;
 	const tk = tokens || {};
 	const VX = document.documentElement.getAttribute("data-gt-theme") === "vitrum";
@@ -107762,6 +108259,11 @@ function App() {
 	GT_CUR_LANG = lang;
 	const [theme, setTheme] = useState$11("dark");
 	const [viewMode, setViewMode] = useState$11("mobile");
+	const [viewModeChosen, setViewModeChosen] = useState$11(false);
+	const setViewModeUser = import_react.default.useCallback((m) => {
+		setViewMode(m);
+		setViewModeChosen(true);
+	}, []);
 	const [soundEnabled, setSoundEnabledRaw] = useState$11(() => {
 		try {
 			return localStorage.getItem("gt_soundEnabled") !== "false";
@@ -107864,6 +108366,7 @@ function App() {
 						"noir"
 					].includes(saved.theme)) setTheme(saved.theme);
 					if (saved.viewMode === "mobile" || saved.viewMode === "laptop") setViewMode(saved.viewMode);
+					setViewModeChosen(saved.viewModeChosen === true || saved.viewModeChosen === void 0 && saved.viewMode === "laptop");
 				}
 				if (!cancelled) setLoaded(true);
 			} catch (e) {
@@ -107888,6 +108391,7 @@ function App() {
 			if (o && typeof o === "object") {
 				o.theme = theme;
 				o.viewMode = viewMode;
+				o.viewModeChosen = viewModeChosen;
 				o.lang = lang;
 				localStorage.setItem(STORAGE_KEY, JSON.stringify(o));
 			}
@@ -107895,6 +108399,7 @@ function App() {
 	}, [
 		theme,
 		viewMode,
+		viewModeChosen,
 		lang,
 		loaded
 	]);
@@ -107931,7 +108436,8 @@ function App() {
 				onboardingSeen,
 				lang,
 				theme,
-				viewMode
+				viewMode,
+				viewModeChosen
 			});
 		}, 500);
 		return () => clearTimeout(t);
@@ -107966,6 +108472,7 @@ function App() {
 		lang,
 		theme,
 		viewMode,
+		viewModeChosen,
 		loaded
 	]);
 	useEffect$15(() => {
@@ -108155,7 +108662,7 @@ function App() {
 			document.documentElement.setAttribute("data-gt-theme", theme || "dark");
 		} catch (e) {}
 	}, [theme, lang]);
-	usePhoneLandscapeRoot(viewMode, loaded);
+	const effMode = usePhoneLandscapeRoot(viewModeChosen ? viewMode : "auto", loaded);
 	useEffect$15(() => {
 		if (!loaded) return;
 		const root = document.documentElement;
@@ -108173,7 +108680,7 @@ function App() {
 			strip.setAttribute("aria-hidden", "true");
 			document.body.appendChild(strip);
 		}
-		root.classList.toggle("gt-laptopmode", viewMode === "laptop");
+		root.classList.toggle("gt-laptopmode", effMode === "laptop");
 		const pick = () => {
 			let el = document.querySelector("#root > div:first-child");
 			for (let i = 0; el && i < 3; i++) {
@@ -108241,7 +108748,7 @@ function App() {
 	}, [
 		theme,
 		view,
-		viewMode,
+		effMode,
 		loaded
 	]);
 	useGtStStore();
@@ -108384,7 +108891,7 @@ function App() {
 		flip7Progress,
 		lang,
 		theme,
-		viewMode,
+		viewMode: effMode,
 		lastPlayed,
 		dismissedResume,
 		onDismissResume: dismissResume,
@@ -108425,8 +108932,8 @@ function App() {
 		setLang,
 		theme,
 		setTheme,
-		viewMode,
-		setViewMode,
+		viewMode: effMode,
+		setViewMode: setViewModeUser,
 		soundEnabled,
 		setSoundEnabled,
 		hapticEnabled,
@@ -108732,7 +109239,7 @@ function App() {
 		} catch (e) {}
 		return n;
 	});
-	if (viewMode !== "laptop") return appContent;
+	if (effMode !== "laptop") return appContent;
 	const laptopTk = shellTokens(theme);
 	const lt = useT(lang);
 	const isVitrum = theme === "vitrum";
@@ -108902,7 +109409,7 @@ function App() {
         .gtL-content .gtL-page.gtL-narrow > * { max-width: 640px; }
         .gtL-content .paper-grid:has(.gtL-yatzy-sheets), .gtL-content .paper-grid:has(.gtL-split) { max-width: 1440px !important; }
         .gtL-content .gtL-yatzy-sheets { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px !important; align-items: start !important; }
-        .gtL-content { flex: 1 1 auto; min-width: 0; height: 100%; overflow-y: auto; position: relative; }
+        .gtL-content { flex: 1 1 auto; min-width: 0; height: 100%; overflow-y: auto; position: relative; container-type: inline-size; container-name: gtl; }
         /* transform erzeugt einen neuen Containing Block, damit "position: fixed"-Overlays
            (Modals, Bottom-Sheets, Konfetti) innerhalb des Inhaltsbereichs bleiben statt
            den ganzen Browser zu bedecken, ohne dass an den Overlay-Komponenten selbst
@@ -109015,15 +109522,28 @@ function App() {
         /* C10 eingeklappte Seitenleiste: Logo passt in die Spalte */
         .gtL-sidebar.is-collapsed .gtL-side-brand > :first-child { transform: scale(0.78); transform-origin: center; }
         .gtL-sidebar.is-collapsed .gtL-side-brand { padding-bottom: 14px !important; }
-        @media (max-width: 1100px) {
+        /* Layoutklassen: kompakt < 600 (Handy), mittel 600 bis 1023 (Seitenleiste als schmale Leiste), erweitert ab 1024.
+           Spalten und Raster richten sich nach der Breite der Inhaltsflaeche (Container Query), nicht nach dem Fenster. */
+        @container gtl (max-width: 759px) {
           .gtL-content .gtL-split, .gtL-content .gtL-yatzy-sheets { grid-template-columns: minmax(0, 1fr) !important; }
           .gtL-content .gtL-col-side { position: static; }
         }
-        @media (max-width: 900px) {
+        /* Touchziele: auf Geraeten mit grobem Zeiger mindestens 44 px (Tablet, Handy im Laptop-Layout) */
+        @media (pointer: coarse) {
+          .gtL-sidebar .gtL-side-brand { min-height: 44px; min-width: 44px; }
+          .gtL-content .gtL-entryrow.gt-ug-row { min-height: 48px !important; }
+        }
+        @container gtl (max-width: 559px) {
+          .gtL-content .gtL-tiles, .gtL-content .gtL-cards { grid-template-columns: 1fr !important; }
+        }
+        @media (max-width: 1023px) {
           .gtL-sidebar { width: 76px; }
           .gtL-sidebar .gtL-side-label { display: none !important; }
           .gtL-sidebar .gtL-navbtn, .gtL-sidebar .gtL-side-brand { justify-content: center; padding-left: 0 !important; padding-right: 0 !important; }
-          .gtL-content .gtL-tiles, .gtL-content .gtL-cards { grid-template-columns: 1fr !important; }
+          .gtL-sidebar .gtL-side-brand > :first-child { transform: scale(0.78); transform-origin: center; }
+          .gtL-sidebar .gtL-side-brand { padding-bottom: 14px !important; }
+          .gtL-sidebar .gtL-toggle-side { display: none !important; }
+          .spieleblock-laptop-frame .gt-weis-ov, .spieleblock-laptop-frame:has(.gtL-sidebar.is-collapsed) .gt-weis-ov { left: 76px !important; }
         }
         @media (max-width: 720px) {
           .spieleblock-laptop-frame { box-shadow: none !important; border: none !important; border-radius: 0 !important; width: 100% !important; }
@@ -109160,7 +109680,7 @@ function App() {
 		minHeight: 16
 	} }), navBtn("settings", lt("settings"), navIcon("settings", activeNav === "settings" ? laptopTk.gold : sideMuted), activeNav === "settings", () => goTo("settings")), /* @__PURE__ */ import_react.default.createElement("button", {
 		onClick: toggleSide,
-		className: "press-fx gtL-navbtn",
+		className: "press-fx gtL-navbtn gtL-toggle-side",
 		"aria-label": sideCollapsed ? lt("sidebarExpand") : lt("sidebarCollapse"),
 		title: sideCollapsed ? lt("sidebarExpand") : lt("sidebarCollapse"),
 		style: {
@@ -110617,9 +111137,6 @@ function YatzyGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 		theme
 	});
 }
-// web/src/app/build.js
-var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.06-6";
 // web/src/app/storage.js
 var storage_exports = /* @__PURE__ */ __exportAll({
 	GT_CAT_KEYS: () => GT_CAT_KEYS,
@@ -110741,7 +111258,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.06-6");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.06-7");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -111183,6 +111700,13 @@ function PodiumOverlay({ open, onClose, onRestart, extraAct, ranked, tk, t, best
 	useEffect$15(() => {
 		if (open) gtEcWarm(gameId);
 	}, [open]);
+	const dlgRef = useGtDialog({
+		open: !!(open && ranked && ranked.length > 0),
+		onClose: () => {
+			if (gtP3Skip() || performance.now() - gtP3SkipAt < 700) return;
+			onClose();
+		}
+	});
 	const sbSig = String(gameId) + "|" + (Array.isArray(ranked) ? ranked : []).map((e) => (e && e.name) + ":" + (e && e.score) + ":" + (e && e.rk)).join("|");
 	const sbSigRef = useRef$17(sbSig);
 	sbSigRef.current = sbSig;
@@ -111320,6 +111844,7 @@ function PodiumOverlay({ open, onClose, onRestart, extraAct, ranked, tk, t, best
 			padding: 16
 		}
 	}, /* @__PURE__ */ import_react.default.createElement("div", {
+		ref: dlgRef,
 		onClick: (e) => e.stopPropagation(),
 		"data-gt-podium": "1",
 		role: "dialog",
@@ -111907,7 +112432,7 @@ function gtP3Skip() {
 	try {
 		document.querySelectorAll("[data-gt-podium]").forEach((el) => {
 			(el.getAnimations ? el.getAnimations({ subtree: true }) : []).forEach((a) => {
-				if (a.playState === "running" || a.pending) {
+				if ((a.playState === "running" || a.pending) && !(a.effect && a.effect.getComputedTiming && a.effect.getComputedTiming().iterations === Infinity)) {
 					hit = true;
 					try {
 						a.finish();
@@ -113319,7 +113844,7 @@ function UpdateBanner() {
 		let shown = false;
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && !shown && v && v.build && v.build !== "2026.11.06-6") {
+				if (alive && !shown && v && v.build && v.build !== "2026.11.06-7") {
 					shown = true;
 					setReady(true);
 					setHidden(false);

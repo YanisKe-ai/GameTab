@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.06-7 (06.11.2026 21:18)
+- Audit: Dialoge mit Tastatur, Schieber-Tafel per Tastatur, Tablet ohne Skalierung, Teilen und Backup mit Rückmeldung
+
 ## 2026.11.06-6 (06.11.2026 20:34)
 - Neues Design: gemeinsames Gerüst, Knopf immer unten, Star pro Spiel
 

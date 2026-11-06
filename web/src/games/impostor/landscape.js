@@ -84,5 +84,15 @@ export const H1_LANDSCAPE_CSS = `
 /* Zielauswahl der Geheimrollen (Seherin, Hexe, Detektiv, Arzt, Beschuetzer): Personen in zwei Spalten */
 [data-phone-landscape] .h1l-plist { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px calc(var(--pl-gap) + 4px) !important; align-items: stretch; }
 [data-phone-landscape] .h1l-plist > :first-child { grid-column: 1 / -1; }
+
+/* Design-Einheit: Anschlussansichten (Hochformat). Hauptknopf klebt unten, Zeilen gross, Inhalt mittig */
+.gt-u-col > :last-child:not(.gt-u-glow):not(.gt-u-dock) { flex: 1 1 auto; }
+.gt-u-col .h1l-ctr > :first-child { margin-top: auto; }
+.gt-stk { margin-top: auto; position: sticky; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); z-index: 6; min-height: 56px; width: 100%; box-sizing: border-box; border-radius: 20px !important; font-size: 17px !important; font-weight: 800 !important; padding: 0 24px !important; }
+.gt-stk:disabled { opacity: 1 !important; background: color-mix(in oklab, currentColor 12%, transparent) !important; color: inherit; box-shadow: none !important; }
+.gt-row { min-height: 64px; font-size: 19px !important; padding: 0 18px !important; border-radius: 20px !important; }
+.gtL-content .gt-stk { position: static; margin-top: 16px; }
+[data-phone-landscape] .gt-stk { position: static; min-height: 44px; margin-top: 0; }
+[data-phone-landscape] .gt-row { min-height: 44px; font-size: 15px !important; padding: 8px 14px !important; }
 `;
 export { H1L, H1L_HEAD };

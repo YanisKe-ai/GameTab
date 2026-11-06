@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.06-5 (06.11.2026 08:37)
+- Siegkarten: doppelte Texte entfernt (Flip 7, Wizard, Minigolf, Rommé, Freies Spiel)
+
 ## 2026.11.06-4 (06.11.2026 08:04)
 - Motion: Tutto-Würfel direkter, Am-Zug-Lichtpunkt, weiche Bildvorschau, Querformat bereinigt
 

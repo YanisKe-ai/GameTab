@@ -1,6 +1,6 @@
 // Ergebnisbild Wizard (Entwurf dev-notes/ergebnisbild-entwuerfe/pro-spiel/wizard.png).
 // Daten: Rang und Punkte (gtEcModel). Zusatz (shareExtra aus WizardGame): {roundCount, players:[{name, hits}]} (hits = Runden, in denen die Ansage genau getroffen wurde).
-// "Prophezeiung erfuellt" nur, wenn alle Sieger jede Ansage getroffen haben; sonst "n von N Ansagen getroffen" des Siegers oder der Gleichstand-Hinweis.
+// "Prophezeiung erfuellt" nur, wenn alle Sieger jede Ansage getroffen haben; sonst der Gleichstand-Hinweis. Die getroffenen Ansagen stehen in der Rangliste, darum kein Untertitel.
 import { pickRows, star, setI } from "./util.js";
 
 const GOLD = "#E0BA72", HERO = "#FFE3A0", DARK = "#1C0410";
@@ -77,14 +77,17 @@ function page1(d, k, N, rowsData) {
   k.setFont(c, 700, tf.size, F_FRAU); c.fillStyle = GOLD; c.textAlign = "center"; c.fillText(tf.lines[0], 540, k.cssBase(c, 14, tf.size * 1.05));
   const win = d.winners;
   const perfect = N > 0 && win.length > 0 && win.every((r) => { const e = extras[d.rows.indexOf(r)]; return e && e.hits === N; });
-  let sub;
+  let sub = "";
   if (perfect) sub = d.tr("tplWzPerfect", "Prophezeiung erfüllt");
   else if (d.tie) sub = d.tr("ecTied", "Gemeinsamer erster Platz");
-  else { const e = extras[d.rows.indexOf(win[0])]; sub = e && e.hits != null && N > 0 ? d.tr("tplWzHits", (a, b) => a + "/" + b)(e.hits, N) : d.tr("ecWon", "Gewonnen"); }
-  const sf = k.fit(c, sub, { w: 500, fam: F_FRAU, max: 68, min: 30, maxW: 940, lines: 1 });
-  setI(c, 500, sf.size, F_FRAU); c.fillStyle = GOLD; c.fillText(sf.lines[0], 540, k.cssBase(c, 196, sf.size)); c.textAlign = "left";
+  else { const e = extras[d.rows.indexOf(win[0])]; if (!(e && e.hits != null && N > 0)) sub = d.tr("ecWon", "Gewonnen"); }
+  if (sub) {
+    const sf = k.fit(c, sub, { w: 500, fam: F_FRAU, max: 68, min: 30, maxW: 940, lines: 1 });
+    setI(c, 500, sf.size, F_FRAU); c.fillStyle = GOLD; c.fillText(sf.lines[0], 540, k.cssBase(c, 196, sf.size));
+  }
+  c.textAlign = "left";
   // Karte im verbleibenden Raum
-  const top = 290, avail = rowsTop - 24 - top;
+  const top = sub ? 290 : 200, avail = rowsTop - 24 - top;
   const s = Math.min(1.25, avail / 600);
   const cy = top + avail / 2;
   STARS.forEach(([x, y, z, a]) => { if (y < rowsTop - 40) star(c, x, Math.min(y, top + avail - 20), z, GOLD, a); });

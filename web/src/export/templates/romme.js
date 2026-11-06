@@ -36,12 +36,11 @@ function page1(d, k, rows, rounds, target) {
   const val = win[0].value;
   k.setFont(c, 400, 160, k.F_ANTON); const vw = c.measureText(val).width;
   const lab = d.tr("tplRmPts", "Minuspunkte");
-  const lf = k.fit(c, lab, { w: 700, fam: F_FRAU, max: 44, min: 22, maxW: 400, lines: 1 });
   const rw = Math.max(vw, 0);
   c.fillStyle = GOLD; c.textAlign = "right"; k.setFont(c, 400, 160, k.F_ANTON); c.fillText(val, 1016, 150 + k.capH(c) + 8);
-  k.setFont(c, 700, lf.size, F_FRAU); c.fillText(lf.lines[0], 1016, 150 + 160 + 36); c.textAlign = "left";
+  c.textAlign = "left";
   const name = d.up(win.map((r) => r.name).join(" & "));
-  const nW = 1016 - 60 - Math.max(rw, c.measureText(lf.lines[0]).width) - 40;
+  const nW = 1016 - 60 - rw - 40;
   const fo = { w: 400, fam: k.F_ANTON, maxW: Math.max(300, nW) };
   let nf = k.fit(c, name, Object.assign({ max: 160, min: 90, lines: 1 }, fo));
   if (nf.cut) { nf = k.fit(c, breakHy(name), Object.assign({ max: 112, min: 54, lines: 2 }, fo)); nf.lines = unHy(nf.lines); }

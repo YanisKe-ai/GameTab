@@ -1,5 +1,5 @@
 // Ergebnisbild Freies Spiel (Entwurf dev-notes/ergebnisbild-entwuerfe/pro-spiel/freiesspiel.png, Notizbuch).
-// Daten: gtEcModel (Raenge, Gleichstand, Summen) plus shareExtra {lowWins, target}. Unterzeile "X gewinnt mit N Punkten" aus den Summen,
+// Daten: gtEcModel (Raenge, Gleichstand, Summen) plus shareExtra {lowWins, target}. Keine Unterzeile, Rang 1 und Stempel sagen es schon.
 // Stempel = "Gewonnen"/"Gemeinsam gewonnen" (vorhandene Texte). Bei "tiefste gewinnt" steht "tief gewinnt" neben dem Datum.
 import { F_FRAUNCES } from "./fonts-a.js";
 
@@ -102,25 +102,11 @@ function page1(d, k, rows) {
   plan.items.forEach((q, i) => { row(c, k, q.r, ys[i][0], q.fr, Math.min(150, plan.fsN * (q.r.winner ? 1.5 : 1)), q.r.winner, ys[i][1]); });
   const endY = y;
   /* Stempel und Satz unten */
-  const noteBase = 1236;
-  const win = d.winners.length ? d.winners : d.rows.slice(0, 1);
-  const names = win.map((r) => r.name);
-  const joinF = d.tr("stuAnd", "und");
-  const joined = names.length < 2 ? names[0] : names.slice(0, -1).join(", ") + " " + joinF + " " + names[names.length - 1];
-  const sc = win[0].score;
-  const one = d.lang === "fr" || d.lang === "pt" ? (sc != null && Math.abs(sc) < 2) : sc === 1 || sc === -1;
-  const fn = d.tr(names.length > 1 ? "tplFreeWinN" : "tplFreeWin1");
-  const note = typeof fn === "function" ? fn(joined, win[0].value, one) : joined;
-  const nf = k.fit(c, note, { w: 400, fam: k.F_KALAM, max: 44, min: 26, maxW: 680, lines: 2 });
-  c.save(); c.translate(170 + 340, 1215); c.rotate(-2 * Math.PI / 180); c.translate(-(170 + 340), -1215);
-  k.setFont(c, 400, nf.size, k.F_KALAM); c.fillStyle = "#4A4455";
-  const nlh = nf.size * 1.25; nf.lines.forEach((l, i) => c.fillText(l, 170, noteBase - (nf.lines.length - 1 - i) * nlh));
-  c.restore();
   const stampTxt = d.tie ? d.tr("ecWonMany", "Gemeinsam gewonnen") : d.tr("ecWon", "Gewonnen");
   const sf = k.fit(c, stampTxt, { w: 700, fam: F_FRAUNCES, max: 40, min: 22, maxW: 330 });
   k.setFont(c, 700, sf.size, F_FRAUNCES);
   const sw = c.measureText(sf.lines[0]).width + 36 + 10, sh = sf.size * 1.2 + 12 + 10;
-  const stampBottom = nf.lines.length > 1 ? 1128 : endY < 1090 ? 1180 : 1190;
+  const stampBottom = endY < 1090 ? 1180 : 1190;
   c.save(); c.translate(880 - sw / 2, stampBottom - sh / 2); c.rotate(-8 * Math.PI / 180);
   c.strokeStyle = PUR; c.lineWidth = 5; k.rrect(c, -sw / 2 + 2.5, -sh / 2 + 2.5, sw - 5, sh - 5, 12); c.stroke();
   c.fillStyle = PUR3; c.textAlign = "center"; c.fillText(sf.lines[0], 0, sf.size * 0.34); c.textAlign = "left"; c.restore();
@@ -161,7 +147,7 @@ function listPageBook(d, k, rows, no, count) {
 export default {
   games: ["freeplay"],
   fonts: ["700 100px Fraunces", "700 78px Kalam", "400 44px Kalam", "700 44px Kalam", "800 44px \"Baloo 2\""],
-  texts: (d) => [d.tr("ecContinued", ""), d.gameLabel, d.date, d.tr("tplSkyjoLow", ""), d.tr("ecWon", ""), d.tr("ecWonMany", ""), d.tr("stuAnd", ""), "0123456789", d.winners.map((r) => r.name).join(" ")],
+  texts: (d) => [d.tr("ecContinued", ""), d.gameLabel, d.date, d.tr("tplSkyjoLow", ""), d.tr("ecWon", ""), d.tr("ecWonMany", ""), "0123456789", d.winners.map((r) => r.name).join(" ")],
   render(d, k) {
     d.low = !!(d.extra && d.extra.lowWins);
     const first = d.rows.slice(0, k.ONE_PAGE);

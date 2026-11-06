@@ -29,8 +29,8 @@ function logoHead(c, k, d) {
   k.setFont(c, 800, 50, k.F_BALOO); c.fillStyle = LIME; c.fillText("GameTab", 100 + lw + 22, 96 + 50 + 18);
 }
 function footer(c, k, d, line) {
-  const f = k.fit(c, line, { w: 600, fam: MONO, max: 28, min: 16, maxW: 900, lines: 1 });
-  k.setFont(c, 600, f.size, MONO); c.fillStyle = SOFT; c.textAlign = "center"; c.fillText(f.lines[0], 540, 1250);
+  c.fillStyle = SOFT; c.textAlign = "center";
+  if (line) { const f = k.fit(c, line, { w: 600, fam: MONO, max: 28, min: 16, maxW: 900, lines: 1 }); k.setFont(c, 600, f.size, MONO); c.fillText(f.lines[0], 540, 1250); }
   k.setFont(c, 500, 22, MONO); c.globalAlpha = 0.85; c.fillText(d.date, 540, 1282); c.globalAlpha = 1; c.textAlign = "left";
 }
 function stamp(c, k, lines, rightX, top) {
@@ -128,7 +128,7 @@ function page1(d, k, extras, rowsList, pageNo, pageCount) {
   }
   // Fusszeile
   const win = d.winners, val = win.length ? d.num(win[0].score) : "";
-  const line = d.tie ? d.tr("tplMgTie", (n) => n + "")(val) : d.tr("tplMgWin1", (nm, n) => nm + " " + n)(win[0] ? win[0].name : "", val);
+  const line = d.tie ? d.tr("tplMgTie", (n) => n + "")(val) : "";
   footer(c, k, d, line);
   void pageCount;
   return cv;

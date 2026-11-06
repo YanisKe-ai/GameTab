@@ -162,10 +162,9 @@ function page1(d, k, others) {
   const f7 = d.flip7;
   if (hasFan) fan(c, k, d.fanVals, sc, dy);
   if (hasFan && f7 > 0) burst(c, k, d, f7, sc, dy);
-  /* Beschriftung links unter dem Schild: Gleichstand und/oder "Beste Runden von ..." */
+  /* Beschriftung links unter dem Schild: nur bei Gleichstand */
   let ly = 440;
   if (d.tie) { const tl = d.tr("ecTied", "Gemeinsamer erster Platz"); const tf = k.fit(c, tl, { w: 700, fam: k.F_BALOO, max: 38, min: 24, maxW: hasFan ? 600 : 900, lines: 1 }); k.setFont(c, 700, tf.size, k.F_BALOO); c.fillStyle = ORG; c.fillText(tf.lines[0], 70, big ? Math.max(ly + 14, heroTop - 30) : ly + 14); ly += 44; }
-  if (hasFan && sc > 0.6) { const f = d.tr("tplFlip7Best"); if (typeof f === "function") { const txt = f(win[0].name); const bf = k.fit(c, txt, { w: 600, fam: k.F_BALOO, max: 32, min: 22, maxW: 560, lines: 1 }); k.setFont(c, 600, bf.size, k.F_BALOO); c.fillStyle = "rgba(255,241,220,0.85)"; c.fillText(bf.lines[0], 70, ly + 14); } }
   c.fillStyle = CREAM; k.setFont(c, 400, nf.size, k.F_ANTON); nf.lines.forEach((ln, i) => c.fillText(ln, 60, bl[i]));
   k.setFont(c, 400, hv.size, k.F_ANTON); c.fillStyle = ORG; c.textAlign = "right"; c.fillText(val, 1020, heroBase); c.textAlign = "left";
   grid(c, k, others, gridTop, fs, pitch);

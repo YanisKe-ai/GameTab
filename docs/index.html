@@ -110095,7 +110095,7 @@ function YatzyGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 }
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.06-4";
+var APP_BUILD = "2026.11.06-5";
 // web/src/app/storage.js
 var storage_exports = /* @__PURE__ */ __exportAll({
 	GT_CAT_KEYS: () => GT_CAT_KEYS,
@@ -110217,7 +110217,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.06-4");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.06-5");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -112795,7 +112795,7 @@ function UpdateBanner() {
 		let shown = false;
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && !shown && v && v.build && v.build !== "2026.11.06-4") {
+				if (alive && !shown && v && v.build && v.build !== "2026.11.06-5") {
 					shown = true;
 					setReady(true);
 					setHidden(false);
@@ -114979,23 +114979,6 @@ function page1$11(d, k, others) {
 		c.fillText(tf.lines[0], 70, big ? Math.max(ly + 14, heroTop - 30) : ly + 14);
 		ly += 44;
 	}
-	if (hasFan && sc > .6) {
-		const f = d.tr("tplFlip7Best");
-		if (typeof f === "function") {
-			const txt = f(win[0].name);
-			const bf = k.fit(c, txt, {
-				w: 600,
-				fam: k.F_BALOO,
-				max: 32,
-				min: 22,
-				maxW: 560,
-				lines: 1
-			});
-			k.setFont(c, 600, bf.size, k.F_BALOO);
-			c.fillStyle = "rgba(255,241,220,0.85)";
-			c.fillText(bf.lines[0], 70, ly + 14);
-		}
-	}
 	c.fillStyle = CREAM$4;
 	k.setFont(c, 400, nf.size, k.F_ANTON);
 	nf.lines.forEach((ln, i) => c.fillText(ln, 60, bl[i]));
@@ -115620,32 +115603,6 @@ function page1$9(d, k, rows) {
 		row(c, k, q.r, ys[i][0], q.fr, Math.min(150, plan.fsN * (q.r.winner ? 1.5 : 1)), q.r.winner, ys[i][1]);
 	});
 	const endY = y;
-	const noteBase = 1236;
-	const win = d.winners.length ? d.winners : d.rows.slice(0, 1);
-	const names = win.map((r) => r.name);
-	const joinF = d.tr("stuAnd", "und");
-	const joined = names.length < 2 ? names[0] : names.slice(0, -1).join(", ") + " " + joinF + " " + names[names.length - 1];
-	const sc = win[0].score;
-	const one = d.lang === "fr" || d.lang === "pt" ? sc != null && Math.abs(sc) < 2 : sc === 1 || sc === -1;
-	const fn = d.tr(names.length > 1 ? "tplFreeWinN" : "tplFreeWin1");
-	const note = typeof fn === "function" ? fn(joined, win[0].value, one) : joined;
-	const nf = k.fit(c, note, {
-		w: 400,
-		fam: k.F_KALAM,
-		max: 44,
-		min: 26,
-		maxW: 680,
-		lines: 2
-	});
-	c.save();
-	c.translate(510, 1215);
-	c.rotate(-2 * Math.PI / 180);
-	c.translate(-510, -1215);
-	k.setFont(c, 400, nf.size, k.F_KALAM);
-	c.fillStyle = "#4A4455";
-	const nlh = nf.size * 1.25;
-	nf.lines.forEach((l, i) => c.fillText(l, 170, noteBase - (nf.lines.length - 1 - i) * nlh));
-	c.restore();
 	const stampTxt = d.tie ? d.tr("ecWonMany", "Gemeinsam gewonnen") : d.tr("ecWon", "Gewonnen");
 	const sf = k.fit(c, stampTxt, {
 		w: 700,
@@ -115656,7 +115613,7 @@ function page1$9(d, k, rows) {
 	});
 	k.setFont(c, 700, sf.size, F_FRAUNCES$1);
 	const sw = c.measureText(sf.lines[0]).width + 36 + 10, sh = sf.size * 1.2 + 12 + 10;
-	const stampBottom = nf.lines.length > 1 ? 1128 : endY < 1090 ? 1180 : 1190;
+	const stampBottom = endY < 1090 ? 1180 : 1190;
 	c.save();
 	c.translate(880 - sw / 2, stampBottom - sh / 2);
 	c.rotate(-8 * Math.PI / 180);
@@ -115753,7 +115710,6 @@ var freeplay_default = {
 		d.tr("tplSkyjoLow", ""),
 		d.tr("ecWon", ""),
 		d.tr("ecWonMany", ""),
-		d.tr("stuAnd", ""),
 		"0123456789",
 		d.winners.map((r) => r.name).join(" ")
 	],
@@ -118102,26 +118058,28 @@ function page1$6(d, k, N, rowsData) {
 		const e = extras[d.rows.indexOf(r)];
 		return e && e.hits === N;
 	});
-	let sub;
+	let sub = "";
 	if (perfect) sub = d.tr("tplWzPerfect", "Prophezeiung erfüllt");
 	else if (d.tie) sub = d.tr("ecTied", "Gemeinsamer erster Platz");
 	else {
 		const e = extras[d.rows.indexOf(win[0])];
-		sub = e && e.hits != null && N > 0 ? d.tr("tplWzHits", (a, b) => a + "/" + b)(e.hits, N) : d.tr("ecWon", "Gewonnen");
+		if (!(e && e.hits != null && N > 0)) sub = d.tr("ecWon", "Gewonnen");
 	}
-	const sf = k.fit(c, sub, {
-		w: 500,
-		fam: F_FRAU$2,
-		max: 68,
-		min: 30,
-		maxW: 940,
-		lines: 1
-	});
-	setI(c, 500, sf.size, F_FRAU$2);
-	c.fillStyle = GOLD$3;
-	c.fillText(sf.lines[0], 540, k.cssBase(c, 196, sf.size));
+	if (sub) {
+		const sf = k.fit(c, sub, {
+			w: 500,
+			fam: F_FRAU$2,
+			max: 68,
+			min: 30,
+			maxW: 940,
+			lines: 1
+		});
+		setI(c, 500, sf.size, F_FRAU$2);
+		c.fillStyle = GOLD$3;
+		c.fillText(sf.lines[0], 540, k.cssBase(c, 196, sf.size));
+	}
 	c.textAlign = "left";
-	const top = 290, avail = rowsTop - 24 - top;
+	const top = sub ? 290 : 200, avail = rowsTop - 24 - top;
 	const s = Math.min(1.25, avail / 600);
 	const cy = top + avail / 2;
 	STARS.forEach(([x, y, z, a]) => {
@@ -118273,18 +118231,20 @@ function logoHead(c, k, d) {
 	c.fillText("GameTab", 100 + lw + 22, 164);
 }
 function footer$3(c, k, d, line) {
-	const f = k.fit(c, line, {
-		w: 600,
-		fam: MONO$2,
-		max: 28,
-		min: 16,
-		maxW: 900,
-		lines: 1
-	});
-	k.setFont(c, 600, f.size, MONO$2);
 	c.fillStyle = SOFT$2;
 	c.textAlign = "center";
-	c.fillText(f.lines[0], 540, 1250);
+	if (line) {
+		const f = k.fit(c, line, {
+			w: 600,
+			fam: MONO$2,
+			max: 28,
+			min: 16,
+			maxW: 900,
+			lines: 1
+		});
+		k.setFont(c, 600, f.size, MONO$2);
+		c.fillText(f.lines[0], 540, 1250);
+	}
 	k.setFont(c, 500, 22, MONO$2);
 	c.globalAlpha = .85;
 	c.fillText(d.date, 540, 1282);
@@ -118526,7 +118486,7 @@ function page1$5(d, k, extras, rowsList, pageNo, pageCount) {
 		} else stamp(c, k, [d.up(d.tr("tplMgAce", "Hole in one")), l2], 810, Math.min(Math.max(endY + 22, 870), 885));
 	}
 	const win = d.winners, val = win.length ? d.num(win[0].score) : "";
-	footer$3(c, k, d, d.tie ? d.tr("tplMgTie", (n) => n + "")(val) : d.tr("tplMgWin1", (nm, n) => nm + " " + n)(win[0] ? win[0].name : "", val));
+	footer$3(c, k, d, d.tie ? d.tr("tplMgTie", (n) => n + "")(val) : "");
 	return cv;
 }
 var minigolf_default = {
@@ -119160,24 +119120,14 @@ function page1$3(d, k, rows, rounds, target) {
 	k.setFont(c, 400, 160, k.F_ANTON);
 	const vw = c.measureText(val).width;
 	const lab = d.tr("tplRmPts", "Minuspunkte");
-	const lf = k.fit(c, lab, {
-		w: 700,
-		fam: F_FRAU$1,
-		max: 44,
-		min: 22,
-		maxW: 400,
-		lines: 1
-	});
 	const rw = Math.max(vw, 0);
 	c.fillStyle = GOLD$1;
 	c.textAlign = "right";
 	k.setFont(c, 400, 160, k.F_ANTON);
 	c.fillText(val, 1016, 150 + k.capH(c) + 8);
-	k.setFont(c, 700, lf.size, F_FRAU$1);
-	c.fillText(lf.lines[0], 1016, 346);
 	c.textAlign = "left";
 	const name = d.up(win.map((r) => r.name).join(" & "));
-	const nW = 956 - Math.max(rw, c.measureText(lf.lines[0]).width) - 40;
+	const nW = 956 - rw - 40;
 	const fo = {
 		w: 400,
 		fam: k.F_ANTON,

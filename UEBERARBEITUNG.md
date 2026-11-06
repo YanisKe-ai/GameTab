@@ -83,7 +83,8 @@ Wenn möglich mit 1 bis 2 Mockup-Screenshots (schnell im Code skizziert) zur Ent
 ### Platzverteilung und Layout
 - [ ] Nichts abgeschnitten oder verdeckt bei 2, 4, 6 und Maximalzahl Spieler
 - [ ] Lange Namen (Ellipse), CJK-Namen, 4-stellige Zahlen
-- [ ] Bildschirmgrössen 320x568, 375x667, 390x844, 430x932 und Laptop 1280x800 / 1512x982
+- [ ] Immer auf alle drei Geräteklassen abgestimmt, nicht nur geprüft: Handy, iPad, Laptop
+- [ ] Bildschirmgrössen 320x568, 375x667, 390x844, 430x932, iPad 768x1024, 834x1194, 1024x768 und Laptop 1280x800 / 1512x982
 - [ ] Handy quer (`tests/landscape.py`), Touchziele mindestens 44 px
 - [ ] Tastatur auf: nichts verschiebt sich oder verdeckt das aktive Feld
 - [ ] Wichtiges gross, Nebensächliches klein: klare Hierarchie, kein Leerraum ohne Zweck
@@ -192,7 +193,7 @@ Ab Nr. 5 ist die Reihenfolge frei. Ohne andere Anweisung von Yanis einfach der T
 
 | # | Spiel | gameId | Modul | Status | Offen |
 |---|---|---|---|---|---|
-| 1 | Tutto | tutto | games/tutto | offen | |
+| 1 | Tutto | tutto | games/tutto | fertig 06.11.2026 | Kartenrechner auf Wunsch entfernt. Nur Chromium geprüft: Safari und echte Geräte offen |
 | 2 | Yatzy | yatzy | games/yatzy | offen | |
 | 3 | Schieber + Turnier | schieber | games/schieber | offen | Kreidetafel unangetastet |
 | 4 | Jass Differenzler | jass-differenzler | games/jass | offen | |

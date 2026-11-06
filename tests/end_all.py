@@ -22,7 +22,7 @@ def arg(name, default):
 
 
 def snap(pg):
-    return pg.evaluate("(ks)=>JSON.stringify(ks.map(k=>localStorage.getItem(k)))", KEYS)
+    return pg.evaluate("(ks)=>JSON.stringify(ks.map(k=>{const v=localStorage.getItem(k);try{return JSON.parse(v);}catch(e){return v;}}))", KEYS)
 
 
 def app_state(pg):
@@ -94,7 +94,8 @@ def one(b, w, h, mode, theme, errors):
                 assert not R.has_text(pg, r"Weiterspielen"), f"{phase}: Weiterspielen steht noch"
             pg.screenshot(path=str(OUT / f"{tag}_start_{phase.replace(' ', '_')}.png"))
         # 4) Statistik und Gruppen unveraendert
-        assert snap(pg) == before, "Statistik oder Gruppen veraendert"
+        after = snap(pg)
+        assert after == before, f"Statistik oder Gruppen veraendert: {str(before)[:400]} -> {str(after)[:400]}"
         # 5) Namen noch da: neues Spiel zeigt Setup, Gruppe ist noch waehlbar
         R.open_game(pg, "Schreibunterlagen", "Skyjo")
         assert R.has_text(pg, r"Spiel starten"), "Skyjo zeigt kein Setup"

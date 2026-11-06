@@ -1,5 +1,6 @@
 // Erzeugt von tools/split.mjs aus index.html. Inhalt zwischen den gt-body-Markern ist 1:1 Originalcode.
 import { React } from "../../vendor/react-globals.js";
+import { useGtDialog } from "../../shared/dialog.js";
 import { Fragment, useEffect, useMemo, useRef, useState } from "../../prelude.js";
 import { GLOBAL_STYLES } from "../../styles/global.js";
 import { useT } from "../../i18n/use-t.js";
@@ -304,10 +305,9 @@ function rootStyle(d){const v=VARS[d]||VARS.strichliste;const bg=d==="grandslam"
 /* ---------- Bausteine ---------- */
 function useLabels(tour){return useMemo(()=>{const by={},m={};if(!tour)return{lbl:id=>"",map:m};tour.participants.slice().sort((a,b)=>a.stableOrder-b.stableOrder).forEach(p=>{const k=fold(p.displayName).trim();(by[k]=by[k]||[]).push(p);});Object.keys(by).forEach(k=>{const arr=by[k];arr.forEach((p,i)=>{m[p.id]=arr.length>1?p.displayName+" ("+(i+1)+")":p.displayName;});});return{lbl:id=>m[id]!=null?m[id]:"?",map:m};},[tour]);}
 function Avatar({id,name,design}){const pal=AV[design]||stuAvPal(design);const c=pal[hash(id)%pal.length];const st=design==="grandslam"?{background:c,color:(function(){const r=gtHexRgb(c);return r&&gtCR(r,[255,255,255])<4.5?"#071743":"#FFFFFF";})()}:{background:"transparent",color:c,boxShadow:"inset 0 0 0 1.5px "+c};return <span className="gtst-av" aria-hidden style={st}>{initials(name)}</span>;}
-function Sheet({title,onClose,children,footer,labelId}){const ref=useRef(null);const opener=useRef(typeof document!=="undefined"?document.activeElement:null);const lid=useRef(labelId||("gtst-s-"+GT_ST.uid().slice(0,6))).current;
+function Sheet({title,onClose,children,footer,labelId}){const ref=useGtDialog({open:true,onClose});const lid=useRef(labelId||("gtst-s-"+GT_ST.uid().slice(0,6))).current;
 useEffect(()=>{const el=ref.current;const prev=document.body.style.overflow;document.body.style.overflow="hidden";const f=el&&el.querySelector("[data-autofocus]")||el&&el.querySelector("input,button:not([data-close])")||el;if(f&&f.focus)try{f.focus({preventScroll:true});}catch(e){}
-const key=e=>{if(e.key==="Escape"){e.stopPropagation();onClose();return;}if(e.key==="Tab"&&el){const q=[...el.querySelectorAll('button:not(:disabled),input:not(:disabled),select:not(:disabled),[tabindex="0"]')].filter(x=>x.offsetParent!==null);if(!q.length)return;const a=q[0],b=q[q.length-1];if(e.shiftKey&&document.activeElement===a){e.preventDefault();b.focus();}else if(!e.shiftKey&&document.activeElement===b){e.preventDefault();a.focus();}}};
-document.addEventListener("keydown",key,true);return()=>{document.removeEventListener("keydown",key,true);document.body.style.overflow=prev;const o=opener.current;if(o&&o.isConnected&&o.focus)try{o.focus({preventScroll:true});}catch(e){}};},[]);
+return()=>{document.body.style.overflow=prev;};},[]);
 return <div className="gtst-ovl" onMouseDown={e=>{if(e.target===e.currentTarget)onClose();}}><div ref={ref} className="gtst-sheet" role="dialog" aria-modal="true" aria-labelledby={lid} tabIndex={-1}>
 <div className="gtst-shead"><h2 id={lid}>{title}</h2><button type="button" className="gtst-ibtn" data-close="1" onClick={onClose} aria-label="×"><Icon n="close"/></button></div>
 <div className="gtst-sbody">{children}</div>{footer&&<div className="gtst-sfoot">{footer}</div>}</div></div>;}

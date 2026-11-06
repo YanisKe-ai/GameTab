@@ -17,7 +17,7 @@ function gtDialogInert(root) {
   const done = [];
   for (let el = root; el && el !== document.body && el.parentElement; el = el.parentElement) {
     Array.from(el.parentElement.children).forEach((sib) => {
-      if (sib === el || sib.tagName === "SCRIPT" || sib.tagName === "STYLE" || sib.hasAttribute("inert")) return;
+      if (sib === el || sib.tagName === "SCRIPT" || sib.tagName === "STYLE" || sib.hasAttribute("inert") || sib.hasAttribute("data-gt-keep")) return;
       sib.setAttribute("inert", "");
       done.push(sib);
     });

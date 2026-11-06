@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.06-6 (06.11.2026 20:34)
+- Neues Design: gemeinsames Gerüst, Knopf immer unten, Star pro Spiel
+
 ## 2026.11.06-5 (06.11.2026 08:37)
 - Siegkarten: doppelte Texte entfernt (Flip 7, Wizard, Minigolf, Rommé, Freies Spiel)
 

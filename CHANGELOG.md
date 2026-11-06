@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.06-13 (06.11.2026 23:58)
+- Tutto: Würfel landen gerade
+
 ## 2026.11.06-12 (06.11.2026 23:47)
 - Tutto: neue Spielansicht mit rollendem Würfel, Spieler antippen, ruhige Eingabe, neuer Titel
 

@@ -46451,7 +46451,14 @@ function TuttoPlayerRow({ player, total, entryCount, color, target, isLeader, se
 		if (!tr || !d) return;
 		const W = Math.max(0, tr.clientWidth - 48);
 		const r = ttRoll(v, targetRef.current, W);
-		d.style.transform = "translate3d(" + r.x + "px," + -r.lift + "px,0) rotate(" + r.deg + "deg)";
+		const snap = (x) => Math.round(x / 90) * 90;
+		let deg = snap(r.deg);
+		if (s.anim && s.to !== s.from) {
+			const a = snap(ttRoll(s.from, targetRef.current, W).deg);
+			deg = a + (snap(ttRoll(s.to, targetRef.current, W).deg) - a) * (v - s.from) / (s.to - s.from);
+		}
+		const lift = Math.abs(Math.sin(deg * Math.PI / 90)) * 5;
+		d.style.transform = "translate3d(" + r.x + "px," + -lift + "px,0) rotate(" + deg + "deg)";
 		if (trailwRef.current) trailwRef.current.style.width = W + 12 + "px";
 		if (trailRef.current) trailRef.current.style.transform = "translate3d(" + (r.x - W) + "px,0,0)";
 		if (numRef.current) {
@@ -46478,15 +46485,20 @@ function TuttoPlayerRow({ player, total, entryCount, color, target, isLeader, se
 		}
 		const from = s.v, to = total;
 		if (from === to || ttRM()) {
+			s.anim = false;
 			s.v = to;
 			paint(to);
 			return;
 		}
+		s.anim = true;
+		s.from = from;
+		s.to = to;
 		const t0 = performance.now();
 		const step = (now) => {
 			const k = Math.max(0, Math.min(1, (now - t0) / 1150));
 			const e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
 			s.v = from + (to - from) * e;
+			if (k >= 1) s.anim = false;
 			paint(s.v);
 			if (k < 1) s.raf = requestAnimationFrame(step);
 			else s.raf = 0;
@@ -68175,7 +68187,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.06-12";
+var APP_BUILD = "2026.11.06-13";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -111297,7 +111309,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.06-12");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.06-13");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -113903,7 +113915,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.06-12" && !upd) {
+		if (seen && seen !== "2026.11.06-13" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -113912,7 +113924,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.06-12" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.06-13" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

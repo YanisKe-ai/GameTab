@@ -200,6 +200,11 @@ function RulesButton({onClick,onHome,onEndGame,onMore,moreLabel,tokens}){const[c
           .gtL-content .gtL-split, .gtL-content .gtL-yatzy-sheets { grid-template-columns: minmax(0, 1fr) !important; }
           .gtL-content .gtL-col-side { position: static; }
         }
+        /* Touchziele: auf Geraeten mit grobem Zeiger mindestens 44 px (Tablet, Handy im Laptop-Layout) */
+        @media (pointer: coarse) {
+          .gtL-sidebar .gtL-side-brand { min-height: 44px; min-width: 44px; }
+          .gtL-content .gtL-entryrow.gt-ug-row { min-height: 48px !important; }
+        }
         @container gtl (max-width: 559px) {
           .gtL-content .gtL-tiles, .gtL-content .gtL-cards { grid-template-columns: 1fr !important; }
         }

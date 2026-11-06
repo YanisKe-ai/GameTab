@@ -98,7 +98,7 @@ function TuttoSetup({players,setPlayers,target,setTarget,onStart,tk:gtTk0,t,them
 .gtL-content .tt-tray{position:static;margin:0 0 14px;border-radius:24px;padding:14px 14px 16px;box-shadow:0 8px 24px -10px rgba(0,0,0,.4);}
 .gtL-content .gtL-col-side{position:sticky;top:12px;}
 .gtL-content .tt-cards{max-height:none;}
-@media (max-width:1099px){.gtL-content .tt-split{grid-template-columns:minmax(0,1fr);}.gtL-content .gtL-col-side{position:static;}}
+@container gtl (max-width:759px){.gtL-content .tt-split{grid-template-columns:minmax(0,1fr);}.gtL-content .gtL-col-side{position:static;}}
 [data-phone-landscape] .tt-root{min-height:0;display:block;}
 [data-phone-landscape] .tt-logo{margin:0 0 6px;}
 [data-phone-landscape] .tt-logo{justify-content:flex-end;}

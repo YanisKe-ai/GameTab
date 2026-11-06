@@ -18,7 +18,7 @@ html[data-gt-theme="noir"] { --gt-focus: #FFFFFF; }
 .gtL-content .gtL-split:has(> .gtL-col-side2) > .gtL-col-side { grid-column: 2; grid-row: 1; position: static; }
 .gtL-content .gtL-split.gtL-e-fit { grid-template-columns: minmax(0, max-content) minmax(320px, 420px); justify-content: center; }
 .gtL-content .gtL-e-board { max-width: min(460px, calc(100dvh - 330px)) !important; }
-@media (max-width: 1100px) {
+@container gtl (max-width: 759px) {
   .gtL-content .gtL-split:has(> .gtL-col-side2) > * { grid-column: 1 !important; grid-row: auto !important; }
 }
 .gt-hit { position: relative; }

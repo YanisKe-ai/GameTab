@@ -8807,6 +8807,7 @@ var TRANSLATIONS = {
 		showDigitalScore: "Zwischenstand als Zahl anzeigen",
 		enterPointsAria: "Punkte eintragen",
 		tuttoMinusAria: "Minuspunkte eintragen",
+		tuttoTapPlayer: "Spieler antippen",
 		tuttoOnTurn: "Am Zug",
 		tuttoIsOnTurn: "ist am Zug",
 		tuttoMinus: "Minus",
@@ -10376,6 +10377,7 @@ var TRANSLATIONS = {
 		showDigitalScore: "Show score as number",
 		enterPointsAria: "Enter points",
 		tuttoMinusAria: "Enter as minus points",
+		tuttoTapPlayer: "Tap a player",
 		tuttoOnTurn: "On turn",
 		tuttoIsOnTurn: "is up",
 		tuttoMinus: "Minus",
@@ -11945,6 +11947,7 @@ var TRANSLATIONS = {
 		showDigitalScore: "Afficher le score en chiffres",
 		enterPointsAria: "Saisir les points",
 		tuttoMinusAria: "Saisir en points négatifs",
+		tuttoTapPlayer: "Touche un joueur",
 		tuttoOnTurn: "Au tour",
 		tuttoIsOnTurn: "joue",
 		tuttoMinus: "Moins",
@@ -13514,6 +13517,7 @@ var TRANSLATIONS = {
 		showDigitalScore: "Mostra punteggio come numero",
 		enterPointsAria: "Inserisci punti",
 		tuttoMinusAria: "Inserisci come punti negativi",
+		tuttoTapPlayer: "Tocca un giocatore",
 		tuttoOnTurn: "Di turno",
 		tuttoIsOnTurn: "è di turno",
 		tuttoMinus: "Meno",
@@ -15083,6 +15087,7 @@ var TRANSLATIONS = {
 		showDigitalScore: "Mostrar resultado como número",
 		enterPointsAria: "Anotar puntos",
 		tuttoMinusAria: "Introducir como puntos negativos",
+		tuttoTapPlayer: "Toca un jugador",
 		tuttoOnTurn: "En turno",
 		tuttoIsOnTurn: "está en turno",
 		tuttoMinus: "Menos",
@@ -16652,6 +16657,7 @@ var TRANSLATIONS = {
 		showDigitalScore: "Mostrar resultado como número",
 		enterPointsAria: "Anotar pontos",
 		tuttoMinusAria: "Anotar como pontos negativos",
+		tuttoTapPlayer: "Toca num jogador",
 		tuttoOnTurn: "Na vez",
 		tuttoIsOnTurn: "está na vez",
 		tuttoMinus: "Menos",
@@ -24235,48 +24241,6 @@ function GtMoreSheet({ open, onClose, label, tk, theme, children }) {
 		maxWidth: 480,
 		margin: "0 auto"
 	} }, children))));
-}
-// web/src/lib/utils.ts
-function cn(...a) {
-	return a.filter(Boolean).join(" ");
-}
-// web/src/components/magicui/border-beam.tsx
-/**
-* Border Beam (Magic UI, angepasst): ein weicher Lichtpunkt wandert um den Rand.
-* Nur sichtbar, wenn offset-path rect() unterstuetzt wird und keine reduzierte Bewegung gewuenscht ist.
-*/
-function BorderBeam({ size = 56, duration = 7, borderWidth = 2, radius = 22, colorFrom = "#ffaa40", colorTo = "#9c40ff", className, style, ...props }) {
-	const [ok, setOk] = import_react.useState(false);
-	import_react.useEffect(() => {
-		try {
-			const rm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-			setOk(!rm && !!(window.CSS && CSS.supports && CSS.supports("offset-path", "rect(0 auto auto 0)")));
-		} catch (_e) {
-			setOk(false);
-		}
-	}, []);
-	if (!ok) return null;
-	return /* @__PURE__ */ import_react.createElement("div", {
-		"aria-hidden": true,
-		className: "tw:pointer-events-none tw:absolute tw:inset-0 tw:rounded-[inherit]",
-		style: {
-			padding: borderWidth,
-			mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-			WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-			WebkitMaskComposite: "xor",
-			maskComposite: "exclude"
-		}
-	}, /* @__PURE__ */ import_react.createElement("div", {
-		className: cn("tw:absolute tw:aspect-square tw:animate-border-beam", className),
-		style: {
-			width: size,
-			offsetPath: `rect(0 auto auto 0 round ${radius}px)`,
-			"--duration": duration,
-			backgroundImage: `linear-gradient(to left, ${colorFrom}, ${colorTo}, transparent)`,
-			...style
-		},
-		...props
-	}));
 }
 // web/src/shared/standings.js
 var standings_exports = /* @__PURE__ */ __exportAll({
@@ -46302,34 +46266,6 @@ function TuttoTopBar({ subtitle, onBack, theme, t, onHome, rulesText, onEndGame,
 		hideTitle
 	});
 }
-var TUTTO_YELLOW = "#F7C32E";
-function tuttoSkin(theme) {
-	const noir = theme === "noir", light = theme === "light";
-	const Y = noir ? "#E2E2E2" : TUTTO_YELLOW;
-	return {
-		Y,
-		onY: noir ? "#0A0A0A" : "#14101C",
-		onYmuted: noir ? "#2E2E2E" : "#4A3A08",
-		key: "#FFFFFF",
-		keyInk: noir ? "#0A0A0A" : "#14101C",
-		keyDeep: noir ? "#8C8C8C" : "#B88A18",
-		dk: noir ? "#1A1A1A" : "#14101C",
-		dkInk: noir ? "#F2F2F2" : TUTTO_YELLOW,
-		dkDeep: "#000000",
-		enter: noir ? "#0A0A0A" : "#C8102E",
-		enterInk: "#FFFFFF",
-		enterDeep: noir ? "#000000" : "#7A0A1C",
-		acc: light ? TUTTO_RED : Y,
-		word: noir ? "#F2F2F2" : light ? TUTTO_RED : "#E6474E",
-		wordShadow: noir ? "#6E6E6E" : TUTTO_YELLOW,
-		path: light ? "#9A9082" : theme === "vitrum" ? "rgba(255,255,255,0.3)" : noir ? "#5A5A5A" : "#4A5578",
-		flagSq: light ? "#FFFFFF" : "#14101C",
-		err: noir ? "#000000" : "#8F0B1F",
-		dispBg: noir ? "#1A1A1A" : "#14101C",
-		dispInk: "#F2F4F8",
-		dispPh: "#AEB7CC"
-	};
-}
 function ttLum(hex) {
 	const h = String(hex).replace("#", "");
 	const c = [
@@ -46346,209 +46282,292 @@ function ttFmt(n) {
 	const s = String(Math.abs(Math.round(n))).replace(/\B(?=(\d{3})+(?!\d))/g, "'");
 	return (n < 0 ? "−" : "") + s;
 }
-function TuttoDie({ rank, color, size, rot = 0, style }) {
-	const pat = {
-		1: [4],
-		2: [0, 8],
-		3: [
-			0,
-			4,
-			8
-		],
-		4: [
-			0,
-			2,
-			6,
-			8
-		],
-		5: [
-			0,
-			2,
-			4,
-			6,
-			8
-		],
-		6: [
-			0,
-			2,
-			3,
-			5,
-			6,
-			8
-		]
+var TT_PIPS = {
+	1: [[50, 50]],
+	2: [[27, 27], [73, 73]],
+	3: [
+		[27, 27],
+		[50, 50],
+		[73, 73]
+	],
+	4: [
+		[27, 27],
+		[73, 27],
+		[27, 73],
+		[73, 73]
+	],
+	5: [
+		[27, 27],
+		[73, 27],
+		[50, 50],
+		[27, 73],
+		[73, 73]
+	],
+	6: [
+		[27, 25],
+		[73, 25],
+		[27, 50],
+		[73, 50],
+		[27, 75],
+		[73, 75]
+	]
+};
+function ttRM() {
+	try {
+		return !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
+	} catch (e) {
+		return false;
+	}
+}
+function ttRoll(v, target, W) {
+	const x = Math.max(0, Math.min(1, v / Math.max(1, target))) * W;
+	const deg = x * 360 / (Math.PI * 24 * 1.27);
+	return {
+		x,
+		deg,
+		lift: Math.abs(Math.sin(deg * Math.PI / 90)) * 5,
+		face: (Math.floor(deg / 90) % 6 + 6) % 6 + 1
 	};
-	const pip = ttLum(color) > .3 ? "#14101C" : "#FFFFFF";
-	const act = pat[rank] || [];
-	return /* @__PURE__ */ import_react.default.createElement("svg", {
-		"aria-hidden": "true",
-		width: size,
-		height: size,
-		viewBox: "0 0 100 100",
-		style: {
-			display: "block",
-			transform: `rotate(${rot}deg)`,
-			filter: "drop-shadow(0 4px 0 rgba(0,0,0,0.35))",
-			flexShrink: 0,
-			...style
+}
+function ttVars(theme) {
+	const base = {
+		"--tt-y": "#F9C22E",
+		"--tt-ink": "#F3F4F8",
+		"--tt-ink2": "rgba(255,255,255,0.82)",
+		"--tt-mut": "rgba(255,255,255,0.58)",
+		"--tt-card": "rgba(255,255,255,0.05)",
+		"--tt-cardb": "transparent",
+		"--tt-dash": "rgba(255,255,255,0.19)",
+		"--tt-key": "rgba(255,255,255,0.07)",
+		"--tt-keyh": "rgba(255,255,255,0.12)",
+		"--tt-line2": "rgba(255,255,255,0.14)",
+		"--tt-tray": "#151A29",
+		"--tt-trayline": "rgba(255,255,255,0.08)",
+		"--tt-num": "#FFFFFF",
+		"--tt-lead": "#FF6B5E",
+		"--tt-sel": "#F9C22E",
+		"--tt-selglow": "rgba(249,194,46,0.25)",
+		"--tt-selname": "#F9C22E",
+		"--tt-selnum": "#F9C22E",
+		"--tt-pop": "#3FD17E",
+		"--tt-enter": "#C8102E",
+		"--tt-enterink": "#FFFFFF",
+		"--tt-offbg": "rgba(255,255,255,0.08)",
+		"--tt-offink": "rgba(255,255,255,0.5)",
+		"--tt-chk1": "#FFFFFF",
+		"--tt-chk2": "#14101C",
+		"--tt-wy": "#F9C22E",
+		"--tt-wk": "#14101C",
+		"--tt-wsh": "0.037em 0.037em 0 #14101C,0.074em 0.074em 0 #D6202A,0.093em 0.093em 0 #D6202A,0.111em 0.111em 0 #14101C,0 0 14px rgba(249,194,46,0.12)",
+		"--tt-gy": "#F9C22E",
+		"--tt-gb": "#D6202A",
+		"--tt-focus": "#F9C22E",
+		"--tt-minon-bg": "rgba(214,32,42,0.2)",
+		"--tt-minon": "#FF8A80"
+	};
+	if (theme === "light") return {
+		...base,
+		"--tt-ink": "#1B1815",
+		"--tt-ink2": "rgba(27,24,21,0.82)",
+		"--tt-mut": "rgba(27,24,21,0.62)",
+		"--tt-card": "#FFFFFF",
+		"--tt-cardb": "rgba(27,24,21,0.12)",
+		"--tt-dash": "rgba(27,24,21,0.3)",
+		"--tt-key": "rgba(27,24,21,0.07)",
+		"--tt-keyh": "rgba(27,24,21,0.12)",
+		"--tt-line2": "rgba(27,24,21,0.3)",
+		"--tt-tray": "#FFFFFF",
+		"--tt-trayline": "rgba(27,24,21,0.14)",
+		"--tt-num": "#1B1815",
+		"--tt-lead": "#C8102E",
+		"--tt-sel": "#D9A400",
+		"--tt-selglow": "rgba(217,164,0,0.22)",
+		"--tt-selname": "#7A5600",
+		"--tt-selnum": "#8A6200",
+		"--tt-pop": "#1E7A45",
+		"--tt-offbg": "rgba(27,24,21,0.07)",
+		"--tt-offink": "rgba(27,24,21,0.55)",
+		"--tt-chk1": "#14101C",
+		"--tt-chk2": "#FFFFFF",
+		"--tt-wsh": "0.037em 0.037em 0 #14101C,0.074em 0.074em 0 #D6202A,0.093em 0.093em 0 #D6202A,0.111em 0.111em 0 #14101C",
+		"--tt-gy": "#7A5600",
+		"--tt-focus": "#7A5600",
+		"--tt-minon-bg": "rgba(200,16,46,0.1)",
+		"--tt-minon": "#C8102E"
+	};
+	if (theme === "vitrum") return {
+		...base,
+		"--tt-card": "rgba(255,255,255,0.07)",
+		"--tt-cardb": "rgba(255,255,255,0.12)",
+		"--tt-tray": "rgba(16,18,25,0.58)",
+		"--tt-trayline": "rgba(255,255,255,0.14)"
+	};
+	if (theme === "noir") return {
+		...base,
+		"--tt-ink": "#EDEDED",
+		"--tt-ink2": "rgba(237,237,237,0.82)",
+		"--tt-mut": "#A5A5A5",
+		"--tt-card": "#1E1E1E",
+		"--tt-cardb": "#2E2E2E",
+		"--tt-tray": "#141414",
+		"--tt-trayline": "#2E2E2E",
+		"--tt-num": "#C9C9C9",
+		"--tt-lead": "#FFFFFF",
+		"--tt-sel": "#E2E2E2",
+		"--tt-selglow": "rgba(226,226,226,0.16)",
+		"--tt-selname": "#E2E2E2",
+		"--tt-selnum": "#E2E2E2",
+		"--tt-pop": "#E2E2E2",
+		"--tt-enter": "#E2E2E2",
+		"--tt-enterink": "#0A0A0A",
+		"--tt-offbg": "rgba(255,255,255,0.07)",
+		"--tt-offink": "rgba(255,255,255,0.45)",
+		"--tt-wy": "#F2F2F2",
+		"--tt-wk": "#000000",
+		"--tt-wsh": "0.037em 0.037em 0 #000000,0.074em 0.074em 0 #6E6E6E,0.093em 0.093em 0 #6E6E6E,0.111em 0.111em 0 #000000",
+		"--tt-gy": "#C9C9C9",
+		"--tt-gb": "#6E6E6E",
+		"--tt-focus": "#E2E2E2",
+		"--tt-minon-bg": "rgba(255,255,255,0.14)",
+		"--tt-minon": "#FFFFFF"
+	};
+	return base;
+}
+function TuttoPlayerRow({ player, total, entryCount, color, target, isLeader, selected, onPick, gtLead, t, theme, laneRef }) {
+	const dieRef = useRef$17(null), trackRef = useRef$17(null), trailRef = useRef$17(null), trailwRef = useRef$17(null), numRef = useRef$17(null);
+	const st = useRef$17({
+		v: total,
+		raf: 0,
+		first: true,
+		face: 0,
+		ec: entryCount
+	});
+	const targetRef = useRef$17(target);
+	targetRef.current = target;
+	const [face, setFace] = useState$11(() => ttRoll(total, target, 200).face);
+	const [pop, setPop] = useState$11(null);
+	const paint = (v) => {
+		const s = st.current, tr = trackRef.current, d = dieRef.current;
+		if (!tr || !d) return;
+		const W = Math.max(0, tr.clientWidth - 48);
+		const r = ttRoll(v, targetRef.current, W);
+		d.style.transform = "translate3d(" + r.x + "px," + -r.lift + "px,0) rotate(" + r.deg + "deg)";
+		if (trailwRef.current) trailwRef.current.style.width = W + 12 + "px";
+		if (trailRef.current) trailRef.current.style.transform = "translate3d(" + (r.x - W) + "px,0,0)";
+		if (numRef.current) {
+			const txt = ttFmt(Math.round(v));
+			if (numRef.current.textContent !== txt) numRef.current.textContent = txt;
 		}
-	}, /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "4",
-		y: "4",
-		width: "92",
-		height: "92",
-		rx: "22",
-		fill: color
-	}), rank <= 6 ? act.map((i) => /* @__PURE__ */ import_react.default.createElement("circle", {
-		key: i,
-		cx: [
-			28,
-			50,
-			72
-		][i % 3],
-		cy: [
-			28,
-			50,
-			72
-		][Math.floor(i / 3)],
-		r: "9",
-		fill: pip
-	})) : /* @__PURE__ */ import_react.default.createElement("text", {
-		x: "50",
-		y: "68",
-		textAnchor: "middle",
-		fontSize: "54",
-		fontWeight: "800",
-		fontFamily: "Inter, sans-serif",
-		fill: pip
-	}, rank));
-}
-function TuttoFlag({ color, sq, size = 40 }) {
-	return /* @__PURE__ */ import_react.default.createElement("svg", {
-		"aria-hidden": "true",
-		width: size * .75,
-		height: size,
-		viewBox: "0 0 30 40"
-	}, /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "3",
-		y: "2",
-		width: "3",
-		height: "36",
-		rx: "1.5",
-		fill: color
-	}), /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "6",
-		y: "3",
-		width: "20",
-		height: "16",
-		fill: color
-	}), [
-		[6, 3],
-		[16, 3],
-		[11, 7],
-		[21, 7],
-		[6, 11],
-		[16, 11],
-		[11, 15],
-		[21, 15]
-	].map((p, i) => /* @__PURE__ */ import_react.default.createElement("rect", {
-		key: i,
-		x: p[0],
-		y: p[1],
-		width: "5",
-		height: "4",
-		fill: sq
-	})));
-}
-function TuttoPlayerRow({ player, total, color, target, playerNumber, isLeader, onTurn, onPick, gtLead, tk, sk, t, compact, theme, laneRef }) {
-	const progress = Math.max(0, Math.min(1, total / target));
-	const segs = Math.min(10, Math.max(2, Math.floor(target / 1e3)));
-	const dw = compact ? 36 : onTurn ? 56 : 50;
-	const rot = playerNumber * 37 % 13 - 6;
+		if (r.face !== s.face) {
+			s.face = r.face;
+			setFace(r.face);
+		}
+	};
+	import_react.default.useLayoutEffect(() => {
+		const s = st.current;
+		if (s.first) {
+			s.first = false;
+			s.v = total;
+			paint(total);
+			return;
+		}
+		if (s.v === total && !s.raf) return;
+		if (s.raf) {
+			cancelAnimationFrame(s.raf);
+			s.raf = 0;
+		}
+		const from = s.v, to = total;
+		if (from === to || ttRM()) {
+			s.v = to;
+			paint(to);
+			return;
+		}
+		const t0 = performance.now();
+		const step = (now) => {
+			const k = Math.max(0, Math.min(1, (now - t0) / 1150));
+			const e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+			s.v = from + (to - from) * e;
+			paint(s.v);
+			if (k < 1) s.raf = requestAnimationFrame(step);
+			else s.raf = 0;
+		};
+		s.raf = requestAnimationFrame(step);
+	}, [total, target]);
+	useEffect$15(() => {
+		const tr = trackRef.current;
+		let ro = null;
+		if (tr && window.ResizeObserver) {
+			ro = new ResizeObserver(() => paint(st.current.v));
+			ro.observe(tr);
+		}
+		return () => {
+			if (ro) ro.disconnect();
+			if (st.current.raf) cancelAnimationFrame(st.current.raf);
+		};
+	}, []);
+	useEffect$15(() => {
+		const s = st.current;
+		if (entryCount === s.ec) return;
+		const inc = entryCount === s.ec + 1;
+		s.ec = entryCount;
+		const last = player.entries[player.entries.length - 1];
+		if (!inc || !last || ttRM()) {
+			setPop(null);
+			return;
+		}
+		setPop({
+			v: last,
+			id: Date.now()
+		});
+		const to = setTimeout(() => setPop(null), 1300);
+		return () => clearTimeout(to);
+	}, [entryCount]);
 	const remaining = Math.max(0, target - total);
-	const label = player.name + ": " + ttFmt(total) + (onTurn ? ", " + t("tuttoOnTurn") : "") + (total > 0 && total < target ? ", " + t("stillToTarget")(remaining) : "");
-	const glass = theme === "vitrum" ? " gtL-glass-soft" : "";
-	return /* @__PURE__ */ import_react.default.createElement("div", {
+	const label = player.name + ": " + ttFmt(total) + (total > 0 && total < target ? ", " + t("stillToTarget")(remaining) : "");
+	const pip = ttLum(color) > .3 ? "#14101C" : "#FFFFFF";
+	const numC = selected ? "var(--tt-selnum)" : isLeader && total > 0 ? "var(--tt-lead)" : "var(--tt-num)";
+	return /* @__PURE__ */ import_react.default.createElement("button", {
+		type: "button",
 		ref: laneRef,
-		role: "button",
-		tabIndex: 0,
-		"aria-pressed": onTurn,
-		"aria-label": label,
 		"data-gt-lh": "1",
+		"aria-pressed": selected,
+		"aria-label": label,
 		onClick: onPick,
-		onKeyDown: (e) => {
-			if (e.target === e.currentTarget && (e.key === "Enter" || e.key === " ")) {
-				e.preventDefault();
-				onPick();
-			}
-		},
-		className: "tt-lane" + glass + (onTurn ? " is-on" : ""),
-		style: {
-			"--tt-dw": dw + "px",
-			"--gt-lead-c": sk.acc,
-			"--lstripe": sk.acc,
-			color: tk.ink,
-			background: onTurn ? tk.cardElevated : tk.card,
-			borderColor: onTurn ? theme === "light" ? TUTTO_RED : sk.Y : tk.border
-		}
-	}, gtLead && /* @__PURE__ */ import_react.default.createElement(GtLeadFx, { key: "gtlf" }), onTurn && !compact && /* @__PURE__ */ import_react.default.createElement(BorderBeam, {
-		size: 64,
-		duration: 8,
-		borderWidth: 2,
-		radius: 22,
-		colorFrom: sk.acc,
-		colorTo: "transparent"
-	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "tt-lt" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "tt-nm" }, /* @__PURE__ */ import_react.default.createElement("span", {
-		className: "tt-dot",
-		style: { background: color }
-	}), /* @__PURE__ */ import_react.default.createElement("span", { className: "tt-nmt" }, player.name), onTurn && /* @__PURE__ */ import_react.default.createElement("span", {
-		className: "tt-pill",
-		style: {
-			background: sk.Y,
-			color: sk.onY
-		}
-	}, t("tuttoOnTurn")), isLeader && !onTurn && !compact && total > 0 && /* @__PURE__ */ import_react.default.createElement("span", {
-		className: "tt-lead",
-		style: { color: tk.muted }
-	}, t("leads"))), /* @__PURE__ */ import_react.default.createElement(GtCount, {
-		as: "div",
-		value: total,
-		good: "high",
-		dpos: "d",
-		format: ttFmt,
+		className: "tt-lane" + (theme === "vitrum" ? " gtL-glass-soft" : "") + (selected ? " is-sel" : ""),
+		style: { "--gt-lead-c": "var(--tt-y)" }
+	}, gtLead && /* @__PURE__ */ import_react.default.createElement(GtLeadFx, { key: "gtlf" }), /* @__PURE__ */ import_react.default.createElement("span", { className: "tt-lt" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "tt-nmt" }, player.name), pop && /* @__PURE__ */ import_react.default.createElement("span", {
+		key: pop.id,
+		className: "tt-pop",
+		"aria-hidden": "true",
+		style: { color: pop.v > 0 ? "var(--tt-pop)" : "var(--tt-lead)" }
+	}, (pop.v > 0 ? "+" : "−") + ttFmt(Math.abs(pop.v))), /* @__PURE__ */ import_react.default.createElement("span", {
+		ref: numRef,
 		className: "tt-num",
-		style: { color: onTurn ? sk.acc : tk.ink }
-	})), /* @__PURE__ */ import_react.default.createElement("div", { className: "tt-track" }, /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "tt-path",
-		style: { borderTopColor: sk.path }
-	}), Array.from({ length: segs - 1 }).map((_, i) => /* @__PURE__ */ import_react.default.createElement("span", {
-		key: i,
-		className: "tt-mk",
-		style: {
-			left: (i + 1) / segs * 100 + "%",
-			background: sk.path
-		}
-	})), /* @__PURE__ */ import_react.default.createElement("div", { className: "tt-trailw" }, /* @__PURE__ */ import_react.default.createElement("div", {
+		style: { color: numC }
+	})), /* @__PURE__ */ import_react.default.createElement("span", {
+		className: "tt-track",
+		ref: trackRef,
+		"aria-hidden": "true"
+	}, /* @__PURE__ */ import_react.default.createElement("i", { className: "tt-path" }), /* @__PURE__ */ import_react.default.createElement("span", {
+		className: "tt-trailw",
+		ref: trailwRef
+	}, /* @__PURE__ */ import_react.default.createElement("i", {
 		className: "tt-trail",
-		style: {
-			transform: `translateX(calc((100cqw - ${dw}px)*${progress.toFixed(4)} + ${dw / 2}px - 100cqw))`,
-			background: color
-		}
-	})), /* @__PURE__ */ import_react.default.createElement("div", {
+		ref: trailRef,
+		style: { background: color }
+	})), /* @__PURE__ */ import_react.default.createElement("span", {
 		className: "tt-die",
-		style: { transform: `translateX(calc((100cqw - ${dw}px)*${progress.toFixed(4)}))` }
-	}, /* @__PURE__ */ import_react.default.createElement("div", {
-		key: total,
-		className: total !== 0 ? "tt-hop" : void 0
-	}, /* @__PURE__ */ import_react.default.createElement(TuttoDie, {
-		rank: playerNumber,
-		color,
-		size: dw,
-		rot
-	}))), /* @__PURE__ */ import_react.default.createElement("div", { className: "tt-fl" }, /* @__PURE__ */ import_react.default.createElement(TuttoFlag, {
-		color: tk.ink,
-		sq: sk.flagSq,
-		size: compact ? 26 : 40
-	}), !compact && /* @__PURE__ */ import_react.default.createElement("span", { style: { color: sk.acc } }, ttFmt(target)))));
+		ref: dieRef,
+		style: { background: color }
+	}, (TT_PIPS[face] || []).map((p, i) => /* @__PURE__ */ import_react.default.createElement("i", {
+		key: i,
+		className: "tt-pip",
+		style: {
+			left: p[0] + "%",
+			top: p[1] + "%",
+			background: pip
+		}
+	}))), /* @__PURE__ */ import_react.default.createElement("i", { className: "tt-flag" })));
 }
 function TuttoSetup({ players, setPlayers, target, setTarget, onStart, tk: gtTk0, t, theme }) {
 	const tk = gtSoftTk(gtTk0, theme);
@@ -46615,101 +46634,96 @@ function TuttoSetup({ players, setPlayers, target, setTarget, onStart, tk: gtTk0
 }
 var TUTTO_PLAY_CSS = `@font-face{font-family:'Inter';font-style:italic;font-weight:900;font-display:swap;src:url("./fonts/Inter-BlackItalic-lat.woff2") format('woff2');}
 @font-face{font-family:'Inter';font-style:normal;font-weight:800 900;font-display:swap;src:url("./fonts/Inter-ExtraBold.ttf") format('truetype');}
-.tt-root{display:flex;flex-direction:column;min-height:calc(100dvh - 20px);font-family:'Inter',sans-serif;font-variant-numeric:tabular-nums;}
+@font-face{font-family:'Bowlby One';font-style:normal;font-weight:400;font-display:swap;src:url("./fonts/BowlbyOne-Regular-lat.woff2") format('woff2');}
+@font-face{font-family:'Anton';font-style:normal;font-weight:400;font-display:swap;src:url("./fonts/Anton-Regular.woff2") format('woff2');}
+@keyframes ttUp{0%{opacity:0;transform:translateY(10px) scale(.8);}18%{opacity:1;transform:translateY(0) scale(1.08);}70%{opacity:1;transform:translateY(-6px) scale(1);}100%{opacity:0;transform:translateY(-18px);}}
+@keyframes ttStamp{0%{transform:scale(1.4);opacity:0;filter:brightness(1.6);}60%{transform:scale(.97);opacity:1;}100%{transform:scale(1);filter:brightness(1);}}
+.tt-root{display:flex;flex-direction:column;min-height:calc(100dvh - 20px);font-family:'Inter',sans-serif;font-variant-numeric:tabular-nums;color:var(--tt-ink);}
 @media (display-mode: standalone){.tt-root{min-height:calc(100vh - 20px);}}
-.tt-root button{touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;font-family:inherit;}
-.tt-logo{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 10px;padding:0 4px;position:relative;z-index:1;}
-.tt-logo h1{margin:0;font-size:54px;line-height:1;font-weight:900;font-style:italic;letter-spacing:-0.02em;padding-right:6px;}
-.tt-chip{height:36px;border-radius:18px;font-weight:800;font-size:15px;padding:0 14px;display:flex;align-items:center;white-space:nowrap;}
-.tt-split{display:contents;}
-.tt-lanes{flex:1 0 auto;display:flex;flex-direction:column;gap:9px;padding:0 0 12px;position:relative;z-index:1;}
-.tt-lane{position:relative;flex:1 1 auto;min-height:104px;max-height:150px;border:1px solid;border-radius:22px;padding:10px 16px 8px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;touch-action:manipulation;-webkit-user-select:none;user-select:none;text-align:left;transition:transform .12s ease-out;}
-.tt-lane.is-on{border-width:2px;padding:9px 15px 7px;}
-.tt-lane:active{transform:scale(.99);}
-.tt-lt{display:flex;align-items:center;justify-content:space-between;gap:10px;min-width:0;}
-.tt-nm{display:flex;align-items:center;gap:8px;min-width:0;font-size:16px;font-weight:600;}
-.tt-nmt{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.tt-dot{width:12px;height:12px;border-radius:6px;flex:none;}
-.tt-pill{flex:none;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;border-radius:10px;padding:3px 8px;}
-.tt-lead{flex:none;font-size:10px;font-weight:700;letter-spacing:.08em;}
-.tt-num{flex:none;font-size:34px;font-weight:800;letter-spacing:-.02em;line-height:1;white-space:nowrap;}
-.tt-track{position:relative;container-type:inline-size;height:var(--tt-th,58px);margin:0 46px 0 4px;}
-.tt-path{position:absolute;left:0;right:0;top:50%;border-top:3px dashed;transform:translateY(-1.5px);}
-.tt-mk{position:absolute;top:50%;width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:3px;}
-.tt-trailw{position:absolute;left:0;right:0;top:50%;height:8px;margin-top:-4px;border-radius:4px;overflow:hidden;}.tt-trail{position:absolute;inset:0;border-radius:4px;transition:transform .32s cubic-bezier(.23,1,.32,1);}
-.tt-die{position:absolute;top:50%;width:var(--tt-dw);height:var(--tt-dw);margin-top:calc(var(--tt-dw) / -2);left:0;transition:transform .32s cubic-bezier(.23,1,.32,1);}
-.tt-hop{animation:ttHop .4s cubic-bezier(.23,1,.32,1);}
-@keyframes ttHop{0%{transform:translateY(0);}35%{transform:translateY(-7px);}100%{transform:translateY(0);}}
-.tt-fl{position:absolute;right:-42px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;font-size:12px;font-weight:800;gap:1px;}
-.tt-lanes.is-compact{gap:7px;}
-.tt-lanes.is-compact .tt-lane{min-height:72px;max-height:none;padding:6px 12px 4px;border-radius:18px;}
-.tt-lanes.is-compact .tt-lane.is-on{padding:5px 11px 3px;}
-.tt-lanes.is-compact .tt-num{font-size:26px;}
-.tt-lanes.is-compact .tt-nm{font-size:15px;}
-.tt-lanes.is-compact .tt-track{--tt-th:40px;margin-right:30px;}
-.tt-lanes.is-compact .tt-fl{right:-28px;}
-.tt-tray{position:sticky;bottom:0;z-index:5;margin:0 -12px;flex:none;border-radius:30px 30px 0 0;padding:12px 14px calc(24px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:8px;box-shadow:0 -10px 24px rgba(0,0,0,.28);}
-.tt-dh{height:44px;display:flex;align-items:center;gap:10px;font-size:17px;font-weight:800;}
-.tt-dht{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.tt-dht span{font-weight:600;font-size:15px;}
-.tt-rb{width:44px;height:44px;border-radius:22px;border:0;display:grid;place-items:center;cursor:pointer;flex:none;padding:0;}
-.tt-disp{height:50px;border-radius:14px;display:flex;align-items:center;padding:0 3px 0 16px;gap:8px;font-size:26px;font-weight:600;}
-.tt-disp .tt-pre{font-weight:600;}
-.tt-in{flex:1;min-width:0;height:100%;border:0;outline:0;background:transparent;font-size:26px;font-weight:600;font-family:inherit;font-variant-numeric:tabular-nums;color:inherit;padding:0;}
-.tt-in::placeholder{color:var(--tt-ph);opacity:1;font-weight:500;}
-.tt-dg{display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(2,50px);gap:8px;}
-.tt-ac{display:grid;grid-template-columns:1fr 1fr 2fr;gap:8px;height:54px;}
-.tt-k{border:0;border-radius:14px;font-size:24px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;min-width:44px;min-height:44px;padding:0 4px;transition:transform .1s ease-out,box-shadow .1s ease-out;}
-.tt-k:active{transform:translateY(3px) !important;box-shadow:0 1px 0 var(--tt-deep) !important;}
-.tt-ac .tt-k{font-size:15px;}
-.tt-ac .tt-k.is-enter{font-size:19px;}
-.tt-cards{max-height:50vh;overflow-y:auto;overscroll-behavior:contain;border-radius:14px;padding:4px 10px 8px;}
-.tt-root :focus-visible{outline:3px solid var(--tt-focus,#F7C32E);outline-offset:2px;}
-.tt-tray :focus-visible{outline-color:var(--tt-onY);}
+:where(.tt-root) button{touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;font-family:inherit;border:0;cursor:pointer;color:inherit;}
+.tt-split,.tt-split>.gtL-col-main,.tt-split>.gtL-col-side{display:contents;}
+.tt-sp{flex:1 1 0;min-height:8px;}
+.tt-sp1{margin-top:-18px;}
+.tt-sp3{flex:1 1 0;min-height:10px;}
+.tt-title{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:0 14px;text-align:center;flex:none;}
+.tt-word{font-family:'Bowlby One',sans-serif;font-weight:400;font-size:54px;line-height:1.05;color:var(--tt-wy);-webkit-text-stroke:.028em var(--tt-wk);paint-order:stroke fill;text-shadow:var(--tt-wsh);animation:ttStamp .5s cubic-bezier(.3,1.4,.5,1) both;white-space:nowrap;}
+.tt-goal{display:flex;align-items:center;gap:8px;color:var(--tt-gy);font-size:14px;font-weight:600;white-space:nowrap;}
+.tt-goal i{width:18px;height:3px;border-radius:2px;background:var(--tt-gb);flex:none;}
+.tt-lanes{position:relative;z-index:1;display:flex;flex-direction:column;gap:8px;flex:none;}
+.tt-lane{position:relative;display:block;width:100%;box-sizing:border-box;height:84px;padding:10px 14px;border-radius:18px;background:var(--tt-card);box-shadow:inset 0 0 0 1px var(--tt-cardb);text-align:left;transition:transform .12s ease-out;}
+.tt-lane:active{transform:scale(.98);}
+.tt-glide{position:absolute;left:0;top:0;width:0;height:84px;border-radius:18px;box-shadow:inset 0 0 0 2px var(--tt-sel),0 0 22px var(--tt-selglow);opacity:0;pointer-events:none;z-index:2;transition:transform .3s cubic-bezier(.23,1,.32,1),opacity .15s linear;}
+.tt-lt{display:flex;align-items:center;gap:8px;height:30px;min-width:0;}
+.tt-nmt{flex:1;min-width:0;font-size:17px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.tt-num{flex:none;font-family:'Anton',sans-serif;font-size:29px;line-height:1;white-space:nowrap;}
+.tt-pop{flex:none;font-size:15px;font-weight:800;animation:ttUp 1.3s ease-out both;pointer-events:none;}
+.tt-track{position:relative;display:block;height:26px;margin-top:5px;}
+.tt-path{position:absolute;left:0;right:24px;top:12px;border-top:2px dashed var(--tt-dash);}
+.tt-trailw{position:absolute;left:0;top:11px;height:4px;border-radius:2px;overflow:hidden;}
+.tt-trail{position:absolute;left:0;top:0;width:100%;height:100%;border-radius:2px;will-change:transform;}
+.tt-die{position:absolute;left:0;top:1px;width:24px;height:24px;border-radius:6px;box-shadow:0 2px 0 rgba(0,0,0,.35);will-change:transform;}
+.tt-pip{position:absolute;width:4.4px;height:4.4px;margin:-2.2px;border-radius:50%;}
+.tt-flag{position:absolute;right:0;top:2px;width:16px;height:22px;border-radius:2px;background:repeating-conic-gradient(var(--tt-chk1) 0 25%,var(--tt-chk2) 0 50%) 0 0/8px 8px;box-shadow:0 0 0 1px var(--tt-dash);}
+.tt-lanes.is-compact{gap:6px;}
+.tt-lanes.is-compact .tt-lane{height:46px;padding:0 12px;border-radius:14px;display:grid;grid-template-columns:minmax(0,30%) minmax(0,1fr) 62px;align-items:center;column-gap:10px;}
+.tt-lanes.is-compact .tt-glide{border-radius:14px;height:46px;}
+.tt-lanes.is-compact .tt-lt{display:contents;}
+.tt-lanes.is-compact .tt-nmt{grid-column:1;grid-row:1;font-size:15px;}
+.tt-lanes.is-compact .tt-track{grid-column:2;grid-row:1;margin-top:0;}
+.tt-lanes.is-compact .tt-num{grid-column:3;grid-row:1;font-size:22px;text-align:right;justify-self:end;}
+.tt-lanes.is-compact .tt-pop{position:absolute;right:12px;top:-3px;font-size:13px;}
+.tt-tray{container:tt/inline-size;position:sticky;bottom:0;z-index:5;margin:0 -12px;flex:none;box-sizing:border-box;border-radius:24px 24px 0 0;background:var(--tt-tray);border-top:1px solid var(--tt-trayline);padding:12px 14px calc(18px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:8px;color:var(--tt-ink);}
+.tt-root.is-vitrum .tt-tray{-webkit-backdrop-filter:blur(24px) saturate(160%);backdrop-filter:blur(24px) saturate(160%);}
+.tt-dh{display:grid;grid-template-columns:minmax(0,1fr) auto 44px 44px;align-items:center;column-gap:6px;min-height:44px;padding:0 0 0 4px;font-size:15px;}
+@container tt (max-width:279px){.tt-dn{grid-column:1/-1;min-height:26px;}.tt-disp{grid-column:1/3;margin-left:0;}}
+.tt-dn{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600;}
+.tt-disp{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:24px;font-weight:600;color:var(--tt-ink);}
+.tt-in{flex:none;min-width:6ch;border:0;outline:0;background:transparent;font-size:24px;font-weight:600;font-family:inherit;font-variant-numeric:tabular-nums;color:inherit;padding:0;text-align:left;}
+.tt-in::placeholder{color:var(--tt-mut);opacity:1;font-weight:600;}
+.tt-rb{flex:none;width:44px;height:44px;border-radius:22px;background:transparent;display:grid;place-items:center;padding:0;color:var(--tt-mut);transition:transform .12s ease-out,opacity .15s linear;}
+.tt-rb:active{transform:scale(.92);}
+.tt-rb:disabled{opacity:.35;cursor:default;}
+.tt-dg{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;}
+.tt-k{height:48px;min-width:44px;border-radius:13px;background:var(--tt-key);font-size:20px;font-weight:600;transition:transform .12s ease-out,background-color .15s ease;}
+.tt-k:active{transform:scale(.95);}
+.tt-ac{display:flex;gap:6px;}
+.tt-minus{height:48px;flex:1;min-width:44px;border-radius:14px;background:transparent;box-shadow:inset 0 0 0 1px var(--tt-line2);color:var(--tt-ink2);font-size:15px;font-weight:600;transition:transform .12s ease-out,background-color .15s ease,color .15s ease,box-shadow .15s ease;}
+.tt-minus:active,.tt-save:active{transform:scale(.97);}
+.tt-minus[aria-pressed="true"]{background:var(--tt-minon-bg);color:var(--tt-minon);box-shadow:inset 0 0 0 1.5px var(--tt-minon);}
+.tt-save{height:48px;flex:2;min-width:0;border-radius:14px;font-size:18px;font-weight:800;background:var(--tt-enter);color:var(--tt-enterink);transition:transform .12s ease-out,background-color .15s ease,color .15s ease;padding:0 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.tt-save[aria-disabled="true"]{background:var(--tt-offbg);color:var(--tt-offink);}
+.tt-root :focus-visible{outline:3px solid var(--tt-focus);outline-offset:2px;}
 .tt-in:focus-visible{outline:none;}
-.tt-disp:has(.tt-in:focus-visible){outline:3px solid var(--tt-onY);outline-offset:2px;}
-@media (max-width:360px){.tt-ac .tt-k:not(.is-enter) svg{display:none;}.tt-ac .tt-k{font-size:14px;}}
-@media (max-height:700px){.tt-dg{grid-template-rows:repeat(2,46px);}.tt-ac{height:50px;}.tt-tray{padding-top:8px;gap:6px;}.tt-logo h1{font-size:44px;}}
-@media (prefers-reduced-motion: reduce){.tt-trail,.tt-die,.tt-lane,.tt-k{transition:none;}.tt-hop{animation:none;}}
-@media (hover: hover) and (pointer: fine){.tt-lane:not(.is-on):hover{filter:brightness(1.08);}.tt-k:hover{filter:brightness(.96);}}
+.tt-disp:has(.tt-in:focus-visible){outline:3px solid var(--tt-focus);outline-offset:4px;border-radius:6px;}
+@media (max-width:360px){.tt-word{font-size:46px;}.tt-save{font-size:16px;}}
+@media (max-height:700px){.tt-tray{padding-top:8px;gap:6px;padding-bottom:calc(10px + env(safe-area-inset-bottom,0px));}.tt-dh{min-height:40px;}.tt-k,.tt-minus,.tt-save{height:42px;}.tt-word{font-size:44px;}.tt-lane{height:68px;padding:6px 14px;}.tt-glide{height:68px;}.tt-lanes.is-compact .tt-glide{height:46px;}.tt-lt{height:28px;}.tt-track{margin-top:2px;}}
+@media (prefers-reduced-motion: reduce){.tt-word,.tt-pop{animation:none;}.tt-glide,.tt-lane,.tt-k,.tt-minus,.tt-save,.tt-rb{transition:none;}}
+@media (hover: hover) and (pointer: fine){.tt-lane:not(.is-sel):hover{filter:brightness(1.08);}.tt-k:hover{background:var(--tt-keyh);}}
 .gtL-content .tt-root{min-height:0;display:block;}
-.gtL-content .tt-split{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,3fr);gap:18px;align-items:start;}
+.gtL-content .tt-sp{display:none;}
+.gtL-content .tt-split{display:grid;grid-template-columns:minmax(0,1fr) clamp(280px,30%,420px) !important;gap:18px;align-items:start;}
 .gtL-content .tt-split>.gtL-col-main,.gtL-content .tt-split>.gtL-col-side{display:block;min-width:0;}
-.gtL-content .tt-lanes{padding-bottom:0;}
-.gtL-content .tt-lane{min-height:112px;}
-.gtL-content .tt-tray{position:static;margin:0 0 14px;border-radius:24px;padding:14px 14px 16px;box-shadow:0 8px 24px -10px rgba(0,0,0,.4);}
+.gtL-content .tt-title{padding:4px 0 22px;}
+.gtL-content .tt-lanes{display:grid;grid-template-columns:repeat(auto-fit,minmax(max(260px,calc(50% - 6px)),1fr));gap:12px;}
+.gtL-content .tt-tray{position:static;margin:0 0 14px;border-radius:24px;border:1px solid var(--tt-trayline);padding:14px 14px 16px;box-shadow:0 8px 24px -10px rgba(0,0,0,.4);}
 .gtL-content .gtL-col-side{position:sticky;top:12px;}
-.gtL-content .tt-cards{max-height:none;}
-@container gtl (max-width:759px){.gtL-content .tt-split{grid-template-columns:minmax(0,1fr);}.gtL-content .gtL-col-side{position:static;}}
+@container gtl (max-width:559px){.gtL-content .tt-split{grid-template-columns:minmax(0,1fr) !important;}.gtL-content .gtL-col-side{position:static;}.gtL-content .tt-lanes{margin-bottom:14px;}}
 [data-phone-landscape] .tt-root{min-height:0;display:block;}
-[data-phone-landscape] .tt-logo{margin:0 0 6px;}
-[data-phone-landscape] .tt-logo{justify-content:flex-end;}
-[data-phone-landscape] .tt-logo h1{display:none;}
-[data-phone-landscape] .tt-chip{height:30px;font-size:13px;}
+[data-phone-landscape] .tt-sp{display:none;}
+[data-phone-landscape] .tt-title{flex-direction:row;justify-content:flex-start;align-items:center;gap:12px;padding:0;margin:0 0 8px;}
+[data-phone-landscape] .tt-word{font-size:28px;}
 [data-phone-landscape] .tt-split{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,44%);gap:12px;align-items:start;}
 [data-phone-landscape] .tt-split>.gtL-col-main,[data-phone-landscape] .tt-split>.gtL-col-side{display:block;min-width:0;}
-[data-phone-landscape] .tt-lanes{max-height:calc(var(--pl-body,300px) - 40px);overflow-y:auto;overscroll-behavior:contain;padding-bottom:4px;}
-[data-phone-landscape] .tt-lane{flex:none;min-height:96px;}
-[data-phone-landscape] .tt-tray{position:static;margin:0;border-radius:20px;padding:8px 10px 10px;gap:6px;max-height:calc(var(--pl-body,300px) - 40px);overflow-y:auto;overscroll-behavior:contain;}
-[data-phone-landscape] .tt-dg{grid-template-rows:repeat(2,44px);}
-[data-phone-landscape] .tt-ac{height:46px;}
-[data-phone-landscape] .tt-dh{height:40px;}
-[data-phone-landscape] .tt-disp{height:46px;}
+[data-phone-landscape] .tt-lanes{max-height:calc(var(--pl-body,300px) - 62px);overflow-y:auto;overscroll-behavior:contain;padding-bottom:2px;}
+[data-phone-landscape] .tt-tray{position:static;margin:0;border-radius:18px;border:1px solid var(--tt-trayline);padding:6px 10px 8px;gap:6px;max-height:calc(var(--pl-body,300px) - 8px);overflow-y:auto;overscroll-behavior:contain;}
+[data-phone-landscape] .tt-dh{min-height:40px;}
+[data-phone-landscape] .tt-k,[data-phone-landscape] .tt-minus,[data-phone-landscape] .tt-save{height:44px;}
 `;
-function TuttoWordmark({ theme, sk, target, t }) {
-	return /* @__PURE__ */ import_react.default.createElement("div", { className: "tt-logo" }, /* @__PURE__ */ import_react.default.createElement("h1", { style: {
-		color: sk.word,
-		textShadow: `2px 3px 0 ${sk.wordShadow}`
-	} }, "TUTTO"), /* @__PURE__ */ import_react.default.createElement("span", {
-		className: "tt-chip",
-		style: {
-			background: sk.Y,
-			color: sk.onY
-		}
-	}, t("targetLabel") + " ", /* @__PURE__ */ import_react.default.createElement("span", { style: {
-		marginLeft: 5,
-		fontWeight: 900
-	} }, ttFmt(target))));
+function TuttoWordmark({ target, t }) {
+	return /* @__PURE__ */ import_react.default.createElement("div", { className: "tt-title" }, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "tt-word",
+		"aria-hidden": "true"
+	}, "TUTTO"), /* @__PURE__ */ import_react.default.createElement("div", { className: "tt-goal" }, /* @__PURE__ */ import_react.default.createElement("i", null), t("targetLabel") + " " + ttFmt(target), /* @__PURE__ */ import_react.default.createElement("i", null)));
 }
 function TuttoPlay({ players, setPlayers, target, onBack, onHome, onEndGame, onEditPlayers, lang = "de", theme = "dark" }) {
 	const plLand = usePhoneLandscape();
@@ -46728,7 +46742,10 @@ function TuttoPlay({ players, setPlayers, target, onBack, onHome, onEndGame, onE
 	const { node: milestoneNode, fire: fireMilestone } = useMilestoneBurst();
 	const [podiumOpen, setPodiumOpen] = useState$11(false);
 	useEffect$15(() => {
-		if (winnerIdx !== -1) setPodiumOpen(true);
+		if (winnerIdx === -1) return;
+		const rm = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+		const to = setTimeout(() => setPodiumOpen(true), rm ? 0 : 1250);
+		return () => clearTimeout(to);
 	}, [winnerIdx]);
 	useGtRecord("tutto", winnerIdx !== -1, () => {
 		const big = players.filter((p) => p.entries.some((e) => e >= 1e3)).map((p) => p.name);
@@ -46743,31 +46760,15 @@ function TuttoPlay({ players, setPlayers, target, onBack, onHome, onEndGame, onE
 	});
 	const podiumRanked = winnerIdx !== -1 ? rankedPodium(players, (p) => p.entries.reduce((s, e) => s + e, 0)) : [];
 	const update = (idx, fn) => setPlayers((ps) => ps.map((p, i) => i === idx ? fn(p) : p));
-	const tcMax = totals.length ? Math.max(...totals) : 0;
-	const tcLeaders = (i) => totals[i] === tcMax ? [] : totals.map((v, j) => v === tcMax ? j : -1).filter((j) => j >= 0);
-	const tcApply = (i, val, pm, win) => {
-		const leaders = tcLeaders(i);
-		let v = Math.round(val || 0);
-		if (win) {
-			const others = totals.filter((_, j) => j !== i);
-			const other = others.length ? Math.max(...others) : 0;
-			v = Math.max(0, Math.max(target, other + 1) - totals[i]);
-		}
-		if (v >= 1e3) fireMilestone();
-		setPlayers((ps) => ps.map((pl, j) => j === i ? {
-			...pl,
-			entries: [...pl.entries, v]
-		} : pm > 0 && leaders.includes(j) ? {
-			...pl,
-			entries: [...pl.entries, -1e3 * pm]
-		} : pl));
-	};
 	const performReset = () => {
 		setPlayers((ps) => ps.map((p) => ({
 			...p,
 			entries: []
 		})));
 		setConfirmingReset(false);
+		setSel(-1);
+		setInput("");
+		setSign(1);
 	};
 	const reset = () => {
 		if (!confirmingReset) {
@@ -46842,34 +46843,25 @@ function TuttoPlay({ players, setPlayers, target, onBack, onHome, onEndGame, onE
 		}
 	}, confirmingSetup ? t("confirmAgain") : t("changePlayers")));
 	const nP = players.length;
-	const [turn, setTurn] = useState$11(() => {
-		let best = 0;
-		players.forEach((p, i) => {
-			if (p.entries.length < players[best].entries.length) best = i;
-		});
-		return best;
-	});
-	const cur = Math.min(turn, Math.max(0, nP - 1));
+	const [sel, setSel] = useState$11(-1);
 	const [input, setInput] = useState$11("");
 	const [sign, setSign] = useState$11(1);
-	const [cardOpen, setCardOpen] = useState$11(false);
 	const [gtErr, setGtErr] = useState$11(false);
 	const [histFor, setHistFor] = useState$11(-1);
+	const [lap, setLap] = useState$11(false);
+	const [short, setShort] = useState$11(false);
 	const dispRef = useRef$17(null);
-	const trayRef = useRef$17(null);
+	const rootRef = useRef$17(null);
+	const lanesRef = useRef$17(null);
+	const glideRef = useRef$17(null);
+	const glideSt = useRef$17({ had: false });
 	const laneRefs = useRef$17([]);
-	const firstTurn = useRef$17(true);
 	const kb = useRef$17({});
-	const sk = tuttoSkin(theme);
-	const compact = nP >= 5;
-	const advance = () => setTurn((cur + 1) % nP);
+	const compact = !lap && (nP >= 5 || (short || plLand) && nP >= 3);
+	const selOk = sel >= 0 && sel < nP;
 	const pick = (i) => {
-		if (i === cur) return;
-		setTurn(i);
-		setInput("");
-		setSign(1);
+		setSel(i);
 		setGtErr(false);
-		setCardOpen(false);
 	};
 	const digit = (d) => {
 		setGtErr(false);
@@ -46880,6 +46872,10 @@ function TuttoPlay({ players, setPlayers, target, onBack, onHome, onEndGame, onE
 		setInput((v) => v.slice(0, -1));
 	};
 	const addEntry = () => {
+		if (!selOk) {
+			gtShake(dispRef.current);
+			return;
+		}
 		const raw = parseInt(input, 10);
 		if (isNaN(raw) || raw === 0) {
 			setGtErr(true);
@@ -46889,20 +46885,13 @@ function TuttoPlay({ players, setPlayers, target, onBack, onHome, onEndGame, onE
 		setGtErr(false);
 		const val = sign * Math.abs(raw);
 		if (val >= 1e3) fireMilestone();
-		update(cur, (pl) => ({
+		update(sel, (pl) => ({
 			...pl,
 			entries: [...pl.entries, val]
 		}));
 		setInput("");
 		setSign(1);
-		advance();
-	};
-	const cardApply = (v, pm, win) => {
-		tcApply(cur, v, pm, win);
-		setInput("");
-		setSign(1);
-		setCardOpen(false);
-		advance();
+		setSel(-1);
 	};
 	kb.current = {
 		digit,
@@ -46910,13 +46899,27 @@ function TuttoPlay({ players, setPlayers, target, onBack, onHome, onEndGame, onE
 		addEntry,
 		flip: () => setSign((s) => -s),
 		clear: () => {
-			if (cardOpen) setCardOpen(false);
-			else {
+			if (input !== "" || gtErr) {
 				setInput("");
 				setGtErr(false);
-			}
+			} else setSel(-1);
 		}
 	};
+	import_react.default.useLayoutEffect(() => {
+		setLap(!!(rootRef.current && rootRef.current.closest(".gtL-content")));
+	}, []);
+	useEffect$15(() => {
+		if (!window.matchMedia) return;
+		const m = matchMedia("(max-height:640px)");
+		const f = () => setShort(m.matches);
+		f();
+		if (m.addEventListener) m.addEventListener("change", f);
+		else m.addListener(f);
+		return () => {
+			if (m.removeEventListener) m.removeEventListener("change", f);
+			else m.removeListener(f);
+		};
+	}, []);
 	useEffect$15(() => {
 		const onKey = (e) => {
 			if (e.defaultPrevented || e.ctrlKey || e.metaKey || e.altKey) return;
@@ -46944,94 +46947,110 @@ function TuttoPlay({ players, setPlayers, target, onBack, onHome, onEndGame, onE
 		window.addEventListener("keydown", onKey);
 		return () => window.removeEventListener("keydown", onKey);
 	}, []);
-	useEffect$15(() => {
-		if (firstTurn.current) {
-			firstTurn.current = false;
+	const glideTo = (instant) => {
+		const g = glideRef.current, el = laneRefs.current[sel], s = glideSt.current;
+		if (!g) return;
+		if (!selOk || !el) {
+			g.style.opacity = "0";
+			s.had = false;
 			return;
 		}
-		const el = laneRefs.current[cur];
-		if (!el || !el.scrollIntoView) return;
-		const th = trayRef.current ? trayRef.current.offsetHeight : 0;
-		const rm = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
-		const box = el.parentElement;
-		if (box && box.scrollHeight > box.clientHeight + 1 && getComputedStyle(box).overflowY !== "visible") {
-			const a = el.getBoundingClientRect(), b = box.getBoundingClientRect();
-			if (a.top < b.top) box.scrollTo({
-				top: box.scrollTop + a.top - b.top - 4,
-				behavior: rm ? "auto" : "smooth"
-			});
-			else if (a.bottom > b.bottom) box.scrollTo({
-				top: box.scrollTop + a.bottom - b.bottom + 4,
-				behavior: rm ? "auto" : "smooth"
-			});
-			return;
-		}
-		el.style.scrollMarginBottom = th + 8 + "px";
-		el.style.scrollMarginTop = "72px";
-		el.scrollIntoView({
-			block: "nearest",
-			behavior: rm ? "auto" : "smooth"
-		});
-	}, [cur]);
-	const curP = players[cur] || players[0];
-	const curHue = playerHue(cur, theme);
-	const trayTk = {
-		...tk,
-		ink: sk.onY,
-		muted: sk.onYmuted,
-		border: "rgba(20,16,28,0.4)",
-		cardPeek1: "rgba(255,255,255,0.7)",
-		gold: sk.enter,
-		accentFill: sk.enter,
-		onAccent: "#FFFFFF"
+		const apply = () => {
+			g.style.width = el.offsetWidth + "px";
+			g.style.height = el.offsetHeight + "px";
+			g.style.transform = "translate3d(" + el.offsetLeft + "px," + el.offsetTop + "px,0)";
+		};
+		if (instant || !s.had) {
+			g.style.transition = "none";
+			apply();
+			g.offsetWidth;
+			g.style.transition = "";
+		} else apply();
+		g.style.opacity = "1";
+		s.had = true;
 	};
-	const histRows = histFor >= 0 && players[histFor] ? players[histFor].entries.map((e, i) => ({
+	const glideFn = useRef$17(glideTo);
+	glideFn.current = glideTo;
+	import_react.default.useLayoutEffect(() => {
+		glideFn.current(false);
+	}, [
+		sel,
+		compact,
+		nP,
+		lap
+	]);
+	useEffect$15(() => {
+		const box = lanesRef.current;
+		if (!box || !window.ResizeObserver) return;
+		const ro = new ResizeObserver(() => glideFn.current(true));
+		ro.observe(box);
+		return () => ro.disconnect();
+	}, []);
+	const selP = selOk ? players[sel] : null;
+	const hp = histFor >= 0 ? players[histFor] : null;
+	const histRows = hp ? hp.entries.map((e, i) => ({
 		e,
 		i
 	})).reverse().slice(0, 8) : [];
-	const hp = histFor >= 0 ? players[histFor] : null;
-	const rootVars = {
-		"--tt-focus": sk.acc,
-		"--tt-onY": sk.onY
-	};
-	const keyStyle = (bg, ink, deep) => ({
-		background: bg,
-		color: ink,
-		boxShadow: `0 4px 0 ${deep}`,
-		"--tt-deep": deep
-	});
+	const rootVars = ttVars(theme);
+	const entryW = Math.max(6, input.length + 1) + "ch";
 	const tray = /* @__PURE__ */ import_react.default.createElement("div", {
-		ref: trayRef,
 		className: "tt-tray",
 		role: "group",
-		"aria-label": curP.name + " " + t("tuttoIsOnTurn"),
-		style: {
-			background: sk.Y,
-			color: sk.onY,
-			"--tt-ph": sk.dispPh
+		"aria-label": selP ? selP.name : t("tuttoTapPlayer")
+	}, /* @__PURE__ */ import_react.default.createElement("div", { className: "tt-dh" }, /* @__PURE__ */ import_react.default.createElement("span", {
+		className: "tt-dn",
+		role: gtErr ? "alert" : void 0,
+		style: { color: gtErr ? "var(--tt-lead)" : selP ? "var(--tt-selname)" : "var(--tt-mut)" }
+	}, gtErr ? t("enterPointsFirst") : selP ? selP.name : t("tuttoTapPlayer")), /* @__PURE__ */ import_react.default.createElement("span", {
+		ref: dispRef,
+		className: "tt-disp"
+	}, /* @__PURE__ */ import_react.default.createElement("span", {
+		"aria-hidden": "true",
+		style: { color: sign === 1 ? "var(--tt-ink2)" : "var(--tt-lead)" }
+	}, sign === 1 ? "+" : "−"), /* @__PURE__ */ import_react.default.createElement("input", {
+		className: "tt-in",
+		type: "text",
+		inputMode: "none",
+		pattern: "[0-9]*",
+		enterKeyHint: "done",
+		autoComplete: "off",
+		placeholder: t("pointsPlaceholder"),
+		"aria-label": t("enterPointsAria"),
+		"aria-invalid": gtErr || void 0,
+		value: input,
+		style: { width: entryW },
+		onChange: (e) => {
+			setGtErr(false);
+			setInput(e.target.value.replace(/[^0-9]/g, "").replace(/^0+(?=\d)/, "").slice(0, 6));
+		},
+		onKeyDown: (e) => {
+			if (e.key === "Enter") {
+				e.preventDefault();
+				addEntry();
+			} else if (e.key === "Escape") setInput("");
 		}
-	}, /* @__PURE__ */ import_react.default.createElement("div", { className: "tt-dh" }, /* @__PURE__ */ import_react.default.createElement(TuttoDie, {
-		rank: cur + 1,
-		color: curHue,
-		size: 32
-	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "tt-dht" }, /* @__PURE__ */ import_react.default.createElement("span", { style: {
-		fontWeight: 800,
-		fontSize: 17
-	} }, curP.name), " ", gtErr ? /* @__PURE__ */ import_react.default.createElement("span", {
-		role: "alert",
-		style: {
-			color: sk.err,
-			fontWeight: 800
-		}
-	}, t("enterPointsFirst")) : /* @__PURE__ */ import_react.default.createElement("span", null, t("tuttoIsOnTurn"))), /* @__PURE__ */ import_react.default.createElement("button", {
+	})), /* @__PURE__ */ import_react.default.createElement("button", {
+		type: "button",
 		className: "tt-rb",
-		onClick: () => setHistFor(cur),
-		"aria-label": t("tuttoMoreFor")(curP.name),
-		"aria-haspopup": "dialog",
-		style: {
-			background: sk.dk,
-			color: sk.dkInk
-		}
+		onClick: back,
+		"aria-label": t("tuttoBackspace")
+	}, /* @__PURE__ */ import_react.default.createElement("svg", {
+		width: "22",
+		height: "22",
+		viewBox: "0 0 24 24",
+		fill: "none",
+		stroke: "currentColor",
+		strokeWidth: "2",
+		strokeLinecap: "round",
+		strokeLinejoin: "round"
+	}, /* @__PURE__ */ import_react.default.createElement("path", { d: "M9 5h11v14H9l-6-7z" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M13 9l4 6M17 9l-4 6" }))), /* @__PURE__ */ import_react.default.createElement("button", {
+		type: "button",
+		className: "tt-rb",
+		disabled: !selOk,
+		onClick: () => setHistFor(sel),
+		"aria-label": selP ? t("tuttoMoreFor")(selP.name) : t("tuttoTapPlayer"),
+		"aria-haspopup": "dialog"
 	}, /* @__PURE__ */ import_react.default.createElement("svg", {
 		width: "22",
 		height: "22",
@@ -47052,67 +47071,7 @@ function TuttoPlay({ players, setPlayers, target, onBack, onHome, onEndGame, onE
 		cx: "19",
 		cy: "12",
 		r: "1.2"
-	})))), cardOpen ? /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "tt-cards",
-		style: { background: "rgba(255,255,255,0.55)" }
-	}, /* @__PURE__ */ import_react.default.createElement(TuttoCardCalc, {
-		tk: trayTk,
-		t,
-		color: sk.onY,
-		pmLeaders: tcLeaders(cur).map((j) => players[j].name),
-		selfLead: totals[cur] === tcMax,
-		onApply: cardApply,
-		onClose: () => setCardOpen(false)
-	})) : /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("div", {
-		ref: dispRef,
-		className: "tt-disp",
-		style: {
-			background: sk.dispBg,
-			color: sk.dispInk
-		}
-	}, /* @__PURE__ */ import_react.default.createElement("span", {
-		className: "tt-pre",
-		"aria-hidden": "true",
-		style: { color: sign === 1 ? sk.Y : "#FFB4BC" }
-	}, sign === 1 ? "+" : "−"), /* @__PURE__ */ import_react.default.createElement("input", {
-		className: "tt-in",
-		type: "text",
-		inputMode: "none",
-		pattern: "[0-9]*",
-		enterKeyHint: "done",
-		autoComplete: "off",
-		placeholder: t("pointsPlaceholder"),
-		"aria-label": t("enterPointsAria"),
-		"aria-invalid": gtErr || void 0,
-		value: input,
-		onChange: (e) => {
-			setGtErr(false);
-			setInput(e.target.value.replace(/[^0-9]/g, "").replace(/^0+(?=\d)/, "").slice(0, 6));
-		},
-		onKeyDown: (e) => {
-			if (e.key === "Enter") {
-				e.preventDefault();
-				addEntry();
-			} else if (e.key === "Escape") setInput("");
-		}
-	}), /* @__PURE__ */ import_react.default.createElement("button", {
-		className: "tt-rb",
-		onClick: back,
-		"aria-label": t("tuttoBackspace"),
-		style: {
-			background: "transparent",
-			color: sk.dispInk
-		}
-	}, /* @__PURE__ */ import_react.default.createElement("svg", {
-		width: "24",
-		height: "24",
-		viewBox: "0 0 24 24",
-		fill: "none",
-		stroke: "currentColor",
-		strokeWidth: "2",
-		strokeLinecap: "round",
-		strokeLinejoin: "round"
-	}, /* @__PURE__ */ import_react.default.createElement("path", { d: "M9 5h11v14H9l-6-7z" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M13 9l4 6M17 9l-4 6" })))), /* @__PURE__ */ import_react.default.createElement("div", {
+	})))), /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "tt-dg",
 		role: "group",
 		"aria-label": t("tuttoKeypad")
@@ -47128,67 +47087,24 @@ function TuttoPlay({ players, setPlayers, target, onBack, onHome, onEndGame, onE
 		"9",
 		"0"
 	].map((d) => /* @__PURE__ */ import_react.default.createElement("button", {
+		type: "button",
 		key: d,
 		className: "tt-k",
-		onClick: () => digit(d),
-		style: keyStyle(sk.key, sk.keyInk, sk.keyDeep)
+		onClick: () => digit(d)
 	}, d))), /* @__PURE__ */ import_react.default.createElement("div", { className: "tt-ac" }, /* @__PURE__ */ import_react.default.createElement("button", {
-		className: "tt-k",
+		type: "button",
+		className: "tt-minus",
 		onClick: () => setSign((s) => -s),
 		"aria-pressed": sign === -1,
-		"aria-label": t("tuttoMinusAria"),
-		style: sign === -1 ? keyStyle(sk.enter, sk.enterInk, sk.enterDeep) : keyStyle(sk.dk, sk.dkInk, sk.dkDeep)
-	}, /* @__PURE__ */ import_react.default.createElement("svg", {
-		"aria-hidden": "true",
-		width: "22",
-		height: "22",
-		viewBox: "0 0 24 24",
-		fill: "none",
-		stroke: "currentColor",
-		strokeWidth: "2",
-		strokeLinecap: "round"
-	}, /* @__PURE__ */ import_react.default.createElement("path", { d: "M6 12h12" })), t("tuttoMinus")), /* @__PURE__ */ import_react.default.createElement("button", {
-		className: "tt-k",
-		onClick: () => {
-			setGtErr(false);
-			setCardOpen(true);
-		},
-		"aria-expanded": false,
-		"aria-label": t("tcTitle"),
-		style: keyStyle(sk.dk, sk.dkInk, sk.dkDeep)
-	}, /* @__PURE__ */ import_react.default.createElement("svg", {
-		"aria-hidden": "true",
-		width: "22",
-		height: "22",
-		viewBox: "0 0 24 24",
-		fill: "none",
-		stroke: "currentColor",
-		strokeWidth: "2",
-		strokeLinecap: "round",
-		strokeLinejoin: "round"
-	}, /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "3",
-		y: "6",
-		width: "11",
-		height: "14",
-		rx: "2"
-	}), /* @__PURE__ */ import_react.default.createElement("path", { d: "M8 3h11a2 2 0 012 2v11" })), t("tuttoCards")), /* @__PURE__ */ import_react.default.createElement("button", {
-		className: "tt-k is-enter",
-		"data-gt-sound": "1",
+		"aria-label": t("tuttoMinusAria")
+	}, t("tuttoMinus")), /* @__PURE__ */ import_react.default.createElement("button", {
+		type: "button",
+		className: "tt-save",
+		"data-gt-sound": selOk ? "1" : void 0,
 		onClick: addEntry,
-		"aria-label": t("enterPointsAria"),
-		style: keyStyle(sk.enter, sk.enterInk, sk.enterDeep)
-	}, /* @__PURE__ */ import_react.default.createElement("svg", {
-		"aria-hidden": "true",
-		width: "22",
-		height: "22",
-		viewBox: "0 0 24 24",
-		fill: "none",
-		stroke: "currentColor",
-		strokeWidth: "2.4",
-		strokeLinecap: "round",
-		strokeLinejoin: "round"
-	}, /* @__PURE__ */ import_react.default.createElement("path", { d: "M5 12.5l4.5 4.5L19 7.5" })), t("tuttoEnter")))));
+		"aria-disabled": !selOk,
+		"aria-label": selOk ? t("enterPointsAria") : void 0
+	}, selOk ? t("tuttoEnter") : t("tuttoTapPlayer"))));
 	return /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-shellpage pld-shell",
 		style: {
@@ -47209,10 +47125,11 @@ function TuttoPlay({ players, setPlayers, target, onBack, onHome, onEndGame, onE
 		theme,
 		shareExtra: () => ({ target })
 	}), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "reveal-1 gtL-game pl-wide pl-page pl-head-compact tt-root",
+		ref: rootRef,
+		className: "reveal-1 gtL-game pl-wide pl-page pl-head-compact tt-root" + (theme === "vitrum" ? " is-vitrum" : ""),
 		style: {
 			...rootVars,
-			maxWidth: 380,
+			maxWidth: 480,
 			margin: "0 auto",
 			position: "relative"
 		}
@@ -47229,17 +47146,15 @@ function TuttoPlay({ players, setPlayers, target, onBack, onHome, onEndGame, onE
 		onBack,
 		theme,
 		t,
-		hideTitle: !plLand
-	}), /* @__PURE__ */ import_react.default.createElement(TuttoWordmark, {
-		theme,
-		sk,
+		hideTitle: true
+	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split tt-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "tt-sp tt-sp1" }), /* @__PURE__ */ import_react.default.createElement(TuttoWordmark, {
 		target,
 		t
-	}), winnerIdx !== -1 && /* @__PURE__ */ import_react.default.createElement("div", {
+	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "tt-sp tt-sp2" }), winnerIdx !== -1 && /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "reveal-1",
 		role: "status",
 		style: {
-			border: "1px solid " + sk.acc,
+			border: "1px solid var(--tt-sel)",
 			color: tk.ink,
 			borderRadius: 14,
 			padding: "10px 14px",
@@ -47260,7 +47175,14 @@ function TuttoPlay({ players, setPlayers, target, onBack, onHome, onEndGame, onE
 			verticalAlign: "-2px",
 			marginRight: 5
 		}
-	}), gtWinLine(t, "winsWith", "winsTie", players.filter((_, i) => totals[i] === maxTotal).map((q) => q.name), maxTotal)), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split tt-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "tt-lanes" + (compact ? " is-compact" : "") }, players.map((p, i) => /* @__PURE__ */ import_react.default.createElement(TuttoPlayerRow, {
+	}), gtWinLine(t, "winsWith", "winsTie", players.filter((_, i) => totals[i] === maxTotal).map((q) => q.name), maxTotal)), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "tt-lanes" + (compact ? " is-compact" : ""),
+		ref: lanesRef
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "tt-glide",
+		ref: glideRef,
+		"aria-hidden": "true"
+	}), players.map((p, i) => /* @__PURE__ */ import_react.default.createElement(TuttoPlayerRow, {
 		key: p.id,
 		laneRef: (el) => {
 			laneRefs.current[i] = el;
@@ -47268,18 +47190,15 @@ function TuttoPlay({ players, setPlayers, target, onBack, onHome, onEndGame, onE
 		gtLead: gtFx === p.id,
 		player: p,
 		total: totals[i],
+		entryCount: p.entries.length,
 		color: playerHue(i, theme),
 		target,
-		playerNumber: i + 1,
 		isLeader: isLeaderList[i],
-		onTurn: i === cur,
+		selected: i === sel,
 		onPick: () => pick(i),
-		tk,
-		sk,
 		t,
-		compact,
 		theme
-	})))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side" }, tray, /* @__PURE__ */ import_react.default.createElement(GtLStandings, {
+	})))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "tt-sp tt-sp3" }), tray, /* @__PURE__ */ import_react.default.createElement(GtLStandings, {
 		title: t("subtotalRow"),
 		rows: players.map((p, i) => ({
 			id: p.id,
@@ -68256,7 +68175,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.06-11";
+var APP_BUILD = "2026.11.06-12";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -111378,7 +111297,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.06-11");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.06-12");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -111716,6 +111635,10 @@ function usePlayCount(trigger) {
 		});
 	}, [trigger]);
 	return count;
+}
+// web/src/lib/utils.ts
+function cn(...a) {
+	return a.filter(Boolean).join(" ");
 }
 // web/src/components/magicui/number-ticker.tsx
 function NumberTicker({ value, startValue = 0, direction = "up", delay = 0, className, decimalPlaces = 0, ...props }) {
@@ -113980,7 +113903,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.06-11" && !upd) {
+		if (seen && seen !== "2026.11.06-12" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -113989,7 +113912,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.06-11" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.06-12" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

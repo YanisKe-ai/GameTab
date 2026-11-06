@@ -173,14 +173,15 @@ def ui_tutto(pg):
     pg.get_by_text("Schreibunterlagen", exact=True).first.click(); pg.wait_for_timeout(600)
     pg.locator("button", has_text=re.compile(r"^\d*\s*Tutto")).first.click(); pg.wait_for_timeout(700)
     pg.get_by_role("button", name="Spiel starten").click(); pg.wait_for_timeout(800)
-    pg.get_by_placeholder("Punkte").first.fill("6000"); pg.keyboard.press("Enter"); pg.wait_for_timeout(1500)
+    pg.locator(".tt-lane").first.click(); pg.wait_for_timeout(300)  # Eingabe gilt der angetippten Person
+    pg.get_by_placeholder("Punkte").first.fill("6000"); pg.keyboard.press("Enter"); pg.wait_for_timeout(2400)
     log = lambda: [m for m in json.loads(pg.evaluate("localStorage.getItem('gt_matchLog')||'[]'")) if m.get("game") == "tutto"]
     lg = log()
     ok(len(lg) == 1 and lg[0]["participants"][0]["score"] == 6000, "UI Tutto Abschluss 6000 erfasst")
     pg.keyboard.press("Escape"); pg.wait_for_timeout(500)
     if pg.locator("[data-gt-podium]").count():
         pg.locator(".gtsb-x").first.click(); pg.wait_for_timeout(600)
-    pg.locator(".tt-lane").first.click(); pg.wait_for_timeout(300)  # Zug zurueck auf Person 1 (Eingabe gilt der Person am Zug)
+    pg.locator(".tt-lane").first.click(); pg.wait_for_timeout(300)  # Person 1 wieder antippen
     pg.get_by_placeholder("Punkte").first.fill("100"); pg.keyboard.press("Enter"); pg.wait_for_timeout(1200)
     lg = log()
     ok(len(lg) == 1 and lg[0]["participants"][0]["score"] == 6100, f"UI Tutto Korrektur +100 nach Abschluss: Statistik 6100 {[p['score'] for p in lg[0]['participants']] if lg else lg}")

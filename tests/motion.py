@@ -81,8 +81,11 @@ def run(pw, vp, theme, mode):
     cls1 = pg.evaluate("window.__cls")
     note(f"{tag}: CLS Tutto-Start {cls1 - cls0:.3f}")
     check(cls1 - cls0 < 0.1, f"{tag}: Layoutsprung beim Spielstart {cls1 - cls0:.3f}")
-    beam = pg.evaluate("document.querySelectorAll('.tt-lane [class*=animate-border-beam]').length")
-    check(beam >= 1, f"{tag}: Border Beam fehlt am Zug (Anzahl {beam})")
+    g0 = pg.evaluate("getComputedStyle(document.querySelector('.tt-glide')).opacity")
+    check(float(g0) < 0.05, f"{tag}: gelber Rahmen ohne Auswahl sichtbar (opacity {g0})")
+    pg.locator(".tt-lane").first.click(); w(pg, 500)
+    g1 = pg.evaluate("getComputedStyle(document.querySelector('.tt-glide')).opacity")
+    check(float(g1) > 0.95, f"{tag}: gelber Rahmen nach Antippen nicht sichtbar (opacity {g1})")
     # Spur / Wuerfel: Position vs. Fortschritt
     pg.screenshot(path=str(OUT / f"{tag}-tutto-start.png"))
 
@@ -103,7 +106,8 @@ def run(pw, vp, theme, mode):
     pg.screenshot(path=str(OUT / f"{tag}-tutto-1500.png"))
     # Sieg -> Podest -> Bildvorschau
     cls0 = pg.evaluate("window.__cls")
-    pg.get_by_placeholder("Punkte").first.fill("9000"); pg.keyboard.press("Enter"); w(pg, 1500)
+    pg.locator(".tt-lane").first.click(); w(pg, 300)
+    pg.get_by_placeholder("Punkte").first.fill("9000"); pg.keyboard.press("Enter"); w(pg, 2800)
     share = pg.get_by_role("button", name=re.compile(r"Bild teilen"))
     if share.count():
         share.first.click()

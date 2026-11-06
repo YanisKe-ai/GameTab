@@ -504,7 +504,14 @@ def t_yatzy(pg, env):
 @test("Tutto")
 def t_tutto(pg, env):
     open_game(pg, "Schreibunterlagen", "Tutto"); press_start(pg)
-    pg.get_by_placeholder("Punkte").first.fill("7000"); pg.keyboard.press("Enter"); wait(pg, 900)
+    # Ohne Auswahl ist Eintragen gesperrt (Text "Spieler antippen"), erst Spieler antippen
+    expect_text(pg, r"Spieler antippen", "Tutto: Hinweis 'Spieler antippen' fehlt")
+    check(pg.locator(".tt-save[aria-disabled='true']").count() == 1, "Tutto: Eintragen ohne Auswahl nicht gesperrt")
+    pg.get_by_placeholder("Punkte").first.fill("7000"); pg.keyboard.press("Enter"); wait(pg, 600)
+    check(pg.evaluate("document.querySelector('.tt-num').textContent") == "0", "Tutto: Eintrag ohne Auswahl hat Punkte verbucht")
+    click(pg, pg.locator(".tt-lane").first, 400)
+    check(pg.locator(".tt-save[aria-disabled='true']").count() == 0, "Tutto: Eintragen nach Auswahl noch gesperrt")
+    pg.get_by_placeholder("Punkte").first.fill("7000"); pg.keyboard.press("Enter"); wait(pg, 1700)
     expect_text(pg, r"Spieler 1 gewinnt", "Tutto: Sieger nicht angezeigt")
     finish(pg, "Tutto", env, True)
 

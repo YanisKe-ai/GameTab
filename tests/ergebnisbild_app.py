@@ -117,10 +117,11 @@ def flow_flip7(pg):
 def flow_tutto(pg):
     names = ["Zoë", "Maximiliane Huber-Brunner", "Kim"]
     R.open_game(pg, "Schreibunterlagen", "Tutto"); fill_names(pg, names); R.press_start(pg)
-    # Der Zug wandert nach jedem Eintragen zur naechsten Person (Eingabe unten, Feld "Punkte", Enter)
-    for val in ("3500", "2250", "100", "3000"):
+    # Spieler antippen, dann Eingabe unten (Feld "Punkte", Enter); danach ist niemand gewaehlt
+    for lane, val in ((0, "3500"), (1, "2250"), (2, "100"), (0, "3000")):
+        pg.locator(".tt-lane").nth(lane).click(); R.wait(pg, 250)
         pg.get_by_placeholder("Punkte").first.fill(val); pg.keyboard.press("Enter"); R.wait(pg, 700)
-    R.wait(pg, 200)
+    R.wait(pg, 1700)
     R.expect_text(pg, r"gewinnt", "Tutto: Sieger nicht angezeigt")
 
 

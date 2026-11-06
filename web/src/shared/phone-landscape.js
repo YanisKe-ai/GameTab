@@ -1,7 +1,7 @@
 // Handy-Querformat: Erkennung und Root-Attribut `data-phone-landscape` auf <html>.
 //
 // Aktiv NUR, wenn ALLE Bedingungen gelten (siehe decidePhoneLandscape):
-//  1. viewMode ist Handy ("mobile"). Im Laptop-Modus nie, auch nicht mit Test-Uebersteuerung.
+//  1. Ansicht ist nicht "laptop" (selbst gewaehlt). Bei "auto" gilt: Querformat-Handy hat Vorrang vor der Breitenregel.
 //  2. Geraet mit Touch (navigator.maxTouchPoints > 0 oder any-pointer: coarse). Schliesst kleine
 //     Desktop-Fenster aus. Allein reicht Touch nicht (Tablets, Touch-Laptops), darum zusaetzlich 3.
 //  3. Handy-Abmessungen: kurze Bildschirmseite (screen.width/height, sonst Fenster) <= 500 CSS px.

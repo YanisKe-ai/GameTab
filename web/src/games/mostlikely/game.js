@@ -18,6 +18,7 @@ import { rankedPodium } from "../../shared/ranking.js";
 /*@gt-body-begin*/const MOSTLIKELY_LANDSCAPE_CSS=`
 
 .ml-play { display: contents !important; }
+@media (max-height: 700px) { .ml-card { min-height: 120px !important; padding: 18px 16px !important; } .ml-card > div { font-size: 22px !important; } .ml-pick > button { min-height: 52px !important; } }
 .ml-skip { order: 9; margin-top: auto; position: sticky; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); z-index: 6; min-height: 56px; width: 100%; box-sizing: border-box; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
 .ml-tally { order: 5; }
 .ml-rows { display: flex; flex-direction: row; flex-wrap: wrap; gap: 8px; }

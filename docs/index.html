@@ -7741,6 +7741,8 @@ var TRANSLATIONS = {
 		noGamesFound: "Keine Spiele gefunden",
 		prevTip: "Vorheriger Tipp",
 		nextTip: "Nächster Tipp",
+		tipPause: "Automatischen Wechsel anhalten",
+		tipPlay: "Automatischen Wechsel fortsetzen",
 		forTonight: "Für heute Abend",
 		tonightPartyReason: "Abends beliebt",
 		tonightScorepadReason: "Perfekt für zwischendurch",
@@ -9308,6 +9310,8 @@ var TRANSLATIONS = {
 		noGamesFound: "No games found",
 		prevTip: "Previous tip",
 		nextTip: "Next tip",
+		tipPause: "Pause automatic tips",
+		tipPlay: "Resume automatic tips",
 		forTonight: "Tonight's pick",
 		tonightPartyReason: "Popular in the evening",
 		tonightScorepadReason: "Perfect for a quick round",
@@ -10875,6 +10879,8 @@ var TRANSLATIONS = {
 		noGamesFound: "Aucun jeu trouvé",
 		prevTip: "Astuce précédente",
 		nextTip: "Astuce suivante",
+		tipPause: "Mettre en pause le défilement des astuces",
+		tipPlay: "Reprendre le défilement des astuces",
 		forTonight: "Ce soir",
 		tonightPartyReason: "Populaire le soir",
 		tonightScorepadReason: "Parfait pour une partie rapide",
@@ -12442,6 +12448,8 @@ var TRANSLATIONS = {
 		noGamesFound: "Nessun gioco trovato",
 		prevTip: "Consiglio precedente",
 		nextTip: "Consiglio successivo",
+		tipPause: "Metti in pausa il cambio automatico dei consigli",
+		tipPlay: "Riprendi il cambio automatico dei consigli",
 		forTonight: "Per stasera",
 		tonightPartyReason: "Popolare la sera",
 		tonightScorepadReason: "Perfetto per una pausa",
@@ -14009,6 +14017,8 @@ var TRANSLATIONS = {
 		noGamesFound: "No se encontraron juegos",
 		prevTip: "Consejo anterior",
 		nextTip: "Siguiente consejo",
+		tipPause: "Pausar el cambio automático de consejos",
+		tipPlay: "Reanudar el cambio automático de consejos",
 		forTonight: "Para esta noche",
 		tonightPartyReason: "Popular por la noche",
 		tonightScorepadReason: "Perfecto para un rato libre",
@@ -15576,6 +15586,8 @@ var TRANSLATIONS = {
 		noGamesFound: "Nenhum jogo encontrado",
 		prevTip: "Dica anterior",
 		nextTip: "Próxima dica",
+		tipPause: "Pausar a troca automática das dicas",
+		tipPlay: "Retomar a troca automática das dicas",
 		forTonight: "Para esta noite",
 		tonightPartyReason: "Popular à noite",
 		tonightScorepadReason: "Perfeito para um intervalo",
@@ -18357,6 +18369,9 @@ html[data-gt-theme="light"] { --gt-focus: #1B4FA0; }
 html[data-gt-theme="noir"] { --gt-focus: #FFFFFF; }
 :where(button, a[href], summary, [role="button"], [tabindex]:not([tabindex="-1"])):focus-visible { outline: 2px solid var(--gt-focus); outline-offset: 2px; }
 :root { --gt-ease-out: cubic-bezier(.23,1,.32,1); --gt-ease-io: cubic-bezier(.77,0,.175,1); --gt-ease-spring: cubic-bezier(.34,1.3,.64,1); }
+/* Motion-Tokens (eine Quelle): Dauer, Abstand, Skala. Nur transform und opacity animieren, nichts wartet auf das Ende. */
+:root { --gt-dur-feedback: 90ms; --gt-dur-small: 160ms; --gt-dur-large: 240ms; --gt-dur-count: 300ms; --gt-dist-s: 4px; --gt-dist-m: 8px; --gt-dist-l: 16px; --gt-scale-press: .97; --gt-scale-enter: .95; }
+@media (prefers-reduced-motion: reduce) { :root { --gt-dist-s: 0px; --gt-dist-m: 0px; --gt-dist-l: 0px; --gt-scale-press: 1; --gt-scale-enter: 1; --gt-dur-small: 120ms; --gt-dur-large: 160ms; --gt-dur-count: 1ms; } }
 .gtL-col-side2, .gtL-e-c { display: contents; }
 .gtL-e-only { display: none; }
 .gtL-content .gtL-e-only { display: block; }
@@ -18450,9 +18465,9 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 input[type="number"] { -moz-appearance: textfield; }
 * { box-sizing: border-box; }
-.press-fx, .card-fx { transition: transform 200ms var(--gt-ease-out, cubic-bezier(.23,1,.32,1)), box-shadow 180ms ease, opacity 150ms ease; -webkit-tap-highlight-color: transparent; }
-.press-fx:active { transform: scale(0.96); opacity: 0.9; transition: transform 90ms var(--gt-ease-out, cubic-bezier(.23,1,.32,1)), opacity 90ms ease; }
-.card-fx:active { transform: scale(0.98); transition: transform 90ms var(--gt-ease-out, cubic-bezier(.23,1,.32,1)); }
+.press-fx, .card-fx { transition: transform var(--gt-dur-large) var(--gt-ease-out, cubic-bezier(.23,1,.32,1)), box-shadow var(--gt-dur-small) ease, opacity var(--gt-dur-small) ease; -webkit-tap-highlight-color: transparent; }
+.press-fx:active { transform: scale(var(--gt-scale-press)); opacity: 0.9; transition: transform var(--gt-dur-feedback) var(--gt-ease-out, cubic-bezier(.23,1,.32,1)), opacity var(--gt-dur-feedback) ease; }
+.card-fx:active { transform: scale(0.98); transition: transform var(--gt-dur-feedback) var(--gt-ease-out, cubic-bezier(.23,1,.32,1)); }
 .paper-grid {
   background-image:
     linear-gradient(rgba(120,120,140,0.07) 1px, transparent 1px),
@@ -18466,7 +18481,7 @@ input[type="number"] { -moz-appearance: textfield; }
 .gt-met::after { content: ""; position: absolute; top: 50%; left: 0; width: 56px; height: 1px; transform: translateY(-50%); background: linear-gradient(90deg, var(--mc, #fff), transparent); }
 @keyframes gtGlowPulse { 0% { opacity: 0; transform: scale(.85); } 35% { opacity: 1; } 100% { opacity: 0; transform: scale(1.15); } }
 .gt-glow { position: absolute; inset: 0; pointer-events: none; opacity: 0; animation: gtGlowPulse 1.7s cubic-bezier(.23,1,.32,1) both; }
-@keyframes gtBlurFade { from { opacity: 0; transform: translateY(6px); filter: blur(6px); } to { opacity: 1; transform: none; filter: none; } }
+@keyframes gtBlurFade { from { opacity: 0; transform: translateY(var(--gt-dist-m)); filter: blur(6px); } to { opacity: 1; transform: none; filter: none; } }
 .gt-su-row { animation: gtBlurFade .4s cubic-bezier(.23,1,.32,1) both; }
 @keyframes gtShimmerOnce { from { transform: translateX(-120%) skewX(-18deg); } to { transform: translateX(260%) skewX(-18deg); } }
 .gt-su-btn:not(:disabled) { position: relative; overflow: hidden; }
@@ -18550,14 +18565,14 @@ input[type="number"] { -moz-appearance: textfield; }
   [data-gt-hold].is-holding { transform: none; }
 }
 @keyframes reveal-up {
-  from { opacity: 0; transform: translateY(8px); }
+  from { opacity: 0; transform: translateY(var(--gt-dist-m)); }
   to { opacity: 1; transform: translateY(0); }
 }
-.reveal-1, .reveal-2, .reveal-3, .reveal-4 { transform: translateY(0); animation: reveal-up 260ms var(--gt-ease-out, cubic-bezier(.23,1,.32,1)) backwards; }
+.reveal-1, .reveal-2, .reveal-3, .reveal-4 { transform: translateY(0); animation: reveal-up var(--gt-dur-large) var(--gt-ease-out, cubic-bezier(.23,1,.32,1)) backwards; }
 .reveal-2 { animation-delay: 50ms; }
 .reveal-3 { animation-delay: 100ms; }
 .reveal-4 { animation-delay: 150ms; }
-::view-transition-old(root) { animation: gtVtOut 90ms cubic-bezier(0.23, 1, 0.32, 1) both; } ::view-transition-new(root) { animation: gtVtIn 200ms cubic-bezier(0.23, 1, 0.32, 1) 40ms both; } @keyframes gtVtOut { to { opacity: 0; } } @keyframes gtVtIn { from { opacity: 0; transform: translateY(6px); } } .gt-scrim-in { animation: gtScrimIn 160ms ease-out both; } @keyframes gtScrimIn { from { opacity: 0; } } 
+::view-transition-old(root) { animation: gtVtOut var(--gt-dur-feedback) cubic-bezier(0.23, 1, 0.32, 1) both; } ::view-transition-new(root) { animation: gtVtIn var(--gt-dur-large) cubic-bezier(0.23, 1, 0.32, 1) 40ms both; } @keyframes gtVtOut { to { opacity: 0; } } @keyframes gtVtIn { from { opacity: 0; transform: translateY(var(--gt-dist-m)); } } .gt-scrim-in { animation: gtScrimIn var(--gt-dur-small) ease-out both; } @keyframes gtScrimIn { from { opacity: 0; } } 
 @media (prefers-reduced-motion: reduce) { ::view-transition-old(root), ::view-transition-new(root) { animation: none !important; } .gt-scrim-in { animation: none; } }
 @keyframes podium-pop { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
 .podium-pop { animation: podium-pop 0.28s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
@@ -18709,6 +18724,11 @@ body::after {
 html[data-phone-landscape] body:has(> #root > div.gtL-start) { position: static !important; overflow: visible !important; top: auto !important; width: auto !important; }
 [data-phone-landscape] #root > div.gtL-start { height: auto !important; min-height: var(--pl-vh) !important; overflow: visible !important; }
 @media (display-mode: standalone) { html[data-phone-landscape] body #root > div.gtL-start { height: auto !important; min-height: 100vh !important; padding-top: max(12px, env(safe-area-inset-top, 0px)) !important; } }
+/* Lesbarkeit Handy: Kleintext mindestens 13 px (Grossbuchstaben-Kleinlabels 12 px). Ausnahmen: Tabellenzellen, Laptop, .gt-nofloor. */
+@media (max-width: 700px) {
+  :is([style*="font-size: 9.5px"],[style*="font-size: 10px"],[style*="font-size: 10.5px"],[style*="font-size: 11px"],[style*="font-size: 11.5px"],[style*="font-size: 12px"],[style*="font-size: 12.5px"]):not(td, th, .gtL-content *, .gt-nofloor, .gt-nofloor *) { font-size: 13px !important; }
+  :is([style*="font-size: 9.5px"],[style*="font-size: 10px"],[style*="font-size: 10.5px"],[style*="font-size: 11px"],[style*="font-size: 11.5px"],[style*="font-size: 12px"],[style*="font-size: 12.5px"])[style*="text-transform: uppercase"]:not(td, th, .gtL-content *, .gt-nofloor, .gt-nofloor *) { font-size: 12px !important; }
+}
 `;
 // web/src/themes/palette.js
 var palette_exports = /* @__PURE__ */ __exportAll({
@@ -22804,7 +22824,7 @@ var GT_UG_CSS = `
 html .gt-u-col .gt-u-dock{margin-top:auto}
 html .gtL-content .gt-u-col .gt-u-dock{margin-top:16px}
 html[data-phone-landscape] .gt-u-col .gt-u-dock{margin-top:10px}
-.gt-ug .gt-u-dock::before{content:'';position:absolute;left:-16px;right:-16px;top:-26px;bottom:-12px;z-index:-1;pointer-events:none;background:linear-gradient(to bottom,transparent 0,rgba(10,12,20,.9) 34%);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 34%);mask-image:linear-gradient(to bottom,transparent 0,#000 34%)}
+.gt-ug .gt-u-dock::before{content:'';position:absolute;left:-12px;right:-12px;top:-26px;bottom:-12px;z-index:-1;pointer-events:none;background:linear-gradient(to bottom,transparent 0,rgba(10,12,20,.9) 34%);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 34%);mask-image:linear-gradient(to bottom,transparent 0,#000 34%)}
 html[data-gt-theme="light"] .gt-ug .gt-u-dock::before{background:linear-gradient(to bottom,transparent 0,rgba(250,247,240,.94) 34%)}
 html[data-gt-theme="noir"] .gt-ug .gt-u-dock::before{background:linear-gradient(to bottom,transparent 0,rgba(0,0,0,.92) 34%)}
 .gtL-content .gt-ug .gt-u-dock::before,[data-phone-landscape] .gt-ug .gt-u-dock::before{display:none}
@@ -22877,7 +22897,8 @@ function GtRace({ players, target, tk, theme, accent, font, label }) {
 			left: `calc((100% - 24px) * ${m.f} ${m.f > .5 ? "-" : "+"} ${m.r * 22}px)`,
 			top: 3,
 			zIndex: 10 - m.r,
-			background: playerHue(m.i, theme)
+			background: gtFill(playerHue(m.i, theme)).bg,
+			color: gtFill(playerHue(m.i, theme)).fg
 		}
 	}, m.i + 1))), /* @__PURE__ */ import_react.default.createElement("u", { style: {
 		color: accent,
@@ -24856,10 +24877,10 @@ function GtInstallHint({ tokens: tk, theme, t, isLaptop }) {
 			fontSize: 15,
 			lineHeight: 1,
 			padding: "6px 6px",
-			margin: "-4px -4px 0 0",
+			margin: "-10px -10px 0 0",
 			cursor: "pointer",
-			minWidth: 32,
-			minHeight: 32
+			minWidth: 44,
+			minHeight: 44
 		}
 	}, "✕")), document.body);
 }
@@ -40701,6 +40722,7 @@ function GameSearchBox({ lang, theme, tokens, onSelect }) {
 			width: "100%",
 			boxSizing: "border-box",
 			padding: "6px 14px 6px 36px",
+			minHeight: 44,
 			borderRadius: 14,
 			border: isVitrum ? void 0 : `1px solid ${tokens.border}`,
 			background: boxBg,
@@ -41239,20 +41261,37 @@ function DailyTipCard({ lang, tokens, theme }) {
 	const dragRef = useRef$17({ startX: null });
 	const [dragX, setDragX] = useState$11(0);
 	const [dragging, setDragging] = useState$11(false);
+	const [paused, setPaused] = useState$11(() => {
+		try {
+			return localStorage.getItem("gametab-tips-paused") === "1";
+		} catch (e) {
+			return false;
+		}
+	});
+	const rm = gtRM();
 	useEffect$15(() => {
 		setIdx((i) => tips.length ? i % tips.length : 0);
 	}, [tips.length]);
-	if (!tips.length) return null;
 	const go = (delta) => setIdx((i) => (i + delta + tips.length) % tips.length);
+	const auto = !paused && !rm && tips.length > 1;
 	useEffect$15(() => {
-		if (dragging || tips.length <= 1) return;
+		if (dragging || !auto) return;
 		const timer = setTimeout(() => go(1), 1e4);
 		return () => clearTimeout(timer);
 	}, [
 		idx,
 		dragging,
+		auto,
 		tips.length
 	]);
+	const togglePause = () => setPaused((p) => {
+		const n = !p;
+		try {
+			localStorage.setItem("gametab-tips-paused", n ? "1" : "0");
+		} catch (e) {}
+		return n;
+	});
+	if (!tips.length) return null;
 	const onPointerDown = (e) => {
 		dragRef.current.startX = e.clientX;
 		setDragging(true);
@@ -41311,9 +41350,9 @@ function DailyTipCard({ lang, tokens, theme }) {
 			padding: "12px 14px",
 			cursor: "grab",
 			touchAction: "pan-y",
-			transform: `translateX(${dragX * .4}px)`,
+			transform: rm ? void 0 : `translateX(${dragX * .4}px)`,
 			opacity: dragging ? .85 : 1,
-			transition: dragging ? "none" : "transform 0.2s ease, opacity 0.2s ease",
+			transition: dragging ? "none" : "transform var(--gt-dur-large) ease, opacity var(--gt-dur-large) ease",
 			userSelect: "none"
 		}
 	}, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
@@ -41328,7 +41367,7 @@ function DailyTipCard({ lang, tokens, theme }) {
 		minWidth: 0,
 		flex: 1
 	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 9.5,
+		fontSize: 12,
 		fontWeight: 700,
 		letterSpacing: "0.08em",
 		textTransform: "uppercase",
@@ -41336,28 +41375,74 @@ function DailyTipCard({ lang, tokens, theme }) {
 		marginBottom: 3,
 		fontFamily: "'Inter', sans-serif"
 	} }, t("dailyTipLabel")), /* @__PURE__ */ import_react.default.createElement("div", {
+		"aria-live": auto ? "off" : "polite",
+		style: { display: "grid" }
+	}, tips.map((tp, i) => /* @__PURE__ */ import_react.default.createElement("div", {
+		key: i,
 		className: "gtL-tipcard-text",
+		"aria-hidden": i === idx ? void 0 : true,
 		style: {
-			fontSize: 12.5,
+			gridArea: "1 / 1",
+			visibility: i === idx ? "visible" : "hidden",
+			fontSize: 13,
 			color: tokens.muted,
 			lineHeight: 1.45,
 			fontFamily: "'Inter', sans-serif",
-			display: "-webkit-box",
-			WebkitLineClamp: 3,
-			WebkitBoxOrient: "vertical",
-			overflow: "hidden",
-			height: "calc(1.45em * 3)",
 			textShadow: isVitrum ? "0 1px 3px rgba(0,0,0,0.35)" : void 0
 		}
-	}, tips[idx]), /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	}, tp))), /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		marginTop: 6,
-		fontSize: 10.5,
+		display: "flex",
+		alignItems: "center",
+		justifyContent: "space-between",
+		gap: 8
+	} }, /* @__PURE__ */ import_react.default.createElement("span", { style: {
+		fontSize: 13,
 		fontWeight: 600,
 		color: tokens.muted,
 		fontVariantNumeric: "tabular-nums",
 		fontFamily: "'Inter', sans-serif",
 		letterSpacing: "0.04em"
-	} }, `${idx + 1} / ${tips.length}`))), /* @__PURE__ */ import_react.default.createElement("button", {
+	} }, `${idx + 1} / ${tips.length}`), !rm && tips.length > 1 && /* @__PURE__ */ import_react.default.createElement("button", {
+		type: "button",
+		className: "gt-hit",
+		onPointerDown: (e) => e.stopPropagation(),
+		onClick: togglePause,
+		"aria-label": t(paused ? "tipPlay" : "tipPause"),
+		style: {
+			"--gt-hit-x": "-8px",
+			"--gt-hit-y": "-12px",
+			display: "flex",
+			alignItems: "center",
+			justifyContent: "center",
+			width: 28,
+			height: 20,
+			margin: "-3px 0",
+			padding: 0,
+			border: "none",
+			background: "transparent",
+			color: tokens.muted,
+			cursor: "pointer"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("svg", {
+		width: "12",
+		height: "12",
+		viewBox: "0 0 12 12",
+		"aria-hidden": "true",
+		fill: "currentColor"
+	}, paused ? /* @__PURE__ */ import_react.default.createElement("path", { d: "M2.5 1.2v9.6L10.6 6z" }) : /* @__PURE__ */ import_react.default.createElement("g", null, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "2",
+		y: "1.2",
+		width: "3",
+		height: "9.6",
+		rx: "0.8"
+	}), /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "7",
+		y: "1.2",
+		width: "3",
+		height: "9.6",
+		rx: "0.8"
+	}))))))), /* @__PURE__ */ import_react.default.createElement("button", {
 		onClick: () => go(1),
 		"aria-label": t("nextTip"),
 		style: {
@@ -41399,9 +41484,7 @@ function DecoGapStrip({ items, theme, className, offset }) {
 			left: it.x,
 			top: offset || 0,
 			transform: `translate(-50%,-50%) rotate(${it.rot}deg)`,
-			opacity,
-			animation: `decoDrift ${7 + i % 4}s ease-in-out infinite`,
-			animationDelay: `${i * .4}s`
+			opacity
 		};
 		if (it.kind === "die") return /* @__PURE__ */ import_react.default.createElement("svg", {
 			key: i,
@@ -43777,7 +43860,7 @@ var SCHIEBER_PL_CSS = `
 .gt-sch-dame{right:0}
 @container (max-height:60px){.gt-sch-deco img{display:none}}
 [data-phone-landscape] .gt-sch-deco{display:none}
-.gtL-content .gt-sch-deco{position:fixed;right:clamp(20px,2.6vw,44px);bottom:0;width:clamp(280px,29%,400px);height:38dvh;margin:0;flex:none}
+.gtL-content .gt-sch-deco{position:fixed;right:clamp(20px,2.6vw,44px);bottom:0;width:clamp(280px,29%,400px);height:38dvh;margin:0;flex:none}@media (max-height:640px){.gtL-content .gt-sch-deco{display:none}}
 @media (display-mode:standalone){.gt-sch-classic::before{content:"";position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top);background:#1F2021;z-index:30}}
 .gt-weis-lap{display:none}
 .gtL-content .gt-weis-lap{display:block}
@@ -45268,15 +45351,15 @@ function TuttoCardCalc({ tk, t, color, pmLeaders, selfLead, onApply, onClose }) 
 		borderRadius: 999,
 		background: on ? `${color}26` : "transparent",
 		color: on ? tk.ink : tk.muted,
-		fontSize: 12,
+		fontSize: 13,
 		fontWeight: on ? 700 : 600,
-		padding: "6px 10px",
+		padding: "8px 12px",
 		cursor: "pointer",
 		fontFamily: "'Inter', sans-serif",
-		minHeight: 32
+		minHeight: 44
 	});
 	const lbl = {
-		fontSize: 10,
+		fontSize: 11,
 		fontWeight: 700,
 		letterSpacing: "0.1em",
 		textTransform: "uppercase",
@@ -45314,9 +45397,12 @@ function TuttoCardCalc({ tk, t, color, pmLeaders, selfLead, onApply, onClose }) 
 			border: "none",
 			background: "transparent",
 			color: tk.muted,
-			fontSize: 13,
+			fontSize: 15,
 			cursor: "pointer",
-			padding: 4
+			padding: 4,
+			minWidth: 44,
+			minHeight: 44,
+			margin: "-8px -8px -8px 0"
 		}
 	}, "✕")), stack.length > 0 && /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		fontSize: 11.5,
@@ -50951,7 +51037,7 @@ var MINIGOLF_FONT = "'Space Grotesk', sans-serif";
 var MG_UI = "'Inter', sans-serif";
 var MG_CSS = `
 .mgGL button { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
-.mgGL .mgPress { transition: transform 140ms var(--gt-ease-out), background-color 160ms ease, border-color 160ms ease, color 160ms ease, opacity 160ms ease, box-shadow 160ms ease; }
+.mgGL .mgPress { min-height: 44px; transition: transform 140ms var(--gt-ease-out), background-color 160ms ease, border-color 160ms ease, color 160ms ease, opacity 160ms ease, box-shadow 160ms ease; }
 .mgGL .mgPress:active:not(:disabled) { transform: scale(0.97); }
 .mgGL .mgPress:disabled { cursor: default; }
 @media (hover: hover) and (pointer: fine) { .mgGL .mgPress:hover:not(:disabled) { filter: brightness(1.07); } }
@@ -51598,7 +51684,7 @@ function MgStandingsBox({ st, onOpen, finished, mg, t, className }) {
 		"aria-label": title + ". " + t("mgOpenTable"),
 		style: {
 			width: "100%",
-			minHeight: 40,
+			minHeight: 44,
 			display: "flex",
 			alignItems: "center",
 			justifyContent: "space-between",
@@ -52051,7 +52137,7 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
 			justifyContent: "center",
 			gap: 8,
 			margin: "2px auto 0",
-			minHeight: 40,
+			minHeight: 44,
 			padding: "0 16px",
 			border: "none",
 			background: "transparent",
@@ -52496,7 +52582,7 @@ function gtYatzyBonusCell(card, val, theme, t, muted) {
 		title: t("bonusReachedLabel"),
 		"aria-label": t("bonusReachedLabel") + ": " + val,
 		style: {
-			color: N ? "#FFFFFF" : V ? "#7BE495" : "#2E8B3E",
+			color: N ? "#FFFFFF" : V ? "#7BE495" : theme === "light" ? "#237A33" : "#4CC261",
 			fontWeight: 800
 		}
 	}, "+" + val);
@@ -52511,7 +52597,7 @@ function gtYatzyBonusCell(card, val, theme, t, muted) {
 		}
 	}, val);
 	const close = need <= open.reduce((s, c) => s + 3 * c.face, 0);
-	const col = close ? N ? "#D9D9D9" : V ? "#F4C86A" : "#A86A12" : V ? "rgba(242,244,255,0.62)" : muted;
+	const col = close ? N ? "#D9D9D9" : V ? "#F4C86A" : theme === "light" ? "#8A5300" : "#E0A84A" : V ? "rgba(242,244,255,0.62)" : muted;
 	return /* @__PURE__ */ import_react.default.createElement("span", {
 		title: t("bonusToGo")(need),
 		"aria-label": t("bonusToGo")(need),
@@ -61510,6 +61596,7 @@ function ImpostorSetup({ state, setState, onStart, theme, lang, t }) {
 			fontSize: 13,
 			fontWeight: 600,
 			padding: "10px 8px",
+			minHeight: 44,
 			cursor: "pointer",
 			fontFamily: "'Inter', sans-serif",
 			textAlign: "left"
@@ -61535,6 +61622,7 @@ function ImpostorSetup({ state, setState, onStart, theme, lang, t }) {
 				fontSize: 13,
 				fontWeight: 600,
 				padding: "10px 8px",
+				minHeight: 44,
 				cursor: "pointer",
 				fontFamily: "'Inter', sans-serif",
 				textAlign: "left"
@@ -61574,10 +61662,12 @@ function ImpostorSetup({ state, setState, onStart, theme, lang, t }) {
 			border: `1px solid ${numImpostors === n ? wt.red : wt.border}`,
 			borderRadius: 20,
 			background: numImpostors === n ? gtFill(wt.red).bg : wt.card,
-			color: n === 2 && !canTwoImpostors ? wt.border : numImpostors === n ? gtFill(wt.red).fg : wt.ink,
+			color: n === 2 && !canTwoImpostors ? wt.muted : numImpostors === n ? gtFill(wt.red).fg : wt.ink,
 			fontSize: 14,
 			fontWeight: 700,
 			padding: "11px 0",
+			minHeight: 44,
+			opacity: n === 2 && !canTwoImpostors ? .75 : 1,
 			cursor: n === 2 && !canTwoImpostors ? "default" : "pointer",
 			fontFamily: IMP_FONT
 		}
@@ -61601,7 +61691,7 @@ function ImpostorSetup({ state, setState, onStart, theme, lang, t }) {
 			background: mrWhite ? `${wt.gold}14` : wt.card,
 			padding: "12px 14px",
 			cursor: canMrWhite ? "pointer" : "default",
-			opacity: canMrWhite ? 1 : .5,
+			opacity: canMrWhite ? 1 : .75,
 			textAlign: "left"
 		}
 	}, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
@@ -65079,7 +65169,7 @@ function CricketPlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewG
 			border: "1px solid " + (confirmingReset ? "#C8102E" : tk.border),
 			borderRadius: 12,
 			background: tk.card,
-			color: confirmingReset ? "#C8102E" : tk.muted,
+			color: confirmingReset ? theme === "light" ? "#C8102E" : "#FF6B6B" : tk.muted,
 			fontSize: 12,
 			fontWeight: 700,
 			letterSpacing: "0.06em",
@@ -65287,7 +65377,49 @@ function CricketPlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewG
 		tk,
 		t,
 		valueKey: "points"
-	}), /* @__PURE__ */ import_react.default.createElement("div", { style: { marginTop: 10 } }, /* @__PURE__ */ import_react.default.createElement(CricketMarksGrid, {
+	}), /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		display: "flex",
+		flexDirection: "column",
+		gap: 6,
+		marginTop: 10
+	} }, state.players.map((p, idx) => /* @__PURE__ */ import_react.default.createElement("div", {
+		key: p.id,
+		style: {
+			display: "flex",
+			alignItems: "center",
+			gap: 10,
+			border: "2px solid " + (idx === state.currentIdx ? theme === "noir" ? "#FFFFFF" : AC : "transparent"),
+			borderRadius: 22,
+			background: tk.card,
+			padding: "12px 16px",
+			minHeight: 72,
+			boxSizing: "border-box"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		flex: 1,
+		minWidth: 0
+	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		fontSize: 19,
+		fontWeight: 600,
+		color: tk.ink,
+		fontFamily: "'Inter', sans-serif",
+		overflow: "hidden",
+		textOverflow: "ellipsis",
+		whiteSpace: "nowrap",
+		wordBreak: "keep-all",
+		hyphens: "none"
+	} }, p.name), /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		fontSize: 13,
+		color: tk.muted,
+		fontFamily: "'Inter', sans-serif"
+	} }, t("dartsLegs") + " " + (state.legsWon[p.id] || 0) + "/" + state.legsTarget)), /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		fontSize: 40,
+		lineHeight: 1,
+		fontWeight: 700,
+		color: tk.ink,
+		fontFamily: "'Baloo 2', sans-serif",
+		fontVariantNumeric: "tabular-nums"
+	} }, state.scores[p.id] || 0)))), /* @__PURE__ */ import_react.default.createElement("div", { style: { marginTop: 10 } }, /* @__PURE__ */ import_react.default.createElement(CricketMarksGrid, {
 		players: state.players,
 		marksByPlayer: previewMap,
 		currentIdx: state.currentIdx,
@@ -65740,7 +65872,7 @@ function HiScorePlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewG
 			border: "1px solid " + (confirmingReset ? "#C8102E" : tk.border),
 			borderRadius: 12,
 			background: tk.card,
-			color: confirmingReset ? "#C8102E" : tk.muted,
+			color: confirmingReset ? theme === "light" ? "#C8102E" : "#FF6B6B" : tk.muted,
 			fontSize: 12,
 			fontWeight: 700,
 			letterSpacing: "0.06em",
@@ -66524,7 +66656,7 @@ function SplitScorePlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onN
 			border: "1px solid " + (confirmingReset ? "#C8102E" : tk.border),
 			borderRadius: 12,
 			background: tk.card,
-			color: confirmingReset ? "#C8102E" : tk.muted,
+			color: confirmingReset ? theme === "light" ? "#C8102E" : "#FF6B6B" : tk.muted,
 			fontSize: 12,
 			fontWeight: 700,
 			letterSpacing: "0.06em",
@@ -66594,9 +66726,9 @@ function SplitScorePlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onN
 	} }, "+" + previewScore), willHalve && /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "inline-block",
 		marginTop: 8,
-		border: "1px solid #C8102E",
+		border: "1px solid " + (theme === "light" ? "#C8102E" : "#FF6B6B"),
 		borderRadius: 999,
-		color: "#C8102E",
+		color: theme === "light" ? "#C8102E" : "#FF6B6B",
 		fontSize: 12,
 		fontWeight: 700,
 		padding: "5px 12px",
@@ -67098,7 +67230,7 @@ function ShanghaiPlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNew
 			border: "1px solid " + (confirmingReset ? "#C8102E" : tk.border),
 			borderRadius: 12,
 			background: tk.card,
-			color: confirmingReset ? "#C8102E" : tk.muted,
+			color: confirmingReset ? theme === "light" ? "#C8102E" : "#FF6B6B" : tk.muted,
 			fontSize: 12,
 			fontWeight: 700,
 			letterSpacing: "0.06em",
@@ -68143,7 +68275,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.06-7";
+var APP_BUILD = "2026.11.06-8";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -69422,6 +69554,8 @@ function FreeplayLeaderRow({ gtLead, gtGood, player, color, rank, medalColor, re
 		style: {
 			flex: 1,
 			minWidth: 0,
+			minHeight: 44,
+			margin: "-10px 0",
 			border: "none",
 			outline: "none",
 			fontSize: 19,
@@ -92759,6 +92893,7 @@ function TabuSetup({ state, setState, onStart, theme, lang, t }) {
 			fontSize: 13,
 			fontWeight: 600,
 			padding: "10px 8px",
+			minHeight: 44,
 			cursor: "pointer",
 			fontFamily: "'Inter', sans-serif",
 			textAlign: "left"
@@ -92784,6 +92919,7 @@ function TabuSetup({ state, setState, onStart, theme, lang, t }) {
 				fontSize: 13,
 				fontWeight: 600,
 				padding: "10px 8px",
+				minHeight: 44,
 				cursor: "pointer",
 				fontFamily: "'Inter', sans-serif",
 				textAlign: "left"
@@ -93670,6 +93806,7 @@ function HeadsUpSetup({ state, setState, onStart, theme, lang, t }) {
 			fontSize: 13,
 			fontWeight: 600,
 			padding: "10px 8px",
+			minHeight: 44,
 			cursor: "pointer",
 			fontFamily: "'Inter', sans-serif",
 			textAlign: "left"
@@ -93695,6 +93832,7 @@ function HeadsUpSetup({ state, setState, onStart, theme, lang, t }) {
 				fontSize: 13,
 				fontWeight: 600,
 				padding: "10px 8px",
+				minHeight: 44,
 				cursor: "pointer",
 				fontFamily: "'Inter', sans-serif",
 				textAlign: "left"
@@ -100201,6 +100339,7 @@ function mostLikelyBtnGhost(theme) {
 		fontSize: 13,
 		fontWeight: 700,
 		padding: "12px 20px",
+		minHeight: 44,
 		cursor: "pointer",
 		fontFamily: "'Inter', sans-serif"
 	};
@@ -103165,7 +103304,7 @@ function GtYrNum({ value, style }) {
 		style: { fontVariantNumeric: "tabular-nums" }
 	}, String(n) + sp.suf));
 }
-var GT_YR_CSS = ".gtYR{position:fixed;left:0;top:0;right:0;height:100vh;height:100dvh;z-index:9600;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.8);-webkit-tap-highlight-color:transparent;overscroll-behavior:contain;touch-action:manipulation;animation:gtYRfade .22s ease-out both}@media (display-mode:standalone){.gtYR{height:100vh}}.gtYR-card{position:relative;width:100%;height:100%;overflow:hidden;container-type:inline-size;display:flex;flex-direction:column;user-select:none;-webkit-user-select:none;font-family:'Inter',system-ui,-apple-system,sans-serif;outline:none}@media (min-width:640px){.gtYR-card{width:auto;height:min(94%,880px);aspect-ratio:9/16;border-radius:28px;box-shadow:0 30px 80px rgba(0,0,0,.5)}}.gtYR-in{animation:gtYRin .56s cubic-bezier(.23,1,.32,1) both}.gtYR-glow{animation:gtYRfade .9s ease-out both}.gtYR-drift{animation:gtYRdrift 9s ease-in-out infinite alternate}.gtYR-zone{position:absolute;top:84px;bottom:0;border:0;padding:0;margin:0;background:transparent;cursor:pointer;z-index:1;-webkit-tap-highlight-color:transparent}.gtYR-zone:focus-visible,.gtYR-btn:focus-visible{outline:2px solid currentColor;outline-offset:-4px}.gtYR-btn{transition:transform .14s cubic-bezier(.23,1,.32,1),opacity .14s;cursor:pointer;-webkit-tap-highlight-color:transparent}.gtYR-btn:active{transform:scale(.97)}@keyframes gtYRfade{from{opacity:0}to{opacity:1}}@keyframes gtYRin{from{opacity:0;transform:translate3d(0,16px,0)}to{opacity:1;transform:none}}@keyframes gtYRdrift{from{transform:translate3d(0,0,0) rotate(-12deg)}to{transform:translate3d(0,-14px,0) rotate(-12deg)}}@media (prefers-reduced-motion:reduce){.gtYR,.gtYR *{animation:none!important;transition:none!important}}";
+var GT_YR_CSS = ".gtYR{position:fixed;left:0;top:0;right:0;height:100vh;height:100dvh;z-index:9600;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.8);-webkit-tap-highlight-color:transparent;overscroll-behavior:contain;touch-action:manipulation;animation:gtYRfade .22s ease-out both}@media (display-mode:standalone){.gtYR{height:100vh}}.gtYR-card{position:relative;width:100%;height:100%;overflow:hidden;container-type:inline-size;display:flex;flex-direction:column;user-select:none;-webkit-user-select:none;font-family:'Inter',system-ui,-apple-system,sans-serif;outline:none}@media (min-width:640px){.gtYR-card{width:auto;height:min(94%,880px);aspect-ratio:9/16;border-radius:28px;box-shadow:0 30px 80px rgba(0,0,0,.5)}}.gtYR-in{animation:gtYRin .56s cubic-bezier(.23,1,.32,1) both}.gtYR-glow{animation:gtYRfade .9s ease-out both}.gtYR-drift{animation:gtYRdrift 9s ease-in-out 2 alternate}.gtYR-zone{position:absolute;top:84px;bottom:0;border:0;padding:0;margin:0;background:transparent;cursor:pointer;z-index:1;-webkit-tap-highlight-color:transparent}.gtYR-zone:focus-visible,.gtYR-btn:focus-visible{outline:2px solid currentColor;outline-offset:-4px}.gtYR-btn{transition:transform .14s cubic-bezier(.23,1,.32,1),opacity .14s;cursor:pointer;-webkit-tap-highlight-color:transparent}.gtYR-btn:active{transform:scale(.97)}@keyframes gtYRfade{from{opacity:0}to{opacity:1}}@keyframes gtYRin{from{opacity:0;transform:translate3d(0,16px,0)}to{opacity:1;transform:none}}@keyframes gtYRdrift{from{transform:translate3d(0,0,0) rotate(-12deg)}to{transform:translate3d(0,-14px,0) rotate(-12deg)}}@media (prefers-reduced-motion:reduce){.gtYR,.gtYR *{animation:none!important;transition:none!important}}";
 function GtYearReview({ t, theme, onClose, year }) {
 	const yr = year || (/* @__PURE__ */ new Date()).getFullYear();
 	const pal = gtYrPal(theme);
@@ -111258,7 +111397,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.06-7");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.06-8");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -113137,7 +113276,7 @@ function GtCount({ value, as, mem, good, dpos, delta, format, className, style, 
 			el.textContent = fmt(n);
 			return;
 		}
-		const t0 = performance.now(), D = 400, a = from;
+		const t0 = performance.now(), D = Math.max(1, parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--gt-dur-count")) || 300), a = from;
 		el.textContent = fmt(a);
 		const step = (now) => {
 			const p = Math.min(1, (now - t0) / D);
@@ -113832,7 +113971,7 @@ var UPDATE_TEXTS = {
 		"A atualizar …"
 	]
 };
-var UPDATE_CSS = "\n.gtU-wrap{--u-bg:rgba(30,32,44,.9);--u-fg:#F3F4F8;--u-sub:rgba(243,244,248,.66);--u-bd:rgba(255,255,255,.12);--u-chip:rgba(255,255,255,.1);--u-btn:#F3F4F8;--u-btnfg:#12141C;--u-sh:0 18px 50px rgba(0,0,0,.5),0 2px 8px rgba(0,0,0,.3);position:fixed;left:0;right:0;bottom:calc(14px + env(safe-area-inset-bottom));z-index:2147483000;display:flex;justify-content:center;padding:0 16px;pointer-events:none;font-family:'Inter',sans-serif}\nhtml[data-gt-theme=\"light\"] .gtU-wrap{--u-bg:rgba(255,253,248,.96);--u-fg:#1B1B22;--u-sub:rgba(27,27,34,.62);--u-bd:rgba(0,0,0,.08);--u-chip:rgba(0,0,0,.06);--u-btn:#1B1B22;--u-btnfg:#fff;--u-sh:0 18px 44px rgba(40,30,10,.22),0 2px 8px rgba(40,30,10,.1)}\nhtml[data-gt-theme=\"vitrum\"] .gtU-wrap{--u-bg:rgba(22,25,33,.62);--u-fg:#F2F4F8;--u-sub:rgba(242,244,248,.66);--u-bd:rgba(255,255,255,.10);--u-chip:rgba(255,255,255,.08);--u-btn:#F2F4F8;--u-btnfg:#10131A;--u-sh:0 10px 30px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.18)}\nhtml[data-gt-theme=\"noir\"] .gtU-wrap{--u-bg:#0B0B0B;--u-fg:#F5F5F5;--u-sub:rgba(245,245,245,.6);--u-bd:rgba(255,255,255,.16);--u-chip:rgba(255,255,255,.09);--u-btn:#F5F5F5;--u-btnfg:#000;--u-sh:0 14px 40px rgba(0,0,0,.7)}\n.gtU-card{pointer-events:auto;position:relative;width:100%;max-width:440px;box-sizing:border-box;display:flex;flex-direction:column;gap:16px;padding:18px 18px 18px;border-radius:28px;color:var(--u-fg);background:var(--u-bg);border:1px solid var(--u-bd);box-shadow:var(--u-sh);-webkit-backdrop-filter:blur(22px) saturate(1.5);backdrop-filter:blur(22px) saturate(1.5);overflow:hidden;animation:gtU-in .6s cubic-bezier(.22,1.25,.36,1) both;will-change:transform,opacity}\nhtml[data-gt-theme=\"vitrum\"] .gtU-card{-webkit-backdrop-filter:blur(24px) saturate(1.6);backdrop-filter:blur(24px) saturate(1.6)}\n.gtU-card.is-out{animation:gtU-out .24s cubic-bezier(.4,0,1,1) both;pointer-events:none}\n.gtU-head{display:flex;align-items:center;gap:14px;padding-right:30px}\n.gtU-icon{width:48px;height:48px;flex-shrink:0;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--u-chip);color:var(--u-fg)}\n.gtU-icon svg{animation:gtU-turn 1s cubic-bezier(.23,1,.32,1) .3s 1 both}\n.gtU-card.is-busy .gtU-icon svg{animation:gtU-spin .8s linear infinite}\n.gtU-txt{min-width:0;flex:1}\n.gtU-title{font-family:'Baloo 2',sans-serif;font-size:21px;font-weight:800;line-height:1.1}\n.gtU-sub{font-size:14px;color:var(--u-sub);margin-top:4px;line-height:1.3}\n.gtU-btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:54px;border:none;border-radius:18px;cursor:pointer;font-family:'Baloo 2',sans-serif;font-size:18px;font-weight:800;color:var(--u-btnfg);background:var(--u-btn);transition:transform .16s cubic-bezier(.23,1,.32,1),opacity .2s;-webkit-tap-highlight-color:transparent}\n.gtU-btn:active{transform:scale(.97)}\n.gtU-card.is-busy .gtU-btn{opacity:.7;pointer-events:none}\n.gtU-x{position:absolute;top:10px;right:10px;width:36px;height:36px;border:none;border-radius:50%;background:transparent;color:var(--u-sub);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .16s,transform .16s cubic-bezier(.23,1,.32,1);-webkit-tap-highlight-color:transparent}\n.gtU-x:active{transform:scale(.9);background:var(--u-chip)}\n.gtU-bar{position:absolute;left:0;right:0;bottom:0;height:3px;overflow:hidden;opacity:0;transition:opacity .2s}\n.gtU-bar::after{content:\"\";position:absolute;top:0;bottom:0;width:40%;background:var(--u-fg);border-radius:2px;animation:gtU-sweep 1s cubic-bezier(.45,0,.2,1) infinite}\n.gtU-card.is-busy .gtU-bar{opacity:.85}\n.gtU-btn:focus-visible,.gtU-x:focus-visible{outline:2px solid var(--u-fg);outline-offset:2px}\n@media (min-width:900px){.gtU-wrap{justify-content:flex-end;padding:0 28px;bottom:28px}.gtU-card{max-width:420px}}\n@media (hover:hover){.gtU-btn:hover{opacity:.92}.gtU-x:hover{background:var(--u-chip)}}\n@keyframes gtU-in{from{opacity:0;transform:translateY(60px) scale(.96)}to{opacity:1;transform:none}}\n@keyframes gtU-out{to{opacity:0;transform:translateY(24px) scale(.97)}}\n@keyframes gtU-spin{to{transform:rotate(360deg)}}\n@keyframes gtU-turn{from{transform:rotate(-220deg);opacity:0}to{transform:rotate(0);opacity:1}}\n@keyframes gtU-sweep{from{transform:translateX(-100%)}to{transform:translateX(250%)}}\n@keyframes gtU-fade{to{opacity:0}}\n@media (prefers-reduced-motion: reduce){.gtU-card,.gtU-icon svg{animation:none!important}.gtU-card.is-out{animation:gtU-fade .15s linear both!important}.gtU-card.is-busy .gtU-icon svg{animation:none!important}.gtU-bar::after{animation:none;width:100%}.gtU-btn,.gtU-x{transition:none}}\n";
+var UPDATE_CSS = "\n.gtU-wrap{--u-bg:rgba(30,32,44,.9);--u-fg:#F3F4F8;--u-sub:rgba(243,244,248,.66);--u-bd:rgba(255,255,255,.12);--u-chip:rgba(255,255,255,.1);--u-btn:#F3F4F8;--u-btnfg:#12141C;--u-sh:0 18px 50px rgba(0,0,0,.5),0 2px 8px rgba(0,0,0,.3);position:fixed;left:0;right:0;bottom:calc(14px + env(safe-area-inset-bottom));z-index:2147483000;display:flex;justify-content:center;padding:0 16px;pointer-events:none;font-family:'Inter',sans-serif}\nhtml[data-gt-theme=\"light\"] .gtU-wrap{--u-bg:rgba(255,253,248,.96);--u-fg:#1B1B22;--u-sub:rgba(27,27,34,.62);--u-bd:rgba(0,0,0,.08);--u-chip:rgba(0,0,0,.06);--u-btn:#1B1B22;--u-btnfg:#fff;--u-sh:0 18px 44px rgba(40,30,10,.22),0 2px 8px rgba(40,30,10,.1)}\nhtml[data-gt-theme=\"vitrum\"] .gtU-wrap{--u-bg:rgba(22,25,33,.62);--u-fg:#F2F4F8;--u-sub:rgba(242,244,248,.66);--u-bd:rgba(255,255,255,.10);--u-chip:rgba(255,255,255,.08);--u-btn:#F2F4F8;--u-btnfg:#10131A;--u-sh:0 10px 30px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.18)}\nhtml[data-gt-theme=\"noir\"] .gtU-wrap{--u-bg:#0B0B0B;--u-fg:#F5F5F5;--u-sub:rgba(245,245,245,.6);--u-bd:rgba(255,255,255,.16);--u-chip:rgba(255,255,255,.09);--u-btn:#F5F5F5;--u-btnfg:#000;--u-sh:0 14px 40px rgba(0,0,0,.7)}\n.gtU-card{pointer-events:auto;position:relative;width:100%;max-width:440px;box-sizing:border-box;display:flex;flex-direction:column;gap:16px;padding:18px 18px 18px;border-radius:28px;color:var(--u-fg);background:var(--u-bg);border:1px solid var(--u-bd);box-shadow:var(--u-sh);-webkit-backdrop-filter:blur(22px) saturate(1.5);backdrop-filter:blur(22px) saturate(1.5);overflow:hidden;animation:gtU-in .6s cubic-bezier(.22,1.25,.36,1) both;will-change:transform,opacity}\nhtml[data-gt-theme=\"vitrum\"] .gtU-card{-webkit-backdrop-filter:blur(24px) saturate(1.6);backdrop-filter:blur(24px) saturate(1.6)}\n.gtU-card.is-out{animation:gtU-out .24s cubic-bezier(.4,0,1,1) both;pointer-events:none}\n.gtU-head{display:flex;align-items:center;gap:14px;padding-right:30px}\n.gtU-icon{width:48px;height:48px;flex-shrink:0;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--u-chip);color:var(--u-fg)}\n.gtU-icon svg{animation:gtU-turn 1s cubic-bezier(.23,1,.32,1) .3s 1 both}\n.gtU-card.is-busy .gtU-icon svg{animation:gtU-spin .8s linear infinite}\n.gtU-txt{min-width:0;flex:1}\n.gtU-title{font-family:'Baloo 2',sans-serif;font-size:21px;font-weight:800;line-height:1.1}\n.gtU-sub{font-size:14px;color:var(--u-sub);margin-top:4px;line-height:1.3}\n.gtU-btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:54px;border:none;border-radius:18px;cursor:pointer;font-family:'Baloo 2',sans-serif;font-size:18px;font-weight:800;color:var(--u-btnfg);background:var(--u-btn);transition:transform .16s cubic-bezier(.23,1,.32,1),opacity .2s;-webkit-tap-highlight-color:transparent}\n.gtU-btn:active{transform:scale(.97)}\n.gtU-card.is-busy .gtU-btn{opacity:.7;pointer-events:none}\n.gtU-x{position:absolute;top:6px;right:6px;width:44px;height:44px;border:none;border-radius:50%;background:transparent;color:var(--u-sub);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .16s,transform .16s cubic-bezier(.23,1,.32,1);-webkit-tap-highlight-color:transparent}\n.gtU-x:active{transform:scale(.9);background:var(--u-chip)}\n.gtU-bar{position:absolute;left:0;right:0;bottom:0;height:3px;overflow:hidden;opacity:0;transition:opacity .2s}\n.gtU-bar::after{content:\"\";position:absolute;top:0;bottom:0;width:40%;background:var(--u-fg);border-radius:2px;animation:gtU-sweep 1s cubic-bezier(.45,0,.2,1) infinite}\n.gtU-card.is-busy .gtU-bar{opacity:.85}\n.gtU-btn:focus-visible,.gtU-x:focus-visible{outline:2px solid var(--u-fg);outline-offset:2px}\n@media (min-width:900px){.gtU-wrap{justify-content:flex-end;padding:0 28px;bottom:28px}.gtU-card{max-width:420px}}\n@media (hover:hover){.gtU-btn:hover{opacity:.92}.gtU-x:hover{background:var(--u-chip)}}\n@keyframes gtU-in{from{opacity:0;transform:translateY(60px) scale(.96)}to{opacity:1;transform:none}}\n@keyframes gtU-out{to{opacity:0;transform:translateY(24px) scale(.97)}}\n@keyframes gtU-spin{to{transform:rotate(360deg)}}\n@keyframes gtU-turn{from{transform:rotate(-220deg);opacity:0}to{transform:rotate(0);opacity:1}}\n@keyframes gtU-sweep{from{transform:translateX(-100%)}to{transform:translateX(250%)}}\n@keyframes gtU-fade{to{opacity:0}}\n@media (prefers-reduced-motion: reduce){.gtU-card,.gtU-icon svg{animation:none!important}.gtU-card.is-out{animation:gtU-fade .15s linear both!important}.gtU-card.is-busy .gtU-icon svg{animation:none!important}.gtU-bar::after{animation:none;width:100%}.gtU-btn,.gtU-x{transition:none}}\n";
 function UpdateBanner() {
 	const [ready, setReady] = import_react.default.useState(false);
 	const [hidden, setHidden] = import_react.default.useState(false);
@@ -113844,7 +113983,7 @@ function UpdateBanner() {
 		let shown = false;
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && !shown && v && v.build && v.build !== "2026.11.06-7") {
+				if (alive && !shown && v && v.build && v.build !== "2026.11.06-8") {
 					shown = true;
 					setReady(true);
 					setHidden(false);
@@ -121398,7 +121537,7 @@ gtExpose([
   }
 
   .tw\:animate-border-beam {
-    animation: border-beam calc(var(--duration) * 1s) infinite linear;
+    animation: border-beam calc(var(--duration) * 1s) linear 1 forwards, beam-out .4s ease-out calc(var(--duration) * 1s - .4s) forwards;
   }
 
   .tw\:rounded-\[inherit\] {
@@ -121416,7 +121555,7 @@ gtExpose([
 
   @media (prefers-reduced-motion: no-preference) {
     .tw\:motion-safe\:animate-shine {
-      animation: shine var(--duration) infinite linear;
+      animation: shine var(--duration) 2 linear;
     }
   }
 }
@@ -121449,6 +121588,12 @@ gtExpose([
 @keyframes border-beam {
   100% {
     offset-distance: 100%;
+  }
+}
+
+@keyframes beam-out {
+  to {
+    opacity: 0;
   }
 }
 

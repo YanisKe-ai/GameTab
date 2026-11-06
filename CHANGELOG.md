@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.06-8 (06.11.2026 21:31)
+- Motion ruhiger und einheitlich, Tippkarte mit Pause, grössere Touchziele, bessere Lesbarkeit, Darts-Karten
+
 ## 2026.11.06-7 (06.11.2026 21:18)
 - Audit: Dialoge mit Tastatur, Schieber-Tafel per Tastatur, Tablet ohne Skalierung, Teilen und Backup mit Rückmeldung
 

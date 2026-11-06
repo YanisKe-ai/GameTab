@@ -263,7 +263,7 @@ def run_share(b, eng):
         pg.keyboard.press("Escape"); R.wait(pg, 300)
         R.check(ov(pg).count() == 0, "Escape schliesst nicht")
         R.check("teilen" in pg.evaluate("document.activeElement.textContent").lower(), "Fokus kehrt nicht zum Ausloeser zurueck")
-        R.check(not pg.evaluate("!!document.querySelector('[inert]')"), "inert bleibt haengen")
+        R.check(not pg.evaluate("!!document.querySelector('.gtsp-ov')"), "Vorschau bleibt offen")  # das Podest darunter bleibt zu Recht modal
 
     def t_noshare(pg):
         R.check(share_btn(pg).count() == 0, "Teilen-Knopf trotz fehlender Funktion")

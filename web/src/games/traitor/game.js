@@ -18,7 +18,7 @@ import { GtCol } from "../../shared/unit.js";
 import { usePhoneLandscape } from "../../shared/phone-landscape.js";
 /*@gt-body-begin*/
 /* Verräter */
-const TRT_COL_CSS=".gt-u-col.gt-trt{min-height:calc(100dvh - 176px)}@media (display-mode: standalone){.gt-u-col.gt-trt{min-height:calc(100vh - 176px)}}.gtL-content .gt-u-col.gt-trt,[data-phone-landscape] .gt-u-col.gt-trt{min-height:0}";
+const TRT_COL_CSS=".gt-u-col.gt-trt{min-height:calc(100dvh - 176px)}@media (display-mode: standalone){.gt-u-col.gt-trt{min-height:calc(100vh - 176px)}}.gtL-content .gt-u-col.gt-trt,[data-phone-landscape] .gt-u-col.gt-trt{min-height:0}.gt-trt .gtL-col-side>*{order:-1}.gt-trt .gtL-col-main>*{flex:1 1 auto}";
 function trtAuto(n){return n<=6?1:n<=10?2:3;}
 function trtMax(n){return Math.max(1,Math.min(3,Math.floor((n-1)/2)));}
 function trtCount(s){const n=s.players.length;const k=s.traitors>0?s.traitors:trtAuto(n);return Math.max(1,Math.min(k,trtMax(n)));}

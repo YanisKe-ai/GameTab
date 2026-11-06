@@ -78,7 +78,7 @@ def iphone(pg):
 def iphone_fail(pg):
     pg.get_by_role("button", name="Sichern oder teilen").click(); R.wait(pg, 300)
     R.check("Bild speichern" in names(pg), f"kein Ausweg, {names(pg)}")
-    R.check(pg.locator(".gtsp-ov p").filter(has_text="gedrückt halten").count() == 1, f"Hinweis fehlt: {pg.locator('.gtsp-ov p').all_inner_texts()}")
+    R.check(pg.locator(".gtsp-ov p").filter(has_text="Teilen hat nicht geklappt").count() == 1, f"Hinweis fehlt: {pg.locator('.gtsp-ov p').all_inner_texts()}")
 
 
 def to_stats(pg):

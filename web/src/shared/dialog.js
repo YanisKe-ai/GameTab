@@ -51,9 +51,12 @@ function useGtDialog({ open, onClose, escape = true }) {
       if (e.key !== "Tab") return;
       const items = gtDialogFocusables(root);
       if (!items.length) { e.preventDefault(); root.focus(); return; }
+      // Reihenfolge selbst steuern: Safari springt von Knopf zu Knopf nicht von allein (Tab nur auf Formularfeldern).
       const first = items[0], last = items[items.length - 1], cur = document.activeElement;
-      if (e.shiftKey && (cur === first || cur === root || !root.contains(cur))) { e.preventDefault(); last.focus(); }
-      else if (!e.shiftKey && (cur === last || !root.contains(cur))) { e.preventDefault(); first.focus(); }
+      const at = items.indexOf(cur);
+      e.preventDefault();
+      if (e.shiftKey) (at <= 0 ? last : items[at - 1]).focus();
+      else (at < 0 || at === items.length - 1 ? first : items[at + 1]).focus();
     };
     document.addEventListener("keydown", onKey, true);
     return () => {

@@ -222,8 +222,8 @@ gtStExport(snap,theme,t).then(cvs=>Promise.all(cvs.map((c,i)=>new Promise((res,r
 return()=>{alive=false;made.forEach(u=>URL.revokeObjectURL(u));};},[snap,theme,retry]);
 const pages=state.pages;const N=pages.length;const acc=theme==="grandslam"?{bg:"#FF7659",fg:"#071743"}:{bg:"#85D1F5",fg:"#0B1A22"};
 const items=React.useMemo(()=>pages.map(p=>({url:p.url,file:new File([p.blob],p.name,{type:"image/png"})})),[pages]);const plan=gtImgPlan({...gtImgDevice(),canShare:N>0&&gtImgCanShare(items.map(x=>x.file))});
-const save=()=>{if(!N)return;gtImgDownload(items);setNote(gtImgDevice().desktop?tr("shareSavedNote","Gespeichert im Ordner Downloads."):"");};
-const share=async()=>{if(!N||sharing)return;setSharing(true);setNote("");const ok=await gtImgShare(items);if(!ok){gtImgDownload(items);setNote(tr("shareResultSaveHint","Zum Speichern das Bild gedrückt halten, oder unten herunterladen."));}setSharing(false);};
+const save=()=>{if(!N)return;gtImgDownload(items);setNote(gtImgDevice().desktop?tr("shareSavedNote","Gespeichert im Ordner Downloads."):tr("shareDownloadNote","Download gestartet."));};
+const share=async()=>{if(!N||sharing)return;setSharing(true);setNote("");const r=await gtImgShare(items);setSharing(false);if(r==="ok")setNote(tr("shareDoneNote","Geteilt."));else if(r==="fail"){gtImgDownload(items);setNote(tr("shareFailNote","Teilen hat nicht geklappt. Du kannst das Bild stattdessen speichern."));}else if(r==="timeout")setNote(tr("shareTimeoutNote","Keine Antwort vom Teilen-Fenster. Versuche es nochmals oder speichere das Bild."));};
 const saveLabel=N>1?tr("shareSaveAll","Alle {n} Bilder speichern",{n:N}):tr("shareSaveImage","Bild speichern");const shareLabel=plan.iosHint?tr("shareSaveOrShare","Sichern oder teilen"):N>1?tr("stxShareAll","Alle {n} Seiten teilen",{n:N}):tr("stxShare","Bild teilen");
 const txt={color:"#F2F3EE",fontFamily:"'Inter', sans-serif"};const sub={color:"#AAB1B5",fontSize:13,lineHeight:1.4,margin:0};
 const btnBase={minHeight:44,borderRadius:12,fontFamily:"'Inter', sans-serif",fontWeight:700,fontSize:15,cursor:"pointer",transition:"transform 160ms cubic-bezier(0.23,1,0.32,1), background-color 160ms ease"};

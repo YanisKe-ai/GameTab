@@ -43,19 +43,21 @@ function TuttoSetup({players,setPlayers,target,setTarget,onStart,tk:gtTk0,t,them
 @font-face{font-family:'Anton';font-style:normal;font-weight:400;font-display:swap;src:url("./fonts/Anton-Regular.woff2") format('woff2');}
 @keyframes ttUp{0%{opacity:0;transform:translateY(10px) scale(.8);}18%{opacity:1;transform:translateY(0) scale(1.08);}70%{opacity:1;transform:translateY(-6px) scale(1);}100%{opacity:0;transform:translateY(-18px);}}
 @keyframes ttStamp{0%{transform:scale(1.4);opacity:0;filter:brightness(1.6);}60%{transform:scale(.97);opacity:1;}100%{transform:scale(1);filter:brightness(1);}}
-.tt-root{display:flex;flex-direction:column;min-height:calc(100dvh - 20px);font-family:'Inter',sans-serif;font-variant-numeric:tabular-nums;color:var(--tt-ink);}
-@media (display-mode: standalone){.tt-root{min-height:calc(100vh - 20px);}}
+.tt-root{display:flex;flex-direction:column;min-height:calc(100dvh - 20px);height:calc(100dvh - 20px);font-family:'Inter',sans-serif;font-variant-numeric:tabular-nums;color:var(--tt-ink);}
+@media (display-mode: standalone){.tt-root{min-height:calc(100vh - 20px - env(safe-area-inset-top,0px));height:calc(100vh - 20px - env(safe-area-inset-top,0px));}}
 :where(.tt-root) button{touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;font-family:inherit;border:0;cursor:pointer;color:inherit;}
 .tt-split,.tt-split>.gtL-col-main,.tt-split>.gtL-col-side{display:contents;}
 .tt-sp{flex:1 1 0;min-height:8px;}
 .tt-sp1{margin-top:-18px;}
 .tt-sp3{flex:1 1 0;min-height:10px;}
-@media (display-mode: standalone){.tt-sp1{flex-basis:calc(env(safe-area-inset-top,0px) / 2);}.tt-sp3{flex-basis:env(safe-area-inset-top,0px);}}
+@media (display-mode: standalone){.tt-sp1{flex-basis:calc(env(safe-area-inset-top,0px) / 2);}}
 .tt-title{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:0 14px;text-align:center;flex:none;}
 .tt-word{font-family:'Bowlby One',sans-serif;font-weight:400;font-size:54px;line-height:1.05;color:var(--tt-wy);-webkit-text-stroke:.028em var(--tt-wk);paint-order:stroke fill;text-shadow:var(--tt-wsh);animation:ttStamp .5s cubic-bezier(.3,1.4,.5,1) both;white-space:nowrap;}
 .tt-goal{display:flex;align-items:center;gap:8px;color:var(--tt-gy);font-size:14px;font-weight:600;white-space:nowrap;}
 .tt-goal i{width:18px;height:3px;border-radius:2px;background:var(--tt-gb);flex:none;}
-.tt-lanes{position:relative;z-index:1;display:flex;flex-direction:column;gap:8px;flex:none;}
+.tt-lanes{position:relative;z-index:1;display:flex;flex-direction:column;gap:8px;flex:0 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+.tt-lanes::-webkit-scrollbar{display:none;}
+.tt-lanes>.tt-lane{flex:none;}
 .tt-lane{position:relative;display:block;width:100%;box-sizing:border-box;height:84px;padding:10px 14px;border-radius:18px;background:var(--tt-card);box-shadow:inset 0 0 0 1px var(--tt-cardb);text-align:left;transition:transform .12s ease-out;}
 .tt-lane:active{transform:scale(.98);}
 .tt-glide{position:absolute;left:0;top:0;width:0;height:84px;border-radius:18px;box-shadow:inset 0 0 0 2px var(--tt-sel),0 0 22px var(--tt-selglow);opacity:0;pointer-events:none;z-index:2;transition:transform .3s cubic-bezier(.23,1,.32,1),opacity .15s linear;}
@@ -107,6 +109,7 @@ function TuttoSetup({players,setPlayers,target,setTarget,onStart,tk:gtTk0,t,them
 @media (prefers-reduced-motion: reduce){.tt-word,.tt-pop{animation:none;}.tt-glide,.tt-lane,.tt-k,.tt-minus,.tt-save,.tt-rb{transition:none;}}
 @media (hover: hover) and (pointer: fine){.tt-lane:not(.is-sel):hover{filter:brightness(1.08);}.tt-k:hover{background:var(--tt-keyh);}}
 .gtL-content .tt-root{min-height:0;display:block;}
+.gtL-content .tt-root{height:auto;}.gtL-content .tt-lanes{overflow:visible;}
 .gtL-content .tt-sp{display:none;}
 .gtL-content .tt-split{display:grid;grid-template-columns:minmax(0,1fr) clamp(280px,30%,420px) !important;gap:18px;align-items:start;}
 .gtL-content .tt-split>.gtL-col-main,.gtL-content .tt-split>.gtL-col-side{display:block;min-width:0;}
@@ -115,7 +118,7 @@ function TuttoSetup({players,setPlayers,target,setTarget,onStart,tk:gtTk0,t,them
 .gtL-content .tt-tray{position:static;margin:0 0 14px;border-radius:24px;border:1px solid var(--tt-trayline);padding:14px 14px 16px;box-shadow:0 8px 24px -10px rgba(0,0,0,.4);}
 .gtL-content .gtL-col-side{position:sticky;top:12px;}
 @container gtl (max-width:559px){.gtL-content .tt-split{grid-template-columns:minmax(0,1fr) !important;}.gtL-content .gtL-col-side{position:static;}.gtL-content .tt-lanes{margin-bottom:14px;}}
-[data-phone-landscape] .tt-root{min-height:0;display:block;}
+[data-phone-landscape] .tt-root{min-height:0;display:block;height:auto;}
 [data-phone-landscape] .tt-sp{display:none;}
 [data-phone-landscape] .tt-title{flex-direction:row;justify-content:flex-start;align-items:center;gap:12px;padding:0;margin:0 0 8px;}
 [data-phone-landscape] .tt-word{font-size:28px;}

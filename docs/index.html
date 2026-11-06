@@ -41367,34 +41367,23 @@ function DailyTipCard({ lang, tokens, theme }) {
 		minWidth: 0,
 		flex: 1
 	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		marginBottom: 3,
+		display: "flex",
+		alignItems: "center",
+		justifyContent: "space-between",
+		gap: 8
+	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		minWidth: 0,
 		fontSize: 12,
 		fontWeight: 700,
 		letterSpacing: "0.08em",
 		textTransform: "uppercase",
 		color: tokens.gold,
-		marginBottom: 3,
 		fontFamily: "'Inter', sans-serif"
-	} }, t("dailyTipLabel")), /* @__PURE__ */ import_react.default.createElement("div", {
-		"aria-live": auto ? "off" : "polite",
-		style: { display: "grid" }
-	}, tips.map((tp, i) => /* @__PURE__ */ import_react.default.createElement("div", {
-		key: i,
-		className: "gtL-tipcard-text",
-		"aria-hidden": i === idx ? void 0 : true,
-		style: {
-			gridArea: "1 / 1",
-			visibility: i === idx ? "visible" : "hidden",
-			fontSize: 13,
-			color: tokens.muted,
-			lineHeight: 1.45,
-			fontFamily: "'Inter', sans-serif",
-			textShadow: isVitrum ? "0 1px 3px rgba(0,0,0,0.35)" : void 0
-		}
-	}, tp))), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		marginTop: 6,
+	} }, t("dailyTipLabel")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		flex: "none",
 		display: "flex",
 		alignItems: "center",
-		justifyContent: "space-between",
 		gap: 8
 	} }, /* @__PURE__ */ import_react.default.createElement("span", { style: {
 		fontSize: 13,
@@ -41442,7 +41431,22 @@ function DailyTipCard({ lang, tokens, theme }) {
 		width: "3",
 		height: "9.6",
 		rx: "0.8"
-	}))))))), /* @__PURE__ */ import_react.default.createElement("button", {
+	})))))), /* @__PURE__ */ import_react.default.createElement("div", {
+		key: idx,
+		"aria-live": auto ? "off" : "polite",
+		className: "gtL-tipcard-text gtL-tipbox",
+		style: {
+			height: 62,
+			overflowY: "auto",
+			overscrollBehavior: "contain",
+			WebkitOverflowScrolling: "touch",
+			fontSize: 13,
+			color: tokens.muted,
+			lineHeight: 1.45,
+			fontFamily: "'Inter', sans-serif",
+			textShadow: isVitrum ? "0 1px 3px rgba(0,0,0,0.35)" : void 0
+		}
+	}, tips[idx]))), /* @__PURE__ */ import_react.default.createElement("button", {
 		onClick: () => go(1),
 		"aria-label": t("nextTip"),
 		style: {
@@ -41609,7 +41613,7 @@ var DECO_GAP_TOP = [
 		size: 16
 	},
 	{
-		x: "38%",
+		x: "29%",
 		rot: 6,
 		kind: "suit",
 		suit: "club",
@@ -41617,7 +41621,7 @@ var DECO_GAP_TOP = [
 		size: 13
 	},
 	{
-		x: "63%",
+		x: "71%",
 		rot: -4,
 		kind: "star",
 		color: "#C9A15C",
@@ -41665,7 +41669,7 @@ var DECO_GAP_TOP_NOIR = [
 		size: 16
 	},
 	{
-		x: "38%",
+		x: "29%",
 		rot: 6,
 		kind: "suit",
 		suit: "club",
@@ -41673,7 +41677,7 @@ var DECO_GAP_TOP_NOIR = [
 		size: 13
 	},
 	{
-		x: "63%",
+		x: "71%",
 		rot: -4,
 		kind: "star",
 		color: "#3A3A3A",
@@ -42509,7 +42513,7 @@ function StartPage({ onSelect, lang, theme, viewMode, lastPlayed, dismissedResum
 			flexDirection: "column",
 			overflow: isLaptop ? "visible" : "hidden"
 		}
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, "@media (max-height:700px){.gt-hero-logo{transform:translateY(4px) scale(1.5)!important}}@media (max-height:700px){html[data-tablet]:not([data-phone-landscape]) .gt-hero-logo{transform:translateY(0) scale(1.05)!important}}"), theme === "noir" && beamOn && beamGeo && /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, { key: "beamfx" + beamGeo.k }, /* @__PURE__ */ import_react.default.createElement("div", {
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, "@media (max-height:700px){.gt-hero-logo{transform:translateY(4px) scale(1.5)!important}html:not([data-phone-landscape]) .gtL-tipcard{margin-top:4px!important}html:not([data-phone-landscape]) .gtL-tipcard-body{padding:8px 12px!important}html:not([data-phone-landscape]) .gtL-tipbox{height:40px!important}html:not([data-phone-landscape]) .gtL-startfoot{padding-bottom:6px!important}}"), theme === "noir" && beamOn && beamGeo && /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, { key: "beamfx" + beamGeo.k }, /* @__PURE__ */ import_react.default.createElement("div", {
 		"aria-hidden": true,
 		className: "gt-beam-w",
 		ref: (el) => gtWowInit(el, beamGeo),
@@ -68275,7 +68279,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.06-8";
+var APP_BUILD = "2026.11.06-9";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -109588,7 +109592,7 @@ function App() {
         .gtL-content .gtL-showcase-label { font-size: 12px !important; }
         .gtL-content .gtL-tipcard { max-width: 1080px; width: 100% !important; margin: 20px auto 0; }
         .gtL-content .gtL-tipcard-body { padding: 20px 24px !important; gap: 16px !important; }
-        .gtL-content .gtL-tipcard-text { font-size: 15px !important; line-height: 1.6 !important; }
+        .gtL-content .gtL-tipcard-text { font-size: 15px !important; line-height: 1.6 !important; height: auto !important; overflow: visible !important; }
         .gtL-content .gtL-start { display: flex !important; flex-direction: column !important; }
 
         /* ===== Paket C: Laptop-Bedienung ===== */
@@ -110961,8 +110965,8 @@ function YatzyPlay({ onRematch, players, scores, setScores, onResetSheet, onEdit
 		style: {
 			"--yz-n": players.length,
 			display: "grid",
-			gridTemplateColumns: `minmax(112px, 1.35fr) repeat(${players.length}, minmax(64px, 1fr))`,
-			minWidth: 112 + players.length * 64,
+			gridTemplateColumns: `minmax(134px, 1.35fr) repeat(${players.length}, minmax(60px, 1fr))`,
+			minWidth: 134 + players.length * 60,
 			width: "100%"
 		}
 	}, /* @__PURE__ */ import_react.default.createElement("div", {
@@ -111397,7 +111401,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.06-8");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.06-9");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -113983,7 +113987,7 @@ function UpdateBanner() {
 		let shown = false;
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && !shown && v && v.build && v.build !== "2026.11.06-8") {
+				if (alive && !shown && v && v.build && v.build !== "2026.11.06-9") {
 					shown = true;
 					setReady(true);
 					setHidden(false);

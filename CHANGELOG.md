@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.06-9 (06.11.2026 21:50)
+- Startseite: Tippkarte überdeckt nichts mehr, Yatzy: Zwischenstand passt in die Spalte
+
 ## 2026.11.06-8 (06.11.2026 21:31)
 - Motion ruhiger und einheitlich, Tippkarte mit Pause, grössere Touchziele, bessere Lesbarkeit, Darts-Karten
 

@@ -50,10 +50,10 @@ const CASES = [
   ["Uebersteuerung 0 im Querformat", { ...L, force: false }, false],
   ["Ohne screen-Masse, Fenster quer", { ...L, screenW: 0, screenH: 0 }, true],
   ["Leere Umgebung", {}, false],
-  ["Tablet-Skalierung quer 1280x800 (Faktor 1.6)", { ...L, screenW: 1280, screenH: 800, innerW: 800, innerH: 500, scale: 1.6 }, true],
-  ["Tablet-Skalierung hochkant 800x1280", { ...P, screenW: 800, screenH: 1280, innerW: 500, innerH: 800, scale: 1.6 }, false],
-  ["iPad Pro quer 1366x1024 skaliert", { ...L, screenW: 1366, screenH: 1024, innerW: 854, innerH: 640, scale: 1.6 }, true],
-  ["Tablet quer ohne Skalierung (Laptop-Modus)", { ...L, viewMode: "laptop", screenW: 1280, screenH: 800, scale: 1 }, false],
+  ["Tablet quer 1280x800, Touch", { ...L, screenW: 1280, screenH: 800, innerW: 1280, innerH: 800 }, false],
+  ["Tablet hochkant 800x1280, Touch", { ...P, screenW: 800, screenH: 1280, innerW: 800, innerH: 1280 }, false],
+  ["iPad Pro quer 1366x1024, Touch", { ...L, screenW: 1366, screenH: 1024, innerW: 1366, innerH: 1024 }, false],
+  ["iPad Split View quer 507x1024", { ...L, screenW: 1366, screenH: 1024, innerW: 507, innerH: 1024 }, false],
 ];
 
 let fails = 0, oks = 0;
@@ -65,9 +65,21 @@ for (const [label, fn] of impls) {
     if (got === want) oks++; else { fails++; console.log("FAIL [" + label + "] " + name + ": erwartet " + want + ", erhalten " + got); }
   }
 }
-{ const mod = require("fs").readFileSync(require("path").join(__dirname, "..", "..", "web", "src", "shared", "phone-landscape.js"), "utf8");
-  const ts = new Function(mod.slice(mod.indexOf("const TAB_MIN_SHORT"), mod.indexOf("// Setzt die Viewport")) + "\nreturn tabletScale;")();
-  const TC = [["Handy 393x852", { viewMode: "mobile", coarse: true, screenW: 393, screenH: 852 }, 1], ["Tablet 800x1280", { viewMode: "mobile", coarse: true, screenW: 800, screenH: 1280 }, 1.6], ["iPad mini 744x1133", { viewMode: "mobile", coarse: true, screenW: 744, screenH: 1133 }, 1.6], ["Kleines Tablet 600x960", { viewMode: "mobile", coarse: true, screenW: 600, screenH: 960 }, 600 / 460], ["Tablet Laptop-Modus", { viewMode: "laptop", coarse: true, screenW: 800, screenH: 1280 }, 1], ["Desktop ohne Touch", { viewMode: "mobile", coarse: false, screenW: 1512, screenH: 982 }, 1]];
-  for (const [name, env, want] of TC) { const got = ts(env); if (Math.abs(got - want) < 1e-9) oks++; else { fails++; console.log("FAIL [tabletScale] " + name + ": erwartet " + want + ", erhalten " + got); } } }
+// Ansichtswahl: resolveViewMode (Modul und Spiegel im Inline-Script, Marker vm-resolve-begin/-end)
+{
+  const mod = fs.readFileSync(path.join(ROOT, "web/src/shared/phone-landscape.js"), "utf8");
+  const fns = [["Modul", new Function("const LAYOUT_MEDIUM_MIN = 600;\n" + mod.slice(mod.indexOf("/*vm-resolve-begin*/"), mod.indexOf("/*vm-resolve-end*/")) + "\nreturn resolveViewMode;")()]];
+  for (const f of ["web/index.html", "docs/index.html"]) {
+    const p = path.join(ROOT, f); if (!fs.existsSync(p)) continue;
+    const h = fs.readFileSync(p, "utf8"), a = h.indexOf("/*vm-resolve-begin*/"), b = h.indexOf("/*vm-resolve-end*/");
+    if (a < 0 || b < 0) { if (f === "web/index.html") throw Error("Marker vm-resolve fehlen"); continue; }
+    fns.push([f, new Function(h.slice(a, b) + "\nreturn resolveViewMode;")()]);
+  }
+  const VC = [["auto 390 Handy", "auto", false, 390, "mobile"], ["auto 599", "auto", false, 599, "mobile"], ["auto 600 Tablet", "auto", false, 600, "laptop"],
+    ["auto 768", "auto", false, 768, "laptop"], ["auto 1280", "auto", false, 1280, "laptop"], ["auto 507 Split View", "auto", false, 507, "mobile"],
+    ["auto Handy quer 844", "auto", true, 844, "mobile"], ["gewaehlt Handy auf 1280", "mobile", false, 1280, "mobile"],
+    ["gewaehlt Laptop auf 390", "laptop", false, 390, "laptop"], ["gewaehlt Laptop quer", "laptop", true, 844, "laptop"]];
+  for (const [label, fn] of fns) for (const [name, pref, pl, w, want] of VC) { const got = fn(pref, pl, w); if (got === want) oks++; else { fails++; console.log("FAIL [resolve " + label + "] " + name + ": erwartet " + want + ", erhalten " + got); } }
+}
 console.log((fails ? "FEHLER" : "OK") + " phone-landscape: " + oks + " ok, " + fails + " fehlgeschlagen");
 process.exit(fails ? 1 : 0);

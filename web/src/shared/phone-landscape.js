@@ -29,22 +29,20 @@ import { React } from "../vendor/react-globals.js";
 
 const PL_ATTR = "data-phone-landscape";
 const PL_MAX_SHORT = 500;
-// Tablets (Handy-Modus, Touch als Hauptzeiger, kurze Bildschirmseite >= 600 CSS px): die ganze App wird
-// per <meta name=viewport width=...> gleichmaessig vergroessert (Faktor bis 1.6). Hochkant entsteht so
-// ein grosses Handy-Layout, quer das Handy-Querformat. Laptop-Modus und Handys bleiben unveraendert.
-const PL_MAX_SHORT_TABLET = 700;
-const TAB_MIN_SHORT = 600;
-const TAB_MAX_SCALE = 1.6;
-const TAB_TARGET = 460;
-const VP_DEFAULT = "width=device-width, initial-scale=1, viewport-fit=cover";
-
-// Reiner Faktor: 1 = keine Vergroesserung. e: {viewMode, coarse, screenW, screenH}.
-function tabletScale(e) {
-  if (!e || e.viewMode === "laptop" || !e.coarse) return 1;
-  const short = Math.min(e.screenW || 0, e.screenH || 0);
-  if (!short || short < TAB_MIN_SHORT) return 1;
-  return Math.min(TAB_MAX_SCALE, Math.max(1, short / TAB_TARGET));
-}
+// Ansicht: "mobile" | "laptop" | "auto". Bei "auto" (Standard, solange die Person nie selbst gewaehlt hat)
+// entscheidet die echte Fensterbreite: ab LAYOUT_MEDIUM_MIN CSS px Laptop-Layout (Seitenleiste plus
+// Inhaltsflaeche), darunter Handy. Ein Handy im Querformat (Regel unten) bleibt immer im Handy-Layout.
+// Layoutklassen: kompakt < 600, mittel 600 bis 1023, erweitert ab 1024 (data-layout auf <html>).
+// Der Viewport bleibt immer device-width, es gibt keine kuenstliche Vergroesserung.
+const LAYOUT_MEDIUM_MIN = 600;
+const LAYOUT_EXPANDED_MIN = 1024;
+function layoutClass(w) { return w >= LAYOUT_EXPANDED_MIN ? "expanded" : w >= LAYOUT_MEDIUM_MIN ? "medium" : "compact"; }
+// pref: gespeicherte Ansicht, plActive: Handy-Querformat aktiv, w: Fensterbreite in CSS px.
+/*vm-resolve-begin*/function resolveViewMode(pref, plActive, w) {
+  if (pref === "laptop") return "laptop";
+  if (pref === "mobile") return "mobile";
+  return !plActive && w >= LAYOUT_MEDIUM_MIN ? "laptop" : "mobile";
+}/*vm-resolve-end*/
 const PL_FORCE_KEY = "gametab-pl-force";
 const PL_STATE_KEY = "spieleblock-app-state-v1";
 
@@ -57,9 +55,8 @@ function decidePhoneLandscape(e) {
   if (!e.touch) return false;
   const iw = e.innerW || 0, ih = e.innerH || 0;
   const sw = e.screenW || 0, sh = e.screenH || 0;
-  const k = e.scale > 1 ? e.scale : 1;
-  const short = (sw && sh ? Math.min(sw, sh) : Math.min(iw, ih)) / k;
-  if (!short || short > (k > 1 ? PL_MAX_SHORT_TABLET : PL_MAX_SHORT)) return false;
+  const short = sw && sh ? Math.min(sw, sh) : Math.min(iw, ih);
+  if (!short || short > PL_MAX_SHORT) return false;
   let land;
   if (typeof e.orientationType === "string" && e.orientationType) land = e.orientationType.indexOf("landscape") === 0;
   else if (typeof e.windowOrientation === "number") land = Math.abs(e.windowOrientation) === 90;
@@ -82,37 +79,24 @@ function plReadForce() {
   return null;
 }
 
+// Gespeicherte Praeferenz: nur eine selbst gewaehlte Ansicht zaehlt. Aeltere Staende ohne Feld
+// viewModeChosen: "laptop" gilt als gewaehlt (Standard war Handy), "mobile" als nie gewaehlt (auto).
 function plReadSavedViewMode() {
-  try { const s = JSON.parse(window.localStorage.getItem(PL_STATE_KEY) || "{}") || {}; return s.viewMode === "laptop" ? "laptop" : "mobile"; } catch (_) { return "mobile"; }
+  try {
+    const s = JSON.parse(window.localStorage.getItem(PL_STATE_KEY) || "{}") || {};
+    const chosen = s.viewModeChosen === true || (s.viewModeChosen === undefined && s.viewMode === "laptop");
+    return chosen ? (s.viewMode === "laptop" ? "laptop" : "mobile") : "auto";
+  } catch (_) { return "auto"; }
 }
 
 function plMQ(q) { try { return !!(window.matchMedia && window.matchMedia(q).matches); } catch (_) { return false; } }
-
-// Setzt die Viewport-Breite passend zum Tablet-Faktor (nur wenn sich etwas aendert).
-let tabLastVp = null;
-function applyTabletViewport(viewMode) {
-  const w = window, s = w.screen || {};
-  const k = tabletScale({ viewMode, coarse: plMQ("(pointer: coarse)"), screenW: s.width || 0, screenH: s.height || 0 });
-  let land = false;
-  try { land = s.orientation && s.orientation.type ? String(s.orientation.type).indexOf("landscape") === 0 : (s.width || 0) > (s.height || 0); } catch (_) {}
-  const side = land ? Math.max(s.width || 0, s.height || 0) : Math.min(s.width || 0, s.height || 0);
-  const vp = k > 1 ? "width=" + Math.round(side / k) + ", viewport-fit=cover" : VP_DEFAULT;
-  if (vp !== tabLastVp) {
-    tabLastVp = vp;
-    const m = document.querySelector('meta[name="viewport"]');
-    if (m && m.getAttribute("content") !== vp) m.setAttribute("content", vp);
-  }
-  document.documentElement.toggleAttribute("data-tablet", k > 1);
-  return k;
-}
 
 function plEnv(viewMode, force) {
   const w = window, s = w.screen || {};
   let ot = null;
   try { ot = s.orientation && s.orientation.type ? String(s.orientation.type) : null; } catch (_) {}
-  const scale = applyTabletViewport(viewMode);
   return {
-    viewMode, force, scale,
+    viewMode, force,
     touch: (w.navigator && w.navigator.maxTouchPoints > 0) || plMQ("(any-pointer: coarse)"),
     screenW: s.width || 0, screenH: s.height || 0,
     orientationType: ot,
@@ -123,13 +107,16 @@ function plEnv(viewMode, force) {
 }
 
 // Modulzustand (eine Quelle fuer Attribut und Hook).
-let plViewMode = null, plForce, plActive = null, plBound = false, plTimer = 0, plRefs = 0;
+let plViewMode = null, plMode = "mobile", plLayout = "compact", plForce, plActive = null, plBound = false, plTimer = 0, plRefs = 0;
 const plSubs = new Set();
 
 function plApply(v) {
   const root = document.documentElement;
   if (v) root.setAttribute(PL_ATTR, ""); else root.removeAttribute(PL_ATTR);
   plActive = v;
+  plNotify();
+}
+function plNotify() {
   plSubs.forEach(f => { try { f(); } catch (_) {} });
 }
 
@@ -144,8 +131,14 @@ function updatePhoneLandscape() {
   if (typeof window === "undefined") return false;
   if (plViewMode == null) plViewMode = plReadSavedViewMode();
   if (plForce === undefined) plForce = plReadForce();
-  const v = decidePhoneLandscape(plEnv(plViewMode, plForce));
-  if (v !== plActive) plApply(v);
+  const v = decidePhoneLandscape(plEnv(plViewMode === "laptop" ? "laptop" : "mobile", plForce));
+  const iw = window.innerWidth || 0;
+  const mode = resolveViewMode(plViewMode, v, iw), lc = layoutClass(iw);
+  const root = document.documentElement;
+  root.setAttribute("data-layout", lc);
+  const changed = mode !== plMode || lc !== plLayout;
+  plMode = mode; plLayout = lc;
+  if (v !== plActive) plApply(v); else if (changed) plNotify();
   plSetVvh();
   return v;
 }
@@ -178,7 +171,7 @@ function plUnbind() {
 
 // Von App aufgerufen, sobald der gespeicherte Zustand geladen ist und bei jedem Wechsel Handy/Laptop.
 function setPhoneLandscapeViewMode(mode) {
-  plViewMode = mode === "laptop" ? "laptop" : "mobile";
+  plViewMode = mode === "laptop" || mode === "mobile" ? mode : "auto";
   return updatePhoneLandscape();
 }
 
@@ -200,9 +193,18 @@ function usePhoneLandscape() {
 }
 
 // App-Hook: haelt viewMode synchron (useLayoutEffect = vor dem Paint, kein Flackern).
+// Gibt die wirksame Ansicht zurueck ("mobile" oder "laptop"); bei "auto" folgt sie live der Fensterbreite
+// (Split View, Drehen) ohne Neuladen. viewMode: "mobile" | "laptop" | "auto".
+function plModeSnapshot() { return plMode; }
+function plLayoutSnapshot() { return plLayout; }
 function usePhoneLandscapeRoot(viewMode, loaded) {
   React.useLayoutEffect(() => plRetain(), []);
   React.useLayoutEffect(() => { if (loaded) setPhoneLandscapeViewMode(viewMode); }, [viewMode, loaded]);
+  return React.useSyncExternalStore(plSubscribe, plModeSnapshot, () => "mobile");
+}
+// Layoutklasse fuer Komponenten: "compact" | "medium" | "expanded".
+function useLayoutClass() {
+  return React.useSyncExternalStore(plSubscribe, plLayoutSnapshot, () => "compact");
 }
 
-export { PL_ATTR, PL_MAX_SHORT, tabletScale, decidePhoneLandscape, updatePhoneLandscape, setPhoneLandscapeViewMode, usePhoneLandscape, usePhoneLandscapeRoot, plUnbind };
+export { PL_ATTR, PL_MAX_SHORT, LAYOUT_MEDIUM_MIN, LAYOUT_EXPANDED_MIN, layoutClass, resolveViewMode, useLayoutClass, decidePhoneLandscape, updatePhoneLandscape, setPhoneLandscapeViewMode, usePhoneLandscape, usePhoneLandscapeRoot, plUnbind };

@@ -65,7 +65,6 @@ const PLD_CSS = `
 [data-phone-landscape] .gtL-padsheet.pld-pad > .pld-padR { display: flex; flex-direction: column; grid-column: 2; grid-row: 2 / span 3; min-width: 0; }
 [data-phone-landscape] .pld-pad .pld-padR > * { margin-bottom: 8px !important; }
 [data-phone-landscape] .pld-pad .pld-padR > button[data-gt-sound="1"] { margin-top: auto; margin-bottom: 0 !important; position: sticky; bottom: 0; }
-[data-tablet] .pld-free :is(button, input) { min-height: 44px !important; min-width: 44px !important; }
 @media (prefers-reduced-motion: reduce) { [data-phone-landscape] .pld * { scroll-behavior: auto !important; } }
 `;
 export { PLD_CSS };

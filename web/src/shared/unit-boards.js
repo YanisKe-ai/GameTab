@@ -6,6 +6,8 @@ import { React } from "../vendor/react-globals.js";
 const GT_UB_CSS = `
 .gt-ub-fill{display:contents}
 .gt-u-col .gt-su-cta{margin-top:auto}
+.gt-u-col .gt-u-dock{margin-top:auto}
+.gtL-content .gt-u-col .gt-u-dock,[data-phone-landscape] .gt-u-col .gt-u-dock{margin-top:12px}
 .gt-ub-title{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.01em}
 @media (prefers-reduced-motion: reduce){.gt-ub-anim{transition:none!important;animation:none!important}}
 `;

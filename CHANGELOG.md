@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.07-8 (07.11.2026 00:27)
+- Tutto-Einrichtung mit neuem Titel, weiche Verläufe
+
 ## 2026.11.07-7 (07.11.2026 00:23)
 - Tutto: Ziel an alter Stelle
 

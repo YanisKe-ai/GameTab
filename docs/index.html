@@ -22820,10 +22820,11 @@ var GT_UNIT_CSS = `
 @media (display-mode: standalone){.gt-u-col{min-height:calc(100vh - 52px)}}
 .gt-u-col>*{position:relative;z-index:1}
 .gt-u-col>.gt-gamehead,.gt-u-col>:has(>.gt-gamehead){z-index:20}
-.gt-u-col>.gt-u-glow{position:absolute;z-index:0;top:-20px;left:-12px;right:-12px;height:320px;pointer-events:none;background:radial-gradient(120% 100% at 50% 0,color-mix(in oklab,var(--gt-u-acc) 30%,transparent),transparent 72%)}
+.gt-u-col>.gt-u-glow{position:absolute;z-index:0;top:calc(-20px - env(safe-area-inset-top,0px));left:calc(50% - 50vw);right:calc(50% - 50vw);height:calc(320px + env(safe-area-inset-top,0px));pointer-events:none;background:radial-gradient(120% 100% at 50% 0,color-mix(in oklab,var(--gt-u-acc) 30%,transparent),transparent 72%)}
 html[data-gt-theme="light"] .gt-u-col>.gt-u-glow{background:radial-gradient(120% 100% at 50% 0,color-mix(in oklab,var(--gt-u-acc) 16%,transparent),transparent 72%)}
 html[data-gt-theme="noir"] .gt-u-col>.gt-u-glow,html[data-gt-theme="vitrum"] .gt-u-col>.gt-u-glow{display:none}
 .gt-u-col>.gt-u-dock,.gt-u-col>.gt-su-cta{margin-top:auto}
+.gt-u-col>.gt-su-cta::before{left:calc(50% - 50vw);right:calc(50% - 50vw);bottom:-40px}
 .gt-u-dock{position:sticky;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:6;display:flex;flex-direction:column;gap:8px;padding-top:12px}
 .gt-u-dock>button{width:100%;min-height:56px}
 .gtL-content .gt-u-col{min-height:0}
@@ -47405,7 +47406,7 @@ function TuttoGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 			position: "relative",
 			overflow: "clip"
 		}
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, TUTTO_TABLE_CSS, PLD_CSS), /* @__PURE__ */ import_react.default.createElement(TuttoDecoration, { theme }), /* @__PURE__ */ import_react.default.createElement("div", {
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, TUTTO_TABLE_CSS, PLD_CSS, TUTTO_PLAY_CSS), /* @__PURE__ */ import_react.default.createElement(TuttoDecoration, { theme }), /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-page gtL-game pl-wide pl-page pl-head-compact pld",
 		style: {
 			maxWidth: 380,
@@ -47422,8 +47423,19 @@ function TuttoGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 		theme,
 		t,
 		onHome,
-		rulesText: t("rulesTutto")
-	}), /* @__PURE__ */ import_react.default.createElement(TuttoSetup, {
+		rulesText: t("rulesTutto"),
+		hideTitle: true
+	}), /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		...ttVars(theme),
+		display: "flex",
+		justifyContent: "center",
+		padding: "0 0 14px",
+		position: "relative",
+		zIndex: 1
+	} }, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "tt-word",
+		"aria-hidden": "true"
+	}, "TUTTO")), /* @__PURE__ */ import_react.default.createElement(TuttoSetup, {
 		theme,
 		players: state.players,
 		setPlayers,
@@ -68228,7 +68240,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.07-7";
+var APP_BUILD = "2026.11.07-8";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -111538,7 +111550,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.07-7");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.07-8");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -114144,7 +114156,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.07-7" && !upd) {
+		if (seen && seen !== "2026.11.07-8" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -114153,7 +114165,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.07-7" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.07-8" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

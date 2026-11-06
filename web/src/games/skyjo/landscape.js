@@ -8,7 +8,9 @@ const PLD_CSS = `
 [data-phone-landscape] .pld-shell { padding: calc(var(--pl-sat) + 4px) 0 0 !important; min-height: 0 !important; }
 [data-phone-landscape] .pld { display: flex; flex-direction: column; height: calc(var(--pl-avail) - var(--pl-sat) - 4px - var(--pl-sab)); min-height: 0; }
 [data-phone-landscape] .pld .gt-gamehead { position: relative !important; top: auto !important; flex: none; }
-[data-phone-landscape] .pld > div:has(> .pld-split) { flex: 1 1 0; min-height: 0; box-sizing: border-box; padding-bottom: 4px; display: flex; flex-direction: column; }
+[data-phone-landscape] .pld > .gt-u-col { flex: 1 1 0; min-height: 0; display: flex; flex-direction: column; }
+[data-phone-landscape] .gt-ug-ent { gap: 10px; }
+[data-phone-landscape] .pld > div:has(> .pld-split), [data-phone-landscape] .pld > .gt-u-col > div:has(> .pld-split) { flex: 1 1 0; min-height: 0; box-sizing: border-box; padding-bottom: 4px; display: flex; flex-direction: column; }
 [data-phone-landscape] .pld-split { display: grid; grid-template-columns: minmax(0, var(--pld-l, 5fr)) minmax(0, var(--pld-r, 6fr)); grid-template-rows: minmax(0, 1fr); gap: var(--pl-gap); align-items: stretch; width: 100%; box-sizing: border-box; flex: 1 1 0; min-height: 0; }
 [data-phone-landscape] .pld-split > :is(.gtL-col-main, .gtL-col-side) { display: block; min-width: 0; min-height: 0; box-sizing: border-box; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
 [data-phone-landscape] .pld-split > .gtL-col-side2 { display: block; min-width: 0; box-sizing: border-box; }

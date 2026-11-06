@@ -5,6 +5,7 @@ import { React } from "../vendor/react-globals.js";
 import { GtCount, gtLeader } from "./fx.js";
 import { GameIcon } from "../assets/icons.js";
 import { playerHue } from "../themes/palette.js";
+import { gtFill } from "./setup-ui.js";
 const GT_UG_CSS = `
 .gt-ug.gt-u-col{gap:10px}
 .gtL-content .gt-ug.gt-u-col,[data-phone-landscape] .gt-ug.gt-u-col{gap:0}
@@ -74,7 +75,7 @@ function GtRace({ players, target, tk, theme, accent, font, label }) {
     <div className="gt-ug-lab" style={{ color: tk.muted }}>{label}</div>
     <div className="gt-ug-rl" style={{ height: 30 }}>
       <i style={{ background: ugLine(theme) }} />
-      <div className="gt-ug-rt">{ms.map(m => <b key={m.p.id} title={m.p.name + " " + m.p.total} style={{ left: `calc((100% - 24px) * ${m.f} ${m.f > 0.5 ? "-" : "+"} ${m.r * 22}px)`, top: 3, zIndex: 10 - m.r, background: playerHue(m.i, theme) }}>{m.i + 1}</b>)}</div>
+      <div className="gt-ug-rt">{ms.map(m => <b key={m.p.id} title={m.p.name + " " + m.p.total} style={{ left: `calc((100% - 24px) * ${m.f} ${m.f > 0.5 ? "-" : "+"} ${m.r * 22}px)`, top: 3, zIndex: 10 - m.r, background: gtFill(playerHue(m.i, theme)).bg, color: gtFill(playerHue(m.i, theme)).fg }}>{m.i + 1}</b>)}</div>
       <u style={{ color: accent, fontFamily: font }}>{target}</u>
     </div>
   </section>;

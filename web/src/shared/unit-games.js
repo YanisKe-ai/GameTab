@@ -12,6 +12,9 @@ const GT_UG_CSS = `
 .gtL-content .gt-ug-ent{display:flex;flex-direction:column;gap:10px}
 .gt-ug-fill{display:contents}
 .gtL-content .gt-ug-fill,[data-phone-landscape] .gt-ug-fill{display:flex;flex-direction:column;gap:14px}
+.gtL-content .gt-ug-g8,[data-phone-landscape] .gt-ug-g8{gap:8px}
+.plsu-split,.plsu-main,.plsu-side{display:contents}
+.gtL-content .plsu-split,.gtL-content .plsu-main,.gtL-content .plsu-side,[data-phone-landscape] .plsu-split,[data-phone-landscape] .plsu-main,[data-phone-landscape] .plsu-side{display:block}
 .gtL-content .gt-ug-po,[data-phone-landscape] .gt-ug-po{display:none!important}
 .gt-u-col .gt-su-cta{margin-top:auto}
 .gtL-content .gt-u-col .gt-su-cta,[data-phone-landscape] .gt-u-col .gt-su-cta{margin-top:6px}

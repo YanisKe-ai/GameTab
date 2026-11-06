@@ -11,8 +11,12 @@ function gtImgDevice() {
   return { ios, desktop: !ios && !touchOnly };
 }
 
+/* Teilen von Dateien geht nur im sicheren Kontext (https, localhost) und wenn der Browser genau diese Dateien annimmt. */
 function gtImgCanShare(files) {
-  try { return !!(navigator.share && navigator.canShare && navigator.canShare({ files })); } catch (_) { return false; }
+  try {
+    if (window.isSecureContext === false) return false;
+    return typeof navigator.share === "function" && typeof navigator.canShare === "function" && !!navigator.canShare({ files });
+  } catch (_) { return false; }
 }
 
 /* Welche Knoepfe die Vorschau zeigt. Reine Regel, geprueft in tests/logic/test_image_save.mjs.
@@ -56,14 +60,27 @@ function gtImgDownload(items) {
   items.forEach((it, i) => { if (i === 0) gtImgDownloadOne(it); else setTimeout(() => gtImgDownloadOne(it), i * 350); });
 }
 
-/* true: erledigt oder selbst abgebrochen. false: Teilen ging nicht, Speichern anbieten. */
-async function gtImgShare(items, title) {
-  try {
-    await navigator.share({ files: items.map((it) => it.file), title: title || "GameTab" });
-    return true;
-  } catch (e) {
-    return !!(e && e.name === "AbortError");
-  }
+/* Wartezeit, nach der ein Teilen-Aufruf ohne Antwort als haengend gilt. Das Teilen-Blatt kann lange offen sein,
+   darum grosszuegig. Danach sind die Knoepfe wieder frei, ein spaeteres Ergebnis des Aufrufs wird ignoriert. */
+const GT_IMG_SHARE_TIMEOUT = 60000;
+
+/* Reine Auswertung eines Teilen-Aufrufs (geprueft in tests/logic/test_image_save.mjs).
+   "ok": geteilt. "abort": selbst abgebrochen (leise). "fail": Teilen ging nicht, Speichern anbieten.
+   "timeout": keine Antwort, Knoepfe wieder frei. */
+function gtImgShareRun(shareFn, timeoutMs) {
+  return new Promise((resolve) => {
+    let done = false;
+    let timer = null;
+    const end = (r) => { if (done) return; done = true; clearTimeout(timer); resolve(r); };
+    timer = setTimeout(() => end("timeout"), timeoutMs == null ? GT_IMG_SHARE_TIMEOUT : timeoutMs);
+    let p;
+    try { p = Promise.resolve(shareFn()); } catch (_) { end("fail"); return; }
+    p.then(() => end("ok"), (e) => end(e && e.name === "AbortError" ? "abort" : "fail"));
+  });
 }
 
-export { gtImgDevice, gtImgCanShare, gtImgPlan, gtImgItems, gtImgFree, gtImgDownload, gtImgShare };
+async function gtImgShare(items, title, timeoutMs) {
+  return gtImgShareRun(() => navigator.share({ files: items.map((it) => it.file), title: title || "GameTab" }), timeoutMs);
+}
+
+export { gtImgDevice, gtImgCanShare, gtImgPlan, gtImgItems, gtImgFree, gtImgDownload, gtImgShare, gtImgShareRun, GT_IMG_SHARE_TIMEOUT };

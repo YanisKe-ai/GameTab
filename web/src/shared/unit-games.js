@@ -21,6 +21,10 @@ const GT_UG_CSS = `
 html .gt-u-col .gt-u-dock{margin-top:auto}
 html .gtL-content .gt-u-col .gt-u-dock{margin-top:16px}
 html[data-phone-landscape] .gt-u-col .gt-u-dock{margin-top:10px}
+.gt-ug .gt-u-dock::before{content:'';position:absolute;left:-16px;right:-16px;top:-26px;bottom:-12px;z-index:-1;pointer-events:none;background:linear-gradient(to bottom,transparent 0,rgba(10,12,20,.9) 34%);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 34%);mask-image:linear-gradient(to bottom,transparent 0,#000 34%)}
+html[data-gt-theme="light"] .gt-ug .gt-u-dock::before{background:linear-gradient(to bottom,transparent 0,rgba(250,247,240,.94) 34%)}
+html[data-gt-theme="noir"] .gt-ug .gt-u-dock::before{background:linear-gradient(to bottom,transparent 0,rgba(0,0,0,.92) 34%)}
+.gtL-content .gt-ug .gt-u-dock::before,[data-phone-landscape] .gt-ug .gt-u-dock::before{display:none}
 .gt-ug-dock-hint{font-size:13px;text-align:center;line-height:1.3}
 .gt-ug-lab{font-size:12px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;font-family:'Inter',sans-serif}
 .gt-ug-race,.gt-ug-bars{border-radius:20px;padding:14px 16px;box-sizing:border-box}
@@ -49,8 +53,8 @@ html[data-phone-landscape] .gt-u-col .gt-u-dock{margin-top:10px}
 .gt-ug-row{min-height:88px}
 .gt-ug-many .gt-ug-row{min-height:64px}
 .gtL-content .gt-ug-row,[data-phone-landscape] .gt-ug-row{min-height:0}
-.gt-ug-hide-total .gtL-entrytotal{display:none}
-.gtL-content .gt-ug-hide-total .gtL-entrytotal,[data-phone-landscape] .gt-ug-hide-total .gtL-entrytotal{display:block}
+.gt-ug-hide-total .gtL-entrytotal{position:absolute;width:1px;height:1px;margin:-1px!important;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.gtL-content .gt-ug-hide-total .gtL-entrytotal,[data-phone-landscape] .gt-ug-hide-total .gtL-entrytotal{position:static;width:auto;height:auto;margin:0!important;overflow:visible;clip:auto;white-space:normal}
 @media (prefers-reduced-motion: reduce){.gt-ug-tile>.gt-ug-tf,.gt-ug-bb>i{transition:none}}
 `;
 function ugSurf(theme) { return theme === "light" ? "rgba(24,22,32,0.06)" : theme === "noir" ? "rgba(255,255,255,0.08)" : "rgba(255,255,255,0.06)"; }

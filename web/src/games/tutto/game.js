@@ -49,6 +49,7 @@ function TuttoSetup({players,setPlayers,target,setTarget,onStart,tk:gtTk0,t,them
 .tt-split,.tt-split>.gtL-col-main,.tt-split>.gtL-col-side{display:contents;}
 .tt-sp{flex:1 1 0;min-height:8px;}
 .tt-sp1{margin-top:-18px;}
+@media (display-mode: standalone){.tt-sp1{flex-basis:calc(env(safe-area-inset-top,0px) / 2);}.tt-sp3{flex-basis:env(safe-area-inset-top,0px);}}
 .tt-sp3{flex:1 1 0;min-height:10px;}
 .tt-title{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:0 14px;text-align:center;flex:none;}
 .tt-word{font-family:'Bowlby One',sans-serif;font-weight:400;font-size:54px;line-height:1.05;color:var(--tt-wy);-webkit-text-stroke:.028em var(--tt-wk);paint-order:stroke fill;text-shadow:var(--tt-wsh);animation:ttStamp .5s cubic-bezier(.3,1.4,.5,1) both;white-space:nowrap;}

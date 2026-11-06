@@ -122,7 +122,7 @@ function RulesButton({onClick,onHome,onEndGame,onMore,moreLabel,tokens}){const[c
         .gtL-content .gtL-showcase-label { font-size: 12px !important; }
         .gtL-content .gtL-tipcard { max-width: 1080px; width: 100% !important; margin: 20px auto 0; }
         .gtL-content .gtL-tipcard-body { padding: 20px 24px !important; gap: 16px !important; }
-        .gtL-content .gtL-tipcard-text { font-size: 15px !important; line-height: 1.6 !important; }
+        .gtL-content .gtL-tipcard-text { font-size: 15px !important; line-height: 1.6 !important; height: auto !important; overflow: visible !important; }
         .gtL-content .gtL-start { display: flex !important; flex-direction: column !important; }
 
         /* ===== Paket C: Laptop-Bedienung ===== */

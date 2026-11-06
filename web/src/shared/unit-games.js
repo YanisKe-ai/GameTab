@@ -22,7 +22,7 @@ const GT_UG_CSS = `
 html .gt-u-col .gt-u-dock{margin-top:auto}
 html .gtL-content .gt-u-col .gt-u-dock{margin-top:16px}
 html[data-phone-landscape] .gt-u-col .gt-u-dock{margin-top:10px}
-.gt-ug .gt-u-dock::before{content:'';position:absolute;left:-16px;right:-16px;top:-26px;bottom:-12px;z-index:-1;pointer-events:none;background:linear-gradient(to bottom,transparent 0,rgba(10,12,20,.9) 34%);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 34%);mask-image:linear-gradient(to bottom,transparent 0,#000 34%)}
+.gt-ug .gt-u-dock::before{content:'';position:absolute;left:-12px;right:-12px;top:-26px;bottom:-12px;z-index:-1;pointer-events:none;background:linear-gradient(to bottom,transparent 0,rgba(10,12,20,.9) 34%);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 34%);mask-image:linear-gradient(to bottom,transparent 0,#000 34%)}
 html[data-gt-theme="light"] .gt-ug .gt-u-dock::before{background:linear-gradient(to bottom,transparent 0,rgba(250,247,240,.94) 34%)}
 html[data-gt-theme="noir"] .gt-ug .gt-u-dock::before{background:linear-gradient(to bottom,transparent 0,rgba(0,0,0,.92) 34%)}
 .gtL-content .gt-ug .gt-u-dock::before,[data-phone-landscape] .gt-ug .gt-u-dock::before{display:none}

@@ -77,7 +77,7 @@ import { GT_UG_CSS } from "../../shared/unit-games.js";
 .gt-sch-dame{right:0}
 @container (max-height:60px){.gt-sch-deco img{display:none}}
 [data-phone-landscape] .gt-sch-deco{display:none}
-.gtL-content .gt-sch-deco{position:fixed;right:clamp(20px,2.6vw,44px);bottom:0;width:clamp(280px,29%,400px);height:38dvh;margin:0;flex:none}
+.gtL-content .gt-sch-deco{position:fixed;right:clamp(20px,2.6vw,44px);bottom:0;width:clamp(280px,29%,400px);height:38dvh;margin:0;flex:none}@media (max-height:640px){.gtL-content .gt-sch-deco{display:none}}
 @media (display-mode:standalone){.gt-sch-classic::before{content:"";position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top);background:#1F2021;z-index:30}}
 .gt-weis-lap{display:none}
 .gtL-content .gt-weis-lap{display:block}

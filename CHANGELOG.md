@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.07-1 (07.11.2026 00:06)
+- Tutto: Karten passen sich der Spielerzahl an, iPhone: Seite wackelt nicht mehr, Einstellungen: alle laufenden Spiele beenden
+
 ## 2026.11.06-13 (06.11.2026 23:58)
 - Tutto: Würfel landen gerade
 

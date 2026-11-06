@@ -8605,6 +8605,11 @@ var TRANSLATIONS = {
 		statsResetButton: "Alle Ergebnisse löschen",
 		statsResetDone: "Statistiken gelöscht",
 		statsResetHint: "Löscht alle gespeicherten Partien-Ergebnisse unwiderruflich. Gruppen bleiben erhalten.",
+		endAllLabel: "Laufende Spiele beenden",
+		endAllHint: "Beendet alle laufenden Partien ohne Wertung. Namen, Gruppen, Ergebnisse und Statistik bleiben.",
+		endAllButton: "Alle laufenden Spiele beenden",
+		endAllNone: "Keine laufenden Spiele",
+		endAllDone: "Laufende Spiele beendet",
 		statsTogetherTitle: "Gemeinsame Partien",
 		roundLabel: (n) => `Runde ${n}`,
 		deleteLastRound: "Letzte Runde löschen",
@@ -10175,6 +10180,11 @@ var TRANSLATIONS = {
 		statsResetButton: "Delete all results",
 		statsResetDone: "Statistics deleted",
 		statsResetHint: "Permanently deletes all recorded match results. Groups stay intact.",
+		endAllLabel: "End games in progress",
+		endAllHint: "Ends all games in progress without scoring. Names, groups, results and statistics stay.",
+		endAllButton: "End all games in progress",
+		endAllNone: "No games in progress",
+		endAllDone: "Games in progress ended",
 		statsTogetherTitle: "Matches together",
 		roundLabel: (n) => `Round ${n}`,
 		deleteLastRound: "Delete last round",
@@ -11745,6 +11755,11 @@ var TRANSLATIONS = {
 		statsResetButton: "Supprimer tous les résultats",
 		statsResetDone: "Statistiques supprimées",
 		statsResetHint: "Supprime définitivement tous les résultats de parties enregistrés. Les groupes restent conservés.",
+		endAllLabel: "Terminer les parties en cours",
+		endAllHint: "Termine toutes les parties en cours sans les compter. Les noms, groupes, résultats et statistiques restent.",
+		endAllButton: "Terminer toutes les parties en cours",
+		endAllNone: "Aucune partie en cours",
+		endAllDone: "Parties en cours terminées",
 		statsTogetherTitle: "Parties en commun",
 		roundLabel: (n) => `Manche ${n}`,
 		deleteLastRound: "Supprimer la dernière manche",
@@ -13315,6 +13330,11 @@ var TRANSLATIONS = {
 		statsResetButton: "Elimina tutti i risultati",
 		statsResetDone: "Statistiche eliminate",
 		statsResetHint: "Elimina definitivamente tutti i risultati delle partite registrati. I gruppi restano invariati.",
+		endAllLabel: "Termina le partite in corso",
+		endAllHint: "Termina tutte le partite in corso senza conteggio. Nomi, gruppi, risultati e statistiche restano.",
+		endAllButton: "Termina tutte le partite in corso",
+		endAllNone: "Nessuna partita in corso",
+		endAllDone: "Partite in corso terminate",
 		statsTogetherTitle: "Partite insieme",
 		roundLabel: (n) => `Round ${n}`,
 		deleteLastRound: "Elimina ultimo round",
@@ -14885,6 +14905,11 @@ var TRANSLATIONS = {
 		statsResetButton: "Borrar todos los resultados",
 		statsResetDone: "Estadísticas borradas",
 		statsResetHint: "Elimina permanentemente todos los resultados de partidas guardados. Los grupos se mantienen.",
+		endAllLabel: "Terminar partidas en curso",
+		endAllHint: "Termina todas las partidas en curso sin puntuar. Los nombres, grupos, resultados y estadísticas se mantienen.",
+		endAllButton: "Terminar todas las partidas en curso",
+		endAllNone: "Ninguna partida en curso",
+		endAllDone: "Partidas en curso terminadas",
 		statsTogetherTitle: "Partidas juntos",
 		roundLabel: (n) => `Ronda ${n}`,
 		deleteLastRound: "Eliminar última ronda",
@@ -16455,6 +16480,11 @@ var TRANSLATIONS = {
 		statsResetButton: "Apagar todos os resultados",
 		statsResetDone: "Estatísticas apagadas",
 		statsResetHint: "Apaga permanentemente todos os resultados de partidas guardados. Os grupos mantêm-se.",
+		endAllLabel: "Terminar jogos em curso",
+		endAllHint: "Termina todos os jogos em curso sem pontuar. Os nomes, grupos, resultados e estatísticas mantêm-se.",
+		endAllButton: "Terminar todos os jogos em curso",
+		endAllNone: "Nenhum jogo em curso",
+		endAllDone: "Jogos em curso terminados",
 		statsTogetherTitle: "Partidas juntos",
 		roundLabel: (n) => `Ronda ${n}`,
 		deleteLastRound: "Eliminar última ronda",
@@ -46676,6 +46706,7 @@ var TUTTO_PLAY_CSS = `@font-face{font-family:'Inter';font-style:italic;font-weig
 .tt-die{position:absolute;left:0;top:1px;width:24px;height:24px;border-radius:6px;box-shadow:0 2px 0 rgba(0,0,0,.35);will-change:transform;}
 .tt-pip{position:absolute;width:4.4px;height:4.4px;margin:-2.2px;border-radius:50%;}
 .tt-flag{position:absolute;right:0;top:2px;width:16px;height:22px;border-radius:2px;background:repeating-conic-gradient(var(--tt-chk1) 0 25%,var(--tt-chk2) 0 50%) 0 0/8px 8px;box-shadow:0 0 0 1px var(--tt-dash);}
+@media (min-height:760px){.tt-lanes.n2,.tt-lanes.n3{--tt-lh:108px;gap:12px;}.tt-lanes.n2{--tt-lh:136px;}.tt-lanes.n2 .tt-lane,.tt-lanes.n3 .tt-lane{height:var(--tt-lh);display:flex;flex-direction:column;justify-content:center;gap:8px;padding:12px 16px;border-radius:22px;}.tt-lanes.n2 .tt-lane{gap:16px;}.tt-lanes.n2 .tt-glide,.tt-lanes.n3 .tt-glide{height:var(--tt-lh);border-radius:22px;}.tt-lanes.n2 .tt-nmt,.tt-lanes.n3 .tt-nmt{font-size:20px;}.tt-lanes.n2 .tt-num{font-size:46px;}.tt-lanes.n3 .tt-num{font-size:38px;}.tt-lanes.n2 .tt-track,.tt-lanes.n3 .tt-track{margin-top:0;}.gtL-content .tt-lanes.n2,.gtL-content .tt-lanes.n3,[data-phone-landscape] .tt-lanes.n2,[data-phone-landscape] .tt-lanes.n3{--tt-lh:84px;gap:8px;}}
 .tt-lanes.is-compact{gap:6px;}
 .tt-lanes.is-compact .tt-lane{height:46px;padding:0 12px;border-radius:14px;display:grid;grid-template-columns:minmax(0,30%) minmax(0,1fr) 62px;align-items:center;column-gap:10px;}
 .tt-lanes.is-compact .tt-glide{border-radius:14px;height:46px;}
@@ -47188,7 +47219,7 @@ function TuttoPlay({ players, setPlayers, target, onBack, onHome, onEndGame, onE
 			marginRight: 5
 		}
 	}), gtWinLine(t, "winsWith", "winsTie", players.filter((_, i) => totals[i] === maxTotal).map((q) => q.name), maxTotal)), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "tt-lanes" + (compact ? " is-compact" : ""),
+		className: "tt-lanes" + (compact ? " is-compact" : " n" + players.length),
 		ref: lanesRef
 	}, /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "tt-glide",
@@ -68187,7 +68218,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.06-13";
+var APP_BUILD = "2026.11.07-1";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -68512,8 +68543,25 @@ function BackupRestoreDialog({ plan, current, onConfirm, onCancel, t, tk }) {
 }
 // web/src/app/settings.js
 var settings_exports = /* @__PURE__ */ __exportAll({ SettingsPage: () => SettingsPage });
-function SettingsPage({ onBack, onReplayTour, lang, setLang, theme, setTheme, viewMode, setViewMode, soundEnabled, setSoundEnabled, hapticEnabled, setHapticEnabled }) {
+function SettingsPage({ onBack, onReplayTour, lang, setLang, theme, setTheme, viewMode, setViewMode, soundEnabled, setSoundEnabled, hapticEnabled, setHapticEnabled, endAllCount = 0, onEndAll }) {
 	const t = useT(lang);
+	const [confirmingEndAll, setConfirmingEndAll] = useState$11(false);
+	const [endAllMsg, setEndAllMsg] = useState$11("");
+	const endAllTimer = useRef$17(null);
+	const doEndAll = () => {
+		if (!endAllCount) return;
+		if (!confirmingEndAll) {
+			setConfirmingEndAll(true);
+			clearTimeout(endAllTimer.current);
+			endAllTimer.current = setTimeout(() => setConfirmingEndAll(false), 3e3);
+			return;
+		}
+		setConfirmingEndAll(false);
+		if (onEndAll) onEndAll();
+		setEndAllMsg(t("endAllDone"));
+		clearTimeout(endAllTimer.current);
+		endAllTimer.current = setTimeout(() => setEndAllMsg(""), 6e3);
+	};
 	const tk = shellTokens(theme);
 	const [legalOpen, setLegalOpen] = useState$11(false);
 	const [infoOpen, setInfoOpen] = useState$11(false);
@@ -68962,6 +69010,46 @@ function SettingsPage({ onBack, onReplayTour, lang, setLang, theme, setTheme, vi
 		t,
 		tk
 	}), /* @__PURE__ */ import_react.default.createElement(SectionLabel, {
+		tokens: tk,
+		compact: true
+	}, t("endAllLabel")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		fontSize: 11.5,
+		color: tk.muted,
+		fontFamily: "'Inter', sans-serif",
+		lineHeight: 1.4,
+		marginBottom: 8
+	} }, t("endAllHint")), /* @__PURE__ */ import_react.default.createElement("button", {
+		type: "button",
+		onClick: doEndAll,
+		disabled: !endAllCount,
+		className: "press-fx gtL-danger",
+		style: {
+			width: "100%",
+			border: `1.5px solid ${confirmingEndAll ? "#D6202A" : theme === "light" ? "#D6202A88" : "#FF6B6B77"}`,
+			borderRadius: 18,
+			background: confirmingEndAll ? "#D6202A" : theme === "light" ? "#D6202A0D" : "#FF6B6B12",
+			color: confirmingEndAll ? "#FFFFFF" : theme === "light" ? "#B3141D" : "#FF8A8A",
+			fontSize: 13,
+			fontWeight: 700,
+			minHeight: 44,
+			padding: "10px 12px",
+			cursor: endAllCount ? "pointer" : "default",
+			opacity: endAllCount ? 1 : .6,
+			fontFamily: "'Inter', sans-serif"
+		}
+	}, !endAllCount ? t("endAllNone") : confirmingEndAll ? t("confirmAgain") : t("endAllButton")), /* @__PURE__ */ import_react.default.createElement("div", {
+		role: "status",
+		"aria-live": "polite",
+		style: {
+			fontSize: 12,
+			color: tk.muted,
+			textAlign: "center",
+			marginTop: endAllMsg ? 8 : 0,
+			marginBottom: endAllMsg ? 10 : 14,
+			fontFamily: "'Inter', sans-serif",
+			fontWeight: 600
+		}
+	}, endAllMsg), /* @__PURE__ */ import_react.default.createElement(SectionLabel, {
 		tokens: tk,
 		compact: true
 	}, t("statsResetLabel")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
@@ -108937,6 +109025,66 @@ function App() {
 		romme: romme.phase === "play" && !gtPadDone("romme", romme),
 		traitor: traitor.phase === "play" && !!traitor.round
 	};
+	const endAllCount = [
+		tuttoProgress,
+		freeplayProgress,
+		yatzyProgress,
+		wizardProgress,
+		jassProgress,
+		schieberProgress,
+		impostorProgress,
+		werewolfProgress,
+		mafiaProgress,
+		tabuProgress,
+		headsupProgress,
+		skyjoProgress,
+		flip7Progress,
+		minigolfProgress,
+		dartsProgress,
+		cricketProgress,
+		hiscoreProgress,
+		splitscoreProgress,
+		shanghaiProgress,
+		fivesecProgress,
+		mostlikelyProgress,
+		GT_S8P.phase10,
+		GT_S8P.romme,
+		GT_S8P.traitor
+	].filter(Boolean).length;
+	const endAllGames = () => {
+		if (tuttoProgress) setTutto(DEFAULT_TUTTO);
+		if (freeplayProgress) {
+			setFreeplayPlayers(DEFAULT_FREEPLAY.players);
+			setFreeplayTarget(DEFAULT_FREEPLAY.target);
+			setFreeplayLowWins(DEFAULT_FREEPLAY.lowWins);
+		}
+		if (yatzyProgress) setYatzy(DEFAULT_YATZY);
+		if (wizardProgress) setWizard(DEFAULT_WIZARD);
+		if (jassProgress) setJass(DEFAULT_JASS);
+		if (schieberProgress) {
+			setSchieberTeams(DEFAULT_SCHIEBER.teams);
+			setSchieberTarget(DEFAULT_SCHIEBER.target);
+			setSchieberPhase(DEFAULT_SCHIEBER.phase);
+		}
+		if (impostorProgress) setImpostor(DEFAULT_IMPOSTOR);
+		if (werewolfProgress) setWerewolf(DEFAULT_WEREWOLF);
+		if (mafiaProgress) setMafia(DEFAULT_MAFIA);
+		if (tabuProgress) setTabu(DEFAULT_TABU);
+		if (headsupProgress) setHeadsup(DEFAULT_HEADSUP);
+		if (skyjoProgress) setSkyjo(DEFAULT_SKYJO);
+		if (flip7Progress) setFlip7(DEFAULT_FLIP7);
+		if (minigolfProgress) setMinigolf(DEFAULT_MINIGOLF);
+		if (dartsProgress) setDarts(DEFAULT_DARTS);
+		if (hiscoreProgress) setHiscore(DEFAULT_HISCORE);
+		if (splitscoreProgress) setSplitscore(DEFAULT_SPLITSCORE);
+		if (cricketProgress) setCricket(DEFAULT_CRICKET);
+		if (shanghaiProgress) setShanghai(DEFAULT_SHANGHAI);
+		if (fivesecProgress) setFivesec(DEFAULT_FIVESEC);
+		if (mostlikelyProgress) setMostlikely(DEFAULT_MOSTLIKELY);
+		if (GT_S8P.phase10) setPhase10(DEFAULT_PHASE10);
+		if (GT_S8P.romme) setRomme(DEFAULT_ROMME);
+		if (GT_S8P.traitor) setTraitor(DEFAULT_TRAITOR);
+	};
 	const appContent = /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, view === "start" && /* @__PURE__ */ import_react.default.createElement(StartPage, {
 		onSelect: goTo,
 		flip7Progress,
@@ -108988,7 +109136,9 @@ function App() {
 		soundEnabled,
 		setSoundEnabled,
 		hapticEnabled,
-		setHapticEnabled
+		setHapticEnabled,
+		endAllCount,
+		onEndAll: endAllGames
 	}), view === "category-scorepads" && /* @__PURE__ */ import_react.default.createElement(CategoryScorepads, {
 		onSelect: goTo,
 		tuttoTarget: tutto && tutto.target,
@@ -111309,7 +111459,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.06-13");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.07-1");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -113915,7 +114065,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.06-13" && !upd) {
+		if (seen && seen !== "2026.11.07-1" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -113924,7 +114074,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.06-13" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.07-1" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);
@@ -114015,6 +114165,29 @@ function UpdateBanner() {
 		"aria-hidden": true
 	})));
 }
+try {
+	if (window.navigator.standalone === true || window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) {
+		let sx = 0, sy = 0;
+		document.addEventListener("touchstart", (e) => {
+			const p = e.touches[0];
+			if (p) {
+				sx = p.clientX;
+				sy = p.clientY;
+			}
+		}, { passive: true });
+		document.addEventListener("touchmove", (e) => {
+			if (e.touches.length !== 1) return;
+			const p = e.touches[0];
+			if (Math.abs(p.clientX - sx) > Math.abs(p.clientY - sy)) return;
+			if (document.documentElement.scrollHeight - window.innerHeight > 70) return;
+			for (let el = e.target; el && el !== document.body && el.nodeType === 1; el = el.parentElement) {
+				const o = getComputedStyle(el).overflowY;
+				if ((o === "auto" || o === "scroll") && el.scrollHeight > el.clientHeight + 1) return;
+			}
+			e.preventDefault();
+		}, { passive: false });
+	}
+} catch (e) {}
 try {
 	const updateHost = document.createElement("div");
 	updateHost.setAttribute("data-gt-keep", "");

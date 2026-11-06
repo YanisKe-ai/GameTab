@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.07-10 (07.11.2026 00:56)
+- Apple-Wischen zurück, Seitenübergänge, Zahnrad auf der Startseite
+
 ## 2026.11.07-9 (07.11.2026 00:40)
 - Tippen ausserhalb schliesst Überlagerungen überall
 

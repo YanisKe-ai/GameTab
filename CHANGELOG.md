@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.06-10 (06.11.2026 21:59)
+- Update-Meldung kommt jetzt bei jedem neuen Stand
+
 ## 2026.11.06-9 (06.11.2026 21:50)
 - Startseite: Tippkarte überdeckt nichts mehr, Yatzy: Zwischenstand passt in die Spalte
 

@@ -68279,7 +68279,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.06-9";
+var APP_BUILD = "2026.11.06-10";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -111401,7 +111401,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.06-9");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.06-10");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -113937,58 +113937,85 @@ var UPDATE_TEXTS = {
 		"Spielstände bleiben erhalten.",
 		"Aktualisieren",
 		"Später",
-		"Aktualisiere …"
+		"Aktualisiere …",
+		"GameTab wurde aktualisiert"
 	],
 	"en": [
 		"New version ready",
 		"Your games and scores are kept.",
 		"Update",
 		"Later",
-		"Updating …"
+		"Updating …",
+		"GameTab has been updated"
 	],
 	"fr": [
 		"Mise à jour prête",
 		"Tes parties sont conservées.",
 		"Mettre à jour",
 		"Plus tard",
-		"Mise à jour …"
+		"Mise à jour …",
+		"GameTab a été mis à jour"
 	],
 	"it": [
 		"Aggiornamento pronto",
 		"Le tue partite restano salvate.",
 		"Aggiorna",
 		"Più tardi",
-		"Aggiorno …"
+		"Aggiorno …",
+		"GameTab è stato aggiornato"
 	],
 	"es": [
 		"Actualización lista",
 		"Tus partidas se conservan.",
 		"Actualizar",
 		"Más tarde",
-		"Actualizando …"
+		"Actualizando …",
+		"GameTab se ha actualizado"
 	],
 	"pt": [
 		"Atualização pronta",
 		"Os teus jogos ficam guardados.",
 		"Atualizar",
 		"Mais tarde",
-		"A atualizar …"
+		"A atualizar …",
+		"O GameTab foi atualizado"
 	]
 };
 var UPDATE_CSS = "\n.gtU-wrap{--u-bg:rgba(30,32,44,.9);--u-fg:#F3F4F8;--u-sub:rgba(243,244,248,.66);--u-bd:rgba(255,255,255,.12);--u-chip:rgba(255,255,255,.1);--u-btn:#F3F4F8;--u-btnfg:#12141C;--u-sh:0 18px 50px rgba(0,0,0,.5),0 2px 8px rgba(0,0,0,.3);position:fixed;left:0;right:0;bottom:calc(14px + env(safe-area-inset-bottom));z-index:2147483000;display:flex;justify-content:center;padding:0 16px;pointer-events:none;font-family:'Inter',sans-serif}\nhtml[data-gt-theme=\"light\"] .gtU-wrap{--u-bg:rgba(255,253,248,.96);--u-fg:#1B1B22;--u-sub:rgba(27,27,34,.62);--u-bd:rgba(0,0,0,.08);--u-chip:rgba(0,0,0,.06);--u-btn:#1B1B22;--u-btnfg:#fff;--u-sh:0 18px 44px rgba(40,30,10,.22),0 2px 8px rgba(40,30,10,.1)}\nhtml[data-gt-theme=\"vitrum\"] .gtU-wrap{--u-bg:rgba(22,25,33,.62);--u-fg:#F2F4F8;--u-sub:rgba(242,244,248,.66);--u-bd:rgba(255,255,255,.10);--u-chip:rgba(255,255,255,.08);--u-btn:#F2F4F8;--u-btnfg:#10131A;--u-sh:0 10px 30px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.18)}\nhtml[data-gt-theme=\"noir\"] .gtU-wrap{--u-bg:#0B0B0B;--u-fg:#F5F5F5;--u-sub:rgba(245,245,245,.6);--u-bd:rgba(255,255,255,.16);--u-chip:rgba(255,255,255,.09);--u-btn:#F5F5F5;--u-btnfg:#000;--u-sh:0 14px 40px rgba(0,0,0,.7)}\n.gtU-card{pointer-events:auto;position:relative;width:100%;max-width:440px;box-sizing:border-box;display:flex;flex-direction:column;gap:16px;padding:18px 18px 18px;border-radius:28px;color:var(--u-fg);background:var(--u-bg);border:1px solid var(--u-bd);box-shadow:var(--u-sh);-webkit-backdrop-filter:blur(22px) saturate(1.5);backdrop-filter:blur(22px) saturate(1.5);overflow:hidden;animation:gtU-in .6s cubic-bezier(.22,1.25,.36,1) both;will-change:transform,opacity}\nhtml[data-gt-theme=\"vitrum\"] .gtU-card{-webkit-backdrop-filter:blur(24px) saturate(1.6);backdrop-filter:blur(24px) saturate(1.6)}\n.gtU-card.is-out{animation:gtU-out .24s cubic-bezier(.4,0,1,1) both;pointer-events:none}\n.gtU-head{display:flex;align-items:center;gap:14px;padding-right:30px}\n.gtU-icon{width:48px;height:48px;flex-shrink:0;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--u-chip);color:var(--u-fg)}\n.gtU-icon svg{animation:gtU-turn 1s cubic-bezier(.23,1,.32,1) .3s 1 both}\n.gtU-card.is-busy .gtU-icon svg{animation:gtU-spin .8s linear infinite}\n.gtU-txt{min-width:0;flex:1}\n.gtU-title{font-family:'Baloo 2',sans-serif;font-size:21px;font-weight:800;line-height:1.1}\n.gtU-sub{font-size:14px;color:var(--u-sub);margin-top:4px;line-height:1.3}\n.gtU-btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:54px;border:none;border-radius:18px;cursor:pointer;font-family:'Baloo 2',sans-serif;font-size:18px;font-weight:800;color:var(--u-btnfg);background:var(--u-btn);transition:transform .16s cubic-bezier(.23,1,.32,1),opacity .2s;-webkit-tap-highlight-color:transparent}\n.gtU-btn:active{transform:scale(.97)}\n.gtU-card.is-busy .gtU-btn{opacity:.7;pointer-events:none}\n.gtU-x{position:absolute;top:6px;right:6px;width:44px;height:44px;border:none;border-radius:50%;background:transparent;color:var(--u-sub);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .16s,transform .16s cubic-bezier(.23,1,.32,1);-webkit-tap-highlight-color:transparent}\n.gtU-x:active{transform:scale(.9);background:var(--u-chip)}\n.gtU-bar{position:absolute;left:0;right:0;bottom:0;height:3px;overflow:hidden;opacity:0;transition:opacity .2s}\n.gtU-bar::after{content:\"\";position:absolute;top:0;bottom:0;width:40%;background:var(--u-fg);border-radius:2px;animation:gtU-sweep 1s cubic-bezier(.45,0,.2,1) infinite}\n.gtU-card.is-busy .gtU-bar{opacity:.85}\n.gtU-btn:focus-visible,.gtU-x:focus-visible{outline:2px solid var(--u-fg);outline-offset:2px}\n@media (min-width:900px){.gtU-wrap{justify-content:flex-end;padding:0 28px;bottom:28px}.gtU-card{max-width:420px}}\n@media (hover:hover){.gtU-btn:hover{opacity:.92}.gtU-x:hover{background:var(--u-chip)}}\n@keyframes gtU-in{from{opacity:0;transform:translateY(60px) scale(.96)}to{opacity:1;transform:none}}\n@keyframes gtU-out{to{opacity:0;transform:translateY(24px) scale(.97)}}\n@keyframes gtU-spin{to{transform:rotate(360deg)}}\n@keyframes gtU-turn{from{transform:rotate(-220deg);opacity:0}to{transform:rotate(0);opacity:1}}\n@keyframes gtU-sweep{from{transform:translateX(-100%)}to{transform:translateX(250%)}}\n@keyframes gtU-fade{to{opacity:0}}\n@media (prefers-reduced-motion: reduce){.gtU-card,.gtU-icon svg{animation:none!important}.gtU-card.is-out{animation:gtU-fade .15s linear both!important}.gtU-card.is-busy .gtU-icon svg{animation:none!important}.gtU-bar::after{animation:none;width:100%}.gtU-btn,.gtU-x{transition:none}}\n";
+var GT_BUILD_KEY = "gametab-last-build";
+var GT_UPD_KEY = "gametab-update-clicked";
 function UpdateBanner() {
 	const [ready, setReady] = import_react.default.useState(false);
 	const [hidden, setHidden] = import_react.default.useState(false);
 	const [closing, setClosing] = import_react.default.useState(false);
 	const [busy, setBusy] = import_react.default.useState(false);
+	const [done, setDone] = import_react.default.useState(false);
 	import_react.default.useEffect(() => {
 		if (location.protocol === "file:") return;
 		let alive = true;
-		let shown = false;
+		let shown = "";
+		let seen = null;
+		let upd = false;
+		try {
+			seen = localStorage.getItem(GT_BUILD_KEY);
+			upd = localStorage.getItem(GT_UPD_KEY) === "1";
+			localStorage.removeItem(GT_UPD_KEY);
+			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
+		} catch (e) {}
+		let doneTimer = 0;
+		if (seen && seen !== "2026.11.06-10" && !upd) {
+			setDone(true);
+			setReady(true);
+			doneTimer = setTimeout(() => {
+				if (alive) setHidden(true);
+			}, 6e3);
+		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && !shown && v && v.build && v.build !== "2026.11.06-9") {
-					shown = true;
+				if (alive && v && v.build && v.build !== "2026.11.06-10" && v.build !== shown) {
+					shown = v.build;
+					clearTimeout(doneTimer);
+					setDone(false);
 					setReady(true);
 					setHidden(false);
 					try {
@@ -114007,9 +114034,12 @@ function UpdateBanner() {
 		};
 		document.addEventListener("visibilitychange", onVis);
 		window.addEventListener("focus", check);
-		const id = setInterval(check, 9e5);
+		const id = setInterval(() => {
+			if (document.visibilityState === "visible") check();
+		}, 6e4);
 		return () => {
 			alive = false;
+			clearTimeout(doneTimer);
 			document.removeEventListener("visibilitychange", onVis);
 			window.removeEventListener("focus", check);
 			clearInterval(id);
@@ -114029,6 +114059,7 @@ function UpdateBanner() {
 		if (busy) return;
 		setBusy(true);
 		try {
+			localStorage.setItem(GT_UPD_KEY, "1");
 			navigator.vibrate && navigator.vibrate(12);
 		} catch (e) {}
 		setTimeout(() => location.reload(), 420);
@@ -114037,7 +114068,7 @@ function UpdateBanner() {
 		className: "gtU-card" + (closing ? " is-out" : "") + (busy ? " is-busy" : ""),
 		role: "alertdialog",
 		"aria-live": "polite",
-		"aria-label": tx[0]
+		"aria-label": done ? tx[5] : tx[0]
 	}, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtU-head" }, /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtU-icon",
 		"aria-hidden": true
@@ -114050,7 +114081,7 @@ function UpdateBanner() {
 		strokeWidth: 2.2,
 		strokeLinecap: "round",
 		strokeLinejoin: "round"
-	}, /* @__PURE__ */ import_react.default.createElement("path", { d: "M20 11a8 8 0 1 0-2.3 5.7" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M20 4v7h-7" }))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtU-txt" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtU-title" }, tx[0]), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtU-sub" }, tx[1]))), /* @__PURE__ */ import_react.default.createElement("button", {
+	}, /* @__PURE__ */ import_react.default.createElement("path", { d: "M20 11a8 8 0 1 0-2.3 5.7" }), /* @__PURE__ */ import_react.default.createElement("path", { d: "M20 4v7h-7" }))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtU-txt" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtU-title" }, done ? tx[5] : tx[0]), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtU-sub" }, tx[1]))), !done && /* @__PURE__ */ import_react.default.createElement("button", {
 		className: "gtU-btn",
 		onClick: go
 	}, busy ? tx[4] : tx[2]), /* @__PURE__ */ import_react.default.createElement("button", {
@@ -114067,13 +114098,14 @@ function UpdateBanner() {
 		strokeWidth: 2.4,
 		strokeLinecap: "round",
 		"aria-hidden": true
-	}, /* @__PURE__ */ import_react.default.createElement("path", { d: "M6 6l12 12M18 6L6 18" }))), /* @__PURE__ */ import_react.default.createElement("div", {
+	}, /* @__PURE__ */ import_react.default.createElement("path", { d: "M6 6l12 12M18 6L6 18" }))), !done && /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtU-bar",
 		"aria-hidden": true
 	})));
 }
 try {
 	const updateHost = document.createElement("div");
+	updateHost.setAttribute("data-gt-keep", "");
 	document.body.appendChild(updateHost);
 	ReactDOM.createRoot(updateHost).render(/* @__PURE__ */ import_react.default.createElement(UpdateBanner, null));
 } catch (e) {}

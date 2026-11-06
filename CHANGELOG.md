@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.07-3 (07.11.2026 00:17)
+- Tutto: Spieler mittig in der iPhone-App
+
 ## 2026.11.07-2 (07.11.2026 00:16)
 - Einstellungen: Spielergruppen einklappbar
 

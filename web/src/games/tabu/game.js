@@ -21,6 +21,7 @@ import { GtCol } from "../../shared/unit.js";
 import { gtDockBtn } from "../../shared/pass-screen.js";
 import { usePhoneLandscape } from "../../shared/phone-landscape.js";
 /*@gt-body-begin*/const TABU_LANDSCAPE_CSS=`
+.gt-u-col > :last-child:not(.gt-u-glow):not(.gt-u-dock) { flex: 1 1 auto; }
 [data-phone-landscape] .tb-ls { padding: max(6px, var(--pl-sat)) 0 max(8px, var(--pl-sab)) 0 !important; min-height: var(--pl-vh) !important; box-sizing: border-box; }
 [data-phone-landscape] .tb-ls .gtL-game { padding-top: 0 !important; }
 [data-phone-landscape] .tb-play { display: grid !important; grid-template-columns: minmax(0, 1fr) clamp(200px, 36%, 300px); grid-template-areas: "card status" "card btns"; grid-template-rows: auto minmax(0, 1fr); gap: 8px 12px; height: max(200px, calc(var(--pl-body) - 18px)); align-items: stretch; }

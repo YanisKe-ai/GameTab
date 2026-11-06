@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.07-5 (07.11.2026 00:21)
+- Tutto: Spielerliste scrollbar, alle Spieler erreichbar
+
 ## 2026.11.07-4 (07.11.2026 00:19)
 - Spielkopf: Knopf wechselt das Erscheinungsbild, Tutto: Spieler mittig
 

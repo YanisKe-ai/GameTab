@@ -42513,7 +42513,7 @@ function StartPage({ onSelect, lang, theme, viewMode, lastPlayed, dismissedResum
 			flexDirection: "column",
 			overflow: isLaptop ? "visible" : "hidden"
 		}
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, "@media (max-height:700px){.gt-hero-logo{transform:translateY(4px) scale(1.5)!important}html:not([data-phone-landscape]) .gtL-tipcard{margin-top:4px!important}html:not([data-phone-landscape]) .gtL-tipcard-body{padding:8px 12px!important}html:not([data-phone-landscape]) .gtL-tipbox{height:40px!important}html:not([data-phone-landscape]) .gtL-startfoot{padding-bottom:6px!important}}"), theme === "noir" && beamOn && beamGeo && /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, { key: "beamfx" + beamGeo.k }, /* @__PURE__ */ import_react.default.createElement("div", {
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, "@media (max-height:700px){.gt-hero-logo{transform:translateY(4px) scale(1.5)!important}}"), theme === "noir" && beamOn && beamGeo && /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, { key: "beamfx" + beamGeo.k }, /* @__PURE__ */ import_react.default.createElement("div", {
 		"aria-hidden": true,
 		className: "gt-beam-w",
 		ref: (el) => gtWowInit(el, beamGeo),
@@ -42995,35 +42995,12 @@ function StartPage({ onSelect, lang, theme, viewMode, lastPlayed, dismissedResum
 		offset: "-32px"
 	})), /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-startfoot",
+		"aria-hidden": "true",
 		style: {
-			maxWidth: 380,
-			margin: "0 auto",
-			padding: "0 14px 16px",
-			width: "100%",
-			position: "relative",
-			zIndex: 1
+			height: 16,
+			flex: "none"
 		}
-	}, /* @__PURE__ */ import_react.default.createElement("p", { style: {
-		fontSize: 10.5,
-		color: tk.muted,
-		textAlign: "center",
-		margin: 0,
-		fontFamily: "'Inter', sans-serif"
-	} }, lastPlayed ? /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, t("lastPlayed"), ": ", /* @__PURE__ */ import_react.default.createElement("strong", { style: { color: tk.ink } }, lastPlayed.label), " · ", appTimeAgoLabel(lastPlayed.ts, lang)) : t("savedAutomatically")), (() => {
-		let totalPlayed = 0;
-		try {
-			const raw = localStorage.getItem("gt_totalGamesPlayed");
-			totalPlayed = raw ? parseInt(raw, 10) : 0;
-		} catch {}
-		return totalPlayed > 1 ? /* @__PURE__ */ import_react.default.createElement("p", { style: {
-			fontSize: 10,
-			color: tk.muted,
-			textAlign: "center",
-			margin: "4px 0 0",
-			opacity: .75,
-			fontFamily: "'Inter', sans-serif"
-		} }, t("gamesPlayedTogether")(totalPlayed)) : null;
-	})()));
+	}));
 }
 // web/src/games/schieber/wy-court.js
 var WY_HALF = {
@@ -68279,7 +68256,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.06-10";
+var APP_BUILD = "2026.11.06-11";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -111401,7 +111378,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.06-10");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.06-11");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -114003,7 +113980,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.06-10" && !upd) {
+		if (seen && seen !== "2026.11.06-11" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -114012,7 +113989,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.06-10" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.06-11" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.06-11 (06.11.2026 22:08)
+- Startseite ohne Fusszeile
+
 ## 2026.11.06-10 (06.11.2026 21:59)
 - Update-Meldung kommt jetzt bei jedem neuen Stand
 

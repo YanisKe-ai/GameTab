@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.07-4 (07.11.2026 00:19)
+- Spielkopf: Knopf wechselt das Erscheinungsbild, Tutto: Spieler mittig
+
 ## 2026.11.07-3 (07.11.2026 00:17)
 - Tutto: Spieler mittig in der iPhone-App
 

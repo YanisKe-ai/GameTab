@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.07-9 (07.11.2026 00:40)
+- Tippen ausserhalb schliesst Überlagerungen überall
+
 ## 2026.11.07-8 (07.11.2026 00:27)
 - Tutto-Einrichtung mit neuem Titel, weiche Verläufe
 

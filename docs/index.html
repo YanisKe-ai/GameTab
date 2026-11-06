@@ -22824,7 +22824,8 @@ var GT_UNIT_CSS = `
 html[data-gt-theme="light"] .gt-u-col>.gt-u-glow{background:radial-gradient(120% 100% at 50% 0,color-mix(in oklab,var(--gt-u-acc) 16%,transparent),transparent 72%)}
 html[data-gt-theme="noir"] .gt-u-col>.gt-u-glow,html[data-gt-theme="vitrum"] .gt-u-col>.gt-u-glow{display:none}
 .gt-u-col>.gt-u-dock,.gt-u-col>.gt-su-cta{margin-top:auto}
-.gt-u-col>.gt-su-cta::before{left:calc(50% - 50vw);right:calc(50% - 50vw);bottom:-40px}
+.gt-u-col .gt-su-cta::before{left:calc(50% - 50vw);right:calc(50% - 50vw);bottom:-40px}
+.gtL-content .gt-u-col .gt-su-cta::before{left:0;right:0;bottom:0}
 .gt-u-dock{position:sticky;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:6;display:flex;flex-direction:column;gap:8px;padding-top:12px}
 .gt-u-dock>button{width:100%;min-height:56px}
 .gtL-content .gt-u-col{min-height:0}
@@ -24178,15 +24179,17 @@ function gtDialogInert(root) {
 	});
 	return () => done.forEach((n) => n.removeAttribute("inert"));
 }
-function useGtDialog({ open, onClose, escape = true }) {
+function useGtDialog({ open, onClose, escape = true, outside = true }) {
 	const ref = import_react.default.useRef(null);
 	const latest = import_react.default.useRef({
 		onClose,
-		escape
+		escape,
+		outside
 	});
 	latest.current = {
 		onClose,
-		escape
+		escape,
+		outside
 	};
 	import_react.default.useEffect(() => {
 		const root = ref.current;
@@ -24225,9 +24228,24 @@ function useGtDialog({ open, onClose, escape = true }) {
 			if (e.shiftKey) (at <= 0 ? last : items[at - 1]).focus();
 			else (at < 0 || at === items.length - 1 ? first : items[at + 1]).focus();
 		};
+		const born = performance.now();
+		const onTap = (e) => {
+			if (stack$1[stack$1.length - 1] !== entry) return;
+			const t = e.target;
+			if (!t || !t.contains || t === root || root.contains(t) || !t.contains(root)) return;
+			if (e.timeStamp && performance.now() - born < 120) return;
+			const l = latest.current;
+			const o = l.outside === true ? l.onClose : l.outside;
+			if (typeof o === "function") {
+				e.stopPropagation();
+				o();
+			}
+		};
 		document.addEventListener("keydown", onKey, true);
+		document.addEventListener("click", onTap, true);
 		return () => {
 			document.removeEventListener("keydown", onKey, true);
+			document.removeEventListener("click", onTap, true);
 			const i = stack$1.indexOf(entry);
 			if (i >= 0) stack$1.splice(i, 1);
 			undoInert();
@@ -39884,7 +39902,8 @@ function GtOnboarding3({ theme, lang, onDone }) {
 	const last = step === 2;
 	const dlgRef = useGtDialog({
 		open: true,
-		onClose: onDone
+		onClose: onDone,
+		outside: false
 	});
 	const overlayBg = theme === "light" ? "rgba(30,32,38,0.55)" : "rgba(0,0,0,0.74)";
 	const blue = theme === "light" ? "#3071CD" : theme === "noir" ? "#C4C4C4" : "#4FA8F5";
@@ -53562,9 +53581,14 @@ function SkyjoSetup({ state, setState, onStart, theme, t }) {
 }
 function SkyjoNumPad({ player, initialValue, onConfirm, onClose, theme, t, sk, onAdvance, instant }) {
 	const [value, setValue] = useState$11(initialValue || "");
+	const tapOut = () => {
+		if (value !== (initialValue || "")) return;
+		onClose();
+	};
 	const sheetRef = useGtDialog({
 		open: true,
-		onClose
+		onClose,
+		outside: tapOut
 	});
 	useEffect$15(() => {
 		try {
@@ -53625,7 +53649,7 @@ function SkyjoNumPad({ player, initialValue, onConfirm, onClose, theme, t, sk, o
 		}
 	}, label);
 	return /* @__PURE__ */ import_react.default.createElement("div", {
-		onClick: onClose,
+		onClick: tapOut,
 		className: "gtL-padov" + (instant ? " gtL-noanim" : ""),
 		style: {
 			position: "fixed",
@@ -55981,7 +56005,10 @@ function ShareImagePreview({ url, onClose, t }) {
 	const hint = note || (plan.iosHint ? t("shareIosHint") : !dev.desktop && plan.primary === "save" && !plan.secondary ? t("shareNoShareNote") : "");
 	return /* @__PURE__ */ import_react.default.createElement("div", {
 		ref: dlg,
-		onClick: onClose,
+		onClick: (e) => {
+			e.stopPropagation();
+			onClose();
+		},
 		role: "dialog",
 		"aria-modal": "true",
 		"aria-label": t("shareResultLabel"),
@@ -68240,7 +68267,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.07-8";
+var APP_BUILD = "2026.11.07-9";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -68436,7 +68463,8 @@ function gtBkApply(entries, isQuota) {
 function BackupRestoreDialog({ plan, current, onConfirm, onCancel, t, tk }) {
 	const ref = useGtDialog({
 		open: !!plan,
-		onClose: onCancel
+		onClose: onCancel,
+		outside: false
 	});
 	if (!plan) return null;
 	const info = plan.info;
@@ -94933,9 +94961,11 @@ function Flip7Setup({ state, setState, onStart, theme, t }) {
 	}))));
 }
 function Flip7RoundPad({ player, initial, onConfirm, onClose, theme, t, onAdvance, instant }) {
+	const tapRef = import_react.default.useRef(null);
 	const sheetRef = useGtDialog({
 		open: true,
-		onClose
+		onClose,
+		outside: () => tapRef.current && tapRef.current()
 	});
 	useEffect$15(() => {
 		try {
@@ -94948,6 +94978,20 @@ function Flip7RoundPad({ player, initial, onConfirm, onClose, theme, t, onAdvanc
 	const [mods, setMods] = useState$11(initial?.mods || []);
 	const [x2, setX2] = useState$11(initial?.x2 || false);
 	const [flip7, setFlip7] = useState$11(initial?.flip7 || false);
+	const padSig = () => JSON.stringify([
+		busted,
+		sumStr,
+		mods,
+		x2,
+		flip7
+	]);
+	const padSig0 = import_react.default.useRef(null);
+	if (padSig0.current === null) padSig0.current = padSig();
+	const tapOut = () => {
+		if (padSig() !== padSig0.current) return;
+		onClose();
+	};
+	tapRef.current = tapOut;
 	const numberSum = parseInt(sumStr, 10) || 0;
 	const pressDigit = (d) => setSumStr((v) => {
 		return (v.replace(/^0+(?=\d)/, "") + d).slice(0, 3);
@@ -95012,7 +95056,7 @@ function Flip7RoundPad({ player, initial, onConfirm, onClose, theme, t, onAdvanc
 		}
 	});
 	return /* @__PURE__ */ import_react.default.createElement("div", {
-		onClick: onClose,
+		onClick: tapOut,
 		className: "gtL-padov" + (instant ? " gtL-noanim" : ""),
 		style: {
 			position: "fixed",
@@ -111550,7 +111594,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.07-8");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.07-9");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -114156,7 +114200,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.07-8" && !upd) {
+		if (seen && seen !== "2026.11.07-9" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -114165,7 +114209,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.07-8" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.07-9" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

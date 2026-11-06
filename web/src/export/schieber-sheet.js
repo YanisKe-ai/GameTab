@@ -1,6 +1,7 @@
 // Erzeugt von tools/split.mjs aus index.html. Inhalt zwischen den gt-body-Markern ist 1:1 Originalcode.
 import "../shared/pl-shared.js";
 import { React } from "../vendor/react-globals.js";
+import { useGtDialog } from "../shared/dialog.js";
 import { GT_EC_CJK, GT_EC_LOC, gtEcFace, gtEcFonts, gtEcNoEmoji, gtEcNum, gtEcSeg, gtEcTr } from "./result-card.js";
 import { GT_ST } from "../games/schieber/tournament-core.js";
 import GT_STX_BERG_URL from "../assets/img/stx-berg.webp";
@@ -213,14 +214,12 @@ return <svg viewBox="0 0 60 80" width={48} height={64} aria-hidden="true" style=
 function GtStExportSheet({tournament,t,onClose,initialTheme}){const tr=(k,fb,v)=>{let s=gtEcTr(t,k,fb);if(v)Object.keys(v).forEach(x=>{s=s.split("{"+x+"}").join(v[x]);});return s;};
 const[theme,setTheme]=React.useState(initialTheme==="grandslam"||initialTheme==="strichliste"?initialTheme:(tournament&&tournament.theme==="grandslam"?"grandslam":"strichliste"));
 const[state,setState]=React.useState({busy:true,err:null,pages:[]});const[note,setNote]=React.useState("");const[retry,setRetry]=React.useState(0);const[sharing,setSharing]=React.useState(false);
-const panelRef=React.useRef(null);const backRef=React.useRef(null);
+const panelRef=useGtDialog({open:true,onClose});
 /* unveraenderlicher Schnappschuss pro Revision */
 const snap=React.useMemo(()=>tournament?JSON.parse(JSON.stringify(tournament)):null,[tournament&&tournament.id,tournament&&tournament.revision,tournament&&tournament.name]);
-React.useEffect(()=>{backRef.current=document.activeElement;const p=panelRef.current;if(p)try{p.focus({preventScroll:true});}catch(_){}return()=>{const b=backRef.current;if(b&&b.focus)try{b.focus();}catch(_){}};},[]);
 React.useEffect(()=>{if(!snap)return;let alive=true;let made=[];setState(s=>({busy:true,err:null,pages:s.pages}));setNote("");
 gtStExport(snap,theme,t).then(cvs=>Promise.all(cvs.map((c,i)=>new Promise((res,rej)=>c.toBlob(b=>b?res({blob:b,meta:c.gtStMeta,i:i,w:c.width,h:c.height}):rej(new Error("toBlob")),"image/png"))))).then(list=>{const pages=list.map(x=>{const name=gtStxFileName(x.meta,x.i,list.length);const url=URL.createObjectURL(x.blob);made.push(url);return{url:url,name:name,blob:x.blob,w:x.w,h:x.h};});if(!alive){made.forEach(u=>URL.revokeObjectURL(u));return;}setState({busy:false,err:null,pages:pages});}).catch(e=>{try{console.warn("Schieber-Turnier Bildexport",e);}catch(_){}if(alive)setState({busy:false,err:e||true,pages:[]});});
 return()=>{alive=false;made.forEach(u=>URL.revokeObjectURL(u));};},[snap,theme,retry]);
-React.useEffect(()=>{const onKey=e=>{if(e.key==="Escape"){e.preventDefault();onClose&&onClose();}else if(e.key==="Tab"&&panelRef.current){const f=Array.from(panelRef.current.querySelectorAll("button,a[href]")).filter(x=>!x.disabled);if(!f.length)return;const a=f[0],z=f[f.length-1];if(e.shiftKey&&(document.activeElement===a||document.activeElement===panelRef.current)){e.preventDefault();z.focus();}else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus();}}};window.addEventListener("keydown",onKey);return()=>window.removeEventListener("keydown",onKey);},[onClose]);
 const pages=state.pages;const N=pages.length;const acc=theme==="grandslam"?{bg:"#FF7659",fg:"#071743"}:{bg:"#85D1F5",fg:"#0B1A22"};
 const items=React.useMemo(()=>pages.map(p=>({url:p.url,file:new File([p.blob],p.name,{type:"image/png"})})),[pages]);const plan=gtImgPlan({...gtImgDevice(),canShare:N>0&&gtImgCanShare(items.map(x=>x.file))});
 const save=()=>{if(!N)return;gtImgDownload(items);setNote(gtImgDevice().desktop?tr("shareSavedNote","Gespeichert im Ordner Downloads."):"");};

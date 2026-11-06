@@ -12,6 +12,7 @@ import { GT_SU_ACC, gtHexRgb, gtMixDark, gtRgbHex } from "../shared/setup-ui.js"
 import { STATS_GAME_COLORS } from "./legacy-ui.js";
 import { gtImgFree, gtImgItems } from "../export/save-image.js";
 import { ShareImagePreview } from "../export/share-preview.js";
+import { useGtDialog } from "../shared/dialog.js";
 /*@gt-body-begin*//*GT_STATS_END*/
 /*GT_YR_BEGIN*/
 const GT_YR_SUIT={spade:"M12 2C9 6 4 9.5 4 13.5a4 4 0 0 0 6.5 3.1C10.3 18.8 9.5 20.5 8 22h8c-1.5-1.5-2.3-3.2-2.5-5.4A4 4 0 0 0 20 13.5C20 9.5 15 6 12 2z",heart:"M12 21C5 15.5 2 12 2 8.5A5 5 0 0 1 12 6a5 5 0 0 1 10 2.5c0 3.5-3 7-10 12.5z",diamond:"M12 2l7 10-7 10-7-10z",club:"M12 2a4.5 4.5 0 0 0-2.2 8.4A4.5 4.5 0 1 0 11 16.5c-.1 2-.8 3.7-2.2 5.5h6.4c-1.4-1.8-2.1-3.5-2.2-5.5a4.5 4.5 0 1 0 1.2-6.1A4.5 4.5 0 0 0 12 2z"};
@@ -49,11 +50,11 @@ function GtYearReview({t,theme,onClose,year}){
   const model=useMemo(()=>{try{const log=loadMatchLog();const o={t:t,now:new Date(),tournaments:GT_STATS.storeTournaments?GT_STATS.storeTournaments():[]};const m=GT_STATS.yearReview(log,yr,o);let nm={};try{nm=GT_STATS.build(log,{range:"year",year:yr,now:o.now,tournaments:o.tournaments,t:t}).names||{};}catch(_){}return m&&Array.isArray(m.cards)?Object.assign({},m,{nameMap:nm}):{year:yr,cards:[],nameMap:{}};}catch(err){try{console.warn("GameTab Rueckblick:",err);}catch(_){}return{year:yr,cards:[]};}},[yr]);
   const seq=useMemo(()=>{const cs=model.cards||[];if(!cs.length)return[{kind:"empty"}];return cs.concat([{kind:"share"}]);},[model]);
   const[i,setI]=useState(0);const[busy,setBusy]=useState(false);const[note,setNote]=useState("");const[preview,setPreview]=useState(null);
-  const cardRef=useRef(null);const alive=useRef(true);const lastFocus=useRef(null);
+  const cardRef=useRef(null);const alive=useRef(true);const dlgRef=useGtDialog({open:true,onClose});
   const n=seq.length;const cur=seq[Math.min(i,n-1)];
   const go=d=>setI(x=>Math.max(0,Math.min(n-1,x+d)));
-  useEffect(()=>{alive.current=true;lastFocus.current=document.activeElement;try{cardRef.current&&cardRef.current.focus({preventScroll:true});}catch(_){}return()=>{alive.current=false;try{lastFocus.current&&lastFocus.current.focus&&lastFocus.current.focus({preventScroll:true});}catch(_){}};},[]);
-  useEffect(()=>{const k=ev=>{if(ev.key==="Escape"){ev.preventDefault();onClose&&onClose();}else if(ev.key==="ArrowRight"){ev.preventDefault();go(1);}else if(ev.key==="ArrowLeft"){ev.preventDefault();go(-1);}};document.addEventListener("keydown",k);return()=>document.removeEventListener("keydown",k);},[n,onClose]);
+  useEffect(()=>{alive.current=true;try{cardRef.current&&cardRef.current.focus({preventScroll:true});}catch(_){}return()=>{alive.current=false;};},[]);
+  useEffect(()=>{const k=ev=>{if(ev.key==="ArrowRight"){ev.preventDefault();go(1);}else if(ev.key==="ArrowLeft"){ev.preventDefault();go(-1);}};document.addEventListener("keydown",k);return()=>document.removeEventListener("keydown",k);},[n,onClose]);
   const game=cur.game||null;
   const acc=gtYrAccent(game,theme,pal.gold);const accRaw=gtYrRaw(game,theme,pal.gold);
   const fill=theme==="light"?acc:accRaw;
@@ -84,7 +85,7 @@ function GtYearReview({t,theme,onClose,year}){
   const suit=<div aria-hidden="true" style={{position:"absolute",right:"-18%",bottom:"-6%",width:"86%",aspectRatio:"1",pointerEvents:"none",zIndex:0}}><div className="gtYR-drift" style={{width:"100%",height:"100%"}}><svg viewBox="0 0 24 24" width="100%" height="100%"><path d={GT_YR_SUIT[GT_YR_SUIT_ORDER[suitIdx]]} fill={gtYrA(accRaw,theme==="light"?0.1:0.09)}/></svg></div></div>;
   const glow=<div key={"g"+i} className="gtYR-glow" aria-hidden="true" style={{position:"absolute",left:0,top:0,right:0,bottom:0,pointerEvents:"none",zIndex:0,background:"radial-gradient(120% 55% at 50% 0%,"+gtYrA(accRaw,pal.glow)+" 0%,transparent 72%)"}}/>;
   const zonesOn=cur.kind!=="empty";
-  return <div className="gtYR" role="dialog" aria-modal="true" aria-label={t("gtYrAria").replace("{year}",String(yr))} onClick={ev=>{if(ev.target===ev.currentTarget)onClose&&onClose();}}>
+  return <div className="gtYR" ref={dlgRef} role="dialog" aria-modal="true" aria-label={t("gtYrAria").replace("{year}",String(yr))} onClick={ev=>{if(ev.target===ev.currentTarget)onClose&&onClose();}}>
 <style>{GT_YR_CSS}</style>
 <div className="gtYR-card" ref={cardRef} tabIndex={-1} style={{background:cardBg,color:pal.ink}}>
 {glow}{suit}{bars}{head}

@@ -110,7 +110,7 @@ function gtStxSlLayout(m,mc,opt){const c=GT_STX_SL,X=GT_STX,M=X.M,R=X.W-M,F=gtSt
 const topBar=(cx,y)=>{const ctx=cx.ctx;gtStxT(cx,m.brand,M,y+46,{font:F.mono(600,40),color:c.ivory});const sx=R-22;["spade","club","diamond","heart"].forEach((k,i)=>gtStxSuitLine(ctx,k,sx-i*56,y+32,40,c.ivory,2.6,c.graph));
 ctx.font=F.mono(400,21);const lab=m.up(m.mode);const lw=gtStxMW(ctx,lab,5);const lx=R-4*56-30;gtStxT(cx,lab,lx,y+40,{font:F.mono(400,21),color:c.dim,align:"right",ls:5});ctx.fillStyle=c.line;ctx.fillRect(lx-lw,y+56,lw,2);ctx.font=F.mono(600,40);const bw=ctx.measureText(m.brand).width;if(lx-lw-28>M+bw+28)ctx.fillRect(M+bw+28,y+30,lx-lw-28-(M+bw+28),2);};
 /* Seite 1 Kopf */
-let TF=gtStxFitLines(mc,m.title,900,F.chalk,150,112,4,1);if(!TF.ok)TF=gtStxFitLines(mc,m.title,900,F.chalk,132,84,4,2);const ts=TF.s,tl=TF.l;const tlh=ts*1.04;
+let TF=gtStxFitLines(mc,m.title,900,F.chalk,150,112,4,1);if(!TF.ok)TF=gtStxFitLines(mc,m.title,900,F.chalk,132,84,4,2);const ts=TF.s,tl=TF.l.filter(s=>s.trim()!=="\u00b7");const tlh=ts*1.04;
 const stl=gtStxWrap(mc,m.status,900,F.mono(400,27));
 const h1={h:72+70+tl.length*tlh+34+stl.length*38+44,draw:(cx,y)=>{topBar(cx,y+50);let yy=y+142;const th=gtStxChalkText(cx,tl,F.chalk(ts),tlh,X.W/2,yy,m.seed,c.ivory);mc.font=F.chalk(ts);const lw=Math.min(860,mc.measureText(tl[tl.length-1]).width*0.92);const ly=yy+tl.length*tlh-tlh*0.06;gtStxChalkLine(cx.ctx,X.W/2-lw/2,ly+8,X.W/2+lw/2,ly-4,c.ice,7,m.seed+3);yy+=tl.length*tlh+34;stl.forEach((s,i)=>gtStxT(cx,s,X.W/2,yy+i*38+24,{font:F.mono(400,27),color:c.ice,align:"center"}));}};
 const tlN=gtStxWrap(mc,m.title,900,F.chalk(64));const hN={h:72+60+tlN.length*68+30+40,draw:(cx,y,i,N)=>{topBar(cx,y+50);gtStxChalkText(cx,tlN,F.chalk(64),68,X.W/2,y+132,m.seed+7,c.ivory);gtStxT(cx,m.continued+", "+m.page(i+1,N),X.W/2,y+132+tlN.length*68+40,{font:F.mono(400,22),color:c.dim,align:"center",ls:2});}};
@@ -160,7 +160,7 @@ function gtStxBerge(ctx,ox,base,k){const im=gtStxBergI;if(!im)throw new Error("G
 function gtStxGsLayout(m,mc,opt){const c=GT_STX_GS,X=GT_STX,M=X.M,R=X.W-M,F=gtStxF;const PL=32,PR=X.W-32;
 /* Titel: zuerst mit Kartendeko (schmal), bei Platzmangel Deko reduzieren und volle Breite */
 const fitTitle=(maxW,from,min,maxLines)=>gtStxFitLines(mc,m.title,maxW,F.arch,from,min,6,maxLines);
-let T=fitTitle(600,128,84,3);let deco=true;if(!T.ok){deco=false;T=fitTitle(R-M,140,72,4);if(!T.ok)T={s:72,l:gtStxWrap(mc,m.title,R-M,F.arch(72))};}
+let T=fitTitle(600,128,84,3);let deco=true;if(!T.ok){deco=false;T=fitTitle(R-M,140,72,4);if(!T.ok)T={s:72,l:gtStxWrap(mc,m.title,R-M,F.arch(72))};}T.l=T.l.filter(s=>s.trim()!=="\u00b7");
 const tlh=T.s*0.98;const stl=gtStxWrap(mc,m.status,deco?600:R-M,F.inter(600,28));
 const outlineLine=s=>/^[\d\s.,:'’\/+\-]+$/.test(s)&&/\d/.test(s);
 const BK=1.1356;let h1h=Math.max(418,150+T.l.length*tlh+20+stl.length*38+46);{const tb=150+tlh*0.8;T.l.forEach((s,i)=>{mc.font=F.arch(T.s);const w=mc.measureText(s).width;h1h=Math.max(h1h,tb+i*tlh+T.s*0.24+10+gtStxBergMax(M,M+w,0,BK));});const sb=tb+(T.l.length-1)*tlh+20+38;stl.forEach((s,i)=>{mc.font=F.inter(600,28);const w=mc.measureText(s).width;h1h=Math.max(h1h,sb+i*38+10+10+gtStxBergMax(M,M+w,0,BK));});h1h=Math.ceil(h1h);}

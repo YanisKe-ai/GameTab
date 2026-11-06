@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.07-6 (07.11.2026 00:23)
+- Tutto: Titel oben, Spieler mittig
+
 ## 2026.11.07-5 (07.11.2026 00:21)
 - Tutto: Spielerliste scrollbar, alle Spieler erreichbar
 

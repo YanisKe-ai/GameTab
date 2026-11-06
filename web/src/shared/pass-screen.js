@@ -16,12 +16,13 @@ const GT_PASS_CSS = `
 .gt-pass-label{font:600 12px/1.2 'Inter',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--gt-p-muted);margin-top:clamp(18px,4.5vh,44px)}
 .gt-pass-name{font-size:var(--gt-p-fs);font-weight:700;line-height:1.05;margin:10px 0 clamp(16px,3.4vh,30px);max-width:100%;overflow-wrap:normal;word-break:normal;hyphens:none}
 .gt-pass-wrap{flex:1 1 auto;display:flex;flex-direction:column;align-items:center;gap:10px;width:100%;min-height:0}
-.gt-pass-wrap>.gt-flip{width:100%;flex:1 1 auto;display:flex;min-height:260px;perspective:none}
+.gt-pass-wrap>.gt-flip{width:100%;flex:1 1 auto;display:flex;min-height:220px;perspective:none}
 .gt-pass-wrap .gt-flip-inner{flex:1;display:grid;min-height:0}
 .gt-pass-wrap .gt-flip-face{border:0 !important;border-radius:28px;min-height:0;box-sizing:border-box;box-shadow:inset 0 0 0 2px color-mix(in oklab,var(--gt-p-acc) 62%,transparent);background:color-mix(in oklab,var(--gt-p-acc) 17%,var(--gt-p-card)) !important;color:var(--gt-p-ink)}
 .gt-pass-wrap .gt-flip-front{gap:14px;color:var(--gt-p-ink)}
 .gt-pass-wrap .gt-flip-front p{margin:0;font:600 18px/1.25 'Inter',sans-serif}
-.gt-pass-wrap .gt-flip-back{padding:18px 14px;display:flex;align-items:center;justify-content:center}
+.gt-pass-wrap .gt-flip-back{padding:18px 14px;display:flex;align-items:center;justify-content:center;overflow:visible}
+@media (max-height:700px){.gt-pass-name{font-size:min(var(--gt-p-fs),50px);margin-bottom:12px}.gt-pass-label{margin-top:14px}.gt-pass-wrap>.gt-flip{min-height:170px}.gt-pass-wrap .gt-flip-back{padding:12px 10px}}
 .gt-pass-wrap .gt-flip-back>div{width:100%}
 .gt-pass-note{font:500 13px/1.35 'Inter',sans-serif;color:var(--gt-p-muted);max-width:300px;margin:2px 0 0}
 .gt-pass-wrap .gt-u-dock{align-self:stretch;margin-top:6px}

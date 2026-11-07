@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.07-21 (07.11.2026 22:22)
+- Differenzler heisst jetzt Coiffeur
+
 ## 2026.11.07-20 (07.11.2026 19:00)
 - Schieber-Turnier: Vorschlag nächste Runde, faire Rangliste, Siegerkarte, neuer Stil
 

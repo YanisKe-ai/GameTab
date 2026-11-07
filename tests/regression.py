@@ -353,7 +353,7 @@ def t_romme(pg, env):
 
 @test("Jass Differenzler")
 def t_differenzler(pg, env):
-    open_game(pg, "Schreibunterlagen", "Jass", "Differenzler"); press_start(pg)
+    open_game(pg, "Schreibunterlagen", "Jass", "Coiffeur"); press_start(pg)
     blank = pg.locator(".jdp-c:has(.jdp-blank)")
     check(blank.count() == 20, "Differenzler: Startbild hat nicht 20 leere Felder")
     # Eingabe per Ziffernblock: Eintragen springt zur naechsten Person derselben Kategorie, nach der letzten schliesst das Blatt

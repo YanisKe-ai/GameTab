@@ -317,7 +317,7 @@ def flow_differenzler(pg):
     cats = [("herz", 1), ("ecke", 2), ("kreuz", 3), ("schaufel", 4), ("unte", 5), ("obe", 6), ("joker1", 7), ("joker2", 8), ("slalom", 9), ("guschti", 10)]
     raws = {"1": [30, 25, 28, 22, 31, 20, 26, 27, 24, 29], "2": [20, 18, 22, 25, 15, 19, 21, 17, 23, 16], "3": [10, 12, 8, 14, 9, 11, 13, 7, 12, 10]}
     scores = {pid: {c: {"raw": rs[i], "total": rs[i] * m} for i, (c, m) in enumerate(cats)} for pid, rs in raws.items()}
-    seeded(pg, ("Schreibunterlagen", "Jass", "Differenzler"), "jass", {"players": [{"id": 1, "name": "Tony"}, {"id": 2, "name": "Zoë Ölçü"}, {"id": 3, "name": "Maximiliane Huber-Brunner"}], "scores": scores})
+    seeded(pg, ("Schreibunterlagen", "Jass", "Coiffeur"), "jass", {"players": [{"id": 1, "name": "Tony"}, {"id": 2, "name": "Zoë Ölçü"}, {"id": 3, "name": "Maximiliane Huber-Brunner"}], "scores": scores})
 
 
 def tabu_wait(pg):

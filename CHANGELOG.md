@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.07-20 (07.11.2026 19:00)
+- Schieber-Turnier: Vorschlag nächste Runde, faire Rangliste, Siegerkarte, neuer Stil
+
 ## 2026.11.07-19 (07.11.2026 17:14)
 - Differenzler: ohne Scrollen, Zeile Total
 

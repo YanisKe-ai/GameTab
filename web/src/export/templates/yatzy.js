@@ -1,124 +1,136 @@
-// Ergebnisbild Yatzy (Entwurf dev-notes/ergebnisbild-entwuerfe/pro-spiel/yatzy.png).
-// Daten: nur Namen, Raenge und Endpunkte (gtEcModel). Wuerfel und Becher sind Spielsymbol (fuenf gleiche = "Yatzy"), keine Wurfdaten.
-// 2 bis 8 Spieler: die Wuerfelflaeche weicht der Rangliste (zwei Reihen, kleiner, oder eine Reihe), mehr als 8 Eintraege -> Folgeseiten.
+// Ergebnisbild Yatzy, Variante A (freigegebener Entwurf Export7, 432 x 540, hier Faktor 2.5).
+// Daten: nur Namen, Raenge und Endpunkte (gtEcModel: d.rows, d.winners, Gleichstand). Die Wuerfel sind Spielsymbol (fuenf Sechser), keine Wurfdaten.
+// Podest 2-1-3 (Sieger Mitte), bei Gleichstand stehen alle Sieger nebeneinander auf Platz 1. Ab Platz 4 eine kurze Liste unter dem Podest, ab 9 Eintraegen Folgeseiten.
+import { F_BOWLBY } from "./fonts-a.js";
 
-const BG = "#1C2838", ACC = "#9DB8D6", LINE = "#5B7A9D", INK = "#FFFFFF", DIE = "#F4EFE3", PIP = "#1B2431";
-const FIRST_CAP = 7; // Eintraege unter dem Sieger auf Seite 1 (Yatzy: max 8 Spieler)
-const DICE = [[90, 420, -5], [350, 410, 4], [610, 420, -3], [220, 650, 3], [490, 650, -4]]; // links, oben, Drehung (Entwurf, 190 px)
+const BG = "#7E8BFF", INK = "#14101C", WHITE = "#FFFFFF";
+const FIRST_CAP = 8; // Eintraege auf Seite 1 (Podest plus Liste)
+const ROT = [-6, 4, -2, 5, -4];
+const SIX = [[0.27, 0.25], [0.73, 0.25], [0.27, 0.5], [0.73, 0.5], [0.27, 0.75], [0.73, 0.75]];
+const FAM = F_BOWLBY;
 
-function bg(c, k) {
-  c.fillStyle = BG; c.fillRect(0, 0, k.TPL_W, k.TPL_H);
-  k.cssEllipse(c, 0, 0, k.TPL_W, k.TPL_H, 540, 742.5, [[0, "#2C405A"], [0.75, "#141D2A"], [1, "#141D2A"]]);
-}
-/* Wuerfelbecher wie im Entwurf: Trapez 260 x 370 bei (700,70), 26 Grad um die Mitte der Unterkante gedreht */
-function cup(c) {
-  c.save(); c.translate(830, 440); c.rotate(26 * Math.PI / 180); c.translate(-130, -370);
-  c.beginPath(); c.moveTo(36.4, 0); c.lineTo(223.6, 0); c.lineTo(260, 370); c.lineTo(0, 370); c.closePath(); c.clip();
-  const g = c.createLinearGradient(0, 0, 260, 0); g.addColorStop(0, "#7A4A2A"); g.addColorStop(0.45, "#A86A3A"); g.addColorStop(1, "#6B3E22");
-  c.fillStyle = g; c.fillRect(0, 0, 260, 370);
-  c.fillStyle = "#E8D8A8"; c.fillRect(0, 324, 260, 46);
-  c.strokeStyle = "rgba(232,216,168,0.67)"; c.lineWidth = 4; c.setLineDash([12, 12]);
-  [32, 228].forEach((x) => { c.beginPath(); c.moveTo(x, 60); c.lineTo(x, 280); c.stroke(); });
-  c.restore();
-}
 function die(c, k, x, y, s, rot) {
-  const h = s / 2;
+  const h = s / 2, r = s * 0.22, bw = 5, sh = Math.max(7.5, Math.round(s * 0.07 / 2.5) * 2.5);
   c.save(); c.translate(x + h, y + h); c.rotate(rot * Math.PI / 180);
-  const r = 34 * s / 190;
-  c.fillStyle = "rgba(0,0,0,0.4)"; k.rrect(c, -h + 12 * s / 190, -h + 16 * s / 190, s, s, r); c.fill();
-  c.fillStyle = DIE; k.rrect(c, -h, -h, s, s, r); c.fill();
-  c.fillStyle = PIP; const pr = 15.5 * s / 190;
-  [[0.18, 0.18], [0.82, 0.18], [0.18, 0.5], [0.82, 0.5], [0.18, 0.82], [0.82, 0.82]].forEach(([px, py]) => { c.beginPath(); c.arc(-h + px * s, -h + py * s, pr, 0, Math.PI * 2); c.fill(); });
+  c.fillStyle = INK; k.rrect(c, -h, -h + sh, s, s, r); c.fill();
+  c.fillStyle = WHITE; k.rrect(c, -h, -h, s, s, r); c.fill();
+  c.strokeStyle = INK; c.lineWidth = bw; k.rrect(c, -h + bw / 2, -h + bw / 2, s - bw, s - bw, r - bw / 2); c.stroke();
+  c.fillStyle = INK;
+  SIX.forEach(([px, py]) => { c.beginPath(); c.arc(-h + px * s, -h + py * s, s * 0.08, 0, Math.PI * 2); c.fill(); });
   c.restore();
 }
-/* Wuerfel im Bereich [top, bottom]: Entwurfsanordnung (2 Reihen) skaliert, bei wenig Platz eine Reihe unter dem Becher */
-function dice(c, k, bottom) {
-  const s2 = Math.min(1, (bottom - 410) / 440);
-  if (s2 >= 0.7) { const ax = 445, ay = 410; DICE.forEach(([x, y, r]) => die(c, k, ax + (x - ax) * s2, ay + (y - ay) * s2, 190 * s2, r)); return; }
-  // eine Reihe: entweder volle Breite unter dem Becher oder links neben dem Becher unter dem Titel, je nachdem was groesser wird
-  const full = Math.min(172, bottom - 505 - 12), left = Math.min(112, bottom - 330 - 12);
-  const useFull = full >= left, sz = Math.max(48, useFull ? full : left), gap = Math.min(24, sz * 0.14);
-  const w = 5 * sz + 4 * gap, x0 = useFull ? 540 - w / 2 : 70, top = useFull ? 505 : 330;
-  DICE.forEach(([, , r], i) => die(c, k, x0 + i * (sz + gap), top, sz, r));
+/* Weisse Schrift mit schwarzem Rand und hartem Versatzschatten (text-stroke + paint-order stroke fill + text-shadow) */
+function pop(c, text, x, y, stroke, off) {
+  c.lineJoin = "round";
+  c.fillStyle = INK; c.strokeStyle = INK; c.lineWidth = stroke * 2;
+  c.strokeText(text, x + off, y + off); c.fillText(text, x + off, y + off);
+  c.strokeText(text, x, y); c.fillStyle = WHITE; c.fillText(text, x, y);
+}
+function title(c, k, d, base) {
+  const f = k.fit(c, d.up(d.gameLabel), { w: 400, fam: FAM, max: 145, min: 70, maxW: 940, lines: 1 });
+  k.setFont(c, 400, f.size, FAM); c.textAlign = "center";
+  pop(c, f.lines[0], 540, base, 2.5 * f.size / 145, 12.5 * f.size / 145);
+  c.textAlign = "left";
 }
 function footer(c, k, d) {
   const lw = k.logo(c, d.logo, 60, 1210, 100, INK);
   const x = 60 + lw + 20;
-  k.setFont(c, 800, 52, k.F_BALOO); c.fillStyle = INK; c.fillText("GameTab", x, 1252);
-  const f = k.fit(c, d.date, { w: 700, fam: k.F_BALOO, max: 26, min: 18, maxW: 1020 - x });
-  k.setFont(c, 700, f.size, k.F_BALOO); c.globalAlpha = 0.9; c.fillText(f.lines[0], x, 1293); c.globalAlpha = 1;
+  k.setFont(c, 800, 52, k.F_BALOO); c.fillStyle = INK; c.fillText("GameTab", x, 1262);
+  const f = k.fit(c, d.date, { w: 600, fam: k.F_INTER, max: 30, min: 18, maxW: 1020 - x - 300 - 20, lines: 1 });
+  k.setFont(c, 600, f.size, k.F_INTER); c.textAlign = "right"; c.fillText(f.lines[0], 1020, 1262); c.textAlign = "left";
 }
-/* Rangliste unter dem Sieger: zwei Spalten, Name links, Punkte rechts, Linie oben */
-function grid(c, k, rows, top, fs, pitch) {
-  const cw = (960 - 30) / 2;
+/* Podium-Spalten in Anzeigereihenfolge: ein Sieger -> 2, 1, 3; Gleichstand -> alle Sieger nebeneinander (dann ggf. Platz 3) */
+function podiumCols(rows, winners) {
+  const win = winners.length ? winners : rows.slice(0, 1);
+  const rest = rows.filter((r) => win.indexOf(r) < 0);
+  if (win.length === 1) {
+    const cols = [];
+    if (rest[0]) cols.push(rest[0]);
+    cols.push(win[0]);
+    if (rest[1]) cols.push(rest[1]);
+    return cols;
+  }
+  const w = win.slice(0, 4);
+  return w.concat(w.length < 3 ? rest.slice(0, 3 - w.length) : []);
+}
+function column(c, k, r, x, w, base, H, hero) {
+  const rank = Math.min(r.rank, 3);
+  const bt = base - H, rad = 35, bw = 7.5;
+  const body = (dx) => { c.beginPath(); c.moveTo(x + dx, base); c.lineTo(x + dx, bt + rad); c.arcTo(x + dx, bt, x + dx + rad, bt, rad); c.lineTo(x + dx + w - rad, bt); c.arcTo(x + dx + w, bt, x + dx + w, bt + rad, rad); c.lineTo(x + dx + w, base); c.closePath(); };
+  c.fillStyle = INK; body(15); c.fill();
+  if (rank !== 1) { c.fillStyle = BG; body(0); c.fill(); }
+  c.fillStyle = rank === 1 ? WHITE : "rgba(255,255,255,0.7)"; body(0); c.fill();
+  c.strokeStyle = INK; c.lineWidth = bw; c.lineJoin = "miter";
+  const a = bw / 2;
+  c.beginPath(); c.moveTo(x + a, base); c.lineTo(x + a, bt + rad); c.arcTo(x + a, bt + a, x + rad, bt + a, rad - a); c.lineTo(x + w - rad, bt + a); c.arcTo(x + w - a, bt + a, x + w - a, bt + rad, rad - a); c.lineTo(x + w - a, base); c.stroke();
+  /* Platznummer */
+  const ns = Math.min(hero ? 180 : 120, H * 0.5);
+  k.setFont(c, 400, ns, FAM); c.fillStyle = INK; c.textAlign = "center";
+  c.fillText(String(r.rank), x + w / 2, bt + H / 2 + k.capH(c) / 2);
+  /* Punkte */
+  const sf = k.fit(c, r.value, { w: 400, fam: FAM, max: hero ? 115 : 70, min: 36, maxW: w - 10, lines: 1 });
+  k.setFont(c, 400, sf.size, FAM); const sb = bt - 20;
+  if (hero) pop(c, r.value, x + w / 2, sb, 3.75 * sf.size / 115, 7.5 * sf.size / 115); else { c.fillStyle = INK; c.fillText(r.value, x + w / 2, sb); }
+  const scap = k.capH(c);
+  /* Name in Grossbuchstaben, Zeilen nach oben gestapelt */
+  let nf = k.nameFit(c, d0(r), { w: 400, fam: FAM, max: hero ? 75 : 50, min: hero ? 30 : 26, maxW: w - 8, lines: 2 });
+  // zu lang: drei Zeilen und kleinere Schrift (nie mitten im Wort), Ellipse nur als letzte Loesung
+  if (nf.cut) nf = k.fit(c, d0(r), { w: 400, fam: FAM, max: hero ? 56 : 40, min: 15, maxW: w - 8, lines: 3 });
+  k.setFont(c, 400, nf.size, FAM); c.fillStyle = INK;
+  let nb = sb - scap - 24;
+  for (let i = nf.lines.length - 1; i >= 0; i--) { c.fillText(nf.lines[i], x + w / 2, nb); nb -= nf.size * 1.12; }
+  c.textAlign = "left";
+}
+let upFn = (s) => s;
+function d0(r) { return upFn(r.name); }
+/* Kurze Liste ab Platz 4: Raster, Platz links, Name, Punkte rechts */
+function list(c, k, rows, top, cols, pitch) {
+  const gap = 30, cw = cols === 1 ? 760 : (960 - gap) / 2, x0 = cols === 1 ? 160 : 60;
   rows.forEach((r, i) => {
-    const col = i % 2, row = Math.floor(i / 2), x = 60 + col * (cw + 30), y = top + row * pitch;
-    c.fillStyle = LINE; c.fillRect(x, y, cw, 6);
-    k.setFont(c, 400, fs, k.F_ANTON); const capY = y + 12 + fs * 0.12; const bl = capY + k.capH(c);
-    c.textAlign = "right"; c.fillStyle = ACC; c.fillText(r.value, x + cw, bl); const vw = c.measureText(r.value).width; c.textAlign = "left";
-    const f = k.fit(c, r.name, { w: 400, fam: k.F_ANTON, max: fs, min: Math.round(fs * 0.55), maxW: cw - vw - 20, lines: 1 });
-    k.setFont(c, 400, f.size, k.F_ANTON); c.fillStyle = INK; c.fillText(f.lines[0], x, bl);
+    const col = i % cols, row = Math.floor(i / cols), x = x0 + col * (cw + gap), y = top + row * pitch;
+    c.fillStyle = INK; c.fillRect(x, y, cw, 5);
+    const fs = 38, mid = y + 5 + (pitch - 5) / 2;
+    k.setFont(c, 400, fs, FAM); const base = mid + k.capH(c) / 2;
+    c.fillStyle = INK; c.fillText(String(r.rank), x + 4, base);
+    const rw = c.measureText("00").width + 24;
+    c.textAlign = "right"; const vw = c.measureText(r.value).width; c.fillText(r.value, x + cw - 4, base); c.textAlign = "left";
+    const nf = k.nameFit(c, d0(r), { w: 400, fam: FAM, max: fs, min: 24, maxW: cw - rw - vw - 36 - 8, lines: 2 });
+    k.setFont(c, 400, nf.size, FAM);
+    nf.lines.forEach((ln, j) => c.fillText(ln, x + rw, mid + nf.size * 0.36 - (nf.lines.length - 1) * nf.size * 0.55 + j * nf.size * 1.1));
   });
 }
 
-function page1(d, k, others) {
+function page1(d, k, rows) {
   const { cv, c } = k.tplCanvas();
-  bg(c, k);
-  const n = others.length, R = Math.ceil(n / 2);
-  const fs = R <= 2 ? 46 : R === 3 ? 42 : 38, pitch = R <= 2 ? 78 : R === 3 ? 70 : 64;
-  const gridTop = n ? Math.min(1060, 1196 - R * pitch) : 1196;
-  /* Sieger: Name(n) links (Anton, 1 bis 2 Zeilen), Punkte rechts, gemeinsame Grundlinie */
-  const heroBase = gridTop - 35;
-  const hs = R <= 2 ? 190 : R === 3 ? 165 : 150;
-  const win = d.winners.length ? d.winners : d.rows.slice(0, 1);
-  const name = d.up(win.map((r) => r.name).join(" & "));
-  const val = win[0].value;
-  k.setFont(c, 400, hs, k.F_ANTON); const vw = c.measureText(val).width;
-  // 1 Zeile gross, sonst 2 Zeilen (max 150), sonst 3 Zeilen (max 112); gekuerzt wird erst darunter
-  const fo = { w: 400, fam: k.F_ANTON, maxW: 960 - vw - 40 };
-  let nf = k.fit(c, name, Object.assign({}, fo, { max: hs, min: Math.round(hs * 0.62), lines: 1 }));
-  if (nf.cut) nf = k.fit(c, name, Object.assign({}, fo, { max: Math.min(hs, 150), min: 72, lines: 2 }));
-  if (nf.cut) nf = k.fit(c, name, Object.assign({}, fo, { max: 112, min: 56, lines: 3 }));
-  /* Zeilen nach echten Glyphen stapeln: Akzente/Umlaute der unteren und Unterlaengen der oberen Zeile bekommen Platz */
-  k.setFont(c, 400, nf.size, k.F_ANTON); const cap = k.capH(c);
-  const asc = nf.lines.map((l) => Math.max(cap, c.measureText(l).actualBoundingBoxAscent || cap));
-  const dsc = nf.lines.map((l) => Math.max(0, c.measureText(l).actualBoundingBoxDescent || 0));
-  const bl = new Array(nf.lines.length); bl[nf.lines.length - 1] = heroBase;
-  for (let i = nf.lines.length - 2; i >= 0; i--) bl[i] = bl[i + 1] - (asc[i + 1] + dsc[i] + nf.size * 0.08);
-  const nameTop = bl[0] - asc[0];
-  let heroTop = Math.min(nameTop, (() => { k.setFont(c, 400, hs, k.F_ANTON); return heroBase - k.capH(c); })());
-  /* Gleichstand: kleiner Hinweis ueber dem Namen */
-  let tieY = 0;
-  if (d.tie) { tieY = heroTop - 26; heroTop = tieY - 40; }
-  /* Titel und Becher, dann Wuerfel im verbleibenden Raum */
-  const title = d.up(d.gameLabel) + "!";
-  const tf = k.fit(c, title, { w: 400, fam: k.F_ANTON, max: 270, min: 120, maxW: 640, lines: 1 });
-  k.setFont(c, 400, tf.size, k.F_ANTON); c.fillStyle = ACC; c.fillText(tf.lines[0], 50, 55 + k.capH(c));
-  cup(c);
-  dice(c, k, heroTop - 18);
-  if (d.tie) {
-    k.setFont(c, 700, 34, k.F_INTER); c.fillStyle = ACC;
-    const tl = d.up(d.tr("ecTied", "Gemeinsamer erster Platz")); k.spaced(c, tl, 62, tieY, 3, "left");
-  }
-  k.setFont(c, 400, nf.size, k.F_ANTON); c.fillStyle = INK;
-  nf.lines.forEach((ln, i) => c.fillText(ln, 60, bl[i]));
-  k.setFont(c, 400, hs, k.F_ANTON); c.fillStyle = ACC; c.textAlign = "right"; c.fillText(val, 1020, heroBase); c.textAlign = "left";
-  grid(c, k, others, gridTop, fs, pitch);
+  upFn = d.up;
+  c.fillStyle = BG; c.fillRect(0, 0, k.TPL_W, k.TPL_H);
+  const pc = podiumCols(rows, d.winners.filter((w) => rows.indexOf(w) >= 0));
+  const rest = rows.filter((r) => pc.indexOf(r) < 0);
+  const lcols = rest.length > 4 ? 2 : 1, lrows = Math.ceil(rest.length / lcols), pitch = 72;
+  const listH = rest.length ? lrows * pitch + 30 : 0;
+  title(c, k, d, 165);
+  const dsz = rest.length > 3 ? 110 : 140, dgap = dsz / 8, dw = 5 * dsz + 4 * dgap, dtop = 215;
+  ROT.forEach((r, i) => die(c, k, 540 - dw / 2 + i * (dsz + dgap), dtop, dsz, r));
+  const pb = 1185 - listH, ztop = dtop + dsz + 45;
+  const m = pc.length, colW = Math.min(460, Math.floor((960 - 20 * (m - 1)) / Math.max(m, 3))), tot = m * colW + (m - 1) * 20, x0 = (1080 - tot) / 2 - 7;
+  const nWin = pc.filter((r) => r.rank === 1).length;
+  const H1 = Math.max(170, Math.min(500, pb - ztop - 290));
+  const hOf = (r) => (r.rank === 1 ? H1 : r.rank === 2 ? Math.round(H1 * 0.7) : Math.round(H1 * 0.5));
+  pc.forEach((r, i) => column(c, k, r, x0 + i * (colW + 20), colW, pb, Math.max(hOf(r), 110), r.rank === 1 && nWin <= 2));
+  if (rest.length) list(c, k, rest, pb + 30, lcols, pitch);
   footer(c, k, d);
   return cv;
 }
 
 export default {
   games: ["yatzy"],
-  fonts: ["400 100px \"GTR Anton\"", "800 52px \"Baloo 2\"", "700 26px \"Baloo 2\"", "700 34px Inter"],
-  texts: (d) => [d.up(d.tr("ecTied", "")), "!&"],
+  fonts: ["400 100px \"GTR Bowlby\"", "800 52px \"Baloo 2\"", "600 30px Inter"],
+  texts: (d) => [d.up(d.gameLabel)],
   render(d, k) {
-    const win = d.winners.length ? d.winners : d.rows.slice(0, 1);
-    const rest = d.rows.filter((r) => win.indexOf(r) < 0);
-    const parts = k.chunks(rest, FIRST_CAP, 12);
+    const parts = k.chunks(d.rows, FIRST_CAP, 12);
     const out = [page1(d, k, parts[0])];
-    const sty = { bg: (c) => bg(c, k), ink: INK, sub: ACC, acc: ACC, line: "rgba(157,184,214,0.35)", fam: k.F_ANTON, logo: INK, titleFam: k.F_ANTON, titleCase: true, subFam: k.F_BALOO,
-      rowFill: "rgba(157,184,214,0.1)", rowEdge: "rgba(157,184,214,0.32)" };
+    const sty = { bg: (c) => { c.fillStyle = BG; c.fillRect(0, 0, k.TPL_W, k.TPL_H); }, ink: INK, sub: INK, acc: WHITE, line: "rgba(20,16,28,0.5)", fam: k.F_INTER, logo: INK, titleFam: FAM, titleCase: true, subFam: k.F_BALOO,
+      rowFill: "rgba(255,255,255,0.55)", rowFillWin: WHITE, rowEdge: INK };
     parts.slice(1).forEach((p, i) => out.push(k.continuationPage(d, p, i + 2, parts.length, sty)));
     return out;
   },

@@ -7,6 +7,7 @@ const FACES = [
   ["GTR Mono", "IBMPlexMono-Regular-lat.woff2", "400", "normal"],
   ["GTR Mono", "IBMPlexMono-SemiBold-lat.woff2", "600", "normal"],
   ["GTR InterBI", "Inter-BlackItalic-lat.woff2", "900", "normal"],
+  ["GTR Bowlby", "BowlbyOne-Regular-lat.woff2", "400", "normal"],
 ];
 let done = false;
 function registerA() {
@@ -23,7 +24,8 @@ const F_ARCHIVO = '"GTR Archivo"' + FB;
 const F_BRUSH = '"GTR Brush"' + FB;
 const F_MONO = '"GTR Mono"' + FB;
 const F_INTERBI = '"GTR InterBI"' + FB;
+const F_BOWLBY = '"GTR Bowlby"' + FB;
 const F_SPACE = '"Space Grotesk"' + FB;
 const F_FRAUNCES = '"Fraunces"' + FB;
 
-export { F_ARCHIVO, F_BRUSH, F_MONO, F_INTERBI, F_SPACE, F_FRAUNCES, registerA };
+export { F_BOWLBY, F_ARCHIVO, F_BRUSH, F_MONO, F_INTERBI, F_SPACE, F_FRAUNCES, registerA };

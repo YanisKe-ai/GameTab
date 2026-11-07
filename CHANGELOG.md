@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.07-16 (07.11.2026 14:39)
+- Schieber: Wyys-Dialog in Nachtblau, neues Turnier-Icon
+
 ## 2026.11.07-15 (07.11.2026 13:10)
 - Neue Icons für Jass, Yatzy, Tutto, Schieber und Differenzler
 

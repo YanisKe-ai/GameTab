@@ -4,7 +4,7 @@ import { noirAccent } from "../themes/shell.js";
 import { resultTheme, shadeHex } from "../export/canvas-utils.js";
 /*@gt-body-begin*/
 
-const GT_SB_ACC={flip7:"#FF7A3D","jass-differenzler":"#D52B1E"};const gtSbSeen=new Set();
+const GT_SB_ACC={flip7:"#FF7A3D","jass-differenzler":"#D52B1E","schieber-turnier":"#3F8A68"};const gtSbSeen=new Set();
 function gtSbLum(hex){const n=parseInt(String(hex||"").slice(1,7),16);if(!isFinite(n))return 0.2;const c=[n>>16&255,n>>8&255,n&255].map(v=>{v/=255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4);});return 0.2126*c[0]+0.7152*c[1]+0.0722*c[2];}
 function gtSbCR(a,b){const x=gtSbLum(a),y=gtSbLum(b);return(Math.max(x,y)+0.05)/(Math.min(x,y)+0.05);}
 function gtSbText(c,bg,min){let x=c;const dark=gtSbLum(bg)>0.4;for(let i=0;i<8&&gtSbCR(x,bg)<min;i++)x=shadeHex(x,dark?-0.18:0.18);return x;}

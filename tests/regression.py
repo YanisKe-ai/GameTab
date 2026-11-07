@@ -443,7 +443,7 @@ def t_schieber_turnier(pg, env):
     click(pg, btn_re(pg, "Team A gewinnt"), 700)
     click(pg, btn(pg, "Ergebnis speichern"), 1000)
     check(has_text(pg, r"1 Partie"), "Turnier: Partie nicht gezaehlt")
-    check(has_text(pg, r"Anna\s+\+1", re.I), "Turnier: Rangliste ohne Punkte")
+    check(has_text(pg, r"Anna[\s\S]{0,60}\+1", re.I), "Turnier: Rangliste ohne Punkte")
     reload_alive(pg, "Turnier: Neuladen")
 
 
@@ -470,8 +470,8 @@ def t_schieber_schwaetzer(pg, env):
     click(pg, btn(pg, "Ins Turnier eintragen").first, 1000)
     pg.goto(URL); wait(pg, 800)
     open_game(pg, "Schreibunterlagen", "Jass", "Schieber-Turnier"); wait(pg, 900)
-    click(pg, pg.get_by_role("button", name=re.compile("Turniermenü")).first, 700)
-    click(pg, pg.locator(".gtst-ovl").get_by_role("button", name=re.compile("Turnier beenden")).last, 800)
+    click(pg, pg.get_by_role("button", name="Menü", exact=True).first, 700)
+    click(pg, pg.get_by_role("menuitem", name=re.compile("Turnier beenden")).first, 800)
     click(pg, pg.locator(".gtst-ovl").get_by_role("button", name="Turnier beenden").last, 1500)
     txt = " ".join(pg.locator(".gtst-talker").all_inner_texts())
     check("Ben · 900 Punkte Wyys" in txt, f"Schwaetzer fehlt: {txt!r}")

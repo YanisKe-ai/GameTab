@@ -45,11 +45,15 @@ const ICONS = {
   rules: [<circle key="a" cx="12" cy="12" r="9" {...IC} />, <path key="b" d="M9.6 9.4a2.5 2.5 0 1 1 3.6 2.2c-.8.5-1.2 1-1.2 1.8" {...IC} />, <circle key="c" cx="12" cy="17" r=".6" fill="currentColor" stroke="currentColor" strokeWidth="1" />],
   home: [<path key="r" d="M3 11.5 12 4l9 7.5" {...IC} />, <path key="h" d="M5.5 10v9.5a1 1 0 0 0 1 1H9.5v-6h5v6H18a1 1 0 0 0 1-1V10" {...IC} />],
   plus: [<path key="a" d="M12 5v14M5 12h14" {...IC} />],
+  table: [<path key="a" d="M3 9h18M5 9v10M19 9v10M4 5h16v4H4z" {...IC} />],
+  share: [<path key="a" d="M12 15V4M8 8l4-4 4 4M5 13v6h14v-6" {...IC} />],
+  copy: [<path key="a" d="M9 9h10v10H9zM5 15V5h10" {...IC} />],
+  trash: [<path key="a" d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3" {...IC} />],
 };
 const COLORS = {
-  dark: { restart: "#F0A63A", users: "#3FB8A6", flag: "#FF7B7F", rules: "#8C9AFF", home: "#5FB38C", plus: "#8C9AFF" },
-  light: { restart: "#B86F00", users: "#12806F", flag: "#C9302C", rules: "#4353D6", home: "#2A7F5A", plus: "#4353D6" },
-  noir: { restart: "#D2D2D2", users: "#D2D2D2", flag: "#FF8F8F", rules: "#D2D2D2", home: "#D2D2D2", plus: "#D2D2D2" },
+  dark: { restart: "#F0A63A", users: "#3FB8A6", flag: "#FF7B7F", rules: "#8C9AFF", home: "#5FB38C", plus: "#8C9AFF", table: "#3FB8A6", share: "#8C9AFF", copy: "#F0A63A", trash: "#FF7B7F" },
+  light: { restart: "#B86F00", users: "#12806F", flag: "#C9302C", rules: "#4353D6", home: "#2A7F5A", plus: "#4353D6", table: "#12806F", share: "#4353D6", copy: "#B86F00", trash: "#C9302C" },
+  noir: { restart: "#D2D2D2", users: "#D2D2D2", flag: "#FF8F8F", rules: "#D2D2D2", home: "#D2D2D2", plus: "#D2D2D2", table: "#D2D2D2", share: "#D2D2D2", copy: "#D2D2D2", trash: "#FF8F8F" },
 };
 
 function GtHmRow({ icon, color, danger, confirming, warm, onClick, children, extra, ...rest }) {
@@ -110,7 +114,7 @@ function GtHeadButtons({ theme, css, L, onRules, onHome, onEndGame, items, onOpe
   };
   const itemRow = (it) => {
     const label = it.confirming && it.confirmLabel ? it.confirmLabel : it.label;
-    const common = { icon: it.icon || "plus", color: col[it.icon] || col.plus, confirming: !!(it.confirming && it.twoStep), warm: true };
+    const common = { icon: it.icon || "plus", color: col[it.icon] || col.plus, confirming: !!(it.confirming && it.twoStep), warm: true, danger: !!it.danger };
     if (it.hold) {
       const hp = gtHold(() => { close(); it.hold(); });
       return (

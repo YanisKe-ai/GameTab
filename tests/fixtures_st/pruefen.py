@@ -2,6 +2,7 @@
 import json
 from pathlib import Path
 from collections import defaultdict
+from fractions import Fraction
 
 def calculate(case):
     stats = {p['id']: {'wins': 0, 'losses': 0} for p in case['participants']}
@@ -27,7 +28,7 @@ def calculate(case):
         s['games'] = s['wins'] + s['losses']
     played = [p for p in stats if stats[p]['games']]
     for p, s in stats.items():
-        s['rank'] = 1 + sum(stats[q]['points'] > s['points'] for q in played) if s['games'] else None
+        s['rank'] = 1 + sum((stats[q]['points'], Fraction(stats[q]['wins'], stats[q]['games']), stats[q]['wins']) > (s['points'], Fraction(s['wins'], s['games']), s['wins']) for q in played) if s['games'] else None  # Punkte, dann Quote, dann Siege
     winners = [p for p in played if stats[p]['rank'] == 1]
     partners = {}
     for p in winners:

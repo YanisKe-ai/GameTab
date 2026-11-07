@@ -4,6 +4,7 @@ import { React } from "../vendor/react-globals.js";
 import { useGtDialog } from "../shared/dialog.js";
 import { GT_EC_CJK, GT_EC_LOC, gtEcFace, gtEcFonts, gtEcNoEmoji, gtEcNum, gtEcSeg, gtEcTr } from "./result-card.js";
 import { GT_ST } from "../games/schieber/tournament-core.js";
+import { logo as gtStxLogoDraw, tplLogo } from "./templates/kit.js";
 import GT_STX_BERG_URL from "../assets/img/stx-berg.webp";
 import { gtImgCanShare, gtImgDevice, gtImgDownload, gtImgPlan, gtImgShare } from "./save-image.js";
 /*@gt-body-begin*/
@@ -81,19 +82,23 @@ stats:plural(d.summary.matches,"stxMatchesOne","stxMatches","1 Partie","{n} Part
 pointsWord:n=>n===1||n===-1?tr("stxPointOne","Punkt"):tr("stxPointsWord","Punkte"),
 head:{rank:tr("stxRank","Rang"),name:tr("stxName","Name"),wins:tr("stxWins","Siege"),losses:tr("stxLosses","Niederlagen"),pts:tr("stxPts","Punkte")},
 unplayedHead:tr("stxUnplayed","Noch nicht gespielt"),unplayedRow:tr("stxUnplayedRow","0 Partien, ohne Rang"),continued:tr("stxContinued","Fortsetzung"),
-legend:[tr("stxLegend","Sieg +1 · Niederlage −1 · Punkte = Siege − Niederlagen"),tr("stxLegendTie","Gleiche Punkte, gleicher Rang.")].concat(cap?[tr("stxTallyCap","Striche bis 10, darüber zählt die Zahl.")]:[]),
+legend:[tr("stxLegend","Sieg +1 · Niederlage −1 · Punkte = Siege − Niederlagen"),tr("stxLegendTie","Bei gleichen Punkten zählt die Quote, dann die Siege.")].concat(cap?[tr("stxTallyCap","Striche bis 10, darüber zählt die Zahl.")]:[]),
 tagStrich:tr("stxTagStrich","Jeder Strich erzählt eine Partie."),tagGrand:tr("stxTagGrand","Zusammen am Tisch. Vorne im Turnier."),
 page:(n,m)=>tr("stxPage","Seite {n}/{m}",{n:num(n),m:num(m)}),more:n=>tr("stxMore","weiter auf Seite {n}",{n:num(n)}),
 date:(snap.completedAt||(done.length?done[done.length-1]:snap.updatedAt)||nowIso),seed:gtStxHash(snap.id||"x"),
 allNames:rows.map(r=>r.name).concat(unplayed.map(u=>u.name)),invariantsOk:!!(d.invariants&&d.invariants.ok)};}
 
 /* Seiten nach gemessener Hoehe aufteilen */
-function gtStxPaginate(L){const X=GT_STX;const pages=[];let pg=null;const limit=()=>X.MAXH-L.foot.h;
+function gtStxRun(L,lim){const X=GT_STX;const pages=[];let pg=null;const limit=()=>lim;
 const newPage=()=>{pg={first:!pages.length,items:[],y:0,n:0};pg.y=(pg.first?L.h1.h:L.hN.h);pages.push(pg);};newPage();
 const B=L.blocks;for(let i=0;i<B.length;i++){const b=B[i];let need=b.h;let j=i,k=b.keep===true?1:(b.keep||0);while(k>0&&B[j+1]){need+=B[j+1].h;j++;k--;if(k===0&&B[j].keep){k=B[j].keep===true?1:B[j].keep;}}
 if(pg.y+need>limit()&&pg.n>0){let carry=[];if(b.withPrev&&pg.n>1){const last=pg.items[pg.items.length-1];if(!last.b.isHead&&!last.b.noCarry){pg.items.pop();pg.n--;pg.y=last.y;carry.push(last.b);}}newPage();const first=carry[0]||b;if(first.rep&&!first.isHead){pg.items.push({b:first.rep,y:pg.y});pg.y+=first.rep.h;}carry.forEach(cb=>{pg.items.push({b:cb,y:pg.y});pg.y+=cb.h;pg.n++;});}
 pg.items.push({b:b,y:pg.y});pg.y+=b.h;pg.n++;}
-const N=pages.length;pages.forEach((p,i)=>{p.H=N===1?Math.max(X.MINH,Math.ceil(p.y+L.foot.h)):(i<N-1?X.MAXH:Math.max(X.MINH,Math.ceil(p.y+L.foot.h)));});return pages;}
+return pages;}
+/* Seiten gleichmaessig fuellen: kleinste Hoehengrenze, bei der die Seitenzahl gleich bleibt (nicht 7 + 1). Alle Seiten gleich hoch. */
+function gtStxPaginate(L){const X=GT_STX;const hi=X.MAXH-L.foot.h;let pages=gtStxRun(L,hi);const N=pages.length;
+if(N>1){let a=Math.max(L.h1.h,L.hN.h)+240,b=hi,best=pages;while(b-a>6){const mid=Math.floor((a+b)/2);const r=gtStxRun(L,mid);if(r.length<=N){b=mid;best=r;}else a=mid;}pages=best;}
+const maxY=pages.reduce((x,p)=>Math.max(x,p.y),0);const H=Math.max(X.MINH,Math.ceil(maxY+L.foot.h));pages.forEach(p=>{p.H=H;});return pages;}
 
 /* ---------- Design STRICHLISTE ---------- */
 const GT_STX_SL={bg:"#1C2023",deep:"#15191C",graph:"#24282B",ivory:"#F4F3EA",ice:"#85D1F5",line:"#626B70",dim:"#B3B9B6"};
@@ -115,7 +120,7 @@ const stl=gtStxWrap(mc,m.status,900,F.mono(400,27));
 const h1={h:72+70+tl.length*tlh+34+stl.length*38+44,draw:(cx,y)=>{topBar(cx,y+50);let yy=y+142;const th=gtStxChalkText(cx,tl,F.chalk(ts),tlh,X.W/2,yy,m.seed,c.ivory);mc.font=F.chalk(ts);const lw=Math.min(860,mc.measureText(tl[tl.length-1]).width*0.92);const ly=yy+tl.length*tlh-tlh*0.06;gtStxChalkLine(cx.ctx,X.W/2-lw/2,ly+8,X.W/2+lw/2,ly-4,c.ice,7,m.seed+3);yy+=tl.length*tlh+34;stl.forEach((s,i)=>gtStxT(cx,s,X.W/2,yy+i*38+24,{font:F.mono(400,27),color:c.ice,align:"center"}));}};
 const tlN=gtStxWrap(mc,m.title,900,F.chalk(64));const hN={h:72+60+tlN.length*68+30+40,draw:(cx,y,i,N)=>{topBar(cx,y+50);gtStxChalkText(cx,tlN,F.chalk(64),68,X.W/2,y+132,m.seed+7,c.ivory);gtStxT(cx,m.continued+", "+m.page(i+1,N),X.W/2,y+132+tlN.length*68+40,{font:F.mono(400,22),color:c.dim,align:"center",ls:2});}};
 mc.font=F.mono(400,24);const stw=mc.measureText(m.stats).width;mc.font=F.chalk(42);const tagW=mc.measureText(m.tagStrich).width;const tagFoot=stw+tagW+70<=R-M;
-const foot={h:120,draw:(cx,y,i,N)=>{const ctx=cx.ctx;ctx.fillStyle=c.line;ctx.fillRect(M,y+30,Math.min(R-M,tagFoot&&i===N-1?stw+40:R-M),2);gtStxT(cx,m.stats,M,y+76,{font:F.mono(400,24),color:c.ivory});if(i<N-1)gtStxT(cx,m.page(i+1,N)+", "+m.more(i+2),R,y+76,{font:F.mono(400,24),color:c.dim,align:"right"});else if(tagFoot){gtStxChalkText(cx,[m.tagStrich],F.chalk(42),46,R-tagW/2,y+34,m.seed+11,c.ivory);gtStxChalkLine(ctx,R-tagW+20,y+92,R,y+84,c.ice,4,m.seed+13);}}};
+const foot={h:190,draw:(cx,y,i,N)=>{const ctx=cx.ctx;ctx.fillStyle=c.line;ctx.fillRect(M,y+30,Math.min(R-M,tagFoot&&i===N-1?stw+40:R-M),2);gtStxT(cx,m.stats,M,y+76,{font:F.mono(400,24),color:c.ivory});if(i<N-1)gtStxT(cx,m.page(i+1,N)+", "+m.more(i+2),R,y+76,{font:F.mono(400,24),color:c.dim,align:"right"});else if(tagFoot){gtStxChalkText(cx,[m.tagStrich],F.chalk(42),46,R-tagW/2,y+34,m.seed+11,c.ivory);gtStxChalkLine(ctx,R-tagW+20,y+92,R,y+84,c.ice,4,m.seed+13);}}};
 const blocks=[];
 /* Sieger */
 const lab=m.leadLabel?m.up(m.leadLabel):"";
@@ -172,7 +177,7 @@ let yy=y+150+tlh*0.8;T.l.forEach((s,i)=>{if(outlineLine(s))gtStxT(cx,s,M,yy+i*tl
 const tlN=gtStxWrap(mc,m.title,R-M-240,F.arch(60));const NK=0.62,NO=GT_STX.W-951*NK;let hNh=200+tlN.length*62+56;tlN.forEach((s,i)=>{mc.font=F.arch(60);hNh=Math.max(hNh,250+i*62+16+10+gtStxBergMax(M,M+mc.measureText(s).width,NO,NK));});{mc.font=F.inter(800,20);const cw=gtStxMW(mc,m.up(m.continued+", "+m.page(9,9)),4);hNh=Math.max(hNh,250+tlN.length*62+8+6+10+gtStxBergMax(M,M+cw,NO,NK));}hNh=Math.ceil(hNh);
 const hN={h:hNh,draw:(cx,y,i,N)=>{const ctx=cx.ctx;gtStxBerge(ctx,NO,y+hNh,NK);["heart","diamond","club","spade"].forEach((k,i)=>gtStxSuitFill(ctx,k,R-20-(3-i)*52,y+86,40,[c.coral,c.white,c.navy,c.white][i]));gtStxT(cx,m.brand,M,y+118,{font:F.arch(50),color:c.white});gtStxT(cx,m.up(m.mode),M,y+168,{font:F.inter(600,24),color:c.white,ls:7});tlN.forEach((s,i)=>gtStxT(cx,s,M,y+250+i*62,{font:F.arch(60),color:c.white}));gtStxT(cx,m.up(m.continued+", "+m.page(i+1,N)),M,y+250+tlN.length*62+8,{font:F.inter(800,20),color:c.soft,ls:4});}};
 mc.font=F.inter(600,26);const stw=mc.measureText(m.stats).width;mc.font=F.inter(800,28);const tagFoot=stw+mc.measureText(m.tagGrand).width+60<=R-M;
-const foot={h:120,draw:(cx,y,i,N)=>{gtStxT(cx,m.stats,M,y+78,{font:F.inter(600,26),color:c.white});if(i<N-1)gtStxT(cx,m.page(i+1,N)+", "+m.more(i+2),R,y+78,{font:F.inter(800,24),color:c.white,align:"right"});else if(tagFoot)gtStxT(cx,m.tagGrand,R,y+78,{font:F.inter(800,28),color:c.white,align:"right"});}};
+const foot={h:190,draw:(cx,y,i,N)=>{gtStxT(cx,m.stats,M,y+78,{font:F.inter(600,26),color:c.white});if(i<N-1)gtStxT(cx,m.page(i+1,N)+", "+m.more(i+2),R,y+78,{font:F.inter(800,24),color:c.white,align:"right"});else if(tagFoot)gtStxT(cx,m.tagGrand,R,y+78,{font:F.inter(800,28),color:c.white,align:"right"});}};
 const blocks=[];const bandRect=(ctx,y,h,col)=>{ctx.fillStyle=col;ctx.fillRect(PL,y,PR-PL,h);};
 if(!m.winners.length){const l=gtStxWrap(mc,m.noWinner,R-M,F.inter(800,32));blocks.push({h:30+l.length*44+40,draw:(cx,y)=>{l.forEach((s,i)=>gtStxT(cx,s,M,y+30+32+i*44,{font:F.inter(800,32),color:c.white}));}});}
 else{const multi=m.winners.length>1;const big=m.winners.length<=2&&!(opt&&opt.compact);const lab=m.up(m.leadLabel);
@@ -197,23 +202,28 @@ const lg=[];m.legend.forEach(s=>gtStxWrap(mc,s,R-M,F.inter(600,23)).forEach(x=>l
 const pe=(m.rows.length||m.unplayed.length)?30:0;blocks.push({h:pe+30+lg.length*34+(tg.length?20+tg.length*40:0)+10,withPrev:1,draw:(cx,y)=>{if(pe)panel(cx.ctx,y,26);y+=pe;let yy=y+54;lg.forEach(s=>{gtStxT(cx,s,M,yy,{font:F.inter(600,23),color:c.soft});yy+=34;});yy+=26;tg.forEach(s=>{gtStxT(cx,s,R,yy,{font:F.inter(800,30),color:c.white,align:"right"});yy+=40;});}});
 return{h1:h1,hN:hN,foot:foot,blocks:blocks,bg:(cx,H)=>{cx.ctx.fillStyle=c.cobalt;cx.ctx.fillRect(0,0,GT_STX.W,H);}};}
 
+/* GameTab-Logo (Drache) mit Schriftzug unten links, auf jeder Seite */
+function gtStxBrand(cx,img,H,th,m){const X=GT_STX,F=gtStxF;const col=th==="grandslam"?GT_STX_GS.white:GT_STX_SL.ivory;const h=46,y=H-76;let w=0;if(img){try{w=gtStxLogoDraw(cx.ctx,img,X.M,y,h,col)+14;}catch(_){w=0;}}
+gtStxT(cx,m.brand,X.M+w,y+33,{font:th==="grandslam"?F.inter(800,32):F.mono(600,32),color:col});}
 /* Oeffentliche Schnittstelle: Promise<Array<HTMLCanvasElement>> */
 async function gtStExport(tournament,theme,t){if(!tournament||typeof GT_ST==="undefined")throw new Error("GT_ST_EXPORT: kein Turnier");
 const th=theme==="grandslam"?"grandslam":"strichliste";const m=gtStxModel(tournament,t);
 const needCjk=GT_EC_CJK.test(m.title+" "+m.allNames.join(" "));await gtStxFonts(needCjk);if(th==="grandslam")await gtStxBergLoad();
 const fam=th==="grandslam"?["400 40px 'GT Archivo'","800 40px 'GT Inter'"]:["400 40px 'GT Chalk'","400 40px 'GT Mono'","600 40px 'GT Mono'"];if(!fam.every(f=>document.fonts.check(f)))throw new Error("GT_ST_EXPORT: Schrift fehlt");
+let brandImg=null;try{brandImg=await tplLogo();}catch(_){brandImg=null;}
 const mc=document.createElement("canvas").getContext("2d");const mk=o=>th==="grandslam"?gtStxGsLayout(m,mc,o):gtStxSlLayout(m,mc,o);let L=mk({});let pages=gtStxPaginate(L);if(pages.length>1&&m.winners.length===2){const L2=mk({compact:true});const p2=gtStxPaginate(L2);if(p2.length<pages.length){L=L2;pages=p2;}}const N=pages.length;const out=[];
 for(let i=0;i<N;i++){const p=pages[i];const cv=document.createElement("canvas");cv.width=GT_STX.W;cv.height=p.H;const ctx=cv.getContext("2d");const cx={ctx:ctx,rec:[]};
-L.bg(cx,p.H,i);(p.first?L.h1:L.hN).draw(cx,0,i,N);p.items.forEach(it=>it.b.draw(cx,it.y));L.foot.draw(cx,p.H-L.foot.h,i,N);
+L.bg(cx,p.H,i);(p.first?L.h1:L.hN).draw(cx,0,i,N);p.items.forEach(it=>it.b.draw(cx,it.y));L.foot.draw(cx,p.H-L.foot.h,i,N);gtStxBrand(cx,brandImg,p.H,th,m);
 cv.gtStMeta={theme:th,page:i+1,pages:N,texts:cx.rec,id:m.id,revision:m.revision,date:m.date,title:m.title,names:m.allNames};out.push(cv);if(i<N-1)await new Promise(r=>setTimeout(r,0));}
 return out;}
 function gtStxFileName(meta,i,n){const slug=String(meta.title||"").normalize("NFKD").replace(/[̀-ͯ]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,40).replace(/-+$/,"")||"turnier";const d=String(meta.date||"").slice(0,10).replace(/[^0-9]/g,"");const id=String(meta.id||"").replace(/[^A-Za-z0-9]/g,"").slice(-6);return"gametab-schieber-"+slug+(d?"-"+d:"")+(id?"-"+id:"")+"-"+(meta.theme==="grandslam"?"grandslam":"strichliste")+(n>1?"-seite-"+(i+1)+"-von-"+n:"")+".png";}
 function GtStxMini({kind}){const gs=kind==="grandslam";const heart="M0 0.45C-0.15 0.3 -0.5 0.1 -0.5 -0.18C-0.5 -0.38 -0.36 -0.48 -0.24 -0.48C-0.1 -0.48 -0.02 -0.4 0 -0.29C0.02 -0.4 0.1 -0.48 0.24 -0.48C0.36 -0.48 0.5 -0.38 0.5 -0.18C0.5 0.1 0.15 0.3 0 0.45Z";const spade="M0 -0.5C0.15 -0.32 0.5 -0.14 0.5 0.1C0.5 0.28 0.36 0.36 0.24 0.36C0.13 0.36 0.05 0.3 0.03 0.22Q0.05 0.42 0.19 0.5L-0.19 0.5Q-0.05 0.42 -0.03 0.22C-0.05 0.3 -0.13 0.36 -0.24 0.36C-0.36 0.36 -0.5 0.28 -0.5 0.1C-0.5 -0.14 -0.15 -0.32 0 -0.5Z";
 if(gs)return <svg viewBox="0 0 60 80" width={48} height={64} aria-hidden="true" style={{display:"block",borderRadius:6}}><rect width={60} height={80} fill="#2448E8"/><path d={heart} transform="translate(42 16) scale(26)" fill="#FF7659"/><rect x={6} y={20} width={28} height={5} fill="#F8FAFF"/><rect x={4} y={36} width={52} height={10} fill="#FF7659"/><rect x={4} y={50} width={52} height={24} fill="#F8FAFF"/><rect x={8} y={56} width={36} height={2.5} fill="#071743"/><rect x={8} y={63} width={30} height={2.5} fill="#071743"/></svg>;
 return <svg viewBox="0 0 60 80" width={48} height={64} aria-hidden="true" style={{display:"block",borderRadius:6}}><rect width={60} height={80} fill="#1C2023"/><path d={spade} transform="translate(48 10) scale(9)" fill="none" stroke="#F4F3EA" strokeWidth={0.14}/><path d="M10 26 Q30 22 50 25" stroke="#85D1F5" strokeWidth={2.4} fill="none" strokeLinecap="round"/><rect x={10} y={16} width={32} height={4} rx={2} fill="#F4F3EA"/>{[0,1,2].map(r=><g key={r} stroke="#F4F3EA" strokeWidth={1.6} strokeLinecap="round">{[0,1,2,3].map(i=><line key={i} x1={12+i*4} y1={38+r*12} x2={12+i*4} y2={46+r*12}/>)}{r<2?<line x1={9} y1={45+r*12} x2={27} y2={39+r*12}/>:null}<line x1={36} y1={42+r*12} x2={50} y2={42+r*12} strokeWidth={2.2}/></g>)}</svg>;}
-function GtStExportSheet({tournament,t,onClose,initialTheme}){const tr=(k,fb,v)=>{let s=gtEcTr(t,k,fb);if(v)Object.keys(v).forEach(x=>{s=s.split("{"+x+"}").join(v[x]);});return s;};
+function GtStExportSheet({tournament,t,onClose:onCloseProp,initialTheme,onTheme}){const tr=(k,fb,v)=>{let s=gtEcTr(t,k,fb);if(v)Object.keys(v).forEach(x=>{s=s.split("{"+x+"}").join(v[x]);});return s;};
 const[theme,setTheme]=React.useState(initialTheme==="grandslam"||initialTheme==="strichliste"?initialTheme:(tournament&&tournament.theme==="grandslam"?"grandslam":"strichliste"));
 const[state,setState]=React.useState({busy:true,err:null,pages:[]});const[note,setNote]=React.useState("");const[retry,setRetry]=React.useState(0);const[sharing,setSharing]=React.useState(false);
+const themeRef=React.useRef(theme);themeRef.current=theme;const onClose=React.useCallback(()=>{if(onTheme&&themeRef.current!==initialTheme)onTheme(themeRef.current);onCloseProp();},[onTheme,onCloseProp,initialTheme]);
 const panelRef=useGtDialog({open:true,onClose});
 /* unveraenderlicher Schnappschuss pro Revision */
 const snap=React.useMemo(()=>tournament?JSON.parse(JSON.stringify(tournament)):null,[tournament&&tournament.id,tournament&&tournament.revision,tournament&&tournament.name]);
@@ -227,13 +237,13 @@ const share=async()=>{if(!N||sharing)return;setSharing(true);setNote("");const r
 const saveLabel=N>1?tr("shareSaveAll","Alle {n} Bilder speichern",{n:N}):tr("shareSaveImage","Bild speichern");const shareLabel=plan.iosHint?tr("shareSaveOrShare","Sichern oder teilen"):N>1?tr("stxShareAll","Alle {n} Seiten teilen",{n:N}):tr("stxShare","Bild teilen");
 const txt={color:"#F2F3EE",fontFamily:"'Inter', sans-serif"};const sub={color:"#AAB1B5",fontSize:13,lineHeight:1.4,margin:0};
 const btnBase={minHeight:44,borderRadius:12,fontFamily:"'Inter', sans-serif",fontWeight:700,fontSize:15,cursor:"pointer",transition:"transform 160ms cubic-bezier(0.23,1,0.32,1), background-color 160ms ease"};
-const pick=(k,label)=><button key={k} type="button" className="press-fx" aria-pressed={theme===k} onClick={()=>setTheme(k)} style={{...btnBase,flex:1,display:"flex",alignItems:"center",gap:12,padding:"8px 12px",textAlign:"left",background:theme===k?"rgba(255,255,255,0.10)":"transparent",border:theme===k?"2px solid "+acc.bg:"1px solid rgba(255,255,255,0.18)",color:"#F2F3EE"}}><GtStxMini kind={k}/><span style={{display:"flex",flexDirection:"column",gap:2}}><span>{label}</span>{theme===k?<span style={{fontSize:12,fontWeight:600,color:acc.bg}}>{tr("stxSelected","Ausgewählt")}</span>:null}</span></button>;
+const pick=(k,label)=><button key={k} type="button" className="press-fx" aria-pressed={theme===k} onClick={()=>setTheme(k)} style={{...btnBase,flex:"1 1 160px",minWidth:0,boxSizing:"border-box",display:"flex",alignItems:"center",gap:12,padding:"8px 12px",textAlign:"left",overflowWrap:"anywhere",background:theme===k?"rgba(255,255,255,0.10)":"transparent",border:theme===k?"2px solid "+acc.bg:"1px solid rgba(255,255,255,0.18)",color:"#F2F3EE"}}><GtStxMini kind={k}/><span style={{display:"flex",flexDirection:"column",gap:2}}><span>{label}</span>{theme===k?<span style={{fontSize:12,fontWeight:600,color:acc.bg}}>{tr("stxSelected","Ausgewählt")}</span>:null}</span></button>;
 const pageCount=N?(N===1?tr("stxPagesOne","1 Seite"):tr("stxPagesMany","{n} Seiten",{n:N})):"";
 return <div role="presentation" onClick={onClose} className="gtstx-ov" style={{position:"fixed",inset:0,zIndex:300,background:"rgba(5,7,9,0.82)",display:"flex",justifyContent:"center",alignItems:"stretch",padding:"max(12px, env(safe-area-inset-top)) 12px max(12px, env(safe-area-inset-bottom))"}}>
 <div ref={panelRef} className="gtstx-panel" role="dialog" aria-modal="true" aria-labelledby="gtstx-title" tabIndex={-1} onClick={e=>e.stopPropagation()} style={{...txt,outline:"none",width:"100%",maxWidth:560,display:"flex",flexDirection:"column",background:"#12161A",borderRadius:18,boxShadow:"0 24px 60px rgba(0,0,0,0.5)",overflow:"hidden"}}>
 <div className="gtstx-head" style={{display:"flex",alignItems:"center",gap:12,padding:"14px 14px 10px 18px"}}><h2 id="gtstx-title" style={{margin:0,fontSize:18,fontWeight:800,flex:1,letterSpacing:"-0.01em"}}>{tr("stxExportTitle","Turnier als Bild")}</h2>
 <button type="button" onClick={onClose} aria-label={tr("stxClose","Schliessen")} className="press-fx" style={{...btnBase,width:44,height:44,padding:0,border:"none",background:"rgba(255,255,255,0.08)",display:"grid",placeItems:"center"}}><svg width={18} height={18} viewBox="0 0 18 18" aria-hidden="true"><path d="M3 3L15 15M15 3L3 15" stroke="#F2F3EE" strokeWidth={2.2} strokeLinecap="round"/></svg></button></div>
-<div className="gtstx-design" style={{padding:"0 18px 12px"}}><p style={{...sub,marginBottom:8,fontWeight:600,color:"#D9DDDF"}}>{tr("stxDesign","Design für den Export")}</p><div role="group" aria-label={tr("stxDesign","Design für den Export")} style={{display:"flex",gap:10}}>{pick("strichliste",tr("stxStrich","Strichliste"))}{pick("grandslam",tr("stxGrand","Grand Slam"))}</div><p style={{...sub,marginTop:8}}>{tr("stxDesignHint","Ändert nur dieses Bild, nicht das Turnier.")}</p></div>
+<div className="gtstx-design" style={{padding:"0 18px 12px"}}><p style={{...sub,marginBottom:8,fontWeight:600,color:"#D9DDDF"}}>{tr("stxDesign","Design für den Export")}</p><div role="group" aria-label={tr("stxDesign","Design für den Export")} style={{display:"flex",flexWrap:"wrap",gap:10}}>{pick("strichliste",tr("stxStrich","Strichliste"))}{pick("grandslam",tr("stxGrand","Grand Slam"))}</div><p style={{...sub,marginTop:8}}>{tr("stxDesignHint","Ändert nur dieses Bild, nicht das Turnier.")}</p></div>
 <div className="gtstx-status" role="status" aria-live="polite" style={{padding:"0 18px 8px",fontSize:13,fontWeight:700,color:"#D9DDDF"}}>{state.busy?tr("stxRendering","Bild wird erstellt"):state.err?"":pageCount}</div>
 <div className="gtstx-pages" style={{flex:1,overflowY:"auto",padding:"4px 18px 16px",display:"flex",flexDirection:"column",gap:18,WebkitOverflowScrolling:"touch"}}>
 {state.err?<div style={{padding:"24px 4px",display:"flex",flexDirection:"column",gap:12,alignItems:"flex-start"}}><p style={{margin:0,fontSize:15,lineHeight:1.45}}>{tr("stxError","Das Bild konnte nicht erstellt werden. Bitte nochmals versuchen.")}</p><button type="button" className="press-fx" onClick={()=>setRetry(x=>x+1)} style={{...btnBase,padding:"0 18px",border:"none",background:acc.bg,color:acc.fg}}>{tr("stxRetry","Nochmals versuchen")}</button></div>:

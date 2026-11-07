@@ -122,6 +122,33 @@ function page1(d, k, rows) {
   return cv;
 }
 
+/* Folgeseite: Titel wie Seite 1, Hinweis Fortsetzung, einspaltige Liste, unten Logo, GameTab und Datum wie Seite 1 (kein Logo oben) */
+function contPage(d, k, rows, no, count) {
+  const { cv, c } = k.tplCanvas();
+  upFn = d.up;
+  c.fillStyle = BG; c.fillRect(0, 0, k.TPL_W, k.TPL_H);
+  title(c, k, d, 165);
+  const pg = d.tr("ecPage", (x, y) => x + "/" + y);
+  const pgt = typeof pg === "function" ? pg(no, count) : no + "/" + count;
+  const cont = d.tr("ecContinued", "Fortsetzung") + "  " + pgt;
+  const cf = k.fit(c, cont, { w: 700, fam: k.F_BALOO, max: 46, min: 26, maxW: 900, lines: 1 });
+  k.setFont(c, 700, cf.size, k.F_BALOO); c.fillStyle = INK; c.textAlign = "center"; c.fillText(cf.lines[0], 540, 245); c.textAlign = "left";
+  const top = 300, avail = 1170 - top, pitch = Math.min(88, avail / Math.max(rows.length, 1)), rh = pitch - 12, fs = Math.min(44, rh * 0.55);
+  rows.forEach((r, i) => {
+    const y = top + i * pitch, base = y + rh / 2 + fs * 0.36;
+    c.fillStyle = r.winner ? WHITE : "rgba(255,255,255,0.55)"; k.rrect(c, 60, y, 960, rh, rh * 0.22); c.fill();
+    c.strokeStyle = INK; c.lineWidth = 4; k.rrect(c, 62, y + 2, 956, rh - 4, rh * 0.22 - 2); c.stroke();
+    k.setFont(c, 400, fs, FAM); c.fillStyle = INK; c.fillText(String(r.rank), 90, base);
+    const rw = c.measureText("00").width + 30;
+    c.textAlign = "right"; const vw = c.measureText(r.value).width; c.fillText(r.value, 990, base); c.textAlign = "left";
+    const nf = k.nameFit(c, d0(r), { w: 400, fam: FAM, max: fs, min: 24, maxW: 960 - 60 - rw - vw - 50, lines: 2 });
+    k.setFont(c, 400, nf.size, FAM);
+    nf.lines.forEach((ln, j) => c.fillText(ln, 90 + rw, y + rh / 2 + nf.size * 0.36 - (nf.lines.length - 1) * nf.size * 0.55 + j * nf.size * 1.1));
+  });
+  footer(c, k, d);
+  return cv;
+}
+
 export default {
   games: ["yatzy"],
   fonts: ["400 100px \"GTR Bowlby\"", "800 52px \"Baloo 2\"", "600 30px Inter"],
@@ -129,9 +156,7 @@ export default {
   render(d, k) {
     const parts = k.chunks(d.rows, FIRST_CAP, 12);
     const out = [page1(d, k, parts[0])];
-    const sty = { bg: (c) => { c.fillStyle = BG; c.fillRect(0, 0, k.TPL_W, k.TPL_H); }, ink: INK, sub: INK, acc: WHITE, line: "rgba(20,16,28,0.5)", fam: k.F_INTER, logo: INK, titleFam: FAM, titleCase: true, subFam: k.F_BALOO,
-      rowFill: "rgba(255,255,255,0.55)", rowFillWin: WHITE, rowEdge: INK };
-    parts.slice(1).forEach((p, i) => out.push(k.continuationPage(d, p, i + 2, parts.length, sty)));
+    parts.slice(1).forEach((p, i) => out.push(contPage(d, k, p, i + 2, parts.length)));
     return out;
   },
 };

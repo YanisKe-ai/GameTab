@@ -197,8 +197,8 @@ Ab Nr. 5 ist die Reihenfolge frei. Ohne andere Anweisung von Yanis einfach der T
 | 1 | Tutto | tutto | games/tutto | fertig 06.11.2026 | Kartenrechner auf Wunsch entfernt. Nur Chromium geprüft: Safari und echte Geräte offen |
 | 2 | Yatzy | yatzy | games/yatzy | fertig 07.11.2026 | Bonus 25. Nur Chromium geprüft: Safari, iPhone, iPad offen. Ab 7 Spielern scrollt das Blatt seitlich |
 | 3 | Schieber + Turnier | schieber | games/schieber | fertig 07.11.2026 | Nocturne Nachtblau, Tafel unverändert, Ergebnisbild bleibt (Logo oben, Ausnahme). Nur Chromium geprüft. Offen: Hausregel 6- bis 9-Blatt, Farbwerte Herz/Ecke ×1 bestätigen, Icon neu |
-| 4 | Jass Differenzler | jass-differenzler | games/jass | in Arbeit | |
-| 4b | Schieber-Turnier perfektionieren | schieber-turnier | games/schieber/tournament*.js | offen | Wunsch Yanis 07.11.2026: direkt nach Differenzler |
+| 4 | Jass Differenzler | jass-differenzler | games/jass | fertig 07.11.2026 | Prinzip bleibt (kein echter Differenzler mit Ansage, Entscheid Yanis). Nur Chromium geprüft. Offen: Ergebnisbild grün-gold passt nicht ganz zur App |
+| 4b | Schieber-Turnier perfektionieren | schieber-turnier | games/schieber/tournament*.js | in Arbeit | Wunsch Yanis 07.11.2026: direkt nach Differenzler |
 | 5 | Wizard | wizard | games/wizard | offen | |
 | 6 | Minigolf | minigolf | games/minigolf | offen | |
 | 7 | Skyjo | skyjo | games/skyjo | offen | |

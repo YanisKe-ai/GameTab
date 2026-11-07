@@ -9,7 +9,7 @@
 <title>GameTab · All-in-One</title>
 <meta name="description" content="GameTab: der digitale Spiele- und Punkteblock für unterwegs: Jass, Skyjo, Werwolf, Impostor, Tabu, Minigolf und mehr, in 6 Sprachen." />
 <meta name="theme-color" content="#12141C" />
-<script>(function(){try{var t=(JSON.parse(localStorage.getItem("spieleblock-app-state-v1")||"{}")||{}).theme;var c={light:"#F8F9FA",vitrum:"#362A52",noir:"#0A0A0A",dark:"#2E2247"}[t]||"#2E2247";document.querySelector('meta[name="theme-color"]').setAttribute("content",c);document.documentElement.style.background=c;}catch(e){}})();</script>
+<script>(function(){try{var t=(JSON.parse(localStorage.getItem("spieleblock-app-state-v1")||"{}")||{}).theme;var c={light:"#F8F9FA",noir:"#0A0A0A",dark:"#2E2247"}[t]||"#2E2247";document.querySelector('meta[name="theme-color"]').setAttribute("content",c);document.documentElement.style.background=c;}catch(e){}})();</script>
 
 <script>/* Handy-Querformat: Attribut data-phone-landscape vor dem ersten Paint (Regel und Doku: web/src/shared/phone-landscape.js). */(function(){try{
 /*pl-decide-begin*/function plDecide(e){if(!e||e.viewMode==="laptop")return false;if(e.force===true)return true;if(e.force===false)return false;if(!e.touch)return false;var iw=e.innerW||0,ih=e.innerH||0,sw=e.screenW||0,sh=e.screenH||0;var sh2=sw&&sh?Math.min(sw,sh):Math.min(iw,ih);if(!sh2||sh2>500)return false;var l;if(typeof e.orientationType==="string"&&e.orientationType)l=e.orientationType.indexOf("landscape")===0;else if(typeof e.windowOrientation==="number")l=Math.abs(e.windowOrientation)===90;else if(sw&&sh&&sw!==sh)l=sw>sh;else l=!!e.mqLandscape;if(!l)return false;return iw>ih;}/*pl-decide-end*/
@@ -7794,7 +7794,6 @@ var TRANSLATIONS = {
 		languageLabel: "Sprache",
 		appearanceLabel: "Erscheinungsbild",
 		lightMode: "Hell",
-		vitrumMode: "Vitrum",
 		noirMode: "Noir",
 		darkMode: "Nocturne",
 		viewModeLabel: "Ansicht",
@@ -9370,7 +9369,6 @@ var TRANSLATIONS = {
 		languageLabel: "Language",
 		appearanceLabel: "Appearance",
 		lightMode: "Light",
-		vitrumMode: "Vitrum",
 		noirMode: "Noir",
 		darkMode: "Nocturne",
 		viewModeLabel: "View",
@@ -10946,7 +10944,6 @@ var TRANSLATIONS = {
 		languageLabel: "Langue",
 		appearanceLabel: "Apparence",
 		lightMode: "Clair",
-		vitrumMode: "Vitrum",
 		noirMode: "Noir",
 		darkMode: "Nocturne",
 		viewModeLabel: "Affichage",
@@ -12522,7 +12519,6 @@ var TRANSLATIONS = {
 		languageLabel: "Lingua",
 		appearanceLabel: "Aspetto",
 		lightMode: "Chiaro",
-		vitrumMode: "Vitrum",
 		noirMode: "Noir",
 		darkMode: "Nocturne",
 		viewModeLabel: "Visualizzazione",
@@ -14098,7 +14094,6 @@ var TRANSLATIONS = {
 		languageLabel: "Idioma",
 		appearanceLabel: "Apariencia",
 		lightMode: "Claro",
-		vitrumMode: "Vitrum",
 		noirMode: "Noir",
 		darkMode: "Nocturne",
 		viewModeLabel: "Vista",
@@ -15674,7 +15669,6 @@ var TRANSLATIONS = {
 		languageLabel: "Idioma",
 		appearanceLabel: "Aparência",
 		lightMode: "Claro",
-		vitrumMode: "Vitrum",
 		noirMode: "Noir",
 		darkMode: "Nocturne",
 		viewModeLabel: "Visualização",
@@ -18433,37 +18427,8 @@ html[data-gt-theme="noir"] { --gt-focus: #FFFFFF; }
 .gt-hit { position: relative; }
 .gt-hit::before { content: ""; position: absolute; left: var(--gt-hit-x, 0px); right: var(--gt-hit-x, 0px); top: var(--gt-hit-y, -7px); bottom: var(--gt-hit-y, -7px); }
 .gtL-toggle-btn { min-height: 44px; }
-.gtL-glass-flat { backdrop-filter: blur(14px) saturate(1.5); -webkit-backdrop-filter: blur(14px) saturate(1.5); box-shadow: inset 0 1px 0 rgba(255,255,255,0.16), 0 4px 14px -6px rgba(0,0,0,0.35); }
-@media (prefers-reduced-transparency: reduce) {
-  :root .gtL-glass, :root .gtL-glass-strong, :root .gtL-glass-soft, :root .gtL-glass-flat { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; background-image: none !important; background-color: #161921 !important; }
-  :root .gtL-glass::after, :root .gtL-glass-strong::after, :root .gtL-glass-soft::after { display: none !important; }
-  :root .vitrum-active .press-fx { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
-}
 .gtL-only { display: none !important; }
 .gtL-split, .gtL-col-main, .gtL-col-side { display: contents; }
-.gtL-glass, .gtL-glass-soft {
-  background-image: linear-gradient(rgba(255,255,255,0.025), rgba(255,255,255,0.025)) !important;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 2px 10px -4px rgba(0,0,0,0.35);
-  position: relative;
-}
-.gtL-glass { box-shadow: inset 0 1px 0 rgba(255,255,255,0.07), 0 4px 16px -6px rgba(0,0,0,0.4); }
-.gtL-glass:active, .gtL-glass-soft:active { background-image: linear-gradient(rgba(255,255,255,0.06), rgba(255,255,255,0.06)) !important; }
-.gtL-glass:active:not(.press-fx), .gtL-glass-soft:active:not(.press-fx) { transform: scale(0.97); }
-.gtL-glass-strong, .gtL-sheet-glass {
-  background: rgba(22,25,33,0.62) !important;
-  background-image: none !important;
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
-  border: 1px solid rgba(255,255,255,0.10) !important;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), 0 10px 30px rgba(0,0,0,0.35) !important;
-}
-.vitrum-active .press-fx:active { transform: scale(0.97); }
-html[data-gt-theme="vitrum"] body{background:#0B1128}
-html[data-gt-theme="vitrum"] [style*="background: rgba(255, 255, 255, 0.07)"],html[data-gt-theme="vitrum"] [style*="background: rgba(255, 255, 255, 0.06)"],html[data-gt-theme="vitrum"] [style*="background-color: rgba(255, 255, 255, 0.07)"]{background:linear-gradient(150deg,rgba(255,255,255,.17) 0%,rgba(255,255,255,.07) 48%,rgba(255,255,255,.11) 100%)!important;border-color:rgba(255,255,255,.24)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.38),inset 0 -1px 0 rgba(255,255,255,.06),0 10px 28px -14px rgba(3,6,20,.7)!important}
-html[data-gt-theme="vitrum"] [style*="background: rgba(255, 255, 255, 0.04)"]{background:rgba(255,255,255,.09)!important;border-color:rgba(255,255,255,.18)!important}
-
-html[data-gt-theme="vitrum"] .gt-su-cta::before { background: linear-gradient(to bottom, rgba(14,20,46,0), rgba(14,20,46,0.30) 60%); -webkit-backdrop-filter: blur(16px) saturate(150%); backdrop-filter: blur(16px) saturate(150%); box-shadow: inset 0 1px 0 rgba(255,255,255,0.08); }
-
 @media (max-height: 700px) {
   .gtL-deco-bottom { display: none !important; }
 }
@@ -18721,7 +18686,6 @@ body::after {
   .ach-pulse-ring, .tutto-near, .tutto-dice-pop { animation: none !important; }
   .press-fx, .card-fx { transition: opacity 150ms ease, box-shadow 180ms ease !important; }
   .press-fx:active, .card-fx:active { transform: none !important; }
-  .gtL-glass::after, .gtL-glass-strong::after, .gtL-glass-soft::after { display: none !important; }
   [style*="decoDrift"], [style*="dragonBreathe"], [style*="dragonFlap"], [style*="headsupRotateHint"], [style*="dartLedPulse"] { animation: none !important; }
   [style*="chalk-draw"] { animation: none !important; stroke-dashoffset: 0 !important; }
   .schieber-sponge-anim { animation: none !important; opacity: 0 !important; }
@@ -18881,40 +18845,6 @@ function AppLogo({ size, theme, style }) {
 		position: "absolute",
 		inset: 0,
 		backgroundColor: "#111111",
-		WebkitMaskImage: `url(${app_logo_gold_default})`,
-		maskImage: `url(${app_logo_gold_default})`,
-		WebkitMaskSize: "contain",
-		maskSize: "contain",
-		WebkitMaskRepeat: "no-repeat",
-		maskRepeat: "no-repeat",
-		WebkitMaskPosition: "center",
-		maskPosition: "center"
-	} }));
-	if (theme === "vitrum") return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		width: w,
-		height: hgt,
-		...aspectBox,
-		position: "relative",
-		display: "block",
-		...style
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		position: "absolute",
-		inset: "-0.6%",
-		backgroundColor: "#FFFFFF",
-		opacity: .16,
-		filter: "blur(2px)",
-		WebkitMaskImage: `url(${app_logo_gold_default})`,
-		maskImage: `url(${app_logo_gold_default})`,
-		WebkitMaskSize: "contain",
-		maskSize: "contain",
-		WebkitMaskRepeat: "no-repeat",
-		maskRepeat: "no-repeat",
-		WebkitMaskPosition: "center",
-		maskPosition: "center"
-	} }), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		position: "absolute",
-		inset: 0,
-		backgroundColor: "#EFD8A8",
 		WebkitMaskImage: `url(${app_logo_gold_default})`,
 		maskImage: `url(${app_logo_gold_default})`,
 		WebkitMaskSize: "contain",
@@ -20197,7 +20127,6 @@ var game_header_exports = /* @__PURE__ */ __exportAll({
 function GameCard({ title, description, status, accent, onClick, disabled, logo, variant = "paper", tokens, theme }) {
 	const isNeon = !disabled;
 	const isLight = theme === "light";
-	const isVitrum = theme === "vitrum";
 	const tk = tokens || {
 		card: "#1D212D",
 		border: "#2A2F3D",
@@ -20207,22 +20136,22 @@ function GameCard({ title, description, status, accent, onClick, disabled, logo,
 	return /* @__PURE__ */ import_react.default.createElement("button", {
 		onClick: disabled ? void 0 : onClick,
 		disabled,
-		className: (disabled ? "" : "card-fx ") + (isNeon && !isLight && !isVitrum ? "tile-glow " : "") + (isVitrum && !disabled ? "gtL-glass-soft " : "") + "gtL-gamecard",
+		className: (disabled ? "" : "card-fx ") + (isNeon && !isLight ? "tile-glow " : "") + "gtL-gamecard",
 		style: {
 			display: "flex",
 			alignItems: "center",
 			gap: 14,
 			width: "100%",
 			textAlign: "left",
-			background: isVitrum ? isNeon ? `linear-gradient(135deg, ${accent}26, rgba(255,255,255,0.07))` : tk.card : isNeon ? isLight ? tk.card : `linear-gradient(135deg, ${accent}24, ${tk.card})` : tk.card,
-			border: isVitrum ? isNeon ? `1.5px solid ${accent}55` : `1px solid ${tk.border}` : isNeon ? isLight ? `1px solid ${tk.border}` : `1px solid ${accent}66` : `1px solid ${tk.border}`,
+			background: isNeon ? isLight ? tk.card : `linear-gradient(135deg, ${accent}24, ${tk.card})` : tk.card,
+			border: isNeon ? isLight ? `1px solid ${tk.border}` : `1px solid ${accent}66` : `1px solid ${tk.border}`,
 			borderRadius: 24,
 			padding: "17px 18px",
 			cursor: disabled ? "default" : "pointer",
 			opacity: disabled ? .5 : 1,
 			fontFamily: "'Inter', sans-serif",
-			boxShadow: disabled ? "none" : isVitrum ? void 0 : isLight ? isNeon ? `inset 4px 0 0 ${accent}, 0 4px 12px rgba(0,0,0,0.06)` : "0 4px 12px rgba(0,0,0,0.06)" : isNeon ? `0 4px 18px -8px ${accent}55, 0 1px 3px rgba(0,0,0,0.3)` : "0 2px 10px rgba(0,0,0,0.15)",
-			"--glow": isNeon && !isLight && !isVitrum ? `${accent}55` : void 0
+			boxShadow: disabled ? "none" : isLight ? isNeon ? `inset 4px 0 0 ${accent}, 0 4px 12px rgba(0,0,0,0.06)` : "0 4px 12px rgba(0,0,0,0.06)" : isNeon ? `0 4px 18px -8px ${accent}55, 0 1px 3px rgba(0,0,0,0.3)` : "0 2px 10px rgba(0,0,0,0.15)",
+			"--glow": isNeon && !isLight ? `${accent}55` : void 0
 		}
 	}, /* @__PURE__ */ import_react.default.createElement("span", {
 		className: "gtL-gamecard-logo",
@@ -20247,16 +20176,14 @@ function GameCard({ title, description, status, accent, onClick, disabled, logo,
 			fontSize: 20,
 			fontWeight: isNeon ? 700 : 600,
 			color: tk.ink,
-			fontFamily: "'Baloo 2', sans-serif",
-			textShadow: isVitrum ? "0 1px 4px rgba(0,0,0,0.45)" : void 0
+			fontFamily: "'Baloo 2', sans-serif"
 		}
 	}, title), /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-gamecard-desc",
 		style: {
 			fontSize: 12,
 			color: tk.muted,
-			marginTop: 3,
-			textShadow: isVitrum ? "0 1px 3px rgba(0,0,0,0.4)" : void 0
+			marginTop: 3
 		}
 	}, description), status && /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-gamecard-status",
@@ -20269,8 +20196,7 @@ function GameCard({ title, description, status, accent, onClick, disabled, logo,
 			marginTop: 6,
 			fontWeight: 600,
 			letterSpacing: "0.08em",
-			textTransform: "uppercase",
-			textShadow: isVitrum ? "0 1px 3px rgba(0,0,0,0.4)" : void 0
+			textTransform: "uppercase"
 		}
 	}, /* @__PURE__ */ import_react.default.createElement("span", {
 		"aria-hidden": true,
@@ -20287,7 +20213,7 @@ function GameCard({ title, description, status, accent, onClick, disabled, logo,
 		flexShrink: 0
 	} }, "›"));
 }
-var GT_HEAD_CSS = "@media (max-width:359px){.gt-headbtns .gt-hb-theme{display:none}}.gt-hb{position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:44px;height:44px;padding:0;margin:0;border:none;background:transparent;cursor:pointer;font:inherit;-webkit-tap-highlight-color:transparent;touch-action:manipulation}.gt-hb:focus{outline:none}.gt-hb>.gt-hf{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:36px;min-width:36px;box-sizing:border-box;border-radius:999px;white-space:nowrap;transition:transform .16s cubic-bezier(.23,1,.32,1),background-color .2s ease,border-color .2s ease,color .2s ease}.gt-hb:active>.gt-hf{transform:scale(.96)}.gt-hb:focus-visible>.gt-hf{outline:2px solid currentColor;outline-offset:2px}@media (hover:hover) and (pointer:fine){.gt-hb:hover>.gt-hf{filter:brightness(1.15)}}@media (prefers-reduced-motion:reduce){.gt-hb>.gt-hf{transition:none}}.gt-gamehead{position:sticky;top:var(--gt-sat, env(safe-area-inset-top, 0px));z-index:20;margin:-6px -12px 8px;padding:6px 12px 8px}.gt-gamehead.is-stuck{background-color:var(--gt-pg-col);background-image:var(--gt-pg-img);background-size:var(--gt-pg-size);background-repeat:no-repeat;background-position:var(--gt-head-pos,0 0);box-shadow:0 1px 0 rgba(128,128,128,.22)}html[data-gt-theme=\"vitrum\"] .gt-gamehead.is-stuck{background:rgba(16,18,25,.58);background-image:none;-webkit-backdrop-filter:blur(24px) saturate(160%);backdrop-filter:blur(24px) saturate(160%);box-shadow:inset 0 -1px 0 rgba(255,255,255,.10),0 8px 24px -12px rgba(0,0,0,.5)}.gt-gamehead>.gt-headbtns{top:6px!important;right:8px!important}.gt-headbtns{z-index:21!important}div:has(>.gt-gamehead~.gt-headbtns){position:sticky!important;top:var(--gt-sat, env(safe-area-inset-top, 0px));z-index:20}div:has(>.gt-gamehead~.gt-headbtns)>.gt-headbtns{top:6px!important}.gtL-content .gt-gamehead,.gtL-content .gt-gamehead.is-stuck{position:relative;top:auto;margin:0 0 16px;padding:0;background:none;box-shadow:none}html[data-gt-theme=\"vitrum\"] .gtL-content .gt-gamehead.is-stuck{background:none;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:none}.gtL-content .gt-gamehead>.gt-headbtns{top:0!important;right:-4px!important}.gtL-content div:has(>.gt-gamehead~.gt-headbtns){position:relative!important;top:auto}.gtL-content div:has(>.gt-gamehead~.gt-headbtns)>.gt-headbtns{top:0!important}div:has(>.gt-headbtns+.gt-gamehead)>.gt-headbtns{position:sticky!important;top:calc(var(--gt-headtop, var(--gt-sat, env(safe-area-inset-top, 0px))) + 6px)!important;right:auto!important;left:auto!important;height:0;overflow:visible;display:flex;justify-content:flex-end;margin-right:-4px;z-index:22!important}.gtL-content div:has(>.gt-headbtns+.gt-gamehead)>.gt-headbtns{position:absolute!important;top:0!important;right:-4px!important;height:auto;margin-right:0}.gtL-yatzy-sheets,.gt-gamehead~.gtL-e-fit{isolation:isolate}.gt-gamehead.is-stuck{-webkit-transform:translateZ(0);transform:translateZ(0)}.gt-gamehead.is-stuck::before{content:'';position:absolute;left:0;right:0;bottom:100%;height:var(--gt-cover,0px);pointer-events:none;background-color:var(--gt-pg-col);background-image:var(--gt-pg-img);background-size:var(--gt-pg-size);background-repeat:no-repeat;background-position:var(--gt-head-pos2,0 0)}.gtL-content .gt-gamehead.is-stuck::before{display:none}";
+var GT_HEAD_CSS = "@media (max-width:359px){.gt-headbtns .gt-hb-theme{display:none}}.gt-hb{position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:44px;height:44px;padding:0;margin:0;border:none;background:transparent;cursor:pointer;font:inherit;-webkit-tap-highlight-color:transparent;touch-action:manipulation}.gt-hb:focus{outline:none}.gt-hb>.gt-hf{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:36px;min-width:36px;box-sizing:border-box;border-radius:999px;white-space:nowrap;transition:transform .16s cubic-bezier(.23,1,.32,1),background-color .2s ease,border-color .2s ease,color .2s ease}.gt-hb:active>.gt-hf{transform:scale(.96)}.gt-hb:focus-visible>.gt-hf{outline:2px solid currentColor;outline-offset:2px}@media (hover:hover) and (pointer:fine){.gt-hb:hover>.gt-hf{filter:brightness(1.15)}}@media (prefers-reduced-motion:reduce){.gt-hb>.gt-hf{transition:none}}.gt-gamehead{position:sticky;top:var(--gt-sat, env(safe-area-inset-top, 0px));z-index:20;margin:-6px -12px 8px;padding:6px 12px 8px}.gt-gamehead.is-stuck{background-color:var(--gt-pg-col);background-image:var(--gt-pg-img);background-size:var(--gt-pg-size);background-repeat:no-repeat;background-position:var(--gt-head-pos,0 0);box-shadow:0 1px 0 rgba(128,128,128,.22)}.gt-gamehead>.gt-headbtns{top:6px!important;right:8px!important}.gt-headbtns{z-index:21!important}div:has(>.gt-gamehead~.gt-headbtns){position:sticky!important;top:var(--gt-sat, env(safe-area-inset-top, 0px));z-index:20}div:has(>.gt-gamehead~.gt-headbtns)>.gt-headbtns{top:6px!important}.gtL-content .gt-gamehead,.gtL-content .gt-gamehead.is-stuck{position:relative;top:auto;margin:0 0 16px;padding:0;background:none;box-shadow:none}.gtL-content .gt-gamehead>.gt-headbtns{top:0!important;right:-4px!important}.gtL-content div:has(>.gt-gamehead~.gt-headbtns){position:relative!important;top:auto}.gtL-content div:has(>.gt-gamehead~.gt-headbtns)>.gt-headbtns{top:0!important}div:has(>.gt-headbtns+.gt-gamehead)>.gt-headbtns{position:sticky!important;top:calc(var(--gt-headtop, var(--gt-sat, env(safe-area-inset-top, 0px))) + 6px)!important;right:auto!important;left:auto!important;height:0;overflow:visible;display:flex;justify-content:flex-end;margin-right:-4px;z-index:22!important}.gtL-content div:has(>.gt-headbtns+.gt-gamehead)>.gt-headbtns{position:absolute!important;top:0!important;right:-4px!important;height:auto;margin-right:0}.gtL-yatzy-sheets,.gt-gamehead~.gtL-e-fit{isolation:isolate}.gt-gamehead.is-stuck{-webkit-transform:translateZ(0);transform:translateZ(0)}.gt-gamehead.is-stuck::before{content:'';position:absolute;left:0;right:0;bottom:100%;height:var(--gt-cover,0px);pointer-events:none;background-color:var(--gt-pg-col);background-image:var(--gt-pg-img);background-size:var(--gt-pg-size);background-repeat:no-repeat;background-position:var(--gt-head-pos2,0 0)}.gtL-content .gt-gamehead.is-stuck::before{display:none}";
 function GameHeader({ title, subtitle, icon, accent, onBack, backLabel, tk, titleFont, onHome, onEndGame, onRules, rulesTitle, rulesText, extra, hideTitle, onMore, moreLabel }) {
 	const [rulesOpen, setRulesOpen] = useState$11(false);
 	const headRef = useRef$17(null);
@@ -22211,7 +22137,7 @@ function gtSoftTk(tk, theme) {
 function gtSkin(theme, tk, id, o) {
 	tk = tk || {};
 	o = o || {};
-	const L = theme === "light", V = theme === "vitrum", N = theme === "noir";
+	const L = theme === "light", N = theme === "noir";
 	let acc = o.acc || GT_SU_ACC[id] || tk.gold || "#C9A15C";
 	if (N && !o.acc) try {
 		acc = noirAccent(id);
@@ -22242,7 +22168,7 @@ function gtSkin(theme, tk, id, o) {
 		const s = String(v || "");
 		return s[0] === "#" && (s.length === 7 || s.length === 4) ? s : null;
 	};
-	const fade = pick(o.bg) || pick(tk.pageBg) || pick(tk.bg) || (L ? "#F4F1EA" : N ? "#0A0A0A" : V ? "rgba(12,15,21,0.55)" : "#121318");
+	const fade = pick(o.bg) || pick(tk.pageBg) || pick(tk.bg) || (L ? "#F4F1EA" : N ? "#0A0A0A" : "#121318");
 	return {
 		theme,
 		acc,
@@ -22252,11 +22178,11 @@ function gtSkin(theme, tk, id, o) {
 		ink: o.ink || tk.ink || (L ? "#16161C" : "#F2F2F2"),
 		muted: o.muted || tk.muted || (L ? "#5A5A66" : "#A0A0A8"),
 		card: o.card || (L ? "#FFFFFF" : tk.card) || "rgba(255,255,255,0.06)",
-		border: L ? "rgba(24,22,32,0.11)" : V ? "rgba(255,255,255,0.12)" : N ? "rgba(255,255,255,0.13)" : "rgba(255,255,255,0.10)",
+		border: L ? "rgba(24,22,32,0.11)" : N ? "rgba(255,255,255,0.13)" : "rgba(255,255,255,0.10)",
 		dash: L ? "rgba(24,22,32,0.22)" : "rgba(255,255,255,0.22)",
-		shadow: L ? "0 1px 2px rgba(24,22,32,0.05), 0 6px 18px -12px rgba(24,22,32,0.22)" : V ? "inset 0 1px 0 rgba(255,255,255,0.10)" : "none",
+		shadow: L ? "0 1px 2px rgba(24,22,32,0.05), 0 6px 18px -12px rgba(24,22,32,0.22)" : "none",
 		fade,
-		blur: V ? "14px" : "0px",
+		blur: "0px",
 		font: o.font || "'Baloo 2', sans-serif"
 	};
 }
@@ -22823,7 +22749,7 @@ var GT_UNIT_CSS = `
 .gt-u-col>.gt-gamehead,.gt-u-col>:has(>.gt-gamehead){z-index:20}
 .gt-u-col>.gt-u-glow{position:absolute;z-index:0;top:calc(-20px - env(safe-area-inset-top,0px));left:calc(50% - 50vw);right:calc(50% - 50vw);height:calc(320px + env(safe-area-inset-top,0px));pointer-events:none;background:radial-gradient(120% 100% at 50% 0,color-mix(in oklab,var(--gt-u-acc) 30%,transparent),transparent 72%)}
 html[data-gt-theme="light"] .gt-u-col>.gt-u-glow{background:radial-gradient(120% 100% at 50% 0,color-mix(in oklab,var(--gt-u-acc) 16%,transparent),transparent 72%)}
-html[data-gt-theme="noir"] .gt-u-col>.gt-u-glow,html[data-gt-theme="vitrum"] .gt-u-col>.gt-u-glow{display:none}
+html[data-gt-theme="noir"] .gt-u-col>.gt-u-glow{display:none}
 .gt-u-col>.gt-u-dock,.gt-u-col>.gt-su-cta{margin-top:auto}
 .gt-u-col .gt-su-cta::before{left:calc(50% - 50vw);right:calc(50% - 50vw);bottom:-40px}
 .gtL-content .gt-u-col .gt-su-cta::before{left:0;right:0;bottom:0}
@@ -22926,7 +22852,7 @@ function GtRace({ players, target, tk, theme, accent, font, label }) {
 		});
 	});
 	return /* @__PURE__ */ import_react.default.createElement("section", {
-		className: "gt-ug-race gt-ug-po" + (theme === "vitrum" ? " gtL-glass-soft" : ""),
+		className: "gt-ug-race gt-ug-po",
 		"aria-label": label,
 		style: { background: ugSurf(theme) }
 	}, /* @__PURE__ */ import_react.default.createElement("div", {
@@ -22965,7 +22891,7 @@ function GtTiles({ players, target, tk, theme, accent, font, label }) {
 		const f = Math.min(1, Math.max(0, (p.total || 0) / T));
 		return /* @__PURE__ */ import_react.default.createElement("div", {
 			key: p.id,
-			className: "gt-ug-tile" + (theme === "vitrum" ? " gtL-glass-soft" : ""),
+			className: "gt-ug-tile",
 			style: { background: ugSurf(theme) }
 		}, /* @__PURE__ */ import_react.default.createElement("span", {
 			className: "gt-ug-tf",
@@ -23002,7 +22928,7 @@ function GtTiles({ players, target, tk, theme, accent, font, label }) {
 function GtBars({ players, target, tk, theme, accent, font, label }) {
 	const T = Math.max(1, target || 1);
 	return /* @__PURE__ */ import_react.default.createElement("section", {
-		className: "gt-ug-bars gt-ug-po" + (theme === "vitrum" ? " gtL-glass-soft" : ""),
+		className: "gt-ug-bars gt-ug-po",
 		"aria-label": label,
 		style: { background: ugSurf(theme) }
 	}, /* @__PURE__ */ import_react.default.createElement("div", {
@@ -23307,7 +23233,7 @@ function P10Standings({ list, tk, theme, t, rounds }) {
 	const r = p10Rank(list);
 	const ph = t("p10Phases");
 	return /* @__PURE__ */ import_react.default.createElement("section", {
-		className: "gtL-only gtL-standings" + (theme === "vitrum" ? " gtL-glass-soft" : ""),
+		className: "gtL-only gtL-standings",
 		"aria-label": t("gtlStandings"),
 		style: {
 			background: tk.card,
@@ -23388,15 +23314,12 @@ function P10Standings({ list, tk, theme, t, rounds }) {
 }
 function P10PhaseList({ tk, t, theme }) {
 	const ph = t("p10Phases");
-	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: theme === "vitrum" ? "gtL-glass-soft" : void 0,
-		style: {
-			background: tk.card,
-			border: `1px solid ${tk.border}`,
-			borderRadius: 20,
-			padding: "12px 14px"
-		}
-	}, s8Lbl(tk, t("p10PhasesTitle")), /* @__PURE__ */ import_react.default.createElement("ol", { style: {
+	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		background: tk.card,
+		border: `1px solid ${tk.border}`,
+		borderRadius: 20,
+		padding: "12px 14px"
+	} }, s8Lbl(tk, t("p10PhasesTitle")), /* @__PURE__ */ import_react.default.createElement("ol", { style: {
 		listStyle: "none",
 		margin: 0,
 		padding: 0,
@@ -23621,7 +23544,7 @@ function GtlStandings({ players, target, lowWins, rounds, accent, tk, font, them
 	useGtFlip(gtBox);
 	const gtFx = useGtLead("gtl-" + (lowWins ? "lo" : "hi"), rounds > 0 ? gtLeader(players.map((p) => [p.id, p.total]), lowWins) : null, rounds);
 	return /* @__PURE__ */ import_react.default.createElement("section", {
-		className: "gtL-only gtL-standings" + (theme === "vitrum" ? " gtL-glass-soft" : ""),
+		className: "gtL-only gtL-standings",
 		"aria-label": t("gtlStandings"),
 		style: {
 			background: tk.card,
@@ -23887,7 +23810,7 @@ function RommeEntry({ players, init, isEdit, onSave, onCancel, tk, theme, t, tar
 				setInst(false);
 				setPad(p.id);
 			},
-			className: "press-fx gtL-entryrow gt-ug-row" + (theme === "vitrum" ? " gtL-glass-flat" : ""),
+			className: "press-fx gtL-entryrow gt-ug-row",
 			style: {
 				display: "flex",
 				alignItems: "center",
@@ -24284,7 +24207,6 @@ function GtMoreSheet({ open, onClose, label, tk, theme, children }) {
 		},
 		onClick: onClose
 	}, /* @__PURE__ */ import_react.default.createElement("div", {
-		className: theme === "vitrum" ? "gtL-sheet-glass" : void 0,
 		onClick: (e) => e.stopPropagation(),
 		style: {
 			background: theme === "light" ? "#FFFFFF" : theme === "noir" ? "#111111" : "#1A1D27",
@@ -24325,7 +24247,7 @@ function GtRoundChart({ series, ink, muted, card, border, title, theme }) {
 	].map((k) => lo + (hi - lo) * k / 3);
 	const step = Math.max(1, Math.ceil(n / 9));
 	return /* @__PURE__ */ import_react.default.createElement("section", {
-		className: "gtL-only gtL-chart" + (theme === "vitrum" ? " gtL-glass-soft" : ""),
+		className: "gtL-only gtL-chart",
 		"aria-label": title,
 		style: {
 			background: card,
@@ -24535,11 +24457,6 @@ function TopBar({ title, subtitle, onBack, tokens, backLabel, ...gtRest }) {
 	});
 }
 function pageShellStyle(theme) {
-	if (theme === "vitrum") return {
-		minHeight: "100vh",
-		background: shellTokens("vitrum").pageBg,
-		padding: "20px 12px 32px"
-	};
 	if (theme === "light") {
 		const tk = shellTokens("light");
 		return {
@@ -24803,7 +24720,6 @@ function GtInstallHint({ tokens: tk, theme, t, isLaptop }) {
 		} catch (e) {}
 	}, [visible]);
 	if (!visible || typeof ReactDOM === "undefined" || !ReactDOM.createPortal) return null;
-	const V = theme === "vitrum";
 	const F = "'Inter', sans-serif";
 	const gold = tk.gold || "#E0BA72";
 	const done = () => {
@@ -24823,7 +24739,7 @@ function GtInstallHint({ tokens: tk, theme, t, isLaptop }) {
 		done();
 	};
 	const body = ios ? t("installIos") : bip ? t("installWhy") : t("installAndroid");
-	const solid = theme === "light" ? "#FFFFFF" : theme === "noir" ? "#161616" : V ? "rgba(30,32,46,0.82)" : "#1E2230";
+	const solid = theme === "light" ? "#FFFFFF" : theme === "noir" ? "#161616" : "#1E2230";
 	const pos = isLaptop ? {
 		right: 24,
 		bottom: 24,
@@ -24838,14 +24754,14 @@ function GtInstallHint({ tokens: tk, theme, t, isLaptop }) {
 	return ReactDOM.createPortal(/* @__PURE__ */ import_react.default.createElement("div", {
 		role: "dialog",
 		"aria-label": t("installTitle"),
-		className: "gt-install-hint" + (V ? " gtL-glass-strong" : ""),
+		className: "gt-install-hint",
 		style: {
 			position: "fixed",
 			zIndex: 95,
 			...pos,
 			boxSizing: "border-box",
 			background: solid,
-			border: V ? void 0 : `1px solid ${tk.border}`,
+			border: `1px solid ${tk.border}`,
 			borderRadius: 18,
 			padding: "12px 12px 12px 14px",
 			boxShadow: "0 14px 40px -12px rgba(0,0,0,0.45)",
@@ -36905,11 +36821,7 @@ var tournament_exports = /* @__PURE__ */ __exportAll({
 var { SchieberTournament, GtStuLogo } = (function() {
 	let UID = "app:dark";
 	function stuT(theme) {
-		return [
-			"light",
-			"vitrum",
-			"noir"
-		].includes(theme) ? theme : "dark";
+		return ["light", "noir"].includes(theme) ? theme : "dark";
 	}
 	function stuSkin(theme) {
 		const T = stuT(theme);
@@ -36943,10 +36855,10 @@ var { SchieberTournament, GtStuLogo } = (function() {
 	function stuRoot(theme) {
 		const T = stuT(theme);
 		const s = stuSkin(T);
-		const L = T === "light", V = T === "vitrum", N = T === "noir";
+		const L = T === "light", N = T === "noir";
 		const a = s.txt;
 		const al = (x, h) => /^#[0-9a-fA-F]{6}$/.test(x) ? x + h : x;
-		const solid = L ? "#FFFFFF" : V ? "#1A1E2B" : N ? "#161616" : "#1C1F29";
+		const solid = L ? "#FFFFFF" : N ? "#161616" : "#1C1F29";
 		const v = {
 			"--st-hink": s.ink,
 			"--st-hmuted": s.muted,
@@ -37393,8 +37305,6 @@ var { SchieberTournament, GtStuLogo } = (function() {
 .gtst-grandart{position:absolute;right:-8px;top:-2px;width:118px;height:96px;pointer-events:none;z-index:0}
 .gtL-content .gtst-cta{position:static}
 .gtst[data-t=light] .gtst-input,.gtst[data-t=light] .gtst-sel{color-scheme:light}
-.gtst[data-t=vitrum] .gtst-panel,.gtst[data-t=vitrum] .gtst-sheet{-webkit-backdrop-filter:blur(14px) saturate(140%);backdrop-filter:blur(14px) saturate(140%)}
-.gtst[data-t=vitrum] .gtst-sheet{background:rgba(26,30,43,.94)}
 .gtst .gtst-title{font-weight:800}
 `;
 	const ST_PL_CSS = `
@@ -39750,16 +39660,7 @@ var start_exports = /* @__PURE__ */ __exportAll({
 });
 function gtBf(theme, delay) {
 	return {
-		variant: theme === "vitrum" ? {
-			hidden: {
-				y: 6,
-				opacity: 0
-			},
-			visible: {
-				y: 0,
-				opacity: 1
-			}
-		} : {
+		variant: {
 			hidden: {
 				y: 6,
 				opacity: 0,
@@ -40072,11 +39973,11 @@ function GtOnboarding3({ theme, lang, onDone }) {
 		role: "dialog",
 		"aria-modal": "true",
 		"aria-labelledby": "gt-onb-title",
-		className: "gt-onb-card" + (theme === "vitrum" ? " gtL-glass-strong" : ""),
+		className: "gt-onb-card",
 		style: {
 			position: "relative",
 			width: "min(340px, calc(100vw - 32px))",
-			background: theme === "vitrum" ? "rgba(28,26,40,0.72)" : tk.card,
+			background: tk.card,
 			borderRadius: 24,
 			padding: "14px 20px 18px",
 			boxSizing: "border-box",
@@ -40146,10 +40047,9 @@ function SectionLabel({ children, tokens, compact }) {
 }
 function CategoryTile({ icon, iconColor, title, description, accent, tokens, onClick, gradient, theme }) {
 	const isLight = theme === "light";
-	const isVitrum = theme === "vitrum";
 	return /* @__PURE__ */ import_react.default.createElement("button", {
 		onClick,
-		className: isVitrum ? "card-fx gtL-tile gtL-glass" : isLight ? "card-fx gtL-tile" : "card-fx tile-glow gtL-tile",
+		className: isLight ? "card-fx gtL-tile" : "card-fx tile-glow gtL-tile",
 		style: {
 			display: "flex",
 			alignItems: "center",
@@ -40157,13 +40057,13 @@ function CategoryTile({ icon, iconColor, title, description, accent, tokens, onC
 			width: "100%",
 			textAlign: "left",
 			padding: "clamp(8px, 2.4vh, 18px) 19px",
-			border: isVitrum ? `1.5px solid ${accent}55` : isLight ? `1px solid ${tokens.border}` : `1.5px solid ${accent}70`,
+			border: isLight ? `1px solid ${tokens.border}` : `1.5px solid ${accent}70`,
 			borderRadius: 24,
-			background: isVitrum ? `linear-gradient(135deg, ${accent}28, rgba(255,255,255,0.07))` : isLight ? tokens.card : gradient,
+			background: isLight ? tokens.card : gradient,
 			cursor: "pointer",
 			marginBottom: 6,
-			boxShadow: isVitrum ? void 0 : isLight ? `inset 4px 0 0 ${accent}, 0 2px 8px rgba(0,0,0,0.04)` : "none",
-			"--glow": isVitrum ? void 0 : `${accent}55`
+			boxShadow: isLight ? `inset 4px 0 0 ${accent}, 0 2px 8px rgba(0,0,0,0.04)` : "none",
+			"--glow": `${accent}55`
 		}
 	}, /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-tile-iconwrap",
@@ -40187,8 +40087,7 @@ function CategoryTile({ icon, iconColor, title, description, accent, tokens, onC
 			fontSize: 22,
 			fontWeight: 700,
 			color: tokens.ink,
-			fontFamily: "'Baloo 2', sans-serif",
-			textShadow: isVitrum ? "0 1px 5px rgba(0,0,0,0.5)" : void 0
+			fontFamily: "'Baloo 2', sans-serif"
 		}
 	}, title)), /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-tile-chevron",
@@ -40533,7 +40432,6 @@ var GT_SEARCH_TAGS = {
 };
 function GameSearchBox({ lang, theme, tokens, onSelect }) {
 	const t = useT(lang);
-	const isVitrum = theme === "vitrum";
 	const [query, setQuery] = useState$11("");
 	const [focused, setFocused] = useState$11(false);
 	const restInputRef = useRef$17(null);
@@ -40649,7 +40547,7 @@ function GameSearchBox({ lang, theme, tokens, onSelect }) {
 		}).join(" "));
 		return searchText.startsWith(q) || searchText.split(/[\s\-]+/).some((word) => word.startsWith(q));
 	});
-	const boxBg = theme === "light" ? "#FFFFFF" : isVitrum ? tokens.card : "rgba(255,255,255,0.07)";
+	const boxBg = theme === "light" ? "#FFFFFF" : "rgba(255,255,255,0.07)";
 	const panelBg = tokens.cardElevated || tokens.card;
 	const itemBg = theme === "light" ? "#FFFFFF" : "rgba(255,255,255,0.05)";
 	const cancelClose = () => {
@@ -40738,17 +40636,16 @@ function GameSearchBox({ lang, theme, tokens, onSelect }) {
 		onBlur: scheduleClose,
 		placeholder: t("searchGamesPlaceholder"),
 		"aria-label": t("searchGamesPlaceholder"),
-		className: isVitrum ? "gtL-glass-soft" : void 0,
 		style: {
 			width: "100%",
 			boxSizing: "border-box",
 			padding: "6px 14px 6px 36px",
 			minHeight: 44,
 			borderRadius: 14,
-			border: isVitrum ? void 0 : `1px solid ${tokens.border}`,
+			border: `1px solid ${tokens.border}`,
 			background: boxBg,
-			backdropFilter: isVitrum ? void 0 : "blur(10px)",
-			WebkitBackdropFilter: isVitrum ? void 0 : "blur(10px)",
+			backdropFilter: "blur(10px)",
+			WebkitBackdropFilter: "blur(10px)",
 			color: tokens.ink,
 			fontSize: 16,
 			fontFamily: "'Inter', sans-serif",
@@ -41104,9 +41001,8 @@ function buildAllGamesList(theme) {
 }
 function GameShowcaseStrip({ lang, theme, tokens, onSelect, fixedOrder }) {
 	const t = useT(lang);
-	const isVitrum = theme === "vitrum";
 	const games = gtShowcaseMain(theme);
-	const fadeBg = theme === "noir" ? "#0A0A0A" : theme === "light" ? "#F8F9FA" : theme === "vitrum" ? "#12131C" : "#171425";
+	const fadeBg = theme === "noir" ? "#0A0A0A" : theme === "light" ? "#F8F9FA" : "#171425";
 	const rowRef = useRef$17(null);
 	const dragRef = useRef$17({
 		active: false,
@@ -41192,7 +41088,7 @@ function GameShowcaseStrip({ lang, theme, tokens, onSelect, fixedOrder }) {
 			padding: 0
 		}
 	}, /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-showcase-icon" + (isVitrum ? " gtL-glass-soft" : ""),
+		className: "gtL-showcase-icon",
 		style: {
 			width: 46,
 			height: 46,
@@ -41200,8 +41096,8 @@ function GameShowcaseStrip({ lang, theme, tokens, onSelect, fixedOrder }) {
 			display: "flex",
 			alignItems: "center",
 			justifyContent: "center",
-			background: isVitrum ? `${g.accent}22` : theme === "light" ? `${g.accent}1A` : theme === "noir" ? `${g.accent}20` : `linear-gradient(150deg, ${g.accent}55, ${g.accent}22)`,
-			border: isVitrum ? `1px solid ${g.accent}80` : theme === "light" ? `1px solid ${g.accent}55` : `1.5px solid ${g.accent}A6`
+			background: theme === "light" ? `${g.accent}1A` : theme === "noir" ? `${g.accent}20` : `linear-gradient(150deg, ${g.accent}55, ${g.accent}22)`,
+			border: theme === "light" ? `1px solid ${g.accent}55` : `1.5px solid ${g.accent}A6`
 		}
 	}, g.Logo ? /* @__PURE__ */ import_react.default.createElement("span", { style: {
 		transform: "scale(0.85)",
@@ -41226,8 +41122,7 @@ function GameShowcaseStrip({ lang, theme, tokens, onSelect, fixedOrder }) {
 			overflowWrap: "break-word",
 			fontFamily: "'Inter', sans-serif",
 			textAlign: "center",
-			lineHeight: 1.15,
-			textShadow: isVitrum ? "0 1px 3px rgba(0,0,0,0.4)" : void 0
+			lineHeight: 1.15
 		}
 	}, g.label || t(g.labelKey))))), /* @__PURE__ */ import_react.default.createElement("div", {
 		"aria-hidden": true,
@@ -41275,7 +41170,6 @@ function GameShowcaseStrip({ lang, theme, tokens, onSelect, fixedOrder }) {
 }
 function DailyTipCard({ lang, tokens, theme }) {
 	const t = useT(lang);
-	const isVitrum = theme === "vitrum";
 	const tips = useMemo$9(() => Array.isArray(t("tips")) ? t("tips") : [], [lang]);
 	const dayOfYear = Math.floor((Date.now() - new Date((/* @__PURE__ */ new Date()).getFullYear(), 0, 0)) / 864e5);
 	const [idx, setIdx] = useState$11(tips.length ? dayOfYear % tips.length : 0);
@@ -41358,7 +41252,7 @@ function DailyTipCard({ lang, tokens, theme }) {
 		onPointerMove,
 		onPointerUp: endDrag,
 		onPointerLeave: () => dragging && endDrag(),
-		className: "gtL-tipcard-body" + (isVitrum ? " gtL-glass-soft" : ""),
+		className: "gtL-tipcard-body",
 		style: {
 			flex: 1,
 			minWidth: 0,
@@ -41366,7 +41260,7 @@ function DailyTipCard({ lang, tokens, theme }) {
 			gap: 10,
 			alignItems: "flex-start",
 			background: tokens.card,
-			border: isVitrum ? void 0 : `1px solid ${tokens.border}`,
+			border: `1px solid ${tokens.border}`,
 			borderRadius: 18,
 			padding: "12px 14px",
 			cursor: "grab",
@@ -41464,8 +41358,7 @@ function DailyTipCard({ lang, tokens, theme }) {
 			fontSize: 13,
 			color: tokens.muted,
 			lineHeight: 1.45,
-			fontFamily: "'Inter', sans-serif",
-			textShadow: isVitrum ? "0 1px 3px rgba(0,0,0,0.35)" : void 0
+			fontFamily: "'Inter', sans-serif"
 		}
 	}, tips[idx]))), /* @__PURE__ */ import_react.default.createElement("button", {
 		onClick: () => go(1),
@@ -41488,7 +41381,6 @@ function DailyTipCard({ lang, tokens, theme }) {
 }
 function startPageGlow(theme) {
 	if (theme === "light") return "#F8F9FA";
-	if (theme === "vitrum") return "radial-gradient(ellipse 95% 50% at 12% -6%, rgba(120,110,255,0.40) 0%, transparent 64%), radial-gradient(ellipse 80% 45% at 108% 32%, rgba(84,132,255,0.30) 0%, transparent 66%), radial-gradient(ellipse 100% 55% at -5% 104%, rgba(38,200,186,0.24) 0%, transparent 66%), linear-gradient(168deg, #16204A 0%, #0D1430 52%, #0A0F24 100%)";
 	if (theme === "noir") return "#0A0A0A";
 	return "radial-gradient(ellipse at 50% -10%, #2E2247 0%, #241A38 30%, #171425 58%, #0B0C12 100%)";
 }
@@ -42524,7 +42416,7 @@ function StartPage({ onSelect, lang, theme, viewMode, lastPlayed, dismissedResum
 		theme
 	});
 	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage gtL-start" + (theme === "vitrum" ? " vitrum-active" : ""),
+		className: "gtL-shellpage gtL-start",
 		style: {
 			height: isLaptop ? "auto" : "100dvh",
 			minHeight: isLaptop ? "100%" : void 0,
@@ -42754,7 +42646,7 @@ function StartPage({ onSelect, lang, theme, viewMode, lastPlayed, dismissedResum
 		color: tk.muted
 	})), /* @__PURE__ */ import_react.default.createElement("button", {
 		onClick: () => onSelect("settings"),
-		className: "press-fx gt-hit gtL-start-gear" + (theme === "vitrum" ? " gtL-glass-soft" : ""),
+		className: "press-fx gt-hit gtL-start-gear",
 		"data-onboard": "settings",
 		"aria-label": t("settings"),
 		style: {
@@ -42820,14 +42712,7 @@ function StartPage({ onSelect, lang, theme, viewMode, lastPlayed, dismissedResum
 	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		position: "relative",
 		flexShrink: 0
-	} }, theme === "vitrum" && /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		position: "absolute",
-		inset: "-30%",
-		borderRadius: "50%",
-		background: "radial-gradient(ellipse 60% 55% at 50% 50%, rgba(255,255,255,0.18) 0%, rgba(224,197,137,0.09) 45%, rgba(255,255,255,0) 75%)",
-		pointerEvents: "none",
-		zIndex: 0
-	} }), /* @__PURE__ */ import_react.default.createElement(AppLogo, {
+	} }, /* @__PURE__ */ import_react.default.createElement(AppLogo, {
 		size: 56,
 		theme,
 		style: {
@@ -42865,14 +42750,7 @@ function StartPage({ onSelect, lang, theme, viewMode, lastPlayed, dismissedResum
 		marginBottom: 4,
 		position: "relative",
 		animation: "none"
-	} }, theme === "vitrum" && /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		position: "absolute",
-		inset: "-20%",
-		borderRadius: "50%",
-		background: "radial-gradient(ellipse 55% 50% at 50% 55%, rgba(255,255,255,0.16) 0%, rgba(224,197,137,0.08) 45%, rgba(255,255,255,0) 75%)",
-		pointerEvents: "none",
-		zIndex: 0
-	} }), /* @__PURE__ */ import_react.default.createElement("div", {
+	} }, /* @__PURE__ */ import_react.default.createElement("div", {
 		ref: logoRef,
 		className: "gt-hero-logo",
 		style: {
@@ -42941,7 +42819,7 @@ function StartPage({ onSelect, lang, theme, viewMode, lastPlayed, dismissedResum
 		onDismissResume,
 		tokens: tk,
 		t
-	})), lastPlayed && /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("style", null, "@media (max-width:359px){.gt-headbtns .gt-hb-theme{display:none}}.gt-hb{position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:44px;height:44px;padding:0;margin:0;border:none;background:transparent;cursor:pointer;font:inherit;-webkit-tap-highlight-color:transparent;touch-action:manipulation}.gt-hb:focus{outline:none}.gt-hb>.gt-hf{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:36px;min-width:36px;box-sizing:border-box;border-radius:999px;white-space:nowrap;transition:transform .16s cubic-bezier(.23,1,.32,1),background-color .2s ease,border-color .2s ease,color .2s ease}.gt-hb:active>.gt-hf{transform:scale(.96)}.gt-hb:focus-visible>.gt-hf{outline:2px solid currentColor;outline-offset:2px}@media (hover:hover) and (pointer:fine){.gt-hb:hover>.gt-hf{filter:brightness(1.15)}}@media (prefers-reduced-motion:reduce){.gt-hb>.gt-hf{transition:none}}.gt-gamehead{position:sticky;top:var(--gt-sat, env(safe-area-inset-top, 0px));z-index:20;margin:-6px -12px 8px;padding:6px 12px 8px}.gt-gamehead.is-stuck{background-color:var(--gt-pg-col);background-image:var(--gt-pg-img);background-size:var(--gt-pg-size);background-repeat:no-repeat;background-position:var(--gt-head-pos,0 0);box-shadow:0 1px 0 rgba(128,128,128,.22)}html[data-gt-theme=\"vitrum\"] .gt-gamehead.is-stuck{background:rgba(16,18,25,.58);background-image:none;-webkit-backdrop-filter:blur(24px) saturate(160%);backdrop-filter:blur(24px) saturate(160%);box-shadow:inset 0 -1px 0 rgba(255,255,255,.10),0 8px 24px -12px rgba(0,0,0,.5)}.gt-gamehead>.gt-headbtns{top:6px!important;right:8px!important}.gt-headbtns{z-index:21!important}div:has(>.gt-gamehead~.gt-headbtns){position:sticky!important;top:var(--gt-sat, env(safe-area-inset-top, 0px));z-index:20}div:has(>.gt-gamehead~.gt-headbtns)>.gt-headbtns{top:6px!important}.gtL-content .gt-gamehead,.gtL-content .gt-gamehead.is-stuck{position:relative;top:auto;margin:0 0 16px;padding:0;background:none;box-shadow:none}html[data-gt-theme=\"vitrum\"] .gtL-content .gt-gamehead.is-stuck{background:none;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:none}.gtL-content .gt-gamehead>.gt-headbtns{top:0!important;right:-4px!important}.gtL-content div:has(>.gt-gamehead~.gt-headbtns){position:relative!important;top:auto}.gtL-content div:has(>.gt-gamehead~.gt-headbtns)>.gt-headbtns{top:0!important}div:has(>.gt-headbtns+.gt-gamehead)>.gt-headbtns{position:sticky!important;top:calc(var(--gt-headtop, var(--gt-sat, env(safe-area-inset-top, 0px))) + 6px)!important;right:auto!important;left:auto!important;height:0;overflow:visible;display:flex;justify-content:flex-end;margin-right:-4px;z-index:22!important}.gtL-content div:has(>.gt-headbtns+.gt-gamehead)>.gt-headbtns{position:absolute!important;top:0!important;right:-4px!important;height:auto;margin-right:0}.gtL-yatzy-sheets,.gt-gamehead~.gtL-e-fit{isolation:isolate}.gt-gamehead.is-stuck{-webkit-transform:translateZ(0);transform:translateZ(0)}.gt-gamehead.is-stuck::before{content:'';position:absolute;left:0;right:0;bottom:100%;height:var(--gt-cover,0px);pointer-events:none;background-color:var(--gt-pg-col);background-image:var(--gt-pg-img);background-size:var(--gt-pg-size);background-repeat:no-repeat;background-position:var(--gt-head-pos2,0 0)}.gtL-content .gt-gamehead.is-stuck::before{display:none}"), /* @__PURE__ */ import_react.default.createElement(SectionLabel, {
+	})), lastPlayed && /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("style", null, "@media (max-width:359px){.gt-headbtns .gt-hb-theme{display:none}}.gt-hb{position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:44px;height:44px;padding:0;margin:0;border:none;background:transparent;cursor:pointer;font:inherit;-webkit-tap-highlight-color:transparent;touch-action:manipulation}.gt-hb:focus{outline:none}.gt-hb>.gt-hf{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:36px;min-width:36px;box-sizing:border-box;border-radius:999px;white-space:nowrap;transition:transform .16s cubic-bezier(.23,1,.32,1),background-color .2s ease,border-color .2s ease,color .2s ease}.gt-hb:active>.gt-hf{transform:scale(.96)}.gt-hb:focus-visible>.gt-hf{outline:2px solid currentColor;outline-offset:2px}@media (hover:hover) and (pointer:fine){.gt-hb:hover>.gt-hf{filter:brightness(1.15)}}@media (prefers-reduced-motion:reduce){.gt-hb>.gt-hf{transition:none}}.gt-gamehead{position:sticky;top:var(--gt-sat, env(safe-area-inset-top, 0px));z-index:20;margin:-6px -12px 8px;padding:6px 12px 8px}.gt-gamehead.is-stuck{background-color:var(--gt-pg-col);background-image:var(--gt-pg-img);background-size:var(--gt-pg-size);background-repeat:no-repeat;background-position:var(--gt-head-pos,0 0);box-shadow:0 1px 0 rgba(128,128,128,.22)}.gt-gamehead>.gt-headbtns{top:6px!important;right:8px!important}.gt-headbtns{z-index:21!important}div:has(>.gt-gamehead~.gt-headbtns){position:sticky!important;top:var(--gt-sat, env(safe-area-inset-top, 0px));z-index:20}div:has(>.gt-gamehead~.gt-headbtns)>.gt-headbtns{top:6px!important}.gtL-content .gt-gamehead,.gtL-content .gt-gamehead.is-stuck{position:relative;top:auto;margin:0 0 16px;padding:0;background:none;box-shadow:none}.gtL-content .gt-gamehead>.gt-headbtns{top:0!important;right:-4px!important}.gtL-content div:has(>.gt-gamehead~.gt-headbtns){position:relative!important;top:auto}.gtL-content div:has(>.gt-gamehead~.gt-headbtns)>.gt-headbtns{top:0!important}div:has(>.gt-headbtns+.gt-gamehead)>.gt-headbtns{position:sticky!important;top:calc(var(--gt-headtop, var(--gt-sat, env(safe-area-inset-top, 0px))) + 6px)!important;right:auto!important;left:auto!important;height:0;overflow:visible;display:flex;justify-content:flex-end;margin-right:-4px;z-index:22!important}.gtL-content div:has(>.gt-headbtns+.gt-gamehead)>.gt-headbtns{position:absolute!important;top:0!important;right:-4px!important;height:auto;margin-right:0}.gtL-yatzy-sheets,.gt-gamehead~.gtL-e-fit{isolation:isolate}.gt-gamehead.is-stuck{-webkit-transform:translateZ(0);transform:translateZ(0)}.gt-gamehead.is-stuck::before{content:'';position:absolute;left:0;right:0;bottom:100%;height:var(--gt-cover,0px);pointer-events:none;background-color:var(--gt-pg-col);background-image:var(--gt-pg-img);background-size:var(--gt-pg-size);background-repeat:no-repeat;background-position:var(--gt-head-pos2,0 0)}.gtL-content .gt-gamehead.is-stuck::before{display:none}"), /* @__PURE__ */ import_react.default.createElement(SectionLabel, {
 		tokens: tk,
 		compact: true
 	}, t("lastPlayed")), /* @__PURE__ */ import_react.default.createElement("button", {
@@ -44484,14 +44362,13 @@ function SchieberGoal({ target, setTarget, t }) {
 	});
 }
 function SchieberBigBoard({ teams, target, setTarget, onOpenEntry, onUndo, onRename, wiping, t, theme }) {
-	const _SV = theme === "vitrum";
 	return /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gt-sch-board",
 		style: {
 			position: "relative",
-			background: _SV ? "linear-gradient(165deg,#1C222D 0%,#12161E 100%)" : `radial-gradient(ellipse at 50% 50%, ${CHALK_BG} 0%, ${CHALK_BG_DARK} 100%)`,
-			borderRadius: _SV ? 16 : 10,
-			boxShadow: _SV ? "inset 0 1px 0 rgba(255,255,255,0.10),inset 0 0 30px rgba(0,0,0,0.35),0 0 0 1px rgba(255,255,255,0.10)" : "inset 0 0 30px rgba(0,0,0,0.4)",
+			background: `radial-gradient(ellipse at 50% 50%, ${CHALK_BG} 0%, ${CHALK_BG_DARK} 100%)`,
+			borderRadius: 10,
+			boxShadow: "inset 0 0 30px rgba(0,0,0,0.4)",
 			overflow: "hidden"
 		}
 	}, /* @__PURE__ */ import_react.default.createElement("div", {
@@ -44550,7 +44427,7 @@ function SchieberTourPick({ onPick, compact, tk, t, theme }) {
 	});
 	if (!rows.length && compact) return null;
 	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: theme === "vitrum" ? "gt-sch-tour gtL-glass-soft" : "gt-sch-tour",
+		className: "gt-sch-tour",
 		style: {
 			border: `1px solid ${acc}`,
 			borderRadius: 8,
@@ -44814,7 +44691,7 @@ function SchieberWeisBtn({ tm, onOpen, t, theme, cls }) {
 	return /* @__PURE__ */ import_react.default.createElement("button", {
 		onClick: () => onOpen(tm.id),
 		"aria-label": t("weisBtn") + ", " + tm.name,
-		className: "press-fx gt-weis-open" + (theme === "vitrum" ? " gtL-glass-soft" : "") + (cls ? " " + cls : ""),
+		className: "press-fx gt-weis-open" + (cls ? " " + cls : ""),
 		style: {
 			display: "flex",
 			flexWrap: "wrap",
@@ -44875,7 +44752,7 @@ function SchieberWeisBar({ teams, onOpen, t, theme }) {
 		t,
 		theme
 	})), rows.length > 0 && /* @__PURE__ */ import_react.default.createElement("div", {
-		className: theme === "vitrum" ? "gt-weis-lap gtL-glass-soft" : "gt-weis-lap",
+		className: "gt-weis-lap",
 		style: {
 			border: `1px solid ${tk.border}`,
 			borderRadius: 8,
@@ -45222,15 +45099,12 @@ function JassWeisStats({ query, refreshKey, tk, t, theme }) {
 	}, /* @__PURE__ */ import_react.default.createElement(SectionLabel, {
 		tokens: tk,
 		compact: true
-	}, t("weisStatsTitle")), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: theme === "vitrum" ? "gtL-glass-soft" : void 0,
-		style: {
-			border: `1px solid ${tk.border}`,
-			borderRadius: 16,
-			padding: "12px 14px",
-			background: tk.card
-		}
-	}, /* @__PURE__ */ import_react.default.createElement(WeisStatsTable, {
+	}, t("weisStatsTitle")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		border: `1px solid ${tk.border}`,
+		borderRadius: 16,
+		padding: "12px 14px",
+		background: tk.card
+	} }, /* @__PURE__ */ import_react.default.createElement(WeisStatsTable, {
 		rows: rows.slice(0, 12),
 		tk,
 		t
@@ -45745,8 +45619,8 @@ function SchieberGame({ teams, setTeams, target, setTarget, phase, setPhase, onB
 		onBack,
 		tokens: tk,
 		backLabel: t("back"),
-		accent: theme === "noir" ? noirAccent("schieber") : theme === "light" ? "#2F6B52" : theme === "vitrum" ? "#7FD1A8" : "#5FB58C",
-		icon: /* @__PURE__ */ import_react.default.createElement(SchieberLogo, { color: theme === "noir" ? noirAccent("schieber") : theme === "light" ? "#2F6B52" : theme === "vitrum" ? "#7FD1A8" : "#5FB58C" }),
+		accent: theme === "noir" ? noirAccent("schieber") : theme === "light" ? "#2F6B52" : "#5FB58C",
+		icon: /* @__PURE__ */ import_react.default.createElement(SchieberLogo, { color: theme === "noir" ? noirAccent("schieber") : theme === "light" ? "#2F6B52" : "#5FB58C" }),
 		onHome,
 		rulesText: t("rulesSchieber")
 	}), /* @__PURE__ */ import_react.default.createElement(SchieberSetup, {
@@ -46460,13 +46334,6 @@ function ttVars(theme) {
 		"--tt-minon-bg": "rgba(200,16,46,0.1)",
 		"--tt-minon": "#C8102E"
 	};
-	if (theme === "vitrum") return {
-		...base,
-		"--tt-card": "rgba(255,255,255,0.07)",
-		"--tt-cardb": "rgba(255,255,255,0.12)",
-		"--tt-tray": "rgba(16,18,25,0.58)",
-		"--tt-trayline": "rgba(255,255,255,0.14)"
-	};
 	if (theme === "noir") return {
 		...base,
 		"--tt-ink": "#EDEDED",
@@ -46610,7 +46477,7 @@ function TuttoPlayerRow({ player, total, entryCount, color, target, isLeader, se
 		"aria-pressed": selected,
 		"aria-label": label,
 		onClick: onPick,
-		className: "tt-lane" + (theme === "vitrum" ? " gtL-glass-soft" : "") + (selected ? " is-sel" : ""),
+		className: "tt-lane" + (selected ? " is-sel" : ""),
 		style: { "--gt-lead-c": "var(--tt-y)" }
 	}, gtLead && /* @__PURE__ */ import_react.default.createElement(GtLeadFx, { key: "gtlf" }), /* @__PURE__ */ import_react.default.createElement("span", { className: "tt-lt" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "tt-nmt" }, player.name), pop && /* @__PURE__ */ import_react.default.createElement("span", {
 		key: pop.id,
@@ -46648,7 +46515,7 @@ function TuttoPlayerRow({ player, total, entryCount, color, target, isLeader, se
 }
 function TuttoSetup({ players, setPlayers, target, setTarget, onStart, tk: gtTk0, t, theme }) {
 	const tk = gtSoftTk(gtTk0, theme);
-	const gtS = gtSkin(theme, tk, "tutto", { acc: theme === "noir" ? "#C9C9C9" : theme === "vitrum" ? "#F0A3B8" : theme === "light" ? "#8C4560" : void 0 });
+	const gtS = gtSkin(theme, tk, "tutto", { acc: theme === "noir" ? "#C9C9C9" : theme === "light" ? "#8C4560" : void 0 });
 	const rename = (idx, name) => setPlayers((ps) => ps.map((p, i) => i === idx ? {
 		...p,
 		name
@@ -46754,7 +46621,6 @@ var TUTTO_PLAY_CSS = `@font-face{font-family:'Inter';font-style:italic;font-weig
 .tt-lanes.is-compact .tt-num{grid-column:3;grid-row:1;font-size:22px;text-align:right;justify-self:end;}
 .tt-lanes.is-compact .tt-pop{position:absolute;right:12px;top:-3px;font-size:13px;}
 .tt-tray{container:tt/inline-size;position:sticky;bottom:0;z-index:5;margin:0 -12px;flex:none;box-sizing:border-box;border-radius:24px 24px 0 0;background:var(--tt-tray);border-top:1px solid var(--tt-trayline);padding:12px 14px calc(18px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:8px;color:var(--tt-ink);}
-.tt-root.is-vitrum .tt-tray{-webkit-backdrop-filter:blur(24px) saturate(160%);backdrop-filter:blur(24px) saturate(160%);}
 .tt-dh{display:grid;grid-template-columns:minmax(0,1fr) auto 44px 44px;align-items:center;column-gap:6px;min-height:44px;padding:0 0 0 4px;font-size:15px;}
 @container tt (max-width:279px){.tt-dn{grid-column:1/-1;min-height:26px;}.tt-disp{grid-column:1/3;margin-left:0;}}
 .tt-dn{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600;}
@@ -47208,7 +47074,7 @@ function TuttoPlay({ players, setPlayers, target, onBack, onHome, onEndGame, onE
 		shareExtra: () => ({ target })
 	}), /* @__PURE__ */ import_react.default.createElement("div", {
 		ref: rootRef,
-		className: "reveal-1 gtL-game pl-wide pl-page pl-head-compact tt-root" + (theme === "vitrum" ? " is-vitrum" : ""),
+		className: "reveal-1 gtL-game pl-wide pl-page pl-head-compact tt-root",
 		style: {
 			...rootVars,
 			maxWidth: 480,
@@ -47527,15 +47393,6 @@ function dartMachineTokens(theme) {
 		muted: "#8C8570",
 		gold: "#946118"
 	};
-	if (theme === "vitrum") return {
-		pageBg: "radial-gradient(ellipse 95% 50% at 12% -6%, rgba(200,16,46,0.46) 0%, transparent 64%), radial-gradient(ellipse 80% 45% at 108% 32%, rgba(84,132,255,0.30) 0%, transparent 66%), radial-gradient(ellipse 100% 55% at -5% 104%, rgba(38,200,186,0.24) 0%, transparent 66%), linear-gradient(168deg, #16204A 0%, #0D1430 52%, #0A0F24 100%)",
-		card: "rgba(255,255,255,0.07)",
-		cardAlt: "rgba(255,255,255,0.04)",
-		border: "rgba(255,255,255,0.12)",
-		ink: "#F2F4F8",
-		muted: "#A3A7B0",
-		gold: "#F5C888"
-	};
 	if (theme === "noir") return {
 		pageBg: "#0A0A0A",
 		card: "#1E1E1E",
@@ -47569,20 +47426,6 @@ function startPageTokens(theme) {
 		muted: "#5B6470",
 		border: "#E2E8F0",
 		gold: "#8F6418"
-	};
-	if (theme === "vitrum") return {
-		onAccent: "#1A1408",
-		pageBg: "radial-gradient(ellipse 95% 50% at 12% -6%, rgba(120,110,255,0.40) 0%, transparent 64%), radial-gradient(ellipse 80% 45% at 108% 32%, rgba(84,132,255,0.30) 0%, transparent 66%), radial-gradient(ellipse 100% 55% at -5% 104%, rgba(38,200,186,0.24) 0%, transparent 66%), linear-gradient(168deg, #16204A 0%, #0D1430 52%, #0A0F24 100%)",
-		pageBg2: "rgba(255,255,255,0.04)",
-		headerBg: "rgba(22,25,33,0.62)",
-		headerInk: "#F2F4F8",
-		headerMuted: "rgba(242,244,248,0.62)",
-		card: "rgba(255,255,255,0.065)",
-		cardElevated: "rgba(26,29,38,0.92)",
-		ink: "#F2F4F8",
-		muted: "rgba(242,244,248,0.64)",
-		border: "rgba(255,255,255,0.12)",
-		gold: "#E0C589"
 	};
 	if (theme === "noir") return {
 		onAccent: "#111111",
@@ -47626,19 +47469,6 @@ function shellTokens(theme) {
 		muted: "#5B6470",
 		border: "#E2E8F0",
 		gold: "#8F6418"
-	};
-	if (theme === "vitrum") return {
-		pageBg: "radial-gradient(ellipse 95% 50% at 12% -6%, rgba(120,110,255,0.40) 0%, transparent 64%), radial-gradient(ellipse 80% 45% at 108% 32%, rgba(84,132,255,0.30) 0%, transparent 66%), radial-gradient(ellipse 100% 55% at -5% 104%, rgba(38,200,186,0.24) 0%, transparent 66%), linear-gradient(168deg, #16204A 0%, #0D1430 52%, #0A0F24 100%)",
-		pageBg2: "rgba(255,255,255,0.04)",
-		headerBg: "rgba(22,25,33,0.62)",
-		headerInk: "#F2F4F8",
-		headerMuted: "rgba(242,244,248,0.62)",
-		card: "rgba(255,255,255,0.065)",
-		cardElevated: "rgba(26,29,38,0.92)",
-		ink: "#F2F4F8",
-		muted: "rgba(242,244,248,0.64)",
-		border: "rgba(255,255,255,0.12)",
-		gold: "#E0C589"
 	};
 	if (theme === "noir") return {
 		pageBg: "#0A0A0A",
@@ -47685,23 +47515,6 @@ function tuttoTokens(theme) {
 		cardPeek1: "#F5EAE8",
 		cardPeek2: "#E9D3D0"
 	};
-	if (theme === "vitrum") return {
-		accentFill: "#FF8E8E",
-		onAccent: "#1A0A0B",
-		pageBg: "radial-gradient(ellipse 95% 50% at 12% -6%, rgba(193,121,143,0.46) 0%, transparent 64%), radial-gradient(ellipse 80% 45% at 108% 32%, rgba(84,132,255,0.30) 0%, transparent 66%), radial-gradient(ellipse 100% 55% at -5% 104%, rgba(38,200,186,0.24) 0%, transparent 66%), linear-gradient(168deg, #16204A 0%, #0D1430 52%, #0A0F24 100%)",
-		pageBg2: "rgba(255,255,255,0.04)",
-		headerBg: "rgba(255,255,255,0.06)",
-		headerInk: "#F2F4F8",
-		headerMuted: "#A3A7B0",
-		card: "rgba(255,255,255,0.07)",
-		cardElevated: "rgba(255,255,255,0.11)",
-		ink: "#F2F4F8",
-		muted: "#A3A7B0",
-		border: "rgba(255,255,255,0.12)",
-		gold: "#FF8E8E",
-		cardPeek1: "rgba(255,255,255,0.06)",
-		cardPeek2: "rgba(255,255,255,0.03)"
-	};
 	if (theme === "noir") return {
 		accentFill: "#C9C9C9",
 		onAccent: "#111111",
@@ -47744,11 +47557,6 @@ function tuttoPageShellStyle(theme) {
 		background: `radial-gradient(ellipse at 50% -10%, #FFFFFF 0%, ${tk.pageBg} 55%, ${tk.pageBg2} 100%)`,
 		padding: "20px 12px 32px"
 	};
-	if (theme === "vitrum") return {
-		minHeight: "100vh",
-		background: tk.pageBg,
-		padding: "20px 12px 32px"
-	};
 	return {
 		minHeight: "100vh",
 		background: `radial-gradient(ellipse at 50% -10%, ${tk.pageBg2} 0%, ${tk.pageBg} 55%, ${NEARBLACK} 100%)`,
@@ -47759,11 +47567,6 @@ function yatzyPageShellStyle(theme) {
 	if (theme === "light") return {
 		minHeight: "100vh",
 		background: `radial-gradient(ellipse at 50% -10%, #FFFFFF 0%, ${shellTokens("light").pageBg} 60%)`,
-		padding: "12px 12px 16px"
-	};
-	if (theme === "vitrum") return {
-		minHeight: "100vh",
-		background: "radial-gradient(ellipse 95% 50% at 12% -6%, rgba(91,122,157,0.46) 0%, transparent 64%), radial-gradient(ellipse 80% 45% at 108% 32%, rgba(84,132,255,0.30) 0%, transparent 66%), radial-gradient(ellipse 100% 55% at -5% 104%, rgba(38,200,186,0.24) 0%, transparent 66%), linear-gradient(168deg, #16204A 0%, #0D1430 52%, #0A0F24 100%)",
 		padding: "12px 12px 16px"
 	};
 	if (theme === "noir") return {
@@ -47794,23 +47597,6 @@ function wizardTokens(theme) {
 		cellEditBg: "rgba(168,119,32,0.15)",
 		placeholderDot: "#D8CDBC",
 		subheadBg: "#EFE6D8"
-	};
-	if (theme === "vitrum") return {
-		onAccent: "#1A1408",
-		ink: "#F2F4F8",
-		card: "rgba(255,255,255,0.07)",
-		border: "rgba(255,255,255,0.12)",
-		gold: "#E8C374",
-		parch: "#F5EEDD",
-		hues: WIZARD_HUES,
-		muted: "#A3A7B0",
-		mutedLight: "#C4C8D0",
-		groupLine: "rgba(255,255,255,0.18)",
-		cellEmptyBg: "rgba(255,255,255,0.05)",
-		cellFilledBg: "rgba(255,255,255,0.08)",
-		cellEditBg: "rgba(232,195,116,0.2)",
-		placeholderDot: "rgba(255,255,255,0.25)",
-		subheadBg: "rgba(255,255,255,0.06)"
 	};
 	if (theme === "noir") {
 		const ac = "#C9C9C9";
@@ -47869,11 +47655,6 @@ function wizardPageShellStyle(theme) {
 			padding: "20px 12px 32px"
 		};
 	}
-	if (theme === "vitrum") return {
-		minHeight: "100vh",
-		background: "radial-gradient(ellipse 95% 50% at 12% -6%, rgba(224,186,114,0.46) 0%, transparent 64%), radial-gradient(ellipse 80% 45% at 108% 32%, rgba(84,132,255,0.30) 0%, transparent 66%), radial-gradient(ellipse 100% 55% at -5% 104%, rgba(38,200,186,0.24) 0%, transparent 66%), linear-gradient(168deg, #16204A 0%, #0D1430 52%, #0A0F24 100%)",
-		padding: "20px 12px 32px"
-	};
 	if (theme === "noir") return {
 		minHeight: "100vh",
 		background: "#0A0A0A",
@@ -47889,11 +47670,6 @@ function jassPageShellStyle(theme) {
 	if (theme === "light") return {
 		minHeight: "100vh",
 		background: `radial-gradient(ellipse at 50% -10%, #FFFFFF 0%, ${shellTokens("light").pageBg} 60%)`,
-		padding: "20px 12px 32px"
-	};
-	if (theme === "vitrum") return {
-		minHeight: "100vh",
-		background: "radial-gradient(ellipse 95% 50% at 12% -6%, rgba(213,43,30,0.46) 0%, transparent 64%), radial-gradient(ellipse 80% 45% at 108% 32%, rgba(84,132,255,0.30) 0%, transparent 66%), radial-gradient(ellipse 100% 55% at -5% 104%, rgba(38,200,186,0.24) 0%, transparent 66%), linear-gradient(168deg, #16204A 0%, #0D1430 52%, #0A0F24 100%)",
 		padding: "20px 12px 32px"
 	};
 	if (theme === "noir") return {
@@ -47924,23 +47700,6 @@ function impostorTokens(theme) {
 		teal: "#14796E",
 		gold: "#8A6712",
 		border: "#4A4038"
-	};
-	if (theme === "vitrum") return {
-		dangerFrom: "#A83BC0",
-		dangerTo: "#B8323A",
-		onDanger: "#FFFFFF",
-		tealFrom: "#6EE8D4",
-		tealTo: "#17A398",
-		onTeal: "#0A0810",
-		bg: "radial-gradient(ellipse 95% 50% at 12% -6%, rgba(192,66,224,0.46) 0%, transparent 64%), radial-gradient(ellipse 80% 45% at 108% 32%, rgba(84,132,255,0.30) 0%, transparent 66%), radial-gradient(ellipse 100% 55% at -5% 104%, rgba(38,200,186,0.24) 0%, transparent 66%), linear-gradient(168deg, #16204A 0%, #0D1430 52%, #0A0F24 100%)",
-		bg2: "rgba(255,255,255,0.04)",
-		card: "rgba(255,255,255,0.07)",
-		ink: "#F2F4F8",
-		muted: "#A3A7B0",
-		red: "#E084F0",
-		teal: "#6EE8D4",
-		gold: "#F5D68C",
-		border: "rgba(255,255,255,0.12)"
 	};
 	if (theme === "noir") return {
 		dangerFrom: "#6B6B6B",
@@ -47981,7 +47740,7 @@ function impostorPageShellStyle(theme) {
 	const wt = impostorTokens(theme);
 	return {
 		minHeight: "100vh",
-		background: theme === "vitrum" ? wt.bg : `radial-gradient(ellipse at 50% -10%, ${wt.bg2} 0%, ${wt.bg} 60%)`,
+		background: `radial-gradient(ellipse at 50% -10%, ${wt.bg2} 0%, ${wt.bg} 60%)`,
 		padding: "20px 12px 32px"
 	};
 }
@@ -47999,20 +47758,6 @@ function wolfTokens(theme) {
 		blood: "#D13C4B",
 		forest: "#2E6B47",
 		border: "#4A4038"
-	};
-	if (theme === "vitrum") return {
-		btnFrom: "#C8343F",
-		btnTo: "#7A1E2C",
-		onAccent: "#FFFFFF",
-		bg: "radial-gradient(ellipse 95% 50% at 12% -6%, rgba(217,56,74,0.46) 0%, transparent 64%), radial-gradient(ellipse 80% 45% at 108% 32%, rgba(84,132,255,0.30) 0%, transparent 66%), radial-gradient(ellipse 100% 55% at -5% 104%, rgba(38,200,186,0.24) 0%, transparent 66%), linear-gradient(168deg, #16204A 0%, #0D1430 52%, #0A0F24 100%)",
-		bg2: "rgba(255,255,255,0.04)",
-		card: "rgba(255,255,255,0.07)",
-		ink: "#F2F4F8",
-		muted: "#A3A7B0",
-		moon: "#F0ECD8",
-		blood: "#FF8A70",
-		forest: "#6BC494",
-		border: "rgba(255,255,255,0.12)"
 	};
 	if (theme === "noir") return {
 		btnFrom: "#C9C9C9",
@@ -48047,7 +47792,7 @@ function wolfPageShellStyle(theme) {
 	const wt = wolfTokens(theme);
 	return {
 		minHeight: "100vh",
-		background: theme === "vitrum" ? wt.bg : `radial-gradient(ellipse at 50% -10%, ${wt.bg2} 0%, ${wt.bg} 65%)`,
+		background: `radial-gradient(ellipse at 50% -10%, ${wt.bg2} 0%, ${wt.bg} 65%)`,
 		padding: "20px 12px 32px"
 	};
 }
@@ -48064,19 +47809,6 @@ function mafiaTokens(theme) {
 		gold: "#8A6B2E",
 		blood: "#7A1F24",
 		border: "#4A3830"
-	};
-	if (theme === "vitrum") return {
-		btnFrom: "#C23A42",
-		btnTo: "#4A1015",
-		onAccent: "#FFFFFF",
-		bg: "radial-gradient(ellipse 95% 50% at 12% -6%, rgba(201,161,92,0.46) 0%, transparent 64%), radial-gradient(ellipse 80% 45% at 108% 32%, rgba(84,132,255,0.30) 0%, transparent 66%), radial-gradient(ellipse 100% 55% at -5% 104%, rgba(38,200,186,0.24) 0%, transparent 66%), linear-gradient(168deg, #16204A 0%, #0D1430 52%, #0A0F24 100%)",
-		bg2: "rgba(255,255,255,0.04)",
-		card: "rgba(255,255,255,0.07)",
-		ink: "#F2F4F8",
-		muted: "#A3A7B0",
-		gold: "#E4BC7C",
-		blood: "#E4626A",
-		border: "rgba(255,255,255,0.12)"
 	};
 	if (theme === "noir") return {
 		btnFrom: "#6B6B6B",
@@ -48109,7 +47841,7 @@ function mafiaPageShellStyle(theme) {
 	const mt = mafiaTokens(theme);
 	return {
 		minHeight: "100vh",
-		background: theme === "vitrum" ? mt.bg : `radial-gradient(ellipse at 50% -10%, ${mt.bg2} 0%, ${mt.bg} 65%)`,
+		background: `radial-gradient(ellipse at 50% -10%, ${mt.bg2} 0%, ${mt.bg} 65%)`,
 		padding: "20px 12px 32px"
 	};
 }
@@ -48130,23 +47862,6 @@ function tabuTokens(theme) {
 		red: "#C53748",
 		green: "#237A5C",
 		border: "#4A4038"
-	};
-	if (theme === "vitrum") return {
-		btnFrom: "#F5D875",
-		btnTo: "#E0A020",
-		onAccent: "#1A1408",
-		okFrom: "#7EEBBE",
-		okTo: "#22A876",
-		onOk: "#0D2119",
-		bg: "radial-gradient(ellipse 95% 50% at 12% -6%, rgba(255,201,60,0.46) 0%, transparent 64%), radial-gradient(ellipse 80% 45% at 108% 32%, rgba(84,132,255,0.30) 0%, transparent 66%), radial-gradient(ellipse 100% 55% at -5% 104%, rgba(38,200,186,0.24) 0%, transparent 66%), linear-gradient(168deg, #16204A 0%, #0D1430 52%, #0A0F24 100%)",
-		bg2: "rgba(255,255,255,0.04)",
-		card: "rgba(255,255,255,0.07)",
-		ink: "#F2F4F8",
-		muted: "#A3A7B0",
-		yellow: "#F5D875",
-		red: "#FF7A88",
-		green: "#7EEBBE",
-		border: "rgba(255,255,255,0.12)"
 	};
 	if (theme === "noir") return {
 		btnFrom: "#C9C9C9",
@@ -48187,7 +47902,7 @@ function tabuPageShellStyle(theme) {
 	const wt = tabuTokens(theme);
 	return {
 		minHeight: "100vh",
-		background: theme === "vitrum" ? wt.bg : `radial-gradient(ellipse at 50% -10%, ${wt.bg2} 0%, ${wt.bg} 65%)`,
+		background: `radial-gradient(ellipse at 50% -10%, ${wt.bg2} 0%, ${wt.bg} 65%)`,
 		padding: "20px 12px 32px"
 	};
 }
@@ -48208,23 +47923,6 @@ function headsupTokens(theme) {
 		blue: "#257496",
 		green: "#237A5C",
 		border: "#4A4038"
-	};
-	if (theme === "vitrum") return {
-		btnFrom: "#FF9E7C",
-		btnTo: "#F07E5C",
-		onAccent: "#1A0E06",
-		okFrom: "#7EEBBE",
-		okTo: "#22A876",
-		onOk: "#0D2119",
-		bg: "radial-gradient(ellipse 95% 50% at 12% -6%, rgba(108,127,232,0.46) 0%, transparent 64%), radial-gradient(ellipse 80% 45% at 108% 32%, rgba(84,132,255,0.30) 0%, transparent 66%), radial-gradient(ellipse 100% 55% at -5% 104%, rgba(38,200,186,0.24) 0%, transparent 66%), linear-gradient(168deg, #16204A 0%, #0D1430 52%, #0A0F24 100%)",
-		bg2: "rgba(255,255,255,0.04)",
-		card: "rgba(255,255,255,0.07)",
-		ink: "#F2F4F8",
-		muted: "#A3A7B0",
-		orange: "#FF9E7C",
-		blue: "#7CDCFF",
-		green: "#7EEBBE",
-		border: "rgba(255,255,255,0.12)"
 	};
 	if (theme === "noir") return {
 		btnFrom: "#C9C9C9",
@@ -48267,7 +47965,7 @@ function headsupPageShellStyle(theme, compact) {
 		minHeight: compact ? "100dvh" : "100vh",
 		height: compact ? "100dvh" : void 0,
 		boxSizing: "border-box",
-		background: theme === "vitrum" ? wt.bg : `radial-gradient(ellipse at 50% -10%, ${wt.bg2} 0%, ${wt.bg} 65%)`,
+		background: `radial-gradient(ellipse at 50% -10%, ${wt.bg2} 0%, ${wt.bg} 65%)`,
 		padding: compact ? "max(4px, env(safe-area-inset-top)) max(10px, env(safe-area-inset-right)) max(4px, env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left))" : "20px 12px 32px",
 		overflow: compact ? "hidden" : void 0
 	};
@@ -48285,19 +47983,6 @@ function skyjoTokens(theme) {
 		teal: "#157A64",
 		gold: "#83683B",
 		border: "#4A4038"
-	};
-	if (theme === "vitrum") return {
-		btnFrom: "#5EEBC4",
-		btnTo: "#13A382",
-		onAccent: "#062015",
-		bg: "radial-gradient(ellipse 95% 50% at 12% -6%, rgba(47,217,168,0.46) 0%, transparent 64%), radial-gradient(ellipse 80% 45% at 108% 32%, rgba(84,132,255,0.30) 0%, transparent 66%), radial-gradient(ellipse 100% 55% at -5% 104%, rgba(38,200,186,0.24) 0%, transparent 66%), linear-gradient(168deg, #16204A 0%, #0D1430 52%, #0A0F24 100%)",
-		bg2: "rgba(255,255,255,0.04)",
-		card: "rgba(255,255,255,0.07)",
-		ink: "#F2F4F8",
-		muted: "#A3A7B0",
-		teal: "#5EEBC4",
-		gold: "#E8CB93",
-		border: "rgba(255,255,255,0.12)"
 	};
 	if (theme === "noir") {
 		const ac = "#C9C9C9";
@@ -48333,7 +48018,7 @@ function skyjoPageShellStyle(theme) {
 	const sk = skyjoTokens(theme);
 	return {
 		minHeight: "100vh",
-		background: theme === "vitrum" ? sk.bg : `radial-gradient(ellipse at 50% -10%, ${sk.bg2} 0%, ${sk.bg} 65%)`,
+		background: `radial-gradient(ellipse at 50% -10%, ${sk.bg2} 0%, ${sk.bg} 65%)`,
 		padding: "20px 12px 32px"
 	};
 }
@@ -48351,20 +48036,6 @@ function flip7Tokens(theme) {
 		gold: "#8A6100",
 		bust: "#C0392B",
 		border: "#4A3018"
-	};
-	if (theme === "vitrum") return {
-		btnFrom: "#FF9E6E",
-		btnTo: "#F07A40",
-		onAccent: "#1A0E06",
-		bg: "radial-gradient(ellipse 95% 50% at 12% -6%, rgba(255,122,61,0.46) 0%, transparent 64%), radial-gradient(ellipse 80% 45% at 108% 32%, rgba(84,132,255,0.30) 0%, transparent 66%), radial-gradient(ellipse 100% 55% at -5% 104%, rgba(38,200,186,0.24) 0%, transparent 66%), linear-gradient(168deg, #16204A 0%, #0D1430 52%, #0A0F24 100%)",
-		bg2: "rgba(255,255,255,0.04)",
-		card: "rgba(255,255,255,0.07)",
-		ink: "#F2F4F8",
-		muted: "#A3A7B0",
-		flame: "#FF9E6E",
-		gold: "#FFD98C",
-		bust: "#FF8272",
-		border: "rgba(255,255,255,0.12)"
 	};
 	if (theme === "noir") {
 		const ac = "#C9C9C9";
@@ -48402,12 +48073,11 @@ function flip7PageShellStyle(theme) {
 	const fk = flip7Tokens(theme);
 	return {
 		minHeight: "100vh",
-		background: theme === "vitrum" ? fk.bg : `radial-gradient(ellipse at 50% -10%, ${fk.bg2} 0%, ${fk.bg} 65%)`,
+		background: `radial-gradient(ellipse at 50% -10%, ${fk.bg2} 0%, ${fk.bg} 65%)`,
 		padding: "20px 12px 32px"
 	};
 }
 function minigolfTokens(theme) {
-	const vbg = "radial-gradient(ellipse 95% 50% at 12% -6%, rgba(63,143,66,0.46) 0%, transparent 64%), radial-gradient(ellipse 80% 45% at 108% 32%, rgba(84,132,255,0.30) 0%, transparent 66%), radial-gradient(ellipse 100% 55% at -5% 104%, rgba(38,200,186,0.24) 0%, transparent 66%), linear-gradient(168deg, #16204A 0%, #0D1430 52%, #0A0F24 100%)";
 	if (theme === "light") return {
 		btnFrom: "#1F5A38",
 		btnTo: "#1F5A38",
@@ -48439,7 +48109,6 @@ function minigolfTokens(theme) {
 		err: "#B3261E",
 		shadow: "0 1px 2px rgba(18,38,27,0.05), 0 8px 22px -14px rgba(18,38,27,0.28)",
 		ctaShadow: "0 10px 24px -14px rgba(31,90,56,0.7)",
-		glass: false,
 		hues: [
 			"#2F6B52",
 			"#2E5C8A",
@@ -48449,49 +48118,6 @@ function minigolfTokens(theme) {
 			"#B24A3C",
 			"#5A6478",
 			"#1F7A66"
-		]
-	};
-	if (theme === "vitrum") return {
-		btnFrom: "#B5EBA0",
-		btnTo: "#B5EBA0",
-		onAccent: "#0E1A12",
-		bg: vbg,
-		bg2: "rgba(255,255,255,0.04)",
-		card: "rgba(255,255,255,0.07)",
-		ink: "#F2F4F8",
-		muted: "#B3BAC5",
-		green: "#7EEBA0",
-		gold: "#E8CB93",
-		border: "rgba(255,255,255,0.12)",
-		gridLine: "rgba(255,255,255,0.10)",
-		surf: "rgba(255,255,255,0.07)",
-		surf2: "rgba(255,255,255,0.05)",
-		line: "rgba(255,255,255,0.14)",
-		acc: "#B5EBA0",
-		onAcc: "#0E1A12",
-		accInk: "#B5EBA0",
-		accSoft: "rgba(181,235,160,0.12)",
-		segBg: "rgba(181,235,160,0.92)",
-		segInk: "#0E1A12",
-		track: "rgba(255,255,255,0.13)",
-		ctrl: "rgba(255,255,255,0.06)",
-		ctrlLine: "rgba(255,255,255,0.22)",
-		flag: "#F08A7E",
-		accLine: "rgba(181,235,160,0.5)",
-		solid: "#18213F",
-		err: "#FF8A80",
-		shadow: "none",
-		ctaShadow: "0 10px 26px -14px rgba(126,235,160,0.55)",
-		glass: true,
-		hues: [
-			"#7EEBA0",
-			"#8FB4E0",
-			"#E8CB93",
-			"#D4AEE8",
-			"#7EDCDC",
-			"#F0A896",
-			"#B8BED0",
-			"#7ED4C4"
 		]
 	};
 	if (theme === "noir") {
@@ -48527,7 +48153,6 @@ function minigolfTokens(theme) {
 			err: "#FF8A80",
 			shadow: "none",
 			ctaShadow: "none",
-			glass: false,
 			hues: [
 				"#E0E0E0",
 				"#B8B8B8",
@@ -48571,7 +48196,6 @@ function minigolfTokens(theme) {
 		err: "#FF8A80",
 		shadow: "0 1px 0 rgba(255,255,255,0.03) inset, 0 10px 24px -16px rgba(0,0,0,0.7)",
 		ctaShadow: "0 10px 26px -14px rgba(200,244,91,0.45)",
-		glass: false,
 		hues: [
 			"#5FBE5D",
 			"#5B9BD5",
@@ -48588,7 +48212,7 @@ function minigolfPageShellStyle(theme) {
 	const mg = minigolfTokens(theme);
 	return {
 		minHeight: "100vh",
-		background: theme === "vitrum" ? mg.bg : `radial-gradient(ellipse at 50% -10%, ${mg.bg2} 0%, ${mg.bg} 65%)`,
+		background: `radial-gradient(ellipse at 50% -10%, ${mg.bg2} 0%, ${mg.bg} 65%)`,
 		padding: "20px 12px 32px"
 	};
 }
@@ -48608,22 +48232,6 @@ function fiveSecTokens(theme) {
 		orange: "#AC601E",
 		blue: "#34729C",
 		border: "#4A4038"
-	};
-	if (theme === "vitrum") return {
-		btnFrom: "#FFB57C",
-		btnTo: "#E8732E",
-		onAccent: "#2B1204",
-		blueFrom: "#8CD4F5",
-		blueTo: "#3A92CC",
-		onBlue: "#04182A",
-		bg: "radial-gradient(ellipse 95% 50% at 12% -6%, rgba(255,150,64,0.46) 0%, transparent 64%), radial-gradient(ellipse 80% 45% at 108% 32%, rgba(84,132,255,0.30) 0%, transparent 66%), radial-gradient(ellipse 100% 55% at -5% 104%, rgba(38,200,186,0.24) 0%, transparent 66%), linear-gradient(168deg, #16204A 0%, #0D1430 52%, #0A0F24 100%)",
-		bg2: "rgba(255,255,255,0.04)",
-		card: "rgba(255,255,255,0.07)",
-		ink: "#F2F4F8",
-		muted: "#A3A7B0",
-		orange: "#FFB57C",
-		blue: "#8CD4F5",
-		border: "rgba(255,255,255,0.12)"
 	};
 	if (theme === "noir") return {
 		btnFrom: "#C9C9C9",
@@ -48662,7 +48270,7 @@ function fiveSecPageShellStyle(theme) {
 	const fk = fiveSecTokens(theme);
 	return {
 		minHeight: "100vh",
-		background: theme === "vitrum" ? fk.bg : `radial-gradient(ellipse at 50% -10%, ${fk.bg2} 0%, ${fk.bg} 65%)`,
+		background: `radial-gradient(ellipse at 50% -10%, ${fk.bg2} 0%, ${fk.bg} 65%)`,
 		padding: "20px 12px 32px"
 	};
 }
@@ -48679,19 +48287,6 @@ function mostLikelyTokens(theme) {
 		purple: "#8653C0",
 		pink: "#B34187",
 		border: "#4A4038"
-	};
-	if (theme === "vitrum") return {
-		btnFrom: "#CFA0FF",
-		btnTo: "#B583F5",
-		onAccent: "#1A0B26",
-		bg: "radial-gradient(ellipse 95% 50% at 12% -6%, rgba(45,212,191,0.46) 0%, transparent 64%), radial-gradient(ellipse 80% 45% at 108% 32%, rgba(84,132,255,0.30) 0%, transparent 66%), radial-gradient(ellipse 100% 55% at -5% 104%, rgba(38,200,186,0.24) 0%, transparent 66%), linear-gradient(168deg, #16204A 0%, #0D1430 52%, #0A0F24 100%)",
-		bg2: "rgba(255,255,255,0.04)",
-		card: "rgba(255,255,255,0.07)",
-		ink: "#F2F4F8",
-		muted: "#A3A7B0",
-		purple: "#CFA0FF",
-		pink: "#FFA0DC",
-		border: "rgba(255,255,255,0.12)"
 	};
 	if (theme === "noir") return {
 		btnFrom: "#C9C9C9",
@@ -48724,7 +48319,7 @@ function mostLikelyPageShellStyle(theme) {
 	const mk = mostLikelyTokens(theme);
 	return {
 		minHeight: "100vh",
-		background: theme === "vitrum" ? mk.bg : `radial-gradient(ellipse at 50% -10%, ${mk.bg2} 0%, ${mk.bg} 65%)`,
+		background: `radial-gradient(ellipse at 50% -10%, ${mk.bg2} 0%, ${mk.bg} 65%)`,
 		padding: "20px 12px 32px"
 	};
 }
@@ -49024,13 +48619,6 @@ function jdTokens(theme) {
 		"hue-n": "#f26a5e",
 		tt: "#0e1328"
 	};
-	if (theme === "vitrum") return {
-		...dark,
-		bgs: "#0D1430",
-		s1: "rgba(255,255,255,0.08)",
-		s2: "rgba(255,255,255,0.12)",
-		mu: "#B4BBD0"
-	};
 	if (theme === "noir") return {
 		...dark,
 		bg: "#0A0A0A",
@@ -49078,7 +48666,7 @@ function JassTopBar({ title, subtitle, onBack, theme, t, onHome, rulesText, rule
 }
 function JassSetup({ players, setPlayers, onStart, t, theme }) {
 	const gtS = gtSkin(theme, shellTokens(theme), "jass-differenzler", {
-		card: theme === "light" ? "#FFFFFF" : theme === "noir" ? "#1E1E1E" : theme === "vitrum" ? void 0 : "#241C14",
+		card: theme === "light" ? "#FFFFFF" : theme === "noir" ? "#1E1E1E" : "#241C14",
 		ink: theme === "light" ? JASS_INK : theme === "noir" ? "#EDEDED" : "#F0E6D8"
 	});
 	const _JCARD = theme === "noir" ? "#1E1E1E" : JASS_CARD;
@@ -49256,7 +48844,7 @@ function JassEditorPanel({ editing, players, scores, category, onSave, onClose, 
 		"aria-hidden": "true"
 	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "jdp-slipw" }, /* @__PURE__ */ import_react.default.createElement("div", {
 		ref: slipRef,
-		className: "jdp-slip" + (theme === "vitrum" ? " gtL-glass-strong" : ""),
+		className: "jdp-slip",
 		role: "dialog",
 		"aria-label": category.label + jk + " · " + pname,
 		tabIndex: -1
@@ -49439,7 +49027,7 @@ function JassPlay({ players, scores, setScores, onResetSheet, onEditPlayers, onB
 	Object.keys(jd).forEach((k) => {
 		jdVars["--" + k] = jd[k];
 	});
-	const jdBg = theme === "vitrum" ? jassPageShellStyle(theme).background : "radial-gradient(ellipse at 50% -8%, " + jd.bg2 + " 0%, " + jd.bg + " 62%)";
+	const jdBg = "radial-gradient(ellipse at 50% -8%, " + jd.bg2 + " 0%, " + jd.bg + " 62%)";
 	const jasActs = (() => {
 		const cB = tk.border;
 		const cM = tk.muted;
@@ -49595,7 +49183,7 @@ function JassPlay({ players, scores, setScores, onResetSheet, onEditPlayers, onB
 			return /* @__PURE__ */ import_react.default.createElement("button", {
 				key: p.id,
 				type: "button",
-				className: "jdp-c gt-jd-cell" + tone + (isEd ? " ed" : "") + (isNx ? " nx" : "") + (theme === "vitrum" ? " gtL-glass-soft" : ""),
+				className: "jdp-c gt-jd-cell" + tone + (isEd ? " ed" : "") + (isNx ? " nx" : ""),
 				style: tone === " p" || tone === " n" ? { "--a": jdHeat(diff) } : void 0,
 				"data-jd-cell": p.id + "-" + cat.id,
 				"aria-haspopup": "dialog",
@@ -51408,7 +50996,7 @@ function MgSegmented({ tab, onTab, mg, t }) {
 	return /* @__PURE__ */ import_react.default.createElement("div", {
 		role: "tablist",
 		"aria-label": t("mgViewLabel"),
-		className: "mg-seg" + (mg.glass ? " gtL-glass-soft" : ""),
+		className: "mg-seg",
 		style: {
 			display: "flex",
 			gap: 4,
@@ -51447,7 +51035,6 @@ function MgHoleCard({ ui, hole, onGo, mg, t }) {
 	};
 	return /* @__PURE__ */ import_react.default.createElement("section", {
 		"aria-label": t("mgHoleOf")(hole + 1, 18),
-		className: mg.glass ? "gtL-glass" : void 0,
 		style: {
 			background: mg.surf,
 			border: "none",
@@ -51550,7 +51137,7 @@ function MgPlayerCard({ p, val, isDraft, missing, sofar, countNote, leads, onSte
 	const plusDis = has && val >= 7;
 	return /* @__PURE__ */ import_react.default.createElement("div", {
 		"data-mg-card": p.id,
-		className: "mgCard" + (mg.glass ? " gtL-glass-soft" : ""),
+		className: "mgCard",
 		style: {
 			background: leads ? `linear-gradient(${mg.accSoft}, ${mg.accSoft}), ${mg.surf}` : mg.surf,
 			border: `2px solid ${leads ? mg.acc : "transparent"}`,
@@ -51860,7 +51447,7 @@ function MgTable({ ui, hole, onCell, mg, t }) {
 	};
 	return /* @__PURE__ */ import_react.default.createElement("div", {
 		ref: wrapRef,
-		className: "mgTableWrap" + (mg.glass ? " gtL-glass" : ""),
+		className: "mgTableWrap",
 		role: "region",
 		"aria-label": t("mgTabTable"),
 		tabIndex: 0,
@@ -52053,7 +51640,6 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
 		};
 		status = info.missing.length === players.length ? t("mgEnterHint") : t("mgStillOpen")(names(info.missing));
 	}
-	const glassBar = theme === "vitrum";
 	const bar = /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "mgBar",
 		style: {
@@ -52062,13 +51648,7 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
 			zIndex: 5,
 			margin: "2px -12px 0",
 			padding: "8px 12px calc(6px + env(safe-area-inset-bottom))",
-			...glassBar ? {
-				background: "rgba(13,20,46,0.72)",
-				backdropFilter: "blur(16px) saturate(1.4)",
-				WebkitBackdropFilter: "blur(16px) saturate(1.4)",
-				borderRadius: "22px 22px 0 0",
-				borderTop: `1px solid ${mg.line}`
-			} : { background: `linear-gradient(180deg, ${mg.bg}00, ${mg.bg}F2 14px, ${mg.bg} 30%)` }
+			background: `linear-gradient(180deg, ${mg.bg}00, ${mg.bg}F2 14px, ${mg.bg} 30%)`
 		}
 	}, status && /* @__PURE__ */ import_react.default.createElement("div", {
 		id: "mg-status",
@@ -52184,7 +51764,7 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
 		fontFamily: MG_UI
 	});
 	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage mgGL mg-land pl-page pl-head-compact" + (theme === "vitrum" ? " vitrum-active" : ""),
+		className: "gtL-shellpage mgGL mg-land pl-page pl-head-compact",
 		style: {
 			...minigolfPageShellStyle(theme),
 			position: "relative",
@@ -52366,7 +51946,7 @@ function MinigolfGame({ state, setState, onBack, onHome, onEndGame, lang = "de",
 		phase: "setup"
 	}));
 	if (state.phase === "setup") return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage" + (theme === "vitrum" ? " vitrum-active" : ""),
+		className: "gtL-shellpage",
 		style: minigolfPageShellStyle(theme)
 	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-page gtL-game",
@@ -52569,13 +52149,13 @@ function useGtWakeLock(view) {
 	}, [on]);
 }
 function gtYatzyBonusCell(card, val, theme, t, muted) {
-	const V = theme === "vitrum", N = theme === "noir";
+	const N = theme === "noir";
 	const sum = yatzyUpperSum(card || {});
 	if (val > 0) return /* @__PURE__ */ import_react.default.createElement("span", {
 		title: t("bonusReachedLabel"),
 		"aria-label": t("bonusReachedLabel") + ": " + val,
 		style: {
-			color: N ? "#FFFFFF" : V ? "#7BE495" : theme === "light" ? "#237A33" : "#4CC261",
+			color: N ? "#FFFFFF" : theme === "light" ? "#237A33" : "#4CC261",
 			fontWeight: 800
 		}
 	}, "+" + val);
@@ -52590,7 +52170,7 @@ function gtYatzyBonusCell(card, val, theme, t, muted) {
 		}
 	}, val);
 	const close = need <= open.reduce((s, c) => s + 3 * c.face, 0);
-	const col = close ? N ? "#D9D9D9" : V ? "#F4C86A" : theme === "light" ? "#8A5300" : "#E0A84A" : V ? "rgba(242,244,255,0.62)" : muted;
+	const col = close ? N ? "#D9D9D9" : theme === "light" ? "#8A5300" : "#E0A84A" : muted;
 	return /* @__PURE__ */ import_react.default.createElement("span", {
 		title: t("bonusToGo")(need),
 		"aria-label": t("bonusToGo")(need),
@@ -53681,9 +53261,7 @@ function SkyjoNumPad({ player, initialValue, onConfirm, onClose, theme, t, sk, o
 			outline: "none",
 			width: "100%",
 			maxWidth: 420,
-			backdropFilter: theme === "vitrum" ? "blur(30px) saturate(150%)" : void 0,
-			WebkitBackdropFilter: theme === "vitrum" ? "blur(30px) saturate(150%)" : void 0,
-			background: theme === "vitrum" ? "rgba(22,25,33,0.72)" : sk.card,
+			background: sk.card,
 			borderRadius: "24px 24px 0 0",
 			padding: "18px 18px calc(18px + env(safe-area-inset-bottom))",
 			boxShadow: "0 -8px 30px rgba(0,0,0,0.35)"
@@ -53918,7 +53496,7 @@ function SkyjoRoundEntry({ players, initialScores, isEdit, onSave, onCancel, the
 				setPadInstant(false);
 				setPadPlayerId(p.id);
 			},
-			className: "press-fx gtL-entryrow gt-ug-row" + (theme === "vitrum" ? " gtL-glass-flat" : ""),
+			className: "press-fx gtL-entryrow gt-ug-row",
 			style: {
 				display: "flex",
 				alignItems: "center",
@@ -55281,12 +54859,12 @@ function s8Tok(theme, c) {
 		red: "#EDEDED",
 		border: "#454545"
 	};
-	return { ...theme === "light" ? c.l : theme === "vitrum" ? c.v : c.d };
+	return { ...theme === "light" ? c.l : c.d };
 }
 function s8Shell(theme, tk) {
 	return {
 		minHeight: "100vh",
-		background: theme === "vitrum" ? tk.bg : `radial-gradient(ellipse at 50% -10%, ${tk.bg2} 0%, ${tk.bg} 65%)`,
+		background: `radial-gradient(ellipse at 50% -10%, ${tk.bg2} 0%, ${tk.bg} 65%)`,
 		padding: "20px 12px 32px"
 	};
 }
@@ -61520,7 +61098,7 @@ function ImpostorSetup({ state, setState, onStart, theme, lang, t }) {
 	const wt = gtSoftTk(impostorTokens(theme), theme);
 	const gtS = gtSkin(theme, wt, "impostor", {
 		font: IMP_FONT,
-		acc: theme === "noir" ? wt.red : theme === "vitrum" ? "#E8A0F5" : theme === "light" ? "#982DB3" : void 0
+		acc: theme === "noir" ? wt.red : theme === "light" ? "#982DB3" : void 0
 	});
 	const [, gtBump] = useState$11(0);
 	const { players, categoryIds, discussSeconds } = state;
@@ -63384,15 +62962,12 @@ function TrtSide({ players, r, tk, t, theme }) {
 		flexDirection: "column",
 		gap: 12,
 		marginTop: 18
-	} }, /* @__PURE__ */ import_react.default.createElement("div", {
-		className: theme === "vitrum" ? "gtL-glass-soft" : void 0,
-		style: {
-			background: tk.card,
-			border: `1px solid ${tk.border}`,
-			borderRadius: 20,
-			padding: "12px 14px"
-		}
-	}, s8Lbl(tk, t("trtAlive") + " (" + alive.length + ")"), /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		background: tk.card,
+		border: `1px solid ${tk.border}`,
+		borderRadius: 20,
+		padding: "12px 14px"
+	} }, s8Lbl(tk, t("trtAlive") + " (" + alive.length + ")"), /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		flexWrap: "wrap",
 		gap: 6
@@ -67827,20 +67402,17 @@ var start_bits_exports = /* @__PURE__ */ __exportAll({
 });
 function GtStatsEmpty({ tk, t, theme, onStart }) {
 	const g = tk.gold;
-	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: theme === "vitrum" ? "gtL-glass-soft" : void 0,
-		style: {
-			border: `1px solid ${tk.border}`,
-			borderRadius: 16,
-			padding: "22px 18px 18px",
-			background: tk.card,
-			display: "flex",
-			flexDirection: "column",
-			alignItems: "center",
-			textAlign: "center",
-			gap: 12
-		}
-	}, /* @__PURE__ */ import_react.default.createElement("svg", {
+	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		border: `1px solid ${tk.border}`,
+		borderRadius: 16,
+		padding: "22px 18px 18px",
+		background: tk.card,
+		display: "flex",
+		flexDirection: "column",
+		alignItems: "center",
+		textAlign: "center",
+		gap: 12
+	} }, /* @__PURE__ */ import_react.default.createElement("svg", {
 		width: 112,
 		height: 76,
 		viewBox: "0 0 112 76",
@@ -67919,7 +67491,7 @@ function GtStatsHeadBtn({ tk, t, theme, onClick }) {
 	return /* @__PURE__ */ import_react.default.createElement("button", {
 		type: "button",
 		onClick,
-		className: "press-fx gt-hit gtL-statsbtn" + (theme === "vitrum" ? " gtL-glass-soft" : ""),
+		className: "press-fx gt-hit gtL-statsbtn",
 		"aria-label": t("statsTitle"),
 		style: {
 			display: "flex",
@@ -67954,7 +67526,7 @@ function CategoryScorepads({ onSelect, onBack, lang, theme, tuttoTarget, tuttoPr
 	const t = useT(lang);
 	const tk = shellTokens(theme);
 	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage pl-app pl-head-compact" + (theme === "vitrum" ? " vitrum-active" : ""),
+		className: "gtL-shellpage pl-app pl-head-compact",
 		style: {
 			minHeight: "100vh",
 			background: tk.pageBg,
@@ -68111,7 +67683,7 @@ function CategoryPartyGames({ onSelect, onBack, lang, theme, impostorProgress, w
 	const t = useT(lang);
 	const tk = shellTokens(theme);
 	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage pl-app pl-head-compact" + (theme === "vitrum" ? " vitrum-active" : ""),
+		className: "gtL-shellpage pl-app pl-head-compact",
 		style: {
 			minHeight: "100vh",
 			background: tk.pageBg,
@@ -68276,7 +67848,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.07-12";
+var APP_BUILD = "2026.11.07-13";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -68741,10 +68313,10 @@ function SettingsPage({ onBack, onReplayTour, lang, setLang, theme, setTheme, vi
 		}
 	];
 	const currentLang = LANGS.find((l) => l.id === lang) || LANGS[0];
-	const L = theme === "light", N = theme === "noir", V = theme === "vitrum";
+	const L = theme === "light", N = theme === "noir";
 	const onFill = L ? "#FFFFFF" : N ? "#0A0A0A" : tk.gold;
 	const selBg = L ? "#1A1D20" : N ? tk.gold : `${tk.gold}2E`;
-	const track = V ? "rgba(0,0,0,0.26)" : tk.pageBg2;
+	const track = tk.pageBg2;
 	const dangerInk = N ? tk.ink : L ? "#B3141D" : "#FF8A8A";
 	const dangerSoft = N ? tk.muted : L ? "#B3141D" : "#E39A9F";
 	const dangerFill = N ? tk.ink : "#D6202A";
@@ -68821,10 +68393,10 @@ function SettingsPage({ onBack, onReplayTour, lang, setLang, theme, setTheme, vi
 		borderRadius: 18,
 		background: tk.card,
 		overflow: "hidden",
-		border: V || N ? `1px solid ${tk.border}` : "none",
+		border: N ? `1px solid ${tk.border}` : "none",
 		boxShadow: L ? "0 1px 2px rgba(26,29,32,0.08)" : "none"
 	};
-	const cardCls = "st-card" + (V ? " gtL-glass" : "");
+	const cardCls = "st-card";
 	const sw = (o, first) => {
 		const on = o.on;
 		return /* @__PURE__ */ import_react.default.createElement("button", {
@@ -68868,7 +68440,7 @@ function SettingsPage({ onBack, onReplayTour, lang, setLang, theme, setTheme, vi
 	const note = confirmingEndAll ? t("endAllHint") : confirmingStatsReset ? t("statsResetHint") : endAllMsg;
 	const css = ".st-page{--st-gold:" + tk.gold + ";min-height:100dvh;box-sizing:border-box;display:flex;flex-direction:column}@media (display-mode: standalone){.st-page{min-height:100vh}}.st-inner{flex:1;display:flex;flex-direction:column;gap:12px;width:100%;max-width:380px;margin:0 auto;min-height:0}.st-cards{display:flex;flex-direction:column;gap:12px;flex:none}.st-btn{-webkit-tap-highlight-color:transparent;transition:opacity .12s ease,background .2s ease,color .2s ease}.st-btn:active{opacity:.62}.st-btn:focus-visible,.st-row:has(select:focus-visible){outline:2px solid var(--st-gold);outline-offset:-2px}.st-segbtn:focus-visible{outline-offset:1px}.st-head{display:flex;align-items:center;height:44px;padding:0 16px;border-radius:22px;align-self:flex-start;font-size:14px;font-weight:600;border:none;cursor:pointer;font-family:'Inter',sans-serif;flex:none}.st-title{font-family:'Baloo 2',sans-serif;font-size:30px;font-weight:800;line-height:1;margin:0;flex:none}.st-fill{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;text-align:center}.st-foot{display:flex;justify-content:center;gap:6px;flex:none}.st-foot button{min-height:44px;padding:0 12px;border:none;background:transparent;font-size:13px;cursor:pointer;font-family:'Inter',sans-serif}@media (max-height:700px){.st-page{padding-top:8px!important;padding-bottom:4px!important}.st-inner,.st-cards{gap:8px}.st-title{font-size:26px}.st-row{min-height:44px!important}.st-foot button{min-height:44px}}@media (prefers-reduced-motion: reduce){.st-btn,.st-btn *{transition:none!important}}.gtL-content .st-page{min-height:100%}.gtL-content .st-inner{max-width:900px}.gtL-content .st-cards{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px 24px;align-items:start}.gtL-content .st-fill{flex:none;margin-top:8px}@media (max-width:1099px){.gtL-content .st-inner{max-width:560px}.gtL-content .st-cards{grid-template-columns:minmax(0,1fr)}}[data-phone-landscape] .st-page{padding-left:var(--pl-gutter-l,14px)!important;padding-right:var(--pl-gutter-r,14px)!important}[data-phone-landscape] .st-inner{max-width:none}[data-phone-landscape] .st-cards{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px 16px;align-items:start}[data-phone-landscape] .st-title{font-size:24px}";
 	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage pl-app st-page" + (V ? " vitrum-active" : ""),
+		className: "gtL-shellpage pl-app st-page",
 		style: {
 			background: tk.pageBg,
 			color: tk.ink,
@@ -68881,7 +68453,7 @@ function SettingsPage({ onBack, onReplayTour, lang, setLang, theme, setTheme, vi
 		style: {
 			background: tk.card,
 			color: tk.ink,
-			border: V || N ? `1px solid ${tk.border}` : "none"
+			border: N ? `1px solid ${tk.border}` : "none"
 		}
 	}, t("backToStart")), /* @__PURE__ */ import_react.default.createElement("h1", {
 		className: "st-title",
@@ -68936,14 +68508,10 @@ function SettingsPage({ onBack, onReplayTour, lang, setLang, theme, setTheme, vi
 			label: t("lightMode")
 		},
 		{
-			id: "vitrum",
-			label: t("vitrumMode")
-		},
-		{
 			id: "noir",
 			label: t("noirMode")
 		}
-	], theme, (e, id) => gtThemeSwitch(e, id, setTheme, theme), 4)), /* @__PURE__ */ import_react.default.createElement("div", {
+	], theme, (e, id) => gtThemeSwitch(e, id, setTheme, theme), 3)), /* @__PURE__ */ import_react.default.createElement("div", {
 		role: "group",
 		"aria-label": t("viewModeLabel"),
 		style: {
@@ -74257,7 +73825,7 @@ function MafiaSetup({ state, setState, onStart, theme, lang, t }) {
 	} }, /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		fontSize: 20,
 		fontWeight: 800,
-		color: theme === "light" || theme === "vitrum" || theme === "noir" ? mt.blood : "#E4626A",
+		color: theme === "light" || theme === "noir" ? mt.blood : "#E4626A",
 		fontFamily: MAFIA_FONT
 	} }, mCount), /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		fontSize: 11,
@@ -95652,9 +95220,7 @@ function Flip7RoundPad({ player, initial, onConfirm, onClose, theme, t, onAdvanc
 			outline: "none",
 			width: "100%",
 			maxWidth: 420,
-			backdropFilter: theme === "vitrum" ? "blur(30px) saturate(150%)" : void 0,
-			WebkitBackdropFilter: theme === "vitrum" ? "blur(30px) saturate(150%)" : void 0,
-			background: theme === "vitrum" ? "rgba(22,25,33,0.72)" : fk.card,
+			background: fk.card,
 			borderRadius: "24px 24px 0 0",
 			padding: "18px 18px calc(18px + env(safe-area-inset-bottom))",
 			boxShadow: "0 -8px 30px rgba(0,0,0,0.4)",
@@ -103467,7 +103033,6 @@ function StatsGameChart({ perGame, tk, t }) {
 	}));
 }
 function StatsMatchRow({ match, highlightNorm, tk, t, lang, onDelete, theme }) {
-	const isVitrum = theme === "vitrum";
 	const me = highlightNorm ? match.participants.find((p) => p.norm === highlightNorm && p.isTeam !== true) : null;
 	const isWin = me && (match.winner || Array.isArray(match.winners) && match.winners.length) ? gtWon(match, me.norm) : null;
 	const others = match.participants.filter((p) => p !== me).map((p) => p.name).join(" · ");
@@ -103482,19 +103047,16 @@ function StatsMatchRow({ match, highlightNorm, tk, t, lang, onDelete, theme }) {
 		}
 		onDelete && onDelete(match.id);
 	};
-	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: isVitrum ? "gtL-glass-soft" : void 0,
-		style: {
-			border: `1px solid ${confirming ? "#D9534F" : tk.border}`,
-			borderRadius: 14,
-			padding: "10px 12px",
-			background: tk.card,
-			display: "flex",
-			flexDirection: "column",
-			gap: 4,
-			position: "relative"
-		}
-	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		border: `1px solid ${confirming ? "#D9534F" : tk.border}`,
+		borderRadius: 14,
+		padding: "10px 12px",
+		background: tk.card,
+		display: "flex",
+		flexDirection: "column",
+		gap: 4,
+		position: "relative"
+	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		justifyContent: "space-between",
 		alignItems: "center",
@@ -103575,10 +103137,9 @@ async function renderPlayerCardCanvas(stats, rivalries, t, appSubtitle, appTheme
 	const accent = stats.personTitle && stats.personTitle.color || "#E0BA72";
 	const isNoirCard = appTheme === "noir";
 	const isLightCard = appTheme === "light";
-	const isVitrumCard = appTheme === "vitrum";
 	const glowRgb = hexToRgb(accent);
-	const bgFrom = isNoirCard ? "#141414" : isVitrumCard ? "#241C3A" : isLightCard ? "#FFFFFF" : "#171225";
-	const bgTo = isNoirCard ? "#0A0A0A" : isVitrumCard ? "#0D0A16" : isLightCard ? "#E7E3D6" : "#0A0810";
+	const bgFrom = isNoirCard ? "#141414" : isLightCard ? "#FFFFFF" : "#171225";
+	const bgTo = isNoirCard ? "#0A0A0A" : isLightCard ? "#E7E3D6" : "#0A0810";
 	const ovl = isLightCard ? "20,20,25" : "255,255,255";
 	const heroText = isLightCard ? "#1A1D20" : "#FFFFFF";
 	const scrimRGB = isLightCard ? "255,255,255" : "0,0,0";
@@ -103889,18 +103450,6 @@ function gtYrPal(theme) {
 		glow: .12,
 		onAcc: "#FFFFFF",
 		gold: "#8F6418"
-	};
-	if (theme === "vitrum") return {
-		bg: "#0D1430",
-		bg2: "#0A0F24",
-		ink: "#F2F4F8",
-		muted: "rgba(242,244,248,0.7)",
-		line: "rgba(255,255,255,0.18)",
-		chip: "rgba(255,255,255,0.09)",
-		glow: .3,
-		onAcc: "#1A1408",
-		gold: "#E0C589",
-		vit: 1
 	};
 	if (theme === "noir") return {
 		bg: "#0A0A0A",
@@ -104810,7 +104359,7 @@ function gtSbText(c, bg, min) {
 }
 function gtSbLook(theme, gameId) {
 	const rt = resultTheme(gameId);
-	const th = theme === "light" || theme === "vitrum" || theme === "noir" ? theme : "dark";
+	const th = theme === "light" || theme === "noir" ? theme : "dark";
 	const acc = th === "noir" ? noirAccent(gameId) : GT_SB_ACC[gameId] || rt.accent;
 	const L = th === "light" ? {
 		bg: "linear-gradient(165deg, #FFFFFF 0%, #F7F5EF 45%, #ECE8DD 100%)",
@@ -104860,30 +104409,6 @@ function gtSbLook(theme, gameId) {
 		btn: "rgba(255,255,255,0.04)",
 		close: "rgba(255,255,255,0.1)",
 		scrim: "rgba(0,0,0,0.8)"
-	} : th === "vitrum" ? {
-		bg: `linear-gradient(165deg, ${shadeHex(rt.bgFrom, .08)} 0%, ${rt.bgFrom} 35%, ${rt.bgTo} 100%)`,
-		ref: "#1A1D27",
-		ink: rt.ink,
-		sub: "#BFC3D6",
-		base: "#433F58",
-		ghost: "rgba(255,255,255,0.07)",
-		ghostLid: "rgba(255,255,255,0.08)",
-		edge: "rgba(255,255,255,0.16)",
-		num: "#F0EBF2",
-		numSh: "0 -1px 0 rgba(255,255,255,0.4), 0 2px 0 rgba(0,0,0,0.3), 0 5px 10px rgba(0,0,0,0.3)",
-		shadow: "rgba(0,0,0,0.6)",
-		ground: "rgba(0,0,0,0.5)",
-		fl: .2,
-		fr: .34,
-		hl: .16,
-		bev: .2,
-		bdk: .4,
-		lidSh: .3,
-		ridge: .18,
-		sep: "rgba(255,255,255,0.09)",
-		btn: "rgba(255,255,255,0.06)",
-		close: "rgba(255,255,255,0.12)",
-		scrim: "rgba(6,6,10,0.6)"
 	} : {
 		bg: `linear-gradient(165deg, #272B32 0%, #1F2228 48%, #1A1C21 100%)`,
 		ref: "#1F2228",
@@ -105941,13 +105466,12 @@ function gtSt2Acc(theme, tk, game) {
 	return typeof STATS_GAME_COLORS !== "undefined" && STATS_GAME_COLORS[game] || tk.gold;
 }
 function gtSt2Look(theme) {
-	const L = theme === "light", V = theme === "vitrum", Nr = theme === "noir";
+	const L = theme === "light", Nr = theme === "noir";
 	return {
 		L,
-		V,
 		Nr,
 		track: L ? "#E9ECF0" : Nr ? "#161616" : "rgba(255,255,255,0.055)",
-		segOn: L ? "#FFFFFF" : Nr ? "#2A2A2A" : V ? "rgba(255,255,255,0.16)" : "rgba(255,255,255,0.11)",
+		segOn: L ? "#FFFFFF" : Nr ? "#2A2A2A" : "rgba(255,255,255,0.11)",
 		segSh: L ? "0 1px 2px rgba(20,24,32,0.12), 0 0 0 1px rgba(20,24,32,0.05)" : "0 1px 2px rgba(0,0,0,0.35)",
 		hover: L ? "rgba(20,24,32,0.035)" : "rgba(255,255,255,0.04)",
 		line: L ? "#E7EBF0" : Nr ? "#333333" : "rgba(255,255,255,0.08)",
@@ -106026,11 +105550,10 @@ function GtSt2Num({ v, suf }) {
 	const shown = Math.round(d == null ? n : d) + (suf || "");
 	return /* @__PURE__ */ import_react.default.createElement("span", { className: "gtSt2-num" }, /* @__PURE__ */ import_react.default.createElement("span", { "aria-hidden": true }, shown), /* @__PURE__ */ import_react.default.createElement("span", { className: "gtSt2-sr" }, Math.round(n) + (suf || "")));
 }
-function GtSt2Card({ theme, tk, children, style, className, glass, i, as, ...rest }) {
-	const V = theme === "vitrum";
+function GtSt2Card({ theme, tk, children, style, className, i, as, ...rest }) {
 	return import_react.default.createElement(as || "section", {
 		className: [
-			V ? glass || "gtL-glass-soft" : "",
+			"",
 			i != null ? "gtSt2-in" : "",
 			className || ""
 		].join(" ").trim() || void 0,
@@ -106619,7 +106142,7 @@ function GtSt2Highlights({ items, t, tk, theme, lk, acc, onOpen }) {
 			flexDirection: "column",
 			"--i": i
 		};
-		const cls = (theme === "vitrum" ? "gtL-glass-soft " : "") + "gtSt2-in";
+		const cls = "gtSt2-in";
 		return /* @__PURE__ */ import_react.default.createElement("div", {
 			key: i,
 			role: "listitem",
@@ -106646,11 +106169,10 @@ function GtSt2Highlights({ items, t, tk, theme, lk, acc, onOpen }) {
 function GtSt2YearEntry({ year, yr, t, tk, theme, lk, onOpen }) {
 	if (!yr || !yr.cards || !yr.cards.length) return null;
 	const g = tk.gold;
-	const V = theme === "vitrum";
 	return /* @__PURE__ */ import_react.default.createElement("button", {
 		type: "button",
 		onClick: onOpen,
-		className: (V ? "gtL-glass " : "") + "gtSt2-btn gtSt2-in",
+		className: "gtSt2-btn gtSt2-in",
 		style: {
 			"--i": 1,
 			width: "100%",
@@ -106663,7 +106185,7 @@ function GtSt2YearEntry({ year, yr, t, tk, theme, lk, onOpen }) {
 			display: "flex",
 			alignItems: "center",
 			gap: 14,
-			background: V ? tk.card : lk.L ? `linear-gradient(135deg, ${g}14 0%, #FFFFFF 70%)` : `linear-gradient(135deg, ${g}26 0%, ${tk.card} 72%)`,
+			background: lk.L ? `linear-gradient(135deg, ${g}14 0%, #FFFFFF 70%)` : `linear-gradient(135deg, ${g}26 0%, ${tk.card} 72%)`,
 			position: "relative",
 			overflow: "hidden"
 		}
@@ -107333,7 +106855,7 @@ function GtSt2Stat({ theme, tk, title, value, text, icon, acc, lk, onClick, i, m
 		"--i": i || 0,
 		textAlign: "left"
 	};
-	const cls = (theme === "vitrum" ? "gtL-glass-soft " : "") + "gtSt2-in";
+	const cls = "gtSt2-in";
 	return onClick ? /* @__PURE__ */ import_react.default.createElement("button", {
 		type: "button",
 		onClick,
@@ -107354,8 +106876,8 @@ async function gtSt2ProfileCanvas(p, t, theme) {
 	c.width = W;
 	c.height = H;
 	const x = c.getContext("2d");
-	const L = theme === "light", Nr = theme === "noir", V = theme === "vitrum";
-	const bgA = L ? "#FFFFFF" : Nr ? "#1A1A1A" : V ? "#1F2A5E" : "#2A2E37", bgB = L ? "#ECE8DD" : Nr ? "#080808" : V ? "#0A0F24" : "#15171C";
+	const L = theme === "light", Nr = theme === "noir";
+	const bgA = L ? "#FFFFFF" : Nr ? "#1A1A1A" : "#2A2E37", bgB = L ? "#ECE8DD" : Nr ? "#080808" : "#15171C";
 	const ink = L ? "#1A1D20" : "#F6F2EA", ovl = L ? "20,24,32" : "255,255,255", acc = L ? "#8F6418" : Nr ? "#DADADA" : "#E0BA72";
 	const g = x.createLinearGradient(0, 0, 0, H);
 	g.addColorStop(0, bgA);
@@ -107817,7 +107339,6 @@ function GtSt2Profile({ pkey, matches, opts, people, t, tk, lk, theme, lang, acc
 	const hero = /* @__PURE__ */ import_react.default.createElement(GtSt2Card, {
 		theme,
 		tk,
-		glass: "gtL-glass",
 		i: 0,
 		style: {
 			padding: "18px 16px 16px",
@@ -108468,7 +107989,6 @@ function GtSt2Page({ onBack, lang, theme }) {
 		}, t("st2Ranking")), /* @__PURE__ */ import_react.default.createElement(GtSt2Card, {
 			theme,
 			tk,
-			glass: "gtL-glass",
 			i: 0,
 			style: { padding: "14px 12px 14px" }
 		}, rk.length ? /* @__PURE__ */ import_react.default.createElement(GtSt2Podium, {
@@ -108618,7 +108138,7 @@ function GtSt2Page({ onBack, lang, theme }) {
 	}
 	const pname = person && (model && model.names && model.names[person] || ((model && model.people || []).find((x) => x.key === person) || {}).name || person);
 	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage gtSt2 pl-app pl-head-compact" + (theme === "vitrum" ? " vitrum-active" : ""),
+		className: "gtL-shellpage gtSt2 pl-app pl-head-compact",
 		style: {
 			minHeight: "100vh",
 			background: tk.pageBg,
@@ -108952,13 +108472,12 @@ function RulesSheet({ open, onClose, title, text, tokens }) {
 	if (!idRef.current) idRef.current = "gt-rs-" + ++GT_RS_SEQ;
 	if (!open) return null;
 	const tk = tokens || {};
-	const VX = document.documentElement.getAttribute("data-gt-theme") === "vitrum";
 	return /* @__PURE__ */ import_react.default.createElement("div", {
 		onClick: onClose,
 		style: {
 			position: "fixed",
 			inset: 0,
-			background: VX ? "rgba(6,8,12,0.55)" : "rgba(0,0,0,0.5)",
+			background: "rgba(0,0,0,0.5)",
 			zIndex: 90,
 			display: "flex",
 			alignItems: "flex-end"
@@ -108969,7 +108488,7 @@ function RulesSheet({ open, onClose, title, text, tokens }) {
 		"aria-modal": "true",
 		"aria-labelledby": idRef.current,
 		onClick: (e) => e.stopPropagation(),
-		className: "gt-rules-box" + (VX ? " gtL-sheet-glass" : ""),
+		className: "gt-rules-box",
 		style: {
 			background: tk.cardElevated || tk.card,
 			borderRadius: "26px 26px 0 0",
@@ -109106,7 +108625,6 @@ function App() {
 			const o = [
 				"dark",
 				"light",
-				"vitrum",
 				"noir"
 			];
 			return o[(o.indexOf(v) + 1) % o.length];
@@ -109218,7 +108736,6 @@ function App() {
 					if ([
 						"dark",
 						"light",
-						"vitrum",
 						"noir"
 					].includes(saved.theme)) setTheme(saved.theme);
 					if (saved.viewMode === "mobile" || saved.viewMode === "laptop") setViewMode(saved.viewMode);
@@ -109508,7 +109025,7 @@ function App() {
 	useEffect$15(() => {
 		try {
 			const m = document.querySelector("meta[name=\"theme-color\"]");
-			const bar = theme === "light" ? "#F4EFE4" : theme === "noir" ? "#000000" : theme === "vitrum" ? "#1B1530" : "#12141C";
+			const bar = theme === "light" ? "#F4EFE4" : theme === "noir" ? "#000000" : "#12141C";
 			if (m) m.setAttribute("content", bar);
 			const bg = (shellTokens(theme) || {}).pageBg || bar;
 			document.documentElement.style.background = bar;
@@ -110160,7 +109677,6 @@ function App() {
 	if (effMode !== "laptop") return appContent;
 	const laptopTk = shellTokens(theme);
 	const lt = useT(lang);
-	const isVitrum = theme === "vitrum";
 	const isLight = theme === "light";
 	const navIcon = (id, color) => id === "stats" ? /* @__PURE__ */ import_react.default.createElement("svg", {
 		width: 19,
@@ -110263,7 +109779,7 @@ function App() {
 		splitscoreProgress
 	}, theme);
 	const sideMuted = isLight ? "#454E5A" : laptopTk.muted;
-	const sideBg = isVitrum ? "rgba(22,25,33,0.55)" : isLight ? "#EFEAE0" : theme === "noir" ? "#0E0E0E" : "#14161F";
+	const sideBg = isLight ? "#EFEAE0" : theme === "noir" ? "#0E0E0E" : "#14161F";
 	const navBtn = (id, label, icon, active, onClick) => /* @__PURE__ */ import_react.default.createElement("button", {
 		key: id,
 		onClick,
@@ -110474,9 +109990,7 @@ function App() {
 		"aria-label": lt("mainMenu"),
 		style: {
 			background: sideBg,
-			backdropFilter: isVitrum ? "blur(28px) saturate(160%)" : void 0,
-			WebkitBackdropFilter: isVitrum ? "blur(28px) saturate(160%)" : void 0,
-			borderRight: `1px solid ${isVitrum ? "rgba(255,255,255,0.10)" : laptopTk.border}`,
+			borderRight: `1px solid ${laptopTk.border}`,
 			padding: "22px 12px 16px",
 			display: "flex",
 			flexDirection: "column",
@@ -110810,18 +110324,17 @@ function yatzyFilledCount(card) {
 	return YATZY_ALL_IDS.filter((id) => card[id] !== null).length;
 }
 function yzPal(theme) {
-	const V = theme === "vitrum", N = theme === "noir", L = theme === "light";
+	const N = theme === "noir", L = theme === "light";
 	return {
-		v: V,
 		dark: !L,
-		card: N ? "#161616" : V ? "rgba(255,255,255,0.07)" : L ? "#FFFFFF" : "#1A1E2C",
-		panel: N ? "#1E1E1E" : V ? "rgba(255,255,255,0.07)" : L ? "#FFFFFF" : "#212741",
-		bg: N ? "#0A0A0A" : V ? "rgba(255,255,255,0.10)" : L ? "#F2F4F8" : "#272D45",
+		card: N ? "#161616" : L ? "#FFFFFF" : "#1A1E2C",
+		panel: N ? "#1E1E1E" : L ? "#FFFFFF" : "#212741",
+		bg: N ? "#0A0A0A" : L ? "#F2F4F8" : "#272D45",
 		ink: L ? "#151826" : N ? "#EDEDED" : "#F2F4F8",
-		muted: N ? "#A5A5A5" : V ? "#A3A7B0" : L ? "#4B5468" : "#AEB5C9",
-		border: N ? "#4A4A4A" : V ? "rgba(255,255,255,0.26)" : L ? "#333A4D" : "#5F6784",
+		muted: N ? "#A5A5A5" : L ? "#4B5468" : "#AEB5C9",
+		border: N ? "#4A4A4A" : L ? "#333A4D" : "#5F6784",
 		grid: L ? "#DDE2EE" : "rgba(255,255,255,0.07)",
-		acc: N ? noirAccent("yatzy") : V ? "#9DB7D8" : L ? "#5B5FEF" : "#8487FF",
+		acc: N ? noirAccent("yatzy") : L ? "#5B5FEF" : "#8487FF",
 		on: L ? "#FFFFFF" : N ? "#111111" : "#0F1220",
 		sum: L ? "#F2F4F8" : "rgba(255,255,255,0.045)",
 		hues: N ? [
@@ -110912,7 +110425,7 @@ var YATZY_HUES = [
 var YATZY_FONT = "'Space Grotesk', sans-serif";
 function YatzyTopBar({ subtitle, onBack, theme, t, onHome, rulesText, onEndGame, hideTitle }) {
 	const stage = shellTokens(theme);
-	const acc = theme === "noir" ? noirAccent("yatzy") : theme === "vitrum" ? "#9DB7D8" : theme === "light" ? "#4A4EDB" : "#8487FF";
+	const acc = theme === "noir" ? noirAccent("yatzy") : theme === "light" ? "#4A4EDB" : "#8487FF";
 	return /* @__PURE__ */ import_react.default.createElement(GameHeader, {
 		title: t("gameYatzy"),
 		subtitle,
@@ -110931,11 +110444,9 @@ function YatzyTopBar({ subtitle, onBack, theme, t, onHome, rulesText, onEndGame,
 function YatzySetup({ players, setPlayers, onStart, t, theme }) {
 	const gtS = gtSkin(theme, shellTokens(theme), "yatzy", {
 		font: YATZY_FONT,
-		acc: theme === "noir" ? "#C9C9C9" : theme === "vitrum" ? "#9DB7D8" : theme === "light" ? "#3D5E8C" : void 0
+		acc: theme === "noir" ? "#C9C9C9" : theme === "light" ? "#3D5E8C" : void 0
 	});
-	const _YP = yzPal(theme);
-	_YP.v;
-	const _YCARD = _YP.card;
+	const _YP = yzPal(theme), _YCARD = _YP.card;
 	_YP.bg;
 	const _YINK = _YP.ink, _YMUTED = _YP.muted, _YBORDER = _YP.border;
 	_YP.grid;
@@ -111027,7 +110538,7 @@ var YATZY_MAXV = {
 	chance: 30
 };
 function YatzyEditorPanel({ editing, players, scores, totals, category, onSave, onStrike, onClose, t, theme }) {
-	const _YP = yzPal(theme), _YV = _YP.v;
+	const _YP = yzPal(theme);
 	_YP.card;
 	const _YBG = _YP.bg, _YINK = _YP.ink, _YMUTED = _YP.muted;
 	_YP.border;
@@ -111101,7 +110612,7 @@ function YatzyEditorPanel({ editing, players, scores, totals, category, onSave, 
 		onSave(editing.playerId, editing.catId, v);
 	};
 	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: (_YV ? "gtL-editor gtL-sheet-glass" : "gtL-editor") + " yz-editor",
+		className: "gtL-editor yz-editor",
 		role: "dialog",
 		"aria-label": (player ? player.name : "") + " · " + catLabel,
 		style: {
@@ -111315,7 +110826,7 @@ function YatzyEditorPanel({ editing, players, scores, totals, category, onSave, 
 			border: currentValue === 0 ? `2px solid ${_YMUTED}` : "2px solid transparent",
 			borderRadius: 22,
 			background: _YBG,
-			color: theme === "noir" ? _YMUTED : _YV ? "#FF8F8A" : "#C0392B",
+			color: theme === "noir" ? _YMUTED : "#C0392B",
 			fontSize: 13,
 			fontWeight: 700,
 			cursor: "pointer",
@@ -111505,9 +111016,7 @@ function YatzyPlay({ onRematch, players, scores, setScores, onResetSheet, onEdit
 	}, [editing]);
 	const t = useT(lang);
 	const tk = shellTokens(theme);
-	const _YP = yzPal(theme);
-	_YP.v;
-	const _YCARD = _YP.card;
+	const _YP = yzPal(theme), _YCARD = _YP.card;
 	_YP.bg;
 	_YP.ink;
 	const _YMUTED = _YP.muted;
@@ -112237,7 +111746,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.07-12");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.07-13");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -112807,7 +112316,6 @@ function PodiumOverlay({ open, onClose, onRestart, extraAct, ranked, tk, t, best
 		};
 	});
 	const rest = ranked.slice(3);
-	const vit = theme === "vitrum";
 	return /* @__PURE__ */ import_react.default.createElement("div", {
 		onClick: () => {
 			if (gtP3Skip() || performance.now() - gtP3SkipAt < 700) return;
@@ -112833,7 +112341,7 @@ function PodiumOverlay({ open, onClose, onRestart, extraAct, ranked, tk, t, best
 		role: "dialog",
 		"aria-modal": "true",
 		"aria-label": (gameLabel ? gameLabel + " " : "") + t("podiumTitle"),
-		className: "gtsb-modal gtsb-" + sbPh + (sbPh === "fin" ? " gtsb-run" : "") + (vit ? " gtL-glass-strong" : ""),
+		className: "gtsb-modal gtsb-" + sbPh + (sbPh === "fin" ? " gtsb-run" : ""),
 		style: {
 			position: "relative",
 			width: "100%",
@@ -114503,7 +114011,6 @@ function gtNightSummary() {
 function GtNightCard({ tokens: tk, theme, t, full, onOpen, isLaptop }) {
 	const s = useMemo$9(() => gtNightSummary(), []);
 	if (!s || s.matches.length < 2) return null;
-	const V = theme === "vitrum";
 	const gold = tk.gold || "#E0BA72";
 	const F = "'Inter', sans-serif";
 	const champ = s.champs.length ? s.champs.slice(0, 3).map((r) => r.name).join(" & ") : null;
@@ -114626,7 +114133,7 @@ function GtNightCard({ tokens: tk, theme, t, full, onOpen, isLaptop }) {
 		boxSizing: "border-box",
 		textAlign: "left",
 		background: tk.card,
-		border: V ? void 0 : `1px solid ${tk.border}`,
+		border: `1px solid ${tk.border}`,
 		borderRadius: 16,
 		padding: full ? "14px 16px" : "10px 14px",
 		marginBottom: full ? 16 : 0,
@@ -114635,16 +114142,15 @@ function GtNightCard({ tokens: tk, theme, t, full, onOpen, isLaptop }) {
 		fontFamily: F,
 		cursor: onOpen ? "pointer" : "default"
 	};
-	const cls = V ? "gtL-glass-soft" : void 0;
 	if (onOpen) return /* @__PURE__ */ import_react.default.createElement("button", {
 		type: "button",
 		onClick: onOpen,
-		className: "press-fx gt-night-card" + (cls ? " " + cls : ""),
+		className: "press-fx gt-night-card",
 		"aria-label": t("nightTitle") + ", " + t("nightOpenStats"),
 		style
 	}, head, champRow, chips);
 	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gt-night-card" + (cls ? " " + cls : ""),
+		className: "gt-night-card",
 		style
 	}, head, champRow, chips, list);
 }
@@ -114821,7 +114327,7 @@ var UPDATE_TEXTS = {
 		"O GameTab foi atualizado"
 	]
 };
-var UPDATE_CSS = "\n.gtU-wrap{--u-bg:rgba(30,32,44,.9);--u-fg:#F3F4F8;--u-sub:rgba(243,244,248,.66);--u-bd:rgba(255,255,255,.12);--u-chip:rgba(255,255,255,.1);--u-btn:#F3F4F8;--u-btnfg:#12141C;--u-sh:0 18px 50px rgba(0,0,0,.5),0 2px 8px rgba(0,0,0,.3);position:fixed;left:0;right:0;bottom:calc(14px + env(safe-area-inset-bottom));z-index:2147483000;display:flex;justify-content:center;padding:0 16px;pointer-events:none;font-family:'Inter',sans-serif}\nhtml[data-gt-theme=\"light\"] .gtU-wrap{--u-bg:rgba(255,253,248,.96);--u-fg:#1B1B22;--u-sub:rgba(27,27,34,.62);--u-bd:rgba(0,0,0,.08);--u-chip:rgba(0,0,0,.06);--u-btn:#1B1B22;--u-btnfg:#fff;--u-sh:0 18px 44px rgba(40,30,10,.22),0 2px 8px rgba(40,30,10,.1)}\nhtml[data-gt-theme=\"vitrum\"] .gtU-wrap{--u-bg:rgba(22,25,33,.62);--u-fg:#F2F4F8;--u-sub:rgba(242,244,248,.66);--u-bd:rgba(255,255,255,.10);--u-chip:rgba(255,255,255,.08);--u-btn:#F2F4F8;--u-btnfg:#10131A;--u-sh:0 10px 30px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.18)}\nhtml[data-gt-theme=\"noir\"] .gtU-wrap{--u-bg:#0B0B0B;--u-fg:#F5F5F5;--u-sub:rgba(245,245,245,.6);--u-bd:rgba(255,255,255,.16);--u-chip:rgba(255,255,255,.09);--u-btn:#F5F5F5;--u-btnfg:#000;--u-sh:0 14px 40px rgba(0,0,0,.7)}\n.gtU-card{pointer-events:auto;position:relative;width:100%;max-width:440px;box-sizing:border-box;display:flex;flex-direction:column;gap:16px;padding:18px 18px 18px;border-radius:28px;color:var(--u-fg);background:var(--u-bg);border:1px solid var(--u-bd);box-shadow:var(--u-sh);-webkit-backdrop-filter:blur(22px) saturate(1.5);backdrop-filter:blur(22px) saturate(1.5);overflow:hidden;animation:gtU-in .6s cubic-bezier(.22,1.25,.36,1) both;will-change:transform,opacity}\nhtml[data-gt-theme=\"vitrum\"] .gtU-card{-webkit-backdrop-filter:blur(24px) saturate(1.6);backdrop-filter:blur(24px) saturate(1.6)}\n.gtU-card.is-out{animation:gtU-out .24s cubic-bezier(.4,0,1,1) both;pointer-events:none}\n.gtU-head{display:flex;align-items:center;gap:14px;padding-right:30px}\n.gtU-icon{width:48px;height:48px;flex-shrink:0;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--u-chip);color:var(--u-fg)}\n.gtU-icon svg{animation:gtU-turn 1s cubic-bezier(.23,1,.32,1) .3s 1 both}\n.gtU-card.is-busy .gtU-icon svg{animation:gtU-spin .8s linear infinite}\n.gtU-txt{min-width:0;flex:1}\n.gtU-title{font-family:'Baloo 2',sans-serif;font-size:21px;font-weight:800;line-height:1.1}\n.gtU-sub{font-size:14px;color:var(--u-sub);margin-top:4px;line-height:1.3}\n.gtU-btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:54px;border:none;border-radius:18px;cursor:pointer;font-family:'Baloo 2',sans-serif;font-size:18px;font-weight:800;color:var(--u-btnfg);background:var(--u-btn);transition:transform .16s cubic-bezier(.23,1,.32,1),opacity .2s;-webkit-tap-highlight-color:transparent}\n.gtU-btn:active{transform:scale(.97)}\n.gtU-card.is-busy .gtU-btn{opacity:.7;pointer-events:none}\n.gtU-x{position:absolute;top:6px;right:6px;width:44px;height:44px;border:none;border-radius:50%;background:transparent;color:var(--u-sub);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .16s,transform .16s cubic-bezier(.23,1,.32,1);-webkit-tap-highlight-color:transparent}\n.gtU-x:active{transform:scale(.9);background:var(--u-chip)}\n.gtU-bar{position:absolute;left:0;right:0;bottom:0;height:3px;overflow:hidden;opacity:0;transition:opacity .2s}\n.gtU-bar::after{content:\"\";position:absolute;top:0;bottom:0;width:40%;background:var(--u-fg);border-radius:2px;animation:gtU-sweep 1s cubic-bezier(.45,0,.2,1) infinite}\n.gtU-card.is-busy .gtU-bar{opacity:.85}\n.gtU-btn:focus-visible,.gtU-x:focus-visible{outline:2px solid var(--u-fg);outline-offset:2px}\n@media (min-width:900px){.gtU-wrap{justify-content:flex-end;padding:0 28px;bottom:28px}.gtU-card{max-width:420px}}\n@media (hover:hover){.gtU-btn:hover{opacity:.92}.gtU-x:hover{background:var(--u-chip)}}\n@keyframes gtU-in{from{opacity:0;transform:translateY(60px) scale(.96)}to{opacity:1;transform:none}}\n@keyframes gtU-out{to{opacity:0;transform:translateY(24px) scale(.97)}}\n@keyframes gtU-spin{to{transform:rotate(360deg)}}\n@keyframes gtU-turn{from{transform:rotate(-220deg);opacity:0}to{transform:rotate(0);opacity:1}}\n@keyframes gtU-sweep{from{transform:translateX(-100%)}to{transform:translateX(250%)}}\n@keyframes gtU-fade{to{opacity:0}}\n@media (prefers-reduced-motion: reduce){.gtU-card,.gtU-icon svg{animation:none!important}.gtU-card.is-out{animation:gtU-fade .15s linear both!important}.gtU-card.is-busy .gtU-icon svg{animation:none!important}.gtU-bar::after{animation:none;width:100%}.gtU-btn,.gtU-x{transition:none}}\n";
+var UPDATE_CSS = "\n.gtU-wrap{--u-bg:rgba(30,32,44,.9);--u-fg:#F3F4F8;--u-sub:rgba(243,244,248,.66);--u-bd:rgba(255,255,255,.12);--u-chip:rgba(255,255,255,.1);--u-btn:#F3F4F8;--u-btnfg:#12141C;--u-sh:0 18px 50px rgba(0,0,0,.5),0 2px 8px rgba(0,0,0,.3);position:fixed;left:0;right:0;bottom:calc(14px + env(safe-area-inset-bottom));z-index:2147483000;display:flex;justify-content:center;padding:0 16px;pointer-events:none;font-family:'Inter',sans-serif}\nhtml[data-gt-theme=\"light\"] .gtU-wrap{--u-bg:rgba(255,253,248,.96);--u-fg:#1B1B22;--u-sub:rgba(27,27,34,.62);--u-bd:rgba(0,0,0,.08);--u-chip:rgba(0,0,0,.06);--u-btn:#1B1B22;--u-btnfg:#fff;--u-sh:0 18px 44px rgba(40,30,10,.22),0 2px 8px rgba(40,30,10,.1)}\nhtml[data-gt-theme=\"noir\"] .gtU-wrap{--u-bg:#0B0B0B;--u-fg:#F5F5F5;--u-sub:rgba(245,245,245,.6);--u-bd:rgba(255,255,255,.16);--u-chip:rgba(255,255,255,.09);--u-btn:#F5F5F5;--u-btnfg:#000;--u-sh:0 14px 40px rgba(0,0,0,.7)}\n.gtU-card{pointer-events:auto;position:relative;width:100%;max-width:440px;box-sizing:border-box;display:flex;flex-direction:column;gap:16px;padding:18px 18px 18px;border-radius:28px;color:var(--u-fg);background:var(--u-bg);border:1px solid var(--u-bd);box-shadow:var(--u-sh);-webkit-backdrop-filter:blur(22px) saturate(1.5);backdrop-filter:blur(22px) saturate(1.5);overflow:hidden;animation:gtU-in .6s cubic-bezier(.22,1.25,.36,1) both;will-change:transform,opacity}\n.gtU-card.is-out{animation:gtU-out .24s cubic-bezier(.4,0,1,1) both;pointer-events:none}\n.gtU-head{display:flex;align-items:center;gap:14px;padding-right:30px}\n.gtU-icon{width:48px;height:48px;flex-shrink:0;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--u-chip);color:var(--u-fg)}\n.gtU-icon svg{animation:gtU-turn 1s cubic-bezier(.23,1,.32,1) .3s 1 both}\n.gtU-card.is-busy .gtU-icon svg{animation:gtU-spin .8s linear infinite}\n.gtU-txt{min-width:0;flex:1}\n.gtU-title{font-family:'Baloo 2',sans-serif;font-size:21px;font-weight:800;line-height:1.1}\n.gtU-sub{font-size:14px;color:var(--u-sub);margin-top:4px;line-height:1.3}\n.gtU-btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:54px;border:none;border-radius:18px;cursor:pointer;font-family:'Baloo 2',sans-serif;font-size:18px;font-weight:800;color:var(--u-btnfg);background:var(--u-btn);transition:transform .16s cubic-bezier(.23,1,.32,1),opacity .2s;-webkit-tap-highlight-color:transparent}\n.gtU-btn:active{transform:scale(.97)}\n.gtU-card.is-busy .gtU-btn{opacity:.7;pointer-events:none}\n.gtU-x{position:absolute;top:6px;right:6px;width:44px;height:44px;border:none;border-radius:50%;background:transparent;color:var(--u-sub);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .16s,transform .16s cubic-bezier(.23,1,.32,1);-webkit-tap-highlight-color:transparent}\n.gtU-x:active{transform:scale(.9);background:var(--u-chip)}\n.gtU-bar{position:absolute;left:0;right:0;bottom:0;height:3px;overflow:hidden;opacity:0;transition:opacity .2s}\n.gtU-bar::after{content:\"\";position:absolute;top:0;bottom:0;width:40%;background:var(--u-fg);border-radius:2px;animation:gtU-sweep 1s cubic-bezier(.45,0,.2,1) infinite}\n.gtU-card.is-busy .gtU-bar{opacity:.85}\n.gtU-btn:focus-visible,.gtU-x:focus-visible{outline:2px solid var(--u-fg);outline-offset:2px}\n@media (min-width:900px){.gtU-wrap{justify-content:flex-end;padding:0 28px;bottom:28px}.gtU-card{max-width:420px}}\n@media (hover:hover){.gtU-btn:hover{opacity:.92}.gtU-x:hover{background:var(--u-chip)}}\n@keyframes gtU-in{from{opacity:0;transform:translateY(60px) scale(.96)}to{opacity:1;transform:none}}\n@keyframes gtU-out{to{opacity:0;transform:translateY(24px) scale(.97)}}\n@keyframes gtU-spin{to{transform:rotate(360deg)}}\n@keyframes gtU-turn{from{transform:rotate(-220deg);opacity:0}to{transform:rotate(0);opacity:1}}\n@keyframes gtU-sweep{from{transform:translateX(-100%)}to{transform:translateX(250%)}}\n@keyframes gtU-fade{to{opacity:0}}\n@media (prefers-reduced-motion: reduce){.gtU-card,.gtU-icon svg{animation:none!important}.gtU-card.is-out{animation:gtU-fade .15s linear both!important}.gtU-card.is-busy .gtU-icon svg{animation:none!important}.gtU-bar::after{animation:none;width:100%}.gtU-btn,.gtU-x{transition:none}}\n";
 var GT_BUILD_KEY = "gametab-last-build";
 var GT_UPD_KEY = "gametab-update-clicked";
 function UpdateBanner() {
@@ -114843,7 +114349,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.07-12" && !upd) {
+		if (seen && seen !== "2026.11.07-13" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -114852,7 +114358,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.07-12" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.07-13" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

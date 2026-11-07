@@ -18787,7 +18787,7 @@ var palette_exports = /* @__PURE__ */ __exportAll({
 	PAGE_BG: () => PAGE_BG,
 	PAGE_BG_2: () => PAGE_BG_2,
 	PAPER_CREAM: () => PAPER_CREAM,
-	PIP: () => PIP$1,
+	PIP: () => PIP,
 	RADIUS: () => 24,
 	RADIUS_SM: () => 18,
 	playerHue: () => playerHue
@@ -18834,7 +18834,7 @@ var GRID_LINE = "#333A4A";
 var INK$10 = "#F0F1F5";
 var MUTED = "#8890A0";
 var DICE_BG = "#0D0F16";
-var PIP$1 = "#F0F1F5";
+var PIP = "#F0F1F5";
 var NEARBLACK = "#0B0C12";
 var PAPER_CREAM = "#F3EFE3";
 // web/src/assets/img/app-logo-gold.png
@@ -19171,17 +19171,17 @@ function YatzyLogo({ color }) {
 		cx: "5.5",
 		cy: "5.5",
 		r: "1.4",
-		fill: PIP$1
+		fill: PIP
 	}), /* @__PURE__ */ import_react.default.createElement("circle", {
 		cx: "14.5",
 		cy: "14.5",
 		r: "1.4",
-		fill: PIP$1
+		fill: PIP
 	}), /* @__PURE__ */ import_react.default.createElement("circle", {
 		cx: "23",
 		cy: "23",
 		r: "1.4",
-		fill: PIP$1
+		fill: PIP
 	}));
 }
 function WizardLogo({ color }) {
@@ -22025,14 +22025,14 @@ function DiePips({ rank, color }) {
 			width: 3.5,
 			height: 3.5,
 			borderRadius: "50%",
-			background: active.includes(i) ? PIP$1 : "transparent",
+			background: active.includes(i) ? PIP : "transparent",
 			justifySelf: "center",
 			alignSelf: "center"
 		}
 	})) : /* @__PURE__ */ import_react.default.createElement("span", { style: {
 		fontSize: 11,
 		fontWeight: 600,
-		color: PIP$1,
+		color: PIP,
 		fontFamily: "'Baloo 2', sans-serif"
 	} }, rank));
 }
@@ -68276,7 +68276,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.07-11";
+var APP_BUILD = "2026.11.07-12";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -110641,7 +110641,6 @@ function App() {
 }
 // web/src/games/yatzy/game.js
 var game_exports = /* @__PURE__ */ __exportAll({
-	RowCells: () => RowCells,
 	YATZY_ACCENT: () => YATZY_ACCENT,
 	YATZY_ALL_IDS: () => YATZY_ALL_IDS,
 	YATZY_BG: () => YATZY_BG,
@@ -110670,24 +110669,17 @@ var game_exports = /* @__PURE__ */ __exportAll({
 	yatzyUpperTotal: () => yatzyUpperTotal
 });
 var YZ_LAND_CSS = `
-[data-phone-landscape] .yz-land { padding-top: calc(var(--pl-sat) + 6px) !important; padding-bottom: calc(var(--pl-sab) + 8px) !important; }
-[data-phone-landscape] .yz-land.yz-editing :is(.yz-sheets, .yz-actions, .yz-win) { margin-right: calc(var(--yz-edw) + 10px + var(--pl-sar) - var(--pl-gutter-r)); }
-[data-phone-landscape] .yz-land { --yz-edw: clamp(264px, 40vw, 340px); }
-[data-phone-landscape] .yz-land .yz-paper { box-shadow: none !important; background: transparent !important; border: 0 !important; padding: 0 !important; }
-[data-phone-landscape] .yz-sheets { margin-top: 10px; flex-direction: row !important; align-items: flex-start; gap: 12px !important; overflow: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; max-height: max(180px, calc(var(--pl-body) - 72px)); border-radius: 20px; }
-[data-phone-landscape] .yz-sheet { overflow: visible !important; flex: 1 0 auto !important; width: max-content; min-width: 0; }
-[data-phone-landscape] .yz-grid { grid-template-columns: 92px repeat(var(--yz-n), minmax(60px, 1fr)) !important; min-width: calc(92px + var(--yz-n) * 60px) !important; width: auto !important; }
-[data-phone-landscape] .yz-th { padding: 7px 4px !important; }
-[data-phone-landscape] .yz-thn { font-size: 13px !important; }
-[data-phone-landscape] .yz-turn { font-size: 11px !important; }
-[data-phone-landscape] .yz-sec { font-size: 11px !important; padding: 6px 10px !important; }
-[data-phone-landscape] .yz-lab { min-height: 44px !important; font-size: 13px !important; padding: 4px 8px !important; }
-[data-phone-landscape] .yz-lab.yz-bold { font-size: 14px !important; }
-[data-phone-landscape] .yz-auto { min-height: 44px !important; }
-[data-phone-landscape] .yz-cell { min-height: 44px !important; min-width: 44px; font-size: 16px !important; }
+[data-phone-landscape] .yz-shell { padding-top: calc(var(--pl-sat) + 6px) !important; padding-bottom: calc(var(--pl-sab) + 6px) !important; }
+[data-phone-landscape] .yz-root { height: auto !important; min-height: 0 !important; --yz-rmin: 44px; --yz-rw: 44px; --yz-hh: 44px; --yz-sech: 28px; }
+[data-phone-landscape] .yz-word { font-size: 26px; }
+[data-phone-landscape] .yz-title { margin: 0 0 8px; }
+[data-phone-landscape] .yz-wrap { container-type: normal; flex: none; max-height: calc(var(--pl-body, 300px) - 40px); }
+[data-phone-landscape] .yz-hint { display: none; }
+[data-phone-landscape] .yz-paper { height: auto !important; }
+[data-phone-landscape] .yz-editing .yz-wrap { margin-right: calc(var(--yz-edw) + 10px + var(--pl-sar) - var(--pl-gutter-r)); }
+[data-phone-landscape] .yz-shell { --yz-edw: clamp(264px, 40vw, 340px); }
 [data-phone-landscape] .yz-actions { margin-top: 8px !important; }
 [data-phone-landscape] .yz-actions button { min-height: 44px !important; font-size: 12.5px !important; }
-[data-phone-landscape] .yz-hint { display: none; }
 [data-phone-landscape] .yz-editor { left: auto !important; right: 0 !important; bottom: 0 !important; top: calc(var(--pl-sat) + var(--pl-head) + 6px) !important; width: calc(var(--yz-edw) + var(--pl-sar)) !important; box-sizing: border-box; border-radius: 22px 0 0 0 !important; padding: 12px calc(14px + var(--pl-sar)) calc(10px + var(--pl-sab)) 14px !important; overflow-y: auto; overscroll-behavior: contain; box-shadow: -8px 0 24px rgba(21,24,38,0.22) !important; }
 [data-phone-landscape] .yz-editor .yz-opt { min-height: 48px !important; padding-top: 6px !important; padding-bottom: 6px !important; font-size: 18px !important; }
 [data-phone-landscape] .yz-editor .yz-x { min-width: 44px; min-height: 44px; width: 44px !important; height: 44px !important; display: inline-grid; place-items: center; }
@@ -110845,23 +110837,63 @@ function yzPal(theme) {
 	};
 }
 var YZ_UNIT_CSS = `
-.yz-paper.yz-dark{background-image:none!important}
-.yz-stand{display:flex;gap:10px;margin:18px 0 14px;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none}
-.yz-stand::-webkit-scrollbar{display:none}
-.yz-stand-card{flex:1 0 108px;min-width:108px;height:88px;border-radius:20px;padding:12px 16px 0;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;gap:2px}
-.yz-sheets{gap:0!important}
-.yz-sheet1{border-radius:22px 22px 0 0!important}
-.yz-sheet2{border-radius:0 0 22px 22px!important}
-.yz-sheet2 .yz-hdr{display:none!important}
-.gtL-content .yz-sheet1,.gtL-content .yz-sheet2,[data-phone-landscape] .yz-sheet1,[data-phone-landscape] .yz-sheet2{border-radius:20px!important}
-.gtL-content .yz-sheet2 .yz-hdr,[data-phone-landscape] .yz-sheet2 .yz-hdr{display:block!important}
-[data-phone-landscape] .yz-stand{display:none}
-.yz-cell{transition:background-color .16s ease,transform .12s ease}
-.yz-cell:active{transform:scale(.94)}
-.yz-cell:focus-visible{outline:2px solid currentColor;outline-offset:-3px}
-.yz-auto-bonus>span>span:nth-child(1){font-size:12px!important}
-.yz-auto-bonus>span>span:nth-child(2){font-size:17px!important}
-@media (prefers-reduced-motion: reduce){.yz-cell{transition:none}.yz-cell:active{transform:none}}
+@font-face{font-family:'Bowlby One';font-style:normal;font-weight:400;font-display:swap;src:url("./fonts/BowlbyOne-Regular-lat.woff2") format('woff2');}
+@keyframes yzStamp{0%{transform:scale(1.4);opacity:0}60%{transform:scale(.97);opacity:1}100%{transform:scale(1);opacity:1}}
+@keyframes yzPop{0%{transform:scale(.5);opacity:0}55%{transform:scale(1.18);opacity:1}100%{transform:scale(1);opacity:1}}
+@keyframes yzFade{from{opacity:0}to{opacity:1}}
+.yz-root{--yz-lw:clamp(100px,31%,128px);--yz-hh:44px;--yz-sech:22px;--yz-rmin:26px;--yz-rmax:46px;--yz-rw:46px;--yz-rmaxw:54px;--yz-colmin:40px;--yz-sp:max(10px,env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;height:calc(100dvh - 20px);min-height:0;max-width:1180px;margin:0 auto;font-family:'Inter',sans-serif;color:#fff;position:relative}
+@media (display-mode: standalone){.yz-root{height:calc(100vh - 20px - env(safe-area-inset-top,0px))}}
+.yz-title{flex:none;display:flex;justify-content:center;padding:2px 14px 12px;text-align:center}
+.yz-word{font-family:'Bowlby One',sans-serif;font-weight:400;font-size:54px;line-height:1.05;color:var(--yz-wy);-webkit-text-stroke:.028em var(--yz-wk);paint-order:stroke fill;text-shadow:.037em .037em 0 var(--yz-wk),.074em .074em 0 #fff,.111em .111em 0 var(--yz-wk);animation:yzStamp .5s cubic-bezier(.3,1.4,.5,1) both;white-space:nowrap;transform-origin:50% 60%}
+@media (max-width:360px){.yz-word{font-size:46px}}
+@media (max-height:700px){.yz-word{font-size:40px}.yz-title{padding-bottom:8px}.yz-root{--yz-hh:40px;--yz-sech:20px;--yz-rmin:24px}}
+.yz-wrap{flex:1 1 0;min-height:0;display:flex;flex-direction:column;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none;container-type:size}
+.yz-spacer{flex:none;height:var(--yz-sp)}
+.yz-wrap::-webkit-scrollbar{display:none}
+.yz-sheets{display:flex;flex-direction:column;flex:none;gap:14px}
+.yz-sheets.is-wide{flex-direction:row;align-items:flex-start}
+.yz-paper{background:var(--yz-paper);color:var(--yz-ink);border-radius:18px;overflow:clip;display:flex;flex-direction:column;flex:none;box-shadow:0 0 0 1px var(--yz-edge),0 1px 3px rgba(21,24,38,.14)}
+.yz-sheets.is-wide .yz-paper{flex:1 1 0;min-width:0;--yz-lw:clamp(112px,30%,140px)}
+.gtL-content .yz-root.gtL-game{max-width:min(1180px,calc(100% - 32px)) !important;margin-left:auto !important;margin-right:auto !important}
+.yz-grid{flex:none;height:100%;display:grid;position:relative}
+.yz-corner{position:sticky;left:0;top:0;z-index:5;background:var(--yz-paper)}
+.yz-hd{position:sticky;top:0;z-index:4;background:var(--yz-paper);display:grid;align-content:center;justify-items:center;padding:0 3px;min-width:0;overflow:hidden}
+.yz-hdtint{position:absolute;inset:0;background:var(--yz-act);opacity:0;transition:opacity .24s ease;pointer-events:none}
+.yz-nm{position:relative;max-width:100%;font:700 13px/1.2 'Inter',sans-serif;color:var(--yz-ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;word-break:keep-all;hyphens:none}
+.yz-turn{position:relative;font:800 9.5px/1.2 'Inter',sans-serif;letter-spacing:.04em;color:var(--yz-acc2);text-transform:uppercase;white-space:nowrap;transition:opacity .2s ease}
+.yz-sec{grid-column:1 / -1;display:flex;align-items:center;background:var(--yz-sec-bg);color:var(--yz-sec-ink);font:800 11px/1 'Inter',sans-serif;letter-spacing:.07em;text-transform:uppercase;position:relative;z-index:3;min-width:0}
+.yz-sec span{position:sticky;left:0;padding:0 10px;white-space:nowrap}
+.yz-lab{position:sticky;left:0;z-index:3;background:var(--yz-paper);display:flex;align-items:center;min-width:0;padding:0 2px 0 10px;font:600 13px/1.1 'Inter',sans-serif;color:var(--yz-ink);border-top:1px solid var(--yz-line);word-break:keep-all;overflow-wrap:normal;hyphens:none}
+.yz-lab.is-auto{background:var(--yz-sum);color:var(--yz-muted)}
+.yz-lab.is-bold{font-weight:800;color:var(--yz-ink);font-size:14px}
+.yz-lab.is-acc{color:var(--yz-acc)}
+.yz-lab.is-div,.yz-auto.is-div,.yz-cell.is-div{border-top:2px solid var(--yz-rule)}
+.yz-lab.is-acc.is-div,.yz-auto.is-acc.is-div{border-top-color:var(--yz-acc)}
+.yz-cell{border:0;border-top:1px solid var(--yz-line);background:transparent;padding:0;margin:0;display:grid;place-items:center;min-width:0;min-height:0;font:700 16px/1 'Inter',sans-serif;font-variant-numeric:tabular-nums;color:var(--yz-ink);cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;position:relative}
+.yz-cell.is-ed{box-shadow:inset 0 0 0 2px var(--yz-acc);background:var(--yz-act)}
+.yz-cell:focus-visible{outline:2px solid var(--yz-acc);outline-offset:-3px}
+.yz-cell .yz-v,.yz-cell .yz-dot{display:inline-block;transition:transform .1s ease-out}
+.yz-cell:active .yz-v,.yz-cell:active .yz-dot{transform:scale(.86)}
+.yz-dot{color:var(--yz-dot);font-size:20px;line-height:1}
+.yz-v.is-zero{color:var(--yz-muted)}
+.yz-pop{animation:yzPop .26s cubic-bezier(.2,.9,.3,1.2) both}
+.yz-auto{display:grid;place-items:center;min-width:0;background:var(--yz-sum);border-top:1px solid var(--yz-line);font:700 15px/1 'Inter',sans-serif;font-variant-numeric:tabular-nums;color:var(--yz-ink);padding:0 2px;text-align:center}
+.yz-auto.is-bold{font-size:17px;font-weight:800}
+.yz-auto.is-acc{font-size:19px;color:var(--yz-acc)}
+.yz-auto.is-bonus{font-size:12px}
+.yz-colov{position:absolute;pointer-events:none;z-index:2;overflow:hidden}
+.yz-colov b{position:absolute;left:0;top:0;bottom:0;background:var(--yz-act);transition:transform .26s cubic-bezier(.32,.72,0,1),opacity .2s ease}
+.yz-paper.is-many .yz-lab{font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;line-height:1.1;align-content:center}
+.yz-paper.is-many .yz-lab.is-bold{font-size:11.5px}
+.yz-paper.is-many .yz-noch{display:none}
+.yz-paper.is-many .yz-auto{font-size:14px}
+.yz-paper.is-many .yz-auto.is-acc{font-size:16px}
+.yz-hint{flex:none;text-align:center;font-size:12.5px;color:rgba(255,255,255,.7);margin:0 0 8px}
+@media (max-height:800px){.yz-hint{display:none}}
+@media (hover:hover) and (pointer:fine){.yz-cell:hover{background:var(--yz-act)}}
+@media (max-width:380px){.yz-lab{font-size:12px}.yz-nm{font-size:12px}}
+@media (min-width:700px) and (min-height:600px){.yz-lab{font-size:14px}.yz-lab.is-bold{font-size:15px}.yz-nm{font-size:14px}.yz-cell{font-size:18px}.yz-auto{font-size:16px}.yz-auto.is-bold{font-size:18px}.yz-auto.is-acc{font-size:21px}.yz-auto.is-bonus{font-size:13px}.yz-sec{font-size:12px}.yz-turn{font-size:10px}.yz-dot{font-size:22px}}
+@media (prefers-reduced-motion: reduce){.yz-word{animation:none}.yz-pop{animation:yzFade .15s ease both}.yz-colov b{transition:opacity .15s ease}.yz-cell .yz-v,.yz-cell .yz-dot{transition:none}.yz-cell:active .yz-v,.yz-cell:active .yz-dot{transform:none}}
 `;
 var YATZY_BG = "#F2F4F8";
 var YATZY_STAGE_BG = "#12141C";
@@ -110878,7 +110910,7 @@ var YATZY_HUES = [
 	"#F5A623"
 ];
 var YATZY_FONT = "'Space Grotesk', sans-serif";
-function YatzyTopBar({ subtitle, onBack, theme, t, onHome, rulesText, onEndGame }) {
+function YatzyTopBar({ subtitle, onBack, theme, t, onHome, rulesText, onEndGame, hideTitle }) {
 	const stage = shellTokens(theme);
 	const acc = theme === "noir" ? noirAccent("yatzy") : theme === "vitrum" ? "#9DB7D8" : theme === "light" ? "#4A4EDB" : "#8487FF";
 	return /* @__PURE__ */ import_react.default.createElement(GameHeader, {
@@ -110892,7 +110924,8 @@ function YatzyTopBar({ subtitle, onBack, theme, t, onHome, rulesText, onEndGame 
 		icon: /* @__PURE__ */ import_react.default.createElement(YatzyLogo, { color: acc }),
 		onHome,
 		onEndGame,
-		rulesText
+		rulesText,
+		hideTitle
 	});
 }
 function YatzySetup({ players, setPlayers, onStart, t, theme }) {
@@ -111400,20 +111433,91 @@ function YatzyPlay({ onRematch, players, scores, setScores, onResetSheet, onEdit
 	const [moreOpen, setMoreOpen] = useState$11(false);
 	const [confirmingSetup, setConfirmingSetup] = useState$11(false);
 	const [rulesOpen, setRulesOpen] = useState$11(false);
+	const [justSet, setJustSet] = useState$11(null);
+	const wrapRef = useRef$17(null);
+	const [wide, setWide] = useState$11(false);
+	const [edPad, setEdPad] = useState$11(0);
+	const nPl = players.length;
+	import_react.default.useLayoutEffect(() => {
+		const el = wrapRef.current;
+		if (!el) return;
+		const calc = () => {
+			setWide(el.clientWidth >= 2 * (120 + nPl * 58) + 14);
+		};
+		calc();
+		let ro = null;
+		if (window.ResizeObserver) {
+			ro = new ResizeObserver(calc);
+			ro.observe(el);
+		}
+		window.addEventListener("resize", calc);
+		return () => {
+			if (ro) ro.disconnect();
+			window.removeEventListener("resize", calc);
+		};
+	}, [nPl]);
+	useEffect$15(() => {
+		if (!editing) {
+			setEdPad(0);
+			return;
+		}
+		let raf = 0, ro = null, tries = 0;
+		const rm = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+		const place = () => {
+			const ed = document.querySelector(".yz-editor");
+			const wr = wrapRef.current;
+			if (!ed || !wr) {
+				if (tries++ < 10) raf = requestAnimationFrame(place);
+				return;
+			}
+			const wrr = wr.getBoundingClientRect();
+			const edTop = window.innerHeight - (parseFloat(getComputedStyle(ed).bottom) || 0) - ed.offsetHeight;
+			const covers = ed.offsetTop > wrr.top + wrr.height * .3 && edTop < wrr.bottom;
+			setEdPad(covers ? Math.max(0, Math.ceil(wrr.bottom - edTop + 8)) : 0);
+			requestAnimationFrame(() => {
+				const cell = wr.querySelector(".yz-cell.is-ed");
+				if (!cell) return;
+				const cr = cell.getBoundingClientRect();
+				const lim = covers ? edTop - 6 : wrr.bottom;
+				const hh = 44;
+				let d = 0;
+				if (cr.bottom > lim) d = cr.bottom - lim;
+				else if (cr.top < wrr.top + hh + 2) d = cr.top - (wrr.top + hh + 2);
+				if (d) wr.scrollBy({
+					top: d,
+					behavior: rm ? "auto" : "smooth"
+				});
+			});
+		};
+		raf = requestAnimationFrame(place);
+		const ed0 = document.querySelector(".yz-editor");
+		if (window.ResizeObserver && ed0) {
+			ro = new ResizeObserver(() => {
+				tries = 0;
+				place();
+			});
+			ro.observe(ed0);
+		}
+		return () => {
+			cancelAnimationFrame(raf);
+			if (ro) ro.disconnect();
+		};
+	}, [editing]);
 	const t = useT(lang);
 	const tk = shellTokens(theme);
 	const _YP = yzPal(theme);
 	_YP.v;
 	const _YCARD = _YP.card;
 	_YP.bg;
-	const _YINK = _YP.ink, _YMUTED = _YP.muted;
+	_YP.ink;
+	const _YMUTED = _YP.muted;
 	_YP.border;
 	_YP.grid;
 	const _YACCENT = _YP.acc, _YHUES = _YP.hues;
 	_YP.on;
 	_YP.panel;
 	_YP.sum;
-	const _YDARK = _YP.dark;
+	_YP.dark;
 	const filledCounts = players.map((p) => yatzyFilledCount(scores[p.id]));
 	const finished = players.length > 0 && filledCounts.every((c) => c === 15);
 	const activeIdx = useMemo$9(() => {
@@ -111474,6 +111578,11 @@ function YatzyPlay({ onRematch, players, scores, setScores, onResetSheet, onEdit
 				...prev,
 				[playerId]: nextCard
 			};
+		});
+		setJustSet(val === null ? null : {
+			p: playerId,
+			c: catId,
+			k: Date.now()
 		});
 		setEditing(null);
 	};
@@ -111556,13 +111665,8 @@ function YatzyPlay({ onRematch, players, scores, setScores, onResetSheet, onEdit
 			boxShadow: "0 1px 3px rgba(21,24,38,0.11)"
 		}
 	}, confirmingSetup ? t("confirmAgain") : t("changePlayers")));
-	const cellLabelStyle = {
-		fontSize: 15,
-		color: _YMUTED,
-		fontFamily: "'Inter', sans-serif",
-		whiteSpace: "normal",
-		lineHeight: 1.15
-	};
+	const P = yzSheet(theme);
+	const rootVars = yzVars(P);
 	const upperRows = [
 		{
 			type: "section",
@@ -111608,7 +111712,6 @@ function YatzyPlay({ onRematch, players, scores, setScores, onResetSheet, onEdit
 			topDivider: true
 		}
 	];
-	[...upperRows, ...lowerRows];
 	const autoValue = (id, card) => {
 		if (id === "upperSum") return yatzyUpperSum(card);
 		if (id === "bonus") return yatzyBonus(card);
@@ -111616,12 +111719,12 @@ function YatzyPlay({ onRematch, players, scores, setScores, onResetSheet, onEdit
 		if (id === "grandTotal") return yatzyGrandTotal(card);
 		return 0;
 	};
+	const parts = wide ? [upperRows, lowerRows] : [[...upperRows, ...lowerRows]];
 	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-shellpage yz-land pl-page pl-head-compact" + (editing ? " yz-editing" : ""),
+		className: "gtL-shellpage yz-shell" + (editing ? " yz-editing" : ""),
 		style: {
 			...yatzyPageShellStyle(theme),
-			paddingTop: 20,
-			paddingBottom: editing ? 190 : 32
+			paddingBottom: 0
 		}
 	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, YZ_LAND_CSS, YZ_UNIT_CSS), celebration, milestoneNode, /* @__PURE__ */ import_react.default.createElement(PodiumOverlay, {
 		gameId: "yatzy",
@@ -111634,15 +111737,10 @@ function YatzyPlay({ onRematch, players, scores, setScores, onResetSheet, onEdit
 		t,
 		bestRecord: { isNew: yatzyIsNew },
 		theme
-	}), /* @__PURE__ */ import_react.default.createElement(GtCol, {
-		accent: _YACCENT,
-		className: "paper-grid reveal-1 pl-wide yz-paper" + (_YDARK ? " yz-dark" : ""),
-		style: {
-			borderRadius: 26,
-			maxWidth: 520,
-			margin: "0 auto"
-		}
-	}, /* @__PURE__ */ import_react.default.createElement(GtUbStyle, null), /* @__PURE__ */ import_react.default.createElement(RulesButton, {
+	}), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "reveal-1 gtL-game pl-wide pl-page pl-head-compact yz-root",
+		style: rootVars
+	}, /* @__PURE__ */ import_react.default.createElement(RulesButton, {
 		onClick: () => setRulesOpen(true),
 		onHome,
 		onEndGame,
@@ -111656,22 +111754,26 @@ function YatzyPlay({ onRematch, players, scores, setScores, onResetSheet, onEdit
 		subtitle: t("yatzySubtitle"),
 		onBack,
 		theme,
-		t
-	}), winnerIdx !== -1 && /* @__PURE__ */ import_react.default.createElement("div", {
+		t,
+		hideTitle: true
+	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "yz-title" }, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "yz-word",
+		"aria-hidden": "true"
+	}, "YATZY")), winnerIdx !== -1 && /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "reveal-1 yz-win",
+		role: "status",
 		style: {
 			border: "none",
 			color: "#fff",
-			borderRadius: 24,
-			padding: "13px 14px",
-			marginBottom: 12,
-			fontSize: 14,
+			borderRadius: 16,
+			padding: "8px 12px",
+			marginBottom: 10,
+			fontSize: 13.5,
 			fontWeight: 700,
 			textAlign: "center",
-			letterSpacing: "-0.01em",
-			fontFamily: "'Space Grotesk', sans-serif",
+			fontFamily: "'Inter', sans-serif",
 			background: `linear-gradient(135deg, ${_YACCENT}, ${_YHUES[1]})`,
-			boxShadow: `0 4px 16px -4px ${_YACCENT}88`
+			flex: "none"
 		}
 	}, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
 		name: "party",
@@ -111681,155 +111783,29 @@ function YatzyPlay({ onRematch, players, scores, setScores, onResetSheet, onEdit
 			verticalAlign: "-2px",
 			marginRight: 5
 		}
-	}), gtWinLine(t, "yatzyWinsWith", "winsTie", players.filter((_, i) => totals[i] === maxTotal).map((q) => q.name), maxTotal)), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "yz-stand",
-		role: "list"
-	}, players.map((p, i) => {
-		const on = activeIdx === i && !finished;
-		const lead = finished && totals[i] === maxTotal;
-		return /* @__PURE__ */ import_react.default.createElement("div", {
-			key: p.id,
-			role: "listitem",
-			className: "yz-stand-card",
-			style: {
-				background: _YDARK ? _YCARD : "#FFFFFF",
-				boxShadow: (on || lead ? "inset 0 0 0 2px " + _YACCENT : "none") + (_YDARK ? "" : ", 0 1px 3px rgba(21,24,38,0.14)")
-			}
-		}, /* @__PURE__ */ import_react.default.createElement("div", {
-			title: p.name,
-			style: {
-				fontSize: 15,
-				fontWeight: 600,
-				color: _YINK,
-				fontFamily: "'Inter', sans-serif",
-				whiteSpace: "nowrap",
-				overflow: "hidden",
-				textOverflow: "ellipsis",
-				wordBreak: "keep-all",
-				hyphens: "none"
-			}
-		}, p.name), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-			fontSize: 40,
-			lineHeight: 1,
-			fontWeight: 700,
-			color: on || lead ? _YACCENT : _YINK,
-			fontFamily: YATZY_FONT,
-			fontVariantNumeric: "tabular-nums"
-		} }, totals[i]));
-	})), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-yatzy-sheets yz-sheets",
-		style: {
-			display: "flex",
-			flexDirection: "column",
-			gap: 12,
-			alignItems: "stretch"
-		}
-	}, [upperRows, lowerRows].map((rowset, si) => /* @__PURE__ */ import_react.default.createElement("div", {
-		key: si,
-		className: "yz-sheet yz-sheet" + (si + 1),
-		style: {
-			overflowX: "auto",
-			borderRadius: 20,
-			background: _YCARD,
-			flex: "none",
-			minWidth: 0,
-			boxShadow: _YDARK ? "none" : "0 1px 3px rgba(21,24,38,0.14)"
-		}
-	}, /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "yz-grid",
-		style: {
-			"--yz-n": players.length,
-			display: "grid",
-			gridTemplateColumns: `minmax(134px, 1.35fr) repeat(${players.length}, minmax(60px, 1fr))`,
-			minWidth: 134 + players.length * 60,
-			width: "100%"
-		}
-	}, /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "yz-hdr",
-		style: {
-			position: "sticky",
-			left: 0,
-			top: 0,
-			background: _YCARD,
-			zIndex: 3
-		}
-	}), players.map((p, i) => {
-		const on = activeIdx === i && !finished;
-		return /* @__PURE__ */ import_react.default.createElement("div", {
-			key: p.id,
-			className: "yz-th yz-hdr",
-			style: {
-				position: "sticky",
-				top: 0,
-				padding: "10px 4px 8px",
-				textAlign: "center",
-				background: on ? `color-mix(in oklab, ${_YACCENT} ${_YDARK ? 24 : 11}%, ${_YCARD})` : _YCARD,
-				zIndex: 2,
-				minHeight: 52,
-				boxSizing: "border-box"
-			}
-		}, /* @__PURE__ */ import_react.default.createElement("div", {
-			className: "yz-thn",
-			title: p.name,
-			style: {
-				fontSize: 15,
-				fontWeight: 700,
-				lineHeight: 1.15,
-				color: _YINK,
-				fontFamily: "'Inter', sans-serif",
-				overflow: "hidden",
-				wordBreak: "keep-all",
-				hyphens: "none",
-				.../\s/.test(p.name.trim()) ? {
-					display: "-webkit-box",
-					WebkitLineClamp: 2,
-					WebkitBoxOrient: "vertical"
-				} : {
-					whiteSpace: "nowrap",
-					textOverflow: "ellipsis"
-				}
-			}
-		}, p.name), on && /* @__PURE__ */ import_react.default.createElement("div", {
-			className: "yz-turn",
-			style: {
-				fontSize: 12,
-				lineHeight: 1.2,
-				color: _YACCENT,
-				fontWeight: 700,
-				letterSpacing: "0.04em",
-				marginTop: 2,
-				fontFamily: "'Inter', sans-serif",
-				whiteSpace: "nowrap",
-				overflow: "hidden",
-				textOverflow: "ellipsis",
-				textTransform: "uppercase"
-			}
-		}, t("yourTurn")));
-	}), rowset.map((row) => /* @__PURE__ */ import_react.default.createElement(RowCells, {
-		key: row.type === "cat" ? row.cat.id : row.label || row.id,
-		row,
+	}), gtWinLine(t, "yatzyWinsWith", "winsTie", players.filter((_, i) => totals[i] === maxTotal).map((q) => q.name), maxTotal)), filledCounts.every((c) => c === 0) && /* @__PURE__ */ import_react.default.createElement("p", { className: "yz-hint" }, t("tapCellHint")), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "yz-wrap",
+		ref: wrapRef
+	}, /* @__PURE__ */ import_react.default.createElement("div", { className: "yz-sheets" + (wide ? " is-wide" : "") }, parts.map((rows, si) => /* @__PURE__ */ import_react.default.createElement(YzPart, {
+		key: si + "-" + (wide ? "w" : "n"),
+		rows,
 		players,
 		scores,
-		autoValue,
-		cellLabelStyle,
-		onCellClick: (playerId, catId) => setEditing({
+		activeIdx: finished ? -1 : activeIdx,
+		editing,
+		justSet,
+		onCell: (playerId, catId) => setEditing({
 			playerId,
 			catId
 		}),
-		editing,
+		autoValue,
 		t,
-		theme,
-		activeIdx: finished ? -1 : activeIdx
-	})))))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gt-foot-acts" }, yzActs), filledCounts.every((c) => c === 0) && /* @__PURE__ */ import_react.default.createElement("p", {
-		className: "yz-hint",
-		style: {
-			fontSize: 13,
-			color: _YMUTED,
-			textAlign: "center",
-			marginTop: 12,
-			fontFamily: "'Inter', sans-serif"
-		}
-	}, t("tapCellHint"))), /* @__PURE__ */ import_react.default.createElement(GtMoreSheet, {
+		P,
+		wide
+	}))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "yz-spacer",
+		style: edPad ? { height: edPad + 10 } : void 0
+	})), /* @__PURE__ */ import_react.default.createElement("div", { className: "gt-foot-acts" }, yzActs)), /* @__PURE__ */ import_react.default.createElement(GtMoreSheet, {
 		open: moreOpen,
 		onClose: () => setMoreOpen(false),
 		label: t("gtMore"),
@@ -111853,118 +111829,196 @@ function YatzyPlay({ onRematch, players, scores, setScores, onResetSheet, onEdit
 		tokens: tk
 	}));
 }
-function RowCells({ row, players, scores, autoValue, cellLabelStyle, onCellClick, editing, t, theme, activeIdx }) {
-	const _YP = yzPal(theme), _YV = _YP.v, _YCARD = _YP.card;
-	_YP.bg;
-	const _YINK = _YP.ink, _YMUTED = _YP.muted, _YBORDER = _YP.border, _YGRID = _YP.grid, _YACCENT = _YP.acc;
-	_YP.hues;
-	_YP.on;
-	_YP.panel;
-	_YP.sum;
-	const _YDARK = _YP.dark;
-	const ACT = `color-mix(in oklab, ${_YACCENT} ${theme === "noir" ? 14 : _YDARK ? 24 : 11}%, transparent)`;
-	const _YCB = _YV && players.length <= 4 ? "transparent" : _YCARD;
-	if (row.type === "section") return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "yz-sec",
+function yzSheet(theme) {
+	return theme === "noir" ? {
+		paper: "#F4F4F4",
+		ink: "#161616",
+		muted: "#555555",
+		line: "#DCDCDC",
+		act: "rgba(0,0,0,0.075)",
+		secBg: "#E6E6E6",
+		secInk: "#3A3A3A",
+		sumBg: "#EDEDED",
+		acc: "#2E2E2E",
+		acc2: "#3A3A3A",
+		dot: "#B0B0B0",
+		rule: "#161616",
+		edge: "rgba(255,255,255,0.10)",
+		good: "#161616",
+		warm: "#161616",
+		wy: "#DADADA",
+		wk: "#0A0A0A"
+	} : {
+		paper: "#FFFFFF",
+		ink: "#151826",
+		muted: "#565C70",
+		line: "#E6E7F2",
+		act: "rgba(91,95,239,0.09)",
+		secBg: "#EFEFFE",
+		secInk: "#5B5FEF",
+		sumBg: "#F3F3FB",
+		acc: "#5B5FEF",
+		acc2: "#4A4EDB",
+		dot: "#A7ABBF",
+		rule: "#151826",
+		edge: theme === "light" ? "rgba(21,24,38,0.16)" : "rgba(255,255,255,0.08)",
+		good: "#237A33",
+		warm: "#8A5300",
+		wy: "#7E8BFF",
+		wk: "#14101C"
+	};
+}
+function yzVars(P) {
+	return {
+		"--yz-paper": P.paper,
+		"--yz-ink": P.ink,
+		"--yz-muted": P.muted,
+		"--yz-line": P.line,
+		"--yz-act": P.act,
+		"--yz-sec-bg": P.secBg,
+		"--yz-sec-ink": P.secInk,
+		"--yz-sum": P.sumBg,
+		"--yz-acc": P.acc,
+		"--yz-acc2": P.acc2,
+		"--yz-dot": P.dot,
+		"--yz-rule": P.rule,
+		"--yz-edge": P.edge,
+		"--yz-wy": P.wy,
+		"--yz-wk": P.wk
+	};
+}
+function YzBonus({ card, val, t, P }) {
+	const sum = yatzyUpperSum(card || {});
+	if (val > 0) return /* @__PURE__ */ import_react.default.createElement("span", {
+		title: t("bonusReachedLabel"),
+		"aria-label": t("bonusReachedLabel") + ": " + val,
 		style: {
-			gridColumn: "1 / -1",
-			padding: "16px 16px 8px",
-			fontSize: 13,
-			fontWeight: 700,
-			letterSpacing: "0.09em",
-			textTransform: "uppercase",
-			color: _YACCENT,
-			fontFamily: "'Inter', sans-serif"
+			color: P.good,
+			fontWeight: 800,
+			fontSize: 15
 		}
-	}, row.label);
-	const isAuto = row.type === "auto";
-	const label = isAuto ? row.label : t(row.cat.labelKey);
-	const topBorderColor = row.topDivider ? row.accent ? _YACCENT : _YDARK ? "rgba(255,255,255,0.2)" : _YINK : _YGRID;
-	const topBorder = row.topDivider ? `2px solid ${topBorderColor}` : `1px solid ${_YGRID}`;
-	const ROW_MIN_H = row.bold ? 54 : 46;
-	const big = row.id === "grandTotal" ? 28 : row.id === "upperTotal" ? 22 : row.id === "upperSum" ? 20 : 17;
-	return /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "yz-lab" + (row.bold ? " yz-bold" : ""),
+	}, "+" + val);
+	const open = YATZY_UPPER.filter((c) => !card || card[c.id] === null || card[c.id] === void 0);
+	const need = 63 - sum;
+	const maxLeft = open.reduce((s, c) => s + 5 * c.face, 0);
+	if (!open.length || maxLeft < need) return /* @__PURE__ */ import_react.default.createElement("span", {
+		title: t("bonusOut"),
 		style: {
-			position: "sticky",
-			left: 0,
-			minHeight: ROW_MIN_H,
-			boxSizing: "border-box",
-			display: "flex",
-			alignItems: "center",
-			background: row.accent ? `color-mix(in oklab, ${_YACCENT} 14%, ${_YCARD})` : isAuto ? `color-mix(in oklab, ${_YINK} 5%, ${_YCB})` : _YCB,
-			borderTop: topBorder,
-			padding: "4px 8px 4px 16px",
-			fontWeight: row.bold ? 700 : 600,
-			color: row.accent ? _YACCENT : isAuto ? _YMUTED : _YINK,
-			zIndex: 1,
-			...cellLabelStyle,
-			fontSize: row.bold ? 16 : 15
+			color: P.muted,
+			opacity: .7,
+			fontSize: 15
 		}
-	}, label), players.map((p, pi) => {
-		const card = scores[p.id];
-		const isAct = activeIdx === pi;
-		if (isAuto) {
-			const val = autoValue(row.id, card);
-			return /* @__PURE__ */ import_react.default.createElement("div", {
-				key: p.id,
-				className: "yz-auto" + (row.id === "bonus" ? " yz-auto-bonus" : ""),
-				style: {
-					minHeight: ROW_MIN_H,
-					boxSizing: "border-box",
-					display: "flex",
-					alignItems: "center",
-					justifyContent: "center",
-					borderTop: topBorder,
-					padding: "4px 6px",
-					textAlign: "center",
-					background: row.accent ? `color-mix(in oklab, ${_YACCENT} ${isAct ? 26 : 14}%, ${_YCARD})` : isAct ? `color-mix(in oklab, ${_YACCENT} ${_YDARK ? 24 : 11}%, ${_YCARD})` : `color-mix(in oklab, ${_YINK} 5%, ${_YCARD})`,
-					fontWeight: 700,
-					fontSize: big,
-					color: row.accent ? _YACCENT : _YINK,
-					fontVariantNumeric: "tabular-nums",
-					fontFamily: YATZY_FONT
-				}
-			}, row.accent ? /* @__PURE__ */ import_react.default.createElement(GtCount, {
-				value: val,
-				good: "high"
-			}) : row.id === "bonus" ? gtYatzyBonusCell(card, val, theme, t, _YMUTED) : val);
+	}, val);
+	const close = need <= open.reduce((s, c) => s + 3 * c.face, 0);
+	return /* @__PURE__ */ import_react.default.createElement("span", {
+		title: t("bonusToGo")(need),
+		"aria-label": t("bonusToGo")(need),
+		style: {
+			color: close ? P.warm : P.muted,
+			whiteSpace: "nowrap"
 		}
-		const value = card[row.cat.id];
-		const isEditing = editing && editing.playerId === p.id && editing.catId === row.cat.id;
-		const isFilled = value !== null;
-		return /* @__PURE__ */ import_react.default.createElement("button", {
+	}, /* @__PURE__ */ import_react.default.createElement("span", {
+		className: "yz-noch",
+		style: {
+			fontSize: "0.82em",
+			fontWeight: 600,
+			marginRight: "0.3em"
+		}
+	}, t("bonusLeft")), /* @__PURE__ */ import_react.default.createElement("span", { style: {
+		fontSize: 14,
+		fontWeight: close ? 800 : 700
+	} }, need));
+}
+function YzPart({ rows, players, scores, activeIdx, editing, justSet, onCell, autoValue, t, P, wide }) {
+	const n = players.length;
+	const many = n > 4;
+	const cats = rows.filter((r) => r.type !== "section").length;
+	const secs = rows.length - cats;
+	const gridRows = ["var(--yz-hh)"].concat(rows.map((r) => r.type === "section" ? "var(--yz-sech)" : "minmax(var(--yz-rmin),1fr)")).join(" ");
+	const act = activeIdx;
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "yz-paper" + (many ? " is-many" : ""),
+		style: {
+			...many ? {
+				"--yz-lw": "clamp(92px,26%,108px)",
+				"--yz-colmin": "40px"
+			} : null,
+			minWidth: `calc(${many ? 108 : wide ? 140 : 124}px + ${n} * var(--yz-colmin))`,
+			alignSelf: wide ? "flex-start" : void 0,
+			height: `max(calc(var(--yz-hh) + ${secs} * var(--yz-sech) + ${cats} * var(--yz-rmin)), min(calc(100cqh - var(--yz-sp)), calc(var(--yz-hh) + ${secs} * var(--yz-sech) + ${cats} * var(${wide ? "--yz-rmaxw" : "--yz-rmax"}))))`
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "yz-grid",
+		style: {
+			gridTemplateColumns: `var(--yz-lw) repeat(${n}, minmax(${many ? "var(--yz-colmin)" : "0px"}, 1fr))`,
+			gridTemplateRows: gridRows
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", { className: "yz-corner" }), players.map((p, i) => {
+		const on = act === i;
+		return /* @__PURE__ */ import_react.default.createElement("div", {
 			key: p.id,
-			className: "yz-cell",
-			onClick: () => onCellClick(p.id, row.cat.id),
-			style: {
-				minHeight: ROW_MIN_H,
-				boxSizing: "border-box",
-				display: "flex",
-				alignItems: "center",
-				justifyContent: "center",
-				border: "none",
-				borderTop: topBorder,
-				padding: "5px 6px",
-				textAlign: "center",
-				background: isEditing ? `color-mix(in oklab, ${_YACCENT} 34%, ${_YCARD})` : isAct ? ACT : _YCB,
-				boxShadow: isEditing ? `inset 0 0 0 2px ${_YACCENT}` : "none",
-				fontSize: 17,
-				fontWeight: isFilled ? 700 : 400,
-				color: isFilled ? value === 0 ? _YMUTED : _YINK : _YBORDER,
-				fontVariantNumeric: "tabular-nums",
-				cursor: "pointer",
-				fontFamily: YATZY_FONT
+			className: "yz-hd",
+			title: p.name
+		}, /* @__PURE__ */ import_react.default.createElement("i", {
+			className: "yz-hdtint",
+			style: { opacity: on ? 1 : 0 }
+		}), /* @__PURE__ */ import_react.default.createElement("span", { className: "yz-nm" }, p.name), /* @__PURE__ */ import_react.default.createElement("span", {
+			className: "yz-turn",
+			"aria-hidden": on ? void 0 : "true",
+			style: { opacity: on ? 1 : 0 }
+		}, t("yourTurn")));
+	}), rows.map((row) => {
+		if (row.type === "section") return /* @__PURE__ */ import_react.default.createElement("div", {
+			key: "s" + row.label,
+			className: "yz-sec"
+		}, /* @__PURE__ */ import_react.default.createElement("span", null, row.label));
+		const isAuto = row.type === "auto";
+		const label = isAuto ? row.label : t(row.cat.labelKey);
+		const mod = (row.bold ? " is-bold" : "") + (row.accent ? " is-acc" : "") + (row.topDivider ? " is-div" : "");
+		return /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, { key: isAuto ? row.id : row.cat.id }, /* @__PURE__ */ import_react.default.createElement("div", { className: "yz-lab" + (isAuto ? " is-auto" : "") + mod }, label), players.map((p) => {
+			const card = scores[p.id];
+			if (isAuto) {
+				const val = autoValue(row.id, card);
+				return /* @__PURE__ */ import_react.default.createElement("div", {
+					key: p.id,
+					className: "yz-auto" + (row.id === "bonus" ? " is-bonus" : "") + mod
+				}, row.accent ? /* @__PURE__ */ import_react.default.createElement(GtCount, {
+					value: val,
+					good: "high"
+				}) : row.id === "bonus" ? /* @__PURE__ */ import_react.default.createElement(YzBonus, {
+					card,
+					val,
+					t,
+					P
+				}) : val);
 			}
-		}, value !== null ? value === 0 ? /* @__PURE__ */ import_react.default.createElement("span", { style: {
-			fontSize: 22,
-			fontWeight: 700,
-			lineHeight: 1
-		} }, "–") : value : /* @__PURE__ */ import_react.default.createElement("span", { style: {
-			fontSize: 22,
-			lineHeight: 1
-		} }, "·"));
-	}));
+			const value = card[row.cat.id];
+			const isEd = !!(editing && editing.playerId === p.id && editing.catId === row.cat.id);
+			const popped = !!(justSet && justSet.p === p.id && justSet.c === row.cat.id);
+			return /* @__PURE__ */ import_react.default.createElement("button", {
+				key: p.id,
+				type: "button",
+				className: "yz-cell" + (isEd ? " is-ed" : "") + (row.topDivider ? " is-div" : ""),
+				title: p.name + " · " + label,
+				onClick: () => onCell(p.id, row.cat.id)
+			}, value === null ? /* @__PURE__ */ import_react.default.createElement("span", { className: "yz-dot" }, "·") : /* @__PURE__ */ import_react.default.createElement("span", {
+				key: popped ? justSet.k : "v",
+				className: "yz-v" + (value === 0 ? " is-zero" : "") + (popped ? " yz-pop" : "")
+			}, value === 0 ? "–" : value));
+		}));
+	}), /* @__PURE__ */ import_react.default.createElement("i", {
+		className: "yz-colov",
+		"aria-hidden": "true",
+		style: {
+			gridRow: "2 / -1",
+			gridColumn: "2 / -1",
+			inset: 0
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("b", { style: {
+		width: 100 / n + "%",
+		transform: `translateX(${Math.max(act, 0) * 100}%)`,
+		opacity: act >= 0 ? 1 : 0
+	} }))));
 }
 function YatzyGame({ state, setState, onBack, onHome, onEndGame, lang = "de", theme = "dark" }) {
 	const t = useT(lang);
@@ -112021,7 +112075,7 @@ function YatzyGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 			...yatzyPageShellStyle(theme),
 			paddingTop: 20
 		}
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("div", {
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, YZ_UNIT_CSS), /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-page gtL-narrow",
 		style: {
 			maxWidth: 380,
@@ -112033,8 +112087,15 @@ function YatzyGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 		theme,
 		t,
 		onHome,
-		rulesText: t("rulesYatzy")
-	}), /* @__PURE__ */ import_react.default.createElement(YatzySetup, {
+		rulesText: t("rulesYatzy"),
+		hideTitle: true
+	}), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "yz-title",
+		style: yzVars(yzSheet(theme))
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "yz-word",
+		"aria-hidden": "true"
+	}, "YATZY")), /* @__PURE__ */ import_react.default.createElement(YatzySetup, {
 		players: state.players,
 		setPlayers,
 		onStart: startGame,
@@ -112176,7 +112237,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.07-11");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.07-12");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -114782,7 +114843,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.07-11" && !upd) {
+		if (seen && seen !== "2026.11.07-12" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -114791,7 +114852,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.07-11" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.07-12" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);
@@ -115431,275 +115492,370 @@ function continuationPage(d, rows, no, count, sty) {
 	return cv;
 }
 var listPage = continuationPage;
-// web/src/export/templates/yatzy.js
-var BG$6 = "#1C2838";
-var ACC$1 = "#9DB8D6";
-var LINE = "#5B7A9D";
-var INK$9 = "#FFFFFF";
-var DIE = "#F4EFE3";
-var PIP = "#1B2431";
-var FIRST_CAP$4 = 7;
-var DICE = [
+// web/src/export/templates/fonts-a.js
+var FACES = [
 	[
-		90,
-		420,
-		-5
+		"GTR Archivo",
+		"ArchivoBlack-Regular-lat.woff2",
+		"400",
+		"normal"
 	],
 	[
-		350,
-		410,
-		4
+		"GTR Brush",
+		"CaveatBrush-Regular-lat.woff2",
+		"400",
+		"normal"
 	],
 	[
-		610,
-		420,
-		-3
+		"GTR Mono",
+		"IBMPlexMono-Regular-lat.woff2",
+		"400",
+		"normal"
 	],
 	[
-		220,
-		650,
-		3
+		"GTR Mono",
+		"IBMPlexMono-SemiBold-lat.woff2",
+		"600",
+		"normal"
 	],
 	[
-		490,
-		650,
-		-4
+		"GTR InterBI",
+		"Inter-BlackItalic-lat.woff2",
+		"900",
+		"normal"
+	],
+	[
+		"GTR Bowlby",
+		"BowlbyOne-Regular-lat.woff2",
+		"400",
+		"normal"
 	]
 ];
-function bg$10(c, k) {
-	c.fillStyle = BG$6;
-	c.fillRect(0, 0, k.TPL_W, k.TPL_H);
-	k.cssEllipse(c, 0, 0, k.TPL_W, k.TPL_H, 540, 742.5, [
-		[0, "#2C405A"],
-		[.75, "#141D2A"],
-		[1, "#141D2A"]
-	]);
-}
-function cup(c) {
-	c.save();
-	c.translate(830, 440);
-	c.rotate(26 * Math.PI / 180);
-	c.translate(-130, -370);
-	c.beginPath();
-	c.moveTo(36.4, 0);
-	c.lineTo(223.6, 0);
-	c.lineTo(260, 370);
-	c.lineTo(0, 370);
-	c.closePath();
-	c.clip();
-	const g = c.createLinearGradient(0, 0, 260, 0);
-	g.addColorStop(0, "#7A4A2A");
-	g.addColorStop(.45, "#A86A3A");
-	g.addColorStop(1, "#6B3E22");
-	c.fillStyle = g;
-	c.fillRect(0, 0, 260, 370);
-	c.fillStyle = "#E8D8A8";
-	c.fillRect(0, 324, 260, 46);
-	c.strokeStyle = "rgba(232,216,168,0.67)";
-	c.lineWidth = 4;
-	c.setLineDash([12, 12]);
-	[32, 228].forEach((x) => {
-		c.beginPath();
-		c.moveTo(x, 60);
-		c.lineTo(x, 280);
-		c.stroke();
+var done = false;
+function registerA() {
+	if (done || typeof document === "undefined" || typeof FontFace === "undefined") return;
+	done = true;
+	FACES.forEach(([fam, file, w, st]) => {
+		try {
+			document.fonts.add(new FontFace(fam, "url(\"" + new URL("fonts/" + file, document.baseURI).href + "\") format(\"woff2\")", {
+				weight: w,
+				style: st,
+				display: "block"
+			}));
+		} catch (_) {}
 	});
-	c.restore();
 }
+registerA();
+var FB = ",\"Inter\",\"GT Clean\",\"GT CJK\",sans-serif";
+var F_ARCHIVO$1 = "\"GTR Archivo\"" + FB;
+var F_BRUSH = "\"GTR Brush\"" + FB;
+var F_MONO$1 = "\"GTR Mono\"" + FB;
+var F_INTERBI = "\"GTR InterBI\"" + FB;
+var F_BOWLBY = "\"GTR Bowlby\"" + FB;
+var F_SPACE = "\"Space Grotesk\"" + FB;
+var F_FRAUNCES$1 = "\"Fraunces\"" + FB;
+// web/src/export/templates/yatzy.js
+var BG$6 = "#7E8BFF";
+var INK$9 = "#14101C";
+var WHITE = "#FFFFFF";
+var FIRST_CAP$4 = 8;
+var ROT = [
+	-6,
+	4,
+	-2,
+	5,
+	-4
+];
+var SIX = [
+	[.27, .25],
+	[.73, .25],
+	[.27, .5],
+	[.73, .5],
+	[.27, .75],
+	[.73, .75]
+];
+var FAM = F_BOWLBY;
 function die(c, k, x, y, s, rot) {
-	const h = s / 2;
+	const h = s / 2, r = s * .22, bw = 5, sh = Math.max(7.5, Math.round(s * .07 / 2.5) * 2.5);
 	c.save();
 	c.translate(x + h, y + h);
 	c.rotate(rot * Math.PI / 180);
-	const r = 34 * s / 190;
-	c.fillStyle = "rgba(0,0,0,0.4)";
-	k.rrect(c, -h + 12 * s / 190, -h + 16 * s / 190, s, s, r);
+	c.fillStyle = INK$9;
+	k.rrect(c, -h, -h + sh, s, s, r);
 	c.fill();
-	c.fillStyle = DIE;
+	c.fillStyle = WHITE;
 	k.rrect(c, -h, -h, s, s, r);
 	c.fill();
-	c.fillStyle = PIP;
-	const pr = 15.5 * s / 190;
-	[
-		[.18, .18],
-		[.82, .18],
-		[.18, .5],
-		[.82, .5],
-		[.18, .82],
-		[.82, .82]
-	].forEach(([px, py]) => {
+	c.strokeStyle = INK$9;
+	c.lineWidth = bw;
+	k.rrect(c, -h + bw / 2, -h + bw / 2, s - bw, s - bw, r - bw / 2);
+	c.stroke();
+	c.fillStyle = INK$9;
+	SIX.forEach(([px, py]) => {
 		c.beginPath();
-		c.arc(-h + px * s, -h + py * s, pr, 0, Math.PI * 2);
+		c.arc(-h + px * s, -h + py * s, s * .08, 0, Math.PI * 2);
 		c.fill();
 	});
 	c.restore();
 }
-function dice(c, k, bottom) {
-	const s2 = Math.min(1, (bottom - 410) / 440);
-	if (s2 >= .7) {
-		const ax = 445, ay = 410;
-		DICE.forEach(([x, y, r]) => die(c, k, ax + (x - ax) * s2, ay + (y - ay) * s2, 190 * s2, r));
-		return;
-	}
-	const full = Math.min(172, bottom - 505 - 12), left = Math.min(112, bottom - 330 - 12);
-	const useFull = full >= left, sz = Math.max(48, useFull ? full : left), gap = Math.min(24, sz * .14);
-	const w = 5 * sz + 4 * gap, x0 = useFull ? 540 - w / 2 : 70, top = useFull ? 505 : 330;
-	DICE.forEach(([, , r], i) => die(c, k, x0 + i * (sz + gap), top, sz, r));
+function pop(c, text, x, y, stroke, off) {
+	c.lineJoin = "round";
+	c.fillStyle = INK$9;
+	c.strokeStyle = INK$9;
+	c.lineWidth = stroke * 2;
+	c.strokeText(text, x + off, y + off);
+	c.fillText(text, x + off, y + off);
+	c.strokeText(text, x, y);
+	c.fillStyle = WHITE;
+	c.fillText(text, x, y);
+}
+function title(c, k, d, base) {
+	const f = k.fit(c, d.up(d.gameLabel), {
+		w: 400,
+		fam: FAM,
+		max: 145,
+		min: 70,
+		maxW: 940,
+		lines: 1
+	});
+	k.setFont(c, 400, f.size, FAM);
+	c.textAlign = "center";
+	pop(c, f.lines[0], 540, base, 2.5 * f.size / 145, 12.5 * f.size / 145);
+	c.textAlign = "left";
 }
 function footer$11(c, k, d) {
 	const x = 60 + k.logo(c, d.logo, 60, 1210, 100, INK$9) + 20;
 	k.setFont(c, 800, 52, k.F_BALOO);
 	c.fillStyle = INK$9;
-	c.fillText("GameTab", x, 1252);
+	c.fillText("GameTab", x, 1262);
 	const f = k.fit(c, d.date, {
+		w: 600,
+		fam: k.F_INTER,
+		max: 30,
+		min: 18,
+		maxW: 1020 - x - 300 - 20,
+		lines: 1
+	});
+	k.setFont(c, 600, f.size, k.F_INTER);
+	c.textAlign = "right";
+	c.fillText(f.lines[0], 1020, 1262);
+	c.textAlign = "left";
+}
+function podiumCols(rows, winners) {
+	const win = winners.length ? winners : rows.slice(0, 1);
+	const rest = rows.filter((r) => win.indexOf(r) < 0);
+	if (win.length === 1) {
+		const cols = [];
+		if (rest[0]) cols.push(rest[0]);
+		cols.push(win[0]);
+		if (rest[1]) cols.push(rest[1]);
+		return cols;
+	}
+	const w = win.slice(0, 4);
+	return w.concat(w.length < 3 ? rest.slice(0, 3 - w.length) : []);
+}
+function column(c, k, r, x, w, base, H, hero) {
+	const rank = Math.min(r.rank, 3);
+	const bt = base - H, rad = 35, bw = 7.5;
+	const body = (dx) => {
+		c.beginPath();
+		c.moveTo(x + dx, base);
+		c.lineTo(x + dx, bt + rad);
+		c.arcTo(x + dx, bt, x + dx + rad, bt, rad);
+		c.lineTo(x + dx + w - rad, bt);
+		c.arcTo(x + dx + w, bt, x + dx + w, bt + rad, rad);
+		c.lineTo(x + dx + w, base);
+		c.closePath();
+	};
+	c.fillStyle = INK$9;
+	body(15);
+	c.fill();
+	if (rank !== 1) {
+		c.fillStyle = BG$6;
+		body(0);
+		c.fill();
+	}
+	c.fillStyle = rank === 1 ? WHITE : "rgba(255,255,255,0.7)";
+	body(0);
+	c.fill();
+	c.strokeStyle = INK$9;
+	c.lineWidth = bw;
+	c.lineJoin = "miter";
+	const a = bw / 2;
+	c.beginPath();
+	c.moveTo(x + a, base);
+	c.lineTo(x + a, bt + rad);
+	c.arcTo(x + a, bt + a, x + rad, bt + a, 31.25);
+	c.lineTo(x + w - rad, bt + a);
+	c.arcTo(x + w - a, bt + a, x + w - a, bt + rad, 31.25);
+	c.lineTo(x + w - a, base);
+	c.stroke();
+	const ns = Math.min(hero ? 180 : 120, H * .5);
+	k.setFont(c, 400, ns, FAM);
+	c.fillStyle = INK$9;
+	c.textAlign = "center";
+	c.fillText(String(r.rank), x + w / 2, bt + H / 2 + k.capH(c) / 2);
+	const sf = k.fit(c, r.value, {
+		w: 400,
+		fam: FAM,
+		max: hero ? 115 : 70,
+		min: 36,
+		maxW: w - 10,
+		lines: 1
+	});
+	k.setFont(c, 400, sf.size, FAM);
+	const sb = bt - 20;
+	if (hero) pop(c, r.value, x + w / 2, sb, 3.75 * sf.size / 115, 7.5 * sf.size / 115);
+	else {
+		c.fillStyle = INK$9;
+		c.fillText(r.value, x + w / 2, sb);
+	}
+	const scap = k.capH(c);
+	let nf = k.nameFit(c, d0(r), {
+		w: 400,
+		fam: FAM,
+		max: hero ? 75 : 50,
+		min: hero ? 30 : 26,
+		maxW: w - 8,
+		lines: 2
+	});
+	if (nf.cut) nf = k.fit(c, d0(r), {
+		w: 400,
+		fam: FAM,
+		max: hero ? 56 : 40,
+		min: 15,
+		maxW: w - 8,
+		lines: 3
+	});
+	k.setFont(c, 400, nf.size, FAM);
+	c.fillStyle = INK$9;
+	let nb = sb - scap - 24;
+	for (let i = nf.lines.length - 1; i >= 0; i--) {
+		c.fillText(nf.lines[i], x + w / 2, nb);
+		nb -= nf.size * 1.12;
+	}
+	c.textAlign = "left";
+}
+var upFn = (s) => s;
+function d0(r) {
+	return upFn(r.name);
+}
+function list(c, k, rows, top, cols, pitch) {
+	const gap = 30, cw = cols === 1 ? 760 : 465, x0 = cols === 1 ? 160 : 60;
+	rows.forEach((r, i) => {
+		const col = i % cols, row = Math.floor(i / cols), x = x0 + col * (cw + gap), y = top + row * pitch;
+		c.fillStyle = INK$9;
+		c.fillRect(x, y, cw, 5);
+		const fs = 38, mid = y + 5 + (pitch - 5) / 2;
+		k.setFont(c, 400, fs, FAM);
+		const base = mid + k.capH(c) / 2;
+		c.fillStyle = INK$9;
+		c.fillText(String(r.rank), x + 4, base);
+		const rw = c.measureText("00").width + 24;
+		c.textAlign = "right";
+		const vw = c.measureText(r.value).width;
+		c.fillText(r.value, x + cw - 4, base);
+		c.textAlign = "left";
+		const nf = k.nameFit(c, d0(r), {
+			w: 400,
+			fam: FAM,
+			max: fs,
+			min: 24,
+			maxW: cw - rw - vw - 36 - 8,
+			lines: 2
+		});
+		k.setFont(c, 400, nf.size, FAM);
+		nf.lines.forEach((ln, j) => c.fillText(ln, x + rw, mid + nf.size * .36 - (nf.lines.length - 1) * nf.size * .55 + j * nf.size * 1.1));
+	});
+}
+function page1$13(d, k, rows) {
+	const { cv, c } = k.tplCanvas();
+	upFn = d.up;
+	c.fillStyle = BG$6;
+	c.fillRect(0, 0, k.TPL_W, k.TPL_H);
+	const pc = podiumCols(rows, d.winners.filter((w) => rows.indexOf(w) >= 0));
+	const rest = rows.filter((r) => pc.indexOf(r) < 0);
+	const lcols = rest.length > 4 ? 2 : 1, lrows = Math.ceil(rest.length / lcols), pitch = 72;
+	const listH = rest.length ? lrows * pitch + 30 : 0;
+	title(c, k, d, 165);
+	const dsz = rest.length > 3 ? 110 : 140, dgap = dsz / 8, dw = 5 * dsz + 4 * dgap, dtop = 215;
+	ROT.forEach((r, i) => die(c, k, 540 - dw / 2 + i * (dsz + dgap), dtop, dsz, r));
+	const pb = 1185 - listH, ztop = dtop + dsz + 45;
+	const m = pc.length, colW = Math.min(460, Math.floor((960 - 20 * (m - 1)) / Math.max(m, 3))), x0 = (1080 - (m * colW + (m - 1) * 20)) / 2 - 7;
+	const nWin = pc.filter((r) => r.rank === 1).length;
+	const H1 = Math.max(170, Math.min(500, pb - ztop - 290));
+	const hOf = (r) => r.rank === 1 ? H1 : r.rank === 2 ? Math.round(H1 * .7) : Math.round(H1 * .5);
+	pc.forEach((r, i) => column(c, k, r, x0 + i * (colW + 20), colW, pb, Math.max(hOf(r), 110), r.rank === 1 && nWin <= 2));
+	if (rest.length) list(c, k, rest, pb + 30, lcols, pitch);
+	footer$11(c, k, d);
+	return cv;
+}
+function contPage(d, k, rows, no, count) {
+	const { cv, c } = k.tplCanvas();
+	upFn = d.up;
+	c.fillStyle = BG$6;
+	c.fillRect(0, 0, k.TPL_W, k.TPL_H);
+	title(c, k, d, 165);
+	const pg = d.tr("ecPage", (x, y) => x + "/" + y);
+	const pgt = typeof pg === "function" ? pg(no, count) : no + "/" + count;
+	const cont = d.tr("ecContinued", "Fortsetzung") + "  " + pgt;
+	const cf = k.fit(c, cont, {
 		w: 700,
 		fam: k.F_BALOO,
-		max: 26,
-		min: 18,
-		maxW: 1020 - x
-	});
-	k.setFont(c, 700, f.size, k.F_BALOO);
-	c.globalAlpha = .9;
-	c.fillText(f.lines[0], x, 1293);
-	c.globalAlpha = 1;
-}
-function grid$1(c, k, rows, top, fs, pitch) {
-	const cw = 465;
-	rows.forEach((r, i) => {
-		const col = i % 2, row = Math.floor(i / 2), x = 60 + col * 495, y = top + row * pitch;
-		c.fillStyle = LINE;
-		c.fillRect(x, y, cw, 6);
-		k.setFont(c, 400, fs, k.F_ANTON);
-		const bl = y + 12 + fs * .12 + k.capH(c);
-		c.textAlign = "right";
-		c.fillStyle = ACC$1;
-		c.fillText(r.value, x + cw, bl);
-		const vw = c.measureText(r.value).width;
-		c.textAlign = "left";
-		const f = k.fit(c, r.name, {
-			w: 400,
-			fam: k.F_ANTON,
-			max: fs,
-			min: Math.round(fs * .55),
-			maxW: cw - vw - 20,
-			lines: 1
-		});
-		k.setFont(c, 400, f.size, k.F_ANTON);
-		c.fillStyle = INK$9;
-		c.fillText(f.lines[0], x, bl);
-	});
-}
-function page1$13(d, k, others) {
-	const { cv, c } = k.tplCanvas();
-	bg$10(c, k);
-	const n = others.length, R = Math.ceil(n / 2);
-	const fs = R <= 2 ? 46 : R === 3 ? 42 : 38, pitch = R <= 2 ? 78 : R === 3 ? 70 : 64;
-	const gridTop = n ? Math.min(1060, 1196 - R * pitch) : 1196;
-	const heroBase = gridTop - 35;
-	const hs = R <= 2 ? 190 : R === 3 ? 165 : 150;
-	const win = d.winners.length ? d.winners : d.rows.slice(0, 1);
-	const name = d.up(win.map((r) => r.name).join(" & "));
-	const val = win[0].value;
-	k.setFont(c, 400, hs, k.F_ANTON);
-	const vw = c.measureText(val).width;
-	const fo = {
-		w: 400,
-		fam: k.F_ANTON,
-		maxW: 960 - vw - 40
-	};
-	let nf = k.fit(c, name, Object.assign({}, fo, {
-		max: hs,
-		min: Math.round(hs * .62),
-		lines: 1
-	}));
-	if (nf.cut) nf = k.fit(c, name, Object.assign({}, fo, {
-		max: Math.min(hs, 150),
-		min: 72,
-		lines: 2
-	}));
-	if (nf.cut) nf = k.fit(c, name, Object.assign({}, fo, {
-		max: 112,
-		min: 56,
-		lines: 3
-	}));
-	k.setFont(c, 400, nf.size, k.F_ANTON);
-	const cap = k.capH(c);
-	const asc = nf.lines.map((l) => Math.max(cap, c.measureText(l).actualBoundingBoxAscent || cap));
-	const dsc = nf.lines.map((l) => Math.max(0, c.measureText(l).actualBoundingBoxDescent || 0));
-	const bl = new Array(nf.lines.length);
-	bl[nf.lines.length - 1] = heroBase;
-	for (let i = nf.lines.length - 2; i >= 0; i--) bl[i] = bl[i + 1] - (asc[i + 1] + dsc[i] + nf.size * .08);
-	const nameTop = bl[0] - asc[0];
-	let heroTop = Math.min(nameTop, (() => {
-		k.setFont(c, 400, hs, k.F_ANTON);
-		return heroBase - k.capH(c);
-	})());
-	let tieY = 0;
-	if (d.tie) {
-		tieY = heroTop - 26;
-		heroTop = tieY - 40;
-	}
-	const title = d.up(d.gameLabel) + "!";
-	const tf = k.fit(c, title, {
-		w: 400,
-		fam: k.F_ANTON,
-		max: 270,
-		min: 120,
-		maxW: 640,
+		max: 46,
+		min: 26,
+		maxW: 900,
 		lines: 1
 	});
-	k.setFont(c, 400, tf.size, k.F_ANTON);
-	c.fillStyle = ACC$1;
-	c.fillText(tf.lines[0], 50, 55 + k.capH(c));
-	cup(c);
-	dice(c, k, heroTop - 18);
-	if (d.tie) {
-		k.setFont(c, 700, 34, k.F_INTER);
-		c.fillStyle = ACC$1;
-		const tl = d.up(d.tr("ecTied", "Gemeinsamer erster Platz"));
-		k.spaced(c, tl, 62, tieY, 3, "left");
-	}
-	k.setFont(c, 400, nf.size, k.F_ANTON);
+	k.setFont(c, 700, cf.size, k.F_BALOO);
 	c.fillStyle = INK$9;
-	nf.lines.forEach((ln, i) => c.fillText(ln, 60, bl[i]));
-	k.setFont(c, 400, hs, k.F_ANTON);
-	c.fillStyle = ACC$1;
-	c.textAlign = "right";
-	c.fillText(val, 1020, heroBase);
+	c.textAlign = "center";
+	c.fillText(cf.lines[0], 540, 245);
 	c.textAlign = "left";
-	grid$1(c, k, others, gridTop, fs, pitch);
+	const top = 300, pitch = Math.min(88, 870 / Math.max(rows.length, 1)), rh = pitch - 12, fs = Math.min(44, rh * .55);
+	rows.forEach((r, i) => {
+		const y = top + i * pitch, base = y + rh / 2 + fs * .36;
+		c.fillStyle = r.winner ? WHITE : "rgba(255,255,255,0.55)";
+		k.rrect(c, 60, y, 960, rh, rh * .22);
+		c.fill();
+		c.strokeStyle = INK$9;
+		c.lineWidth = 4;
+		k.rrect(c, 62, y + 2, 956, rh - 4, rh * .22 - 2);
+		c.stroke();
+		k.setFont(c, 400, fs, FAM);
+		c.fillStyle = INK$9;
+		c.fillText(String(r.rank), 90, base);
+		const rw = c.measureText("00").width + 30;
+		c.textAlign = "right";
+		const vw = c.measureText(r.value).width;
+		c.fillText(r.value, 990, base);
+		c.textAlign = "left";
+		const nf = k.nameFit(c, d0(r), {
+			w: 400,
+			fam: FAM,
+			max: fs,
+			min: 24,
+			maxW: 900 - rw - vw - 50,
+			lines: 2
+		});
+		k.setFont(c, 400, nf.size, FAM);
+		nf.lines.forEach((ln, j) => c.fillText(ln, 90 + rw, y + rh / 2 + nf.size * .36 - (nf.lines.length - 1) * nf.size * .55 + j * nf.size * 1.1));
+	});
 	footer$11(c, k, d);
 	return cv;
 }
 var yatzy_default = {
 	games: ["yatzy"],
 	fonts: [
-		"400 100px \"GTR Anton\"",
+		"400 100px \"GTR Bowlby\"",
 		"800 52px \"Baloo 2\"",
-		"700 26px \"Baloo 2\"",
-		"700 34px Inter"
+		"600 30px Inter"
 	],
-	texts: (d) => [d.up(d.tr("ecTied", "")), "!&"],
+	texts: (d) => [d.up(d.gameLabel)],
 	render(d, k) {
-		const win = d.winners.length ? d.winners : d.rows.slice(0, 1);
-		const rest = d.rows.filter((r) => win.indexOf(r) < 0);
-		const parts = k.chunks(rest, FIRST_CAP$4, 12);
+		const parts = k.chunks(d.rows, FIRST_CAP$4, 12);
 		const out = [page1$13(d, k, parts[0])];
-		const sty = {
-			bg: (c) => bg$10(c, k),
-			ink: INK$9,
-			sub: ACC$1,
-			acc: ACC$1,
-			line: "rgba(157,184,214,0.35)",
-			fam: k.F_ANTON,
-			logo: INK$9,
-			titleFam: k.F_ANTON,
-			titleCase: true,
-			subFam: k.F_BALOO,
-			rowFill: "rgba(157,184,214,0.1)",
-			rowEdge: "rgba(157,184,214,0.32)"
-		};
-		parts.slice(1).forEach((p, i) => out.push(k.continuationPage(d, p, i + 2, parts.length, sty)));
+		parts.slice(1).forEach((p, i) => out.push(contPage(d, k, p, i + 2, parts.length)));
 		return out;
 	}
 };
@@ -116163,61 +116319,6 @@ var schieber_default = {
 	texts: (d) => ["−'’!¡#… " + d.tr("tplNewsEntries", "") + d.tr("schieberEntryOne", "") + d.up(d.tr("tplNewsWinner", "") + d.tr("tplNewsSum", "") + d.tr("targetLabel", "")) + (d.extra ? d.extra.teams.map((t) => t.name).join(" ") : "")],
 	render: render$5
 };
-// web/src/export/templates/fonts-a.js
-var FACES = [
-	[
-		"GTR Archivo",
-		"ArchivoBlack-Regular-lat.woff2",
-		"400",
-		"normal"
-	],
-	[
-		"GTR Brush",
-		"CaveatBrush-Regular-lat.woff2",
-		"400",
-		"normal"
-	],
-	[
-		"GTR Mono",
-		"IBMPlexMono-Regular-lat.woff2",
-		"400",
-		"normal"
-	],
-	[
-		"GTR Mono",
-		"IBMPlexMono-SemiBold-lat.woff2",
-		"600",
-		"normal"
-	],
-	[
-		"GTR InterBI",
-		"Inter-BlackItalic-lat.woff2",
-		"900",
-		"normal"
-	]
-];
-var done = false;
-function registerA() {
-	if (done || typeof document === "undefined" || typeof FontFace === "undefined") return;
-	done = true;
-	FACES.forEach(([fam, file, w, st]) => {
-		try {
-			document.fonts.add(new FontFace(fam, "url(\"" + new URL("fonts/" + file, document.baseURI).href + "\") format(\"woff2\")", {
-				weight: w,
-				style: st,
-				display: "block"
-			}));
-		} catch (_) {}
-	});
-}
-registerA();
-var FB = ",\"Inter\",\"GT Clean\",\"GT CJK\",sans-serif";
-var F_ARCHIVO$1 = "\"GTR Archivo\"" + FB;
-var F_BRUSH = "\"GTR Brush\"" + FB;
-var F_MONO$1 = "\"GTR Mono\"" + FB;
-var F_INTERBI = "\"GTR InterBI\"" + FB;
-var F_SPACE = "\"Space Grotesk\"" + FB;
-var F_FRAUNCES$1 = "\"Fraunces\"" + FB;
 // web/src/export/templates/skyjo.js
 var BG$5 = "#0A2D33";
 var ACC = "#2FD9A8";

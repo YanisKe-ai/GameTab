@@ -53,6 +53,10 @@ function minigolfFilledCount(card) {
   return card.filter((v) => v !== null).length;
 }
 const MG_UNIT_CSS = `
+.spieleblock-laptop-frame .mg-inner > .gt-gamehead { align-self: stretch; width: 100%; }
+.spieleblock-laptop-frame .mg-split > .mg-main { display: flex !important; flex-direction: column; min-height: calc(100dvh - 150px) !important; }
+.spieleblock-laptop-frame .mg-split > .mg-main > .mgBar { margin-top: auto !important; }
+
 .gt-u-col .mgBar{margin-top:auto!important}
 .gtL-content .gt-u-col .mgBar,[data-phone-landscape] .gt-u-col .mgBar{margin-top:2px!important}
 .mgStar{display:flex;flex-direction:column;gap:0}

@@ -48394,29 +48394,36 @@ var JASS_DIFF_CSS = `
 .jdp-status .hn{display:inline-block;vertical-align:bottom;max-width:60%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:800;color:var(--tx)}
 .jdp-status b{font-weight:800;color:var(--pos)}
 .jdp-hm{container-type:inline-size;margin-top:10px}
-.jdp-grid{--lw:76px;display:grid;grid-template-columns:var(--lw) repeat(var(--n),minmax(0,1fr));gap:6px;align-items:stretch}
-@container (max-width:300px){.jdp-grid{--lw:66px;gap:5px}}
+.jdp-grid{--lw:104px;display:grid;grid-template-columns:var(--lw) repeat(var(--n),minmax(0,1fr));column-gap:6px;row-gap:7px;align-items:stretch}
+@container (max-width:300px){.jdp-grid{--lw:90px;column-gap:5px;row-gap:6px}.jdp-cw{width:28px!important}.jdp-card{width:26px;height:36px}}
 .jdp-colh{min-width:0;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding-bottom:4px;text-align:center}
-.jdp-nm{display:block;max-width:100%;font-size:13px;font-weight:800;line-height:1.25;color:var(--mu);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.jdp-tot{display:block;max-width:100%;font-size:clamp(16px,calc((100cqw - 76px) / var(--n) / 3.3),28px);font-weight:800;letter-spacing:-.02em;line-height:1.2;padding:0 4px;border-radius:10px;white-space:nowrap;color:var(--tx)}
+.jdp-nm{display:block;max-width:100%;font-size:11.5px;font-weight:700;line-height:1.25;color:var(--mu);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.jdp-tot{display:block;max-width:100%;font-size:clamp(15px,calc((100cqw - 104px) / var(--n) / 3.3),26px);font-weight:800;letter-spacing:-.02em;line-height:1.2;padding:0 4px;border-radius:10px;white-space:nowrap;color:var(--tx)}
 .jdp-tot.p{color:var(--pos)}
 .jdp-tot.m{color:var(--neg)}
 .jdp-tot.w{background:color-mix(in srgb,var(--pos) 16%,transparent)}
-.jdp-lab{min-width:0;display:flex;flex-direction:column;justify-content:center;font-size:14px;font-weight:800;line-height:1.15;white-space:nowrap;scroll-margin:100px 0 calc(var(--jd-slip,0px) + 16px)}
-.jdp-lab .cn{overflow:hidden;text-overflow:ellipsis}
-.jdp-lab .cf{font-size:12px;color:var(--mu)}
-.jdp-lab.cur::before{content:"";width:18px;height:4px;border-radius:2px;background:var(--acc);margin-bottom:4px}
-.jdp-c{appearance:none;-webkit-appearance:none;margin:0;padding:0;border:0;min-width:0;min-height:49px;border-radius:15px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--s2);color:var(--tx);font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:transform .12s ease-out;scroll-margin:100px 0 calc(var(--jd-slip,0px) + 16px)}
+.jdp-noir .jdp-tot.w{background:rgba(255,255,255,.14)}
+.jdp-lab{min-width:0;display:flex;flex-direction:row;align-items:center;gap:8px;line-height:1.1;white-space:nowrap;scroll-margin:100px 0 calc(var(--jd-slip,0px) + 16px)}
+.jdp-cw{position:relative;flex:none;width:34px;height:46px;display:flex;align-items:center;justify-content:flex-start}
+.jdp-card{display:block;flex:none;overflow:visible;filter:drop-shadow(0 2px 2px rgba(0,0,0,.4))}
+.jdp-lt{min-width:0;display:flex;flex-direction:column;justify-content:center}
+.jdp-lab .cn{overflow:hidden;text-overflow:ellipsis;font-size:12.5px;font-weight:700}
+.jdp-lab .cf{font-size:10.5px;font-weight:600;color:var(--cpt)}
+.jdp-lab.cur .cn{color:var(--cur)}
+.jdp-c{appearance:none;-webkit-appearance:none;margin:0;padding:0;border:0;min-width:0;min-height:50px;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--s2);color:var(--tx);font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:transform .12s ease-out;scroll-margin:100px 0 calc(var(--jd-slip,0px) + 16px)}
 .jdp-c:active{transform:scale(.96)}
 .jdp-c:focus-visible,.jdp-k:focus-visible,.jdp-cta:focus-visible,.jdp-grab:focus-visible,.jdp-strike:focus-visible,.jdp-act:focus-visible{outline:2px solid var(--tx);outline-offset:2px}
-.jdp-c.p,.jdp-c.n{color:var(--tt);background:color-mix(in srgb,var(--hue) calc(var(--a) * 100%),transparent)}
-.jdp-c.p{--hue:var(--hue-p)}
-.jdp-c.n{--hue:var(--hue-n)}
-.jdp-noir .jdp-c.p,.jdp-noir .jdp-c.n{background:color-mix(in srgb,#fff calc(var(--a) * 60%),transparent)}
-.jdp-c.e{background:color-mix(in srgb,var(--s1) 70%,transparent)}
-.jdp-c.nx,.jdp-c.ed{background:var(--s1);box-shadow:inset 0 0 0 2px var(--acc)}
-.jdp-c b{display:block;max-width:100%;font-size:clamp(12px,calc((100cqw - 76px) / var(--n) / 3.5),20px);font-weight:800;line-height:1.05;letter-spacing:-.01em;white-space:nowrap}
-.jdp-c em{display:block;font-style:normal;font-size:11px;font-weight:600;line-height:1.2}
+.jdp-c.p,.jdp-c.n{background:color-mix(in srgb,var(--hue) calc(var(--a) * 100%),transparent)}
+.jdp-c.p{--hue:var(--hue-p);color:var(--cp)}
+.jdp-c.n{--hue:var(--hue-n);color:var(--cn)}
+.jdp-c.p em,.jdp-c.n em,.jdp-c em{color:var(--cpt)}
+.jdp-noir .jdp-c.p{background:color-mix(in srgb,#EDEDED calc((.75 + var(--a) * 1.25) * 100%),transparent)}
+.jdp-noir .jdp-c.p em{color:#2B2B2B}
+.jdp-noir .jdp-c.n{background:#141414;box-shadow:inset 0 0 0 1.5px color-mix(in srgb,#EDEDED calc((.4 + var(--a) * 2.6) * 100%),transparent)}
+.jdp-c.e,.jdp-c.nx{background:var(--ce)}
+.jdp-c.nx,.jdp-c.ed{box-shadow:inset 0 0 0 1.5px var(--acc)}
+.jdp-c b{display:block;max-width:100%;font-size:clamp(12px,calc((100cqw - 104px) / var(--n) / 3.5),17px);font-weight:800;line-height:1.05;letter-spacing:-.01em;white-space:nowrap}
+.jdp-c em{display:block;font-style:normal;font-size:10px;font-weight:600;line-height:1.2}
 .jdp-blank{display:none}
 .jdp-cta{appearance:none;-webkit-appearance:none;position:sticky;bottom:calc(16px + env(safe-area-inset-bottom));z-index:5;display:grid;place-items:center;width:100%;min-height:56px;margin:18px 0 0;padding:0 16px;border:0;border-radius:20px;background:var(--acc);color:var(--onacc);font:inherit;font-size:17px;font-weight:800;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;box-shadow:0 10px 26px -8px rgba(0,0,0,.45);transition:transform .12s ease-out}
 .jdp-cta:active{transform:scale(.98)}
@@ -48445,10 +48452,15 @@ var JASS_DIFF_CSS = `
 .jdp-k svg{width:26px;height:26px}
 .jdp-k.ok{background:var(--acc);color:var(--onacc)}
 .jdp-k[aria-disabled=true]{opacity:.45}
+.jd-setfan{display:flex;justify-content:center;align-items:flex-end;margin:20px 0 0;padding:0 4px;height:56px}
+.jd-setfan>svg{flex:0 1 30px;min-width:0;height:auto;aspect-ratio:40/56;margin-left:-3px;filter:drop-shadow(0 2px 2px rgba(0,0,0,.4))}
+.jd-setfan>svg:first-child{margin-left:0}
+.jd-grp button{background:var(--jd-btn)!important;border:0!important;box-shadow:inset 0 0 0 1px var(--jd-ring);color:var(--jd-mu)!important}
 .jdp-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .jdp-act{appearance:none;-webkit-appearance:none;flex:1;min-height:44px;margin:0;padding:11px 8px;border-radius:14px;font:inherit;font-size:13px;font-weight:800;letter-spacing:.02em;cursor:pointer;touch-action:manipulation}
 @media (max-height:700px){.jdp-keys{grid-template-columns:repeat(3,52px);row-gap:8px}.jdp-k{width:52px;height:52px;font-size:24px}.jdp-val{height:56px;font-size:52px}.jdp-big{margin:2px 0 8px}}
-@media (max-width:359px){.jdp-who{font-size:22px}.jdp-cat{padding:0 10px;font-size:14px}.jdp-strike{padding:0 4px;font-size:14px}}
+@media (max-width:420px){.jdp-who{font-size:22px}}
+@media (max-width:359px){.jdp-who{font-size:20px}.jdp-cat{padding:0 10px;font-size:14px}.jdp-strike{padding:0 4px;font-size:14px}}
 @media (hover:hover) and (pointer:fine){.jdp-k:hover{filter:brightness(1.12)}.jdp-c:hover{filter:brightness(1.08)}.jdp-cta:hover{filter:brightness(1.08)}}
 @keyframes jdpBl{50%{opacity:0}}
 @keyframes jdpUp{from{transform:translateY(24px);opacity:0}to{transform:none;opacity:1}}
@@ -48459,18 +48471,31 @@ var JASS_DIFF_CSS = `
 .gtL-content .jdp-scrim{display:none}
 .gtL-content .jdp-slipw{position:sticky;top:16px;bottom:auto;left:auto;right:auto;margin-top:12px;animation:none}
 .gtL-content .jdp-slip{max-width:none;border-radius:24px;padding:0 16px 18px;box-shadow:0 10px 30px -10px rgba(0,0,0,.4)}
-.gtL-content .jdp-grid{--lw:110px;gap:8px}
+.gtL-content .jdp-grid{--lw:120px;column-gap:8px;row-gap:8px}
 .gtL-content .jdp-c{min-height:54px}
-.gtL-content .jdp-c b{font-size:22px}
+.gtL-content .jdp-c b{font-size:20px}
 .gtL-content .jdp-c em{font-size:12px}
-.gtL-content .jdp-tot{font-size:32px}
+.gtL-content .jdp-tot{font-size:30px}
 .gtL-content .jdp-cta{position:static;max-width:420px}
 .gtL-content .jdp-lab,.gtL-content .jdp-c{scroll-margin:16px}
+.gtL-content .jdp-sh{flex-wrap:wrap;row-gap:0}
+.gtL-content .jdp-who{flex:1 1 100%;white-space:normal;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;overflow-wrap:normal;word-break:normal;padding-top:4px}
+.gtL-content .jdp-strike{margin-right:auto;padding-left:0}
+@media (max-width:1099px){
+.gtL-content .jdp{padding-bottom:calc(32px + var(--jd-slip,0px))!important}
+.gtL-content .jdp-scrim{display:block}
+.gtL-content .jdp-slipw{position:fixed;left:0;right:0;bottom:0;top:auto;margin:0;animation:jdpUp .26s cubic-bezier(.23,1,.32,1)}
+.gtL-content .jdp-slip{max-width:520px;border-radius:30px 30px 0 0;padding:0 16px calc(18px + env(safe-area-inset-bottom));box-shadow:0 -20px 50px rgba(0,0,0,.35)}
+.gtL-content .jdp-sh{flex-wrap:nowrap}
+.gtL-content .jdp-who{flex:1 1 auto;white-space:nowrap;display:block;-webkit-line-clamp:unset;text-overflow:ellipsis;padding-top:0}
+.gtL-content .jdp-strike{margin-right:0;padding-left:8px}
+.gtL-content .jdp-lab,.gtL-content .jdp-c{scroll-margin:100px 0 calc(var(--jd-slip,0px) + 16px)}
+}
 [data-phone-landscape] .jdp{--jd-slip:0px!important}
 [data-phone-landscape] .jdp-hm{overflow:auto;max-height:calc(var(--pl-avail) - var(--pl-head) - 104px - var(--pl-sab));overscroll-behavior:contain;-webkit-overflow-scrolling:touch;margin-top:6px}
 [data-phone-landscape] .jdp-colh{position:sticky;top:0;z-index:2;background:var(--bgs)}
 [data-phone-landscape] .jdp-c{min-height:44px}
-[data-phone-landscape] .jdp-tot{font-size:clamp(16px,calc((100cqw - 76px) / var(--n) / 4),24px)}
+[data-phone-landscape] .jdp-tot{font-size:clamp(15px,calc((100cqw - 104px) / var(--n) / 4),22px)}
 [data-phone-landscape] .jdp-colh{padding-bottom:2px}
 [data-phone-landscape] .jdp-lab,[data-phone-landscape] .jdp-c{scroll-margin:48px 0 8px}
 [data-phone-landscape] .jdp-status{margin-top:6px;min-height:0;font-size:13px}
@@ -48481,7 +48506,7 @@ var JASS_DIFF_CSS = `
 [data-phone-landscape] .jdp-slipw{left:auto;right:var(--pl-gutter-r);top:calc(var(--pl-sat) + 6px);bottom:auto;width:max(300px,40vw);max-width:calc(100vw - var(--pl-gutter-l) - var(--pl-gutter-r));animation:none}
 [data-phone-landscape] .jdp-slip{max-width:none;border-radius:22px;padding:0 12px 10px;max-height:calc(var(--pl-avail) - 12px);overflow-y:auto;overscroll-behavior:contain;box-shadow:0 12px 30px rgba(0,0,0,.38)}
 [data-phone-landscape] .jdp-grab{height:44px;margin-bottom:-6px}
-[data-phone-landscape] .jdp-who{font-size:22px}
+[data-phone-landscape] .jdp-who{font-size:19px}
 [data-phone-landscape] .jdp-big{margin:0 0 6px}
 [data-phone-landscape] .jdp-val{height:48px;font-size:44px}
 [data-phone-landscape] .jdp-calc{min-height:22px;font-size:17px;line-height:22px}
@@ -48491,21 +48516,28 @@ var JASS_DIFF_CSS = `
 `;
 function jdTokens(theme) {
 	const dark = {
-		bg: "#0d1120",
-		bg2: "#18203a",
-		bgs: "#0d1120",
+		bg: "#0D1220",
+		bg2: "#1E2740",
+		bgs: "#0D1220",
 		s1: "#171d31",
 		s2: "#212a45",
 		tx: "#f3f5fb",
 		mu: "#98a1ba",
-		pos: "#43e0a0",
-		neg: "#ff8074",
+		pos: "#4FC08D",
+		neg: "#F06A5D",
 		acc: "#D52B1E",
 		onacc: "#FFFFFF",
 		scrim: "rgba(5,8,18,.66)",
-		"hue-p": "#1fa97a",
-		"hue-n": "#e2483b",
-		tt: "#FFFFFF"
+		"hue-p": "#4FC08D",
+		"hue-n": "#F06A5D",
+		tt: "#FFFFFF",
+		cp: "#7FE0B0",
+		cn: "#FF9B90",
+		cpt: "#98A1B8",
+		ce: "rgba(255,255,255,.04)",
+		cur: "#FF8A7E",
+		btn: "#1B2235",
+		ring: "rgba(255,255,255,.12)"
 	};
 	if (theme === "light") return {
 		...dark,
@@ -48519,9 +48551,16 @@ function jdTokens(theme) {
 		pos: "#0b7a51",
 		neg: "#c1281c",
 		scrim: "rgba(14,19,40,.4)",
-		"hue-p": "#34c791",
-		"hue-n": "#f26a5e",
-		tt: "#0e1328"
+		"hue-p": "#2E9E70",
+		"hue-n": "#E0584A",
+		tt: "#0e1328",
+		cp: "#0b7a51",
+		cn: "#b3261b",
+		cpt: "#566079",
+		ce: "rgba(14,19,40,.045)",
+		cur: "#c1281c",
+		btn: "#FFFFFF",
+		ring: "rgba(27,34,53,.16)"
 	};
 	if (theme === "noir") return {
 		...dark,
@@ -48532,20 +48571,159 @@ function jdTokens(theme) {
 		s2: "#2A2A2A",
 		tx: "#EDEDED",
 		mu: "#A5A5A5",
-		pos: "#EDEDED",
-		neg: "#EDEDED",
+		pos: "#FFFFFF",
+		neg: "#B5B5B5",
 		acc: "#EDEDED",
 		onacc: "#0A0A0A",
 		scrim: "rgba(0,0,0,.7)",
-		tt: "#FFFFFF"
+		"hue-p": "#EDEDED",
+		"hue-n": "#141414",
+		tt: "#FFFFFF",
+		cp: "#0A0A0A",
+		cn: "#EDEDED",
+		cpt: "#A5A5A5",
+		ce: "rgba(255,255,255,.05)",
+		cur: "#FFFFFF",
+		btn: "#1E1E1E",
+		ring: "rgba(255,255,255,.18)"
 	};
 	return dark;
 }
-var JD_HEAT_MIN = .14;
-var JD_HEAT_STEP = .003;
-var JD_HEAT_MAX = .62;
+var JD_HEAT_MIN = .07;
+var JD_HEAT_MAX = .2;
 function jdHeat(diff) {
-	return Math.min(JD_HEAT_MAX, JD_HEAT_MIN + JD_HEAT_STEP * Math.abs(diff));
+	return JD_HEAT_MIN + (JD_HEAT_MAX - JD_HEAT_MIN) * Math.min(1, Math.abs(diff) / 300);
+}
+function jdPageBg(theme) {
+	const k = jdTokens(theme);
+	return theme === "noir" ? k.bg : "radial-gradient(ellipse at 50% -10%, " + k.bg2 + " 0%, " + k.bg + " 65%)";
+}
+var JD_R = "#C8102E";
+var JD_K = "#1A1714";
+var JD_SYM = {
+	herz: {
+		d: "M50 88 C20 65 5 48 5 30 A22 22 0 0 1 50 22 A22 22 0 0 1 95 30 C95 48 80 65 50 88Z",
+		c: JD_R
+	},
+	ecke: {
+		d: "M50 5 L88 50 L50 95 L12 50Z",
+		c: JD_R
+	},
+	kreuz: {
+		d: "M50 12 A18 18 0 1 1 49.9 12 Z M30 40 A18 18 0 1 1 29.9 40 Z M70 40 A18 18 0 1 1 69.9 40 Z M44 58 L36 94 H64 L56 58Z",
+		c: JD_K
+	},
+	schaufel: {
+		d: "M50 6 C30 34 8 47 8 63 A18 18 0 0 0 44 70 L38 94 H62 L56 70 A18 18 0 0 0 92 63 C92 47 70 34 50 6Z",
+		c: JD_K
+	},
+	unte: {
+		d: "M40 94 H60 V44 H82 L50 6 L18 44 H40Z",
+		c: JD_K
+	},
+	obe: {
+		d: "M40 6 H60 V56 H82 L50 94 L18 56 H40Z",
+		c: JD_K
+	},
+	joker1: { jester: 1 },
+	joker2: { jester: 1 },
+	slalom: {
+		d: "M6 40 L18 18 L30 40 H22 V58 H14 V40Z M36 60 L48 82 L60 60 H52 V42 H44 V60Z M66 40 L78 18 L90 40 H82 V58 H74 V40Z",
+		c: JD_K
+	},
+	guschti: { letter: 1 }
+};
+var JD_ROT = [
+	-4,
+	3,
+	-2,
+	4,
+	-3,
+	2,
+	-4,
+	3,
+	-6,
+	-6
+];
+function JassCard({ id, rot, w = 30, h = 42 }) {
+	const sy = JD_SYM[id] || {};
+	return /* @__PURE__ */ import_react.default.createElement("svg", {
+		className: "jdp-card",
+		viewBox: "0 0 40 56",
+		width: w,
+		height: h,
+		"aria-hidden": "true",
+		style: rot ? { transform: "rotate(" + rot + "deg)" } : void 0
+	}, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: ".6",
+		y: ".6",
+		width: "38.8",
+		height: "54.8",
+		rx: "4.5",
+		fill: "#FFFFFF",
+		stroke: "#C9C2B6",
+		strokeWidth: "1.2"
+	}), sy.jester ? /* @__PURE__ */ import_react.default.createElement("g", {
+		transform: "translate(6 12) scale(.28)",
+		stroke: JD_K,
+		strokeWidth: "3.2",
+		strokeLinejoin: "round"
+	}, /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M48 46 C40 22 22 16 15 30 C11 38 13 49 19 57 C21 47 26 41 34 43 Z",
+		fill: "#FFFFFF"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M52 46 C60 22 78 16 85 30 C89 38 87 49 81 57 C79 47 74 41 66 43 Z",
+		fill: JD_K
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M50 73 Q36 64 21 70 Q35 80 50 73Z M50 73 Q38 80 31 93 Q46 88 50 73Z M50 73 Q44 86 50 98 Q56 86 50 73Z M50 73 Q62 80 69 93 Q54 88 50 73Z M50 73 Q64 64 79 70 Q65 80 50 73Z",
+		fill: JD_K
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M50 75 C42 69 35 63 35 54 A7.5 7.5 0 0 1 50 50 A7.5 7.5 0 0 1 65 54 C65 63 58 69 50 75Z",
+		fill: "#FFFFFF"
+	}), /* @__PURE__ */ import_react.default.createElement("g", {
+		fill: "#FFFFFF",
+		strokeWidth: "2.6"
+	}, /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: "19",
+		cy: "61",
+		r: "4"
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: "81",
+		cy: "61",
+		r: "4"
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: "18",
+		cy: "70",
+		r: "3.4"
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: "82",
+		cy: "70",
+		r: "3.4"
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: "29",
+		cy: "96",
+		r: "3.4"
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: "71",
+		cy: "96",
+		r: "3.4"
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: "50",
+		cy: "101",
+		r: "3.4"
+	}))) : sy.letter ? /* @__PURE__ */ import_react.default.createElement("text", {
+		x: "20",
+		y: "38",
+		textAnchor: "middle",
+		fontFamily: "'Fraunces', Georgia, 'Times New Roman', serif",
+		fontWeight: "800",
+		fontSize: "26",
+		fill: JD_K
+	}, "G") : /* @__PURE__ */ import_react.default.createElement("g", { transform: "translate(8 16) scale(.24)" }, /* @__PURE__ */ import_react.default.createElement("path", {
+		d: sy.d,
+		fill: sy.c,
+		fillRule: "evenodd"
+	})));
 }
 function JassTopBar({ title, subtitle, onBack, theme, t, onHome, rulesText, rulesTitle, onEndGame, hideTitle, tkOv }) {
 	const stage = shellTokens(theme);
@@ -48569,16 +48747,20 @@ function JassTopBar({ title, subtitle, onBack, theme, t, onHome, rulesText, rule
 	});
 }
 function JassSetup({ players, setPlayers, onStart, t, theme }) {
+	const jt = jdTokens(theme);
+	const jN = theme === "noir", jL = theme === "light";
 	const gtS = gtSkin(theme, shellTokens(theme), "jass-differenzler", {
-		card: theme === "light" ? "#FFFFFF" : theme === "noir" ? "#1E1E1E" : "#241C14",
-		ink: theme === "light" ? JASS_INK : theme === "noir" ? "#EDEDED" : "#F0E6D8"
+		card: jt.btn,
+		ink: jt.tx,
+		muted: jt.mu,
+		bg: jt.bg
 	});
-	const _JCARD = theme === "noir" ? "#1E1E1E" : JASS_CARD;
-	const _JINK = theme === "noir" ? "#EDEDED" : JASS_INK;
-	const _JMUTED = theme === "noir" ? "#A5A5A5" : theme === "light" ? JASS_MUTED : "#C9B9A2";
-	const _JBORDER = theme === "noir" ? "#5A5A5A" : theme === "light" ? JASS_BORDER : "#6E5B45";
-	const _JWOOD = theme === "noir" ? noirAccent("jass-differenzler") : JASS_WOOD;
-	const _JHUES = theme === "noir" ? [
+	const _JCARD = jt.btn;
+	const _JMUTED = jt.mu;
+	const _JBORDER = jN ? "#5A5A5A" : jL ? JASS_BORDER : "rgba(255,255,255,.14)";
+	const _JINK = jt.tx;
+	const _JWOOD = jN ? noirAccent("jass-differenzler") : JASS_WOOD;
+	const _JHUES = jN ? [
 		"#E0E0E0",
 		"#B8B8B8",
 		"#949494",
@@ -48587,7 +48769,12 @@ function JassSetup({ players, setPlayers, onStart, t, theme }) {
 		"#A2A2A2",
 		"#DEDEDE",
 		"#888888"
-	] : JASS_HUES;
+	] : [
+		"#D52B1E",
+		"#2F6B52",
+		"#8B5A2B",
+		"#3B5A8A"
+	];
 	const rename = (idx, name) => setPlayers((ps) => ps.map((p, i) => i === idx ? {
 		...p,
 		name
@@ -48608,7 +48795,14 @@ function JassSetup({ players, setPlayers, onStart, t, theme }) {
 		return next;
 	});
 	const tooFew = players.length < 2;
-	return /* @__PURE__ */ import_react.default.createElement("div", { className: "gt-ug-fill gt-ug-g8" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "plsu-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "plsu-main" }, /* @__PURE__ */ import_react.default.createElement(GroupPicker, {
+	return /* @__PURE__ */ import_react.default.createElement("div", { className: "gt-ug-fill gt-ug-g8" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "plsu-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "plsu-main" }, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "jd-grp",
+		style: {
+			"--jd-btn": jt.btn,
+			"--jd-ring": jt.ring,
+			"--jd-mu": jt.mu
+		}
+	}, /* @__PURE__ */ import_react.default.createElement(GroupPicker, {
 		getNames: () => players.map((p) => p.name),
 		setNames: (names) => setPlayers(names.map((name, i) => ({
 			id: i + 1,
@@ -48622,7 +48816,7 @@ function JassSetup({ players, setPlayers, onStart, t, theme }) {
 			ink: _JINK,
 			gold: _JWOOD
 		}, gtS)
-	}), /* @__PURE__ */ import_react.default.createElement(GtPlayerList, {
+	})), /* @__PURE__ */ import_react.default.createElement(GtPlayerList, {
 		players,
 		onRename: rename,
 		onRemove: removePlayer,
@@ -48633,12 +48827,21 @@ function JassSetup({ players, setPlayers, onStart, t, theme }) {
 		minPlayers: 2,
 		maxPlayers: 4,
 		hues: _JHUES
-	})), /* @__PURE__ */ import_react.default.createElement("div", { className: "plsu-side" }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	})), /* @__PURE__ */ import_react.default.createElement("div", { className: "plsu-side" }, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "jd-setfan",
+		"aria-hidden": "true"
+	}, JASS_CATEGORIES.map((c, i) => /* @__PURE__ */ import_react.default.createElement(JassCard, {
+		key: c.id,
+		id: c.id,
+		w: 30,
+		h: 42,
+		rot: (i - 4.5) * 2.4
+	}))), /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		fontSize: 13,
 		color: _JMUTED,
 		fontFamily: "'Inter', sans-serif",
 		textAlign: "center",
-		marginTop: 2
+		marginTop: 8
 	} }, t("jassTenGames")), /* @__PURE__ */ import_react.default.createElement(GtStartBar, {
 		onClick: onStart,
 		disabled: tooFew,
@@ -48915,7 +49118,7 @@ function JassPlay({ players, scores, setScores, onResetSheet, onEditPlayers, onB
 	Object.keys(jd).forEach((k) => {
 		jdVars["--" + k] = jd[k];
 	});
-	const jdBg = "radial-gradient(ellipse at 50% -8%, " + jd.bg2 + " 0%, " + jd.bg + " 62%)";
+	const jdBg = jdPageBg(theme);
 	const jasItems = [{
 		key: "new",
 		icon: "restart",
@@ -49041,7 +49244,10 @@ function JassPlay({ players, scores, setScores, onResetSheet, onEditPlayers, onB
 	}), JASS_CATEGORIES.map((cat, catIdx) => {
 		const isCur = cat.id === jdCur;
 		const jk = cat.id === "joker1" ? " I" : cat.id === "joker2" ? " II" : "";
-		return /* @__PURE__ */ import_react.default.createElement(Fragment$3, { key: `${cat.id}-${catIdx}` }, /* @__PURE__ */ import_react.default.createElement("div", { className: "jdp-lab" + (isCur ? " cur" : "") }, /* @__PURE__ */ import_react.default.createElement("span", { className: "cn" }, cat.label, jk), /* @__PURE__ */ import_react.default.createElement("span", { className: "cf" }, "×", cat.mult)), players.map((p) => {
+		return /* @__PURE__ */ import_react.default.createElement(Fragment$3, { key: `${cat.id}-${catIdx}` }, /* @__PURE__ */ import_react.default.createElement("div", { className: "jdp-lab" + (isCur ? " cur" : "") }, /* @__PURE__ */ import_react.default.createElement("span", { className: "jdp-cw" }, /* @__PURE__ */ import_react.default.createElement(JassCard, {
+			id: cat.id,
+			rot: JD_ROT[catIdx]
+		})), /* @__PURE__ */ import_react.default.createElement("span", { className: "jdp-lt" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "cn" }, cat.label, jk), /* @__PURE__ */ import_react.default.createElement("span", { className: "cf" }, "×", cat.mult))), players.map((p) => {
 			const cell = scores[p.id][cat.id];
 			const value = cell ? cell.total : null;
 			const diff = jassDiff(scores, players, cat.id, p.id);
@@ -49128,8 +49334,11 @@ function JassGame({ state, setState, onBack, onHome, onEndGame, lang = "de", the
 	};
 	if (state.phase === "setup") return /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-shellpage",
-		style: jassPageShellStyle(theme)
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, JASS_PL_CSS), /* @__PURE__ */ import_react.default.createElement("div", {
+		style: {
+			...jassPageShellStyle(theme),
+			background: jdPageBg(theme)
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, JASS_PL_CSS, JASS_DIFF_CSS), /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-page gtL-narrow gt-jd-setpage pl-head-compact",
 		style: {
 			maxWidth: 380,
@@ -67790,7 +67999,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.07-17";
+var APP_BUILD = "2026.11.07-18";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -111459,7 +111668,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.07-17");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.07-18");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -114062,7 +114271,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.07-17" && !upd) {
+		if (seen && seen !== "2026.11.07-18" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -114071,7 +114280,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.07-17" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.07-18" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

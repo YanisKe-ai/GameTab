@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.07-18 (07.11.2026 16:27)
+- Differenzler: zarte Farben, Jasskarten, Einrichtung in Nachtblau
+
 ## 2026.11.07-17 (07.11.2026 15:58)
 - Neuer Spielkopf mit Menü in allen Spielen, Tipp-Karte zeigt den ganzen Text
 

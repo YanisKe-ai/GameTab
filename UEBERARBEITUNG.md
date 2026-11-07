@@ -111,6 +111,7 @@ Wenn möglich mit 1 bis 2 Mockup-Screenshots (schnell im Code skizziert) zur Ent
 - [ ] Neue Spiel-Daten im Export ergänzt, falls sinnvoll (Testfälle in JSON nachführen)
 - [ ] Teilen auf iOS: Web Share zuerst, sichtbare Vorschau als Rückfall
 - [ ] Statistik und Erfolge zählen die Partie richtig
+- [ ] Kleines Spiel-Icon (Startseite «Alle Spiele», Listen, Seitenleiste) passt zum neuen Design (Wunsch Yanis 07.11.2026)
 
 ### Texte und Zugänglichkeit
 - [ ] Texte kurz, natürlich, Schweizer Schreibweise, keine Gedankenstriche, neutral gegendert
@@ -194,8 +195,8 @@ Ab Nr. 5 ist die Reihenfolge frei. Ohne andere Anweisung von Yanis einfach der T
 | # | Spiel | gameId | Modul | Status | Offen |
 |---|---|---|---|---|---|
 | 1 | Tutto | tutto | games/tutto | fertig 06.11.2026 | Kartenrechner auf Wunsch entfernt. Nur Chromium geprüft: Safari und echte Geräte offen |
-| 2 | Yatzy | yatzy | games/yatzy | offen | |
-| 3 | Schieber + Turnier | schieber | games/schieber | offen | Kreidetafel unangetastet |
+| 2 | Yatzy | yatzy | games/yatzy | fertig 07.11.2026 | Bonus 25. Nur Chromium geprüft: Safari, iPhone, iPad offen. Ab 7 Spielern scrollt das Blatt seitlich |
+| 3 | Schieber + Turnier | schieber | games/schieber | fertig 07.11.2026 | Nocturne Nachtblau, Tafel unverändert, Ergebnisbild bleibt (Logo oben, Ausnahme). Nur Chromium geprüft. Offen: Hausregel 6- bis 9-Blatt, Farbwerte Herz/Ecke ×1 bestätigen, Icon neu |
 | 4 | Jass Differenzler | jass-differenzler | games/jass | offen | |
 | 5 | Wizard | wizard | games/wizard | offen | |
 | 6 | Minigolf | minigolf | games/minigolf | offen | |

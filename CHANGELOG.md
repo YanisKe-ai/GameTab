@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.07-15 (07.11.2026 13:10)
+- Neue Icons für Jass, Yatzy, Tutto, Schieber und Differenzler
+
 ## 2026.11.07-14 (07.11.2026 12:50)
 - Schieber: Nachtblau in Nocturne, grössere Karten, Fehler behoben
 

@@ -6,8 +6,7 @@
 Prüft:
   1. JavaScript-Syntax des Haupt-Scripts (node --check)
   2. Klammer-Balance rund um StartPage (häufigste Fehlerquelle bei Edits)
-  3. Vitrum-Fallen: ${xx.bg} in radial-gradient ohne vitrum-Zweig davor
-  4. Notausgang ?reset=1 und Lade-Absicherung noch vorhanden
+  3. Notausgang ?reset=1 und Lade-Absicherung noch vorhanden
 Exit-Code 0 = alles gut, 1 = Fehler.
 """
 import json
@@ -37,15 +36,6 @@ def src_build():
         f = re.findall(BUILD_RE, p.read_text(encoding="utf-8"))
         return f[0] if len(f) == 1 else "?"
     return None
-
-
-def vitrum_suspects(js):
-    out = []
-    for m in re.finditer(r"radial-gradient\([^`\"]{0,80}\$\{(\w+)\.bg\}", js):
-        before = js[max(0, m.start() - 160): m.start()]
-        if "vitrum" not in before:
-            out.append(js[m.start(): m.start() + 90])
-    return out
 
 
 def main() -> int:
@@ -83,19 +73,6 @@ def main() -> int:
             problems.append(f"StartPage Klammern unausgeglichen: () {p:+d}, {{}} {b:+d}")
         else:
             print("OK   StartPage Klammern")
-
-    # 3. Vitrum-Falle: ${tokens.bg} direkt in radial-gradient ohne vitrum-Weiche
-    suspects = vitrum_suspects(main_js)
-    for f in sorted((ROOT / "web" / "src").rglob("*.js")) if (ROOT / "web" / "src").is_dir() else []:
-        for x in vitrum_suspects(f.read_text(encoding="utf-8")):
-            suspects.append(f"{f.relative_to(ROOT)}: {x}")
-    if suspects:
-        problems.append(
-            "Möglicher Vitrum-Hintergrundfehler (bg ist im Vitrum-Modus schon ein kompletter Verlauf, "
-            "nicht in radial-gradient() verschachteln):\n    " + "\n    ".join(suspects[:5])
-        )
-    else:
-        print("OK   keine verschachtelten Vitrum-Verläufe")
 
     # 4. Notausgang
     if 'indexOf("reset=1")' in main_js and "localStorage.clear()" in main_js:

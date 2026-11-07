@@ -358,7 +358,7 @@ function MgSegmented({ tab, onTab, mg, t }) {
     );
   };
   return (
-    <div role="tablist" aria-label={t("mgViewLabel")} className={"mg-seg" + (mg.glass ? " gtL-glass-soft" : "")} style={{ display: "flex", gap: 4, padding: 4, borderRadius: 18, background: mg.surf, border: `1px solid ${mg.line}`, marginBottom: 12 }}>
+    <div role="tablist" aria-label={t("mgViewLabel")} className="mg-seg" style={{ display: "flex", gap: 4, padding: 4, borderRadius: 18, background: mg.surf, border: `1px solid ${mg.line}`, marginBottom: 12 }}>
       {item("hole", t("mgTabHole"))}
       {item("table", t("mgTabTable"))}
     </div>
@@ -382,7 +382,7 @@ function MgHoleCard({ ui, hole, onGo, mg, t }) {
     );
   };
   return (
-    <section aria-label={t("mgHoleOf")(hole + 1, MINIGOLF_HOLES)} className={mg.glass ? "gtL-glass" : undefined} style={{ background: mg.surf, border: "none", borderRadius: 24, padding: "18px 16px 16px 16px", boxShadow: mg.shadow, marginBottom: 12 }}>
+    <section aria-label={t("mgHoleOf")(hole + 1, MINIGOLF_HOLES)} style={{ background: mg.surf, border: "none", borderRadius: 24, padding: "18px 16px 16px 16px", boxShadow: mg.shadow, marginBottom: 12 }}>
       <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
         <MgFlag mg={mg} size={48} />
         <div style={{ flex: "1 1 auto", minWidth: 0 }} aria-live="polite" aria-atomic="true">
@@ -419,7 +419,7 @@ function MgPlayerCard({ p, val, isDraft, missing, sofar, countNote, leads, onSte
   return (
     <div
       data-mg-card={p.id}
-      className={"mgCard" + (mg.glass ? " gtL-glass-soft" : "")}
+      className="mgCard"
       style={{ background: leads ? `linear-gradient(${mg.accSoft}, ${mg.accSoft}), ${mg.surf}` : mg.surf, border: `2px solid ${leads ? mg.acc : "transparent"}`, borderRadius: 20, padding: "14px 12px 14px 18px", minHeight: 88, boxShadow: mg.shadow }}
     >
       <div style={{ flex: "1 1 128px", minWidth: 0 }}>
@@ -566,7 +566,7 @@ function MgTable({ ui, hole, onCell, mg, t }) {
     );
   };
   return (
-    <div ref={wrapRef} className={"mgTableWrap" + (mg.glass ? " gtL-glass" : "")} role="region" aria-label={t("mgTabTable")} tabIndex={0} style={{ background: mg.surf, border: `1px solid ${mg.line}`, borderRadius: 20, boxShadow: mg.shadow }}>
+    <div ref={wrapRef} className="mgTableWrap" role="region" aria-label={t("mgTabTable")} tabIndex={0} style={{ background: mg.surf, border: `1px solid ${mg.line}`, borderRadius: 20, boxShadow: mg.shadow }}>
       <table style={{ borderCollapse: "separate", borderSpacing: 0, width: "100%", minWidth: 52 + ps.length * 60 }}>
         <thead>
           <tr>
@@ -710,9 +710,8 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
     main = { label: info.isNew ? t("mgSaveHole") : t("mgSaveChanges"), blocked: true, onClick: showMissing };
     status = info.missing.length === players.length ? t("mgEnterHint") : t("mgStillOpen")(names(info.missing));
   }
-  const glassBar = theme === "vitrum";
   const bar = (
-    <div className="mgBar" style={{ position: "sticky", bottom: 0, zIndex: 5, margin: "2px -12px 0", padding: "8px 12px calc(6px + env(safe-area-inset-bottom))", ...(glassBar ? { background: "rgba(13,20,46,0.72)", backdropFilter: "blur(16px) saturate(1.4)", WebkitBackdropFilter: "blur(16px) saturate(1.4)", borderRadius: "22px 22px 0 0", borderTop: `1px solid ${mg.line}` } : { background: `linear-gradient(180deg, ${mg.bg}00, ${mg.bg}F2 14px, ${mg.bg} 30%)` }) }}>
+    <div className="mgBar" style={{ position: "sticky", bottom: 0, zIndex: 5, margin: "2px -12px 0", padding: "8px 12px calc(6px + env(safe-area-inset-bottom))", ...({ background: `linear-gradient(180deg, ${mg.bg}00, ${mg.bg}F2 14px, ${mg.bg} 30%)` }) }}>
       {status && (
         <div id="mg-status" role="status" aria-live="polite" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, textAlign: "center", fontSize: 14, fontWeight: 600, color: statusOk ? mg.accInk : mg.muted, fontFamily: MG_UI, margin: "0 4px 8px", lineHeight: 1.35 }}>
           {statusOk && <CheckMark />}
@@ -804,7 +803,7 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
     fontFamily: MG_UI,
   });
   return (
-    <div className={"gtL-shellpage mgGL mg-land pl-page pl-head-compact" + (theme === "vitrum" ? " vitrum-active" : "")} style={{ ...minigolfPageShellStyle(theme), position: "relative", overflowX: "clip", paddingBottom: editing ? 290 : 24 }}>
+    <div className={"gtL-shellpage mgGL mg-land pl-page pl-head-compact"} style={{ ...minigolfPageShellStyle(theme), position: "relative", overflowX: "clip", paddingBottom: editing ? 290 : 24 }}>
       <style>
         {GLOBAL_STYLES}
         {MG_CSS}
@@ -913,7 +912,7 @@ function MinigolfGame({ state, setState, onBack, onHome, onEndGame, lang = "de",
   const goToSetup = () => setState((s) => ({ ...s, phase: "setup" }));
   if (state.phase === "setup") {
     return (
-      <div className={"gtL-shellpage" + (theme === "vitrum" ? " vitrum-active" : "")} style={minigolfPageShellStyle(theme)}>
+      <div className={"gtL-shellpage"} style={minigolfPageShellStyle(theme)}>
         <style>{GLOBAL_STYLES}</style>
         <div className="gtL-page gtL-game" style={{ maxWidth: 380, margin: "0 auto", position: "relative", zIndex: 1 }}>
           <GtCol accent={minigolfTokens(theme).acc}>

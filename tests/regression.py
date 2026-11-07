@@ -8,7 +8,7 @@ Aufruf:
     python3 tests/regression.py chromium --quick   # nur Handy, Kernablauf (unter 4 Minuten)
     python3 tests/regression.py --only Skyjo --only Rommé   # nur bestimmte Tests (Teilstring)
     python3 tests/regression.py --jobs 1        # seriell (Standard: 4 parallele Prozesse)
-    python3 tests/regression.py --theme Hell    # festes Theme statt Wechsel Nocturne/Hell/Vitrum/Noir
+    python3 tests/regression.py --theme Hell    # festes Theme statt Wechsel Nocturne/Hell/Noir
 
 Pro Spiel ein kurzer echter Ablauf (Einrichtung, starten, Punkte/Rollen/Woerter, Neuladen,
 wo moeglich bis Spielende mit Podium und Bildvorschau "Als Bild teilen").
@@ -49,7 +49,7 @@ for a in ARGS:
     elif a == "all":
         ENGINES = ["chromium", "webkit"]
 VIEWS = {"mobile": (393, 852, "Handy"), "laptop": (1512, 982, "Laptop")}
-THEMES = ["Nocturne", "Hell", "Vitrum", "Noir"]
+THEMES = ["Nocturne", "Hell", "Noir"]
 WAIT = 500  # nach Klicks mindestens 500 ms (CLAUDE.md)
 
 # Meldungen, die keine App-Fehler sind

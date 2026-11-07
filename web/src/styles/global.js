@@ -27,37 +27,8 @@ html[data-gt-theme="noir"] { --gt-focus: #FFFFFF; }
 .gt-hit { position: relative; }
 .gt-hit::before { content: ""; position: absolute; left: var(--gt-hit-x, 0px); right: var(--gt-hit-x, 0px); top: var(--gt-hit-y, -7px); bottom: var(--gt-hit-y, -7px); }
 .gtL-toggle-btn { min-height: 44px; }
-.gtL-glass-flat { backdrop-filter: blur(14px) saturate(1.5); -webkit-backdrop-filter: blur(14px) saturate(1.5); box-shadow: inset 0 1px 0 rgba(255,255,255,0.16), 0 4px 14px -6px rgba(0,0,0,0.35); }
-@media (prefers-reduced-transparency: reduce) {
-  :root .gtL-glass, :root .gtL-glass-strong, :root .gtL-glass-soft, :root .gtL-glass-flat { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; background-image: none !important; background-color: #161921 !important; }
-  :root .gtL-glass::after, :root .gtL-glass-strong::after, :root .gtL-glass-soft::after { display: none !important; }
-  :root .vitrum-active .press-fx { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
-}
 .gtL-only { display: none !important; }
 .gtL-split, .gtL-col-main, .gtL-col-side { display: contents; }
-.gtL-glass, .gtL-glass-soft {
-  background-image: linear-gradient(rgba(255,255,255,0.025), rgba(255,255,255,0.025)) !important;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 2px 10px -4px rgba(0,0,0,0.35);
-  position: relative;
-}
-.gtL-glass { box-shadow: inset 0 1px 0 rgba(255,255,255,0.07), 0 4px 16px -6px rgba(0,0,0,0.4); }
-.gtL-glass:active, .gtL-glass-soft:active { background-image: linear-gradient(rgba(255,255,255,0.06), rgba(255,255,255,0.06)) !important; }
-.gtL-glass:active:not(.press-fx), .gtL-glass-soft:active:not(.press-fx) { transform: scale(0.97); }
-.gtL-glass-strong, .gtL-sheet-glass {
-  background: rgba(22,25,33,0.62) !important;
-  background-image: none !important;
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
-  border: 1px solid rgba(255,255,255,0.10) !important;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), 0 10px 30px rgba(0,0,0,0.35) !important;
-}
-.vitrum-active .press-fx:active { transform: scale(0.97); }
-html[data-gt-theme="vitrum"] body{background:#0B1128}
-html[data-gt-theme="vitrum"] [style*="background: rgba(255, 255, 255, 0.07)"],html[data-gt-theme="vitrum"] [style*="background: rgba(255, 255, 255, 0.06)"],html[data-gt-theme="vitrum"] [style*="background-color: rgba(255, 255, 255, 0.07)"]{background:linear-gradient(150deg,rgba(255,255,255,.17) 0%,rgba(255,255,255,.07) 48%,rgba(255,255,255,.11) 100%)!important;border-color:rgba(255,255,255,.24)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.38),inset 0 -1px 0 rgba(255,255,255,.06),0 10px 28px -14px rgba(3,6,20,.7)!important}
-html[data-gt-theme="vitrum"] [style*="background: rgba(255, 255, 255, 0.04)"]{background:rgba(255,255,255,.09)!important;border-color:rgba(255,255,255,.18)!important}
-
-html[data-gt-theme="vitrum"] .gt-su-cta::before { background: linear-gradient(to bottom, rgba(14,20,46,0), rgba(14,20,46,0.30) 60%); -webkit-backdrop-filter: blur(16px) saturate(150%); backdrop-filter: blur(16px) saturate(150%); box-shadow: inset 0 1px 0 rgba(255,255,255,0.08); }
-
 @media (max-height: 700px) {
   .gtL-deco-bottom { display: none !important; }
 }
@@ -315,7 +286,6 @@ body::after {
   .ach-pulse-ring, .tutto-near, .tutto-dice-pop { animation: none !important; }
   .press-fx, .card-fx { transition: opacity 150ms ease, box-shadow 180ms ease !important; }
   .press-fx:active, .card-fx:active { transform: none !important; }
-  .gtL-glass::after, .gtL-glass-strong::after, .gtL-glass-soft::after { display: none !important; }
   [style*="decoDrift"], [style*="dragonBreathe"], [style*="dragonFlap"], [style*="headsupRotateHint"], [style*="dartLedPulse"] { animation: none !important; }
   [style*="chalk-draw"] { animation: none !important; stroke-dashoffset: 0 !important; }
   .schieber-sponge-anim { animation: none !important; opacity: 0 !important; }

@@ -13,7 +13,7 @@ Danach: `docs/` mitcommitten, dann pushen (erst nach OK von Yanis).
     python3 tools/check.py            # nimmt docs/index.html, sonst index.html
     python3 tools/check.py pfad.html  # andere Datei
 
-check.py prüft auch die Vitrum-Goldregel in `web/src/**/*.js` und dass Quelle, docs/index.html, version.json und sw.js dieselbe Version haben.
+check.py prüft auch, dass Quelle, docs/index.html, version.json und sw.js dieselbe Version haben.
 
 ## GitHub Pages auf /docs umstellen (macht der Koordinator)
 GitHub, Repo, Settings, Pages: Source "Deploy from a branch", Branch `main`, Ordner `/docs`, speichern. Adresse und Pfad bleiben gleich, der localStorage bleibt erhalten. Vorher iPhone-Backup (Als Datei exportieren). Rückfall: Ordner wieder auf `/ (root)` stellen.

@@ -2,7 +2,7 @@
 """Motion-Pruefung (Playwright, Python): Dialog auf/zu, Fokus, Scroll-Spruenge, Layoutspruenge (CLS),
 haengende Animationen, Tutto-Spur und Border Beam, Bildvorschau.
 
-    $VENV tests/motion.py [--vp 393x852,1280x800] [--theme Nocturne,Hell,Vitrum,Noir]
+    $VENV tests/motion.py [--vp 393x852,1280x800] [--theme Nocturne,Hell,Noir]
 
 Datei: GAMETAB_HTML (Standard docs/index.html). Screenshots: tests/out/motion/. Exit 1 bei Fehlern.
 Nur Browser (Chromium), kein echtes Geraet.
@@ -136,7 +136,7 @@ def run(pw, vp, theme, mode):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--vp", default="393x852,1280x800")
-    ap.add_argument("--theme", default="Nocturne,Hell,Vitrum,Noir")
+    ap.add_argument("--theme", default="Nocturne,Hell,Noir")
     a = ap.parse_args()
     vps = [tuple(int(n) for n in v.split("x")) for v in a.vp.split(",")]
     with sync_playwright() as pw:

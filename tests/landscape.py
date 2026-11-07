@@ -2,8 +2,8 @@
 """Handy-Querformat: Testwerkzeug (Playwright, Python).
 
     $VENV tests/landscape.py                       # alle Querformat-Viewports, Nocturne, Startseite + Negativfaelle
-    $VENV tests/landscape.py --vp 844x390 --theme Vitrum
-    $VENV tests/landscape.py --vp all --theme all  # 7 Viewports x 4 Themes
+    $VENV tests/landscape.py --vp 844x390 --theme Noir
+    $VENV tests/landscape.py --vp all --theme all  # 7 Viewports x 3 Themes
     $VENV tests/landscape.py --only neg            # nur Negativfaelle (Attribut darf nicht gesetzt sein)
     $VENV tests/landscape.py --only start,rotate   # Startseite quer, Drehen hin und zurueck
 
@@ -32,7 +32,7 @@ OUT = ROOT / "tests" / "out" / "landscape"
 HTML_PATH = (ROOT / os.environ.get("GAMETAB_HTML", "docs/index.html")).resolve()
 URL = HTML_PATH.as_uri()
 VIEWPORTS = [(568, 320), (667, 375), (740, 360), (812, 375), (844, 390), (852, 393), (932, 430)]
-THEMES = ["Nocturne", "Hell", "Vitrum", "Noir"]
+THEMES = ["Nocturne", "Hell", "Noir"]
 ATTR = "data-phone-landscape"
 CALM_CSS = ("*,*::before,*::after{animation:none!important;transition:none!important;"
             "caret-color:transparent!important;scroll-behavior:auto!important}")
@@ -330,7 +330,7 @@ def parse_vps(s):
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--vp", default="all", help="Viewports quer, z.B. 844x390,568x320 oder all")
-    ap.add_argument("--theme", default="Nocturne", help="Nocturne|Hell|Vitrum|Noir|all, kommagetrennt")
+    ap.add_argument("--theme", default="Nocturne", help="Nocturne|Hell|Noir|all, kommagetrennt")
     ap.add_argument("--only", default="start,rotate,neg", help="Szenarien: " + ",".join(SCENARIOS))
     ap.add_argument("--strict-touch", action="store_true", help="Touchflaechen < 44px als Fehler werten")
     a = ap.parse_args()

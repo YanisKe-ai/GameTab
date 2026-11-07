@@ -19,11 +19,11 @@ import { gtCR, gtHexRgb, gtSkin } from "../../shared/setup-ui.js";
 const{SchieberTournament,GtStuLogo}=(function(){
 
 let UID="app:dark";
-function stuT(theme){return["light","vitrum","noir"].includes(theme)?theme:"dark";}
+function stuT(theme){return["light","noir"].includes(theme)?theme:"dark";}
 function stuSkin(theme){const T=stuT(theme);const tk=shellTokens(T);return gtSkin(T,tk,"jass",T==="noir"?{}:{acc:T==="light"?"#D52B1E":"#F0584A"});}
 function stuAvPal(d){const T=String(d||"").slice(4);return T==="light"?["#B8241A","#1D5FA8","#2F6B52","#7A5512","#6A43A8","#4A5260"]:T==="noir"?["#EDEDED","#BDBDBD","#9A9A9A","#D6D6D6","#ABABAB","#C8C8C8"]:["#F0584A","#7DB7F0","#5FB58C","#E0BA72","#B89BE6","#AEB5B9"];}
-function stuRoot(theme){const T=stuT(theme);const s=stuSkin(T);const L=T==="light",V=T==="vitrum",N=T==="noir";const a=s.txt;const al=(x,h)=>/^#[0-9a-fA-F]{6}$/.test(x)?x+h:x;
-const solid=L?"#FFFFFF":V?"#1A1E2B":N?"#161616":"#1C1F29";
+function stuRoot(theme){const T=stuT(theme);const s=stuSkin(T);const L=T==="light",N=T==="noir";const a=s.txt;const al=(x,h)=>/^#[0-9a-fA-F]{6}$/.test(x)?x+h:x;
+const solid=L?"#FFFFFF":N?"#161616":"#1C1F29";
 const v={"--st-hink":s.ink,"--st-hmuted":s.muted,"--st-uline":a,"--st-live":a,"--st-title-font":"800 30px/1.1 'Baloo 2',sans-serif","--st-title-track":"-0.01em","--st-data":"'Inter',sans-serif","--st-ui":"'Inter',sans-serif",
 "--st-body":"transparent","--st-body-solid":solid,"--st-body-r":"0","--st-body-pad":"0","--st-body-border":"none","--st-body-shadow":"none",
 "--st-panel":s.card,"--st-pline":s.border,"--st-pshadow":s.shadow,"--st-ink":s.ink,"--st-muted":s.muted,"--st-bline":L?"rgba(24,22,32,0.2)":"rgba(255,255,255,0.2)","--st-rline":s.border,
@@ -249,8 +249,6 @@ const CSS=`
 .gtst-grandart{position:absolute;right:-8px;top:-2px;width:118px;height:96px;pointer-events:none;z-index:0}
 .gtL-content .gtst-cta{position:static}
 .gtst[data-t=light] .gtst-input,.gtst[data-t=light] .gtst-sel{color-scheme:light}
-.gtst[data-t=vitrum] .gtst-panel,.gtst[data-t=vitrum] .gtst-sheet{-webkit-backdrop-filter:blur(14px) saturate(140%);backdrop-filter:blur(14px) saturate(140%)}
-.gtst[data-t=vitrum] .gtst-sheet{background:rgba(26,30,43,.94)}
 .gtst .gtst-title{font-weight:800}
 `;
 const VARS={

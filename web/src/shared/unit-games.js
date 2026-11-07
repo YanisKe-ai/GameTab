@@ -71,7 +71,7 @@ function GtRace({ players, target, tk, theme, accent, font, label }) {
     while (ms.some(q => q.r === r && Math.abs(q.f - f) < 0.07 + q.r * 0.07)) r++;
     ms.push({ p, i, f, r: Math.min(r, 5) });
   });
-  return <section className={"gt-ug-race gt-ug-po" + (theme === "vitrum" ? " gtL-glass-soft" : "")} aria-label={label} style={{ background: ugSurf(theme) }}>
+  return <section className={"gt-ug-race gt-ug-po"} aria-label={label} style={{ background: ugSurf(theme) }}>
     <div className="gt-ug-lab" style={{ color: tk.muted }}>{label}</div>
     <div className="gt-ug-rl" style={{ height: 30 }}>
       <i style={{ background: ugLine(theme) }} />
@@ -90,7 +90,7 @@ function GtTiles({ players, target, tk, theme, accent, font, label }) {
   return <section className="gt-ug-po" aria-label={label}>
     <div className="gt-ug-tiles" style={{ gridTemplateColumns: `repeat(${cols},minmax(0,1fr))` }}>{players.map(p => {
       const f = Math.min(1, Math.max(0, (p.total || 0) / T));
-      return <div key={p.id} className={"gt-ug-tile" + (theme === "vitrum" ? " gtL-glass-soft" : "")} style={{ background: ugSurf(theme) }}>
+      return <div key={p.id} className={"gt-ug-tile"} style={{ background: ugSurf(theme) }}>
         <span className="gt-ug-tf" aria-hidden="true" style={{ background: `color-mix(in oklab, ${accent} ${theme === "light" ? 30 : 34}%, transparent)`, transform: `scaleY(${f})` }} />
         <div className="gt-ug-tn" style={{ color: tk.ink }}>{p.id === lead && (p.total || 0) > 0 && <GameIcon name="crown" size={14} color={tk.gold || accent} style={{ flexShrink: 0 }} />}<span>{p.name}</span></div>
         <div><span className="gt-ug-tv" style={{ color: tk.ink, fontFamily: font }}><GtCount value={p.total} mem={"ug-t" + p.id} good="high" dpos="r" /></span><span className="gt-ug-tt" style={{ color: tk.muted }}>/ {target}</span></div>
@@ -102,7 +102,7 @@ function GtTiles({ players, target, tk, theme, accent, font, label }) {
 // Romme: Minuspunkte als grosse Zahl mit Balken Richtung Spielende
 function GtBars({ players, target, tk, theme, accent, font, label }) {
   const T = Math.max(1, target || 1);
-  return <section className={"gt-ug-bars gt-ug-po" + (theme === "vitrum" ? " gtL-glass-soft" : "")} aria-label={label} style={{ background: ugSurf(theme) }}>
+  return <section className={"gt-ug-bars gt-ug-po"} aria-label={label} style={{ background: ugSurf(theme) }}>
     <div className="gt-ug-lab" style={{ color: tk.muted }}>{label}</div>
     {players.map(p => {
       const f = Math.min(1, Math.max(0, (p.total || 0) / T));

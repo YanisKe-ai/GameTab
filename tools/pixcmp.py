@@ -4,7 +4,7 @@
     python3 tools/pixcmp.py index.html docs/index.html [--out tests/out/pixcmp] [--quick] [--jobs 4] [--tol 0]
 
 Ansichten: Startseite, beide Kategorien, Einstellungen, Statistik, 6 Spiele (Setup und laufend), Podest;
-je 4 Themes (Nocturne/Hell/Vitrum/Noir) x Handy (393x852) / Laptop (1512x982).
+je 3 Themes (Nocturne/Hell/Noir) x Handy (393x852) / Laptop (1512x982).
 Ruhe: reduced motion, CSS ohne Animationen/Transitions, feste Math.random, Wartezeit.
 Bericht: <out>/report.txt, Diff-Bilder <out>/diff/*.png. Exit 0 = keine Abweichung, 1 = Abweichungen, 2 = Fehler.
 Nutzt Playwright (Python) und Pillow."""
@@ -16,7 +16,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 VIEWS = {"handy": (393, 852, "Handy"), "laptop": (1512, 982, "Laptop")}
-THEMES = ["Nocturne", "Hell", "Vitrum", "Noir"]
+THEMES = ["Nocturne", "Hell", "Noir"]
 GAMES = [("Schreibunterlagen", "Skyjo"), ("Schreibunterlagen", "Flip 7"), ("Schreibunterlagen", "Yatzy"),
          ("Schreibunterlagen", "Tutto"), ("Partyspiele", "Impostor"), ("Partyspiele", "Tabu")]
 WAIT = 600

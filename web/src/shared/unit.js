@@ -10,7 +10,7 @@ const GT_UNIT_CSS = `
 .gt-u-col>.gt-gamehead,.gt-u-col>:has(>.gt-gamehead){z-index:20}
 .gt-u-col>.gt-u-glow{position:absolute;z-index:0;top:calc(-20px - env(safe-area-inset-top,0px));left:calc(50% - 50vw);right:calc(50% - 50vw);height:calc(320px + env(safe-area-inset-top,0px));pointer-events:none;background:radial-gradient(120% 100% at 50% 0,color-mix(in oklab,var(--gt-u-acc) 30%,transparent),transparent 72%)}
 html[data-gt-theme="light"] .gt-u-col>.gt-u-glow{background:radial-gradient(120% 100% at 50% 0,color-mix(in oklab,var(--gt-u-acc) 16%,transparent),transparent 72%)}
-html[data-gt-theme="noir"] .gt-u-col>.gt-u-glow,html[data-gt-theme="vitrum"] .gt-u-col>.gt-u-glow{display:none}
+html[data-gt-theme="noir"] .gt-u-col>.gt-u-glow{display:none}
 .gt-u-col>.gt-u-dock,.gt-u-col>.gt-su-cta{margin-top:auto}
 .gt-u-col .gt-su-cta::before{left:calc(50% - 50vw);right:calc(50% - 50vw);bottom:-40px}
 .gtL-content .gt-u-col .gt-su-cta::before{left:0;right:0;bottom:0}

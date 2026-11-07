@@ -16,7 +16,7 @@ import ergebnisbild_app as A  # noqa: E402
 from playwright.sync_api import sync_playwright  # noqa: E402
 
 ONLY = [sys.argv[i + 1] for i, a in enumerate(sys.argv) if a == "--only" and i + 1 < len(sys.argv)]
-THEMES = ["Nocturne", "Hell", "Vitrum", "Noir"]
+THEMES = ["Nocturne", "Hell", "Noir"]
 LAYOUTS = [("hoch", 393, 852, False), ("quer", 852, 393, True), ("tablet", 820, 1180, False)]
 FLOWS = {"Impostor": A.flow_impostor, "Verraeter": A.flow_verraeter, "Werwolf": A.flow_werwolf, "Mafia": A.flow_mafia, "Am ehesten": A.flow_amehesten}
 

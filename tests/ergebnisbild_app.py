@@ -173,8 +173,9 @@ def flow_fivesec(pg):
         nxt = R.btn_re(pg, "Nächste Kategorie")
         if nxt.count():
             R.click(pg, nxt, 500)
-    R.click(pg, R.btn(pg, "Spiel beenden").last, 600)
-    conf = R.btn_re(pg, "Wirklich beenden")
+    R.click(pg, R.btn(pg, "Menü").first, 600)
+    R.click(pg, pg.get_by_role("menuitem", name="Spiel beenden").first, 600)
+    conf = pg.get_by_role("menuitem", name=re.compile("wirklich beenden"))
     if conf.count():
         R.click(pg, conf.last, 900)
 
@@ -226,7 +227,7 @@ def drive(pg, maxsteps=120, pick=0):
                 R.click(pg, loc.first, 450); done = True; break
         if done:
             continue
-        cand = [n for n in names if n not in ("Spiel beenden", "Zur Startseite", "Regeln anzeigen", "Zurück", "Start", "Reset")]
+        cand = [n for n in names if n not in ("Spiel beenden", "Zur Startseite", "Regeln anzeigen", "Zurück", "Start", "Reset", "Menü", "Erscheinungsbild wechseln")]
         if cand:
             R.click(pg, R.btn(pg, cand[min(pick, len(cand) - 1)]).first, 400); continue
         R.wait(pg, 400)

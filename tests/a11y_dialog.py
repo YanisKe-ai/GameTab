@@ -126,12 +126,68 @@ def case_onboarding(b):
     ctx.close()
 
 
+JS_MENU = """() => {
+  const m = document.querySelector('[role="menu"]');
+  if (!m || !m.getClientRects().length) return null;
+  const a = document.activeElement;
+  const foc = 'a[href],button:not([disabled]),input:not([disabled]):not([type="hidden"]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
+  const outside = [...document.querySelectorAll(foc)].filter(e => e.getClientRects().length && !m.contains(e) && !e.contains(m));
+  const open = outside.filter(e => !e.closest('[inert]')).map(e => (e.getAttribute('aria-label') || e.textContent || e.tagName).trim().slice(0, 30));
+  const trg = document.querySelector('button[aria-haspopup="menu"]');
+  const items = [...m.querySelectorAll('[role="menuitem"]')];
+  return { inside: m.contains(a), label: m.getAttribute('aria-label') || '', expanded: trg && trg.getAttribute('aria-expanded'),
+           outsideOpen: open, nOutside: outside.length, nItems: items.length, activeIdx: items.indexOf(a),
+           minH: Math.min(...items.map(i => Math.round(i.getBoundingClientRect().height))) };
+}"""
+
+
+def menu_state(pg):
+    return pg.evaluate(JS_MENU)
+
+
+def check_menu(pg, name, trigger, shot=None):
+    """Menue im Spielkopf (role=menu): Fokus, aria-expanded, Tab-Schleife, Pfeiltasten, Escape, Fokus zurueck."""
+    trigger.focus()
+    pg.keyboard.press("Enter")
+    R.wait(pg, 800)
+    st = menu_state(pg)
+    ok(st is not None, f"{name}: Menue offen")
+    if st is None:
+        return
+    ok(st["inside"], f"{name}: Startfokus im Menue")
+    ok(st["expanded"] == "true", f"{name}: aria-expanded=true am Knopf")
+    ok(bool(st["label"]), f"{name}: zugaenglicher Name ({st['label']!r})")
+    ok(st["minH"] >= 46, f"{name}: Zeilenhoehe >= 46 ({st['minH']})")
+    ok(not st["outsideOpen"], f"{name}: Hintergrund inert ({st['nOutside']} Bedienelemente aussen, offen: {st['outsideOpen'][:3]})")
+    bad = 0
+    for key in ("Tab", "Shift+Tab"):
+        for _ in range(st["nItems"] * 2 + 2):
+            pg.keyboard.press(key)
+            s2 = menu_state(pg)
+            if s2 is None or not s2["inside"]:
+                bad += 1
+    ok(bad == 0, f"{name}: Tab-Schleife bleibt im Menue ({bad} Ausreisser)")
+    pg.keyboard.press("Home")
+    pg.keyboard.press("ArrowDown")
+    ok(menu_state(pg)["activeIdx"] == 1, f"{name}: Pfeil nach unten springt auf den zweiten Eintrag")
+    pg.keyboard.press("End")
+    ok(menu_state(pg)["activeIdx"] == st["nItems"] - 1, f"{name}: Ende springt auf den letzten Eintrag")
+    if shot:
+        pg.screenshot(path=str(OUT / f"{shot}.png"))
+    pg.keyboard.press("Escape")
+    R.wait(pg, 600)
+    ok(menu_state(pg) is None, f"{name}: Escape schliesst")
+    ok(focus_is(pg, trigger), f"{name}: Fokus zurueck auf den Menue-Knopf")
+    ok(trigger.get_attribute("aria-expanded") == "false", f"{name}: aria-expanded=false nach dem Schliessen")
+    ok(pg.evaluate("document.querySelectorAll('[inert]').length") == 0, f"{name}: nach dem Schliessen kein inert mehr")
+
+
 def case_mehr(b):
     errors = []
     ctx, pg = new_phone(b, errors)
     to_schieber_board(pg)
-    check_modal(pg, "Mehr", pg.get_by_role("button", name="Mehr", exact=True).first, shot="mehr")
-    ok(not errors, f"Mehr: keine Seitenfehler {errors[:1]}")
+    check_menu(pg, "Menue", pg.get_by_role("button", name="Menü", exact=True).first, shot="menue")
+    ok(not errors, f"Menue: keine Seitenfehler {errors[:1]}")
     ctx.close()
 
 
@@ -139,7 +195,11 @@ def case_regeln(b):
     errors = []
     ctx, pg = new_phone(b, errors)
     to_schieber_setup(pg)
-    check_modal(pg, "Regeln", pg.get_by_role("button", name="Regeln anzeigen").first, shot="regeln")
+    trg = pg.get_by_role("button", name="Menü", exact=True).first
+    R.click(pg, trg, 700)
+    R.click(pg, pg.get_by_role("menuitem", name="Regeln").first, 900)
+    check_modal(pg, "Regeln", None, shot="regeln")
+    ok(focus_is(pg, trg), "Regeln: Fokus zurueck auf den Menue-Knopf")
     ok(not errors, f"Regeln: keine Seitenfehler {errors[:1]}")
     ctx.close()
 

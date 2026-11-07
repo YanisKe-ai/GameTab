@@ -99,9 +99,9 @@ def case_mehr(b):
     errors = []
     ctx, pg = new_phone(b, errors)
     to_schieber_board(pg)
-    R.click(pg, pg.get_by_role("button", name="Mehr", exact=True).first, 800)
-    check(pg, "Mehr-Sheet", ".gt-more-sheet", content_sel=".gt-more-sheet > div")
-    ok(not errors, f"Mehr: keine Seitenfehler {errors[:1]}")
+    R.click(pg, pg.get_by_role("button", name="Menü", exact=True).first, 800)
+    check(pg, "Menue", ".gt-hm-dim", content_sel=".gt-hm-panel")
+    ok(not errors, f"Menue: keine Seitenfehler {errors[:1]}")
     ctx.close()
 
 
@@ -112,7 +112,8 @@ def case_regeln(b):
     R.wait(pg, 900)
     R.open_game(pg, "Schreibunterlagen", "Jass")
     R.click(pg, pg.get_by_text("Schieber", exact=True).first, 800)
-    R.click(pg, pg.get_by_role("button", name="Regeln anzeigen").first, 900)
+    R.click(pg, pg.get_by_role("button", name="Menü", exact=True).first, 700)
+    R.click(pg, pg.get_by_role("menuitem", name="Regeln").first, 900)
     check(pg, "Regeln", DLG)
     ok(not errors, f"Regeln: keine Seitenfehler {errors[:1]}")
     ctx.close()

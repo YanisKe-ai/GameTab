@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.07-14 (07.11.2026 12:50)
+- Schieber: Nachtblau in Nocturne, grössere Karten, Fehler behoben
+
 ## 2026.11.07-13 (07.11.2026 11:23)
 - Vitrum entfernt, es gibt noch Nocturne, Hell und Noir
 

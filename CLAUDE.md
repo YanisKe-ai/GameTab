@@ -10,7 +10,7 @@ Live: https://yaniske-ai.github.io/GameTab/ (Repo-Name auf GitHub prüfen: `Game
 - Nach Änderungen: `npm run build && npm run lint && python3 tools/check.py`. Vor Release: `GAMETAB_HTML=docs/index.html <venv-python> tests/regression.py` (muss grün sein). Release: `python3 tools/release.py "Text"`, dann docs/ mitcommitten und pushen.
 - Wurzel-`index.html` ist ALT und wird nicht mehr gepflegt. Nie grosse Dateiteile ausgeben (translations.js, Inhaltslisten sind gross), gezielt grep/Slices.
 - Grosse Edits per Python-Skript mit `assert text.count(alt) == 1`, kleine mit dem Edit-Tool.
-- Dark und Light dürfen nie regressieren. Jede Design-Änderung in allen 4 Themes prüfen.
+- Dark und Light dürfen nie regressieren. Jede Design-Änderung in allen 3 Themes prüfen.
 
 ## Architektur
 - Quelle: `web/src/**` (ES-Module, JSX in `.js`-Dateien, klassische Runtime, jede JSX-Datei braucht `React` im Scope). Vite 8 baut `docs/index.html` als EINE Datei (vite-plugin-singlefile), Pages liefert `/docs` aus. Config `web/vite.config.mjs` (Plugin `gt-jsx-in-js`, Precache-Liste für sw.js). Statische Dateien (sw.js, version.json, fonts/, icons/, img/, Rechtstexte) liegen in der Wurzel und werden per `web/scripts/copy-public.mjs` kopiert.
@@ -24,13 +24,8 @@ Live: https://yaniske-ai.github.io/GameTab/ (Repo-Name auf GitHub prüfen: `Game
 - 6 Sprachpakete (DE, EN, ...). Neue Texte immer in allen Paketen ergänzen.
 
 ## Themes
-- Themes: `dark`, `light`, `vitrum` (Glas), `noir`. Pro Spiel `xxxTokens(theme)` und `xxxPageShellStyle(theme)`. Unbekannte Themes fallen auf dark.
-- GOLDREGEL Vitrum: `tk.bg` / `pageBg` ist im Vitrum-Modus bereits ein KOMPLETTER Mehrschicht-Verlauf. Nie in `radial-gradient(...)` verschachteln (ergibt ungültiges CSS und weisse Seite). Richtig:
-  `background: theme==="vitrum" ? tk.bg : \`radial-gradient(ellipse at 50% -10%, ${tk.bg2} 0%, ${tk.bg} 65%)\``
-  Minigolf: `repeating-linear-gradient(stripes), ${mg.bg}` im Vitrum-Zweig. `tools/check.py` warnt vor dieser Falle.
-- Vitrum-CSS in GLOBAL_STYLES: `.gtL-glass-soft` (kleine, oft wiederholte Elemente), `.gtL-glass` (mittel, Kacheln), `.gtL-glass-strong`. Technik: backdrop-filter blur/saturate, Highlight per radial-gradient (`background-image !important`), inset box-shadows (blau links, bernstein rechts) als Chromatic-Aberration-Imitat, `::after` Glanzstreifen bei `:active`. `border-image` ignoriert border-radius (vermeiden). `overflow:hidden` schneidet das eigene `::after` ab.
-- Startseite: die zwei grossen Kategorie-Kacheln nutzen `gtL-glass` (nicht strong), bewusst zurückgenommen.
-- AppLogo hat eine eigene Vitrum-Darstellung (zwei maskierte Layer mit `APP_LOGO_URI_GOLD`).
+- Themes: `dark`, `light`, `noir`. Pro Spiel `xxxTokens(theme)` und `xxxPageShellStyle(theme)`. Unbekannte Themes fallen auf dark.
+- Vitrum (Glas) wurde am 07.11.2026 auf Wunsch von Yanis komplett entfernt. Gespeichertes `vitrum` wird beim Laden zu `dark`. Nicht wieder einbauen.
 
 ## Akzentfarben der Spiele
 Skyjo #2FD9A8, Flip7 #FF7A3D, Jass #D52B1E, Yatzy #5B7A9D, Tutto #C1798F, Darts #C8102E, Wizard #E0BA72, Minigolf #3F8F42, Freeplay #9A7BA8, Impostor #C042E0, Werwolf #D9384A, Mafia #C9A15C, AmEhesten #2DD4BF, Tabu #FFC93C, HeadsUp #6C7FE8, 5Sek #FF9640.
@@ -53,8 +48,8 @@ Skyjo #2FD9A8, Flip7 #FF7A3D, Jass #D52B1E, Yatzy #5B7A9D, Tutto #C1798F, Darts 
 - Testwerkzeug: `$VENV tests/landscape.py [--vp 844x390|all] [--theme Nocturne|all] [--only start,rotate,neg] [--strict-touch]`, Screenshots `tests/out/landscape/`. Importierbar: `new_phone, start, goto_game, rotate, keyboard_portrait, check_page, small_targets, overflow_x, shot`.
 
 ## Test-Matrix (Playwright, Python)
-- Viewports: 393x852 (Handy), 1512x982 und 1280x800 (Laptop). Themes: Nocturne (intern dark), Hell, Vitrum, Noir. Python mit Playwright: siehe dev-notes/HELFER_BRIEF.md (venv).
-- Onboarding überspringen mit Text "Überspringen". Einstellungen: `button[aria-label="Einstellungen"]`. Theme-Buttons "Nocturne"/"Hell"/"Vitrum"/"Noir", Modus-Buttons "Handy"/"Laptop". Kategorien "Schreibunterlagen"/"Partyspiele".
+- Viewports: 393x852 (Handy), 1512x982 und 1280x800 (Laptop). Themes: Nocturne (intern dark), Hell, Noir. Python mit Playwright: siehe dev-notes/HELFER_BRIEF.md (venv).
+- Onboarding überspringen mit Text "Überspringen". Einstellungen: `button[aria-label="Einstellungen"]`. Theme-Buttons "Nocturne"/"Hell"/"Noir", Modus-Buttons "Handy"/"Laptop". Kategorien "Schreibunterlagen"/"Partyspiele".
 - Nach Klicks mindestens 500 ms warten (sonst Fehlalarme).
 - `tests/smoke.py` macht das automatisch, Screenshots in `tests/out/` ansehen (Read-Tool kann Bilder anzeigen).
 

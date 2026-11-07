@@ -48513,6 +48513,27 @@ var JASS_DIFF_CSS = `
 [data-phone-landscape] .jdp-keys{grid-template-columns:repeat(3,44px);row-gap:6px;padding:0 24px}
 [data-phone-landscape] .jdp-k{width:44px;height:44px;font-size:21px}
 [data-phone-landscape] .jdp-k svg{width:22px;height:22px}
+.jdp-tl,.jdp-tv{min-width:0;display:flex;align-items:center;border-top:1px solid color-mix(in srgb,var(--mu) 38%,transparent);padding-top:4px;font-weight:800;white-space:nowrap}
+.jdp-tl{padding-left:2px;font-size:12.5px;color:var(--mu)}
+.jdp-tv{justify-content:center;text-align:center;letter-spacing:-.01em;font-size:clamp(14px,calc((100cqw - 104px) / var(--n) / 3.5),19px)}
+.jdp-hm.is-scroll .jdp-lab,.jdp-hm.is-scroll .jdp-tl{position:sticky;left:0;z-index:1;background:var(--bgs)}
+.jdp-status:empty{display:none}
+.jdp:not(.is-ed):not(.gtL-content .jdp):not([data-phone-landscape] .jdp) .gt-jd-sheet{flex:1;min-height:0;width:100%;display:flex;flex-direction:column}
+.jdp:not(.is-ed):not(.gtL-content .jdp):not([data-phone-landscape] .jdp){height:100vh;height:100dvh;box-sizing:border-box;overflow:hidden;display:flex;flex-direction:column;padding-bottom:calc(14px + env(safe-area-inset-bottom))!important;--jd-rmin:28px;--jd-rg:6px}
+@media (display-mode:standalone){.jdp:not(.is-ed):not(.gtL-content .jdp):not([data-phone-landscape] .jdp){height:100vh}}
+.jdp:not(.is-ed):not(.gtL-content .jdp):not([data-phone-landscape] .jdp) .jdp-body{flex:1;min-height:0;display:flex;flex-direction:column}
+.jdp:not(.is-ed):not(.gtL-content .jdp):not([data-phone-landscape] .jdp) .jdp-status{margin:10px 0 0;min-height:0;font-size:13px}
+.jdp:not(.is-ed):not(.gtL-content .jdp):not([data-phone-landscape] .jdp) .jdp-status .win{font-size:15px}
+.jdp:not(.is-ed):not(.gtL-content .jdp):not([data-phone-landscape] .jdp) .jdp-hm{flex:1;min-height:0;display:flex;margin-top:4px;overflow:auto;overscroll-behavior:contain}
+.jdp:not(.is-ed):not(.gtL-content .jdp):not([data-phone-landscape] .jdp) .jdp-grid{flex:0 0 100%;min-width:min-content;row-gap:var(--jd-rg);grid-template-columns:var(--lw) repeat(var(--n),minmax(46px,1fr));grid-template-rows:auto repeat(10,minmax(var(--jd-rmin),1fr)) auto}
+.jdp:not(.is-ed):not(.gtL-content .jdp):not([data-phone-landscape] .jdp) .jdp-c{min-height:0;overflow:hidden}
+.jdp:not(.is-ed):not(.gtL-content .jdp):not([data-phone-landscape] .jdp) .jdp-cw{height:100%}
+.jdp:not(.is-ed):not(.gtL-content .jdp):not([data-phone-landscape] .jdp) .jdp-card{height:min(100%,42px);width:auto;aspect-ratio:40/56}
+.jdp:not(.is-ed):not(.gtL-content .jdp):not([data-phone-landscape] .jdp) .jdp-cta{flex:none;position:static;min-height:52px;margin-top:10px;border-radius:18px}
+.jdp:not(.is-ed):not(.gtL-content .jdp):not([data-phone-landscape] .jdp) .gt-foot-acts{display:none}
+@container (max-width:300px){.jdp:not(.is-ed):not(.gtL-content .jdp):not([data-phone-landscape] .jdp) .jdp-grid{--lw:86px;grid-template-columns:var(--lw) repeat(var(--n),minmax(40px,1fr))}}
+@media (max-height:760px){.jdp:not(.is-ed):not(.gtL-content .jdp):not([data-phone-landscape] .jdp){--jd-rg:4px}.jdp:not(.is-ed):not(.gtL-content .jdp):not([data-phone-landscape] .jdp) .jdp-c b{font-size:15px}.jdp:not(.is-ed):not(.gtL-content .jdp):not([data-phone-landscape] .jdp) .jdp-c em{font-size:9px}.jdp:not(.is-ed):not(.gtL-content .jdp):not([data-phone-landscape] .jdp) .jdp-cta{min-height:46px;margin-top:8px}}
+@media (max-height:640px){.jdp:not(.is-ed):not(.gtL-content .jdp):not([data-phone-landscape] .jdp){--jd-rmin:22px;--jd-rg:3px;padding-top:10px!important}.jdp:not(.is-ed):not(.gtL-content .jdp):not([data-phone-landscape] .jdp) .jdp-cw{width:20px!important}.jdp:not(.is-ed):not(.gtL-content .jdp):not([data-phone-landscape] .jdp) .jdp-card{height:min(100%,32px)}.jdp:not(.is-ed):not(.gtL-content .jdp):not([data-phone-landscape] .jdp) .jdp-lab{gap:5px}.jdp:not(.is-ed):not(.gtL-content .jdp):not([data-phone-landscape] .jdp) .jdp-c b{font-size:13px}.jdp:not(.is-ed):not(.gtL-content .jdp):not([data-phone-landscape] .jdp) .jdp-c em{font-size:8.5px}.jdp:not(.is-ed):not(.gtL-content .jdp):not([data-phone-landscape] .jdp) .jdp-lab .cn{font-size:11.5px}.jdp:not(.is-ed):not(.gtL-content .jdp):not([data-phone-landscape] .jdp) .jdp-lab .cf{font-size:9.5px}.jdp:not(.is-ed):not(.gtL-content .jdp):not([data-phone-landscape] .jdp) .jdp-lt{flex-direction:row;align-items:baseline;gap:4px}.jdp:not(.is-ed):not(.gtL-content .jdp):not([data-phone-landscape] .jdp) .jdp-cta{min-height:42px;margin-top:6px;font-size:15px}.jdp:not(.is-ed):not(.gtL-content .jdp):not([data-phone-landscape] .jdp) .jdp-tot{font-size:15px}}
 `;
 function jdTokens(theme) {
 	const dark = {
@@ -49042,6 +49063,17 @@ function JassPlay({ players, scores, setScores, onResetSheet, onEditPlayers, onB
 	const [confirmingReset, setConfirmingReset] = useState$11(false);
 	const [confirmingSetup, setConfirmingSetup] = useState$11(false);
 	const [rulesOpen, setRulesOpen] = useState$11(false);
+	const jdHmRef = useRef$17(null);
+	useEffect$15(() => {
+		const el = jdHmRef.current;
+		if (!el) return;
+		const upd = () => {
+			el.classList.toggle("is-scroll", el.scrollWidth > el.clientWidth + 1);
+		};
+		upd();
+		window.addEventListener("resize", upd);
+		return () => window.removeEventListener("resize", upd);
+	});
 	const filledCounts = players.map((p) => jassFilledCount(scores[p.id]));
 	const finished = players.length > 0 && filledCounts.every((c) => c === JASS_CATEGORIES.length);
 	const totals = players.map((p) => jassTotal(scores, players, p.id));
@@ -49171,7 +49203,7 @@ function JassPlay({ players, scores, setScores, onResetSheet, onEditPlayers, onB
 	const jdStatus = jdHead ? /* @__PURE__ */ import_react.default.createElement("span", { className: "win" }, jdHead) : jdLead ? /* @__PURE__ */ import_react.default.createElement(Fragment$3, null, /* @__PURE__ */ import_react.default.createElement("span", {
 		className: "hn",
 		title: jdTop[0].name
-	}, jdTop[0].name), " ", t("jassDiffLeads"), " ", /* @__PURE__ */ import_react.default.createElement("b", null, jdFmt(maxTotal))) : jdAny ? /* @__PURE__ */ import_react.default.createElement("span", null, t("jassDiffTied")) : filledCounts.every((c) => c === 0) ? /* @__PURE__ */ import_react.default.createElement("span", null, t("jassTapHint")) : null;
+	}, jdTop[0].name), " ", t("jassDiffLeads"), " ", /* @__PURE__ */ import_react.default.createElement("b", null, jdFmt(maxTotal))) : jdAny ? /* @__PURE__ */ import_react.default.createElement("span", null, t("jassDiffTied")) : null;
 	const jdCurCat = jdCur ? JASS_CATEGORIES.find((c) => c.id === jdCur) : null;
 	const jdCurJk = jdCur === "joker1" ? " I" : jdCur === "joker2" ? " II" : "";
 	return /* @__PURE__ */ import_react.default.createElement("div", {
@@ -49231,7 +49263,10 @@ function JassPlay({ players, scores, setScores, onResetSheet, onEditPlayers, onB
 		className: "jdp-status",
 		role: "status",
 		"aria-live": "polite"
-	}, jdStatus), /* @__PURE__ */ import_react.default.createElement("div", { className: "jdp-hm" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "jdp-grid" }, /* @__PURE__ */ import_react.default.createElement("div", null), players.map((p, i) => {
+	}, jdStatus), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "jdp-hm",
+		ref: jdHmRef
+	}, /* @__PURE__ */ import_react.default.createElement("div", { className: "jdp-grid" }, /* @__PURE__ */ import_react.default.createElement("div", null), players.map((p, i) => {
 		const parts = String(p.name).trim().split(/\s+/);
 		return /* @__PURE__ */ import_react.default.createElement("div", {
 			key: p.id,
@@ -49271,6 +49306,16 @@ function JassPlay({ players, scores, setScores, onResetSheet, onEditPlayers, onB
 				"aria-hidden": "true"
 			}));
 		}));
+	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "jdp-tl" }, t("gtlTotal")), players.map((p) => {
+		const pts = JASS_CATEGORIES.reduce((sum, c) => {
+			const v = scores[p.id][c.id];
+			return sum + (v ? v.total : 0);
+		}, 0);
+		return /* @__PURE__ */ import_react.default.createElement("div", {
+			key: p.id,
+			className: "jdp-tv",
+			"aria-label": t("gtlTotal") + " " + p.name + ": " + pts
+		}, pts);
 	}))), !editing && jdCurCat && jdNext != null && /* @__PURE__ */ import_react.default.createElement("button", {
 		type: "button",
 		className: "jdp-cta",
@@ -67999,7 +68044,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.07-18";
+var APP_BUILD = "2026.11.07-19";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -111668,7 +111713,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.07-18");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.07-19");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -114271,7 +114316,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.07-18" && !upd) {
+		if (seen && seen !== "2026.11.07-19" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -114280,7 +114325,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.07-18" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.07-19" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.07-19 (07.11.2026 17:14)
+- Differenzler: ohne Scrollen, Zeile Total
+
 ## 2026.11.07-18 (07.11.2026 16:27)
 - Differenzler: zarte Farben, Jasskarten, Einrichtung in Nachtblau
 

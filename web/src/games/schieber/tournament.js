@@ -25,7 +25,7 @@ function stuAvPal(d){const T=String(d||"").slice(4);return T==="light"?["#B8241A
 function stuRoot(theme){const T=stuT(theme);const s=stuSkin(T);const L=T==="light",N=T==="noir";const a=s.txt;const al=(x,h)=>/^#[0-9a-fA-F]{6}$/.test(x)?x+h:x;
 const solid=L?"#FFFFFF":N?"#161616":"#1C1F29";
 const v={"--st-hink":s.ink,"--st-hmuted":s.muted,"--st-uline":a,"--st-live":a,"--st-title-font":"800 30px/1.1 'Baloo 2',sans-serif","--st-title-track":"-0.01em","--st-data":"'Inter',sans-serif","--st-ui":"'Inter',sans-serif",
-"--st-body":"transparent","--st-body-solid":solid,"--st-body-r":"0","--st-body-pad":"0","--st-body-border":"none","--st-body-shadow":"none",
+"--st-body":"transparent","--st-pagebg":L?"#F8F9FA":N?"#0A0A0A":"#12141C","--st-body-solid":solid,"--st-body-r":"0","--st-body-pad":"0","--st-body-border":"none","--st-body-shadow":"none",
 "--st-panel":s.card,"--st-pline":s.border,"--st-pshadow":s.shadow,"--st-ink":s.ink,"--st-muted":s.muted,"--st-bline":L?"rgba(24,22,32,0.2)":"rgba(255,255,255,0.2)","--st-rline":s.border,
 "--st-accent":s.fill,"--st-on-accent":s.on,"--st-accent-soft":al(s.fill,"1F"),"--st-focus":a,"--st-danger":N?s.ink:L?"#B42318":"#FF8A7A","--st-field":L?"#FFFFFF":N?"#141414":"rgba(255,255,255,0.05)","--st-ph":s.muted,"--st-hover":L?"rgba(24,22,32,0.05)":"rgba(255,255,255,0.06)",
 "--st-tabgap":"0","--st-tabpad":"0","--st-tabbg":"transparent","--st-tabr":"6px","--st-tabline":"1px solid "+s.border,"--st-tabon-ink":s.ink,"--st-tabon-bg":"transparent",
@@ -162,6 +162,8 @@ const CSS=`
 .gtst-people .gtst-cap{display:block;margin-bottom:3px}
 .gtst-cta{position:sticky;bottom:calc(env(safe-area-inset-bottom,0px) + 10px);z-index:6;margin-top:14px;display:grid;gap:8px}
 .gtst-cta .is-primary{min-height:52px;font-size:16px;box-shadow:var(--st-cta-shadow)}
+.gtst-cta::before{content:"";position:absolute;z-index:-1;left:-14px;right:-14px;top:-18px;bottom:calc(-1 * (env(safe-area-inset-bottom,0px) + 10px));background:linear-gradient(to bottom,transparent,var(--st-pagebg) 46%);pointer-events:none}
+.gtL-content .gtst-cta::before,[data-phone-landscape] .gtst-cta::before{display:none}
 .gtst-chips{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 8px;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
 .gtst-chip{min-height:44px;flex:0 0 auto;border-radius:999px;border:1px solid var(--st-bline);background:transparent;color:var(--st-ink);font:600 14px/1.2 var(--st-ui);padding:6px 14px 6px 6px;display:inline-flex;align-items:center;gap:8px;cursor:pointer;max-width:240px}
 .gtst-chip>span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -507,7 +509,7 @@ if(k==="match")sheetEl=<MatchSheet key={"m"+(sheet.match?sheet.match.id:"")+shee
 else if(k==="people")sheetEl=<PeopleSheet tour={tour} t={t} lbl={lbl} design={design} onClose={close} toast={toast}/>;
 else if(k==="menu")sheetEl=<MenuSheet tour={tour} t={t} onClose={close} openSheet={openSheet} goList={goList} toast={toast} lbl={lbl}/>;
 else if(k==="abort"){const m=sheet.match;const tb=tour.tables.find(x=>x.id===m.tableId);sheetEl=<ConfirmSheet cancel={t("stuCancel")} title={fmt(t("stuAbortT"),{table:tb?fmt(t("stuTableN"),{n:tb.number}):""})} text={t("stuAbortText")} ok={t("stuAbortOk")} danger onClose={close} onOk={()=>{const r=commitT(x=>GT_ST.abortMatch(x,m.id));if(r.ok){close();toast({msg:t("stuToastAborted")});}}}/>;}
-else if(k==="end"){const run=Object.keys(GT_ST.occupancy(tour).runningByTable).length;const w=d.winners;sheetEl=<ConfirmSheet cancel={t("stuCancel")} title={t("stuEndT")} ok={t("stuEndOk")} okDisabled={run>0} onClose={close} onOk={()=>{const r=commitT(x=>GT_ST.completeTournament(x));if(r.ok){close();toast({msg:t("stuToastEnded")});}}}>
+else if(k==="end"){const run=Object.keys(GT_ST.occupancy(tour).runningByTable).length;const w=d.winners;sheetEl=<ConfirmSheet cancel={t("stuCancel")} title={t("stuEndT")} ok={t("stuEndOk")} okDisabled={run>0} onClose={close} onOk={()=>{const r=commitT(x=>GT_ST.completeTournament(x));if(r.ok){close();toast({msg:t("stuToastEnded")});try{window.scrollTo(0,0);}catch(e){}}}}>
 {run>0?<div className="gtst-note" role="alert">{fmt(t(run===1?"stuEndBlockedOne":"stuEndBlockedOther"),{n:run})}</div>:<div><p style={{margin:"0 0 10px",font:"500 15px/1.5 var(--st-ui)"}}>{d.summary.matches?fmt(t("stuEndSummary"),{m:d.summary.matches,p:d.summary.players}):t("stuEndNoMatches")}</p>{w.length>0&&<div className="gtst-sum"><div className="gtst-cap" style={{marginBottom:4}}>{w.length>1?t("stuWinnersFinal"):t("stuWinnerFinal")}</div>{w.map(x=>lbl(x.id)+" ("+pts(x.points)+")").join(", ")}</div>}<p className="gtst-help">{t("stuEndHint")}</p></div>}</ConfirmSheet>;}
 else if(k==="reopen")sheetEl=<ConfirmSheet cancel={t("stuCancel")} title={t("stuReopenT")} text={t("stuReopenText")} ok={t("stuReopen")} onClose={close} onOk={()=>{const r=commitT(x=>GT_ST.reopenTournament(x));if(r.ok){close();toast({msg:t("stuToastReopened")});}}}/>;
 else if(k==="delete")sheetEl=<ConfirmSheet cancel={t("stuCancel")} title={fmt(t("stuDeleteT"),{name:tour.name})} text={t("stuDeleteText")} ok={t("stuDeleteOk")} danger onClose={close} onOk={()=>doDelete(tour)}/>;

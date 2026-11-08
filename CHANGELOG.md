@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.08-16 (08.11.2026 22:49)
+- Skyjo: Schritt für Schritt, erst wer beendet hat, dann jede Person einzeln
+
 ## 2026.11.08-15 (08.11.2026 22:26)
 - Versionsnummer im Format TT.MM.JJJJ
 

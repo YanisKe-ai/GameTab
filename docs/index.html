@@ -7682,7 +7682,11 @@ var TRANSLATIONS = {
 	de: {
 		yzHelpFace: "Wie viele Würfel zeigen diese Augenzahl?",
 		yzHelpOnePair: "Zwei gleiche Würfel. Welche Augenzahl?",
-		yzHelpTwoPairs: "Zwei verschiedene Paare. Welche?",
+		yzHelpTwoPairs: "Welche zwei Paare?",
+		yzPairName: (n) => `Paar ${n}`,
+		yzPairsTwice: (n) => `Zweimal Paar ${n}`,
+		yzPairsSum: (a, b) => `Paar ${a} + Paar ${b}`,
+		yzPairsHint: "Zwei Paare antippen, gleiches Paar zweimal geht auch",
 		yzHelpThreeKind: "Drei gleiche Würfel. Welche Augenzahl?",
 		yzHelpFourKind: "Vier gleiche Würfel. Welche Augenzahl?",
 		yzHelpSmall: "Die Würfel 1 bis 5 liegen in einer Reihe.",
@@ -9368,7 +9372,11 @@ var TRANSLATIONS = {
 	en: {
 		yzHelpFace: "How many dice show this number?",
 		yzHelpOnePair: "Two dice alike. Which number?",
-		yzHelpTwoPairs: "Two different pairs. Which ones?",
+		yzHelpTwoPairs: "Which two pairs?",
+		yzPairName: (n) => `Pair ${n}`,
+		yzPairsTwice: (n) => `Pair ${n} twice`,
+		yzPairsSum: (a, b) => `Pair ${a} + Pair ${b}`,
+		yzPairsHint: "Tap two pairs, the same pair twice works too",
 		yzHelpThreeKind: "Three dice alike. Which number?",
 		yzHelpFourKind: "Four dice alike. Which number?",
 		yzHelpSmall: "Dice 1 to 5 in a row.",
@@ -11054,7 +11062,11 @@ var TRANSLATIONS = {
 	fr: {
 		yzHelpFace: "Combien de dés montrent ce chiffre ?",
 		yzHelpOnePair: "Deux dés identiques. Quel chiffre ?",
-		yzHelpTwoPairs: "Deux paires différentes. Lesquelles ?",
+		yzHelpTwoPairs: "Quelles deux paires ?",
+		yzPairName: (n) => `Paire ${n}`,
+		yzPairsTwice: (n) => `Paire ${n} deux fois`,
+		yzPairsSum: (a, b) => `Paire ${a} + Paire ${b}`,
+		yzPairsHint: "Touche deux paires, la même paire deux fois est possible",
 		yzHelpThreeKind: "Trois dés identiques. Quel chiffre ?",
 		yzHelpFourKind: "Quatre dés identiques. Quel chiffre ?",
 		yzHelpSmall: "Les dés 1 à 5 se suivent.",
@@ -12740,7 +12752,11 @@ var TRANSLATIONS = {
 	it: {
 		yzHelpFace: "Quanti dadi mostrano questo numero?",
 		yzHelpOnePair: "Due dadi uguali. Quale numero?",
-		yzHelpTwoPairs: "Due coppie diverse. Quali?",
+		yzHelpTwoPairs: "Quali due coppie?",
+		yzPairName: (n) => `Coppia ${n}`,
+		yzPairsTwice: (n) => `Coppia ${n} due volte`,
+		yzPairsSum: (a, b) => `Coppia ${a} + Coppia ${b}`,
+		yzPairsHint: "Tocca due coppie, anche la stessa coppia due volte",
 		yzHelpThreeKind: "Tre dadi uguali. Quale numero?",
 		yzHelpFourKind: "Quattro dadi uguali. Quale numero?",
 		yzHelpSmall: "I dadi da 1 a 5 in fila.",
@@ -14426,7 +14442,11 @@ var TRANSLATIONS = {
 	es: {
 		yzHelpFace: "¿Cuántos dados muestran este número?",
 		yzHelpOnePair: "Dos dados iguales. ¿Qué número?",
-		yzHelpTwoPairs: "Dos parejas distintas. ¿Cuáles?",
+		yzHelpTwoPairs: "¿Qué dos parejas?",
+		yzPairName: (n) => `Pareja ${n}`,
+		yzPairsTwice: (n) => `Pareja ${n} dos veces`,
+		yzPairsSum: (a, b) => `Pareja ${a} + Pareja ${b}`,
+		yzPairsHint: "Toca dos parejas, la misma pareja dos veces también vale",
 		yzHelpThreeKind: "Tres dados iguales. ¿Qué número?",
 		yzHelpFourKind: "Cuatro dados iguales. ¿Qué número?",
 		yzHelpSmall: "Los dados del 1 al 5 en fila.",
@@ -16112,7 +16132,11 @@ var TRANSLATIONS = {
 	pt: {
 		yzHelpFace: "Quantos dados mostram este número?",
 		yzHelpOnePair: "Dois dados iguais. Que número?",
-		yzHelpTwoPairs: "Dois pares diferentes. Quais?",
+		yzHelpTwoPairs: "Quais dois pares?",
+		yzPairName: (n) => `Par ${n}`,
+		yzPairsTwice: (n) => `Par ${n} duas vezes`,
+		yzPairsSum: (a, b) => `Par ${a} + Par ${b}`,
+		yzPairsHint: "Toca em dois pares, o mesmo par duas vezes também vale",
 		yzHelpThreeKind: "Três dados iguais. Que número?",
 		yzHelpFourKind: "Quatro dados iguais. Que número?",
 		yzHelpSmall: "Os dados de 1 a 5 em sequência.",
@@ -70759,7 +70783,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.08-17";
+var APP_BUILD = "2026.11.08-18";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -113388,6 +113412,9 @@ var YZ_ED_CSS = `
 .yz-rl{font:700 13px/1.2 'Inter',sans-serif;color:var(--ze-muted);margin:0 0 6px}
 .yz-row{display:grid;gap:8px}
 .yz-row.is-six{grid-template-columns:repeat(6,minmax(0,1fr));gap:4px}
+.yz-badge{position:absolute;top:4px;right:4px;min-width:20px;height:20px;padding:0 5px;box-sizing:border-box;border-radius:999px;background:var(--ze-on);color:var(--ze-acc);font:700 12px/20px 'Inter',sans-serif;text-align:center}
+.yz-sumline{margin:0;min-height:20px;text-align:center;font:700 15px/20px 'Inter',sans-serif;color:var(--ze-ink)}
+.yz-hint{margin:0;text-align:center;font:500 12.5px/1.3 'Inter',sans-serif;color:var(--ze-muted)}
 .yz-slots{display:flex;gap:6px;justify-content:center}
 .yz-slot{width:46px;height:46px;display:grid;place-items:center;border-radius:12px;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;background:var(--ze-bg)}
 .yz-tiles{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:12px;padding:2px}
@@ -113533,7 +113560,7 @@ function yzInit(category, cur) {
 		const n = cur / (id === "onePair" ? 2 : id === "threeKind" ? 3 : 4);
 		if (Number.isInteger(n) && n >= 1 && n <= 6) r.a = n;
 	} else if (id === "twoPairs") {
-		for (let a = 1; a <= 6 && !r.a; a++) for (let b = a + 1; b <= 6; b++) if (2 * a + 2 * b === cur) {
+		for (let a = 1; a <= 6 && !r.a; a++) for (let b = a; b <= 6; b++) if (2 * a + 2 * b === cur) {
 			r.a = a;
 			r.b = b;
 			break;
@@ -113757,37 +113784,62 @@ function YatzyEditorPanel({ editing, players, scores, totals, category, onSave, 
 			size: m === 4 ? 16 : m === 3 ? 20 : 22
 		}), /* @__PURE__ */ import_react.default.createElement("span", { className: "yz-tv" }, m * n))));
 	} else if (id === "twoPairs") {
-		const combos = [];
-		for (let a = 1; a <= 6; a++) for (let b = a + 1; b <= 6; b++) combos.push([a, b]);
-		body = /* @__PURE__ */ import_react.default.createElement("div", {
+		const pick = (n) => setSt((s) => {
+			if (s.a === n && s.b === n) return {
+				...s,
+				a: 0,
+				b: 0
+			};
+			if (s.a === n && s.b) return {
+				...s,
+				a: s.b,
+				b: 0
+			};
+			if (s.b === n) return {
+				...s,
+				b: 0
+			};
+			if (!s.a) return {
+				...s,
+				a: n
+			};
+			if (!s.b) return {
+				...s,
+				b: n
+			};
+			return {
+				...s,
+				b: n
+			};
+		});
+		const sumLine = st.a && st.b ? st.a === st.b ? t("yzPairsTwice")(st.a) : t("yzPairsSum")(st.a, st.b) : "";
+		body = /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("div", {
 			className: "yz-row",
 			style: grid3
-		}, combos.map(([a, b]) => /* @__PURE__ */ import_react.default.createElement(YzTile, {
-			key: a + "-" + b,
-			sel: st.a === a && st.b === b,
-			label: a + "" + a + " + " + b + b + " = " + (2 * a + 2 * b),
-			onPick: () => setSt((s) => ({
-				...s,
-				a,
-				b
-			})),
-			style: {
-				minHeight: 54,
-				gap: 4
-			}
-		}, /* @__PURE__ */ import_react.default.createElement(YzDice, {
-			faces: [
-				a,
-				a,
-				"gap",
-				b,
-				b
-			],
-			size: 14
-		}), /* @__PURE__ */ import_react.default.createElement("span", {
-			className: "yz-tv",
-			style: { fontSize: 16 }
-		}, 2 * a + 2 * b))));
+		}, six.map((n) => {
+			const c = (st.a === n ? 1 : 0) + (st.b === n ? 1 : 0);
+			const badge = c === 2 ? "×2" : c === 1 ? String(st.a === n ? 1 : 2) : "";
+			return /* @__PURE__ */ import_react.default.createElement(YzTile, {
+				key: n,
+				sel: c > 0,
+				label: t("yzPairName")(n) + (badge ? " (" + badge + ")" : ""),
+				onPick: () => pick(n),
+				style: {
+					minHeight: 72,
+					gap: 4,
+					position: "relative"
+				}
+			}, /* @__PURE__ */ import_react.default.createElement(YzDice, {
+				faces: [n, n],
+				size: 24
+			}), /* @__PURE__ */ import_react.default.createElement("span", { className: "yz-tm" }, t("yzPairName")(n)), badge && /* @__PURE__ */ import_react.default.createElement("span", {
+				className: "yz-badge",
+				"aria-hidden": "true"
+			}, badge));
+		})), /* @__PURE__ */ import_react.default.createElement("p", {
+			className: "yz-sumline",
+			"aria-live": "polite"
+		}, sumLine), /* @__PURE__ */ import_react.default.createElement("p", { className: "yz-hint" }, t("yzPairsHint")));
 	} else if (id === "fullHouse") {
 		const strip = [
 			st.a,
@@ -114002,10 +114054,7 @@ function YatzyEditorPanel({ editing, players, scores, totals, category, onSave, 
 			fontFamily: "'Space Grotesk', sans-serif",
 			fontVariantNumeric: "tabular-nums"
 		}
-	})))), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "yz-tiles",
-		style: { maxHeight: id === "twoPairs" ? "min(330px, 40dvh)" : void 0 }
-	}, body), /* @__PURE__ */ import_react.default.createElement("div", { className: "yz-foot" }, /* @__PURE__ */ import_react.default.createElement("button", {
+	})))), /* @__PURE__ */ import_react.default.createElement("div", { className: "yz-tiles" }, body), /* @__PURE__ */ import_react.default.createElement("div", { className: "yz-foot" }, /* @__PURE__ */ import_react.default.createElement("button", {
 		className: "yz-strike",
 		onClick: () => commit(0),
 		style: {
@@ -114797,7 +114846,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.08-17");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.08-18");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -117425,7 +117474,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.08-17" && !upd) {
+		if (seen && seen !== "2026.11.08-18" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -117434,7 +117483,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.08-17" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.08-18" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

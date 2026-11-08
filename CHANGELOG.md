@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.08-18 (08.11.2026 23:20)
+- Yatzy: 2 Paare mit 6 Kacheln, gleiches Paar zweimal möglich
+
 ## 2026.11.08-17 (08.11.2026 22:56)
 - Yatzy: klare Tabellenlinien, Eingabe mit Würfelbildern, keine unmöglichen Werte
 

@@ -64,7 +64,7 @@ const MG_UNIT_CSS = `
 const MG_LAND_CSS = `
 [data-phone-landscape] .mg-land { padding-top: calc(var(--pl-sat) + 6px) !important; padding-bottom: calc(var(--pl-sab) + 6px) !important; --mg-edw: clamp(280px, 40vw, 360px); }
 [data-phone-landscape] .mg-inner { max-width: none !important; margin: 0 !important; width: 100% !important; }
-[data-phone-landscape] .mg-split { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); grid-template-rows: auto auto minmax(0, 1fr) auto auto; column-gap: 12px; row-gap: 0; height: max(230px, calc(var(--pl-body) - 6px)); margin-top: 6px; }
+[data-phone-landscape] .mg-split { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); grid-template-rows: auto auto minmax(0, 1fr) auto auto; column-gap: 12px; row-gap: 0; height: max(230px, calc(var(--pl-body) - 22px)); margin-top: 6px; }
 [data-phone-landscape] .mg-split.mg-tab-table { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); }
 [data-phone-landscape] .mg-main { display: contents; }
 [data-phone-landscape] .mg-banner { grid-column: 1 / -1; grid-row: 1; margin-bottom: 8px !important; padding: 8px 12px !important; }
@@ -78,7 +78,7 @@ const MG_LAND_CSS = `
 [data-phone-landscape] .mg-land .mgPhoneOnly { display: none !important; }
 [data-phone-landscape] .mg-land .mgBar { grid-column: 2; grid-row: 4; position: static !important; margin: 8px 0 0 !important; padding: 0 !important; background: transparent !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; border: 0 !important; border-radius: 0 !important; box-shadow: none !important; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
 [data-phone-landscape] .mg-land .mgBar #mg-status { flex: 1 0 100%; margin: 0 !important; justify-content: flex-start !important; text-align: left !important; font-size: 13px !important; line-height: 1.3 !important; }
-[data-phone-landscape] .mg-land .mgBar [data-mg-main] { width: auto !important; flex: 1 1 140px; min-height: 48px !important; font-size: 17px !important; }
+[data-phone-landscape] .mg-land .mgBar [data-mg-main] { width: auto !important; flex: 1 1 140px; min-height: 44px !important; height: 44px !important; font-size: 17px !important; }
 [data-phone-landscape] .mg-land .mgBar [data-mg-undo] { margin: 0 !important; min-height: 44px !important; min-width: 44px; padding: 0 12px !important; flex: 0 0 auto; }
 [data-phone-landscape] .mg-side2 { display: block; grid-column: 2; grid-row: 5; }
 [data-phone-landscape] .mg-split .mgTableWrap td button { min-height: 44px !important; }

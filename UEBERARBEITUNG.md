@@ -196,11 +196,11 @@ Ab Nr. 5 ist die Reihenfolge frei. Ohne andere Anweisung von Yanis einfach der T
 |---|---|---|---|---|---|
 | 1 | Tutto | tutto | games/tutto | fertig 06.11.2026 | Kartenrechner auf Wunsch entfernt. Nur Chromium geprüft: Safari und echte Geräte offen |
 | 2 | Yatzy | yatzy | games/yatzy | fertig 07.11.2026 | Bonus 25. Nur Chromium geprüft: Safari, iPhone, iPad offen. Ab 7 Spielern scrollt das Blatt seitlich |
-| 3 | Schieber + Turnier | schieber | games/schieber | fertig 07.11.2026 | Nocturne Nachtblau, Tafel unverändert, Ergebnisbild bleibt (Logo oben, Ausnahme). Nur Chromium geprüft. Offen: Hausregel 6- bis 9-Blatt, Farbwerte Herz/Ecke ×1 bestätigen, Icon neu |
-| 4 | Jass Differenzler | jass-differenzler | games/jass | fertig 07.11.2026 | Prinzip bleibt (kein echter Differenzler mit Ansage, Entscheid Yanis). Nur Chromium geprüft. Offen: Ergebnisbild grün-gold passt nicht ganz zur App |
-| 4b | Schieber-Turnier perfektionieren | schieber-turnier | games/schieber/tournament*.js | in Arbeit | Wunsch Yanis 07.11.2026: direkt nach Differenzler |
-| 5 | Wizard | wizard | games/wizard | offen | |
-| 6 | Minigolf | minigolf | games/minigolf | offen | |
+| 3 | Schieber + Turnier | schieber | games/schieber | fertig 07.11.2026 | Nocturne Nachtblau, Tafel unverändert, Ergebnisbild bleibt (Logo oben, Ausnahme). Nur Chromium geprüft. Offen: Hausregel 6- bis 9-Blatt, Farbwerte Herz/Ecke ×1 bestätigen, Icon neu. Nachtrag 08.11.2026: Wyys-Knöpfe als Jasskarten mit Bauer und Dame, Tafel länger und oben, Eingabe mit Trumpfkarten und Faktor (Herz/Ecke ×1, Schaufel/Kreuz ×2, Obe/Unde ×3, bestätigt), Herz-Fächer auf der Einrichtung |
+| 4 | Jass Coiffeur (früher Differenzler) | jass-differenzler | games/jass | fertig 07.11.2026 | Prinzip bleibt (kein echter Differenzler mit Ansage, Entscheid Yanis). Nur Chromium geprüft. Offen: Ergebnisbild grün-gold passt nicht ganz zur App |
+| 4b | Schieber-Turnier perfektionieren | schieber-turnier | games/schieber/tournament*.js | fertig 07.11.2026 | Rundenvorschlag, Quote, Siegerkarte, Nachtblau. Offen: Knopf Zur Tafel im Browser nicht gesehen |
+| 5 | Wizard | wizard | games/wizard | fertig 08.11.2026 | Astrolabium, Ansage/Stiche reihum, Summenprüfung, Rückgängig, Beenden mit Wertung, Icon Zauberhut. Nur Chromium. Ergebnisbild jetzt Indigo mit Gold (08.11.2026). Offen: Regel Ansagen dürfen nicht aufgehen nicht bestätigt |
+| 6 | Minigolf | minigolf | games/minigolf | fertig 08.11.2026 | Anzeigetafel, Ball rollt zum Loch 18, Tasten 1 bis 7, Icon Loch mit Fahne, Export-Stempel. Nur Chromium. Podium zählt nur noch 0,9 s, Querformat korrigiert (08.11.2026) |
 | 7 | Skyjo | skyjo | games/skyjo | offen | |
 | 8 | Flip 7 | flip7 | games/flip7 | offen | |
 | 9 | Phase 10 | phase10 | games/phase10 | offen | |

@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.09-5 (09.11.2026 00:48)
+- Darts: jede Person wirft mit eigener Pfeilfarbe
+
 ## 2026.11.09-4 (09.11.2026 00:35)
 - Yatzy: Würfelring mittig mit Namen. Darts: Pfeile fliegen bei jedem Wurf ins Brett und bleiben bis zum Bestätigen, Druckwelle nur beim Bullseye
 

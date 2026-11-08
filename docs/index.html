@@ -66693,7 +66693,17 @@ function dartsFinishRoute(rem, k, mode) {
 	return null;
 }
 var DT_DART_CSS = "@keyframes dtIn{0%{opacity:0;transform:translate(var(--x),var(--y)) translate(46px,70px) scale(2.4)}55%{opacity:1;transform:translate(var(--x),var(--y)) scale(1)}70%{transform:translate(var(--x),var(--y)) rotate(-5deg)}85%{transform:translate(var(--x),var(--y)) rotate(2.5deg)}100%{transform:translate(var(--x),var(--y))}}@keyframes dtPulse{0%,40%{opacity:0;transform:scale(.4)}48%{opacity:1}100%{opacity:0;transform:scale(4.2)}}.dt-pulse{transform-box:fill-box;transform-origin:center;animation:dtPulse .9s ease-out both;pointer-events:none}.dt-pulse2{animation-delay:.12s}.dt-dart{transform:translate(var(--x),var(--y));transform-origin:0 0;animation:dtIn .36s cubic-bezier(.2,.8,.2,1) both;pointer-events:none}@media (prefers-reduced-motion: reduce){.dt-dart{animation:none}.dt-pulse{display:none}}";
-function DtDart({ x, y }) {
+var DT_COLS = [
+	"#E63946",
+	"#3D8BFF",
+	"#FFC93C",
+	"#2FD9A8",
+	"#FF7A3D",
+	"#B57BFF",
+	"#40D0E0",
+	"#FF6FB5"
+];
+function DtDart({ x, y, c }) {
 	return /* @__PURE__ */ import_react.default.createElement("g", {
 		className: "dt-dart",
 		style: {
@@ -66730,10 +66740,10 @@ function DtDart({ x, y }) {
 		width: "8",
 		height: "9",
 		rx: "3",
-		fill: "#C8121E"
+		fill: c
 	}), /* @__PURE__ */ import_react.default.createElement("path", {
 		d: "M36 0 L54 -11 L62 -11 L56 0 L62 11 L54 11Z",
-		fill: "#C8121E",
+		fill: c,
 		stroke: "#14141A",
 		strokeWidth: "1"
 	}), /* @__PURE__ */ import_react.default.createElement("line", {
@@ -66759,7 +66769,8 @@ function dtPt(e) {
 		return null;
 	}
 }
-function DartboardSVG({ onHit, numColor, darts }) {
+function DartboardSVG({ onHit, numColor, darts, player }) {
+	const dc = DT_COLS[((player | 0) % DT_COLS.length + DT_COLS.length) % DT_COLS.length];
 	const hit = (e, d) => {
 		const q = dtPt(e);
 		if (d.l === "Bull") try {
@@ -66933,7 +66944,8 @@ function DartboardSVG({ onHit, numColor, darts }) {
 	})) : null), (darts || []).map((d, i) => d && d.px != null ? /* @__PURE__ */ import_react.default.createElement(DtDart, {
 		key: i,
 		x: d.px,
-		y: d.py
+		y: d.py,
+		c: dc
 	}) : null));
 }
 function legPips(won, target, activeColor, mutedColor) {
@@ -67239,7 +67251,8 @@ function DartsPlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewGam
 	}, /* @__PURE__ */ import_react.default.createElement(DartboardSVG, {
 		onHit: addDart,
 		numColor: tk.muted,
-		darts: turn
+		darts: turn,
+		player: state.currentIdx
 	})), /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		gap: 8,
@@ -68139,7 +68152,8 @@ function CricketPlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewG
 	}, /* @__PURE__ */ import_react.default.createElement(DartboardSVG, {
 		onHit: addDart,
 		numColor: tk.muted,
-		darts: turn
+		darts: turn,
+		player: state.currentIdx
 	})), /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		gap: 8,
@@ -68810,7 +68824,8 @@ function HiScorePlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewG
 	}, /* @__PURE__ */ import_react.default.createElement(DartboardSVG, {
 		onHit: addDart,
 		numColor: tk.muted,
-		darts: turn
+		darts: turn,
+		player: state.currentIdx
 	})), /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		gap: 8,
@@ -69568,7 +69583,8 @@ function SplitScorePlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onN
 	}, /* @__PURE__ */ import_react.default.createElement(DartboardSVG, {
 		onHit: addDart,
 		numColor: tk.muted,
-		darts: turn
+		darts: turn,
+		player: state.currentIdx
 	})), /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		gap: 8,
@@ -70128,7 +70144,8 @@ function ShanghaiPlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNew
 	}, /* @__PURE__ */ import_react.default.createElement(DartboardSVG, {
 		onHit: addDart,
 		numColor: tk.muted,
-		darts: turn
+		darts: turn,
+		player: state.currentIdx
 	})), /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		gap: 8,
@@ -71106,7 +71123,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.09-4";
+var APP_BUILD = "2026.11.09-5";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -115235,7 +115252,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.09-4");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.09-5");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -117932,7 +117949,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.09-4" && !upd) {
+		if (seen && seen !== "2026.11.09-5" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -117941,7 +117958,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.09-4" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.09-5" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

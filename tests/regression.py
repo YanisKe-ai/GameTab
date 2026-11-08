@@ -195,7 +195,8 @@ def numpad(pg, row_name, value):
     click(pg, row, 500)
     for ch in str(value):
         click(pg, btn(pg, "±" if ch == "-" else ch).last, 150)
-    click(pg, btn(pg, "Bestätigen"), 500)
+    if btn(pg, "Bestätigen").count():  # Skyjo hat einen festen Zahlenblock ohne Bestätigen
+        click(pg, btn(pg, "Bestätigen"), 500)
 
 
 def podium_ranks(pg):
@@ -294,7 +295,8 @@ FAST = 130  # Wartezeit in Eintrags-Schleifen
 def t_skyjo(pg, env):
     open_game(pg, "Schreibunterlagen", "Skyjo"); press_start(pg)
     numpad(pg, "Spieler 1", 5); numpad(pg, "Spieler 2", 120)
-    click(pg, btn(pg, "Spieler 1")); click(pg, btn(pg, "Runde speichern"), 900)
+    click(pg, btn_re(pg, r"^Spieler 1 hat beendet$"), 500)
+    click(pg, btn_re(pg, r"^Runde 1 speichern$"), 900)
     expect_text(pg, r"Spieler 1 gewinnt", "Skyjo: Sieger nicht angezeigt")
     check(podium_ranks(pg) == ["1", "2"], f"Skyjo: Podest {podium_ranks(pg)}")
     finish(pg, "Skyjo", env, True)
@@ -304,7 +306,7 @@ def t_skyjo(pg, env):
 def t_erfolge(pg, env):
     open_game(pg, "Schreibunterlagen", "Skyjo"); press_start(pg)
     numpad(pg, "Spieler 1", 5); numpad(pg, "Spieler 2", 120)
-    click(pg, btn(pg, "Spieler 1")); click(pg, btn(pg, "Runde speichern"), 900)
+    click(pg, btn_re(pg, r"^Spieler 1 hat beendet$"), 500); click(pg, btn_re(pg, r"^Runde 1 speichern$"), 900)
     expect_text(pg, r"Neuer Erfolg: Erste Partie", "Erfolge: Hinweis auf dem Podest fehlt", timeout=9000)
     pg.goto(URL); wait(pg, 700)
     if pg.viewport_size["width"] < 768:

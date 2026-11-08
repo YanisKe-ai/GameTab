@@ -67,4 +67,22 @@ const PLD_CSS = `
 [data-phone-landscape] .pld-pad .pld-padR > button[data-gt-sound="1"] { margin-top: auto; margin-bottom: 0 !important; position: sticky; bottom: 0; }
 @media (prefers-reduced-motion: reduce) { [data-phone-landscape] .pld * { scroll-behavior: auto !important; } }
 `;
-export { PLD_CSS };
+/* Skyjo (neues Layout): Querformat. Links Zeilen, rechts Zahlenblock; Logo und Seitenspalte entfallen. */
+const SKL_CSS = `
+[data-phone-landscape] .sk-hero { display: none; }
+[data-phone-landscape] .sk-split { display: flex; flex-direction: column; flex: 1 1 0; min-height: 0; }
+[data-phone-landscape] .sk-split > .gtL-col-main { display: flex; flex-direction: column; gap: 8px; flex: 1 1 0; min-height: 0; }
+[data-phone-landscape] .sk-split > .gtL-col-side { display: none; }
+[data-phone-landscape] .sk-seg { width: min(300px, 100%); align-self: center; flex: none; }
+[data-phone-landscape] .sk-seg button { height: 36px; }
+[data-phone-landscape] .sk-entry.gt-ug-ent { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); gap: 12px; flex: 1 1 0; min-height: 0; align-items: stretch; }
+[data-phone-landscape] .sk-entry.gt-ug-ent > .sk-body { display: flex; flex-direction: column; gap: 6px; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding-bottom: 4px; }
+[data-phone-landscape] .sk-entry.gt-ug-ent > .sk-dock { align-self: end; margin-top: 0 !important; padding-top: 0; gap: 6px; }
+[data-phone-landscape] .sk-row { min-height: 56px; padding: 4px 10px; }
+[data-phone-landscape] .sk-key { height: 38px; }
+[data-phone-landscape] .sk-save, [data-phone-landscape] .sk-ghost { min-height: 46px; }
+[data-phone-landscape] .sk-split > .gtL-col-main > .sk-tbl { flex: 1 1 0; min-height: 0; overflow: auto; }
+[data-phone-landscape] .sk-sheet { max-width: min(560px, 100%); }
+[data-phone-landscape] .sk-slot, [data-phone-landscape] .sk-pick { height: 40px; }
+`;
+export { PLD_CSS, SKL_CSS };

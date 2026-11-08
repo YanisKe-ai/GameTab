@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.08-1 (08.11.2026 02:33)
+- Wizard im Astrolabium-Stil
+
 ## 2026.11.07-21 (07.11.2026 22:22)
 - Differenzler heisst jetzt Coiffeur
 

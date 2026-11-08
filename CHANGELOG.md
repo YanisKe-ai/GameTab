@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.08-12 (08.11.2026 15:38)
+- Einstellungen im Spielmenü, Podium schneller, Wizard-Bild in Indigo, Herz-Fächer auf dem Laptop, Minigolf quer
+
 ## 2026.11.08-11 (08.11.2026 15:16)
 - Schieber: Herzkarten im Halbkreis auf der Einrichtung
 

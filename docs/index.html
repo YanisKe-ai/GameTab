@@ -7630,12 +7630,12 @@ var prelude_exports = /* @__PURE__ */ __exportAll({
 	gtEmoRe: () => gtEmoRe,
 	gtEmoReG: () => gtEmoReG,
 	gtNoEmo: () => gtNoEmo,
-	useEffect: () => useEffect$15,
+	useEffect: () => useEffect$14,
 	useMemo: () => useMemo$9,
-	useRef: () => useRef$17,
+	useRef: () => useRef$16,
 	useState: () => useState$11
 });
-var { useState: useState$11, useEffect: useEffect$15, useMemo: useMemo$9, useRef: useRef$17, Fragment: Fragment$3 } = import_react.default;
+var { useState: useState$11, useEffect: useEffect$14, useMemo: useMemo$9, useRef: useRef$16, Fragment: Fragment$3 } = import_react.default;
 var gtEmoRe = /\p{Extended_Pictographic}|\p{Regional_Indicator}|[‍️⃣]|[\u{1F3FB}-\u{1F3FF}]|[\u{E0020}-\u{E007F}]/u;
 var gtEmoReG = new RegExp(gtEmoRe.source, "gu");
 function gtNoEmo(s) {
@@ -20729,9 +20729,9 @@ function GameCard({ title, description, status, accent, onClick, disabled, logo,
 var GT_HEAD_CSS = ".gt-hb{position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:44px;height:44px;padding:0;margin:0;border:none;background:transparent;cursor:pointer;font:inherit;-webkit-tap-highlight-color:transparent;touch-action:manipulation}.gt-hb:focus{outline:none}.gt-hb>.gt-hf{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:36px;min-width:36px;box-sizing:border-box;border-radius:999px;white-space:nowrap;transition:transform .16s cubic-bezier(.23,1,.32,1),background-color .2s ease,border-color .2s ease,color .2s ease}.gt-hb:active>.gt-hf{transform:scale(.96)}.gt-hb:focus-visible>.gt-hf{outline:2px solid currentColor;outline-offset:2px}@media (hover:hover) and (pointer:fine){.gt-hb:hover>.gt-hf{filter:brightness(1.15)}}@media (prefers-reduced-motion:reduce){.gt-hb>.gt-hf{transition:none}}.gt-gamehead{position:sticky;top:var(--gt-sat, env(safe-area-inset-top, 0px));z-index:20;margin:-6px -12px 8px;padding:6px 12px 8px}.gt-gamehead.is-stuck{background-color:var(--gt-pg-col);background-image:var(--gt-pg-img);background-size:var(--gt-pg-size);background-repeat:no-repeat;background-position:var(--gt-head-pos,0 0);box-shadow:0 1px 0 rgba(128,128,128,.22)}.gt-gamehead>.gt-headbtns{top:6px!important;right:8px!important}.gt-headbtns{z-index:21!important}div:has(>.gt-gamehead~.gt-headbtns){position:sticky!important;top:var(--gt-sat, env(safe-area-inset-top, 0px));z-index:20}div:has(>.gt-gamehead~.gt-headbtns)>.gt-headbtns{top:6px!important}.gtL-content .gt-gamehead,.gtL-content .gt-gamehead.is-stuck{position:relative;top:auto;margin:0 0 16px;padding:0;background:none;box-shadow:none}.gtL-content .gt-gamehead>.gt-headbtns{top:0!important;right:-4px!important}.gtL-content div:has(>.gt-gamehead~.gt-headbtns){position:relative!important;top:auto}.gtL-content div:has(>.gt-gamehead~.gt-headbtns)>.gt-headbtns{top:0!important}div:has(>.gt-headbtns+.gt-gamehead)>.gt-headbtns{position:sticky!important;top:calc(var(--gt-headtop, var(--gt-sat, env(safe-area-inset-top, 0px))) + 6px)!important;right:auto!important;left:auto!important;height:0;overflow:visible;display:flex;justify-content:flex-end;margin-right:-4px;z-index:22!important}.gtL-content div:has(>.gt-headbtns+.gt-gamehead)>.gt-headbtns{position:absolute!important;top:0!important;right:-4px!important;height:auto;margin-right:0}.gtL-yatzy-sheets,.gt-gamehead~.gtL-e-fit{isolation:isolate}.gt-gamehead.is-stuck{-webkit-transform:translateZ(0);transform:translateZ(0)}.gt-gamehead.is-stuck::before{content:'';position:absolute;left:0;right:0;bottom:100%;height:var(--gt-cover,0px);pointer-events:none;background-color:var(--gt-pg-col);background-image:var(--gt-pg-img);background-size:var(--gt-pg-size);background-repeat:no-repeat;background-position:var(--gt-head-pos2,0 0)}.gtL-content .gt-gamehead.is-stuck::before{display:none}";
 function GameHeader({ title, subtitle, icon, accent, onBack, backLabel, tk, titleFont, onHome, onEndGame, onRules, rulesTitle, rulesText, extra, hideTitle, moreItems, onMenuOpen }) {
 	const [rulesOpen, setRulesOpen] = useState$11(false);
-	const headRef = useRef$17(null);
+	const headRef = useRef$16(null);
 	const [stuck, setStuck] = useState$11(false);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		let raf = 0;
 		const upd = () => {
 			raf = 0;
@@ -22486,7 +22486,7 @@ function useSavedGroups() {
 			return [];
 		}
 	});
-	useEffect$15(() => {
+	useEffect$14(() => {
 		try {
 			localStorage.setItem("gt_playerGroups", JSON.stringify(groups));
 		} catch {}
@@ -22763,7 +22763,7 @@ function GtPlayerList({ players, onRename, onMove, onRemove, onAdd, minPlayers, 
 		onRename,
 		def
 	};
-	useEffect$15(() => {
+	useEffect$14(() => {
 		const h = () => setNote(true);
 		window.addEventListener("gt-names-fixed", h);
 		return () => {
@@ -22771,7 +22771,7 @@ function GtPlayerList({ players, onRename, onMove, onRemove, onAdd, minPlayers, 
 			gtPlGuard = null;
 		};
 	}, []);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (!note) return;
 		const tm = setTimeout(() => setNote(false), 4500);
 		return () => clearTimeout(tm);
@@ -22859,7 +22859,7 @@ function GtChips({ options, value, onChange, skin, t, custom, suffix, label, max
 	const inOpts = options.includes(value);
 	const [open, setOpen] = useState$11(!inOpts);
 	const [draft, setDraft] = useState$11(String(value || ""));
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (!open) setDraft(String(value || ""));
 	}, [value, open]);
 	const chip = (key, on, txt, onClick) => /* @__PURE__ */ import_react.default.createElement("button", {
@@ -23097,7 +23097,7 @@ function GroupPicker({ getNames, setNames, t, tk, onStarter }) {
 function GroupManager({ t, tk }) {
 	const { groups, deleteGroup, updateGroup, addEmptyGroup } = useSavedGroups();
 	const [openId, setOpenId] = useState$11(null);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		groups.forEach((g) => {
 			if (!(g.players || []).some((n) => String(n || "").trim())) deleteGroup(g.id);
 		});
@@ -24030,9 +24030,9 @@ function gtlRestoreFocus(el) {
 	} catch (e) {}
 }
 function useGtlKeys(active, handler, restoreOnClose) {
-	const ref = useRef$17(handler);
+	const ref = useRef$16(handler);
 	ref.current = handler;
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (!active) return;
 		const back = GTL_FOCUS.el;
 		const fn = (e) => {
@@ -24054,7 +24054,7 @@ function useGtlKeys(active, handler, restoreOnClose) {
 function GtlStandings({ players, target, lowWins, rounds, accent, tk, font, theme, t }) {
 	const ranked = [...players].sort((a, b) => lowWins ? a.total - b.total : b.total - a.total);
 	const goal = Math.max(1, target || 1);
-	const gtBox = useRef$17(null);
+	const gtBox = useRef$16(null);
 	useGtFlip(gtBox);
 	const gtFx = useGtLead("gtl-" + (lowWins ? "lo" : "hi"), rounds > 0 ? gtLeader(players.map((p) => [p.id, p.total]), lowWins) : null, rounds);
 	return /* @__PURE__ */ import_react.default.createElement("section", {
@@ -24853,7 +24853,7 @@ function GtRoundChart({ series, ink, muted, card, border, title, theme }) {
 function GtLStandings({ title, rows, lowWins, target, ink, muted, card, border, font }) {
 	const sorted = [...rows].sort((a, b) => lowWins ? a.total - b.total : b.total - a.total);
 	const max = target > 0 ? target : Math.max(1, ...rows.map((r) => Math.abs(r.total)));
-	const gtBox = useRef$17(null);
+	const gtBox = useRef$16(null);
 	useGtFlip(gtBox);
 	const gtFx = useGtLead(null, gtLeader(rows.map((r) => [r.id, r.total]), lowWins), rows.map((r) => r.total).join(","));
 	return /* @__PURE__ */ import_react.default.createElement("div", {
@@ -25216,7 +25216,7 @@ function GtInstallHint({ tokens: tk, theme, t, isLaptop }) {
 			return false;
 		}
 	});
-	useEffect$15(() => {
+	useEffect$14(() => {
 		const on = () => setBip(gtBIP);
 		window.addEventListener("gt-bip", on);
 		return () => window.removeEventListener("gt-bip", on);
@@ -25225,7 +25225,7 @@ function GtInstallHint({ tokens: tk, theme, t, isLaptop }) {
 	const ios = /iPhone|iPad|iPod/.test(ua) || /Macintosh/.test(ua) && navigator.maxTouchPoints > 1;
 	const android = /Android/.test(ua);
 	const visible = show && (ios || android || !!bip);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (!visible) return;
 		try {
 			const n = (parseInt(localStorage.getItem("gt_installHintSeen") || "0", 10) || 0) + 1;
@@ -30240,8 +30240,6 @@ var scaleCorrectors = {};
 function resolveMotionValue(value) {
 	return isMotionValue(value) ? value.get() : value;
 }
-// node_modules/motion-dom/dist/es/value/utils/as-number.mjs
-var asNumber = (v) => typeof v === "number" ? v : parseFloat(v);
 cornerRadiusProps.length;
 // node_modules/motion-dom/dist/es/projection/geometry/delta-calc.mjs
 var SCALE_PRECISION = 1e-4;
@@ -31143,250 +31141,6 @@ function press(targetOrSelector, onPressStart, options = {}) {
 		}
 	});
 	return cancelEvents;
-}
-// node_modules/motion-dom/dist/es/utils/transform.mjs
-function transform(...args) {
-	const useImmediate = !Array.isArray(args[0]);
-	const argOffset = useImmediate ? 0 : -1;
-	const inputValue = args[0 + argOffset];
-	const inputRange = args[1 + argOffset];
-	const outputRange = args[2 + argOffset];
-	const options = args[3 + argOffset];
-	const interpolator = interpolate(inputRange, outputRange, options);
-	return useImmediate ? interpolator(inputValue) : interpolator;
-}
-// node_modules/motion-dom/dist/es/animation/FollowAnimation.mjs
-/**
-* Every running follower ticks from this one frame callback.
-*/
-var active = /* @__PURE__ */ new Set();
-var tickAll = ({ timestamp }) => {
-	active.forEach((animation) => animation.tick(timestamp));
-};
-/**
-* A lean animation for values that follow a target (`followValue`,
-* `springValue`): a single numeric generator, retargeted in place as
-* the target moves and ticked from a frame callback shared by every
-* follower. Only implements the controls `MotionValue.animation`
-* exposes. Repeat options are ignored: a follower only ever heads for
-* its latest target.
-*/
-var FollowAnimation = class extends WithPromise {
-	constructor(options) {
-		super();
-		this.state = "idle";
-		this.startTime = 0;
-		this.currentTime = 0;
-		/**
-		* Whether the first tick has fired `onPlay`.
-		*/
-		this.started = false;
-		/**
-		* A target set since the last tick, applied at the next one so any
-		* number of sets per frame cost one retarget.
-		*/
-		this.hasNextTarget = false;
-		this.nextTarget = 0;
-		/**
-		* Bound to the instance so `animation.stop` can be passed around.
-		*/
-		this.stop = () => {
-			if (this.state === "idle") return;
-			this.teardown();
-			this.options.onStop?.();
-		};
-		this.options = options;
-		this.factory = options.type;
-		this.generator = this.factory(options);
-		const { driver } = options;
-		if (driver) this.driver = driver((timestamp) => this.tick(timestamp));
-		this.startTime = this.now();
-		this.state = "running";
-		if (this.driver) this.driver.start();
-		else {
-			active.size || frame.update(tickAll, true);
-			active.add(this);
-		}
-	}
-	/**
-	* Aim at a new target from wherever the animation has reached by the
-	* next tick. `velocity` fixes the velocity to steer with, otherwise
-	* the generator's is used.
-	*/
-	setTarget(target, velocity) {
-		this.nextTarget = target;
-		this.nextVelocity = velocity;
-		this.hasNextTarget = true;
-	}
-	/**
-	* Steer towards new keyframes from the current position and velocity.
-	* Springs are updated in place; other generators are recreated.
-	*/
-	retarget(keyframes, velocity) {
-		const { options, generator } = this;
-		options.keyframes = keyframes;
-		options.velocity = velocity;
-		this.startTime = this.now();
-		this.currentTime = 0;
-		if (generator.retarget) generator.retarget(keyframes, velocity);
-		else this.generator = this.factory(options);
-	}
-	tick(timestamp) {
-		const { options, hasNextTarget: retargeted } = this;
-		const { delay = 0, onUpdate, onPlay } = options;
-		if (!this.started) this.startTime = resolveStartTime(this.startTime, timestamp);
-		const elapsed = Math.round(timestamp - this.startTime) - delay;
-		const t = this.currentTime = Math.max(0, elapsed);
-		const state = this.generator.next(t);
-		const value = elapsed < 0 ? options.keyframes[0] : state.value;
-		if (retargeted) {
-			/**
-			* Steer from where the current trajectory has reached this
-			* frame, then render that position as the new origin.
-			*/
-			this.hasNextTarget = false;
-			const { keyframes } = options;
-			keyframes[0] = value;
-			keyframes[1] = this.nextTarget;
-			this.retarget(keyframes, this.nextVelocity ?? this.getGeneratorVelocity());
-		}
-		if (retargeted || !this.started) {
-			this.started = true;
-			onPlay?.();
-		}
-		/**
-		* Callbacks may stop this animation or set a new target, so check
-		* the live state rather than what was read at the top of the tick.
-		*/
-		if (this.state !== "running") return;
-		onUpdate?.(value);
-		if (state.done && elapsed >= 0 && !retargeted && !this.hasNextTarget && this.state === "running") {
-			this.notifyFinished();
-			this.teardown();
-			this.state = "finished";
-			options.onComplete?.();
-		}
-	}
-	getGeneratorVelocity() {
-		return calcGeneratorVelocity(this.generator, this.currentTime, this.options.velocity);
-	}
-	now() {
-		return this.driver ? this.driver.now() : time.now();
-	}
-	teardown() {
-		this.state = "idle";
-		if (this.driver) this.driver.stop();
-		else {
-			active.delete(this);
-			active.size || cancelFrame(tickAll);
-		}
-	}
-};
-// node_modules/motion-dom/dist/es/value/utils/follow.mjs
-/**
-* Animate `value` to its latest value with the generator in
-* `options.type`, tracking `source` if it's a `MotionValue`. Takes a
-* generator rather than a type name, so spring-only callers don't
-* bundle every generator.
-*/
-function follow(value, source, options) {
-	const initialValue = value.get();
-	let activeAnimation = null;
-	let set;
-	const unit = typeof initialValue === "string" ? initialValue.replace(/[\d.-]/g, "") : void 0;
-	const onUpdate = (v) => set(unit ? v + unit : v);
-	const onPlay = () => value["events"].animationStart?.notify();
-	const stopAnimation = () => {
-		if (activeAnimation) {
-			activeAnimation.stop();
-			activeAnimation = null;
-		}
-		value.animation = void 0;
-	};
-	value.attach((v, safeSet) => {
-		set = safeSet;
-		const target = asNumber(v);
-		if (activeAnimation?.state === "running") {
-			/**
-			* Steer the running animation rather than replacing it. This
-			* keeps its completion promise and uses its analytical velocity
-			* for accuracy, preventing systematic velocity loss at high
-			* frame rates (240hz+).
-			*/
-			activeAnimation.setTarget(target, options.velocity);
-			return;
-		}
-		const current = asNumber(value.get());
-		const velocity = activeAnimation ? activeAnimation.getGeneratorVelocity() : value.getVelocity();
-		stopAnimation();
-		if (current === target) return;
-		const animation = activeAnimation = new FollowAnimation({
-			keyframes: [current, target],
-			velocity,
-			restDelta: .001,
-			restSpeed: .01,
-			...options,
-			onUpdate,
-			onPlay
-		});
-		value.animation = animation;
-		animation.then(() => {
-			if (activeAnimation !== animation) return;
-			activeAnimation = null;
-			value.animation = void 0;
-			value["events"].animationComplete?.notify();
-		});
-	}, stopAnimation);
-	if (isMotionValue(source)) {
-		let skipNextAnimation = options.skipInitialAnimation === true;
-		const onSourceChange = (v) => {
-			if (skipNextAnimation) {
-				skipNextAnimation = false;
-				value.jump(parseValue(v, unit), false);
-			} else value.set(parseValue(v, unit));
-		};
-		const removeSourceOnChange = source.on("change", onSourceChange);
-		/**
-		* Catch up on a change made before we subscribed, for instance
-		* between a React render reading the source and the effect
-		* attaching to it. Subtracting is falsy for equal or non-numeric
-		* (NaN) values.
-		*/
-		const latest = source.get();
-		if (asNumber(latest) - asNumber(value.get())) onSourceChange(latest);
-		const removeValueOnDestroy = value.on("destroy", removeSourceOnChange);
-		/**
-		* Stop our animation on detach, otherwise a re-attach (new
-		* options, Strict Mode) starts a second animation that fights
-		* this orphaned one. The catch-up above resumes from the
-		* current value and velocity.
-		*/
-		return () => {
-			removeSourceOnChange();
-			removeValueOnDestroy();
-			stopAnimation();
-		};
-	}
-	return stopAnimation;
-}
-function parseValue(v, unit) {
-	return unit ? v + unit : v;
-}
-/**
-* Attach a spring animation to a MotionValue that will animate whenever the value changes.
-*
-* @param value - The MotionValue to animate
-* @param source - Initial value or MotionValue to track
-* @param options - Spring configuration options
-* @returns Cleanup function
-*
-* @public
-*/
-function attachSpring(value, source, options) {
-	return follow(value, source, {
-		...options,
-		type: spring
-	});
 }
 [...dimensionValueTypes];
 // node_modules/motion-dom/dist/es/render/Feature.mjs
@@ -33250,155 +33004,6 @@ var domAnimation = /* @__PURE__ */ Object.assign({ renderer: createDomVisualElem
 	hover: { Feature: HoverGesture }
 });
 ({ ...animations });
-// node_modules/framer-motion/dist/es/value/use-motion-value.mjs
-/**
-* Creates a `MotionValue` to track the state and velocity of a value.
-*
-* Usually, these are created automatically. For advanced use-cases, like use with `useTransform`, you can create `MotionValue`s externally and pass them into the animated component via the `style` prop.
-*
-* ```jsx
-* export const MyComponent = () => {
-*   const scale = useMotionValue(1)
-*
-*   return <motion.div style={{ scale }} />
-* }
-* ```
-*
-* @param initial - The initial state.
-*
-* @public
-*/
-function useMotionValue(initial) {
-	const value = useConstant(() => motionValue(initial));
-	/**
-	* If this motion value is being used in static mode, like on
-	* the Framer canvas, force components to rerender when the motion
-	* value is updated.
-	*/
-	const { isStatic } = (0, import_react.useContext)(MotionConfigContext);
-	if (isStatic) {
-		const [, setLatest] = (0, import_react.useState)(initial);
-		(0, import_react.useEffect)(() => value.on("change", setLatest), []);
-	}
-	return value;
-}
-// node_modules/framer-motion/dist/es/value/use-combine-values.mjs
-function useCombineMotionValues(values, combineValues) {
-	/**
-	* Initialise the returned motion value. This remains the same between renders.
-	*/
-	const value = useMotionValue(combineValues());
-	/**
-	* Create a function that will update the template motion value with the latest values.
-	* This is pre-bound so whenever a motion value updates it can schedule its
-	* execution in Framesync. If it's already been scheduled it won't be fired twice
-	* in a single frame.
-	*/
-	const updateValue = () => value.set(combineValues());
-	/**
-	* Synchronously update the motion value with the latest values during the render.
-	* This ensures that within a React render, the styles applied to the DOM are up-to-date.
-	*/
-	updateValue();
-	/**
-	* Subscribe to all motion values found within the template. Whenever any of them change,
-	* schedule an update.
-	*/
-	useIsomorphicLayoutEffect(() => {
-		const scheduleUpdate = () => frame.preRender(updateValue, false, true);
-		const subscriptions = values.map((v) => v.on("change", scheduleUpdate));
-		/**
-		* Catch up on changes made while unsubscribed. A source can change
-		* between render and this subscription (e.g. in a child's layout
-		* effect), and Strict Mode or <Activity> can re-run this effect
-		* without a render after the cleanup cancelled a scheduled update.
-		*/
-		updateValue();
-		return () => {
-			subscriptions.forEach((unsubscribe) => unsubscribe());
-			cancelFrame(updateValue);
-		};
-	});
-	return value;
-}
-// node_modules/framer-motion/dist/es/value/use-computed.mjs
-function useComputed(compute) {
-	/**
-	* Open session of collectMotionValues. Any MotionValue that calls get()
-	* will be saved into this array.
-	*/
-	collectMotionValues.current = [];
-	compute();
-	const value = useCombineMotionValues(collectMotionValues.current, compute);
-	/**
-	* Synchronously close session of collectMotionValues.
-	*/
-	collectMotionValues.current = void 0;
-	return value;
-}
-// node_modules/framer-motion/dist/es/value/use-transform.mjs
-function useTransform(input, inputRangeOrTransformer, outputRangeOrMap, options) {
-	if (typeof input === "function") return useComputed(input);
-	if (outputRangeOrMap !== void 0 && !Array.isArray(outputRangeOrMap) && typeof inputRangeOrTransformer !== "function") return useMapTransform(input, inputRangeOrTransformer, outputRangeOrMap, options);
-	const transformer = typeof inputRangeOrTransformer === "function" ? inputRangeOrTransformer : transform(inputRangeOrTransformer, outputRangeOrMap, options);
-	const result = Array.isArray(input) ? useListTransform(input, transformer) : useListTransform([input], ([latest]) => transformer(latest));
-	const inputAccelerate = !Array.isArray(input) ? input.accelerate : void 0;
-	if (inputAccelerate && !inputAccelerate.isTransformed && typeof inputRangeOrTransformer !== "function" && Array.isArray(outputRangeOrMap) && options?.clamp !== false) {
-		const ease = options?.ease;
-		/**
-		* WAAPI fills missing 0 and 1 offsets with the underlying value, so
-		* hold the end values to match the clamped transform.
-		*/
-		result.accelerate = {
-			...inputAccelerate,
-			times: [
-				0,
-				...inputRangeOrTransformer,
-				1
-			],
-			keyframes: [
-				outputRangeOrMap[0],
-				...outputRangeOrMap,
-				outputRangeOrMap[outputRangeOrMap.length - 1]
-			],
-			isTransformed: true,
-			...ease ? { ease: Array.isArray(ease) ? [ease[0], ...ease] : ease } : {}
-		};
-	}
-	return result;
-}
-function useListTransform(values, transformer) {
-	const latest = useConstant(() => []);
-	return useCombineMotionValues(values, () => {
-		latest.length = 0;
-		const numValues = values.length;
-		for (let i = 0; i < numValues; i++) latest[i] = values[i].get();
-		return transformer(latest);
-	});
-}
-function useMapTransform(inputValue, inputRange, outputMap, options) {
-	/**
-	* Capture keys once to ensure hooks are called in consistent order.
-	*/
-	const keys = useConstant(() => Object.keys(outputMap));
-	const output = useConstant(() => ({}));
-	for (const key of keys) output[key] = useTransform(inputValue, inputRange, outputMap[key], options);
-	return output;
-}
-function useFollow(source, options, attach) {
-	const { isStatic } = (0, import_react.useContext)(MotionConfigContext);
-	const getFromSource = () => isMotionValue(source) ? source.get() : source;
-	if (isStatic) return useTransform(getFromSource);
-	const value = useMotionValue(getFromSource());
-	(0, import_react.useInsertionEffect)(() => {
-		return attach(value, source, options);
-	}, [value, JSON.stringify(options)]);
-	return value;
-}
-// node_modules/framer-motion/dist/es/value/use-spring.mjs
-function useSpring(source, options = {}) {
-	return useFollow(source, options, attachSpring);
-}
 // node_modules/framer-motion/dist/es/utils/reduced-motion/use-reduced-motion.mjs
 /**
 * A hook that returns `true` if we should be using reduced motion based on the current device's Reduced Motion setting.
@@ -38514,8 +38119,8 @@ var { SchieberTournament, GtStuLogo } = (function() {
 			open: true,
 			onClose
 		});
-		const lid = useRef$17(labelId || "gtst-s-" + GT_ST.uid().slice(0, 6)).current;
-		useEffect$15(() => {
+		const lid = useRef$16(labelId || "gtst-s-" + GT_ST.uid().slice(0, 6)).current;
+		useEffect$14(() => {
 			const el = ref.current;
 			const prev = document.body.style.overflow;
 			document.body.style.overflow = "hidden";
@@ -38682,7 +38287,7 @@ var { SchieberTournament, GtStuLogo } = (function() {
 		const [tables, setTables] = useState$11(1);
 		const [nameErr, setNameErr] = useState$11("");
 		const { groups } = useSavedGroups();
-		const inRef = useRef$17(null);
+		const inRef = useRef$16(null);
 		const clean = GT_ST.cleanName(nn);
 		const dupNew = !!clean && names.some((x) => fold(x) === fold(clean));
 		const add = () => {
@@ -38892,7 +38497,7 @@ var { SchieberTournament, GtStuLogo } = (function() {
 		const [q, setQ] = useState$11("");
 		const [err, setErr] = useState$11("");
 		const [busy, setBusy] = useState$11(false);
-		const op = useRef$17(GT_ST.uid()).current;
+		const op = useRef$16(GT_ST.uid()).current;
 		const lock = mode === "result";
 		const [when, setWhen] = useState$11("");
 		const [showWhen, setShowWhen] = useState$11(false);
@@ -39980,7 +39585,7 @@ var { SchieberTournament, GtStuLogo } = (function() {
 		const [ed, setEd] = useState$11(false);
 		const [v, setV] = useState$11(tour.name);
 		const [err, setErr] = useState$11("");
-		const btn = useRef$17(null);
+		const btn = useRef$16(null);
 		const st = tour.status === "completed" ? d.summary.matches ? t("stuStatusDone") : t("stuStatusUnrated") : tour.status === "draft" ? t("stuStatusDraft") : t("stuStatusRunning");
 		const save = () => {
 			const x = GT_ST.cleanName(v);
@@ -40202,7 +39807,7 @@ var { SchieberTournament, GtStuLogo } = (function() {
 			const run = s.list.filter((x) => x.status !== "completed");
 			return run.length === 1 ? run[0].id : null;
 		});
-		useEffect$15(() => {
+		useEffect$14(() => {
 			if (autoId) {
 				GT_ST_STORE.setActive(autoId);
 				setAutoId(null);
@@ -40216,7 +39821,7 @@ var { SchieberTournament, GtStuLogo } = (function() {
 		const [sheet, setSheet] = useState$11(null);
 		const [toastS, setToastS] = useState$11(null);
 		const [err, setErr] = useState$11("");
-		const tmr = useRef$17(null);
+		const tmr = useRef$16(null);
 		const tid = autoId || snap.activeId;
 		const tour = tid ? snap.tournaments.find((x) => x.id === tid && !x.deletedAt) || null : null;
 		const scr = screen === "tour" && !tour ? snap.list.length ? "list" : "setup" : screen;
@@ -40227,10 +39832,10 @@ var { SchieberTournament, GtStuLogo } = (function() {
 			setToastS(Object.assign({ id }, o));
 			tmr.current = setTimeout(() => setToastS((s) => s && s.id === id ? null : s), o.undo ? 7e3 : 3800);
 		};
-		useEffect$15(() => () => {
+		useEffect$14(() => () => {
 			if (tmr.current) clearTimeout(tmr.current);
 		}, []);
-		useEffect$15(() => {
+		useEffect$14(() => {
 			try {
 				window.scrollTo(0, 0);
 			} catch (e) {}
@@ -40887,7 +40492,7 @@ function GtOnboarding3({ theme, lang, onDone }) {
 	const t = useT(lang);
 	const tk = startPageTokens(theme);
 	const [step, setStep] = useState$11(0);
-	const btnRef = useRef$17(null);
+	const btnRef = useRef$16(null);
 	const last = step === 2;
 	const dlgRef = useGtDialog({
 		open: true,
@@ -41521,10 +41126,10 @@ function GameSearchBox({ lang, theme, tokens, onSelect }) {
 	const t = useT(lang);
 	const [query, setQuery] = useState$11("");
 	const [focused, setFocused] = useState$11(false);
-	const restInputRef = useRef$17(null);
-	const overlayInputRef = useRef$17(null);
-	const panelRef = useRef$17(null);
-	const closeTimerRef = useRef$17(null);
+	const restInputRef = useRef$16(null);
+	const overlayInputRef = useRef$16(null);
+	const panelRef = useRef$16(null);
+	const closeTimerRef = useRef$16(null);
 	const [panelRect, setPanelRect] = useState$11(null);
 	const recalc = () => {
 		try {
@@ -41563,7 +41168,7 @@ function GameSearchBox({ lang, theme, tokens, onSelect }) {
 			}
 		} catch {}
 	};
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (!focused) return;
 		recalc();
 		const raf = requestAnimationFrame(recalc);
@@ -41580,7 +41185,7 @@ function GameSearchBox({ lang, theme, tokens, onSelect }) {
 			}
 		};
 	}, [focused]);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (focused && panelRect && overlayInputRef.current) {
 			const timer = setTimeout(() => {
 				try {
@@ -41592,7 +41197,7 @@ function GameSearchBox({ lang, theme, tokens, onSelect }) {
 			return () => clearTimeout(timer);
 		}
 	}, [focused, !!panelRect]);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (!focused) return;
 		const onKey = (e) => {
 			if (e.key === "Escape") {
@@ -41607,7 +41212,7 @@ function GameSearchBox({ lang, theme, tokens, onSelect }) {
 		document.addEventListener("keydown", onKey, true);
 		return () => document.removeEventListener("keydown", onKey, true);
 	}, [focused]);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (!focused) return;
 		const onOutside = (e) => {
 			const t = e.target;
@@ -42124,7 +41729,7 @@ function gtVariantItem(id, theme) {
 			Logo: GtStuLogo
 		},
 		"darts": {
-			labelKey: "gameDarts",
+			labelKey: "dartsStandardMode",
 			accent: by.darts.accent,
 			Logo: DartsLogo
 		},
@@ -42171,7 +41776,7 @@ function GameShowcaseStrip({ lang, theme, tokens, onSelect, fixedOrder, favorite
 	const favSet = new Set(favGames.map((g) => g.fav || g.view));
 	const games = favGames.concat(base.filter((g) => !favSet.has(g.view)));
 	const starC = theme === "light" ? "#C8921F" : "#E8B84A";
-	const lpRef = useRef$17({
+	const lpRef = useRef$16({
 		timer: null,
 		fired: false,
 		x: 0,
@@ -42183,7 +41788,7 @@ function GameShowcaseStrip({ lang, theme, tokens, onSelect, fixedOrder, favorite
 			lpRef.current.timer = null;
 		}
 	};
-	useEffect$15(() => clearLp, []);
+	useEffect$14(() => clearLp, []);
 	const toggleFav = (view) => {
 		if (!onToggleFavorite) return;
 		const was = favSet.has(view);
@@ -42194,8 +41799,8 @@ function GameShowcaseStrip({ lang, theme, tokens, onSelect, fixedOrder, favorite
 		gtFavToast(t(was ? "favRemoved" : "favAdded"));
 	};
 	const fadeBg = theme === "noir" ? "#0A0A0A" : theme === "light" ? "#F8F9FA" : "#171425";
-	const rowRef = useRef$17(null);
-	const dragRef = useRef$17({
+	const rowRef = useRef$16(null);
+	const dragRef = useRef$16({
 		active: false,
 		startX: 0,
 		startY: 0,
@@ -42428,7 +42033,7 @@ function DailyTipCard({ lang, tokens, theme }) {
 	const tips = useMemo$9(() => Array.isArray(t("tips")) ? t("tips") : [], [lang]);
 	const dayOfYear = Math.floor((Date.now() - new Date((/* @__PURE__ */ new Date()).getFullYear(), 0, 0)) / 864e5);
 	const [idx, setIdx] = useState$11(tips.length ? dayOfYear % tips.length : 0);
-	const dragRef = useRef$17({ startX: null });
+	const dragRef = useRef$16({ startX: null });
 	const [dragX, setDragX] = useState$11(0);
 	const [dragging, setDragging] = useState$11(false);
 	const [paused, setPaused] = useState$11(() => {
@@ -42439,12 +42044,12 @@ function DailyTipCard({ lang, tokens, theme }) {
 		}
 	});
 	const rm = gtRM();
-	useEffect$15(() => {
+	useEffect$14(() => {
 		setIdx((i) => tips.length ? i % tips.length : 0);
 	}, [tips.length]);
 	const go = (delta) => setIdx((i) => (i + delta + tips.length) % tips.length);
 	const auto = !paused && !rm && tips.length > 1;
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (dragging || !auto) return;
 		const timer = setTimeout(() => go(1), 1e4);
 		return () => clearTimeout(timer);
@@ -42917,10 +42522,10 @@ function StartPage({ onSelect, lang, theme, viewMode, lastPlayed, dismissedResum
 	const isLaptop = viewMode === "laptop";
 	const [beamOn, setBeamOn] = useState$11(false);
 	const [beamGeo, setBeamGeo] = useState$11(null);
-	const beamTm = useRef$17(null);
-	const beamTk = useRef$17([]);
-	const beamAn = useRef$17([]);
-	const logoRef = useRef$17(null);
+	const beamTm = useRef$16(null);
+	const beamTk = useRef$16([]);
+	const beamAn = useRef$16([]);
+	const logoRef = useRef$16(null);
 	const gtFlyInit = (el, o, i) => {
 		if (!el || el.__gtFly || !el.animate) return;
 		el.__gtFly = 1;
@@ -43573,7 +43178,7 @@ function StartPage({ onSelect, lang, theme, viewMode, lastPlayed, dismissedResum
 			beamAn.current = [];
 		}, rm ? 3600 : 4600);
 	};
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (isLaptop) return;
 		const prevOverflow = document.body.style.overflow;
 		const prevPosition = document.body.style.position;
@@ -44864,7 +44469,7 @@ function PendingNumbers({ pending }) {
 function SchieberBoardContent({ team, target, t }) {
 	const [showDigits, setShowDigits] = useState$11(false);
 	const [visualEntries, setVisualEntries] = useState$11(team.entries);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		const t = setTimeout(() => setVisualEntries(team.entries), 450);
 		return () => clearTimeout(t);
 	}, [team.entries]);
@@ -45280,10 +44885,10 @@ function SchieberEditorPanel({ editing, teams, onSave, onClose, t, theme }) {
 	const [value, setValue] = useState$11("");
 	const [sign, setSign] = useState$11(1);
 	const [trump, setTrump] = useState$11(null);
-	const edRef = useRef$17(null);
-	const edClose = useRef$17(onClose);
+	const edRef = useRef$16(null);
+	const edClose = useRef$16(onClose);
 	edClose.current = onClose;
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (editing) {
 			setValue("");
 			setSign(1);
@@ -45291,7 +44896,7 @@ function SchieberEditorPanel({ editing, teams, onSave, onClose, t, theme }) {
 		}
 	}, [editing]);
 	const edTeam = editing ? editing.teamId : null;
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (edTeam === null) return void 0;
 		const trig = document.activeElement;
 		const trigLbl = trig && trig.getAttribute ? trig.getAttribute("aria-label") : null;
@@ -45964,6 +45569,8 @@ var SCH_FAN_CARDS = [
 var SCH_FAN_CSS = `
 .gt-sch-fan{flex:1 1 0;min-height:0;margin-bottom:-10px;container-type:size;position:relative;pointer-events:none;display:block}
 .gtL-content .gt-sch-fan{margin-bottom:-8px}
+.gt-sch-fan.gt-sch-fan-main{display:none}
+@media (min-width:1100px){.gtL-content .gt-sch-fan.gt-sch-fan-main{display:block;flex:1 0 230px;margin-bottom:0}.gtL-content .gt-sch-fan.gt-sch-fan-side{display:none}.gtL-content .gt-sch-fan-main .gt-sch-fan-in{visibility:visible;--cw:min(84px,15.5cqw);margin-top:calc(var(--ch)*-.1)}}
 [data-phone-landscape] .gt-sch-fan{display:none!important}
 .gt-sch-fan-in{position:absolute;left:50%;top:50%;width:0;height:0;visibility:hidden;--cw:min(60px,14.5cqw);--ch:calc(var(--cw)*1.4167);margin-top:calc(var(--ch)*-.28)}
 @container (min-height:150px){.gt-sch-fan-in{visibility:visible}}
@@ -45972,9 +45579,9 @@ html[data-gt-theme="noir"] .gt-sch-fan{filter:grayscale(1)}
 @keyframes gt-sch-fan-open{from{transform:rotate(0deg)}to{transform:rotate(var(--a))}}
 @media (prefers-reduced-motion:reduce){.gt-sch-fan-in img{animation:none}}
 `;
-function SchieberFan({ theme }) {
+function SchieberFan({ theme, pos = "side" }) {
 	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gt-sch-fan",
+		className: "gt-sch-fan gt-sch-fan-" + pos,
 		"aria-hidden": "true",
 		style: theme === "noir" ? { filter: "grayscale(1)" } : void 0
 	}, /* @__PURE__ */ import_react.default.createElement("style", null, SCH_FAN_CSS), /* @__PURE__ */ import_react.default.createElement("div", { className: "gt-sch-fan-in" }, SCH_FAN_CARDS.map((u, i) => /* @__PURE__ */ import_react.default.createElement("img", {
@@ -46026,6 +45633,9 @@ function SchieberSetup({ teams, setTeams, target, setTarget, onStart, onTourPick
 		label: t("schieberTeamsLabel"),
 		skin: gtS,
 		t
+	}), /* @__PURE__ */ import_react.default.createElement(SchieberFan, {
+		theme,
+		pos: "main"
 	})), /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-col-side",
 		style: { gap: 8 }
@@ -46346,12 +45956,12 @@ function SchieberWeisPanel({ open, teamId, teams, onSave, onClose, t, theme }) {
 	const [stoeck, setStoeck] = useState$11(false);
 	const [factor, setFactor] = useState$11(1);
 	const [more, setMore] = useState$11(false);
-	const booked = useRef$17(false);
+	const booked = useRef$16(false);
 	const weisRef = useGtDialog({
 		open: !!(open && teams && teams.length),
 		onClose
 	});
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (open) {
 			setItems([]);
 			setStoeck(false);
@@ -46907,8 +46517,8 @@ function SchieberGame({ teams, setTeams, target, setTarget, phase, setPhase, onB
 	const tk = shellTokens(theme);
 	const [confirmingReset, setConfirmingReset] = useState$11(false);
 	const [wiping, setWiping] = useState$11(false);
-	const wipeTimers = useRef$17([]);
-	useEffect$15(() => () => wipeTimers.current.forEach(clearTimeout), []);
+	const wipeTimers = useRef$16([]);
+	useEffect$14(() => () => wipeTimers.current.forEach(clearTimeout), []);
 	const [confirmingSetup, setConfirmingSetup] = useState$11(false);
 	const [editing, setEditing] = useState$11(null);
 	const [rulesOpen, setRulesOpen] = useState$11(false);
@@ -46951,8 +46561,8 @@ function SchieberGame({ teams, setTeams, target, setTarget, phase, setPhase, onB
 	const canSaveTour = linkLive && winnerIdx !== -1 && totals[0] !== totals[1];
 	const [tourErr, setTourErr] = useState$11(false);
 	const [tourDone, setTourDone] = useState$11(false);
-	const doneTmr = useRef$17(0);
-	useEffect$15(() => () => clearTimeout(doneTmr.current), []);
+	const doneTmr = useRef$16(0);
+	useEffect$14(() => () => clearTimeout(doneTmr.current), []);
 	const dz = theme === "light";
 	const doneEl = tourDone ? /* @__PURE__ */ import_react.default.createElement("div", {
 		role: "status",
@@ -47029,7 +46639,7 @@ function SchieberGame({ teams, setTeams, target, setTarget, phase, setPhase, onB
 	};
 	const celebration = useCelebration(winnerIdx !== -1);
 	const [podiumOpen, setPodiumOpen] = useState$11(false);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (winnerIdx !== -1) setPodiumOpen(true);
 	}, [winnerIdx]);
 	const podiumRanked = winnerIdx !== -1 ? rankedPodium(teams, (tm) => tm.entries.reduce((s, e) => s + e, 0)) : [];
@@ -47856,15 +47466,15 @@ function ttVars(theme) {
 	return base;
 }
 function TuttoPlayerRow({ player, total, entryCount, color, target, isLeader, selected, onPick, gtLead, t, theme, laneRef }) {
-	const dieRef = useRef$17(null), trackRef = useRef$17(null), trailRef = useRef$17(null), trailwRef = useRef$17(null), numRef = useRef$17(null);
-	const st = useRef$17({
+	const dieRef = useRef$16(null), trackRef = useRef$16(null), trailRef = useRef$16(null), trailwRef = useRef$16(null), numRef = useRef$16(null);
+	const st = useRef$16({
 		v: total,
 		raf: 0,
 		first: true,
 		face: 0,
 		ec: entryCount
 	});
-	const targetRef = useRef$17(target);
+	const targetRef = useRef$16(target);
 	targetRef.current = target;
 	const [face, setFace] = useState$11(() => ttRoll(total, target, 200).face);
 	const [pop, setPop] = useState$11(null);
@@ -47927,7 +47537,7 @@ function TuttoPlayerRow({ player, total, entryCount, color, target, isLeader, se
 		};
 		s.raf = requestAnimationFrame(step);
 	}, [total, target]);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		const tr = trackRef.current;
 		let ro = null;
 		if (tr && window.ResizeObserver) {
@@ -47939,7 +47549,7 @@ function TuttoPlayerRow({ player, total, entryCount, color, target, isLeader, se
 			if (st.current.raf) cancelAnimationFrame(st.current.raf);
 		};
 	}, []);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		const s = st.current;
 		if (entryCount === s.ec) return;
 		const inc = entryCount === s.ec + 1;
@@ -48184,7 +47794,7 @@ function TuttoPlay({ players, setPlayers, target, onBack, onHome, onEndGame, onE
 	const celebration = useCelebration(winnerIdx !== -1);
 	const { node: milestoneNode, fire: fireMilestone } = useMilestoneBurst();
 	const [podiumOpen, setPodiumOpen] = useState$11(false);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (winnerIdx === -1) return;
 		const rm = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
 		const to = setTimeout(() => setPodiumOpen(true), rm ? 0 : 1250);
@@ -48250,13 +47860,13 @@ function TuttoPlay({ players, setPlayers, target, onBack, onHome, onEndGame, onE
 	const [histFor, setHistFor] = useState$11(-1);
 	const [lap, setLap] = useState$11(false);
 	const [short, setShort] = useState$11(false);
-	const dispRef = useRef$17(null);
-	const rootRef = useRef$17(null);
-	const lanesRef = useRef$17(null);
-	const glideRef = useRef$17(null);
-	const glideSt = useRef$17({ had: false });
-	const laneRefs = useRef$17([]);
-	const kb = useRef$17({});
+	const dispRef = useRef$16(null);
+	const rootRef = useRef$16(null);
+	const lanesRef = useRef$16(null);
+	const glideRef = useRef$16(null);
+	const glideSt = useRef$16({ had: false });
+	const laneRefs = useRef$16([]);
+	const kb = useRef$16({});
 	const compact = !lap && (nP >= 5 || (short || plLand) && nP >= 3);
 	const selOk = sel >= 0 && sel < nP;
 	const pick = (i) => {
@@ -48308,7 +47918,7 @@ function TuttoPlay({ players, setPlayers, target, onBack, onHome, onEndGame, onE
 	import_react.default.useLayoutEffect(() => {
 		setLap(!!(rootRef.current && rootRef.current.closest(".gtL-content")));
 	}, []);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (!window.matchMedia) return;
 		const m = matchMedia("(max-height:640px)");
 		const f = () => setShort(m.matches);
@@ -48320,7 +47930,7 @@ function TuttoPlay({ players, setPlayers, target, onBack, onHome, onEndGame, onE
 			else m.removeListener(f);
 		};
 	}, []);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		const onKey = (e) => {
 			if (e.defaultPrevented || e.ctrlKey || e.metaKey || e.altKey) return;
 			const el = e.target;
@@ -48369,7 +47979,7 @@ function TuttoPlay({ players, setPlayers, target, onBack, onHome, onEndGame, onE
 		g.style.opacity = "1";
 		s.had = true;
 	};
-	const glideFn = useRef$17(glideTo);
+	const glideFn = useRef$16(glideTo);
 	glideFn.current = glideTo;
 	import_react.default.useLayoutEffect(() => {
 		glideFn.current(false);
@@ -48379,7 +47989,7 @@ function TuttoPlay({ players, setPlayers, target, onBack, onHome, onEndGame, onE
 		nP,
 		lap
 	]);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		const box = lanesRef.current;
 		if (!box || !window.ResizeObserver) return;
 		const ro = new ResizeObserver(() => glideFn.current(true));
@@ -50278,7 +49888,7 @@ function WizardEditorPanel({ editing, players, rounds, onSave, onClose, theme, t
 	const [tricks, setTricks] = useState$11(null);
 	const [tab, setTab] = useState$11("bid");
 	const eR = editing ? editing.round : 0, eP = editing ? editing.playerId : 0;
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (eR) {
 			const c = wzCell(rounds, eR, eP);
 			setBid(c.bid);
@@ -50369,7 +49979,7 @@ function wzIsLaptop() {
 }
 function WzSheet({ open, onClose, players, rounds, curRound, roundCount, editing, setEditing, editPad, t, chart, editor }) {
 	const n = players.length;
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (!open) return void 0;
 		const h = (e) => {
 			if (e.key === "Escape") {
@@ -50476,13 +50086,13 @@ function WizardPlay({ state, setState, onBack, onHome, onEndGame, lang = "de", t
 	})() : 0;
 	const celebration = useCelebration(finished, finished ? Math.max(0, 1 - winMargin / Math.max(1, Math.abs(maxTotal))) : void 0);
 	const [podiumOpen, setPodiumOpen] = useState$11(false);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (finished) setPodiumOpen(true);
 	}, [finished]);
 	const podiumRanked = finished ? rankedPodium(players, (p) => totals[p.id] || 0) : [];
-	const prevDone = useRef$17(doneCount);
+	const prevDone = useRef$16(doneCount);
 	const [pop, setPop] = useState$11(0);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (doneCount > prevDone.current) setPop(lastDone);
 		prevDone.current = doneCount;
 	}, [doneCount]);
@@ -50879,7 +50489,7 @@ function WizardGame({ state, setState, onBack, onHome, onEndGame, lang = "de", t
 			ended: false
 		}));
 	};
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (state.phase === "setup" && state.players.length < 3) setState((s) => s.phase !== "setup" || s.players.length >= 3 ? s : {
 			...s,
 			players: wzPad(s.players, t)
@@ -51206,7 +50816,7 @@ var MG_UNIT_CSS = `
 var MG_LAND_CSS = `
 [data-phone-landscape] .mg-land { padding-top: calc(var(--pl-sat) + 6px) !important; padding-bottom: calc(var(--pl-sab) + 6px) !important; --mg-edw: clamp(280px, 40vw, 360px); }
 [data-phone-landscape] .mg-inner { max-width: none !important; margin: 0 !important; width: 100% !important; }
-[data-phone-landscape] .mg-split { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); grid-template-rows: auto auto minmax(0, 1fr) auto auto; column-gap: 12px; row-gap: 0; height: max(230px, calc(var(--pl-body) - 6px)); margin-top: 6px; }
+[data-phone-landscape] .mg-split { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); grid-template-rows: auto auto minmax(0, 1fr) auto auto; column-gap: 12px; row-gap: 0; height: max(230px, calc(var(--pl-body) - 22px)); margin-top: 6px; }
 [data-phone-landscape] .mg-split.mg-tab-table { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); }
 [data-phone-landscape] .mg-main { display: contents; }
 [data-phone-landscape] .mg-banner { grid-column: 1 / -1; grid-row: 1; margin-bottom: 8px !important; padding: 8px 12px !important; }
@@ -51220,7 +50830,7 @@ var MG_LAND_CSS = `
 [data-phone-landscape] .mg-land .mgPhoneOnly { display: none !important; }
 [data-phone-landscape] .mg-land .mgBar { grid-column: 2; grid-row: 4; position: static !important; margin: 8px 0 0 !important; padding: 0 !important; background: transparent !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; border: 0 !important; border-radius: 0 !important; box-shadow: none !important; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
 [data-phone-landscape] .mg-land .mgBar #mg-status { flex: 1 0 100%; margin: 0 !important; justify-content: flex-start !important; text-align: left !important; font-size: 13px !important; line-height: 1.3 !important; }
-[data-phone-landscape] .mg-land .mgBar [data-mg-main] { width: auto !important; flex: 1 1 140px; min-height: 48px !important; font-size: 17px !important; }
+[data-phone-landscape] .mg-land .mgBar [data-mg-main] { width: auto !important; flex: 1 1 140px; min-height: 44px !important; height: 44px !important; font-size: 17px !important; }
 [data-phone-landscape] .mg-land .mgBar [data-mg-undo] { margin: 0 !important; min-height: 44px !important; min-width: 44px; padding: 0 12px !important; flex: 0 0 auto; }
 [data-phone-landscape] .mg-side2 { display: block; grid-column: 2; grid-row: 5; }
 [data-phone-landscape] .mg-split .mgTableWrap td button { min-height: 44px !important; }
@@ -51351,14 +50961,14 @@ function MinigolfSetup({ players, setPlayers, onStart, theme, t }) {
 }
 function MinigolfEditorPanel({ editing, players, value: cur, onSave, onClose, t, mg }) {
 	const [value, setValue] = useState$11("");
-	const boxRef = useRef$17(null);
-	useEffect$15(() => {
+	const boxRef = useRef$16(null);
+	useEffect$14(() => {
 		if (editing) {
 			setValue(cur !== null && cur !== void 0 ? String(cur) : "");
 			if (boxRef.current) boxRef.current.focus({ preventScroll: true });
 		}
 	}, [editing]);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (!editing) return;
 		const onKey = (e) => {
 			if (e.key === "Escape") onClose();
@@ -52076,8 +51686,8 @@ function MgRankBoard({ st, onOpen, b, t, className }) {
 function MgTable({ ui, hole, onCell, mg, t }) {
 	const ps = ui.players;
 	const pl = usePhoneLandscape();
-	const wrapRef = useRef$17(null);
-	useEffect$15(() => {
+	const wrapRef = useRef$16(null);
+	useEffect$14(() => {
 		const w = wrapRef.current;
 		if (!pl || !w) return;
 		const row = w.querySelector("tr[aria-current=\"true\"]");
@@ -52265,7 +51875,7 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
 	});
 	const celebration = useCelebration(winnerIdx !== -1);
 	const [podiumOpen, setPodiumOpen] = useState$11(false);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (winnerIdx !== -1) setPodiumOpen(true);
 	}, [winnerIdx]);
 	const podiumRanked = winnerIdx !== -1 ? rankedPodium(players, (p) => minigolfTotal(scores[p.id]), true) : [];
@@ -53336,13 +52946,13 @@ function JassEditorPanel({ editing, players, scores, category, onSave, onClose, 
 	const [value, setValue] = useState$11("");
 	const [fresh, setFresh] = useState$11(false);
 	const [gtErr, setGtErr] = useState$11(false);
-	const inpRef = useRef$17(null);
+	const inpRef = useRef$16(null);
 	const open = !!(editing && category);
 	const slipRef = useGtDialog({
 		open,
 		onClose
 	});
-	useEffect$15(() => {
+	useEffect$14(() => {
 		setGtErr(false);
 		if (editing) {
 			const current = scores[editing.playerId][editing.catId];
@@ -53350,7 +52960,7 @@ function JassEditorPanel({ editing, players, scores, category, onSave, onClose, 
 			setFresh(current !== null);
 		}
 	}, [editing]);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (!open) return;
 		const el = slipRef.current;
 		const pg = el && el.closest(".gt-jd-page");
@@ -53525,8 +53135,8 @@ function JassPlay({ players, scores, setScores, onResetSheet, onEditPlayers, onB
 	const [confirmingReset, setConfirmingReset] = useState$11(false);
 	const [confirmingSetup, setConfirmingSetup] = useState$11(false);
 	const [rulesOpen, setRulesOpen] = useState$11(false);
-	const jdHmRef = useRef$17(null);
-	useEffect$15(() => {
+	const jdHmRef = useRef$16(null);
+	useEffect$14(() => {
 		const el = jdHmRef.current;
 		if (!el) return;
 		const upd = () => {
@@ -53554,7 +53164,7 @@ function JassPlay({ players, scores, setScores, onResetSheet, onEditPlayers, onB
 	})() : 0;
 	const celebration = useCelebration(winnerIdx !== -1, winnerIdx !== -1 ? Math.max(0, 1 - winMargin / Math.max(1, Math.abs(maxTotal))) : void 0);
 	const [podiumOpen, setPodiumOpen] = useState$11(false);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (winnerIdx !== -1) setPodiumOpen(true);
 	}, [winnerIdx]);
 	const podiumRanked = winnerIdx !== -1 ? rankedPodium(players, (p) => jassTotal(scores, players, p.id)) : [];
@@ -53634,7 +53244,7 @@ function JassPlay({ players, scores, setScores, onResetSheet, onEditPlayers, onB
 	const jdCur = editing ? editing.catId : (JASS_CATEGORIES.find((c) => players.some((p) => scores[p.id][c.id] === null)) || {}).id;
 	const jdNext = !editing && jdCur ? (players.find((p) => scores[p.id][jdCur] === null) || {}).id : null;
 	players.length;
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (!editing) return;
 		const hd = document.querySelector(".gt-gamehead");
 		if (hd) {
@@ -53650,7 +53260,7 @@ function JassPlay({ players, scores, setScores, onResetSheet, onEditPlayers, onB
 		}, 60);
 		return () => clearTimeout(id);
 	}, [editing]);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (editing || !jdCur) return;
 		if (window.innerWidth < 600 && !document.documentElement.hasAttribute("data-phone-landscape")) return;
 		const id = setTimeout(() => {
@@ -54029,7 +53639,7 @@ var GT_WAKE_FREE_VIEWS = [
 ];
 function useGtWakeLock(view) {
 	const on = !GT_WAKE_FREE_VIEWS.includes(view);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (!on) return;
 		let lock = null, dead = false;
 		const req = async () => {
@@ -54211,7 +53821,7 @@ function gtAutoReopen(cur) {
 	} catch (e) {}
 }
 function useGtRecord(game, done, build) {
-	const ref = useRef$17(null);
+	const ref = useRef$16(null);
 	let data = null, sig = null;
 	if (done) try {
 		data = build();
@@ -54220,7 +53830,7 @@ function useGtRecord(game, done, build) {
 		data = null;
 		sig = null;
 	}
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (!done || !data) {
 			ref.current = null;
 			return;
@@ -54911,7 +54521,7 @@ function usePersonalBest(storageKey, active, name, value, lowerIsBetter) {
 		}
 	});
 	const [isNew, setIsNew] = useState$11(false);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (!active || value === null || value === void 0) return;
 		setState((prev) => {
 			if (!prev || (lowerIsBetter ? value < prev.value : value > prev.value)) {
@@ -55092,7 +54702,7 @@ function SkyjoNumPad({ player, initialValue, onConfirm, onClose, theme, t, sk, o
 		onClose,
 		outside: tapOut
 	});
-	useEffect$15(() => {
+	useEffect$14(() => {
 		try {
 			sheetRef.current && sheetRef.current.focus({ preventScroll: true });
 		} catch (e) {}
@@ -55300,11 +54910,11 @@ function SkyjoRoundEntry({ players, initialScores, isEdit, onSave, onCancel, the
 	const [enderId, setEnderId] = useState$11(null);
 	const [padPlayerId, setPadPlayerId] = useState$11(null);
 	const [padInstant, setPadInstant] = useState$11(false);
-	const saveRef = useRef$17(null);
-	const listRef = useRef$17(null);
-	const lastPadRef = useRef$17(null);
-	const focusSaveRef = useRef$17(false);
-	useEffect$15(() => {
+	const saveRef = useRef$16(null);
+	const listRef = useRef$16(null);
+	const lastPadRef = useRef$16(null);
+	const focusSaveRef = useRef$16(false);
+	useEffect$14(() => {
 		if (padPlayerId != null) {
 			lastPadRef.current = padPlayerId;
 			return;
@@ -55708,7 +55318,7 @@ function SkyjoGameOver({ players, onRestart, onNewSetup, theme, t }) {
 	const winner = ranked[0];
 	const celebration = useCelebration(true);
 	const [podiumOpen, setPodiumOpen] = useState$11(false);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		setPodiumOpen(true);
 		recordMatch("skyjo", players.map((p) => ({
 			name: p.name,
@@ -55866,7 +55476,7 @@ function SkyjoGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 		});
 		setEditingIndex(null);
 	};
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (state.phase !== "play") return;
 		if (state.players.some((p) => p.total >= state.target) && state.players[0]?.rounds.length > 0) setGameOver(true);
 	}, [
@@ -57159,7 +56769,7 @@ function S8Wrap({ theme, tk, title, sub, logo, onBack, onHome, onEndGame, rulesT
 }
 function S8History({ players, history, cell, editIdx, setEditIdx, renderEdit, onUndo, tk, t }) {
 	const [cf, setCf] = useState$11(false);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (!cf) return;
 		const tm = setTimeout(() => setCf(false), 3e3);
 		return () => clearTimeout(tm);
@@ -57270,7 +56880,7 @@ function S8History({ players, history, cell, editIdx, setEditIdx, renderEdit, on
 function S8GameOver({ ranked, tk, theme, t, gameId, label, onRestart, onNewSetup, onUndo, record, shareExtra }) {
 	const celebration = useCelebration(true);
 	const [open, setOpen] = useState$11(false);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		setOpen(true);
 		try {
 			record && record();
@@ -57431,18 +57041,18 @@ function ShareImagePreview({ url, onClose, t }) {
 	const [note, setNote] = useState$11("");
 	const [forceSave, setForceSave] = useState$11(false);
 	const [busy, setBusy] = useState$11(false);
-	const alive = useRef$17(true);
+	const alive = useRef$16(true);
 	const dlg = useGtDialog({
 		open: !!url,
 		onClose
 	});
-	useEffect$15(() => {
+	useEffect$14(() => {
 		alive.current = true;
 		return () => {
 			alive.current = false;
 		};
 	}, []);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		setNote("");
 		setForceSave(false);
 		setBusy(false);
@@ -57661,7 +57271,7 @@ function ShareImagePreview({ url, onClose, t }) {
 function ShareImageButton({ gameId, gameLabel, ranked, extra, theme, t, style }) {
 	const [sharing, setSharing] = useState$11(false);
 	const [preview, setPreview] = useState$11(null);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		gtEcWarm(gameId);
 	}, [gameId]);
 	return /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("button", {
@@ -62961,11 +62571,11 @@ function impostorAssignRoles(players, numImpostors, mrWhite) {
 	return roles;
 }
 function useDeadline(left, setLeft, running, onEnd) {
-	const endRef = useRef$17(0);
-	const remRef = useRef$17(null);
-	const cb = useRef$17(onEnd);
+	const endRef = useRef$16(0);
+	const remRef = useRef$16(null);
+	const cb = useRef$16(onEnd);
 	cb.current = onEnd;
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (!running) return;
 		const ms = remRef.current != null && Math.ceil(remRef.current / 1e3) === left ? remRef.current : left * 1e3;
 		endRef.current = Date.now() + ms;
@@ -63761,7 +63371,7 @@ function ImpostorResults({ players, roles, word, votes, onPlayAgain, onNewSetup,
 	const tie = eliminatedIds.length > 1;
 	const eliminatedRole = eliminated ? roles[eliminated.id] : null;
 	const caughtImpostorTeam = eliminatedRole === "impostor" || eliminatedRole === "mrwhite";
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (caughtImpostorTeam && guessPhase) return;
 		const impWin = !(eliminated && caughtImpostorTeam && guessResult !== "impostorwin");
 		gtRecordSides("impostor", players, tie ? () => false : (p) => roles[p.id] !== "civilian" === impWin, roles, { impostors: players.filter((p) => roles[p.id] !== "civilian").map((p) => p.name) });
@@ -64772,7 +64382,7 @@ function TrtEnd({ winner, players, roles, alive, tk, t, theme, onAgain, onSetup 
 	const fw = winner === "faithful";
 	const c = fw ? tk.teal : tk.red;
 	const traitors = players.filter((p) => roles[p.id] === "traitor").map((p) => p.name);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		gtRecordSides("traitor", players, (p) => roles[p.id] === "traitor" === !fw, roles, { traitors });
 	}, []);
 	return /* @__PURE__ */ import_react.default.createElement("div", {
@@ -65334,6 +64944,17 @@ var ICONS = {
 			strokeWidth: "1"
 		})
 	],
+	gear: [/* @__PURE__ */ import_react.default.createElement("circle", {
+		key: "a",
+		cx: "12",
+		cy: "12",
+		r: "3",
+		...IC
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		key: "b",
+		d: "M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M5.5 18.5l1.7-1.7M16.8 7.2l1.7-1.7",
+		...IC
+	})],
 	home: [/* @__PURE__ */ import_react.default.createElement("path", {
 		key: "r",
 		d: "M3 11.5 12 4l9 7.5",
@@ -65375,6 +64996,7 @@ var COLORS = {
 		users: "#3FB8A6",
 		flag: "#FF7B7F",
 		rules: "#8C9AFF",
+		gear: "#9AA4BE",
 		home: "#5FB38C",
 		plus: "#8C9AFF",
 		table: "#3FB8A6",
@@ -65387,6 +65009,7 @@ var COLORS = {
 		users: "#12806F",
 		flag: "#C9302C",
 		rules: "#4353D6",
+		gear: "#5C6580",
 		home: "#2A7F5A",
 		plus: "#4353D6",
 		table: "#12806F",
@@ -65399,6 +65022,7 @@ var COLORS = {
 		users: "#D2D2D2",
 		flag: "#FF8F8F",
 		rules: "#D2D2D2",
+		gear: "#D2D2D2",
 		home: "#D2D2D2",
 		plus: "#D2D2D2",
 		table: "#D2D2D2",
@@ -65528,7 +65152,6 @@ function GtHeadButtons({ theme, css, L, onRules, onHome, onEndGame, items, onOpe
 		}, /* @__PURE__ */ import_react.default.createElement("span", { "aria-live": "polite" }, label));
 	};
 	const showGroup = list.length > 0 || !!onEndGame;
-	const showTail = !!onRules || !!onHome;
 	const panel = open && pos && ReactDOM.createPortal(/* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gt-hm-dim gt-hmt-" + th,
 		onClick: close
@@ -65553,7 +65176,7 @@ function GtHeadButtons({ theme, css, L, onRules, onHome, onEndGame, items, onOpe
 		danger: !confirmEnd,
 		confirming: confirmEnd,
 		onClick: endTap
-	}, /* @__PURE__ */ import_react.default.createElement("span", { "aria-live": "polite" }, confirmEnd ? L.endConfirm : L.end)), showGroup && showTail && /* @__PURE__ */ import_react.default.createElement("div", {
+	}, /* @__PURE__ */ import_react.default.createElement("span", { "aria-live": "polite" }, confirmEnd ? L.endConfirm : L.end)), showGroup && /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gt-hm-sep",
 		role: "separator"
 	}), onRules && /* @__PURE__ */ import_react.default.createElement(GtHmRow, {
@@ -65563,7 +65186,14 @@ function GtHeadButtons({ theme, css, L, onRules, onHome, onEndGame, items, onOpe
 			close();
 			onRules();
 		}
-	}, L.rules), onHome && /* @__PURE__ */ import_react.default.createElement(GtHmRow, {
+	}, L.rules), /* @__PURE__ */ import_react.default.createElement(GtHmRow, {
+		icon: "gear",
+		color: col.gear,
+		onClick: () => {
+			close();
+			window.dispatchEvent(new CustomEvent("gt-open-settings"));
+		}
+	}, L.settings), onHome && /* @__PURE__ */ import_react.default.createElement(GtHmRow, {
 		icon: "home",
 		color: col.home,
 		onClick: () => {
@@ -65999,7 +65629,7 @@ function DartsPlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewGam
 	const [turn, setTurn] = useState$11([]);
 	const [confirmingReset, setConfirmingReset] = useState$11(false);
 	const { node: bigThrowNode, fire: fireBigThrow } = useMilestoneBurst();
-	useEffect$15(() => {
+	useEffect$14(() => {
 		setTurn([]);
 	}, [state.currentIdx, state.history.length]);
 	const io = state.inOut || (state.doubleOut ? "dido" : "siso");
@@ -66414,10 +66044,10 @@ function DartsGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 	})() : 0;
 	const celebration = useCelebration(state.phase === "done", state.phase === "done" ? Math.max(0, 1 - legsMargin / Math.max(1, state.legsTarget)) : void 0);
 	const [podiumOpen, setPodiumOpen] = useState$11(false);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (state.phase === "done") setPodiumOpen(true);
 	}, [state.phase]);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (state.phase === "done") recordMatch("darts", state.players.map((p) => ({
 			name: p.name,
 			score: state.legsWon[p.id] || 0
@@ -66957,7 +66587,7 @@ function CricketPlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewG
 	const [turn, setTurn] = useState$11([]);
 	const [confirmingReset, setConfirmingReset] = useState$11(false);
 	const { node: tripleCloseNode, fire: fireTripleClose } = useMilestoneBurst();
-	useEffect$15(() => {
+	useEffect$14(() => {
 		setTurn([]);
 	}, [state.currentIdx, state.history.length]);
 	const cur = state.players[state.currentIdx];
@@ -67227,10 +66857,10 @@ function CricketGame({ state, setState, onBack, onHome, onEndGame, lang = "de", 
 	})() : 0;
 	const celebration = useCelebration(state.phase === "done", state.phase === "done" ? Math.max(0, 1 - legsMargin / Math.max(1, state.legsTarget)) : void 0);
 	const [podiumOpen, setPodiumOpen] = useState$11(false);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (state.phase === "done") setPodiumOpen(true);
 	}, [state.phase]);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (state.phase === "done") recordMatch("cricket", state.players.map((p) => ({
 			name: p.name,
 			score: state.legsWon[p.id] || 0
@@ -67632,7 +67262,7 @@ function HiScorePlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewG
 	const GN = "#2F6B52";
 	const [turn, setTurn] = useState$11([]);
 	const [confirmingReset, setConfirmingReset] = useState$11(false);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		setTurn([]);
 	}, [
 		state.currentIdx,
@@ -67956,7 +67586,7 @@ function useGtDsRecord(game, st) {
 		useGtRecord(game, done, () => gtDsBuild(st));
 		return;
 	}
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (done) {
 			const b = gtDsBuild(st);
 			recordMatch(game, b.participants, b.lowWins, b.extra);
@@ -67980,7 +67610,7 @@ function HiScoreGame({ state, setState, onBack, onHome, onEndGame, lang = "de", 
 	};
 	const celebration = useCelebration(state.phase === "done", state.phase === "done" ? Math.max(0, 1 - scoreMargin.gap / Math.max(1, scoreMargin.top)) : void 0);
 	const [podiumOpen, setPodiumOpen] = useState$11(false);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (state.phase === "done") setPodiumOpen(true);
 	}, [state.phase]);
 	useGtDsRecord("hiscore", state);
@@ -68377,7 +68007,7 @@ function SplitScorePlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onN
 	const GN = "#2F6B52";
 	const [turn, setTurn] = useState$11([]);
 	const [confirmingReset, setConfirmingReset] = useState$11(false);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		setTurn([]);
 	}, [
 		state.currentIdx,
@@ -68646,7 +68276,7 @@ function SplitScoreGame({ state, setState, onBack, onHome, onEndGame, lang = "de
 	};
 	const celebration = useCelebration(state.phase === "done", state.phase === "done" ? Math.max(0, 1 - scoreMargin.gap / Math.max(1, scoreMargin.top)) : void 0);
 	const [podiumOpen, setPodiumOpen] = useState$11(false);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (state.phase === "done") setPodiumOpen(true);
 	}, [state.phase]);
 	useGtDsRecord("splitscore", state);
@@ -68906,7 +68536,7 @@ function ShanghaiPlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNew
 	const GN = "#2F6B52";
 	const [turn, setTurn] = useState$11([]);
 	const [confirmingReset, setConfirmingReset] = useState$11(false);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		setTurn([]);
 	}, [
 		state.currentIdx,
@@ -69205,7 +68835,7 @@ function ShanghaiGame({ state, setState, onBack, onHome, onEndGame, lang = "de",
 	};
 	const celebration = useCelebration(state.phase === "done", state.phase === "done" ? Math.max(0, 1 - scoreMargin.gap / Math.max(1, scoreMargin.top)) : void 0);
 	const [podiumOpen, setPodiumOpen] = useState$11(false);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (state.phase === "done") setPodiumOpen(true);
 	}, [state.phase]);
 	useGtDsRecord("shanghai", state);
@@ -70010,7 +69640,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.08-11";
+var APP_BUILD = "2026.11.08-12";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -70336,16 +69966,16 @@ function BackupRestoreDialog({ plan, current, onConfirm, onCancel, t, tk }) {
 }
 // web/src/app/settings.js
 var settings_exports = /* @__PURE__ */ __exportAll({ SettingsPage: () => SettingsPage });
-function SettingsPage({ onBack, onReplayTour, lang, setLang, theme, setTheme, viewMode, setViewMode, soundEnabled, setSoundEnabled, hapticEnabled, setHapticEnabled, endAllCount = 0, onEndAll }) {
+function SettingsPage({ onBack, backLabel, onReplayTour, lang, setLang, theme, setTheme, viewMode, setViewMode, soundEnabled, setSoundEnabled, hapticEnabled, setHapticEnabled, endAllCount = 0, onEndAll }) {
 	const t = useT(lang);
 	const tk = shellTokens(theme);
 	const [confirmingEndAll, setConfirmingEndAll] = useState$11(false);
 	const [endAllMsg, setEndAllMsg] = useState$11("");
-	const endAllTimer = useRef$17(null);
+	const endAllTimer = useRef$16(null);
 	const [legalOpen, setLegalOpen] = useState$11(false);
 	const [groupsOpen, setGroupsOpen] = useState$11(false);
 	const [confirmingStatsReset, setConfirmingStatsReset] = useState$11(false);
-	const statsTimer = useRef$17(null);
+	const statsTimer = useRef$16(null);
 	const doEndAll = () => {
 		if (!endAllCount) return;
 		if (!confirmingEndAll) {
@@ -70376,8 +70006,8 @@ function SettingsPage({ onBack, onReplayTour, lang, setLang, theme, setTheme, vi
 	};
 	const [backupMsg, setBackupMsg] = useState$11(null);
 	const [restorePlan, setRestorePlan] = useState$11(null);
-	const fileInputRef = useRef$17(null);
-	const msgTimer = useRef$17(null);
+	const fileInputRef = useRef$16(null);
+	const msgTimer = useRef$16(null);
 	const say = (kind, text, ms) => {
 		clearTimeout(msgTimer.current);
 		setBackupMsg({
@@ -70618,7 +70248,7 @@ function SettingsPage({ onBack, onReplayTour, lang, setLang, theme, setTheme, vi
 			color: tk.ink,
 			border: N ? `1px solid ${tk.border}` : "none"
 		}
-	}, t("backToStart")), /* @__PURE__ */ import_react.default.createElement("h1", {
+	}, backLabel || t("backToStart")), /* @__PURE__ */ import_react.default.createElement("h1", {
 		className: "st-title",
 		style: { color: tk.ink }
 	}, t("settingsTitle")), /* @__PURE__ */ import_react.default.createElement("div", { className: "st-cards" }, /* @__PURE__ */ import_react.default.createElement("div", {
@@ -72233,11 +71863,11 @@ function FreeplayGame({ players, setPlayers, target, setTarget, lowWins, setLowW
 	const celebration = useCelebration(winnerIdx !== -1);
 	const { node: milestoneNode, fire: fireMilestone } = useMilestoneBurst();
 	const [podiumOpen, setPodiumOpen] = useState$11(false);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (winnerIdx !== -1) setPodiumOpen(true);
 	}, [winnerIdx]);
 	const podiumRanked = winnerIdx !== -1 ? rankedPodium(players, (p) => p.entries.reduce((s, e) => s + e, 0), { lowWins: !!lowWins }) : [];
-	const gtBox = useRef$17(null);
+	const gtBox = useRef$16(null);
 	useGtFlip(gtBox);
 	const gtFx = useGtLead("free", gtLeader(players.map((p, i) => [p.id, totals[i]]), lowWins), players.reduce((s, p) => s + p.entries.length, 0));
 	const update = (idx, fn) => setPlayers((ps) => ps.map((p, i) => i === idx ? fn(p) : p));
@@ -74573,7 +74203,7 @@ function GameOverPanel({ winner, lovers, players, rolesFlat, alive, onRestart, o
 	const ROLES = WEREWOLF_ROLES_FOR(lang);
 	const civWin = winner === "dorf";
 	const celebration = useCelebration(civWin, void 0, theme);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		gtRecordSides("werwolf", players, (p) => winner === "lovers" ? !!(lovers && lovers.includes(p.id)) : rolesFlat[p.id] === "werwolf" === (winner === "wolf"), rolesFlat, {
 			wolves: players.filter((p) => rolesFlat[p.id] === "werwolf").map((p) => p.name),
 			wwWin: winner
@@ -75365,7 +74995,7 @@ function MafiaGameOverPanel({ winner, players, rolesFlat, alive, onRestart, onNe
 	const ROLES = MAFIA_ROLES_BY_LANG_FOR(lang, t);
 	const townWin = winner === "town";
 	const celebration = useCelebration(townWin, void 0, theme);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		gtRecordSides("mafia", players, (p) => (ROLES[rolesFlat[p.id]] || {}).team === "mafia" === (winner === "mafia"), rolesFlat, { mafiosi: players.filter((p) => (ROLES[rolesFlat[p.id]] || {}).team === "mafia").map((p) => p.name) });
 	}, []);
 	return /* @__PURE__ */ import_react.default.createElement("div", {
@@ -95667,7 +95297,7 @@ function TabuGameOver({ teams, scores, onRestart, onNewSetup, theme, t }) {
 	const winner = ranked[0];
 	const celebration = useCelebration(true);
 	const [podiumOpen, setPodiumOpen] = useState$11(false);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		setPodiumOpen(true);
 		recordMatch("tabu", teams.map((tm) => ({
 			name: tm.name,
@@ -95812,7 +95442,7 @@ function TabuGame({ state, setState, onBack, onHome, onEndGame, lang = "de", the
 		setTabooCount(0);
 		setWinnerReached(false);
 	};
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (state.phase === "play" && scores === null) initGame();
 	}, [state.phase]);
 	useDeadline(secondsLeft, setSecondsLeft, phase === "playing", () => {
@@ -95984,7 +95614,7 @@ function useOrientation() {
 			return "portrait";
 		}
 	});
-	useEffect$15(() => {
+	useEffect$14(() => {
 		let mq;
 		try {
 			mq = window.matchMedia("(orientation: landscape)");
@@ -96419,7 +96049,7 @@ function HeadsUpPlay({ word, secondsLeft, correctCount, onCorrect, onSkip, motio
 	const [flash, setFlash] = useState$11(null);
 	const [calibrating, setCalibrating] = useState$11(!!motionEnabled);
 	const [noSensor, setNoSensor] = useState$11(false);
-	const calRef = useRef$17(calibrating);
+	const calRef = useRef$16(calibrating);
 	calRef.current = calibrating;
 	const [tiltInverted, setTiltInverted] = useState$11(() => {
 		try {
@@ -96428,20 +96058,20 @@ function HeadsUpPlay({ word, secondsLeft, correctCount, onCorrect, onSkip, motio
 			return false;
 		}
 	});
-	const tiltInvertedRef = useRef$17(tiltInverted);
-	useEffect$15(() => {
+	const tiltInvertedRef = useRef$16(tiltInverted);
+	useEffect$14(() => {
 		tiltInvertedRef.current = tiltInverted;
 		try {
 			localStorage.setItem("gt_headsup_tilt_invert", tiltInverted ? "1" : "0");
 		} catch {}
 	}, [tiltInverted]);
-	const onCorrectRef = useRef$17(onCorrect);
-	const onSkipRef = useRef$17(onSkip);
-	useEffect$15(() => {
+	const onCorrectRef = useRef$16(onCorrect);
+	const onSkipRef = useRef$16(onSkip);
+	useEffect$14(() => {
 		onCorrectRef.current = onCorrect;
 		onSkipRef.current = onSkip;
 	});
-	useEffect$15(() => {
+	useEffect$14(() => {
 		const fn = (e) => {
 			if (e.metaKey || e.ctrlKey || e.altKey || e.repeat || calRef.current) return;
 			const k = e.key;
@@ -96459,7 +96089,7 @@ function HeadsUpPlay({ word, secondsLeft, correctCount, onCorrect, onSkip, motio
 		window.addEventListener("keydown", fn);
 		return () => window.removeEventListener("keydown", fn);
 	}, []);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (!motionEnabled) {
 			setCalibrating(false);
 			setNoSensor(true);
@@ -96835,7 +96465,7 @@ function HeadsUpGameOver({ players, scores, onRestart, onNewSetup, theme, t }) {
 	const winner = ranked[0];
 	const celebration = useCelebration(true);
 	const [podiumOpen, setPodiumOpen] = useState$11(false);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		setPodiumOpen(true);
 		recordMatch("headsup", players.map((p) => ({
 			name: p.name,
@@ -96979,17 +96609,17 @@ function HeadsUpGame({ state, setState, onBack, onHome, onEndGame, lang = "de", 
 		setTurnCount(0);
 		setPortraitOk(false);
 	};
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (state.phase === "play" && scores === null) initGame();
 	}, [state.phase]);
 	useDeadline(secondsLeft, setSecondsLeft, phase === "playing" && !(orientation === "portrait" && gtHuCoarse() && motionState === "granted" && !portraitOk), () => {
 		timeUpAlert();
 		setPhase("summary");
 	});
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (phase === "playing") headsupTryLockLandscape();
 	}, [phase]);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (phase === "playing" && orientation === "landscape") try {
 			window.scrollTo(0, 0);
 		} catch (e) {}
@@ -97287,7 +96917,7 @@ function Flip7RoundPad({ player, initial, onConfirm, onClose, theme, t, onAdvanc
 		onClose,
 		outside: () => tapRef.current && tapRef.current()
 	});
-	useEffect$15(() => {
+	useEffect$14(() => {
 		try {
 			sheetRef.current && sheetRef.current.focus({ preventScroll: true });
 		} catch (e) {}
@@ -97620,11 +97250,11 @@ function Flip7RoundEntry({ players, initialData, isEdit, onSave, onCancel, theme
 	const [data, setData] = useState$11(() => initialData || Object.fromEntries(players.map((p) => [p.id, null])));
 	const [padPlayerId, setPadPlayerId] = useState$11(null);
 	const [padInstant, setPadInstant] = useState$11(false);
-	const saveRef = useRef$17(null);
-	const listRef = useRef$17(null);
-	const lastPadRef = useRef$17(null);
-	const focusSaveRef = useRef$17(false);
-	useEffect$15(() => {
+	const saveRef = useRef$16(null);
+	const listRef = useRef$16(null);
+	const lastPadRef = useRef$16(null);
+	const focusSaveRef = useRef$16(false);
+	useEffect$14(() => {
 		if (padPlayerId != null) {
 			lastPadRef.current = padPlayerId;
 			return;
@@ -97944,7 +97574,7 @@ function Flip7GameOver({ players, history, onRestart, onNewSetup, theme, t }) {
 	const winner = ranked[0];
 	const celebration = useCelebration(true);
 	const [podiumOpen, setPodiumOpen] = useState$11(false);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		setPodiumOpen(true);
 		recordMatch("flip7", players.map((p) => ({
 			name: p.name,
@@ -98094,7 +97724,7 @@ function Flip7Game({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 		});
 		setEditingIndex(null);
 	};
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (state.phase !== "play") return;
 		if (state.players.some((p) => p.total >= state.target) && (state.history || []).length > 0) setGameOver(true);
 	}, [
@@ -100363,7 +99993,7 @@ function FiveSecPlay({ prompt, playerName, secondsLeft, phase, onSuccess, onFail
 function FiveSecScoreboard({ players, scores, onEnd, theme, t, currentId }) {
 	const fk = fiveSecTokens(theme);
 	const [cf, setCf] = useState$11(false);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (!cf) return;
 		const tm = setTimeout(() => setCf(false), 3e3);
 		return () => clearTimeout(tm);
@@ -100435,7 +100065,7 @@ function FiveSecOver({ players, scores, onRestart, onNewSetup, theme, t }) {
 	const any = ranked.some((p) => sc(p) > 0);
 	const celebration = useCelebration(uniq && any);
 	const [podiumOpen, setPodiumOpen] = useState$11(false);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (any) setPodiumOpen(true);
 	}, []);
 	const podiumRanked = ranked.map((p) => ({
@@ -100570,7 +100200,7 @@ function FiveSecGame({ state, setState, onBack, onHome, onEndGame, lang = "de", 
 		setAttemptsThisPrompt(0);
 		setPhase("intro");
 	};
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (state.phase === "play" && scores === null) initGame();
 	}, [state.phase]);
 	useDeadline(secondsLeft, setSecondsLeft, phase === "playing", () => {
@@ -103213,7 +102843,7 @@ function MostLikelyGame({ state, setState, onBack, onHome, onEndGame, lang = "de
 		setDeckIdx(0);
 		setCount(0);
 	};
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (state.phase === "play" && tally === null) initGame();
 	}, [state.phase]);
 	if (state.phase === "setup") return /* @__PURE__ */ import_react.default.createElement("div", {
@@ -105676,7 +105306,7 @@ function gtYrValSize(len) {
 }
 function useGtYrTicker(target, run) {
 	const [v, setV] = useState$11(run && !gtRM() ? 0 : target);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (!run || gtRM() || target <= 0) {
 			setV(target);
 			return;
@@ -105756,8 +105386,8 @@ function GtYearReview({ t, theme, onClose, year }) {
 	const [busy, setBusy] = useState$11(false);
 	const [note, setNote] = useState$11("");
 	const [preview, setPreview] = useState$11(null);
-	const cardRef = useRef$17(null);
-	const alive = useRef$17(true);
+	const cardRef = useRef$16(null);
+	const alive = useRef$16(true);
 	const dlgRef = useGtDialog({
 		open: true,
 		onClose
@@ -105765,7 +105395,7 @@ function GtYearReview({ t, theme, onClose, year }) {
 	const n = seq.length;
 	const cur = seq[Math.min(i, n - 1)];
 	const go = (d) => setI((x) => Math.max(0, Math.min(n - 1, x + d)));
-	useEffect$15(() => {
+	useEffect$14(() => {
 		alive.current = true;
 		try {
 			cardRef.current && cardRef.current.focus({ preventScroll: true });
@@ -105774,7 +105404,7 @@ function GtYearReview({ t, theme, onClose, year }) {
 			alive.current = false;
 		};
 	}, []);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		const k = (ev) => {
 			if (ev.key === "ArrowRight") {
 				ev.preventDefault();
@@ -107689,8 +107319,8 @@ function gtSt2Label(id, t) {
 function GtSt2Num({ v, suf }) {
 	const n = typeof v === "number" && isFinite(v) ? v : null;
 	const [d, setD] = useState$11(() => n == null || gtSt2RM() ? n : 0);
-	const cur = useRef$17(d || 0);
-	useEffect$15(() => {
+	const cur = useRef$16(d || 0);
+	useEffect$14(() => {
 		if (n == null) return;
 		let hidden = false;
 		try {
@@ -109150,7 +108780,7 @@ function GtSt2Achievements({ matches, pname, t, tk, lk, theme, acc, i }) {
 			return /* @__PURE__ */ new Set();
 		}
 	}, [list, pname]);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (!fresh.size) return;
 		const id = setTimeout(() => {
 			try {
@@ -109460,7 +109090,7 @@ function GtSt2Profile({ pkey, matches, opts, people, t, tk, lk, theme, lang, acc
 	const [allRecent, setAllRecent] = useState$11(false);
 	const [sharing, setSharing] = useState$11(false);
 	const [preview, setPreview] = useState$11(null);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		setCmp(null);
 		setMergeOpen(false);
 		setAllRecent(false);
@@ -109960,7 +109590,7 @@ function GtSt2Page({ onBack, lang, theme }) {
 	const [refreshKey, setRefreshKey] = useState$11(0);
 	const [yearOpen, setYearOpen] = useState$11(false);
 	const { groups } = useSavedGroups();
-	useEffect$15(() => {
+	useEffect$14(() => {
 		try {
 			sessionStorage.setItem(FK, JSON.stringify({
 				range,
@@ -109973,7 +109603,7 @@ function GtSt2Page({ onBack, lang, theme }) {
 		game,
 		groupId
 	]);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		try {
 			window.scrollTo(0, 0);
 			const c = document.querySelector(".gtL-content");
@@ -110503,6 +110133,7 @@ function RulesButton({ onClick, onHome, onEndGame, moreItems, onMenuOpen, tokens
 		items: moreItems,
 		onOpen: onMenuOpen,
 		L: {
+			settings: gtTx("settings"),
 			theme: gtTx("gtxTheme"),
 			menu: gtTx("gtxMenu"),
 			group: gtTx("gtxGroupGame"),
@@ -110520,8 +110151,8 @@ function RulesSheet({ open, onClose, title, text, tokens }) {
 		open,
 		onClose
 	});
-	const closeRef = useRef$17(null);
-	const idRef = useRef$17("");
+	const closeRef = useRef$16(null);
+	const idRef = useRef$16("");
 	if (!idRef.current) idRef.current = "gt-rs-" + ++GT_RS_SEQ;
 	if (!open) return null;
 	const tk = tokens || {};
@@ -110617,6 +110248,10 @@ function App() {
 	});
 	const [loaded, setLoaded] = useState$11(false);
 	const [view, setViewRaw] = useState$11("start");
+	const settingsFromRef = useRef$16(null);
+	useEffect$14(() => {
+		if (view !== "settings") settingsFromRef.current = null;
+	}, [view]);
 	useGtWakeLock(view);
 	usePageSwipe(view, loaded);
 	const setView = (v) => {
@@ -110642,6 +110277,20 @@ function App() {
 		f.gtNav = 1;
 		return f;
 	};
+	const viewRefE = useRef$16(view);
+	viewRefE.current = view;
+	const setViewRefE = useRef$16(setView);
+	setViewRefE.current = setView;
+	useEffect$14(() => {
+		const on = () => {
+			const v = viewRefE.current;
+			if (v === "settings") return;
+			settingsFromRef.current = v === "start" ? null : v;
+			setViewRefE.current("settings");
+		};
+		window.addEventListener("gt-open-settings", on);
+		return () => window.removeEventListener("gt-open-settings", on);
+	}, []);
 	const [tutto, setTutto] = useState$11(DEFAULT_TUTTO);
 	const [freeplay, setFreeplay] = useState$11(DEFAULT_FREEPLAY);
 	const [yatzy, setYatzy] = useState$11(DEFAULT_YATZY);
@@ -110676,7 +110325,7 @@ function App() {
 	GT_CUR_LANG = lang;
 	const [theme, setTheme] = useState$11("dark");
 	GT_CUR_THEME = theme;
-	useEffect$15(() => {
+	useEffect$14(() => {
 		const on = () => setTheme((v) => {
 			const o = [
 				"dark",
@@ -110720,7 +110369,7 @@ function App() {
 			localStorage.setItem("gt_hapticEnabled", v ? "true" : "false");
 		} catch (e) {}
 	};
-	useEffect$15(() => {
+	useEffect$14(() => {
 		const handler = (e) => {
 			if (e.target && e.target.closest && e.target.closest("[data-gt-sound]")) {
 				playTapSound();
@@ -110730,7 +110379,7 @@ function App() {
 		document.addEventListener("click", handler, true);
 		return () => document.removeEventListener("click", handler, true);
 	}, []);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		let cancelled = false;
 		const gtLoadTimer = setTimeout(() => {
 			if (!cancelled) setLoaded(true);
@@ -110811,7 +110460,7 @@ function App() {
 			clearTimeout(gtLoadTimer);
 		};
 	}, []);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (!loaded) return;
 		try {
 			if (window.__gtImporting) return;
@@ -110833,7 +110482,7 @@ function App() {
 		lang,
 		loaded
 	]);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (!loaded) return;
 		const t = setTimeout(() => {
 			saveAppState({
@@ -110907,7 +110556,7 @@ function App() {
 		viewModeChosen,
 		loaded
 	]);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (!loaded) return;
 		const sy = (set, k) => set((s) => gtSyncMatchId(k, s));
 		sy(setTutto, "tutto");
@@ -110982,7 +110631,7 @@ function App() {
 			GT_MATCH_IDS[GT_MATCH_GAME[k]] = s && typeof s.matchId === "string" ? s.matchId : null;
 		});
 	}
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (!loaded) return;
 		setTutto((s) => ({
 			...s,
@@ -111081,7 +110730,7 @@ function App() {
 			players: relocalizeDefaultNames(s.players, lang, false)
 		}));
 	}, [lang, loaded]);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		try {
 			const m = document.querySelector("meta[name=\"theme-color\"]");
 			const bar = theme === "light" ? "#F4EFE4" : theme === "noir" ? "#000000" : "#12141C";
@@ -111095,7 +110744,7 @@ function App() {
 		} catch (e) {}
 	}, [theme, lang]);
 	const effMode = usePhoneLandscapeRoot(viewModeChosen ? viewMode : "auto", loaded);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (!loaded) return;
 		const root = document.documentElement;
 		let st = document.getElementById("gt-topstrip-css");
@@ -111432,7 +111081,8 @@ function App() {
 			setReplayTour(false);
 		}
 	}), view === "settings" && /* @__PURE__ */ import_react.default.createElement(SettingsPage, {
-		onBack: nb("start"),
+		onBack: nb(settingsFromRef.current || "start"),
+		backLabel: settingsFromRef.current ? gtTx("back") : void 0,
 		onReplayTour: () => {
 			setView("start");
 			setReplayTour(true);
@@ -112640,7 +112290,7 @@ function YatzyEditorPanel({ editing, players, scores, totals, category, onSave, 
 	const [other, setOther] = useState$11(false);
 	const pset = category ? YATZY_POSSIBLE[category.id] : null;
 	const gridVals = category && category.kind === "free" && pset && pset.size <= 12 ? [...pset].sort((a, b) => a - b) : null;
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (editing) {
 			const current = scores[editing.playerId][editing.catId];
 			setValue(current !== null ? String(current) : "");
@@ -113034,7 +112684,7 @@ function YatzyPlay({ onRematch, players, scores, setScores, onResetSheet, onEdit
 	const [confirmingSetup, setConfirmingSetup] = useState$11(false);
 	const [rulesOpen, setRulesOpen] = useState$11(false);
 	const [justSet, setJustSet] = useState$11(null);
-	const wrapRef = useRef$17(null);
+	const wrapRef = useRef$16(null);
 	const [wide, setWide] = useState$11(false);
 	const [edPad, setEdPad] = useState$11(0);
 	const nPl = players.length;
@@ -113056,7 +112706,7 @@ function YatzyPlay({ onRematch, players, scores, setScores, onResetSheet, onEdit
 			window.removeEventListener("resize", calc);
 		};
 	}, [nPl]);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (!editing) {
 			setEdPad(0);
 			return;
@@ -113146,7 +112796,7 @@ function YatzyPlay({ onRematch, players, scores, setScores, onResetSheet, onEdit
 	})() : 0;
 	const celebration = useCelebration(winnerIdx !== -1, winnerIdx !== -1 ? Math.max(0, 1 - winMargin / Math.max(1, Math.abs(maxTotal))) : void 0);
 	const [podiumOpen, setPodiumOpen] = useState$11(false);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (winnerIdx !== -1) setPodiumOpen(true);
 	}, [winnerIdx]);
 	useGtRecord("yatzy", winnerIdx !== -1, () => ({
@@ -113778,7 +113428,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.08-11");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.08-12");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -113786,7 +113436,7 @@ function gtKeep(snap, onSnap, active, onFail, sv) {
 		vals: [],
 		tags: {}
 	};
-	const last = useRef$17(null);
+	const last = useRef$16(null);
 	const live = !!(active && gtIsObj(snap) && Array.isArray(snap.v) && snap.ok === true && gtSnapOk(snap, sv));
 	const us = (init, tag, fix) => {
 		const k = ctx.i++;
@@ -113807,7 +113457,7 @@ function gtKeep(snap, onSnap, active, onFail, sv) {
 		if (typeof tag === "string" && tag.charAt(0) === "@") ctx.tags[tag.slice(1)] = k;
 		return r;
 	};
-	useEffect$15(() => {
+	useEffect$14(() => {
 		let s;
 		try {
 			s = JSON.stringify(ctx.vals);
@@ -113832,7 +113482,7 @@ function gtKeep(snap, onSnap, active, onFail, sv) {
 			});
 		} catch (e) {}
 	});
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (active && onFail && (!live || ctx.i !== snap.v.length)) onFail();
 	}, []);
 	return us;
@@ -114106,7 +113756,7 @@ function usePlayCount(trigger) {
 			return 0;
 		}
 	});
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (trigger) setCount((c) => {
 			const next = c + 1;
 			try {
@@ -114120,53 +113770,6 @@ function usePlayCount(trigger) {
 // web/src/lib/utils.ts
 function cn(...a) {
 	return a.filter(Boolean).join(" ");
-}
-// web/src/components/magicui/number-ticker.tsx
-function NumberTicker({ value, startValue = 0, direction = "up", delay = 0, className, decimalPlaces = 0, ...props }) {
-	const ref = (0, import_react.useRef)(null);
-	const motionValue = useMotionValue(direction === "down" ? value : startValue);
-	const springValue = useSpring(motionValue, {
-		damping: 60,
-		stiffness: 100
-	});
-	const isInView = useInView(ref, {
-		once: true,
-		margin: "0px"
-	});
-	const reduce = useReducedMotion();
-	(0, import_react.useEffect)(() => {
-		let timer = null;
-		if (isInView) timer = setTimeout(() => {
-			const target = direction === "down" ? startValue : value;
-			if (reduce) {
-				motionValue.jump(target);
-				springValue.jump(target);
-			} else motionValue.set(target);
-		}, delay * 1e3);
-		return () => {
-			if (timer !== null) clearTimeout(timer);
-		};
-	}, [
-		motionValue,
-		springValue,
-		reduce,
-		isInView,
-		delay,
-		value,
-		direction,
-		startValue
-	]);
-	(0, import_react.useEffect)(() => springValue.on("change", (latest) => {
-		if (ref.current) ref.current.textContent = Intl.NumberFormat("de-CH", {
-			minimumFractionDigits: decimalPlaces,
-			maximumFractionDigits: decimalPlaces
-		}).format(Number(latest.toFixed(decimalPlaces)) || 0);
-	}), [springValue, decimalPlaces]);
-	return /* @__PURE__ */ React.createElement("span", {
-		ref,
-		className: cn("tw:inline-block tw:tabular-nums", className),
-		...props
-	}, startValue);
 }
 // web/src/components/magicui/shine-border.tsx
 /**
@@ -114221,7 +113824,7 @@ function PodiumOverlay({ open, onClose, onRestart, extraAct, ranked, tk, t, best
 	const plLand = usePhoneLandscape();
 	const [isSharing, setIsSharing] = useState$11(false);
 	const [previewUrl, setPreviewUrl] = useState$11(null);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (open) gtEcWarm(gameId);
 	}, [open]);
 	const dlgRef = useGtDialog({
@@ -114232,7 +113835,7 @@ function PodiumOverlay({ open, onClose, onRestart, extraAct, ranked, tk, t, best
 		}
 	});
 	const sbSig = String(gameId) + "|" + (Array.isArray(ranked) ? ranked : []).map((e) => (e && e.name) + ":" + (e && e.score) + ":" + (e && e.rk)).join("|");
-	const sbSigRef = useRef$17(sbSig);
+	const sbSigRef = useRef$16(sbSig);
 	sbSigRef.current = sbSig;
 	const [sbPh, setSbPh] = useState$11("done");
 	import_react.default.useLayoutEffect(() => {
@@ -114268,7 +113871,7 @@ function PodiumOverlay({ open, onClose, onRestart, extraAct, ranked, tk, t, best
 		};
 	}, [open]);
 	const [achv, setAchv] = useState$11([]);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (!open) {
 			setAchv([]);
 			return;
@@ -114580,9 +114183,9 @@ function gtSbDrop(h, e) {
 	return o;
 }
 function GtPodiumBlocks({ items, S, play, land }) {
-	const stRef = useRef$17(null);
-	const rigRef = useRef$17(null);
-	const api = useRef$17(null);
+	const stRef = useRef$16(null);
+	const rigRef = useRef$16(null);
+	const api = useRef$16(null);
 	const W = land ? 70 : 80, step = W + 10, m = items.length, B = land ? 34 : 44;
 	import_react.default.useLayoutEffect(() => {
 		const st = stRef.current, rig = rigRef.current;
@@ -114860,7 +114463,7 @@ function GtPodiumBlocks({ items, S, play, land }) {
 	}, it.lab)));
 }
 function GtAchvHint({ items, t, S }) {
-	const ref = useRef$17(null);
+	const ref = useRef$16(null);
 	import_react.default.useLayoutEffect(() => {
 		const el = ref.current;
 		if (!el || gtP3RM() || !el.animate) return;
@@ -114945,11 +114548,68 @@ function gtTick(sc) {
 	const s = String(sc);
 	if (!/^-?\d{1,9}(\.\d{1,2})?$/.test(s) || String(Number(s)) !== s) return sc;
 	const d = s.indexOf(".") < 0 ? 0 : s.length - s.indexOf(".") - 1;
-	return /* @__PURE__ */ import_react.default.createElement(NumberTicker, {
+	return /* @__PURE__ */ import_react.default.createElement(GtTickNum, {
 		value: Number(s),
-		decimalPlaces: d,
-		delay: .15
+		decimalPlaces: d
 	});
+}
+function GtTickNum({ value, decimalPlaces = 0 }) {
+	const ref = useRef$16(null);
+	const fmt = (v) => Intl.NumberFormat("de-CH", {
+		minimumFractionDigits: decimalPlaces,
+		maximumFractionDigits: decimalPlaces
+	}).format(Number(v.toFixed(decimalPlaces)) || 0);
+	import_react.default.useLayoutEffect(() => {
+		const el = ref.current;
+		if (!el) return;
+		if (value === 0 || gtP3RM()) {
+			el.textContent = fmt(value);
+			return;
+		}
+		let raf = 0, t0 = 0, stop = false;
+		const D = 850, st = 60;
+		el.textContent = fmt(0);
+		const end = () => {
+			if (stop) return;
+			stop = true;
+			cancelAnimationFrame(raf);
+			el.textContent = fmt(value);
+			window.removeEventListener("gt-p3-skip", end);
+			document.removeEventListener("pointerdown", end, true);
+		};
+		const step = (now) => {
+			if (stop) return;
+			if (!t0) t0 = now;
+			const p = Math.min(1, Math.max(0, (now - t0 - st) / D));
+			const k = 1 - Math.pow(1 - p, 3);
+			el.textContent = fmt(value * k);
+			if (p < 1) raf = requestAnimationFrame(step);
+			else end();
+		};
+		raf = requestAnimationFrame(step);
+		window.addEventListener("gt-p3-skip", end);
+		document.addEventListener("pointerdown", end, true);
+		return () => {
+			stop = true;
+			cancelAnimationFrame(raf);
+			window.removeEventListener("gt-p3-skip", end);
+			document.removeEventListener("pointerdown", end, true);
+		};
+	}, [value, decimalPlaces]);
+	return /* @__PURE__ */ import_react.default.createElement("span", { style: {
+		display: "inline-block",
+		fontVariantNumeric: "tabular-nums"
+	} }, /* @__PURE__ */ import_react.default.createElement("span", {
+		ref,
+		"aria-hidden": "true"
+	}), /* @__PURE__ */ import_react.default.createElement("span", { style: {
+		position: "absolute",
+		width: 1,
+		height: 1,
+		overflow: "hidden",
+		clip: "rect(0 0 0 0)",
+		whiteSpace: "nowrap"
+	} }, fmt(value)));
 }
 var gtP3Accent = null;
 var gtP3AccentAt = -1e9;
@@ -115000,21 +114660,21 @@ function gtTimeUpFlash() {
 	} catch (e) {}
 }
 function GtTimerRing({ left, total, running = true, size = 56, stroke = 4, color, warn = "#E5484D", children }) {
-	const ref = useRef$17(null);
-	const maxRef = useRef$17(0);
+	const ref = useRef$16(null);
+	const maxRef = useRef$16(0);
 	if (left > maxRef.current) maxRef.current = left;
 	const tot = Math.max(1, total || maxRef.current || 1);
 	const urgentAt = tot > 10 ? 5 : Math.ceil(tot / 2);
 	const ended = left <= 0;
 	const urgent = !ended && left <= urgentAt;
 	const [armed, setArmed] = useState$11(false);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		const r = requestAnimationFrame(() => setArmed(true));
 		return () => cancelAnimationFrame(r);
 	}, []);
 	const live = armed && running && !ended;
 	const frac = Math.max(0, Math.min(1, (live ? left - 1 : left) / tot));
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (!urgent || !running) return;
 		playTone(1180, .035, "sine", .018);
 		const el = ref.current;
@@ -115024,7 +114684,7 @@ function GtTimerRing({ left, total, running = true, size = 56, stroke = 4, color
 			easing: "cubic-bezier(.23,1,.32,1)"
 		});
 	}, [left]);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (!ended) return;
 		const el = ref.current;
 		if (!el || gtP3RM() || !el.animate) return;
@@ -115096,7 +114756,7 @@ function GtTimerRing({ left, total, running = true, size = 56, stroke = 4, color
 	} }, children));
 }
 function GtPodiumNum({ value, delay = 0 }) {
-	const ref = useRef$17(null);
+	const ref = useRef$16(null);
 	import_react.default.useLayoutEffect(() => {
 		const el = ref.current;
 		if (!el) return;
@@ -115196,7 +114856,7 @@ function GtSparkles({ color, count = 9, meteors = 0, glow = true }) {
 function GtCelebration({ intensity, theme }) {
 	const [stage, setStage] = useState$11("wait");
 	const [lvl, setLvl] = useState$11(1);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (gtP3RM()) {
 			setStage("off");
 			return;
@@ -115323,7 +114983,7 @@ function GtStarterRun({ names, tk, t, onResult }) {
 	const [startAt] = useState$11(() => ((res - 15) % n + n) % n);
 	const [i, setI] = useState$11(() => gtP3RM() ? 15 : 0);
 	const done = i >= 15;
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (done) {
 			playRevealSound();
 			if (onResult) onResult(names[res]);
@@ -115436,7 +115096,7 @@ function gtThemeSwitch(e, id, setTheme, cur) {
 function useCelebration(trigger, intensity, theme) {
 	const [celebrating, setCelebrating] = useState$11(false);
 	const [burstKey, setBurstKey] = useState$11(0);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (trigger) {
 			setCelebrating(true);
 			setBurstKey((k) => k + 1);
@@ -115464,7 +115124,7 @@ function useMilestoneBurst() {
 		setBurstKey((k) => k + 1);
 		setActive(true);
 	};
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (!active) return;
 		const t = setTimeout(() => setActive(false), 2100);
 		return () => clearTimeout(t);
@@ -115637,10 +115297,10 @@ function gtDelta(el, d, good) {
 	}, 760);
 }
 function GtCount({ value, as, mem, good, dpos, delta, format, className, style, ...rest }) {
-	const ref = useRef$17(null);
-	const cur = useRef$17(null);
-	const tgt = useRef$17(null);
-	const raf = useRef$17(0);
+	const ref = useRef$16(null);
+	const cur = useRef$16(null);
+	const tgt = useRef$16(null);
+	const raf = useRef$16(0);
 	const n = typeof value === "number" ? value : value !== null && value !== void 0 && value !== "" && !isNaN(Number(value)) ? Number(value) : NaN;
 	const ok = isFinite(n);
 	const dec = ok ? (String(n).split(".")[1] || "").length : 0;
@@ -115742,7 +115402,7 @@ function GtRing({ value, size, color, track, label, style }) {
 	}));
 }
 function useGtFlip(ref) {
-	const prev = useRef$17(null);
+	const prev = useRef$16(null);
 	import_react.default.useLayoutEffect(() => {
 		const box = ref.current;
 		if (!box) return;
@@ -115791,7 +115451,7 @@ function gtLeader(pairs, low) {
 	return cnt === 1 ? id : null;
 }
 function useGtLead(mem, leaderId, commit) {
-	const prev = useRef$17(null);
+	const prev = useRef$16(null);
 	const [fx, setFx] = useState$11(null);
 	import_react.default.useLayoutEffect(() => {
 		let p = prev.current;
@@ -115811,7 +115471,7 @@ function useGtLead(mem, leaderId, commit) {
 			t: performance.now()
 		};
 	}, []);
-	useEffect$15(() => {
+	useEffect$14(() => {
 		if (!fx) return;
 		const tm = setTimeout(() => setFx(null), 1500);
 		return () => clearTimeout(tm);
@@ -116396,7 +116056,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.08-11" && !upd) {
+		if (seen && seen !== "2026.11.08-12" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -116405,7 +116065,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.08-11" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.08-12" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);
@@ -120992,8 +120652,8 @@ var impostor_default = {
 };
 // web/src/export/templates/wizard.js
 var GOLD$3 = "#E0BA72";
-var HERO = "#FFE3A0";
-var DARK$1 = "#1C0410";
+var HERO = "#F3DFA9";
+var DARK$1 = "#070818";
 var F_FRAU$2 = "\"Fraunces\",\"Inter\",\"GT Clean\",\"GT CJK\",serif";
 var STARS = [
 	[
@@ -121040,12 +120700,12 @@ var STARS = [
 	]
 ];
 function bg$3(c, k) {
-	c.fillStyle = "#33081B";
+	c.fillStyle = "#0E1030";
 	c.fillRect(0, 0, k.TPL_W, k.TPL_H);
 	k.cssEllipse(c, 0, 0, k.TPL_W, k.TPL_H, 540, 513, [
-		[0, "#5A1230"],
-		[.55, "#33081B"],
-		[1, "#1C0410"]
+		[0, "#1B1E52"],
+		[.55, "#0E1030"],
+		[1, "#070818"]
 	]);
 }
 function wizCard(c, k, cx, cy, s, rot, letter, word) {
@@ -121070,9 +120730,9 @@ function wizCard(c, k, cx, cy, s, rot, letter, word) {
 	k.rrect(c, 19, 19, 362, 502, 15);
 	c.clip();
 	k.cssEllipse(c, 19, 19, 362, 502, 200, 230, [
-		[0, "#4A1A5E"],
-		[.8, "#2A0F3E"],
-		[1, "#2A0F3E"]
+		[0, "#2A2E78"],
+		[.8, "#171A45"],
+		[1, "#171A45"]
 	]);
 	const ox = 14, oy = 14;
 	[
@@ -121263,7 +120923,7 @@ function page1$6(d, k, N, rowsData) {
 	let y = rowsTop;
 	L.forEach((l, i) => {
 		const r = l.r;
-		c.fillStyle = "rgba(224,186,114,0.53)";
+		c.fillStyle = "rgba(224,186,114,0.45)";
 		c.fillRect(60, y, 960, 3);
 		y + l.h - 10 - (l.f.lines.length - 1) * 0;
 		const bl = y + 3 + 6 + (l.h - 9 - 6) / 2 + l.f.size * .34 + (l.f.lines.length - 1) * l.f.size * .55;

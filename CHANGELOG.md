@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.08-2 (08.11.2026 12:21)
+- Minigolf: Anzeigetafel, Ball rollt zum Loch, Tasten 1 bis 7, neues Icon
+
 ## 2026.11.08-1 (08.11.2026 02:33)
 - Wizard im Astrolabium-Stil
 

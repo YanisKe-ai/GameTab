@@ -108,7 +108,7 @@ import { GT_UG_CSS } from "../../shared/unit-games.js";
 .gt-wk-ic{display:none}
 .gt-wk-tx{white-space:nowrap}
 .gt-wk-mid .gt-weis-brief{flex-basis:100%;min-width:0;font-size:11.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.gt-wk{position:absolute;top:50%;width:66px;height:auto;transform:translateY(-50%);pointer-events:none;-webkit-user-select:none;user-select:none}
+.gt-wk{position:absolute;top:50%;width:56px;height:auto;transform:translateY(-50%);pointer-events:none;-webkit-user-select:none;user-select:none}
 .gt-wk-b{left:6px}.gt-wk-d{right:6px}
 .gt-sch-noir .gt-weis-open{background:#E6E6E6;border-color:#BDBDBD;color:#111}
 .gt-sch-noir .gt-wk{filter:grayscale(1) contrast(1.05)}

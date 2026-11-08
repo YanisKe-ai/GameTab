@@ -8782,6 +8782,7 @@ var TRANSLATIONS = {
 		jassWinsWith: (name, score) => `${name} gewinnt mit ${score} Differenzpunkten!`,
 		jassTapHint: "Feld antippen: eigene Punkte eintragen. Differenz erscheint, sobald alle das Spiel gemacht haben.",
 		jassDiffLeads: "führt mit",
+		jassLeadsNow: "führt",
 		jassDiffTied: "Gleichstand an der Spitze",
 		jassDiffStand: "Stand",
 		jassDiffEnter: "Eintragen",
@@ -10437,6 +10438,7 @@ var TRANSLATIONS = {
 		jassWinsWith: (name, score) => `${name} wins with ${score} difference points!`,
 		jassTapHint: "Tap a box: enter your own points. The difference appears once everyone has played the game.",
 		jassDiffLeads: "leads with",
+		jassLeadsNow: "is leading",
 		jassDiffTied: "Tied for the lead",
 		jassDiffStand: "Total",
 		jassDiffEnter: "Enter",
@@ -12092,6 +12094,7 @@ var TRANSLATIONS = {
 		jassWinsWith: (name, score) => `${name} gagne avec ${score} points d'écart !`,
 		jassTapHint: "Touche une case : saisis tes propres points. L'écart apparaît une fois que tout le monde a joué.",
 		jassDiffLeads: "mène avec",
+		jassLeadsNow: "mène",
 		jassDiffTied: "Égalité en tête",
 		jassDiffStand: "Total",
 		jassDiffEnter: "Valider",
@@ -13747,6 +13750,7 @@ var TRANSLATIONS = {
 		jassWinsWith: (name, score) => `${name} vince con ${score} punti di differenza!`,
 		jassTapHint: "Tocca una casella: inserisci i tuoi punti. La differenza appare non appena tutti hanno giocato la partita.",
 		jassDiffLeads: "è in testa con",
+		jassLeadsNow: "è in testa",
 		jassDiffTied: "Pari in testa",
 		jassDiffStand: "Totale",
 		jassDiffEnter: "Inserisci",
@@ -15402,6 +15406,7 @@ var TRANSLATIONS = {
 		jassWinsWith: (name, score) => `¡${name} gana con ${score} puntos de diferencia!`,
 		jassTapHint: "Toca una casilla: anota tus propios puntos. La diferencia aparece en cuanto todos hayan jugado la partida.",
 		jassDiffLeads: "lidera con",
+		jassLeadsNow: "va ganando",
 		jassDiffTied: "Empate en cabeza",
 		jassDiffStand: "Total",
 		jassDiffEnter: "Anotar",
@@ -17057,6 +17062,7 @@ var TRANSLATIONS = {
 		jassWinsWith: (name, score) => `${name} ganha com ${score} pontos de diferença!`,
 		jassTapHint: "Toca numa casa: anota os teus próprios pontos. A diferença aparece assim que todos tiverem jogado o jogo.",
 		jassDiffLeads: "lidera com",
+		jassLeadsNow: "está na frente",
 		jassDiffTied: "Empate na frente",
 		jassDiffStand: "Total",
 		jassDiffEnter: "Registar",
@@ -52548,6 +52554,12 @@ var JASS_DIFF_CSS = `
 .jdp-status .win{display:block;font-size:17px;font-weight:800;color:var(--tx)}
 .jdp-status .hn{display:inline-block;vertical-align:bottom;max-width:60%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:800;color:var(--tx)}
 .jdp-status b{font-weight:800;color:var(--pos)}
+.jdp-status .lead{display:inline-flex;align-items:center;gap:7px;padding:7px 14px;border-radius:999px;background:color-mix(in srgb,var(--pos) 14%,transparent);font-size:15px;font-weight:700;color:var(--tx);max-width:100%}
+.jdp-status .lead .cr{flex:none;color:#E8B84A}
+.jdp-status .lead .hn{max-width:none;min-width:0}
+.jdp-crown{display:block;color:#E8B84A;line-height:0;margin-top:2px}
+.jdp-light .jdp-crown,.jdp-light .jdp-status .lead .cr{color:#B07F12}
+.jdp-noir .jdp-crown,.jdp-noir .jdp-status .lead .cr{color:#C4C4C4}
 .jdp-hm{container-type:inline-size;margin-top:10px}
 .jdp-grid{--lw:104px;display:grid;grid-template-columns:var(--lw) repeat(var(--n),minmax(0,1fr));column-gap:6px;row-gap:7px;align-items:stretch}
 @container (max-width:300px){.jdp-grid{--lw:90px;column-gap:5px;row-gap:6px}.jdp-cw{width:28px!important}.jdp-card{width:26px;height:36px}}
@@ -53356,10 +53368,19 @@ function JassPlay({ players, scores, setScores, onResetSheet, onEditPlayers, onB
 		return () => clearTimeout(id);
 	}, [jdCur]);
 	const jdHead = winnerIdx !== -1 ? gtWinLine(t, "jassWinsWith", "winsTie", jdTop.map((q) => q.name), maxTotal) : null;
-	const jdStatus = jdHead ? /* @__PURE__ */ import_react.default.createElement("span", { className: "win" }, jdHead) : jdLead ? /* @__PURE__ */ import_react.default.createElement(Fragment$3, null, /* @__PURE__ */ import_react.default.createElement("span", {
+	const jdStatus = jdHead ? /* @__PURE__ */ import_react.default.createElement("span", { className: "win" }, jdHead) : jdLead ? /* @__PURE__ */ import_react.default.createElement("span", { className: "lead" }, /* @__PURE__ */ import_react.default.createElement("svg", {
+		className: "cr",
+		width: "18",
+		height: "14",
+		viewBox: "0 0 24 18",
+		"aria-hidden": "true"
+	}, /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M2 16h20L20 4l-5 5-3-7-3 7-5-5z",
+		fill: "currentColor"
+	})), /* @__PURE__ */ import_react.default.createElement("span", {
 		className: "hn",
 		title: jdTop[0].name
-	}, jdTop[0].name), " ", t("jassDiffLeads"), " ", /* @__PURE__ */ import_react.default.createElement("b", null, jdFmt(maxTotal))) : jdAny ? /* @__PURE__ */ import_react.default.createElement("span", null, t("jassDiffTied")) : null;
+	}, jdTop[0].name), " ", t("jassLeadsNow")) : jdAny ? /* @__PURE__ */ import_react.default.createElement("span", null, t("jassDiffTied")) : null;
 	const jdCurCat = jdCur ? JASS_CATEGORIES.find((c) => c.id === jdCur) : null;
 	const jdCurJk = jdCur === "joker1" ? " I" : jdCur === "joker2" ? " II" : "";
 	return /* @__PURE__ */ import_react.default.createElement("div", {
@@ -53431,7 +53452,17 @@ function JassPlay({ players, scores, setScores, onResetSheet, onEditPlayers, onB
 		}, /* @__PURE__ */ import_react.default.createElement("span", { className: "jdp-nmw" }, parts.map((x, k) => /* @__PURE__ */ import_react.default.createElement("span", {
 			key: k,
 			className: "jdp-nm"
-		}, x))), /* @__PURE__ */ import_react.default.createElement("span", { className: "jdp-tot" + (totals[i] > 0 ? " p" : totals[i] < 0 ? " m" : "") + (jdLead && totals[i] === maxTotal ? " w" : "") }, jdFmt(totals[i])));
+		}, x))), jdLead && totals[i] === maxTotal && /* @__PURE__ */ import_react.default.createElement("span", {
+			className: "jdp-crown",
+			"aria-hidden": "true"
+		}, /* @__PURE__ */ import_react.default.createElement("svg", {
+			width: "14",
+			height: "11",
+			viewBox: "0 0 24 18"
+		}, /* @__PURE__ */ import_react.default.createElement("path", {
+			d: "M2 16h20L20 4l-5 5-3-7-3 7-5-5z",
+			fill: "currentColor"
+		}))));
 	}), JASS_CATEGORIES.map((cat, catIdx) => {
 		const isCur = cat.id === jdCur;
 		const jk = cat.id === "joker1" ? " I" : cat.id === "joker2" ? " II" : "";
@@ -70147,7 +70178,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.08-13";
+var APP_BUILD = "2026.11.08-14";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -113935,7 +113966,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.08-13");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.08-14");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -116563,7 +116594,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.08-13" && !upd) {
+		if (seen && seen !== "2026.11.08-14" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -116572,7 +116603,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.08-13" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.08-14" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

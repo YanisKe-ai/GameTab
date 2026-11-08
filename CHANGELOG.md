@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.08-14 (08.11.2026 22:18)
+- Coiffeur: oben nur wer führt, mit Krone
+
 ## 2026.11.08-13 (08.11.2026 22:03)
 - Skyjo: neues Logo, Runde und Tabelle, Fahne für Beender, Raster-Hilfe, Rückgängig, neues Icon
 

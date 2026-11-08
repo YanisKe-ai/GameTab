@@ -43,6 +43,7 @@ const ICONS = {
   users: [<circle key="a" cx="9" cy="8.5" r="3.2" {...IC} />, <path key="b" d="M3 19.5a6 6 0 0 1 12 0" {...IC} />, <path key="c" d="M15.6 5.6a3.2 3.2 0 0 1 0 5.8M18.2 19.5a6 6 0 0 0-2.6-5" {...IC} />],
   flag: [<path key="m" d="M6 21V4" {...IC} />, <path key="f" d="M6 4.5h11.5l-2.4 4 2.4 4H6" {...IC} />],
   rules: [<circle key="a" cx="12" cy="12" r="9" {...IC} />, <path key="b" d="M9.6 9.4a2.5 2.5 0 1 1 3.6 2.2c-.8.5-1.2 1-1.2 1.8" {...IC} />, <circle key="c" cx="12" cy="17" r=".6" fill="currentColor" stroke="currentColor" strokeWidth="1" />],
+  gear: [<circle key="a" cx="12" cy="12" r="3" {...IC} />, <path key="b" d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M5.5 18.5l1.7-1.7M16.8 7.2l1.7-1.7" {...IC} />],
   home: [<path key="r" d="M3 11.5 12 4l9 7.5" {...IC} />, <path key="h" d="M5.5 10v9.5a1 1 0 0 0 1 1H9.5v-6h5v6H18a1 1 0 0 0 1-1V10" {...IC} />],
   plus: [<path key="a" d="M12 5v14M5 12h14" {...IC} />],
   table: [<path key="a" d="M3 9h18M5 9v10M19 9v10M4 5h16v4H4z" {...IC} />],
@@ -51,9 +52,9 @@ const ICONS = {
   trash: [<path key="a" d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3" {...IC} />],
 };
 const COLORS = {
-  dark: { restart: "#F0A63A", users: "#3FB8A6", flag: "#FF7B7F", rules: "#8C9AFF", home: "#5FB38C", plus: "#8C9AFF", table: "#3FB8A6", share: "#8C9AFF", copy: "#F0A63A", trash: "#FF7B7F" },
-  light: { restart: "#B86F00", users: "#12806F", flag: "#C9302C", rules: "#4353D6", home: "#2A7F5A", plus: "#4353D6", table: "#12806F", share: "#4353D6", copy: "#B86F00", trash: "#C9302C" },
-  noir: { restart: "#D2D2D2", users: "#D2D2D2", flag: "#FF8F8F", rules: "#D2D2D2", home: "#D2D2D2", plus: "#D2D2D2", table: "#D2D2D2", share: "#D2D2D2", copy: "#D2D2D2", trash: "#FF8F8F" },
+  dark: { restart: "#F0A63A", users: "#3FB8A6", flag: "#FF7B7F", rules: "#8C9AFF", gear: "#9AA4BE", home: "#5FB38C", plus: "#8C9AFF", table: "#3FB8A6", share: "#8C9AFF", copy: "#F0A63A", trash: "#FF7B7F" },
+  light: { restart: "#B86F00", users: "#12806F", flag: "#C9302C", rules: "#4353D6", gear: "#5C6580", home: "#2A7F5A", plus: "#4353D6", table: "#12806F", share: "#4353D6", copy: "#B86F00", trash: "#C9302C" },
+  noir: { restart: "#D2D2D2", users: "#D2D2D2", flag: "#FF8F8F", rules: "#D2D2D2", gear: "#D2D2D2", home: "#D2D2D2", plus: "#D2D2D2", table: "#D2D2D2", share: "#D2D2D2", copy: "#D2D2D2", trash: "#FF8F8F" },
 };
 
 function GtHmRow({ icon, color, danger, confirming, warm, onClick, children, extra, ...rest }) {
@@ -130,7 +131,7 @@ function GtHeadButtons({ theme, css, L, onRules, onHome, onEndGame, items, onOpe
     );
   };
   const showGroup = list.length > 0 || !!onEndGame;
-  const showTail = !!onRules || !!onHome;
+  const showTail = true;
   const panel = open && pos && ReactDOM.createPortal(
     <div className={"gt-hm-dim gt-hmt-" + th} onClick={close}>
       <div ref={dlgRef} role="menu" aria-label={L.menu} className="gt-hm-panel" style={{ top: pos.top, right: pos.right, maxHeight: `calc(100vh - ${pos.top + 10}px)` }} onClick={(e) => e.stopPropagation()} onKeyDown={onKey}>
@@ -143,6 +144,7 @@ function GtHeadButtons({ theme, css, L, onRules, onHome, onEndGame, items, onOpe
         )}
         {showGroup && showTail && <div className="gt-hm-sep" role="separator" />}
         {onRules && <GtHmRow icon="rules" color={col.rules} onClick={() => { close(); onRules(); }}>{L.rules}</GtHmRow>}
+        <GtHmRow icon="gear" color={col.gear} onClick={() => { close(); window.dispatchEvent(new CustomEvent("gt-open-settings")); }}>{L.settings}</GtHmRow>
         {onHome && <GtHmRow icon="home" color={col.home} onClick={() => { close(); onHome(); }}>{L.home}</GtHmRow>}
       </div>
       <div className="gt-hm-ghost" aria-hidden style={{ left: pos.gl, top: pos.gt, width: pos.gw, height: pos.gh }}><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg></div>

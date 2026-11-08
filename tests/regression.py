@@ -413,9 +413,11 @@ def t_schieber_wyys(pg, env):
 def t_schieber(pg, env):
     open_game(pg, "Schreibunterlagen", "Jass", "Schieber"); press_start(pg)
     click(pg, btn_re(pg, "Punkte eintragen").last)  # Rechnen im Eingabefeld
-    for k in ["1", "5", "7", "×", "2"]:
+    click(pg, pg.get_by_role("button", name=re.compile("^Trumpf Schaufel, mal 2")), 120)
+    for k in ["1", "5", "7"]:
         click(pg, pg.locator(".gt-sch-edpad button", has_text=re.compile("^" + re.escape(k) + "$")).first, 120)
-    check(has_text(pg, r"157×2 = 314"), "Schieber: Rechnung im Eingabefeld fehlt")
+    check(has_text(pg, r"× 2 = 314"), "Schieber: Trumpf-Rechnung im Eingabefeld fehlt")
+    check(pg.get_by_role("button", name=re.compile("^314 für Team 1 eintragen")).count() == 1, "Schieber: Eintragen-Knopf ohne Endwert")
     click(pg, pg.locator(".gt-sch-x").first)
     for _ in range(2):
         click(pg, btn_re(pg, "Wyys und Stöck, Team 1"))

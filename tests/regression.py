@@ -506,11 +506,17 @@ def yz_enter(pg):
         if c.count() and c.first.get_attribute("aria-disabled") != "true":
             click(pg, c.first, FAST)
             return
+        clicked = False
         for r in pg.locator(".yz-tiles .yz-row").all():
             if r.locator('.yz-tile[aria-pressed="true"]').count() == 0:
                 t = r.locator('.yz-tile:not([aria-disabled="true"])')
                 if t.count():
                     click(pg, t.first, 60)
+                    clicked = True
+        if not clicked:  # 2 Paare: ein gewaehltes Paar nochmals antippen = zweimal dasselbe Paar
+            pr = pg.locator('.yz-tile[aria-pressed="true"]')
+            if pr.count():
+                click(pg, pr.first, 60)
     raise AssertionError("Yatzy: Eingabe nicht abschliessbar")
 
 

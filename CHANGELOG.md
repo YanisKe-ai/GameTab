@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.08-6 (08.11.2026 13:20)
+- Schieber: Eingabe mit Trumpfkarten. Favoriten: Stern in Listen und bei Varianten
+
 ## 2026.11.08-5 (08.11.2026 13:00)
 - Favoriten: Spiel in Alle Spiele lange drücken, Favoriten stehen vorne
 

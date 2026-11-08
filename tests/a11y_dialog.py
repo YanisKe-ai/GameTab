@@ -235,9 +235,9 @@ def case_pad(b):
     R.wait(pg, 900)
     R.open_game(pg, "Schreibunterlagen", "Skyjo")
     R.click(pg, R.btn(pg, "Spiel starten").first, 900)
-    trig = pg.locator("button", has_text=re.compile(r"Total")).first
-    check_modal(pg, "Skyjo-Eingabe", trig, shot="skyjo_pad")
-    ok(not errors, f"Skyjo-Eingabe: keine Seitenfehler {errors[:1]}")
+    trig = pg.get_by_role("button", name=re.compile(r"^Karten von .* eingeben$")).first
+    check_modal(pg, "Skyjo-Raster-Blatt", trig, shot="skyjo_pad")
+    ok(not errors, f"Skyjo-Raster-Blatt: keine Seitenfehler {errors[:1]}")
     ctx.close()
 
 

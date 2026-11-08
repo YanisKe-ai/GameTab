@@ -100,7 +100,7 @@ def flow_skyjo(pg):
     for sc in ([5, 20, 31], [3, 120, 44]):
         for nm, v in zip(names, sc):
             R.numpad(pg, nm, v)
-        R.click(pg, R.btn(pg, names[0])); R.click(pg, R.btn(pg, "Runde speichern"), 900)
+        R.click(pg, R.btn(pg, names[0] + " hat beendet")); R.click(pg, R.btn_re(pg, r"^Runde \d+ speichern$"), 900)
     R.expect_text(pg, r"gewinnt", "Skyjo: Sieger nicht angezeigt")
 
 

@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.08-15 (08.11.2026 22:26)
+- Versionsnummer im Format TT.MM.JJJJ
+
 ## 2026.11.08-14 (08.11.2026 22:18)
 - Coiffeur: oben nur wer führt, mit Krone
 

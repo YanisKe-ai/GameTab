@@ -19305,13 +19305,6 @@ input[type="number"] { -moz-appearance: textfield; }
     linear-gradient(90deg, rgba(120,120,140,0.07) 1px, transparent 1px);
   background-size: 18px 18px;
 }
-@keyframes gtSparkle { 0% { opacity: 0; transform: scale(0) rotate(75deg); } 50% { opacity: 1; transform: scale(var(--s, 1)) rotate(120deg); } 100% { opacity: 0; transform: scale(0) rotate(150deg); } }
-.gt-spk { position: absolute; pointer-events: none; will-change: transform, opacity; opacity: 0; animation: gtSparkle .85s ease-in-out both; }
-@keyframes gtMeteor { 0% { transform: rotate(215deg) translateX(0); opacity: 1; } 70% { opacity: 1; } 100% { transform: rotate(215deg) translateX(-420px); opacity: 0; } }
-.gt-met { position: absolute; top: -4%; width: 2px; height: 2px; border-radius: 50%; pointer-events: none; opacity: 0; animation: gtMeteor 1.1s linear both; }
-.gt-met::after { content: ""; position: absolute; top: 50%; left: 0; width: 56px; height: 1px; transform: translateY(-50%); background: linear-gradient(90deg, var(--mc, #fff), transparent); }
-@keyframes gtGlowPulse { 0% { opacity: 0; transform: scale(.85); } 35% { opacity: 1; } 100% { opacity: 0; transform: scale(1.15); } }
-.gt-glow { position: absolute; inset: 0; pointer-events: none; opacity: 0; animation: gtGlowPulse 1.7s cubic-bezier(.23,1,.32,1) both; }
 @keyframes gtBlurFade { from { opacity: 0; transform: translateY(var(--gt-dist-m)); filter: blur(6px); } to { opacity: 1; transform: none; filter: none; } }
 .gt-su-row { animation: gtBlurFade .4s cubic-bezier(.23,1,.32,1) both; }
 @keyframes gtShimmerOnce { from { transform: translateX(-120%) skewX(-18deg); } to { transform: translateX(260%) skewX(-18deg); } }
@@ -19484,7 +19477,7 @@ input[type="number"] { -moz-appearance: textfield; }
   .podium-block-1, .podium-block-2, .podium-block-3 { animation: gtP3Fade 0.2s ease forwards !important; }
   [data-gt-podium].podium-pop { animation: gtP3Fade 0.2s ease both !important; }
   .gt-win-name { animation: none; background: none; -webkit-text-fill-color: currentColor; }
-  .gt-spk, .gt-met, .gt-glow { display: none; } .gt-su-row { animation: none; } .gt-su-btn::after { display: none; }
+  .gt-su-row { animation: none; } .gt-su-btn::after { display: none; }
   .gt-timeup-ring, .gt-starter-chip.is-win { animation: none; }
   .gt-starter-res { animation: gtP3Fade 0.2s ease both; }
   .gt-flip-inner, .gt-flip.is-held .gt-flip-inner { transform: none !important; transition: none !important; }
@@ -64519,7 +64512,7 @@ function ImpostorResults({ players, roles, word, votes, onPlayAgain, onNewSetup,
 		const impWin = !(eliminated && caughtImpostorTeam && guessResult !== "impostorwin");
 		gtRecordSides("impostor", players, tie ? () => false : (p) => roles[p.id] !== "civilian" === impWin, roles, { impostors: players.filter((p) => roles[p.id] !== "civilian").map((p) => p.name) });
 	}, [guessPhase]);
-	const celebration = useCelebration(!!eliminated && caughtImpostorTeam && guessResult !== "impostorwin", void 0, theme);
+	const celebration = useCelebration(!!eliminated && caughtImpostorTeam && guessResult !== "impostorwin", void 0, theme, "scan");
 	const submitGuess = () => {
 		const correct = impNorm(guess) === impNorm(word.word);
 		setGuessResult(correct ? "impostorwin" : "civilianwin");
@@ -66569,6 +66562,7 @@ function DartboardSVG({ onHit, numColor }) {
 		}, num));
 	});
 	return /* @__PURE__ */ import_react.default.createElement("svg", {
+		"data-gt-fx": "dt-board",
 		viewBox: "0 0 300 300",
 		width: "100%",
 		style: {
@@ -66771,7 +66765,7 @@ function DartsPlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewGam
 	const GN = "#2F6B52";
 	const [turn, setTurn] = useState$11([]);
 	const [confirmingReset, setConfirmingReset] = useState$11(false);
-	const { node: bigThrowNode, fire: fireBigThrow } = useMilestoneBurst();
+	const { node: bigThrowNode, fire: fireBigThrow } = useMilestoneBurst("bull", theme);
 	useEffect$14(() => {
 		setTurn([]);
 	}, [state.currentIdx, state.history.length]);
@@ -67185,7 +67179,7 @@ function DartsGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 		const vals = state.players.map((p) => state.legsWon[p.id] || 0).sort((a, b) => b - a);
 		return (vals[0] || 0) - (vals[1] || 0);
 	})() : 0;
-	const celebration = useCelebration(state.phase === "done", state.phase === "done" ? Math.max(0, 1 - legsMargin / Math.max(1, state.legsTarget)) : void 0);
+	const celebration = useCelebration(state.phase === "done", state.phase === "done" ? Math.max(0, 1 - legsMargin / Math.max(1, state.legsTarget)) : void 0, theme, "bull");
 	const [podiumOpen, setPodiumOpen] = useState$11(false);
 	useEffect$14(() => {
 		if (state.phase === "done") setPodiumOpen(true);
@@ -70783,7 +70777,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.08-18";
+var APP_BUILD = "2026.11.09-1";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -75345,7 +75339,7 @@ function GameOverPanel({ winner, lovers, players, rolesFlat, alive, onRestart, o
 	const wt = wolfTokens(theme);
 	const ROLES = WEREWOLF_ROLES_FOR(lang);
 	const civWin = winner === "dorf";
-	const celebration = useCelebration(civWin, void 0, theme);
+	const celebration = useCelebration(civWin, void 0, theme, "nacht");
 	useEffect$14(() => {
 		gtRecordSides("werwolf", players, (p) => winner === "lovers" ? !!(lovers && lovers.includes(p.id)) : rolesFlat[p.id] === "werwolf" === (winner === "wolf"), rolesFlat, {
 			wolves: players.filter((p) => rolesFlat[p.id] === "werwolf").map((p) => p.name),
@@ -114216,22 +114210,22 @@ function YatzyPlay({ onRematch, players, scores, setScores, onResetSheet, onEdit
 		lowWins: false
 	}));
 	const podiumRanked = winnerIdx !== -1 ? rankedPodium(players, (p) => yatzyGrandTotal(scores[p.id])) : [];
-	const { node: milestoneNode, fire: fireMilestone } = useMilestoneBurst();
+	const { node: milestoneNode, fire: fireMilestone } = useMilestoneBurst(void 0, theme);
 	const allCats = editing ? [...YATZY_UPPER, ...YATZY_LOWER].find((c) => c.id === editing.catId) : null;
 	const saveScore = (playerId, catId, rawValue) => {
 		const val = rawValue === null ? null : Math.max(0, parseInt(rawValue, 10) || 0);
 		if (catId === "yatzy" && val === 50) {
 			playWinSound();
 			hapticWin();
-			fireMilestone();
 		}
+		if (catId === "yatzy" && val > 0) fireMilestone("ring");
 		setScores((prev) => {
 			const prevCard = prev[playerId];
 			const nextCard = {
 				...prevCard,
 				[catId]: val
 			};
-			if (yatzyBonus(prevCard) === 0 && yatzyBonus(nextCard) > 0) fireMilestone();
+			if (yatzyBonus(prevCard) === 0 && yatzyBonus(nextCard) > 0) fireMilestone("wurf");
 			return {
 				...prev,
 				[playerId]: nextCard
@@ -114584,7 +114578,10 @@ function YzPart({ rows, players, scores, activeIdx, editing, justSet, onCell, au
 		const isAuto = row.type === "auto";
 		const label = isAuto ? row.label : t(row.cat.labelKey);
 		const mod = (row.bold ? " is-bold" : "") + (row.accent ? " is-acc" : "") + (row.topDivider ? " is-div" : "");
-		return /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, { key: isAuto ? row.id : row.cat.id }, /* @__PURE__ */ import_react.default.createElement("div", { className: "yz-lab" + (isAuto ? " is-auto" : "") + mod }, label), players.map((p) => {
+		return /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, { key: isAuto ? row.id : row.cat.id }, /* @__PURE__ */ import_react.default.createElement("div", {
+			className: "yz-lab" + (isAuto ? " is-auto" : "") + mod,
+			"data-gt-fx": isAuto ? row.id === "bonus" ? "yz-bonus" : void 0 : row.cat.id === "yatzy" ? "yz-yatzy" : void 0
+		}, label), players.map((p) => {
 			const card = scores[p.id];
 			if (isAuto) {
 				const val = autoValue(row.id, card);
@@ -114846,7 +114843,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.08-18");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.09-1");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -115213,13 +115210,137 @@ function ShineBorder({ borderWidth = 1, duration = 14, shineColor = "#000000", c
 		...props
 	});
 }
+// web/src/shared/game-fx.js
+var GT_FX_CSS = "@keyframes y1_1k{0%,13%{transform:scale(.3);opacity:0} 17%{opacity:1} 21%{transform:scale(1);opacity:1} 86%{transform:scale(1);opacity:1} 94%,100%{transform:scale(1);opacity:0}}\n.y1_1{transform-box:fill-box;transform-origin:center;animation:y1_1k 1.8s cubic-bezier(.2,.8,.2,1) both}\n@keyframes y1_2k{0%,5%{transform:translate(0px,-230px) rotate(-200deg) scale(1);opacity:0} 9%{opacity:1} 21%{transform:translate(0px,0px) rotate(0deg) scale(1);opacity:1} 86%{transform:translate(0px,0px) rotate(0deg) scale(1);opacity:1} 94%,100%{transform:translate(0px,0px) rotate(0deg) scale(1);opacity:0}}\n.y1_2{transform-box:fill-box;transform-origin:center;animation:y1_2k 1.8s cubic-bezier(.34,1.56,.64,1) both}\n@keyframes y1_3k{0%,16%{transform:scale(.3);opacity:0} 20%{opacity:1} 24%{transform:scale(1);opacity:1} 86%{transform:scale(1);opacity:1} 94%,100%{transform:scale(1);opacity:0}}\n.y1_3{transform-box:fill-box;transform-origin:center;animation:y1_3k 1.8s cubic-bezier(.2,.8,.2,1) both}\n@keyframes y1_4k{0%,8%{transform:translate(0px,-230px) rotate(-200deg) scale(1);opacity:0} 12%{opacity:1} 24%{transform:translate(0px,0px) rotate(0deg) scale(1);opacity:1} 86%{transform:translate(0px,0px) rotate(0deg) scale(1);opacity:1} 94%,100%{transform:translate(0px,0px) rotate(0deg) scale(1);opacity:0}}\n.y1_4{transform-box:fill-box;transform-origin:center;animation:y1_4k 1.8s cubic-bezier(.34,1.56,.64,1) both}\n@keyframes y1_5k{0%,19%{transform:scale(.3);opacity:0} 23%{opacity:1} 27%{transform:scale(1);opacity:1} 86%{transform:scale(1);opacity:1} 94%,100%{transform:scale(1);opacity:0}}\n.y1_5{transform-box:fill-box;transform-origin:center;animation:y1_5k 1.8s cubic-bezier(.2,.8,.2,1) both}\n@keyframes y1_6k{0%,11%{transform:translate(0px,-230px) rotate(-200deg) scale(1);opacity:0} 15%{opacity:1} 27%{transform:translate(0px,0px) rotate(0deg) scale(1);opacity:1} 86%{transform:translate(0px,0px) rotate(0deg) scale(1);opacity:1} 94%,100%{transform:translate(0px,0px) rotate(0deg) scale(1);opacity:0}}\n.y1_6{transform-box:fill-box;transform-origin:center;animation:y1_6k 1.8s cubic-bezier(.34,1.56,.64,1) both}\n@keyframes y1_7k{0%,22%{transform:scale(.3);opacity:0} 26%{opacity:1} 30%{transform:scale(1);opacity:1} 86%{transform:scale(1);opacity:1} 94%,100%{transform:scale(1);opacity:0}}\n.y1_7{transform-box:fill-box;transform-origin:center;animation:y1_7k 1.8s cubic-bezier(.2,.8,.2,1) both}\n@keyframes y1_8k{0%,14%{transform:translate(0px,-230px) rotate(-200deg) scale(1);opacity:0} 18%{opacity:1} 30%{transform:translate(0px,0px) rotate(0deg) scale(1);opacity:1} 86%{transform:translate(0px,0px) rotate(0deg) scale(1);opacity:1} 94%,100%{transform:translate(0px,0px) rotate(0deg) scale(1);opacity:0}}\n.y1_8{transform-box:fill-box;transform-origin:center;animation:y1_8k 1.8s cubic-bezier(.34,1.56,.64,1) both}\n@keyframes y1_9k{0%,25%{transform:scale(.3);opacity:0} 29%{opacity:1} 33%{transform:scale(1);opacity:1} 86%{transform:scale(1);opacity:1} 94%,100%{transform:scale(1);opacity:0}}\n.y1_9{transform-box:fill-box;transform-origin:center;animation:y1_9k 1.8s cubic-bezier(.2,.8,.2,1) both}\n@keyframes y1_10k{0%,17%{transform:translate(0px,-230px) rotate(-200deg) scale(1);opacity:0} 21%{opacity:1} 33%{transform:translate(0px,0px) rotate(0deg) scale(1);opacity:1} 86%{transform:translate(0px,0px) rotate(0deg) scale(1);opacity:1} 94%,100%{transform:translate(0px,0px) rotate(0deg) scale(1);opacity:0}}\n.y1_10{transform-box:fill-box;transform-origin:center;animation:y1_10k 1.8s cubic-bezier(.34,1.56,.64,1) both}\n@keyframes y1_11k{0%,34%{transform:scale(1)} 40%{transform:scale(1.15)} 48%,100%{transform:scale(1)}}\n.y1_11{transform-box:fill-box;transform-origin:center;animation:y1_11k 1.8s ease-in-out both}\n@keyframes y4_1k{0%,22%{stroke-dashoffset:660;opacity:0} 23%{opacity:1} 40%{stroke-dashoffset:0;opacity:1} 86%{stroke-dashoffset:0;opacity:1} 94%,100%{stroke-dashoffset:0;opacity:0}}\n.y4_1{animation:y4_1k 1.8s ease-in-out both}\n@keyframes y4_2k{0%,4%{transform:rotate(-160deg) scale(.3);opacity:0} 8%{opacity:1} 28%{transform:rotate(0deg) scale(1);opacity:1} 86%{transform:rotate(0deg) scale(1);opacity:1} 94%,100%{transform:rotate(0deg) scale(1);opacity:0}}\n.y4_2{transform-box:view-box;transform-origin:213px 215px;animation:y4_2k 1.8s cubic-bezier(.2,.8,.2,1) both}\n@keyframes d1_1k{0%,14%{transform:scale(.5);opacity:0} 18%{opacity:1} 34%{transform:scale(3);opacity:1} 34%{transform:scale(3);opacity:1} 42%,100%{transform:scale(3);opacity:0}}\n.d1_1{transform-box:fill-box;transform-origin:center;animation:d1_1k 1.8s ease-out both}\n@keyframes d1_2k{0%,4%{transform:translate(260px,-90px) rotate(-12deg) scale(1);opacity:0} 8%{opacity:1} 14%{transform:translate(0px,0px) rotate(0deg) scale(1);opacity:1} 18%{transform:translate(0px,0px) rotate(3deg) scale(1);opacity:1} 22%{transform:translate(0px,0px) rotate(-2deg) scale(1);opacity:1} 26%{transform:translate(0px,0px) rotate(1deg) scale(1);opacity:1} 30%{transform:translate(0px,0px) rotate(0deg) scale(1);opacity:1} 86%{transform:translate(0px,0px) rotate(0deg) scale(1);opacity:1} 94%,100%{transform:translate(0px,0px) rotate(0deg) scale(1);opacity:0}}\n.d1_2{transform-box:view-box;transform-origin:213px 225px;animation:d1_2k 1.8s cubic-bezier(.5,0,.8,.6) both}\n@keyframes i3_1k{0%,26%{transform:scale(.6);opacity:0} 30%{opacity:1} 40%{transform:scale(1);opacity:1} 86%{transform:scale(1);opacity:1} 94%,100%{transform:scale(1);opacity:0}}\n.i3_1{transform-box:fill-box;transform-origin:center;animation:i3_1k 1.8s cubic-bezier(.34,1.56,.64,1) both}\n@keyframes i3_2k{0%,26%{transform:scale(.8);opacity:0} 30%{opacity:1} 34%{transform:scale(1);opacity:1} 86%{transform:scale(1);opacity:1} 94%,100%{transform:scale(1);opacity:0}}\n.i3_2{transform-box:fill-box;transform-origin:center;animation:i3_2k 1.8s cubic-bezier(.2,.8,.2,1) both}\n@keyframes i3_3k{0%,6%{transform:translateX(0px);opacity:0} 10%{opacity:1} 30%{transform:translateX(290px);opacity:1} 34%{transform:translateX(290px);opacity:1} 42%,100%{transform:translateX(300px);opacity:0}}\n.i3_3{transform-box:fill-box;transform-origin:center;animation:i3_3k 1.8s ease-in-out both}\n@keyframes v2_1k{0%{transform:scale(1);opacity:1} 1%{transform:scale(1);opacity:1} 22%{transform:scale(1);opacity:1} 30%,100%{transform:scale(1);opacity:0}}\n.v2_1{transform-box:fill-box;transform-origin:center;animation:v2_1k 1.8s cubic-bezier(.2,.8,.2,1) both}\n@keyframes v2_2k{0%{transform:translateY(0px);opacity:1} 1%{transform:translateY(0px);opacity:1} 20%{transform:translateY(0px);opacity:1} 28%,100%{transform:translateY(200px);opacity:0}}\n.v2_2{transform-box:fill-box;transform-origin:center;animation:v2_2k 1.8s cubic-bezier(.2,.8,.2,1) both}\n@keyframes v2_3k{0%,14%{transform:translate(0px,200px) rotate(0deg) scale(0.6);opacity:0} 18%{opacity:1} 30%{transform:translate(0px,0px) rotate(0deg) scale(1);opacity:1} 86%{transform:translate(0px,0px) rotate(0deg) scale(1);opacity:1} 94%,100%{transform:translate(0px,0px) rotate(0deg) scale(1);opacity:0}}\n.v2_3{transform-box:fill-box;transform-origin:center;animation:v2_3k 1.8s cubic-bezier(.34,1.56,.64,1) both}\n.gt-fx-env{width:100%;height:100%;animation:gtFxEnv 1.8s linear both}\n@keyframes gtFxEnv{0%{opacity:0}6%{opacity:1}90%{opacity:1}100%{opacity:0}}\n@media (prefers-reduced-motion: reduce){.gt-fx-env{display:none}}";
+var GT_FX = {
+	"wurf": {
+		"svg": "<g class=\"y1_1\"><ellipse cx=\"89\" cy=\"232\" rx=\"24\" ry=\"6\" fill=\"#00000066\" /></g><g class=\"y1_2\"><rect x=\"63\" y=\"164\" width=\"52\" height=\"52\" rx=\"10.4\" fill=\"#5B63E8\" /><circle cx=\"76\" cy=\"177\" r=\"3.9\" fill=\"#fff\" /><circle cx=\"102\" cy=\"177\" r=\"3.9\" fill=\"#fff\" /><circle cx=\"76\" cy=\"190\" r=\"3.9\" fill=\"#fff\" /><circle cx=\"102\" cy=\"190\" r=\"3.9\" fill=\"#fff\" /><circle cx=\"76\" cy=\"203\" r=\"3.9\" fill=\"#fff\" /><circle cx=\"102\" cy=\"203\" r=\"3.9\" fill=\"#fff\" /></g><g class=\"y1_3\"><ellipse cx=\"151\" cy=\"232\" rx=\"24\" ry=\"6\" fill=\"#00000066\" /></g><g class=\"y1_4\"><rect x=\"125\" y=\"164\" width=\"52\" height=\"52\" rx=\"10.4\" fill=\"#5B63E8\" /><circle cx=\"138\" cy=\"177\" r=\"3.9\" fill=\"#fff\" /><circle cx=\"164\" cy=\"177\" r=\"3.9\" fill=\"#fff\" /><circle cx=\"138\" cy=\"190\" r=\"3.9\" fill=\"#fff\" /><circle cx=\"164\" cy=\"190\" r=\"3.9\" fill=\"#fff\" /><circle cx=\"138\" cy=\"203\" r=\"3.9\" fill=\"#fff\" /><circle cx=\"164\" cy=\"203\" r=\"3.9\" fill=\"#fff\" /></g><g class=\"y1_5\"><ellipse cx=\"213\" cy=\"232\" rx=\"24\" ry=\"6\" fill=\"#00000066\" /></g><g class=\"y1_6\"><rect x=\"187\" y=\"164\" width=\"52\" height=\"52\" rx=\"10.4\" fill=\"#5B63E8\" /><circle cx=\"200\" cy=\"177\" r=\"3.9\" fill=\"#fff\" /><circle cx=\"226\" cy=\"177\" r=\"3.9\" fill=\"#fff\" /><circle cx=\"200\" cy=\"190\" r=\"3.9\" fill=\"#fff\" /><circle cx=\"226\" cy=\"190\" r=\"3.9\" fill=\"#fff\" /><circle cx=\"200\" cy=\"203\" r=\"3.9\" fill=\"#fff\" /><circle cx=\"226\" cy=\"203\" r=\"3.9\" fill=\"#fff\" /></g><g class=\"y1_7\"><ellipse cx=\"275\" cy=\"232\" rx=\"24\" ry=\"6\" fill=\"#00000066\" /></g><g class=\"y1_8\"><rect x=\"249\" y=\"164\" width=\"52\" height=\"52\" rx=\"10.4\" fill=\"#5B63E8\" /><circle cx=\"262\" cy=\"177\" r=\"3.9\" fill=\"#fff\" /><circle cx=\"288\" cy=\"177\" r=\"3.9\" fill=\"#fff\" /><circle cx=\"262\" cy=\"190\" r=\"3.9\" fill=\"#fff\" /><circle cx=\"288\" cy=\"190\" r=\"3.9\" fill=\"#fff\" /><circle cx=\"262\" cy=\"203\" r=\"3.9\" fill=\"#fff\" /><circle cx=\"288\" cy=\"203\" r=\"3.9\" fill=\"#fff\" /></g><g class=\"y1_9\"><ellipse cx=\"337\" cy=\"232\" rx=\"24\" ry=\"6\" fill=\"#00000066\" /></g><g class=\"y1_10\"><rect x=\"311\" y=\"164\" width=\"52\" height=\"52\" rx=\"10.4\" fill=\"#5B63E8\" /><circle cx=\"324\" cy=\"177\" r=\"3.9\" fill=\"#fff\" /><circle cx=\"350\" cy=\"177\" r=\"3.9\" fill=\"#fff\" /><circle cx=\"324\" cy=\"190\" r=\"3.9\" fill=\"#fff\" /><circle cx=\"350\" cy=\"190\" r=\"3.9\" fill=\"#fff\" /><circle cx=\"324\" cy=\"203\" r=\"3.9\" fill=\"#fff\" /><circle cx=\"350\" cy=\"203\" r=\"3.9\" fill=\"#fff\" /></g>",
+		"vb": "50 -40 326 460",
+		"w": 326,
+		"h": 460,
+		"anchor": "yz-bonus"
+	},
+	"ring": {
+		"svg": "<path class=\"y4_1\" d=\"M318 215 a105 105 0 1 1 -210 0 a105 105 0 1 1 210 0\" fill=\"none\" stroke=\"#5B63E8\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-dasharray=\"660\" /><g class=\"y4_2\"><rect x=\"191\" y=\"88\" width=\"44\" height=\"44\" rx=\"8.8\" fill=\"#5B63E8\" /><circle cx=\"202\" cy=\"99\" r=\"3.3\" fill=\"#fff\" /><circle cx=\"224\" cy=\"99\" r=\"3.3\" fill=\"#fff\" /><circle cx=\"202\" cy=\"110\" r=\"3.3\" fill=\"#fff\" /><circle cx=\"224\" cy=\"110\" r=\"3.3\" fill=\"#fff\" /><circle cx=\"202\" cy=\"121\" r=\"3.3\" fill=\"#fff\" /><circle cx=\"224\" cy=\"121\" r=\"3.3\" fill=\"#fff\" /><rect x=\"281.9\" y=\"140.5\" width=\"44\" height=\"44\" rx=\"8.8\" fill=\"#5B63E8\" /><circle cx=\"292.9\" cy=\"151.5\" r=\"3.3\" fill=\"#fff\" /><circle cx=\"314.9\" cy=\"151.5\" r=\"3.3\" fill=\"#fff\" /><circle cx=\"292.9\" cy=\"162.5\" r=\"3.3\" fill=\"#fff\" /><circle cx=\"314.9\" cy=\"162.5\" r=\"3.3\" fill=\"#fff\" /><circle cx=\"292.9\" cy=\"173.5\" r=\"3.3\" fill=\"#fff\" /><circle cx=\"314.9\" cy=\"173.5\" r=\"3.3\" fill=\"#fff\" /><rect x=\"281.9\" y=\"245.5\" width=\"44\" height=\"44\" rx=\"8.8\" fill=\"#5B63E8\" /><circle cx=\"292.9\" cy=\"256.5\" r=\"3.3\" fill=\"#fff\" /><circle cx=\"314.9\" cy=\"256.5\" r=\"3.3\" fill=\"#fff\" /><circle cx=\"292.9\" cy=\"267.5\" r=\"3.3\" fill=\"#fff\" /><circle cx=\"314.9\" cy=\"267.5\" r=\"3.3\" fill=\"#fff\" /><circle cx=\"292.9\" cy=\"278.5\" r=\"3.3\" fill=\"#fff\" /><circle cx=\"314.9\" cy=\"278.5\" r=\"3.3\" fill=\"#fff\" /><rect x=\"191\" y=\"298\" width=\"44\" height=\"44\" rx=\"8.8\" fill=\"#5B63E8\" /><circle cx=\"202\" cy=\"309\" r=\"3.3\" fill=\"#fff\" /><circle cx=\"224\" cy=\"309\" r=\"3.3\" fill=\"#fff\" /><circle cx=\"202\" cy=\"320\" r=\"3.3\" fill=\"#fff\" /><circle cx=\"224\" cy=\"320\" r=\"3.3\" fill=\"#fff\" /><circle cx=\"202\" cy=\"331\" r=\"3.3\" fill=\"#fff\" /><circle cx=\"224\" cy=\"331\" r=\"3.3\" fill=\"#fff\" /><rect x=\"100.1\" y=\"245.5\" width=\"44\" height=\"44\" rx=\"8.8\" fill=\"#5B63E8\" /><circle cx=\"111.1\" cy=\"256.5\" r=\"3.3\" fill=\"#fff\" /><circle cx=\"133.1\" cy=\"256.5\" r=\"3.3\" fill=\"#fff\" /><circle cx=\"111.1\" cy=\"267.5\" r=\"3.3\" fill=\"#fff\" /><circle cx=\"133.1\" cy=\"267.5\" r=\"3.3\" fill=\"#fff\" /><circle cx=\"111.1\" cy=\"278.5\" r=\"3.3\" fill=\"#fff\" /><circle cx=\"133.1\" cy=\"278.5\" r=\"3.3\" fill=\"#fff\" /><rect x=\"100.1\" y=\"140.5\" width=\"44\" height=\"44\" rx=\"8.8\" fill=\"#5B63E8\" /><circle cx=\"111.1\" cy=\"151.5\" r=\"3.3\" fill=\"#fff\" /><circle cx=\"133.1\" cy=\"151.5\" r=\"3.3\" fill=\"#fff\" /><circle cx=\"111.1\" cy=\"162.5\" r=\"3.3\" fill=\"#fff\" /><circle cx=\"133.1\" cy=\"162.5\" r=\"3.3\" fill=\"#fff\" /><circle cx=\"111.1\" cy=\"173.5\" r=\"3.3\" fill=\"#fff\" /><circle cx=\"133.1\" cy=\"173.5\" r=\"3.3\" fill=\"#fff\" /></g><text x=\"213\" y=\"226\" font-family=\"Inter,sans-serif\" font-size=\"34\" font-weight=\"800\" fill=\"#5B63E8\" stroke=\"#fff\" stroke-width=\"7\" stroke-linejoin=\"round\" paint-order=\"stroke\" text-anchor=\"middle\" >YATZY</text>",
+		"vb": "73 75 280 280",
+		"w": 280,
+		"h": 280,
+		"anchor": "yz-yatzy"
+	},
+	"bull": {
+		"svg": "<circle cx=\"213\" cy=\"225\" r=\"112\" fill=\"#15161c\" /><g transform=\"rotate(-99 213 225)\"><circle cx=\"213\" cy=\"225\" r=\"105.3\" fill=\"none\" stroke=\"#C8121E\" stroke-width=\"13.4\" stroke-dasharray=\"33.1 33.1\"/><circle cx=\"213\" cy=\"225\" r=\"105.3\" fill=\"none\" stroke=\"#1B7A3E\" stroke-width=\"13.4\" stroke-dasharray=\"33.1 33.1\" stroke-dashoffset=\"33.1\"/></g><g transform=\"rotate(-99 213 225)\"><circle cx=\"213\" cy=\"225\" r=\"85.7\" fill=\"none\" stroke=\"#EFE3C2\" stroke-width=\"25.8\" stroke-dasharray=\"26.9 26.9\"/><circle cx=\"213\" cy=\"225\" r=\"85.7\" fill=\"none\" stroke=\"#1c1c22\" stroke-width=\"25.8\" stroke-dasharray=\"26.9 26.9\" stroke-dashoffset=\"26.9\"/></g><g transform=\"rotate(-99 213 225)\"><circle cx=\"213\" cy=\"225\" r=\"67.2\" fill=\"none\" stroke=\"#C8121E\" stroke-width=\"11.2\" stroke-dasharray=\"21.1 21.1\"/><circle cx=\"213\" cy=\"225\" r=\"67.2\" fill=\"none\" stroke=\"#1B7A3E\" stroke-width=\"11.2\" stroke-dasharray=\"21.1 21.1\" stroke-dashoffset=\"21.1\"/></g><g transform=\"rotate(-99 213 225)\"><circle cx=\"213\" cy=\"225\" r=\"42\" fill=\"none\" stroke=\"#EFE3C2\" stroke-width=\"39.2\" stroke-dasharray=\"13.2 13.2\"/><circle cx=\"213\" cy=\"225\" r=\"42\" fill=\"none\" stroke=\"#1c1c22\" stroke-width=\"39.2\" stroke-dasharray=\"13.2 13.2\" stroke-dashoffset=\"13.2\"/></g><circle cx=\"213\" cy=\"225\" r=\"22.4\" fill=\"#1B7A3E\" /><circle cx=\"213\" cy=\"225\" r=\"9.5\" fill=\"#C8121E\" /><g class=\"d1_1 tr\"><circle cx=\"213\" cy=\"225\" r=\"16\" fill=\"none\" stroke=\"#fff\" stroke-width=\"3\" /></g><g class=\"d1_2\"><g transform=\"translate(213 225) rotate(0) scale(1)\"><line x1=\"0\" y1=\"0\" x2=\"18\" y2=\"0\" stroke=\"#C9CCD6\" stroke-width=\"2.6\" stroke-linecap=\"round\" /><rect x=\"14\" y=\"-4.5\" width=\"24\" height=\"9\" rx=\"4\" fill=\"#2a2d3a\" /><rect x=\"18\" y=\"-4.5\" width=\"8\" height=\"9\" rx=\"3\" fill=\"#C8121E\" /><path d=\"M36 0 L54 -11 L62 -11 L56 0 L62 11 L54 11Z\" fill=\"#C8121E\" /><line x1=\"38\" y1=\"0\" x2=\"56\" y2=\"0\" stroke=\"#2a2d3a\" stroke-width=\"2\" stroke-linecap=\"round\" /></g></g>",
+		"vb": "101 113 224 224",
+		"w": 224,
+		"h": 224,
+		"anchor": "dt-board",
+		"celTop": true
+	},
+	"scan": {
+		"svg": "<circle cx=\"84\" cy=\"225\" r=\"30\" fill=\"#1C2132\" /><circle cx=\"73.5\" cy=\"222\" r=\"3\" fill=\"#C9CEEE\" /><circle cx=\"94.5\" cy=\"222\" r=\"3\" fill=\"#C9CEEE\" /><path d=\"M75 237 Q84 241.5 93 237\" fill=\"None\" stroke=\"#C9CEEE\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><circle cx=\"170\" cy=\"225\" r=\"30\" fill=\"#1C2132\" /><circle cx=\"159.5\" cy=\"222\" r=\"3\" fill=\"#C9CEEE\" /><circle cx=\"180.5\" cy=\"222\" r=\"3\" fill=\"#C9CEEE\" /><path d=\"M161 237 Q170 241.5 179 237\" fill=\"None\" stroke=\"#C9CEEE\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><circle cx=\"256\" cy=\"225\" r=\"30\" fill=\"#1C2132\" /><circle cx=\"245.5\" cy=\"222\" r=\"3\" fill=\"#C9CEEE\" /><circle cx=\"266.5\" cy=\"222\" r=\"3\" fill=\"#C9CEEE\" /><path d=\"M247 237 Q256 241.5 265 237\" fill=\"None\" stroke=\"#C9CEEE\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><circle cx=\"342\" cy=\"225\" r=\"30\" fill=\"#1C2132\" /><circle cx=\"331.5\" cy=\"222\" r=\"3\" fill=\"#C9CEEE\" /><circle cx=\"352.5\" cy=\"222\" r=\"3\" fill=\"#C9CEEE\" /><path d=\"M333 237 Q342 241.5 351 237\" fill=\"None\" stroke=\"#C9CEEE\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><g class=\"i3_1\"><circle cx=\"256\" cy=\"225\" r=\"34\" fill=\"none\" stroke=\"#C042E0\" stroke-width=\"4\" /></g><g class=\"i3_2\"><circle cx=\"256\" cy=\"225\" r=\"30\" fill=\"#C042E0\" opacity=\".85\"/><circle cx=\"247\" cy=\"220\" r=\"3\" fill=\"#11141D\" /><circle cx=\"265\" cy=\"220\" r=\"3\" fill=\"#11141D\" /></g><g class=\"i3_3\"><rect x=\"60\" y=\"150\" width=\"4\" height=\"150\" rx=\"2\" fill=\"#E7A8F5\" /></g>",
+		"vb": "44 150 338 150",
+		"w": 338,
+		"h": 150
+	},
+	"nacht": {
+		"svg": "<path d=\"M0 420 V320 C60 300 110 330 170 316 C230 300 280 332 340 312 C380 300 410 310 426 304 V420Z\" fill=\"#1A1224\" /><g class=\"v2_1 tr\"><rect x=\"0\" y=\"0\" width=\"426\" height=\"420\" rx=\"0\" fill=\"#33477A\" opacity=\".55\"/></g><g class=\"v2_2 tr\"><circle cx=\"213\" cy=\"170\" r=\"36\" fill=\"#F2B64E\" /><circle cx=\"213\" cy=\"170\" r=\"46\" fill=\"none\" stroke=\"#F2B64E\" stroke-width=\"3\" /></g><g class=\"v2_3\"><g transform=\"translate(213 190) scale(4)\"><path d=\"M6 -12 A14 14 0 1 0 6 12 A11 11 0 1 1 6 -12Z\" fill=\"#F4E7B8\"/></g></g>",
+		"vb": "0 0 426 420",
+		"w": 426,
+		"h": 420,
+		"card": true
+	}
+};
+function gtFxReduced() {
+	try {
+		return !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+	} catch (e) {
+		return false;
+	}
+}
+function GameFx({ name, theme, mode }) {
+	const d = GT_FX[name];
+	const [pos, setPos] = useState$11(null);
+	import_react.default.useLayoutEffect(() => {
+		if (!d) return;
+		const top = mode === "top" && !!d.celTop;
+		const anchor = mode === "top" ? null : d.anchor;
+		const place = () => {
+			const vw = window.innerWidth, vh = window.innerHeight;
+			let x = vw / 2, y = vh / 2, s = Math.min(1, (vw - 16) / d.w);
+			if (anchor) try {
+				const el = Array.from(document.querySelectorAll("[data-gt-fx=\"" + anchor + "\"]")).find((e) => e.getClientRects().length > 0);
+				if (el) {
+					const r = el.getBoundingClientRect();
+					y = r.top + r.height / 2;
+					x = r.left + r.width / 2;
+					const host = el.closest(".yz-paper");
+					if (host) {
+						const hr = host.getBoundingClientRect();
+						x = hr.left + hr.width / 2;
+					}
+				}
+			} catch (e) {}
+			if (top) {
+				s = Math.min(s, Math.max(.4, Math.min(.8, (vh / 2 - 233) / d.h)));
+				y = 10 + d.h * s / 2;
+			} else {
+				const hh = (anchor === "yz-bonus" ? 260 : d.h) * s / 2;
+				y = Math.max(hh + 8, Math.min(vh - hh - 8, y));
+			}
+			x = Math.max(d.w * s / 2 + 8, Math.min(vw - d.w * s / 2 - 8, x));
+			setPos({
+				x,
+				y,
+				s
+			});
+		};
+		if (!anchor) {
+			place();
+			return;
+		}
+		const tm = setTimeout(place, 140);
+		return () => clearTimeout(tm);
+	}, [name]);
+	if (!d || !pos || gtFxReduced()) return null;
+	const noir = theme === "noir";
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		"aria-hidden": "true",
+		"data-gt-fx-layer": name,
+		style: {
+			position: "fixed",
+			left: pos.x,
+			top: pos.y,
+			width: d.w * pos.s,
+			height: d.h * pos.s,
+			transform: "translate(-50%,-50%)",
+			pointerEvents: "none",
+			zIndex: 140,
+			filter: noir ? "grayscale(1)" : void 0
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GT_FX_CSS), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gt-fx-env",
+		style: d.card ? {
+			background: "#11141DD9",
+			borderRadius: 22,
+			overflow: "hidden"
+		} : void 0
+	}, /* @__PURE__ */ import_react.default.createElement("svg", {
+		width: "100%",
+		height: "100%",
+		viewBox: d.vb,
+		xmlns: "http://www.w3.org/2000/svg",
+		style: {
+			display: "block",
+			overflow: "visible"
+		},
+		dangerouslySetInnerHTML: { __html: d.svg }
+	})));
+}
 // web/src/shared/podium.js
 var podium_exports = /* @__PURE__ */ __exportAll({
 	GtAchvHint: () => GtAchvHint,
 	GtCelebration: () => GtCelebration,
 	GtPodiumNum: () => GtPodiumNum,
 	GtRoleHold: () => GtRoleHold,
-	GtSparkles: () => GtSparkles,
 	GtStarterRun: () => GtStarterRun,
 	GtTimerRing: () => GtTimerRing,
 	PodiumOverlay: () => PodiumOverlay,
@@ -116212,77 +116333,15 @@ function GtPodiumNum({ value, delay = 0 }) {
 		"aria-label": String(value)
 	});
 }
-function GtSparkles({ color, count = 9, meteors = 0, glow = true }) {
-	const star = "M9.82531 0.843845C10.0553 0.215178 10.9446 0.215178 11.1746 0.843845L11.8618 2.72026C12.4006 4.19229 12.3916 6.39157 13.5 7.5C14.6084 8.60843 16.8077 8.59935 18.2797 9.13822L20.1561 9.82534C20.7858 10.0553 20.7858 10.9447 20.1561 11.1747L18.2797 11.8618C16.8077 12.4007 14.6084 12.3916 13.5 13.5C12.3916 14.6084 12.4006 16.8077 11.8618 18.2798L11.1746 20.1562C10.9446 20.7858 10.0553 20.7858 9.82531 20.1562L9.13819 18.2798C8.59932 16.8077 8.60843 14.6084 7.5 13.5C6.39157 12.3916 4.19225 12.4007 2.72023 11.8618L0.843814 11.1747C0.215148 10.9447 0.215148 10.0553 0.843814 9.82534L2.72023 9.13822C4.19225 8.59935 6.39157 8.60843 7.5 7.5C8.60843 6.39157 8.59932 4.19229 9.13819 2.72026L9.82531 0.843845Z";
-	const c1 = color, c2 = shadeHex(color, .55);
-	const sp = useMemo$9(() => Array.from({ length: count }).map((_, i) => ({
-		id: i,
-		x: 14 + Math.random() * 72,
-		y: 16 + Math.random() * 46,
-		s: .55 + Math.random() * .7,
-		d: Math.random() * .9,
-		sz: 12 + Math.random() * 10,
-		c: i % 2 ? c2 : c1
-	})), [count]);
-	const mt = useMemo$9(() => Array.from({ length: meteors }).map((_, i) => ({
-		id: i,
-		x: Math.round(30 + Math.random() * (Math.max(320, window.innerWidth) - 30)),
-		d: .1 + Math.random() * .8,
-		du: .9 + Math.random() * .5
-	})), [meteors]);
-	return /* @__PURE__ */ import_react.default.createElement("div", {
-		"aria-hidden": true,
-		style: {
-			position: "fixed",
-			inset: 0,
-			pointerEvents: "none",
-			overflow: "hidden",
-			zIndex: 135
-		}
-	}, glow && /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gt-glow",
-		style: { background: `radial-gradient(ellipse 70% 45% at 50% 42%, ${color}38 0%, transparent 70%)` }
-	}), sp.map((s) => /* @__PURE__ */ import_react.default.createElement("svg", {
-		key: s.id,
-		className: "gt-spk",
-		width: s.sz,
-		height: s.sz,
-		viewBox: "0 0 21 21",
-		style: {
-			left: s.x + "%",
-			top: s.y + "%",
-			"--s": s.s,
-			animationDelay: s.d + "s",
-			animationIterationCount: 2
-		}
-	}, /* @__PURE__ */ import_react.default.createElement("path", {
-		d: star,
-		fill: s.c
-	}))), mt.map((m) => /* @__PURE__ */ import_react.default.createElement("span", {
-		key: m.id,
-		className: "gt-met",
-		style: {
-			left: m.x,
-			"--mc": c2,
-			background: c2,
-			boxShadow: "0 0 0 1px " + c2 + "22",
-			animationDelay: m.d + "s",
-			animationDuration: m.du + "s"
-		}
-	})));
-}
-function GtCelebration({ intensity, theme }) {
+function GtCelebration({ theme, fx }) {
 	const [stage, setStage] = useState$11("wait");
-	const [lvl, setLvl] = useState$11(1);
 	useEffect$14(() => {
-		if (gtP3RM()) {
+		if (gtP3RM() || !fx) {
 			setStage("off");
 			return;
 		}
 		const ts = [];
 		ts.push(setTimeout(() => {
-			const L = performance.now() - gtP3BoostAt < 4e3 ? 2 : 1;
-			setLvl(L);
 			setStage("on");
 			ts.push(setTimeout(() => setStage("off"), 1900));
 		}, 650));
@@ -116298,14 +116357,11 @@ function GtCelebration({ intensity, theme }) {
 			window.removeEventListener("pointerdown", skip, true);
 		};
 	}, []);
-	if (stage === "wait" || stage === "off") return null;
-	const th = theme || gtP3Theme;
-	const col = gtP3Accent && performance.now() - gtP3AccentAt < 15e3 ? gtP3Accent : th === "noir" ? "#EAD9A2" : "#F2C14E";
-	const iv = intensity === void 0 ? .5 : Math.max(0, Math.min(1, intensity));
-	return /* @__PURE__ */ import_react.default.createElement(GtSparkles, {
-		color: col,
-		count: lvl === 2 ? 15 : Math.round(7 + iv * 4),
-		meteors: lvl === 2 ? 5 : 0
+	if (stage !== "on") return null;
+	return /* @__PURE__ */ import_react.default.createElement(GameFx, {
+		name: fx,
+		theme: theme || gtP3Theme,
+		mode: "top"
 	});
 }
 function GtRoleHold({ tk, peek, onPeek, onNext, nextLabel, hint, front, dock, below }) {
@@ -116511,7 +116567,7 @@ function gtThemeSwitch(e, id, setTheme, cur) {
 	}).catch(() => {});
 	vt.finished.then(clean, clean);
 }
-function useCelebration(trigger, intensity, theme) {
+function useCelebration(trigger, intensity, theme, fx) {
 	const [celebrating, setCelebrating] = useState$11(false);
 	const [burstKey, setBurstKey] = useState$11(0);
 	useEffect$14(() => {
@@ -116528,31 +116584,31 @@ function useCelebration(trigger, intensity, theme) {
 	if (!celebrating) return null;
 	return /* @__PURE__ */ import_react.default.createElement(GtCelebration, {
 		key: burstKey,
-		intensity,
-		theme
+		theme,
+		fx
 	});
 }
 function crossedRoundMilestone(oldVal, newVal, step) {
 	return newVal > 0 && Math.floor(oldVal / step) !== Math.floor(newVal / step);
 }
-function useMilestoneBurst() {
-	const [active, setActive] = useState$11(false);
-	const [burstKey, setBurstKey] = useState$11(0);
-	const fire = () => {
-		setBurstKey((k) => k + 1);
-		setActive(true);
+function useMilestoneBurst(defFx, theme) {
+	const [st, setSt] = useState$11(null);
+	const fire = (name) => {
+		setSt((p) => ({
+			k: (p ? p.k : 0) + 1,
+			fx: typeof name === "string" ? name : defFx
+		}));
 	};
 	useEffect$14(() => {
-		if (!active) return;
-		const t = setTimeout(() => setActive(false), 2100);
+		if (!st) return;
+		const t = setTimeout(() => setSt(null), 2100);
 		return () => clearTimeout(t);
-	}, [burstKey]);
+	}, [st && st.k]);
 	return {
-		node: active && !gtP3RM() ? /* @__PURE__ */ import_react.default.createElement(GtSparkles, {
-			key: burstKey,
-			color: gtP3Theme === "noir" ? "#EAD9A2" : "#F2C14E",
-			count: 6,
-			glow: false
+		node: st && st.fx && !gtP3RM() ? /* @__PURE__ */ import_react.default.createElement(GameFx, {
+			key: st.k,
+			name: st.fx,
+			theme: theme || gtP3Theme
 		}) : null,
 		fire
 	};
@@ -117474,7 +117530,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.08-18" && !upd) {
+		if (seen && seen !== "2026.11.09-1" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -117483,7 +117539,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.08-18" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.09-1" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

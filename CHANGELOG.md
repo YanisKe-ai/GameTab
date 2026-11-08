@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.09-1 (09.11.2026 00:07)
+- Sternefunkeln entfernt. Neue Effekte: Yatzy Würfelwurf und Würfelring, Darts Bull, Impostor Scanner, Werwolf Nacht und Tag
+
 ## 2026.11.08-18 (08.11.2026 23:20)
 - Yatzy: 2 Paare mit 6 Kacheln, gleiches Paar zweimal möglich
 

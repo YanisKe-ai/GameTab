@@ -36,7 +36,7 @@ def settings(pg):
 def start_three(pg, lap):
     # Skyjo: Spiel starten, Punkte eintragen
     R.open_game(pg, "Schreibunterlagen", "Skyjo"); R.press_start(pg)
-    R.numpad(pg, "Spieler 1", 5)
+    R.skyjo_round(pg, ["Spieler 1", "Spieler 2"], [5, 9], ender="Spieler 1")
     # Freies Spiel: ein Eintrag
     R.open_game(pg, "Schreibunterlagen", "Freies Spiel")
     R.click(pg, R.btn(pg, "25").first, 900)

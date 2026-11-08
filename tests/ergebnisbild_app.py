@@ -98,9 +98,7 @@ def flow_skyjo(pg):
     names = ["Maximiliane Huber-Brunner", "Zoë", "Ölçü"]
     R.open_game(pg, "Schreibunterlagen", "Skyjo"); fill_names(pg, names); R.press_start(pg)
     for sc in ([5, 20, 31], [3, 120, 44]):
-        for nm, v in zip(names, sc):
-            R.numpad(pg, nm, v)
-        R.click(pg, R.btn(pg, names[0] + " hat beendet")); R.click(pg, R.btn_re(pg, r"^Runde \d+ speichern$"), 900)
+        R.skyjo_round(pg, names, sc, ender=names[0])
     R.expect_text(pg, r"gewinnt", "Skyjo: Sieger nicht angezeigt")
 
 

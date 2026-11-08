@@ -47772,14 +47772,204 @@ function ttVars(theme) {
 	};
 	return base;
 }
+var TT_BIG_IMP = 1720;
+var TT_BIG_END = 2340;
+var TT_SQ = [
+	[
+		0,
+		1,
+		1
+	],
+	[
+		54,
+		1.32,
+		.56
+	],
+	[
+		144,
+		1.32,
+		.56
+	],
+	[
+		288,
+		.92,
+		1.12
+	],
+	[
+		432,
+		1.03,
+		.97
+	],
+	[
+		576,
+		1,
+		1
+	]
+];
+function ttBigStep(fx, ms) {
+	const ei = (p) => p * p * p;
+	let hov;
+	if (ms < 700) hov = -20 * (1 - Math.pow(1 - ms / 700, 3));
+	else if (ms < 1500) hov = -20;
+	else if (ms < TT_BIG_IMP) hov = -20 * (1 - ei((ms - 1500) / (TT_BIG_IMP - 1500)));
+	else hov = 0;
+	fx.hov = hov;
+	let sx = 1, sy = 1;
+	const d = ms - TT_BIG_IMP;
+	if (d >= 0) for (let i = 1; i < TT_SQ.length; i++) {
+		const a = TT_SQ[i - 1], b = TT_SQ[i];
+		if (d <= b[0]) {
+			const q = (d - a[0]) / (b[0] - a[0]);
+			sx = a[1] + (b[1] - a[1]) * q;
+			sy = a[2] + (b[2] - a[2]) * q;
+			break;
+		}
+	}
+	fx.sx = sx;
+	fx.sy = sy;
+}
+function ttBigFx(v, x, tr, big, wave, t0) {
+	const fx = {
+		hov: 0,
+		sx: 1,
+		sy: 1
+	};
+	if (!tr || !big || !wave || !big.animate) return fx;
+	big.textContent = "+" + ttFmt(v);
+	const w = big.offsetWidth || 80, W = tr.clientWidth;
+	const cx = Math.max(w / 2 - 12, Math.min(W - w / 2 + 12, x + 12));
+	big.style.left = cx + "px";
+	wave.style.left = x + 12 + "px";
+	const D = 3900, o = (ms) => ms / D, EI = "cubic-bezier(.55,0,1,.45)";
+	const tf = (y, s) => "translate(-50%," + y + "px) scale(" + s + ")";
+	big.animate([
+		{
+			offset: 0,
+			opacity: 0,
+			transform: tf(-60, 1.2)
+		},
+		{
+			offset: o(950),
+			opacity: 0,
+			transform: tf(-60, 1.2),
+			easing: EI
+		},
+		{
+			offset: o(1050),
+			opacity: 1
+		},
+		{
+			offset: o(1500),
+			opacity: 1,
+			transform: tf(-20, 1),
+			easing: EI
+		},
+		{
+			offset: o(TT_BIG_IMP),
+			transform: tf(0, "1,1")
+		},
+		{
+			offset: o(TT_BIG_IMP + 54),
+			transform: tf(9, "1.08,.86")
+		},
+		{
+			offset: o(TT_BIG_IMP + 144),
+			transform: tf(9, "1.08,.86")
+		},
+		{
+			offset: o(TT_BIG_IMP + 288),
+			transform: tf(-4, ".98,1.03")
+		},
+		{
+			offset: o(TT_BIG_IMP + 432),
+			transform: tf(1, "1,1")
+		},
+		{
+			offset: o(TT_BIG_IMP + 576),
+			opacity: 1,
+			transform: tf(0, "1,1")
+		},
+		{
+			offset: o(3300),
+			opacity: 1,
+			transform: tf(0, "1,1")
+		},
+		{
+			offset: 1,
+			opacity: 0,
+			transform: tf(0, "1,1")
+		}
+	], {
+		duration: D,
+		fill: "none"
+	});
+	wave.animate([
+		{
+			opacity: 0,
+			transform: "translate(-50%,-50%) scale(.2)"
+		},
+		{
+			opacity: .9,
+			transform: "translate(-50%,-50%) scale(.5)",
+			offset: .08
+		},
+		{
+			opacity: 0,
+			transform: "translate(-50%,-50%) scale(1.8)"
+		}
+	], {
+		duration: 700,
+		delay: TT_BIG_IMP
+	});
+	const lane = tr.closest(".tt-lane");
+	const nm = lane && lane.querySelector(".tt-nmt");
+	if (nm && nm.animate) nm.animate([
+		{ opacity: 1 },
+		{
+			opacity: 1,
+			offset: o(900)
+		},
+		{
+			opacity: .1,
+			offset: o(1150)
+		},
+		{
+			opacity: .1,
+			offset: o(3300)
+		},
+		{ opacity: 1 }
+	], { duration: D });
+	if (lane && lane.animate) lane.animate([
+		{ transform: "translateY(0)" },
+		{
+			transform: "translateY(3px)",
+			offset: .13
+		},
+		{
+			transform: "translateY(3px)",
+			offset: .36
+		},
+		{
+			transform: "translateY(-1px)",
+			offset: .62
+		},
+		{ transform: "translateY(0)" }
+	], {
+		duration: 400,
+		delay: TT_BIG_IMP
+	});
+	return fx;
+}
 function TuttoPlayerRow({ player, total, entryCount, color, target, isLeader, selected, onPick, gtLead, t, theme, laneRef }) {
-	const dieRef = useRef$16(null), trackRef = useRef$16(null), trailRef = useRef$16(null), trailwRef = useRef$16(null), numRef = useRef$16(null);
+	const dieRef = useRef$16(null), trackRef = useRef$16(null), bigRef = useRef$16(null), waveRef = useRef$16(null), trailRef = useRef$16(null), trailwRef = useRef$16(null), numRef = useRef$16(null);
 	const st = useRef$16({
 		v: total,
 		raf: 0,
 		first: true,
 		face: 0,
-		ec: entryCount
+		ec: entryCount,
+		ecL: entryCount,
+		fx: null
 	});
 	const targetRef = useRef$16(target);
 	targetRef.current = target;
@@ -47797,7 +47987,8 @@ function TuttoPlayerRow({ player, total, entryCount, color, target, isLeader, se
 			deg = a + (snap(ttRoll(s.to, targetRef.current, W).deg) - a) * (v - s.from) / (s.to - s.from);
 		}
 		const lift = Math.abs(Math.sin(deg * Math.PI / 90)) * 5;
-		d.style.transform = "translate3d(" + r.x + "px," + -lift + "px,0) rotate(" + deg + "deg)";
+		const fx = s.fx;
+		d.style.transform = fx ? "translate3d(" + r.x + "px," + (fx.hov - lift + (1 - fx.sy) * 12) + "px,0) scale(" + fx.sx + "," + fx.sy + ") rotate(" + deg + "deg)" : "translate3d(" + r.x + "px," + -lift + "px,0) rotate(" + deg + "deg)";
 		if (trailwRef.current) trailwRef.current.style.width = W + 12 + "px";
 		if (trailRef.current) trailRef.current.style.transform = "translate3d(" + (r.x - W) + "px,0,0)";
 		if (numRef.current) {
@@ -47825,6 +48016,8 @@ function TuttoPlayerRow({ player, total, entryCount, color, target, isLeader, se
 		const from = s.v, to = total;
 		if (from === to || ttRM()) {
 			s.anim = false;
+			s.ecL = entryCount;
+			s.fx = null;
 			s.v = to;
 			paint(to);
 			return;
@@ -47832,15 +48025,28 @@ function TuttoPlayerRow({ player, total, entryCount, color, target, isLeader, se
 		s.anim = true;
 		s.from = from;
 		s.to = to;
+		const last = player.entries[player.entries.length - 1];
+		const big = entryCount === s.ecL + 1 && last >= 1e3;
+		s.ecL = entryCount;
+		s.fx = null;
 		const t0 = performance.now();
+		if (big) s.fx = ttBigFx(last, ttRoll(to, targetRef.current, Math.max(0, trackRef.current ? trackRef.current.clientWidth - 48 : 0)).x, trackRef.current, bigRef.current, waveRef.current, t0);
 		const step = (now) => {
-			const k = Math.max(0, Math.min(1, (now - t0) / 1150));
+			const ms = now - t0;
+			const k = Math.max(0, Math.min(1, ms / 1150));
 			const e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
 			s.v = from + (to - from) * e;
 			if (k >= 1) s.anim = false;
+			if (s.fx) ttBigStep(s.fx, ms);
 			paint(s.v);
-			if (k < 1) s.raf = requestAnimationFrame(step);
-			else s.raf = 0;
+			if (k < 1 || s.fx && ms < TT_BIG_END) s.raf = requestAnimationFrame(step);
+			else {
+				s.raf = 0;
+				if (s.fx) {
+					s.fx = null;
+					paint(s.v);
+				}
+			}
 		};
 		s.raf = requestAnimationFrame(step);
 	}, [total, target]);
@@ -47862,7 +48068,7 @@ function TuttoPlayerRow({ player, total, entryCount, color, target, isLeader, se
 		const inc = entryCount === s.ec + 1;
 		s.ec = entryCount;
 		const last = player.entries[player.entries.length - 1];
-		if (!inc || !last || ttRM()) {
+		if (!inc || !last || ttRM() || last >= 1e3) {
 			setPop(null);
 			return;
 		}
@@ -47924,7 +48130,13 @@ function TuttoPlayerRow({ player, total, entryCount, color, target, isLeader, se
 			top: p[1] + "%",
 			background: pip
 		}
-	}))), /* @__PURE__ */ import_react.default.createElement("i", { className: "tt-flag" })));
+	}))), /* @__PURE__ */ import_react.default.createElement("i", { className: "tt-flag" }), /* @__PURE__ */ import_react.default.createElement("i", {
+		className: "tt-wave",
+		ref: waveRef
+	}), /* @__PURE__ */ import_react.default.createElement("span", {
+		className: "tt-big",
+		ref: bigRef
+	})));
 }
 function TuttoSetup({ players, setPlayers, target, setTarget, onStart, tk: gtTk0, t, theme }) {
 	const tk = gtSoftTk(gtTk0, theme);
@@ -48022,6 +48234,7 @@ var TUTTO_PLAY_CSS = `@font-face{font-family:'Inter';font-style:italic;font-weig
 .tt-trailw{position:absolute;left:0;top:11px;height:4px;border-radius:2px;overflow:hidden;}
 .tt-trail{position:absolute;left:0;top:0;width:100%;height:100%;border-radius:2px;will-change:transform;}
 .tt-die{position:absolute;left:0;top:1px;width:24px;height:24px;border-radius:6px;box-shadow:0 2px 0 rgba(0,0,0,.35);will-change:transform;}
+.tt-big{position:absolute;left:0;bottom:calc(100% + 9px);font-family:'Bowlby One',sans-serif;font-size:26px;line-height:1;white-space:nowrap;color:var(--tt-wy);text-shadow:var(--tt-wsh);transform-origin:50% 100%;opacity:0;pointer-events:none;z-index:3;}.tt-wave{position:absolute;left:0;top:25px;width:84px;height:18px;border-radius:50%;border:2px solid var(--tt-sel);opacity:0;pointer-events:none;}.tt-lanes.is-compact .tt-big{font-size:18px;bottom:calc(100% + 4px);}
 .tt-pip{position:absolute;width:4.4px;height:4.4px;margin:-2.2px;border-radius:50%;}
 .tt-flag{position:absolute;right:0;top:2px;width:16px;height:22px;border-radius:2px;background:repeating-conic-gradient(var(--tt-chk1) 0 25%,var(--tt-chk2) 0 50%) 0 0/8px 8px;box-shadow:0 0 0 1px var(--tt-dash);}
 @media (min-height:760px){.tt-lanes.n2,.tt-lanes.n3{--tt-lh:108px;gap:12px;}.tt-lanes.n2{--tt-lh:136px;}.tt-lanes.n2 .tt-lane,.tt-lanes.n3 .tt-lane{height:var(--tt-lh);display:flex;flex-direction:column;justify-content:center;gap:8px;padding:12px 16px;border-radius:22px;}.tt-lanes.n2 .tt-lane{gap:16px;}.tt-lanes.n2 .tt-glide,.tt-lanes.n3 .tt-glide{height:var(--tt-lh);border-radius:22px;}.tt-lanes.n2 .tt-nmt,.tt-lanes.n3 .tt-nmt{font-size:20px;}.tt-lanes.n2 .tt-num{font-size:46px;}.tt-lanes.n3 .tt-num{font-size:38px;}.tt-lanes.n2 .tt-track,.tt-lanes.n3 .tt-track{margin-top:0;}.gtL-content .tt-lanes.n2,.gtL-content .tt-lanes.n3,[data-phone-landscape] .tt-lanes.n2,[data-phone-landscape] .tt-lanes.n3{--tt-lh:84px;gap:8px;}}
@@ -48201,7 +48414,6 @@ function TuttoPlay({ players, setPlayers, target, onBack, onHome, onEndGame, onE
 		}
 		setGtErr(false);
 		const val = sign * Math.abs(raw);
-		if (val >= 1e3) fireMilestone();
 		update(sel, (pl) => ({
 			...pl,
 			entries: [...pl.entries, val]
@@ -70777,7 +70989,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.09-1";
+var APP_BUILD = "2026.11.09-2";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -114843,7 +115055,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.09-1");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.09-2");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -117530,7 +117742,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.09-1" && !upd) {
+		if (seen && seen !== "2026.11.09-2" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -117539,7 +117751,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.09-1" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.09-2" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

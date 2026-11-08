@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.09-2 (09.11.2026 00:16)
+- Tutto: ab 1000 Punkten in einem Wurf prallt die Punktzahl auf den Würfel
+
 ## 2026.11.09-1 (09.11.2026 00:07)
 - Sternefunkeln entfernt. Neue Effekte: Yatzy Würfelwurf und Würfelring, Darts Bull, Impostor Scanner, Werwolf Nacht und Tag
 

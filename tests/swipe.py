@@ -322,8 +322,40 @@ def sc_settings(b):
     ctx.close()
 
 
+def sc_settings_game(b):
+    print("settings_game")
+    ctx, page = mk(b)
+    enter(page)
+    page.locator("#root input[type=text], #root input:not([type])").first.fill("Wischtest")
+    page.evaluate("document.activeElement && document.activeElement.blur()")
+    page.wait_for_timeout(300)
+    page.locator('button[aria-label="Menü"]').first.click(timeout=3000)
+    page.wait_for_timeout(500)
+    OUT.mkdir(parents=True, exist_ok=True)
+    page.screenshot(path=str(OUT / "settings_game_menu.png"))
+    page.locator('[role="menuitem"]', has_text="Einstellungen").first.click(timeout=3000)
+    page.wait_for_timeout(900)
+    check("Einstellungen offen", "Einstellungen" in page.inner_text("#root"))
+    check("Knopf heisst Zurueck", "Zurück" in page.locator('[data-gt-back]').first.inner_text())
+    drag(page, 10, 400, 300, 410)
+    page.wait_for_timeout(800)
+    vals = page.eval_on_selector_all("#root input", "els => els.map(e => e.value)")
+    check("Wischen fuehrt ins Spiel, Stand bleibt", "Wischtest" in vals, vals)
+    check("nichts haengt", clean(page), state(page))
+    page.locator('button[aria-label="Menü"]').first.click(timeout=3000)
+    page.wait_for_timeout(400)
+    page.locator('[role="menuitem"]', has_text="Einstellungen").first.click(timeout=3000)
+    page.wait_for_timeout(900)
+    page.locator('[data-gt-back]').first.click(timeout=3000)
+    page.wait_for_timeout(900)
+    vals = page.eval_on_selector_all("#root input", "els => els.map(e => e.value)")
+    check("Zurueck-Knopf fuehrt ins Spiel", "Wischtest" in vals, vals)
+    check("keine Seitenfehler", not page._errs, page._errs)
+    ctx.close()
+
+
 ALL = {"abort": sc_abort, "complete": sc_complete, "flick": sc_flick, "vertical": sc_vertical, "dialog": sc_dialog,
-       "state": sc_state, "start": sc_start, "tap": sc_tap, "fixed": sc_fixed, "ios": sc_ios, "reduced": sc_reduced, "frames": sc_frames, "settings": sc_settings}
+       "state": sc_state, "start": sc_start, "tap": sc_tap, "fixed": sc_fixed, "ios": sc_ios, "reduced": sc_reduced, "frames": sc_frames, "settings": sc_settings, "settings_game": sc_settings_game}
 
 
 def main():

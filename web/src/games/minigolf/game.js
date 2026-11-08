@@ -92,12 +92,22 @@ const MG_LAND_CSS = `
 `;
 const MINIGOLF_FONT = "'Space Grotesk', sans-serif";
 const MG_UI = "'Inter', sans-serif";
+const MG_ANTON = "'Anton', 'Space Grotesk', sans-serif";
 const MG_CSS = `
 .mgGL button { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
 .mgGL .mgPress { min-height: 44px; transition: transform 140ms var(--gt-ease-out), background-color 160ms ease, border-color 160ms ease, color 160ms ease, opacity 160ms ease, box-shadow 160ms ease; }
 .mgGL .mgPress:active:not(:disabled) { transform: scale(0.97); }
 .mgGL .mgPress:disabled { cursor: default; }
 @media (hover: hover) and (pointer: fine) { .mgGL .mgPress:hover:not(:disabled) { filter: brightness(1.07); } }
+@font-face{font-family:'Anton';font-style:normal;font-weight:400;font-display:swap;src:url("./fonts/Anton-Regular.woff2") format('woff2');}
+.mgGL .mgTile { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 50px; border-radius: 7px; font-family: 'Anton', 'Space Grotesk', sans-serif; font-size: 34px; line-height: 1; overflow: hidden; box-shadow: inset 0 -3px 0 rgba(0,0,0,0.13), 0 2px 0 rgba(0,0,0,0.38); }
+.mgGL .mgTile::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1.5px; background: rgba(0,0,0,0.24); }
+.mgGL .mgFlip { display: block; padding-top: 3px; animation: mgFlip 300ms var(--gt-ease-out); }
+@keyframes mgFlip { from { transform: perspective(120px) rotateX(-75deg); opacity: 0.15; } to { transform: none; opacity: 1; } }
+.mgGL .mgBallG { transition: transform 450ms cubic-bezier(0.23, 1, 0.32, 1); }
+.mgGL .mgKeys { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; }
+.mgGL .mgKey { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 44px; padding: 0; border-radius: 12px; font-family: 'Anton', 'Space Grotesk', sans-serif; font-size: 20px; cursor: pointer; transition: transform 140ms var(--gt-ease-out), background-color 140ms ease, border-color 140ms ease, color 140ms ease; }
+.mgGL .mgPc { transition: border-color 160ms ease; }
 .mgGL .mgHoleNum { animation: mgIn 220ms var(--gt-ease-out); }
 @keyframes mgIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 .mgGL .mgSr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
@@ -109,6 +119,9 @@ const MG_CSS = `
 @media (prefers-reduced-motion: reduce) {
   .mgGL .mgPress, .mgGL .mgPress:active:not(:disabled) { transition: none; transform: none; }
   .mgGL .mgHoleNum { animation: none; }
+  .mgGL .mgBallG { transition: none; }
+  .mgGL .mgFlip { animation: none; }
+  .mgGL .mgKey, .mgGL .mgKey:active:not(:disabled) { transition: none; transform: none; }
 }
 `;
 function MgSvg({ size = 20, sw = 2.2, children }) {
@@ -320,7 +333,7 @@ function MinigolfEditorPanel({ editing, players, value: cur, onSave, onClose, t,
     </div>
   );
 }
-function MgSegmented({ tab, onTab, mg, t }) {
+function MgSegmented({ tab, onTab, mg, t, segOn, segInk }) {
   const item = (id, label) => {
     const on = tab === id;
     return (
@@ -346,12 +359,12 @@ function MgSegmented({ tab, onTab, mg, t }) {
           flex: "1 1 0",
           minHeight: 44,
           border: "none",
-          borderRadius: 14,
-          background: on ? mg.segBg : "transparent",
-          color: on ? mg.segInk : mg.muted,
+          borderRadius: 12,
+          background: on ? segOn : "transparent",
+          color: on ? segInk : mg.muted,
           fontFamily: MINIGOLF_FONT,
           fontWeight: 700,
-          fontSize: 16,
+          fontSize: 15,
           cursor: "pointer",
           boxShadow: on ? "0 1px 2px rgba(0,0,0,0.12)" : "none",
         }}
@@ -361,156 +374,210 @@ function MgSegmented({ tab, onTab, mg, t }) {
     );
   };
   return (
-    <div role="tablist" aria-label={t("mgViewLabel")} className="mg-seg" style={{ display: "flex", gap: 4, padding: 4, borderRadius: 18, background: mg.surf, border: `1px solid ${mg.line}`, marginBottom: 12 }}>
+    <div role="tablist" aria-label={t("mgViewLabel")} className="mg-seg" style={{ display: "flex", gap: 2, padding: 2, borderRadius: 14, background: mg.surf, border: `1px solid ${mg.line}`, marginBottom: 8 }}>
       {item("hole", t("mgTabHole"))}
       {item("table", t("mgTabTable"))}
     </div>
   );
 }
-function MgHoleCard({ ui, hole, onGo, mg, t }) {
-  const done = Array.from({ length: MINIGOLF_HOLES }, (_, h) => mgHoleComplete(ui.players, ui.scores, h));
+// Anzeigetafel: Farben des Objekts (Holzrahmen, Rasengruen). Im Hell-Theme bleibt die Tafel dunkelgruen, Noir graustufig.
+function mgBoardTk(theme) {
+  const noir = theme === "noir";
+  return {
+    frame: noir ? "#4A4A4A" : "#7A4E2A",
+    inner: noir ? "#141414" : "#123A27",
+    tile: noir ? "#DADADA" : "#F3EBD3",
+    tileInk: noir ? "#111111" : "#123A27",
+    lime: noir ? "#EDEDED" : "#D6F23A",
+    ink: noir ? "#EDEDED" : "#F3EBD3",
+    muted: noir ? "#A5A5A5" : "#A9C2B0",
+    grass: noir ? "#262626" : "#1B4F33",
+    grassHi: noir ? "#313131" : "#2C6644",
+    dim: noir ? "rgba(237,237,237,0.34)" : "rgba(243,235,211,0.34)",
+    flag: noir ? "#BDBDBD" : "#E5484D",
+    pole: noir ? "#D6D6D6" : "#F3EBD3",
+    hole: noir ? "#050505" : "#06140C",
+    btn: noir ? "rgba(237,237,237,0.10)" : "rgba(243,235,211,0.12)",
+  };
+}
+// Spielerkarten und Schlagtasten je Theme
+function mgCardTk(theme, mg) {
+  if (theme === "light") return { card: mg.surf, keyBg: mg.surf2, keyLine: mg.ctrlLine, keyOn: mg.acc, keyOnInk: "#FFFFFF" };
+  if (theme === "noir") return { card: mg.surf, keyBg: "transparent", keyLine: mg.ctrlLine, keyOn: "#EDEDED", keyOnInk: "#0A0A0A" };
+  return { card: "#163126", keyBg: "#1D3F32", keyLine: "#33594C", keyOn: "#D6F23A", keyOnInk: "#0B1411" };
+}
+function MgTile({ ch, b }) {
+  return (
+    <span className="mgTile" style={{ background: b.tile, color: b.tileInk }}>
+      <span key={ch} className="mgFlip">
+        {ch}
+      </span>
+    </span>
+  );
+}
+// Live-Rangliste: gleicher Rang bei Gleichstand, vor der ersten gespeicherten Bahn Strich statt Rang
+function MgRankList({ st, b, className, big }) {
+  const n = st.rows.length;
+  const two = !big && n > 4;
+  return (
+    <ol className={className} style={{ flex: "1 1 auto", minWidth: 0, margin: 0, padding: 0, listStyle: "none", display: "grid", gridTemplateColumns: two ? "minmax(0,1fr) minmax(0,1fr)" : "minmax(0,1fr)", gridTemplateRows: two ? `repeat(${Math.ceil(n / 2)}, auto)` : undefined, gridAutoFlow: two ? "column" : "row", columnGap: 12, rowGap: big ? 4 : 2, alignContent: "center" }}>
+      {st.rows.map((r) => (
+        <li key={r.id} data-mg-rank={r.id} style={{ display: "flex", alignItems: "center", gap: 8, minHeight: big ? 34 : 22, minWidth: 0 }}>
+          <span style={{ fontFamily: MG_ANTON, fontSize: big ? 22 : 16, color: b.lime, minWidth: big ? 22 : 15, lineHeight: 1, fontVariantNumeric: "tabular-nums" }}>{r.rank == null ? "–" : r.rank}</span>
+          <span title={r.name} style={{ flex: "1 1 auto", minWidth: 0, fontFamily: MG_UI, fontWeight: 700, fontSize: big ? 17 : 14, color: b.ink, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+            {r.name}
+          </span>
+          <span style={{ fontFamily: MG_ANTON, fontSize: big ? 24 : 17, color: b.lime, lineHeight: 1, fontVariantNumeric: "tabular-nums" }}>{r.sum}</span>
+        </li>
+      ))}
+    </ol>
+  );
+}
+const MG_TRACK_W = 340;
+const MG_X0 = 20;
+const MG_XH = 304;
+const mgX = (i) => MG_X0 + (i * (MG_XH - MG_X0)) / (MINIGOLF_HOLES - 1);
+// Bahnspur: Rasenstreifen mit 18 Markierungen, Bahn 18 ist das Loch mit Fahne. Der Ball rollt per CSS-Transition zur neuen Markierung.
+function MgTrack({ hole, done, b, t }) {
+  const last = hole >= MINIGOLF_HOLES - 1;
+  const bx = last ? MG_XH - 16 : mgX(hole);
   const nDone = done.filter(Boolean).length;
+  return (
+    <svg className="mgTrackSvg" viewBox={`0 0 ${MG_TRACK_W} 58`} width="100%" role="img" aria-label={t("mgProgress")(nDone, MINIGOLF_HOLES)} focusable="false" style={{ display: "block", flex: "1 1 auto", minWidth: 0, maxHeight: 76 }}>
+      <defs>
+        <pattern id="mgGrassPat" width="28" height="12" patternUnits="userSpaceOnUse">
+          <rect width="14" height="12" fill={b.grass} />
+          <rect x="14" width="14" height="12" fill={b.grassHi} opacity="0.55" />
+        </pattern>
+        <clipPath id="mgTrailClip">
+          <rect x={MG_X0} y="40" width={MG_XH - MG_X0} height="16" />
+        </clipPath>
+      </defs>
+      <rect x="4" y="42" width="332" height="12" rx="6" fill="url(#mgGrassPat)" />
+      <g clipPath="url(#mgTrailClip)">
+        <g className="mgBallG" style={{ transform: `translateX(${bx}px)` }}>
+          <line x1="-320" y1="48" x2="0" y2="48" stroke={b.lime} strokeWidth="2.6" strokeLinecap="round" strokeDasharray="0.1 6" />
+        </g>
+      </g>
+      {Array.from({ length: MINIGOLF_HOLES - 1 }, (_, i) => {
+        const x = mgX(i);
+        return done[i] ? <circle key={i} cx={x} cy="48" r="3.2" fill={b.lime} /> : <circle key={i} cx={x} cy="48" r="2.1" fill={b.dim} />;
+      })}
+      <circle cx={mgX(Math.min(hole, MINIGOLF_HOLES - 2))} cy="48" r="5" fill="none" stroke={b.lime} strokeWidth="1.4" opacity={last ? 0 : 1} />
+      <ellipse cx={MG_XH} cy="47" rx="12.5" ry="4.4" fill={b.grassHi} />
+      <ellipse cx={MG_XH} cy="47" rx="8" ry="2.9" fill={b.hole} />
+      <path d={`M${MG_XH} 47V7`} stroke={b.pole} strokeWidth="2.2" strokeLinecap="round" />
+      <path d={`M${MG_XH + 1.1} 7.6l17 6.6-17 6.6z`} fill={b.flag} />
+      <g className="mgBallG" style={{ transform: `translateX(${bx}px)` }}>
+        <ellipse cx="0" cy="42.4" rx="5" ry="1.5" fill="#000" opacity="0.28" />
+        <circle cx="0" cy="36.6" r="5.6" fill="#FFFFFF" />
+        <circle cx="-1.7" cy="34.8" r="1.1" fill="#D9E2D6" />
+        <circle cx="1.8" cy="38" r="0.9" fill="#D9E2D6" />
+      </g>
+    </svg>
+  );
+}
+function MgBoard({ hole, done, st, onGo, b, t }) {
   const nav = (dir) => {
     const dis = dir < 0 ? hole <= 0 : hole >= MINIGOLF_HOLES - 1;
     return (
       <button
-        className="mgPress"
+        className="mgPress mgNav"
+        data-mg-nav={dir < 0 ? "prev" : "next"}
         onClick={() => !dis && onGo(hole + dir)}
         disabled={dis}
         aria-label={dir < 0 ? t("mgPrevHole") : t("mgNextHole")}
-        style={{ width: 48, height: 48, borderRadius: "50%", border: "none", background: mg.ctrl, color: mg.ink, display: "grid", placeItems: "center", cursor: "pointer", opacity: dis ? 0.38 : 1, flexShrink: 0 }}
+        style={{ width: 44, height: 44, borderRadius: "50%", border: "none", background: b.btn, color: b.ink, display: "grid", placeItems: "center", cursor: "pointer", opacity: dis ? 0.32 : 1, flexShrink: 0, padding: 0 }}
       >
-        <MgSvg size={20}>{dir < 0 ? <path d="M15 5l-7 7 7 7" /> : <path d="M9 5l7 7-7 7" />}</MgSvg>
+        <MgSvg size={20} sw={2.4}>
+          <path d={dir < 0 ? "M15 5l-7 7 7 7" : "M9 5l7 7-7 7"} />
+        </MgSvg>
       </button>
     );
   };
+  const num = String(hole + 1).padStart(2, "0");
   return (
-    <section aria-label={t("mgHoleOf")(hole + 1, MINIGOLF_HOLES)} style={{ background: mg.surf, border: "none", borderRadius: 24, padding: "18px 16px 16px 16px", boxShadow: mg.shadow, marginBottom: 12 }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-        <MgFlag mg={mg} size={48} />
-        <div style={{ flex: "1 1 auto", minWidth: 0 }} aria-live="polite" aria-atomic="true">
-          <span className="mgSr">{t("mgHoleOf")(hole + 1, MINIGOLF_HOLES)}</span>
-          <div aria-hidden="true" style={{ fontSize: 15, fontWeight: 700, color: mg.ink, fontFamily: MG_UI, lineHeight: 1.1 }}>
-            {t("mgTabHole")}
+    <section className="mgBoard" aria-label={t("mgHoleOf")(hole + 1, MINIGOLF_HOLES)} style={{ background: b.inner, border: `6px solid ${b.frame}`, borderRadius: 18, padding: "10px 8px 6px 12px", boxShadow: "0 12px 26px -16px rgba(0,0,0,0.65), inset 0 0 28px rgba(0,0,0,0.38)", marginBottom: 10 }}>
+      <span className="mgSr" aria-live="polite" aria-atomic="true">
+        {t("mgHoleOf")(hole + 1, MINIGOLF_HOLES)}
+      </span>
+      <div style={{ display: "flex", alignItems: "center", gap: 14, paddingRight: 4 }}>
+        <div aria-hidden="true" data-mg-hole={hole + 1} style={{ flexShrink: 0, textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", gap: 3 }}>
+          <span style={{ fontFamily: MG_UI, fontSize: 11, fontWeight: 800, letterSpacing: "0.2em", color: b.muted, textIndent: "0.2em", textTransform: "uppercase" }}>{t("mgTabHole")}</span>
+          <div style={{ display: "flex", gap: 4 }}>
+            <MgTile ch={num[0]} b={b} />
+            <MgTile ch={num[1]} b={b} />
           </div>
-          <div aria-hidden="true" style={{ display: "flex", flexWrap: "wrap", alignItems: "baseline", columnGap: 8 }}>
-            <span key={hole} className="mgHoleNum" data-mg-hole={hole + 1} style={{ fontFamily: MINIGOLF_FONT, fontWeight: 700, fontSize: 88, lineHeight: 0.95, color: mg.accInk, letterSpacing: "-0.04em", fontVariantNumeric: "tabular-nums" }}>
-              {String(hole + 1).padStart(2, "0")}
-            </span>
-            <span style={{ fontSize: 19, color: mg.muted, fontFamily: MG_UI, fontWeight: 600, whiteSpace: "nowrap" }}>{t("mgOf")(MINIGOLF_HOLES)}</span>
-          </div>
+          <span style={{ fontFamily: MG_UI, fontSize: 12, fontWeight: 600, color: b.muted }}>{t("mgOf")(MINIGOLF_HOLES)}</span>
         </div>
-        <div style={{ display: "flex", gap: 8, flexShrink: 0 }}>
-          {nav(-1)}
-          {nav(1)}
-        </div>
+        <MgRankList className="mgPhoneOnly mgRank" st={st} b={b} />
+        <span className="gtL-e-only" style={{ marginLeft: "auto", fontFamily: MG_UI, fontSize: 14, fontWeight: 600, color: b.muted }}>
+          {t("mgProgress")(done.filter(Boolean).length, MINIGOLF_HOLES)}
+        </span>
       </div>
-      <div role="img" aria-label={t("mgProgress")(nDone, MINIGOLF_HOLES)} style={{ display: "grid", gridTemplateColumns: `repeat(${MINIGOLF_HOLES}, minmax(0, 1fr))`, gap: 3, marginTop: 16, padding: "0 2px" }}>
-        {done.map((d, h) => (
-          <span key={h} style={{ height: 6, borderRadius: 3, background: d ? mg.acc : mg.track, outline: h === hole ? `1.5px solid ${mg.muted}` : "none", outlineOffset: 1.5 }} />
-        ))}
+      <div style={{ display: "flex", alignItems: "center", gap: 0, marginTop: 4 }}>
+        {nav(-1)}
+        <MgTrack hole={hole} done={done} b={b} t={t} />
+        {nav(1)}
       </div>
     </section>
   );
 }
-function MgPlayerCard({ p, val, isDraft, missing, sofar, countNote, leads, onStep, onPick, mg, t }) {
+function MgPlayerCard({ p, val, missing, sofar, onKey, mg, c, t }) {
   const name = p.name || "";
-  const has = val !== null && val !== undefined;
-  const round = { width: 52, height: 52, borderRadius: "50%", border: "none", background: mg.ctrl, color: mg.ink, display: "grid", placeItems: "center", cursor: "pointer", flexShrink: 0 };
-  const minusDis = !has || val <= 1;
-  const plusDis = has && val >= MINIGOLF_MAX_STROKES;
   return (
-    <div
-      data-mg-card={p.id}
-      className="mgCard"
-      style={{ background: leads ? `linear-gradient(${mg.accSoft}, ${mg.accSoft}), ${mg.surf}` : mg.surf, border: `2px solid ${leads ? mg.acc : "transparent"}`, borderRadius: 20, padding: "14px 12px 14px 18px", minHeight: 88, boxShadow: mg.shadow }}
-    >
-      <div style={{ flex: "1 1 128px", minWidth: 0 }}>
-        <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "2px 8px" }}>
-          <span style={{ fontFamily: MINIGOLF_FONT, fontWeight: 600, fontSize: 19, color: mg.ink, lineHeight: 1.2, overflowWrap: "break-word", letterSpacing: "-0.01em" }}>{name}</span>
-          {leads && (
-            <span style={{ fontFamily: MG_UI, fontSize: 13, fontWeight: 700, letterSpacing: "0.05em", textTransform: "uppercase", padding: "2px 8px", borderRadius: 999, color: mg.accInk, border: `1px solid ${mg.accLine}`, lineHeight: 1.4 }}>{t("mgLeads")}</span>
-          )}
-        </div>
-        <div style={{ fontSize: 14, color: mg.muted, fontFamily: MG_UI, marginTop: 2 }}>
-          {t("mgSoFar")} <span style={{ color: mg.ink, fontWeight: 700, fontFamily: MINIGOLF_FONT, fontSize: 17, fontVariantNumeric: "tabular-nums" }}>{sofar}</span>
-          {countNote ? <span>{" · " + countNote}</span> : null}
-        </div>
+    <div data-mg-card={p.id} className="mgPc" style={{ background: c.card, border: `1.5px ${missing ? "dashed" : "solid"} ${missing ? mg.accLine : "transparent"}`, borderRadius: 16, padding: "8px 8px 8px 10px", boxShadow: mg.shadow }}>
+      <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 10, marginBottom: 6, paddingRight: 2 }}>
+        <span style={{ fontFamily: MINIGOLF_FONT, fontWeight: 700, fontSize: 17, color: mg.ink, lineHeight: 1.2, minWidth: 0, overflowWrap: "break-word", letterSpacing: "-0.01em" }}>{name}</span>
+        <span style={{ flexShrink: 0, fontFamily: MG_UI, fontSize: 13, fontWeight: 600, color: mg.muted, whiteSpace: "nowrap" }}>
+          {t("mgTotal")}{" "}
+          <span data-mg-total={p.id} style={{ fontFamily: MG_ANTON, fontSize: 17, color: mg.ink, fontVariantNumeric: "tabular-nums", letterSpacing: "0.01em" }}>
+            {sofar}
+          </span>
+        </span>
       </div>
-      <div role="group" aria-label={t("strokesPlaceholder") + ", " + name} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4, marginLeft: "auto" }}>
-        
-        <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-          <button className="mgPress" data-mg-minus={p.id} onClick={() => !minusDis && onStep(-1)} disabled={minusDis} aria-label={t("mgSub")(name)} style={{ ...round, opacity: minusDis ? 0.38 : 1 }}>
-            <MgSvg size={18}>
-              <path d="M6 12h12" />
-            </MgSvg>
-          </button>
-          <button
-            className="mgPress"
-            data-mg-val={p.id}
-            onClick={onPick}
-            aria-label={t("mgPick")(name, has ? val : null) + (isDraft ? ", " + t("mgUnsaved") : "")}
-            style={{
-              minWidth: 64,
-              height: 52,
-              borderRadius: 14,
-              border: has ? `${isDraft ? 1.5 : 1}px solid ${isDraft ? mg.acc : mg.ctrlLine}` : `1.5px dashed ${missing ? mg.acc : mg.ctrlLine}`,
-              background: has ? mg.surf2 : "transparent",
-              color: mg.ink,
-              fontFamily: MINIGOLF_FONT,
-              fontWeight: 700,
-              fontSize: 32,
-              fontVariantNumeric: "tabular-nums",
-              cursor: "pointer",
-              padding: 0,
-            }}
-          >
-            {has ? val : <span style={{ fontFamily: MG_UI, fontSize: 13, fontWeight: 600, color: missing ? mg.accInk : mg.muted, letterSpacing: "0.01em" }}>{t("mgOpen")}</span>}
-          </button>
-          <button className="mgPress" data-mg-plus={p.id} onClick={() => !plusDis && onStep(1)} disabled={plusDis} aria-label={t("mgAdd")(name)} style={{ ...round, opacity: plusDis ? 0.38 : 1 }}>
-            <MgSvg size={18}>
-              <path d="M12 6v12M6 12h12" />
-            </MgSvg>
-          </button>
-        </div>
+      <div role="group" aria-label={t("strokesPlaceholder") + ", " + name} className="mgKeys">
+        {Array.from({ length: MINIGOLF_MAX_STROKES }, (_, k) => k + 1).map((n) => {
+          const on = val === n;
+          const isMax = n === MINIGOLF_MAX_STROKES;
+          return (
+            <button
+              key={n}
+              className="mgPress mgKey"
+              data-gt-sound="1"
+              data-mg-key={p.id + "-" + n}
+              data-mg-giveup={isMax ? "1" : undefined}
+              onClick={() => onKey(on ? null : n)}
+              aria-pressed={on ? "true" : "false"}
+              aria-label={isMax ? t("mgStrokesFor")(name, n) + ", " + t("mgMaxHint")(MINIGOLF_MAX_STROKES) : t("mgStrokesFor")(name, n)}
+              style={{ background: on ? c.keyOn : c.keyBg, color: on ? c.keyOnInk : mg.ink, border: `${isMax ? "1.5px dashed" : "1px solid"} ${on ? c.keyOn : c.keyLine}` }}
+            >
+              <span style={{ lineHeight: 1 }}>{n}</span>
+              {isMax && <span style={{ fontFamily: MG_UI, fontSize: 8.5, fontWeight: 800, letterSpacing: "0.04em", textTransform: "uppercase", lineHeight: 1, marginTop: 2, color: on ? c.keyOnInk : mg.muted }}>{t("mgMaxShort")}</span>}
+            </button>
+          );
+        })}
       </div>
     </div>
   );
 }
-function MgStandingsBox({ st, onOpen, finished, mg, t, className }) {
+// Rangliste als eigene Tafel (Laptop rechts, Handy quer): Titel oeffnet die Tabelle
+function MgRankBoard({ st, onOpen, b, t, className }) {
   const title = st.common === 0 ? t("mgStandNone") : st.uniform ? t("mgStandAfter")(st.common) : t("mgStandCommon")(st.common);
-  const allTied = st.rows.every((r) => r.rank === 1);
   return (
-    <section className={className} aria-label={title} style={{ background: mg.surf2, border: `1px solid ${mg.line}`, borderRadius: 18, padding: "2px 10px 8px", marginTop: 8 }}>
+    <section className={className} aria-label={title} style={{ background: b.inner, border: `6px solid ${b.frame}`, borderRadius: 18, padding: "2px 12px 10px", marginTop: 8, boxShadow: "0 12px 26px -16px rgba(0,0,0,0.65), inset 0 0 28px rgba(0,0,0,0.38)" }}>
       <button
         className="mgPress"
         onClick={onOpen}
         aria-label={title + ". " + t("mgOpenTable")}
-        style={{ width: "100%", minHeight: 44, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8, border: "none", background: "transparent", color: mg.muted, fontFamily: MG_UI, fontSize: 14, fontWeight: 600, padding: "0 4px 0 6px", cursor: "pointer", textAlign: "left" }}
+        style={{ width: "100%", minHeight: 44, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8, border: "none", background: "transparent", color: b.muted, fontFamily: MG_UI, fontSize: 13, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", padding: "0 2px", cursor: "pointer", textAlign: "left" }}
       >
         <span>{title}</span>
         <MgSvg size={18}>
           <path d="M9 5l7 7-7 7" />
         </MgSvg>
       </button>
-      {st.common > 0 && (
-        <ol style={{ listStyle: "none", margin: 0, padding: 0, display: "grid", gridTemplateColumns: st.rows.every((r) => String(r.name || "").length <= 11) ? "repeat(auto-fill, minmax(min(100%, 148px), 1fr))" : "1fr", gap: 6 }}>
-          {st.rows.map((r) => {
-            const top = r.rank === 1 && !allTied && !finished;
-            return (
-              <li key={r.id} style={{ display: "flex", alignItems: "center", gap: 8, padding: "6px 12px", borderRadius: 12, border: `1px solid ${top ? mg.accLine : mg.line}`, background: top ? mg.accSoft : "transparent", minWidth: 0 }}>
-                <span style={{ color: top ? mg.accInk : mg.muted, fontWeight: 700, fontFamily: MINIGOLF_FONT, fontSize: 15, minWidth: 20, fontVariantNumeric: "tabular-nums" }}>{r.rank}.</span>
-                <span style={{ flex: "1 1 auto", minWidth: 0, color: mg.ink, fontFamily: MG_UI, fontWeight: 600, fontSize: 15, overflowWrap: "break-word", lineHeight: 1.25 }}>
-                  {r.name}
-                  {top && <span className="mgSr">{", " + t("mgLeads")}</span>}
-                  {!st.uniform && <span style={{ display: "block", fontSize: 12, fontWeight: 500, color: mg.muted }}>{t("mgHolesN")(r.count) + " · " + t("minigolfTotalRow") + " " + r.total}</span>}
-                </span>
-                <span style={{ fontFamily: MINIGOLF_FONT, fontWeight: 700, fontSize: 18, color: mg.ink, fontVariantNumeric: "tabular-nums" }}>{r.sum}</span>
-              </li>
-            );
-          })}
-        </ol>
-      )}
+      <MgRankList st={st} b={b} big />
     </section>
   );
 }
@@ -600,8 +667,13 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
   const [editing, setEditing] = useState(null);
   const [confirmingReset, setConfirmingReset] = useState(false);
   const [confirmingSetup, setConfirmingSetup] = useState(false);
+  const [nudge, setNudge] = useState(false);
   const t = useT(lang);
   const mg = minigolfTokens(theme);
+  const bt = mgBoardTk(theme);
+  const ct = mgCardTk(theme, mg);
+  const segOn = theme === "light" ? mg.acc : mg.segBg;
+  const segInk = theme === "light" ? "#FFFFFF" : mg.segInk;
   const tk = shellTokens(theme);
   const filledCounts = players.map((p) => minigolfFilledCount(scores[p.id]));
   const finished = players.length > 0 && filledCounts.every((c) => c === MINIGOLF_HOLES);
@@ -625,7 +697,7 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
   const tab = ui.tab;
   const upd = (fn) => setState((s) => fn(s));
   const st = mgStandings(players, scores);
-  const lead = new Set(!finished && st.common > 0 && !st.rows.every((r) => r.rank === 1) ? st.rows.filter((r) => r.rank === 1).map((r) => r.id) : []);
+  const doneHoles = Array.from({ length: MINIGOLF_HOLES }, (_, h) => mgHoleComplete(players, scores, h));
   const info = mgHoleInfo(ui, hole);
   const saveDraft = (playerId, holeIdx, v) => {
     upd((s) => mgSetDraft(s, playerId, holeIdx, v));
@@ -665,14 +737,13 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
   ];
   const names = (list) => gtJoinNames(list.map((p) => p.name), t);
   const holesTxt = (hs) => hs.map((h) => h + 1).join(", ");
-  // Gesperrte Hauptaktion bleibt antippbar und fuehrt zur ersten fehlenden Person
+  // Gesperrte Hauptaktion bleibt antippbar: markiert die Karten ohne Wert, kein automatisches Scrollen
   const showMissing = () => {
     const m = info.missing[0];
-    const el = m && document.querySelector(`[data-mg-plus="${m.id}"]`);
-    if (!el) return;
-    const rm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    el.scrollIntoView({ block: "center", behavior: rm ? "auto" : "smooth" });
-    el.focus({ preventScroll: true });
+    setNudge(true);
+    setTimeout(() => setNudge(false), 1400);
+    const el = m && document.querySelector(`[data-mg-card="${m.id}"] button`);
+    if (el) el.focus({ preventScroll: true });
   };
   const lastUndo = ui.undo.length ? ui.undo[ui.undo.length - 1] : null;
   // Hauptaktion je nach Zustand der Bahn bzw. der Tabelle
@@ -688,82 +759,90 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
       status = blocked.length ? blocked.map((h) => t("holeLabel")(h + 1) + ": " + t("mgStillOpen")(names(mgHoleInfo(ui, h).missing))).join(" · ") : t("mgDirtyHoles")(holesTxt(dirtyHoles));
     } else status = t("mgTableHint");
   } else if (info.dirty) {
-    main = info.canSave ? { label: info.isNew ? t("mgSaveHole") : t("mgSaveChanges"), onClick: () => upd((s) => mgSave(s, hole)) } : { label: t("mgSaveHole"), blocked: true, onClick: showMissing };
+    main = info.canSave ? { label: info.isNew ? t("mgSaveHoleN")(hole + 1) : t("mgSaveChanges"), onClick: () => upd((s) => mgSave(s, hole)) } : { label: t("mgSaveHoleN")(hole + 1), sub: t("mgOpenCount")(info.missing.length), blocked: true, onClick: showMissing };
     status = info.isNew && info.missing.length ? t("mgStillOpen")(names(info.missing)) : t("mgUnsaved");
   } else if (finished) {
     main = { label: t("mgShowResult"), onClick: () => setPodiumOpen(true), icon: "trophy" };
   } else if (info.done) {
     const nx = mgNextOpen(players, scores, hole);
-    main = nx >= 0 ? { label: t("mgGoNext")(nx + 1), onClick: () => upd((s) => mgGoto(s, nx)), icon: "next" } : null;
+    main = nx >= 0 ? { label: t("mgGoNext")(nx + 1), sub: t("mgSaved"), onClick: () => upd((s) => mgGoto(s, nx)), icon: "next" } : null;
     status = t("mgSaved");
     statusOk = true;
   } else {
-    main = { label: info.isNew ? t("mgSaveHole") : t("mgSaveChanges"), blocked: true, onClick: showMissing };
+    main = { label: info.isNew ? t("mgSaveHoleN")(hole + 1) : t("mgSaveChanges"), sub: t("mgOpenCount")(info.missing.length), blocked: true, onClick: showMissing };
     status = info.missing.length === players.length ? t("mgEnterHint") : t("mgStillOpen")(names(info.missing));
   }
+  const barBtn = { width: 56, height: 56, minHeight: 56, flexShrink: 0, borderRadius: 18, display: "grid", placeItems: "center", padding: 0, cursor: "pointer" };
   const bar = (
-    <div className="mgBar" style={{ position: "sticky", bottom: 0, zIndex: 5, margin: "2px -12px 0", padding: "8px 12px calc(6px + env(safe-area-inset-bottom))", ...({ background: `linear-gradient(180deg, ${mg.bg}00, ${mg.bg}F2 14px, ${mg.bg} 30%)` }) }}>
+    <div className="mgBar" style={{ margin: "10px 0 0", padding: "0 0 calc(4px + env(safe-area-inset-bottom))" }}>
       {status && (
-        <div id="mg-status" role="status" aria-live="polite" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, textAlign: "center", fontSize: 14, fontWeight: 600, color: statusOk ? mg.accInk : mg.muted, fontFamily: MG_UI, margin: "0 4px 8px", lineHeight: 1.35 }}>
+        <div id="mg-status" role="status" aria-live="polite" className={tab === "table" ? undefined : "mgSr"} style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, textAlign: "center", fontSize: 13.5, fontWeight: 600, color: statusOk ? mg.accInk : mg.muted, fontFamily: MG_UI, margin: "0 4px 8px", lineHeight: 1.35 }}>
           {statusOk && <CheckMark />}
           <span>{status}</span>
         </div>
       )}
-      {main && (
+      <div className="mgBarRow" style={{ display: "flex", alignItems: "stretch", gap: 8 }}>
         <button
           className="mgPress"
-          data-mg-main="1"
-          onClick={main.disabled ? undefined : main.onClick}
-          disabled={!!main.disabled}
-          aria-disabled={main.blocked ? "true" : undefined}
-          aria-describedby={status ? "mg-status" : undefined}
-          style={{
-            width: "100%",
-            minHeight: 56,
-            border: "none",
-            borderRadius: 20,
-            background: main.disabled || main.blocked ? mg.track : mg.acc,
-            color: main.disabled || main.blocked ? mg.muted : mg.onAcc,
-            fontFamily: MINIGOLF_FONT,
-            fontWeight: 700,
-            fontSize: 19,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: 10,
-            cursor: main.disabled ? "default" : "pointer",
-            boxShadow: main.disabled || main.blocked ? "none" : mg.ctaShadow,
-          }}
+          data-mg-undo="1"
+          onClick={() => lastUndo && upd((s) => mgUndo(s))}
+          disabled={!lastUndo}
+          aria-label={lastUndo ? t("mgUndoAria")(holesTxt(lastUndo.holes)) : t("mgUndo")}
+          title={t("mgUndo")}
+          style={{ ...barBtn, border: `1px solid ${mg.ctrlLine}`, background: mg.surf, color: mg.ink, opacity: lastUndo ? 1 : 0.4, cursor: lastUndo ? "pointer" : "default" }}
         >
-          {main.icon === "trophy" ? (
-            <GameIcon name="trophy" size={20} color="currentColor" />
-          ) : main.icon === "next" ? (
-            <MgSvg size={20}>
-              <path d="M5 12h14M13 6l6 6-6 6" />
-            </MgSvg>
-          ) : (
-            <MgSvg size={20} sw={2}>
-              <path d="M5 4h11l3 3v12a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1z" />
-              <path d="M8 4v5h7V4M8 20v-6h8v6" />
-            </MgSvg>
-          )}
-          <span>{main.label}</span>
+          <MgSvg size={22} sw={2}>
+            <path d="M9 7L5 11l4 4" />
+            <path d="M5 11h9a5 5 0 0 1 0 10h-2" />
+          </MgSvg>
+          <span className="mgSr mg-undo-txt">{t("mgUndo") + (lastUndo ? " " + t("holeLabel")(holesTxt(lastUndo.holes)) : "")}</span>
         </button>
-      )}
-      <button
-        className="mgPress"
-        data-mg-undo="1"
-        onClick={() => lastUndo && upd((s) => mgUndo(s))}
-        disabled={!lastUndo}
-        aria-label={lastUndo ? t("mgUndoAria")(holesTxt(lastUndo.holes)) : t("mgUndo")}
-        style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, margin: "2px auto 0", minHeight: 44, padding: "0 16px", border: "none", background: "transparent", color: mg.muted, fontFamily: MG_UI, fontSize: 14.5, fontWeight: 600, cursor: lastUndo ? "pointer" : "default", opacity: lastUndo ? 1 : 0.45 }}
-      >
-        <MgSvg size={18} sw={2}>
-          <path d="M9 7L5 11l4 4" />
-          <path d="M5 11h9a5 5 0 0 1 0 10h-2" />
-        </MgSvg>
-        <span className="mg-undo-txt">{t("mgUndo") + (lastUndo ? " · " + t("holeLabel")(holesTxt(lastUndo.holes)) : "")}</span>
-      </button>
+        {main && (
+          <button
+            className="mgPress"
+            data-mg-main="1"
+            onClick={main.disabled ? undefined : main.onClick}
+            disabled={!!main.disabled}
+            aria-disabled={main.blocked ? "true" : undefined}
+            aria-describedby={status ? "mg-status" : undefined}
+            style={{
+              flex: "1 1 auto",
+              minWidth: 0,
+              minHeight: 56,
+              border: "none",
+              borderRadius: 18,
+              background: main.disabled || main.blocked ? mg.track : mg.acc,
+              color: main.disabled || main.blocked ? mg.muted : mg.onAcc,
+              fontFamily: MINIGOLF_FONT,
+              fontWeight: 700,
+              fontSize: 18,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 10,
+              cursor: main.disabled ? "default" : "pointer",
+              boxShadow: main.disabled || main.blocked ? "none" : mg.ctaShadow,
+            }}
+          >
+            {main.icon === "trophy" ? (
+              <GameIcon name="trophy" size={20} color="currentColor" />
+            ) : main.icon === "next" ? (
+              <MgSvg size={20}>
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </MgSvg>
+            ) : (
+              <MgSvg size={20} sw={2}>
+                <path d="M5 4h11l3 3v12a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1z" />
+                <path d="M8 4v5h7V4M8 20v-6h8v6" />
+              </MgSvg>
+            )}
+            <span style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", lineHeight: 1.15, minWidth: 0 }}>
+              <span>{main.label}</span>
+              {main.sub && <span style={{ fontFamily: MG_UI, fontSize: 12.5, fontWeight: 600, opacity: 0.85 }}>{main.sub}</span>}
+            </span>
+          </button>
+        )}
+      </div>
     </div>
   );
   const winBanner = winnerIdx !== -1 && (
@@ -820,33 +899,18 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
         <div className={"gtL-split gtL-e-block mg-split mg-tab-" + tab}>
           <div className="gtL-col-main mg-main">
             {winBanner}
-            <MgSegmented tab={tab} onTab={(v) => upd((s) => ({ ...s, tab: v }))} mg={mg} t={t} />
+            <MgSegmented tab={tab} onTab={(v) => upd((s) => ({ ...s, tab: v }))} mg={mg} t={t} segOn={segOn} segInk={segInk} />
             <div id="mg-panel" className="mg-panel" role="tabpanel" aria-labelledby={"mg-tab-" + tab}>
               {tab === "hole" ? (
                 <React.Fragment>
-                  <MgHoleCard ui={ui} hole={hole} onGo={(h) => upd((s) => mgGoto(s, h))} mg={mg} t={t} />
-                  <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                  <MgBoard hole={hole} done={doneHoles} st={st} onGo={(h) => upd((s) => mgGoto(s, h))} b={bt} t={t} />
+                  <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                     {players.map((p) => {
                       const r = st.rows.find((x) => x.id === p.id);
-                      return (
-                        <MgPlayerCard
-                          key={p.id}
-                          p={p}
-                          val={mgEff(ui, p.id, hole)}
-                          isDraft={mgHasDraft(ui.drafts, hole, p.id)}
-                          missing={info.isNew && info.dirty && mgEff(ui, p.id, hole) === null}
-                          sofar={r ? r.total : 0}
-                          countNote={r && !st.uniform ? t("mgHolesN")(r.count) : ""}
-                          leads={lead.has(p.id)}
-                          onStep={(dir) => upd((s) => mgStep(s, p.id, hole, dir))}
-                          onPick={() => setEditing({ playerId: p.id, holeIdx: hole })}
-                          mg={mg}
-                          t={t}
-                        />
-                      );
+                      const v = mgEff(ui, p.id, hole);
+                      return <MgPlayerCard key={p.id} p={p} val={v} missing={nudge && v === null} sofar={r ? r.total : 0} onKey={(n) => upd((s) => mgSetDraft(s, p.id, hole, n))} mg={mg} c={ct} t={t} />;
                     })}
                   </div>
-                  <MgStandingsBox className="mgPhoneOnly" st={st} finished={finished} onOpen={() => upd((s) => ({ ...s, tab: "table" }))} mg={mg} t={t} />
                 </React.Fragment>
               ) : (
                 <MgTable ui={ui} hole={hole} onCell={(pid, h) => setEditing({ playerId: pid, holeIdx: h })} mg={mg} t={t} />
@@ -856,7 +920,7 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
           </div>
           <div className="gtL-col-side mg-side">
             <div className="gtL-e-only">
-              <MgStandingsBox st={st} finished={finished} onOpen={() => upd((s) => ({ ...s, tab: "table" }))} mg={mg} t={t} />
+              <MgRankBoard st={st} onOpen={() => upd((s) => ({ ...s, tab: "table" }))} b={bt} t={t} />
             </div>
             <div style={{ marginTop: 12 }} className="gtL-e-only">
               <GtRoundChart

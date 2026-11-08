@@ -586,23 +586,22 @@ def t_wizard(pg, env):
 def t_minigolf(pg, env):
     open_game(pg, "Schreibunterlagen", "Minigolf"); press_start(pg)
     holes = 3 if env.quick else 18
-    plus = pg.locator("[data-mg-plus]")
+    keys2 = pg.locator("[data-mg-key$='-2']")
     main = pg.locator("[data-mg-main]")
 
     def total_of(card_idx):
-        # Zwischensumme der Spielerkarte ("bisher"), als Zahlenzeilen gelesen
-        txt = pg.locator("[data-mg-card]").nth(card_idx).inner_text()
-        return [int(x) for x in re.findall(r"(?<!\d)\d+(?!\d)", txt)]
+        # Zwischensumme der Spielerkarte ("Total"), per data-mg-total gelesen
+        txt = pg.locator("[data-mg-total]").nth(card_idx).inner_text()
+        return [int(x) for x in re.findall(r"\d+", txt)]
 
-    check(plus.count() >= 2, "Minigolf: Plus-Knoepfe pro Spieler fehlen")
-    n_players = plus.count()
+    check(keys2.count() >= 2, "Minigolf: Schlagtasten pro Spieler fehlen")
+    n_players = keys2.count()
     for h in range(holes):
         check(main.count() == 1, f"Minigolf: Hauptaktion fehlt (Bahn {h + 1})")
         # Hauptaktion bleibt gesperrt, solange nicht alle Spieler einen Wert haben
         for i in range(n_players):
             check(main.is_disabled(), f"Minigolf: 'Bahn speichern' schon aktiv vor Eingabe aller (Bahn {h + 1})")
-            for _ in range(2):  # Plus: leer -> 1 -> 2
-                click(pg, plus.nth(i), FAST)
+            click(pg, keys2.nth(i), FAST)  # Taste 2 setzt die Schlaege
         check(main.is_enabled(), f"Minigolf: 'Bahn speichern' bleibt gesperrt (Bahn {h + 1})")
         if h == 0:
             # Doppelklick darf die Bahn nicht doppelt zaehlen (Summe 2, nicht 4)

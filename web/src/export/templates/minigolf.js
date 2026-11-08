@@ -99,7 +99,7 @@ function page1(d, k, extras, rowsList, pageNo, pageCount) {
   const gt = 1010;
   if (strokes && strokes.length === holes && !compact) {
     const lab = d.up(d.tr("tplMgPer", (nm) => nm)(w0.name));
-    const lf = k.fit(c, lab, { w: 600, fam: MONO, max: 22, min: 14, maxW: 500, lines: 1, ls: 0.14 });
+    const lf = k.fit(c, lab, { w: 600, fam: MONO, max: 22, min: 14, maxW: 440, lines: 1, ls: 0.14 });
     k.setFont(c, 500, lf.size, MONO); c.fillStyle = SOFT; k.spaced(c, lf.lines[0], 100, gt - 12 - 6, lf.size * 0.14, "left");
     const cols = 9, gw = (880 - 8 * (cols - 1)) / cols, ch = 76, rowsN = Math.ceil(holes / cols);
     strokes.forEach((v, i) => {
@@ -116,15 +116,16 @@ function page1(d, k, extras, rowsList, pageNo, pageCount) {
   if (aces.length && pageNo === 1) {
     const a0 = aces[0];
     const l2 = a0.name + ", " + d.tr("tplMgHole", (l) => l)(a0.holes.join(", ")) + (aces.length > 1 ? " +" + (aces.length - 1) : "");
-    if (endY > 872 || compact) {
+    // Stempel nur, wenn er samt Drehung ueber der Beschriftung "Schlaege pro Bahn" Platz hat (Hoehe ca. 100), sonst kleine Marke rechts auf der Beschriftungszeile
+    if (endY + 22 + 100 + 24 > gt - 50 || compact) {
       // viele Spieler: kleine Marke neben der Beschriftung statt gedrehtem Stempel
       const txt = d.up(d.tr("tplMgAce", "Hole in one")) + ": " + l2;
-      const bf = k.fit(c, txt, { w: 400, fam: k.F_ANTON, max: 24, min: 14, maxW: 480, lines: 1 });
+      const bf = k.fit(c, txt, { w: 400, fam: k.F_ANTON, max: 24, min: 14, maxW: 340, lines: 1 });
       const ay = compact ? 1155 : gt - 52;
       k.setFont(c, 400, bf.size, k.F_ANTON); const bw = c.measureText(bf.lines[0]).width + 28;
       c.strokeStyle = GOLD; c.lineWidth = 3; k.rrect(c, 980 - bw, ay, bw, 38, 10); c.stroke();
       c.fillStyle = GOLD; c.textAlign = "center"; c.fillText(bf.lines[0], 980 - bw / 2, ay + 19 + k.capH(c) / 2); c.textAlign = "left";
-    } else stamp(c, k, [d.up(d.tr("tplMgAce", "Hole in one")), l2], 810, Math.min(Math.max(endY + 22, 870), 985 - 100));
+    } else stamp(c, k, [d.up(d.tr("tplMgAce", "Hole in one")), l2], 810, endY + 22);
   }
   // Fusszeile
   const win = d.winners, val = win.length ? d.num(win[0].score) : "";

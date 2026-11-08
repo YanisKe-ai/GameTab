@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.09-3 (09.11.2026 00:23)
+- Yatzy-Bonus: Würfel zeigen BONUS. Darts: Bull-Effekt bei jedem Treffer auf Bull
+
 ## 2026.11.09-2 (09.11.2026 00:16)
 - Tutto: ab 1000 Punkten in einem Wurf prallt die Punktzahl auf den Würfel
 

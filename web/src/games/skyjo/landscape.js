@@ -82,6 +82,27 @@ const SKL_CSS = `
 [data-phone-landscape] .sk-key { height: 38px; }
 [data-phone-landscape] .sk-save, [data-phone-landscape] .sk-ghost { min-height: 46px; }
 [data-phone-landscape] .sk-split > .gtL-col-main > .sk-tbl { flex: 1 1 0; min-height: 0; overflow: auto; }
+[data-phone-landscape] .sk-flow{display:grid;gap:8px 12px;flex:1 1 0;min-height:0;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+[data-phone-landscape] .sk-flow .sk-hero{display:none}
+[data-phone-landscape] .sk-s1{grid-template-areas:"card tiles" "none tiles" "foot foot";grid-template-rows:auto minmax(0,1fr) auto}
+[data-phone-landscape] .sk-s1 .sk-tiles{grid-template-rows:repeat(var(--rows,2),minmax(44px,64px));align-content:start}
+[data-phone-landscape] .sk-s1 .sk-card{padding:8px 12px}
+[data-phone-landscape] .sk-s1 .sk-q{font-size:18px;margin:3px 0 4px}
+[data-phone-landscape] .sk-s1 .sk-qh{font-size:12px;line-height:1.3}
+[data-phone-landscape] .sk-s1 .sk-none{align-self:start}
+[data-phone-landscape] .sk-s2{grid-template-areas:"strip strip" "who pad" "disp pad" "gbtn pad" "foot foot";grid-template-rows:auto auto auto minmax(0,1fr) auto;grid-template-columns:minmax(0,1fr) minmax(0,0.9fr)}
+[data-phone-landscape] .sk-s2 .sk-chip{height:44px}
+[data-phone-landscape] .sk-s2 .sk-wl{display:block;font-size:11.5px}
+[data-phone-landscape] .sk-s2 .sk-wn{font-size:20px}
+[data-phone-landscape] .sk-s2 .sk-dv{font-size:40px}
+[data-phone-landscape] .sk-s2 .sk-disp{padding:4px 10px 5px}
+[data-phone-landscape] .sk-s2 .sk-gbtn{align-self:start;min-height:44px}
+[data-phone-landscape] .sk-s2 .sk-pad3{grid-template-rows:repeat(4,minmax(38px,1fr));gap:5px;align-self:stretch;min-height:0}
+[data-phone-landscape] .sk-s2 .sk-pad3 .sk-key{height:auto;min-height:0}
+[data-phone-landscape] .sk-flow .sk-foot{margin-top:0}
+[data-phone-landscape] .sk-flow .sk-save,[data-phone-landscape] .sk-flow .sk-ghost{min-height:44px}
+[data-phone-landscape] .sk-tview{flex:1 1 0;min-height:0}
+[data-phone-landscape] .sk-tview .sk-tbl{flex:1 1 0;min-height:0;overflow:auto}
 [data-phone-landscape] .sk-sheet { max-width: min(560px, 100%); }
 [data-phone-landscape] .sk-slot, [data-phone-landscape] .sk-pick { height: 40px; }
 `;

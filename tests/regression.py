@@ -199,6 +199,27 @@ def numpad(pg, row_name, value):
         click(pg, btn(pg, "Bestätigen"), 500)
 
 
+def skyjo_pick_ender(pg, ender=None):
+    """Skyjo Schritt 1: Beender waehlen (Name) oder 'Weiss nicht mehr' (None), dann 'Weiter: Punkte eintragen'."""
+    if ender is None:
+        click(pg, btn(pg, "Weiss nicht mehr"), 300)
+    else:
+        click(pg, btn_re(pg, r"^" + re.escape(ender) + r", Total"), 300)
+    click(pg, btn(pg, "Weiter: Punkte eintragen"), 500)
+
+
+def skyjo_round(pg, names, vals, ender=None):
+    """Skyjo (Schritt fuer Schritt): Beender waehlen, pro Person Punkte tippen, 'Weiter zu ...', am Ende 'Runde N speichern'."""
+    skyjo_pick_ender(pg, ender)
+    for i, v in enumerate(vals):
+        for ch in str(v):
+            click(pg, btn(pg, "Vorzeichen wechseln" if ch == "-" else ch), 120)
+        if i < len(vals) - 1:
+            click(pg, btn_re(pg, r"^Weiter zu "), 350)
+        else:
+            click(pg, btn_re(pg, r"^Runde \d+ speichern$"), 900)
+
+
 def podium_ranks(pg):
     """Raenge auf dem Podest als sortierte Liste, z.B. ['1','2','2'].
     Liest den Rang aus dem Screenreader-Text jeder Beschriftung."""
@@ -294,9 +315,7 @@ FAST = 130  # Wartezeit in Eintrags-Schleifen
 @test("Skyjo")
 def t_skyjo(pg, env):
     open_game(pg, "Schreibunterlagen", "Skyjo"); press_start(pg)
-    numpad(pg, "Spieler 1", 5); numpad(pg, "Spieler 2", 120)
-    click(pg, btn_re(pg, r"^Spieler 1 hat beendet$"), 500)
-    click(pg, btn_re(pg, r"^Runde 1 speichern$"), 900)
+    skyjo_round(pg, ["Spieler 1", "Spieler 2"], [5, 120], ender="Spieler 1")
     expect_text(pg, r"Spieler 1 gewinnt", "Skyjo: Sieger nicht angezeigt")
     check(podium_ranks(pg) == ["1", "2"], f"Skyjo: Podest {podium_ranks(pg)}")
     finish(pg, "Skyjo", env, True)
@@ -305,8 +324,7 @@ def t_skyjo(pg, env):
 @test("Erfolge: Hinweis nach Spielende und Abschnitt in der Statistik")
 def t_erfolge(pg, env):
     open_game(pg, "Schreibunterlagen", "Skyjo"); press_start(pg)
-    numpad(pg, "Spieler 1", 5); numpad(pg, "Spieler 2", 120)
-    click(pg, btn_re(pg, r"^Spieler 1 hat beendet$"), 500); click(pg, btn_re(pg, r"^Runde 1 speichern$"), 900)
+    skyjo_round(pg, ["Spieler 1", "Spieler 2"], [5, 120], ender="Spieler 1")
     expect_text(pg, r"Neuer Erfolg: Erste Partie", "Erfolge: Hinweis auf dem Podest fehlt", timeout=9000)
     pg.goto(URL); wait(pg, 700)
     if pg.viewport_size["width"] < 768:

@@ -551,32 +551,34 @@ for _v in DARTS_VARIANTS:
     _mk(_v)
 
 
-def wizard_cell(pg, r, ansage, stiche):
-    """Zelle oeffnen und Ansage/Stiche waehlen. Das Blatt hat je 0..r Knoepfe (Ansage, Stiche) und am Ende 'Speichern'."""
-    click(pg, btn(pg, "·").first, 400)
-    ins = pg.locator("input:visible")
-    if ins.count() >= 2:  # ab Runde 11 gibt es Eingabefelder statt Knoepfe
-        ins.nth(-2).fill(str(ansage)); ins.nth(-1).fill(str(stiche)); wait(pg, 200)
-    else:
-        c = pg.get_by_role("button").count()
-        click(pg, pg.get_by_role("button").nth(c - 3 - 2 * r + ansage), FAST)
-        click(pg, pg.get_by_role("button").nth(c - 2 - r + stiche), FAST)
-    click(pg, btn(pg, "Speichern"), 400)
+def wizard_pick(pg, v):
+    """Zahlenknopf (rund, 0..Kartenzahl) der Eingabe unten antippen."""
+    click(pg, pg.locator(".wz-n").nth(v), FAST)
+
+
+def wizard_round(pg, n, r):
+    """Eine Runde reihum: alle sagen 0 an, die letzte Person macht alle Stiche (Summe = Kartenzahl)."""
+    for _ in range(n):
+        wizard_pick(pg, 0)
+    for _ in range(n - 1):
+        wizard_pick(pg, 0)
+    wizard_pick(pg, r)  # letzter Eintrag: nur der passende Wert ist erlaubt
 
 
 @test("Wizard")
 def t_wizard(pg, env):
-    open_game(pg, "Schreibunterlagen", "Wizard"); press_start(pg)
-    rounds = 2 if env.quick else 30
+    open_game(pg, "Schreibunterlagen", "Wizard"); press_start(pg)  # Standard: 3 Spielende, 20 Runden
+    rounds = 2 if env.quick else 20
     for r in range(1, rounds + 1):
-        wizard_cell(pg, r, 0, r)  # Spieler 1 macht alle Stiche, Spieler 2 keinen (Summe = Rundenzahl)
-        wizard_cell(pg, r, 0, 0)
+        wizard_round(pg, 3, r)
     wait(pg, 1000)
     if env.quick:
-        check(has_text(pg, r"GESAMTRESULTAT"), "Wizard: Gesamtresultat fehlt")
+        check(has_text(pg, r"Runde 2: 2 von 3 Ansagen"), "Wizard: Erfolgszeile fehlt")
+        click(pg, btn(pg, "Rückgängig"), 300)  # echtes Rückgängig nimmt den letzten Stich zurück
+        check(has_text(pg, r"Stiche von"), "Wizard: Rückgängig ohne Wirkung")
         finish(pg, "Wizard", env)
     else:
-        expect_text(pg, r"gewinnt", "Wizard: Sieger nicht angezeigt")
+        expect_text(pg, r"gewinn", "Wizard: Sieger nicht angezeigt")
         finish(pg, "Wizard", env, True)
 
 

@@ -3,13 +3,13 @@
 // "Prophezeiung erfuellt" nur, wenn alle Sieger jede Ansage getroffen haben; sonst der Gleichstand-Hinweis. Die getroffenen Ansagen stehen in der Rangliste, darum kein Untertitel.
 import { pickRows, star, setI } from "./util.js";
 
-const GOLD = "#E0BA72", HERO = "#FFE3A0", DARK = "#1C0410";
+const GOLD = "#E0BA72", HERO = "#F3DFA9", DARK = "#070818";
 const F_FRAU = '"Fraunces","Inter","GT Clean","GT CJK",serif';
 const STARS = [[100, 360, 60, 1], [983, 443, 46, 1], [130, 760, 40, 1], [971, 811, 62, 1], [918, 268, 36, 0.7], [57, 617, 34, 0.6], [1025, 665, 30, 0.6]];
 
 function bg(c, k) {
-  c.fillStyle = "#33081B"; c.fillRect(0, 0, k.TPL_W, k.TPL_H);
-  k.cssEllipse(c, 0, 0, k.TPL_W, k.TPL_H, 540, 513, [[0, "#5A1230"], [0.55, "#33081B"], [1, "#1C0410"]]);
+  c.fillStyle = "#0E1030"; c.fillRect(0, 0, k.TPL_W, k.TPL_H);
+  k.cssEllipse(c, 0, 0, k.TPL_W, k.TPL_H, 540, 513, [[0, "#1B1E52"], [0.55, "#0E1030"], [1, "#070818"]]);
 }
 /* Zauberkarte 400 x 540 (Entwurf), um die Mitte (cx, cy) gedreht und skaliert */
 function wizCard(c, k, cx, cy, s, rot, letter, word) {
@@ -20,7 +20,7 @@ function wizCard(c, k, cx, cy, s, rot, letter, word) {
   // Innenflaeche: inset 14, Rand 5 px
   c.fillStyle = DARK; k.rrect(c, 14, 14, 372, 512, 20); c.fill();
   c.save(); k.rrect(c, 19, 19, 362, 502, 15); c.clip();
-  k.cssEllipse(c, 19, 19, 362, 502, 200, 230, [[0, "#4A1A5E"], [0.8, "#2A0F3E"], [1, "#2A0F3E"]]);
+  k.cssEllipse(c, 19, 19, 362, 502, 200, 230, [[0, "#2A2E78"], [0.8, "#171A45"], [1, "#171A45"]]);
   const ox = 14, oy = 14;
   [[40, 60, 40, 1], [350, 80, 30, 1], [70, 500, 28, 1], [340, 460, 44, 1], [190, 70, 22, 0.7]].forEach(([x, y, z, a]) => star(c, ox + x + z / 2, oy + y + z / 2, z, GOLD, a));
   // grosser Buchstabe
@@ -98,7 +98,7 @@ function page1(d, k, N, rowsData) {
   let y = rowsTop;
   L.forEach((l, i) => {
     const r = l.r;
-    c.fillStyle = "rgba(224,186,114,0.53)"; c.fillRect(60, y, 960, 3);
+    c.fillStyle = "rgba(224,186,114,0.45)"; c.fillRect(60, y, 960, 3);
     const lastBase = y + l.h - 10 - (l.f.lines.length - 1) * 0; // Grundlinie der letzten Zeile
     const bl = y + 3 + 6 + (l.h - 9 - 6) / 2 + l.f.size * 0.34 + (l.f.lines.length - 1) * l.f.size * 0.55;
     setI(c, 500, 40, F_FRAU); c.fillStyle = GOLD; c.fillText(String(r.rank), 60, bl);

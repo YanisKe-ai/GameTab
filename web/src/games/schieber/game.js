@@ -117,7 +117,7 @@ import { GT_UG_CSS } from "../../shared/unit-games.js";
 .gtL-content .gt-wk-ic,[data-phone-landscape] .gt-wk-ic{display:inline-flex}
 html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *){min-height:100dvh;box-sizing:border-box}
 html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *)>.gt-sch-sheet{flex:1 1 auto;display:flex;flex-direction:column}
-html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *) .gt-sch-split{display:flex;flex-direction:column;justify-content:center;flex:1 1 auto}
+html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *) .gt-sch-split{display:flex;flex-direction:column;justify-content:flex-start;flex:1 1 auto}
 html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *) .gt-weis-topw{margin:0 0 10px}
 html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *) .gt-weis-btns+*{margin-top:0}
 html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *) .gt-sch-weisbar{margin-top:10px!important}

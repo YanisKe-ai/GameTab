@@ -66692,7 +66692,100 @@ function dartsFinishRoute(rem, k, mode) {
 	}
 	return null;
 }
-function DartboardSVG({ onHit, numColor }) {
+var DT_DART_CSS = "@keyframes dtIn{0%{opacity:0;transform:translate(var(--x),var(--y)) translate(46px,70px) scale(2.4)}55%{opacity:1;transform:translate(var(--x),var(--y)) scale(1)}70%{transform:translate(var(--x),var(--y)) rotate(-5deg)}85%{transform:translate(var(--x),var(--y)) rotate(2.5deg)}100%{transform:translate(var(--x),var(--y))}}@keyframes dtPulse{0%,40%{opacity:0;transform:scale(.4)}48%{opacity:1}100%{opacity:0;transform:scale(4.2)}}.dt-pulse{transform-box:fill-box;transform-origin:center;animation:dtPulse .9s ease-out both;pointer-events:none}.dt-pulse2{animation-delay:.12s}.dt-dart{transform:translate(var(--x),var(--y));transform-origin:0 0;animation:dtIn .36s cubic-bezier(.2,.8,.2,1) both;pointer-events:none}@media (prefers-reduced-motion: reduce){.dt-dart{animation:none}.dt-pulse{display:none}}";
+function DtDart({ x, y }) {
+	return /* @__PURE__ */ import_react.default.createElement("g", {
+		className: "dt-dart",
+		style: {
+			"--x": x + "px",
+			"--y": y + "px"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("g", { transform: "rotate(-38) scale(.78)" }, /* @__PURE__ */ import_react.default.createElement("line", {
+		x1: "2",
+		y1: "3",
+		x2: "58",
+		y2: "3",
+		stroke: "#000",
+		strokeOpacity: ".35",
+		strokeWidth: "5",
+		strokeLinecap: "round"
+	}), /* @__PURE__ */ import_react.default.createElement("line", {
+		x1: "0",
+		y1: "0",
+		x2: "18",
+		y2: "0",
+		stroke: "#C9CCD6",
+		strokeWidth: "2.6",
+		strokeLinecap: "round"
+	}), /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "14",
+		y: "-4.5",
+		width: "24",
+		height: "9",
+		rx: "4",
+		fill: "#2a2d3a"
+	}), /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "18",
+		y: "-4.5",
+		width: "8",
+		height: "9",
+		rx: "3",
+		fill: "#C8121E"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M36 0 L54 -11 L62 -11 L56 0 L62 11 L54 11Z",
+		fill: "#C8121E",
+		stroke: "#14141A",
+		strokeWidth: "1"
+	}), /* @__PURE__ */ import_react.default.createElement("line", {
+		x1: "38",
+		y1: "0",
+		x2: "56",
+		y2: "0",
+		stroke: "#2a2d3a",
+		strokeWidth: "2",
+		strokeLinecap: "round"
+	})));
+}
+function dtPt(e) {
+	try {
+		const m = e.currentTarget.ownerSVGElement.getScreenCTM();
+		if (!m || e.clientX == null) return null;
+		const q = new DOMPoint(e.clientX, e.clientY).matrixTransform(m.inverse());
+		return {
+			px: Math.round(q.x * 10) / 10,
+			py: Math.round(q.y * 10) / 10
+		};
+	} catch (err) {
+		return null;
+	}
+}
+function DartboardSVG({ onHit, numColor, darts }) {
+	const hit = (e, d) => {
+		const q = dtPt(e);
+		if (d.l === "Bull") try {
+			const sv = e.currentTarget.ownerSVGElement;
+			if (sv && sv.animate && !(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) sv.animate([
+				{ transform: "scale(1)" },
+				{
+					transform: "scale(.95)",
+					offset: .25
+				},
+				{
+					transform: "scale(1.035)",
+					offset: .6
+				},
+				{ transform: "scale(1)" }
+			], {
+				duration: 460,
+				delay: 200,
+				easing: "ease-out"
+			});
+		} catch (err) {}
+		onHit(q && e.detail !== 0 ? {
+			...d,
+			...q
+		} : d);
+	};
 	const ORDER = [
 		20,
 		1,
@@ -66737,7 +66830,7 @@ function DartboardSVG({ onHit, numColor }) {
 			stroke: "#3A3A44",
 			strokeWidth: .8,
 			style: { cursor: "pointer" },
-			onClick: () => onHit(d)
+			onClick: (e) => hit(e, d)
 		}));
 		seg(20, 62, bed, {
 			l: String(num),
@@ -66803,7 +66896,7 @@ function DartboardSVG({ onHit, numColor }) {
 		stroke: "#3A3A44",
 		strokeWidth: .8,
 		style: { cursor: "pointer" },
-		onClick: () => onHit({
+		onClick: (e) => hit(e, {
 			l: "25",
 			v: 25,
 			dbl: false
@@ -66816,12 +66909,32 @@ function DartboardSVG({ onHit, numColor }) {
 		stroke: "#3A3A44",
 		strokeWidth: .8,
 		style: { cursor: "pointer" },
-		onClick: () => onHit({
+		onClick: (e) => hit(e, {
 			l: "Bull",
 			v: 50,
 			dbl: true
 		})
-	}));
+	}), /* @__PURE__ */ import_react.default.createElement("style", null, DT_DART_CSS), (darts || []).map((d, i) => d && d.l === "Bull" ? /* @__PURE__ */ import_react.default.createElement("g", { key: "p" + i }, /* @__PURE__ */ import_react.default.createElement("circle", {
+		className: "dt-pulse",
+		cx: C,
+		cy: C,
+		r: 16,
+		fill: "none",
+		stroke: "#fff",
+		strokeWidth: 3
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		className: "dt-pulse dt-pulse2",
+		cx: C,
+		cy: C,
+		r: 16,
+		fill: "none",
+		stroke: "#C8102E",
+		strokeWidth: 2
+	})) : null), (darts || []).map((d, i) => d && d.px != null ? /* @__PURE__ */ import_react.default.createElement(DtDart, {
+		key: i,
+		x: d.px,
+		y: d.py
+	}) : null));
 }
 function legPips(won, target, activeColor, mutedColor) {
 	return /* @__PURE__ */ import_react.default.createElement("span", { style: {
@@ -67021,7 +67134,6 @@ function DartsPlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewGam
 	};
 	const addDart = (d) => {
 		if (turn.length >= 3) return;
-		if (d && (d.l === "Bull" || d.v === 50 || d.v === 25)) fireBigThrow();
 		setTurn((ts) => [...ts, d]);
 	};
 	const lastE = state.history[state.history.length - 1];
@@ -67126,7 +67238,8 @@ function DartsPlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewGam
 		}
 	}, /* @__PURE__ */ import_react.default.createElement(DartboardSVG, {
 		onHit: addDart,
-		numColor: tk.muted
+		numColor: tk.muted,
+		darts: turn
 	})), /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		gap: 8,
@@ -67201,7 +67314,6 @@ function DartsPlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewGam
 			if (turn.length === 3 && turn.reduce((a, d) => a + d.v, 0) === 180) {
 				playWinSound();
 				hapticWin();
-				fireBigThrow();
 			}
 			onConfirmTurn(turn);
 		},
@@ -68026,7 +68138,8 @@ function CricketPlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewG
 		}
 	}, /* @__PURE__ */ import_react.default.createElement(DartboardSVG, {
 		onHit: addDart,
-		numColor: tk.muted
+		numColor: tk.muted,
+		darts: turn
 	})), /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		gap: 8,
@@ -68696,7 +68809,8 @@ function HiScorePlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewG
 		}
 	}, /* @__PURE__ */ import_react.default.createElement(DartboardSVG, {
 		onHit: addDart,
-		numColor: tk.muted
+		numColor: tk.muted,
+		darts: turn
 	})), /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		gap: 8,
@@ -69453,7 +69567,8 @@ function SplitScorePlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onN
 		}
 	}, /* @__PURE__ */ import_react.default.createElement(DartboardSVG, {
 		onHit: addDart,
-		numColor: tk.muted
+		numColor: tk.muted,
+		darts: turn
 	})), /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		gap: 8,
@@ -70012,7 +70127,8 @@ function ShanghaiPlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNew
 		}
 	}, /* @__PURE__ */ import_react.default.createElement(DartboardSVG, {
 		onHit: addDart,
-		numColor: tk.muted
+		numColor: tk.muted,
+		darts: turn
 	})), /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		gap: 8,
@@ -70990,7 +71106,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.09-3";
+var APP_BUILD = "2026.11.09-4";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -72271,7 +72387,7 @@ function standalone() {
 		return false;
 	}
 }
-function isIOS() {
+function isIOS$1() {
 	try {
 		const ua = navigator.userAgent || "";
 		return /iPhone|iPad|iPod/.test(ua) || navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1;
@@ -72280,7 +72396,7 @@ function isIOS() {
 	}
 }
 function gestureEnabled() {
-	return !(isIOS() && !standalone());
+	return !(isIOS$1() && !standalone());
 }
 function isLaptop() {
 	return !!document.querySelector(".gtL-sidebar");
@@ -72909,6 +73025,68 @@ function usePageSwipe(view, loaded) {
 			off();
 			finishRunning();
 		};
+	}, [loaded]);
+}
+// web/src/shared/hw-back.js
+function isIOS() {
+	try {
+		const ua = navigator.userAgent || "";
+		return /iPhone|iPad|iPod/.test(ua) || /Macintosh/.test(ua) && navigator.maxTouchPoints > 1;
+	} catch (e) {
+		return false;
+	}
+}
+function shown(el) {
+	const r = el.getBoundingClientRect();
+	return r.width > 0 && r.height > 0 && r.bottom > 0 && r.top < window.innerHeight;
+}
+function findBackBtn() {
+	const list = document.querySelectorAll(".gt-gamehead .gt-hb,[data-gt-back]");
+	for (const b of list) if (shown(b) && !b.disabled && !b.closest("[inert],[aria-hidden='true']")) return b;
+	return null;
+}
+function openDialog() {
+	return document.querySelector("[aria-modal=\"true\"],[role=\"dialog\"],[role=\"alertdialog\"]");
+}
+function useHardwareBack(loaded) {
+	useEffect$14(() => {
+		if (!loaded || isIOS() || !window.history || !history.pushState) return void 0;
+		let leaving = false;
+		try {
+			if (!(history.state && history.state.gtTrap)) history.pushState({ gtTrap: 1 }, "");
+		} catch (e) {
+			return;
+		}
+		const rearm = () => {
+			try {
+				history.pushState({ gtTrap: 1 }, "");
+			} catch (e) {}
+		};
+		const onPop = () => {
+			if (leaving) return;
+			if (openDialog()) {
+				const ev = new KeyboardEvent("keydown", {
+					key: "Escape",
+					bubbles: true,
+					cancelable: true
+				});
+				(document.activeElement || document.body).dispatchEvent(ev);
+				rearm();
+				return;
+			}
+			const btn = findBackBtn();
+			if (btn) {
+				btn.click();
+				rearm();
+				return;
+			}
+			leaving = true;
+			try {
+				history.back();
+			} catch (e) {}
+		};
+		window.addEventListener("popstate", onPop);
+		return () => window.removeEventListener("popstate", onPop);
 	}, [loaded]);
 }
 // web/src/games/freeplay/game.js
@@ -111604,6 +111782,7 @@ function App() {
 	}, [view]);
 	useGtWakeLock(view);
 	usePageSwipe(view, loaded);
+	useHardwareBack(loaded);
 	const setView = (v) => {
 		const _go = () => {
 			try {
@@ -114431,7 +114610,7 @@ function YatzyPlay({ onRematch, players, scores, setScores, onResetSheet, onEdit
 			playWinSound();
 			hapticWin();
 		}
-		if (catId === "yatzy" && val > 0) fireMilestone("ring");
+		if (catId === "yatzy" && val > 0) fireMilestone("ring", (players.find((p) => p.id === playerId) || {}).name);
 		setScores((prev) => {
 			const prevCard = prev[playerId];
 			const nextCard = {
@@ -115056,7 +115235,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.09-3");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.09-4");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -115438,7 +115617,7 @@ var GT_FX = {
 		"vb": "73 75 280 280",
 		"w": 280,
 		"h": 280,
-		"anchor": "yz-yatzy"
+		"label": true
 	},
 	"bull": {
 		"svg": "<circle cx=\"213\" cy=\"225\" r=\"112\" fill=\"#15161c\" /><g transform=\"rotate(-99 213 225)\"><circle cx=\"213\" cy=\"225\" r=\"105.3\" fill=\"none\" stroke=\"#C8121E\" stroke-width=\"13.4\" stroke-dasharray=\"33.1 33.1\"/><circle cx=\"213\" cy=\"225\" r=\"105.3\" fill=\"none\" stroke=\"#1B7A3E\" stroke-width=\"13.4\" stroke-dasharray=\"33.1 33.1\" stroke-dashoffset=\"33.1\"/></g><g transform=\"rotate(-99 213 225)\"><circle cx=\"213\" cy=\"225\" r=\"85.7\" fill=\"none\" stroke=\"#EFE3C2\" stroke-width=\"25.8\" stroke-dasharray=\"26.9 26.9\"/><circle cx=\"213\" cy=\"225\" r=\"85.7\" fill=\"none\" stroke=\"#1c1c22\" stroke-width=\"25.8\" stroke-dasharray=\"26.9 26.9\" stroke-dashoffset=\"26.9\"/></g><g transform=\"rotate(-99 213 225)\"><circle cx=\"213\" cy=\"225\" r=\"67.2\" fill=\"none\" stroke=\"#C8121E\" stroke-width=\"11.2\" stroke-dasharray=\"21.1 21.1\"/><circle cx=\"213\" cy=\"225\" r=\"67.2\" fill=\"none\" stroke=\"#1B7A3E\" stroke-width=\"11.2\" stroke-dasharray=\"21.1 21.1\" stroke-dashoffset=\"21.1\"/></g><g transform=\"rotate(-99 213 225)\"><circle cx=\"213\" cy=\"225\" r=\"42\" fill=\"none\" stroke=\"#EFE3C2\" stroke-width=\"39.2\" stroke-dasharray=\"13.2 13.2\"/><circle cx=\"213\" cy=\"225\" r=\"42\" fill=\"none\" stroke=\"#1c1c22\" stroke-width=\"39.2\" stroke-dasharray=\"13.2 13.2\" stroke-dashoffset=\"13.2\"/></g><circle cx=\"213\" cy=\"225\" r=\"22.4\" fill=\"#1B7A3E\" /><circle cx=\"213\" cy=\"225\" r=\"9.5\" fill=\"#C8121E\" /><g class=\"d1_1 tr\"><circle cx=\"213\" cy=\"225\" r=\"16\" fill=\"none\" stroke=\"#fff\" stroke-width=\"3\" /></g><g class=\"d1_2\"><g transform=\"translate(213 225) rotate(0) scale(1)\"><line x1=\"0\" y1=\"0\" x2=\"18\" y2=\"0\" stroke=\"#C9CCD6\" stroke-width=\"2.6\" stroke-linecap=\"round\" /><rect x=\"14\" y=\"-4.5\" width=\"24\" height=\"9\" rx=\"4\" fill=\"#2a2d3a\" /><rect x=\"18\" y=\"-4.5\" width=\"8\" height=\"9\" rx=\"3\" fill=\"#C8121E\" /><path d=\"M36 0 L54 -11 L62 -11 L56 0 L62 11 L54 11Z\" fill=\"#C8121E\" /><line x1=\"38\" y1=\"0\" x2=\"56\" y2=\"0\" stroke=\"#2a2d3a\" stroke-width=\"2\" stroke-linecap=\"round\" /></g></g>",
@@ -115469,7 +115648,15 @@ function gtFxReduced() {
 		return false;
 	}
 }
-function GameFx({ name, theme, mode }) {
+function gtFxEsc(s) {
+	return String(s).replace(/[&<>"]/g, (c) => ({
+		"&": "&amp;",
+		"<": "&lt;",
+		">": "&gt;",
+		"\"": "&quot;"
+	})[c]);
+}
+function GameFx({ name, theme, mode, label }) {
 	const d = GT_FX[name];
 	const [pos, setPos] = useState$11(null);
 	import_react.default.useLayoutEffect(() => {
@@ -115545,7 +115732,7 @@ function GameFx({ name, theme, mode }) {
 			display: "block",
 			overflow: "visible"
 		},
-		dangerouslySetInnerHTML: { __html: d.svg }
+		dangerouslySetInnerHTML: { __html: d.svg + (d.label && label ? "<text x=\"213\" y=\"258\" font-family=\"Inter,sans-serif\" font-size=\"" + Math.min(20, Math.round(300 / Math.max(1, label.length))) + "\" font-weight=\"800\" fill=\"#fff\" stroke=\"#5B63E8\" stroke-width=\"5\" stroke-linejoin=\"round\" paint-order=\"stroke\" text-anchor=\"middle\">" + gtFxEsc(label) + "</text>" : "") }
 	})));
 }
 // web/src/shared/podium.js
@@ -116806,10 +116993,11 @@ function crossedRoundMilestone(oldVal, newVal, step) {
 }
 function useMilestoneBurst(defFx, theme) {
 	const [st, setSt] = useState$11(null);
-	const fire = (name) => {
+	const fire = (name, label) => {
 		setSt((p) => ({
 			k: (p ? p.k : 0) + 1,
-			fx: typeof name === "string" ? name : defFx
+			fx: typeof name === "string" ? name : defFx,
+			label: typeof label === "string" ? label : ""
 		}));
 	};
 	useEffect$14(() => {
@@ -116821,6 +117009,7 @@ function useMilestoneBurst(defFx, theme) {
 		node: st && st.fx && !gtP3RM() ? /* @__PURE__ */ import_react.default.createElement(GameFx, {
 			key: st.k,
 			name: st.fx,
+			label: st.label,
 			theme: theme || gtP3Theme
 		}) : null,
 		fire
@@ -117743,7 +117932,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.09-3" && !upd) {
+		if (seen && seen !== "2026.11.09-4" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -117752,7 +117941,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.09-3" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.09-4" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.08-10 (08.11.2026 14:45)
+- Knöpfe in Wizard, Schieber und Coiffeur für ältere iPhones
+
 ## 2026.11.08-9 (08.11.2026 14:36)
 - Tutto: Punktzahl immer weiss
 

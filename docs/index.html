@@ -45088,7 +45088,7 @@ html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *) .gt-sch-weisba
 .gt-wy-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:7px}
 .gt-wy-tile{position:relative;display:flex;flex-direction:column;min-width:0;border:1px solid transparent;box-shadow:inset 0 0 0 1px var(--wy-edge);border-radius:13px;background:var(--wy-tile);transition:background-color 160ms ease,box-shadow 160ms ease}
 .gt-wy-tile.is-on{background:var(--wy-firbg);box-shadow:inset 0 0 0 2px var(--wy-fir)}
-.gt-wy-tb{position:relative;display:flex;flex-direction:column;align-items:center;width:100%;border:0;background:none;padding:9px 4px 7px;color:var(--wy-ink);cursor:pointer;font-family:'Inter',sans-serif;transition:transform 140ms ease-out;-webkit-tap-highlight-color:transparent}
+.gt-wy-tb{cursor:pointer;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none;box-sizing:border-box;text-align:center;color:inherit;font:inherit;position:relative;display:flex;flex-direction:column;align-items:center;width:100%;border:0;background:none;padding:9px 4px 7px;color:var(--wy-ink);cursor:pointer;font-family:'Inter',sans-serif;transition:transform 140ms ease-out;-webkit-tap-highlight-color:transparent}
 .gt-wy-tb:active{transform:scale(.97)}
 .gt-wy-tb b{font-weight:700;font-size:13px;line-height:1.15;margin-top:5px}
 .gt-wy-tb i{font-style:normal;font-weight:700;font-size:11px;line-height:1.15;color:var(--wy-pt)}
@@ -45140,7 +45140,7 @@ html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *) .gt-sch-weisba
 .gt-wy button:focus-visible{outline:2px solid currentColor;outline-offset:2px}
 .gt-sch-hit:focus-visible{outline:2px solid #F4F1E8;outline-offset:-3px;border-radius:8px}
 .gt-sch-trs{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;padding-top:12px;margin-bottom:6px}
-.gt-sch-tr{border:0;background:transparent;padding:0;min-height:44px;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;touch-action:manipulation;font-family:'Inter',sans-serif}
+.gt-sch-tr{cursor:pointer;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none;box-sizing:border-box;text-align:center;color:inherit;font:inherit;border:0;background:transparent;padding:0;min-height:44px;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;touch-action:manipulation;font-family:'Inter',sans-serif}
 .gt-sch-trc{position:relative;width:48px;height:66px;border-radius:7px;display:flex;align-items:center;justify-content:center;transition:transform .16s ease,box-shadow .16s ease}
 .gt-sch-trc svg{width:26px;height:26px}
 .gt-sch-trf{position:absolute;right:4px;bottom:3px;font-size:10px;font-weight:700;color:#6B6258;font-family:'Inter',sans-serif;line-height:1}
@@ -45427,13 +45427,20 @@ function SchieberEditorPanel({ editing, teams, onSave, onClose, t, theme }) {
 	}, SCH_TRUMPS.map((x) => {
 		const on = trump === x.k;
 		const nm = trName(x.k);
-		return /* @__PURE__ */ import_react.default.createElement("button", {
+		return /* @__PURE__ */ import_react.default.createElement("div", {
 			key: x.k,
-			type: "button",
+			role: "button",
+			tabIndex: 0,
 			className: "gt-sch-tr press-fx",
 			"aria-pressed": on,
 			"aria-label": t("schTrAria").replace("{n}", nm).replace("{f}", String(x.f)),
-			onClick: () => setTrump((c) => c === x.k ? null : x.k)
+			onClick: () => setTrump((c) => c === x.k ? null : x.k),
+			onKeyDown: (e) => {
+				if (e.key === "Enter" || e.key === " ") {
+					e.preventDefault();
+					setTrump((c) => c === x.k ? null : x.k);
+				}
+			}
 		}, /* @__PURE__ */ import_react.default.createElement("span", {
 			className: "gt-sch-trc",
 			style: {
@@ -46389,11 +46396,18 @@ function SchieberWeisPanel({ open, teamId, teams, onSave, onClose, t, theme }) {
 		return /* @__PURE__ */ import_react.default.createElement("div", {
 			key: k,
 			className: "gt-wy-tile" + (n > 0 ? " is-on" : "")
-		}, /* @__PURE__ */ import_react.default.createElement("button", {
-			type: "button",
+		}, /* @__PURE__ */ import_react.default.createElement("div", {
+			role: "button",
+			tabIndex: 0,
 			className: "gt-wy-tb",
 			"aria-pressed": n > 0,
-			onClick: () => toggle(k)
+			onClick: () => toggle(k),
+			onKeyDown: (e) => {
+				if (e.key === "Enter" || e.key === " ") {
+					e.preventDefault();
+					toggle(k);
+				}
+			}
 		}, n > 0 && chk, /* @__PURE__ */ import_react.default.createElement(WyFan, {
 			c,
 			s
@@ -46406,11 +46420,18 @@ function SchieberWeisPanel({ open, teamId, teams, onSave, onClose, t, theme }) {
 			onClick: () => step(k, 1),
 			"aria-label": t("weisMoreQty") + ": " + t(WEIS_LBL[k])
 		}, "+")));
-	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "gt-wy-tile" + (stoeck ? " is-on" : "") }, /* @__PURE__ */ import_react.default.createElement("button", {
-		type: "button",
+	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "gt-wy-tile" + (stoeck ? " is-on" : "") }, /* @__PURE__ */ import_react.default.createElement("div", {
+		role: "button",
+		tabIndex: 0,
 		className: "gt-wy-tb",
 		"aria-pressed": stoeck,
-		onClick: () => setStoeck((s) => !s)
+		onClick: () => setStoeck((s) => !s),
+		onKeyDown: (e) => {
+			if (e.key === "Enter" || e.key === " ") {
+				e.preventDefault();
+				setStoeck((s) => !s);
+			}
+		}
 	}, stoeck && chk, /* @__PURE__ */ import_react.default.createElement(WyCourtFan, null), /* @__PURE__ */ import_react.default.createElement("b", null, "Stöck"), /* @__PURE__ */ import_react.default.createElement("i", null, t("weisPts")(20))))), /* @__PURE__ */ import_react.default.createElement("button", {
 		type: "button",
 		className: "gt-wy-more",
@@ -49786,18 +49807,19 @@ var WZ_CSS = `
 .wz-th{position:sticky;top:0;z-index:2;background:var(--wz-bg);border-bottom:1px solid var(--wz-line);padding:9px 3px;text-align:center;font-size:12px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;box-sizing:border-box}
 .wz-th.corner{left:0;z-index:3;border-right:1px solid var(--wz-line)}
 .wz-rd{position:sticky;left:0;z-index:1;background:var(--wz-bg);border-bottom:1px solid var(--wz-soft);border-right:1px solid var(--wz-line);display:grid;place-items:center;font:700 15px 'Fraunces',Georgia,serif;color:var(--wz-gold);min-height:48px}
-.wz-cell{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:48px;padding:3px 1px;border:none;border-bottom:1px solid var(--wz-soft);border-left:1px solid var(--wz-soft);background:transparent;color:var(--wz-tx);cursor:pointer;touch-action:manipulation;transition:background-color .16s ease,transform .12s ease;font-family:'Inter',sans-serif}
+.wz-cell{cursor:pointer;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none;box-sizing:border-box;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:48px;padding:3px 1px;border:none;border-bottom:1px solid var(--wz-soft);border-left:1px solid var(--wz-soft);background:transparent;color:var(--wz-tx);cursor:pointer;touch-action:manipulation;transition:background-color .16s ease,transform .12s ease;font-family:'Inter',sans-serif}
 .wz-cell:active{transform:scale(.95)}
 .wz-cell small{font-size:11px;line-height:1;color:var(--wz-mu);font-variant-numeric:tabular-nums}
 .wz-cell b{font:700 18px/1 'Fraunces',Georgia,serif;font-variant-numeric:tabular-nums}
 .wz-cell.cur{background:var(--wz-rowa)}
 .wz-rd.cur{background:color-mix(in oklab,var(--wz-gold) 22%,var(--wz-bg))}
+.wz-tab:focus-visible,.wz-cell:focus-visible{outline:2px solid var(--wz-gold);outline-offset:-2px}
 .wz-cell.sel{background:var(--wz-open);box-shadow:inset 0 0 0 2px var(--wz-gold)}
 .wz-editor{position:fixed;left:0;right:0;bottom:0;z-index:90;background:var(--wz-bg);border-top:2px solid var(--wz-gold);box-shadow:0 -10px 28px rgba(0,0,0,.4);padding:12px 14px calc(12px + env(safe-area-inset-bottom,0px));max-height:70vh;overflow-y:auto;box-sizing:border-box;color:var(--wz-tx);font-family:'Inter',sans-serif;animation:wzIn .2s cubic-bezier(.23,1,.32,1)}
 .wz-ed-h{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}
 .wz-ed-h b{font:600 16px 'Fraunces',Georgia,serif;color:var(--wz-gold);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .wz-tabs{display:flex;gap:8px;margin-bottom:10px}
-.wz-tab{flex:1;min-height:52px;border-radius:14px;border:1.5px solid var(--wz-soft);background:transparent;color:var(--wz-mu);font:600 11px 'Inter',sans-serif;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;text-transform:uppercase;letter-spacing:.06em}
+.wz-tab{cursor:pointer;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none;box-sizing:border-box;text-align:center;-webkit-appearance:none;flex:1;min-height:52px;border-radius:14px;border:1.5px solid var(--wz-soft);background:transparent;color:var(--wz-mu);font:600 11px 'Inter',sans-serif;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;text-transform:uppercase;letter-spacing:.06em}
 .wz-tab b{font:700 20px/1 'Fraunces',Georgia,serif;color:var(--wz-tx);text-transform:none;letter-spacing:0}
 .wz-tab.on{border-color:var(--wz-gold);background:var(--wz-open);color:var(--wz-gold)}
 .wz-start{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 4px}
@@ -50236,14 +50258,28 @@ function WizardEditorPanel({ editing, players, rounds, onSave, onClose, theme, t
 		className: "wz-x",
 		onClick: onClose,
 		"aria-label": t("mgClose")
-	}, /* @__PURE__ */ import_react.default.createElement(XMark, null))), /* @__PURE__ */ import_react.default.createElement("div", { className: "wz-tabs" }, /* @__PURE__ */ import_react.default.createElement("button", {
-		type: "button",
+	}, /* @__PURE__ */ import_react.default.createElement(XMark, null))), /* @__PURE__ */ import_react.default.createElement("div", { className: "wz-tabs" }, /* @__PURE__ */ import_react.default.createElement("div", {
+		role: "button",
+		tabIndex: 0,
 		className: "wz-tab" + (tab === "bid" ? " on" : ""),
-		onClick: () => setTab("bid")
-	}, t("bidLabel"), /* @__PURE__ */ import_react.default.createElement("b", null, bid === null ? "·" : bid)), /* @__PURE__ */ import_react.default.createElement("button", {
-		type: "button",
+		onClick: () => setTab("bid"),
+		onKeyDown: (e) => {
+			if (e.key === "Enter" || e.key === " ") {
+				e.preventDefault();
+				setTab("bid");
+			}
+		}
+	}, t("bidLabel"), /* @__PURE__ */ import_react.default.createElement("b", null, bid === null ? "·" : bid)), /* @__PURE__ */ import_react.default.createElement("div", {
+		role: "button",
+		tabIndex: 0,
 		className: "wz-tab" + (tab === "tricks" ? " on" : ""),
-		onClick: () => setTab("tricks")
+		onClick: () => setTab("tricks"),
+		onKeyDown: (e) => {
+			if (e.key === "Enter" || e.key === " ") {
+				e.preventDefault();
+				setTab("tricks");
+			}
+		}
 	}, t("wzTricksShort"), /* @__PURE__ */ import_react.default.createElement("b", null, tricks === null ? "·" : tricks))), /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "wz-pad",
 		style: { marginBottom: 10 }
@@ -50305,14 +50341,24 @@ function WzSheet({ open, onClose, players, rounds, curRound, roundCount, editing
 		return /* @__PURE__ */ import_react.default.createElement(Fragment$3, { key: r }, /* @__PURE__ */ import_react.default.createElement("div", { className: "wz-rd" + (r === curRound ? " cur" : "") }, r), players.map((p) => {
 			const c = wzCell(rounds, r, p.id);
 			const sel = editing && editing.round === r && editing.playerId === p.id;
-			return /* @__PURE__ */ import_react.default.createElement("button", {
+			return /* @__PURE__ */ import_react.default.createElement("div", {
 				key: p.id,
-				type: "button",
+				role: "button",
+				tabIndex: 0,
 				className: "wz-cell" + (r === curRound ? " cur" : "") + (sel ? " sel" : ""),
 				onClick: () => setEditing({
 					round: r,
 					playerId: p.id
 				}),
+				onKeyDown: (e) => {
+					if (e.key === "Enter" || e.key === " ") {
+						e.preventDefault();
+						setEditing({
+							round: r,
+							playerId: p.id
+						});
+					}
+				},
 				"aria-label": p.name + ", " + t("roundLabel")(r) + ": " + (c.bid === null ? "-" : c.bid) + " / " + (c.tricks === null ? "-" : c.tricks)
 			}, (c.bid !== null || c.tricks !== null) && /* @__PURE__ */ import_react.default.createElement("small", null, c.bid === null ? "·" : c.bid, "/", c.tricks === null ? "·" : c.tricks), /* @__PURE__ */ import_react.default.createElement("b", { style: c.tricks !== null && c.bid !== null ? void 0 : {
 				color: "var(--wz-mu)",
@@ -52769,7 +52815,7 @@ var JASS_DIFF_CSS = `
 .jdp-lab .cn{overflow:hidden;text-overflow:ellipsis;font-size:12.5px;font-weight:700}
 .jdp-lab .cf{font-size:10.5px;font-weight:600;color:var(--cpt)}
 .jdp-lab.cur .cn{color:var(--cur)}
-.jdp-c{appearance:none;-webkit-appearance:none;margin:0;padding:0;border:0;min-width:0;min-height:50px;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--s2);color:var(--tx);font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:transform .12s ease-out;scroll-margin:100px 0 calc(var(--jd-slip,0px) + 16px)}
+.jdp-c{-webkit-user-select:none;user-select:none;box-sizing:border-box;text-align:center;appearance:none;-webkit-appearance:none;margin:0;padding:0;border:0;min-width:0;min-height:50px;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--s2);color:var(--tx);font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:transform .12s ease-out;scroll-margin:100px 0 calc(var(--jd-slip,0px) + 16px)}
 .jdp-c:active{transform:scale(.96)}
 .jdp-c:focus-visible,.jdp-k:focus-visible,.jdp-cta:focus-visible,.jdp-grab:focus-visible,.jdp-strike:focus-visible,.jdp-act:focus-visible{outline:2px solid var(--tx);outline-offset:2px}
 .jdp-c.p,.jdp-c.n{background:color-mix(in srgb,var(--hue) calc(var(--a) * 100%),transparent)}
@@ -53649,9 +53695,10 @@ function JassPlay({ players, scores, setScores, onResetSheet, onEditPlayers, onB
 			const isEd = !!(editing && editing.playerId === p.id && editing.catId === cat.id);
 			const isNx = !editing && cat.id === jdCur && p.id === jdNext;
 			const tone = value === null ? " e" : diff === null || diff === 0 ? "" : diff > 0 ? " p" : " n";
-			return /* @__PURE__ */ import_react.default.createElement("button", {
+			return /* @__PURE__ */ import_react.default.createElement("div", {
 				key: p.id,
-				type: "button",
+				role: "button",
+				tabIndex: 0,
 				className: "jdp-c gt-jd-cell" + tone + (isEd ? " ed" : "") + (isNx ? " nx" : ""),
 				style: tone === " p" || tone === " n" ? { "--a": jdHeat(diff) } : void 0,
 				"data-jd-cell": p.id + "-" + cat.id,
@@ -53660,7 +53707,16 @@ function JassPlay({ players, scores, setScores, onResetSheet, onEditPlayers, onB
 				onClick: () => setEditing({
 					playerId: p.id,
 					catId: cat.id
-				})
+				}),
+				onKeyDown: (e) => {
+					if (e.key === "Enter" || e.key === " ") {
+						e.preventDefault();
+						setEditing({
+							playerId: p.id,
+							catId: cat.id
+						});
+					}
+				}
 			}, value !== null ? diff !== null ? /* @__PURE__ */ import_react.default.createElement(Fragment$3, null, /* @__PURE__ */ import_react.default.createElement("b", null, jdFmt(diff)), /* @__PURE__ */ import_react.default.createElement("em", null, value)) : /* @__PURE__ */ import_react.default.createElement("b", null, value) : /* @__PURE__ */ import_react.default.createElement("span", {
 				className: "jdp-blank",
 				"aria-hidden": "true"
@@ -69897,7 +69953,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.08-9";
+var APP_BUILD = "2026.11.08-10";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -113665,7 +113721,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.08-9");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.08-10");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -116283,7 +116339,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.08-9" && !upd) {
+		if (seen && seen !== "2026.11.08-10" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -116292,7 +116348,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.08-9" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.08-10" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

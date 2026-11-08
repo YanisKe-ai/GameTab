@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.08-4 (08.11.2026 12:50)
+- Schieber: Tafel direkt unter dem Kopf
+
 ## 2026.11.08-3 (08.11.2026 12:39)
 - Schieber: Wyys-Knöpfe als Jasskarten mit Bauer und Dame, Tafel länger
 

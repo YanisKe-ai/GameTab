@@ -44692,7 +44692,7 @@ var SCHIEBER_PL_CSS = `
 .gtL-content .gt-wk-ic,[data-phone-landscape] .gt-wk-ic{display:inline-flex}
 html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *){min-height:100dvh;box-sizing:border-box}
 html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *)>.gt-sch-sheet{flex:1 1 auto;display:flex;flex-direction:column}
-html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *) .gt-sch-split{display:flex;flex-direction:column;justify-content:center;flex:1 1 auto}
+html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *) .gt-sch-split{display:flex;flex-direction:column;justify-content:flex-start;flex:1 1 auto}
 html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *) .gt-weis-topw{margin:0 0 10px}
 html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *) .gt-weis-btns+*{margin-top:0}
 html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *) .gt-sch-weisbar{margin-top:10px!important}
@@ -69340,7 +69340,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.08-3";
+var APP_BUILD = "2026.11.08-4";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -113016,7 +113016,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.08-3");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.08-4");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -115634,7 +115634,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.08-3" && !upd) {
+		if (seen && seen !== "2026.11.08-4" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -115643,7 +115643,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.08-3" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.08-4" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

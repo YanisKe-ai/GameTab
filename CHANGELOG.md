@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.08-13 (08.11.2026 22:03)
+- Skyjo: neues Logo, Runde und Tabelle, Fahne für Beender, Raster-Hilfe, Rückgängig, neues Icon
+
 ## 2026.11.08-12 (08.11.2026 15:38)
 - Einstellungen im Spielmenü, Podium schneller, Wizard-Bild in Indigo, Herz-Fächer auf dem Laptop, Minigolf quer
 

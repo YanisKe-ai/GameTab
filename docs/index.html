@@ -9072,6 +9072,26 @@ var TRANSLATIONS = {
 		skyjoSaveRound: "Runde speichern",
 		enterPointsFirst: "Zuerst Punkte eintragen",
 		skyjoTotalLabel: "Gesamt",
+		skyjoViewRound: "Runde",
+		skyjoViewTable: "Tabelle",
+		skyjoEnded: "hat beendet",
+		skyjoEndedDouble: (a, b) => `hat beendet, ${a} wird ${b}`,
+		skyjoNearTarget: (n) => `nahe an der ${n}`,
+		skyjoNoOneEnded: "Niemand hat beendet",
+		skyjoFlagLabel: (n) => `${n} hat beendet`,
+		skyjoGridOpen: (n) => `Karten von ${n} eingeben`,
+		skyjoGridTitle: (n) => `Karten von ${n}`,
+		skyjoColGone: "Spalte weg",
+		skyjoGridSum: "Summe ohne gestrichene Spalte",
+		skyjoGridApply: (s, n) => `${s} für ${n} übernehmen`,
+		skyjoGridClear: "Löschen",
+		skyjoGridClose: "Schliessen",
+		skyjoHeadLine: (n, g) => `Runde ${n}, Ziel ${g}`,
+		skyjoSaveRoundN: (n) => `Runde ${n} speichern`,
+		skyjoChangeRound: (n) => `Runde ${n} ändern`,
+		skyjoTableEmpty: "Noch keine Runde gespeichert.",
+		skyjoUndoRound: "Letzte Runde zurücknehmen",
+		skyjoGridCard: (n, c) => `Karte ${n}, Spalte ${c}`,
 		skyjoNewGame: "Neues Spiel",
 		gameMinigolf: "Minigolf",
 		gameMinigolfDesc: "Schläge pro Loch eintragen, wenigste Schläge gewinnt",
@@ -10707,6 +10727,26 @@ var TRANSLATIONS = {
 		skyjoSaveRound: "Save round",
 		enterPointsFirst: "Enter points first",
 		skyjoTotalLabel: "Total",
+		skyjoViewRound: "Round",
+		skyjoViewTable: "Table",
+		skyjoEnded: "finished",
+		skyjoEndedDouble: (a, b) => `finished, ${a} becomes ${b}`,
+		skyjoNearTarget: (n) => `close to ${n}`,
+		skyjoNoOneEnded: "No one finished",
+		skyjoFlagLabel: (n) => `${n} finished`,
+		skyjoGridOpen: (n) => `Enter cards for ${n}`,
+		skyjoGridTitle: (n) => `Cards of ${n}`,
+		skyjoColGone: "Column out",
+		skyjoGridSum: "Total without removed column",
+		skyjoGridApply: (s, n) => `Use ${s} for ${n}`,
+		skyjoGridClear: "Clear",
+		skyjoGridClose: "Close",
+		skyjoHeadLine: (n, g) => `Round ${n}, goal ${g}`,
+		skyjoSaveRoundN: (n) => `Save round ${n}`,
+		skyjoChangeRound: (n) => `Change round ${n}`,
+		skyjoTableEmpty: "No round saved yet.",
+		skyjoUndoRound: "Undo last round",
+		skyjoGridCard: (n, c) => `Card ${n}, column ${c}`,
 		skyjoNewGame: "New game",
 		gameMinigolf: "Mini Golf",
 		gameMinigolfDesc: "Enter strokes per hole, fewest strokes wins",
@@ -12342,6 +12382,26 @@ var TRANSLATIONS = {
 		skyjoSaveRound: "Enregistrer la manche",
 		enterPointsFirst: "Saisis d'abord les points",
 		skyjoTotalLabel: "Total",
+		skyjoViewRound: "Manche",
+		skyjoViewTable: "Tableau",
+		skyjoEnded: "a terminé",
+		skyjoEndedDouble: (a, b) => `a terminé, ${a} devient ${b}`,
+		skyjoNearTarget: (n) => `proche de ${n}`,
+		skyjoNoOneEnded: "Personne n'a terminé",
+		skyjoFlagLabel: (n) => `${n} a terminé`,
+		skyjoGridOpen: (n) => `Saisir les cartes de ${n}`,
+		skyjoGridTitle: (n) => `Cartes de ${n}`,
+		skyjoColGone: "Colonne retirée",
+		skyjoGridSum: "Somme sans la colonne retirée",
+		skyjoGridApply: (s, n) => `Reprendre ${s} pour ${n}`,
+		skyjoGridClear: "Effacer",
+		skyjoGridClose: "Fermer",
+		skyjoHeadLine: (n, g) => `Manche ${n}, objectif ${g}`,
+		skyjoSaveRoundN: (n) => `Enregistrer la manche ${n}`,
+		skyjoChangeRound: (n) => `Modifier la manche ${n}`,
+		skyjoTableEmpty: "Aucune manche enregistrée.",
+		skyjoUndoRound: "Annuler la dernière manche",
+		skyjoGridCard: (n, c) => `Carte ${n}, colonne ${c}`,
 		skyjoNewGame: "Nouvelle partie",
 		gameMinigolf: "Minigolf",
 		gameMinigolfDesc: "Note les coups par trou, le moins de coups gagne",
@@ -13977,6 +14037,26 @@ var TRANSLATIONS = {
 		skyjoSaveRound: "Salva round",
 		enterPointsFirst: "Inserisci prima i punti",
 		skyjoTotalLabel: "Totale",
+		skyjoViewRound: "Round",
+		skyjoViewTable: "Tabella",
+		skyjoEnded: "ha finito",
+		skyjoEndedDouble: (a, b) => `ha finito, ${a} diventa ${b}`,
+		skyjoNearTarget: (n) => `vicino a ${n}`,
+		skyjoNoOneEnded: "Nessuno ha finito",
+		skyjoFlagLabel: (n) => `${n} ha finito`,
+		skyjoGridOpen: (n) => `Inserisci le carte di ${n}`,
+		skyjoGridTitle: (n) => `Carte di ${n}`,
+		skyjoColGone: "Colonna tolta",
+		skyjoGridSum: "Somma senza la colonna tolta",
+		skyjoGridApply: (s, n) => `Usa ${s} per ${n}`,
+		skyjoGridClear: "Cancella",
+		skyjoGridClose: "Chiudi",
+		skyjoHeadLine: (n, g) => `Round ${n}, obiettivo ${g}`,
+		skyjoSaveRoundN: (n) => `Salva round ${n}`,
+		skyjoChangeRound: (n) => `Modifica round ${n}`,
+		skyjoTableEmpty: "Nessun round salvato.",
+		skyjoUndoRound: "Annulla ultimo round",
+		skyjoGridCard: (n, c) => `Carta ${n}, colonna ${c}`,
 		skyjoNewGame: "Nuova partita",
 		gameMinigolf: "Minigolf",
 		gameMinigolfDesc: "Inserisci i colpi per buca, chi ne fa meno vince",
@@ -15612,6 +15692,26 @@ var TRANSLATIONS = {
 		skyjoSaveRound: "Guardar ronda",
 		enterPointsFirst: "Introduce primero los puntos",
 		skyjoTotalLabel: "Total",
+		skyjoViewRound: "Ronda",
+		skyjoViewTable: "Tabla",
+		skyjoEnded: "ha terminado",
+		skyjoEndedDouble: (a, b) => `ha terminado, ${a} pasa a ${b}`,
+		skyjoNearTarget: (n) => `cerca de ${n}`,
+		skyjoNoOneEnded: "Nadie ha terminado",
+		skyjoFlagLabel: (n) => `${n} ha terminado`,
+		skyjoGridOpen: (n) => `Introducir cartas de ${n}`,
+		skyjoGridTitle: (n) => `Cartas de ${n}`,
+		skyjoColGone: "Columna fuera",
+		skyjoGridSum: "Suma sin la columna retirada",
+		skyjoGridApply: (s, n) => `Usar ${s} para ${n}`,
+		skyjoGridClear: "Borrar",
+		skyjoGridClose: "Cerrar",
+		skyjoHeadLine: (n, g) => `Ronda ${n}, objetivo ${g}`,
+		skyjoSaveRoundN: (n) => `Guardar ronda ${n}`,
+		skyjoChangeRound: (n) => `Cambiar ronda ${n}`,
+		skyjoTableEmpty: "Aún no hay rondas guardadas.",
+		skyjoUndoRound: "Deshacer la última ronda",
+		skyjoGridCard: (n, c) => `Carta ${n}, columna ${c}`,
 		skyjoNewGame: "Nueva partida",
 		gameMinigolf: "Minigolf",
 		gameMinigolfDesc: "Anota golpes por hoyo, gana quien haga menos golpes",
@@ -17247,6 +17347,26 @@ var TRANSLATIONS = {
 		skyjoSaveRound: "Guardar ronda",
 		enterPointsFirst: "Introduz primeiro os pontos",
 		skyjoTotalLabel: "Total",
+		skyjoViewRound: "Ronda",
+		skyjoViewTable: "Tabela",
+		skyjoEnded: "terminou",
+		skyjoEndedDouble: (a, b) => `terminou, ${a} passa a ${b}`,
+		skyjoNearTarget: (n) => `perto de ${n}`,
+		skyjoNoOneEnded: "Ninguém terminou",
+		skyjoFlagLabel: (n) => `${n} terminou`,
+		skyjoGridOpen: (n) => `Introduzir cartas de ${n}`,
+		skyjoGridTitle: (n) => `Cartas de ${n}`,
+		skyjoColGone: "Coluna fora",
+		skyjoGridSum: "Soma sem a coluna retirada",
+		skyjoGridApply: (s, n) => `Usar ${s} para ${n}`,
+		skyjoGridClear: "Apagar",
+		skyjoGridClose: "Fechar",
+		skyjoHeadLine: (n, g) => `Ronda ${n}, objetivo ${g}`,
+		skyjoSaveRoundN: (n) => `Guardar ronda ${n}`,
+		skyjoChangeRound: (n) => `Alterar ronda ${n}`,
+		skyjoTableEmpty: "Ainda não há rondas guardadas.",
+		skyjoUndoRound: "Desfazer a última ronda",
+		skyjoGridCard: (n, c) => `Carta ${n}, coluna ${c}`,
 		skyjoNewGame: "Nova partida",
 		gameMinigolf: "Minigolfe",
 		gameMinigolfDesc: "Anota tacadas por buraco, ganha quem fizer menos tacadas",
@@ -19885,66 +20005,54 @@ function HeadsUpLogo({ color }) {
 	}));
 }
 function SkyjoLogo({ color, theme }) {
-	const scale = theme === "noir" ? [
-		"#C4C4C4",
+	const n = theme === "noir", l = theme === "light";
+	const cols = n ? [
+		"#4D4D4D",
+		"#CFCFCF",
+		"#8C8C8C",
 		"#B0B0B0",
-		"#9C9C9C",
-		"#888888",
-		"#A8A8A8"
+		"#6E6E6E"
 	] : [
-		"#8B6FD6",
-		"#4FA8F5",
-		"#3FD17E",
-		"#F0C23C",
-		"#E4402E"
+		"#3B5BC4",
+		"#8CC9EE",
+		"#3FAE4F",
+		"#F2C531",
+		"#E0453A"
 	];
+	const K = n ? "#161616" : l ? "#E7ECF4" : "#12161F";
+	const E = n ? "#161616" : l ? "#E7ECF4" : "#12161F";
 	return /* @__PURE__ */ import_react.default.createElement("svg", {
 		width: "30",
 		height: "30",
 		viewBox: "0 0 30 30",
-		style: { flexShrink: 0 }
+		style: { flexShrink: 0 },
+		"aria-hidden": "true"
 	}, /* @__PURE__ */ import_react.default.createElement("rect", {
 		x: "1",
 		y: "1",
 		width: "28",
 		height: "28",
 		rx: "8",
-		fill: "#0B1512",
-		stroke: `${color}55`,
+		fill: K,
+		stroke: n ? "#3A3A3A" : l ? "#B9C4D6" : `${color}55`,
 		strokeWidth: "1"
-	}), /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "8",
-		y: "8",
-		width: "10.5",
-		height: "15",
-		rx: "2",
-		transform: "rotate(-9 13 15)",
-		fill: "#0B1512",
-		stroke: color,
-		strokeWidth: "1.5"
-	}), /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "12.5",
-		y: "6.5",
-		width: "10.5",
-		height: "15",
-		rx: "2",
-		fill: "#0B1512",
-		stroke: color,
-		strokeWidth: "1.5"
-	}), /* @__PURE__ */ import_react.default.createElement("text", {
-		x: "17.7",
-		y: "13",
-		fontSize: "5.5",
-		fontWeight: "700",
-		fill: color,
-		textAnchor: "middle",
-		fontFamily: "sans-serif"
-	}, "12"), /* @__PURE__ */ import_react.default.createElement("g", null, scale.map((c, i) => /* @__PURE__ */ import_react.default.createElement("circle", {
+	}), /* @__PURE__ */ import_react.default.createElement("g", null, [
+		-30,
+		-15,
+		0,
+		15,
+		30
+	].map((a, i) => /* @__PURE__ */ import_react.default.createElement("rect", {
 		key: i,
-		cx: 14.3 + i * 2.15,
-		cy: 19,
-		r: "1",
-		fill: c
+		x: "11.2",
+		y: "6.2",
+		width: "7.6",
+		height: "11",
+		rx: "1.7",
+		fill: cols[i],
+		stroke: E,
+		strokeWidth: "0.8",
+		transform: `rotate(${a} 15 24.5)`
 	}))));
 }
 function FiveSecLogo({ color }) {
@@ -23347,48 +23455,6 @@ html[data-gt-theme="noir"] .gt-ug .gt-u-dock::before{background:linear-gradient(
 `;
 function ugSurf(theme) {
 	return theme === "light" ? "rgba(24,22,32,0.06)" : theme === "noir" ? "rgba(255,255,255,0.08)" : "rgba(255,255,255,0.06)";
-}
-function ugLine(theme) {
-	return theme === "light" ? "rgba(24,22,32,0.16)" : "rgba(255,255,255,0.18)";
-}
-function GtRace({ players, target, tk, theme, accent, font, label }) {
-	const T = Math.max(1, target || 1);
-	const ms = [];
-	players.forEach((p, i) => {
-		const f = Math.min(1, Math.max(0, (p.total || 0) / T));
-		let r = 0;
-		while (ms.some((q) => q.r === r && Math.abs(q.f - f) < .07 + q.r * .07)) r++;
-		ms.push({
-			p,
-			i,
-			f,
-			r: Math.min(r, 5)
-		});
-	});
-	return /* @__PURE__ */ import_react.default.createElement("section", {
-		className: "gt-ug-race gt-ug-po",
-		"aria-label": label,
-		style: { background: ugSurf(theme) }
-	}, /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gt-ug-lab",
-		style: { color: tk.muted }
-	}, label), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gt-ug-rl",
-		style: { height: 30 }
-	}, /* @__PURE__ */ import_react.default.createElement("i", { style: { background: ugLine(theme) } }), /* @__PURE__ */ import_react.default.createElement("div", { className: "gt-ug-rt" }, ms.map((m) => /* @__PURE__ */ import_react.default.createElement("b", {
-		key: m.p.id,
-		title: m.p.name + " " + m.p.total,
-		style: {
-			left: `calc((100% - 24px) * ${m.f} ${m.f > .5 ? "-" : "+"} ${m.r * 22}px)`,
-			top: 3,
-			zIndex: 10 - m.r,
-			background: gtFill(playerHue(m.i, theme)).bg,
-			color: gtFill(playerHue(m.i, theme)).fg
-		}
-	}, m.i + 1))), /* @__PURE__ */ import_react.default.createElement("u", { style: {
-		color: accent,
-		fontFamily: font
-	} }, target)));
 }
 function GtTiles({ players, target, tk, theme, accent, font, label }) {
 	const T = Math.max(1, target || 1);
@@ -46996,6 +47062,23 @@ var PLD_CSS = `
 [data-phone-landscape] .pld-pad .pld-padR > button[data-gt-sound="1"] { margin-top: auto; margin-bottom: 0 !important; position: sticky; bottom: 0; }
 @media (prefers-reduced-motion: reduce) { [data-phone-landscape] .pld * { scroll-behavior: auto !important; } }
 `;
+var SKL_CSS = `
+[data-phone-landscape] .sk-hero { display: none; }
+[data-phone-landscape] .sk-split { display: flex; flex-direction: column; flex: 1 1 0; min-height: 0; }
+[data-phone-landscape] .sk-split > .gtL-col-main { display: flex; flex-direction: column; gap: 8px; flex: 1 1 0; min-height: 0; }
+[data-phone-landscape] .sk-split > .gtL-col-side { display: none; }
+[data-phone-landscape] .sk-seg { width: min(300px, 100%); align-self: center; flex: none; }
+[data-phone-landscape] .sk-seg button { height: 36px; }
+[data-phone-landscape] .sk-entry.gt-ug-ent { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); gap: 12px; flex: 1 1 0; min-height: 0; align-items: stretch; }
+[data-phone-landscape] .sk-entry.gt-ug-ent > .sk-body { display: flex; flex-direction: column; gap: 6px; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding-bottom: 4px; }
+[data-phone-landscape] .sk-entry.gt-ug-ent > .sk-dock { align-self: end; margin-top: 0 !important; padding-top: 0; gap: 6px; }
+[data-phone-landscape] .sk-row { min-height: 56px; padding: 4px 10px; }
+[data-phone-landscape] .sk-key { height: 38px; }
+[data-phone-landscape] .sk-save, [data-phone-landscape] .sk-ghost { min-height: 46px; }
+[data-phone-landscape] .sk-split > .gtL-col-main > .sk-tbl { flex: 1 1 0; min-height: 0; overflow: auto; }
+[data-phone-landscape] .sk-sheet { max-width: min(560px, 100%); }
+[data-phone-landscape] .sk-slot, [data-phone-landscape] .sk-pick { height: 40px; }
+`;
 // web/src/games/tutto/game.js
 var game_exports$15 = /* @__PURE__ */ __exportAll({
 	TUTTO_CARD: () => TUTTO_CARD,
@@ -54552,8 +54635,6 @@ var game_exports$11 = /* @__PURE__ */ __exportAll({
 	SkyjoGame: () => SkyjoGame,
 	SkyjoGameOver: () => SkyjoGameOver,
 	SkyjoNumPad: () => SkyjoNumPad,
-	SkyjoRoundEntry: () => SkyjoRoundEntry,
-	SkyjoRoundHistory: () => SkyjoRoundHistory,
 	SkyjoSetup: () => SkyjoSetup,
 	SkyjoTopBar: () => SkyjoTopBar,
 	skyjoBtnGhost: () => skyjoBtnGhost,
@@ -54577,9 +54658,10 @@ function skyjoScoreColor(v) {
 	if (n <= 15) return "#F0803C";
 	return "#E4402E";
 }
-function SkyjoTopBar({ subtitle, onBack, theme, t }) {
-	const sk = skyjoTokens(theme);
+function SkyjoTopBar({ subtitle, onBack, theme, t, hideTitle }) {
+	const sk = skyT(theme);
 	return /* @__PURE__ */ import_react.default.createElement(GameHeader, {
+		hideTitle,
 		title: t("gameSkyjo"),
 		subtitle,
 		onBack,
@@ -54596,7 +54678,7 @@ function SkyjoTopBar({ subtitle, onBack, theme, t }) {
 }
 var GT_DISABLED_BG = "rgba(127,127,127,0.14)";
 function skyjoBtnPrimary(theme) {
-	const sk = skyjoTokens(theme);
+	const sk = skyT(theme);
 	return {
 		border: "none",
 		borderRadius: 22,
@@ -54611,7 +54693,7 @@ function skyjoBtnPrimary(theme) {
 	};
 }
 function skyjoBtnGhost(theme) {
-	const sk = skyjoTokens(theme);
+	const sk = skyT(theme);
 	return {
 		border: `1px solid ${sk.border}`,
 		borderRadius: 20,
@@ -54625,7 +54707,7 @@ function skyjoBtnGhost(theme) {
 	};
 }
 function SkyjoSetup({ state, setState, onStart, theme, t }) {
-	const sk = gtSoftTk(skyjoTokens(theme), theme);
+	const sk = gtSoftTk(skyT(theme), theme);
 	const gtS = gtSkin(theme, sk, "skyjo", {
 		font: SKYJO_FONT,
 		acc: sk.teal
@@ -54904,416 +54986,743 @@ function SkyjoNumPad({ player, initialValue, onConfirm, onClose, theme, t, sk, o
 		}
 	}, t("gtlKeysPad"))));
 }
-function SkyjoRoundEntry({ players, initialScores, isEdit, onSave, onCancel, theme, t, gtTarget, gtRound }) {
-	const sk = skyjoTokens(theme);
-	const [scores, setScores] = useState$11(() => initialScores || Object.fromEntries(players.map((p) => [p.id, ""])));
-	const [enderId, setEnderId] = useState$11(null);
-	const [padPlayerId, setPadPlayerId] = useState$11(null);
-	const [padInstant, setPadInstant] = useState$11(false);
-	const saveRef = useRef$16(null);
-	const listRef = useRef$16(null);
-	const lastPadRef = useRef$16(null);
-	const focusSaveRef = useRef$16(false);
-	useEffect$14(() => {
-		if (padPlayerId != null) {
-			lastPadRef.current = padPlayerId;
-			return;
-		}
-		const last = lastPadRef.current;
-		if (last == null) return;
-		lastPadRef.current = null;
-		if (focusSaveRef.current && saveRef.current && !saveRef.current.disabled) {
-			focusSaveRef.current = false;
-			try {
-				saveRef.current.focus({ preventScroll: true });
-			} catch (e) {}
-			return;
-		}
-		focusSaveRef.current = false;
-		gtlRestoreFocus(listRef.current && listRef.current.querySelector("[data-gtl-row=\"" + last + "\"]"));
-	}, [padPlayerId]);
-	const pointsDone = players.every((p) => scores[p.id] !== "" && !isNaN(parseInt(scores[p.id], 10)));
-	const canSave = pointsDone && (isEdit || enderId !== null);
-	const realEnder = enderId !== null && enderId !== "none" ? enderId : null;
-	const dblNote = (() => {
-		if (isEdit || !pointsDone || realEnder == null) return null;
-		const v = players.map((p) => parseInt(scores[p.id], 10) || 0);
-		const a = parseInt(scores[realEnder], 10) || 0;
-		const min = Math.min(...v);
-		if (a <= 0 || a === min && v.filter((x) => x === min).length === 1) return null;
-		const pl = players.find((p) => p.id === realEnder);
-		return t("skyjoDoubleNow").replace("{name}", pl ? pl.name : "").replace("{a}", a).replace("{b}", a * 2);
-	})();
-	const leaderId = !isEdit && players.length > 1 && (gtRound || 0) > 0 ? [...players].sort((a, b) => a.total - b.total)[0].id : null;
-	const gtFx = useGtLead(isEdit ? null : "sk-e", isEdit ? null : gtLeader(players.map((p) => [p.id, p.total]), true), gtRound || 0);
-	const handleSave = () => {
-		const raw = Object.fromEntries(players.map((p) => [p.id, parseInt(scores[p.id], 10) || 0]));
-		if (isEdit) {
-			onSave(raw);
-			return;
-		}
-		const minScore = Math.min(...Object.values(raw));
-		const countAtMin = Object.values(raw).filter((v) => v === minScore).length;
-		const finalScores = { ...raw };
-		let doubledId = null;
-		if (realEnder != null) {
-			if (!(raw[realEnder] === minScore && countAtMin === 1) && raw[realEnder] > 0) {
-				finalScores[realEnder] = raw[realEnder] * 2;
-				doubledId = realEnder;
-			}
-		}
-		onSave(finalScores, doubledId);
-		setScores(Object.fromEntries(players.map((p) => [p.id, ""])));
-		setEnderId(null);
+var SK_CSS = `
+@font-face{font-family:'Bowlby One';font-style:normal;font-weight:400;font-display:swap;src:url("./fonts/BowlbyOne-Regular-lat.woff2") format('woff2');}
+.sk-hero{display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center;padding:0 0 2px}
+.sk-fan{display:block;width:132px;height:auto;filter:drop-shadow(0 4px 5px rgba(0,0,0,.34))}
+.sk-word{margin:0;font-family:'Bowlby One',sans-serif;font-weight:400;font-size:42px;line-height:1.05;letter-spacing:.01em;color:var(--sk-acc);text-shadow:0 2px 0 rgba(0,0,0,.30),0 8px 20px color-mix(in oklab,var(--sk-acc) 30%,transparent)}
+html[data-gt-theme="light"] .sk-word{text-shadow:0 2px 0 rgba(0,0,0,.14)}
+.sk-sub{margin:0;font:600 14px/1.3 'Inter',sans-serif;color:var(--sk-muted)}
+@media (max-height:700px){.sk-fan{width:104px}.sk-word{font-size:34px}.sk-sub{font-size:13px}}
+@media (max-height:620px){.sk-fan,.sk-sub{display:none}.sk-word{font-size:30px}}
+.sk-seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:16px;background:var(--sk-card);border:1px solid var(--sk-line)}
+.sk-seg button{height:42px;border:0;border-radius:12px;background:transparent;color:var(--sk-muted);font:700 15px 'Inter',sans-serif;cursor:pointer;padding:0}
+.sk-seg button[aria-selected="true"]{background:var(--sk-acc);color:var(--sk-on)}
+.sk-rows{display:flex;flex-direction:column;gap:8px}
+.sk-row{display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--sk-card);border:2px solid var(--sk-line);border-radius:16px;box-sizing:border-box;cursor:pointer;min-height:68px}
+.sk-row[data-on="1"]{border-color:var(--sk-acc)}
+.sk-flag{flex:none;width:44px;height:44px;border-radius:50%;border:0;background:rgba(127,127,127,.18);color:var(--sk-muted);display:grid;place-items:center;cursor:pointer;padding:0}
+.sk-flag[aria-pressed="true"]{background:var(--sk-acc);color:var(--sk-on)}
+.sk-who{flex:1;min-width:0;border-radius:8px}
+.sk-name{font:700 17px/1.25 'Inter',sans-serif;color:var(--sk-ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;overflow-wrap:normal;word-break:keep-all}
+.sk-t1{font:600 12.5px/1.3 'Inter',sans-serif;color:var(--sk-muted);margin-top:1px}
+.sk-t1[data-k="dbl"]{color:var(--sk-acc)}
+.sk-t1[data-k="near"]{color:var(--sk-red)}
+.sk-gb{flex:none;width:44px;height:44px;border-radius:12px;border:1px solid var(--sk-line);background:transparent;color:var(--sk-muted);display:grid;place-items:center;padding:0;cursor:pointer}
+.sk-val{flex:none;min-width:60px;height:48px;padding:0 8px;border-radius:12px;border:2px solid var(--sk-line);box-sizing:border-box;display:grid;place-items:center;font:800 24px/1 'Space Grotesk',sans-serif;color:var(--sk-ink);font-variant-numeric:tabular-nums;background:var(--sk-in)}
+.sk-val[data-on="1"]{border-color:var(--sk-acc)}
+.sk-val[data-e="1"]{color:var(--sk-muted);opacity:.6}
+.sk-flag:focus-visible,.sk-gb:focus-visible,.sk-who:focus-visible,.sk-key:focus-visible,.sk-seg button:focus-visible,.sk-cell:focus-visible,.sk-none button:focus-visible,.sk-slot:focus-visible,.sk-pick:focus-visible,.sk-ghost:focus-visible{outline:2px solid var(--sk-acc);outline-offset:2px}
+.sk-none{display:flex;justify-content:center}
+.sk-none button{min-height:44px;padding:0 18px;border-radius:999px;border:1.5px dashed var(--sk-line);background:transparent;color:var(--sk-muted);font:600 14px 'Inter',sans-serif;cursor:pointer}
+.sk-none button[aria-pressed="true"]{border-style:solid;border-color:var(--sk-acc);color:var(--sk-acc);background:color-mix(in oklab,var(--sk-acc) 14%,transparent)}
+.sk-pad{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.sk-key{height:48px;border-radius:14px;border:1px solid var(--sk-line);background:var(--sk-card);color:var(--sk-ink);font:700 22px 'Space Grotesk',sans-serif;cursor:pointer;padding:0;display:grid;place-items:center}
+.sk-key[data-op="1"]{color:var(--sk-muted)}
+.sk-acts{display:flex;gap:8px}
+.sk-ghost{flex:none;min-height:54px;padding:0 14px;border-radius:18px;border:1px solid var(--sk-line);background:transparent;color:var(--sk-muted);font:700 14px 'Inter',sans-serif;cursor:pointer;display:flex;align-items:center;gap:6px}
+.sk-ghost:disabled{opacity:.4;cursor:default}
+.sk-save{flex:1;min-height:54px;border:0;border-radius:18px;background:var(--sk-acc);color:var(--sk-on);font:800 17px 'Space Grotesk',sans-serif;cursor:pointer;padding:0 10px}
+.sk-save:disabled{background:rgba(127,127,127,.18);color:var(--sk-muted);cursor:default}
+.sk-hint{font:500 13px/1.3 'Inter',sans-serif;color:var(--sk-muted);text-align:center}
+@media (max-height:700px){.sk-key{height:42px}.sk-row{min-height:62px;padding:6px 10px}.sk-save,.sk-ghost{min-height:48px}}
+@media (max-height:620px){.sk-key{height:38px}.sk-pad{gap:6px}.sk-row{min-height:56px;padding:4px 10px}.sk-save,.sk-ghost{min-height:44px}}
+@media (max-width:360px){.sk-save{font-size:15px}.sk-gl{display:none}.sk-ghost{padding:0 12px}}
+.sk-body,.sk-entry.gt-ug-ent{display:contents}
+.sk-tbl{background:var(--sk-card);border:1px solid var(--sk-line);border-radius:16px;padding:8px 6px;overflow-x:auto}
+.sk-tr{display:grid;gap:4px;align-items:center;min-width:min-content}
+.sk-th{font:700 11.5px 'Inter',sans-serif;color:var(--sk-muted);text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:4px 2px}
+.sk-rn{font:700 12px 'Inter',sans-serif;color:var(--sk-muted);text-align:center}
+.sk-cell{position:relative;min-height:42px;border:0;border-radius:10px;background:transparent;color:var(--sk-ink);font:700 16px 'Space Grotesk',sans-serif;font-variant-numeric:tabular-nums;cursor:pointer;padding:0 4px}
+.sk-cell:hover{background:rgba(127,127,127,.12)}
+.sk-x2{display:inline-block;margin-left:3px;padding:1px 4px;border-radius:6px;background:var(--sk-acc);color:var(--sk-on);font:800 10px/1.2 'Inter',sans-serif;vertical-align:2px;font-style:normal}
+.sk-tot{border-top:1px solid var(--sk-line);margin-top:4px;padding-top:4px}
+.sk-tot .sk-cell{cursor:default;font-weight:800;font-size:17px}
+.sk-tot .sk-cell:hover{background:transparent}
+.sk-tot .sk-cell[data-near="1"]{color:var(--sk-red)}
+.sk-empty{padding:24px 10px;text-align:center;font:500 14px 'Inter',sans-serif;color:var(--sk-muted)}
+.sk-ov{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:80;display:flex;align-items:flex-end;justify-content:center}
+.gtL-content .sk-ov{align-items:center}
+.sk-sheet{outline:none;width:100%;max-width:420px;max-height:94vh;max-height:94dvh;overflow-y:auto;box-sizing:border-box;background:var(--sk-card);color:var(--sk-ink);border-radius:24px 24px 0 0;padding:16px 16px calc(14px + env(safe-area-inset-bottom));box-shadow:0 -8px 30px rgba(0,0,0,.35);display:flex;flex-direction:column;gap:12px}
+.gtL-content .sk-sheet{border-radius:24px}
+.sk-sh-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.sk-sh-title{font:700 17px 'Inter',sans-serif;color:var(--sk-ink);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sk-x{flex:none;width:44px;height:44px;border:0;background:transparent;color:var(--sk-muted);cursor:pointer;display:grid;place-items:center;padding:0;border-radius:12px}
+.sk-x:focus-visible{outline:2px solid var(--sk-acc)}
+.sk-slots{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.sk-col{position:relative;display:grid;gap:6px;grid-template-rows:repeat(3,auto)}
+.sk-slot{height:54px;border-radius:10px;border:2px dashed var(--sk-line);background:transparent;color:var(--sk-muted);font:800 22px 'Space Grotesk',sans-serif;padding:0;display:grid;place-items:center;cursor:pointer}
+.sk-slot[data-sel="1"]{border-color:var(--sk-acc);border-style:solid}
+.sk-slot[data-v="1"]{border:2px solid rgba(255,255,255,.35);background:var(--c);color:var(--ci)}
+.sk-slot[data-v="1"][data-sel="1"]{border-color:var(--sk-acc);box-shadow:0 0 0 2px var(--sk-acc)}
+.sk-gone{position:absolute;inset:-3px;border-radius:12px;border:2px solid var(--sk-acc);background:color-mix(in oklab,var(--sk-card) 80%,transparent);display:grid;place-items:center;text-align:center;font:800 12px/1.2 'Inter',sans-serif;color:var(--sk-acc);pointer-events:none;padding:0 4px}
+.sk-picks{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+.sk-pick{height:46px;border-radius:10px;border:1.5px solid rgba(255,255,255,.3);background:var(--c);color:var(--ci);font:800 18px 'Space Grotesk',sans-serif;cursor:pointer;padding:0}
+.sk-pick[data-clr="1"]{grid-column:span 3;background:transparent;border:1px solid var(--sk-line);color:var(--sk-muted);font:700 14px 'Inter',sans-serif}
+.sk-sumline{display:flex;align-items:baseline;justify-content:space-between;gap:10px;font:600 14px 'Inter',sans-serif;color:var(--sk-muted)}
+.sk-sumline b{font:800 28px 'Space Grotesk',sans-serif;color:var(--sk-ink)}
+@media (max-height:700px){.sk-slot{height:42px}.sk-pick{height:42px}}
+.sk-dockplain{display:flex;flex-direction:column;gap:8px;position:sticky;bottom:0;background:var(--sk-card);padding-top:6px}
+.sk-split{display:contents}
+html:not([data-phone-landscape]) .sk-pt{display:flex;flex-direction:column;height:calc(100dvh - 32px)}
+@media (display-mode: standalone){html:not([data-phone-landscape]) .sk-pt{height:calc(100vh - 32px)}}
+html:not([data-phone-landscape]) .sk-pt>.gt-u-col{flex:1 1 0;min-height:0}
+html:not([data-phone-landscape]) .sk-pt .sk-split,html:not([data-phone-landscape]) .sk-pt .sk-split>.gtL-col-main{display:flex;flex-direction:column;flex:1 1 0;min-height:0;gap:10px}
+html:not([data-phone-landscape]) .sk-pt .sk-split>.gtL-col-main{overflow-y:auto;overscroll-behavior:contain}
+html:not([data-phone-landscape]) .sk-pt .sk-split>.gtL-col-side{display:none}
+html:not([data-phone-landscape]) .sk-pt .sk-entry.gt-ug-ent{display:flex;flex-direction:column;flex:1 1 0;min-height:0;gap:10px}
+html:not([data-phone-landscape]) .sk-pt .sk-entry>.sk-body{display:flex;flex-direction:column;flex:1 1 0;min-height:0;gap:6px;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+html:not([data-phone-landscape]) .sk-pt .sk-dock{position:static;margin-top:0!important;padding-top:0;flex:none;gap:8px}
+html:not([data-phone-landscape]) .sk-pt .sk-dock::before{display:none}
+html:not([data-phone-landscape]) .sk-pt .sk-hero,html:not([data-phone-landscape]) .sk-pt .sk-seg{flex:none}
+html:not([data-phone-landscape]) .sk-pt .sk-fan{width:92px}
+html:not([data-phone-landscape]) .sk-pt .sk-word{font-size:34px}
+html:not([data-phone-landscape]) .sk-pt .sk-sub{font-size:13px}
+html:not([data-phone-landscape]) .sk-pt .sk-row{min-height:56px;padding:4px 10px}
+html:not([data-phone-landscape]) .sk-pt .sk-key{height:46px}
+html:not([data-phone-landscape]) .sk-pt .sk-pad{gap:6px}
+html:not([data-phone-landscape]) .sk-pt .sk-save,html:not([data-phone-landscape]) .sk-pt .sk-ghost{min-height:52px}
+html:not([data-phone-landscape]) .sk-pt .sk-seg button{height:38px}
+@media (max-height:700px){html:not([data-phone-landscape]) .sk-pt .sk-key{height:42px}html:not([data-phone-landscape]) .sk-pt .sk-save,html:not([data-phone-landscape]) .sk-pt .sk-ghost{min-height:48px}}
+@media (max-height:620px){html:not([data-phone-landscape]) .sk-pt .sk-fan,html:not([data-phone-landscape]) .sk-pt .sk-sub{display:none}html:not([data-phone-landscape]) .sk-pt .sk-word{font-size:28px}html:not([data-phone-landscape]) .sk-pt .sk-key{height:38px}html:not([data-phone-landscape]) .sk-pt .sk-pad{gap:5px}html:not([data-phone-landscape]) .sk-pt .sk-save,html:not([data-phone-landscape]) .sk-pt .sk-ghost{min-height:44px}html:not([data-phone-landscape]) .sk-pt .sk-seg button{height:34px}html:not([data-phone-landscape]) .sk-pt .sk-sub{display:none}}
+.sk-entry:not(.gt-ug-ent){display:flex;flex-direction:column;gap:12px}
+.gtL-content .sk-sidetbl{margin-top:10px}
+@media (prefers-reduced-motion:no-preference){.sk-sheet{animation:sk-up .22s cubic-bezier(.23,1,.32,1)}@keyframes sk-up{from{transform:translateY(24px);opacity:.6}to{transform:none;opacity:1}}}
+`;
+function skyT(theme) {
+	const b = skyjoTokens(theme);
+	if (theme === "light") return {
+		...b,
+		line: "rgba(40,36,30,0.16)",
+		red: "#B3261E",
+		input: "#F4F1E8"
 	};
-	const padPlayer = padPlayerId != null ? players.find((p) => p.id === padPlayerId) : null;
-	const activeId = !isEdit ? (players.find((p) => scores[p.id] === "") || {}).id : null;
+	if (theme === "noir") return {
+		...b,
+		line: "#454545",
+		red: "#E0E0E0",
+		input: "#111111"
+	};
+	return {
+		...b,
+		bg: "#12141C",
+		bg2: "#181B25",
+		card: "#1A1E2B",
+		ink: "#F0F1F5",
+		muted: "#8890A0",
+		line: "#2A3040",
+		red: "#FF8A80",
+		input: "#12141C"
+	};
+}
+function skyShell(theme) {
+	const sk = skyT(theme);
+	return {
+		minHeight: "100vh",
+		background: `radial-gradient(ellipse at 50% -10%, ${sk.bg2} 0%, ${sk.bg} 65%)`,
+		padding: "20px 12px 32px"
+	};
+}
+function skyVars(sk) {
+	return {
+		"--sk-card": sk.card,
+		"--sk-ink": sk.ink,
+		"--sk-muted": sk.muted,
+		"--sk-line": sk.line,
+		"--sk-acc": sk.teal,
+		"--sk-on": sk.onAccent,
+		"--sk-red": sk.red,
+		"--sk-in": sk.input
+	};
+}
+function skyCardColor(v, theme) {
+	const k = v < 0 ? 0 : v === 0 ? 1 : v <= 4 ? 2 : v <= 8 ? 3 : 4;
+	const c = theme === "noir" ? [
+		"#4D4D4D",
+		"#CFCFCF",
+		"#8C8C8C",
+		"#B0B0B0",
+		"#6E6E6E"
+	][k] : [
+		"#3B5BC4",
+		"#8CC9EE",
+		"#3FAE4F",
+		"#F2C531",
+		"#E0453A"
+	][k];
+	const h = parseInt(c.slice(1), 16), r = h >> 16 & 255, g = h >> 8 & 255, b = h & 255;
+	return {
+		bg: c,
+		ink: (.2126 * r + .7152 * g + .0722 * b) / 255 > .5 ? "#10151F" : "#FFFFFF"
+	};
+}
+function skyValid(s) {
+	return s !== "" && s !== "-" && !isNaN(parseInt(s, 10));
+}
+function skyFinals(raw, enderSel) {
+	const vals = Object.values(raw);
+	const min = Math.min(...vals);
+	const cnt = vals.filter((v) => v === min).length;
+	const finals = { ...raw };
+	let doubledId = null;
+	if (enderSel != null && enderSel !== "none" && raw[enderSel] !== void 0) {
+		const a = raw[enderSel];
+		if (!(a === min && cnt === 1) && a > 0) {
+			finals[enderSel] = a * 2;
+			doubledId = enderSel;
+		}
+	}
+	return {
+		finals,
+		doubledId
+	};
+}
+function skyRoundRaw(r) {
+	if (!r) return 0;
+	if (typeof r.raw === "number") return r.raw;
+	return r.doubled ? Math.round(r.score / 2) : r.score;
+}
+function skyRoundEnder(players, i) {
+	let id = null, allFalse = players.length > 0;
+	players.forEach((p) => {
+		const r = p.rounds[i];
+		if (!r) {
+			allFalse = false;
+			return;
+		}
+		if (r.ender === true || r.doubled && id === null) id = p.id;
+		if (r.ender !== false) allFalse = false;
+	});
+	if (id !== null) return id;
+	return allFalse ? "none" : null;
+}
+function SkyjoFan({ theme, className }) {
+	const vs = [
+		-2,
+		0,
+		3,
+		7,
+		11
+	];
+	const ang = [
+		-40,
+		-20,
+		0,
+		20,
+		40
+	];
+	return /* @__PURE__ */ import_react.default.createElement("svg", {
+		className,
+		viewBox: "0 0 150 76",
+		"aria-hidden": "true"
+	}, vs.map((v, i) => {
+		const c = skyCardColor(v, theme);
+		return /* @__PURE__ */ import_react.default.createElement("g", {
+			key: i,
+			transform: `rotate(${ang[i]} 75 96)`
+		}, /* @__PURE__ */ import_react.default.createElement("rect", {
+			x: "56",
+			y: "10",
+			width: "38",
+			height: "54",
+			rx: "7",
+			fill: c.bg,
+			stroke: "rgba(255,255,255,0.55)",
+			strokeWidth: "1.5"
+		}), /* @__PURE__ */ import_react.default.createElement("rect", {
+			x: "59.5",
+			y: "13.5",
+			width: "31",
+			height: "47",
+			rx: "4.5",
+			fill: "none",
+			stroke: "rgba(0,0,0,0.12)",
+			strokeWidth: "1"
+		}), /* @__PURE__ */ import_react.default.createElement("text", {
+			x: "75",
+			y: "44",
+			textAnchor: "middle",
+			fontSize: "19",
+			fontWeight: "800",
+			fill: c.ink,
+			fontFamily: "'Space Grotesk',sans-serif"
+		}, v));
+	}));
+}
+function SkyjoHero({ theme, t, round, target }) {
+	return /* @__PURE__ */ import_react.default.createElement("div", { className: "sk-hero" }, /* @__PURE__ */ import_react.default.createElement(SkyjoFan, {
+		theme,
+		className: "sk-fan"
+	}), /* @__PURE__ */ import_react.default.createElement("h1", { className: "sk-word" }, "SKYJO"), /* @__PURE__ */ import_react.default.createElement("p", { className: "sk-sub" }, t("skyjoHeadLine")(round, target)));
+}
+function SkyFlagIcon() {
+	return /* @__PURE__ */ import_react.default.createElement("svg", {
+		width: "22",
+		height: "22",
+		viewBox: "0 0 24 24",
+		fill: "none",
+		"aria-hidden": "true"
+	}, /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M6 21V3.5",
+		stroke: "currentColor",
+		strokeWidth: "2.2",
+		strokeLinecap: "round"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M6.8 4.5c3.2-1.8 5.4 1.6 9.2 0 .9-.4 1.6-.4 2-.2v8.2c-.5-.2-1.1-.2-2 .2-3.8 1.6-6-1.8-9.2 0z",
+		fill: "currentColor"
+	}));
+}
+function SkyGridIcon() {
+	return /* @__PURE__ */ import_react.default.createElement("svg", {
+		width: "22",
+		height: "18",
+		viewBox: "0 0 22 18",
+		"aria-hidden": "true"
+	}, [
+		0,
+		1,
+		2,
+		3
+	].map((c) => [
+		0,
+		1,
+		2
+	].map((r) => /* @__PURE__ */ import_react.default.createElement("rect", {
+		key: c + "-" + r,
+		x: c * 5.6,
+		y: r * 6.2,
+		width: "4.2",
+		height: "5",
+		rx: "1",
+		fill: "currentColor"
+	}))));
+}
+function SkyUndoIcon() {
+	return /* @__PURE__ */ import_react.default.createElement("svg", {
+		width: "18",
+		height: "18",
+		viewBox: "0 0 24 24",
+		fill: "none",
+		"aria-hidden": "true"
+	}, /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M9 7 4 12l5 5",
+		stroke: "currentColor",
+		strokeWidth: "2.2",
+		strokeLinecap: "round",
+		strokeLinejoin: "round"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M4.5 12H14a6 6 0 0 1 0 12",
+		transform: "translate(0 -3)",
+		stroke: "currentColor",
+		strokeWidth: "2.2",
+		strokeLinecap: "round"
+	}));
+}
+function SkyjoGridSheet({ player, slots, setSlots, onApply, onClose, theme, t }) {
+	const ref = useGtDialog({
+		open: true,
+		onClose
+	});
+	const [sel, setSel] = useState$11(() => {
+		const i = slots.findIndex((v) => v == null);
+		return i < 0 ? 0 : i;
+	});
+	const gone = [
+		0,
+		1,
+		2,
+		3
+	].map((c) => {
+		const a = slots.slice(c * 3, c * 3 + 3);
+		return a.every((v) => v != null) && a[0] === a[1] && a[1] === a[2];
+	});
+	const sum = slots.reduce((s, v, i) => s + (v == null || gone[Math.floor(i / 3)] ? 0 : v), 0);
+	const filled = slots.some((v) => v != null);
+	const pick = (v) => {
+		setSlots((sl) => {
+			const n = [...sl];
+			n[sel] = v;
+			return n;
+		});
+		setSel(Math.min(11, sel + 1));
+	};
+	const clear = () => setSlots((sl) => {
+		const n = [...sl];
+		n[sel] = null;
+		return n;
+	});
+	const picks = [];
+	for (let v = -2; v <= 12; v++) picks.push(v);
 	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: isEdit ? void 0 : "pld-entry gt-ug-ent",
-		style: isEdit ? {
-			display: "flex",
-			flexDirection: "column",
-			gap: 10
-		} : void 0
-	}, /* @__PURE__ */ import_react.default.createElement("div", { className: "pld-body" + (players.length > 4 ? " gt-ug-many" : "") }, !isEdit && /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 13,
-		color: sk.muted,
-		letterSpacing: "0.08em",
-		textTransform: "uppercase",
-		fontFamily: "'Inter', sans-serif",
-		fontWeight: 600
-	} }, t("skyjoPointsThisRound")), !isEdit && (gtRound || 0) === 0 && /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		alignItems: "center",
-		gap: 6,
-		background: `${sk.teal}12`,
-		border: `1px solid ${sk.teal}40`,
-		borderRadius: 14,
-		padding: "7px 10px"
-	} }, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
-		name: "cards",
-		size: 13,
-		color: sk.teal,
-		style: { flexShrink: 0 }
-	}), /* @__PURE__ */ import_react.default.createElement("span", { style: {
-		fontSize: 13,
-		color: sk.teal,
-		fontFamily: "'Inter', sans-serif",
-		fontWeight: 600,
-		lineHeight: 1.3
-	} }, t("skyjoColumnRuleHint"))), /* @__PURE__ */ import_react.default.createElement("div", {
-		ref: listRef,
-		style: {
-			display: "flex",
-			flexDirection: "column",
-			gap: 8
-		}
-	}, players.map((p) => {
-		const rc = skyjoScoreColor(scores[p.id]);
-		const hasValue = scores[p.id] !== "";
+		className: "sk-ov",
+		onClick: onClose
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "sk-sheet",
+		role: "dialog",
+		"aria-modal": "true",
+		"aria-label": t("skyjoGridTitle")(player.name),
+		tabIndex: -1,
+		ref,
+		onClick: (e) => e.stopPropagation()
+	}, /* @__PURE__ */ import_react.default.createElement("div", { className: "sk-sh-head" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "sk-sh-title" }, t("skyjoGridTitle")(player.name)), /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "sk-x",
+		onClick: onClose,
+		"aria-label": t("skyjoGridClose")
+	}, /* @__PURE__ */ import_react.default.createElement(XMark, null))), /* @__PURE__ */ import_react.default.createElement("div", { className: "sk-slots" }, [
+		0,
+		1,
+		2,
+		3
+	].map((c) => /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "sk-col",
+		key: c
+	}, [
+		0,
+		1,
+		2
+	].map((r) => {
+		const i = c * 3 + r;
+		const v = slots[i];
+		const cc = v == null ? null : skyCardColor(v, theme);
 		return /* @__PURE__ */ import_react.default.createElement("button", {
-			key: p.id,
-			"data-gtl-row": p.id,
-			"data-gt-lh": "1",
-			onClick: () => {
-				setPadInstant(false);
-				setPadPlayerId(p.id);
+			key: r,
+			className: "sk-slot press-fx",
+			"data-sel": sel === i ? "1" : void 0,
+			"data-v": v == null ? void 0 : "1",
+			style: cc ? {
+				"--c": cc.bg,
+				"--ci": cc.ink
+			} : void 0,
+			"aria-label": t("skyjoGridCard")(i + 1, c + 1) + (v == null ? "" : ": " + v),
+			onClick: () => setSel(i)
+		}, v == null ? "·" : v);
+	}), gone[c] && /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "sk-gone",
+		"aria-hidden": "true"
+	}, t("skyjoColGone"))))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "sk-picks",
+		role: "group",
+		"aria-label": t("skyjoGridTitle")(player.name)
+	}, picks.map((v) => {
+		const cc = skyCardColor(v, theme);
+		return /* @__PURE__ */ import_react.default.createElement("button", {
+			key: v,
+			className: "sk-pick press-fx",
+			style: {
+				"--c": cc.bg,
+				"--ci": cc.ink
 			},
-			className: "press-fx gtL-entryrow gt-ug-row",
-			style: {
-				display: "flex",
-				alignItems: "center",
-				gap: 10,
-				background: rc ? `${rc}1c` : sk.card,
-				border: `2px solid ${p.id === activeId ? sk.teal : theme === "light" ? "rgba(24,22,32,0.10)" : "transparent"}`,
-				borderRadius: 20,
-				padding: "14px 18px",
-				cursor: "pointer",
-				textAlign: "left",
-				width: "100%",
-				boxSizing: "border-box"
-			}
-		}, gtFx === p.id && /* @__PURE__ */ import_react.default.createElement(GtLeadFx, { key: "gtlf" }), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-			flex: 1,
-			minWidth: 0
-		} }, /* @__PURE__ */ import_react.default.createElement("div", {
-			className: "gtL-entryname",
-			style: {
-				fontSize: 19,
-				fontWeight: 700,
-				color: sk.ink,
-				fontFamily: "'Inter', sans-serif",
-				display: "flex",
-				alignItems: "center",
-				gap: 6
-			}
-		}, p.id === leaderId && /* @__PURE__ */ import_react.default.createElement(GameIcon, {
-			name: "crown",
-			size: 14,
-			color: sk.gold,
-			style: { flexShrink: 0 },
-			className: gtFx === p.id ? "gt-crown-in" : void 0
-		}), /* @__PURE__ */ import_react.default.createElement("span", { style: {
-			minWidth: 0,
-			whiteSpace: "nowrap",
-			overflow: "hidden",
-			textOverflow: "ellipsis"
-		} }, p.name)), !isEdit && /* @__PURE__ */ import_react.default.createElement("div", {
-			className: "gtL-entrytotal",
-			"data-label": t("gtlTotal"),
-			style: {
-				fontSize: 13,
-				fontWeight: 600,
-				color: sk.muted,
-				fontFamily: "'Inter', sans-serif",
-				marginTop: 2
-			}
-		}, /* @__PURE__ */ import_react.default.createElement("span", { className: "gtsk-tl" }, t("gtlTotal"), " "), gtTarget > 0 && /* @__PURE__ */ import_react.default.createElement(GtRing, {
-			value: p.total / gtTarget,
-			size: 13,
-			color: sk.teal,
-			style: {
-				marginRight: 5,
-				verticalAlign: "-2px"
-			}
-		}), sk.totalPrefix || "", /* @__PURE__ */ import_react.default.createElement(GtCount, {
-			value: p.total,
-			mem: isEdit ? void 0 : "sk-t" + p.id,
-			good: "low",
-			dpos: "r"
-		}))), /* @__PURE__ */ import_react.default.createElement("div", {
-			className: "gtL-entryval",
-			"data-empty": hasValue ? void 0 : "1",
-			"data-hint": t("gtlEnterHint"),
-			style: {
-				"--gtl-hint": sk.muted,
-				fontSize: 40,
-				fontWeight: 800,
-				color: hasValue ? rc || sk.ink : sk.muted,
-				opacity: hasValue ? 1 : .55,
-				fontFamily: SKYJO_FONT,
-				fontVariantNumeric: "tabular-nums",
-				minWidth: 46,
-				textAlign: "right"
-			}
-		}, hasValue ? scores[p.id] : "·"));
-	})), !isEdit && /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 14,
-		color: sk.ink,
-		marginTop: 6,
-		fontFamily: "'Inter', sans-serif",
-		fontWeight: 600,
-		opacity: .85
-	} }, t("skyjoRoundEnderQuestion")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexWrap: "wrap",
-		gap: 6
-	} }, players.map((p) => /* @__PURE__ */ import_react.default.createElement("button", {
-		key: p.id,
-		onClick: () => setEnderId(p.id),
-		"aria-pressed": enderId === p.id,
-		style: {
-			border: `1.5px solid ${enderId === p.id ? sk.teal : sk.border}`,
-			borderRadius: 999,
-			background: enderId === p.id ? `${sk.teal}22` : sk.card,
-			color: enderId === p.id ? sk.teal : sk.ink,
-			fontSize: 13.5,
-			fontWeight: 600,
-			minHeight: 46,
-			padding: "0 18px",
-			cursor: "pointer",
-			fontFamily: "'Inter', sans-serif"
-		}
-	}, p.name)), /* @__PURE__ */ import_react.default.createElement("button", {
-		onClick: () => setEnderId("none"),
-		"aria-pressed": enderId === "none",
-		style: {
-			border: `1.5px ${enderId === "none" ? "solid" : "dashed"} ${enderId === "none" ? sk.teal : sk.border}`,
-			borderRadius: 999,
-			background: enderId === "none" ? `${sk.teal}22` : "transparent",
-			color: enderId === "none" ? sk.teal : sk.muted,
-			fontSize: 13.5,
-			fontWeight: 600,
-			minHeight: 44,
-			padding: "0 16px",
-			cursor: "pointer",
-			fontFamily: "'Inter', sans-serif"
-		}
-	}, t("skyjoRoundEnderNone"))), dblNote && /* @__PURE__ */ import_react.default.createElement("div", {
-		role: "status",
-		style: {
-			fontSize: 13,
-			fontWeight: 600,
-			color: sk.ink,
-			lineHeight: 1.35,
-			fontFamily: "'Inter', sans-serif"
-		}
-	}, dblNote))), /* @__PURE__ */ import_react.default.createElement("div", { className: "pld-foot" }, /* @__PURE__ */ import_react.default.createElement(GtDock, null, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		gap: 8
-	} }, isEdit && /* @__PURE__ */ import_react.default.createElement("button", {
-		onClick: onCancel,
-		className: "press-fx",
-		style: skyjoBtnGhost(theme)
-	}, t("back")), /* @__PURE__ */ import_react.default.createElement("button", {
+			onClick: () => pick(v)
+		}, v);
+	}), /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "sk-pick press-fx",
+		"data-clr": "1",
+		onClick: clear
+	}, t("skyjoGridClear"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "sk-sumline" }, /* @__PURE__ */ import_react.default.createElement("span", null, t("skyjoGridSum")), /* @__PURE__ */ import_react.default.createElement("b", null, sum)), /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "sk-save press-fx",
 		"data-gt-sound": "1",
-		ref: saveRef,
-		onClick: handleSave,
-		disabled: !canSave,
-		className: "press-fx",
-		style: {
-			...skyjoBtnPrimary(theme),
-			flex: 1,
-			minHeight: 56,
-			borderRadius: 20,
-			fontSize: 17,
-			...canSave ? {} : {
-				background: GT_DISABLED_BG,
-				color: sk.muted,
-				boxShadow: "none",
-				cursor: "default"
-			}
-		},
-		"aria-describedby": canSave ? void 0 : "gt-save-hint-sk"
-	}, t("skyjoSaveRound"))), !canSave && /* @__PURE__ */ import_react.default.createElement("div", {
-		id: "gt-save-hint-sk",
-		className: "gt-ug-dock-hint",
-		style: {
-			color: sk.muted,
-			fontFamily: "'Inter', sans-serif"
+		disabled: !filled,
+		onClick: () => onApply(sum)
+	}, t("skyjoGridApply")(sum, player.name))));
+}
+function SkyjoEntry({ players, init, isEdit, plain, roundNo, startPid, target, theme, t, sk, keysOn, canUndo, onUndo, onSave, onCancel }) {
+	const [vals, setVals] = useState$11(() => Object.fromEntries(players.map((p) => [p.id, init && init.raw && init.raw[p.id] !== void 0 ? String(init.raw[p.id]) : ""])));
+	const [enderSel, setEnderSel] = useState$11(init && init.ender !== void 0 ? init.ender : null);
+	const [selId, setSelId] = useState$11(startPid != null ? startPid : null);
+	const [fresh, setFresh] = useState$11(true);
+	const [gridFor, setGridFor] = useState$11(null);
+	const [grids, setGrids] = useState$11({});
+	const pointsDone = players.every((p) => skyValid(vals[p.id]));
+	const firstEmpty = players.find((p) => !skyValid(vals[p.id]));
+	const sel = selId != null ? selId : isEdit ? (players[0] || {}).id : (firstEmpty || {}).id;
+	const raw = Object.fromEntries(players.map((p) => [p.id, parseInt(vals[p.id], 10) || 0]));
+	const realEnder = enderSel != null && enderSel !== "none" ? enderSel : null;
+	const preview = pointsDone && realEnder != null ? skyFinals(raw, realEnder) : null;
+	const canSave = pointsDone && (isEdit || enderSel !== null);
+	const choose = (id) => {
+		setSelId(id);
+		setFresh(true);
+	};
+	const setV = (id, v) => setVals((o) => ({
+		...o,
+		[id]: v
+	}));
+	const press = (d) => {
+		const cur = fresh ? "" : vals[sel] || "";
+		const neg = cur.startsWith("-");
+		const digits = (neg ? cur.slice(1) : cur).replace(/^0+(?=\d)/, "");
+		setV(sel, (neg ? "-" : "") + (digits + d).slice(0, 3));
+		setFresh(false);
+	};
+	const back = () => {
+		const nx = (vals[sel] || "").slice(0, -1);
+		setV(sel, nx === "-" ? "" : nx);
+		setFresh(false);
+	};
+	const sign = () => {
+		if (fresh) {
+			setV(sel, "-");
+			setFresh(false);
+			return;
 		}
-	}, t(pointsDone ? "skyjoPickEnder" : "enterPointsFirst")))), padPlayer && /* @__PURE__ */ import_react.default.createElement(SkyjoNumPad, {
-		key: padPlayer.id,
-		instant: padInstant,
-		onAdvance: (v, dir) => {
-			const nx = players.findIndex((q) => q.id === padPlayer.id) + dir;
-			const clean = String(v).replace(/[^0-9-]/g, "");
-			setScores((s) => ({
-				...s,
-				[padPlayer.id]: clean === "" || clean === "-" ? "0" : clean
-			}));
-			if (nx >= 0 && nx < players.length) {
-				setPadInstant(true);
-				setPadPlayerId(players[nx].id);
-			} else if (nx >= players.length) {
-				focusSaveRef.current = true;
-				setPadPlayerId(null);
+		const cur = vals[sel] || "";
+		if (cur === "" || cur === "0") setV(sel, "-");
+		else setV(sel, cur.startsWith("-") ? cur.slice(1) : "-" + cur);
+	};
+	const doSave = () => {
+		if (!canSave) return;
+		onSave(raw, enderSel);
+	};
+	useGtlKeys(!!keysOn && gridFor == null, (e) => {
+		const k = e.key;
+		if (/^[0-9]$/.test(k)) {
+			e.preventDefault();
+			press(k);
+		} else if (k === "Backspace" || k === "Delete") {
+			e.preventDefault();
+			back();
+		} else if (k === "-" || k === "+" || k === "±") {
+			e.preventDefault();
+			sign();
+		} else if (k === "ArrowDown" || k === "ArrowUp") {
+			e.preventDefault();
+			const i = players.findIndex((p) => p.id === sel);
+			const nx = players[Math.max(0, Math.min(players.length - 1, i + (k === "ArrowDown" ? 1 : -1)))];
+			if (nx) choose(nx.id);
+		} else if (k === "Enter") {
+			if (e.target && e.target.closest && e.target.closest("button,[role=\"button\"]")) return;
+			e.preventDefault();
+			doSave();
+		}
+	});
+	const gridPlayer = gridFor != null ? players.find((p) => p.id === gridFor) : null;
+	const rowsEl = /* @__PURE__ */ import_react.default.createElement("div", { className: "sk-rows" }, players.map((p) => {
+		const on = p.id === sel;
+		const has = skyValid(vals[p.id]);
+		const isEnd = realEnder === p.id;
+		let sub = null;
+		if (isEnd) sub = preview && preview.doubledId === p.id ? {
+			k: "dbl",
+			x: t("skyjoEndedDouble")(raw[p.id], raw[p.id] * 2)
+		} : {
+			k: "end",
+			x: t("skyjoEnded")
+		};
+		else if (!isEdit) sub = target > 0 && p.total >= target * .75 ? {
+			k: "near",
+			x: `${t("gtlTotal")} ${p.total}, ${t("skyjoNearTarget")(target)}`
+		} : {
+			k: "tot",
+			x: `${t("gtlTotal")} ${p.total}`
+		};
+		return /* @__PURE__ */ import_react.default.createElement("div", {
+			key: p.id,
+			className: "sk-row",
+			"data-on": on ? "1" : void 0,
+			onClick: () => choose(p.id)
+		}, /* @__PURE__ */ import_react.default.createElement("button", {
+			className: "sk-flag press-fx",
+			"aria-pressed": isEnd,
+			"aria-label": t("skyjoFlagLabel")(p.name),
+			onClick: (e) => {
+				e.stopPropagation();
+				setEnderSel(isEnd ? null : p.id);
+				choose(p.id);
 			}
-		},
-		player: padPlayer,
-		initialValue: scores[padPlayer.id],
+		}, /* @__PURE__ */ import_react.default.createElement(SkyFlagIcon, null)), /* @__PURE__ */ import_react.default.createElement("div", {
+			className: "sk-who",
+			role: "button",
+			tabIndex: 0,
+			"aria-pressed": on,
+			"aria-label": `${p.name}${isEdit ? "" : " " + t("gtlTotal") + " " + p.total}${has ? ", " + vals[p.id] : ""}`,
+			onKeyDown: (e) => {
+				if (e.key === "Enter" || e.key === " ") {
+					e.preventDefault();
+					choose(p.id);
+				}
+			}
+		}, /* @__PURE__ */ import_react.default.createElement("div", { className: "sk-name" }, p.name), sub && /* @__PURE__ */ import_react.default.createElement("div", {
+			className: "sk-t1",
+			"data-k": sub.k
+		}, sub.x)), /* @__PURE__ */ import_react.default.createElement("button", {
+			className: "sk-gb press-fx",
+			"aria-label": t("skyjoGridOpen")(p.name),
+			onClick: (e) => {
+				e.stopPropagation();
+				choose(p.id);
+				setGridFor(p.id);
+			}
+		}, /* @__PURE__ */ import_react.default.createElement(SkyGridIcon, null)), /* @__PURE__ */ import_react.default.createElement("div", {
+			className: "sk-val",
+			"data-on": on ? "1" : void 0,
+			"data-e": has ? void 0 : "1",
+			"aria-hidden": "true"
+		}, has ? vals[p.id] : vals[p.id] === "-" ? "−" : "·"));
+	}));
+	const noneEl = /* @__PURE__ */ import_react.default.createElement("div", { className: "sk-none" }, /* @__PURE__ */ import_react.default.createElement("button", {
+		"aria-pressed": enderSel === "none",
+		onClick: () => setEnderSel(enderSel === "none" ? null : "none")
+	}, t("skyjoNoOneEnded")));
+	const padEl = /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "sk-pad",
+		role: "group",
+		"aria-label": t("skyjoPointsThisRound")
+	}, [
+		["1", "d"],
+		["2", "d"],
+		["3", "d"],
+		["bk", "o"],
+		["4", "d"],
+		["5", "d"],
+		["6", "d"],
+		["sg", "o"],
+		["7", "d"],
+		["8", "d"],
+		["9", "d"],
+		["0", "d"]
+	].map(([k, ty]) => k === "bk" ? /* @__PURE__ */ import_react.default.createElement("button", {
+		key: k,
+		className: "sk-key press-fx",
+		"data-op": "1",
+		"aria-label": t("skyjoGridClear"),
+		onClick: back
+	}, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+		name: "backspaceKey",
+		size: 20,
+		color: sk.muted
+	})) : k === "sg" ? /* @__PURE__ */ import_react.default.createElement("button", {
+		key: k,
+		className: "sk-key press-fx",
+		"data-op": "1",
+		onClick: sign
+	}, "±") : /* @__PURE__ */ import_react.default.createElement("button", {
+		key: k,
+		className: "sk-key press-fx",
+		onClick: () => press(k)
+	}, k)));
+	const actsEl = /* @__PURE__ */ import_react.default.createElement("div", { className: "sk-acts" }, isEdit ? /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "sk-ghost press-fx",
+		onClick: onCancel
+	}, t("skyjoGridClose")) : /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "sk-ghost press-fx",
+		disabled: !canUndo,
+		onClick: onUndo,
+		"aria-label": t("mgUndo")
+	}, /* @__PURE__ */ import_react.default.createElement(SkyUndoIcon, null), /* @__PURE__ */ import_react.default.createElement("span", { className: "sk-gl" }, t("mgUndo"))), /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "sk-save press-fx",
+		"data-gt-sound": "1",
+		disabled: !canSave,
+		onClick: doSave,
+		"aria-describedby": canSave ? void 0 : "gt-save-hint-sk"
+	}, isEdit ? t("skyjoChangeRound")(roundNo) : t("skyjoSaveRoundN")(roundNo)));
+	const hintEl = !canSave && /* @__PURE__ */ import_react.default.createElement("div", {
+		id: "gt-save-hint-sk",
+		className: "sk-hint"
+	}, t(pointsDone ? "skyjoPickEnder" : "enterPointsFirst"));
+	const dockInner = /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, padEl, actsEl, hintEl);
+	return /* @__PURE__ */ import_react.default.createElement("div", { className: isEdit ? "sk-entry" : "sk-entry gt-ug-ent" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "sk-body" }, rowsEl, noneEl), plain ? /* @__PURE__ */ import_react.default.createElement("div", { className: "sk-dockplain" }, dockInner) : /* @__PURE__ */ import_react.default.createElement(GtDock, { className: "sk-dock" }, dockInner), gridPlayer && /* @__PURE__ */ import_react.default.createElement(SkyjoGridSheet, {
+		key: gridPlayer.id,
+		player: gridPlayer,
+		slots: grids[gridPlayer.id] || Array(12).fill(null),
+		setSlots: (fn) => setGrids((g) => ({
+			...g,
+			[gridPlayer.id]: fn(g[gridPlayer.id] || Array(12).fill(null))
+		})),
 		theme,
 		t,
-		sk,
-		onClose: () => setPadPlayerId(null),
-		onConfirm: (v) => {
-			setScores((s) => ({
-				...s,
-				[padPlayer.id]: v.replace(/[^0-9-]/g, "")
-			}));
-			setPadPlayerId(null);
+		onClose: () => setGridFor(null),
+		onApply: (sum) => {
+			setV(gridPlayer.id, String(sum));
+			setFresh(true);
+			setGridFor(null);
 		}
 	}));
 }
-function SkyjoRoundHistory({ players, editingIndex, setEditingIndex, onEditSave, theme, t }) {
-	const sk = skyjoTokens(theme);
-	const numRounds = players[0] ? players[0].rounds.length : 0;
-	if (numRounds === 0) return null;
-	const indices = Array.from({ length: numRounds }, (_, i) => i).reverse();
-	const cols = `44px repeat(${players.length}, 1fr)`;
-	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 6,
-		marginTop: 20
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 11,
-		color: sk.muted,
-		letterSpacing: "0.08em",
-		textTransform: "uppercase",
-		fontFamily: "'Inter', sans-serif",
-		fontWeight: 600
-	} }, t("skyjoRoundHistory")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "grid",
-		gridTemplateColumns: cols,
-		gap: 6,
-		padding: "0 12px"
-	} }, /* @__PURE__ */ import_react.default.createElement("span", null), players.map((p) => /* @__PURE__ */ import_react.default.createElement("span", {
+function SkyjoTable({ players, target, onCell, theme, t }) {
+	const n = players[0] ? players[0].rounds.length : 0;
+	if (n === 0) return /* @__PURE__ */ import_react.default.createElement("div", { className: "sk-tbl" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "sk-empty" }, t("skyjoTableEmpty")));
+	const cols = `28px repeat(${players.length}, minmax(${players.length > 5 ? 54 : 0}px, 1fr))`;
+	const idx = Array.from({ length: n }, (_, i) => i);
+	return /* @__PURE__ */ import_react.default.createElement("div", { className: "sk-tbl" }, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "sk-tr",
+		style: { gridTemplateColumns: cols }
+	}, /* @__PURE__ */ import_react.default.createElement("span", null), players.map((p) => /* @__PURE__ */ import_react.default.createElement("span", {
 		key: p.id,
-		style: {
-			fontSize: 10.5,
-			fontWeight: 700,
-			color: sk.muted,
-			fontFamily: "'Inter', sans-serif",
-			textAlign: "center",
-			whiteSpace: "nowrap",
-			overflow: "hidden",
-			textOverflow: "ellipsis"
-		}
-	}, p.name))), indices.map((i) => editingIndex === i ? /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "sk-th",
+		title: p.name
+	}, p.name))), idx.map((i) => /* @__PURE__ */ import_react.default.createElement("div", {
 		key: i,
-		style: {
-			background: sk.card,
-			border: `1.5px solid ${sk.gold}`,
-			borderRadius: 22,
-			padding: "14px 12px"
-		}
-	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 11,
-		color: sk.gold,
-		fontFamily: "'Inter', sans-serif",
-		fontWeight: 700,
-		marginBottom: 8
-	} }, t("skyjoRoundLabel")(i + 1)), /* @__PURE__ */ import_react.default.createElement(SkyjoRoundEntry, {
-		players,
-		isEdit: true,
-		initialScores: Object.fromEntries(players.map((p) => [p.id, String(p.rounds[i].score)])),
-		onSave: (scores) => onEditSave(i, scores),
-		onCancel: () => setEditingIndex(null),
-		theme,
-		t
-	})) : /* @__PURE__ */ import_react.default.createElement("button", {
-		key: i,
-		onClick: () => setEditingIndex(i),
-		className: "press-fx",
+		className: "sk-tr",
+		style: { gridTemplateColumns: cols }
+	}, /* @__PURE__ */ import_react.default.createElement("span", { className: "sk-rn" }, i + 1), players.map((p) => {
+		const r = p.rounds[i] || {
+			score: 0,
+			missing: true
+		};
+		return /* @__PURE__ */ import_react.default.createElement("button", {
+			key: p.id,
+			className: "sk-cell press-fx",
+			"aria-label": `${p.name}, ${t("skyjoRoundLabel")(i + 1)}: ${r.missing ? "-" : r.score}${r.doubled ? " (×2)" : ""}`,
+			onClick: () => onCell(i, p.id)
+		}, r.missing ? "–" : r.score, r.doubled && /* @__PURE__ */ import_react.default.createElement("i", {
+			className: "sk-x2",
+			"aria-hidden": "true"
+		}, "×2"));
+	}))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "sk-tr sk-tot",
+		style: { gridTemplateColumns: cols }
+	}, /* @__PURE__ */ import_react.default.createElement("span", { className: "sk-rn" }, "Σ"), players.map((p) => /* @__PURE__ */ import_react.default.createElement("span", {
+		key: p.id,
+		className: "sk-cell",
+		"data-near": target > 0 && p.total >= target * .75 ? "1" : void 0,
 		style: {
 			display: "grid",
-			gridTemplateColumns: cols,
-			gap: 6,
-			alignItems: "center",
-			width: "100%",
-			background: sk.card,
-			border: `1px solid ${sk.border}`,
-			borderRadius: 14,
-			padding: "9px 12px",
-			cursor: "pointer",
-			textAlign: "left"
+			placeItems: "center"
 		}
-	}, /* @__PURE__ */ import_react.default.createElement("span", { style: {
-		fontSize: 11.5,
-		fontWeight: 700,
-		color: sk.muted,
-		fontFamily: "'Inter', sans-serif"
-	} }, i + 1), players.map((p) => {
-		const sc = p.rounds[i].score;
-		const rc = skyjoScoreColor(String(sc));
-		return /* @__PURE__ */ import_react.default.createElement("span", {
-			key: p.id,
-			style: {
-				fontSize: 14,
-				fontWeight: 800,
-				color: rc || sk.ink,
-				fontFamily: SKYJO_FONT,
-				background: rc ? `${rc}18` : "transparent",
-				borderRadius: 8,
-				padding: "3px 0",
-				textAlign: "center"
-			}
-		}, sc > 0 ? `+${sc}` : sc);
-	}))));
+	}, p.total))));
 }
-function SkyjoGameOver({ players, onRestart, onNewSetup, theme, t }) {
-	const sk = skyjoTokens(theme);
+function SkyjoEditSheet({ players, i, pid, onSave, onClose, theme, t, sk, target }) {
+	const ref = useGtDialog({
+		open: true,
+		onClose
+	});
+	const init = {
+		raw: Object.fromEntries(players.map((p) => [p.id, skyRoundRaw(p.rounds[i])])),
+		ender: skyRoundEnder(players, i)
+	};
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "sk-ov",
+		onClick: onClose
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "sk-sheet",
+		role: "dialog",
+		"aria-modal": "true",
+		"aria-label": t("skyjoRoundLabel")(i + 1),
+		tabIndex: -1,
+		ref,
+		onClick: (e) => e.stopPropagation()
+	}, /* @__PURE__ */ import_react.default.createElement("div", { className: "sk-sh-head" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "sk-sh-title" }, t("skyjoRoundLabel")(i + 1)), /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "sk-x",
+		onClick: onClose,
+		"aria-label": t("skyjoGridClose")
+	}, /* @__PURE__ */ import_react.default.createElement(XMark, null))), /* @__PURE__ */ import_react.default.createElement(SkyjoEntry, {
+		isEdit: true,
+		plain: true,
+		keysOn: true,
+		init,
+		players,
+		roundNo: i + 1,
+		startPid: pid,
+		target,
+		theme,
+		t,
+		sk,
+		onSave: (raw, en) => onSave(i, raw, en),
+		onCancel: onClose
+	})));
+}
+function SkyjoGameOver({ players, onRestart, onNewSetup, onUndo, theme, t }) {
+	const sk = skyT(theme);
 	const ranked = [...players].sort((a, b) => a.total - b.total);
 	const winner = ranked[0];
 	const celebration = useCelebration(true);
@@ -55404,7 +55813,9 @@ function SkyjoGameOver({ players, onRestart, onNewSetup, theme, t }) {
 		style: {
 			display: "flex",
 			gap: 8,
-			marginTop: 8
+			marginTop: 8,
+			flexWrap: "wrap",
+			justifyContent: "center"
 		}
 	}, /* @__PURE__ */ import_react.default.createElement("button", {
 		"data-gt-sound": "1",
@@ -55419,15 +55830,34 @@ function SkyjoGameOver({ players, onRestart, onNewSetup, theme, t }) {
 		onClick: onNewSetup,
 		className: "press-fx",
 		style: skyjoBtnGhost(theme)
-	}, t("changePlayers"))));
+	}, t("changePlayers")), /* @__PURE__ */ import_react.default.createElement("button", {
+		onClick: onUndo,
+		className: "press-fx",
+		style: {
+			...skyjoBtnGhost(theme),
+			display: "flex",
+			alignItems: "center",
+			gap: 6
+		}
+	}, /* @__PURE__ */ import_react.default.createElement(SkyUndoIcon, null), t("skyjoUndoRound"))));
 }
 function SkyjoGame({ state, setState, onBack, onHome, onEndGame, lang = "de", theme = "dark" }) {
 	const t = useT(lang);
-	const sk = skyjoTokens(theme);
+	const sk = skyT(theme);
 	const [rulesOpen, setRulesOpen] = useState$11(false);
-	const [editingIndex, setEditingIndex] = useState$11(null);
 	const [gameOver, setGameOver] = useState$11(false);
+	const [view, setView] = useState$11("round");
+	const [edit, setEdit] = useState$11(null);
+	const restoreRef = useRef$16(null);
+	const rootRef = useRef$16(null);
+	const [lap, setLap] = useState$11(false);
+	import_react.default.useLayoutEffect(() => {
+		setLap(!!(rootRef.current && rootRef.current.closest(".gtL-content")));
+	}, [state.phase, gameOver]);
+	const pt = !lap && !gameOver && state.phase === "play";
+	const nRounds = state.players[0] ? state.players[0].rounds.length : 0;
 	const startGame = () => {
+		restoreRef.current = null;
 		setState((s) => ({
 			...s,
 			phase: "play",
@@ -55438,35 +55868,23 @@ function SkyjoGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 			}))
 		}));
 		setGameOver(false);
+		setView("round");
 	};
-	const saveRound = (scores, doubledId) => {
+	const saveRound = (raw, enderSel) => {
+		restoreRef.current = null;
 		setState((s) => {
-			const players = s.players.map((p) => ({
-				...p,
-				total: p.total + (scores[p.id] || 0),
-				rounds: [...p.rounds, {
-					score: scores[p.id] || 0,
-					doubled: p.id === doubledId
-				}]
-			}));
-			return {
-				...s,
-				players
-			};
-		});
-	};
-	const editRound = (roundIndex, newScores) => {
-		setState((s) => {
+			const { finals, doubledId } = skyFinals(raw, enderSel);
 			const players = s.players.map((p) => {
-				const rounds = p.rounds.map((r, i) => i === roundIndex ? {
-					...r,
-					score: newScores[p.id] || 0
-				} : r);
-				const total = rounds.reduce((sum, r) => sum + r.score, 0);
+				const sc = finals[p.id] || 0;
 				return {
 					...p,
-					rounds,
-					total
+					total: p.total + sc,
+					rounds: [...p.rounds, {
+						score: sc,
+						doubled: p.id === doubledId,
+						raw: raw[p.id] || 0,
+						ender: enderSel === "none" ? false : p.id === enderSel
+					}]
 				};
 			});
 			return {
@@ -55474,26 +55892,82 @@ function SkyjoGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 				players
 			};
 		});
-		setEditingIndex(null);
+	};
+	const editRound = (i, raw, enderSel) => {
+		setState((s) => {
+			const { finals, doubledId } = skyFinals(raw, enderSel);
+			const players = s.players.map((p) => {
+				const rounds = p.rounds.map((r, k) => {
+					if (k !== i) return r;
+					const nr = {
+						score: finals[p.id] || 0,
+						doubled: p.id === doubledId,
+						raw: raw[p.id] || 0
+					};
+					if (enderSel !== null) nr.ender = enderSel === "none" ? false : p.id === enderSel;
+					return nr;
+				});
+				return {
+					...p,
+					rounds,
+					total: rounds.reduce((a, r) => a + r.score, 0)
+				};
+			});
+			return {
+				...s,
+				players
+			};
+		});
+		setEdit(null);
+	};
+	const undoRound = () => {
+		const ps = state.players;
+		const n = ps[0] ? ps[0].rounds.length : 0;
+		if (!n) return;
+		const last = n - 1;
+		restoreRef.current = {
+			raw: Object.fromEntries(ps.map((p) => [p.id, skyRoundRaw(p.rounds[last])])),
+			ender: skyRoundEnder(ps, last)
+		};
+		setState((s) => {
+			const players = s.players.map((p) => {
+				const rounds = p.rounds.slice(0, -1);
+				return {
+					...p,
+					rounds,
+					total: rounds.reduce((a, r) => a + r.score, 0)
+				};
+			});
+			return {
+				...s,
+				players
+			};
+		});
+		setEdit(null);
+		setView("round");
 	};
 	useEffect$14(() => {
 		if (state.phase !== "play") return;
 		if (state.players.some((p) => p.total >= state.target) && state.players[0]?.rounds.length > 0) setGameOver(true);
+		else setGameOver(false);
 	}, [
 		state.players,
 		state.phase,
 		state.target
 	]);
+	const shellVars = {
+		maxWidth: 380,
+		margin: "0 auto",
+		position: "relative",
+		...skyVars(sk)
+	};
 	if (state.phase === "setup") return /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-shellpage pld-shell",
-		style: skyjoPageShellStyle(theme)
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, PLD_CSS), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-game pl-wide pl-page pl-head-compact pld",
-		style: {
-			maxWidth: 380,
-			margin: "0 auto",
-			position: "relative"
-		}
+		style: skyShell(theme)
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, PLD_CSS, SK_CSS, SKL_CSS), /* @__PURE__ */ import_react.default.createElement("div", {
+		ref: rootRef,
+		className: "gtL-game pl-wide pl-page pl-head-compact pld sk-root",
+		style: shellVars
 	}, /* @__PURE__ */ import_react.default.createElement(GtCol, {
 		accent: sk.teal,
 		className: "gt-ug"
@@ -55519,16 +55993,28 @@ function SkyjoGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 		text: t("rulesSkyjo"),
 		tokens: sk
 	}));
+	const openCell = (i, pid) => setEdit({
+		i,
+		pid
+	});
+	const tableEl = /* @__PURE__ */ import_react.default.createElement(SkyjoTable, {
+		players: state.players,
+		target: state.target,
+		onCell: openCell,
+		theme,
+		t
+	});
+	const seriesColors = state.players.map((p, i) => playerHue(i, theme));
 	return /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-shellpage pld-shell",
-		style: skyjoPageShellStyle(theme)
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, PLD_CSS), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-game pl-wide pl-page pl-head-compact pld",
-		style: {
-			maxWidth: 380,
-			margin: "0 auto",
-			position: "relative"
-		}
+		style: pt ? {
+			...skyShell(theme),
+			padding: "20px 12px 12px"
+		} : skyShell(theme)
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, PLD_CSS, SK_CSS, SKL_CSS), /* @__PURE__ */ import_react.default.createElement("div", {
+		ref: rootRef,
+		className: "gtL-game pl-wide pl-page pl-head-compact pld sk-root" + (pt ? " sk-pt" : ""),
+		style: shellVars
 	}, /* @__PURE__ */ import_react.default.createElement(GtCol, {
 		accent: sk.teal,
 		className: "gt-ug"
@@ -55538,6 +56024,7 @@ function SkyjoGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 		onEndGame,
 		tokens: sk
 	}), /* @__PURE__ */ import_react.default.createElement(SkyjoTopBar, {
+		hideTitle: pt,
 		subtitle: `${t("skyjoTarget")} ${state.target}`,
 		onBack,
 		theme,
@@ -55549,32 +56036,49 @@ function SkyjoGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 			...s,
 			phase: "setup"
 		})),
+		onUndo: undoRound,
 		theme,
 		t
-	}) : /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split pld-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement(GtRace, {
+	}) : /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split sk-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement(SkyjoHero, {
+		theme,
+		t,
+		round: nRounds + 1,
+		target: state.target
+	}), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "sk-seg",
+		role: "tablist"
+	}, /* @__PURE__ */ import_react.default.createElement("button", {
+		role: "tab",
+		"aria-selected": view === "round",
+		onClick: () => setView("round")
+	}, t("skyjoViewRound")), /* @__PURE__ */ import_react.default.createElement("button", {
+		role: "tab",
+		"aria-selected": view === "table",
+		onClick: () => setView("table")
+	}, t("skyjoViewTable"))), view === "round" ? /* @__PURE__ */ import_react.default.createElement(SkyjoEntry, {
+		key: nRounds,
+		init: restoreRef.current,
+		keysOn: !edit,
 		players: state.players,
+		roundNo: nRounds + 1,
 		target: state.target,
-		tk: sk,
 		theme,
-		accent: sk.teal,
-		font: SKYJO_FONT,
-		label: t("gtlStandings")
-	}), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		marginTop: 4,
-		display: "contents"
-	} }, /* @__PURE__ */ import_react.default.createElement(SkyjoRoundEntry, {
-		key: state.players[0]?.rounds.length || 0,
-		gtTarget: state.target,
-		gtRound: state.players[0]?.rounds.length || 0,
-		players: state.players,
-		onSave: saveRound,
-		theme,
-		t
-	}))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side" }, /* @__PURE__ */ import_react.default.createElement(GtlStandings, {
+		t,
+		sk,
+		canUndo: nRounds > 0,
+		onUndo: undoRound,
+		onSave: saveRound
+	}) : /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, tableEl, nRounds > 0 && /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "sk-acts",
+		style: { justifyContent: "center" }
+	}, /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "sk-ghost press-fx",
+		onClick: undoRound
+	}, /* @__PURE__ */ import_react.default.createElement(SkyUndoIcon, null), t("mgUndo"))))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side" }, /* @__PURE__ */ import_react.default.createElement(GtlStandings, {
 		players: state.players,
 		target: state.target,
 		lowWins: true,
-		rounds: state.players[0] ? state.players[0].rounds.length : 0,
+		rounds: nRounds,
 		accent: sk.teal,
 		tk: sk,
 		font: SKYJO_FONT,
@@ -55584,7 +56088,7 @@ function SkyjoGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 		series: state.players.map((p, i) => ({
 			id: p.id,
 			name: p.name,
-			color: playerHue(i, theme),
+			color: seriesColors[i],
 			vals: p.rounds.map((r) => r.score)
 		})),
 		ink: sk.ink,
@@ -55593,14 +56097,17 @@ function SkyjoGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 		border: sk.border,
 		title: t("gtChartTitle"),
 		theme
-	}), /* @__PURE__ */ import_react.default.createElement(SkyjoRoundHistory, {
+	}), view === "round" && /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-only sk-sidetbl" }, tableEl)))), edit && /* @__PURE__ */ import_react.default.createElement(SkyjoEditSheet, {
 		players: state.players,
-		editingIndex,
-		setEditingIndex,
-		onEditSave: editRound,
+		i: edit.i,
+		pid: edit.pid,
+		onSave: editRound,
+		onClose: () => setEdit(null),
 		theme,
-		t
-	}))))), /* @__PURE__ */ import_react.default.createElement(RulesSheet, {
+		t,
+		sk,
+		target: state.target
+	})), /* @__PURE__ */ import_react.default.createElement(RulesSheet, {
 		open: rulesOpen,
 		onClose: () => setRulesOpen(false),
 		title: t("gameSkyjo"),
@@ -69640,7 +70147,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.08-12";
+var APP_BUILD = "2026.11.08-13";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -113428,7 +113935,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.08-12");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.08-13");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -116056,7 +116563,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.08-12" && !upd) {
+		if (seen && seen !== "2026.11.08-13" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -116065,7 +116572,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.08-12" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.08-13" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

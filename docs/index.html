@@ -44636,7 +44636,6 @@ var SCHIEBER_PL_CSS = `
 .gt-sch-classic:where(:not(.gt-sch-night)) .gt-gamehead h1+*{color:#3B3833!important}
 .gt-sch-classic:where(:not(.gt-sch-night)) .gt-gamehead.is-stuck{background:#F5EAD6!important;background-image:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;box-shadow:0 1px 0 rgba(35,33,30,.16)!important}
 .gt-sch-classic:where(:not(.gt-sch-night)) .gt-hf{background:#1F2021!important;color:#F5EAD6!important;border-color:#1F2021!important}
-.gt-sch-classic:where(:not(.gt-sch-night)) .gt-weis-open{background:#1F2021!important;background-image:none!important;color:#F5EAD6!important;border-color:#1F2021!important}
 .gt-sch-classic:where(:not(.gt-sch-night)) .gt-sch-split label{color:#23211E!important}
 .gt-sch-classic:where(:not(.gt-sch-night)) .gt-sch-tourtag,.gt-sch-classic:where(:not(.gt-sch-night)) .gt-sch-win{color:#23211E!important;border-color:#23211E!important}
 .gt-sch-classic:where(:not(.gt-sch-night)) .gt-foot-acts .gt-sch-act-q{background:#1F2021!important;color:#F5EAD6!important;border-color:#1F2021!important}
@@ -44644,16 +44643,16 @@ var SCHIEBER_PL_CSS = `
 .gt-sch-noir .gt-gamehead h1{color:#EDEDED!important}
 .gt-sch-noir .gt-gamehead h1+*{color:#A5A5A5!important}
 .gt-sch-noir .gt-gamehead.is-stuck{background:#0A0A0A!important;box-shadow:0 1px 0 rgba(255,255,255,.14)!important}
-.gt-sch-noir .gt-hf,.gt-sch-noir .gt-weis-open,.gt-sch-noir .gt-foot-acts .gt-sch-act-q{background:#1E1E1E!important;color:#EDEDED!important;border-color:#454545!important}
+.gt-sch-noir .gt-hf,.gt-sch-noir .gt-foot-acts .gt-sch-act-q{background:#1E1E1E!important;color:#EDEDED!important;border-color:#454545!important}
 .gt-sch-noir .gt-sch-split label,.gt-sch-noir .gt-sch-tourtag,.gt-sch-noir .gt-sch-win{color:#EDEDED!important;border-color:#EDEDED!important}
 .gt-sch-noir .gt-sch-deco img{filter:grayscale(1) contrast(1.05)}
-.gt-sch-deco{flex:1 1 0;min-height:0;position:relative;overflow:hidden;margin:0 -12px;container-type:size;pointer-events:none}
+.gt-sch-deco{display:none;flex:1 1 0;min-height:0;position:relative;overflow:hidden;margin:0 -12px;container-type:size;pointer-events:none}
 .gt-sch-deco img{--s:min(47.2cqw,288px,calc((100cqh - 8px)/.81));position:absolute;top:calc(100cqh - var(--s)*.81);width:var(--s);height:auto;pointer-events:none;-webkit-user-select:none;user-select:none}
 .gt-sch-bauer{left:0}
 .gt-sch-dame{right:0}
 @container (max-height:80px){.gt-sch-deco img{display:none}}
 [data-phone-landscape] .gt-sch-deco{display:none}
-.gtL-content .gt-sch-deco{position:fixed;right:clamp(20px,2.6vw,44px);bottom:0;width:clamp(280px,29%,400px);height:38dvh;margin:0;flex:none}@media (max-height:640px) and (min-width:1100px){.gtL-content .gt-sch-deco{display:none}}@media (max-width:1099px){.gtL-content .gt-sch-deco{position:relative;right:auto;bottom:auto;width:auto;height:clamp(150px,24dvh,260px);margin:0 -12px}}
+.gtL-content .gt-sch-deco{display:block;position:fixed;right:clamp(20px,2.6vw,44px);bottom:0;width:clamp(280px,29%,400px);height:38dvh;margin:0;flex:none}@media (max-height:640px) and (min-width:1100px){.gtL-content .gt-sch-deco{display:none}}@media (max-width:1099px){.gtL-content .gt-sch-deco{position:relative;right:auto;bottom:auto;width:auto;height:clamp(150px,24dvh,260px);margin:0 -12px}}
 @media (display-mode:standalone){.gt-sch-classic::before{content:"";position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top);background:#1F2021;z-index:30}.gt-sch-classic.gt-sch-night::before{background:#12141C}}
 .gt-weis-lap{display:none}
 .gtL-content .gt-weis-lap{display:block}
@@ -44678,6 +44677,34 @@ var SCHIEBER_PL_CSS = `
 [data-phone-landscape] .gt-sch-edpad>button{min-height:48px}
 [data-phone-landscape] .gt-sch-x{min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center;margin-right:-10px}
 [data-phone-landscape] .gt-weis-ov{padding:6px var(--pl-gutter-r) 0 var(--pl-gutter-l)}
+.gt-weis-open{position:relative;display:flex;align-items:center;justify-content:center;flex:1 1 0;min-width:0;width:100%;min-height:66px;box-sizing:border-box;padding:0 78px;border:1px solid #C9B98F;border-radius:10px;background:#F1E8D2;color:#1F4A38;font-family:'Inter',sans-serif;font-size:15px;font-weight:800;letter-spacing:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.gt-weis-open:focus-visible{outline:2px solid #1F4A38;outline-offset:2px}
+.gt-wk-mid{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:2px 8px;min-width:0;text-align:center}
+.gt-wk-ic{display:none}
+.gt-wk-tx{white-space:nowrap}
+.gt-wk-mid .gt-weis-brief{flex-basis:100%;min-width:0;font-size:11.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gt-wk{position:absolute;top:50%;width:56px;height:auto;transform:translateY(-50%);pointer-events:none;-webkit-user-select:none;user-select:none}
+.gt-wk-b{left:6px}.gt-wk-d{right:6px}
+.gt-sch-noir .gt-weis-open{background:#E6E6E6;border-color:#BDBDBD;color:#111}
+.gt-sch-noir .gt-wk{filter:grayscale(1) contrast(1.05)}
+.gtL-content .gt-weis-open,[data-phone-landscape] .gt-weis-open{padding:0 10px;min-height:58px;font-size:13px}
+.gtL-content .gt-wk,[data-phone-landscape] .gt-wk{display:none}
+.gtL-content .gt-wk-ic,[data-phone-landscape] .gt-wk-ic{display:inline-flex}
+html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *){min-height:100dvh;box-sizing:border-box}
+html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *)>.gt-sch-sheet{flex:1 1 auto;display:flex;flex-direction:column}
+html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *) .gt-sch-split{display:flex;flex-direction:column;justify-content:center;flex:1 1 auto}
+html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *) .gt-weis-topw{margin:0 0 10px}
+html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *) .gt-weis-btns+*{margin-top:0}
+html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *) .gt-sch-weisbar{margin-top:10px!important}
+@media (display-mode:standalone){html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *){min-height:100vh}}
+@media (min-height:830px){html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *) .gt-sch-half{zoom:1.12}
+html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *) .gt-sch-target{width:85px;height:49px;line-height:49px;font-size:25px}
+html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *) .gt-sch-line{-webkit-mask-image:linear-gradient(90deg,#000 calc(50% - 45px),transparent calc(50% - 45px),transparent calc(50% + 45px),#000 calc(50% + 45px));mask-image:linear-gradient(90deg,#000 calc(50% - 45px),transparent calc(50% - 45px),transparent calc(50% + 45px),#000 calc(50% + 45px))}}
+@media (max-height:760px){html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *){padding-bottom:14px!important}
+html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *) .gt-weis-open{min-height:46px;padding:0 54px}
+html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *) .gt-wk{width:42px}
+html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *) .gt-weis-topw{margin-bottom:6px}
+html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *) .gt-sch-weisbar{margin-top:6px!important}}
 .gt-weis-btns{display:flex;gap:8px}
 .gt-weis-b2{display:none!important;order:-1}
 .gt-weis-tn{display:none}
@@ -45601,61 +45628,39 @@ function WeisStatsTable({ rows, tk, t, scroll }) {
 	} }, r.pts), /* @__PURE__ */ import_react.default.createElement("span", { style: cell }, r.best || "·"), /* @__PURE__ */ import_react.default.createElement("span", { style: cell }, r.st || "·")))));
 }
 function SchieberWeisBtn({ tm, onOpen, t, theme, cls }) {
-	const acc = theme === "noir" ? noirAccent("schieber") : theme === "light" ? "#2F6B52" : "#5FB38C";
 	const pts = (Array.isArray(tm.weis) ? tm.weis : []).reduce((s, w) => s + (w && typeof w.pts === "number" ? w.pts : 0), 0);
 	return /* @__PURE__ */ import_react.default.createElement("button", {
 		onClick: () => onOpen(tm.id),
 		"aria-label": t("weisBtn") + ", " + tm.name,
-		className: "press-fx gt-weis-open" + (cls ? " " + cls : ""),
-		style: {
-			display: "flex",
-			flexWrap: "wrap",
-			alignItems: "center",
-			justifyContent: "center",
-			gap: "2px 8px",
-			flex: "1 1 0",
-			minWidth: 0,
-			width: "100%",
-			border: `1px solid ${acc}`,
-			borderRadius: 4,
-			background: `${acc}14`,
-			color: acc,
-			fontSize: 13,
-			fontWeight: 700,
-			letterSpacing: "0.04em",
-			padding: "11px 0",
-			cursor: "pointer",
-			fontFamily: "'Inter', sans-serif"
-		}
-	}, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
+		className: "press-fx gt-weis-open" + (cls ? " " + cls : "")
+	}, /* @__PURE__ */ import_react.default.createElement("img", {
+		className: "gt-wk gt-wk-b",
+		src: "./img/sch-bauer.webp",
+		alt: "",
+		draggable: false
+	}), /* @__PURE__ */ import_react.default.createElement("span", { className: "gt-wk-mid" }, /* @__PURE__ */ import_react.default.createElement("span", { className: "gt-wk-ic" }, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
 		name: "cards",
 		size: 16,
 		color: "currentColor"
-	}), t("weisBtn"), /* @__PURE__ */ import_react.default.createElement("span", { className: "gt-weis-tn" }, tm.name), pts > 0 && /* @__PURE__ */ import_react.default.createElement("span", {
-		className: "gt-weis-brief",
-		style: {
-			flexBasis: "100%",
-			minWidth: 0,
-			boxSizing: "border-box",
-			padding: "0 10px",
-			fontSize: 11.5,
-			fontWeight: 600,
-			letterSpacing: 0,
-			whiteSpace: "nowrap",
-			overflow: "hidden",
-			textOverflow: "ellipsis"
-		}
-	}, tm.name + ": " + pts));
+	})), /* @__PURE__ */ import_react.default.createElement("span", { className: "gt-wk-tx" }, t("weisBtn")), /* @__PURE__ */ import_react.default.createElement("span", { className: "gt-weis-tn" }, tm.name), pts > 0 && /* @__PURE__ */ import_react.default.createElement("span", { className: "gt-weis-brief" }, tm.name + ": " + pts)), /* @__PURE__ */ import_react.default.createElement("img", {
+		className: "gt-wk gt-wk-d",
+		src: "./img/sch-dame.webp",
+		alt: "",
+		draggable: false
+	}));
 }
 function SchieberWeisBar({ teams, onOpen, t, theme }) {
 	const tk = shellTokens(theme);
 	const rows = weisAggregate(weisRecordsOf(teams));
-	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 10,
-		marginTop: 14
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gt-weis-btns" }, /* @__PURE__ */ import_react.default.createElement(SchieberWeisBtn, {
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gt-sch-weisbar",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 10,
+			marginTop: 14
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", { className: "gt-weis-btns" }, /* @__PURE__ */ import_react.default.createElement(SchieberWeisBtn, {
 		tm: teams[0],
 		onOpen,
 		t,
@@ -69335,7 +69340,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.08-2";
+var APP_BUILD = "2026.11.08-3";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -113011,7 +113016,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.08-2");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.08-3");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -115629,7 +115634,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.08-2" && !upd) {
+		if (seen && seen !== "2026.11.08-3" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -115638,7 +115643,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.08-2" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.08-3" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

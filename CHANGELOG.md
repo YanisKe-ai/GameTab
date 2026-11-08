@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.08-3 (08.11.2026 12:39)
+- Schieber: Wyys-Knöpfe als Jasskarten mit Bauer und Dame, Tafel länger
+
 ## 2026.11.08-2 (08.11.2026 12:21)
 - Minigolf: Anzeigetafel, Ball rollt zum Loch, Tasten 1 bis 7, neues Icon
 

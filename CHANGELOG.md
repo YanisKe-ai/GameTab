@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.08-8 (08.11.2026 14:04)
+- Tutto: Darstellung auf älteren iPhones korrigiert
+
 ## 2026.11.08-7 (08.11.2026 13:51)
 - Einstellungen zeigen die Versionsnummer
 

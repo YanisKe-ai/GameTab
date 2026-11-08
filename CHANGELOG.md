@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.08-17 (08.11.2026 22:56)
+- Yatzy: klare Tabellenlinien, Eingabe mit Würfelbildern, keine unmöglichen Werte
+
 ## 2026.11.08-16 (08.11.2026 22:49)
 - Skyjo: Schritt für Schritt, erst wer beendet hat, dann jede Person einzeln
 

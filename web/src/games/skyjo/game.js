@@ -100,7 +100,7 @@ html[data-gt-theme="light"] .sk-word{text-shadow:0 2px 0 rgba(0,0,0,.14)}
 .sk-dockplain{display:flex;flex-direction:column;gap:8px;position:sticky;bottom:0;background:var(--sk-card);padding-top:6px}
 .sk-split{display:contents}
 html:not([data-phone-landscape]) .sk-pt{display:flex;flex-direction:column;height:calc(100dvh - 32px)}
-@media (display-mode: standalone){html:not([data-phone-landscape]) .sk-pt{height:calc(100vh - 32px)}}
+@media (display-mode: standalone){html:not([data-phone-landscape]) .sk-pt{height:calc(100vh - 32px - env(safe-area-inset-top,0px))}}
 html:not([data-phone-landscape]) .sk-pt>.gt-u-col{flex:1 1 0;min-height:0}
 html:not([data-phone-landscape]) .sk-pt .sk-split,html:not([data-phone-landscape]) .sk-pt .sk-split>.gtL-col-main{display:flex;flex-direction:column;flex:1 1 0;min-height:0;gap:10px}
 html:not([data-phone-landscape]) .sk-pt .sk-split>.gtL-col-main{overflow-y:auto;overscroll-behavior:contain}

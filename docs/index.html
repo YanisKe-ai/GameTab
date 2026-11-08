@@ -7739,6 +7739,10 @@ var TRANSLATIONS = {
 		savedAutomatically: "Dein Spielstand wird automatisch gespeichert.",
 		dailyTipLabel: "Wusstest du schon?",
 		allGamesLabel: "Alle Spiele",
+		favAdded: "Zu Favoriten hinzugefügt",
+		favRemoved: "Aus Favoriten entfernt",
+		favHint: "Lange drücken, um ein Spiel als Favorit zu merken",
+		favLabel: "Favorit",
 		searchGamesPlaceholder: "Spiel suchen...",
 		storageFull: "Speicher voll, bitte Backup exportieren.",
 		noGamesFound: "Keine Spiele gefunden",
@@ -9357,6 +9361,10 @@ var TRANSLATIONS = {
 		savedAutomatically: "Your progress is saved automatically.",
 		dailyTipLabel: "Did you know?",
 		allGamesLabel: "All games",
+		favAdded: "Added to favorites",
+		favRemoved: "Removed from favorites",
+		favHint: "Press and hold a game to save it as a favorite",
+		favLabel: "Favorite",
 		searchGamesPlaceholder: "Search games...",
 		storageFull: "Storage full, please export a backup.",
 		noGamesFound: "No games found",
@@ -10975,6 +10983,10 @@ var TRANSLATIONS = {
 		savedAutomatically: "Ta progression est enregistrée automatiquement.",
 		dailyTipLabel: "Le savais-tu ?",
 		allGamesLabel: "Tous les jeux",
+		favAdded: "Ajouté aux favoris",
+		favRemoved: "Retiré des favoris",
+		favHint: "Appuie longuement sur un jeu pour le garder en favori",
+		favLabel: "Favori",
 		searchGamesPlaceholder: "Rechercher un jeu...",
 		storageFull: "Mémoire pleine, merci d'exporter une sauvegarde.",
 		noGamesFound: "Aucun jeu trouvé",
@@ -12593,6 +12605,10 @@ var TRANSLATIONS = {
 		savedAutomatically: "La tua partita viene salvata automaticamente.",
 		dailyTipLabel: "Lo sapevi?",
 		allGamesLabel: "Tutti i giochi",
+		favAdded: "Aggiunto ai preferiti",
+		favRemoved: "Rimosso dai preferiti",
+		favHint: "Tieni premuto un gioco per salvarlo tra i preferiti",
+		favLabel: "Preferito",
 		searchGamesPlaceholder: "Cerca un gioco...",
 		storageFull: "Memoria piena, esporta un backup.",
 		noGamesFound: "Nessun gioco trovato",
@@ -14211,6 +14227,10 @@ var TRANSLATIONS = {
 		savedAutomatically: "Tu partida se guarda automáticamente.",
 		dailyTipLabel: "¿Sabías que...?",
 		allGamesLabel: "Todos los juegos",
+		favAdded: "Añadido a favoritos",
+		favRemoved: "Quitado de favoritos",
+		favHint: "Mantén pulsado un juego para guardarlo como favorito",
+		favLabel: "Favorito",
 		searchGamesPlaceholder: "Buscar un juego...",
 		storageFull: "Memoria llena, exporta una copia de seguridad.",
 		noGamesFound: "No se encontraron juegos",
@@ -15829,6 +15849,10 @@ var TRANSLATIONS = {
 		savedAutomatically: "A tua partida é guardada automaticamente.",
 		dailyTipLabel: "Sabias que...?",
 		allGamesLabel: "Todos os jogos",
+		favAdded: "Adicionado aos favoritos",
+		favRemoved: "Removido dos favoritos",
+		favHint: "Mantém premido um jogo para o guardar como favorito",
+		favLabel: "Favorito",
 		searchGamesPlaceholder: "Pesquisar um jogo...",
 		storageFull: "Memória cheia, exporta uma cópia de segurança.",
 		noGamesFound: "Nenhum jogo encontrado",
@@ -41896,9 +41920,52 @@ function buildAllGamesList(theme) {
 		}
 	];
 }
-function GameShowcaseStrip({ lang, theme, tokens, onSelect, fixedOrder }) {
+function gtFavToast(msg) {
+	try {
+		const old = document.getElementById("gt-fav-toast");
+		if (old) old.remove();
+		const d = document.createElement("div");
+		d.id = "gt-fav-toast";
+		d.setAttribute("role", "status");
+		d.textContent = msg;
+		d.style.cssText = "position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);max-width:min(92vw,420px);padding:9px 16px;border-radius:14px;background:rgba(20,22,28,.94);color:#F3EFE6;border:1px solid rgba(255,255,255,.18);font-family:Inter,system-ui,-apple-system,sans-serif;font-weight:600;font-size:13px;line-height:1.35;text-align:center;z-index:2147483000;box-shadow:0 8px 24px rgba(0,0,0,.35);pointer-events:none";
+		document.body.appendChild(d);
+		setTimeout(() => {
+			try {
+				d.remove();
+			} catch (_e) {}
+		}, 1800);
+	} catch (_e) {}
+}
+function GameShowcaseStrip({ lang, theme, tokens, onSelect, fixedOrder, favorites, onToggleFavorite }) {
 	const t = useT(lang);
-	const games = gtShowcaseMain(theme);
+	const base = gtShowcaseMain(theme);
+	const favGames = (Array.isArray(favorites) ? favorites : []).map((v) => base.find((g) => g.view === v)).filter(Boolean);
+	const favSet = new Set(favGames.map((g) => g.view));
+	const games = favGames.concat(base.filter((g) => !favSet.has(g.view)));
+	const starC = theme === "light" ? "#C8921F" : "#E8B84A";
+	const lpRef = useRef$17({
+		timer: null,
+		fired: false,
+		x: 0,
+		y: 0
+	});
+	const clearLp = () => {
+		if (lpRef.current.timer) {
+			clearTimeout(lpRef.current.timer);
+			lpRef.current.timer = null;
+		}
+	};
+	useEffect$15(() => clearLp, []);
+	const toggleFav = (view) => {
+		if (!onToggleFavorite) return;
+		const was = favSet.has(view);
+		onToggleFavorite(view);
+		try {
+			hapticTap();
+		} catch (e) {}
+		gtFavToast(t(was ? "favRemoved" : "favAdded"));
+	};
 	const fadeBg = theme === "noir" ? "#0A0A0A" : theme === "light" ? "#F8F9FA" : "#171425";
 	const rowRef = useRef$17(null);
 	const dragRef = useRef$17({
@@ -41916,6 +41983,8 @@ function GameShowcaseStrip({ lang, theme, tokens, onSelect, fixedOrder }) {
 		};
 	};
 	const onMove = (e) => {
+		const lp = lpRef.current;
+		if (lp.timer && Math.hypot(e.clientX - lp.x, e.clientY - lp.y) > 8) clearLp();
 		const d = dragRef.current;
 		if (!d.active) return;
 		const dx = e.clientX - d.startX;
@@ -41924,8 +41993,14 @@ function GameShowcaseStrip({ lang, theme, tokens, onSelect, fixedOrder }) {
 	};
 	const onUp = () => {
 		dragRef.current.active = false;
+		clearLp();
 	};
 	const onItemClick = (view, e) => {
+		if (lpRef.current.fired) {
+			e.preventDefault();
+			lpRef.current.fired = false;
+			return;
+		}
 		if (dragRef.current.moved) {
 			e.preventDefault();
 			dragRef.current.moved = false;
@@ -41968,10 +42043,33 @@ function GameShowcaseStrip({ lang, theme, tokens, onSelect, fixedOrder }) {
 			scrollPaddingLeft: 0
 		}
 	}, games.map((g, i) => /* @__PURE__ */ import_react.default.createElement("button", {
-		key: i,
+		key: g.view,
 		onClick: (e) => onItemClick(g.view, e),
+		onPointerDown: (e) => {
+			const lp = lpRef.current;
+			clearLp();
+			lp.fired = false;
+			lp.x = e.clientX;
+			lp.y = e.clientY;
+			lp.timer = setTimeout(() => {
+				lp.timer = null;
+				lp.fired = true;
+				toggleFav(g.view);
+			}, 500);
+		},
+		onContextMenu: (e) => e.preventDefault(),
+		onKeyDown: (e) => {
+			if (e.key === "Enter" && e.shiftKey || e.key === "ContextMenu") {
+				e.preventDefault();
+				toggleFav(g.view);
+			}
+		},
+		"aria-label": (g.label || t(g.labelKey)) + (favSet.has(g.view) ? ", " + t("favLabel") : ""),
 		className: "card-fx gtL-showcase-item",
 		style: {
+			WebkitTouchCallout: "none",
+			WebkitUserSelect: "none",
+			userSelect: "none",
 			flexShrink: 0,
 			display: "flex",
 			flexDirection: "column",
@@ -41987,6 +42085,7 @@ function GameShowcaseStrip({ lang, theme, tokens, onSelect, fixedOrder }) {
 	}, /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-showcase-icon",
 		style: {
+			position: "relative",
 			width: 46,
 			height: 46,
 			borderRadius: "50%",
@@ -42008,7 +42107,28 @@ function GameShowcaseStrip({ lang, theme, tokens, onSelect, fixedOrder }) {
 		name: g.icon,
 		size: 22,
 		color: g.accent
-	})), /* @__PURE__ */ import_react.default.createElement("span", {
+	}), favSet.has(g.view) && /* @__PURE__ */ import_react.default.createElement("span", {
+		"aria-hidden": "true",
+		style: {
+			position: "absolute",
+			top: -3,
+			right: -3,
+			width: 17,
+			height: 17,
+			borderRadius: "50%",
+			background: fadeBg,
+			display: "flex",
+			alignItems: "center",
+			justifyContent: "center"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("svg", {
+		width: "11",
+		height: "11",
+		viewBox: "0 0 24 24"
+	}, /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.8 5.7 21.5l1.7-7.3L2 9.5l7.1-.6Z",
+		fill: starC
+	})))), /* @__PURE__ */ import_react.default.createElement("span", {
 		className: "gtL-showcase-label",
 		style: {
 			fontSize: 10,
@@ -42063,7 +42183,18 @@ function GameShowcaseStrip({ lang, theme, tokens, onSelect, fixedOrder }) {
 			padding: 4,
 			flexShrink: 0
 		}
-	}, "›")));
+	}, "›")), favGames.length === 0 && /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtL-showcase-hint",
+		style: {
+			marginTop: 8,
+			fontSize: 11,
+			color: tokens.muted,
+			opacity: .8,
+			fontFamily: "'Inter', sans-serif",
+			textAlign: "center",
+			lineHeight: 1.3
+		}
+	}, t("favHint")));
 }
 function DailyTipCard({ lang, tokens, theme }) {
 	const t = useT(lang);
@@ -42535,7 +42666,7 @@ var DECO_GAP_BOTTOM_NOIR = [
 function OnboardingSpotlightTour(p) {
 	return /* @__PURE__ */ import_react.default.createElement(GtOnboarding3, p);
 }
-function StartPage({ onSelect, lang, theme, viewMode, lastPlayed, dismissedResume, onDismissResume, ...flags }) {
+function StartPage({ onSelect, lang, theme, viewMode, lastPlayed, dismissedResume, onDismissResume, favorites, onToggleFavorite, ...flags }) {
 	const pl = usePhoneLandscape();
 	const t = useT(lang);
 	const tk = startPageTokens(theme);
@@ -43291,7 +43422,9 @@ function StartPage({ onSelect, lang, theme, viewMode, lastPlayed, dismissedResum
 		theme,
 		tokens: tk,
 		onSelect,
-		fixedOrder: isLaptop
+		fixedOrder: isLaptop,
+		favorites,
+		onToggleFavorite
 	}));
 	const gtExtrasEl = /* @__PURE__ */ import_react.default.createElement(GtStartExtras, {
 		key: "extras",
@@ -69340,7 +69473,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.08-4";
+var APP_BUILD = "2026.11.08-5";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -109937,6 +110070,8 @@ function App() {
 	const [lastPlayed, setLastPlayed] = useState$11(null);
 	const [dismissedResume, setDismissedResume] = useState$11({});
 	const [onboardingSeen, setOnboardingSeen] = useState$11(false);
+	const [favorites, setFavorites] = useState$11([]);
+	const toggleFavorite = (view) => setFavorites((f) => f.includes(view) ? f.filter((x) => x !== view) : [...f, view]);
 	const [replayTour, setReplayTour] = useState$11(false);
 	const [lang, setLang] = useState$11("de");
 	GT_CUR_LANG = lang;
@@ -110053,6 +110188,7 @@ function App() {
 					}
 					if (gtIsObj(saved.lastPlayed)) setLastPlayed(saved.lastPlayed);
 					if (gtIsObj(saved.dismissedResume)) setDismissedResume(saved.dismissedResume);
+					if (Array.isArray(saved.favorites)) setFavorites([...new Set(saved.favorites.filter((x) => typeof x === "string" && x.length < 40))].slice(0, 40));
 					if (saved.onboardingSeen !== false) setOnboardingSeen(true);
 					if (typeof saved.lang === "string" && TRANSLATIONS[saved.lang]) setLang(saved.lang);
 					if ([
@@ -110129,6 +110265,7 @@ function App() {
 				lastPlayed,
 				dismissedResume,
 				onboardingSeen,
+				favorites,
 				lang,
 				theme,
 				viewMode,
@@ -110164,6 +110301,7 @@ function App() {
 		lastPlayed,
 		dismissedResume,
 		onboardingSeen,
+		favorites,
 		lang,
 		theme,
 		viewMode,
@@ -110650,6 +110788,8 @@ function App() {
 		lastPlayed,
 		dismissedResume,
 		onDismissResume: dismissResume,
+		favorites,
+		onToggleFavorite: toggleFavorite,
 		tuttoProgress,
 		freeplayProgress,
 		yatzyProgress,
@@ -113016,7 +113156,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.08-4");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.08-5");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -115634,7 +115774,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.08-4" && !upd) {
+		if (seen && seen !== "2026.11.08-5" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -115643,7 +115783,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.08-4" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.08-5" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

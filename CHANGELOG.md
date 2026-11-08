@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.08-5 (08.11.2026 13:00)
+- Favoriten: Spiel in Alle Spiele lange drücken, Favoriten stehen vorne
+
 ## 2026.11.08-4 (08.11.2026 12:50)
 - Schieber: Tafel direkt unter dem Kopf
 

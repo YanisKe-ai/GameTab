@@ -81,13 +81,6 @@ input[type="number"] { -moz-appearance: textfield; }
     linear-gradient(90deg, rgba(120,120,140,0.07) 1px, transparent 1px);
   background-size: 18px 18px;
 }
-@keyframes gtSparkle { 0% { opacity: 0; transform: scale(0) rotate(75deg); } 50% { opacity: 1; transform: scale(var(--s, 1)) rotate(120deg); } 100% { opacity: 0; transform: scale(0) rotate(150deg); } }
-.gt-spk { position: absolute; pointer-events: none; will-change: transform, opacity; opacity: 0; animation: gtSparkle .85s ease-in-out both; }
-@keyframes gtMeteor { 0% { transform: rotate(215deg) translateX(0); opacity: 1; } 70% { opacity: 1; } 100% { transform: rotate(215deg) translateX(-420px); opacity: 0; } }
-.gt-met { position: absolute; top: -4%; width: 2px; height: 2px; border-radius: 50%; pointer-events: none; opacity: 0; animation: gtMeteor 1.1s linear both; }
-.gt-met::after { content: ""; position: absolute; top: 50%; left: 0; width: 56px; height: 1px; transform: translateY(-50%); background: linear-gradient(90deg, var(--mc, #fff), transparent); }
-@keyframes gtGlowPulse { 0% { opacity: 0; transform: scale(.85); } 35% { opacity: 1; } 100% { opacity: 0; transform: scale(1.15); } }
-.gt-glow { position: absolute; inset: 0; pointer-events: none; opacity: 0; animation: gtGlowPulse 1.7s cubic-bezier(.23,1,.32,1) both; }
 @keyframes gtBlurFade { from { opacity: 0; transform: translateY(var(--gt-dist-m)); filter: blur(6px); } to { opacity: 1; transform: none; filter: none; } }
 .gt-su-row { animation: gtBlurFade .4s cubic-bezier(.23,1,.32,1) both; }
 @keyframes gtShimmerOnce { from { transform: translateX(-120%) skewX(-18deg); } to { transform: translateX(260%) skewX(-18deg); } }
@@ -260,7 +253,7 @@ input[type="number"] { -moz-appearance: textfield; }
   .podium-block-1, .podium-block-2, .podium-block-3 { animation: gtP3Fade 0.2s ease forwards !important; }
   [data-gt-podium].podium-pop { animation: gtP3Fade 0.2s ease both !important; }
   .gt-win-name { animation: none; background: none; -webkit-text-fill-color: currentColor; }
-  .gt-spk, .gt-met, .gt-glow { display: none; } .gt-su-row { animation: none; } .gt-su-btn::after { display: none; }
+  .gt-su-row { animation: none; } .gt-su-btn::after { display: none; }
   .gt-timeup-ring, .gt-starter-chip.is-win { animation: none; }
   .gt-starter-res { animation: gtP3Fade 0.2s ease both; }
   .gt-flip-inner, .gt-flip.is-held .gt-flip-inner { transform: none !important; transition: none !important; }

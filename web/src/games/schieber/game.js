@@ -61,7 +61,6 @@ import { GT_UG_CSS } from "../../shared/unit-games.js";
 .gt-sch-classic:where(:not(.gt-sch-night)) .gt-gamehead h1+*{color:#3B3833!important}
 .gt-sch-classic:where(:not(.gt-sch-night)) .gt-gamehead.is-stuck{background:#F5EAD6!important;background-image:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;box-shadow:0 1px 0 rgba(35,33,30,.16)!important}
 .gt-sch-classic:where(:not(.gt-sch-night)) .gt-hf{background:#1F2021!important;color:#F5EAD6!important;border-color:#1F2021!important}
-.gt-sch-classic:where(:not(.gt-sch-night)) .gt-weis-open{background:#1F2021!important;background-image:none!important;color:#F5EAD6!important;border-color:#1F2021!important}
 .gt-sch-classic:where(:not(.gt-sch-night)) .gt-sch-split label{color:#23211E!important}
 .gt-sch-classic:where(:not(.gt-sch-night)) .gt-sch-tourtag,.gt-sch-classic:where(:not(.gt-sch-night)) .gt-sch-win{color:#23211E!important;border-color:#23211E!important}
 .gt-sch-classic:where(:not(.gt-sch-night)) .gt-foot-acts .gt-sch-act-q{background:#1F2021!important;color:#F5EAD6!important;border-color:#1F2021!important}
@@ -69,16 +68,16 @@ import { GT_UG_CSS } from "../../shared/unit-games.js";
 .gt-sch-noir .gt-gamehead h1{color:#EDEDED!important}
 .gt-sch-noir .gt-gamehead h1+*{color:#A5A5A5!important}
 .gt-sch-noir .gt-gamehead.is-stuck{background:#0A0A0A!important;box-shadow:0 1px 0 rgba(255,255,255,.14)!important}
-.gt-sch-noir .gt-hf,.gt-sch-noir .gt-weis-open,.gt-sch-noir .gt-foot-acts .gt-sch-act-q{background:#1E1E1E!important;color:#EDEDED!important;border-color:#454545!important}
+.gt-sch-noir .gt-hf,.gt-sch-noir .gt-foot-acts .gt-sch-act-q{background:#1E1E1E!important;color:#EDEDED!important;border-color:#454545!important}
 .gt-sch-noir .gt-sch-split label,.gt-sch-noir .gt-sch-tourtag,.gt-sch-noir .gt-sch-win{color:#EDEDED!important;border-color:#EDEDED!important}
 .gt-sch-noir .gt-sch-deco img{filter:grayscale(1) contrast(1.05)}
-.gt-sch-deco{flex:1 1 0;min-height:0;position:relative;overflow:hidden;margin:0 -12px;container-type:size;pointer-events:none}
+.gt-sch-deco{display:none;flex:1 1 0;min-height:0;position:relative;overflow:hidden;margin:0 -12px;container-type:size;pointer-events:none}
 .gt-sch-deco img{--s:min(47.2cqw,288px,calc((100cqh - 8px)/.81));position:absolute;top:calc(100cqh - var(--s)*.81);width:var(--s);height:auto;pointer-events:none;-webkit-user-select:none;user-select:none}
 .gt-sch-bauer{left:0}
 .gt-sch-dame{right:0}
 @container (max-height:80px){.gt-sch-deco img{display:none}}
 [data-phone-landscape] .gt-sch-deco{display:none}
-.gtL-content .gt-sch-deco{position:fixed;right:clamp(20px,2.6vw,44px);bottom:0;width:clamp(280px,29%,400px);height:38dvh;margin:0;flex:none}@media (max-height:640px) and (min-width:1100px){.gtL-content .gt-sch-deco{display:none}}@media (max-width:1099px){.gtL-content .gt-sch-deco{position:relative;right:auto;bottom:auto;width:auto;height:clamp(150px,24dvh,260px);margin:0 -12px}}
+.gtL-content .gt-sch-deco{display:block;position:fixed;right:clamp(20px,2.6vw,44px);bottom:0;width:clamp(280px,29%,400px);height:38dvh;margin:0;flex:none}@media (max-height:640px) and (min-width:1100px){.gtL-content .gt-sch-deco{display:none}}@media (max-width:1099px){.gtL-content .gt-sch-deco{position:relative;right:auto;bottom:auto;width:auto;height:clamp(150px,24dvh,260px);margin:0 -12px}}
 @media (display-mode:standalone){.gt-sch-classic::before{content:"";position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top);background:#1F2021;z-index:30}.gt-sch-classic.gt-sch-night::before{background:#12141C}}
 .gt-weis-lap{display:none}
 .gtL-content .gt-weis-lap{display:block}
@@ -103,6 +102,34 @@ import { GT_UG_CSS } from "../../shared/unit-games.js";
 [data-phone-landscape] .gt-sch-edpad>button{min-height:48px}
 [data-phone-landscape] .gt-sch-x{min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center;margin-right:-10px}
 [data-phone-landscape] .gt-weis-ov{padding:6px var(--pl-gutter-r) 0 var(--pl-gutter-l)}
+.gt-weis-open{position:relative;display:flex;align-items:center;justify-content:center;flex:1 1 0;min-width:0;width:100%;min-height:66px;box-sizing:border-box;padding:0 78px;border:1px solid #C9B98F;border-radius:10px;background:#F1E8D2;color:#1F4A38;font-family:'Inter',sans-serif;font-size:15px;font-weight:800;letter-spacing:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.gt-weis-open:focus-visible{outline:2px solid #1F4A38;outline-offset:2px}
+.gt-wk-mid{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:2px 8px;min-width:0;text-align:center}
+.gt-wk-ic{display:none}
+.gt-wk-tx{white-space:nowrap}
+.gt-wk-mid .gt-weis-brief{flex-basis:100%;min-width:0;font-size:11.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gt-wk{position:absolute;top:50%;width:66px;height:auto;transform:translateY(-50%);pointer-events:none;-webkit-user-select:none;user-select:none}
+.gt-wk-b{left:6px}.gt-wk-d{right:6px}
+.gt-sch-noir .gt-weis-open{background:#E6E6E6;border-color:#BDBDBD;color:#111}
+.gt-sch-noir .gt-wk{filter:grayscale(1) contrast(1.05)}
+.gtL-content .gt-weis-open,[data-phone-landscape] .gt-weis-open{padding:0 10px;min-height:58px;font-size:13px}
+.gtL-content .gt-wk,[data-phone-landscape] .gt-wk{display:none}
+.gtL-content .gt-wk-ic,[data-phone-landscape] .gt-wk-ic{display:inline-flex}
+html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *){min-height:100dvh;box-sizing:border-box}
+html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *)>.gt-sch-sheet{flex:1 1 auto;display:flex;flex-direction:column}
+html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *) .gt-sch-split{display:flex;flex-direction:column;justify-content:center;flex:1 1 auto}
+html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *) .gt-weis-topw{margin:0 0 10px}
+html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *) .gt-weis-btns+*{margin-top:0}
+html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *) .gt-sch-weisbar{margin-top:10px!important}
+@media (display-mode:standalone){html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *){min-height:100vh}}
+@media (min-height:830px){html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *) .gt-sch-half{zoom:1.12}
+html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *) .gt-sch-target{width:85px;height:49px;line-height:49px;font-size:25px}
+html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *) .gt-sch-line{-webkit-mask-image:linear-gradient(90deg,#000 calc(50% - 45px),transparent calc(50% - 45px),transparent calc(50% + 45px),#000 calc(50% + 45px));mask-image:linear-gradient(90deg,#000 calc(50% - 45px),transparent calc(50% - 45px),transparent calc(50% + 45px),#000 calc(50% + 45px))}}
+@media (max-height:760px){html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *){padding-bottom:14px!important}
+html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *) .gt-weis-open{min-height:46px;padding:0 54px}
+html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *) .gt-wk{width:42px}
+html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *) .gt-weis-topw{margin-bottom:6px}
+html:not([data-phone-landscape]) .gt-sch-page:not(.gtL-content *) .gt-sch-weisbar{margin-top:6px!important}}
 .gt-weis-btns{display:flex;gap:8px}
 .gt-weis-b2{display:none!important;order:-1}
 .gt-weis-tn{display:none}
@@ -195,8 +222,8 @@ function SchieberSetup({teams,setTeams,target,setTarget,onStart,onTourPick,tk,t,
 function weisRecordsOf(teams){const out=[];(teams||[]).forEach(tm=>{(Array.isArray(tm.weis)?tm.weis:[]).forEach(w=>{if(gtIsObj(w))out.push({team:tm.name,player:typeof w.player==="string"?w.player:"",items:Array.isArray(w.items)?w.items.filter(x=>WEIS_PTS[x]):[],stoeck:!!w.stoeck,factor:w.factor||1,pts:typeof w.pts==="number"?w.pts:0});});});return out;}
 function weisAggregate(recs){const m={};(recs||[]).forEach(r=>{if(!gtIsObj(r))return;const who=(typeof r.player==="string"&&r.player.trim())||(typeof r.team==="string"&&r.team.trim())||"?";const k=normalizeName(who);const e=m[k]||(m[k]={name:who,team:r.team||"",n:0,pts:0,best:0,st:0});const f=typeof r.factor==="number"&&r.factor>0?r.factor:1;const items=Array.isArray(r.items)?r.items:[];const wp=items.reduce((s,x)=>s+(WEIS_PTS[x]||0),0)*f;e.n+=items.filter(x=>WEIS_PTS[x]).length;e.pts+=typeof r.pts==="number"?r.pts:0;if(wp>e.best)e.best=wp;if(r.stoeck)e.st++;});return Object.values(m).sort((a,b)=>b.pts-a.pts||b.n-a.n);}
 function WeisStatsTable({rows,tk,t,scroll}){const cols="minmax(0,1fr) 38px 56px 50px 40px";const hd={fontSize:9.5,fontWeight:700,letterSpacing:"0.08em",textTransform:"uppercase",color:tk.muted,fontFamily:"'Inter', sans-serif",textAlign:"right"};const cell={fontSize:13,fontWeight:600,color:tk.ink,fontFamily:"'Inter', sans-serif",fontVariantNumeric:"tabular-nums",textAlign:"right"};return <div role="table" style={{display:"flex",flexDirection:"column",gap:7}}><div role="row" style={{display:"grid",gridTemplateColumns:cols,gap:6,alignItems:"end"}}><span style={{...hd,textAlign:"left"}}>{t("weisColWho")}</span><span style={hd}>{t("weisColN")}</span><span style={hd}>{t("weisColPts")}</span><span style={hd}>{t("weisColBest")}</span><span style={hd}>{t("weisColSt")}</span></div>{(list=>scroll?<div className="gt-wy-rows" tabIndex={0}>{list}</div>:list)(rows.map((r,i)=><div key={r.name+i} role="row" style={{display:"grid",gridTemplateColumns:cols,gap:6,alignItems:"center",paddingTop:6,borderTop:`1px solid ${tk.border}`}}><span style={{...cell,textAlign:"left",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{r.name}{r.team&&normalizeName(r.team)!==normalizeName(r.name)?<span style={{fontSize:10.5,fontWeight:500,color:tk.muted,marginLeft:6}}>{r.team}</span>:null}</span><span style={cell}>{r.n}</span><span style={{...cell,color:tk.gold,fontWeight:800}}>{r.pts}</span><span style={cell}>{r.best||"·"}</span><span style={cell}>{r.st||"·"}</span></div>))}</div>;}
-function SchieberWeisBtn({tm,onOpen,t,theme,cls}){const acc=theme==="noir"?noirAccent("schieber"):theme==="light"?"#2F6B52":"#5FB38C";const pts=(Array.isArray(tm.weis)?tm.weis:[]).reduce((s,w)=>s+(w&&typeof w.pts==="number"?w.pts:0),0);return <button onClick={()=>onOpen(tm.id)} aria-label={t("weisBtn")+", "+tm.name} className={"press-fx gt-weis-open"+(cls?" "+cls:"")} style={{display:"flex",flexWrap:"wrap",alignItems:"center",justifyContent:"center",gap:"2px 8px",flex:"1 1 0",minWidth:0,width:"100%",border:`1px solid ${acc}`,borderRadius:4,background:`${acc}14`,color:acc,fontSize:13,fontWeight:700,letterSpacing:"0.04em",padding:"11px 0",cursor:"pointer",fontFamily:"'Inter', sans-serif"}}><GameIcon name="cards" size={16} color="currentColor"/>{t("weisBtn")}<span className="gt-weis-tn">{tm.name}</span>{pts>0&&<span className="gt-weis-brief" style={{flexBasis:"100%",minWidth:0,boxSizing:"border-box",padding:"0 10px",fontSize:11.5,fontWeight:600,letterSpacing:0,whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{tm.name+": "+pts}</span>}</button>;}
-function SchieberWeisBar({teams,onOpen,t,theme}){const tk=shellTokens(theme);const rows=weisAggregate(weisRecordsOf(teams));return <div style={{display:"flex",flexDirection:"column",gap:10,marginTop:14}}><div className="gt-weis-btns"><SchieberWeisBtn tm={teams[0]} onOpen={onOpen} t={t} theme={theme}/>{teams[1]&&<SchieberWeisBtn tm={teams[1]} cls="gt-weis-b2" onOpen={onOpen} t={t} theme={theme}/>}</div>{rows.length>0&&<div className="gt-weis-lap" style={{border:`1px solid ${tk.border}`,borderRadius:8,padding:"10px 12px",background:tk.card}}><div style={{fontSize:10.5,fontWeight:700,letterSpacing:"0.12em",textTransform:"uppercase",color:tk.muted,fontFamily:"'Inter', sans-serif",marginBottom:8}}>{t("weisGameTitle")}</div><WeisStatsTable rows={rows} tk={tk} t={t}/></div>}</div>;}
+function SchieberWeisBtn({tm,onOpen,t,theme,cls}){const pts=(Array.isArray(tm.weis)?tm.weis:[]).reduce((s,w)=>s+(w&&typeof w.pts==="number"?w.pts:0),0);return <button onClick={()=>onOpen(tm.id)} aria-label={t("weisBtn")+", "+tm.name} className={"press-fx gt-weis-open"+(cls?" "+cls:"")}><img className="gt-wk gt-wk-b" src="./img/sch-bauer.webp" alt="" draggable={false}/><span className="gt-wk-mid"><span className="gt-wk-ic"><GameIcon name="cards" size={16} color="currentColor"/></span><span className="gt-wk-tx">{t("weisBtn")}</span><span className="gt-weis-tn">{tm.name}</span>{pts>0&&<span className="gt-weis-brief">{tm.name+": "+pts}</span>}</span><img className="gt-wk gt-wk-d" src="./img/sch-dame.webp" alt="" draggable={false}/></button>;}
+function SchieberWeisBar({teams,onOpen,t,theme}){const tk=shellTokens(theme);const rows=weisAggregate(weisRecordsOf(teams));return <div className="gt-sch-weisbar" style={{display:"flex",flexDirection:"column",gap:10,marginTop:14}}><div className="gt-weis-btns"><SchieberWeisBtn tm={teams[0]} onOpen={onOpen} t={t} theme={theme}/>{teams[1]&&<SchieberWeisBtn tm={teams[1]} cls="gt-weis-b2" onOpen={onOpen} t={t} theme={theme}/>}</div>{rows.length>0&&<div className="gt-weis-lap" style={{border:`1px solid ${tk.border}`,borderRadius:8,padding:"10px 12px",background:tk.card}}><div style={{fontSize:10.5,fontWeight:700,letterSpacing:"0.12em",textTransform:"uppercase",color:tk.muted,fontFamily:"'Inter', sans-serif",marginBottom:8}}>{t("weisGameTitle")}</div><WeisStatsTable rows={rows} tk={tk} t={t}/></div>}</div>;}
 // Spielernamen aus dem Teamnamen ("Tony und Yanis", "Tony & Yanis"), fuer die Auswahl beim Weisen.
 function weisMembers(name){const parts=String(name||"").split(/\s+(?:und|and|et|e|y)\s+|\s*[&+\/,]\s*/i).map(s=>s.trim().slice(0,24)).filter(Boolean);return parts.length>1?parts:[];}
 const WY_SUIT={h:"M12 21C5 15 2 11.5 2 7.6 2 4.8 4.2 3 6.6 3c2.2 0 4 1.2 5.4 3.4C13.4 4.2 15.2 3 17.4 3 19.8 3 22 4.8 22 7.6 22 11.5 19 15 12 21Z",d:"M12 2 20 12 12 22 4 12Z",c:"M12 2a5 5 0 0 1 4.6 7 5 5 0 1 1-2.9 7.6c.2 1.9.9 3.4 2.2 5.4H8.1c1.3-2 2-3.5 2.2-5.4A5 5 0 1 1 7.4 9 5 5 0 0 1 12 2Z",s:"M12 2C8 7 3 10 3 14.5 3 17 5 19 7.4 19c1.4 0 2.7-.6 3.5-1.7-.2 1.7-.9 3-2.2 4.2h6.6c-1.3-1.2-2-2.5-2.2-4.2.8 1.1 2.1 1.7 3.5 1.7C19 19 21 17 21 14.5 21 10 16 7 12 2Z"};const WY_TILES=[["w3",["D","K","A"],"h"],["w4",["9","10","B","D"],"s"],["g4",["A","A","A","A"],["h","s","d","c"]]];const WY_MORE=["w5","w6","w7","w8","w9","g4n","g4b"];

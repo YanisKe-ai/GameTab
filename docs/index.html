@@ -47881,7 +47881,6 @@ function TuttoPlayerRow({ player, total, entryCount, color, target, isLeader, se
 	const remaining = Math.max(0, target - total);
 	const label = player.name + ": " + ttFmt(total) + (total > 0 && total < target ? ", " + t("stillToTarget")(remaining) : "");
 	const pip = ttLum(color) > .3 ? "#14101C" : "#FFFFFF";
-	const numC = selected ? "var(--tt-selnum)" : isLeader && total > 0 ? "var(--tt-lead)" : "var(--tt-num)";
 	return /* @__PURE__ */ import_react.default.createElement("div", {
 		role: "button",
 		tabIndex: 0,
@@ -47906,7 +47905,7 @@ function TuttoPlayerRow({ player, total, entryCount, color, target, isLeader, se
 	}, (pop.v > 0 ? "+" : "−") + ttFmt(Math.abs(pop.v))), /* @__PURE__ */ import_react.default.createElement("span", {
 		ref: numRef,
 		className: "tt-num",
-		style: { color: numC }
+		style: { color: "var(--tt-num)" }
 	})), /* @__PURE__ */ import_react.default.createElement("span", {
 		className: "tt-track",
 		ref: trackRef,
@@ -69898,7 +69897,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.08-8";
+var APP_BUILD = "2026.11.08-9";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -70498,6 +70497,7 @@ function SettingsPage({ onBack, onReplayTour, lang, setLang, theme, setTheme, vi
 		}
 	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES), /* @__PURE__ */ import_react.default.createElement("style", null, css), /* @__PURE__ */ import_react.default.createElement("div", { className: "st-inner" }, /* @__PURE__ */ import_react.default.createElement("button", {
 		type: "button",
+		"data-gt-back": "1",
 		onClick: onBack,
 		className: "st-btn st-head",
 		style: {
@@ -71539,7 +71539,7 @@ function visible(el) {
 	return r.width > 0 && r.height > 0 && r.bottom > 0 && r.top < window.innerHeight;
 }
 function findBack(root) {
-	const list = root.querySelectorAll(".gt-gamehead .gt-hb");
+	const list = root.querySelectorAll(".gt-gamehead .gt-hb,[data-gt-back]");
 	for (const b of list) if (visible(b) && !b.disabled && !b.closest("[inert],[aria-hidden='true']")) return b;
 	return null;
 }
@@ -113665,7 +113665,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.08-8");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.08-9");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -116283,7 +116283,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.08-8" && !upd) {
+		if (seen && seen !== "2026.11.08-9" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -116292,7 +116292,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.08-8" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.08-9" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

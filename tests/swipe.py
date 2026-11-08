@@ -306,8 +306,24 @@ def sc_frames(b):
     ctx.close()
 
 
+def sc_settings(b):
+    print("settings")
+    ctx, page = mk(b)
+    skip_onboarding(page)
+    page.locator('button[aria-label="Einstellungen"]').first.click(timeout=3000)
+    page.wait_for_timeout(900)
+    check("Einstellungen offen", "Einstellungen" in page.inner_text("#root"))
+    drag(page, 10, 400, 300, 410)
+    page.wait_for_timeout(800)
+    txt = page.inner_text("#root")
+    check("Wischen fuehrt zur Startseite", "Schreibunterlagen" in txt and "Als Datei exportieren" not in txt, txt[:40])
+    check("nichts haengt", clean(page), state(page))
+    check("keine Seitenfehler", not page._errs, page._errs)
+    ctx.close()
+
+
 ALL = {"abort": sc_abort, "complete": sc_complete, "flick": sc_flick, "vertical": sc_vertical, "dialog": sc_dialog,
-       "state": sc_state, "start": sc_start, "tap": sc_tap, "fixed": sc_fixed, "ios": sc_ios, "reduced": sc_reduced, "frames": sc_frames}
+       "state": sc_state, "start": sc_start, "tap": sc_tap, "fixed": sc_fixed, "ios": sc_ios, "reduced": sc_reduced, "frames": sc_frames, "settings": sc_settings}
 
 
 def main():

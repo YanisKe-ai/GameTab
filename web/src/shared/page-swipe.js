@@ -247,7 +247,7 @@ function visible(el) {
   return r.width > 0 && r.height > 0 && r.bottom > 0 && r.top < window.innerHeight;
 }
 function findBack(root) {
-  const list = root.querySelectorAll(".gt-gamehead .gt-hb");
+  const list = root.querySelectorAll(".gt-gamehead .gt-hb,[data-gt-back]");
   for (const b of list) if (visible(b) && !b.disabled && !b.closest("[inert],[aria-hidden='true']")) return b;
   return null;
 }

@@ -499,6 +499,21 @@ def t_schieber_schwaetzer(pg, env):
     check("Ben · 900 Punkte Wyys" in txt, f"Schwaetzer fehlt: {txt!r}")
 
 
+def yz_enter(pg):
+    """Yatzy-Eingabeblatt: je Kachelreihe die erste freie Kachel waehlen, dann eintragen."""
+    for _ in range(12):
+        c = pg.locator(".yz-commit")
+        if c.count() and c.first.get_attribute("aria-disabled") != "true":
+            click(pg, c.first, FAST)
+            return
+        for r in pg.locator(".yz-tiles .yz-row").all():
+            if r.locator('.yz-tile[aria-pressed="true"]').count() == 0:
+                t = r.locator('.yz-tile:not([aria-disabled="true"])')
+                if t.count():
+                    click(pg, t.first, 60)
+    raise AssertionError("Yatzy: Eingabe nicht abschliessbar")
+
+
 @test("Yatzy")
 def t_yatzy(pg, env):
     open_game(pg, "Schreibunterlagen", "Yatzy"); press_start(pg)
@@ -506,14 +521,7 @@ def t_yatzy(pg, env):
     n = 0
     while btn(pg, "·").count() > 0 and n < limit:
         click(pg, btn(pg, "·").first, FAST + 80)
-        if btn_re(pg, "^Erreicht").count():
-            click(pg, btn_re(pg, "^Erreicht").last, FAST)
-        elif btn(pg, "Anderer Wert").count():
-            click(pg, pg.locator(".yz-val").last, FAST)
-        elif pg.get_by_placeholder("Punkte").count():
-            click(pg, btn(pg, "Streichen").last, FAST)
-        else:
-            click(pg, btn(pg, "–").last.locator("xpath=following-sibling::button").first, FAST)
+        yz_enter(pg)
         n += 1
     wait(pg, 1000)
     if env.quick:

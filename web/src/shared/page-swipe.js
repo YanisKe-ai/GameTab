@@ -53,7 +53,8 @@ function injectCss() {
   const st = document.createElement("style");
   st.id = "gt-swipe-css";
   st.textContent = ".gt-swipe-snap,.gt-swipe-snap *{animation:none!important;transition:none!important;pointer-events:none!important}"
-    + "html[data-gt-swiping],html[data-gt-swiping] *{-webkit-user-select:none;user-select:none}";
+    + "html[data-gt-swiping],html[data-gt-swiping] *{-webkit-user-select:none;user-select:none}"
+    + "html[data-gt-swiped] .reveal-1,html[data-gt-swiped] .reveal-2,html[data-gt-swiped] .reveal-3,html[data-gt-swiped] .reveal-4,html[data-gt-swiped] .gtL-showcase-fade,html[data-gt-swiped] .gt-scrim-in{animation:none!important}";
   document.head.appendChild(st);
 }
 
@@ -102,7 +103,7 @@ function capture(root, withClone) {
       const cs = clone.style;
       cs.position = "absolute"; cs.left = "0"; cs.top = "0"; cs.width = rect.width + "px";
       cs.display = "flex"; cs.flexDirection = "column"; cs.minHeight = "0"; cs.height = "auto"; cs.margin = "0";
-      cs.transform = "translateY(" + (-off) + "px)"; cs.overflow = "visible";
+      const topOff = laptop ? -off : Math.round(root.getBoundingClientRect().top); cs.transform = "translateY(" + topOff + "px)"; cs.overflow = "visible";
       const pg = root.firstElementChild, cpg = clone.firstElementChild;
       if (pg && cpg) { const h = pg.getBoundingClientRect().height; cpg.style.boxSizing = "border-box"; cpg.style.height = h + "px"; cpg.style.minHeight = h + "px"; cpg.style.flex = "none"; }
       box.appendChild(clone);
@@ -115,13 +116,14 @@ function capture(root, withClone) {
 function freeze(root) {
   if (isLaptop()) return { restore() {}, scrollTop(v) { try { root.scrollTop = v; } catch (_) {} } };
   const y = window.scrollY || 0;
+  const docTop = Math.max(0, Math.round(root.getBoundingClientRect().top + y));
   const body = document.body, de = document.documentElement;
   const docH = Math.max(de.scrollHeight, body.scrollHeight);
   const prevBodyH = body.style.height;
   const prevCss = root.style.cssText;
   body.style.height = docH + "px";
   const s = root.style;
-  s.position = "fixed"; s.top = "0"; s.left = "0"; s.width = "100%"; s.height = vhCss(); s.minHeight = "0"; s.overflow = "hidden";
+  s.position = "fixed"; s.top = docTop + "px"; s.left = "0"; s.width = "100%"; s.height = docTop ? "calc(" + vhCss() + " - " + docTop + "px)" : vhCss(); s.minHeight = "0"; s.overflow = "hidden";
   s.willChange = "transform";
   root.scrollTop = y;
   const fixed = [];
@@ -385,6 +387,7 @@ function clickBack(g, noLayers) {
   const before = sigOf(root);
   const navBack = btn.hasAttribute("data-gt-nav");
   S.suppress = true; S.navBack = navBack;
+  try { document.documentElement.setAttribute("data-gt-swiped", ""); clearTimeout(S.swipedT); S.swipedT = setTimeout(() => document.documentElement.removeAttribute("data-gt-swiped"), 700); } catch (_) {}
   try { btn.click(); } finally { S.suppress = false; S.navBack = false; }
   raf2(() => {
     const changed = sigOf(root) !== before;

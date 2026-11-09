@@ -72434,7 +72434,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.10-6";
+var APP_BUILD = "2026.11.10-7";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -73739,7 +73739,7 @@ function injectCss() {
 	if (document.getElementById("gt-swipe-css")) return;
 	const st = document.createElement("style");
 	st.id = "gt-swipe-css";
-	st.textContent = ".gt-swipe-snap,.gt-swipe-snap *{animation:none!important;transition:none!important;pointer-events:none!important}html[data-gt-swiping],html[data-gt-swiping] *{-webkit-user-select:none;user-select:none}";
+	st.textContent = ".gt-swipe-snap,.gt-swipe-snap *{animation:none!important;transition:none!important;pointer-events:none!important}html[data-gt-swiping],html[data-gt-swiping] *{-webkit-user-select:none;user-select:none}html[data-gt-swiped] .reveal-1,html[data-gt-swiped] .reveal-2,html[data-gt-swiped] .reveal-3,html[data-gt-swiped] .reveal-4,html[data-gt-swiped] .gtL-showcase-fade,html[data-gt-swiped] .gt-scrim-in{animation:none!important}";
 	document.head.appendChild(st);
 }
 function pageBgStyle(root) {
@@ -73798,7 +73798,8 @@ function capture(root, withClone) {
 	Object.assign(box.style, pageBgStyle(root));
 	placeBox(box, rect);
 	if (withClone) try {
-		const off = isLaptop() ? root.scrollTop : window.scrollY || 0;
+		const laptop = isLaptop();
+		const off = laptop ? root.scrollTop : window.scrollY || 0;
 		const clone = root.cloneNode(true);
 		clone.removeAttribute("id");
 		clone.querySelectorAll("[id]").forEach((n) => n.removeAttribute("id"));
@@ -73831,7 +73832,7 @@ function capture(root, withClone) {
 		cs.minHeight = "0";
 		cs.height = "auto";
 		cs.margin = "0";
-		cs.transform = "translateY(" + -off + "px)";
+		cs.transform = "translateY(" + (laptop ? -off : Math.round(root.getBoundingClientRect().top)) + "px)";
 		cs.overflow = "visible";
 		const pg = root.firstElementChild, cpg = clone.firstElementChild;
 		if (pg && cpg) {
@@ -73855,6 +73856,7 @@ function freeze(root) {
 		}
 	};
 	const y = window.scrollY || 0;
+	const docTop = Math.max(0, Math.round(root.getBoundingClientRect().top + y));
 	const body = document.body, de = document.documentElement;
 	const docH = Math.max(de.scrollHeight, body.scrollHeight);
 	const prevBodyH = body.style.height;
@@ -73862,10 +73864,10 @@ function freeze(root) {
 	body.style.height = docH + "px";
 	const s = root.style;
 	s.position = "fixed";
-	s.top = "0";
+	s.top = docTop + "px";
 	s.left = "0";
 	s.width = "100%";
-	s.height = vhCss();
+	s.height = docTop ? "calc(" + vhCss() + " - " + docTop + "px)" : vhCss();
 	s.minHeight = "0";
 	s.overflow = "hidden";
 	s.willChange = "transform";
@@ -74272,6 +74274,11 @@ function clickBack(g, noLayers) {
 	const navBack = btn.hasAttribute("data-gt-nav");
 	S.suppress = true;
 	S.navBack = navBack;
+	try {
+		document.documentElement.setAttribute("data-gt-swiped", "");
+		clearTimeout(S.swipedT);
+		S.swipedT = setTimeout(() => document.documentElement.removeAttribute("data-gt-swiped"), 700);
+	} catch (_) {}
 	try {
 		btn.click();
 	} finally {
@@ -116587,7 +116594,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.10-6");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.10-7");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -119284,7 +119291,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.10-6" && !upd) {
+		if (seen && seen !== "2026.11.10-7" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -119293,7 +119300,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.10-6" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.10-7" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

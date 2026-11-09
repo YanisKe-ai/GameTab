@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.10-7 (10.11.2026 00:40)
+- Wischen zurück: kein Springen mehr in der Home-Bildschirm-App, keine doppelte Einblend-Animation
+
 ## 2026.11.10-6 (10.11.2026 00:32)
 - Neue Icons: 5 Sekunden, Freies Spiel. Favoriten stehen in den Spiellisten oben
 

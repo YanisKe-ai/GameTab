@@ -21944,50 +21944,63 @@ function SkyjoLogo({ color, theme, size }) {
 	const S = size || 28;
 	const K = "#14100E";
 	const c = n ? [
-		"#4D4D4D",
-		"#CFCFCF",
-		"#8C8C8C",
-		"#B0B0B0",
-		"#6E6E6E"
+		"#3A3A3A",
+		"#9A9A9A",
+		"#C8C8C8"
 	] : [
-		"#3B5BC4",
-		"#8CC9EE",
-		"#3FAE4F",
-		"#F2C531",
-		"#E0453A"
+		"#2B4C9B",
+		"#FFD23F",
+		"#E53935"
 	];
+	const card = (x, y, r, f, k) => /* @__PURE__ */ import_react.default.createElement("g", {
+		key: k,
+		transform: `rotate(${r} 14 26)`
+	}, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x,
+		y,
+		width: "11",
+		height: "16",
+		rx: "2.4",
+		fill: f,
+		stroke: K,
+		strokeWidth: "1.1"
+	}), /* @__PURE__ */ import_react.default.createElement("ellipse", {
+		cx: x + 5.5,
+		cy: y + 8,
+		rx: "3.6",
+		ry: "4.8",
+		fill: "#fff",
+		opacity: ".92"
+	}));
 	return /* @__PURE__ */ import_react.default.createElement("svg", {
 		width: S,
 		height: S,
 		viewBox: "0 0 28 28",
 		style: { flexShrink: 0 },
 		"aria-hidden": "true"
-	}, [
-		-36,
-		-18,
-		0,
-		18,
-		36
-	].map((a, i) => /* @__PURE__ */ import_react.default.createElement("g", {
-		key: i,
-		transform: `rotate(${a} 14 25)`
-	}, /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "9.6",
-		y: "4",
-		width: "8.8",
-		height: "13",
-		rx: "1.8",
-		fill: c[i],
-		stroke: K,
-		strokeWidth: "1"
-	}))), /* @__PURE__ */ import_react.default.createElement("ellipse", {
-		cx: "14",
-		cy: "10.3",
+	}, card(8.5, 4, -30, c[0], "a"), card(8.5, 4, -8, n ? "#6E6E6E" : "#4CAF50", "b"), card(8.5, 4, 14, c[1], "c"), /* @__PURE__ */ import_react.default.createElement("g", { transform: "rotate(30 14 26)" }, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "8.5",
+		y: "3.5",
+		width: "11.5",
+		height: "16.5",
 		rx: "2.4",
-		ry: "3",
-		fill: "#fff",
-		opacity: ".9"
-	}));
+		fill: c[2],
+		stroke: K,
+		strokeWidth: "1.2"
+	}), /* @__PURE__ */ import_react.default.createElement("ellipse", {
+		cx: "14.25",
+		cy: "11.75",
+		rx: "4",
+		ry: "5.2",
+		fill: "#fff"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M12.4 10.2 L13.6 9.4 V14.2 M15.2 10.4 C15.6 9.2 17.6 9.2 17.6 10.6 C17.6 11.8 15.4 13 15.2 14.2 H17.8",
+		stroke: n ? "#1E1E1E" : "#E53935",
+		strokeWidth: "1.15",
+		fill: "none",
+		strokeLinecap: "round",
+		strokeLinejoin: "round"
+	})));
 }
 function FiveSecLogo({ color, theme, size }) {
 	const n = gtIcTheme(theme) === "noir";
@@ -22448,9 +22461,10 @@ function Flip7Logo({ color, theme, size }) {
 	const n = gtIcTheme(theme) === "noir";
 	const S = size || 28;
 	const K = "#14100E";
-	const back = n ? "#7A7A7A" : "#FF7A3D";
 	const face = n ? "#EDEDED" : "#FFF1DC";
-	const num = n ? "#1E1E1E" : "#C2571A";
+	const t1 = n ? "#6E6E6E" : "#2EC4B6", t2 = n ? "#9A9A9A" : "#FFD23F";
+	const o = n ? "#1E1E1E" : "#FF7A3D";
+	const sh = n ? "#6E6E6E" : "#2B2D6E";
 	return /* @__PURE__ */ import_react.default.createElement("svg", {
 		width: S,
 		height: S,
@@ -22458,39 +22472,63 @@ function Flip7Logo({ color, theme, size }) {
 		style: { flexShrink: 0 },
 		"aria-hidden": "true"
 	}, /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "3.5",
-		y: "5",
-		width: "12",
-		height: "17",
+		x: "2.5",
+		y: "6",
+		width: "10.5",
+		height: "15.5",
 		rx: "2.2",
-		fill: back,
+		fill: t1,
 		stroke: K,
-		strokeWidth: "1.2",
-		transform: "rotate(-14 9.5 13.5)"
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M6.5 9.5 l4 2 M6 13 l4 2",
-		stroke: n ? "#BDBDBD" : "#FFC24B",
-		strokeWidth: "1",
-		opacity: ".8",
-		transform: "rotate(-14 9.5 13.5)"
+		strokeWidth: "1.1",
+		transform: "rotate(-24 8 14)"
+	}), /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "6",
+		y: "4.5",
+		width: "10.5",
+		height: "15.5",
+		rx: "2.2",
+		fill: t2,
+		stroke: K,
+		strokeWidth: "1.1",
+		transform: "rotate(-10 11 12)"
 	}), /* @__PURE__ */ import_react.default.createElement("rect", {
 		x: "11",
-		y: "4.5",
-		width: "12.5",
-		height: "18",
-		rx: "2.2",
+		y: "4",
+		width: "13",
+		height: "18.5",
+		rx: "2.4",
 		fill: face,
 		stroke: K,
 		strokeWidth: "1.2",
-		transform: "rotate(9 17 13.5)"
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M14.4 9.2 H20.4 L16.4 19.4",
-		stroke: num,
-		strokeWidth: "2.4",
+		transform: "rotate(10 17.5 13)"
+	}), /* @__PURE__ */ import_react.default.createElement("g", { transform: "rotate(10 17.5 13)" }, /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M14.6 9 H21 L16.9 19.4",
+		stroke: sh,
+		strokeWidth: "3.6",
 		fill: "none",
 		strokeLinecap: "round",
 		strokeLinejoin: "round",
-		transform: "rotate(9 17 13.5)"
+		transform: "translate(.7 .7)"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M14.6 9 H21 L16.9 19.4",
+		stroke: o,
+		strokeWidth: "2.6",
+		fill: "none",
+		strokeLinecap: "round",
+		strokeLinejoin: "round"
+	})), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M3.5 4.5 C6 1.8 10 1.5 12.6 3.4",
+		stroke: n ? "#CFCFCF" : "#FF7A3D",
+		strokeWidth: "1.5",
+		fill: "none",
+		strokeLinecap: "round"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M12.9 1.6 L13 3.7 L10.9 4",
+		stroke: n ? "#CFCFCF" : "#FF7A3D",
+		strokeWidth: "1.5",
+		fill: "none",
+		strokeLinecap: "round",
+		strokeLinejoin: "round"
 	}));
 }
 function MinigolfLogo({ color, theme, size }) {
@@ -58594,10 +58632,10 @@ function Phase10Logo({ color, size, theme }) {
 		"#A2A2A2",
 		"#2A2A2A"
 	] : [
-		"#F2C230",
-		"#2FA84F",
-		"#2F6FDE",
-		"#E2453C"
+		"#FFC72C",
+		"#2DA44E",
+		"#1D6FD1",
+		"#E63946"
 	];
 	return /* @__PURE__ */ import_react.default.createElement("svg", {
 		width: S,
@@ -58606,42 +58644,44 @@ function Phase10Logo({ color, size, theme }) {
 		style: { flexShrink: 0 },
 		"aria-hidden": "true"
 	}, [
-		-30,
-		-12,
-		6
+		-34,
+		-17,
+		0
 	].map((a, i) => /* @__PURE__ */ import_react.default.createElement("rect", {
 		key: i,
-		x: "8",
+		x: "7.5",
 		y: "4",
 		width: "11",
 		height: "16",
-		rx: "2",
+		rx: "2.2",
 		fill: cs[i],
 		stroke: K,
 		strokeWidth: "1",
-		transform: `rotate(${a} 13.5 24)`
-	})), /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "12",
-		y: "6.5",
-		width: "11.5",
-		height: "16.5",
-		rx: "2",
+		transform: `rotate(${a} 13 25)`
+	})), /* @__PURE__ */ import_react.default.createElement("g", { transform: "rotate(16 18 14)" }, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "11.5",
+		y: "5",
+		width: "12.5",
+		height: "18",
+		rx: "2.4",
 		fill: cs[3],
 		stroke: K,
-		strokeWidth: "1.1",
-		transform: "rotate(18 17.7 14.7)"
-	}), /* @__PURE__ */ import_react.default.createElement("g", { transform: "rotate(18 17.7 14.7)" }, /* @__PURE__ */ import_react.default.createElement("ellipse", {
-		cx: "17.75",
-		cy: "14.75",
-		rx: "4.6",
-		ry: "3.4",
-		fill: "#fff"
+		strokeWidth: "1.2"
 	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M15 13.2 L16.2 12.6 V17 M18.4 14.8 a1.3 2 0 1 0 2.6 0 a1.3 2 0 1 0 -2.6 0",
-		stroke: n ? "#1E1E1E" : "#E2453C",
-		strokeWidth: "1.1",
+		d: "M14 11.4 L15.6 10.2 V18",
+		stroke: "#fff",
+		strokeWidth: "1.9",
 		fill: "none",
-		strokeLinecap: "round"
+		strokeLinecap: "round",
+		strokeLinejoin: "round"
+	}), /* @__PURE__ */ import_react.default.createElement("ellipse", {
+		cx: "20",
+		cy: "14.1",
+		rx: "2.2",
+		ry: "3.7",
+		fill: "none",
+		stroke: "#fff",
+		strokeWidth: "1.9"
 	})));
 }
 function RommeLogo({ color, size, theme }) {
@@ -71899,7 +71939,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.09-11";
+var APP_BUILD = "2026.11.09-12";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -116061,7 +116101,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.09-11");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.09-12");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -118758,7 +118798,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.09-11" && !upd) {
+		if (seen && seen !== "2026.11.09-12" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -118767,7 +118807,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.09-11" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.09-12" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

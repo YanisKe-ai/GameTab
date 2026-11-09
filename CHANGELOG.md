@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.09-12 (09.11.2026 23:48)
+- Neue Icons: Skyjo, Flip 7, Phase 10
+
 ## 2026.11.09-11 (09.11.2026 23:35)
 - Darts: klassisches Zielscheiben-Icon mit Pfeil
 

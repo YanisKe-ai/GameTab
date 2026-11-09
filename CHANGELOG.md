@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.09-11 (09.11.2026 23:35)
+- Darts: klassisches Zielscheiben-Icon mit Pfeil
+
 ## 2026.11.09-10 (09.11.2026 23:27)
 - Neue Icons ohne Rahmen für alle Spiele: Skyjo, Flip 7, Phase 10, Rommé, Darts-Modi, Minigolf, Partyspiele
 

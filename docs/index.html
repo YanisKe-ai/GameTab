@@ -7680,6 +7680,7 @@ function gtNoEmo(s) {
 var translations_exports = /* @__PURE__ */ __exportAll({ TRANSLATIONS: () => TRANSLATIONS });
 var TRANSLATIONS = {
 	de: {
+		gtVariantsN: (n) => `${n} Varianten`,
 		f7Numbers: "Zahlenkarten",
 		f7Mods: "Bonuskarten",
 		f7Double: "Mal zwei",
@@ -9379,6 +9380,7 @@ var TRANSLATIONS = {
 		mostLikelyStatementsPlayed: (n) => `${n} Aussagen gespielt`
 	},
 	en: {
+		gtVariantsN: (n) => `${n} variants`,
 		f7Numbers: "Number cards",
 		f7Mods: "Bonus cards",
 		f7Double: "Times two",
@@ -11078,6 +11080,7 @@ var TRANSLATIONS = {
 		mostLikelyStatementsPlayed: (n) => `${n} statements played`
 	},
 	fr: {
+		gtVariantsN: (n) => `${n} variantes`,
 		f7Numbers: "Cartes numéro",
 		f7Mods: "Cartes bonus",
 		f7Double: "Fois deux",
@@ -12777,6 +12780,7 @@ var TRANSLATIONS = {
 		mostLikelyStatementsPlayed: (n) => `${n} affirmations jouées`
 	},
 	it: {
+		gtVariantsN: (n) => `${n} varianti`,
 		f7Numbers: "Carte numero",
 		f7Mods: "Carte bonus",
 		f7Double: "Per due",
@@ -14476,6 +14480,7 @@ var TRANSLATIONS = {
 		mostLikelyStatementsPlayed: (n) => `${n} affermazioni giocate`
 	},
 	es: {
+		gtVariantsN: (n) => `${n} variantes`,
 		f7Numbers: "Cartas de número",
 		f7Mods: "Cartas de bonificación",
 		f7Double: "Por dos",
@@ -16175,6 +16180,7 @@ var TRANSLATIONS = {
 		mostLikelyStatementsPlayed: (n) => `${n} afirmaciones jugadas`
 	},
 	pt: {
+		gtVariantsN: (n) => `${n} variantes`,
 		f7Numbers: "Cartas de número",
 		f7Mods: "Cartas de bónus",
 		f7Double: "Vezes dois",
@@ -21677,105 +21683,55 @@ function WizardLogo({ color, theme, size }) {
 	}));
 }
 function JassLogo({ color, theme, size }) {
-	gtIcTheme(theme);
 	const S = size || 28;
 	const K = "#14100E";
 	const face = "#FFF8EC";
 	const red = "#D62828";
 	const blk = "#1B1B22";
+	const card = (r, k, kids) => /* @__PURE__ */ import_react.default.createElement("g", {
+		key: k,
+		transform: `rotate(${r} 13 27)`
+	}, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "7.5",
+		y: "2",
+		width: "11.5",
+		height: "17",
+		rx: "2",
+		fill: face,
+		stroke: K,
+		strokeWidth: "1.1"
+	}), kids);
 	return /* @__PURE__ */ import_react.default.createElement("svg", {
 		width: S,
 		height: S,
 		viewBox: "0 0 28 28",
 		style: { flexShrink: 0 },
 		"aria-hidden": "true"
-	}, /* @__PURE__ */ import_react.default.createElement("g", { transform: "rotate(-14 10 15)" }, /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "3",
-		y: "4.5",
-		width: "12",
-		height: "18",
-		rx: "2",
-		fill: face,
-		stroke: K,
-		strokeWidth: "1.1"
-	}), /* @__PURE__ */ import_react.default.createElement("g", {
+	}, card(-26, "a", /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M11 5.6 L13.2 8.6 L11 11.6 L8.8 8.6 Z",
+		fill: red
+	})), card(-6, "b", /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M0 -3.6 C-3.6 -0.6 -3.4 2.4 -1.2 2.4 C-0.6 2.4 -0.2 2 0 1.6 L-0.6 3.8 H0.6 L0 1.6 C0.2 2 0.6 2.4 1.2 2.4 C3.4 2.4 3.6 -0.6 0 -3.6Z",
 		fill: blk,
-		transform: "translate(9 13.5) scale(1.25)"
-	}, /* @__PURE__ */ import_react.default.createElement("g", null, /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: "0",
-		cy: "-1.8",
-		r: "1.7"
-	}), /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: "-1.8",
-		cy: ".6",
-		r: "1.7"
-	}), /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: "1.8",
-		cy: ".6",
-		r: "1.7"
-	}), /* @__PURE__ */ import_react.default.createElement("path", { d: "M0 0 L-1 3.6 H1 Z" }))), /* @__PURE__ */ import_react.default.createElement("g", {
-		fill: blk,
-		transform: "translate(5.2 7) scale(.42)"
-	}, /* @__PURE__ */ import_react.default.createElement("g", null, /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: "0",
-		cy: "-1.8",
-		r: "1.7"
-	}), /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: "-1.8",
-		cy: ".6",
-		r: "1.7"
-	}), /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: "1.8",
-		cy: ".6",
-		r: "1.7"
-	}), /* @__PURE__ */ import_react.default.createElement("path", { d: "M0 0 L-1 3.6 H1 Z" }))), /* @__PURE__ */ import_react.default.createElement("g", {
-		fill: blk,
-		transform: "translate(12.8 20) rotate(180) scale(.42)"
-	}, /* @__PURE__ */ import_react.default.createElement("g", null, /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: "0",
-		cy: "-1.8",
-		r: "1.7"
-	}), /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: "-1.8",
-		cy: ".6",
-		r: "1.7"
-	}), /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: "1.8",
-		cy: ".6",
-		r: "1.7"
-	}), /* @__PURE__ */ import_react.default.createElement("path", { d: "M0 0 L-1 3.6 H1 Z" })))), /* @__PURE__ */ import_react.default.createElement("g", { transform: "rotate(10 18 14)" }, /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "12",
-		y: "4",
-		width: "12.5",
-		height: "18.5",
-		rx: "2",
-		fill: face,
-		stroke: K,
-		strokeWidth: "1.1"
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M15 7.2 V12.6 H17.1 C18.4 12.6 18.9 11.8 18.9 11 C18.9 10.2 18.3 9.7 17.4 9.8 C18.1 9.7 18.6 9.2 18.6 8.5 C18.6 7.7 18 7.2 17 7.2 Z M15 9.8 H17.3",
+		transform: "translate(11.2 8.6) scale(1)"
+	})), card(14, "c", /* @__PURE__ */ import_react.default.createElement("g", null, /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M10.4 4.6 V9.4 H12.3 C13.5 9.4 13.9 8.7 13.9 8 C13.9 7.3 13.4 6.9 12.6 6.9 C13.2 6.9 13.6 6.5 13.6 5.8 C13.6 5.1 13.1 4.6 12.2 4.6 Z M10.4 6.9 H12.5",
 		stroke: red,
-		strokeWidth: "1.1",
+		strokeWidth: "1",
 		fill: "none",
 		strokeLinejoin: "round"
 	}), /* @__PURE__ */ import_react.default.createElement("path", {
 		d: "M0 3.4 C-3.6 0.9 -3 -2.6 -1 -2.6 C-0.4 -2.6 0 -2 0 -2 C0 -2 0.4 -2.6 1 -2.6 C3 -2.6 3.6 0.9 0 3.4Z",
 		fill: red,
-		transform: "translate(19.6 17.2) scale(1.05)"
-	}), /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "13.4",
-		y: "5.4",
-		width: "9.7",
-		height: "15.7",
-		rx: "1.2",
-		fill: "none",
-		stroke: red,
-		strokeWidth: ".5",
-		opacity: ".55"
+		transform: "translate(14.6 13.6) scale(1.1)"
+	}))), /* @__PURE__ */ import_react.default.createElement("g", { transform: "translate(21 21.2)" }, /* @__PURE__ */ import_react.default.createElement("circle", {
+		r: "5.6",
+		fill: "#E3242B",
+		stroke: K,
+		strokeWidth: "1"
 	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M0 3.4 C-3.6 0.9 -3 -2.6 -1 -2.6 C-0.4 -2.6 0 -2 0 -2 C0 -2 0.4 -2.6 1 -2.6 C3 -2.6 3.6 0.9 0 3.4Z",
-		fill: red,
-		transform: "translate(22.2 7) scale(.4)"
+		d: "M-1 -3.4 H1 V-1 H3.4 V1 H1 V3.4 H-1 V1 H-3.4 V-1 H-1 Z",
+		fill: "#fff"
 	})));
 }
 function DifferenzlerLogo({ color, theme, size }) {
@@ -21932,10 +21888,8 @@ function ImpostorLogo({ color, theme, size }) {
 	}));
 }
 function WerewolfLogo({ color, theme, size }) {
-	gtIcTheme(theme);
 	const S = size || 28;
 	const K = "#14100E";
-	const m = "#FFE7A3";
 	return /* @__PURE__ */ import_react.default.createElement("svg", {
 		width: S,
 		height: S,
@@ -21943,33 +21897,53 @@ function WerewolfLogo({ color, theme, size }) {
 		style: { flexShrink: 0 },
 		"aria-hidden": "true"
 	}, /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: "16.5",
+		cx: "18.5",
 		cy: "11",
-		r: "8.5",
-		fill: m,
+		r: "9",
+		fill: "#FFE9A8",
 		stroke: K,
 		strokeWidth: "1"
 	}), /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: "19",
-		cy: "8.5",
-		r: "1.4",
+		cx: "21.5",
+		cy: "7.8",
+		r: "1.8",
 		fill: "#F2D27A"
 	}), /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: "14.5",
-		cy: "13.5",
+		cx: "23",
+		cy: "13.4",
+		r: "1.2",
+		fill: "#F2D27A"
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: "18.8",
+		cy: "16",
 		r: "1",
 		fill: "#F2D27A"
 	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M3 26 C3.4 21 4.4 17.4 6.4 14.8 L7.6 10.6 L8.6 6 L10 8.6 L11.6 6.8 L12 9.2 L16.4 4 L17.2 5.4 L14.6 10.8 L12.8 12.4 L13 15.6 C14.6 18.6 15.4 22.4 15.5 26 Z",
+		d: "M3 27.5 L3.6 22 L3 20.4 L4.4 19.6 L4.2 17.4 L5.4 16.8 L5.6 13.6 L6.6 11 L6.4 6.2 L8.8 9.2 L10.2 5.4 L11.4 9.2 L13.2 9 L19 4.2 L20.2 4.8 L16.6 8.6 L15.6 9.8 L19.4 8.4 L19.6 9.4 L15.8 12 L15.2 13.6 L16 14.6 L14.6 15.6 L15.4 16.8 L14 18 L14.8 19.4 L13.6 20.6 L14.6 27.5 Z",
 		fill: "#2B2340",
 		stroke: K,
-		strokeWidth: ".8",
+		strokeWidth: ".9",
 		strokeLinejoin: "round"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M6.8 7.6 L8.4 10",
+		stroke: "#4A3D66",
+		strokeWidth: ".8",
+		strokeLinecap: "round"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M10.2 6.8 L10.8 9.4",
+		stroke: "#4A3D66",
+		strokeWidth: ".8",
+		strokeLinecap: "round"
 	}), /* @__PURE__ */ import_react.default.createElement("circle", {
 		cx: "11.6",
-		cy: "10.4",
-		r: ".7",
-		fill: m
+		cy: "10.8",
+		r: ".75",
+		fill: "#FFD23F"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M5.4 22 L7.2 20.6 M5.8 25 L7.6 23.4",
+		stroke: "#4A3D66",
+		strokeWidth: ".7",
+		strokeLinecap: "round"
 	}));
 }
 function TabuLogo({ color, theme, size }) {
@@ -22066,63 +22040,65 @@ function HeadsUpLogo({ color, theme, size }) {
 	}));
 }
 function SkyjoLogo({ color, theme, size }) {
-	gtIcTheme(theme);
 	const S = size || 28;
 	const K = "#14100E";
-	const c = [
-		"#2B4C9B",
-		"#5BC0EB",
-		"#4CAF50",
-		"#FFD23F",
-		"#E53935"
-	];
-	const back = "#1B2A4A";
-	const cells = [
-		[0, c[4]],
-		[1, "B"],
-		[2, c[3]],
-		[3, c[2]],
-		[4, c[1]],
-		[5, "B"]
-	];
+	const card = (r, f, ink, k, kids) => /* @__PURE__ */ import_react.default.createElement("g", {
+		key: k,
+		transform: `rotate(${r} 14 26)`
+	}, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "8",
+		y: "2.5",
+		width: "12",
+		height: "17",
+		rx: "2.4",
+		fill: f,
+		stroke: K,
+		strokeWidth: "1.1"
+	}), /* @__PURE__ */ import_react.default.createElement("ellipse", {
+		cx: "14",
+		cy: "11",
+		rx: "4.3",
+		ry: "5.6",
+		fill: "#fff"
+	}), kids(ink));
 	return /* @__PURE__ */ import_react.default.createElement("svg", {
 		width: S,
 		height: S,
 		viewBox: "0 0 28 28",
 		style: { flexShrink: 0 },
 		"aria-hidden": "true"
-	}, cells.map(([i, f]) => {
-		const x = 2 + i % 3 * 8.3, y = 4 + Math.floor(i / 3) * 10.8;
-		return f === "B" ? /* @__PURE__ */ import_react.default.createElement("g", { key: i }, /* @__PURE__ */ import_react.default.createElement("rect", {
-			x,
-			y,
-			width: "7.4",
-			height: "10",
-			rx: "1.6",
-			fill: back,
-			stroke: K,
-			strokeWidth: "1"
-		}), /* @__PURE__ */ import_react.default.createElement("path", {
-			d: `M${x + 1.6} ${y + 6.4} a1.3 1.3 0 0 1 .9-2.3 a1.8 1.8 0 0 1 3.3 .4 a1.1 1.1 0 0 1 .2 1.9 Z`,
-			fill: "#CFEAF7"
-		})) : /* @__PURE__ */ import_react.default.createElement("g", { key: i }, /* @__PURE__ */ import_react.default.createElement("rect", {
-			x,
-			y,
-			width: "7.4",
-			height: "10",
-			rx: "1.6",
-			fill: f,
-			stroke: K,
-			strokeWidth: "1"
-		}), /* @__PURE__ */ import_react.default.createElement("ellipse", {
-			cx: x + 3.7,
-			cy: y + 5,
-			rx: "2.2",
-			ry: "3",
-			fill: "#fff",
-			opacity: ".9"
-		}));
-	}));
+	}, card(-28, "#2B4C9B", "#2B4C9B", "a", (ink) => /* @__PURE__ */ import_react.default.createElement("g", null, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "8.9",
+		y: "9.4",
+		width: "1.8",
+		height: "1",
+		rx: ".4",
+		fill: ink
+	}), /* @__PURE__ */ import_react.default.createElement("text", {
+		x: "12.6",
+		y: "12.4",
+		fontSize: "6.4",
+		fill: ink,
+		fontFamily: "'Space Grotesk','Inter',sans-serif",
+		fontWeight: "800",
+		textAnchor: "middle"
+	}, "2"))), card(-4, "#FFD23F", "#C79100", "b", (ink) => /* @__PURE__ */ import_react.default.createElement("text", {
+		x: "12.6",
+		y: "12.8",
+		fontSize: "6.4",
+		fill: ink,
+		fontFamily: "'Space Grotesk','Inter',sans-serif",
+		fontWeight: "800",
+		textAnchor: "middle"
+	}, "5")), card(22, "#E53935", "#E53935", "c", (ink) => /* @__PURE__ */ import_react.default.createElement("text", {
+		x: "14",
+		y: "13.4",
+		fontSize: "5.8",
+		fill: ink,
+		fontFamily: "'Space Grotesk','Inter',sans-serif",
+		fontWeight: "800",
+		textAnchor: "middle"
+	}, "12")));
 }
 function FiveSecLogo({ color, theme, size }) {
 	gtIcTheme(theme);
@@ -22538,57 +22514,9 @@ function MastersLogo({ color, theme, size }) {
 	})));
 }
 function HiScoreLogo({ color, theme, size }) {
-	gtIcTheme(theme);
 	const S = size || 28;
 	const K = "#14100E";
-	const c = "#22D3EE";
-	const d = "#1C7C8C";
-	return /* @__PURE__ */ import_react.default.createElement("svg", {
-		width: S,
-		height: S,
-		viewBox: "0 0 28 28",
-		style: { flexShrink: 0 },
-		"aria-hidden": "true"
-	}, /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "3",
-		y: "16",
-		width: "5.6",
-		height: "9",
-		rx: "1.4",
-		fill: d,
-		stroke: K,
-		strokeWidth: "1"
-	}), /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "11.2",
-		y: "11",
-		width: "5.6",
-		height: "14",
-		rx: "1.4",
-		fill: d,
-		stroke: K,
-		strokeWidth: "1"
-	}), /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "19.4",
-		y: "5",
-		width: "5.6",
-		height: "20",
-		rx: "1.4",
-		fill: c,
-		stroke: K,
-		strokeWidth: "1"
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M19.4 2.6 l2.8 -1.6 l2.8 1.6",
-		stroke: c,
-		strokeWidth: "1.4",
-		fill: "none",
-		strokeLinecap: "round",
-		strokeLinejoin: "round"
-	}));
-}
-function SplitScoreLogo({ color, theme, size }) {
-	gtIcTheme(theme);
-	const S = size || 28;
-	const K = "#14100E";
+	const G = "#FFC24B";
 	return /* @__PURE__ */ import_react.default.createElement("svg", {
 		width: S,
 		height: S,
@@ -22596,22 +22524,129 @@ function SplitScoreLogo({ color, theme, size }) {
 		style: { flexShrink: 0 },
 		"aria-hidden": "true"
 	}, /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M12.6 3 A11 11 0 0 0 12.6 25 Z",
-		fill: "#B478F0",
+		d: "M7 3.5 H21 V9 C21 13.6 17.8 16.4 14 16.4 C10.2 16.4 7 13.6 7 9 Z",
+		fill: G,
 		stroke: K,
-		strokeWidth: "1"
+		strokeWidth: "1.1",
+		strokeLinejoin: "round"
 	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M15.4 3 A11 11 0 0 1 15.4 25 Z",
-		fill: "#4B2D6E",
+		d: "M7 5.5 H3.8 C3.8 9.6 5.6 11.2 7.6 11.4 M21 5.5 H24.2 C24.2 9.6 22.4 11.2 20.4 11.4",
 		stroke: K,
-		strokeWidth: "1"
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M12.6 8 A6 6 0 0 0 12.6 20",
-		stroke: "#fff",
-		strokeWidth: "1.2",
+		strokeWidth: "1.3",
 		fill: "none",
+		strokeLinecap: "round"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M7 5.5 H3.8 C3.8 9.6 5.6 11.2 7.6 11.4 M21 5.5 H24.2 C24.2 9.6 22.4 11.2 20.4 11.4",
+		stroke: G,
+		strokeWidth: ".6",
+		fill: "none",
+		strokeLinecap: "round"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M12.6 16.2 H15.4 V20 H12.6 Z",
+		fill: "#E09A1E",
+		stroke: K,
+		strokeWidth: "1"
+	}), /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "8.5",
+		y: "20",
+		width: "11",
+		height: "4.6",
+		rx: "1",
+		fill: "#3A2A1A",
+		stroke: K,
+		strokeWidth: "1"
+	}), /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "10.6",
+		y: "21.4",
+		width: "6.8",
+		height: "1.8",
+		rx: ".4",
+		fill: G
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: "14",
+		cy: "9.4",
+		r: "3.6",
+		fill: "#1B1B22",
+		stroke: K,
+		strokeWidth: ".6"
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: "14",
+		cy: "9.4",
+		r: "2.6",
+		fill: "#F3E6C8"
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: "14",
+		cy: "9.4",
+		r: "1.5",
+		fill: "#D7263D"
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: "14",
+		cy: "9.4",
+		r: ".6",
+		fill: "#1E7A46"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M9.6 5.2 C9.4 7 9.6 8.6 10.2 10",
+		stroke: "#fff",
+		strokeWidth: ".9",
+		fill: "none",
+		strokeLinecap: "round",
 		opacity: ".7"
 	}));
+}
+function SplitScoreLogo({ color, theme, size }) {
+	const S = size || 28;
+	const K = "#14100E";
+	const ring = (cx, r1, r2, a0, a1, f, k) => {
+		const P = (r, d) => {
+			const t = (d - 90) * Math.PI / 180;
+			return (cx + r * Math.cos(t)).toFixed(2) + " " + (14 + r * Math.sin(t)).toFixed(2);
+		};
+		return /* @__PURE__ */ import_react.default.createElement("path", {
+			key: k,
+			d: `M${P(r2, a0)} A${r2} ${r2} 0 0 1 ${P(r2, a1)} L${P(r1, a1)} A${r1} ${r1} 0 0 0 ${P(r1, a0)}Z`,
+			fill: f
+		});
+	};
+	const half = (cx, a0, dir) => {
+		const out = [];
+		for (let i = 0; i < 10; i++) {
+			const s = a0 + i * 18, e = s + 18;
+			const dk = i % 2 === 0;
+			out.push(ring(cx, 2.2, 10.6, s, e, dk ? "#1B1B22" : "#F3E6C8", "b" + i));
+			out.push(ring(cx, 5.6, 6.9, s, e, dk ? "#D7263D" : "#1E7A46", "t" + i));
+			out.push(ring(cx, 10.6, 12, s, e, dk ? "#D7263D" : "#1E7A46", "d" + i));
+		}
+		return out;
+	};
+	return /* @__PURE__ */ import_react.default.createElement("svg", {
+		width: S,
+		height: S,
+		viewBox: "0 0 28 28",
+		style: { flexShrink: 0 },
+		"aria-hidden": "true"
+	}, /* @__PURE__ */ import_react.default.createElement("g", { transform: "rotate(-8 12 14)" }, half(12.2, 180, -1), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M12.2 1.8 A12.2 12.2 0 0 0 12.2 26.2",
+		stroke: K,
+		strokeWidth: "1",
+		fill: "none"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M12.2 1.8 L11.2 6 L12.6 9 L11.4 13 L12.8 17 L11.4 21 L12.2 26.2",
+		stroke: K,
+		strokeWidth: "1",
+		fill: "none",
+		strokeLinejoin: "round"
+	})), /* @__PURE__ */ import_react.default.createElement("g", { transform: "translate(3.4 0) rotate(8 16 14)" }, half(12.6, 0, 1), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M12.6 1.8 A12.2 12.2 0 0 1 12.6 26.2",
+		stroke: K,
+		strokeWidth: "1",
+		fill: "none"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M12.6 1.8 L11.6 6 L13 9 L11.8 13 L13.2 17 L11.8 21 L12.6 26.2",
+		stroke: K,
+		strokeWidth: "1",
+		fill: "none",
+		strokeLinejoin: "round"
+	})));
 }
 function MafiaLogo({ color, theme, size }) {
 	gtIcTheme(theme);
@@ -22991,7 +23026,7 @@ var game_header_exports = /* @__PURE__ */ __exportAll({
 	GameCard: () => GameCard,
 	GameHeader: () => GameHeader
 });
-function GameCard({ title, description, status, accent, onClick, disabled, logo, variant = "paper", tokens, theme, fav, t }) {
+function GameCard({ title, description, status, accent, onClick, disabled, logo, variant = "paper", tokens, theme, fav, t, variants }) {
 	const isNeon = !disabled;
 	const isLight = theme === "light";
 	const tk = tokens || {
@@ -23013,7 +23048,9 @@ function GameCard({ title, description, status, accent, onClick, disabled, logo,
 			background: isNeon ? isLight ? tk.card : `linear-gradient(135deg, ${accent}24, ${tk.card})` : tk.card,
 			border: isNeon ? isLight ? `1px solid ${tk.border}` : `1px solid ${accent}66` : `1px solid ${tk.border}`,
 			borderRadius: 24,
-			padding: "17px 18px",
+			padding: "0 18px",
+			height: 80,
+			boxSizing: "border-box",
 			cursor: disabled ? "default" : "pointer",
 			opacity: disabled ? .5 : 1,
 			fontFamily: "'Inter', sans-serif",
@@ -23045,14 +23082,7 @@ function GameCard({ title, description, status, accent, onClick, disabled, logo,
 			color: tk.ink,
 			fontFamily: "'Baloo 2', sans-serif"
 		}
-	}, title), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-gamecard-desc",
-		style: {
-			fontSize: 12,
-			color: tk.muted,
-			marginTop: 3
-		}
-	}, description), status && /* @__PURE__ */ import_react.default.createElement("div", {
+	}, title), status && /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-gamecard-status",
 		style: {
 			display: "flex",
@@ -23060,10 +23090,12 @@ function GameCard({ title, description, status, accent, onClick, disabled, logo,
 			gap: 6,
 			fontSize: 10.5,
 			color: disabled ? tk.muted : tk.ink,
-			marginTop: 6,
+			marginTop: 4,
 			fontWeight: 600,
 			letterSpacing: "0.08em",
-			textTransform: "uppercase"
+			textTransform: "uppercase",
+			whiteSpace: "nowrap",
+			overflow: "hidden"
 		}
 	}, /* @__PURE__ */ import_react.default.createElement("span", {
 		"aria-hidden": true,
@@ -23074,7 +23106,10 @@ function GameCard({ title, description, status, accent, onClick, disabled, logo,
 			background: accent,
 			flexShrink: 0
 		}
-	}), status)), fav && /* @__PURE__ */ import_react.default.createElement("span", {
+	}), /* @__PURE__ */ import_react.default.createElement("span", { style: {
+		overflow: "hidden",
+		textOverflow: "ellipsis"
+	} }, status))), fav && /* @__PURE__ */ import_react.default.createElement("span", {
 		"aria-hidden": "true",
 		style: {
 			width: 44,
@@ -23085,15 +23120,33 @@ function GameCard({ title, description, status, accent, onClick, disabled, logo,
 		fontSize: 18,
 		flexShrink: 0
 	} }, "›"));
-	return fav ? /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	const vb = variants ? /* @__PURE__ */ import_react.default.createElement("span", {
+		"aria-hidden": "true",
+		style: {
+			position: "absolute",
+			top: 8,
+			right: 14,
+			padding: "2px 8px",
+			borderRadius: 999,
+			background: `${accent}26`,
+			border: `1px solid ${accent}66`,
+			color: tk.ink,
+			fontSize: 10.5,
+			fontWeight: 700,
+			letterSpacing: "0.04em",
+			pointerEvents: "none",
+			fontFamily: "'Inter', sans-serif"
+		}
+	}, t ? t("gtVariantsN")(variants) : variants) : null;
+	return fav || vb ? /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		position: "relative",
 		width: "100%"
-	} }, _card, /* @__PURE__ */ import_react.default.createElement(FavStar, {
+	} }, _card, fav && /* @__PURE__ */ import_react.default.createElement(FavStar, {
 		fav,
 		theme,
 		t,
 		muted: tk.muted
-	})) : _card;
+	}), vb) : _card;
 }
 var GT_HEAD_CSS = ".gt-hb{position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:44px;height:44px;padding:0;margin:0;border:none;background:transparent;cursor:pointer;font:inherit;-webkit-tap-highlight-color:transparent;touch-action:manipulation}.gt-hb:focus{outline:none}.gt-hb>.gt-hf{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:36px;min-width:36px;box-sizing:border-box;border-radius:999px;white-space:nowrap;transition:transform .16s cubic-bezier(.23,1,.32,1),background-color .2s ease,border-color .2s ease,color .2s ease}.gt-hb:active>.gt-hf{transform:scale(.96)}.gt-hb:focus-visible>.gt-hf{outline:2px solid currentColor;outline-offset:2px}@media (hover:hover) and (pointer:fine){.gt-hb:hover>.gt-hf{filter:brightness(1.15)}}@media (prefers-reduced-motion:reduce){.gt-hb>.gt-hf{transition:none}}.gt-gamehead{position:sticky;top:var(--gt-sat, env(safe-area-inset-top, 0px));z-index:20;margin:-6px -12px 8px;padding:6px 12px 8px}.gt-gamehead.is-stuck{background-color:var(--gt-pg-col);background-image:var(--gt-pg-img);background-size:var(--gt-pg-size);background-repeat:no-repeat;background-position:var(--gt-head-pos,0 0);box-shadow:0 1px 0 rgba(128,128,128,.22)}.gt-gamehead>.gt-headbtns{top:6px!important;right:8px!important}.gt-headbtns{z-index:21!important}div:has(>.gt-gamehead~.gt-headbtns){position:sticky!important;top:var(--gt-sat, env(safe-area-inset-top, 0px));z-index:20}div:has(>.gt-gamehead~.gt-headbtns)>.gt-headbtns{top:6px!important}.gtL-content .gt-gamehead,.gtL-content .gt-gamehead.is-stuck{position:relative;top:auto;margin:0 0 16px;padding:0;background:none;box-shadow:none}.gtL-content .gt-gamehead>.gt-headbtns{top:0!important;right:-4px!important}.gtL-content div:has(>.gt-gamehead~.gt-headbtns){position:relative!important;top:auto}.gtL-content div:has(>.gt-gamehead~.gt-headbtns)>.gt-headbtns{top:0!important}div:has(>.gt-headbtns+.gt-gamehead)>.gt-headbtns{position:sticky!important;top:calc(var(--gt-headtop, var(--gt-sat, env(safe-area-inset-top, 0px))) + 6px)!important;right:auto!important;left:auto!important;height:0;overflow:visible;display:flex;justify-content:flex-end;margin-right:-4px;z-index:22!important}.gtL-content div:has(>.gt-headbtns+.gt-gamehead)>.gt-headbtns{position:absolute!important;top:0!important;right:-4px!important;height:auto;margin-right:0}.gtL-yatzy-sheets,.gt-gamehead~.gtL-e-fit{isolation:isolate}.gt-gamehead.is-stuck{-webkit-transform:translateZ(0);transform:translateZ(0)}.gt-gamehead.is-stuck::before{content:'';position:absolute;left:0;right:0;bottom:100%;height:var(--gt-cover,0px);pointer-events:none;background-color:var(--gt-pg-col);background-image:var(--gt-pg-img);background-size:var(--gt-pg-size);background-repeat:no-repeat;background-position:var(--gt-head-pos2,0 0)}.gtL-content .gt-gamehead.is-stuck::before{display:none}";
 function GameHeader({ title, subtitle, icon, accent, onBack, backLabel, tk, titleFont, onHome, onEndGame, onRules, rulesTitle, rulesText, extra, hideTitle, moreItems, onMenuOpen }) {
@@ -71822,6 +71875,8 @@ function CategoryScorepads({ favorites, onToggleFavorite, onSelect, onBack, lang
 		tokens: tk,
 		theme,
 		title: t("gameJass"),
+		variants: 2,
+		t,
 		description: t("jassDesc"),
 		status: jassProgress || schieberProgress ? t("gameInProgress") : null,
 		accent: theme === "noir" ? "#C4C4C4" : "#D52B1E",
@@ -71859,6 +71914,8 @@ function CategoryScorepads({ favorites, onToggleFavorite, onSelect, onBack, lang
 		tokens: tk,
 		theme,
 		title: t("gameDarts"),
+		variants: 7,
+		t,
 		description: t("gameDartsDesc"),
 		status: dartsProgress || cricketProgress || shanghaiProgress ? t("gameInProgress") : null,
 		accent: showcaseAccent("darts", "#C8102E", theme),
@@ -72095,7 +72152,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.10-2";
+var APP_BUILD = "2026.11.10-3";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -73123,8 +73180,8 @@ function DartMachineModeButton({ label, sub, status, ledColor, icon, onClick, tk
 			background: tk.card,
 			border: "none",
 			borderRadius: 20,
-			padding: "14px 16px",
-			minHeight: 88,
+			padding: "0 16px",
+			height: 80,
 			cursor: "pointer",
 			position: "relative",
 			boxSizing: "border-box",
@@ -73147,13 +73204,7 @@ function DartMachineModeButton({ label, sub, status, ledColor, icon, onClick, tk
 		color: tk.ink,
 		wordBreak: "keep-all",
 		hyphens: "none"
-	} }, label), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontFamily: "'Inter', sans-serif",
-		fontSize: 13,
-		color: tk.muted,
-		marginTop: 3,
-		lineHeight: 1.3
-	} }, sub), running && /* @__PURE__ */ import_react.default.createElement("div", { style: {
+	} }, label), running && /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "inline-block",
 		fontFamily: "'Inter', sans-serif",
 		fontSize: 13,
@@ -116257,7 +116308,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.10-2");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.10-3");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -118954,7 +119005,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.10-2" && !upd) {
+		if (seen && seen !== "2026.11.10-3" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -118963,7 +119014,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.10-2" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.10-3" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

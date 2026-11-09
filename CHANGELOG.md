@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.10-3 (10.11.2026 00:15)
+- Neue Icons: Werwolf, Hi Score, Split Score, Skyjo, Jass. Spiellisten ohne Beschreibung, alle gleich hoch, Schild mit Anzahl Varianten
+
 ## 2026.11.10-2 (10.11.2026 00:06)
 - Neue Icons: Cut Throat, Masters, Shanghai; Jass und Coiffeur mit französischen Karten; Icons auch im Noir-Modus farbig
 

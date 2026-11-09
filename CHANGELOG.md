@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.10-1 (10.11.2026 00:00)
+- Neue Icons: Schieber, Wizard, Cricket; Skyjo als Kartenraster, Phase 10 als Treppe; Icons in Listen einheitlich gross
+
 ## 2026.11.09-13 (09.11.2026 23:53)
 - Neue Icons: Rommé, Jass, Coiffeur
 

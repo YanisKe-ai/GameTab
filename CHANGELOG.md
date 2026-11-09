@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.10-5 (10.11.2026 00:25)
+- Neue Icons: Am ehesten, Tabu, HeadsUp. Spielnamen in den Listen grösser und kräftiger, Icons etwas kleiner
+
 ## 2026.11.10-4 (10.11.2026 00:20)
 - Neue Icons: Impostor, Mafia, Verräter; Skyjo mit Karten nebeneinander, Jass mit Jassteppich und vier Farben
 

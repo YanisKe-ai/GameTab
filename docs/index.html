@@ -19284,7 +19284,7 @@ function useGtStStore() {
 // web/src/styles/global.js
 var global_exports = /* @__PURE__ */ __exportAll({ GLOBAL_STYLES: () => GLOBAL_STYLES });
 var GLOBAL_STYLES = `
-.gtL-gamecard-logo svg{width:40px !important;height:40px !important;}
+.gtL-gamecard-logo{width:40px !important;min-width:40px !important;}.gtL-gamecard-logo svg{width:36px !important;height:36px !important;}.gtL-gamecard{gap:18px !important;}.gtL-gamecard-title{font-size:26px !important;font-weight:800 !important;line-height:1.05;}
 
 :root { --gt-focus: #F2D48F; }
 html[data-gt-theme="light"] { --gt-focus: #1B4FA0; }
@@ -21979,11 +21979,64 @@ function WerewolfLogo({ color, theme, size }) {
 	}));
 }
 function TabuLogo({ color, theme, size }) {
-	gtIcTheme(theme);
 	const S = size || 28;
 	const K = "#14100E";
-	const y = "#FFC93C";
-	const r = "#E5383B";
+	return /* @__PURE__ */ import_react.default.createElement("svg", {
+		width: S,
+		height: S,
+		viewBox: "0 0 28 28",
+		style: { flexShrink: 0 },
+		"aria-hidden": "true"
+	}, /* @__PURE__ */ import_react.default.createElement("g", { transform: "rotate(-8 13 14)" }, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "4",
+		y: "2.5",
+		width: "17",
+		height: "23",
+		rx: "2.4",
+		fill: "#FFFFFF",
+		stroke: K,
+		strokeWidth: "1.1"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M4 4.9 a2.4 2.4 0 0 1 2.4 -2.4 H18.6 a2.4 2.4 0 0 1 2.4 2.4 V8.6 H4 Z",
+		fill: "#7B3FBF"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M7.4 5.6 H17.6",
+		stroke: "#fff",
+		strokeWidth: "1.5",
+		strokeLinecap: "round"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M4 8.6 H21",
+		stroke: K,
+		strokeWidth: ".8"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M7.4 12 H16 M7.4 15 H17.4 M7.4 18 H14.8 M7.4 21 H16.6",
+		stroke: "#E5383B",
+		strokeWidth: "1.3",
+		strokeLinecap: "round"
+	})), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: "20.6",
+		cy: "20.2",
+		r: "5.6",
+		fill: "#fff",
+		stroke: "#E5383B",
+		strokeWidth: "2"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M16.6 24.2 L24.6 16.2",
+		stroke: "#E5383B",
+		strokeWidth: "2",
+		strokeLinecap: "round"
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: "20.6",
+		cy: "20.2",
+		r: "6.6",
+		fill: "none",
+		stroke: K,
+		strokeWidth: ".8"
+	}));
+}
+function HeadsUpLogo({ color, theme, size }) {
+	const S = size || 28;
+	const K = "#14100E";
 	return /* @__PURE__ */ import_react.default.createElement("svg", {
 		width: S,
 		height: S,
@@ -21991,84 +22044,69 @@ function TabuLogo({ color, theme, size }) {
 		style: { flexShrink: 0 },
 		"aria-hidden": "true"
 	}, /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M5 5 h18 a3 3 0 0 1 3 3 v8 a3 3 0 0 1 -3 3 h-10 l-5 4.5 v-4.5 h-3 a3 3 0 0 1 -3 -3 v-8 a3 3 0 0 1 3 -3 Z",
-		fill: y,
+		d: "M5 27 C5 21.6 8.6 19.4 14 19.4 C19.4 19.4 23 21.6 23 27 Z",
+		fill: "#6C7FE8",
 		stroke: K,
-		strokeWidth: "1.2",
-		strokeLinejoin: "round"
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M7 9.5 h14 M7 13.5 h9",
-		stroke: K,
-		strokeWidth: "1.4",
-		strokeLinecap: "round",
-		opacity: ".55"
-	}), /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: "20",
-		cy: "18",
-		r: "6",
-		fill: "#fff",
-		stroke: r,
-		strokeWidth: "2.2"
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M15.8 22.2 L24.2 13.8",
-		stroke: r,
-		strokeWidth: "2.2",
-		strokeLinecap: "round"
-	}));
-}
-function HeadsUpLogo({ color, theme, size }) {
-	gtIcTheme(theme);
-	const S = size || 28;
-	const K = "#14100E";
-	return /* @__PURE__ */ import_react.default.createElement("svg", {
-		width: S,
-		height: S,
-		viewBox: "0 0 28 28",
-		style: { flexShrink: 0 },
-		"aria-hidden": "true"
-	}, /* @__PURE__ */ import_react.default.createElement("circle", {
+		strokeWidth: "1"
+	}), /* @__PURE__ */ import_react.default.createElement("ellipse", {
 		cx: "14",
-		cy: "19.5",
-		r: "6.5",
+		cy: "15.4",
+		rx: "6.2",
+		ry: "6.6",
 		fill: "#F2C7A5",
 		stroke: K,
 		strokeWidth: "1"
 	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M7.5 26 a6.5 4 0 0 1 13 0",
-		fill: "#3B4A9C"
+		d: "M7.9 13.6 C8 9.8 10.4 8.4 14 8.4 C17.6 8.4 20 9.8 20.1 13.6 C18.6 11.8 16.4 11.4 14 11.4 C11.6 11.4 9.4 11.8 7.9 13.6 Z",
+		fill: "#5A3A22"
 	}), /* @__PURE__ */ import_react.default.createElement("circle", {
 		cx: "11.6",
-		cy: "19.5",
-		r: ".9",
+		cy: "16",
+		r: ".75",
 		fill: K
 	}), /* @__PURE__ */ import_react.default.createElement("circle", {
 		cx: "16.4",
-		cy: "19.5",
-		r: ".9",
+		cy: "16",
+		r: ".75",
 		fill: K
+	}), /* @__PURE__ */ import_react.default.createElement("ellipse", {
+		cx: "14",
+		cy: "18.6",
+		rx: "1.4",
+		ry: "1",
+		fill: "#C25450"
 	}), /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "7.5",
-		y: "1.5",
-		width: "13",
-		height: "10.5",
+		x: "7.4",
+		y: "1",
+		width: "13.2",
+		height: "9.6",
 		rx: "2",
-		fill: "#6C7FE8",
+		fill: "#23202A",
 		stroke: K,
-		strokeWidth: "1.1",
-		transform: "rotate(-6 14 7)"
+		strokeWidth: "1"
+	}), /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "8.6",
+		y: "2.1",
+		width: "10.8",
+		height: "7.4",
+		rx: "1.1",
+		fill: "#FFC93C"
 	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M12.4 5.2 a1.8 1.8 0 1 1 2.6 1.6 c-.7 .4 -1 .8 -1 1.5",
-		stroke: "#fff",
-		strokeWidth: "1.3",
+		d: "M12.6 4.4 a1.6 1.6 0 1 1 2.3 1.4 c-.6 .3 -.9 .7 -.9 1.3",
+		stroke: "#23202A",
+		strokeWidth: "1.1",
 		fill: "none",
-		strokeLinecap: "round",
-		transform: "rotate(-6 14 7)"
+		strokeLinecap: "round"
 	}), /* @__PURE__ */ import_react.default.createElement("circle", {
 		cx: "14",
-		cy: "10",
-		r: ".8",
-		fill: "#fff",
-		transform: "rotate(-6 14 7)"
+		cy: "8.2",
+		r: ".6",
+		fill: "#23202A"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M3.4 4 L5 6 M3 8 H5.2 M24.6 4 L23 6 M25 8 H22.8",
+		stroke: "#FFC93C",
+		strokeWidth: "1",
+		strokeLinecap: "round"
 	}));
 }
 function SkyjoLogo({ color, theme, size }) {
@@ -22209,11 +22247,9 @@ function FiveSecLogo({ color, theme, size }) {
 	}));
 }
 function MostLikelyLogo({ color, theme, size }) {
-	gtIcTheme(theme);
 	const S = size || 28;
 	const K = "#14100E";
-	const c = "#2DD4BF";
-	const g = "#3A4558";
+	const c = "#2DD4BF", sk = "#F2C7A5", cuff = "#FFC93C";
 	return /* @__PURE__ */ import_react.default.createElement("svg", {
 		width: S,
 		height: S,
@@ -22221,45 +22257,106 @@ function MostLikelyLogo({ color, theme, size }) {
 		style: { flexShrink: 0 },
 		"aria-hidden": "true"
 	}, /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: "5.5",
-		cy: "17",
-		r: "3",
-		fill: g,
-		stroke: K,
-		strokeWidth: ".8"
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M1 26 a4.5 4 0 0 1 9 0Z",
-		fill: g
-	}), /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: "22.5",
-		cy: "17",
-		r: "3",
-		fill: g,
-		stroke: K,
-		strokeWidth: ".8"
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M18 26 a4.5 4 0 0 1 9 0Z",
-		fill: g
-	}), /* @__PURE__ */ import_react.default.createElement("circle", {
 		cx: "14",
-		cy: "14.5",
-		r: "3.6",
-		fill: c,
+		cy: "12",
+		r: "4.2",
+		fill: sk,
 		stroke: K,
 		strokeWidth: "1"
 	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M8.6 26 a5.4 4.8 0 0 1 10.8 0Z",
-		fill: c,
-		stroke: K,
-		strokeWidth: "1"
+		d: "M10.4 11 C10.6 8 12 7.4 14 7.4 C16 7.4 17.4 8 17.6 11 C16.6 9.6 15.4 9.4 14 9.4 C12.6 9.4 11.4 9.6 10.4 11 Z",
+		fill: "#5A3A22"
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: "12.6",
+		cy: "12.6",
+		r: ".6",
+		fill: K
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: "15.4",
+		cy: "12.6",
+		r: ".6",
+		fill: K
 	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M14 2 V8.5 M11.2 5.8 L14 8.6 L16.8 5.8",
-		stroke: c,
-		strokeWidth: "2",
+		d: "M12.8 14.4 C13.6 15.2 14.4 15.2 15.2 14.4",
+		stroke: K,
+		strokeWidth: ".7",
 		fill: "none",
-		strokeLinecap: "round",
-		strokeLinejoin: "round"
-	}));
+		strokeLinecap: "round"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M7.4 26.5 C7.4 20.4 10.4 17.6 14 17.6 C17.6 17.6 20.6 20.4 20.6 26.5 Z",
+		fill: c,
+		stroke: K,
+		strokeWidth: "1"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M14 1 L14.8 3 L17 3.2 L15.3 4.6 L15.8 6.7 L14 5.5 L12.2 6.7 L12.7 4.6 L11 3.2 L13.2 3 Z",
+		fill: "#FFC93C",
+		stroke: K,
+		strokeWidth: ".6"
+	}), /* @__PURE__ */ import_react.default.createElement("g", { transform: "translate(6.2 19.6) rotate(-28)" }, /* @__PURE__ */ import_react.default.createElement("g", null, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "-5.2",
+		y: "-2",
+		width: "5.4",
+		height: "4.6",
+		rx: "1.6",
+		fill: sk,
+		stroke: K,
+		strokeWidth: ".8"
+	}), /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "-.6",
+		y: "-2",
+		width: "5.6",
+		height: "1.9",
+		rx: ".95",
+		fill: sk,
+		stroke: K,
+		strokeWidth: ".8"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M-3.6 -2 V2.6 M-2 -2 V2.6",
+		stroke: K,
+		strokeWidth: ".5",
+		opacity: ".5"
+	}), /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "-6.6",
+		y: "-1.4",
+		width: "1.8",
+		height: "3.6",
+		rx: ".6",
+		fill: cuff,
+		stroke: K,
+		strokeWidth: ".7"
+	}))), /* @__PURE__ */ import_react.default.createElement("g", { transform: "translate(21.8 19.6) scale(-1 1) rotate(-28)" }, /* @__PURE__ */ import_react.default.createElement("g", null, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "-5.2",
+		y: "-2",
+		width: "5.4",
+		height: "4.6",
+		rx: "1.6",
+		fill: sk,
+		stroke: K,
+		strokeWidth: ".8"
+	}), /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "-.6",
+		y: "-2",
+		width: "5.6",
+		height: "1.9",
+		rx: ".95",
+		fill: sk,
+		stroke: K,
+		strokeWidth: ".8"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M-3.6 -2 V2.6 M-2 -2 V2.6",
+		stroke: K,
+		strokeWidth: ".5",
+		opacity: ".5"
+	}), /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "-6.6",
+		y: "-1.4",
+		width: "1.8",
+		height: "3.6",
+		rx: ".6",
+		fill: cuff,
+		stroke: K,
+		strokeWidth: ".7"
+	}))));
 }
 function gtIcTheme(theme) {
 	if (theme) return theme;
@@ -72266,7 +72363,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.10-4";
+var APP_BUILD = "2026.11.10-5";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -73289,7 +73386,7 @@ function DartMachineModeButton({ label, sub, status, ledColor, icon, onClick, tk
 			width: "100%",
 			display: "flex",
 			alignItems: "center",
-			gap: 14,
+			gap: 18,
 			textAlign: "left",
 			background: tk.card,
 			border: "none",
@@ -73302,7 +73399,7 @@ function DartMachineModeButton({ label, sub, status, ledColor, icon, onClick, tk
 			boxShadow: running ? `inset 0 0 0 2px ${ledColor}` : "none"
 		}
 	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		width: 48,
+		width: 40,
 		height: 48,
 		display: "flex",
 		alignItems: "center",
@@ -73312,9 +73409,10 @@ function DartMachineModeButton({ label, sub, status, ledColor, icon, onClick, tk
 		flex: 1,
 		minWidth: 0
 	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontFamily: "'Space Grotesk', sans-serif",
-		fontSize: 19,
-		fontWeight: 600,
+		fontFamily: "'Baloo 2', sans-serif",
+		fontSize: 26,
+		fontWeight: 800,
+		lineHeight: 1.05,
 		color: tk.ink,
 		wordBreak: "keep-all",
 		hyphens: "none"
@@ -73406,7 +73504,7 @@ function DartsVariantSelect({ onSelect, onBack, dartsProgress, cricketProgress, 
 		ledColor: ac,
 		icon: /* @__PURE__ */ import_react.default.createElement(DartsLogo, {
 			color: ac,
-			size: 40
+			size: 36
 		}),
 		fav: fv("darts"),
 		t,
@@ -73420,7 +73518,7 @@ function DartsVariantSelect({ onSelect, onBack, dartsProgress, cricketProgress, 
 		ledColor: ac,
 		icon: /* @__PURE__ */ import_react.default.createElement(CricketLogo, {
 			color: ac,
-			size: 40
+			size: 36
 		}),
 		fav: fv("cricket"),
 		t,
@@ -73434,7 +73532,7 @@ function DartsVariantSelect({ onSelect, onBack, dartsProgress, cricketProgress, 
 		ledColor: ac,
 		icon: /* @__PURE__ */ import_react.default.createElement(ShanghaiLogo, {
 			color: ac,
-			size: 40
+			size: 36
 		}),
 		fav: fv("shanghai"),
 		t,
@@ -73448,7 +73546,7 @@ function DartsVariantSelect({ onSelect, onBack, dartsProgress, cricketProgress, 
 		ledColor: ac,
 		icon: /* @__PURE__ */ import_react.default.createElement(CutThroatLogo, {
 			color: ac,
-			size: 40
+			size: 36
 		}),
 		fav: fv("cricket-cutthroat"),
 		t,
@@ -73462,7 +73560,7 @@ function DartsVariantSelect({ onSelect, onBack, dartsProgress, cricketProgress, 
 		ledColor: ac,
 		icon: /* @__PURE__ */ import_react.default.createElement(MastersLogo, {
 			color: ac,
-			size: 40
+			size: 36
 		}),
 		fav: fv("cricket-masters"),
 		t,
@@ -73476,7 +73574,7 @@ function DartsVariantSelect({ onSelect, onBack, dartsProgress, cricketProgress, 
 		ledColor: ac,
 		icon: /* @__PURE__ */ import_react.default.createElement(HiScoreLogo, {
 			color: ac,
-			size: 40
+			size: 36
 		}),
 		fav: fv("hiscore"),
 		t,
@@ -73490,7 +73588,7 @@ function DartsVariantSelect({ onSelect, onBack, dartsProgress, cricketProgress, 
 		ledColor: ac,
 		icon: /* @__PURE__ */ import_react.default.createElement(SplitScoreLogo, {
 			color: ac,
-			size: 40
+			size: 36
 		}),
 		fav: fv("splitscore"),
 		t,
@@ -116422,7 +116520,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.10-4");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.10-5");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -119119,7 +119217,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.10-4" && !upd) {
+		if (seen && seen !== "2026.11.10-5" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -119128,7 +119226,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.10-4" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.10-5" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

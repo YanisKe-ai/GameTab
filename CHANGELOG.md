@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.10-8 (10.11.2026 00:53)
+- Einrichtungsseiten: grosser Schriftzug pro Spiel in eigener Schrift, Farbschimmer oben entfernt
+
 ## 2026.11.10-7 (10.11.2026 00:40)
 - Wischen zurück: kein Springen mehr in der Home-Bildschirm-App, keine doppelte Einblend-Animation
 

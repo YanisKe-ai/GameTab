@@ -4,6 +4,8 @@
 // Kein position:fixed: auf dem iPhone wird das in der Home-Bildschirm-App abgeschnitten (siehe CLAUDE.md).
 import { React } from "../vendor/react-globals.js";
 const GT_UNIT_CSS = `
+.gt-u-glow{display:none!important}
+
 .gt-u-col{position:relative;display:flex;flex-direction:column;min-height:calc(100dvh - 52px)}
 @media (display-mode: standalone){.gt-u-col{min-height:calc(100vh - 52px)}}
 .gt-u-col>*{position:relative;z-index:1}

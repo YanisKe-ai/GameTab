@@ -614,6 +614,18 @@ for _v in DARTS_VARIANTS:
     _mk(_v)
 
 
+@test("Darts Cricket-Varianten getrennt")
+def t_cricket_variants(pg, env):
+    open_game(pg, "Schreibunterlagen", "Darts", "CRICKET"); press_start(pg)
+    dart(pg, 1); click(pg, btn(pg, "✓"), 700)
+    open_game(pg, "Schreibunterlagen", "Darts", "CUT THROAT")
+    expect_text(pg, r"Cut Throat", "Cut Throat: falscher Modus geöffnet")
+    check(pg.locator('svg[data-gt-fx="dt-board"]').count() == 0, "Cut Throat: übernimmt laufendes Cricket statt neuer Partie")
+    open_game(pg, "Schreibunterlagen", "Darts", "CRICKET")
+    check(pg.locator('svg[data-gt-fx="dt-board"]').count() > 0, "Cricket: laufende Partie verloren nach Wechsel zu Cut Throat")
+    finish(pg, "Darts Cricket-Varianten", env)
+
+
 def wizard_pick(pg, v):
     """Zahlenknopf (rund, 0..Kartenzahl) der Eingabe unten antippen."""
     click(pg, pg.locator(".wz-n").nth(v), FAST)

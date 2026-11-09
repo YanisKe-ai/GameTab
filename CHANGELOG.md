@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.09-9 (09.11.2026 23:16)
+- Darts: Cricket, Cut Throat und Masters getrennt gespeichert, Zielfelder auf der Scheibe hervorgehoben. Neue einheitliche Icons für Darts-Modi, Phase 10 und Rommé
+
 ## 2026.11.09-8 (09.11.2026 22:51)
 - Rommé neu: erst wählen, wer Rommé gemacht hat, dann Handkarten antippen statt Punkte tippen, Hand-Rommé doppelt, Tabelle
 

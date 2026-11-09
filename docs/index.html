@@ -21647,93 +21647,180 @@ function WizardLogo({ theme }) {
 		fill: G
 	}));
 }
-function JassLogo({ theme }) {
-	const R = theme === "noir" ? "#8A8A8A" : "#D52B1E";
+function JassLogo({ color, theme, size }) {
+	const n = gtIcTheme(theme) === "noir";
+	const S = size || 28;
 	const K = "#14100E";
+	const face = n ? "#EDEDED" : "#FFF8EC";
+	const yel = n ? "#BDBDBD" : "#F2B705";
+	const grn = n ? "#6E6E6E" : "#3F8F42";
+	const brn = n ? "#8A8A8A" : "#B5651D";
+	const red = n ? "#2A2A2A" : "#D62828";
 	return /* @__PURE__ */ import_react.default.createElement("svg", {
-		width: "28",
-		height: "28",
+		width: S,
+		height: S,
 		viewBox: "0 0 28 28",
 		style: { flexShrink: 0 },
 		"aria-hidden": "true"
-	}, /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "8",
-		y: "3",
-		width: "15",
-		height: "21",
-		rx: "2.5",
-		fill: "#F1E7D6",
-		stroke: K,
-		strokeWidth: "1.1",
-		transform: "rotate(11 15.5 13.5)"
-	}), /* @__PURE__ */ import_react.default.createElement("g", { transform: "rotate(-8 12.5 14.5)" }, /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "4.5",
+	}, /* @__PURE__ */ import_react.default.createElement("g", { transform: "rotate(-16 10 14)" }, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "3",
 		y: "4",
-		width: "16",
-		height: "21",
-		rx: "2.5",
-		fill: "#fff",
+		width: "12",
+		height: "18",
+		rx: "2",
+		fill: face,
 		stroke: K,
-		strokeWidth: "1.2"
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M7.5 11 C8 7.6 11 6.6 14.6 7.2 C16.6 7.6 17.6 8.8 17.4 10.2 Z",
-		fill: R,
+		strokeWidth: "1.1"
+	}), /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "4.4",
+		y: "5.4",
+		width: "9.2",
+		height: "15.2",
+		rx: "1.2",
+		fill: "none",
+		stroke: red,
+		strokeWidth: ".6",
+		opacity: ".7"
+	}), /* @__PURE__ */ import_react.default.createElement("g", { transform: "translate(9 13)" }, /* @__PURE__ */ import_react.default.createElement("g", null, /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M-2.6 -0.6 C-2.6 3 -1.4 4.6 0 4.6 C1.4 4.6 2.6 3 2.6 -0.6 Z",
+		fill: brn,
 		stroke: K,
-		strokeWidth: "0.7"
+		strokeWidth: ".7"
 	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M10.2 10.6 C10.2 13.2 11.4 14.8 13.4 14.8 C14.6 14.8 15.2 13.8 15.4 12.6 L16.3 12.2 L15.4 11.6 L15.3 10.4 Z",
-		fill: "#F6E3C8",
+		d: "M-3.2 -0.4 C-3.2 -2.8 3.2 -2.8 3.2 -0.4 Z",
+		fill: grn,
 		stroke: K,
-		strokeWidth: "0.6"
+		strokeWidth: ".7"
 	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M8.6 16.2 Q12.5 14.8 16.6 16.2 L17 22.6 H8.2 Z",
-		fill: R,
+		d: "M0 -2.4 V-4.4",
 		stroke: K,
-		strokeWidth: "0.7"
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M11.4 15.6 H13.8 V22.6 H11.4 Z",
-		fill: "#F4EDE0"
-	})));
+		strokeWidth: ".9",
+		strokeLinecap: "round"
+	})))), /* @__PURE__ */ import_react.default.createElement("g", { transform: "rotate(12 18 14)" }, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "12",
+		y: "4",
+		width: "12",
+		height: "18",
+		rx: "2",
+		fill: face,
+		stroke: K,
+		strokeWidth: "1.1"
+	}), /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "13.4",
+		y: "5.4",
+		width: "9.2",
+		height: "15.2",
+		rx: "1.2",
+		fill: "none",
+		stroke: red,
+		strokeWidth: ".6",
+		opacity: ".7"
+	}), /* @__PURE__ */ import_react.default.createElement("g", { transform: "translate(18 13.2) scale(1.05)" }, /* @__PURE__ */ import_react.default.createElement("g", null, /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M-3.6 2.2 C-3.6 -1.6 -2.4 -3.6 0 -3.6 C2.4 -3.6 3.6 -1.6 3.6 2.2 Z",
+		fill: yel,
+		stroke: K,
+		strokeWidth: ".7"
+	}), /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "-4.3",
+		y: "1.8",
+		width: "8.6",
+		height: "1.6",
+		rx: ".8",
+		fill: yel,
+		stroke: K,
+		strokeWidth: ".7"
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: "0",
+		cy: "4.3",
+		r: "1",
+		fill: K
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: "0",
+		cy: "-4.2",
+		r: ".8",
+		fill: yel,
+		stroke: K,
+		strokeWidth: ".6"
+	})))));
 }
-function DifferenzlerLogo({ theme }) {
-	const R = theme === "noir" ? "#8A8A8A" : "#D52B1E";
+function DifferenzlerLogo({ color, theme, size }) {
+	const n = gtIcTheme(theme) === "noir";
+	const S = size || 28;
 	const K = "#14100E";
+	const face = n ? "#EDEDED" : "#FFF8EC";
+	const red = n ? "#4A4A4A" : "#D62828";
+	const yel = n ? "#BDBDBD" : "#F2B705";
+	const sc = n ? "#CFCFCF" : "#9AA3B5";
 	return /* @__PURE__ */ import_react.default.createElement("svg", {
-		width: "28",
-		height: "28",
+		width: S,
+		height: S,
 		viewBox: "0 0 28 28",
 		style: { flexShrink: 0 },
 		"aria-hidden": "true"
-	}, /* @__PURE__ */ import_react.default.createElement("g", { transform: "rotate(-8 11 14.5)" }, /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "3.5",
-		y: "4",
-		width: "15",
-		height: "21",
-		rx: "2.5",
-		fill: "#fff",
+	}, /* @__PURE__ */ import_react.default.createElement("g", { transform: "rotate(-10 11 14)" }, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "4",
+		y: "3.5",
+		width: "13",
+		height: "19",
+		rx: "2.2",
+		fill: face,
 		stroke: K,
-		strokeWidth: "1.2"
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M11 19.5 C7 16.8 6 15 6 13.6 A2.5 2.5 0 0 1 11 13.1 A2.5 2.5 0 0 1 16 13.6 C16 15 15 16.8 11 19.5Z",
-		fill: R
+		strokeWidth: "1.1"
+	}), /* @__PURE__ */ import_react.default.createElement("g", { transform: "translate(10.5 11)" }, /* @__PURE__ */ import_react.default.createElement("g", null, [
+		0,
+		72,
+		144,
+		216,
+		288
+	].map((a) => /* @__PURE__ */ import_react.default.createElement("circle", {
+		key: a,
+		cx: 2.1 * Math.cos((a - 90) * Math.PI / 180),
+		cy: 2.1 * Math.sin((a - 90) * Math.PI / 180),
+		r: "1.9",
+		fill: red,
+		stroke: K,
+		strokeWidth: ".6"
 	})), /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: "20.5",
-		cy: "20",
-		r: "6",
-		fill: "#fff",
+		r: "1.5",
+		fill: yel,
 		stroke: K,
-		strokeWidth: "1"
+		strokeWidth: ".5"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M0 4 L0 7.2 M0 5.8 L-1.8 4.8",
+		stroke: n ? "#8A8A8A" : "#3F8F42",
+		strokeWidth: ".9",
+		strokeLinecap: "round"
+	})))), /* @__PURE__ */ import_react.default.createElement("g", { transform: "rotate(-38 19 18)" }, /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M19 8 L20.4 19.5 M19 8 L17.6 19.5",
+		stroke: sc,
+		strokeWidth: "1.6",
+		strokeLinecap: "round"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M19 8 L20.4 19.5 M19 8 L17.6 19.5",
+		stroke: K,
+		strokeWidth: ".5",
+		strokeLinecap: "round",
+		opacity: ".5"
 	}), /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: "20.5",
-		cy: "20",
-		r: "3.8",
-		fill: R
+		cx: "16.6",
+		cy: "22.3",
+		r: "2.6",
+		fill: "none",
+		stroke: n ? "#2A2A2A" : "#E5383B",
+		strokeWidth: "1.6"
 	}), /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: "20.5",
-		cy: "20",
-		r: "1.6",
-		fill: "#fff"
-	}));
+		cx: "21.4",
+		cy: "22.3",
+		r: "2.6",
+		fill: "none",
+		stroke: n ? "#2A2A2A" : "#E5383B",
+		strokeWidth: "1.6"
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: "19",
+		cy: "17.6",
+		r: ".8",
+		fill: K
+	})));
 }
 function SchieberLogo({ theme }) {
 	const W = theme === "noir" ? "#5A5A5A" : "#8A6236";
@@ -58688,56 +58775,45 @@ function RommeLogo({ color, size, theme }) {
 	const n = gtIcTheme(theme) === "noir";
 	const S = size || 28;
 	const K = "#14100E";
-	const back = n ? "#6E6E6E" : color || "#F25C9A";
 	const face = n ? "#EDEDED" : "#FFF6EE";
-	const red = n ? "#2A2A2A" : "#C8102E";
+	const red = n ? "#2A2A2A" : "#D62828";
+	const jy = n ? "#BDBDBD" : "#FFC93C", jp = n ? "#6E6E6E" : "#7A3FB0";
+	const card = (r, k, big) => /* @__PURE__ */ import_react.default.createElement("g", {
+		key: k,
+		transform: `rotate(${r} 14 26)`
+	}, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "8",
+		y: "3.5",
+		width: "12",
+		height: "17",
+		rx: "2.2",
+		fill: face,
+		stroke: K,
+		strokeWidth: "1.1"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M0 3.4 C-3.6 0.9 -3 -2.6 -1 -2.6 C-0.4 -2.6 0 -2 0 -2 C0 -2 0.4 -2.6 1 -2.6 C3 -2.6 3.6 0.9 0 3.4Z",
+		fill: red,
+		transform: `translate(14 ${big ? 12 : 8.5}) scale(${big ? 1.35 : .75})`
+	}));
 	return /* @__PURE__ */ import_react.default.createElement("svg", {
 		width: S,
 		height: S,
 		viewBox: "0 0 28 28",
 		style: { flexShrink: 0 },
 		"aria-hidden": "true"
-	}, /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "3.5",
-		y: "5",
+	}, /* @__PURE__ */ import_react.default.createElement("g", { transform: "rotate(-40 14 26)" }, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "8",
+		y: "3.5",
 		width: "12",
 		height: "17",
 		rx: "2.2",
-		fill: back,
+		fill: jp,
 		stroke: K,
-		strokeWidth: "1.2",
-		transform: "rotate(-14 9.5 13.5)"
-	}), /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "5.6",
-		y: "7.6",
-		width: "7.8",
-		height: "11.8",
-		rx: "1.2",
-		fill: "none",
-		stroke: "#fff",
-		strokeWidth: ".8",
-		opacity: ".6",
-		transform: "rotate(-14 9.5 13.5)"
-	}), /* @__PURE__ */ import_react.default.createElement("g", { transform: "rotate(9 17 13.5)" }, /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "11",
-		y: "4.5",
-		width: "12.5",
-		height: "18",
-		rx: "2.2",
-		fill: face,
-		stroke: K,
-		strokeWidth: "1.2"
+		strokeWidth: "1.1"
 	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M12.8 10 L14 6.3 L15.2 10 M13.2 8.8 H14.8",
-		stroke: red,
-		strokeWidth: "1",
-		fill: "none",
-		strokeLinecap: "round",
-		strokeLinejoin: "round"
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M17.25 19.4 C13.4 16.6 14.1 12.9 16.1 12.9 C16.8 12.9 17.25 13.5 17.25 13.5 C17.25 13.5 17.7 12.9 18.4 12.9 C20.4 12.9 21.1 16.6 17.25 19.4Z",
-		fill: red
-	})));
+		d: "M14 6.6 l1.2 2.5 2.7.4-2 1.9.5 2.7-2.4-1.3-2.4 1.3.5-2.7-2-1.9 2.7-.4z",
+		fill: jy
+	})), card(-22, "a"), card(-2, "b"), card(18, "c", true));
 }
 function TraitorLogo({ color, size, theme }) {
 	const n = gtIcTheme(theme) === "noir";
@@ -71939,7 +72015,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.09-12";
+var APP_BUILD = "2026.11.09-13";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -116101,7 +116177,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.09-12");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.09-13");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -118798,7 +118874,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.09-12" && !upd) {
+		if (seen && seen !== "2026.11.09-13" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -118807,7 +118883,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.09-12" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.09-13" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

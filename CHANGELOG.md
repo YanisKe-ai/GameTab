@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.09-13 (09.11.2026 23:53)
+- Neue Icons: Rommé, Jass, Coiffeur
+
 ## 2026.11.09-12 (09.11.2026 23:48)
 - Neue Icons: Skyjo, Flip 7, Phase 10
 

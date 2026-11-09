@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.10-2 (10.11.2026 00:06)
+- Neue Icons: Cut Throat, Masters, Shanghai; Jass und Coiffeur mit französischen Karten; Icons auch im Noir-Modus farbig
+
 ## 2026.11.10-1 (10.11.2026 00:00)
 - Neue Icons: Schieber, Wizard, Cricket; Skyjo als Kartenraster, Phase 10 als Treppe; Icons in Listen einheitlich gross
 

@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.10-6 (10.11.2026 00:32)
+- Neue Icons: 5 Sekunden, Freies Spiel. Favoriten stehen in den Spiellisten oben
+
 ## 2026.11.10-5 (10.11.2026 00:25)
 - Neue Icons: Am ehesten, Tabu, HeadsUp. Spielnamen in den Listen grösser und kräftiger, Icons etwas kleiner
 

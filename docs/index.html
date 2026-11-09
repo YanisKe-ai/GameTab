@@ -21506,6 +21506,7 @@ var logos_exports = /* @__PURE__ */ __exportAll({
 	DifferenzlerLogo: () => DifferenzlerLogo,
 	FiveSecLogo: () => FiveSecLogo,
 	Flip7Logo: () => Flip7Logo,
+	FreeplayLogo: () => FreeplayLogo,
 	HeadsUpLogo: () => HeadsUpLogo,
 	HiScoreLogo: () => HiScoreLogo,
 	ImpostorLogo: () => ImpostorLogo,
@@ -22200,11 +22201,9 @@ function SkyjoLogo({ color, theme, size }) {
 		textAnchor: "middle"
 	}, "7")));
 }
-function FiveSecLogo({ color, theme, size }) {
-	gtIcTheme(theme);
+function FreeplayLogo({ color, theme, size }) {
 	const S = size || 28;
 	const K = "#14100E";
-	const c = "#FF9640";
 	return /* @__PURE__ */ import_react.default.createElement("svg", {
 		width: S,
 		height: S,
@@ -22212,35 +22211,113 @@ function FiveSecLogo({ color, theme, size }) {
 		style: { flexShrink: 0 },
 		"aria-hidden": "true"
 	}, /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "11.5",
-		y: "1.5",
-		width: "5",
-		height: "3",
-		rx: "1",
-		fill: c,
+		x: "3.5",
+		y: "3",
+		width: "16.5",
+		height: "22",
+		rx: "2",
+		fill: "#FFFFFF",
+		stroke: K,
+		strokeWidth: "1.1"
+	}), /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "3.5",
+		y: "3",
+		width: "16.5",
+		height: "4.4",
+		rx: "2",
+		fill: "#9A7BA8"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M3.5 7.4 H20",
+		stroke: K,
+		strokeWidth: ".8"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M11.8 7.4 V25",
+		stroke: "#C9C2D2",
+		strokeWidth: ".8"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M5.6 11 H10 M5.6 14.4 H10 M5.6 17.8 H10 M13.6 11 H18 M13.6 14.4 H17 M13.6 17.8 H18",
+		stroke: "#8A7F96",
+		strokeWidth: "1.1",
+		strokeLinecap: "round"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M6 21.4 l1 1 2-2.2 M14 21.4 h3",
+		stroke: "#3F8F42",
+		strokeWidth: "1.1",
+		fill: "none",
+		strokeLinecap: "round",
+		strokeLinejoin: "round"
+	}), /* @__PURE__ */ import_react.default.createElement("g", { transform: "rotate(38 21 15)" }, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "19.4",
+		y: "4",
+		width: "3.4",
+		height: "15",
+		rx: ".8",
+		fill: "#FFC93C",
+		stroke: K,
+		strokeWidth: ".9"
+	}), /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "19.4",
+		y: "4",
+		width: "3.4",
+		height: "2.4",
+		rx: ".8",
+		fill: "#E88A9A",
+		stroke: K,
+		strokeWidth: ".9"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M19.4 19 L21.1 22.6 L22.8 19 Z",
+		fill: "#F3E6C8",
+		stroke: K,
+		strokeWidth: ".9",
+		strokeLinejoin: "round"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M20.6 21.4 L21.1 22.6 L21.6 21.4 Z",
+		fill: K
+	})));
+}
+function FiveSecLogo({ color, theme, size }) {
+	const S = size || 28;
+	const K = "#14100E";
+	const O = "#FF9640", Y = "#FFD23F";
+	return /* @__PURE__ */ import_react.default.createElement("svg", {
+		width: S,
+		height: S,
+		viewBox: "0 0 28 28",
+		style: { flexShrink: 0 },
+		"aria-hidden": "true"
+	}, /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M5 3 H23 M5 25 H23",
+		stroke: "#7A4A1E",
+		strokeWidth: "2.2",
+		strokeLinecap: "round"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M6.4 3.6 C6.4 9.6 12 11.4 12 14 C12 16.6 6.4 18.4 6.4 24.4 H21.6 C21.6 18.4 16 16.6 16 14 C16 11.4 21.6 9.6 21.6 3.6 Z",
+		fill: "#E8F6FF",
+		fillOpacity: ".55",
 		stroke: K,
 		strokeWidth: "1"
 	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M21 6.2 l2 -2",
-		stroke: K,
-		strokeWidth: "2.2",
-		strokeLinecap: "round"
-	}), /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: "14",
-		cy: "15.5",
-		r: "10",
-		fill: c,
-		stroke: K,
-		strokeWidth: "1.2"
-	}), /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: "14",
-		cy: "15.5",
-		r: "7.6",
-		fill: "#fff"
+		d: "M9.2 7 C10.6 9.6 13 10.6 13 12.6 H15 C15 10.6 17.4 9.6 18.8 7 Z",
+		fill: Y
 	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M16.6 10.6 H12.3 L11.8 14.6 C13.6 13.6 16.9 14.2 16.9 17 C16.9 19.9 13.2 20.6 11.4 19",
+		d: "M8.4 23.4 C9.6 20.4 12.4 19.4 14 18.6 C15.6 19.4 18.4 20.4 19.6 23.4 Z",
+		fill: Y
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M14 14 V18.6",
+		stroke: Y,
+		strokeWidth: ".9",
+		strokeDasharray: "1 1"
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: "20.4",
+		cy: "19.4",
+		r: "6.4",
+		fill: O,
 		stroke: K,
-		strokeWidth: "1.7",
+		strokeWidth: "1.1"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M22.6 15.8 H19 L18.6 19 C20 18.2 22.8 18.6 22.8 20.8 C22.8 23 20 23.6 18.4 22.4",
+		stroke: "#fff",
+		strokeWidth: "1.6",
 		fill: "none",
 		strokeLinecap: "round",
 		strokeLinejoin: "round"
@@ -23323,9 +23400,11 @@ function GameCard({ title, description, status, accent, onClick, disabled, logo,
 			fontFamily: "'Inter', sans-serif"
 		}
 	}, t ? t("gtVariantsN")(variants) : variants) : null;
+	const ord = fav && fav.on ? -1 : void 0;
 	return fav || vb ? /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		position: "relative",
-		width: "100%"
+		width: "100%",
+		order: ord
 	} }, _card, fav && /* @__PURE__ */ import_react.default.createElement(FavStar, {
 		fav,
 		theme,
@@ -42249,11 +42328,7 @@ function buildQuickResume(t, dismissedResume, flags, theme) {
 			id: "freeplay",
 			label: t("gameFreeplay"),
 			accent: HUES[4],
-			logo: /* @__PURE__ */ import_react.default.createElement(GameIcon, {
-				name: "pencilPad",
-				size: 30,
-				color: HUES[4]
-			})
+			logo: /* @__PURE__ */ import_react.default.createElement(FreeplayLogo, null)
 		},
 		yatzyProgress && {
 			id: "yatzy",
@@ -72164,11 +72239,7 @@ function CategoryScorepads({ favorites, onToggleFavorite, onSelect, onBack, lang
 		description: t("gameFreeplayDesc"),
 		status: freeplayProgress ? t("gameInProgress") : null,
 		accent: playerHue(4, theme),
-		logo: /* @__PURE__ */ import_react.default.createElement(GameIcon, {
-			name: "pencilPad",
-			size: 30,
-			color: playerHue(4, theme)
-		}),
+		logo: /* @__PURE__ */ import_react.default.createElement(FreeplayLogo, null),
 		fav: fv("freeplay"),
 		t,
 		onClick: () => onSelect("freeplay")
@@ -72363,7 +72434,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.10-5";
+var APP_BUILD = "2026.11.10-6";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -74712,11 +74783,7 @@ function FreeplayGame({ players, setPlayers, target, setTarget, lowWins, setLowW
 		tokens: tk,
 		backLabel: t("back"),
 		accent: playerHue(4, theme),
-		icon: /* @__PURE__ */ import_react.default.createElement(GameIcon, {
-			name: "pencilPad",
-			size: 26,
-			color: playerHue(4, theme)
-		})
+		icon: /* @__PURE__ */ import_react.default.createElement(FreeplayLogo, null)
 	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split pld-split pld-rows pld-free" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side" }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		display: "flex",
 		flexWrap: "wrap",
@@ -116520,7 +116587,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.10-5");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.10-6");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -119217,7 +119284,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.10-5" && !upd) {
+		if (seen && seen !== "2026.11.10-6" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -119226,7 +119293,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.10-5" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.10-6" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

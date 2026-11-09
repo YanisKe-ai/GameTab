@@ -203,7 +203,7 @@ Ab Nr. 5 ist die Reihenfolge frei. Ohne andere Anweisung von Yanis einfach der T
 | 6 | Minigolf | minigolf | games/minigolf | fertig 08.11.2026 | Anzeigetafel, Ball rollt zum Loch 18, Tasten 1 bis 7, Icon Loch mit Fahne, Export-Stempel. Nur Chromium. Podium zählt nur noch 0,9 s, Querformat korrigiert (08.11.2026) |
 | 7 | Skyjo | skyjo | games/skyjo | fertig 08.11.2026 | GameTab-Navy, Logo Kartenfächer mit SKYJO, Runde/Tabelle, Fahne für Beender, Raster-Hilfe pro Person (Spalten streichen), echtes Rückgängig, neues Icon. Nur Chromium. Offen: Ergebnisbild noch Petrol |
 | 8 | Flip 7 | flip7 | games/flip7 | fertig (2026.11.09-6) | Karten antippen, Stechrunde bei Gleichstand; Ergebnisbild unverändert |
-| 9 | Phase 10 | phase10 | games/phase10 | offen | |
+| 9 | Phase 10 | phase10 | games/phase10 | fertig (2026.11.09-7) | Handkarten zählen, Stechen bei Gleichstand; 320 px scrollt leicht |
 | 10 | Rommé | romme | games/romme | offen | |
 | 11 | Darts (alle 7 Modi) | darts | games/darts | offen | Rapid Fire noch nicht gebaut |
 | 12 | Freies Spiel | freeplay | games/freeplay | offen | |

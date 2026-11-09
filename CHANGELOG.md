@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.09-10 (09.11.2026 23:27)
+- Neue Icons ohne Rahmen für alle Spiele: Skyjo, Flip 7, Phase 10, Rommé, Darts-Modi, Minigolf, Partyspiele
+
 ## 2026.11.09-9 (09.11.2026 23:16)
 - Darts: Cricket, Cut Throat und Masters getrennt gespeichert, Zielfelder auf der Scheibe hervorgehoben. Neue einheitliche Icons für Darts-Modi, Phase 10 und Rommé
 

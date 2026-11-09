@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.09-7 (09.11.2026 22:41)
+- Phase 10 neu: Handkarten zählen statt Punkte tippen, Phase pro Person mit Treppe, Ausgemacht, Tabelle, Stechen bei Gleichstand
+
 ## 2026.11.09-6 (09.11.2026 22:28)
 - Flip 7 neu: Karten antippen statt Summe tippen, Flip 7 und Bust automatisch, Stechrunde bei Gleichstand, Tabelle, neues Icon
 

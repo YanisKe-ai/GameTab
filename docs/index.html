@@ -19756,1549 +19756,97 @@ function AppLogo({ size, theme, style }) {
 		}
 	});
 }
-// web/src/i18n/use-t.js
-var use_t_exports = /* @__PURE__ */ __exportAll({
-	DEFAULT_PLAYER_NAME_PATTERNS: () => DEFAULT_PLAYER_NAME_PATTERNS,
-	DEFAULT_TEAM_NAME_PATTERNS: () => DEFAULT_TEAM_NAME_PATTERNS,
-	appTimeAgoLabel: () => appTimeAgoLabel,
-	localizedPlayerName: () => localizedPlayerName,
-	localizedTeamName: () => localizedTeamName,
-	relocalizeDefaultNames: () => relocalizeDefaultNames,
-	useT: () => useT
-});
-function useT(lang) {
-	const dict = TRANSLATIONS[lang] || TRANSLATIONS.de;
-	return (key) => dict[key] || TRANSLATIONS.de[key] || key;
+// web/src/shared/dialog.js
+var FOCUSABLE = "a[href],button:not([disabled]),input:not([disabled]):not([type=\"hidden\"]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex=\"-1\"]),[contenteditable=\"true\"]";
+var stack$1 = [];
+function gtDialogFocusables(root) {
+	return Array.from(root.querySelectorAll(FOCUSABLE)).filter((el) => !el.closest("[inert]") && el.getClientRects().length > 0);
 }
-var DEFAULT_PLAYER_NAME_PATTERNS = [
-	/^Spieler (\d+)$/,
-	/^Player (\d+)$/,
-	/^Joueur (\d+)$/,
-	/^Giocatore (\d+)$/,
-	/^Jugador (\d+)$/,
-	/^Jogador (\d+)$/
-];
-var DEFAULT_TEAM_NAME_PATTERNS = [
-	/^Team (\d+)$/,
-	/^Équipe (\d+)$/,
-	/^Squadra (\d+)$/,
-	/^Equipo (\d+)$/,
-	/^Equipa (\d+)$/
-];
-function localizedPlayerName(n, lang) {
-	return ((TRANSLATIONS[lang] || TRANSLATIONS.de).defaultPlayerName || TRANSLATIONS.de.defaultPlayerName)(n);
-}
-function localizedTeamName(n, lang) {
-	return ((TRANSLATIONS[lang] || TRANSLATIONS.de).defaultTeamName || TRANSLATIONS.de.defaultTeamName)(n);
-}
-function relocalizeDefaultNames(list, lang, isTeam) {
-	const patterns = isTeam ? DEFAULT_TEAM_NAME_PATTERNS : DEFAULT_PLAYER_NAME_PATTERNS;
-	const fn = isTeam ? localizedTeamName : localizedPlayerName;
-	return list.map((item) => {
-		if (!item || typeof item.name !== "string") return item;
-		let matchN = null;
-		for (const re of patterns) {
-			const m = re.exec(item.name);
-			if (m) {
-				matchN = parseInt(m[1], 10);
-				break;
-			}
-		}
-		if (matchN === null) return item;
-		return {
-			...item,
-			name: fn(matchN, lang)
-		};
+function gtDialogInert(root) {
+	const done = [];
+	for (let el = root; el && el !== document.body && el.parentElement; el = el.parentElement) Array.from(el.parentElement.children).forEach((sib) => {
+		if (sib === el || sib.tagName === "SCRIPT" || sib.tagName === "STYLE" || sib.hasAttribute("inert") || sib.hasAttribute("data-gt-keep")) return;
+		sib.setAttribute("inert", "");
+		done.push(sib);
 	});
+	return () => done.forEach((n) => n.removeAttribute("inert"));
 }
-function appTimeAgoLabel(ts, lang) {
-	const diffMs = Date.now() - ts;
-	const min = Math.floor(diffMs / 6e4);
-	const forms = {
-		de: {
-			now: "gerade eben",
-			min: (n) => `vor ${n} Min.`,
-			h: (n) => `vor ${n} Std.`,
-			d: (n) => `vor ${n} Tag${n === 1 ? "" : "en"}`
-		},
-		en: {
-			now: "just now",
-			min: (n) => `${n} min ago`,
-			h: (n) => `${n} h ago`,
-			d: (n) => `${n} day${n === 1 ? "" : "s"} ago`
-		},
-		fr: {
-			now: "à l'instant",
-			min: (n) => `il y a ${n} min`,
-			h: (n) => `il y a ${n} h`,
-			d: (n) => `il y a ${n} jour${n === 1 ? "" : "s"}`
-		}
+function useGtDialog({ open, onClose, escape = true, outside = true }) {
+	const ref = import_react.default.useRef(null);
+	const latest = import_react.default.useRef({
+		onClose,
+		escape,
+		outside
+	});
+	latest.current = {
+		onClose,
+		escape,
+		outside
 	};
-	const f = forms[lang] || forms.de;
-	if (min < 1) return f.now;
-	if (min < 60) return f.min(min);
-	const h = Math.floor(min / 60);
-	if (h < 24) return f.h(h);
-	const d = Math.floor(h / 24);
-	return f.d(d);
-}
-// web/src/assets/logos.js
-var logos_exports = /* @__PURE__ */ __exportAll({
-	CricketLogo: () => CricketLogo,
-	CutThroatLogo: () => CutThroatLogo,
-	DartsLogo: () => DartsLogo,
-	DifferenzlerLogo: () => DifferenzlerLogo,
-	FiveSecLogo: () => FiveSecLogo,
-	Flip7Logo: () => Flip7Logo,
-	HeadsUpLogo: () => HeadsUpLogo,
-	HiScoreLogo: () => HiScoreLogo,
-	ImpostorLogo: () => ImpostorLogo,
-	JassLogo: () => JassLogo,
-	MafiaLogo: () => MafiaLogo,
-	MastersLogo: () => MastersLogo,
-	MinigolfLogo: () => MinigolfLogo,
-	MostLikelyLogo: () => MostLikelyLogo,
-	SchieberLogo: () => SchieberLogo,
-	ShanghaiLogo: () => ShanghaiLogo,
-	SkyjoLogo: () => SkyjoLogo,
-	SplitScoreLogo: () => SplitScoreLogo,
-	TabuLogo: () => TabuLogo,
-	TuttoLogo: () => TuttoLogo,
-	WerewolfLogo: () => WerewolfLogo,
-	WizardLogo: () => WizardLogo,
-	YatzyLogo: () => YatzyLogo
-});
-function TuttoLogo({ theme }) {
-	const R = theme === "noir" ? "#8A8A8A" : "#D93A2E";
-	const K = "#14100E";
-	return /* @__PURE__ */ import_react.default.createElement("svg", {
-		width: "28",
-		height: "28",
-		viewBox: "0 0 28 28",
-		style: { flexShrink: 0 },
-		"aria-hidden": "true"
-	}, /* @__PURE__ */ import_react.default.createElement("g", { transform: "rotate(-12 9 17)" }, /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "2",
-		y: "10",
-		width: "13",
-		height: "13",
-		rx: "3.2",
-		fill: "#fff",
-		stroke: K,
-		strokeWidth: "1.4"
-	}), /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: "8.5",
-		cy: "16.5",
-		r: "2.2",
-		fill: R
-	})), /* @__PURE__ */ import_react.default.createElement("g", { transform: "rotate(10 19 9.5)" }, /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "12.5",
-		y: "3",
-		width: "13",
-		height: "13",
-		rx: "3.2",
-		fill: R,
-		stroke: K,
-		strokeWidth: "1.4"
-	}), /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: "15.7",
-		cy: "6.2",
-		r: "1.35",
-		fill: "#fff"
-	}), /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: "22.3",
-		cy: "6.2",
-		r: "1.35",
-		fill: "#fff"
-	}), /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: "19",
-		cy: "9.5",
-		r: "1.35",
-		fill: "#fff"
-	}), /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: "15.7",
-		cy: "12.8",
-		r: "1.35",
-		fill: "#fff"
-	}), /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: "22.3",
-		cy: "12.8",
-		r: "1.35",
-		fill: "#fff"
-	})));
-}
-function YatzyLogo({ theme }) {
-	const B = theme === "noir" ? "#B8B8B8" : "#7E8BFF";
-	const D = theme === "noir" ? "#6A6A6A" : "#3F48B8";
-	const K = "#14100E";
-	return /* @__PURE__ */ import_react.default.createElement("svg", {
-		width: "28",
-		height: "28",
-		viewBox: "0 0 28 28",
-		style: { flexShrink: 0 },
-		"aria-hidden": "true"
-	}, /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M6 7 L22 7 L19.5 24 Q14 26 8.5 24 Z",
-		fill: B,
-		stroke: K,
-		strokeWidth: "1.3",
-		strokeLinejoin: "round"
-	}), /* @__PURE__ */ import_react.default.createElement("ellipse", {
-		cx: "14",
-		cy: "7",
-		rx: "8",
-		ry: "2.2",
-		fill: D,
-		stroke: K,
-		strokeWidth: "1.2"
-	}), /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "10.5",
-		y: "1.5",
-		width: "7",
-		height: "7",
-		rx: "1.8",
-		fill: "#fff",
-		stroke: K,
-		strokeWidth: "1",
-		transform: "rotate(-18 14 5)"
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M9 12 L19 12",
-		stroke: "#fff",
-		strokeWidth: "1.2",
-		opacity: "0.5"
-	}));
-}
-function WizardLogo({ theme }) {
-	const M = theme === "noir" ? "#5A5A5A" : theme === "light" ? "#5B2A86" : "#6A35A0";
-	const G = theme === "noir" ? "#C4C4C4" : theme === "light" ? "#C99A3E" : "#E0BA72";
-	return /* @__PURE__ */ import_react.default.createElement("svg", {
-		width: "28",
-		height: "28",
-		viewBox: "0 0 28 28",
-		style: { flexShrink: 0 },
-		"aria-hidden": "true"
-	}, /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M14 3 7.5 19h13L14 3z",
-		fill: M
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M14 3c1.5 3 4 4.5 6 4",
-		fill: "none",
-		stroke: M,
-		strokeWidth: "1.6",
-		strokeLinecap: "round"
-	}), /* @__PURE__ */ import_react.default.createElement("ellipse", {
-		cx: "14",
-		cy: "20",
-		rx: "10",
-		ry: "2.6",
-		fill: G
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "m13 11 .7 1.5 1.6.2-1.2 1.1.3 1.6-1.4-.8-1.4.8.3-1.6-1.2-1.1 1.6-.2z",
-		fill: G
-	}));
-}
-function JassLogo({ theme }) {
-	const R = theme === "noir" ? "#8A8A8A" : "#D52B1E";
-	const K = "#14100E";
-	return /* @__PURE__ */ import_react.default.createElement("svg", {
-		width: "28",
-		height: "28",
-		viewBox: "0 0 28 28",
-		style: { flexShrink: 0 },
-		"aria-hidden": "true"
-	}, /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "8",
-		y: "3",
-		width: "15",
-		height: "21",
-		rx: "2.5",
-		fill: "#F1E7D6",
-		stroke: K,
-		strokeWidth: "1.1",
-		transform: "rotate(11 15.5 13.5)"
-	}), /* @__PURE__ */ import_react.default.createElement("g", { transform: "rotate(-8 12.5 14.5)" }, /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "4.5",
-		y: "4",
-		width: "16",
-		height: "21",
-		rx: "2.5",
-		fill: "#fff",
-		stroke: K,
-		strokeWidth: "1.2"
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M7.5 11 C8 7.6 11 6.6 14.6 7.2 C16.6 7.6 17.6 8.8 17.4 10.2 Z",
-		fill: R,
-		stroke: K,
-		strokeWidth: "0.7"
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M10.2 10.6 C10.2 13.2 11.4 14.8 13.4 14.8 C14.6 14.8 15.2 13.8 15.4 12.6 L16.3 12.2 L15.4 11.6 L15.3 10.4 Z",
-		fill: "#F6E3C8",
-		stroke: K,
-		strokeWidth: "0.6"
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M8.6 16.2 Q12.5 14.8 16.6 16.2 L17 22.6 H8.2 Z",
-		fill: R,
-		stroke: K,
-		strokeWidth: "0.7"
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M11.4 15.6 H13.8 V22.6 H11.4 Z",
-		fill: "#F4EDE0"
-	})));
-}
-function DifferenzlerLogo({ theme }) {
-	const R = theme === "noir" ? "#8A8A8A" : "#D52B1E";
-	const K = "#14100E";
-	return /* @__PURE__ */ import_react.default.createElement("svg", {
-		width: "28",
-		height: "28",
-		viewBox: "0 0 28 28",
-		style: { flexShrink: 0 },
-		"aria-hidden": "true"
-	}, /* @__PURE__ */ import_react.default.createElement("g", { transform: "rotate(-8 11 14.5)" }, /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "3.5",
-		y: "4",
-		width: "15",
-		height: "21",
-		rx: "2.5",
-		fill: "#fff",
-		stroke: K,
-		strokeWidth: "1.2"
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M11 19.5 C7 16.8 6 15 6 13.6 A2.5 2.5 0 0 1 11 13.1 A2.5 2.5 0 0 1 16 13.6 C16 15 15 16.8 11 19.5Z",
-		fill: R
-	})), /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: "20.5",
-		cy: "20",
-		r: "6",
-		fill: "#fff",
-		stroke: K,
-		strokeWidth: "1"
-	}), /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: "20.5",
-		cy: "20",
-		r: "3.8",
-		fill: R
-	}), /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: "20.5",
-		cy: "20",
-		r: "1.6",
-		fill: "#fff"
-	}));
-}
-function SchieberLogo({ theme }) {
-	const W = theme === "noir" ? "#5A5A5A" : "#8A6236";
-	return /* @__PURE__ */ import_react.default.createElement("svg", {
-		width: "28",
-		height: "28",
-		viewBox: "0 0 28 28",
-		style: { flexShrink: 0 },
-		"aria-hidden": "true"
-	}, /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "1.5",
-		y: "1.5",
-		width: "25",
-		height: "25",
-		rx: "5",
-		fill: W
-	}), /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "4",
-		y: "4",
-		width: "20",
-		height: "20",
-		rx: "2.5",
-		fill: "#2E3034"
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M8 8.5H20L8 19.5H20",
-		stroke: "#EDEBE5",
-		strokeWidth: "1.6",
-		fill: "none",
-		strokeLinecap: "round",
-		strokeLinejoin: "round"
-	}));
-}
-function ImpostorLogo({ color }) {
-	return /* @__PURE__ */ import_react.default.createElement("svg", {
-		width: "28",
-		height: "28",
-		viewBox: "0 0 28 28",
-		style: { flexShrink: 0 }
-	}, /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "1",
-		y: "1",
-		width: "26",
-		height: "26",
-		rx: "6",
-		fill: "#0B0B10",
-		stroke: color,
-		strokeWidth: "1"
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M5 14 Q14 6 23 14 Q14 22 5 14 Z",
-		fill: "none",
-		stroke: color,
-		strokeWidth: "1.6"
-	}), /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: "14",
-		cy: "14",
-		r: "3.2",
-		fill: color
-	}));
-}
-function WerewolfLogo({ color }) {
-	return /* @__PURE__ */ import_react.default.createElement("svg", {
-		width: "30",
-		height: "30",
-		viewBox: "0 0 30 30",
-		style: { flexShrink: 0 }
-	}, /* @__PURE__ */ import_react.default.createElement("defs", null, /* @__PURE__ */ import_react.default.createElement("radialGradient", {
-		id: "wolfMoon",
-		cx: "35%",
-		cy: "30%",
-		r: "70%"
-	}, /* @__PURE__ */ import_react.default.createElement("stop", {
-		offset: "0%",
-		stopColor: "#FFF6E0"
-	}), /* @__PURE__ */ import_react.default.createElement("stop", {
-		offset: "100%",
-		stopColor: color
-	}))), /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "1",
-		y: "1",
-		width: "28",
-		height: "28",
-		rx: "8",
-		fill: "#0A0E17",
-		style: { fill: "var(--gt-tile,#0A0E17)" },
-		stroke: `${color}55`,
-		strokeWidth: "1"
-	}), /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: "15",
-		cy: "14",
-		r: "7.5",
-		fill: "#0A0E17",
-		opacity: "0.5"
-	}), /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: "14",
-		cy: "13",
-		r: "7",
-		fill: "url(#wolfMoon)"
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M6.5 22 L10.5 13 L14 19 L17.5 13 L21.5 22 Z",
-		fill: "#0A0E17"
-	}));
-}
-function TabuLogo({ color, theme }) {
-	const slashColor = theme === "noir" ? "#8A8A8A" : "#FF4757";
-	return /* @__PURE__ */ import_react.default.createElement("svg", {
-		width: "30",
-		height: "30",
-		viewBox: "0 0 30 30",
-		style: { flexShrink: 0 }
-	}, /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "1",
-		y: "1",
-		width: "28",
-		height: "28",
-		rx: "8",
-		fill: "#12100B",
-		stroke: `${color}55`,
-		strokeWidth: "1"
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M8,10 h14 a2,2 0 0 1 2,2 v5 a2,2 0 0 1 -2,2 h-9 l-4,4 v-4 h-1 a2,2 0 0 1 -2,-2 v-5 a2,2 0 0 1 2,-2 Z",
-		fill: "#12100B",
-		stroke: color,
-		strokeWidth: "1.6"
-	}), /* @__PURE__ */ import_react.default.createElement("line", {
-		x1: "6",
-		y1: "24",
-		x2: "24",
-		y2: "6",
-		stroke: slashColor,
-		strokeWidth: "2.4",
-		strokeLinecap: "round"
-	}));
-}
-function HeadsUpLogo({ color }) {
-	return /* @__PURE__ */ import_react.default.createElement("svg", {
-		width: "30",
-		height: "30",
-		viewBox: "0 0 30 30",
-		style: { flexShrink: 0 }
-	}, /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "1",
-		y: "1",
-		width: "28",
-		height: "28",
-		rx: "8",
-		fill: "#141018",
-		stroke: `${color}55`,
-		strokeWidth: "1"
-	}), /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "10",
-		y: "5",
-		width: "10",
-		height: "17",
-		rx: "2.2",
-		stroke: color,
-		strokeWidth: "1.8",
-		fill: "none"
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M13.5 19h3",
-		stroke: color,
-		strokeWidth: "1.6",
-		strokeLinecap: "round"
-	}), /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: "22.5",
-		cy: "21.5",
-		r: "4.6",
-		fill: "#141018",
-		stroke: color,
-		strokeWidth: "1.5"
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M22.5 19.2v2.3l1.6 1.3",
-		stroke: color,
-		strokeWidth: "1.3",
-		strokeLinecap: "round",
-		strokeLinejoin: "round"
-	}));
-}
-function SkyjoLogo({ color, theme }) {
-	const n = theme === "noir", l = theme === "light";
-	const cols = n ? [
-		"#4D4D4D",
-		"#CFCFCF",
-		"#8C8C8C",
-		"#B0B0B0",
-		"#6E6E6E"
-	] : [
-		"#3B5BC4",
-		"#8CC9EE",
-		"#3FAE4F",
-		"#F2C531",
-		"#E0453A"
-	];
-	const K = n ? "#161616" : l ? "#E7ECF4" : "#12161F";
-	const E = n ? "#161616" : l ? "#E7ECF4" : "#12161F";
-	return /* @__PURE__ */ import_react.default.createElement("svg", {
-		width: "30",
-		height: "30",
-		viewBox: "0 0 30 30",
-		style: { flexShrink: 0 },
-		"aria-hidden": "true"
-	}, /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "1",
-		y: "1",
-		width: "28",
-		height: "28",
-		rx: "8",
-		fill: K,
-		stroke: n ? "#3A3A3A" : l ? "#B9C4D6" : `${color}55`,
-		strokeWidth: "1"
-	}), /* @__PURE__ */ import_react.default.createElement("g", null, [
-		-30,
-		-15,
-		0,
-		15,
-		30
-	].map((a, i) => /* @__PURE__ */ import_react.default.createElement("rect", {
-		key: i,
-		x: "11.2",
-		y: "6.2",
-		width: "7.6",
-		height: "11",
-		rx: "1.7",
-		fill: cols[i],
-		stroke: E,
-		strokeWidth: "0.8",
-		transform: `rotate(${a} 15 24.5)`
-	}))));
-}
-function FiveSecLogo({ color }) {
-	return /* @__PURE__ */ import_react.default.createElement("svg", {
-		width: "30",
-		height: "30",
-		viewBox: "0 0 30 30",
-		style: { flexShrink: 0 }
-	}, /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "1",
-		y: "1",
-		width: "28",
-		height: "28",
-		rx: "8",
-		fill: "#160F0A",
-		stroke: `${color}55`,
-		strokeWidth: "1"
-	}), /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: "15",
-		cy: "16.5",
-		r: "8.2",
-		fill: "#160F0A",
-		stroke: color,
-		strokeWidth: "1.6"
-	}), /* @__PURE__ */ import_react.default.createElement("text", {
-		x: "15",
-		y: "19.5",
-		fontSize: "9",
-		fontWeight: "800",
-		fill: color,
-		textAnchor: "middle",
-		fontFamily: "sans-serif"
-	}, "5"), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M12 4.5h6",
-		stroke: color,
-		strokeWidth: "1.6",
-		strokeLinecap: "round"
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M15 4.5v3",
-		stroke: color,
-		strokeWidth: "1.6",
-		strokeLinecap: "round"
-	}));
-}
-function MostLikelyLogo({ color }) {
-	return /* @__PURE__ */ import_react.default.createElement("svg", {
-		width: "30",
-		height: "30",
-		viewBox: "0 0 30 30",
-		style: { flexShrink: 0 }
-	}, /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "1",
-		y: "1",
-		width: "28",
-		height: "28",
-		rx: "8",
-		fill: "#150F1E",
-		stroke: `${color}55`,
-		strokeWidth: "1"
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M11 17V9.5a1.7 1.7 0 0 1 3.4 0V16",
-		stroke: color,
-		strokeWidth: "1.6",
-		fill: "none",
-		strokeLinecap: "round"
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M14.4 16.2V8a1.7 1.7 0 0 1 3.4 0v8.6",
-		stroke: color,
-		strokeWidth: "1.6",
-		fill: "none",
-		strokeLinecap: "round"
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M17.8 16.4v-6.2a1.7 1.7 0 0 1 3.4 0v9.9c0 4.1-2.9 6.9-7 6.9-2.4 0-3.9-.8-5.3-2.5l-3.3-4c-.8-.9-.7-2.3.2-3a2.1 2.1 0 0 1 2.8.2l1.6 1.4",
-		stroke: color,
-		strokeWidth: "1.6",
-		fill: "none",
-		strokeLinecap: "round",
-		strokeLinejoin: "round"
-	}));
-}
-function DartsLogo({ color }) {
-	return /* @__PURE__ */ import_react.default.createElement("svg", {
-		width: 30,
-		height: 30,
-		viewBox: "0 0 30 30"
-	}, /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: 13,
-		cy: 17,
-		r: 11,
-		fill: "none",
-		stroke: color,
-		strokeWidth: 1.6
-	}), /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: 13,
-		cy: 17,
-		r: 6.5,
-		fill: "none",
-		stroke: color,
-		strokeWidth: 1.3,
-		opacity: .65
-	}), /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: 13,
-		cy: 17,
-		r: 2.1,
-		fill: color
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M13 17 L24 6",
-		stroke: color,
-		strokeWidth: 1.8,
-		strokeLinecap: "round"
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M22 3.5 L26.5 3.5 L26.5 8",
-		fill: "none",
-		stroke: color,
-		strokeWidth: 1.6,
-		strokeLinecap: "round",
-		strokeLinejoin: "round"
-	}));
-}
-function CricketLogo({ color }) {
-	return /* @__PURE__ */ import_react.default.createElement("svg", {
-		width: 28,
-		height: 28,
-		viewBox: "0 0 28 28"
-	}, /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: 1,
-		y: 1,
-		width: 26,
-		height: 26,
-		rx: 8,
-		fill: "#0C1F17",
-		stroke: color,
-		strokeWidth: 1
-	}), /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: 14,
-		cy: 14,
-		r: 7,
-		fill: "none",
-		stroke: color,
-		strokeWidth: 1.8
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M9.5 9.5 L18.5 18.5 M18.5 9.5 L9.5 18.5",
-		stroke: color,
-		strokeWidth: 1.8,
-		strokeLinecap: "round"
-	}));
-}
-function ShanghaiLogo({ color }) {
-	return /* @__PURE__ */ import_react.default.createElement("svg", {
-		width: 28,
-		height: 28,
-		viewBox: "0 0 28 28"
-	}, /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: 1,
-		y: 1,
-		width: 26,
-		height: 26,
-		rx: 8,
-		fill: "#0C1620",
-		stroke: color,
-		strokeWidth: 1
-	}), /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: 6,
-		y: 16,
-		width: 4,
-		height: 7,
-		rx: 1,
-		fill: color
-	}), /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: 12,
-		y: 11,
-		width: 4,
-		height: 12,
-		rx: 1,
-		fill: color
-	}), /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: 18,
-		y: 6,
-		width: 4,
-		height: 17,
-		rx: 1,
-		fill: color
-	}));
-}
-function CutThroatLogo({ color }) {
-	return /* @__PURE__ */ import_react.default.createElement("svg", {
-		width: 28,
-		height: 28,
-		viewBox: "0 0 28 28"
-	}, /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: 1,
-		y: 1,
-		width: 26,
-		height: 26,
-		rx: 8,
-		fill: "#1F0C10",
-		stroke: color,
-		strokeWidth: 1
-	}), /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: 14,
-		cy: 11,
-		r: 5.4,
-		fill: "none",
-		stroke: color,
-		strokeWidth: 1.7
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M10.9 7.9 L17.1 14.1 M17.1 7.9 L10.9 14.1",
-		stroke: color,
-		strokeWidth: 1.5,
-		strokeLinecap: "round"
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M14 17.5 L14 23.5 M11.2 20.5 L14 23.5 L16.8 20.5",
-		stroke: color,
-		strokeWidth: 1.7,
-		fill: "none",
-		strokeLinecap: "round",
-		strokeLinejoin: "round"
-	}));
-}
-function MastersLogo({ color }) {
-	return /* @__PURE__ */ import_react.default.createElement("svg", {
-		width: 28,
-		height: 28,
-		viewBox: "0 0 28 28"
-	}, /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: 1,
-		y: 1,
-		width: 26,
-		height: 26,
-		rx: 8,
-		fill: "#1C1608",
-		stroke: color,
-		strokeWidth: 1
-	}), /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: 14,
-		cy: 16.5,
-		r: 5.6,
-		fill: "none",
-		stroke: color,
-		strokeWidth: 1.7
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M10.7 13.2 L17.3 19.8 M17.3 13.2 L10.7 19.8",
-		stroke: color,
-		strokeWidth: 1.5,
-		strokeLinecap: "round"
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M8.5 8.2 L10.5 4.6 L14 7.4 L17.5 4.6 L19.5 8.2 L18.3 9.6 L9.7 9.6 Z",
-		fill: color
-	}));
-}
-function HiScoreLogo({ color }) {
-	return /* @__PURE__ */ import_react.default.createElement("svg", {
-		width: 28,
-		height: 28,
-		viewBox: "0 0 28 28"
-	}, /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: 1,
-		y: 1,
-		width: 26,
-		height: 26,
-		rx: 8,
-		fill: "#081620",
-		stroke: color,
-		strokeWidth: 1
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M5.5 20.5 L11 14.5 L15 18 L20.5 9.5",
-		stroke: color,
-		strokeWidth: 1.8,
-		fill: "none",
-		strokeLinecap: "round",
-		strokeLinejoin: "round"
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M15.5 9 L20.5 9 L20.5 14",
-		stroke: color,
-		strokeWidth: 1.8,
-		fill: "none",
-		strokeLinecap: "round",
-		strokeLinejoin: "round"
-	}));
-}
-function SplitScoreLogo({ color }) {
-	return /* @__PURE__ */ import_react.default.createElement("svg", {
-		width: 28,
-		height: 28,
-		viewBox: "0 0 28 28"
-	}, /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: 1,
-		y: 1,
-		width: 26,
-		height: 26,
-		rx: 8,
-		fill: "#140C1C",
-		stroke: color,
-		strokeWidth: 1
-	}), /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: 14,
-		cy: 14,
-		r: 8,
-		fill: "none",
-		stroke: color,
-		strokeWidth: 1.7
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M14 6 A8 8 0 0 1 14 22 Z",
-		fill: color,
-		opacity: .32
-	}), /* @__PURE__ */ import_react.default.createElement("line", {
-		x1: 14,
-		y1: 6,
-		x2: 14,
-		y2: 22,
-		stroke: color,
-		strokeWidth: 1.7
-	}), /* @__PURE__ */ import_react.default.createElement("text", {
-		x: 14,
-		y: 18,
-		fontSize: 8.5,
-		fontWeight: 700,
-		textAnchor: "middle",
-		fill: color
-	}, "½"));
-}
-function MafiaLogo({ color }) {
-	return /* @__PURE__ */ import_react.default.createElement("svg", {
-		width: "30",
-		height: "30",
-		viewBox: "0 0 30 30",
-		style: { flexShrink: 0 }
-	}, /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "1",
-		y: "1",
-		width: "28",
-		height: "28",
-		rx: "8",
-		fill: "#120B0C",
-		stroke: `${color}55`,
-		strokeWidth: "1"
-	}), /* @__PURE__ */ import_react.default.createElement("ellipse", {
-		cx: "15",
-		cy: "18.5",
-		rx: "9",
-		ry: "1.7",
-		fill: color
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M9.5 18c-.3-3.6 1.5-7.2 5.5-7.2s5.8 3.6 5.5 7.2H9.5Z",
-		fill: color
-	}), /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "10.5",
-		y: "13",
-		width: "9",
-		height: "1.5",
-		rx: "0.5",
-		fill: "#120B0C",
-		opacity: "0.5"
-	}));
-}
-function Flip7Logo({ color, theme }) {
-	const n = theme === "noir", l = theme === "light";
-	const K = n ? "#161616" : l ? "#F4EDE3" : "#12161F";
-	const face = n ? "#E6E6E6" : "#FFF1DC";
-	const back = n ? "#6E6E6E" : color || "#FF7A3D";
-	const num = n ? "#161616" : "#C2571A";
-	return /* @__PURE__ */ import_react.default.createElement("svg", {
-		width: "30",
-		height: "30",
-		viewBox: "0 0 30 30",
-		style: { flexShrink: 0 },
-		"aria-hidden": "true"
-	}, /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "1",
-		y: "1",
-		width: "28",
-		height: "28",
-		rx: "8",
-		fill: K,
-		stroke: n ? "#3A3A3A" : l ? "#D8C9B5" : `${back}55`,
-		strokeWidth: "1"
-	}), /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "6.5",
-		y: "7",
-		width: "11",
-		height: "15.5",
-		rx: "2",
-		fill: back,
-		transform: "rotate(-14 12 15)"
-	}), /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "12.5",
-		y: "7.5",
-		width: "11",
-		height: "15.5",
-		rx: "2",
-		fill: face,
-		stroke: n ? "#161616" : "rgba(0,0,0,.35)",
-		strokeWidth: "0.8",
-		transform: "rotate(10 18 15)"
-	}), /* @__PURE__ */ import_react.default.createElement("text", {
-		x: "18.2",
-		y: "19.6",
-		fontSize: "10.5",
-		fontWeight: "900",
-		fill: num,
-		textAnchor: "middle",
-		fontFamily: "'Bowlby One',sans-serif",
-		transform: "rotate(10 18 15)"
-	}, "7"));
-}
-function MinigolfLogo({ theme }) {
-	const n = theme === "noir", l = theme === "light";
-	const K = n ? "#161616" : l ? "#E6EFDC" : "#0E1F17";
-	const G = n ? "#4A4A4A" : l ? "#7FB06A" : "#2C6644";
-	const H = n ? "#080808" : l ? "#1F3A2B" : "#06100A";
-	const P = n ? "#D6D6D6" : l ? "#1F3A2B" : "#F3EBD3";
-	const F = n ? "#9C9C9C" : l ? "#D9483B" : "#E5484D";
-	const B = l ? "#FFFFFF" : "#FFFFFF";
-	return /* @__PURE__ */ import_react.default.createElement("svg", {
-		width: "30",
-		height: "30",
-		viewBox: "0 0 30 30",
-		style: { flexShrink: 0 },
-		"aria-hidden": "true"
-	}, /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "1",
-		y: "1",
-		width: "28",
-		height: "28",
-		rx: "8",
-		fill: K,
-		stroke: n ? "#3A3A3A" : l ? "#B9CDB0" : "#2C6644",
-		strokeWidth: "1"
-	}), /* @__PURE__ */ import_react.default.createElement("ellipse", {
-		cx: "15",
-		cy: "22.5",
-		rx: "10.5",
-		ry: "3.6",
-		fill: G
-	}), /* @__PURE__ */ import_react.default.createElement("ellipse", {
-		cx: "14",
-		cy: "22.2",
-		rx: "3.3",
-		ry: "1.2",
-		fill: H
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M14 22V6.8",
-		stroke: P,
-		strokeWidth: "1.6",
-		strokeLinecap: "round"
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M14.7 7.2c2.3-1.5 4.2 1.3 6.6-.1v5.1c-2.4 1.4-4.3-1.4-6.6.1z",
-		fill: F
-	}), /* @__PURE__ */ import_react.default.createElement("circle", {
-		cx: "21.2",
-		cy: "21.4",
-		r: "1.9",
-		fill: B,
-		stroke: l ? "#7A8F78" : "none",
-		strokeWidth: "0.6"
-	}));
-}
-// web/src/shared/pl-names.js
-var POP_ID = "gt-pl-fullname";
-var CSS_ID = "gt-pl-names-css";
-var PL_NAMES_CSS = `
-[data-phone-landscape] :is(button, [role="button"]) [style*="text-overflow: ellipsis"],
-[data-phone-landscape] :is(button, [role="button"])[style*="text-overflow: ellipsis"] { white-space: normal !important; overflow: visible !important; text-overflow: clip !important; overflow-wrap: break-word; min-width: 0; }
-#${POP_ID} { position: fixed; z-index: 100000; max-width: min(78vw, 420px); box-sizing: border-box; padding: 8px 12px; border-radius: 12px; background: rgba(18,18,24,0.97); color: #fff; border: 1px solid rgba(255,255,255,0.28); box-shadow: 0 6px 24px rgba(0,0,0,0.45); font: 600 15px/1.3 'Inter', system-ui, sans-serif; overflow-wrap: break-word; pointer-events: none; }
-`;
-var timer = null;
-function plHideFullName() {
-	if (timer) {
-		clearTimeout(timer);
-		timer = null;
-	}
-	const el = document.getElementById(POP_ID);
-	if (el) el.remove();
-}
-function plTruncatedAt(target) {
-	let el = target && target.nodeType === 1 ? target : target && target.parentElement;
-	for (let i = 0; i < 4 && el && el !== document.body; i++, el = el.parentElement) {
-		if (el.closest(".gt-gamehead") || el.closest("button, [role=button], a, input, select, textarea")) return null;
-		if (getComputedStyle(el).textOverflow === "ellipsis" && el.scrollWidth > el.clientWidth + 1) return el;
-	}
-	return null;
-}
-function plShowFullName(el) {
-	const text = (el.textContent || "").replace(/\s+/g, " ").trim();
-	if (!text) return;
-	plHideFullName();
-	const pop = document.createElement("div");
-	pop.id = POP_ID;
-	pop.setAttribute("role", "status");
-	pop.textContent = text;
-	document.body.appendChild(pop);
-	const r = el.getBoundingClientRect();
-	const pr = pop.getBoundingClientRect();
-	const vw = window.innerWidth, vh = window.innerHeight;
-	let left = Math.min(Math.max(8, r.left), vw - pr.width - 8);
-	let top = r.bottom + 6;
-	if (top + pr.height > vh - 8) top = Math.max(8, r.top - pr.height - 6);
-	pop.style.left = left + "px";
-	pop.style.top = top + "px";
-	timer = setTimeout(plHideFullName, 5e3);
-}
-function plNamesInstall() {
-	if (typeof document === "undefined" || window.__gtPlNames) return;
-	window.__gtPlNames = true;
-	if (!document.getElementById(CSS_ID)) {
-		const st = document.createElement("style");
-		st.id = CSS_ID;
-		st.textContent = PL_NAMES_CSS;
-		document.head.appendChild(st);
-	}
-	document.addEventListener("click", (e) => {
-		if (!document.documentElement.hasAttribute("data-phone-landscape")) {
-			plHideFullName();
-			return;
-		}
-		const had = !!document.getElementById(POP_ID);
-		const el = plTruncatedAt(e.target);
-		if (el) plShowFullName(el);
-		else if (had) plHideFullName();
-	}, true);
-	window.addEventListener("resize", plHideFullName);
-	window.addEventListener("scroll", plHideFullName, true);
-}
-plNamesInstall();
-// web/src/shared/pl-shared.js
-var PL_SHARED_ID = "gt-pl-shared-css";
-var PL_SHARED_CSS = `
-/* ---- GameHeader: kompakt (48 px), gilt fuer alle Spiele ---- */
-[data-phone-landscape] .gt-gamehead { display: flex; align-items: center; gap: 10px; min-height: var(--pl-head, 48px); max-height: 52px; box-sizing: border-box; padding-top: 2px; padding-bottom: 2px; margin-bottom: 6px; }
-[data-phone-landscape] .gt-gamehead > div:first-of-type { margin-bottom: 0 !important; min-height: 44px !important; flex: none; order: 0; }
-[data-phone-landscape] .gt-gamehead > div:nth-of-type(n+2):not(.gt-headbtns) { flex: 1 1 auto; min-width: 0; order: 1; }
-[data-phone-landscape] .gt-gamehead > .gt-headbtns { position: static !important; order: 2; flex: none; margin-left: auto; }
-[data-phone-landscape] .gt-gamehead > .gt-headbtns ~ .gt-headbtns { margin-left: 0; }
-[data-phone-landscape] .gt-gamehead h1 { font-size: 20px !important; line-height: 1.1 !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; overflow-wrap: normal !important; }
-[data-phone-landscape] .gt-gamehead h1 + div { margin-top: 1px !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-
-/* ---- Regeln-Dialog (RulesSheet): mittig, breit, eigenes Scrollen ---- */
-[data-phone-landscape] div:has(> [role="dialog"][aria-labelledby^="gt-rs-"]) { align-items: center !important; justify-content: center; box-sizing: border-box; padding: max(8px, var(--pl-sat)) max(12px, var(--pl-sar)) max(8px, var(--pl-sab)) max(12px, var(--pl-sal)); }
-[data-phone-landscape] [role="dialog"][aria-labelledby^="gt-rs-"] { max-width: min(640px, 100%) !important; margin: 0 !important; border-radius: 22px !important; padding: 14px 20px !important; max-height: calc(var(--pl-avail) - 16px - var(--pl-sat) - var(--pl-sab)) !important; }
-
-/* ---- Ziffernfeld-Dialoge (gtL-padov / gtL-padsheet, z. B. Skyjo): links Name und Wert, rechts Tastenfeld ---- */
-[data-phone-landscape] .gtL-padov { align-items: center !important; box-sizing: border-box; padding: max(8px, var(--pl-sat)) max(12px, var(--pl-sar)) max(8px, var(--pl-sab)) max(12px, var(--pl-sal)); overflow-y: auto; }
-[data-phone-landscape] .gtL-padsheet { box-sizing: border-box; border-radius: 20px !important; max-width: min(640px, 100%) !important; padding: 12px 16px !important; max-height: calc(var(--pl-avail) - 16px - var(--pl-sat) - var(--pl-sab)) !important; overflow-y: auto !important; overscroll-behavior: contain; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: auto auto 1fr; column-gap: 18px; align-content: start; }
-[data-phone-landscape] .gtL-padsheet > :not([style*="repeat(3"]) { grid-column: 1; min-width: 0; }
-[data-phone-landscape] .gtL-padsheet > [style*="repeat(3"] { grid-column: 2; grid-row: 1 / 4; align-self: start; margin-bottom: 0 !important; }
-[data-phone-landscape] .gtL-padsheet > [style*="repeat(3"] > button { min-height: 44px; padding-top: 8px !important; padding-bottom: 8px !important; }
-[data-phone-landscape] .gtL-padsheet > button:not([style*="repeat(3"]) { align-self: end; min-height: 48px; }
-[data-phone-landscape] .gtL-padsheet > button[data-gt-sound="1"] { position: sticky; bottom: 0; z-index: 2; }
-[data-phone-landscape] .gtL-padsheet button { min-height: 44px; }
-[data-phone-landscape] .gtL-padsheet > :first-child { margin-bottom: 8px !important; }
-[data-phone-landscape] .gtL-padsheet > :first-child > button { min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; margin: -6px -8px -6px 0; }
-[data-phone-landscape] .gtL-padsheet > :nth-child(2) { margin-bottom: 8px !important; }
-
-/* ---- Setup: Startleiste (GtStartBar) flacher ---- */
-[data-phone-landscape] .gt-su-cta { padding: 12px 12px calc(8px + var(--pl-sab, 0px)); margin-top: 4px; }
-[data-phone-landscape] .gt-su-btn { min-height: 48px; border-radius: 16px; }
-[data-phone-landscape] .gt-su-ib, [data-phone-landscape] .gt-su-add { min-height: 44px; }
-[data-phone-landscape] .gt-gm-sb { min-height: 44px !important; min-width: 44px; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; }
-[data-phone-landscape] .gt-gm-in { min-height: 44px; box-sizing: border-box; }
-[data-phone-landscape] .gt-gm-head { flex-wrap: wrap; row-gap: 4px; }
-[data-phone-landscape] .gt-gm-head > .gt-gm-in:first-child { flex: 1 1 100% !important; width: 100%; text-overflow: clip; }
-
-/* ---- Podest (PodiumOverlay): links Sieger, rechts Rangliste und Aktionen ---- */
-[data-phone-landscape] .gtsb-modal { max-width: min(760px, 100%) !important; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); grid-template-rows: auto 1fr; column-gap: 18px; align-items: start; padding: 14px 16px 14px !important; border-radius: 24px !important; max-height: calc(var(--pl-avail) - 16px - var(--pl-sat) - var(--pl-sab)); }
-[data-phone-landscape] .gtsb-hd { grid-column: 1; grid-row: 1; }
-[data-phone-landscape] .gtsb-hd > div { padding: 0 !important; font-size: 20px !important; text-align: left !important; justify-content: flex-start !important; }
-[data-phone-landscape] .gtsb-stage { grid-column: 1; grid-row: 2; align-self: end; margin-top: 8px !important; }
-[data-phone-landscape] .gtsb-side { grid-column: 2; grid-row: 1 / 3; display: flex; flex-direction: column; min-height: 0; max-height: calc(var(--pl-avail) - 16px - var(--pl-sat) - var(--pl-sab) - 28px); padding-top: 38px; box-sizing: border-box; }
-[data-phone-landscape] .gtsb-side .gtsb-list { margin-top: 0; flex: 0 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
-[data-phone-landscape] .gtsb-side .gtsb-acts { margin-top: auto; padding-top: 12px; flex: none; }
-[data-phone-landscape] .gtsb-side .gtsb-acts > button { min-height: 48px; }
-
-/* ---- Exportvorschau (ShareImagePreview, Bild links, Hinweis und Aktionen rechts) ---- */
-[data-phone-landscape] .gtsp-ov { padding: max(10px, var(--pl-sat)) max(60px, calc(var(--pl-sar) + 16px)) max(10px, var(--pl-sab)) max(16px, var(--pl-sal)) !important; }
-[data-phone-landscape] .gtsp-in { flex-direction: row !important; align-items: center !important; justify-content: center; gap: 24px !important; width: 100%; }
-[data-phone-landscape] .gtsp-imgs { max-height: calc(var(--pl-avail) - 20px) !important; }
-[data-phone-landscape] .gtsp-imgs img { max-height: calc(var(--pl-avail) - 24px) !important; }
-[data-phone-landscape] .gtsp-side { display: flex; flex-direction: column; align-items: center; gap: 14px; flex: 0 1 260px; min-width: 0; }
-[data-phone-landscape] .gtsp-x { top: calc(6px + var(--pl-sat)) !important; right: calc(6px + var(--pl-sar)) !important; }
-
-/* ---- Turnier-Exportblatt (GtStExportSheet): links Auswahl, rechts Vorschau ---- */
-[data-phone-landscape] .gtstx-ov { padding: max(8px, var(--pl-sat)) max(12px, var(--pl-sar)) max(8px, var(--pl-sab)) max(12px, var(--pl-sal)) !important; }
-[data-phone-landscape] .gtstx-panel { max-width: min(860px, 100%) !important; display: grid !important; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr); grid-template-rows: auto auto auto 1fr auto; }
-[data-phone-landscape] .gtstx-head { grid-column: 1 / 3; grid-row: 1; }
-[data-phone-landscape] .gtstx-design { grid-column: 1; grid-row: 2; }
-[data-phone-landscape] .gtstx-status { grid-column: 1; grid-row: 3; }
-[data-phone-landscape] .gtstx-pages { grid-column: 2; grid-row: 2 / 6; min-height: 0; }
-[data-phone-landscape] .gtstx-foot { grid-column: 1; grid-row: 5; }
-/* Huellen der Einrichtung ohne Laptop-Layout: ausserhalb Querformat unsichtbar */
-.plsu-split, .plsu-main, .plsu-side { display: contents; }
-/* ---- Einrichtung aller Spiele (gtL-split-setup): Teilnehmer links, Einstellungen und Start rechts, Spalten scrollen einzeln ---- */
-[data-phone-landscape] :is(.gtL-split-setup, .plsu-split):not(.pld-split) { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--pl-gap) calc(var(--pl-gap) + 4px); align-items: stretch; width: 100%; box-sizing: border-box; max-height: max(160px, var(--pl-body)); }
-[data-phone-landscape] :is(.gtL-split-setup, .plsu-split):not(.pld-split) > :is(.gtL-col-main, .gtL-col-side, .plsu-main, .plsu-side) { display: flex; flex-direction: column; gap: 10px; min-width: 0; min-height: 0; max-height: max(160px, var(--pl-body)); box-sizing: border-box; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding-bottom: 2px; }
-[data-phone-landscape] :is(.gtL-split-setup, .plsu-split):not(.pld-split) > :is(.gtL-col-side, .plsu-side) > .gt-su-cta { position: sticky; bottom: 0; z-index: 6; margin: 4px 0 0; padding: 8px 0 2px; background: transparent; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
-[data-phone-landscape] :is(.gtL-split-setup, .plsu-split):not(.pld-split) > :is(.gtL-col-side, .plsu-side) > .gt-su-cta::before { display: none; }
-[data-phone-landscape] :is(.gtL-split-setup, .plsu-split):not(.pld-split) > :is(.gtL-col-side, .plsu-side) > .gt-su-cta > button { box-shadow: none; }
-@media (max-width: 640px) { [data-phone-landscape] :is(.gtL-split-setup, .plsu-split):not(.pld-split) { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); } [data-phone-landscape] :is(.gtL-split-setup, .plsu-split):not(.pld-split) > :is(.gtL-col-main, .plsu-main) button { font-size: 13px; } }
-[data-phone-landscape] :is(.gtL-split-setup, .plsu-split):not(.pld-split) :is(button, input, select) { min-height: 44px; box-sizing: border-box; }
-[data-phone-landscape] :is(.gtL-split-setup, .plsu-split):not(.pld-split) input { scroll-margin: 8px; }
-[data-phone-landscape] .gtL-page:has(:is(.gtL-split-setup, .plsu-split)) { max-width: none !important; width: 100% !important; margin: 0 !important; box-sizing: border-box; padding-left: var(--pl-gutter-l) !important; padding-right: var(--pl-gutter-r) !important; }
-[data-phone-landscape] .gtL-shellpage:has(:is(.gtL-split-setup, .plsu-split)) { padding-top: max(var(--pl-sat), 6px) !important; }
-
-`;
-function plInstallSharedCss() {
-	if (typeof document === "undefined") return;
-	try {
-		if (document.getElementById(PL_SHARED_ID)) return;
-		const s = document.createElement("style");
-		s.id = PL_SHARED_ID;
-		s.textContent = PL_SHARED_CSS;
-		document.head.appendChild(s);
-	} catch (_) {}
-}
-plInstallSharedCss();
-// web/src/shared/fav-star.js
-function gtFavToast(msg) {
-	try {
-		const old = document.getElementById("gt-fav-toast");
-		if (old) old.remove();
-		const d = document.createElement("div");
-		d.id = "gt-fav-toast";
-		d.setAttribute("role", "status");
-		d.textContent = msg;
-		d.style.cssText = "position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);max-width:min(92vw,420px);padding:9px 16px;border-radius:14px;background:rgba(20,22,28,.94);color:#F3EFE6;border:1px solid rgba(255,255,255,.18);font-family:Inter,system-ui,-apple-system,sans-serif;font-weight:600;font-size:13px;line-height:1.35;text-align:center;z-index:2147483000;box-shadow:0 8px 24px rgba(0,0,0,.35);pointer-events:none";
-		document.body.appendChild(d);
-		setTimeout(() => {
+	import_react.default.useEffect(() => {
+		const root = ref.current;
+		if (!open || !root) return void 0;
+		const trigger = document.activeElement;
+		const entry = { root };
+		stack$1.push(entry);
+		const undoInert = gtDialogInert(root);
+		if (!root.hasAttribute("tabindex")) root.setAttribute("tabindex", "-1");
+		if (!root.contains(document.activeElement)) {
+			const start = root.querySelector("[data-gt-autofocus]") || gtDialogFocusables(root)[0] || root;
 			try {
-				d.remove();
-			} catch (_e) {}
-		}, 1800);
-	} catch (_e) {}
-}
-function FavStar({ fav, theme, t, muted, style }) {
-	if (!fav) return null;
-	const on = !!fav.on;
-	const gold = theme === "light" ? "#C8921F" : "#E8B84A";
-	const off = muted || (theme === "light" ? "#8A8F99" : "#8B90A0");
-	const label = t(on ? "favRemoveLabel" : "favAddLabel");
-	return /* @__PURE__ */ import_react.default.createElement("button", {
-		type: "button",
-		className: "gt-favstar",
-		"aria-pressed": on,
-		"aria-label": label,
-		title: label,
-		onClick: (e) => {
-			e.stopPropagation();
+				start.focus({ preventScroll: true });
+			} catch (_) {}
+		}
+		const onKey = (e) => {
+			if (stack$1[stack$1.length - 1] !== entry) return;
+			if (e.key === "Escape") {
+				const l = latest.current;
+				if (l.escape && l.onClose) {
+					e.stopPropagation();
+					l.onClose();
+				}
+				return;
+			}
+			if (e.key !== "Tab") return;
+			const items = gtDialogFocusables(root);
+			if (!items.length) {
+				e.preventDefault();
+				root.focus();
+				return;
+			}
+			const first = items[0], last = items[items.length - 1], cur = document.activeElement;
+			const at = items.indexOf(cur);
 			e.preventDefault();
-			const was = on;
-			fav.toggle();
-			try {
-				hapticTap();
-			} catch (_e) {}
-			gtFavToast(t(was ? "favRemoved" : "favAdded"));
-		},
-		style: {
-			position: "absolute",
-			top: "50%",
-			right: 40,
-			transform: "translateY(-50%)",
-			width: 44,
-			height: 44,
-			padding: 0,
-			margin: 0,
-			border: "none",
-			background: "transparent",
-			cursor: "pointer",
-			display: "flex",
-			alignItems: "center",
-			justifyContent: "center",
-			WebkitTapHighlightColor: "transparent",
-			touchAction: "manipulation",
-			zIndex: 2,
-			...style || {}
-		}
-	}, /* @__PURE__ */ import_react.default.createElement("svg", {
-		width: "22",
-		height: "22",
-		viewBox: "0 0 24 24",
-		"aria-hidden": "true"
-	}, /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.8 5.7 21.5l1.7-7.3L2 9.5l7.1-.6Z",
-		fill: on ? gold : "none",
-		stroke: on ? gold : off,
-		strokeWidth: "1.7",
-		strokeLinejoin: "round"
-	})));
-}
-// web/src/shared/game-header.js
-var game_header_exports = /* @__PURE__ */ __exportAll({
-	GT_HEAD_CSS: () => GT_HEAD_CSS,
-	GameCard: () => GameCard,
-	GameHeader: () => GameHeader
-});
-function GameCard({ title, description, status, accent, onClick, disabled, logo, variant = "paper", tokens, theme, fav, t }) {
-	const isNeon = !disabled;
-	const isLight = theme === "light";
-	const tk = tokens || {
-		card: "#1D212D",
-		border: "#2A2F3D",
-		ink: "#F0F1F5",
-		muted: "#8890A0"
-	};
-	const _card = /* @__PURE__ */ import_react.default.createElement("button", {
-		onClick: disabled ? void 0 : onClick,
-		disabled,
-		className: (disabled ? "" : "card-fx ") + (isNeon && !isLight ? "tile-glow " : "") + "gtL-gamecard",
-		style: {
-			display: "flex",
-			alignItems: "center",
-			gap: 14,
-			width: "100%",
-			textAlign: "left",
-			background: isNeon ? isLight ? tk.card : `linear-gradient(135deg, ${accent}24, ${tk.card})` : tk.card,
-			border: isNeon ? isLight ? `1px solid ${tk.border}` : `1px solid ${accent}66` : `1px solid ${tk.border}`,
-			borderRadius: 24,
-			padding: "17px 18px",
-			cursor: disabled ? "default" : "pointer",
-			opacity: disabled ? .5 : 1,
-			fontFamily: "'Inter', sans-serif",
-			boxShadow: disabled ? "none" : isLight ? isNeon ? `inset 4px 0 0 ${accent}, 0 4px 12px rgba(0,0,0,0.06)` : "0 4px 12px rgba(0,0,0,0.06)" : isNeon ? `0 4px 18px -8px ${accent}55, 0 1px 3px rgba(0,0,0,0.3)` : "0 2px 10px rgba(0,0,0,0.15)",
-			"--glow": isNeon && !isLight ? `${accent}55` : void 0
-		}
-	}, /* @__PURE__ */ import_react.default.createElement("span", {
-		className: "gtL-gamecard-logo",
-		"aria-hidden": true,
-		style: {
-			width: 44,
-			minWidth: 44,
-			display: "flex",
-			alignItems: "center",
-			justifyContent: "center",
-			flexShrink: 0
-		}
-	}, logo), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-gamecard-body",
-		style: {
-			flex: 1,
-			minWidth: 0
-		}
-	}, /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-gamecard-title",
-		style: {
-			fontSize: 20,
-			fontWeight: isNeon ? 700 : 600,
-			color: tk.ink,
-			fontFamily: "'Baloo 2', sans-serif"
-		}
-	}, title), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-gamecard-desc",
-		style: {
-			fontSize: 12,
-			color: tk.muted,
-			marginTop: 3
-		}
-	}, description), status && /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-gamecard-status",
-		style: {
-			display: "flex",
-			alignItems: "center",
-			gap: 6,
-			fontSize: 10.5,
-			color: disabled ? tk.muted : tk.ink,
-			marginTop: 6,
-			fontWeight: 600,
-			letterSpacing: "0.08em",
-			textTransform: "uppercase"
-		}
-	}, /* @__PURE__ */ import_react.default.createElement("span", {
-		"aria-hidden": true,
-		style: {
-			width: 7,
-			height: 7,
-			borderRadius: "50%",
-			background: accent,
-			flexShrink: 0
-		}
-	}), status)), fav && /* @__PURE__ */ import_react.default.createElement("span", {
-		"aria-hidden": "true",
-		style: {
-			width: 44,
-			flexShrink: 0
-		}
-	}), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		color: disabled ? tk.border : tk.muted,
-		fontSize: 18,
-		flexShrink: 0
-	} }, "›"));
-	return fav ? /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		position: "relative",
-		width: "100%"
-	} }, _card, /* @__PURE__ */ import_react.default.createElement(FavStar, {
-		fav,
-		theme,
-		t,
-		muted: tk.muted
-	})) : _card;
-}
-var GT_HEAD_CSS = ".gt-hb{position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:44px;height:44px;padding:0;margin:0;border:none;background:transparent;cursor:pointer;font:inherit;-webkit-tap-highlight-color:transparent;touch-action:manipulation}.gt-hb:focus{outline:none}.gt-hb>.gt-hf{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:36px;min-width:36px;box-sizing:border-box;border-radius:999px;white-space:nowrap;transition:transform .16s cubic-bezier(.23,1,.32,1),background-color .2s ease,border-color .2s ease,color .2s ease}.gt-hb:active>.gt-hf{transform:scale(.96)}.gt-hb:focus-visible>.gt-hf{outline:2px solid currentColor;outline-offset:2px}@media (hover:hover) and (pointer:fine){.gt-hb:hover>.gt-hf{filter:brightness(1.15)}}@media (prefers-reduced-motion:reduce){.gt-hb>.gt-hf{transition:none}}.gt-gamehead{position:sticky;top:var(--gt-sat, env(safe-area-inset-top, 0px));z-index:20;margin:-6px -12px 8px;padding:6px 12px 8px}.gt-gamehead.is-stuck{background-color:var(--gt-pg-col);background-image:var(--gt-pg-img);background-size:var(--gt-pg-size);background-repeat:no-repeat;background-position:var(--gt-head-pos,0 0);box-shadow:0 1px 0 rgba(128,128,128,.22)}.gt-gamehead>.gt-headbtns{top:6px!important;right:8px!important}.gt-headbtns{z-index:21!important}div:has(>.gt-gamehead~.gt-headbtns){position:sticky!important;top:var(--gt-sat, env(safe-area-inset-top, 0px));z-index:20}div:has(>.gt-gamehead~.gt-headbtns)>.gt-headbtns{top:6px!important}.gtL-content .gt-gamehead,.gtL-content .gt-gamehead.is-stuck{position:relative;top:auto;margin:0 0 16px;padding:0;background:none;box-shadow:none}.gtL-content .gt-gamehead>.gt-headbtns{top:0!important;right:-4px!important}.gtL-content div:has(>.gt-gamehead~.gt-headbtns){position:relative!important;top:auto}.gtL-content div:has(>.gt-gamehead~.gt-headbtns)>.gt-headbtns{top:0!important}div:has(>.gt-headbtns+.gt-gamehead)>.gt-headbtns{position:sticky!important;top:calc(var(--gt-headtop, var(--gt-sat, env(safe-area-inset-top, 0px))) + 6px)!important;right:auto!important;left:auto!important;height:0;overflow:visible;display:flex;justify-content:flex-end;margin-right:-4px;z-index:22!important}.gtL-content div:has(>.gt-headbtns+.gt-gamehead)>.gt-headbtns{position:absolute!important;top:0!important;right:-4px!important;height:auto;margin-right:0}.gtL-yatzy-sheets,.gt-gamehead~.gtL-e-fit{isolation:isolate}.gt-gamehead.is-stuck{-webkit-transform:translateZ(0);transform:translateZ(0)}.gt-gamehead.is-stuck::before{content:'';position:absolute;left:0;right:0;bottom:100%;height:var(--gt-cover,0px);pointer-events:none;background-color:var(--gt-pg-col);background-image:var(--gt-pg-img);background-size:var(--gt-pg-size);background-repeat:no-repeat;background-position:var(--gt-head-pos2,0 0)}.gtL-content .gt-gamehead.is-stuck::before{display:none}";
-function GameHeader({ title, subtitle, icon, accent, onBack, backLabel, tk, titleFont, onHome, onEndGame, onRules, rulesTitle, rulesText, extra, hideTitle, moreItems, onMenuOpen }) {
-	const [rulesOpen, setRulesOpen] = useState$11(false);
-	const headRef = useRef$16(null);
-	const [stuck, setStuck] = useState$11(false);
-	useEffect$14(() => {
-		let raf = 0;
-		const upd = () => {
-			raf = 0;
-			const el = headRef.current;
-			if (!el) return;
-			const y = window.scrollY || document.documentElement && document.documentElement.scrollTop || 0;
-			const r = el.getBoundingClientRect();
-			const pg = el.closest("#root > div:first-child");
-			const pr = pg ? pg.getBoundingClientRect() : {
-				left: 0,
-				top: 0
-			};
-			el.style.setProperty("--gt-head-pos", Math.round(pr.left - r.left) + "px " + Math.round(pr.top - r.top) + "px");
-			if (!el.closest(".gtL-content")) {
-				const w = el.parentElement;
-				const pin = w && getComputedStyle(w).position === "sticky" ? w : el;
-				if (y <= 2) {
-					const tp = Math.max(0, Math.round(pin.getBoundingClientRect().top));
-					if (tp !== pin.__gtTop) {
-						pin.__gtTop = tp;
-						pin.style.top = tp + "px";
-						document.documentElement.style.setProperty("--gt-headtop", tp + "px");
-					}
-				}
-				if (pin.__gtTop != null) {
-					const hr = el.getBoundingClientRect();
-					const cov = Math.max(0, Math.round(hr.top));
-					el.style.setProperty("--gt-cover", cov + "px");
-					el.style.setProperty("--gt-head-pos2", Math.round(pr.left - r.left) + "px " + Math.round(pr.top - r.top + cov) + "px");
-				}
+			if (e.shiftKey) (at <= 0 ? last : items[at - 1]).focus();
+			else (at < 0 || at === items.length - 1 ? first : items[at + 1]).focus();
+		};
+		const born = performance.now();
+		const onTap = (e) => {
+			if (stack$1[stack$1.length - 1] !== entry) return;
+			const t = e.target;
+			if (!t || !t.contains || t === root || root.contains(t) || !t.contains(root)) return;
+			if (e.timeStamp && performance.now() - born < 120) return;
+			const l = latest.current;
+			const o = l.outside === true ? l.onClose : l.outside;
+			if (typeof o === "function") {
+				e.stopPropagation();
+				o();
 			}
-			setStuck(y > 2);
 		};
-		const on = () => {
-			if (!raf) raf = requestAnimationFrame(upd);
-		};
-		on();
-		window.addEventListener("scroll", on, { passive: true });
-		window.addEventListener("resize", on);
+		document.addEventListener("keydown", onKey, true);
+		document.addEventListener("click", onTap, true);
 		return () => {
-			window.removeEventListener("scroll", on);
-			window.removeEventListener("resize", on);
-			if (raf) cancelAnimationFrame(raf);
+			document.removeEventListener("keydown", onKey, true);
+			document.removeEventListener("click", onTap, true);
+			const i = stack$1.indexOf(entry);
+			if (i >= 0) stack$1.splice(i, 1);
+			undoInert();
+			if (trigger && trigger.isConnected && trigger !== document.body) try {
+				trigger.focus({ preventScroll: true });
+			} catch (_) {}
 		};
-	}, []);
-	const label = String(backLabel || "").replace(/^[‹<]\s*/, "");
-	const face = {
-		border: `1px solid ${tk.border}`,
-		background: tk.card,
-		backdropFilter: "blur(12px)",
-		WebkitBackdropFilter: "blur(12px)"
-	};
-	return /* @__PURE__ */ import_react.default.createElement("div", {
-		ref: headRef,
-		className: "gt-gamehead" + (stuck ? " is-stuck" : "")
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GT_HEAD_CSS), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		alignItems: "center",
-		minHeight: 44,
-		marginBottom: 8
-	} }, /* @__PURE__ */ import_react.default.createElement("button", {
-		type: "button",
-		onClick: onBack,
-		className: "gt-hb",
-		"data-gt-nav": onBack && onBack.gtNav ? "1" : void 0,
-		style: { color: tk.ink }
-	}, /* @__PURE__ */ import_react.default.createElement("span", {
-		className: "gt-hf",
-		style: {
-			...face,
-			padding: "0 15px 0 10px",
-			fontSize: 13,
-			fontWeight: 600,
-			fontFamily: "'Inter', sans-serif"
-		}
-	}, /* @__PURE__ */ import_react.default.createElement("svg", {
-		width: 15,
-		height: 15,
-		viewBox: "0 0 24 24",
-		"aria-hidden": true,
-		style: { flexShrink: 0 }
-	}, /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M15 5l-7 7 7 7",
-		stroke: "currentColor",
-		strokeWidth: "2.4",
-		fill: "none",
-		strokeLinecap: "round",
-		strokeLinejoin: "round"
-	})), label))), (rulesText || onRules || onHome || onEndGame || moreItems && moreItems.length) && /* @__PURE__ */ import_react.default.createElement(RulesButton, {
-		onClick: onRules || (rulesText ? () => setRulesOpen(true) : void 0),
-		onHome,
-		onEndGame,
-		moreItems,
-		onMenuOpen,
-		tokens: tk
-	}), extra && /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gt-headbtns",
-		style: {
-			position: "absolute",
-			top: 0,
-			right: -4,
-			display: "flex",
-			zIndex: 5
-		}
-	}, extra), /* @__PURE__ */ import_react.default.createElement("div", { style: hideTitle ? {
-		position: "absolute",
-		width: 1,
-		height: 1,
-		overflow: "hidden",
-		clip: "rect(0 0 0 0)",
-		whiteSpace: "nowrap"
-	} : {
-		display: "flex",
-		alignItems: "center",
-		gap: 10,
-		minWidth: 0
-	} }, icon && /* @__PURE__ */ import_react.default.createElement("span", {
-		"aria-hidden": true,
-		style: {
-			width: 34,
-			height: 34,
-			display: "flex",
-			alignItems: "center",
-			justifyContent: "center",
-			flexShrink: 0,
-			.../^#[0-3]/.test(String(tk.ink || "")) && /^#[0-9a-fA-F]{6}$/.test(String(accent || "")) ? {
-				"--gt-tile": accent + "22",
-				"--gt-tile2": "#FFFFFF"
-			} : {}
-		}
-	}, icon), /* @__PURE__ */ import_react.default.createElement("div", { style: { minWidth: 0 } }, /* @__PURE__ */ import_react.default.createElement("h1", { style: {
-		margin: 0,
-		fontSize: 24,
-		fontWeight: 800,
-		lineHeight: 1.1,
-		letterSpacing: "-0.01em",
-		color: accent || tk.ink,
-		fontFamily: titleFont || "'Baloo 2', sans-serif",
-		overflowWrap: "break-word"
-	} }, title), subtitle && /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 11,
-		fontWeight: 600,
-		color: tk.muted,
-		fontFamily: "'Inter', sans-serif",
-		letterSpacing: "0.08em",
-		textTransform: "uppercase",
-		marginTop: 3
-	} }, subtitle))), rulesText && /* @__PURE__ */ import_react.default.createElement(RulesSheet, {
-		open: rulesOpen,
-		onClose: () => setRulesOpen(false),
-		title: rulesTitle || title,
-		text: rulesText,
-		tokens: tk
-	}));
-}
-// web/src/themes/shell.js
-var shell_exports = /* @__PURE__ */ __exportAll({
-	dartsAccent: () => dartsAccent,
-	dartsHead: () => dartsHead,
-	noirAccent: () => noirAccent
-});
-function dartsAccent(theme) {
-	return theme === "light" ? "#B8331F" : theme === "noir" ? "#C9C9C9" : "#E4402E";
-}
-function dartsHead(title, onBack, onHome, onEndGame, onRules, tk, t, theme, subtitle, rulesText, moreItems, onMenuOpen) {
-	const ac = dartsAccent(theme);
-	return /* @__PURE__ */ import_react.default.createElement(GameHeader, {
-		title,
-		subtitle,
-		onBack,
-		backLabel: t("back"),
-		tk,
-		accent: ac,
-		titleFont: "'Space Grotesk', sans-serif",
-		icon: /* @__PURE__ */ import_react.default.createElement(DartsLogo, { color: ac }),
-		onHome,
-		onEndGame,
-		onRules,
-		moreItems,
-		onMenuOpen,
-		rulesText,
-		rulesTitle: rulesText ? title : void 0
-	});
-}
-function noirAccent(gameId) {
-	return "#E8E8E8";
+	}, [open]);
+	return ref;
 }
 // web/src/assets/icons.js
 var icons_exports = /* @__PURE__ */ __exportAll({
@@ -22856,6 +21404,1550 @@ function DiePips({ rank, color }) {
 		fontFamily: "'Baloo 2', sans-serif"
 	} }, rank));
 }
+// web/src/i18n/use-t.js
+var use_t_exports = /* @__PURE__ */ __exportAll({
+	DEFAULT_PLAYER_NAME_PATTERNS: () => DEFAULT_PLAYER_NAME_PATTERNS,
+	DEFAULT_TEAM_NAME_PATTERNS: () => DEFAULT_TEAM_NAME_PATTERNS,
+	appTimeAgoLabel: () => appTimeAgoLabel,
+	localizedPlayerName: () => localizedPlayerName,
+	localizedTeamName: () => localizedTeamName,
+	relocalizeDefaultNames: () => relocalizeDefaultNames,
+	useT: () => useT
+});
+function useT(lang) {
+	const dict = TRANSLATIONS[lang] || TRANSLATIONS.de;
+	return (key) => dict[key] || TRANSLATIONS.de[key] || key;
+}
+var DEFAULT_PLAYER_NAME_PATTERNS = [
+	/^Spieler (\d+)$/,
+	/^Player (\d+)$/,
+	/^Joueur (\d+)$/,
+	/^Giocatore (\d+)$/,
+	/^Jugador (\d+)$/,
+	/^Jogador (\d+)$/
+];
+var DEFAULT_TEAM_NAME_PATTERNS = [
+	/^Team (\d+)$/,
+	/^Équipe (\d+)$/,
+	/^Squadra (\d+)$/,
+	/^Equipo (\d+)$/,
+	/^Equipa (\d+)$/
+];
+function localizedPlayerName(n, lang) {
+	return ((TRANSLATIONS[lang] || TRANSLATIONS.de).defaultPlayerName || TRANSLATIONS.de.defaultPlayerName)(n);
+}
+function localizedTeamName(n, lang) {
+	return ((TRANSLATIONS[lang] || TRANSLATIONS.de).defaultTeamName || TRANSLATIONS.de.defaultTeamName)(n);
+}
+function relocalizeDefaultNames(list, lang, isTeam) {
+	const patterns = isTeam ? DEFAULT_TEAM_NAME_PATTERNS : DEFAULT_PLAYER_NAME_PATTERNS;
+	const fn = isTeam ? localizedTeamName : localizedPlayerName;
+	return list.map((item) => {
+		if (!item || typeof item.name !== "string") return item;
+		let matchN = null;
+		for (const re of patterns) {
+			const m = re.exec(item.name);
+			if (m) {
+				matchN = parseInt(m[1], 10);
+				break;
+			}
+		}
+		if (matchN === null) return item;
+		return {
+			...item,
+			name: fn(matchN, lang)
+		};
+	});
+}
+function appTimeAgoLabel(ts, lang) {
+	const diffMs = Date.now() - ts;
+	const min = Math.floor(diffMs / 6e4);
+	const forms = {
+		de: {
+			now: "gerade eben",
+			min: (n) => `vor ${n} Min.`,
+			h: (n) => `vor ${n} Std.`,
+			d: (n) => `vor ${n} Tag${n === 1 ? "" : "en"}`
+		},
+		en: {
+			now: "just now",
+			min: (n) => `${n} min ago`,
+			h: (n) => `${n} h ago`,
+			d: (n) => `${n} day${n === 1 ? "" : "s"} ago`
+		},
+		fr: {
+			now: "à l'instant",
+			min: (n) => `il y a ${n} min`,
+			h: (n) => `il y a ${n} h`,
+			d: (n) => `il y a ${n} jour${n === 1 ? "" : "s"}`
+		}
+	};
+	const f = forms[lang] || forms.de;
+	if (min < 1) return f.now;
+	if (min < 60) return f.min(min);
+	const h = Math.floor(min / 60);
+	if (h < 24) return f.h(h);
+	const d = Math.floor(h / 24);
+	return f.d(d);
+}
+// web/src/assets/logos.js
+var logos_exports = /* @__PURE__ */ __exportAll({
+	CricketLogo: () => CricketLogo,
+	CutThroatLogo: () => CutThroatLogo,
+	DartsLogo: () => DartsLogo,
+	DifferenzlerLogo: () => DifferenzlerLogo,
+	FiveSecLogo: () => FiveSecLogo,
+	Flip7Logo: () => Flip7Logo,
+	HeadsUpLogo: () => HeadsUpLogo,
+	HiScoreLogo: () => HiScoreLogo,
+	ImpostorLogo: () => ImpostorLogo,
+	JassLogo: () => JassLogo,
+	MafiaLogo: () => MafiaLogo,
+	MastersLogo: () => MastersLogo,
+	MinigolfLogo: () => MinigolfLogo,
+	MostLikelyLogo: () => MostLikelyLogo,
+	SchieberLogo: () => SchieberLogo,
+	ShanghaiLogo: () => ShanghaiLogo,
+	SkyjoLogo: () => SkyjoLogo,
+	SplitScoreLogo: () => SplitScoreLogo,
+	TabuLogo: () => TabuLogo,
+	TuttoLogo: () => TuttoLogo,
+	WerewolfLogo: () => WerewolfLogo,
+	WizardLogo: () => WizardLogo,
+	YatzyLogo: () => YatzyLogo
+});
+function TuttoLogo({ theme }) {
+	const R = theme === "noir" ? "#8A8A8A" : "#D93A2E";
+	const K = "#14100E";
+	return /* @__PURE__ */ import_react.default.createElement("svg", {
+		width: "28",
+		height: "28",
+		viewBox: "0 0 28 28",
+		style: { flexShrink: 0 },
+		"aria-hidden": "true"
+	}, /* @__PURE__ */ import_react.default.createElement("g", { transform: "rotate(-12 9 17)" }, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "2",
+		y: "10",
+		width: "13",
+		height: "13",
+		rx: "3.2",
+		fill: "#fff",
+		stroke: K,
+		strokeWidth: "1.4"
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: "8.5",
+		cy: "16.5",
+		r: "2.2",
+		fill: R
+	})), /* @__PURE__ */ import_react.default.createElement("g", { transform: "rotate(10 19 9.5)" }, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "12.5",
+		y: "3",
+		width: "13",
+		height: "13",
+		rx: "3.2",
+		fill: R,
+		stroke: K,
+		strokeWidth: "1.4"
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: "15.7",
+		cy: "6.2",
+		r: "1.35",
+		fill: "#fff"
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: "22.3",
+		cy: "6.2",
+		r: "1.35",
+		fill: "#fff"
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: "19",
+		cy: "9.5",
+		r: "1.35",
+		fill: "#fff"
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: "15.7",
+		cy: "12.8",
+		r: "1.35",
+		fill: "#fff"
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: "22.3",
+		cy: "12.8",
+		r: "1.35",
+		fill: "#fff"
+	})));
+}
+function YatzyLogo({ theme }) {
+	const B = theme === "noir" ? "#B8B8B8" : "#7E8BFF";
+	const D = theme === "noir" ? "#6A6A6A" : "#3F48B8";
+	const K = "#14100E";
+	return /* @__PURE__ */ import_react.default.createElement("svg", {
+		width: "28",
+		height: "28",
+		viewBox: "0 0 28 28",
+		style: { flexShrink: 0 },
+		"aria-hidden": "true"
+	}, /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M6 7 L22 7 L19.5 24 Q14 26 8.5 24 Z",
+		fill: B,
+		stroke: K,
+		strokeWidth: "1.3",
+		strokeLinejoin: "round"
+	}), /* @__PURE__ */ import_react.default.createElement("ellipse", {
+		cx: "14",
+		cy: "7",
+		rx: "8",
+		ry: "2.2",
+		fill: D,
+		stroke: K,
+		strokeWidth: "1.2"
+	}), /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "10.5",
+		y: "1.5",
+		width: "7",
+		height: "7",
+		rx: "1.8",
+		fill: "#fff",
+		stroke: K,
+		strokeWidth: "1",
+		transform: "rotate(-18 14 5)"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M9 12 L19 12",
+		stroke: "#fff",
+		strokeWidth: "1.2",
+		opacity: "0.5"
+	}));
+}
+function WizardLogo({ theme }) {
+	const M = theme === "noir" ? "#5A5A5A" : theme === "light" ? "#5B2A86" : "#6A35A0";
+	const G = theme === "noir" ? "#C4C4C4" : theme === "light" ? "#C99A3E" : "#E0BA72";
+	return /* @__PURE__ */ import_react.default.createElement("svg", {
+		width: "28",
+		height: "28",
+		viewBox: "0 0 28 28",
+		style: { flexShrink: 0 },
+		"aria-hidden": "true"
+	}, /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M14 3 7.5 19h13L14 3z",
+		fill: M
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M14 3c1.5 3 4 4.5 6 4",
+		fill: "none",
+		stroke: M,
+		strokeWidth: "1.6",
+		strokeLinecap: "round"
+	}), /* @__PURE__ */ import_react.default.createElement("ellipse", {
+		cx: "14",
+		cy: "20",
+		rx: "10",
+		ry: "2.6",
+		fill: G
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "m13 11 .7 1.5 1.6.2-1.2 1.1.3 1.6-1.4-.8-1.4.8.3-1.6-1.2-1.1 1.6-.2z",
+		fill: G
+	}));
+}
+function JassLogo({ theme }) {
+	const R = theme === "noir" ? "#8A8A8A" : "#D52B1E";
+	const K = "#14100E";
+	return /* @__PURE__ */ import_react.default.createElement("svg", {
+		width: "28",
+		height: "28",
+		viewBox: "0 0 28 28",
+		style: { flexShrink: 0 },
+		"aria-hidden": "true"
+	}, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "8",
+		y: "3",
+		width: "15",
+		height: "21",
+		rx: "2.5",
+		fill: "#F1E7D6",
+		stroke: K,
+		strokeWidth: "1.1",
+		transform: "rotate(11 15.5 13.5)"
+	}), /* @__PURE__ */ import_react.default.createElement("g", { transform: "rotate(-8 12.5 14.5)" }, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "4.5",
+		y: "4",
+		width: "16",
+		height: "21",
+		rx: "2.5",
+		fill: "#fff",
+		stroke: K,
+		strokeWidth: "1.2"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M7.5 11 C8 7.6 11 6.6 14.6 7.2 C16.6 7.6 17.6 8.8 17.4 10.2 Z",
+		fill: R,
+		stroke: K,
+		strokeWidth: "0.7"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M10.2 10.6 C10.2 13.2 11.4 14.8 13.4 14.8 C14.6 14.8 15.2 13.8 15.4 12.6 L16.3 12.2 L15.4 11.6 L15.3 10.4 Z",
+		fill: "#F6E3C8",
+		stroke: K,
+		strokeWidth: "0.6"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M8.6 16.2 Q12.5 14.8 16.6 16.2 L17 22.6 H8.2 Z",
+		fill: R,
+		stroke: K,
+		strokeWidth: "0.7"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M11.4 15.6 H13.8 V22.6 H11.4 Z",
+		fill: "#F4EDE0"
+	})));
+}
+function DifferenzlerLogo({ theme }) {
+	const R = theme === "noir" ? "#8A8A8A" : "#D52B1E";
+	const K = "#14100E";
+	return /* @__PURE__ */ import_react.default.createElement("svg", {
+		width: "28",
+		height: "28",
+		viewBox: "0 0 28 28",
+		style: { flexShrink: 0 },
+		"aria-hidden": "true"
+	}, /* @__PURE__ */ import_react.default.createElement("g", { transform: "rotate(-8 11 14.5)" }, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "3.5",
+		y: "4",
+		width: "15",
+		height: "21",
+		rx: "2.5",
+		fill: "#fff",
+		stroke: K,
+		strokeWidth: "1.2"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M11 19.5 C7 16.8 6 15 6 13.6 A2.5 2.5 0 0 1 11 13.1 A2.5 2.5 0 0 1 16 13.6 C16 15 15 16.8 11 19.5Z",
+		fill: R
+	})), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: "20.5",
+		cy: "20",
+		r: "6",
+		fill: "#fff",
+		stroke: K,
+		strokeWidth: "1"
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: "20.5",
+		cy: "20",
+		r: "3.8",
+		fill: R
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: "20.5",
+		cy: "20",
+		r: "1.6",
+		fill: "#fff"
+	}));
+}
+function SchieberLogo({ theme }) {
+	const W = theme === "noir" ? "#5A5A5A" : "#8A6236";
+	return /* @__PURE__ */ import_react.default.createElement("svg", {
+		width: "28",
+		height: "28",
+		viewBox: "0 0 28 28",
+		style: { flexShrink: 0 },
+		"aria-hidden": "true"
+	}, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "1.5",
+		y: "1.5",
+		width: "25",
+		height: "25",
+		rx: "5",
+		fill: W
+	}), /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "4",
+		y: "4",
+		width: "20",
+		height: "20",
+		rx: "2.5",
+		fill: "#2E3034"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M8 8.5H20L8 19.5H20",
+		stroke: "#EDEBE5",
+		strokeWidth: "1.6",
+		fill: "none",
+		strokeLinecap: "round",
+		strokeLinejoin: "round"
+	}));
+}
+function ImpostorLogo({ color }) {
+	return /* @__PURE__ */ import_react.default.createElement("svg", {
+		width: "28",
+		height: "28",
+		viewBox: "0 0 28 28",
+		style: { flexShrink: 0 }
+	}, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "1",
+		y: "1",
+		width: "26",
+		height: "26",
+		rx: "6",
+		fill: "#0B0B10",
+		stroke: color,
+		strokeWidth: "1"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M5 14 Q14 6 23 14 Q14 22 5 14 Z",
+		fill: "none",
+		stroke: color,
+		strokeWidth: "1.6"
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: "14",
+		cy: "14",
+		r: "3.2",
+		fill: color
+	}));
+}
+function WerewolfLogo({ color }) {
+	return /* @__PURE__ */ import_react.default.createElement("svg", {
+		width: "30",
+		height: "30",
+		viewBox: "0 0 30 30",
+		style: { flexShrink: 0 }
+	}, /* @__PURE__ */ import_react.default.createElement("defs", null, /* @__PURE__ */ import_react.default.createElement("radialGradient", {
+		id: "wolfMoon",
+		cx: "35%",
+		cy: "30%",
+		r: "70%"
+	}, /* @__PURE__ */ import_react.default.createElement("stop", {
+		offset: "0%",
+		stopColor: "#FFF6E0"
+	}), /* @__PURE__ */ import_react.default.createElement("stop", {
+		offset: "100%",
+		stopColor: color
+	}))), /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "1",
+		y: "1",
+		width: "28",
+		height: "28",
+		rx: "8",
+		fill: "#0A0E17",
+		style: { fill: "var(--gt-tile,#0A0E17)" },
+		stroke: `${color}55`,
+		strokeWidth: "1"
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: "15",
+		cy: "14",
+		r: "7.5",
+		fill: "#0A0E17",
+		opacity: "0.5"
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: "14",
+		cy: "13",
+		r: "7",
+		fill: "url(#wolfMoon)"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M6.5 22 L10.5 13 L14 19 L17.5 13 L21.5 22 Z",
+		fill: "#0A0E17"
+	}));
+}
+function TabuLogo({ color, theme }) {
+	const slashColor = theme === "noir" ? "#8A8A8A" : "#FF4757";
+	return /* @__PURE__ */ import_react.default.createElement("svg", {
+		width: "30",
+		height: "30",
+		viewBox: "0 0 30 30",
+		style: { flexShrink: 0 }
+	}, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "1",
+		y: "1",
+		width: "28",
+		height: "28",
+		rx: "8",
+		fill: "#12100B",
+		stroke: `${color}55`,
+		strokeWidth: "1"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M8,10 h14 a2,2 0 0 1 2,2 v5 a2,2 0 0 1 -2,2 h-9 l-4,4 v-4 h-1 a2,2 0 0 1 -2,-2 v-5 a2,2 0 0 1 2,-2 Z",
+		fill: "#12100B",
+		stroke: color,
+		strokeWidth: "1.6"
+	}), /* @__PURE__ */ import_react.default.createElement("line", {
+		x1: "6",
+		y1: "24",
+		x2: "24",
+		y2: "6",
+		stroke: slashColor,
+		strokeWidth: "2.4",
+		strokeLinecap: "round"
+	}));
+}
+function HeadsUpLogo({ color }) {
+	return /* @__PURE__ */ import_react.default.createElement("svg", {
+		width: "30",
+		height: "30",
+		viewBox: "0 0 30 30",
+		style: { flexShrink: 0 }
+	}, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "1",
+		y: "1",
+		width: "28",
+		height: "28",
+		rx: "8",
+		fill: "#141018",
+		stroke: `${color}55`,
+		strokeWidth: "1"
+	}), /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "10",
+		y: "5",
+		width: "10",
+		height: "17",
+		rx: "2.2",
+		stroke: color,
+		strokeWidth: "1.8",
+		fill: "none"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M13.5 19h3",
+		stroke: color,
+		strokeWidth: "1.6",
+		strokeLinecap: "round"
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: "22.5",
+		cy: "21.5",
+		r: "4.6",
+		fill: "#141018",
+		stroke: color,
+		strokeWidth: "1.5"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M22.5 19.2v2.3l1.6 1.3",
+		stroke: color,
+		strokeWidth: "1.3",
+		strokeLinecap: "round",
+		strokeLinejoin: "round"
+	}));
+}
+function SkyjoLogo({ color, theme }) {
+	const n = theme === "noir", l = theme === "light";
+	const cols = n ? [
+		"#4D4D4D",
+		"#CFCFCF",
+		"#8C8C8C",
+		"#B0B0B0",
+		"#6E6E6E"
+	] : [
+		"#3B5BC4",
+		"#8CC9EE",
+		"#3FAE4F",
+		"#F2C531",
+		"#E0453A"
+	];
+	const K = n ? "#161616" : l ? "#E7ECF4" : "#12161F";
+	const E = n ? "#161616" : l ? "#E7ECF4" : "#12161F";
+	return /* @__PURE__ */ import_react.default.createElement("svg", {
+		width: "30",
+		height: "30",
+		viewBox: "0 0 30 30",
+		style: { flexShrink: 0 },
+		"aria-hidden": "true"
+	}, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "1",
+		y: "1",
+		width: "28",
+		height: "28",
+		rx: "8",
+		fill: K,
+		stroke: n ? "#3A3A3A" : l ? "#B9C4D6" : `${color}55`,
+		strokeWidth: "1"
+	}), /* @__PURE__ */ import_react.default.createElement("g", null, [
+		-30,
+		-15,
+		0,
+		15,
+		30
+	].map((a, i) => /* @__PURE__ */ import_react.default.createElement("rect", {
+		key: i,
+		x: "11.2",
+		y: "6.2",
+		width: "7.6",
+		height: "11",
+		rx: "1.7",
+		fill: cols[i],
+		stroke: E,
+		strokeWidth: "0.8",
+		transform: `rotate(${a} 15 24.5)`
+	}))));
+}
+function FiveSecLogo({ color }) {
+	return /* @__PURE__ */ import_react.default.createElement("svg", {
+		width: "30",
+		height: "30",
+		viewBox: "0 0 30 30",
+		style: { flexShrink: 0 }
+	}, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "1",
+		y: "1",
+		width: "28",
+		height: "28",
+		rx: "8",
+		fill: "#160F0A",
+		stroke: `${color}55`,
+		strokeWidth: "1"
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: "15",
+		cy: "16.5",
+		r: "8.2",
+		fill: "#160F0A",
+		stroke: color,
+		strokeWidth: "1.6"
+	}), /* @__PURE__ */ import_react.default.createElement("text", {
+		x: "15",
+		y: "19.5",
+		fontSize: "9",
+		fontWeight: "800",
+		fill: color,
+		textAnchor: "middle",
+		fontFamily: "sans-serif"
+	}, "5"), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M12 4.5h6",
+		stroke: color,
+		strokeWidth: "1.6",
+		strokeLinecap: "round"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M15 4.5v3",
+		stroke: color,
+		strokeWidth: "1.6",
+		strokeLinecap: "round"
+	}));
+}
+function MostLikelyLogo({ color }) {
+	return /* @__PURE__ */ import_react.default.createElement("svg", {
+		width: "30",
+		height: "30",
+		viewBox: "0 0 30 30",
+		style: { flexShrink: 0 }
+	}, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "1",
+		y: "1",
+		width: "28",
+		height: "28",
+		rx: "8",
+		fill: "#150F1E",
+		stroke: `${color}55`,
+		strokeWidth: "1"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M11 17V9.5a1.7 1.7 0 0 1 3.4 0V16",
+		stroke: color,
+		strokeWidth: "1.6",
+		fill: "none",
+		strokeLinecap: "round"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M14.4 16.2V8a1.7 1.7 0 0 1 3.4 0v8.6",
+		stroke: color,
+		strokeWidth: "1.6",
+		fill: "none",
+		strokeLinecap: "round"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M17.8 16.4v-6.2a1.7 1.7 0 0 1 3.4 0v9.9c0 4.1-2.9 6.9-7 6.9-2.4 0-3.9-.8-5.3-2.5l-3.3-4c-.8-.9-.7-2.3.2-3a2.1 2.1 0 0 1 2.8.2l1.6 1.4",
+		stroke: color,
+		strokeWidth: "1.6",
+		fill: "none",
+		strokeLinecap: "round",
+		strokeLinejoin: "round"
+	}));
+}
+function DartsLogo({ color }) {
+	return /* @__PURE__ */ import_react.default.createElement("svg", {
+		width: 30,
+		height: 30,
+		viewBox: "0 0 30 30"
+	}, /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: 13,
+		cy: 17,
+		r: 11,
+		fill: "none",
+		stroke: color,
+		strokeWidth: 1.6
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: 13,
+		cy: 17,
+		r: 6.5,
+		fill: "none",
+		stroke: color,
+		strokeWidth: 1.3,
+		opacity: .65
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: 13,
+		cy: 17,
+		r: 2.1,
+		fill: color
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M13 17 L24 6",
+		stroke: color,
+		strokeWidth: 1.8,
+		strokeLinecap: "round"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M22 3.5 L26.5 3.5 L26.5 8",
+		fill: "none",
+		stroke: color,
+		strokeWidth: 1.6,
+		strokeLinecap: "round",
+		strokeLinejoin: "round"
+	}));
+}
+function CricketLogo({ color }) {
+	return /* @__PURE__ */ import_react.default.createElement("svg", {
+		width: 28,
+		height: 28,
+		viewBox: "0 0 28 28"
+	}, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: 1,
+		y: 1,
+		width: 26,
+		height: 26,
+		rx: 8,
+		fill: "#0C1F17",
+		stroke: color,
+		strokeWidth: 1
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: 14,
+		cy: 14,
+		r: 7,
+		fill: "none",
+		stroke: color,
+		strokeWidth: 1.8
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M9.5 9.5 L18.5 18.5 M18.5 9.5 L9.5 18.5",
+		stroke: color,
+		strokeWidth: 1.8,
+		strokeLinecap: "round"
+	}));
+}
+function ShanghaiLogo({ color }) {
+	return /* @__PURE__ */ import_react.default.createElement("svg", {
+		width: 28,
+		height: 28,
+		viewBox: "0 0 28 28"
+	}, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: 1,
+		y: 1,
+		width: 26,
+		height: 26,
+		rx: 8,
+		fill: "#0C1620",
+		stroke: color,
+		strokeWidth: 1
+	}), /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: 6,
+		y: 16,
+		width: 4,
+		height: 7,
+		rx: 1,
+		fill: color
+	}), /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: 12,
+		y: 11,
+		width: 4,
+		height: 12,
+		rx: 1,
+		fill: color
+	}), /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: 18,
+		y: 6,
+		width: 4,
+		height: 17,
+		rx: 1,
+		fill: color
+	}));
+}
+function CutThroatLogo({ color }) {
+	return /* @__PURE__ */ import_react.default.createElement("svg", {
+		width: 28,
+		height: 28,
+		viewBox: "0 0 28 28"
+	}, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: 1,
+		y: 1,
+		width: 26,
+		height: 26,
+		rx: 8,
+		fill: "#1F0C10",
+		stroke: color,
+		strokeWidth: 1
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: 14,
+		cy: 11,
+		r: 5.4,
+		fill: "none",
+		stroke: color,
+		strokeWidth: 1.7
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M10.9 7.9 L17.1 14.1 M17.1 7.9 L10.9 14.1",
+		stroke: color,
+		strokeWidth: 1.5,
+		strokeLinecap: "round"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M14 17.5 L14 23.5 M11.2 20.5 L14 23.5 L16.8 20.5",
+		stroke: color,
+		strokeWidth: 1.7,
+		fill: "none",
+		strokeLinecap: "round",
+		strokeLinejoin: "round"
+	}));
+}
+function MastersLogo({ color }) {
+	return /* @__PURE__ */ import_react.default.createElement("svg", {
+		width: 28,
+		height: 28,
+		viewBox: "0 0 28 28"
+	}, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: 1,
+		y: 1,
+		width: 26,
+		height: 26,
+		rx: 8,
+		fill: "#1C1608",
+		stroke: color,
+		strokeWidth: 1
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: 14,
+		cy: 16.5,
+		r: 5.6,
+		fill: "none",
+		stroke: color,
+		strokeWidth: 1.7
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M10.7 13.2 L17.3 19.8 M17.3 13.2 L10.7 19.8",
+		stroke: color,
+		strokeWidth: 1.5,
+		strokeLinecap: "round"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M8.5 8.2 L10.5 4.6 L14 7.4 L17.5 4.6 L19.5 8.2 L18.3 9.6 L9.7 9.6 Z",
+		fill: color
+	}));
+}
+function HiScoreLogo({ color }) {
+	return /* @__PURE__ */ import_react.default.createElement("svg", {
+		width: 28,
+		height: 28,
+		viewBox: "0 0 28 28"
+	}, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: 1,
+		y: 1,
+		width: 26,
+		height: 26,
+		rx: 8,
+		fill: "#081620",
+		stroke: color,
+		strokeWidth: 1
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M5.5 20.5 L11 14.5 L15 18 L20.5 9.5",
+		stroke: color,
+		strokeWidth: 1.8,
+		fill: "none",
+		strokeLinecap: "round",
+		strokeLinejoin: "round"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M15.5 9 L20.5 9 L20.5 14",
+		stroke: color,
+		strokeWidth: 1.8,
+		fill: "none",
+		strokeLinecap: "round",
+		strokeLinejoin: "round"
+	}));
+}
+function SplitScoreLogo({ color }) {
+	return /* @__PURE__ */ import_react.default.createElement("svg", {
+		width: 28,
+		height: 28,
+		viewBox: "0 0 28 28"
+	}, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: 1,
+		y: 1,
+		width: 26,
+		height: 26,
+		rx: 8,
+		fill: "#140C1C",
+		stroke: color,
+		strokeWidth: 1
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: 14,
+		cy: 14,
+		r: 8,
+		fill: "none",
+		stroke: color,
+		strokeWidth: 1.7
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M14 6 A8 8 0 0 1 14 22 Z",
+		fill: color,
+		opacity: .32
+	}), /* @__PURE__ */ import_react.default.createElement("line", {
+		x1: 14,
+		y1: 6,
+		x2: 14,
+		y2: 22,
+		stroke: color,
+		strokeWidth: 1.7
+	}), /* @__PURE__ */ import_react.default.createElement("text", {
+		x: 14,
+		y: 18,
+		fontSize: 8.5,
+		fontWeight: 700,
+		textAnchor: "middle",
+		fill: color
+	}, "½"));
+}
+function MafiaLogo({ color }) {
+	return /* @__PURE__ */ import_react.default.createElement("svg", {
+		width: "30",
+		height: "30",
+		viewBox: "0 0 30 30",
+		style: { flexShrink: 0 }
+	}, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "1",
+		y: "1",
+		width: "28",
+		height: "28",
+		rx: "8",
+		fill: "#120B0C",
+		stroke: `${color}55`,
+		strokeWidth: "1"
+	}), /* @__PURE__ */ import_react.default.createElement("ellipse", {
+		cx: "15",
+		cy: "18.5",
+		rx: "9",
+		ry: "1.7",
+		fill: color
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M9.5 18c-.3-3.6 1.5-7.2 5.5-7.2s5.8 3.6 5.5 7.2H9.5Z",
+		fill: color
+	}), /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "10.5",
+		y: "13",
+		width: "9",
+		height: "1.5",
+		rx: "0.5",
+		fill: "#120B0C",
+		opacity: "0.5"
+	}));
+}
+function Flip7Logo({ color, theme }) {
+	const n = theme === "noir", l = theme === "light";
+	const K = n ? "#161616" : l ? "#F4EDE3" : "#12161F";
+	const face = n ? "#E6E6E6" : "#FFF1DC";
+	const back = n ? "#6E6E6E" : color || "#FF7A3D";
+	const num = n ? "#161616" : "#C2571A";
+	return /* @__PURE__ */ import_react.default.createElement("svg", {
+		width: "30",
+		height: "30",
+		viewBox: "0 0 30 30",
+		style: { flexShrink: 0 },
+		"aria-hidden": "true"
+	}, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "1",
+		y: "1",
+		width: "28",
+		height: "28",
+		rx: "8",
+		fill: K,
+		stroke: n ? "#3A3A3A" : l ? "#D8C9B5" : `${back}55`,
+		strokeWidth: "1"
+	}), /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "6.5",
+		y: "7",
+		width: "11",
+		height: "15.5",
+		rx: "2",
+		fill: back,
+		transform: "rotate(-14 12 15)"
+	}), /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "12.5",
+		y: "7.5",
+		width: "11",
+		height: "15.5",
+		rx: "2",
+		fill: face,
+		stroke: n ? "#161616" : "rgba(0,0,0,.35)",
+		strokeWidth: "0.8",
+		transform: "rotate(10 18 15)"
+	}), /* @__PURE__ */ import_react.default.createElement("text", {
+		x: "18.2",
+		y: "19.6",
+		fontSize: "10.5",
+		fontWeight: "900",
+		fill: num,
+		textAnchor: "middle",
+		fontFamily: "'Bowlby One',sans-serif",
+		transform: "rotate(10 18 15)"
+	}, "7"));
+}
+function MinigolfLogo({ theme }) {
+	const n = theme === "noir", l = theme === "light";
+	const K = n ? "#161616" : l ? "#E6EFDC" : "#0E1F17";
+	const G = n ? "#4A4A4A" : l ? "#7FB06A" : "#2C6644";
+	const H = n ? "#080808" : l ? "#1F3A2B" : "#06100A";
+	const P = n ? "#D6D6D6" : l ? "#1F3A2B" : "#F3EBD3";
+	const F = n ? "#9C9C9C" : l ? "#D9483B" : "#E5484D";
+	const B = l ? "#FFFFFF" : "#FFFFFF";
+	return /* @__PURE__ */ import_react.default.createElement("svg", {
+		width: "30",
+		height: "30",
+		viewBox: "0 0 30 30",
+		style: { flexShrink: 0 },
+		"aria-hidden": "true"
+	}, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "1",
+		y: "1",
+		width: "28",
+		height: "28",
+		rx: "8",
+		fill: K,
+		stroke: n ? "#3A3A3A" : l ? "#B9CDB0" : "#2C6644",
+		strokeWidth: "1"
+	}), /* @__PURE__ */ import_react.default.createElement("ellipse", {
+		cx: "15",
+		cy: "22.5",
+		rx: "10.5",
+		ry: "3.6",
+		fill: G
+	}), /* @__PURE__ */ import_react.default.createElement("ellipse", {
+		cx: "14",
+		cy: "22.2",
+		rx: "3.3",
+		ry: "1.2",
+		fill: H
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M14 22V6.8",
+		stroke: P,
+		strokeWidth: "1.6",
+		strokeLinecap: "round"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M14.7 7.2c2.3-1.5 4.2 1.3 6.6-.1v5.1c-2.4 1.4-4.3-1.4-6.6.1z",
+		fill: F
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: "21.2",
+		cy: "21.4",
+		r: "1.9",
+		fill: B,
+		stroke: l ? "#7A8F78" : "none",
+		strokeWidth: "0.6"
+	}));
+}
+// web/src/shared/pl-names.js
+var POP_ID = "gt-pl-fullname";
+var CSS_ID = "gt-pl-names-css";
+var PL_NAMES_CSS = `
+[data-phone-landscape] :is(button, [role="button"]) [style*="text-overflow: ellipsis"],
+[data-phone-landscape] :is(button, [role="button"])[style*="text-overflow: ellipsis"] { white-space: normal !important; overflow: visible !important; text-overflow: clip !important; overflow-wrap: break-word; min-width: 0; }
+#${POP_ID} { position: fixed; z-index: 100000; max-width: min(78vw, 420px); box-sizing: border-box; padding: 8px 12px; border-radius: 12px; background: rgba(18,18,24,0.97); color: #fff; border: 1px solid rgba(255,255,255,0.28); box-shadow: 0 6px 24px rgba(0,0,0,0.45); font: 600 15px/1.3 'Inter', system-ui, sans-serif; overflow-wrap: break-word; pointer-events: none; }
+`;
+var timer = null;
+function plHideFullName() {
+	if (timer) {
+		clearTimeout(timer);
+		timer = null;
+	}
+	const el = document.getElementById(POP_ID);
+	if (el) el.remove();
+}
+function plTruncatedAt(target) {
+	let el = target && target.nodeType === 1 ? target : target && target.parentElement;
+	for (let i = 0; i < 4 && el && el !== document.body; i++, el = el.parentElement) {
+		if (el.closest(".gt-gamehead") || el.closest("button, [role=button], a, input, select, textarea")) return null;
+		if (getComputedStyle(el).textOverflow === "ellipsis" && el.scrollWidth > el.clientWidth + 1) return el;
+	}
+	return null;
+}
+function plShowFullName(el) {
+	const text = (el.textContent || "").replace(/\s+/g, " ").trim();
+	if (!text) return;
+	plHideFullName();
+	const pop = document.createElement("div");
+	pop.id = POP_ID;
+	pop.setAttribute("role", "status");
+	pop.textContent = text;
+	document.body.appendChild(pop);
+	const r = el.getBoundingClientRect();
+	const pr = pop.getBoundingClientRect();
+	const vw = window.innerWidth, vh = window.innerHeight;
+	let left = Math.min(Math.max(8, r.left), vw - pr.width - 8);
+	let top = r.bottom + 6;
+	if (top + pr.height > vh - 8) top = Math.max(8, r.top - pr.height - 6);
+	pop.style.left = left + "px";
+	pop.style.top = top + "px";
+	timer = setTimeout(plHideFullName, 5e3);
+}
+function plNamesInstall() {
+	if (typeof document === "undefined" || window.__gtPlNames) return;
+	window.__gtPlNames = true;
+	if (!document.getElementById(CSS_ID)) {
+		const st = document.createElement("style");
+		st.id = CSS_ID;
+		st.textContent = PL_NAMES_CSS;
+		document.head.appendChild(st);
+	}
+	document.addEventListener("click", (e) => {
+		if (!document.documentElement.hasAttribute("data-phone-landscape")) {
+			plHideFullName();
+			return;
+		}
+		const had = !!document.getElementById(POP_ID);
+		const el = plTruncatedAt(e.target);
+		if (el) plShowFullName(el);
+		else if (had) plHideFullName();
+	}, true);
+	window.addEventListener("resize", plHideFullName);
+	window.addEventListener("scroll", plHideFullName, true);
+}
+plNamesInstall();
+// web/src/shared/pl-shared.js
+var PL_SHARED_ID = "gt-pl-shared-css";
+var PL_SHARED_CSS = `
+/* ---- GameHeader: kompakt (48 px), gilt fuer alle Spiele ---- */
+[data-phone-landscape] .gt-gamehead { display: flex; align-items: center; gap: 10px; min-height: var(--pl-head, 48px); max-height: 52px; box-sizing: border-box; padding-top: 2px; padding-bottom: 2px; margin-bottom: 6px; }
+[data-phone-landscape] .gt-gamehead > div:first-of-type { margin-bottom: 0 !important; min-height: 44px !important; flex: none; order: 0; }
+[data-phone-landscape] .gt-gamehead > div:nth-of-type(n+2):not(.gt-headbtns) { flex: 1 1 auto; min-width: 0; order: 1; }
+[data-phone-landscape] .gt-gamehead > .gt-headbtns { position: static !important; order: 2; flex: none; margin-left: auto; }
+[data-phone-landscape] .gt-gamehead > .gt-headbtns ~ .gt-headbtns { margin-left: 0; }
+[data-phone-landscape] .gt-gamehead h1 { font-size: 20px !important; line-height: 1.1 !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; overflow-wrap: normal !important; }
+[data-phone-landscape] .gt-gamehead h1 + div { margin-top: 1px !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* ---- Regeln-Dialog (RulesSheet): mittig, breit, eigenes Scrollen ---- */
+[data-phone-landscape] div:has(> [role="dialog"][aria-labelledby^="gt-rs-"]) { align-items: center !important; justify-content: center; box-sizing: border-box; padding: max(8px, var(--pl-sat)) max(12px, var(--pl-sar)) max(8px, var(--pl-sab)) max(12px, var(--pl-sal)); }
+[data-phone-landscape] [role="dialog"][aria-labelledby^="gt-rs-"] { max-width: min(640px, 100%) !important; margin: 0 !important; border-radius: 22px !important; padding: 14px 20px !important; max-height: calc(var(--pl-avail) - 16px - var(--pl-sat) - var(--pl-sab)) !important; }
+
+/* ---- Ziffernfeld-Dialoge (gtL-padov / gtL-padsheet, z. B. Skyjo): links Name und Wert, rechts Tastenfeld ---- */
+[data-phone-landscape] .gtL-padov { align-items: center !important; box-sizing: border-box; padding: max(8px, var(--pl-sat)) max(12px, var(--pl-sar)) max(8px, var(--pl-sab)) max(12px, var(--pl-sal)); overflow-y: auto; }
+[data-phone-landscape] .gtL-padsheet { box-sizing: border-box; border-radius: 20px !important; max-width: min(640px, 100%) !important; padding: 12px 16px !important; max-height: calc(var(--pl-avail) - 16px - var(--pl-sat) - var(--pl-sab)) !important; overflow-y: auto !important; overscroll-behavior: contain; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: auto auto 1fr; column-gap: 18px; align-content: start; }
+[data-phone-landscape] .gtL-padsheet > :not([style*="repeat(3"]) { grid-column: 1; min-width: 0; }
+[data-phone-landscape] .gtL-padsheet > [style*="repeat(3"] { grid-column: 2; grid-row: 1 / 4; align-self: start; margin-bottom: 0 !important; }
+[data-phone-landscape] .gtL-padsheet > [style*="repeat(3"] > button { min-height: 44px; padding-top: 8px !important; padding-bottom: 8px !important; }
+[data-phone-landscape] .gtL-padsheet > button:not([style*="repeat(3"]) { align-self: end; min-height: 48px; }
+[data-phone-landscape] .gtL-padsheet > button[data-gt-sound="1"] { position: sticky; bottom: 0; z-index: 2; }
+[data-phone-landscape] .gtL-padsheet button { min-height: 44px; }
+[data-phone-landscape] .gtL-padsheet > :first-child { margin-bottom: 8px !important; }
+[data-phone-landscape] .gtL-padsheet > :first-child > button { min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; margin: -6px -8px -6px 0; }
+[data-phone-landscape] .gtL-padsheet > :nth-child(2) { margin-bottom: 8px !important; }
+
+/* ---- Setup: Startleiste (GtStartBar) flacher ---- */
+[data-phone-landscape] .gt-su-cta { padding: 12px 12px calc(8px + var(--pl-sab, 0px)); margin-top: 4px; }
+[data-phone-landscape] .gt-su-btn { min-height: 48px; border-radius: 16px; }
+[data-phone-landscape] .gt-su-ib, [data-phone-landscape] .gt-su-add { min-height: 44px; }
+[data-phone-landscape] .gt-gm-sb { min-height: 44px !important; min-width: 44px; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; }
+[data-phone-landscape] .gt-gm-in { min-height: 44px; box-sizing: border-box; }
+[data-phone-landscape] .gt-gm-head { flex-wrap: wrap; row-gap: 4px; }
+[data-phone-landscape] .gt-gm-head > .gt-gm-in:first-child { flex: 1 1 100% !important; width: 100%; text-overflow: clip; }
+
+/* ---- Podest (PodiumOverlay): links Sieger, rechts Rangliste und Aktionen ---- */
+[data-phone-landscape] .gtsb-modal { max-width: min(760px, 100%) !important; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); grid-template-rows: auto 1fr; column-gap: 18px; align-items: start; padding: 14px 16px 14px !important; border-radius: 24px !important; max-height: calc(var(--pl-avail) - 16px - var(--pl-sat) - var(--pl-sab)); }
+[data-phone-landscape] .gtsb-hd { grid-column: 1; grid-row: 1; }
+[data-phone-landscape] .gtsb-hd > div { padding: 0 !important; font-size: 20px !important; text-align: left !important; justify-content: flex-start !important; }
+[data-phone-landscape] .gtsb-stage { grid-column: 1; grid-row: 2; align-self: end; margin-top: 8px !important; }
+[data-phone-landscape] .gtsb-side { grid-column: 2; grid-row: 1 / 3; display: flex; flex-direction: column; min-height: 0; max-height: calc(var(--pl-avail) - 16px - var(--pl-sat) - var(--pl-sab) - 28px); padding-top: 38px; box-sizing: border-box; }
+[data-phone-landscape] .gtsb-side .gtsb-list { margin-top: 0; flex: 0 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+[data-phone-landscape] .gtsb-side .gtsb-acts { margin-top: auto; padding-top: 12px; flex: none; }
+[data-phone-landscape] .gtsb-side .gtsb-acts > button { min-height: 48px; }
+
+/* ---- Exportvorschau (ShareImagePreview, Bild links, Hinweis und Aktionen rechts) ---- */
+[data-phone-landscape] .gtsp-ov { padding: max(10px, var(--pl-sat)) max(60px, calc(var(--pl-sar) + 16px)) max(10px, var(--pl-sab)) max(16px, var(--pl-sal)) !important; }
+[data-phone-landscape] .gtsp-in { flex-direction: row !important; align-items: center !important; justify-content: center; gap: 24px !important; width: 100%; }
+[data-phone-landscape] .gtsp-imgs { max-height: calc(var(--pl-avail) - 20px) !important; }
+[data-phone-landscape] .gtsp-imgs img { max-height: calc(var(--pl-avail) - 24px) !important; }
+[data-phone-landscape] .gtsp-side { display: flex; flex-direction: column; align-items: center; gap: 14px; flex: 0 1 260px; min-width: 0; }
+[data-phone-landscape] .gtsp-x { top: calc(6px + var(--pl-sat)) !important; right: calc(6px + var(--pl-sar)) !important; }
+
+/* ---- Turnier-Exportblatt (GtStExportSheet): links Auswahl, rechts Vorschau ---- */
+[data-phone-landscape] .gtstx-ov { padding: max(8px, var(--pl-sat)) max(12px, var(--pl-sar)) max(8px, var(--pl-sab)) max(12px, var(--pl-sal)) !important; }
+[data-phone-landscape] .gtstx-panel { max-width: min(860px, 100%) !important; display: grid !important; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr); grid-template-rows: auto auto auto 1fr auto; }
+[data-phone-landscape] .gtstx-head { grid-column: 1 / 3; grid-row: 1; }
+[data-phone-landscape] .gtstx-design { grid-column: 1; grid-row: 2; }
+[data-phone-landscape] .gtstx-status { grid-column: 1; grid-row: 3; }
+[data-phone-landscape] .gtstx-pages { grid-column: 2; grid-row: 2 / 6; min-height: 0; }
+[data-phone-landscape] .gtstx-foot { grid-column: 1; grid-row: 5; }
+/* Huellen der Einrichtung ohne Laptop-Layout: ausserhalb Querformat unsichtbar */
+.plsu-split, .plsu-main, .plsu-side { display: contents; }
+/* ---- Einrichtung aller Spiele (gtL-split-setup): Teilnehmer links, Einstellungen und Start rechts, Spalten scrollen einzeln ---- */
+[data-phone-landscape] :is(.gtL-split-setup, .plsu-split):not(.pld-split) { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--pl-gap) calc(var(--pl-gap) + 4px); align-items: stretch; width: 100%; box-sizing: border-box; max-height: max(160px, var(--pl-body)); }
+[data-phone-landscape] :is(.gtL-split-setup, .plsu-split):not(.pld-split) > :is(.gtL-col-main, .gtL-col-side, .plsu-main, .plsu-side) { display: flex; flex-direction: column; gap: 10px; min-width: 0; min-height: 0; max-height: max(160px, var(--pl-body)); box-sizing: border-box; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding-bottom: 2px; }
+[data-phone-landscape] :is(.gtL-split-setup, .plsu-split):not(.pld-split) > :is(.gtL-col-side, .plsu-side) > .gt-su-cta { position: sticky; bottom: 0; z-index: 6; margin: 4px 0 0; padding: 8px 0 2px; background: transparent; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+[data-phone-landscape] :is(.gtL-split-setup, .plsu-split):not(.pld-split) > :is(.gtL-col-side, .plsu-side) > .gt-su-cta::before { display: none; }
+[data-phone-landscape] :is(.gtL-split-setup, .plsu-split):not(.pld-split) > :is(.gtL-col-side, .plsu-side) > .gt-su-cta > button { box-shadow: none; }
+@media (max-width: 640px) { [data-phone-landscape] :is(.gtL-split-setup, .plsu-split):not(.pld-split) { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); } [data-phone-landscape] :is(.gtL-split-setup, .plsu-split):not(.pld-split) > :is(.gtL-col-main, .plsu-main) button { font-size: 13px; } }
+[data-phone-landscape] :is(.gtL-split-setup, .plsu-split):not(.pld-split) :is(button, input, select) { min-height: 44px; box-sizing: border-box; }
+[data-phone-landscape] :is(.gtL-split-setup, .plsu-split):not(.pld-split) input { scroll-margin: 8px; }
+[data-phone-landscape] .gtL-page:has(:is(.gtL-split-setup, .plsu-split)) { max-width: none !important; width: 100% !important; margin: 0 !important; box-sizing: border-box; padding-left: var(--pl-gutter-l) !important; padding-right: var(--pl-gutter-r) !important; }
+[data-phone-landscape] .gtL-shellpage:has(:is(.gtL-split-setup, .plsu-split)) { padding-top: max(var(--pl-sat), 6px) !important; }
+
+`;
+function plInstallSharedCss() {
+	if (typeof document === "undefined") return;
+	try {
+		if (document.getElementById(PL_SHARED_ID)) return;
+		const s = document.createElement("style");
+		s.id = PL_SHARED_ID;
+		s.textContent = PL_SHARED_CSS;
+		document.head.appendChild(s);
+	} catch (_) {}
+}
+plInstallSharedCss();
+// web/src/shared/fav-star.js
+function gtFavToast(msg) {
+	try {
+		const old = document.getElementById("gt-fav-toast");
+		if (old) old.remove();
+		const d = document.createElement("div");
+		d.id = "gt-fav-toast";
+		d.setAttribute("role", "status");
+		d.textContent = msg;
+		d.style.cssText = "position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);max-width:min(92vw,420px);padding:9px 16px;border-radius:14px;background:rgba(20,22,28,.94);color:#F3EFE6;border:1px solid rgba(255,255,255,.18);font-family:Inter,system-ui,-apple-system,sans-serif;font-weight:600;font-size:13px;line-height:1.35;text-align:center;z-index:2147483000;box-shadow:0 8px 24px rgba(0,0,0,.35);pointer-events:none";
+		document.body.appendChild(d);
+		setTimeout(() => {
+			try {
+				d.remove();
+			} catch (_e) {}
+		}, 1800);
+	} catch (_e) {}
+}
+function FavStar({ fav, theme, t, muted, style }) {
+	if (!fav) return null;
+	const on = !!fav.on;
+	const gold = theme === "light" ? "#C8921F" : "#E8B84A";
+	const off = muted || (theme === "light" ? "#8A8F99" : "#8B90A0");
+	const label = t(on ? "favRemoveLabel" : "favAddLabel");
+	return /* @__PURE__ */ import_react.default.createElement("button", {
+		type: "button",
+		className: "gt-favstar",
+		"aria-pressed": on,
+		"aria-label": label,
+		title: label,
+		onClick: (e) => {
+			e.stopPropagation();
+			e.preventDefault();
+			const was = on;
+			fav.toggle();
+			try {
+				hapticTap();
+			} catch (_e) {}
+			gtFavToast(t(was ? "favRemoved" : "favAdded"));
+		},
+		style: {
+			position: "absolute",
+			top: "50%",
+			right: 40,
+			transform: "translateY(-50%)",
+			width: 44,
+			height: 44,
+			padding: 0,
+			margin: 0,
+			border: "none",
+			background: "transparent",
+			cursor: "pointer",
+			display: "flex",
+			alignItems: "center",
+			justifyContent: "center",
+			WebkitTapHighlightColor: "transparent",
+			touchAction: "manipulation",
+			zIndex: 2,
+			...style || {}
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("svg", {
+		width: "22",
+		height: "22",
+		viewBox: "0 0 24 24",
+		"aria-hidden": "true"
+	}, /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.3L12 17.8 5.7 21.5l1.7-7.3L2 9.5l7.1-.6Z",
+		fill: on ? gold : "none",
+		stroke: on ? gold : off,
+		strokeWidth: "1.7",
+		strokeLinejoin: "round"
+	})));
+}
+// web/src/shared/game-header.js
+var game_header_exports = /* @__PURE__ */ __exportAll({
+	GT_HEAD_CSS: () => GT_HEAD_CSS,
+	GameCard: () => GameCard,
+	GameHeader: () => GameHeader
+});
+function GameCard({ title, description, status, accent, onClick, disabled, logo, variant = "paper", tokens, theme, fav, t }) {
+	const isNeon = !disabled;
+	const isLight = theme === "light";
+	const tk = tokens || {
+		card: "#1D212D",
+		border: "#2A2F3D",
+		ink: "#F0F1F5",
+		muted: "#8890A0"
+	};
+	const _card = /* @__PURE__ */ import_react.default.createElement("button", {
+		onClick: disabled ? void 0 : onClick,
+		disabled,
+		className: (disabled ? "" : "card-fx ") + (isNeon && !isLight ? "tile-glow " : "") + "gtL-gamecard",
+		style: {
+			display: "flex",
+			alignItems: "center",
+			gap: 14,
+			width: "100%",
+			textAlign: "left",
+			background: isNeon ? isLight ? tk.card : `linear-gradient(135deg, ${accent}24, ${tk.card})` : tk.card,
+			border: isNeon ? isLight ? `1px solid ${tk.border}` : `1px solid ${accent}66` : `1px solid ${tk.border}`,
+			borderRadius: 24,
+			padding: "17px 18px",
+			cursor: disabled ? "default" : "pointer",
+			opacity: disabled ? .5 : 1,
+			fontFamily: "'Inter', sans-serif",
+			boxShadow: disabled ? "none" : isLight ? isNeon ? `inset 4px 0 0 ${accent}, 0 4px 12px rgba(0,0,0,0.06)` : "0 4px 12px rgba(0,0,0,0.06)" : isNeon ? `0 4px 18px -8px ${accent}55, 0 1px 3px rgba(0,0,0,0.3)` : "0 2px 10px rgba(0,0,0,0.15)",
+			"--glow": isNeon && !isLight ? `${accent}55` : void 0
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("span", {
+		className: "gtL-gamecard-logo",
+		"aria-hidden": true,
+		style: {
+			width: 44,
+			minWidth: 44,
+			display: "flex",
+			alignItems: "center",
+			justifyContent: "center",
+			flexShrink: 0
+		}
+	}, logo), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtL-gamecard-body",
+		style: {
+			flex: 1,
+			minWidth: 0
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtL-gamecard-title",
+		style: {
+			fontSize: 20,
+			fontWeight: isNeon ? 700 : 600,
+			color: tk.ink,
+			fontFamily: "'Baloo 2', sans-serif"
+		}
+	}, title), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtL-gamecard-desc",
+		style: {
+			fontSize: 12,
+			color: tk.muted,
+			marginTop: 3
+		}
+	}, description), status && /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtL-gamecard-status",
+		style: {
+			display: "flex",
+			alignItems: "center",
+			gap: 6,
+			fontSize: 10.5,
+			color: disabled ? tk.muted : tk.ink,
+			marginTop: 6,
+			fontWeight: 600,
+			letterSpacing: "0.08em",
+			textTransform: "uppercase"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("span", {
+		"aria-hidden": true,
+		style: {
+			width: 7,
+			height: 7,
+			borderRadius: "50%",
+			background: accent,
+			flexShrink: 0
+		}
+	}), status)), fav && /* @__PURE__ */ import_react.default.createElement("span", {
+		"aria-hidden": "true",
+		style: {
+			width: 44,
+			flexShrink: 0
+		}
+	}), /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		color: disabled ? tk.border : tk.muted,
+		fontSize: 18,
+		flexShrink: 0
+	} }, "›"));
+	return fav ? /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		position: "relative",
+		width: "100%"
+	} }, _card, /* @__PURE__ */ import_react.default.createElement(FavStar, {
+		fav,
+		theme,
+		t,
+		muted: tk.muted
+	})) : _card;
+}
+var GT_HEAD_CSS = ".gt-hb{position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:44px;height:44px;padding:0;margin:0;border:none;background:transparent;cursor:pointer;font:inherit;-webkit-tap-highlight-color:transparent;touch-action:manipulation}.gt-hb:focus{outline:none}.gt-hb>.gt-hf{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:36px;min-width:36px;box-sizing:border-box;border-radius:999px;white-space:nowrap;transition:transform .16s cubic-bezier(.23,1,.32,1),background-color .2s ease,border-color .2s ease,color .2s ease}.gt-hb:active>.gt-hf{transform:scale(.96)}.gt-hb:focus-visible>.gt-hf{outline:2px solid currentColor;outline-offset:2px}@media (hover:hover) and (pointer:fine){.gt-hb:hover>.gt-hf{filter:brightness(1.15)}}@media (prefers-reduced-motion:reduce){.gt-hb>.gt-hf{transition:none}}.gt-gamehead{position:sticky;top:var(--gt-sat, env(safe-area-inset-top, 0px));z-index:20;margin:-6px -12px 8px;padding:6px 12px 8px}.gt-gamehead.is-stuck{background-color:var(--gt-pg-col);background-image:var(--gt-pg-img);background-size:var(--gt-pg-size);background-repeat:no-repeat;background-position:var(--gt-head-pos,0 0);box-shadow:0 1px 0 rgba(128,128,128,.22)}.gt-gamehead>.gt-headbtns{top:6px!important;right:8px!important}.gt-headbtns{z-index:21!important}div:has(>.gt-gamehead~.gt-headbtns){position:sticky!important;top:var(--gt-sat, env(safe-area-inset-top, 0px));z-index:20}div:has(>.gt-gamehead~.gt-headbtns)>.gt-headbtns{top:6px!important}.gtL-content .gt-gamehead,.gtL-content .gt-gamehead.is-stuck{position:relative;top:auto;margin:0 0 16px;padding:0;background:none;box-shadow:none}.gtL-content .gt-gamehead>.gt-headbtns{top:0!important;right:-4px!important}.gtL-content div:has(>.gt-gamehead~.gt-headbtns){position:relative!important;top:auto}.gtL-content div:has(>.gt-gamehead~.gt-headbtns)>.gt-headbtns{top:0!important}div:has(>.gt-headbtns+.gt-gamehead)>.gt-headbtns{position:sticky!important;top:calc(var(--gt-headtop, var(--gt-sat, env(safe-area-inset-top, 0px))) + 6px)!important;right:auto!important;left:auto!important;height:0;overflow:visible;display:flex;justify-content:flex-end;margin-right:-4px;z-index:22!important}.gtL-content div:has(>.gt-headbtns+.gt-gamehead)>.gt-headbtns{position:absolute!important;top:0!important;right:-4px!important;height:auto;margin-right:0}.gtL-yatzy-sheets,.gt-gamehead~.gtL-e-fit{isolation:isolate}.gt-gamehead.is-stuck{-webkit-transform:translateZ(0);transform:translateZ(0)}.gt-gamehead.is-stuck::before{content:'';position:absolute;left:0;right:0;bottom:100%;height:var(--gt-cover,0px);pointer-events:none;background-color:var(--gt-pg-col);background-image:var(--gt-pg-img);background-size:var(--gt-pg-size);background-repeat:no-repeat;background-position:var(--gt-head-pos2,0 0)}.gtL-content .gt-gamehead.is-stuck::before{display:none}";
+function GameHeader({ title, subtitle, icon, accent, onBack, backLabel, tk, titleFont, onHome, onEndGame, onRules, rulesTitle, rulesText, extra, hideTitle, moreItems, onMenuOpen }) {
+	const [rulesOpen, setRulesOpen] = useState$11(false);
+	const headRef = useRef$16(null);
+	const [stuck, setStuck] = useState$11(false);
+	useEffect$14(() => {
+		let raf = 0;
+		const upd = () => {
+			raf = 0;
+			const el = headRef.current;
+			if (!el) return;
+			const y = window.scrollY || document.documentElement && document.documentElement.scrollTop || 0;
+			const r = el.getBoundingClientRect();
+			const pg = el.closest("#root > div:first-child");
+			const pr = pg ? pg.getBoundingClientRect() : {
+				left: 0,
+				top: 0
+			};
+			el.style.setProperty("--gt-head-pos", Math.round(pr.left - r.left) + "px " + Math.round(pr.top - r.top) + "px");
+			if (!el.closest(".gtL-content")) {
+				const w = el.parentElement;
+				const pin = w && getComputedStyle(w).position === "sticky" ? w : el;
+				if (y <= 2) {
+					const tp = Math.max(0, Math.round(pin.getBoundingClientRect().top));
+					if (tp !== pin.__gtTop) {
+						pin.__gtTop = tp;
+						pin.style.top = tp + "px";
+						document.documentElement.style.setProperty("--gt-headtop", tp + "px");
+					}
+				}
+				if (pin.__gtTop != null) {
+					const hr = el.getBoundingClientRect();
+					const cov = Math.max(0, Math.round(hr.top));
+					el.style.setProperty("--gt-cover", cov + "px");
+					el.style.setProperty("--gt-head-pos2", Math.round(pr.left - r.left) + "px " + Math.round(pr.top - r.top + cov) + "px");
+				}
+			}
+			setStuck(y > 2);
+		};
+		const on = () => {
+			if (!raf) raf = requestAnimationFrame(upd);
+		};
+		on();
+		window.addEventListener("scroll", on, { passive: true });
+		window.addEventListener("resize", on);
+		return () => {
+			window.removeEventListener("scroll", on);
+			window.removeEventListener("resize", on);
+			if (raf) cancelAnimationFrame(raf);
+		};
+	}, []);
+	const label = String(backLabel || "").replace(/^[‹<]\s*/, "");
+	const face = {
+		border: `1px solid ${tk.border}`,
+		background: tk.card,
+		backdropFilter: "blur(12px)",
+		WebkitBackdropFilter: "blur(12px)"
+	};
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		ref: headRef,
+		className: "gt-gamehead" + (stuck ? " is-stuck" : "")
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GT_HEAD_CSS), /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		display: "flex",
+		alignItems: "center",
+		minHeight: 44,
+		marginBottom: 8
+	} }, /* @__PURE__ */ import_react.default.createElement("button", {
+		type: "button",
+		onClick: onBack,
+		className: "gt-hb",
+		"data-gt-nav": onBack && onBack.gtNav ? "1" : void 0,
+		style: { color: tk.ink }
+	}, /* @__PURE__ */ import_react.default.createElement("span", {
+		className: "gt-hf",
+		style: {
+			...face,
+			padding: "0 15px 0 10px",
+			fontSize: 13,
+			fontWeight: 600,
+			fontFamily: "'Inter', sans-serif"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("svg", {
+		width: 15,
+		height: 15,
+		viewBox: "0 0 24 24",
+		"aria-hidden": true,
+		style: { flexShrink: 0 }
+	}, /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M15 5l-7 7 7 7",
+		stroke: "currentColor",
+		strokeWidth: "2.4",
+		fill: "none",
+		strokeLinecap: "round",
+		strokeLinejoin: "round"
+	})), label))), (rulesText || onRules || onHome || onEndGame || moreItems && moreItems.length) && /* @__PURE__ */ import_react.default.createElement(RulesButton, {
+		onClick: onRules || (rulesText ? () => setRulesOpen(true) : void 0),
+		onHome,
+		onEndGame,
+		moreItems,
+		onMenuOpen,
+		tokens: tk
+	}), extra && /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gt-headbtns",
+		style: {
+			position: "absolute",
+			top: 0,
+			right: -4,
+			display: "flex",
+			zIndex: 5
+		}
+	}, extra), /* @__PURE__ */ import_react.default.createElement("div", { style: hideTitle ? {
+		position: "absolute",
+		width: 1,
+		height: 1,
+		overflow: "hidden",
+		clip: "rect(0 0 0 0)",
+		whiteSpace: "nowrap"
+	} : {
+		display: "flex",
+		alignItems: "center",
+		gap: 10,
+		minWidth: 0
+	} }, icon && /* @__PURE__ */ import_react.default.createElement("span", {
+		"aria-hidden": true,
+		style: {
+			width: 34,
+			height: 34,
+			display: "flex",
+			alignItems: "center",
+			justifyContent: "center",
+			flexShrink: 0,
+			.../^#[0-3]/.test(String(tk.ink || "")) && /^#[0-9a-fA-F]{6}$/.test(String(accent || "")) ? {
+				"--gt-tile": accent + "22",
+				"--gt-tile2": "#FFFFFF"
+			} : {}
+		}
+	}, icon), /* @__PURE__ */ import_react.default.createElement("div", { style: { minWidth: 0 } }, /* @__PURE__ */ import_react.default.createElement("h1", { style: {
+		margin: 0,
+		fontSize: 24,
+		fontWeight: 800,
+		lineHeight: 1.1,
+		letterSpacing: "-0.01em",
+		color: accent || tk.ink,
+		fontFamily: titleFont || "'Baloo 2', sans-serif",
+		overflowWrap: "break-word"
+	} }, title), subtitle && /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		fontSize: 11,
+		fontWeight: 600,
+		color: tk.muted,
+		fontFamily: "'Inter', sans-serif",
+		letterSpacing: "0.08em",
+		textTransform: "uppercase",
+		marginTop: 3
+	} }, subtitle))), rulesText && /* @__PURE__ */ import_react.default.createElement(RulesSheet, {
+		open: rulesOpen,
+		onClose: () => setRulesOpen(false),
+		title: rulesTitle || title,
+		text: rulesText,
+		tokens: tk
+	}));
+}
+// web/src/themes/shell.js
+var shell_exports = /* @__PURE__ */ __exportAll({
+	dartsAccent: () => dartsAccent,
+	dartsHead: () => dartsHead,
+	noirAccent: () => noirAccent
+});
+function dartsAccent(theme) {
+	return theme === "light" ? "#B8331F" : theme === "noir" ? "#C9C9C9" : "#E4402E";
+}
+function dartsHead(title, onBack, onHome, onEndGame, onRules, tk, t, theme, subtitle, rulesText, moreItems, onMenuOpen) {
+	const ac = dartsAccent(theme);
+	return /* @__PURE__ */ import_react.default.createElement(GameHeader, {
+		title,
+		subtitle,
+		onBack,
+		backLabel: t("back"),
+		tk,
+		accent: ac,
+		titleFont: "'Space Grotesk', sans-serif",
+		icon: /* @__PURE__ */ import_react.default.createElement(DartsLogo, { color: ac }),
+		onHome,
+		onEndGame,
+		onRules,
+		moreItems,
+		onMenuOpen,
+		rulesText,
+		rulesTitle: rulesText ? title : void 0
+	});
+}
+function noirAccent(gameId) {
+	return "#E8E8E8";
+}
 // web/src/shared/groups.js
 var groups_exports = /* @__PURE__ */ __exportAll({ useSavedGroups: () => useSavedGroups });
 function useSavedGroups() {
@@ -23769,39 +23861,38 @@ function GtBars({ players, target, tk, theme, accent, font, label }) {
 		} })));
 	}));
 }
-function GtLadder({ done, cur, tk, theme, accent, label }) {
-	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gt-ug-lad",
-		role: "img",
-		"aria-label": label,
-		style: { color: tk.muted }
-	}, Array.from({ length: 10 }, (_, k) => {
-		const d = k < done;
-		const c = !d && k + 1 === cur;
-		return /* @__PURE__ */ import_react.default.createElement("span", {
-			key: k,
-			style: d ? {
-				background: accent,
-				color: tk.onAccent || "#07110e"
-			} : c ? {
-				boxShadow: `inset 0 0 0 2px ${accent}`,
-				background: "transparent",
-				color: tk.ink,
-				fontSize: 14
-			} : void 0
-		}, k + 1);
-	}));
-}
 // web/src/games/phase10/game.js
 var game_exports$18 = /* @__PURE__ */ __exportAll({
-	P10Entry: () => P10Entry,
 	P10PhaseList: () => P10PhaseList,
 	P10Standings: () => P10Standings,
 	Phase10Game: () => Phase10Game,
 	p10Bar: () => p10Bar,
 	p10Calc: () => p10Calc,
+	p10Pts: () => p10Pts,
 	p10Rank: () => p10Rank
 });
+var P10_KINDS = [
+	{
+		k: "n",
+		v: 5,
+		c: "#2F6FDE"
+	},
+	{
+		k: "h",
+		v: 10,
+		c: "#2FA84F"
+	},
+	{
+		k: "s",
+		v: 15,
+		c: "#E2453C"
+	},
+	{
+		k: "w",
+		v: 25,
+		c: "#F2C230"
+	}
+];
 function p10Calc(players, history) {
 	return players.map((p) => {
 		let total = 0, done = 0;
@@ -23819,8 +23910,8 @@ function p10Calc(players, history) {
 		};
 	});
 }
-function p10Rank(list) {
-	return [...list].sort((a, b) => b.done - a.done || a.total - b.total);
+function p10Rank(list, tieWin) {
+	return [...list].sort((a, b) => (tieWin != null ? (b.id === tieWin) - (a.id === tieWin) : 0) || b.done - a.done || a.total - b.total);
 }
 function p10Bar(tk, done, mt) {
 	return /* @__PURE__ */ import_react.default.createElement("div", {
@@ -23840,198 +23931,409 @@ function p10Bar(tk, done, mt) {
 		}
 	})));
 }
-function P10Entry({ players, init, isEdit, onSave, onCancel, tk, theme, t }) {
-	const [sc, setSc] = useState$11(() => Object.fromEntries(players.map((p) => [p.id, init && init.scores && gtNum(init.scores[p.id]) !== null ? String(gtNum(init.scores[p.id])) : ""])));
-	const [dn, setDn] = useState$11(() => init && gtIsObj(init.done) ? { ...init.done } : {});
-	const [pad, setPad] = useState$11(null);
-	const [inst, setInst] = useState$11(false);
-	const ph = t("p10Phases");
-	const can = players.every((p) => sc[p.id] !== "" && !isNaN(parseInt(sc[p.id], 10)));
-	const save = () => {
-		if (!can) return;
-		const scores = {}, done = {};
-		players.forEach((p) => {
-			scores[p.id] = Math.max(0, parseInt(sc[p.id], 10) || 0);
-			done[p.id] = !!dn[p.id];
-		});
-		onSave({
-			scores,
-			done
-		});
+function p10Pts(e) {
+	if (!e) return 0;
+	if (e.out) return 0;
+	if (e.legacy != null && !e.touched) return e.legacy;
+	return P10_KINDS.reduce((s, x) => s + (e[x.k] || 0) * x.v, 0);
+}
+function p10Blank() {
+	return {
+		n: 0,
+		h: 0,
+		s: 0,
+		w: 0,
+		out: false,
+		done: false,
+		touched: false,
+		legacy: null
 	};
-	const firstRound = players.every((p) => !p.total && !p.done);
-	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: isEdit ? void 0 : "pld-entry gt-ug-ent",
-		style: isEdit ? {
-			display: "flex",
-			flexDirection: "column",
-			gap: 10
-		} : void 0
-	}, /* @__PURE__ */ import_react.default.createElement("div", { className: "pld-body" }, !isEdit && s8Lbl(tk, t("p10RoundQ"), { marginBottom: 0 }), !isEdit && firstRound && s8Hint(tk, "cards", t("p10PointsHint"), true), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 8
-	} }, players.map((p) => {
-		const v = sc[p.id];
-		const has = v !== "";
-		const ok = !!dn[p.id];
+}
+function p10Norm(x) {
+	if (!gtIsObj(x)) return p10Blank();
+	const c = (v) => Math.max(0, Math.min(99, Math.floor(Number(v) || 0)));
+	return {
+		n: c(x.n),
+		h: c(x.h),
+		s: c(x.s),
+		w: c(x.w),
+		out: !!x.out,
+		done: !!x.done || !!x.out,
+		touched: !!x.touched,
+		legacy: typeof x.legacy === "number" ? x.legacy : null
+	};
+}
+function p10FromRound(r, pid) {
+	const h = r && gtIsObj(r.hand) && gtIsObj(r.hand[pid]) ? p10Norm({
+		...r.hand[pid],
+		touched: true
+	}) : {
+		...p10Blank(),
+		legacy: gtNum(r && r.scores && r.scores[pid]) || 0
+	};
+	h.done = !!(r && r.done && r.done[pid]) || h.out;
+	return h;
+}
+function p10Draft(dr, players) {
+	const ents = {}, tch = {};
+	players.forEach((p) => {
+		ents[p.id] = p10Norm(dr && dr.ents && dr.ents[p.id]);
+		tch[p.id] = !!(dr && dr.tch && dr.tch[p.id]);
+	});
+	return {
+		cur: dr && Number.isInteger(dr.cur) && dr.cur >= 0 && dr.cur < players.length ? dr.cur : 0,
+		ents,
+		tch
+	};
+}
+var P10_CSS = `
+.p10-flow{display:grid;gap:10px;grid-template-columns:minmax(0,1fr);grid-template-areas:"seg" "tie" "strip" "who" "stairs" "done" "hand" "foot"}
+.p10-seg{grid-area:seg;display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:16px;background:var(--p-card);border:1px solid var(--p-line)}
+.p10-seg button{height:40px;border:0;border-radius:12px;background:transparent;color:var(--p-muted);font:700 15px 'Inter',sans-serif;cursor:pointer;padding:0}
+.p10-seg button[aria-selected="true"]{background:var(--p-acc);color:var(--p-on)}
+.p10-tie{grid-area:tie;border:1.5px solid var(--p-gold);border-radius:16px;padding:10px 12px;display:flex;flex-direction:column;gap:8px;color:var(--p-ink);font:600 14px/1.35 'Inter',sans-serif}
+.p10-tie b{color:var(--p-gold)}
+.p10-tie div{display:flex;flex-wrap:wrap;gap:6px}
+.p10-tie button{min-height:44px;padding:0 14px;border-radius:12px;border:1.5px solid var(--p-gold);background:transparent;color:var(--p-ink);font:700 14px 'Inter',sans-serif;cursor:pointer}
+.p10-strip{grid-area:strip;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:2px}
+.p10-strip::-webkit-scrollbar{display:none}
+.p10-chip{flex:1 0 74px;max-width:132px;min-height:46px;box-sizing:border-box;border-radius:12px;border:1.5px solid var(--p-line);background:var(--p-card);padding:4px 8px;display:flex;flex-direction:column;justify-content:center;cursor:pointer;min-width:0}
+.p10-chip[data-s="cur"]{border-color:var(--p-acc)}
+.p10-cn{font:600 12px/1.2 'Inter',sans-serif;color:var(--p-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.p10-cv{font:800 17px/1.15 'Space Grotesk',sans-serif;color:var(--p-ink);font-variant-numeric:tabular-nums}
+.p10-cv i{font-style:normal;color:var(--p-acc);margin-left:4px;font-size:14px}
+.p10-who{grid-area:who;display:flex;justify-content:space-between;align-items:flex-end;gap:10px;min-width:0}
+.p10-wl{font:700 12.5px 'Inter',sans-serif;color:var(--p-acc)}
+.p10-wn{margin:0;font:800 22px/1.15 'Inter',sans-serif;color:var(--p-ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;word-break:keep-all}
+.p10-wp{font:600 14px/1.3 'Inter',sans-serif;color:var(--p-ink);margin-top:1px}
+.p10-wt{flex:none;text-align:right;font:600 12.5px/1.35 'Inter',sans-serif;color:var(--p-muted)}
+.p10-wt b{display:block;font:800 30px/1 'Space Grotesk',sans-serif;color:var(--p-ink)}
+.p10-stairs{grid-area:stairs;display:grid;grid-template-columns:repeat(10,1fr);gap:3px;align-items:end;height:30px}
+.p10-st{border-radius:3px 3px 1px 1px;background:rgba(127,127,127,.2);position:relative}
+.p10-st[data-d="1"]{background:var(--p-acc)}
+.p10-st[data-c="1"]{background:transparent;border:2px solid var(--p-acc);box-sizing:border-box}
+.p10-done{grid-area:done;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.p10-tg{min-height:52px;border-radius:16px;border:1.5px solid var(--p-line);background:var(--p-card);color:var(--p-ink);font:700 14px/1.2 'Inter',sans-serif;cursor:pointer;padding:6px 10px;display:flex;align-items:center;justify-content:center;gap:8px;text-align:center}
+.p10-tg[aria-pressed="true"]{background:var(--p-acc);border-color:var(--p-acc);color:var(--p-on)}
+.p10-tg .p10-ck{flex:none;width:18px;height:18px;border-radius:50%;border:2px solid currentColor;display:grid;place-items:center;font-size:11px}
+.p10-hand{grid-area:hand;display:flex;flex-direction:column;gap:6px}
+.p10-lab{display:flex;justify-content:space-between;align-items:baseline;font:700 11px 'Inter',sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--p-muted)}
+.p10-lab b{font:800 15px 'Space Grotesk',sans-serif;letter-spacing:0;text-transform:none;color:var(--p-ink)}
+.p10-row{display:grid;grid-template-columns:30px minmax(0,1fr) 48px 40px 48px;align-items:center;gap:8px;background:var(--p-card);border:1px solid var(--p-line);border-radius:14px;padding:5px 8px;min-height:54px;box-sizing:border-box}
+.p10-row[data-off="1"]{opacity:.35}
+.p10-card{width:24px;height:32px;border-radius:5px;background:var(--c);display:grid;place-items:center;font:800 10px 'Space Grotesk',sans-serif;color:#fff;box-shadow:0 2px 0 rgba(0,0,0,.25)}
+.p10-card[data-dk="1"]{color:#14141C}
+.p10-rt{min-width:0;font:700 15px/1.2 'Inter',sans-serif;color:var(--p-ink)}
+.p10-rt small{display:block;font:600 12px 'Inter',sans-serif;color:var(--p-muted)}
+.p10-pm{width:48px;height:44px;border-radius:12px;border:1px solid var(--p-line);background:transparent;color:var(--p-ink);font:700 22px/1 'Space Grotesk',sans-serif;cursor:pointer;padding:0}
+.p10-pm:disabled{opacity:.3;cursor:default}
+.p10-cnt{text-align:center;font:800 22px 'Space Grotesk',sans-serif;color:var(--p-ink);font-variant-numeric:tabular-nums}
+.p10-foot{grid-area:foot;display:flex;gap:8px}
+.p10-ghost{flex:none;min-height:54px;padding:0 14px;border-radius:18px;border:1px solid var(--p-line);background:transparent;color:var(--p-muted);font:700 14px 'Inter',sans-serif;cursor:pointer}
+.p10-ghost:disabled{opacity:.4;cursor:default}
+.p10-save{flex:1;min-width:0;min-height:54px;border:0;border-radius:18px;background:var(--p-acc);color:var(--p-on);font:800 17px 'Space Grotesk',sans-serif;cursor:pointer;padding:0 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.p10-tg:focus-visible,.p10-pm:focus-visible,.p10-chip:focus-visible,.p10-seg button:focus-visible,.p10-save:focus-visible,.p10-ghost:focus-visible,.p10-cell:focus-visible,.p10-tie button:focus-visible{outline:2px solid var(--p-acc);outline-offset:2px}
+.p10-tbl{background:var(--p-card);border:1px solid var(--p-line);border-radius:16px;padding:8px 6px;overflow-x:auto}
+.p10-tr{display:grid;gap:4px;align-items:center;min-width:min-content}
+.p10-th{font:700 11.5px 'Inter',sans-serif;color:var(--p-muted);text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:4px 2px}
+.p10-rn{font:700 12px 'Inter',sans-serif;color:var(--p-muted);text-align:center}
+.p10-cell{min-height:42px;border:0;border-radius:10px;background:transparent;color:var(--p-ink);font:700 16px 'Space Grotesk',sans-serif;font-variant-numeric:tabular-nums;cursor:pointer;padding:0 4px}
+.p10-cell i{font-style:normal;color:var(--p-acc);margin-left:3px;font-size:12px}
+.p10-cell:hover{background:rgba(127,127,127,.12)}
+.p10-tot{border-top:1px solid var(--p-line);margin-top:4px;padding-top:4px}
+.p10-tot .p10-cell{cursor:default;font-weight:800}
+.p10-empty{padding:24px 10px;text-align:center;font:500 14px 'Inter',sans-serif;color:var(--p-muted)}
+.p10-ov{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:80;display:flex;align-items:flex-end;justify-content:center}
+.gtL-content .p10-ov{align-items:center}
+.p10-sheet{outline:none;width:100%;max-width:440px;max-height:94vh;max-height:94dvh;overflow-y:auto;box-sizing:border-box;background:var(--p-bg);color:var(--p-ink);border-radius:24px 24px 0 0;padding:16px 16px calc(14px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:10px}
+.gtL-content .p10-sheet{border-radius:24px}
+.p10-sh{display:flex;justify-content:space-between;align-items:center;gap:10px;font:700 17px 'Inter',sans-serif}
+.p10-x{flex:none;width:44px;height:44px;border:0;background:transparent;color:var(--p-muted);cursor:pointer;display:grid;place-items:center;border-radius:12px}
+@media (max-height:740px){.p10-flow{gap:8px}.p10-row{min-height:48px;padding:3px 8px}.p10-pm{height:40px}.p10-stairs{height:22px}.p10-tg{min-height:46px}.p10-save,.p10-ghost{min-height:48px}}
+@media (max-height:640px){.p10-stairs{display:none}.p10-row{min-height:44px}.p10-pm{height:38px;width:44px}.p10-row{grid-template-columns:26px minmax(0,1fr) 44px 34px 44px}.p10-wt b{font-size:24px}.p10-seg button{height:36px}.p10-chip{min-height:42px}}
+@media (max-height:620px){.p10-flow{gap:6px}.p10-rt small{display:none}.p10-row{min-height:40px;padding:2px 8px}.p10-pm{height:36px}.p10-tg{min-height:42px;font-size:13px}.p10-hand{gap:4px}.p10-wn{font-size:19px}.p10-chip{min-height:38px}}
+.gtL-content .p10-seg{display:none}
+[data-phone-landscape] .p10-flow{grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:14px;grid-template-areas:"seg hand" "tie hand" "strip hand" "who hand" "done foot";align-items:start}
+[data-phone-landscape] .p10-stairs{display:none}
+`;
+function p10Vars(tk, theme) {
+	return {
+		"--p-card": tk.card,
+		"--p-bg": tk.bg,
+		"--p-ink": tk.ink,
+		"--p-muted": tk.muted,
+		"--p-line": theme === "light" ? "rgba(24,22,32,0.14)" : tk.border,
+		"--p-acc": tk.teal,
+		"--p-on": tk.onAccent,
+		"--p-gold": tk.gold
+	};
+}
+function P10Editor({ p, e, setE, tk, t, theme, noOut, outTaken }) {
+	t("p10Phases");
+	const off = e.out;
+	const pts = p10Pts(e);
+	const inc = (k, d) => setE({
+		...e,
+		[k]: Math.max(0, Math.min(99, (e[k] || 0) + d)),
+		touched: true
+	});
+	const kl = {
+		n: t("p10K1"),
+		h: t("p10K2"),
+		s: t("p10K3"),
+		w: t("p10K4")
+	};
+	const cl = {
+		n: "1-9",
+		h: "10-12",
+		s: "S",
+		w: "W"
+	};
+	return /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("div", { className: "p10-done" }, /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "p10-tg press-fx",
+		"aria-pressed": e.done,
+		disabled: false,
+		onClick: () => {
+			try {
+				hapticTap();
+			} catch (er) {}
+			setE({
+				...e,
+				done: !e.done,
+				out: e.done ? false : e.out
+			});
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("span", {
+		className: "p10-ck",
+		"aria-hidden": true
+	}, e.done ? "✓" : ""), t("p10DoneN")(p.cur)), !noOut && /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "p10-tg press-fx",
+		"aria-pressed": e.out,
+		disabled: !e.out && outTaken,
+		onClick: () => setE({
+			...e,
+			out: !e.out,
+			done: !e.out ? true : e.done,
+			touched: true
+		})
+	}, /* @__PURE__ */ import_react.default.createElement("span", {
+		className: "p10-ck",
+		"aria-hidden": true
+	}, e.out ? "✓" : ""), t("p10Out"))), /* @__PURE__ */ import_react.default.createElement("div", { className: "p10-hand" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "p10-lab" }, /* @__PURE__ */ import_react.default.createElement("span", null, t("p10HandCards")), /* @__PURE__ */ import_react.default.createElement("b", null, t("p10PtsN")(pts))), P10_KINDS.map((x) => /* @__PURE__ */ import_react.default.createElement("div", {
+		key: x.k,
+		className: "p10-row",
+		"data-off": off ? "1" : void 0
+	}, /* @__PURE__ */ import_react.default.createElement("span", {
+		className: "p10-card",
+		"data-dk": x.k === "w" ? "1" : void 0,
+		style: { "--c": theme === "noir" ? "#8C8C8C" : x.c },
+		"aria-hidden": true
+	}, cl[x.k]), /* @__PURE__ */ import_react.default.createElement("span", { className: "p10-rt" }, kl[x.k], /* @__PURE__ */ import_react.default.createElement("small", null, t("p10Each")(x.v))), /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "p10-pm press-fx",
+		disabled: off || !e[x.k],
+		"aria-label": t("p10Less")(kl[x.k]),
+		onClick: () => inc(x.k, -1)
+	}, "−"), /* @__PURE__ */ import_react.default.createElement("span", {
+		className: "p10-cnt",
+		"aria-live": "polite"
+	}, off ? 0 : e[x.k] || 0), /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "p10-pm press-fx",
+		disabled: off,
+		"aria-label": t("p10More")(kl[x.k]),
+		onClick: () => inc(x.k, 1)
+	}, "+")))));
+}
+function P10Flow({ list, d, upd, roundNo, tk, t, theme, lap, onSave, view, setView, tie, onTie }) {
+	const n = list.length;
+	const cur = d.cur;
+	const p = list[cur] || list[0];
+	const e = d.ents[p.id];
+	const last = cur >= n - 1;
+	const ph = t("p10Phases");
+	const setE = (v) => upd((dr) => {
+		const ents = {
+			...dr.ents,
+			[p.id]: v
+		};
+		if (v.out) list.forEach((q) => {
+			if (q.id !== p.id && ents[q.id].out) ents[q.id] = {
+				...ents[q.id],
+				out: false
+			};
+		});
+		return {
+			ents,
+			tch: {
+				...dr.tch,
+				[p.id]: true
+			}
+		};
+	});
+	const outTaken = list.some((q) => q.id !== p.id && d.ents[q.id].out);
+	const next = () => {
+		if (last) {
+			const scores = {}, done = {}, hand = {};
+			list.forEach((q) => {
+				const x = d.ents[q.id];
+				scores[q.id] = p10Pts(x);
+				done[q.id] = !!x.done;
+				hand[q.id] = {
+					n: x.n,
+					h: x.h,
+					s: x.s,
+					w: x.w,
+					out: x.out
+				};
+			});
+			onSave({
+				scores,
+				done,
+				hand
+			});
+		} else upd({ cur: cur + 1 });
+	};
+	const pts = p10Pts(e);
+	const act = (fn) => (ev) => {
+		if (ev.key === "Enter" || ev.key === " ") {
+			ev.preventDefault();
+			fn();
+		}
+	};
+	return /* @__PURE__ */ import_react.default.createElement("div", { className: "p10-flow" }, !lap && /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "p10-seg",
+		role: "tablist"
+	}, /* @__PURE__ */ import_react.default.createElement("button", {
+		role: "tab",
+		"aria-selected": view === "round",
+		onClick: () => setView("round")
+	}, t("skyjoRoundLabel")(roundNo)), /* @__PURE__ */ import_react.default.createElement("button", {
+		role: "tab",
+		"aria-selected": view === "table",
+		onClick: () => setView("table")
+	}, t("skyjoViewTable"))), tie && /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "p10-tie",
+		role: "status"
+	}, /* @__PURE__ */ import_react.default.createElement("span", null, /* @__PURE__ */ import_react.default.createElement("b", null, t("p10TieTitle")), " ", t("p10TieText")), /* @__PURE__ */ import_react.default.createElement("div", null, tie.map((q) => /* @__PURE__ */ import_react.default.createElement("button", {
+		key: q.id,
+		className: "press-fx",
+		onClick: () => onTie(q.id)
+	}, q.name)))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "p10-strip",
+		role: "group",
+		"aria-label": t("skyjoFlowStrip")
+	}, list.map((q, i) => {
+		const x = d.ents[q.id];
+		const has = d.tch[q.id];
 		return /* @__PURE__ */ import_react.default.createElement("div", {
-			key: p.id,
-			"data-gt-p10row": p.id,
-			className: "pld-p10row",
-			style: {
-				background: ok ? `${tk.teal}14` : tk.card,
-				border: `2px solid ${ok ? tk.teal : theme === "light" ? "rgba(24,22,32,0.10)" : "transparent"}`,
-				borderRadius: 20,
-				padding: "14px 16px",
-				display: "flex",
-				flexDirection: "column",
-				gap: 12,
-				transition: "background .2s, border-color .2s"
-			}
-		}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-			display: "flex",
-			alignItems: "center",
-			gap: 10
-		} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-			flex: 1,
-			minWidth: 0
-		} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-			fontSize: 19,
-			fontWeight: 600,
-			color: tk.ink,
-			fontFamily: S8I,
-			whiteSpace: "nowrap",
-			overflow: "hidden",
-			textOverflow: "ellipsis"
-		} }, p.name), !isEdit && /* @__PURE__ */ import_react.default.createElement("div", { style: {
-			fontSize: 13,
-			color: tk.muted,
-			fontFamily: "'Inter', sans-serif",
-			marginTop: 2,
-			whiteSpace: "nowrap",
-			overflow: "hidden",
-			textOverflow: "ellipsis"
-		} }, /* @__PURE__ */ import_react.default.createElement("strong", { style: { color: tk.teal } }, t("p10Phase")(p.cur)), "  ", Array.isArray(ph) ? ph[p.cur - 1] : ""), !isEdit && /* @__PURE__ */ import_react.default.createElement("div", {
-			className: "pld-hide",
-			style: {
-				fontSize: 12.5,
-				color: tk.muted,
-				fontFamily: "'Inter', sans-serif",
-				marginTop: 2
-			}
-		}, t("gtlTotal"), ": ", /* @__PURE__ */ import_react.default.createElement(GtCount, {
-			value: p.total,
-			mem: "p10t" + p.id,
-			good: "low",
-			dpos: "r"
-		}))), /* @__PURE__ */ import_react.default.createElement("button", {
-			onClick: () => {
-				setInst(false);
-				setPad(p.id);
-			},
-			className: "press-fx",
-			"aria-label": t("s8Points") + " " + p.name,
-			style: {
-				border: `1.5px solid ${has ? tk.teal : tk.border}`,
-				borderRadius: 14,
-				background: theme === "noir" ? "#2A2A2A" : tk.bg2,
-				minWidth: 104,
-				padding: "9px 14px",
-				cursor: "pointer",
-				textAlign: "right",
-				fontFamily: S8F,
-				flexShrink: 0
-			}
-		}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-			fontSize: 11,
-			color: tk.muted,
-			fontFamily: S8I,
-			fontWeight: 600,
-			letterSpacing: "0.06em",
-			textTransform: "uppercase"
-		} }, t("s8Points")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-			fontSize: 34,
-			fontWeight: 800,
-			color: has ? tk.ink : tk.muted,
-			opacity: has ? 1 : .5,
-			fontVariantNumeric: "tabular-nums",
-			lineHeight: 1.15
-		} }, has ? v : "·"))), !isEdit && /* @__PURE__ */ import_react.default.createElement("div", { className: "pld-hide" }, /* @__PURE__ */ import_react.default.createElement(GtLadder, {
-			done: p.done,
-			cur: p.cur,
-			tk,
-			theme,
-			accent: tk.teal,
-			label: t("p10Phase")(p.cur)
-		})), /* @__PURE__ */ import_react.default.createElement("button", {
-			onClick: () => {
-				try {
-					hapticTap();
-				} catch (e) {}
-				setDn((d) => ({
-					...d,
-					[p.id]: !d[p.id]
-				}));
-			},
-			"aria-pressed": ok,
-			className: "press-fx",
-			style: {
-				display: "flex",
-				alignItems: "center",
-				gap: 8,
-				border: `1.5px solid ${ok ? tk.teal : tk.border}`,
-				borderRadius: 999,
-				background: ok ? tk.teal : "transparent",
-				color: ok ? tk.onAccent : tk.ink,
-				fontSize: 14,
-				fontWeight: 700,
-				minHeight: 46,
-				padding: "0 16px",
-				cursor: "pointer",
-				fontFamily: S8I,
-				alignSelf: "flex-start"
-			}
-		}, /* @__PURE__ */ import_react.default.createElement("span", {
-			"aria-hidden": true,
-			style: {
-				width: 16,
-				height: 16,
-				borderRadius: "50%",
-				border: `1.5px solid ${ok ? tk.onAccent : tk.muted}`,
-				display: "inline-flex",
-				alignItems: "center",
-				justifyContent: "center",
-				fontSize: 10,
-				lineHeight: 1
-			}
-		}, ok ? "✓" : ""), isEdit ? t("p10Done") : t("p10DoneN")(p.cur)));
-	}))), /* @__PURE__ */ import_react.default.createElement("div", { className: "pld-foot" }, /* @__PURE__ */ import_react.default.createElement(GtDock, null, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		gap: 8
-	} }, isEdit && /* @__PURE__ */ import_react.default.createElement("button", {
-		onClick: onCancel,
-		className: "press-fx",
-		style: s8Ghost(tk)
-	}, t("back")), /* @__PURE__ */ import_react.default.createElement("button", {
+			key: q.id,
+			className: "p10-chip press-fx",
+			"data-s": i === cur ? "cur" : void 0,
+			role: "button",
+			tabIndex: 0,
+			"aria-current": i === cur ? "step" : void 0,
+			"aria-label": q.name,
+			onClick: () => upd({ cur: i }),
+			onKeyDown: act(() => upd({ cur: i }))
+		}, /* @__PURE__ */ import_react.default.createElement("span", { className: "p10-cn" }, q.name), /* @__PURE__ */ import_react.default.createElement("span", { className: "p10-cv" }, has ? p10Pts(x) : "·", has && x.done && /* @__PURE__ */ import_react.default.createElement("i", { "aria-hidden": true }, "✓")));
+	})), /* @__PURE__ */ import_react.default.createElement("div", { className: "p10-who" }, /* @__PURE__ */ import_react.default.createElement("div", { style: { minWidth: 0 } }, /* @__PURE__ */ import_react.default.createElement("div", { className: "p10-wl" }, t("p10Phase")(p.cur)), /* @__PURE__ */ import_react.default.createElement("h2", { className: "p10-wn" }, p.name), /* @__PURE__ */ import_react.default.createElement("div", { className: "p10-wp" }, Array.isArray(ph) ? ph[p.cur - 1] : "")), /* @__PURE__ */ import_react.default.createElement("div", { className: "p10-wt" }, /* @__PURE__ */ import_react.default.createElement("b", null, p.total + pts), t("s8Pts"))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "p10-stairs",
+		"aria-hidden": true
+	}, Array.from({ length: 10 }, (_, k) => /* @__PURE__ */ import_react.default.createElement("span", {
+		key: k,
+		className: "p10-st",
+		"data-d": k < p.done ? "1" : void 0,
+		"data-c": k === p.done && p.done < 10 ? "1" : void 0,
+		style: { height: 30 + k * 7 + "%" }
+	}))), /* @__PURE__ */ import_react.default.createElement(P10Editor, {
+		p,
+		e,
+		setE,
+		tk,
+		t,
+		theme,
+		outTaken
+	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "p10-foot" }, /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "p10-ghost press-fx",
+		disabled: cur === 0,
+		onClick: () => upd({ cur: cur - 1 })
+	}, t("mgUndo")), /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "p10-save press-fx",
+		"data-gt-sound": last ? "1" : void 0,
+		onClick: next
+	}, last ? t("skyjoSaveRoundN")(roundNo) : t("skyjoFlowNextTo")(list[cur + 1].name))));
+}
+function P10Table({ players, hist, list, onCell, t }) {
+	if (!hist.length) return /* @__PURE__ */ import_react.default.createElement("div", { className: "p10-tbl" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "p10-empty" }, t("skyjoTableEmpty")));
+	const cols = `28px repeat(${players.length}, minmax(${players.length > 5 ? 54 : 0}px, 1fr))`;
+	return /* @__PURE__ */ import_react.default.createElement("div", { className: "p10-tbl" }, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "p10-tr",
+		style: { gridTemplateColumns: cols }
+	}, /* @__PURE__ */ import_react.default.createElement("span", null), players.map((p) => /* @__PURE__ */ import_react.default.createElement("span", {
+		key: p.id,
+		className: "p10-th"
+	}, p.name))), hist.map((r, i) => /* @__PURE__ */ import_react.default.createElement("div", {
+		key: i,
+		className: "p10-tr",
+		style: { gridTemplateColumns: cols }
+	}, /* @__PURE__ */ import_react.default.createElement("span", { className: "p10-rn" }, i + 1), players.map((p) => /* @__PURE__ */ import_react.default.createElement("button", {
+		key: p.id,
+		className: "p10-cell press-fx",
+		"aria-label": `${p.name}, ${t("skyjoRoundLabel")(i + 1)}`,
+		onClick: () => onCell(i, p.id)
+	}, gtNum(r.scores && r.scores[p.id]) || 0, r.done && r.done[p.id] && /* @__PURE__ */ import_react.default.createElement("i", { "aria-hidden": true }, "✓"))))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "p10-tr p10-tot",
+		style: { gridTemplateColumns: cols }
+	}, /* @__PURE__ */ import_react.default.createElement("span", { className: "p10-rn" }, "Σ"), list.map((p) => /* @__PURE__ */ import_react.default.createElement("span", {
+		key: p.id,
+		className: "p10-cell",
+		style: {
+			display: "grid",
+			placeItems: "center"
+		}
+	}, p.total))));
+}
+function P10EditSheet({ p, init, round, onSave, onClose, tk, t, theme }) {
+	const [e, setE] = useState$11(() => ({ ...init }));
+	const e0 = import_react.default.useRef(JSON.stringify(init));
+	const tap = () => {
+		if (JSON.stringify(e) !== e0.current) return;
+		onClose();
+	};
+	const tr = import_react.default.useRef(tap);
+	tr.current = tap;
+	const ref = useGtDialog({
+		open: true,
+		onClose,
+		outside: () => tr.current()
+	});
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "p10-ov",
+		onClick: tap
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "p10-sheet",
+		role: "dialog",
+		"aria-modal": "true",
+		"aria-label": p.name,
+		tabIndex: -1,
+		ref,
+		onClick: (ev) => ev.stopPropagation()
+	}, /* @__PURE__ */ import_react.default.createElement("div", { className: "p10-sh" }, /* @__PURE__ */ import_react.default.createElement("span", null, p.name, " · ", t("skyjoRoundLabel")(round)), /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "p10-x",
+		onClick: onClose,
+		"aria-label": t("skyjoGridClose")
+	}, /* @__PURE__ */ import_react.default.createElement(XMark, null))), /* @__PURE__ */ import_react.default.createElement(P10Editor, {
+		p,
+		e,
+		setE,
+		tk,
+		t,
+		theme,
+		noOut: true
+	}), /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "p10-save press-fx",
 		"data-gt-sound": "1",
-		onClick: save,
-		disabled: !can,
-		className: "press-fx",
-		style: {
-			...s8Prim(tk, !can),
-			flex: 1,
-			minHeight: 56,
-			borderRadius: 20,
-			fontSize: 17
-		}
-	}, t("skyjoSaveRound"))), !can && /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gt-ug-dock-hint",
-		style: {
-			color: tk.muted,
-			fontFamily: "'Inter', sans-serif"
-		}
-	}, t("enterPointsFirst")))), s8NumPad(tk, theme, t, players, pad, setPad, inst, setInst, sc, setSc));
+		onClick: () => onSave(e)
+	}, t("confirm"))));
 }
 function P10Standings({ list, tk, theme, t, rounds }) {
 	const r = p10Rank(list);
@@ -24148,38 +24450,114 @@ function P10PhaseList({ tk, t, theme }) {
 		fontVariantNumeric: "tabular-nums"
 	} }, i + 1), /* @__PURE__ */ import_react.default.createElement("span", null, x)))));
 }
+function p10Status(list, tieWin) {
+	const fin = list.filter((p) => p.done >= 10);
+	if (!fin.length) return { s: "play" };
+	const best = Math.min(...fin.map((p) => p.total));
+	const top = fin.filter((p) => p.total === best);
+	if (top.length > 1 && !top.some((p) => p.id === tieWin)) return {
+		s: "tie",
+		tied: top
+	};
+	return {
+		s: "over",
+		win: top.length > 1 ? tieWin : top[0].id
+	};
+}
 function Phase10Game({ state, setState, onBack, onHome, onEndGame, lang = "de", theme = "dark" }) {
 	const t = useT(lang);
 	const tk = s8Tok(theme, P10_TK);
-	const [editIdx, setEditIdx] = useState$11(null);
+	const [view, setView] = useState$11("round");
+	const [edit, setEdit] = useState$11(null);
+	const rootRef = import_react.default.useRef(null);
+	const [lap, setLap] = useState$11(false);
 	const hist = Array.isArray(state.history) ? state.history.filter(gtIsObj) : [];
 	const list = p10Calc(state.players, hist);
-	const over = state.phase === "play" && list.some((p) => p.done >= 10);
+	const st = state.phase === "play" ? p10Status(list, state.tieWin) : { s: "play" };
+	const over = st.s === "over";
+	import_react.default.useLayoutEffect(() => {
+		setLap(!!(rootRef.current && rootRef.current.closest(".gtL-content")));
+	}, [state.phase, over]);
+	const d = p10Draft(state.draft, state.players);
+	const upd = (f) => setState((s) => {
+		const dr = p10Draft(s.draft, s.players);
+		const patch = typeof f === "function" ? f(dr) : f;
+		return {
+			...s,
+			draft: {
+				...dr,
+				...patch
+			}
+		};
+	});
 	const start = () => {
 		setState((s) => ({
 			...s,
 			phase: "play",
-			history: []
+			history: [],
+			draft: null,
+			tieWin: null
 		}));
-		setEditIdx(null);
+		setView("round");
 	};
 	const addRound = (r) => setState((s) => ({
 		...s,
-		history: [...s.history || [], r]
+		history: [...s.history || [], r],
+		draft: null,
+		tieWin: null
 	}));
-	const editRound = (i, r) => {
+	const editCell = (i, pid, e) => {
 		setState((s) => ({
 			...s,
-			history: s.history.map((x, j) => j === i ? r : x)
+			tieWin: null,
+			history: s.history.map((x, j) => {
+				if (j !== i) return x;
+				const done = {
+					...x.done || {},
+					[pid]: !!e.done
+				};
+				const scores = {
+					...x.scores || {},
+					[pid]: p10Pts(e)
+				};
+				const hand = { ...gtIsObj(x.hand) ? x.hand : {} };
+				if (e.touched || e.legacy == null) hand[pid] = {
+					n: e.n,
+					h: e.h,
+					s: e.s,
+					w: e.w,
+					out: e.out
+				};
+				return {
+					...x,
+					done,
+					scores,
+					hand
+				};
+			})
 		}));
-		setEditIdx(null);
+		setEdit(null);
 	};
 	const undo = () => {
+		const lastR = hist[hist.length - 1];
+		if (!lastR) return;
+		const ents = {}, tch = {};
+		state.players.forEach((p) => {
+			ents[p.id] = p10FromRound(lastR, p.id);
+			tch[p.id] = true;
+		});
 		setState((s) => ({
 			...s,
-			history: (s.history || []).slice(0, -1)
+			history: (s.history || []).slice(0, -1),
+			draft: {
+				cur: 0,
+				ents,
+				tch
+			},
+			tieWin: null
 		}));
-		setEditIdx(null);
+		setEdit(null);
+		setView("round");
 	};
 	const W = (sub, kids) => /* @__PURE__ */ import_react.default.createElement(S8Wrap, {
 		theme,
@@ -24196,7 +24574,8 @@ function Phase10Game({ state, setState, onBack, onHome, onEndGame, lang = "de", 
 		onEndGame: sub === t("gtNewMatch") ? void 0 : onEndGame,
 		rulesText: t("rulesPhase10"),
 		pld: true,
-		unit: true
+		unit: true,
+		extraCss: P10_CSS
 	}, kids);
 	if (state.phase !== "play") {
 		const tooFew = state.players.length < 2;
@@ -24227,7 +24606,7 @@ function Phase10Game({ state, setState, onBack, onHome, onEndGame, lang = "de", 
 		})))));
 	}
 	if (over) {
-		const ranked = p10Rank(list).map((p) => ({
+		const ranked = p10Rank(list, st.win).map((p) => ({
 			id: p.id,
 			name: p.name,
 			score: p.total,
@@ -24259,46 +24638,75 @@ function Phase10Game({ state, setState, onBack, onHome, onEndGame, lang = "de", 
 			record: () => s8Record("phase10", ranked, ranked[0] && ranked[0].pscore >= 10 && hist.length === 10 ? { straight: [ranked[0].name] } : void 0)
 		}));
 	}
-	return W(t("skyjoRoundLabel")(hist.length + 1), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split pld-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		marginTop: 4,
-		display: "contents"
-	} }, /* @__PURE__ */ import_react.default.createElement(P10Entry, {
-		key: hist.length,
-		players: list,
-		onSave: addRound,
-		tk,
-		theme,
+	const editP = edit ? list.find((p) => p.id === edit.pid) : null;
+	const table = /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		display: "flex",
+		flexDirection: "column",
+		gap: 10
+	} }, /* @__PURE__ */ import_react.default.createElement(P10Table, {
+		players: state.players,
+		hist,
+		list,
+		onCell: (i, pid) => setEdit({
+			i,
+			pid
+		}),
 		t
-	}))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side" }, /* @__PURE__ */ import_react.default.createElement(P10Standings, {
+	}), hist.length > 0 && /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "p10-ghost press-fx",
+		style: { alignSelf: "center" },
+		onClick: undo
+	}, t("skyjoUndoRound")));
+	return W(t("skyjoRoundLabel")(hist.length + 1), /* @__PURE__ */ import_react.default.createElement("div", {
+		ref: rootRef,
+		style: p10Vars(tk, theme)
+	}, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, lap || view === "round" ? /* @__PURE__ */ import_react.default.createElement(P10Flow, {
+		list,
+		d,
+		upd,
+		roundNo: hist.length + 1,
+		tk,
+		t,
+		theme,
+		lap,
+		onSave: addRound,
+		view,
+		setView,
+		tie: st.s === "tie" ? st.tied : null,
+		onTie: (id) => setState((s) => ({
+			...s,
+			tieWin: id
+		}))
+	}) : /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "p10-flow",
+		style: { gridTemplateAreas: "\"seg\" \"tbl\"" }
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "p10-seg",
+		role: "tablist"
+	}, /* @__PURE__ */ import_react.default.createElement("button", {
+		role: "tab",
+		"aria-selected": false,
+		onClick: () => setView("round")
+	}, t("skyjoRoundLabel")(hist.length + 1)), /* @__PURE__ */ import_react.default.createElement("button", {
+		role: "tab",
+		"aria-selected": true
+	}, t("skyjoViewTable"))), /* @__PURE__ */ import_react.default.createElement("div", { style: { gridArea: "tbl" } }, table))), lap && /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side" }, /* @__PURE__ */ import_react.default.createElement(P10Standings, {
 		list,
 		tk,
 		theme,
 		t,
 		rounds: hist.length
-	}), /* @__PURE__ */ import_react.default.createElement(S8History, {
-		players: state.players,
-		history: hist,
-		editIdx,
-		setEditIdx,
-		onUndo: undo,
+	}), table)), editP && /* @__PURE__ */ import_react.default.createElement(P10EditSheet, {
+		key: edit.i + "-" + edit.pid,
+		p: editP,
+		round: edit.i + 1,
+		init: p10FromRound(hist[edit.i], edit.pid),
 		tk,
 		t,
-		cell: (r, p) => /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, gtNum(r.scores && r.scores[p.id]) || 0, r.done && r.done[p.id] ? /* @__PURE__ */ import_react.default.createElement("span", { style: {
-			color: tk.teal,
-			marginLeft: 3,
-			fontSize: 12
-		} }, "✓") : null),
-		renderEdit: (i) => /* @__PURE__ */ import_react.default.createElement(P10Entry, {
-			players: list,
-			init: hist[i],
-			isEdit: true,
-			onSave: (r) => editRound(i, r),
-			onCancel: () => setEditIdx(null),
-			tk,
-			theme,
-			t
-		})
-	}))));
+		theme,
+		onClose: () => setEdit(null),
+		onSave: (e) => editCell(edit.i, edit.pid, e)
+	})));
 }
 // web/src/shared/laptop-keys.js
 var laptop_keys_exports = /* @__PURE__ */ __exportAll({
@@ -24891,98 +25299,6 @@ function RommeGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 			target
 		})
 	}))));
-}
-// web/src/shared/dialog.js
-var FOCUSABLE = "a[href],button:not([disabled]),input:not([disabled]):not([type=\"hidden\"]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex=\"-1\"]),[contenteditable=\"true\"]";
-var stack$1 = [];
-function gtDialogFocusables(root) {
-	return Array.from(root.querySelectorAll(FOCUSABLE)).filter((el) => !el.closest("[inert]") && el.getClientRects().length > 0);
-}
-function gtDialogInert(root) {
-	const done = [];
-	for (let el = root; el && el !== document.body && el.parentElement; el = el.parentElement) Array.from(el.parentElement.children).forEach((sib) => {
-		if (sib === el || sib.tagName === "SCRIPT" || sib.tagName === "STYLE" || sib.hasAttribute("inert") || sib.hasAttribute("data-gt-keep")) return;
-		sib.setAttribute("inert", "");
-		done.push(sib);
-	});
-	return () => done.forEach((n) => n.removeAttribute("inert"));
-}
-function useGtDialog({ open, onClose, escape = true, outside = true }) {
-	const ref = import_react.default.useRef(null);
-	const latest = import_react.default.useRef({
-		onClose,
-		escape,
-		outside
-	});
-	latest.current = {
-		onClose,
-		escape,
-		outside
-	};
-	import_react.default.useEffect(() => {
-		const root = ref.current;
-		if (!open || !root) return void 0;
-		const trigger = document.activeElement;
-		const entry = { root };
-		stack$1.push(entry);
-		const undoInert = gtDialogInert(root);
-		if (!root.hasAttribute("tabindex")) root.setAttribute("tabindex", "-1");
-		if (!root.contains(document.activeElement)) {
-			const start = root.querySelector("[data-gt-autofocus]") || gtDialogFocusables(root)[0] || root;
-			try {
-				start.focus({ preventScroll: true });
-			} catch (_) {}
-		}
-		const onKey = (e) => {
-			if (stack$1[stack$1.length - 1] !== entry) return;
-			if (e.key === "Escape") {
-				const l = latest.current;
-				if (l.escape && l.onClose) {
-					e.stopPropagation();
-					l.onClose();
-				}
-				return;
-			}
-			if (e.key !== "Tab") return;
-			const items = gtDialogFocusables(root);
-			if (!items.length) {
-				e.preventDefault();
-				root.focus();
-				return;
-			}
-			const first = items[0], last = items[items.length - 1], cur = document.activeElement;
-			const at = items.indexOf(cur);
-			e.preventDefault();
-			if (e.shiftKey) (at <= 0 ? last : items[at - 1]).focus();
-			else (at < 0 || at === items.length - 1 ? first : items[at + 1]).focus();
-		};
-		const born = performance.now();
-		const onTap = (e) => {
-			if (stack$1[stack$1.length - 1] !== entry) return;
-			const t = e.target;
-			if (!t || !t.contains || t === root || root.contains(t) || !t.contains(root)) return;
-			if (e.timeStamp && performance.now() - born < 120) return;
-			const l = latest.current;
-			const o = l.outside === true ? l.onClose : l.outside;
-			if (typeof o === "function") {
-				e.stopPropagation();
-				o();
-			}
-		};
-		document.addEventListener("keydown", onKey, true);
-		document.addEventListener("click", onTap, true);
-		return () => {
-			document.removeEventListener("keydown", onKey, true);
-			document.removeEventListener("click", onTap, true);
-			const i = stack$1.indexOf(entry);
-			if (i >= 0) stack$1.splice(i, 1);
-			undoInert();
-			if (trigger && trigger.isConnected && trigger !== document.body) try {
-				trigger.focus({ preventScroll: true });
-			} catch (_) {}
-		};
-	}, [open]);
-	return ref;
 }
 // web/src/shared/more-sheet.js
 var GT_MORE_CSS = `.gt-foot-acts{display:none}
@@ -57093,8 +57409,20 @@ var GT_S8_TR = {
 	de: {
 		gamePhase10: "Phase 10",
 		gamePhase10Desc: "Zehn Phasen nacheinander schaffen, wenig Strafpunkte sammeln",
-		rulesPhase10: "Ziel: Als erste Person alle 10 Phasen schaffen. In jeder Runde versucht jede Person, ihre aktuelle Phase auszulegen. Wer sie schafft, macht in der nächsten Runde mit der nächsten Phase weiter, sonst wird dieselbe Phase wiederholt. Die Runde endet, sobald jemand alle Karten los ist.\n\nStrafpunkte für Karten auf der Hand: 1 bis 9 je 5 Punkte, 10 bis 12 je 10 Punkte, Aussetzen 15 Punkte, Joker 25 Punkte.\n\nTrage pro Runde die Strafpunkte ein und hake ab, wer seine Phase geschafft hat. Die App führt die Phase jeder Person mit.\n\nSieg: Wer zuerst Phase 10 schafft, gewinnt. Schaffen es mehrere in derselben Runde, gewinnt, wer weniger Strafpunkte hat.\n\nDrilling = 3 gleiche Zahlen, Folge = Zahlen in Reihe." + gtS8PL("de"),
+		rulesPhase10: "Ziel: Als erste Person alle 10 Phasen schaffen. In jeder Runde versucht jede Person, ihre aktuelle Phase auszulegen. Wer sie schafft, macht in der nächsten Runde mit der nächsten Phase weiter, sonst wird dieselbe Phase wiederholt. Die Runde endet, sobald jemand alle Karten los ist.\n\nStrafpunkte für Karten auf der Hand: 1 bis 9 je 5 Punkte, 10 bis 12 je 10 Punkte, Aussetzen 15 Punkte, Joker 25 Punkte.\n\nTrage pro Runde die Strafpunkte ein und hake ab, wer seine Phase geschafft hat. Die App führt die Phase jeder Person mit.\n\nSieg: Wer zuerst Phase 10 schafft, gewinnt. Schaffen es mehrere in derselben Runde, gewinnt, wer weniger Strafpunkte hat. Bei Gleichstand spielen die Gleichen Phase 10 nochmals, wer zuerst ausmacht, gewinnt.\n\nDrilling = 3 gleiche Zahlen, Folge = Zahlen in Reihe." + gtS8PL("de"),
 		p10Phase: (n) => `Phase ${n}`,
+		p10Out: "Ausgemacht (0)",
+		p10HandCards: "Karten auf der Hand",
+		p10PtsN: (n) => `${n} Punkte`,
+		p10Each: (n) => `je ${n} Punkte`,
+		p10K1: "Zahl 1 bis 9",
+		p10K2: "Zahl 10 bis 12",
+		p10K3: "Aussetzen",
+		p10K4: "Joker",
+		p10Less: (k) => `${k} weniger`,
+		p10More: (k) => `${k} mehr`,
+		p10TieTitle: "Gleichstand!",
+		p10TieText: "Die Gleichen spielen Phase 10 nochmals. Wer hat zuerst ausgemacht?",
 		p10Phases: GT_S8_PH.de,
 		p10Done: "Phase geschafft",
 		p10DoneN: (n) => `Phase ${n} geschafft`,
@@ -57170,8 +57498,20 @@ var GT_S8_TR = {
 	en: {
 		gamePhase10: "Phase 10",
 		gamePhase10Desc: "Complete ten phases in order, collect few penalty points",
-		rulesPhase10: "Goal: be the first to complete all 10 phases. Each round, everyone tries to lay down their current phase. If you make it, you move on to the next phase next round, otherwise you repeat the same phase. The round ends as soon as someone gets rid of all their cards.\n\nPenalty points for cards left in hand: 1 to 9 are 5 points each, 10 to 12 are 10 points each, Skip 15 points, Wild 25 points.\n\nEach round, enter the penalty points and tick who completed their phase. The app keeps track of everyone's phase.\n\nWinning: the first to complete phase 10 wins. If several do it in the same round, the one with fewer penalty points wins.\n\nSet = cards of the same number, run = numbers in sequence." + gtS8PL("en"),
+		rulesPhase10: "Goal: be the first to complete all 10 phases. Each round, everyone tries to lay down their current phase. If you make it, you move on to the next phase next round, otherwise you repeat the same phase. The round ends as soon as someone gets rid of all their cards.\n\nPenalty points for cards left in hand: 1 to 9 are 5 points each, 10 to 12 are 10 points each, Skip 15 points, Wild 25 points.\n\nEach round, enter the penalty points and tick who completed their phase. The app keeps track of everyone's phase.\n\nWinning: the first to complete phase 10 wins. If several do it in the same round, the one with fewer penalty points wins. If there is a tie, the tied players replay Phase 10 and the first to go out wins.\n\nSet = cards of the same number, run = numbers in sequence." + gtS8PL("en"),
 		p10Phase: (n) => `Phase ${n}`,
+		p10Out: "Went out (0)",
+		p10HandCards: "Cards in hand",
+		p10PtsN: (n) => `${n} points`,
+		p10Each: (n) => `${n} points each`,
+		p10K1: "Number 1 to 9",
+		p10K2: "Number 10 to 12",
+		p10K3: "Skip",
+		p10K4: "Wild",
+		p10Less: (k) => `one less ${k}`,
+		p10More: (k) => `one more ${k}`,
+		p10TieTitle: "Tie!",
+		p10TieText: "The tied players replay Phase 10. Who went out first?",
 		p10Phases: GT_S8_PH.en,
 		p10Done: "Phase completed",
 		p10DoneN: (n) => `Phase ${n} completed`,
@@ -57247,8 +57587,20 @@ var GT_S8_TR = {
 	fr: {
 		gamePhase10: "Phase 10",
 		gamePhase10Desc: "Réussir dix phases dans l'ordre avec peu de points de pénalité",
-		rulesPhase10: "But : être la première personne à réussir les 10 phases. À chaque manche, chacun essaie de poser sa phase actuelle. Si tu la réussis, tu passes à la phase suivante à la prochaine manche, sinon tu recommences la même. La manche se termine dès que quelqu'un s'est débarrassé de toutes ses cartes.\n\nPoints de pénalité pour les cartes en main : 1 à 9 valent 5 points, 10 à 12 valent 10 points, Passe 15 points, Joker 25 points.\n\nÀ chaque manche, saisis les points de pénalité et coche qui a réussi sa phase. L'app suit la phase de chacun.\n\nVictoire : la première personne à réussir la phase 10 gagne. Si plusieurs y arrivent dans la même manche, celle qui a le moins de points gagne.\n\nBrelan = 3 cartes du même nombre, suite = nombres qui se suivent." + gtS8PL("fr"),
+		rulesPhase10: "But : être la première personne à réussir les 10 phases. À chaque manche, chacun essaie de poser sa phase actuelle. Si tu la réussis, tu passes à la phase suivante à la prochaine manche, sinon tu recommences la même. La manche se termine dès que quelqu'un s'est débarrassé de toutes ses cartes.\n\nPoints de pénalité pour les cartes en main : 1 à 9 valent 5 points, 10 à 12 valent 10 points, Passe 15 points, Joker 25 points.\n\nÀ chaque manche, saisis les points de pénalité et coche qui a réussi sa phase. L'app suit la phase de chacun.\n\nVictoire : la première personne à réussir la phase 10 gagne. Si plusieurs y arrivent dans la même manche, celle qui a le moins de points gagne. En cas d’égalité, les personnes concernées rejouent la phase 10 ; la première à finir gagne.\n\nBrelan = 3 cartes du même nombre, suite = nombres qui se suivent." + gtS8PL("fr"),
 		p10Phase: (n) => `Phase ${n}`,
+		p10Out: "A fini (0)",
+		p10HandCards: "Cartes en main",
+		p10PtsN: (n) => `${n} points`,
+		p10Each: (n) => `${n} points chacune`,
+		p10K1: "Chiffre 1 à 9",
+		p10K2: "Chiffre 10 à 12",
+		p10K3: "Passe",
+		p10K4: "Joker",
+		p10Less: (k) => `${k} en moins`,
+		p10More: (k) => `${k} en plus`,
+		p10TieTitle: "Égalité !",
+		p10TieText: "Les personnes à égalité rejouent la phase 10. Qui a fini en premier ?",
 		p10Phases: GT_S8_PH.fr,
 		p10Done: "Phase réussie",
 		p10DoneN: (n) => `Phase ${n} réussie`,
@@ -57324,8 +57676,20 @@ var GT_S8_TR = {
 	it: {
 		gamePhase10: "Phase 10",
 		gamePhase10Desc: "Completa dieci fasi in ordine, raccogli pochi punti di penalità",
-		rulesPhase10: "Obiettivo: essere i primi a completare tutte le 10 fasi. A ogni round ognuno prova a calare la propria fase attuale. Chi ci riesce passa alla fase successiva nel round seguente, altrimenti ripete la stessa fase. Il round finisce appena qualcuno ha finito tutte le carte.\n\nPunti di penalità per le carte in mano: da 1 a 9 valgono 5 punti, da 10 a 12 valgono 10 punti, Salta 15 punti, Jolly 25 punti.\n\nA ogni round inserisci i punti di penalità e spunta chi ha completato la sua fase. L'app tiene traccia della fase di ognuno.\n\nVittoria: chi completa per primo la fase 10 vince. Se ci riescono in più nello stesso round, vince chi ha meno punti di penalità.\n\nTris = 3 carte dello stesso numero, scala = numeri in sequenza." + gtS8PL("it"),
+		rulesPhase10: "Obiettivo: essere i primi a completare tutte le 10 fasi. A ogni round ognuno prova a calare la propria fase attuale. Chi ci riesce passa alla fase successiva nel round seguente, altrimenti ripete la stessa fase. Il round finisce appena qualcuno ha finito tutte le carte.\n\nPunti di penalità per le carte in mano: da 1 a 9 valgono 5 punti, da 10 a 12 valgono 10 punti, Salta 15 punti, Jolly 25 punti.\n\nA ogni round inserisci i punti di penalità e spunta chi ha completato la sua fase. L'app tiene traccia della fase di ognuno.\n\nVittoria: chi completa per primo la fase 10 vince. Se ci riescono in più nello stesso round, vince chi ha meno punti di penalità. In caso di parità, chi è pari rigioca la fase 10 e vince chi chiude per primo.\n\nTris = 3 carte dello stesso numero, scala = numeri in sequenza." + gtS8PL("it"),
 		p10Phase: (n) => `Fase ${n}`,
+		p10Out: "Chiuso (0)",
+		p10HandCards: "Carte in mano",
+		p10PtsN: (n) => `${n} punti`,
+		p10Each: (n) => `${n} punti ciascuna`,
+		p10K1: "Numero da 1 a 9",
+		p10K2: "Numero da 10 a 12",
+		p10K3: "Salta",
+		p10K4: "Jolly",
+		p10Less: (k) => `un ${k} in meno`,
+		p10More: (k) => `un ${k} in più`,
+		p10TieTitle: "Parità!",
+		p10TieText: "Chi è in parità rigioca la fase 10. Chi ha chiuso per primo?",
 		p10Phases: GT_S8_PH.it,
 		p10Done: "Fase completata",
 		p10DoneN: (n) => `Fase ${n} completata`,
@@ -57401,8 +57765,20 @@ var GT_S8_TR = {
 	es: {
 		gamePhase10: "Phase 10",
 		gamePhase10Desc: "Completa diez fases en orden y suma pocos puntos de penalización",
-		rulesPhase10: "Objetivo: ser la primera persona en completar las 10 fases. En cada ronda, todos intentan bajar su fase actual. Quien lo logra pasa a la siguiente fase en la próxima ronda, si no, repite la misma. La ronda termina en cuanto alguien se queda sin cartas.\n\nPuntos de penalización por cartas en la mano: del 1 al 9 valen 5 puntos, del 10 al 12 valen 10 puntos, Salto 15 puntos, Comodín 25 puntos.\n\nEn cada ronda, anota los puntos de penalización y marca quién completó su fase. La app lleva la fase de cada persona.\n\nVictoria: quien complete primero la fase 10 gana. Si lo logran varias personas en la misma ronda, gana quien tenga menos puntos.\n\nTrío = 3 cartas del mismo número, escalera = números seguidos." + gtS8PL("es"),
+		rulesPhase10: "Objetivo: ser la primera persona en completar las 10 fases. En cada ronda, todos intentan bajar su fase actual. Quien lo logra pasa a la siguiente fase en la próxima ronda, si no, repite la misma. La ronda termina en cuanto alguien se queda sin cartas.\n\nPuntos de penalización por cartas en la mano: del 1 al 9 valen 5 puntos, del 10 al 12 valen 10 puntos, Salto 15 puntos, Comodín 25 puntos.\n\nEn cada ronda, anota los puntos de penalización y marca quién completó su fase. La app lleva la fase de cada persona.\n\nVictoria: quien complete primero la fase 10 gana. Si lo logran varias personas en la misma ronda, gana quien tenga menos puntos. En caso de empate, quienes empatan repiten la fase 10 y gana quien termine primero.\n\nTrío = 3 cartas del mismo número, escalera = números seguidos." + gtS8PL("es"),
 		p10Phase: (n) => `Fase ${n}`,
+		p10Out: "Se descartó todo (0)",
+		p10HandCards: "Cartas en la mano",
+		p10PtsN: (n) => `${n} puntos`,
+		p10Each: (n) => `${n} puntos cada una`,
+		p10K1: "Número del 1 al 9",
+		p10K2: "Número del 10 al 12",
+		p10K3: "Salto",
+		p10K4: "Comodín",
+		p10Less: (k) => `un ${k} menos`,
+		p10More: (k) => `un ${k} más`,
+		p10TieTitle: "¡Empate!",
+		p10TieText: "Quienes empatan repiten la fase 10. ¿Quién terminó primero?",
 		p10Phases: GT_S8_PH.es,
 		p10Done: "Fase completada",
 		p10DoneN: (n) => `Fase ${n} completada`,
@@ -57478,8 +57854,20 @@ var GT_S8_TR = {
 	pt: {
 		gamePhase10: "Phase 10",
 		gamePhase10Desc: "Completa dez fases por ordem e junta poucos pontos de penalização",
-		rulesPhase10: "Objetivo: ser a primeira pessoa a completar as 10 fases. Em cada ronda, todos tentam baixar a sua fase atual. Quem conseguir passa à fase seguinte na próxima ronda, senão repete a mesma. A ronda termina assim que alguém fica sem cartas.\n\nPontos de penalização pelas cartas na mão: de 1 a 9 valem 5 pontos, de 10 a 12 valem 10 pontos, Salto 15 pontos, Curinga 25 pontos.\n\nEm cada ronda, regista os pontos de penalização e marca quem completou a sua fase. A app acompanha a fase de cada pessoa.\n\nVitória: quem completar primeiro a fase 10 ganha. Se várias pessoas o conseguirem na mesma ronda, ganha quem tiver menos pontos.\n\nTrinca = 3 cartas do mesmo número, sequência = números seguidos." + gtS8PL("pt"),
+		rulesPhase10: "Objetivo: ser a primeira pessoa a completar as 10 fases. Em cada ronda, todos tentam baixar a sua fase atual. Quem conseguir passa à fase seguinte na próxima ronda, senão repete a mesma. A ronda termina assim que alguém fica sem cartas.\n\nPontos de penalização pelas cartas na mão: de 1 a 9 valem 5 pontos, de 10 a 12 valem 10 pontos, Salto 15 pontos, Curinga 25 pontos.\n\nEm cada ronda, regista os pontos de penalização e marca quem completou a sua fase. A app acompanha a fase de cada pessoa.\n\nVitória: quem completar primeiro a fase 10 ganha. Se várias pessoas o conseguirem na mesma ronda, ganha quem tiver menos pontos. Em caso de empate, quem empatou volta a jogar a fase 10 e ganha quem terminar primeiro.\n\nTrinca = 3 cartas do mesmo número, sequência = números seguidos." + gtS8PL("pt"),
 		p10Phase: (n) => `Fase ${n}`,
+		p10Out: "Terminou (0)",
+		p10HandCards: "Cartas na mão",
+		p10PtsN: (n) => `${n} pontos`,
+		p10Each: (n) => `${n} pontos cada`,
+		p10K1: "Número de 1 a 9",
+		p10K2: "Número de 10 a 12",
+		p10K3: "Salto",
+		p10K4: "Curinga",
+		p10Less: (k) => `menos um ${k}`,
+		p10More: (k) => `mais um ${k}`,
+		p10TieTitle: "Empate!",
+		p10TieText: "Quem empatou volta a jogar a fase 10. Quem terminou primeiro?",
 		p10Phases: GT_S8_PH.pt,
 		p10Done: "Fase completada",
 		p10DoneN: (n) => `Fase ${n} completada`,
@@ -71144,7 +71532,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.09-6";
+var APP_BUILD = "2026.11.09-7";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -115258,7 +115646,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.09-6");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.09-7");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -117955,7 +118343,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.09-6" && !upd) {
+		if (seen && seen !== "2026.11.09-7" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -117964,7 +118352,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.09-6" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.09-7" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

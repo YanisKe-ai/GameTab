@@ -213,6 +213,18 @@ def flip7_round(pg, hands):
         click(pg, pg.locator(".f7-save").first, 500)
 
 
+def p10_round(pg, entries):
+    """Phase 10: pro Person (geschafft, ausgemacht, Anzahl Karten 1-9), dann Weiter bzw. Runde speichern."""
+    for done, out, n in entries:
+        if out:
+            click(pg, pg.locator(".p10-tg", has_text="Ausgemacht").first, 150)
+        elif done:
+            click(pg, pg.locator(".p10-tg", has_text="geschafft").first, 150)
+        for _ in range(n):
+            click(pg, pg.locator(".p10-row").first.locator(".p10-pm").last, 80)
+        click(pg, pg.locator(".p10-save").first, 450)
+
+
 def skyjo_pick_ender(pg, ender=None):
     """Skyjo Schritt 1: Beender waehlen (Name) oder 'Weiss nicht mehr' (None), dann 'Weiter: Punkte eintragen'."""
     if ender is None:
@@ -365,10 +377,7 @@ def t_phase10(pg, env):
     open_game(pg, "Schreibunterlagen", "Phase 10"); press_start(pg)
     rounds = 2 if env.quick else 10
     for _ in range(rounds):
-        pts = pg.get_by_role("button", name=re.compile(r"^punkte", re.I))
-        numpad(pg, pts.nth(0), 0); numpad(pg, pts.nth(1), 25)
-        click(pg, btn_re(pg, r"Phase \d+ geschafft").first, 400)
-        click(pg, btn(pg, "Runde speichern"), 800)
+        p10_round(pg, [(True, True, 0), (False, False, 5)])
     if env.quick:
         check(has_text(pg, r"RUNDE 3"), "Phase 10: Runde 3 nicht erreicht")
         finish(pg, "Phase 10", env)

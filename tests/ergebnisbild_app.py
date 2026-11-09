@@ -98,10 +98,11 @@ def flow_skyjo(pg):
 def flow_flip7(pg):
     names = ["Zoë", "Maximiliane Huber-Brunner", "Kim"]
     R.open_game(pg, "Schreibunterlagen", "Flip 7"); fill_names(pg, names); R.press_start(pg)
-    for sc in ([60, 40, 20], [70, 30, 10], [85, 90, 50]):
-        for nm, v in zip(names, sc):
-            R.numpad(pg, nm, v)
-        R.click(pg, R.btn(pg, "Runde speichern"), 900)
+    for hands in ([[12, 11, 10, 9, 8, 7, 6], [9, 7, 5, "+4"], ["Bust"]],
+                  [[12, 10, 8, "x2", "+6"], [11, 6, "+2"], [3, 4, 5]],
+                  [[11, 9, 7, "x2", "+10"], [12, 10, "x2"], [8, 2]]):
+        R.flip7_round(pg, hands)
+        R.wait(pg, 400)
     R.expect_text(pg, r"gewinnt", "Flip 7: Sieger nicht angezeigt")
 
 

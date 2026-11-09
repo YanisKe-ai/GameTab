@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.09-6 (09.11.2026 22:28)
+- Flip 7 neu: Karten antippen statt Summe tippen, Flip 7 und Bust automatisch, Stechrunde bei Gleichstand, Tabelle, neues Icon
+
 ## 2026.11.09-5 (09.11.2026 00:48)
 - Darts: jede Person wirft mit eigener Pfeilfarbe
 

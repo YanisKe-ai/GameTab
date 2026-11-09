@@ -150,16 +150,18 @@ def case_flip7(b):
     R.wait(pg, 900)
     R.open_game(pg, "Schreibunterlagen", "Flip 7")
     R.click(pg, R.btn(pg, "Spiel starten").first, 900)
-    trig = pg.get_by_role("button", name=re.compile(r"^Spieler 1\s")).first
+    R.flip7_round(pg, [[3], [4]])
+    R.click(pg, pg.get_by_role("tab", name="Tabelle").first, 600)
+    trig = pg.locator(".f7-cell").first
     R.click(pg, trig, 800)
-    check(pg, "Flip7-Eingabe (leer)", ".gtL-padov", content_sel=".gtL-padsheet")
+    check(pg, "Flip7-Bearbeiten (unverändert)", ".f7-ov", content_sel=".f7-sheet")
     R.click(pg, trig, 800)
-    pg.locator(".gtL-padsheet").get_by_role("button", name="7", exact=True).first.click()
+    pg.locator(".f7-sheet .f7-grid button", has_text=re.compile("^7$")).first.click()
     R.wait(pg, 300)
-    pts = points(pg, ".gtL-padsheet")
+    pts = points(pg, ".f7-sheet")
     pg.mouse.click(pts["outside"][0], pts["outside"][1])
     R.wait(pg, 700)
-    ok(not gone(pg, ".gtL-padov"), "Flip7-Eingabe mit Eintrag: Tippen ausserhalb schliesst nicht (Eintrag bleibt)")
+    ok(not gone(pg, ".f7-ov"), "Flip7-Bearbeiten mit Änderung: Tippen ausserhalb schliesst nicht")
     ok(not errors, f"Flip7: keine Seitenfehler {errors[:1]}")
     ctx.close()
 

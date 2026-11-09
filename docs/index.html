@@ -7680,6 +7680,15 @@ function gtNoEmo(s) {
 var translations_exports = /* @__PURE__ */ __exportAll({ TRANSLATIONS: () => TRANSLATIONS });
 var TRANSLATIONS = {
 	de: {
+		f7Numbers: "Zahlenkarten",
+		f7Mods: "Bonuskarten",
+		f7Double: "Mal zwei",
+		f7TapCards: "Tippe die Karten an, die vor der Person liegen.",
+		f7Flip7Badge: "FLIP 7 +15",
+		f7CardsOf: "Karten von",
+		f7ToTarget: (n) => `noch ${n} bis zum Ziel`,
+		f7AtTarget: "Ziel erreicht",
+		f7TieRound: "Gleichstand an der Spitze: Es folgt eine Stechrunde, bis eine Person allein vorne liegt.",
 		yzHelpFace: "Wie viele Würfel zeigen diese Augenzahl?",
 		yzHelpOnePair: "Zwei gleiche Würfel. Welche Augenzahl?",
 		yzHelpTwoPairs: "Welche zwei Paare?",
@@ -9352,7 +9361,7 @@ var TRANSLATIONS = {
 		],
 		gameFlip7: "Flip 7",
 		gameFlip7Desc: "Ziehen ohne doppelte Zahl, bis 200 Punkte",
-		rulesFlip7: "Reihum wird gezogen: entweder eine Zahlenkarte (0-12) dazu (Hit) oder aussteigen (Stay). Zieht ihr eine Zahl, die ihr schon habt, ist das ein Bust: Die Runde bringt 0 Punkte. 7 verschiedene Zahlenkarten (Flip 7) beenden die Runde sofort für alle und bringen +15 Bonus. Rundenwertung: Zahlenkarten-Summe, dann ×2 falls vorhanden, dann +2/+4/+6/+8/+10-Boni addieren, dann +15 bei Flip 7. Wer zuerst 200 Punkte erreicht (Runde wird noch fertig gespielt), gewinnt mit der höchsten Gesamtpunktzahl.",
+		rulesFlip7: "Reihum wird gezogen: entweder eine Zahlenkarte (0-12) dazu (Hit) oder aussteigen (Stay). Zieht ihr eine Zahl, die ihr schon habt, ist das ein Bust: Die Runde bringt 0 Punkte. 7 verschiedene Zahlenkarten (Flip 7) beenden die Runde sofort für alle und bringen +15 Bonus. Rundenwertung: Zahlenkarten-Summe, dann ×2 falls vorhanden, dann +2/+4/+6/+8/+10-Boni addieren, dann +15 bei Flip 7. Wer zuerst 200 Punkte erreicht (Runde wird noch fertig gespielt), gewinnt mit der höchsten Gesamtpunktzahl. Bonuskarten zählen auch ohne Zahlenkarten. Bei Gleichstand an der Spitze folgt eine Stechrunde.",
 		flip7RoundTitle: "Ergebnis dieser Runde",
 		flip7BustHint: "Doppelte Zahl gezogen = Bust, 0 Punkte diese Runde",
 		flip7BustToggle: "Bust (0 Punkte)",
@@ -9370,6 +9379,15 @@ var TRANSLATIONS = {
 		mostLikelyStatementsPlayed: (n) => `${n} Aussagen gespielt`
 	},
 	en: {
+		f7Numbers: "Number cards",
+		f7Mods: "Bonus cards",
+		f7Double: "Times two",
+		f7TapCards: "Tap the cards in front of this player.",
+		f7Flip7Badge: "FLIP 7 +15",
+		f7CardsOf: "Cards of",
+		f7ToTarget: (n) => `${n} to go`,
+		f7AtTarget: "Target reached",
+		f7TieRound: "Tie for the lead: play another round until one player is ahead.",
 		yzHelpFace: "How many dice show this number?",
 		yzHelpOnePair: "Two dice alike. Which number?",
 		yzHelpTwoPairs: "Which two pairs?",
@@ -11042,7 +11060,7 @@ var TRANSLATIONS = {
 		],
 		gameFlip7: "Flip 7",
 		gameFlip7Desc: "Draw without matching a number, race to 200",
-		rulesFlip7: "Take turns drawing: either add a number card (0-12, Hit) or stop (Stay). Drawing a number you already have is a bust: the round scores 0. Collecting 7 different number cards (Flip 7) ends the round instantly for everyone and adds a +15 bonus. Round scoring: sum of number cards, then ×2 if you have it, then add any +2/+4/+6/+8/+10 bonus cards, then +15 for Flip 7. First to reach 200 points (the round is finished first) wins with the highest total score.",
+		rulesFlip7: "Take turns drawing: either add a number card (0-12, Hit) or stop (Stay). Drawing a number you already have is a bust: the round scores 0. Collecting 7 different number cards (Flip 7) ends the round instantly for everyone and adds a +15 bonus. Round scoring: sum of number cards, then ×2 if you have it, then add any +2/+4/+6/+8/+10 bonus cards, then +15 for Flip 7. First to reach 200 points (the round is finished first) wins with the highest total score. Bonus cards count even without number cards. If the lead is tied, play another round.",
 		flip7RoundTitle: "This round's result",
 		flip7BustHint: "Drawing a duplicate number = bust, 0 points this round",
 		flip7BustToggle: "Bust (0 points)",
@@ -11060,6 +11078,15 @@ var TRANSLATIONS = {
 		mostLikelyStatementsPlayed: (n) => `${n} statements played`
 	},
 	fr: {
+		f7Numbers: "Cartes numéro",
+		f7Mods: "Cartes bonus",
+		f7Double: "Fois deux",
+		f7TapCards: "Touchez les cartes posées devant cette personne.",
+		f7Flip7Badge: "FLIP 7 +15",
+		f7CardsOf: "Cartes de",
+		f7ToTarget: (n) => `encore ${n} jusqu’à l’objectif`,
+		f7AtTarget: "Objectif atteint",
+		f7TieRound: "Égalité en tête : jouez une manche de plus jusqu’à ce qu’une seule personne mène.",
 		yzHelpFace: "Combien de dés montrent ce chiffre ?",
 		yzHelpOnePair: "Deux dés identiques. Quel chiffre ?",
 		yzHelpTwoPairs: "Quelles deux paires ?",
@@ -12732,7 +12759,7 @@ var TRANSLATIONS = {
 		],
 		gameFlip7: "Flip 7",
 		gameFlip7Desc: "Piochez sans doublon, course jusqu'à 200",
-		rulesFlip7: "Chacun pioche à tour de rôle : soit une carte numéro (0-12, Hit), soit on s'arrête (Stay). Piocher un numéro déjà en main, c'est un bust : la manche vaut 0 point. Réunir 7 cartes numéro différentes (Flip 7) termine la manche instantanément pour tout le monde et ajoute un bonus de +15. Calcul : somme des cartes numéro, puis ×2 si présent, puis addition des cartes bonus +2/+4/+6/+8/+10, puis +15 pour un Flip 7. La première personne à atteindre 200 points (la manche se termine d'abord) gagne avec le total le plus élevé.",
+		rulesFlip7: "Chacun pioche à tour de rôle : soit une carte numéro (0-12, Hit), soit on s'arrête (Stay). Piocher un numéro déjà en main, c'est un bust : la manche vaut 0 point. Réunir 7 cartes numéro différentes (Flip 7) termine la manche instantanément pour tout le monde et ajoute un bonus de +15. Calcul : somme des cartes numéro, puis ×2 si présent, puis addition des cartes bonus +2/+4/+6/+8/+10, puis +15 pour un Flip 7. La première personne à atteindre 200 points (la manche se termine d'abord) gagne avec le total le plus élevé. Les cartes bonus comptent aussi sans cartes numéro. En cas d’égalité en tête, on joue une manche de plus.",
 		flip7RoundTitle: "Résultat de cette manche",
 		flip7BustHint: "Numéro en double = bust, 0 point cette manche",
 		flip7BustToggle: "Bust (0 point)",
@@ -12750,6 +12777,15 @@ var TRANSLATIONS = {
 		mostLikelyStatementsPlayed: (n) => `${n} affirmations jouées`
 	},
 	it: {
+		f7Numbers: "Carte numero",
+		f7Mods: "Carte bonus",
+		f7Double: "Per due",
+		f7TapCards: "Tocca le carte davanti a questa persona.",
+		f7Flip7Badge: "FLIP 7 +15",
+		f7CardsOf: "Carte di",
+		f7ToTarget: (n) => `mancano ${n} all’obiettivo`,
+		f7AtTarget: "Obiettivo raggiunto",
+		f7TieRound: "Parità in testa: si gioca un altro round finché una sola persona è in vantaggio.",
 		yzHelpFace: "Quanti dadi mostrano questo numero?",
 		yzHelpOnePair: "Due dadi uguali. Quale numero?",
 		yzHelpTwoPairs: "Quali due coppie?",
@@ -14422,7 +14458,7 @@ var TRANSLATIONS = {
 		],
 		gameFlip7: "Flip 7",
 		gameFlip7Desc: "Pesca senza doppioni, corsa fino a 200",
-		rulesFlip7: "A turno si pesca: una carta numero (0-12, Hit) oppure ci si ferma (Stay). Pescare un numero già in mano è un bust: il round vale 0 punti. Raccogliere 7 carte numero diverse (Flip 7) termina il round all'istante per tutti e aggiunge un bonus di +15. Calcolo: somma delle carte numero, poi ×2 se presente, poi si sommano le carte bonus +2/+4/+6/+8/+10, poi +15 per il Flip 7. Chi raggiunge per primo 200 punti (il round viene comunque terminato) vince con il punteggio totale più alto.",
+		rulesFlip7: "A turno si pesca: una carta numero (0-12, Hit) oppure ci si ferma (Stay). Pescare un numero già in mano è un bust: il round vale 0 punti. Raccogliere 7 carte numero diverse (Flip 7) termina il round all'istante per tutti e aggiunge un bonus di +15. Calcolo: somma delle carte numero, poi ×2 se presente, poi si sommano le carte bonus +2/+4/+6/+8/+10, poi +15 per il Flip 7. Chi raggiunge per primo 200 punti (il round viene comunque terminato) vince con il punteggio totale più alto. Le carte bonus contano anche senza carte numero. In caso di parità in testa si gioca un altro round.",
 		flip7RoundTitle: "Risultato di questo round",
 		flip7BustHint: "Numero doppio pescato = bust, 0 punti questo round",
 		flip7BustToggle: "Bust (0 punti)",
@@ -14440,6 +14476,15 @@ var TRANSLATIONS = {
 		mostLikelyStatementsPlayed: (n) => `${n} affermazioni giocate`
 	},
 	es: {
+		f7Numbers: "Cartas de número",
+		f7Mods: "Cartas de bonificación",
+		f7Double: "Por dos",
+		f7TapCards: "Toca las cartas que tiene delante esta persona.",
+		f7Flip7Badge: "FLIP 7 +15",
+		f7CardsOf: "Cartas de",
+		f7ToTarget: (n) => `faltan ${n} para la meta`,
+		f7AtTarget: "Meta alcanzada",
+		f7TieRound: "Empate en cabeza: se juega otra ronda hasta que una sola persona vaya delante.",
 		yzHelpFace: "¿Cuántos dados muestran este número?",
 		yzHelpOnePair: "Dos dados iguales. ¿Qué número?",
 		yzHelpTwoPairs: "¿Qué dos parejas?",
@@ -16112,7 +16157,7 @@ var TRANSLATIONS = {
 		],
 		gameFlip7: "Flip 7",
 		gameFlip7Desc: "Roba sin repetir número, carrera hasta 200",
-		rulesFlip7: "Por turnos se roba: una carta número (0-12, Hit) o te plantas (Stay). Robar un número que ya tienes es un bust: la ronda vale 0 puntos. Reunir 7 cartas número diferentes (Flip 7) termina la ronda al instante para todos y suma un bono de +15. Cálculo: suma de las cartas número, luego ×2 si lo tienes, luego se suman las cartas bonus +2/+4/+6/+8/+10, luego +15 por el Flip 7. Quien alcance primero 200 puntos (la ronda se termina igualmente) gana con la puntuación total más alta.",
+		rulesFlip7: "Por turnos se roba: una carta número (0-12, Hit) o te plantas (Stay). Robar un número que ya tienes es un bust: la ronda vale 0 puntos. Reunir 7 cartas número diferentes (Flip 7) termina la ronda al instante para todos y suma un bono de +15. Cálculo: suma de las cartas número, luego ×2 si lo tienes, luego se suman las cartas bonus +2/+4/+6/+8/+10, luego +15 por el Flip 7. Quien alcance primero 200 puntos (la ronda se termina igualmente) gana con la puntuación total más alta. Las cartas de bonificación cuentan también sin cartas de número. Si hay empate en cabeza, se juega otra ronda.",
 		flip7RoundTitle: "Resultado de esta ronda",
 		flip7BustHint: "Número repetido = bust, 0 puntos esta ronda",
 		flip7BustToggle: "Bust (0 puntos)",
@@ -16130,6 +16175,15 @@ var TRANSLATIONS = {
 		mostLikelyStatementsPlayed: (n) => `${n} afirmaciones jugadas`
 	},
 	pt: {
+		f7Numbers: "Cartas de número",
+		f7Mods: "Cartas de bónus",
+		f7Double: "Vezes dois",
+		f7TapCards: "Toca nas cartas à frente desta pessoa.",
+		f7Flip7Badge: "FLIP 7 +15",
+		f7CardsOf: "Cartas de",
+		f7ToTarget: (n) => `faltam ${n} para a meta`,
+		f7AtTarget: "Meta alcançada",
+		f7TieRound: "Empate na liderança: joga-se mais uma ronda até uma só pessoa ficar à frente.",
 		yzHelpFace: "Quantos dados mostram este número?",
 		yzHelpOnePair: "Dois dados iguais. Que número?",
 		yzHelpTwoPairs: "Quais dois pares?",
@@ -17802,7 +17856,7 @@ var TRANSLATIONS = {
 		],
 		gameFlip7: "Flip 7",
 		gameFlip7Desc: "Puxa sem repetir número, corrida até 200",
-		rulesFlip7: "Às vezes puxa-se: uma carta número (0-12, Hit) ou para-se (Stay). Puxar um número que já tens é um bust: a ronda vale 0 pontos. Reunir 7 cartas número diferentes (Flip 7) termina a ronda instantaneamente para todos e soma um bónus de +15. Cálculo: soma das cartas número, depois ×2 se tiveres, depois somam-se as cartas bónus +2/+4/+6/+8/+10, depois +15 pelo Flip 7. Quem chegar primeiro aos 200 pontos (a ronda termina na mesma) ganha com a pontuação total mais alta.",
+		rulesFlip7: "Às vezes puxa-se: uma carta número (0-12, Hit) ou para-se (Stay). Puxar um número que já tens é um bust: a ronda vale 0 pontos. Reunir 7 cartas número diferentes (Flip 7) termina a ronda instantaneamente para todos e soma um bónus de +15. Cálculo: soma das cartas número, depois ×2 se tiveres, depois somam-se as cartas bónus +2/+4/+6/+8/+10, depois +15 pelo Flip 7. Quem chegar primeiro aos 200 pontos (a ronda termina na mesma) ganha com a pontuação total mais alta. As cartas de bónus contam mesmo sem cartas de número. Em caso de empate na liderança, joga-se mais uma ronda.",
 		flip7RoundTitle: "Resultado desta ronda",
 		flip7BustHint: "Número repetido = bust, 0 pontos nesta ronda",
 		flip7BustToggle: "Bust (0 pontos)",
@@ -20611,38 +20665,54 @@ function MafiaLogo({ color }) {
 		opacity: "0.5"
 	}));
 }
-function Flip7Logo({ color }) {
+function Flip7Logo({ color, theme }) {
+	const n = theme === "noir", l = theme === "light";
+	const K = n ? "#161616" : l ? "#F4EDE3" : "#12161F";
+	const face = n ? "#E6E6E6" : "#FFF1DC";
+	const back = n ? "#6E6E6E" : color || "#FF7A3D";
+	const num = n ? "#161616" : "#C2571A";
 	return /* @__PURE__ */ import_react.default.createElement("svg", {
 		width: "30",
 		height: "30",
 		viewBox: "0 0 30 30",
-		style: { flexShrink: 0 }
+		style: { flexShrink: 0 },
+		"aria-hidden": "true"
 	}, /* @__PURE__ */ import_react.default.createElement("rect", {
 		x: "1",
 		y: "1",
 		width: "28",
 		height: "28",
 		rx: "8",
-		fill: "#160D08",
-		stroke: `${color}55`,
+		fill: K,
+		stroke: n ? "#3A3A3A" : l ? "#D8C9B5" : `${back}55`,
 		strokeWidth: "1"
 	}), /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "8",
-		y: "6",
-		width: "14",
-		height: "18",
-		rx: "2.5",
-		fill: "none",
-		stroke: color,
-		strokeWidth: "1.6"
+		x: "6.5",
+		y: "7",
+		width: "11",
+		height: "15.5",
+		rx: "2",
+		fill: back,
+		transform: "rotate(-14 12 15)"
+	}), /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "12.5",
+		y: "7.5",
+		width: "11",
+		height: "15.5",
+		rx: "2",
+		fill: face,
+		stroke: n ? "#161616" : "rgba(0,0,0,.35)",
+		strokeWidth: "0.8",
+		transform: "rotate(10 18 15)"
 	}), /* @__PURE__ */ import_react.default.createElement("text", {
-		x: "15",
-		y: "20",
-		fontSize: "11",
-		fontWeight: "800",
-		fill: color,
+		x: "18.2",
+		y: "19.6",
+		fontSize: "10.5",
+		fontWeight: "900",
+		fill: num,
 		textAnchor: "middle",
-		fontFamily: "sans-serif"
+		fontFamily: "'Bowlby One',sans-serif",
+		transform: "rotate(10 18 15)"
 	}, "7"));
 }
 function MinigolfLogo({ theme }) {
@@ -23658,55 +23728,6 @@ html[data-gt-theme="noir"] .gt-ug .gt-u-dock::before{background:linear-gradient(
 `;
 function ugSurf(theme) {
 	return theme === "light" ? "rgba(24,22,32,0.06)" : theme === "noir" ? "rgba(255,255,255,0.08)" : "rgba(255,255,255,0.06)";
-}
-function GtTiles({ players, target, tk, theme, accent, font, label }) {
-	const T = Math.max(1, target || 1);
-	const lead = players.length > 1 ? gtLeader(players.map((p) => [p.id, p.total]), false) : null;
-	const n = players.length;
-	const cols = n <= 2 || n === 4 ? 2 : 3;
-	return /* @__PURE__ */ import_react.default.createElement("section", {
-		className: "gt-ug-po",
-		"aria-label": label
-	}, /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gt-ug-tiles",
-		style: { gridTemplateColumns: `repeat(${cols},minmax(0,1fr))` }
-	}, players.map((p) => {
-		const f = Math.min(1, Math.max(0, (p.total || 0) / T));
-		return /* @__PURE__ */ import_react.default.createElement("div", {
-			key: p.id,
-			className: "gt-ug-tile",
-			style: { background: ugSurf(theme) }
-		}, /* @__PURE__ */ import_react.default.createElement("span", {
-			className: "gt-ug-tf",
-			"aria-hidden": "true",
-			style: {
-				background: `color-mix(in oklab, ${accent} ${theme === "light" ? 30 : 34}%, transparent)`,
-				transform: `scaleY(${f})`
-			}
-		}), /* @__PURE__ */ import_react.default.createElement("div", {
-			className: "gt-ug-tn",
-			style: { color: tk.ink }
-		}, p.id === lead && (p.total || 0) > 0 && /* @__PURE__ */ import_react.default.createElement(GameIcon, {
-			name: "crown",
-			size: 14,
-			color: tk.gold || accent,
-			style: { flexShrink: 0 }
-		}), /* @__PURE__ */ import_react.default.createElement("span", null, p.name)), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("span", {
-			className: "gt-ug-tv",
-			style: {
-				color: tk.ink,
-				fontFamily: font
-			}
-		}, /* @__PURE__ */ import_react.default.createElement(GtCount, {
-			value: p.total,
-			mem: "ug-t" + p.id,
-			good: "high",
-			dpos: "r"
-		})), /* @__PURE__ */ import_react.default.createElement("span", {
-			className: "gt-ug-tt",
-			style: { color: tk.muted }
-		}, "/ ", target)));
-	})));
 }
 function GtBars({ players, target, tk, theme, accent, font, label }) {
 	const T = Math.max(1, target || 1);
@@ -71123,7 +71144,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.09-5";
+var APP_BUILD = "2026.11.09-6";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -98320,11 +98341,9 @@ var game_exports$3 = /* @__PURE__ */ __exportAll({
 	FLIP7_MODS: () => FLIP7_MODS,
 	Flip7Game: () => Flip7Game,
 	Flip7GameOver: () => Flip7GameOver,
-	Flip7RoundEntry: () => Flip7RoundEntry,
-	Flip7RoundHistory: () => Flip7RoundHistory,
-	Flip7RoundPad: () => Flip7RoundPad,
 	Flip7Setup: () => Flip7Setup,
 	Flip7TopBar: () => Flip7TopBar,
+	f7Entry: () => f7Entry,
 	flip7BtnGhost: () => flip7BtnGhost,
 	flip7BtnPrimary: () => flip7BtnPrimary,
 	flip7RoundScore: () => flip7RoundScore
@@ -98337,6 +98356,21 @@ var FLIP7_MODS = [
 	8,
 	10
 ];
+var F7_NUMS = [
+	0,
+	1,
+	2,
+	3,
+	4,
+	5,
+	6,
+	7,
+	8,
+	9,
+	10,
+	11,
+	12
+];
 function flip7RoundScore({ numberSum, busted, x2, mods, flip7 }) {
 	if (busted) return 0;
 	let base = numberSum || 0;
@@ -98346,41 +98380,129 @@ function flip7RoundScore({ numberSum, busted, x2, mods, flip7 }) {
 	if (flip7) total += 15;
 	return total;
 }
-function Flip7TopBar({ subtitle, onBack, theme, t }) {
-	const fk = flip7Tokens(theme);
-	return /* @__PURE__ */ import_react.default.createElement(GameHeader, {
-		title: t("gameFlip7"),
-		subtitle,
-		onBack,
-		backLabel: t("back"),
-		tk: fk,
-		accent: fk.flame,
-		titleFont: FLIP7_FONT,
-		icon: /* @__PURE__ */ import_react.default.createElement(Flip7Logo, { color: fk.flame })
-	});
+function f7Entry(nums, mods, x2, busted) {
+	const ns = [...new Set((nums || []).filter((n) => F7_NUMS.includes(n)))].sort((a, b) => a - b);
+	const ms = [...new Set((mods || []).filter((m) => FLIP7_MODS.includes(m)))].sort((a, b) => a - b);
+	const b = !!busted;
+	return {
+		busted: b,
+		nums: b ? [] : ns,
+		numberSum: b ? 0 : ns.reduce((s, n) => s + n, 0),
+		mods: b ? [] : ms,
+		x2: b ? false : !!x2,
+		flip7: !b && ns.length >= 7
+	};
+}
+function f7T(theme) {
+	const b = flip7Tokens(theme);
+	if (theme === "light") return {
+		...b,
+		bg: "#FAF7F0",
+		bg2: "#F2EADB",
+		card: "#FFFFFF",
+		ink: "#1B1815",
+		muted: "#585360",
+		line: "rgba(40,36,30,0.16)",
+		acc: "#C4470F",
+		on: "#FFFFFF",
+		red: "#B3261E",
+		gold: "#8A6100",
+		face: "#FFF6EA",
+		faceLine: "rgba(40,36,30,0.22)",
+		back: "#C4470F",
+		bink: "#FFFFFF"
+	};
+	if (theme === "noir") return {
+		...b,
+		line: "#454545",
+		acc: "#D6D6D6",
+		on: "#111111",
+		red: "#F2F2F2",
+		gold: "#D6D6D6",
+		face: "#EDEDED",
+		faceLine: "#5A5A5A",
+		back: "#3A3A3A"
+	};
+	return {
+		...b,
+		bg: "#12141C",
+		bg2: "#181B25",
+		card: "#1A1E2B",
+		ink: "#F0F1F5",
+		muted: "#8890A0",
+		line: "#2A3040",
+		acc: "#FF7A3D",
+		on: "#1A0E06",
+		red: "#FF6B5E",
+		gold: "#FFC24B",
+		face: "#FFF1DC",
+		faceLine: "rgba(255,255,255,0.28)",
+		back: "#FF7A3D"
+	};
+}
+function f7Shell(theme) {
+	const k = f7T(theme);
+	return {
+		minHeight: "100vh",
+		background: `radial-gradient(ellipse at 50% -10%, ${k.bg2} 0%, ${k.bg} 65%)`,
+		padding: "20px 12px 32px"
+	};
+}
+function f7Vars(k) {
+	return {
+		"--f7-card": k.card,
+		"--f7-ink": k.ink,
+		"--f7-muted": k.muted,
+		"--f7-line": k.line,
+		"--f7-acc": k.acc,
+		"--f7-on": k.on,
+		"--f7-red": k.red,
+		"--f7-gold": k.gold,
+		"--f7-face": k.face,
+		"--f7-fline": k.faceLine,
+		"--f7-back": k.back,
+		"--f7-bink": k.bink || "#1A1205"
+	};
+}
+var F7_NUM_COL = [
+	"#6B6F80",
+	"#8C5A2B",
+	"#2E7D5B",
+	"#B2384E",
+	"#2F6FB0",
+	"#3E8E41",
+	"#8A4FB0",
+	"#C2571A",
+	"#1F7F86",
+	"#A0367A",
+	"#A85A12",
+	"#3D5BA8",
+	"#6A3FA0"
+];
+function f7NumCol(n, theme) {
+	return theme === "noir" ? "#2A2A2A" : F7_NUM_COL[n] || "#333";
 }
 function flip7BtnPrimary(theme) {
-	const fk = flip7Tokens(theme);
+	const k = f7T(theme);
 	return {
 		border: "none",
-		borderRadius: 22,
-		background: `linear-gradient(135deg, ${fk.btnFrom}, ${fk.btnTo})`,
-		color: fk.onAccent,
+		borderRadius: 18,
+		background: k.acc,
+		color: k.on,
 		fontSize: 15,
 		fontWeight: 800,
 		padding: "14px 0",
 		cursor: "pointer",
-		fontFamily: FLIP7_FONT,
-		boxShadow: `0 6px 20px -6px ${fk.flame}88`
+		fontFamily: FLIP7_FONT
 	};
 }
 function flip7BtnGhost(theme) {
-	const fk = flip7Tokens(theme);
+	const k = f7T(theme);
 	return {
-		border: `1px solid ${fk.border}`,
-		borderRadius: 20,
+		border: `1px solid ${k.line}`,
+		borderRadius: 18,
 		background: "transparent",
-		color: fk.muted,
+		color: k.muted,
 		fontSize: 13,
 		fontWeight: 700,
 		padding: "12px 20px",
@@ -98388,11 +98510,449 @@ function flip7BtnGhost(theme) {
 		fontFamily: "'Inter', sans-serif"
 	};
 }
+function Flip7TopBar({ subtitle, onBack, theme, t, hideTitle }) {
+	const k = f7T(theme);
+	return /* @__PURE__ */ import_react.default.createElement(GameHeader, {
+		title: t("gameFlip7"),
+		subtitle,
+		onBack,
+		backLabel: t("back"),
+		tk: k,
+		accent: k.acc,
+		titleFont: FLIP7_FONT,
+		icon: /* @__PURE__ */ import_react.default.createElement(Flip7Logo, {
+			color: k.acc,
+			theme
+		}),
+		hideTitle
+	});
+}
+var F7_CSS = `
+@font-face{font-family:'Bowlby One';font-style:normal;font-weight:400;font-display:swap;src:url("./fonts/BowlbyOne-Regular-lat.woff2") format('woff2');}
+.f7-flow{display:grid;gap:10px;grid-template-columns:minmax(0,1fr);grid-template-areas:"hero" "seg" "tie" "strip" "who" "disp" "nums" "mods" "foot";}
+.f7-hero{grid-area:hero;display:flex;align-items:center;justify-content:center;gap:10px;padding:0 0 2px}
+.f7-fan{display:block;width:62px;height:auto;filter:drop-shadow(0 4px 5px rgba(0,0,0,.34))}
+.f7-sub{font:600 12px/1.2 'Inter',sans-serif;color:var(--f7-muted);margin-top:3px;letter-spacing:.02em}
+.f7-word{margin:0;font-family:'Bowlby One',sans-serif;font-weight:400;font-size:34px;line-height:1;color:var(--f7-acc);text-shadow:0 2px 0 rgba(0,0,0,.3),0 8px 20px color-mix(in oklab,var(--f7-acc) 30%,transparent);white-space:nowrap}
+html[data-gt-theme="light"] .f7-word{text-shadow:0 2px 0 rgba(0,0,0,.14)}
+.f7-seg{grid-area:seg;display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:16px;background:var(--f7-card);border:1px solid var(--f7-line)}
+.f7-seg button{height:40px;border:0;border-radius:12px;background:transparent;color:var(--f7-muted);font:700 15px 'Inter',sans-serif;cursor:pointer;padding:0}
+.f7-seg button[aria-selected="true"]{background:var(--f7-acc);color:var(--f7-on)}
+.f7-tie{grid-area:tie;border:1.5px solid var(--f7-gold);color:var(--f7-gold);border-radius:14px;padding:8px 12px;font:700 13px/1.35 'Inter',sans-serif;text-align:center}
+.f7-strip{grid-area:strip;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:2px}
+.f7-strip::-webkit-scrollbar{display:none}
+.f7-chip{flex:1 0 74px;max-width:132px;min-height:46px;box-sizing:border-box;border-radius:12px;border:1.5px solid var(--f7-line);background:var(--f7-card);padding:4px 8px;display:flex;flex-direction:column;justify-content:center;cursor:pointer;min-width:0}
+.f7-chip[data-s="cur"]{border-color:var(--f7-acc)}
+.f7-chip[data-s="done"]{border-color:color-mix(in oklab,var(--f7-acc) 40%,var(--f7-line))}
+.f7-cn{font:600 12px/1.2 'Inter',sans-serif;color:var(--f7-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.f7-cv{font:800 17px/1.15 'Space Grotesk',sans-serif;color:var(--f7-ink);font-variant-numeric:tabular-nums}
+.f7-cv[data-b="1"]{color:var(--f7-red)}
+.f7-who{grid-area:who;display:flex;align-items:baseline;justify-content:space-between;gap:10px;min-width:0}
+.f7-wl{font:600 12.5px 'Inter',sans-serif;color:var(--f7-muted)}
+.f7-wn{margin:0;font:800 22px/1.15 'Inter',sans-serif;color:var(--f7-ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;word-break:keep-all}
+.f7-wt{flex:none;font:600 13px 'Inter',sans-serif;color:var(--f7-muted);text-align:right}
+.f7-disp{grid-area:disp;position:relative;display:flex;align-items:center;gap:12px;background:var(--f7-card);border:1px solid var(--f7-line);border-radius:18px;padding:10px 14px;min-height:64px;box-sizing:border-box}
+.f7-dv{font:800 42px/1 'Space Grotesk',sans-serif;color:var(--f7-acc);font-variant-numeric:tabular-nums;min-width:62px}
+.f7-dv[data-b="1"]{color:var(--f7-red)}
+.f7-df{flex:1;min-width:0;font:600 13px/1.35 'Inter',sans-serif;color:var(--f7-muted);overflow-wrap:anywhere}
+.f7-df b{color:var(--f7-ink);font-weight:700}
+.f7-badge{position:absolute;right:10px;top:-11px;padding:3px 9px;border-radius:999px;background:var(--f7-gold);color:var(--f7-bink,#1A1205);font:800 12px/1.2 'Space Grotesk',sans-serif;animation:f7Pop .32s cubic-bezier(.2,.8,.2,1) both}
+@keyframes f7Pop{0%{transform:scale(.6);opacity:0}70%{transform:scale(1.12);opacity:1}100%{transform:scale(1)}}
+.f7-lab{font:700 11px 'Inter',sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--f7-muted);margin:0 0 5px}
+.f7-nums{grid-area:nums}
+.f7-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.f7-c{position:relative;height:58px;border-radius:9px;border:1.5px dashed color-mix(in oklab,var(--f7-muted) 38%,transparent);background:transparent;color:var(--f7-muted);font:400 21px/1 'Bowlby One',sans-serif;cursor:pointer;padding:0;display:grid;place-items:center;transition:opacity .15s linear,transform .12s ease-out;-webkit-tap-highlight-color:transparent}
+.f7-c[data-on="1"]{border:1.5px solid var(--f7-fline);background:var(--f7-face);color:var(--c);box-shadow:0 3px 0 rgba(0,0,0,.28);transform:translateY(-2px);animation:f7Flip .26s cubic-bezier(.2,.8,.2,1)}
+@keyframes f7Flip{0%{transform:translateY(-2px) rotateY(90deg);background:var(--f7-back);color:transparent}100%{transform:translateY(-2px) rotateY(0)}}
+.f7-c:disabled{opacity:.3;cursor:default}
+.f7-c:active:not(:disabled){transform:scale(.95)}
+.f7-c[data-k="bust"]{font:800 13px/1.1 'Inter',sans-serif;border-style:solid;color:var(--f7-red);border-color:color-mix(in oklab,var(--f7-red) 45%,transparent)}
+.f7-c[data-k="bust"][aria-pressed="true"]{background:var(--f7-red);color:#1A0606;border-color:var(--f7-red);animation:none;transform:none}
+html[data-gt-theme="light"] .f7-c[data-k="bust"][aria-pressed="true"]{color:#FFFFFF}
+.f7-mods{grid-area:mods}
+.f7-mg{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px}
+.f7-m{height:46px;border-radius:9px;border:1.5px dashed color-mix(in oklab,var(--f7-muted) 38%,transparent);background:transparent;color:var(--f7-muted);font:800 16px 'Space Grotesk',sans-serif;cursor:pointer;padding:0}
+.f7-m[aria-pressed="true"]{border:1.5px solid var(--f7-gold);background:color-mix(in oklab,var(--f7-gold) 20%,transparent);color:var(--f7-gold)}
+.f7-m:disabled{opacity:.3;cursor:default}
+.f7-c:focus-visible,.f7-m:focus-visible,.f7-chip:focus-visible,.f7-seg button:focus-visible,.f7-save:focus-visible,.f7-ghost:focus-visible,.f7-cell:focus-visible{outline:2px solid var(--f7-acc);outline-offset:2px}
+.f7-foot{grid-area:foot;display:flex;gap:8px}
+.f7-ghost{flex:none;min-height:54px;padding:0 14px;border-radius:18px;border:1px solid var(--f7-line);background:transparent;color:var(--f7-muted);font:700 14px 'Inter',sans-serif;cursor:pointer;display:flex;align-items:center;gap:6px}
+.f7-ghost:disabled{opacity:.4;cursor:default}
+.f7-save{flex:1;min-width:0;min-height:54px;border:0;border-radius:18px;background:var(--f7-acc);color:var(--f7-on);font:800 17px 'Space Grotesk',sans-serif;cursor:pointer;padding:0 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.f7-tbl{background:var(--f7-card);border:1px solid var(--f7-line);border-radius:16px;padding:8px 6px;overflow-x:auto}
+.f7-tr{display:grid;gap:4px;align-items:center;min-width:min-content}
+.f7-th{font:700 11.5px 'Inter',sans-serif;color:var(--f7-muted);text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:4px 2px}
+.f7-rn{font:700 12px 'Inter',sans-serif;color:var(--f7-muted);text-align:center}
+.f7-cell{position:relative;min-height:42px;border:0;border-radius:10px;background:transparent;color:var(--f7-ink);font:700 16px 'Space Grotesk',sans-serif;font-variant-numeric:tabular-nums;cursor:pointer;padding:0 4px}
+.f7-cell:hover{background:rgba(127,127,127,.12)}
+.f7-cell[data-b="1"]{color:var(--f7-red);font-size:13px}
+.f7-cell[data-f="1"]{color:var(--f7-gold)}
+.f7-tot{border-top:1px solid var(--f7-line);margin-top:4px;padding-top:4px}
+.f7-tot .f7-cell{cursor:default;font-weight:800;font-size:17px}
+.f7-tot .f7-cell:hover{background:transparent}
+.f7-empty{padding:24px 10px;text-align:center;font:500 14px 'Inter',sans-serif;color:var(--f7-muted)}
+.f7-tview{display:flex;flex-direction:column;gap:10px}
+.f7-ov{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:80;display:flex;align-items:flex-end;justify-content:center}
+.gtL-content .f7-ov{align-items:center}
+.f7-sheet{outline:none;width:100%;max-width:440px;max-height:94vh;max-height:94dvh;overflow-y:auto;box-sizing:border-box;background:var(--f7-card);color:var(--f7-ink);border-radius:24px 24px 0 0;padding:16px 16px calc(14px + env(safe-area-inset-bottom));box-shadow:0 -8px 30px rgba(0,0,0,.35);display:flex;flex-direction:column;gap:12px}
+.gtL-content .f7-sheet{border-radius:24px}
+.f7-sheet .f7-disp{background:transparent}
+.f7-sh-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.f7-sh-title{font:700 17px 'Inter',sans-serif;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.f7-x{flex:none;width:44px;height:44px;border:0;background:transparent;color:var(--f7-muted);cursor:pointer;display:grid;place-items:center;padding:0;border-radius:12px}
+@media (max-height:760px){.f7-fan{width:50px}.f7-word{font-size:28px}.f7-c{height:52px}.f7-m{height:44px}}
+@media (max-height:700px){.f7-flow{gap:8px}.f7-hero{display:none}.f7-c{height:48px;font-size:19px}.f7-dv{font-size:36px}.f7-disp{min-height:56px;padding:8px 12px}.f7-save,.f7-ghost{min-height:48px}.f7-chip{min-height:42px}}
+@media (max-height:620px){.f7-c{height:42px;font-size:17px}.f7-m{height:40px}.f7-lab{display:none}.f7-seg button{height:36px}.f7-wn{font-size:19px}}
+@media (max-width:360px){.f7-grid,.f7-mg{gap:4px}.f7-c{font-size:17px}.f7-save{font-size:15px}.f7-gl{display:none}}
+.gtL-content .f7-hero{display:none}
+.gtL-content .f7-seg{display:none}
+[data-phone-landscape] .f7-flow{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);column-gap:14px;grid-template-areas:"seg nums" "tie nums" "strip nums" "who mods" "disp mods" "disp foot";align-items:start}
+[data-phone-landscape] .f7-hero{display:none}
+[data-phone-landscape] .f7-c{height:40px;font-size:17px}
+[data-phone-landscape] .f7-m{height:40px}
+[data-phone-landscape] .f7-save,[data-phone-landscape] .f7-ghost{min-height:46px}
+@media (prefers-reduced-motion: reduce){.f7-c,.f7-badge{animation:none !important;transition:none}}
+`;
+function Flip7Fan({ theme, className }) {
+	const k = f7T(theme);
+	const vs = [
+		3,
+		12,
+		7
+	];
+	const ang = [
+		-22,
+		0,
+		22
+	];
+	return /* @__PURE__ */ import_react.default.createElement("svg", {
+		className,
+		viewBox: "0 0 96 70",
+		"aria-hidden": "true"
+	}, vs.map((v, i) => /* @__PURE__ */ import_react.default.createElement("g", {
+		key: i,
+		transform: `rotate(${ang[i]} 48 66)`
+	}, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "33",
+		y: "8",
+		width: "30",
+		height: "42",
+		rx: "5",
+		fill: k.face,
+		stroke: theme === "light" ? "rgba(40,36,30,.3)" : "rgba(0,0,0,.35)",
+		strokeWidth: "1.2"
+	}), /* @__PURE__ */ import_react.default.createElement("text", {
+		x: "48",
+		y: "37",
+		fontSize: v > 9 ? 15 : 18,
+		fontFamily: "'Bowlby One',sans-serif",
+		fill: f7NumCol(v, theme),
+		textAnchor: "middle"
+	}, v))));
+}
+function Flip7Picker({ e, setE, t, theme }) {
+	const full = e.nums.length >= 7;
+	const tog = (v) => setE(f7Entry(e.nums.includes(v) ? e.nums.filter((x) => x !== v) : [...e.nums, v], e.mods, e.x2, false));
+	const togM = (m) => setE(f7Entry(e.nums, e.mods.includes(m) ? e.mods.filter((x) => x !== m) : [...e.mods, m], e.x2, false));
+	return /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("div", { className: "f7-nums" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "f7-lab" }, t("f7Numbers")), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "f7-grid",
+		role: "group",
+		"aria-label": t("f7Numbers")
+	}, F7_NUMS.map((v) => {
+		const on = e.nums.includes(v);
+		return /* @__PURE__ */ import_react.default.createElement("button", {
+			key: v,
+			type: "button",
+			className: "f7-c",
+			"data-on": on ? "1" : void 0,
+			"aria-pressed": on,
+			disabled: e.busted || !on && full,
+			style: { "--c": f7NumCol(v, theme) },
+			onClick: () => tog(v)
+		}, v);
+	}), /* @__PURE__ */ import_react.default.createElement("button", {
+		type: "button",
+		className: "f7-c",
+		"data-k": "bust",
+		"aria-pressed": e.busted,
+		onClick: () => setE(e.busted ? f7Entry([], [], false, false) : f7Entry([], [], false, true))
+	}, t("flip7BustAbbr")))), /* @__PURE__ */ import_react.default.createElement("div", { className: "f7-mods" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "f7-lab" }, t("f7Mods")), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "f7-mg",
+		role: "group",
+		"aria-label": t("f7Mods")
+	}, FLIP7_MODS.map((m) => /* @__PURE__ */ import_react.default.createElement("button", {
+		key: m,
+		type: "button",
+		className: "f7-m",
+		"aria-pressed": e.mods.includes(m),
+		disabled: e.busted,
+		onClick: () => togM(m)
+	}, "+", m)), /* @__PURE__ */ import_react.default.createElement("button", {
+		type: "button",
+		className: "f7-m",
+		"aria-pressed": e.x2,
+		disabled: e.busted,
+		"aria-label": t("f7Double"),
+		onClick: () => setE(f7Entry(e.nums, e.mods, !e.x2, false))
+	}, "×2"))));
+}
+function Flip7Display({ e, t }) {
+	const sc = flip7RoundScore(e);
+	let parts = [];
+	if (e.busted) parts = [t("flip7BustedHint")];
+	else {
+		if (e.nums.length) parts.push(/* @__PURE__ */ import_react.default.createElement("b", { key: "n" }, e.nums.join(" + ")));
+		if (e.x2) parts.push(/* @__PURE__ */ import_react.default.createElement("span", { key: "x" }, " ×2"));
+		e.mods.forEach((m) => parts.push(/* @__PURE__ */ import_react.default.createElement("span", { key: "m" + m }, " +" + m)));
+		if (e.flip7) parts.push(/* @__PURE__ */ import_react.default.createElement("span", { key: "f" }, " +15"));
+		if (!parts.length) parts = [t("f7TapCards")];
+	}
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "f7-disp",
+		"aria-live": "polite"
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "f7-dv",
+		"data-b": e.busted ? "1" : void 0
+	}, sc), /* @__PURE__ */ import_react.default.createElement("div", { className: "f7-df" }, parts), e.flip7 && /* @__PURE__ */ import_react.default.createElement("span", { className: "f7-badge" }, t("f7Flip7Badge")));
+}
+function F7Undo() {
+	return /* @__PURE__ */ import_react.default.createElement("svg", {
+		width: "18",
+		height: "18",
+		viewBox: "0 0 24 24",
+		fill: "none",
+		"aria-hidden": "true"
+	}, /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M9 7 4 12l5 5",
+		stroke: "currentColor",
+		strokeWidth: "2",
+		strokeLinecap: "round",
+		strokeLinejoin: "round"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M4 12h10a6 6 0 0 1 0 12h-2",
+		stroke: "currentColor",
+		strokeWidth: "2",
+		strokeLinecap: "round",
+		transform: "translate(0 -6)"
+	}));
+}
+function f7Blank() {
+	return f7Entry([], [], false, false);
+}
+function f7Norm(x) {
+	if (!x || typeof x !== "object") return null;
+	if (Array.isArray(x.nums)) return f7Entry(x.nums, x.mods, x.x2, x.busted);
+	return null;
+}
+function f7Draft(draft, players) {
+	const ids = players.map((p) => p.id);
+	const ents = {};
+	ids.forEach((id) => {
+		ents[id] = draft && draft.ents && f7Norm(draft.ents[id]) || f7Blank();
+	});
+	const touched = {};
+	ids.forEach((id) => {
+		touched[id] = !!(draft && draft.touched && draft.touched[id]);
+	});
+	return {
+		cur: draft && Number.isInteger(draft.cur) && draft.cur >= 0 && draft.cur < ids.length ? draft.cur : 0,
+		ents,
+		touched
+	};
+}
+function Flip7Flow({ players, d, upd, roundNo, target, tie, theme, t, lap, keysOn, onSave, view, setView }) {
+	const n = players.length;
+	const cur = d.cur;
+	const p = players[cur] || players[0];
+	const e = d.ents[p.id];
+	const last = cur >= n - 1;
+	const stripRef = useRef$16(null);
+	const setE = (v) => upd((dr) => ({
+		ents: {
+			...dr.ents,
+			[p.id]: v
+		},
+		touched: {
+			...dr.touched,
+			[p.id]: true
+		}
+	}));
+	const goTo = (i) => upd({ cur: i });
+	const next = () => {
+		if (last) {
+			const ents = players.map((q) => [q.id, d.ents[q.id]]);
+			onSave(Object.fromEntries(ents.map(([id, x]) => [id, flip7RoundScore(x)])), Object.fromEntries(ents));
+		} else goTo(cur + 1);
+	};
+	useGtlKeys(!!keysOn, (ev) => {
+		if (ev.key === "Enter") {
+			if (ev.target && ev.target.closest && ev.target.closest("button,[role=\"button\"]")) return;
+			ev.preventDefault();
+			next();
+		}
+	});
+	useEffect$14(() => {
+		const el = stripRef.current;
+		if (!el) return;
+		const c = el.querySelector("[aria-current=\"step\"]");
+		if (!c) return;
+		el.scrollLeft = Math.max(0, c.offsetLeft - el.clientWidth / 2 + c.offsetWidth / 2);
+	}, [cur]);
+	const act = (fn) => (ev) => {
+		if (ev.key === "Enter" || ev.key === " ") {
+			ev.preventDefault();
+			fn();
+		}
+	};
+	const sc = flip7RoundScore(e);
+	const nextName = players[cur + 1] ? players[cur + 1].name : "";
+	const rest = Math.max(0, target - (p.total + sc));
+	return /* @__PURE__ */ import_react.default.createElement("div", { className: "f7-flow" }, !lap && /* @__PURE__ */ import_react.default.createElement("div", { className: "f7-hero" }, /* @__PURE__ */ import_react.default.createElement(Flip7Fan, {
+		theme,
+		className: "f7-fan"
+	}), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h1", { className: "f7-word" }, "FLIP 7"), /* @__PURE__ */ import_react.default.createElement("div", { className: "f7-sub" }, t("skyjoTarget"), " ", target))), !lap && /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "f7-seg",
+		role: "tablist"
+	}, /* @__PURE__ */ import_react.default.createElement("button", {
+		role: "tab",
+		"aria-selected": view === "round",
+		onClick: () => setView("round")
+	}, t("skyjoRoundLabel")(roundNo)), /* @__PURE__ */ import_react.default.createElement("button", {
+		role: "tab",
+		"aria-selected": view === "table",
+		onClick: () => setView("table")
+	}, t("skyjoViewTable"))), tie && /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "f7-tie",
+		role: "status"
+	}, t("f7TieRound")), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "f7-strip",
+		ref: stripRef,
+		role: "group",
+		"aria-label": t("skyjoFlowStrip")
+	}, players.map((q, i) => {
+		const x = d.ents[q.id];
+		const has = d.touched[q.id];
+		const s = i === cur ? "cur" : has ? "done" : "open";
+		return /* @__PURE__ */ import_react.default.createElement("div", {
+			key: q.id,
+			className: "f7-chip press-fx",
+			"data-s": s,
+			role: "button",
+			tabIndex: 0,
+			"aria-current": i === cur ? "step" : void 0,
+			"aria-label": `${q.name}${has ? ", " + (x.busted ? t("flip7BustAbbr") : flip7RoundScore(x)) : ""}`,
+			onClick: () => goTo(i),
+			onKeyDown: act(() => goTo(i))
+		}, /* @__PURE__ */ import_react.default.createElement("span", { className: "f7-cn" }, q.name), /* @__PURE__ */ import_react.default.createElement("span", {
+			className: "f7-cv",
+			"data-b": has && x.busted ? "1" : void 0
+		}, has ? x.busted ? t("flip7BustAbbr") : flip7RoundScore(x) : "·"));
+	})), /* @__PURE__ */ import_react.default.createElement("div", { className: "f7-who" }, /* @__PURE__ */ import_react.default.createElement("div", { style: { minWidth: 0 } }, /* @__PURE__ */ import_react.default.createElement("div", { className: "f7-wl" }, t("f7CardsOf")), /* @__PURE__ */ import_react.default.createElement("h2", { className: "f7-wn" }, p.name)), /* @__PURE__ */ import_react.default.createElement("div", { className: "f7-wt" }, t("skyjoFlowNewTotal")(p.total + sc), /* @__PURE__ */ import_react.default.createElement("br", null), rest > 0 ? t("f7ToTarget")(rest) : t("f7AtTarget"))), /* @__PURE__ */ import_react.default.createElement(Flip7Display, {
+		e,
+		t
+	}), /* @__PURE__ */ import_react.default.createElement(Flip7Picker, {
+		e,
+		setE,
+		t,
+		theme
+	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "f7-foot" }, /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "f7-ghost press-fx",
+		disabled: cur === 0,
+		onClick: () => goTo(cur - 1),
+		"aria-label": t("mgUndo")
+	}, /* @__PURE__ */ import_react.default.createElement(F7Undo, null), /* @__PURE__ */ import_react.default.createElement("span", { className: "f7-gl" }, t("mgUndo"))), /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "f7-save press-fx",
+		"data-gt-sound": last ? "1" : void 0,
+		onClick: next
+	}, last ? t("skyjoSaveRoundN")(roundNo) : t("skyjoFlowNextTo")(nextName))));
+}
+function Flip7Table({ players, history, target, onCell, t }) {
+	if (history.length === 0) return /* @__PURE__ */ import_react.default.createElement("div", { className: "f7-tbl" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "f7-empty" }, t("skyjoTableEmpty")));
+	const cols = `28px repeat(${players.length}, minmax(${players.length > 5 ? 54 : 0}px, 1fr))`;
+	return /* @__PURE__ */ import_react.default.createElement("div", { className: "f7-tbl" }, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "f7-tr",
+		style: { gridTemplateColumns: cols }
+	}, /* @__PURE__ */ import_react.default.createElement("span", null), players.map((p) => /* @__PURE__ */ import_react.default.createElement("span", {
+		key: p.id,
+		className: "f7-th",
+		title: p.name
+	}, p.name))), history.map((r, i) => /* @__PURE__ */ import_react.default.createElement("div", {
+		key: i,
+		className: "f7-tr",
+		style: { gridTemplateColumns: cols }
+	}, /* @__PURE__ */ import_react.default.createElement("span", { className: "f7-rn" }, i + 1), players.map((p) => {
+		const x = r.data && r.data[p.id] || {};
+		const sc = r.scores && r.scores[p.id] || 0;
+		return /* @__PURE__ */ import_react.default.createElement("button", {
+			key: p.id,
+			className: "f7-cell press-fx",
+			"data-b": x.busted ? "1" : void 0,
+			"data-f": x.flip7 && !x.busted ? "1" : void 0,
+			"aria-label": `${p.name}, ${t("skyjoRoundLabel")(i + 1)}: ${x.busted ? t("flip7BustAbbr") : sc}`,
+			onClick: () => onCell(i, p.id)
+		}, x.busted ? t("flip7BustAbbr") : sc);
+	}))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "f7-tr f7-tot",
+		style: { gridTemplateColumns: cols }
+	}, /* @__PURE__ */ import_react.default.createElement("span", { className: "f7-rn" }, "Σ"), players.map((p) => /* @__PURE__ */ import_react.default.createElement("span", {
+		key: p.id,
+		className: "f7-cell",
+		style: {
+			display: "grid",
+			placeItems: "center",
+			color: target > 0 && p.total >= target ? "var(--f7-acc)" : void 0
+		}
+	}, p.total))));
+}
+function Flip7EditSheet({ player, round, init, onSave, onClose, theme, t }) {
+	const [e, setE] = useState$11(() => f7Norm(init) || f7Blank());
+	const e0 = useRef$16(null);
+	if (e0.current === null) e0.current = JSON.stringify(e);
+	const tapOut = () => {
+		if (JSON.stringify(e) !== e0.current) return;
+		onClose();
+	};
+	const tapRef = useRef$16(tapOut);
+	tapRef.current = tapOut;
+	const ref = useGtDialog({
+		open: true,
+		onClose,
+		outside: () => tapRef.current()
+	});
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "f7-ov",
+		onClick: tapOut
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "f7-sheet",
+		role: "dialog",
+		"aria-modal": "true",
+		"aria-label": `${player.name}, ${t("skyjoRoundLabel")(round)}`,
+		tabIndex: -1,
+		ref,
+		onClick: (ev) => ev.stopPropagation()
+	}, /* @__PURE__ */ import_react.default.createElement("div", { className: "f7-sh-head" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "f7-sh-title" }, player.name, " · ", t("skyjoRoundLabel")(round)), /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "f7-x",
+		onClick: onClose,
+		"aria-label": t("skyjoGridClose")
+	}, /* @__PURE__ */ import_react.default.createElement(XMark, null))), /* @__PURE__ */ import_react.default.createElement(Flip7Display, {
+		e,
+		t
+	}), /* @__PURE__ */ import_react.default.createElement(Flip7Picker, {
+		e,
+		setE,
+		t,
+		theme
+	}), /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "f7-save press-fx",
+		"data-gt-sound": "1",
+		onClick: () => onSave(e)
+	}, t("confirm"))));
+}
 function Flip7Setup({ state, setState, onStart, theme, t }) {
-	const fk = gtSoftTk(flip7Tokens(theme), theme);
+	const fk = gtSoftTk(f7T(theme), theme);
 	const gtS = gtSkin(theme, fk, "flip7", {
 		font: FLIP7_FONT,
-		acc: fk.flame
+		acc: fk.acc
 	});
 	const { players, target } = state;
 	const setPlayers = (updater) => setState((s) => ({
@@ -98408,19 +98968,23 @@ function Flip7Setup({ state, setState, onStart, theme, t }) {
 		return [...ps, {
 			id: nextId,
 			name: t("defaultPlayerName")(ps.length + 1),
-			total: 0,
-			rounds: []
+			total: 0
 		}];
 	});
 	const removePlayer = (idx) => setPlayers((ps) => ps.filter((_, i) => i !== idx));
 	const tooFew = players.length < 2;
-	return /* @__PURE__ */ import_react.default.createElement("div", { className: "gt-ug-fill" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-split-setup pld-split pld-setup" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement(GroupPicker, {
+	return /* @__PURE__ */ import_react.default.createElement("div", { className: "gt-ug-fill" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split gtL-split-setup pld-split pld-setup" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "f7-hero",
+		style: { marginBottom: 10 }
+	}, /* @__PURE__ */ import_react.default.createElement(Flip7Fan, {
+		theme,
+		className: "f7-fan"
+	}), /* @__PURE__ */ import_react.default.createElement("h1", { className: "f7-word" }, "FLIP 7")), /* @__PURE__ */ import_react.default.createElement(GroupPicker, {
 		getNames: () => players.map((p) => p.name),
 		setNames: (names) => setPlayers(names.map((name, i) => ({
 			id: i + 1,
 			name,
-			total: 0,
-			rounds: []
+			total: 0
 		}))),
 		t,
 		tk: gtSkinTk(fk, gtS)
@@ -98455,666 +99019,11 @@ function Flip7Setup({ state, setState, onStart, theme, t }) {
 		skin: gtS
 	}))));
 }
-function Flip7RoundPad({ player, initial, onConfirm, onClose, theme, t, onAdvance, instant }) {
-	const tapRef = import_react.default.useRef(null);
-	const sheetRef = useGtDialog({
-		open: true,
-		onClose,
-		outside: () => tapRef.current && tapRef.current()
-	});
-	useEffect$14(() => {
-		try {
-			sheetRef.current && sheetRef.current.focus({ preventScroll: true });
-		} catch (e) {}
-	}, []);
-	const fk = flip7Tokens(theme);
-	const [busted, setBusted] = useState$11(initial?.busted || false);
-	const [sumStr, setSumStr] = useState$11(initial ? initial.numberSum === 0 && !initial.numberSumStr ? "" : String(initial.numberSum || "") : "");
-	const [mods, setMods] = useState$11(initial?.mods || []);
-	const [x2, setX2] = useState$11(initial?.x2 || false);
-	const [flip7, setFlip7] = useState$11(initial?.flip7 || false);
-	const padSig = () => JSON.stringify([
-		busted,
-		sumStr,
-		mods,
-		x2,
-		flip7
-	]);
-	const padSig0 = import_react.default.useRef(null);
-	if (padSig0.current === null) padSig0.current = padSig();
-	const tapOut = () => {
-		if (padSig() !== padSig0.current) return;
-		onClose();
-	};
-	tapRef.current = tapOut;
-	const numberSum = parseInt(sumStr, 10) || 0;
-	const pressDigit = (d) => setSumStr((v) => {
-		return (v.replace(/^0+(?=\d)/, "") + d).slice(0, 3);
-	});
-	const backspace = () => setSumStr((v) => v.slice(0, -1));
-	const toggleMod = (m) => setMods((ms) => ms.includes(m) ? ms.filter((x) => x !== m) : [...ms, m]);
-	const liveScore = busted ? 0 : flip7RoundScore({
-		numberSum,
-		busted: false,
-		x2,
-		mods,
-		flip7
-	});
-	const digitBtn = (label) => /* @__PURE__ */ import_react.default.createElement("button", {
-		key: label,
-		onClick: () => pressDigit(label),
-		className: "press-fx",
-		style: {
-			border: `1px solid ${fk.border}`,
-			borderRadius: 12,
-			background: fk.bg2,
-			color: fk.ink,
-			fontSize: 19,
-			fontWeight: 700,
-			padding: "12px 0",
-			cursor: "pointer",
-			fontFamily: FLIP7_FONT
-		}
-	}, label);
-	const commit = () => onConfirm({
-		busted,
-		numberSum: busted ? 0 : numberSum,
-		mods: busted ? [] : mods,
-		x2: busted ? false : x2,
-		flip7: busted ? false : flip7
-	});
-	useGtlKeys(true, (e) => {
-		const k = e.key;
-		const payload = {
-			busted,
-			numberSum: busted ? 0 : numberSum,
-			mods: busted ? [] : mods,
-			x2: busted ? false : x2,
-			flip7: busted ? false : flip7
-		};
-		if (k === "Escape") {
-			e.preventDefault();
-			onClose();
-		} else if (/^[0-9]$/.test(k)) {
-			e.preventDefault();
-			if (!busted) pressDigit(k);
-		} else if (k === "Backspace" || k === "Delete") {
-			e.preventDefault();
-			backspace();
-		} else if (k === "Enter") {
-			e.preventDefault();
-			if (onAdvance) onAdvance(payload, 1);
-			else onConfirm(payload);
-		} else if (k === "Tab") {
-			e.preventDefault();
-			if (onAdvance) onAdvance(payload, e.shiftKey ? -1 : 1);
-		}
-	});
-	return /* @__PURE__ */ import_react.default.createElement("div", {
-		onClick: tapOut,
-		className: "gtL-padov" + (instant ? " gtL-noanim" : ""),
-		style: {
-			position: "fixed",
-			inset: 0,
-			background: "rgba(0,0,0,0.6)",
-			zIndex: 80,
-			display: "flex",
-			alignItems: "flex-end",
-			justifyContent: "center",
-			overflowY: "auto"
-		}
-	}, /* @__PURE__ */ import_react.default.createElement("div", {
-		onClick: (e) => e.stopPropagation(),
-		className: "gtL-padsheet pld-pad",
-		role: "dialog",
-		"aria-modal": "true",
-		"aria-label": player.name,
-		tabIndex: -1,
-		ref: sheetRef,
-		style: {
-			outline: "none",
-			width: "100%",
-			maxWidth: 420,
-			background: fk.card,
-			borderRadius: "24px 24px 0 0",
-			padding: "18px 18px calc(18px + env(safe-area-inset-bottom))",
-			boxShadow: "0 -8px 30px rgba(0,0,0,0.4)",
-			maxHeight: "88vh",
-			overflowY: "auto"
-		}
-	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		justifyContent: "space-between",
-		alignItems: "center",
-		marginBottom: 14
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 15,
-		fontWeight: 700,
-		color: fk.ink,
-		fontFamily: "'Inter', sans-serif"
-	} }, player.name), /* @__PURE__ */ import_react.default.createElement("button", {
-		onClick: onClose,
-		style: {
-			border: "none",
-			background: "transparent",
-			color: fk.muted,
-			fontSize: 16,
-			cursor: "pointer",
-			padding: 4
-		}
-	}, /* @__PURE__ */ import_react.default.createElement(XMark, null))), /* @__PURE__ */ import_react.default.createElement("div", { className: "pld-padL" }, /* @__PURE__ */ import_react.default.createElement("button", {
-		onClick: () => setBusted((b) => !b),
-		className: "press-fx",
-		style: {
-			width: "100%",
-			border: `2px solid ${busted ? fk.bust : fk.border}`,
-			borderRadius: 16,
-			background: busted ? `${fk.bust}22` : "transparent",
-			color: busted ? fk.bust : fk.muted,
-			fontSize: 14,
-			fontWeight: 800,
-			padding: "13px 0",
-			cursor: "pointer",
-			fontFamily: FLIP7_FONT,
-			marginBottom: 16,
-			display: "flex",
-			alignItems: "center",
-			justifyContent: "center",
-			gap: 8
-		}
-	}, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
-		name: "skull",
-		size: 15,
-		color: busted ? fk.bust : fk.muted
-	}), t("flip7BustToggle")), !busted && /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 10,
-		color: fk.muted,
-		letterSpacing: "0.08em",
-		textTransform: "uppercase",
-		fontFamily: "'Inter', sans-serif",
-		fontWeight: 600,
-		marginBottom: 6
-	} }, t("flip7NumberSumLabel")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		alignItems: "center",
-		gap: 10,
-		marginBottom: 14
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		flex: 1,
-		textAlign: "center",
-		fontSize: 36,
-		fontWeight: 800,
-		color: fk.ink,
-		fontFamily: "'Space Grotesk', sans-serif",
-		background: fk.bg2,
-		borderRadius: 14,
-		padding: "8px 0"
-	} }, sumStr === "" ? "0" : sumStr), /* @__PURE__ */ import_react.default.createElement("button", {
-		onClick: backspace,
-		className: "press-fx",
-		style: {
-			border: `1.5px solid ${fk.border}`,
-			borderRadius: 14,
-			background: "transparent",
-			color: fk.muted,
-			width: 46,
-			height: 46,
-			cursor: "pointer",
-			display: "flex",
-			alignItems: "center",
-			justifyContent: "center",
-			flexShrink: 0
-		}
-	}, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
-		name: "backspaceKey",
-		size: 17,
-		color: fk.muted
-	}))), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "grid",
-		gridTemplateColumns: "repeat(3,1fr)",
-		gap: 7,
-		marginBottom: 16
-	} }, [
-		"1",
-		"2",
-		"3",
-		"4",
-		"5",
-		"6",
-		"7",
-		"8",
-		"9"
-	].map((d) => digitBtn(d)), /* @__PURE__ */ import_react.default.createElement("div", { key: "b1" }), digitBtn("0"), /* @__PURE__ */ import_react.default.createElement("div", { key: "b2" })))), /* @__PURE__ */ import_react.default.createElement("div", { className: "pld-padR" }, !busted && /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 10,
-		color: fk.muted,
-		letterSpacing: "0.08em",
-		textTransform: "uppercase",
-		fontFamily: "'Inter', sans-serif",
-		fontWeight: 600,
-		marginBottom: 6
-	} }, t("flip7ModifiersLabel")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexWrap: "wrap",
-		gap: 6,
-		marginBottom: 10
-	} }, FLIP7_MODS.map((m) => /* @__PURE__ */ import_react.default.createElement("button", {
-		key: m,
-		onClick: () => toggleMod(m),
-		className: "press-fx",
-		style: {
-			border: `1.5px solid ${mods.includes(m) ? fk.gold : fk.border}`,
-			borderRadius: 14,
-			background: mods.includes(m) ? `${fk.gold}22` : "transparent",
-			color: mods.includes(m) ? fk.gold : fk.ink,
-			fontSize: 14,
-			fontWeight: 700,
-			padding: "9px 14px",
-			cursor: "pointer",
-			fontFamily: "'Space Grotesk', sans-serif"
-		}
-	}, "+", m)), /* @__PURE__ */ import_react.default.createElement("button", {
-		onClick: () => setX2((x) => !x),
-		className: "press-fx",
-		style: {
-			border: `1.5px solid ${x2 ? fk.flame : fk.border}`,
-			borderRadius: 14,
-			background: x2 ? `${fk.flame}22` : "transparent",
-			color: x2 ? fk.flame : fk.ink,
-			fontSize: 14,
-			fontWeight: 800,
-			padding: "9px 14px",
-			cursor: "pointer",
-			fontFamily: "'Space Grotesk', sans-serif"
-		}
-	}, "×2")), /* @__PURE__ */ import_react.default.createElement("button", {
-		onClick: () => setFlip7((f) => !f),
-		className: "press-fx",
-		style: {
-			width: "100%",
-			border: `2px solid ${flip7 ? fk.gold : fk.border}`,
-			borderRadius: 16,
-			background: flip7 ? `${fk.gold}22` : "transparent",
-			color: flip7 ? fk.gold : fk.muted,
-			fontSize: 14,
-			fontWeight: 800,
-			padding: "13px 0",
-			cursor: "pointer",
-			fontFamily: "'Space Grotesk', sans-serif",
-			marginBottom: 16,
-			display: "flex",
-			alignItems: "center",
-			justifyContent: "center",
-			gap: 8
-		}
-	}, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
-		name: "party",
-		size: 15,
-		color: flip7 ? fk.gold : fk.muted
-	}), t("flip7BonusToggle")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		textAlign: "center",
-		fontSize: 12,
-		color: fk.muted,
-		fontFamily: "'Inter', sans-serif",
-		marginBottom: 6
-	} }, t("flip7LiveScoreLabel"))), busted && /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		textAlign: "center",
-		fontSize: 13,
-		color: fk.bust,
-		fontFamily: "'Inter', sans-serif",
-		marginBottom: 16
-	} }, t("flip7BustedHint")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		textAlign: "center",
-		fontSize: 38,
-		fontWeight: 800,
-		color: busted ? fk.bust : fk.flame,
-		fontFamily: FLIP7_FONT,
-		marginBottom: 16
-	} }, liveScore), /* @__PURE__ */ import_react.default.createElement("button", {
-		"data-gt-sound": "1",
-		onClick: commit,
-		className: "press-fx",
-		style: {
-			...flip7BtnPrimary(theme),
-			width: "100%",
-			minHeight: 52
-		}
-	}, t("confirm"))), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-only gtL-keyhint",
-		style: {
-			fontSize: 11.5,
-			color: fk.muted,
-			textAlign: "center",
-			marginTop: 12,
-			fontFamily: "'Inter', sans-serif",
-			lineHeight: 1.45
-		}
-	}, t("gtlKeysFlip7"))));
+function f7Flip7Count(history, pid) {
+	return (history || []).filter((r) => r && r.data && r.data[pid] && r.data[pid].flip7 && !r.data[pid].busted).length;
 }
-function Flip7RoundEntry({ players, initialData, isEdit, onSave, onCancel, theme, t, gtTarget, gtRound }) {
-	const fk = flip7Tokens(theme);
-	const [data, setData] = useState$11(() => initialData || Object.fromEntries(players.map((p) => [p.id, null])));
-	const [padPlayerId, setPadPlayerId] = useState$11(null);
-	const [padInstant, setPadInstant] = useState$11(false);
-	const saveRef = useRef$16(null);
-	const listRef = useRef$16(null);
-	const lastPadRef = useRef$16(null);
-	const focusSaveRef = useRef$16(false);
-	useEffect$14(() => {
-		if (padPlayerId != null) {
-			lastPadRef.current = padPlayerId;
-			return;
-		}
-		const last = lastPadRef.current;
-		if (last == null) return;
-		lastPadRef.current = null;
-		if (focusSaveRef.current && saveRef.current && !saveRef.current.disabled) {
-			focusSaveRef.current = false;
-			try {
-				saveRef.current.focus({ preventScroll: true });
-			} catch (e) {}
-			return;
-		}
-		focusSaveRef.current = false;
-		gtlRestoreFocus(listRef.current && listRef.current.querySelector("[data-gtl-row=\"" + last + "\"]"));
-	}, [padPlayerId]);
-	const canSave = players.every((p) => data[p.id] != null);
-	const leaderId = !isEdit && players.length > 1 && (gtRound || 0) > 0 ? [...players].sort((a, b) => b.total - a.total)[0].id : null;
-	const gtFx = useGtLead(isEdit ? null : "f7-e", isEdit ? null : gtLeader(players.map((p) => [p.id, p.total]), false), gtRound || 0);
-	const padPlayer = padPlayerId != null ? players.find((p) => p.id === padPlayerId) : null;
-	const handleSave = () => {
-		onSave(Object.fromEntries(players.map((p) => [p.id, flip7RoundScore(data[p.id] || {})])), data);
-		if (!isEdit) setData(Object.fromEntries(players.map((p) => [p.id, null])));
-	};
-	const activeId = !isEdit ? (players.find((p) => data[p.id] == null) || {}).id : null;
-	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: isEdit ? void 0 : "pld-entry gt-ug-ent",
-		style: isEdit ? {
-			display: "flex",
-			flexDirection: "column",
-			gap: 10
-		} : void 0
-	}, /* @__PURE__ */ import_react.default.createElement("div", { className: "pld-body" + (isEdit ? "" : " gt-ug-hide-total") + (players.length > 4 ? " gt-ug-many" : "") }, !isEdit && /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 13,
-		color: fk.muted,
-		letterSpacing: "0.08em",
-		textTransform: "uppercase",
-		fontFamily: "'Inter', sans-serif",
-		fontWeight: 600
-	} }, t("flip7RoundTitle")), !isEdit && (gtRound || 0) === 0 && /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		alignItems: "center",
-		gap: 6,
-		background: `${fk.flame}12`,
-		border: `1px solid ${fk.flame}40`,
-		borderRadius: 14,
-		padding: "7px 10px"
-	} }, /* @__PURE__ */ import_react.default.createElement(GameIcon, {
-		name: "skull",
-		size: 13,
-		color: fk.flame,
-		style: { flexShrink: 0 }
-	}), /* @__PURE__ */ import_react.default.createElement("span", { style: {
-		fontSize: 13,
-		color: fk.flame,
-		fontFamily: "'Inter', sans-serif",
-		fontWeight: 600,
-		lineHeight: 1.3
-	} }, t("flip7BustHint"))), /* @__PURE__ */ import_react.default.createElement("div", {
-		ref: listRef,
-		style: {
-			display: "flex",
-			flexDirection: "column",
-			gap: 8
-		}
-	}, players.map((p) => {
-		const entry = data[p.id];
-		const score = entry ? flip7RoundScore(entry) : null;
-		const busted = entry?.busted;
-		return /* @__PURE__ */ import_react.default.createElement("button", {
-			key: p.id,
-			"data-gtl-row": p.id,
-			"data-gt-lh": "1",
-			onClick: () => {
-				setPadInstant(false);
-				setPadPlayerId(p.id);
-			},
-			className: "press-fx gtL-entryrow gt-ug-row",
-			style: {
-				display: "flex",
-				alignItems: "center",
-				gap: 10,
-				background: busted ? `${fk.bust}14` : score != null ? `${fk.flame}1c` : fk.card,
-				border: `2px solid ${busted ? fk.bust : p.id === activeId ? fk.flame : theme === "light" ? "rgba(24,22,32,0.10)" : "transparent"}`,
-				borderRadius: 20,
-				padding: "14px 18px",
-				cursor: "pointer",
-				textAlign: "left",
-				width: "100%",
-				boxSizing: "border-box"
-			}
-		}, gtFx === p.id && /* @__PURE__ */ import_react.default.createElement(GtLeadFx, { key: "gtlf" }), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-			flex: 1,
-			minWidth: 0
-		} }, /* @__PURE__ */ import_react.default.createElement("div", {
-			className: "gtL-entryname",
-			style: {
-				fontSize: 19,
-				fontWeight: 700,
-				color: fk.ink,
-				fontFamily: "'Inter', sans-serif",
-				whiteSpace: "nowrap",
-				overflow: "hidden",
-				textOverflow: "ellipsis",
-				display: "flex",
-				alignItems: "center",
-				gap: 6
-			}
-		}, p.id === leaderId && /* @__PURE__ */ import_react.default.createElement(GameIcon, {
-			name: "crown",
-			size: 14,
-			color: fk.gold,
-			className: gtFx === p.id ? "gt-crown-in" : void 0
-		}), p.name), !isEdit && /* @__PURE__ */ import_react.default.createElement("div", {
-			className: "gtL-entrytotal",
-			"data-label": t("gtlTotal"),
-			style: {
-				fontSize: 12.5,
-				color: fk.muted,
-				fontFamily: "'Inter', sans-serif",
-				marginTop: 2
-			}
-		}, gtTarget > 0 && /* @__PURE__ */ import_react.default.createElement(GtRing, {
-			value: p.total / gtTarget,
-			size: 13,
-			color: fk.flame,
-			style: {
-				marginRight: 5,
-				verticalAlign: "-2px"
-			}
-		}), /* @__PURE__ */ import_react.default.createElement(GtCount, {
-			value: p.total,
-			mem: isEdit ? void 0 : "f7-t" + p.id,
-			good: "high",
-			dpos: "r"
-		}))), /* @__PURE__ */ import_react.default.createElement("div", {
-			className: "gtL-entryval",
-			"data-empty": entry ? void 0 : "1",
-			"data-hint": t("gtlEnterHint"),
-			style: {
-				"--gtl-hint": fk.muted,
-				fontSize: 40,
-				fontWeight: 800,
-				color: busted ? fk.bust : score != null ? fk.flame : fk.muted,
-				opacity: score == null && !busted ? .55 : 1,
-				fontFamily: FLIP7_FONT,
-				fontVariantNumeric: "tabular-nums",
-				minWidth: 44,
-				textAlign: "right"
-			}
-		}, busted ? t("flip7BustAbbr") : score != null ? score : "·"));
-	}))), /* @__PURE__ */ import_react.default.createElement("div", { className: "pld-foot" }, /* @__PURE__ */ import_react.default.createElement(GtDock, null, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		gap: 8
-	} }, isEdit && /* @__PURE__ */ import_react.default.createElement("button", {
-		onClick: onCancel,
-		className: "press-fx",
-		style: flip7BtnGhost(theme)
-	}, t("back")), /* @__PURE__ */ import_react.default.createElement("button", {
-		"data-gt-sound": "1",
-		ref: saveRef,
-		onClick: handleSave,
-		disabled: !canSave,
-		className: "press-fx",
-		style: {
-			...flip7BtnPrimary(theme),
-			flex: 1,
-			minHeight: 56,
-			borderRadius: 20,
-			fontSize: 17,
-			...canSave ? {} : {
-				background: GT_DISABLED_BG,
-				color: fk.muted,
-				boxShadow: "none",
-				cursor: "default"
-			}
-		},
-		"aria-describedby": canSave ? void 0 : "gt-save-hint-f7"
-	}, t("skyjoSaveRound"))), !canSave && /* @__PURE__ */ import_react.default.createElement("div", {
-		id: "gt-save-hint-f7",
-		className: "gt-ug-dock-hint",
-		style: {
-			color: fk.muted,
-			fontFamily: "'Inter', sans-serif"
-		}
-	}, t("enterPointsFirst")))), padPlayer && /* @__PURE__ */ import_react.default.createElement(Flip7RoundPad, {
-		key: padPlayer.id,
-		instant: padInstant,
-		onAdvance: (v, dir) => {
-			const nx = players.findIndex((q) => q.id === padPlayer.id) + dir;
-			setData((d) => ({
-				...d,
-				[padPlayer.id]: v
-			}));
-			if (nx >= 0 && nx < players.length) {
-				setPadInstant(true);
-				setPadPlayerId(players[nx].id);
-			} else if (nx >= players.length) {
-				focusSaveRef.current = true;
-				setPadPlayerId(null);
-			}
-		},
-		player: padPlayer,
-		initial: data[padPlayer.id],
-		theme,
-		t,
-		onClose: () => setPadPlayerId(null),
-		onConfirm: (v) => {
-			setData((d) => ({
-				...d,
-				[padPlayer.id]: v
-			}));
-			setPadPlayerId(null);
-		}
-	}));
-}
-function Flip7RoundHistory({ players, history, editingIndex, setEditingIndex, onEditSave, theme, t }) {
-	const fk = flip7Tokens(theme);
-	if (history.length === 0) return null;
-	const indices = history.map((_, i) => i).reverse();
-	const cols = `44px repeat(${players.length}, 1fr)`;
-	return /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 6,
-		marginTop: 20
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 11,
-		color: fk.muted,
-		letterSpacing: "0.08em",
-		textTransform: "uppercase",
-		fontFamily: "'Inter', sans-serif",
-		fontWeight: 600
-	} }, t("skyjoRoundHistory")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "grid",
-		gridTemplateColumns: cols,
-		gap: 6,
-		padding: "0 12px"
-	} }, /* @__PURE__ */ import_react.default.createElement("span", null), players.map((p) => /* @__PURE__ */ import_react.default.createElement("span", {
-		key: p.id,
-		style: {
-			fontSize: 10.5,
-			fontWeight: 700,
-			color: fk.muted,
-			fontFamily: "'Inter', sans-serif",
-			textAlign: "center",
-			whiteSpace: "nowrap",
-			overflow: "hidden",
-			textOverflow: "ellipsis"
-		}
-	}, p.name))), indices.map((i) => editingIndex === i ? /* @__PURE__ */ import_react.default.createElement("div", {
-		key: i,
-		style: {
-			background: fk.card,
-			border: `1.5px solid ${fk.gold}`,
-			borderRadius: 22,
-			padding: "14px 12px"
-		}
-	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 11,
-		color: fk.gold,
-		fontFamily: "'Inter', sans-serif",
-		fontWeight: 700,
-		marginBottom: 8
-	} }, t("skyjoRoundLabel")(i + 1)), /* @__PURE__ */ import_react.default.createElement(Flip7RoundEntry, {
-		players,
-		isEdit: true,
-		initialData: history[i].data,
-		onSave: (scores, data) => onEditSave(i, scores, data),
-		onCancel: () => setEditingIndex(null),
-		theme,
-		t
-	})) : /* @__PURE__ */ import_react.default.createElement("button", {
-		key: i,
-		onClick: () => setEditingIndex(i),
-		className: "press-fx",
-		style: {
-			display: "grid",
-			gridTemplateColumns: cols,
-			gap: 6,
-			alignItems: "center",
-			width: "100%",
-			background: fk.card,
-			border: `1px solid ${fk.border}`,
-			borderRadius: 14,
-			padding: "9px 12px",
-			cursor: "pointer",
-			textAlign: "left"
-		}
-	}, /* @__PURE__ */ import_react.default.createElement("span", { style: {
-		fontSize: 11.5,
-		fontWeight: 700,
-		color: fk.muted,
-		fontFamily: "'Inter', sans-serif"
-	} }, i + 1), players.map((p) => {
-		const entry = history[i].data[p.id] || {};
-		const sc = history[i].scores[p.id] || 0;
-		return /* @__PURE__ */ import_react.default.createElement("span", {
-			key: p.id,
-			style: {
-				fontSize: 14,
-				fontWeight: 800,
-				color: entry.busted ? fk.bust : fk.ink,
-				fontFamily: FLIP7_FONT,
-				background: entry.busted ? `${fk.bust}18` : entry.flip7 ? `${fk.gold}18` : "transparent",
-				borderRadius: 8,
-				padding: "3px 0",
-				textAlign: "center"
-			}
-		}, entry.busted ? t("flip7BustAbbr") : sc);
-	}))));
-}
-function Flip7GameOver({ players, history, onRestart, onNewSetup, theme, t }) {
-	const fk = flip7Tokens(theme);
+function Flip7GameOver({ players, history, onRestart, onNewSetup, onUndo, theme, t }) {
+	const k = f7T(theme);
 	const ranked = [...players].sort((a, b) => b.total - a.total);
 	const winner = ranked[0];
 	const celebration = useCelebration(true);
@@ -99125,7 +99034,7 @@ function Flip7GameOver({ players, history, onRestart, onNewSetup, theme, t }) {
 			name: p.name,
 			score: p.total
 		})), false, (() => {
-			const f7 = players.filter((p) => (history || []).some((r) => r && r.data && r.data[p.id] && r.data[p.id].flip7 && !r.data[p.id].busted)).map((p) => p.name);
+			const f7 = players.filter((p) => f7Flip7Count(history, p.id) > 0).map((p) => p.name);
 			return f7.length ? { flip7: f7 } : void 0;
 		})());
 	}, []);
@@ -99145,50 +99054,60 @@ function Flip7GameOver({ players, history, onRestart, onNewSetup, theme, t }) {
 		onClose: () => setPodiumOpen(false),
 		onRestart,
 		ranked: podiumRanked,
-		tk: fk,
+		tk: k,
 		t,
 		theme,
 		shareExtra: () => ({ players: ranked.map((p) => ({
 			name: p.name,
 			rounds: (history || []).map((r) => Number(r && r.scores && r.scores[p.id]) || 0),
-			flip7: (history || []).filter((r) => r && r.data && r.data[p.id] && r.data[p.id].flip7 && !r.data[p.id].busted).length
+			flip7: f7Flip7Count(history, p.id)
 		})) })
-	}), /* @__PURE__ */ import_react.default.createElement(GameIcon, {
-		name: "trophy",
-		size: 48,
-		color: fk.flame
-	}), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 24,
-		fontWeight: 800,
-		color: fk.flame,
-		fontFamily: FLIP7_FONT,
-		textAlign: "center"
-	} }, gtWinLine(t, "winnerWins", "winnersTie", ranked.filter((q) => q.total === winner.total).map((q) => q.name))), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 6,
-		width: "100%",
-		maxWidth: 280
-	} }, ranked.map((p, i) => /* @__PURE__ */ import_react.default.createElement("div", {
+	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "reveal-1" }, /* @__PURE__ */ import_react.default.createElement(Flip7Fan, {
+		theme,
+		className: "f7-fan"
+	})), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "reveal-2",
+		style: {
+			fontSize: 24,
+			fontWeight: 800,
+			color: k.acc,
+			fontFamily: FLIP7_FONT,
+			textAlign: "center"
+		}
+	}, gtWinLine(t, "winnerWins", "winnersTie", ranked.filter((q) => q.total === winner.total).map((q) => q.name))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "reveal-3",
+		style: {
+			display: "flex",
+			flexDirection: "column",
+			gap: 6,
+			width: "100%",
+			maxWidth: 300
+		}
+	}, ranked.map((p, i) => /* @__PURE__ */ import_react.default.createElement("div", {
 		key: p.id,
 		style: {
 			display: "flex",
 			justifyContent: "space-between",
 			alignItems: "center",
+			gap: 10,
 			padding: "10px 14px",
-			background: i === 0 ? `${fk.flame}14` : fk.card,
-			border: `1px solid ${i === 0 ? fk.flame : fk.border}`,
-			borderRadius: 20
+			background: i === 0 ? `color-mix(in oklab, ${k.acc} 14%, ${k.card})` : k.card,
+			border: `1px solid ${i === 0 ? k.acc : k.line}`,
+			borderRadius: 18
 		}
 	}, /* @__PURE__ */ import_react.default.createElement("span", { style: {
 		fontSize: 14,
 		fontWeight: 600,
-		color: fk.ink,
-		fontFamily: "'Inter', sans-serif"
+		color: k.ink,
+		fontFamily: "'Inter', sans-serif",
+		minWidth: 0,
+		overflow: "hidden",
+		textOverflow: "ellipsis",
+		whiteSpace: "nowrap"
 	} }, i === 0 && /* @__PURE__ */ import_react.default.createElement(GameIcon, {
 		name: "crown",
 		size: 13,
-		color: fk.flame,
+		color: k.acc,
 		style: {
 			marginRight: 4,
 			verticalAlign: "-2px"
@@ -99196,13 +99115,18 @@ function Flip7GameOver({ players, history, onRestart, onNewSetup, theme, t }) {
 	}), p.name), /* @__PURE__ */ import_react.default.createElement("span", { style: {
 		fontSize: 16,
 		fontWeight: 800,
-		color: i === 0 ? fk.flame : fk.muted,
+		color: i === 0 ? k.acc : k.muted,
 		fontFamily: FLIP7_FONT
-	} }, p.total)))), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		gap: 8,
-		marginTop: 8
-	} }, /* @__PURE__ */ import_react.default.createElement("button", {
+	} }, p.total)))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "reveal-4",
+		style: {
+			display: "flex",
+			gap: 8,
+			marginTop: 8,
+			flexWrap: "wrap",
+			justifyContent: "center"
+		}
+	}, /* @__PURE__ */ import_react.default.createElement("button", {
 		"data-gt-sound": "1",
 		onClick: onRestart,
 		className: "press-fx",
@@ -99215,91 +99139,155 @@ function Flip7GameOver({ players, history, onRestart, onNewSetup, theme, t }) {
 		onClick: onNewSetup,
 		className: "press-fx",
 		style: flip7BtnGhost(theme)
-	}, t("changePlayers"))));
+	}, t("changePlayers")), /* @__PURE__ */ import_react.default.createElement("button", {
+		onClick: onUndo,
+		className: "press-fx",
+		style: flip7BtnGhost(theme)
+	}, t("skyjoUndoRound"))));
+}
+function f7Totals(players, history) {
+	return players.map((p) => ({
+		...p,
+		total: (history || []).reduce((s, r) => s + (r && r.scores && r.scores[p.id] || 0), 0)
+	}));
+}
+function f7Status(players, target, nRounds) {
+	if (!nRounds) return "play";
+	const max = Math.max(...players.map((p) => p.total));
+	if (max < target) return "play";
+	return players.filter((p) => p.total === max).length > 1 ? "tie" : "over";
 }
 function Flip7Game({ state, setState, onBack, onHome, onEndGame, lang = "de", theme = "dark" }) {
 	const t = useT(lang);
-	const fk = flip7Tokens(theme);
+	const k = f7T(theme);
 	const [rulesOpen, setRulesOpen] = useState$11(false);
-	const [editingIndex, setEditingIndex] = useState$11(null);
-	const [gameOver, setGameOver] = useState$11(false);
+	const [view, setView] = useState$11("round");
+	const [edit, setEdit] = useState$11(null);
+	const rootRef = useRef$16(null);
+	const [lap, setLap] = useState$11(false);
+	const history = state.history || [];
+	const nRounds = history.length;
+	const status = state.phase === "play" ? f7Status(state.players, state.target, nRounds) : "play";
+	const gameOver = status === "over";
+	import_react.default.useLayoutEffect(() => {
+		setLap(!!(rootRef.current && rootRef.current.closest(".gtL-content")));
+	}, [state.phase, gameOver]);
+	const d = f7Draft(state.draft, state.players);
+	const upd = (f) => setState((s) => {
+		const dr = f7Draft(s.draft, s.players);
+		const patch = typeof f === "function" ? f(dr) : f;
+		return {
+			...s,
+			draft: {
+				...dr,
+				...patch
+			}
+		};
+	});
 	const startGame = () => {
 		setState((s) => ({
 			...s,
 			phase: "play",
+			draft: null,
+			history: [],
 			players: s.players.map((p) => ({
-				...p,
-				total: 0,
-				history: []
+				id: p.id,
+				name: p.name,
+				total: 0
 			}))
 		}));
-		setGameOver(false);
+		setView("round");
 	};
 	const saveRound = (scores, data) => {
 		setState((s) => {
-			const players = s.players.map((p) => ({
-				...p,
-				total: p.total + (scores[p.id] || 0)
-			}));
+			const h = [...s.history || [], {
+				scores,
+				data
+			}];
 			return {
 				...s,
-				players,
-				history: [...s.history || [], {
-					scores,
-					data
-				}]
+				draft: null,
+				history: h,
+				players: f7Totals(s.players, h)
 			};
 		});
 	};
-	const editRound = (roundIndex, newScores, newData) => {
+	const editCell = (i, pid, e) => {
 		setState((s) => {
-			const history = s.history.map((r, i) => i === roundIndex ? {
-				scores: newScores,
-				data: newData
-			} : r);
-			const players = s.players.map((p) => ({
-				...p,
-				total: history.reduce((sum, r) => sum + (r.scores[p.id] || 0), 0)
-			}));
+			const h = (s.history || []).map((r, k2) => k2 !== i ? r : {
+				scores: {
+					...r.scores,
+					[pid]: flip7RoundScore(e)
+				},
+				data: {
+					...r.data,
+					[pid]: e
+				}
+			});
 			return {
 				...s,
-				players,
-				history
+				history: h,
+				players: f7Totals(s.players, h)
 			};
 		});
-		setEditingIndex(null);
+		setEdit(null);
 	};
-	useEffect$14(() => {
-		if (state.phase !== "play") return;
-		if (state.players.some((p) => p.total >= state.target) && (state.history || []).length > 0) setGameOver(true);
-	}, [
-		state.players,
-		state.phase,
-		state.target,
-		state.history
-	]);
+	const undoRound = () => {
+		if (!nRounds) return;
+		const lastR = history[nRounds - 1];
+		const ents = {};
+		const touched = {};
+		state.players.forEach((p) => {
+			ents[p.id] = f7Norm(lastR.data && lastR.data[p.id]) || f7Blank();
+			touched[p.id] = true;
+		});
+		setState((s) => {
+			const h = (s.history || []).slice(0, -1);
+			return {
+				...s,
+				history: h,
+				players: f7Totals(s.players, h),
+				draft: {
+					cur: 0,
+					ents,
+					touched
+				}
+			};
+		});
+		setView("round");
+	};
+	const shellVars = {
+		maxWidth: lap ? void 0 : 420,
+		margin: "0 auto",
+		position: "relative",
+		...f7Vars(k)
+	};
+	const editPlayer = edit ? state.players.find((p) => p.id === edit.pid) : null;
+	const keysOn = lap && !edit && !rulesOpen;
 	if (state.phase === "setup") return /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-shellpage pld-shell",
-		style: flip7PageShellStyle(theme)
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, PLD_CSS), /* @__PURE__ */ import_react.default.createElement("div", {
+		style: f7Shell(theme)
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, PLD_CSS, F7_CSS), /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-game pl-wide pl-page pl-head-compact pld",
 		style: {
 			maxWidth: 380,
 			margin: "0 auto",
-			position: "relative"
+			position: "relative",
+			...f7Vars(k)
 		}
 	}, /* @__PURE__ */ import_react.default.createElement(GtCol, {
-		accent: fk.flame,
+		accent: k.acc,
 		className: "gt-ug"
 	}, /* @__PURE__ */ import_react.default.createElement("style", null, GT_UG_CSS), /* @__PURE__ */ import_react.default.createElement(RulesButton, {
 		onClick: () => setRulesOpen(true),
 		onHome,
-		tokens: fk
+		tokens: k
 	}), /* @__PURE__ */ import_react.default.createElement(Flip7TopBar, {
 		subtitle: t("gtNewMatch"),
 		onBack,
 		theme,
-		t
+		t,
+		hideTitle: true
 	}), /* @__PURE__ */ import_react.default.createElement(Flip7Setup, {
 		state,
 		setState,
@@ -99311,97 +99299,117 @@ function Flip7Game({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 		onClose: () => setRulesOpen(false),
 		title: t("gameFlip7"),
 		text: t("rulesFlip7"),
-		tokens: fk
+		tokens: k
 	}));
+	const table = /* @__PURE__ */ import_react.default.createElement("div", { className: "f7-tview" }, /* @__PURE__ */ import_react.default.createElement(Flip7Table, {
+		players: state.players,
+		history,
+		target: state.target,
+		onCell: (i, pid) => setEdit({
+			i,
+			pid
+		}),
+		t
+	}), nRounds > 0 && /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "f7-ghost press-fx",
+		style: { alignSelf: "center" },
+		onClick: undoRound
+	}, /* @__PURE__ */ import_react.default.createElement(F7Undo, null), t("skyjoUndoRound")));
 	return /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-shellpage pld-shell",
-		style: flip7PageShellStyle(theme)
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, PLD_CSS), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gtL-game pl-wide pl-page pl-head-compact pld",
-		style: {
-			maxWidth: 380,
-			margin: "0 auto",
-			position: "relative"
-		}
-	}, /* @__PURE__ */ import_react.default.createElement(GtCol, {
-		accent: fk.flame,
-		className: "gt-ug"
-	}, /* @__PURE__ */ import_react.default.createElement("style", null, GT_UG_CSS), /* @__PURE__ */ import_react.default.createElement(RulesButton, {
+		style: f7Shell(theme)
+	}, /* @__PURE__ */ import_react.default.createElement("style", null, GLOBAL_STYLES, PLD_CSS, F7_CSS), /* @__PURE__ */ import_react.default.createElement("div", {
+		ref: rootRef,
+		className: "gtL-game pl-wide pl-page pl-head-compact",
+		style: shellVars
+	}, /* @__PURE__ */ import_react.default.createElement(RulesButton, {
 		onClick: () => setRulesOpen(true),
 		onHome,
 		onEndGame,
-		tokens: fk
+		tokens: k
 	}), /* @__PURE__ */ import_react.default.createElement(Flip7TopBar, {
 		subtitle: `${t("skyjoTarget")} ${state.target}`,
 		onBack,
 		theme,
-		t
+		t,
+		hideTitle: !lap
 	}), gameOver ? /* @__PURE__ */ import_react.default.createElement(Flip7GameOver, {
 		players: state.players,
-		history: state.history || [],
+		history,
 		onRestart: startGame,
+		onUndo: undoRound,
 		onNewSetup: () => setState((s) => ({
 			...s,
-			phase: "setup"
+			phase: "setup",
+			draft: null
 		})),
 		theme,
 		t
-	}) : /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split pld-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement(GtTiles, {
+	}) : /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, lap || view === "round" ? /* @__PURE__ */ import_react.default.createElement(Flip7Flow, {
 		players: state.players,
+		d,
+		upd,
+		roundNo: nRounds + 1,
 		target: state.target,
-		tk: fk,
+		tie: status === "tie",
 		theme,
-		accent: fk.flame,
-		font: FLIP7_FONT,
-		label: t("gtlStandings")
-	}), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		marginTop: 4,
-		display: "contents"
-	} }, /* @__PURE__ */ import_react.default.createElement(Flip7RoundEntry, {
-		key: (state.history || []).length,
-		gtTarget: state.target,
-		gtRound: (state.history || []).length,
-		players: state.players,
+		t,
+		lap,
+		keysOn,
 		onSave: saveRound,
-		theme,
-		t
-	}))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side" }, /* @__PURE__ */ import_react.default.createElement(GtlStandings, {
+		view,
+		setView
+	}) : /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "f7-flow",
+		style: { gridTemplateAreas: "\"seg\" \"tbl\"" }
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "f7-seg",
+		role: "tablist"
+	}, /* @__PURE__ */ import_react.default.createElement("button", {
+		role: "tab",
+		"aria-selected": false,
+		onClick: () => setView("round")
+	}, t("skyjoRoundLabel")(nRounds + 1)), /* @__PURE__ */ import_react.default.createElement("button", {
+		role: "tab",
+		"aria-selected": true
+	}, t("skyjoViewTable"))), /* @__PURE__ */ import_react.default.createElement("div", { style: { gridArea: "tbl" } }, table))), lap && /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side" }, /* @__PURE__ */ import_react.default.createElement(GtlStandings, {
 		players: state.players,
 		target: state.target,
 		lowWins: false,
-		rounds: (state.history || []).length,
-		accent: fk.flame,
-		tk: fk,
-		font: FLIP7_FONT,
+		rounds: nRounds,
+		accent: k.acc,
+		tk: k,
+		font: "'Space Grotesk', sans-serif",
 		theme,
 		t
-	}), /* @__PURE__ */ import_react.default.createElement(GtRoundChart, {
+	}), table, /* @__PURE__ */ import_react.default.createElement(GtRoundChart, {
 		series: state.players.map((p, i) => ({
 			id: p.id,
 			name: p.name,
 			color: playerHue(i, theme),
-			vals: (state.history || []).map((r) => r.scores && r.scores[p.id] || 0)
+			vals: history.map((r) => r.scores && r.scores[p.id] || 0)
 		})),
-		ink: fk.ink,
-		muted: fk.muted,
-		card: fk.card,
-		border: fk.border,
+		ink: k.ink,
+		muted: k.muted,
+		card: k.card,
+		border: k.line,
 		title: t("gtChartTitle"),
 		theme
-	}), /* @__PURE__ */ import_react.default.createElement(Flip7RoundHistory, {
-		players: state.players,
-		history: state.history || [],
-		editingIndex,
-		setEditingIndex,
-		onEditSave: editRound,
+	})))), editPlayer && /* @__PURE__ */ import_react.default.createElement("div", { style: f7Vars(k) }, /* @__PURE__ */ import_react.default.createElement(Flip7EditSheet, {
+		key: edit.i + "-" + edit.pid,
+		player: editPlayer,
+		round: edit.i + 1,
+		init: history[edit.i] && history[edit.i].data && history[edit.i].data[edit.pid],
 		theme,
-		t
-	}))))), /* @__PURE__ */ import_react.default.createElement(RulesSheet, {
+		t,
+		onClose: () => setEdit(null),
+		onSave: (e) => editCell(edit.i, edit.pid, e)
+	})), /* @__PURE__ */ import_react.default.createElement(RulesSheet, {
 		open: rulesOpen,
 		onClose: () => setRulesOpen(false),
 		title: t("gameFlip7"),
 		text: t("rulesFlip7"),
-		tokens: fk
+		tokens: k
 	}));
 }
 var DEFAULT_FLIP7 = {
@@ -99409,13 +99417,11 @@ var DEFAULT_FLIP7 = {
 	players: [{
 		id: 1,
 		name: "Spieler 1",
-		total: 0,
-		history: []
+		total: 0
 	}, {
 		id: 2,
 		name: "Spieler 2",
-		total: 0,
-		history: []
+		total: 0
 	}],
 	target: 200,
 	history: []
@@ -115252,7 +115258,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.09-5");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.09-6");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -117949,7 +117955,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.09-5" && !upd) {
+		if (seen && seen !== "2026.11.09-6" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -117958,7 +117964,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.09-5" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.09-6" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

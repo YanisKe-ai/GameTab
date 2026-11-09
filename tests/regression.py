@@ -199,6 +199,20 @@ def numpad(pg, row_name, value):
         click(pg, btn(pg, "Bestätigen"), 500)
 
 
+def flip7_round(pg, hands):
+    """Flip 7: pro Person Karten antippen (Zahlen, "+4", "x2", "Bust"), dann Weiter bzw. Runde speichern."""
+    for hand in hands:
+        for c in hand:
+            if c == "Bust":
+                click(pg, pg.locator(".f7-grid button[data-k=bust]").first, 150)
+            elif isinstance(c, str):
+                lab = "×2" if c == "x2" else c
+                click(pg, pg.locator(".f7-mg button", has_text=re.compile("^" + re.escape(lab) + "$")).first, 150)
+            else:
+                click(pg, pg.locator(".f7-grid button", has_text=re.compile("^" + str(c) + "$")).first, 150)
+        click(pg, pg.locator(".f7-save").first, 500)
+
+
 def skyjo_pick_ender(pg, ender=None):
     """Skyjo Schritt 1: Beender waehlen (Name) oder 'Weiss nicht mehr' (None), dann 'Weiter: Punkte eintragen'."""
     if ender is None:
@@ -339,8 +353,9 @@ def t_erfolge(pg, env):
 @test("Flip 7")
 def t_flip7(pg, env):
     open_game(pg, "Schreibunterlagen", "Flip 7"); press_start(pg)
-    numpad(pg, "Spieler 1", 210); numpad(pg, "Spieler 2", 30)
-    click(pg, btn(pg, "Runde speichern"), 900)
+    flip7_round(pg, [[12, 11, 10, 9, 8, 7, 6, "x2"], ["Bust"]])
+    check(pg.locator(".f7-cell, .f7-chip").count() > 0, "Flip 7: Spielansicht fehlt")
+    flip7_round(pg, [[12, 11, 10, "x2", "+10"], [5, 3, "+4"]])
     expect_text(pg, r"Spieler 1 gewinnt", "Flip 7: Sieger nicht angezeigt")
     finish(pg, "Flip 7", env, True)
 

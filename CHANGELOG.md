@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.10-4 (10.11.2026 00:20)
+- Neue Icons: Impostor, Mafia, Verräter; Skyjo mit Karten nebeneinander, Jass mit Jassteppich und vier Farben
+
 ## 2026.11.10-3 (10.11.2026 00:15)
 - Neue Icons: Werwolf, Hi Score, Split Score, Skyjo, Jass. Spiellisten ohne Beschreibung, alle gleich hoch, Schild mit Anzahl Varianten
 

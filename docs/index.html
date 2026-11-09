@@ -21688,51 +21688,66 @@ function JassLogo({ color, theme, size }) {
 	const face = "#FFF8EC";
 	const red = "#D62828";
 	const blk = "#1B1B22";
-	const card = (r, k, kids) => /* @__PURE__ */ import_react.default.createElement("g", {
+	const card = (r, k, kid) => /* @__PURE__ */ import_react.default.createElement("g", {
 		key: k,
-		transform: `rotate(${r} 13 27)`
+		transform: `rotate(${r} 14 25)`
 	}, /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "7.5",
-		y: "2",
-		width: "11.5",
-		height: "17",
-		rx: "2",
+		x: "9",
+		y: "5",
+		width: "10",
+		height: "14.5",
+		rx: "1.8",
 		fill: face,
 		stroke: K,
-		strokeWidth: "1.1"
-	}), kids);
+		strokeWidth: "1"
+	}), /* @__PURE__ */ import_react.default.createElement("g", { transform: "translate(14 10.6)" }, kid));
 	return /* @__PURE__ */ import_react.default.createElement("svg", {
 		width: S,
 		height: S,
 		viewBox: "0 0 28 28",
 		style: { flexShrink: 0 },
 		"aria-hidden": "true"
-	}, card(-26, "a", /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M11 5.6 L13.2 8.6 L11 11.6 L8.8 8.6 Z",
-		fill: red
-	})), card(-6, "b", /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M0 -3.6 C-3.6 -0.6 -3.4 2.4 -1.2 2.4 C-0.6 2.4 -0.2 2 0 1.6 L-0.6 3.8 H0.6 L0 1.6 C0.2 2 0.6 2.4 1.2 2.4 C3.4 2.4 3.6 -0.6 0 -3.6Z",
-		fill: blk,
-		transform: "translate(11.2 8.6) scale(1)"
-	})), card(14, "c", /* @__PURE__ */ import_react.default.createElement("g", null, /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M10.4 4.6 V9.4 H12.3 C13.5 9.4 13.9 8.7 13.9 8 C13.9 7.3 13.4 6.9 12.6 6.9 C13.2 6.9 13.6 6.5 13.6 5.8 C13.6 5.1 13.1 4.6 12.2 4.6 Z M10.4 6.9 H12.5",
-		stroke: red,
-		strokeWidth: "1",
-		fill: "none",
-		strokeLinejoin: "round"
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M0 3.4 C-3.6 0.9 -3 -2.6 -1 -2.6 C-0.4 -2.6 0 -2 0 -2 C0 -2 0.4 -2.6 1 -2.6 C3 -2.6 3.6 0.9 0 3.4Z",
-		fill: red,
-		transform: "translate(14.6 13.6) scale(1.1)"
-	}))), /* @__PURE__ */ import_react.default.createElement("g", { transform: "translate(21 21.2)" }, /* @__PURE__ */ import_react.default.createElement("circle", {
-		r: "5.6",
-		fill: "#E3242B",
+	}, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "1",
+		y: "9",
+		width: "26",
+		height: "17.5",
+		rx: "4",
+		fill: "#1E6B3A",
 		stroke: K,
-		strokeWidth: "1"
-	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M-1 -3.4 H1 V-1 H3.4 V1 H1 V3.4 H-1 V1 H-3.4 V-1 H-1 Z",
-		fill: "#fff"
-	})));
+		strokeWidth: "1.1"
+	}), /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "2.6",
+		y: "10.6",
+		width: "22.8",
+		height: "14.3",
+		rx: "2.8",
+		fill: "none",
+		stroke: "#D9C27A",
+		strokeWidth: ".7",
+		opacity: ".8"
+	}), card(-36, "a", /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M0 3.4 C-3.6 0.9 -3 -2.6 -1 -2.6 C-0.4 -2.6 0 -2 0 -2 C0 -2 0.4 -2.6 1 -2.6 C3 -2.6 3.6 0.9 0 3.4Z",
+		fill: red
+	})), card(-12, "b", /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M0 -3.6 L2.6 0 L0 3.6 L-2.6 0 Z",
+		fill: red
+	})), card(12, "c", /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M0 -3.6 C-3.6 -0.6 -3.4 2.4 -1.2 2.4 C-0.6 2.4 -0.2 2 0 1.6 L-0.6 3.8 H0.6 L0 1.6 C0.2 2 0.6 2.4 1.2 2.4 C3.4 2.4 3.6 -0.6 0 -3.6Z",
+		fill: blk
+	})), card(36, "d", /* @__PURE__ */ import_react.default.createElement("g", { fill: blk }, /* @__PURE__ */ import_react.default.createElement("g", null, /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: "0",
+		cy: "-1.8",
+		r: "1.6"
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: "-1.7",
+		cy: ".6",
+		r: "1.6"
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: "1.7",
+		cy: ".6",
+		r: "1.6"
+	}), /* @__PURE__ */ import_react.default.createElement("path", { d: "M0 0 L-1 3.6 H1 Z" })))));
 }
 function DifferenzlerLogo({ color, theme, size }) {
 	gtIcTheme(theme);
@@ -21854,8 +21869,9 @@ function SchieberLogo({ color, theme, size }) {
 	}));
 }
 function ImpostorLogo({ color, theme, size }) {
-	gtIcTheme(theme);
 	const S = size || 28;
+	const K = "#14100E";
+	const P = "#B23BD6", P2 = "#D877F2", G = "#F2C14E";
 	return /* @__PURE__ */ import_react.default.createElement("svg", {
 		width: S,
 		height: S,
@@ -21863,27 +21879,43 @@ function ImpostorLogo({ color, theme, size }) {
 		style: { flexShrink: 0 },
 		"aria-hidden": "true"
 	}, /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M2 11.5 C5 8 9.5 8.2 14 10.4 C18.5 8.2 23 8 26 11.5 C26 16.5 22.5 19.5 18.6 19.5 C16.4 19.5 15 17.6 14 16.4 C13 17.6 11.6 19.5 9.4 19.5 C5.5 19.5 2 16.5 2 11.5 Z",
-		fill: "#C042E0",
-		stroke: "#14100E",
+		d: "M20 9 C22 4.5 25.5 3 26.5 2.4 C25.6 4.6 24.4 7.6 22.4 10.2",
+		fill: P2,
+		stroke: K,
+		strokeWidth: ".8",
+		strokeLinejoin: "round"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M21.4 9.6 C23 6.4 24.6 4.6 26 3.2",
+		stroke: K,
+		strokeWidth: ".5",
+		fill: "none",
+		opacity: ".6"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M1.5 12 C4.5 8.4 9.4 8.6 14 11 C18.6 8.6 23.5 8.4 26.5 12 C26.5 17.2 22.8 20.4 18.8 20.4 C16.4 20.4 15 18.4 14 17.2 C13 18.4 11.6 20.4 9.2 20.4 C5.2 20.4 1.5 17.2 1.5 12 Z",
+		fill: P,
+		stroke: K,
 		strokeWidth: "1.1",
 		strokeLinejoin: "round"
-	}), /* @__PURE__ */ import_react.default.createElement("ellipse", {
-		cx: "8.6",
-		cy: "13.6",
-		rx: "2.6",
-		ry: "1.9",
-		fill: "#14100E"
-	}), /* @__PURE__ */ import_react.default.createElement("ellipse", {
-		cx: "19.4",
-		cy: "13.6",
-		rx: "2.6",
-		ry: "1.9",
-		fill: "#14100E"
 	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M14 19.5 V25",
-		stroke: "#E0BA72",
-		strokeWidth: "1.4",
+		d: "M3 12.4 C5.6 9.8 9.8 10 14 12.4 C18.2 10 22.4 9.8 25 12.4",
+		stroke: G,
+		strokeWidth: "1",
+		fill: "none"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M5 13.6 C6.4 12.2 9.6 12 11.4 13.8 C10.4 15.8 6.6 16 5 13.6 Z",
+		fill: K
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M23 13.6 C21.6 12.2 18.4 12 16.6 13.8 C17.6 15.8 21.4 16 23 13.6 Z",
+		fill: K
+	}), /* @__PURE__ */ import_react.default.createElement("circle", {
+		cx: "14",
+		cy: "15",
+		r: "1",
+		fill: G
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M14 20.4 V26.5",
+		stroke: "#8B5A2B",
+		strokeWidth: "1.5",
 		strokeLinecap: "round"
 	}));
 }
@@ -22042,63 +22074,93 @@ function HeadsUpLogo({ color, theme, size }) {
 function SkyjoLogo({ color, theme, size }) {
 	const S = size || 28;
 	const K = "#14100E";
-	const card = (r, f, ink, k, kids) => /* @__PURE__ */ import_react.default.createElement("g", {
-		key: k,
-		transform: `rotate(${r} 14 26)`
-	}, /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "8",
-		y: "2.5",
-		width: "12",
-		height: "17",
-		rx: "2.4",
-		fill: f,
-		stroke: K,
-		strokeWidth: "1.1"
-	}), /* @__PURE__ */ import_react.default.createElement("ellipse", {
-		cx: "14",
-		cy: "11",
-		rx: "4.3",
-		ry: "5.6",
-		fill: "#fff"
-	}), kids(ink));
 	return /* @__PURE__ */ import_react.default.createElement("svg", {
 		width: S,
 		height: S,
 		viewBox: "0 0 28 28",
 		style: { flexShrink: 0 },
 		"aria-hidden": "true"
-	}, card(-28, "#2B4C9B", "#2B4C9B", "a", (ink) => /* @__PURE__ */ import_react.default.createElement("g", null, /* @__PURE__ */ import_react.default.createElement("rect", {
-		x: "8.9",
-		y: "9.4",
-		width: "1.8",
-		height: "1",
-		rx: ".4",
-		fill: ink
+	}, [
+		[
+			"#5BC0EB",
+			"#1C6E99",
+			"0",
+			1.2
+		],
+		[
+			"#4CAF50",
+			"#1E6B23",
+			"4",
+			10
+		],
+		[
+			"#E53935",
+			"#E53935",
+			"12",
+			18.8
+		]
+	].map(([f, ink, v, x], i) => /* @__PURE__ */ import_react.default.createElement("g", {
+		key: i,
+		transform: `translate(${x} ${i === 1 ? 3 : 5})`
+	}, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "0",
+		y: "0",
+		width: "8.4",
+		height: "12.6",
+		rx: "1.8",
+		fill: f,
+		stroke: K,
+		strokeWidth: "1"
+	}), /* @__PURE__ */ import_react.default.createElement("ellipse", {
+		cx: "4.2",
+		cy: "6.3",
+		rx: "3",
+		ry: "4",
+		fill: "#fff"
 	}), /* @__PURE__ */ import_react.default.createElement("text", {
-		x: "12.6",
-		y: "12.4",
-		fontSize: "6.4",
+		x: "4.2",
+		y: v.length > 1 ? 8.1 : 8.4,
+		fontSize: v.length > 1 ? 4.4 : 5.4,
 		fill: ink,
 		fontFamily: "'Space Grotesk','Inter',sans-serif",
 		fontWeight: "800",
 		textAnchor: "middle"
-	}, "2"))), card(-4, "#FFD23F", "#C79100", "b", (ink) => /* @__PURE__ */ import_react.default.createElement("text", {
-		x: "12.6",
-		y: "12.8",
-		fontSize: "6.4",
-		fill: ink,
+	}, v))), /* @__PURE__ */ import_react.default.createElement("g", { transform: "translate(5.4 16.5)" }, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "0",
+		y: "0",
+		width: "8.4",
+		height: "10.4",
+		rx: "1.8",
+		fill: "#1B2A4A",
+		stroke: K,
+		strokeWidth: "1"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M1.8 6.4 a1.3 1.3 0 0 1 .9-2.3 a1.8 1.8 0 0 1 3.3 .4 a1.1 1.1 0 0 1 .2 1.9 Z",
+		fill: "#CFEAF7"
+	})), /* @__PURE__ */ import_react.default.createElement("g", { transform: "translate(14.4 17.5)" }, /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "0",
+		y: "0",
+		width: "8.4",
+		height: "10",
+		rx: "1.8",
+		fill: "#FFD23F",
+		stroke: K,
+		strokeWidth: "1"
+	}), /* @__PURE__ */ import_react.default.createElement("ellipse", {
+		cx: "4.2",
+		cy: "5",
+		rx: "2.8",
+		ry: "3.4",
+		fill: "#fff"
+	}), /* @__PURE__ */ import_react.default.createElement("text", {
+		x: "4.2",
+		y: "7",
+		fontSize: "5",
+		fill: "#B88600",
 		fontFamily: "'Space Grotesk','Inter',sans-serif",
 		fontWeight: "800",
 		textAnchor: "middle"
-	}, "5")), card(22, "#E53935", "#E53935", "c", (ink) => /* @__PURE__ */ import_react.default.createElement("text", {
-		x: "14",
-		y: "13.4",
-		fontSize: "5.8",
-		fill: ink,
-		fontFamily: "'Space Grotesk','Inter',sans-serif",
-		fontWeight: "800",
-		textAnchor: "middle"
-	}, "12")));
+	}, "7")));
 }
 function FiveSecLogo({ color, theme, size }) {
 	gtIcTheme(theme);
@@ -22649,32 +22711,58 @@ function SplitScoreLogo({ color, theme, size }) {
 	})));
 }
 function MafiaLogo({ color, theme, size }) {
-	gtIcTheme(theme);
 	const S = size || 28;
-	const h = "#1F1A1C";
-	const b = "#C9A15C";
+	const K = "#14100E";
+	const H = "#3A3544", HL = "#6B6478";
 	return /* @__PURE__ */ import_react.default.createElement("svg", {
 		width: S,
 		height: S,
 		viewBox: "0 0 28 28",
 		style: { flexShrink: 0 },
 		"aria-hidden": "true"
-	}, /* @__PURE__ */ import_react.default.createElement("ellipse", {
-		cx: "14",
-		cy: "20",
+	}, /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M19.5 22 C21.5 19 23 18.4 24.6 18.6",
+		stroke: "#3F8F42",
+		strokeWidth: "1.1",
+		fill: "none",
+		strokeLinecap: "round"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M24.4 15.8 C26.4 15.6 27.2 17.6 26 18.8 C24.8 20 23 19.4 22.8 18 C22.6 16.8 23.4 16 24.4 15.8 Z",
+		fill: "#D62839",
+		stroke: K,
+		strokeWidth: ".7"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M24.2 17.2 C25 16.8 25.8 17.4 25.4 18.2",
+		stroke: "#8C1424",
+		strokeWidth: ".6",
+		fill: "none"
+	}), /* @__PURE__ */ import_react.default.createElement("ellipse", {
+		cx: "13.5",
+		cy: "19.5",
 		rx: "12.5",
-		ry: "3.4",
-		fill: h,
-		stroke: b,
+		ry: "3.6",
+		fill: H,
+		stroke: "#8A8296",
 		strokeWidth: "1"
 	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M6.5 19.5 C6 13.5 7.5 6.5 10.5 6.5 C12 6.5 12.6 8.4 14 8.4 C15.4 8.4 16 6.5 17.5 6.5 C20.5 6.5 22 13.5 21.5 19.5 Z",
-		fill: h,
-		stroke: b,
+		d: "M5.8 19 C5.2 12.8 6.8 5.6 9.8 5.6 C11.4 5.6 12 7.6 13.5 7.6 C15 7.6 15.6 5.6 17.2 5.6 C20.2 5.6 21.8 12.8 21.2 19 Z",
+		fill: H,
+		stroke: "#8A8296",
 		strokeWidth: "1"
 	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M6.9 16 C11 17.4 17 17.4 21.1 16 L21.3 18.6 C17 20 11 20 6.7 18.6 Z",
-		fill: "#B3261E"
+		d: "M9.4 7.4 C8.4 10 8 13 8.2 16",
+		stroke: HL,
+		strokeWidth: "1.2",
+		fill: "none",
+		strokeLinecap: "round"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M6.1 15.2 C10.8 16.8 16.2 16.8 20.9 15.2 L21.1 18 C16.2 19.6 10.8 19.6 5.9 18 Z",
+		fill: "#B3202A"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M2.8 20.2 C8 22.4 19 22.4 24.2 20.2",
+		stroke: HL,
+		strokeWidth: ".8",
+		fill: "none"
 	}));
 }
 function Flip7Logo({ color, theme, size }) {
@@ -58950,10 +59038,9 @@ function RommeLogo({ color, size, theme }) {
 	})), card(-22, "a"), card(-2, "b"), card(18, "c", true));
 }
 function TraitorLogo({ color, size, theme }) {
-	gtIcTheme(theme);
 	const S = size || 28;
 	const K = "#14100E";
-	const c = "#7FBF5A";
+	const R = "#7A1F2B", R2 = "#9E2A39", G = "#C9A15C";
 	return /* @__PURE__ */ import_react.default.createElement("svg", {
 		width: S,
 		height: S,
@@ -58961,29 +59048,56 @@ function TraitorLogo({ color, size, theme }) {
 		style: { flexShrink: 0 },
 		"aria-hidden": "true"
 	}, /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M14 2 C8 2 4.5 7.5 4.5 13.5 L4.5 26 L23.5 26 L23.5 13.5 C23.5 7.5 20 2 14 2 Z",
-		fill: "#1E2A1A",
+		d: "M14 1.8 C7.8 1.8 4.4 7.4 4.4 13.6 L3.4 26.5 H24.6 L23.6 13.6 C23.6 7.4 20.2 1.8 14 1.8 Z",
+		fill: R,
 		stroke: K,
 		strokeWidth: "1.1",
 		strokeLinejoin: "round"
 	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M14 2 C8 2 4.5 7.5 4.5 13.5 L4.5 26",
-		fill: "none",
-		stroke: c,
-		strokeWidth: "1",
-		opacity: ".7"
+		d: "M14 1.8 C9 3.4 7 8.4 7 13.6 L6.4 26.5",
+		stroke: R2,
+		strokeWidth: "1.2",
+		fill: "none"
+	}), /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M3.6 24 H24.4",
+		stroke: G,
+		strokeWidth: "1.2"
 	}), /* @__PURE__ */ import_react.default.createElement("ellipse", {
 		cx: "14",
-		cy: "14.5",
-		rx: "5.2",
-		ry: "6.4",
-		fill: "#05070A"
+		cy: "14.2",
+		rx: "5.6",
+		ry: "7",
+		fill: "#08080B"
 	}), /* @__PURE__ */ import_react.default.createElement("path", {
-		d: "M10.6 13.6 L13 14.6 M17.4 13.6 L15 14.6",
-		stroke: c,
+		d: "M10.6 13.2 L13 14.3 M17.4 13.2 L15 14.3",
+		stroke: "#FFD23F",
 		strokeWidth: "1.6",
 		strokeLinecap: "round"
-	}));
+	}), /* @__PURE__ */ import_react.default.createElement("g", { transform: "rotate(-35 22 20)" }, /* @__PURE__ */ import_react.default.createElement("path", {
+		d: "M22 10.5 L23.4 17 H20.6 Z",
+		fill: "#E6E9EF",
+		stroke: K,
+		strokeWidth: ".7",
+		strokeLinejoin: "round"
+	}), /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "19.6",
+		y: "17",
+		width: "4.8",
+		height: "1.3",
+		rx: ".5",
+		fill: G,
+		stroke: K,
+		strokeWidth: ".5"
+	}), /* @__PURE__ */ import_react.default.createElement("rect", {
+		x: "21.3",
+		y: "18.3",
+		width: "1.4",
+		height: "3.6",
+		rx: ".6",
+		fill: "#5A3A22",
+		stroke: K,
+		strokeWidth: ".5"
+	})));
 }
 function gtS8Resume(t, theme) {
 	const L = [];
@@ -72152,7 +72266,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.10-3";
+var APP_BUILD = "2026.11.10-4";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -116308,7 +116422,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.10-3");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.10-4");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -119005,7 +119119,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.10-3" && !upd) {
+		if (seen && seen !== "2026.11.10-4" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -119014,7 +119128,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.10-3" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.10-4" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

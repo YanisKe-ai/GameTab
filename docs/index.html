@@ -23818,49 +23818,6 @@ html[data-gt-theme="noir"] .gt-ug .gt-u-dock::before{background:linear-gradient(
 .gtL-content .gt-ug-hide-total .gtL-entrytotal,[data-phone-landscape] .gt-ug-hide-total .gtL-entrytotal{position:static;width:auto;height:auto;margin:0!important;overflow:visible;clip:auto;white-space:normal}
 @media (prefers-reduced-motion: reduce){.gt-ug-tile>.gt-ug-tf,.gt-ug-bb>i{transition:none}}
 `;
-function ugSurf(theme) {
-	return theme === "light" ? "rgba(24,22,32,0.06)" : theme === "noir" ? "rgba(255,255,255,0.08)" : "rgba(255,255,255,0.06)";
-}
-function GtBars({ players, target, tk, theme, accent, font, label }) {
-	const T = Math.max(1, target || 1);
-	return /* @__PURE__ */ import_react.default.createElement("section", {
-		className: "gt-ug-bars gt-ug-po",
-		"aria-label": label,
-		style: { background: ugSurf(theme) }
-	}, /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gt-ug-lab",
-		style: { color: tk.muted }
-	}, label), players.map((p) => {
-		const f = Math.min(1, Math.max(0, (p.total || 0) / T));
-		return /* @__PURE__ */ import_react.default.createElement("div", {
-			key: p.id,
-			className: "gt-ug-br"
-		}, /* @__PURE__ */ import_react.default.createElement("div", {
-			className: "gt-ug-bn",
-			style: { color: tk.ink }
-		}, p.name), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("span", {
-			className: "gt-ug-bv",
-			style: {
-				color: tk.ink,
-				fontFamily: font
-			}
-		}, /* @__PURE__ */ import_react.default.createElement(GtCount, {
-			value: p.total,
-			mem: "ug-b" + p.id,
-			good: "low",
-			dpos: "l"
-		})), /* @__PURE__ */ import_react.default.createElement("span", {
-			className: "gt-ug-bt",
-			style: { color: tk.muted }
-		}, "/ ", target)), /* @__PURE__ */ import_react.default.createElement("div", {
-			className: "gt-ug-bb",
-			"aria-hidden": "true"
-		}, /* @__PURE__ */ import_react.default.createElement("i", { style: {
-			background: accent,
-			transform: `scaleX(${f})`
-		} })));
-	}));
-}
 // web/src/games/phase10/game.js
 var game_exports$18 = /* @__PURE__ */ __exportAll({
 	P10PhaseList: () => P10PhaseList,
@@ -24864,301 +24821,452 @@ function GtlStandings({ players, target, lowWins, rounds, accent, tk, font, them
 }
 // web/src/games/romme/game.js
 var game_exports$17 = /* @__PURE__ */ __exportAll({
-	RommeEntry: () => RommeEntry,
 	RommeGame: () => RommeGame,
-	romCalc: () => romCalc
+	romCalc: () => romCalc,
+	romSum: () => romSum
 });
+var ROM_CARDS = [
+	["J", 20],
+	["A", 11],
+	["K", 10],
+	["D", 10],
+	["B", 10],
+	["10", 10],
+	["9", 9],
+	["8", 8],
+	["7", 7],
+	["6", 6],
+	["5", 5],
+	["4", 4],
+	["3", 3],
+	["2", 2]
+];
+var ROM_VAL = Object.fromEntries(ROM_CARDS);
 function romCalc(players, history) {
 	return players.map((p) => ({
 		...p,
 		total: (history || []).reduce((s, r) => s + (gtIsObj(r) ? gtNum(r.scores && r.scores[p.id]) || 0 : 0), 0)
 	}));
 }
-function RommeEntry({ players, init, isEdit, onSave, onCancel, tk, theme, t, target }) {
-	const [out, setOut] = useState$11(() => init && init.outId != null ? init.outId : null);
-	const [hand, setHand] = useState$11(() => !!(init && init.hand));
-	const [sc, setSc] = useState$11(() => Object.fromEntries(players.map((p) => {
-		const src = init && (gtIsObj(init.raw) ? init.raw : init.scores);
-		const v = src ? gtNum(src[p.id]) : null;
-		return [p.id, v !== null ? String(v) : ""];
-	})));
-	const [pad, setPad] = useState$11(null);
-	const [inst, setInst] = useState$11(false);
-	const others = players.filter((p) => String(p.id) !== String(out));
-	const can = out != null && others.every((p) => sc[p.id] !== "" && !isNaN(parseInt(sc[p.id], 10)));
+function romSum(cards) {
+	return (cards || []).reduce((s, c) => s + (ROM_VAL[c] || 0), 0);
+}
+function romCards(x) {
+	return Array.isArray(x) ? x.filter((c) => ROM_VAL[c] != null).slice(0, 40) : [];
+}
+function romDraft(dr, players) {
+	const ids = players.map((p) => p.id);
+	const cards = {}, tch = {};
+	ids.forEach((id) => {
+		cards[id] = romCards(dr && dr.cards && dr.cards[id]);
+		tch[id] = !!(dr && dr.tch && dr.tch[id]);
+	});
+	const out = dr && ids.some((id) => String(id) === String(dr.out)) ? dr.out : null;
+	const step = dr && dr.step === "cards" && out != null ? "cards" : "out";
+	const cur = dr && Number.isInteger(dr.cur) && dr.cur >= 0 ? dr.cur : 0;
+	return {
+		step,
+		out,
+		hand: !!(dr && dr.hand),
+		cards,
+		tch,
+		cur
+	};
+}
+var ROM_CSS = `
+.rm-flow{display:grid;gap:10px;grid-template-columns:minmax(0,1fr)}
+.rm-seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:16px;background:var(--r-card);border:1px solid var(--r-line)}
+.rm-seg button{height:40px;border:0;border-radius:12px;background:transparent;color:var(--r-muted);font:700 15px 'Inter',sans-serif;cursor:pointer;padding:0}
+.rm-seg button[aria-selected="true"]{background:var(--r-acc);color:var(--r-on)}
+.rm-q{margin:4px 0 0;font:800 22px/1.2 'Inter',sans-serif;color:var(--r-ink)}
+.rm-qh{margin:0;font:500 13.5px/1.35 'Inter',sans-serif;color:var(--r-muted)}
+.rm-tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.rm-tile{min-height:68px;border-radius:16px;border:2px solid var(--r-line);background:var(--r-card);padding:8px 12px;display:flex;flex-direction:column;justify-content:center;gap:2px;cursor:pointer;box-sizing:border-box;min-width:0}
+.rm-tile[aria-pressed="true"]{border-color:var(--r-acc);background:color-mix(in oklab,var(--r-acc) 16%,var(--r-card))}
+.rm-tn{font:700 17px/1.2 'Inter',sans-serif;color:var(--r-ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rm-tt{font:600 12.5px 'Inter',sans-serif;color:var(--r-muted)}
+.rm-hand{display:flex;align-items:center;gap:10px;min-height:56px;border-radius:16px;border:1.5px solid var(--r-line);background:var(--r-card);padding:8px 14px;cursor:pointer;text-align:left;color:var(--r-ink)}
+.rm-hand[aria-pressed="true"]{border-color:var(--r-acc)}
+.rm-hand span{flex:1;min-width:0;font:700 15px/1.25 'Inter',sans-serif}
+.rm-hand small{display:block;font:500 12.5px/1.3 'Inter',sans-serif;color:var(--r-muted)}
+.rm-sw{flex:none;width:44px;height:26px;border-radius:13px;background:rgba(127,127,127,.3);position:relative;transition:background .15s}
+.rm-sw::after{content:"";position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform .15s ease-out}
+.rm-hand[aria-pressed="true"] .rm-sw{background:var(--r-acc)}
+.rm-hand[aria-pressed="true"] .rm-sw::after{transform:translateX(18px)}
+.rm-strip{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:2px}
+.rm-strip::-webkit-scrollbar{display:none}
+.rm-chip{flex:1 0 74px;max-width:132px;min-height:46px;box-sizing:border-box;border-radius:12px;border:1.5px solid var(--r-line);background:var(--r-card);padding:4px 8px;display:flex;flex-direction:column;justify-content:center;cursor:pointer;min-width:0}
+.rm-chip[data-s="cur"]{border-color:var(--r-acc)}
+.rm-chip[data-s="out"]{opacity:.55;cursor:default}
+.rm-cn{font:600 12px/1.2 'Inter',sans-serif;color:var(--r-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rm-cv{font:800 17px/1.15 'Space Grotesk',sans-serif;color:var(--r-ink)}
+.rm-who{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;min-width:0}
+.rm-wl{font:600 12.5px 'Inter',sans-serif;color:var(--r-muted)}
+.rm-wn{margin:0;font:800 22px/1.15 'Inter',sans-serif;color:var(--r-ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rm-wt{flex:none;text-align:right;font:600 12.5px/1.35 'Inter',sans-serif;color:var(--r-muted)}
+.rm-wt b{display:block;font:800 30px/1 'Space Grotesk',sans-serif;color:var(--r-acc)}
+.rm-handrow{display:flex;flex-wrap:wrap;gap:5px;min-height:52px;align-content:flex-start;background:var(--r-card);border:1px solid var(--r-line);border-radius:16px;padding:8px;box-sizing:border-box}
+.rm-hc{width:32px;height:44px;border-radius:6px;border:1px solid rgba(0,0,0,.25);background:var(--r-face);color:var(--c);font:800 15px/1 'Space Grotesk',sans-serif;display:grid;place-items:center;cursor:pointer;padding:0;box-shadow:0 2px 0 rgba(0,0,0,.25);animation:rmIn .2s cubic-bezier(.2,.8,.2,1)}
+@keyframes rmIn{0%{transform:translateY(-8px) scale(.8);opacity:0}100%{transform:none;opacity:1}}
+.rm-empty{align-self:center;font:500 13px 'Inter',sans-serif;color:var(--r-muted);padding:0 4px}
+.rm-lab{font:700 11px 'Inter',sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--r-muted);margin:0 0 5px}
+.rm-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.rm-c{height:58px;border-radius:9px;border:1.5px solid rgba(0,0,0,.2);background:var(--r-face);color:var(--c);font:800 20px/1 'Space Grotesk',sans-serif;cursor:pointer;padding:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;box-shadow:0 3px 0 rgba(0,0,0,.25)}
+.rm-c small{font:700 10px 'Inter',sans-serif;color:rgba(20,20,28,.55)}
+.rm-c:active{transform:translateY(2px);box-shadow:0 1px 0 rgba(0,0,0,.25)}
+.rm-foot{display:flex;gap:8px}
+.rm-ghost{flex:none;min-height:54px;padding:0 14px;border-radius:18px;border:1px solid var(--r-line);background:transparent;color:var(--r-muted);font:700 14px 'Inter',sans-serif;cursor:pointer}
+.rm-ghost:disabled{opacity:.4;cursor:default}
+.rm-save{flex:1;min-width:0;min-height:54px;border:0;border-radius:18px;background:var(--r-acc);color:var(--r-on);font:800 17px 'Space Grotesk',sans-serif;cursor:pointer;padding:0 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rm-save:disabled{background:rgba(127,127,127,.18);color:var(--r-muted);cursor:default}
+.rm-tile:focus-visible,.rm-hand:focus-visible,.rm-c:focus-visible,.rm-hc:focus-visible,.rm-chip:focus-visible,.rm-seg button:focus-visible,.rm-save:focus-visible,.rm-ghost:focus-visible,.rm-cell:focus-visible{outline:2px solid var(--r-acc);outline-offset:2px}
+.rm-tbl{background:var(--r-card);border:1px solid var(--r-line);border-radius:16px;padding:8px 6px;overflow-x:auto}
+.rm-tr{display:grid;gap:4px;align-items:center;min-width:min-content}
+.rm-th{font:700 11.5px 'Inter',sans-serif;color:var(--r-muted);text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:4px 2px}
+.rm-rn{font:700 12px 'Inter',sans-serif;color:var(--r-muted);text-align:center}
+.rm-cell{min-height:42px;border:0;border-radius:10px;background:transparent;color:var(--r-ink);font:700 16px 'Space Grotesk',sans-serif;font-variant-numeric:tabular-nums;cursor:pointer;padding:0 4px}
+.rm-cell[data-o="1"]{color:var(--r-acc);cursor:default}
+.rm-cell:hover{background:rgba(127,127,127,.12)}
+.rm-tot{border-top:1px solid var(--r-line);margin-top:4px;padding-top:4px}
+.rm-tot .rm-cell{cursor:default;font-weight:800}
+.rm-x2{display:inline-block;margin-left:3px;padding:1px 4px;border-radius:6px;background:var(--r-acc);color:var(--r-on);font:800 10px/1.2 'Inter',sans-serif;vertical-align:2px}
+.rm-none{padding:24px 10px;text-align:center;font:500 14px 'Inter',sans-serif;color:var(--r-muted)}
+.rm-ov{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:80;display:flex;align-items:flex-end;justify-content:center}
+.gtL-content .rm-ov{align-items:center}
+.rm-sheet{outline:none;width:100%;max-width:440px;max-height:94vh;max-height:94dvh;overflow-y:auto;box-sizing:border-box;background:var(--r-bg);color:var(--r-ink);border-radius:24px 24px 0 0;padding:16px 16px calc(14px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:10px}
+.gtL-content .rm-sheet{border-radius:24px}
+.rm-sh{display:flex;justify-content:space-between;align-items:center;gap:10px;font:700 17px 'Inter',sans-serif}
+.rm-xb{flex:none;width:44px;height:44px;border:0;background:transparent;color:var(--r-muted);cursor:pointer;display:grid;place-items:center;border-radius:12px}
+@media (max-height:700px){.rm-flow{gap:8px}.rm-c{height:50px;font-size:18px}.rm-handrow{min-height:46px}.rm-hc{width:28px;height:38px}.rm-save,.rm-ghost{min-height:48px}.rm-tile{min-height:58px}}
+@media (max-height:620px){.rm-c small{display:none}.rm-c{height:42px}.rm-lab{display:none}.rm-seg button{height:36px}}
+@media (max-width:360px){.rm-grid{gap:4px}.rm-c{font-size:17px}}
+.gtL-content .rm-seg{display:none}
+@media (prefers-reduced-motion: reduce){.rm-hc{animation:none}}
+`;
+function romVars(tk, theme) {
+	return {
+		"--r-card": tk.card,
+		"--r-bg": tk.bg,
+		"--r-ink": tk.ink,
+		"--r-muted": tk.muted,
+		"--r-line": theme === "light" ? "rgba(24,22,32,0.14)" : tk.border,
+		"--r-acc": tk.teal,
+		"--r-on": tk.onAccent,
+		"--r-face": theme === "noir" ? "#EDEDED" : "#FFF6EE"
+	};
+}
+function romCol(c, i, theme) {
+	if (theme === "noir") return "#1E1E1E";
+	if (c === "J") return "#7A3FB0";
+	return i % 2 ? "#C8102E" : "#1B1B24";
+}
+function RomPicker({ cards, setCards, t, theme }) {
+	const add = (c) => setCards([...cards, c].slice(0, 40));
+	const rm = (i) => setCards(cards.filter((_, k) => k !== i));
+	return /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "rm-handrow",
+		"aria-live": "polite",
+		"aria-label": t("romHandCards")
+	}, cards.length ? cards.map((c, i) => /* @__PURE__ */ import_react.default.createElement("button", {
+		key: i + "-" + c,
+		type: "button",
+		className: "rm-hc press-fx",
+		style: { "--c": romCol(c, ROM_CARDS.findIndex((x) => x[0] === c), theme) },
+		"aria-label": t("romRemove")(c),
+		onClick: () => rm(i)
+	}, c === "J" ? "★" : c)) : /* @__PURE__ */ import_react.default.createElement("span", { className: "rm-empty" }, t("romNoCards"))), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("div", { className: "rm-lab" }, t("romTapCards")), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "rm-grid",
+		role: "group",
+		"aria-label": t("romTapCards")
+	}, ROM_CARDS.map(([c, v], i) => /* @__PURE__ */ import_react.default.createElement("button", {
+		key: c,
+		type: "button",
+		className: "rm-c press-fx",
+		style: { "--c": romCol(c, i, theme) },
+		"aria-label": t("romAdd")(c === "J" ? t("romJoker") : c, v),
+		onClick: () => add(c)
+	}, c === "J" ? "★" : c, /* @__PURE__ */ import_react.default.createElement("small", null, v))))));
+}
+function RomFlow({ list, d, upd, roundNo, target, tk, t, theme, lap, onSave, view, setView }) {
+	const others = list.filter((p) => String(p.id) !== String(d.out));
+	const act = (fn) => (ev) => {
+		if (ev.key === "Enter" || ev.key === " ") {
+			ev.preventDefault();
+			fn();
+		}
+	};
+	const seg = !lap && /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "rm-seg",
+		role: "tablist"
+	}, /* @__PURE__ */ import_react.default.createElement("button", {
+		role: "tab",
+		"aria-selected": view === "round",
+		onClick: () => setView("round")
+	}, t("skyjoRoundLabel")(roundNo)), /* @__PURE__ */ import_react.default.createElement("button", {
+		role: "tab",
+		"aria-selected": view === "table",
+		onClick: () => setView("table")
+	}, t("skyjoViewTable")));
+	if (d.step !== "cards" || !others.length) return /* @__PURE__ */ import_react.default.createElement("div", { className: "rm-flow" }, seg, /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h2", { className: "rm-q" }, t("romOutQ")), /* @__PURE__ */ import_react.default.createElement("p", { className: "rm-qh" }, t("romOutHint"))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "rm-tiles",
+		role: "group",
+		"aria-label": t("romOutQ")
+	}, list.map((q) => {
+		const on = String(d.out) === String(q.id);
+		return /* @__PURE__ */ import_react.default.createElement("div", {
+			key: q.id,
+			className: "rm-tile press-fx",
+			role: "button",
+			tabIndex: 0,
+			"aria-pressed": on,
+			onClick: () => upd({ out: on ? null : q.id }),
+			onKeyDown: act(() => upd({ out: on ? null : q.id }))
+		}, /* @__PURE__ */ import_react.default.createElement("span", { className: "rm-tn" }, q.name), /* @__PURE__ */ import_react.default.createElement("span", { className: "rm-tt" }, t("gtlTotal"), " ", q.total));
+	})), /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "rm-hand press-fx",
+		"aria-pressed": d.hand,
+		onClick: () => upd({ hand: !d.hand })
+	}, /* @__PURE__ */ import_react.default.createElement("span", null, t("romHand"), /* @__PURE__ */ import_react.default.createElement("small", null, t("romHandDesc"))), /* @__PURE__ */ import_react.default.createElement("i", {
+		className: "rm-sw",
+		"aria-hidden": true
+	})), /* @__PURE__ */ import_react.default.createElement("div", { className: "rm-foot" }, /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "rm-save press-fx",
+		disabled: d.out == null,
+		onClick: () => upd({
+			step: "cards",
+			cur: 0
+		})
+	}, t("skyjoFlowNext"))));
+	const cur = Math.min(d.cur, others.length - 1);
+	const p = others[cur];
+	const cards = d.cards[p.id];
+	const raw = romSum(cards);
+	const pts = d.hand ? raw * 2 : raw;
+	const last = cur >= others.length - 1;
 	const save = () => {
-		if (!can) return;
-		const raw = {}, scores = {};
-		players.forEach((p) => {
-			const v = String(p.id) === String(out) ? 0 : Math.max(0, parseInt(sc[p.id], 10) || 0);
-			raw[p.id] = v;
-			scores[p.id] = hand ? v * 2 : v;
+		const raw2 = {}, scores = {}, cardsOut = {};
+		list.forEach((q) => {
+			const isOut = String(q.id) === String(d.out);
+			const r = isOut ? 0 : romSum(d.cards[q.id]);
+			raw2[q.id] = r;
+			scores[q.id] = d.hand ? r * 2 : r;
+			cardsOut[q.id] = isOut ? [] : d.cards[q.id];
 		});
 		onSave({
 			scores,
-			raw,
-			outId: out,
-			hand
+			raw: raw2,
+			outId: d.out,
+			hand: d.hand,
+			cards: cardsOut
 		});
 	};
-	const leaderId = !isEdit && players.length > 1 ? gtLeader(players.map((p) => [p.id, p.total]), true) : null;
-	const activeId = !isEdit && out != null ? (others.find((p) => sc[p.id] === "") || {}).id : null;
-	return /* @__PURE__ */ import_react.default.createElement("div", {
-		className: isEdit ? void 0 : "pld-entry gt-ug-ent",
-		style: isEdit ? {
-			display: "flex",
-			flexDirection: "column",
-			gap: 10
-		} : void 0
-	}, /* @__PURE__ */ import_react.default.createElement("div", { className: "pld-body rom-body" + (isEdit ? "" : " gt-ug-hide-total") + (players.length > 4 ? " gt-ug-many" : "") }, s8Lbl(tk, t("romOutQ"), { marginBottom: 0 }), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "rom-chips",
-		style: {
-			display: "flex",
-			flexWrap: "wrap",
-			gap: 6
-		}
-	}, players.map((p) => {
-		const on = String(out) === String(p.id);
-		return /* @__PURE__ */ import_react.default.createElement("button", {
-			key: p.id,
-			onClick: () => setOut(p.id),
-			"aria-pressed": on,
-			style: {
-				border: `1.5px solid ${on ? tk.teal : tk.border}`,
-				borderRadius: 999,
-				background: on ? `${tk.teal}22` : tk.card,
-				color: on ? tk.teal : tk.ink,
-				fontSize: 14,
-				fontWeight: 700,
-				minHeight: 46,
-				padding: "0 18px",
-				cursor: "pointer",
-				fontFamily: S8I
-			}
-		}, p.name);
-	})), /* @__PURE__ */ import_react.default.createElement("button", {
-		className: "rom-hand",
-		onClick: () => setHand((v) => !v),
-		"aria-pressed": hand,
-		style: {
-			display: "flex",
-			alignItems: "center",
-			gap: 10,
-			border: `1.5px solid ${hand ? tk.teal : tk.border}`,
-			borderRadius: 20,
-			background: hand ? `${tk.teal}14` : tk.card,
-			padding: "10px 14px",
-			cursor: "pointer",
-			textAlign: "left"
-		}
-	}, /* @__PURE__ */ import_react.default.createElement("span", { style: { flex: 1 } }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 14,
-		fontWeight: 700,
-		color: hand ? tk.teal : tk.ink,
-		fontFamily: S8I
-	} }, t("romHand")), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 13,
-		color: tk.muted,
-		fontFamily: S8I,
-		marginTop: 1
-	} }, t("romHandDesc"))), s8Switch(tk, hand)), !isEdit && players.every((p) => !p.total) && /* @__PURE__ */ import_react.default.createElement("div", { className: "rom-hint" }, s8Hint(tk, "cards", t("romCardHint"), true)), /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "rom-rows",
-		style: {
-			display: "flex",
-			flexDirection: "column",
-			gap: 8
-		}
-	}, players.map((p) => {
-		const isOut = String(p.id) === String(out);
-		const v = sc[p.id];
-		const has = v !== "";
-		if (isOut) return /* @__PURE__ */ import_react.default.createElement("div", {
-			key: p.id,
-			className: "gtL-entryrow gt-ug-row",
-			style: {
-				display: "flex",
-				alignItems: "center",
-				gap: 10,
-				background: `${tk.teal}1c`,
-				border: "2px solid transparent",
-				borderRadius: 20,
-				padding: "14px 18px",
-				boxSizing: "border-box"
-			}
-		}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-			flex: 1,
-			minWidth: 0
-		} }, /* @__PURE__ */ import_react.default.createElement("div", {
-			className: "gtL-entryname",
-			style: {
-				fontSize: 19,
-				fontWeight: 700,
-				color: tk.ink,
-				fontFamily: S8I,
-				whiteSpace: "nowrap",
-				overflow: "hidden",
-				textOverflow: "ellipsis"
-			}
-		}, p.name), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-			fontSize: 12.5,
-			color: tk.teal,
-			fontFamily: S8I,
-			fontWeight: 700,
-			marginTop: 2
-		} }, t("romOut"))), /* @__PURE__ */ import_react.default.createElement("div", {
-			className: "gtL-entryval",
-			style: {
-				fontSize: 40,
-				fontWeight: 800,
-				color: tk.teal,
-				fontFamily: S8F,
-				minWidth: 46,
-				textAlign: "right"
-			}
-		}, "0"));
-		return /* @__PURE__ */ import_react.default.createElement("button", {
-			key: p.id,
-			onClick: () => {
-				setInst(false);
-				setPad(p.id);
+	const outP = list.find((q) => String(q.id) === String(d.out));
+	return /* @__PURE__ */ import_react.default.createElement("div", { className: "rm-flow" }, seg, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "rm-strip",
+		role: "group",
+		"aria-label": t("skyjoFlowStrip")
+	}, outP && /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "rm-chip",
+		"data-s": "out"
+	}, /* @__PURE__ */ import_react.default.createElement("span", { className: "rm-cn" }, outP.name), /* @__PURE__ */ import_react.default.createElement("span", { className: "rm-cv" }, "0")), others.map((q, i) => {
+		const has = d.tch[q.id];
+		const r = romSum(d.cards[q.id]);
+		return /* @__PURE__ */ import_react.default.createElement("div", {
+			key: q.id,
+			className: "rm-chip press-fx",
+			"data-s": i === cur ? "cur" : void 0,
+			role: "button",
+			tabIndex: 0,
+			"aria-current": i === cur ? "step" : void 0,
+			"aria-label": q.name,
+			onClick: () => upd({ cur: i }),
+			onKeyDown: act(() => upd({ cur: i }))
+		}, /* @__PURE__ */ import_react.default.createElement("span", { className: "rm-cn" }, q.name), /* @__PURE__ */ import_react.default.createElement("span", { className: "rm-cv" }, has ? d.hand ? r * 2 : r : "·"));
+	})), /* @__PURE__ */ import_react.default.createElement("div", { className: "rm-who" }, /* @__PURE__ */ import_react.default.createElement("div", { style: { minWidth: 0 } }, /* @__PURE__ */ import_react.default.createElement("div", { className: "rm-wl" }, t("romCardsOf")), /* @__PURE__ */ import_react.default.createElement("h2", { className: "rm-wn" }, p.name)), /* @__PURE__ */ import_react.default.createElement("div", { className: "rm-wt" }, /* @__PURE__ */ import_react.default.createElement("b", null, pts), d.hand ? t("romDoubled")(raw) : t("skyjoFlowNewTotal")(p.total + pts))), /* @__PURE__ */ import_react.default.createElement(RomPicker, {
+		cards,
+		setCards: (c) => upd((dr) => ({
+			cards: {
+				...dr.cards,
+				[p.id]: c
 			},
-			className: "press-fx gtL-entryrow gt-ug-row",
-			style: {
-				display: "flex",
-				alignItems: "center",
-				gap: 10,
-				background: tk.card,
-				border: `2px solid ${p.id === activeId ? tk.teal : theme === "light" ? "rgba(24,22,32,0.10)" : "transparent"}`,
-				borderRadius: 20,
-				padding: "14px 18px",
-				cursor: "pointer",
-				textAlign: "left",
-				width: "100%",
-				boxSizing: "border-box"
+			tch: {
+				...dr.tch,
+				[p.id]: true
 			}
-		}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-			flex: 1,
-			minWidth: 0
-		} }, /* @__PURE__ */ import_react.default.createElement("div", {
-			className: "gtL-entryname",
-			style: {
-				fontSize: 19,
-				fontWeight: 700,
-				color: tk.ink,
-				fontFamily: S8I,
-				whiteSpace: "nowrap",
-				overflow: "hidden",
-				textOverflow: "ellipsis",
-				display: "flex",
-				alignItems: "center",
-				gap: 6
-			}
-		}, p.id === leaderId && /* @__PURE__ */ import_react.default.createElement(GameIcon, {
-			name: "crown",
-			size: 14,
-			color: tk.gold
-		}), p.name), !isEdit && /* @__PURE__ */ import_react.default.createElement("div", {
-			className: "gtL-entrytotal",
-			"data-label": t("gtlTotal"),
-			style: {
-				fontSize: 12.5,
-				color: tk.muted,
-				fontFamily: "'Inter', sans-serif",
-				marginTop: 2
-			}
-		}, target > 0 && /* @__PURE__ */ import_react.default.createElement(GtRing, {
-			value: p.total / target,
-			size: 13,
-			color: tk.teal,
-			style: {
-				marginRight: 5,
-				verticalAlign: "-2px"
-			}
-		}), /* @__PURE__ */ import_react.default.createElement(GtCount, {
-			value: p.total,
-			mem: "rmt" + p.id,
-			good: "low",
-			dpos: "r"
-		}))), /* @__PURE__ */ import_react.default.createElement("div", {
-			className: "gtL-entryval",
-			"data-empty": has ? void 0 : "1",
-			"data-hint": t("gtlEnterHint"),
-			style: {
-				"--gtl-hint": tk.muted,
-				fontSize: 40,
-				fontWeight: 800,
-				color: has ? tk.ink : tk.muted,
-				opacity: has ? 1 : .55,
-				fontFamily: S8F,
-				fontVariantNumeric: "tabular-nums",
-				minWidth: 46,
-				textAlign: "right"
-			}
-		}, has ? hand ? /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, v, /* @__PURE__ */ import_react.default.createElement("span", { style: {
-			fontSize: 13,
-			color: tk.teal,
-			marginLeft: 4
-		} }, "×2")) : v : "·"));
-	}))), /* @__PURE__ */ import_react.default.createElement("div", { className: "pld-foot" }, /* @__PURE__ */ import_react.default.createElement(GtDock, null, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		gap: 8
-	} }, isEdit && /* @__PURE__ */ import_react.default.createElement("button", {
-		onClick: onCancel,
-		className: "press-fx",
-		style: s8Ghost(tk)
-	}, t("back")), /* @__PURE__ */ import_react.default.createElement("button", {
+		})),
+		t,
+		theme
+	}), /* @__PURE__ */ import_react.default.createElement("div", { className: "rm-foot" }, /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "rm-ghost press-fx",
+		onClick: () => cur > 0 ? upd({ cur: cur - 1 }) : upd({ step: "out" })
+	}, t("mgUndo")), /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "rm-save press-fx",
+		"data-gt-sound": last ? "1" : void 0,
+		onClick: () => last ? save() : upd({ cur: cur + 1 })
+	}, last ? t("skyjoSaveRoundN")(roundNo) : t("skyjoFlowNextTo")(others[cur + 1].name))));
+}
+function RomTable({ players, hist, list, onCell, t }) {
+	if (!hist.length) return /* @__PURE__ */ import_react.default.createElement("div", { className: "rm-tbl" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "rm-none" }, t("skyjoTableEmpty")));
+	const cols = `28px repeat(${players.length}, minmax(${players.length > 5 ? 54 : 0}px, 1fr))`;
+	return /* @__PURE__ */ import_react.default.createElement("div", { className: "rm-tbl" }, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "rm-tr",
+		style: { gridTemplateColumns: cols }
+	}, /* @__PURE__ */ import_react.default.createElement("span", null), players.map((p) => /* @__PURE__ */ import_react.default.createElement("span", {
+		key: p.id,
+		className: "rm-th"
+	}, p.name))), hist.map((r, i) => /* @__PURE__ */ import_react.default.createElement("div", {
+		key: i,
+		className: "rm-tr",
+		style: { gridTemplateColumns: cols }
+	}, /* @__PURE__ */ import_react.default.createElement("span", { className: "rm-rn" }, i + 1), players.map((p) => {
+		const isOut = String(r.outId) === String(p.id);
+		return /* @__PURE__ */ import_react.default.createElement("button", {
+			key: p.id,
+			className: "rm-cell press-fx",
+			"data-o": isOut ? "1" : void 0,
+			disabled: isOut,
+			"aria-label": `${p.name}, ${t("skyjoRoundLabel")(i + 1)}`,
+			onClick: () => onCell(i, p.id)
+		}, isOut ? t("romOutShort") : gtNum(r.scores && r.scores[p.id]) || 0, !isOut && r.hand && /* @__PURE__ */ import_react.default.createElement("i", { className: "rm-x2" }, "×2"));
+	}))), /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "rm-tr rm-tot",
+		style: { gridTemplateColumns: cols }
+	}, /* @__PURE__ */ import_react.default.createElement("span", { className: "rm-rn" }, "Σ"), list.map((p) => /* @__PURE__ */ import_react.default.createElement("span", {
+		key: p.id,
+		className: "rm-cell",
+		style: {
+			display: "grid",
+			placeItems: "center",
+			cursor: "default"
+		}
+	}, p.total))));
+}
+function RomEditSheet({ p, init, round, legacy, onSave, onClose, t, theme }) {
+	const [cards, setCards] = useState$11(init);
+	const c0 = import_react.default.useRef(JSON.stringify(init));
+	const tap = () => {
+		if (JSON.stringify(cards) !== c0.current) return;
+		onClose();
+	};
+	const tr = import_react.default.useRef(tap);
+	tr.current = tap;
+	const ref = useGtDialog({
+		open: true,
+		onClose,
+		outside: () => tr.current()
+	});
+	return /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "rm-ov",
+		onClick: tap
+	}, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "rm-sheet",
+		role: "dialog",
+		"aria-modal": "true",
+		"aria-label": p.name,
+		tabIndex: -1,
+		ref,
+		onClick: (ev) => ev.stopPropagation()
+	}, /* @__PURE__ */ import_react.default.createElement("div", { className: "rm-sh" }, /* @__PURE__ */ import_react.default.createElement("span", null, p.name, " · ", t("skyjoRoundLabel")(round)), /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "rm-xb",
+		onClick: onClose,
+		"aria-label": t("skyjoGridClose")
+	}, /* @__PURE__ */ import_react.default.createElement(XMark, null))), legacy != null && !cards.length && /* @__PURE__ */ import_react.default.createElement("div", { className: "rm-qh" }, t("romLegacy")(legacy)), /* @__PURE__ */ import_react.default.createElement(RomPicker, {
+		cards,
+		setCards,
+		t,
+		theme
+	}), /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "rm-save press-fx",
 		"data-gt-sound": "1",
-		onClick: save,
-		disabled: !can,
-		className: "press-fx",
-		style: {
-			...s8Prim(tk, !can),
-			flex: 1,
-			minHeight: 56,
-			borderRadius: 20,
-			fontSize: 17
-		}
-	}, t("skyjoSaveRound"))), !can && /* @__PURE__ */ import_react.default.createElement("div", {
-		className: "gt-ug-dock-hint",
-		style: {
-			color: tk.muted,
-			fontFamily: "'Inter', sans-serif"
-		}
-	}, out == null ? t("romChooseOut") : t("enterPointsFirst")))), s8NumPad(tk, theme, t, players, pad, setPad, inst, setInst, sc, setSc, out));
+		onClick: () => onSave(cards)
+	}, t("confirm"))));
 }
 function RommeGame({ state, setState, onBack, onHome, onEndGame, lang = "de", theme = "dark" }) {
 	const t = useT(lang);
 	const tk = s8Tok(theme, ROM_TK);
-	const [editIdx, setEditIdx] = useState$11(null);
+	const [view, setView] = useState$11("round");
+	const [edit, setEdit] = useState$11(null);
+	const rootRef = import_react.default.useRef(null);
+	const [lap, setLap] = useState$11(false);
 	const hist = Array.isArray(state.history) ? state.history.filter(gtIsObj) : [];
 	const target = Math.max(50, gtNum(state.target) || 500);
 	const list = romCalc(state.players, hist);
 	const over = state.phase === "play" && hist.length > 0 && list.some((p) => p.total >= target);
+	import_react.default.useLayoutEffect(() => {
+		setLap(!!(rootRef.current && rootRef.current.closest(".gtL-content")));
+	}, [state.phase, over]);
+	const d = romDraft(state.draft, state.players);
+	const upd = (f) => setState((s) => {
+		const dr = romDraft(s.draft, s.players);
+		const patch = typeof f === "function" ? f(dr) : f;
+		return {
+			...s,
+			draft: {
+				...dr,
+				...patch
+			}
+		};
+	});
 	const start = () => {
 		setState((s) => ({
 			...s,
 			phase: "play",
-			history: []
+			history: [],
+			draft: null
 		}));
-		setEditIdx(null);
+		setView("round");
 	};
 	const addRound = (r) => setState((s) => ({
 		...s,
-		history: [...s.history || [], r]
+		history: [...s.history || [], r],
+		draft: null
 	}));
-	const editRound = (i, r) => {
+	const editCell = (i, pid, cards) => {
 		setState((s) => ({
 			...s,
-			history: s.history.map((x, j) => j === i ? r : x)
+			history: s.history.map((x, j) => {
+				if (j !== i) return x;
+				const raw = { ...gtIsObj(x.raw) ? x.raw : x.scores || {} };
+				const r = romSum(cards);
+				raw[pid] = r;
+				return {
+					...x,
+					raw,
+					scores: {
+						...x.scores || {},
+						[pid]: x.hand ? r * 2 : r
+					},
+					cards: {
+						...gtIsObj(x.cards) ? x.cards : {},
+						[pid]: cards
+					}
+				};
+			})
 		}));
-		setEditIdx(null);
+		setEdit(null);
 	};
 	const undo = () => {
+		const lastR = hist[hist.length - 1];
+		if (!lastR) return;
+		const cards = {}, tch = {};
+		state.players.forEach((p) => {
+			cards[p.id] = romCards(lastR.cards && lastR.cards[p.id]);
+			tch[p.id] = true;
+		});
 		setState((s) => ({
 			...s,
-			history: (s.history || []).slice(0, -1)
+			history: (s.history || []).slice(0, -1),
+			draft: {
+				step: lastR.outId != null ? "cards" : "out",
+				out: lastR.outId,
+				hand: !!lastR.hand,
+				cards,
+				tch,
+				cur: 0
+			}
 		}));
-		setEditIdx(null);
+		setEdit(null);
+		setView("round");
 	};
 	const W = (sub, kids) => /* @__PURE__ */ import_react.default.createElement(S8Wrap, {
 		theme,
@@ -25175,7 +25283,8 @@ function RommeGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 		onEndGame: sub === t("gtNewMatch") ? void 0 : onEndGame,
 		rulesText: t("rulesRomme"),
 		pld: true,
-		unit: true
+		unit: true,
+		extraCss: ROM_CSS
 	}, kids);
 	if (state.phase !== "play") {
 		const tooFew = state.players.length < 2;
@@ -25249,56 +25358,73 @@ function RommeGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 			record: () => s8Record("romme", ranked, ranked[0] && ranked[0].score * 4 <= target ? { clean: ranked.filter((p) => p.score === ranked[0].score).map((p) => p.name) } : void 0)
 		}));
 	}
-	return W(`${t("romTarget")} ${target}`, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split pld-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, /* @__PURE__ */ import_react.default.createElement(GtBars, {
-		players: list,
+	const editP = edit ? state.players.find((p) => p.id === edit.pid) : null;
+	const er = edit ? hist[edit.i] : null;
+	const table = /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		display: "flex",
+		flexDirection: "column",
+		gap: 10
+	} }, /* @__PURE__ */ import_react.default.createElement(RomTable, {
+		players: state.players,
+		hist,
+		list,
+		onCell: (i, pid) => setEdit({
+			i,
+			pid
+		}),
+		t
+	}), hist.length > 0 && /* @__PURE__ */ import_react.default.createElement("button", {
+		className: "rm-ghost press-fx",
+		style: { alignSelf: "center" },
+		onClick: undo
+	}, t("skyjoUndoRound")));
+	return W(`${t("romTarget")} ${target}`, /* @__PURE__ */ import_react.default.createElement("div", {
+		ref: rootRef,
+		style: romVars(tk, theme)
+	}, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-split" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-main" }, lap || view === "round" ? /* @__PURE__ */ import_react.default.createElement(RomFlow, {
+		list,
+		d,
+		upd,
+		roundNo: hist.length + 1,
 		target,
 		tk,
-		theme,
-		accent: tk.teal,
-		font: S8F,
-		label: t("gtlStandings")
-	}), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		marginTop: 4,
-		display: "contents"
-	} }, /* @__PURE__ */ import_react.default.createElement(RommeEntry, {
-		key: hist.length,
-		players: list,
-		onSave: addRound,
-		tk,
-		theme,
 		t,
-		target
-	}))), /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side" }, /* @__PURE__ */ import_react.default.createElement(GtlStandings, {
+		theme,
+		lap,
+		onSave: addRound,
+		view,
+		setView
+	}) : /* @__PURE__ */ import_react.default.createElement("div", { className: "rm-flow" }, /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "rm-seg",
+		role: "tablist"
+	}, /* @__PURE__ */ import_react.default.createElement("button", {
+		role: "tab",
+		"aria-selected": false,
+		onClick: () => setView("round")
+	}, t("skyjoRoundLabel")(hist.length + 1)), /* @__PURE__ */ import_react.default.createElement("button", {
+		role: "tab",
+		"aria-selected": true
+	}, t("skyjoViewTable"))), table)), lap && /* @__PURE__ */ import_react.default.createElement("div", { className: "gtL-col-side" }, /* @__PURE__ */ import_react.default.createElement(GtlStandings, {
 		players: list,
 		target,
 		lowWins: true,
 		rounds: hist.length,
 		accent: tk.teal,
 		tk,
-		font: S8F,
+		font: "'Space Grotesk', sans-serif",
 		theme,
 		t
-	}), /* @__PURE__ */ import_react.default.createElement(S8History, {
-		players: state.players,
-		history: hist,
-		editIdx,
-		setEditIdx,
-		onUndo: undo,
-		tk,
+	}), table)), editP && er && /* @__PURE__ */ import_react.default.createElement(RomEditSheet, {
+		key: edit.i + "-" + edit.pid,
+		p: editP,
+		round: edit.i + 1,
+		init: romCards(er.cards && er.cards[edit.pid]),
+		legacy: er.cards && er.cards[edit.pid] ? null : gtNum((gtIsObj(er.raw) ? er.raw : er.scores || {})[edit.pid]) || 0,
 		t,
-		cell: (r, p) => String(r.outId) === String(p.id) ? /* @__PURE__ */ import_react.default.createElement("span", { style: { color: tk.teal } }, r.hand ? "★ 0" : "0") : gtNum(r.scores && r.scores[p.id]) || 0,
-		renderEdit: (i) => /* @__PURE__ */ import_react.default.createElement(RommeEntry, {
-			players: list,
-			init: hist[i],
-			isEdit: true,
-			onSave: (r) => editRound(i, r),
-			onCancel: () => setEditIdx(null),
-			tk,
-			theme,
-			t,
-			target
-		})
-	}))));
+		theme,
+		onClose: () => setEdit(null),
+		onSave: (c) => editCell(edit.i, edit.pid, c)
+	})));
 }
 // web/src/shared/more-sheet.js
 var GT_MORE_CSS = `.gt-foot-acts{display:none}
@@ -57423,6 +57549,17 @@ var GT_S8_TR = {
 		p10More: (k) => `${k} mehr`,
 		p10TieTitle: "Gleichstand!",
 		p10TieText: "Die Gleichen spielen Phase 10 nochmals. Wer hat zuerst ausgemacht?",
+		romOutHint: "Wer zuerst alle Karten los ist, bekommt 0 Punkte.",
+		romCardsOf: "Handkarten von",
+		romHandCards: "Handkarten",
+		romTapCards: "Karten antippen",
+		romNoCards: "Noch keine Karte. Tippe unten die Handkarten an.",
+		romRemove: (c) => `${c} entfernen`,
+		romAdd: (c, v) => `${c} hinzufügen, ${v} Punkte`,
+		romJoker: "Joker",
+		romDoubled: (n) => `doppelt: ${n} × 2`,
+		romOutShort: "Rommé",
+		romLegacy: (n) => `Bisher ${n} Punkte, ohne Karten gespeichert.`,
 		p10Phases: GT_S8_PH.de,
 		p10Done: "Phase geschafft",
 		p10DoneN: (n) => `Phase ${n} geschafft`,
@@ -57512,6 +57649,17 @@ var GT_S8_TR = {
 		p10More: (k) => `one more ${k}`,
 		p10TieTitle: "Tie!",
 		p10TieText: "The tied players replay Phase 10. Who went out first?",
+		romOutHint: "Whoever gets rid of all cards first scores 0.",
+		romCardsOf: "Hand of",
+		romHandCards: "Cards in hand",
+		romTapCards: "Tap the cards",
+		romNoCards: "No cards yet. Tap the cards in hand below.",
+		romRemove: (c) => `Remove ${c}`,
+		romAdd: (c, v) => `Add ${c}, ${v} points`,
+		romJoker: "Joker",
+		romDoubled: (n) => `doubled: ${n} × 2`,
+		romOutShort: "Rummy",
+		romLegacy: (n) => `Previously ${n} points, saved without cards.`,
 		p10Phases: GT_S8_PH.en,
 		p10Done: "Phase completed",
 		p10DoneN: (n) => `Phase ${n} completed`,
@@ -57601,6 +57749,17 @@ var GT_S8_TR = {
 		p10More: (k) => `${k} en plus`,
 		p10TieTitle: "Égalité !",
 		p10TieText: "Les personnes à égalité rejouent la phase 10. Qui a fini en premier ?",
+		romOutHint: "La première personne à se défaire de toutes ses cartes marque 0.",
+		romCardsOf: "Main de",
+		romHandCards: "Cartes en main",
+		romTapCards: "Touchez les cartes",
+		romNoCards: "Aucune carte. Touchez les cartes en main ci-dessous.",
+		romRemove: (c) => `Retirer ${c}`,
+		romAdd: (c, v) => `Ajouter ${c}, ${v} points`,
+		romJoker: "Joker",
+		romDoubled: (n) => `doublé : ${n} × 2`,
+		romOutShort: "Rami",
+		romLegacy: (n) => `Avant ${n} points, enregistré sans cartes.`,
 		p10Phases: GT_S8_PH.fr,
 		p10Done: "Phase réussie",
 		p10DoneN: (n) => `Phase ${n} réussie`,
@@ -57690,6 +57849,17 @@ var GT_S8_TR = {
 		p10More: (k) => `un ${k} in più`,
 		p10TieTitle: "Parità!",
 		p10TieText: "Chi è in parità rigioca la fase 10. Chi ha chiuso per primo?",
+		romOutHint: "Chi si libera per primo di tutte le carte fa 0 punti.",
+		romCardsOf: "Mano di",
+		romHandCards: "Carte in mano",
+		romTapCards: "Tocca le carte",
+		romNoCards: "Nessuna carta. Tocca qui sotto le carte in mano.",
+		romRemove: (c) => `Togli ${c}`,
+		romAdd: (c, v) => `Aggiungi ${c}, ${v} punti`,
+		romJoker: "Jolly",
+		romDoubled: (n) => `doppio: ${n} × 2`,
+		romOutShort: "Ramino",
+		romLegacy: (n) => `Prima ${n} punti, salvato senza carte.`,
 		p10Phases: GT_S8_PH.it,
 		p10Done: "Fase completata",
 		p10DoneN: (n) => `Fase ${n} completata`,
@@ -57779,6 +57949,17 @@ var GT_S8_TR = {
 		p10More: (k) => `un ${k} más`,
 		p10TieTitle: "¡Empate!",
 		p10TieText: "Quienes empatan repiten la fase 10. ¿Quién terminó primero?",
+		romOutHint: "Quien se queda sin cartas primero suma 0.",
+		romCardsOf: "Mano de",
+		romHandCards: "Cartas en la mano",
+		romTapCards: "Toca las cartas",
+		romNoCards: "Aún no hay cartas. Toca abajo las cartas de la mano.",
+		romRemove: (c) => `Quitar ${c}`,
+		romAdd: (c, v) => `Añadir ${c}, ${v} puntos`,
+		romJoker: "Comodín",
+		romDoubled: (n) => `doble: ${n} × 2`,
+		romOutShort: "Rummy",
+		romLegacy: (n) => `Antes ${n} puntos, guardado sin cartas.`,
 		p10Phases: GT_S8_PH.es,
 		p10Done: "Fase completada",
 		p10DoneN: (n) => `Fase ${n} completada`,
@@ -57868,6 +58049,17 @@ var GT_S8_TR = {
 		p10More: (k) => `mais um ${k}`,
 		p10TieTitle: "Empate!",
 		p10TieText: "Quem empatou volta a jogar a fase 10. Quem terminou primeiro?",
+		romOutHint: "Quem fica primeiro sem cartas marca 0.",
+		romCardsOf: "Mão de",
+		romHandCards: "Cartas na mão",
+		romTapCards: "Toca nas cartas",
+		romNoCards: "Ainda sem cartas. Toca abaixo nas cartas da mão.",
+		romRemove: (c) => `Remover ${c}`,
+		romAdd: (c, v) => `Adicionar ${c}, ${v} pontos`,
+		romJoker: "Curinga",
+		romDoubled: (n) => `a dobrar: ${n} × 2`,
+		romOutShort: "Rummy",
+		romLegacy: (n) => `Antes ${n} pontos, guardado sem cartas.`,
 		p10Phases: GT_S8_PH.pt,
 		p10Done: "Fase completada",
 		p10DoneN: (n) => `Fase ${n} completada`,
@@ -71532,7 +71724,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.09-7";
+var APP_BUILD = "2026.11.09-8";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -115646,7 +115838,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.09-7");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.09-8");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -118343,7 +118535,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.09-7" && !upd) {
+		if (seen && seen !== "2026.11.09-8" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -118352,7 +118544,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.09-7" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.09-8" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.09-8 (09.11.2026 22:51)
+- Rommé neu: erst wählen, wer Rommé gemacht hat, dann Handkarten antippen statt Punkte tippen, Hand-Rommé doppelt, Tabelle
+
 ## 2026.11.09-7 (09.11.2026 22:41)
 - Phase 10 neu: Handkarten zählen statt Punkte tippen, Phase pro Person mit Treppe, Ausgemacht, Tabelle, Stechen bei Gleichstand
 

@@ -389,8 +389,11 @@ def t_phase10(pg, env):
 @test("Rommé")
 def t_romme(pg, env):
     open_game(pg, "Schreibunterlagen", "Rommé"); press_start(pg)
-    click(pg, btn(pg, "Spieler 1")); numpad(pg, "Spieler 2", 600)
-    click(pg, btn(pg, "Runde speichern"), 900)
+    click(pg, pg.locator(".rm-tile", has_text="Spieler 1").first, 300)
+    click(pg, pg.locator(".rm-save").first, 500)
+    for _ in range(30):
+        click(pg, pg.locator(".rm-c").first, 40)
+    click(pg, pg.locator(".rm-save").first, 900)
     expect_text(pg, r"Spieler 1 gewinnt", "Rommé: Sieger nicht angezeigt")
     finish(pg, "Rommé", env, True)
 
@@ -826,9 +829,13 @@ def t_headsup3(pg, env):
 @test("Grenzfall Podium Gleichstand Rommé (Platz 2 und 2)", matrix=False)
 def t_romme_tie(pg, env):
     open_game(pg, "Schreibunterlagen", "Rommé"); set_players(pg, 3); press_start(pg)
-    click(pg, btn(pg, "Spieler 1"))
-    numpad(pg, "Spieler 2", 600); numpad(pg, "Spieler 3", 600)
-    click(pg, btn(pg, "Runde speichern"), 1500)
+    click(pg, pg.locator(".rm-tile", has_text="Spieler 1").first, 300)
+    click(pg, pg.locator(".rm-save").first, 500)
+    for _ in range(2):
+        for _ in range(30):
+            click(pg, pg.locator(".rm-c").first, 40)
+        click(pg, pg.locator(".rm-save").first, 600)
+    wait(pg, 900)
     check(podium_ranks(pg) == ["1", "2", "2"], f"Podest zeigt {podium_ranks(pg)} statt ['1','2','2']")
     podium_and_share(pg, "Romme Gleichstand")
 

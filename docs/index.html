@@ -50496,10 +50496,9 @@ function impostorTokens(theme) {
 	};
 }
 function impostorPageShellStyle(theme) {
-	const wt = impostorTokens(theme);
 	return {
 		minHeight: "100vh",
-		background: `radial-gradient(ellipse at 50% -10%, ${wt.bg2} 0%, ${wt.bg} 60%)`,
+		background: shellTokens(theme).pageBg,
 		padding: "20px 12px 32px"
 	};
 }
@@ -50548,10 +50547,9 @@ function wolfTokens(theme) {
 	};
 }
 function wolfPageShellStyle(theme) {
-	const wt = wolfTokens(theme);
 	return {
 		minHeight: "100vh",
-		background: `radial-gradient(ellipse at 50% -10%, ${wt.bg2} 0%, ${wt.bg} 65%)`,
+		background: shellTokens(theme).pageBg,
 		padding: "20px 12px 32px"
 	};
 }
@@ -50597,10 +50595,9 @@ function mafiaTokens(theme) {
 	};
 }
 function mafiaPageShellStyle(theme) {
-	const mt = mafiaTokens(theme);
 	return {
 		minHeight: "100vh",
-		background: `radial-gradient(ellipse at 50% -10%, ${mt.bg2} 0%, ${mt.bg} 65%)`,
+		background: shellTokens(theme).pageBg,
 		padding: "20px 12px 32px"
 	};
 }
@@ -50658,10 +50655,9 @@ function tabuTokens(theme) {
 	};
 }
 function tabuPageShellStyle(theme) {
-	const wt = tabuTokens(theme);
 	return {
 		minHeight: "100vh",
-		background: `radial-gradient(ellipse at 50% -10%, ${wt.bg2} 0%, ${wt.bg} 65%)`,
+		background: shellTokens(theme).pageBg,
 		padding: "20px 12px 32px"
 	};
 }
@@ -50719,12 +50715,11 @@ function headsupTokens(theme) {
 	};
 }
 function headsupPageShellStyle(theme, compact) {
-	const wt = headsupTokens(theme);
 	return {
 		minHeight: compact ? "100dvh" : "100vh",
 		height: compact ? "100dvh" : void 0,
 		boxSizing: "border-box",
-		background: `radial-gradient(ellipse at 50% -10%, ${wt.bg2} 0%, ${wt.bg} 65%)`,
+		background: shellTokens(theme).pageBg,
 		padding: compact ? "max(4px, env(safe-area-inset-top)) max(10px, env(safe-area-inset-right)) max(4px, env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left))" : "20px 12px 32px",
 		overflow: compact ? "hidden" : void 0
 	};
@@ -51026,10 +51021,9 @@ function fiveSecTokens(theme) {
 	};
 }
 function fiveSecPageShellStyle(theme) {
-	const fk = fiveSecTokens(theme);
 	return {
 		minHeight: "100vh",
-		background: `radial-gradient(ellipse at 50% -10%, ${fk.bg2} 0%, ${fk.bg} 65%)`,
+		background: shellTokens(theme).pageBg,
 		padding: "20px 12px 32px"
 	};
 }
@@ -51075,10 +51069,9 @@ function mostLikelyTokens(theme) {
 	};
 }
 function mostLikelyPageShellStyle(theme) {
-	const mk = mostLikelyTokens(theme);
 	return {
 		minHeight: "100vh",
-		background: `radial-gradient(ellipse at 50% -10%, ${mk.bg2} 0%, ${mk.bg} 65%)`,
+		background: shellTokens(theme).pageBg,
 		padding: "20px 12px 32px"
 	};
 }
@@ -59060,7 +59053,7 @@ function s8Tok(theme, c) {
 function s8Shell(theme, tk) {
 	return {
 		minHeight: "100vh",
-		background: `radial-gradient(ellipse at 50% -10%, ${tk.bg2} 0%, ${tk.bg} 65%)`,
+		background: shellTokens(theme).pageBg,
 		padding: "20px 12px 32px"
 	};
 }
@@ -69309,7 +69302,7 @@ function cricketEmptyMarks() {
 		bull: 0
 	};
 }
-function CricketMarksGrid({ players, marksByPlayer, currentIdx, tk }) {
+function CricketMarksGrid({ players, marksByPlayer, currentIdx, tk, scores, legs, legsTarget, legsLabel }) {
 	const h = import_react.default.createElement;
 	const AC = "#1B8A5A";
 	const label = (k) => k === "bull" ? "Bull" : k;
@@ -69317,8 +69310,9 @@ function CricketMarksGrid({ players, marksByPlayer, currentIdx, tk }) {
 		const allDone = players.every((p) => ((marksByPlayer[p.id] || cricketEmptyMarks())[k] || 0) >= 3);
 		return h(import_react.default.Fragment, { key: "row" + k }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 			borderTop: "1px solid " + tk.border + "66",
-			padding: "12px 6px",
-			fontSize: 16,
+			padding: "5px 6px",
+			fontSize: 14,
+			lineHeight: "20px",
 			fontWeight: 700,
 			color: allDone ? tk.border : tk.muted,
 			fontFamily: "'Baloo 2', sans-serif",
@@ -69329,10 +69323,11 @@ function CricketMarksGrid({ players, marksByPlayer, currentIdx, tk }) {
 				key: k + p.id,
 				style: {
 					borderTop: "1px solid " + tk.border + "66",
-					padding: "12px 4px",
+					padding: "4px 4px",
+					lineHeight: "22px",
 					textAlign: "center",
 					background: i === currentIdx ? AC + "22" : "transparent",
-					fontSize: 24,
+					fontSize: 20,
 					fontWeight: 800,
 					color: allDone ? tk.border : n >= 3 ? AC : n > 0 ? tk.ink : tk.border,
 					fontFamily: "'Baloo 2', sans-serif"
@@ -69351,7 +69346,7 @@ function CricketMarksGrid({ players, marksByPlayer, currentIdx, tk }) {
 	} }, /* @__PURE__ */ import_react.default.createElement("div", null), ...players.map((p, i) => /* @__PURE__ */ import_react.default.createElement("div", {
 		key: "h" + p.id,
 		style: {
-			padding: "14px 4px 10px",
+			padding: "8px 4px 6px",
 			textAlign: "center",
 			background: i === currentIdx ? AC + "33" : "transparent",
 			boxShadow: i === currentIdx ? "inset 0 2px 0 " + AC : "none"
@@ -69359,13 +69354,25 @@ function CricketMarksGrid({ players, marksByPlayer, currentIdx, tk }) {
 	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		fontSize: 15,
 		fontWeight: 600,
+		fontFamily: "'Inter', sans-serif",
 		wordBreak: "keep-all",
 		hyphens: "none",
 		color: tk.ink,
 		whiteSpace: "nowrap",
 		overflow: "hidden",
 		textOverflow: "ellipsis"
-	} }, p.name))), ...rows));
+	} }, p.name), scores && /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		fontSize: 28,
+		lineHeight: 1.05,
+		fontWeight: 700,
+		color: tk.ink,
+		fontFamily: "'Baloo 2', sans-serif",
+		fontVariantNumeric: "tabular-nums"
+	} }, scores[p.id] || 0), legs && /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		fontSize: 11.5,
+		color: tk.muted,
+		fontFamily: "'Inter', sans-serif"
+	} }, legsLabel + " " + (legs[p.id] || 0) + "/" + legsTarget))), ...rows));
 }
 function CricketSetup({ state, setState, onStart, tk, t, theme }) {
 	const gtS = gtSkin(theme, tk, "cricket", { acc: "#1B8A5A" });
@@ -69654,53 +69661,15 @@ function CricketPlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewG
 		tk,
 		t,
 		valueKey: "points"
-	}), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		display: "flex",
-		flexDirection: "column",
-		gap: 6,
-		marginTop: 10
-	} }, state.players.map((p, idx) => /* @__PURE__ */ import_react.default.createElement("div", {
-		key: p.id,
-		style: {
-			display: "flex",
-			alignItems: "center",
-			gap: 10,
-			border: "2px solid " + (idx === state.currentIdx ? theme === "noir" ? "#FFFFFF" : AC : "transparent"),
-			borderRadius: 22,
-			background: tk.card,
-			padding: "12px 16px",
-			minHeight: 72,
-			boxSizing: "border-box"
-		}
-	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		flex: 1,
-		minWidth: 0
-	} }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 19,
-		fontWeight: 600,
-		color: tk.ink,
-		fontFamily: "'Inter', sans-serif",
-		overflow: "hidden",
-		textOverflow: "ellipsis",
-		whiteSpace: "nowrap",
-		wordBreak: "keep-all",
-		hyphens: "none"
-	} }, p.name), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 13,
-		color: tk.muted,
-		fontFamily: "'Inter', sans-serif"
-	} }, t("dartsLegs") + " " + (state.legsWon[p.id] || 0) + "/" + state.legsTarget)), /* @__PURE__ */ import_react.default.createElement("div", { style: {
-		fontSize: 40,
-		lineHeight: 1,
-		fontWeight: 700,
-		color: tk.ink,
-		fontFamily: "'Baloo 2', sans-serif",
-		fontVariantNumeric: "tabular-nums"
-	} }, state.scores[p.id] || 0)))), /* @__PURE__ */ import_react.default.createElement("div", { style: { marginTop: 10 } }, /* @__PURE__ */ import_react.default.createElement(CricketMarksGrid, {
+	}), /* @__PURE__ */ import_react.default.createElement("div", { style: { marginTop: 10 } }, /* @__PURE__ */ import_react.default.createElement(CricketMarksGrid, {
 		players: state.players,
 		marksByPlayer: previewMap,
 		currentIdx: state.currentIdx,
-		tk
+		tk,
+		scores: state.scores,
+		legs: state.legsWon,
+		legsTarget: state.legsTarget,
+		legsLabel: t("dartsLegs")
 	})))));
 }
 function CricketGame({ state, setState, onBack, onHome, onEndGame, lang = "de", theme = "dark" }) {
@@ -72507,7 +72476,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.10-11";
+var APP_BUILD = "2026.11.10-12";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -116666,7 +116635,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.10-11");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.10-12");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -119363,7 +119332,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.10-11" && !upd) {
+		if (seen && seen !== "2026.11.10-12" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -119372,7 +119341,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.10-11" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.10-12" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

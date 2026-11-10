@@ -205,7 +205,7 @@ Ab Nr. 5 ist die Reihenfolge frei. Ohne andere Anweisung von Yanis einfach der T
 | 8 | Flip 7 | flip7 | games/flip7 | fertig (2026.11.09-6) | Karten antippen, Stechrunde bei Gleichstand; Ergebnisbild unverändert |
 | 9 | Phase 10 | phase10 | games/phase10 | fertig (2026.11.09-7) | Handkarten zählen, Stechen bei Gleichstand; 320 px scrollt leicht |
 | 10 | Rommé | romme | games/romme | fertig (2026.11.09-8) | Handkarten antippen, Hand-Rommé doppelt |
-| 11 | Darts (alle 7 Modi) | darts | games/darts | offen | Rapid Fire noch nicht gebaut |
+| 11 | Darts (alle 7 Modi) | darts | games/darts | offen | Rapid Fire gestrichen (keine Quelle) |
 | 12 | Freies Spiel | freeplay | games/freeplay | offen | |
 | 13 | Impostor | impostor | games/impostor | offen | |
 | 14 | Werwolf | werwolf | games/werwolf | offen | |

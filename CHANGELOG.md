@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.10-13 (10.11.2026 19:21)
+- Alle Spiele: Titel in der Yatzy-Schrift mit eigenen Farben, schwebende Symbole im Hintergrund wie bei Tutto
+
 ## 2026.11.10-12 (10.11.2026 19:01)
 - Partyspiele, Phase 10, Rommé und Verräter mit neutralem Hintergrund. Cricket-Tabelle kompakt mit Punkten und Legs im Kopf
 

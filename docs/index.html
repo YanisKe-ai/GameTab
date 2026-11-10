@@ -23415,69 +23415,136 @@ function gtIsNewMatch(x) {
 	return GT_NEWMATCH.has(x);
 }
 var GT_WM_FONTS = "@font-face{font-family:'Bowlby One';font-weight:400;font-display:swap;src:url(\"./fonts/BowlbyOne-Regular-lat.woff2\") format('woff2');}@font-face{font-family:'Archivo Black';font-weight:400;font-display:swap;src:url(\"./fonts/ArchivoBlack-Regular-lat.woff2\") format('woff2');}@font-face{font-family:'Caveat Brush';font-weight:400;font-display:swap;src:url(\"./fonts/CaveatBrush-Regular-lat.woff2\") format('woff2');}@font-face{font-family:'Kalam';font-weight:700;font-display:swap;src:url(\"./fonts/Kalam-700-1.woff2\") format('woff2');}@font-face{font-family:'Fraunces';font-weight:500;font-display:swap;src:url(\"./fonts/Fraunces-500-1.woff2\") format('woff2');}@font-face{font-family:'Inter';font-style:italic;font-weight:900;font-display:swap;src:url(\"./fonts/Inter-BlackItalic-lat.woff2\") format('woff2');}@keyframes gtWmIn{0%{opacity:0;transform:scale(1.18)}60%{opacity:1;transform:scale(.97)}100%{transform:scale(1)}}.gt-wm{margin:2px 0 10px;text-align:center;line-height:1.05;white-space:nowrap;animation:gtWmIn .45s cubic-bezier(.3,1.3,.5,1) both;transform-origin:50% 60%}@media (prefers-reduced-motion:reduce){.gt-wm{animation:none}}";
+var GT_WM_COL = [
+	[
+		/^phase/,
+		"#FFC72C",
+		"#E63946"
+	],
+	[
+		/^(romm|rami|ramino|rummy)/,
+		"#F25C9A",
+		"#FFFFFF"
+	],
+	[
+		/^(coiffeur|differenzler)/,
+		"#FFF6EE",
+		"#D62828"
+	],
+	[
+		/^schieber/,
+		"#F2EFE6",
+		"#2F6B52"
+	],
+	[
+		/^darts/,
+		"#E5383B",
+		"#FFFFFF"
+	],
+	[
+		/^cricket/,
+		"#2FD08A",
+		"#FFFFFF"
+	],
+	[
+		/^cut throat/,
+		"#FF6B5E",
+		"#FFFFFF"
+	],
+	[
+		/^masters/,
+		"#FFC24B",
+		"#1B8A5A"
+	],
+	[
+		/^shanghai/,
+		"#4FB0FF",
+		"#FFFFFF"
+	],
+	[
+		/^hi score/,
+		"#22D3EE",
+		"#FFC24B"
+	],
+	[
+		/^split score/,
+		"#B478F0",
+		"#FFFFFF"
+	],
+	[
+		/^wizard/,
+		"#E0BA72",
+		"#5B2DB0"
+	],
+	[
+		/^minigolf/,
+		"#7ED957",
+		"#FFFFFF"
+	],
+	[
+		/^mafia/,
+		"#C9A15C",
+		"#B3202A"
+	],
+	[
+		/^impostor/,
+		"#C042E0",
+		"#FFFFFF"
+	],
+	[
+		/^(werwolf|werewolf|loup|lupo|hombre lobo|lobisomem)/,
+		"#FFE9A8",
+		"#D9384A"
+	],
+	[
+		/^(am ehesten|most likely|qui plut|chi è|quién|quem)/,
+		"#2DD4BF",
+		"#FFFFFF"
+	],
+	[
+		/^(verräter|traitor|traît|tradit|traidor)/,
+		"#7FBF5A",
+		"#FFC24B"
+	],
+	[
+		/^(tabu|taboo)/,
+		"#FFC93C",
+		"#E5383B"
+	],
+	[
+		/^heads/,
+		"#6C7FE8",
+		"#FFC93C"
+	],
+	[
+		/^(5 |five)/,
+		"#FF9640",
+		"#FFD23F"
+	],
+	[
+		/^(freies spiel|free play|jeu libre|gioco libero|juego libre|jogo livre)/,
+		"#B49BC4",
+		"#FFFFFF"
+	]
+];
 function gtWmStyle(title, accent) {
 	const k = String(title || "").toLowerCase().trim();
 	const n = k.length;
 	const K = "#14100E";
-	const base = {
+	const hit = GT_WM_COL.find((r) => r[0].test(k));
+	const fill = hit ? hit[1] : accent;
+	const mid = hit ? hit[2] : "#FFFFFF";
+	return {
 		fontFamily: "'Bowlby One',sans-serif",
 		fontWeight: 400,
-		fontSize: n > 12 ? 28 : n > 9 ? 34 : 44,
-		color: accent,
+		fontSize: n > 13 ? 26 : n > 10 ? 32 : n > 7 ? 38 : 46,
+		color: fill,
 		WebkitTextStroke: ".028em " + K,
 		paintOrder: "stroke fill",
-		textShadow: ".037em .037em 0 " + K + ",.074em .074em 0 rgba(255,255,255,.85),.111em .111em 0 " + K,
+		textShadow: ".037em .037em 0 " + K + ",.074em .074em 0 " + mid + ",.093em .093em 0 " + mid + ",.111em .111em 0 #14100E",
 		textTransform: "uppercase",
 		letterSpacing: ".01em"
 	};
-	let lt = false;
-	try {
-		lt = document.documentElement.getAttribute("data-gt-theme") === "light";
-	} catch (e) {}
-	if (/^(coiffeur|schieber|differenzler)/.test(k)) return {
-		...base,
-		fontFamily: "'Caveat Brush',cursive",
-		fontSize: n > 12 ? 40 : 52,
-		color: lt ? "#2E3034" : "#F2EFE6",
-		WebkitTextStroke: "0",
-		textShadow: lt ? "0 2px 0 rgba(0,0,0,.12)" : "0 2px 0 rgba(0,0,0,.45),0 0 18px rgba(255,255,255,.12)",
-		textTransform: "none",
-		letterSpacing: ".02em"
-	};
-	if (/^(darts|cricket|shanghai|cut throat|masters|hi score|split score)/.test(k)) return {
-		...base,
-		fontFamily: "'Inter',sans-serif",
-		fontStyle: "italic",
-		fontWeight: 900,
-		fontSize: n > 9 ? 36 : 44,
-		letterSpacing: "-.01em",
-		textShadow: ".05em .05em 0 " + K
-	};
-	if (/^mafia/.test(k)) return {
-		...base,
-		fontFamily: "'Fraunces',serif",
-		fontWeight: 500,
-		fontSize: 46,
-		letterSpacing: ".14em",
-		WebkitTextStroke: "0",
-		textShadow: "0 2px 0 rgba(0,0,0,.6)"
-	};
-	if (/^(romm|rami|ramino|rummy)/.test(k) || /^(werwolf|werewolf|loup|lupo|hombre lobo|lobisomem|verräter|traitor|traître|traditor|traidor)/.test(k)) return {
-		...base,
-		fontFamily: "'Archivo Black',sans-serif",
-		fontSize: n > 10 ? 32 : 42,
-		letterSpacing: ".02em"
-	};
-	if (/^(freies spiel|free play|jeu libre|gioco libero|juego libre|jogo livre)/.test(k)) return {
-		...base,
-		fontFamily: "'Kalam',cursive",
-		fontWeight: 700,
-		fontSize: n > 12 ? 36 : 42,
-		textTransform: "none",
-		WebkitTextStroke: "0",
-		textShadow: "0 2px 0 rgba(0,0,0,.35)"
-	};
-	return base;
 }
 function GameHeader({ title, subtitle, icon, accent, onBack, backLabel, tk, titleFont, onHome, onEndGame, onRules, rulesTitle, rulesText, extra, hideTitle, moreItems, onMenuOpen }) {
 	const [rulesOpen, setRulesOpen] = useState$11(false);
@@ -23588,7 +23655,7 @@ function GameHeader({ title, subtitle, icon, accent, onBack, backLabel, tk, titl
 			display: "flex",
 			zIndex: 5
 		}
-	}, extra), !hideTitle && gtIsNewMatch(subtitle) ? /* @__PURE__ */ import_react.default.createElement("h1", {
+	}, extra), !hideTitle && (gtIsNewMatch(subtitle) || /^(freies spiel|free play|jeu libre|gioco libero|juego libre|jogo livre)$/i.test(String(title || "").trim())) ? /* @__PURE__ */ import_react.default.createElement("h1", {
 		className: "gt-wm",
 		style: gtWmStyle(title, accent || tk.ink)
 	}, /* @__PURE__ */ import_react.default.createElement("style", null, GT_WM_FONTS), title) : /* @__PURE__ */ import_react.default.createElement("div", { style: hideTitle ? {
@@ -72476,7 +72543,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.10-12";
+var APP_BUILD = "2026.11.10-13";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -74457,6 +74524,326 @@ function useHardwareBack(loaded) {
 		window.addEventListener("popstate", onPop);
 		return () => window.removeEventListener("popstate", onPop);
 	}, [loaded]);
+}
+// web/src/shared/bg-decor.js
+var SYM = {
+	dice: (c) => `<rect x="3" y="3" width="18" height="18" rx="4" stroke="${c}" stroke-width="1.6" fill="none"/><circle cx="8.3" cy="8.3" r="1.3" fill="${c}"/><circle cx="15.7" cy="8.3" r="1.3" fill="${c}"/><circle cx="12" cy="12" r="1.3" fill="${c}"/><circle cx="8.3" cy="15.7" r="1.3" fill="${c}"/><circle cx="15.7" cy="15.7" r="1.3" fill="${c}"/>`,
+	card: (c) => `<rect x="5" y="2.5" width="14" height="19" rx="2.5" stroke="${c}" stroke-width="1.5" fill="none"/><circle cx="12" cy="12" r="3" fill="none" stroke="${c}" stroke-width="1.3"/>`,
+	star: (c) => `<path d="M12 2l2.6 6.6L21.5 9l-5.3 4.6L17.8 21 12 17.2 6.2 21l1.6-7.4L2.5 9l6.9-0.4Z" fill="${c}"/>`,
+	heart: (c) => `<path d="M12 20C4 14.5 4 7.5 8.2 7.5c2 0 3.8 2 3.8 2s1.8-2 3.8-2C20 7.5 20 14.5 12 20Z" fill="${c}"/>`,
+	diamond: (c) => `<path d="M12 3l6.5 9-6.5 9-6.5-9Z" fill="${c}"/>`,
+	spade: (c) => `<path d="M12 3C5 9.5 5.5 15 9.3 15c1.2 0 2.2-.8 2.7-1.6L10.8 21h2.4L12 13.4c.5.8 1.5 1.6 2.7 1.6 3.8 0 4.3-5.5-2.7-12Z" fill="${c}"/>`,
+	club: (c) => `<circle cx="12" cy="7.5" r="3.4" fill="${c}"/><circle cx="7.6" cy="13" r="3.4" fill="${c}"/><circle cx="16.4" cy="13" r="3.4" fill="${c}"/><path d="M12 12l-1.6 9h3.2Z" fill="${c}"/>`,
+	moon: (c) => `<path d="M15 3a9 9 0 1 0 6 15.5A7 7 0 0 1 15 3Z" fill="${c}"/>`,
+	flag: (c) => `<path d="M7 21V3" stroke="${c}" stroke-width="1.6" stroke-linecap="round"/><path d="M7.6 3.5c3-1.6 5.4 1.6 8.6 0v6c-3.2 1.6-5.6-1.6-8.6 0Z" fill="${c}"/>`,
+	ball: (c) => `<circle cx="12" cy="12" r="7" stroke="${c}" stroke-width="1.6" fill="none"/><circle cx="10" cy="10" r=".9" fill="${c}"/><circle cx="13.5" cy="11" r=".9" fill="${c}"/><circle cx="11" cy="14" r=".9" fill="${c}"/>`,
+	target: (c) => `<circle cx="12" cy="12" r="9" stroke="${c}" stroke-width="1.6" fill="none"/><circle cx="12" cy="12" r="5" stroke="${c}" stroke-width="1.6" fill="none"/><circle cx="12" cy="12" r="1.6" fill="${c}"/>`,
+	dart: (c) => `<path d="M4 20 15 9" stroke="${c}" stroke-width="1.6" stroke-linecap="round"/><path d="M14 10l3-6 1.5 1.5L21 4l-1.5 2.5L21 8l-6 3Z" fill="${c}"/>`,
+	hat: (c) => `<path d="M12 2 6 17h12Z" fill="${c}"/><ellipse cx="12" cy="18" rx="9" ry="2.4" fill="${c}"/>`,
+	question: (c) => `<path d="M8.5 8.5a3.5 3.5 0 1 1 5 3.2c-1 .5-1.5 1.2-1.5 2.3" stroke="${c}" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="12" cy="18" r="1.3" fill="${c}"/>`,
+	bubble: (c) => `<path d="M4 5h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H11l-5 4v-4H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z" stroke="${c}" stroke-width="1.5" fill="none"/>`,
+	hourglass: (c) => `<path d="M6 3h12M6 21h12M7 3c0 6 5 7 5 9s-5 3-5 9M17 3c0 6-5 7-5 9s5 3 5 9" stroke="${c}" stroke-width="1.5" fill="none" stroke-linecap="round"/>`,
+	mask: (c) => `<path d="M2 9c3-3 7-3 10-1 3-2 7-2 10 1 0 5-3 7-6 7-2 0-3-1.5-4-2.5-1 1-2 2.5-4 2.5-3 0-6-2-6-7Z" fill="${c}"/>`,
+	pencil: (c) => `<path d="M4 20l3.5-1 11-11-2.5-2.5-11 11Z" stroke="${c}" stroke-width="1.5" fill="none" stroke-linejoin="round"/>`,
+	arrow: (c) => `<path d="M12 3v14M6.5 11.5 12 17l5.5-5.5" stroke="${c}" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`,
+	eye: (c) => `<path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6S2 12 2 12Z" stroke="${c}" stroke-width="1.5" fill="none"/><circle cx="12" cy="12" r="2.6" fill="${c}"/>`,
+	cloud: (c) => `<path d="M6 18a4 4 0 0 1 .5-8 5.5 5.5 0 0 1 10.5 1.5A3.3 3.3 0 0 1 17.5 18Z" fill="${c}"/>`
+};
+var GAMES = {
+	yatzy: ["#7E8BFF", [
+		"dice",
+		"star",
+		"dice",
+		"card"
+	]],
+	skyjo: ["#2FD9A8", [
+		"card",
+		"cloud",
+		"star",
+		"card"
+	]],
+	flip7: ["#FF7A3D", [
+		"card",
+		"star",
+		"card",
+		"clover"
+	]],
+	phase10: ["#2E9BF0", [
+		"card",
+		"star",
+		"card",
+		"diamond"
+	]],
+	romme: ["#F25C9A", [
+		"heart",
+		"spade",
+		"diamond",
+		"club"
+	]],
+	jass: ["#D52B1E", [
+		"heart",
+		"spade",
+		"diamond",
+		"club"
+	]],
+	schieber: ["#5FB58C", [
+		"club",
+		"heart",
+		"spade",
+		"diamond"
+	]],
+	wizard: ["#E0BA72", [
+		"star",
+		"moon",
+		"hat",
+		"star"
+	]],
+	minigolf: ["#3F8F42", [
+		"flag",
+		"ball",
+		"star",
+		"ball"
+	]],
+	darts: ["#C8102E", [
+		"target",
+		"dart",
+		"star",
+		"dart"
+	]],
+	cricket: ["#1B8A5A", [
+		"target",
+		"dart",
+		"star",
+		"dart"
+	]],
+	shanghai: ["#2E86C1", [
+		"target",
+		"dart",
+		"star",
+		"dart"
+	]],
+	hiscore: ["#22D3EE", [
+		"target",
+		"dart",
+		"star",
+		"dart"
+	]],
+	splitscore: ["#B478F0", [
+		"target",
+		"dart",
+		"star",
+		"dart"
+	]],
+	freeplay: ["#9A7BA8", [
+		"pencil",
+		"star",
+		"card",
+		"pencil"
+	]],
+	impostor: ["#C042E0", [
+		"mask",
+		"question",
+		"eye",
+		"star"
+	]],
+	werewolf: ["#D9384A", [
+		"moon",
+		"star",
+		"eye",
+		"star"
+	]],
+	mafia: ["#C9A15C", [
+		"hat",
+		"card",
+		"spade",
+		"star"
+	]],
+	mostlikely: ["#2DD4BF", [
+		"arrow",
+		"star",
+		"question",
+		"heart"
+	]],
+	traitor: ["#7FBF5A", [
+		"eye",
+		"mask",
+		"star",
+		"moon"
+	]],
+	tabu: ["#FFC93C", [
+		"bubble",
+		"star",
+		"hourglass",
+		"bubble"
+	]],
+	headsup: ["#6C7FE8", [
+		"question",
+		"star",
+		"card",
+		"question"
+	]],
+	fivesec: ["#FF9640", [
+		"hourglass",
+		"star",
+		"bubble",
+		"hourglass"
+	]]
+};
+SYM.clover = SYM.club;
+GAMES["schieber-turnier"] = GAMES.schieber;
+var POS = [
+	[
+		"8%",
+		"3%",
+		-12,
+		24
+	],
+	[
+		"46%",
+		"1%",
+		14,
+		14
+	],
+	[
+		"84%",
+		"2%",
+		10,
+		15
+	],
+	[
+		"4%",
+		"14%",
+		-8,
+		17
+	],
+	[
+		"64%",
+		"10%",
+		-10,
+		13
+	],
+	[
+		"92%",
+		"18%",
+		18,
+		19
+	],
+	[
+		"22%",
+		"20%",
+		-14,
+		15
+	],
+	[
+		"6%",
+		"30%",
+		-15,
+		14
+	],
+	[
+		"88%",
+		"34%",
+		12,
+		16
+	],
+	[
+		"40%",
+		"36%",
+		8,
+		18
+	],
+	[
+		"70%",
+		"46%",
+		16,
+		15
+	],
+	[
+		"12%",
+		"48%",
+		-9,
+		13
+	],
+	[
+		"92%",
+		"54%",
+		-16,
+		17
+	],
+	[
+		"30%",
+		"58%",
+		10,
+		16
+	],
+	[
+		"6%",
+		"64%",
+		-12,
+		15
+	],
+	[
+		"80%",
+		"68%",
+		14,
+		14
+	],
+	[
+		"18%",
+		"78%",
+		11,
+		18
+	],
+	[
+		"60%",
+		"80%",
+		-10,
+		16
+	],
+	[
+		"92%",
+		"84%",
+		-8,
+		15
+	],
+	[
+		"40%",
+		"88%",
+		9,
+		14
+	],
+	[
+		"78%",
+		"94%",
+		-14,
+		19
+	],
+	[
+		"4%",
+		"92%",
+		12,
+		13
+	]
+];
+function tile$1(color, syms) {
+	const W = 400, H = 860;
+	return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${POS.map((p, i) => {
+		const x = parseFloat(p[0]) / 100 * W, y = parseFloat(p[1]) / 100 * H, s = p[3] / 24;
+		const f = SYM[syms[i % syms.length]] || SYM.star;
+		return `<g transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${p[2]}) scale(${s.toFixed(2)})">${f(color)}</g>`;
+	}).join("")}</svg>`;
+}
+var CACHE = {};
+function gtBgDecorCss(view, theme) {
+	const g = GAMES[view];
+	if (!g) return "";
+	const key = view + "|" + theme;
+	if (CACHE[key]) return CACHE[key];
+	const col = theme === "noir" ? "#FFFFFF" : g[0];
+	const op = theme === "noir" ? .06 : theme === "light" ? .2 : .1;
+	const css = `.gtL-shellpage{isolation:isolate}.gtL-shellpage::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background-image:url("${"data:image/svg+xml;charset=utf-8," + encodeURIComponent(tile$1(col, g[1]))}");background-size:400px auto;background-repeat:repeat;opacity:${op}}`;
+	CACHE[key] = css;
+	return css;
 }
 // web/src/games/freeplay/game.js
 var game_exports$8 = /* @__PURE__ */ __exportAll({
@@ -113962,7 +114349,7 @@ function App() {
 		if (GT_S8P.romme) setRomme(DEFAULT_ROMME);
 		if (GT_S8P.traitor) setTraitor(DEFAULT_TRAITOR);
 	};
-	const appContent = /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, view === "start" && /* @__PURE__ */ import_react.default.createElement(StartPage, {
+	const appContent = /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("style", null, gtBgDecorCss(view, theme)), view === "start" && /* @__PURE__ */ import_react.default.createElement(StartPage, {
 		onSelect: goToV,
 		flip7Progress,
 		lang,
@@ -116635,7 +117022,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.10-12");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.10-13");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -119332,7 +119719,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.10-12" && !upd) {
+		if (seen && seen !== "2026.11.10-13" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -119341,7 +119728,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.10-12" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.10-13" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

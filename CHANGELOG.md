@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.10-25 (10.11.2026 23:26)
+- Einstellungen: Beschriftung Erscheinungsbild und Ansicht
+
 ## 2026.11.10-24 (10.11.2026 22:43)
 - Noir: Favoriten-Sterne weiss statt gold
 

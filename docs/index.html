@@ -72795,7 +72795,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.10-24";
+var APP_BUILD = "2026.11.10-25";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -73446,7 +73446,13 @@ function SettingsPage({ onBack, backLabel, onReplayTour, lang, setLang, theme, s
 			borderTop: sepLine,
 			padding: "8px 8px 10px"
 		}
-	}, seg([
+	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		fontSize: 12.5,
+		fontWeight: 600,
+		color: tk.muted,
+		padding: "0 6px 6px",
+		fontFamily: "'Inter', sans-serif"
+	} }, t("appearanceLabel")), seg([
 		{
 			id: "dark",
 			label: t("darkMode")
@@ -73466,7 +73472,13 @@ function SettingsPage({ onBack, backLabel, onReplayTour, lang, setLang, theme, s
 			borderTop: sepLine,
 			padding: 8
 		}
-	}, seg([{
+	}, /* @__PURE__ */ import_react.default.createElement("div", { style: {
+		fontSize: 12.5,
+		fontWeight: 600,
+		color: tk.muted,
+		padding: "0 6px 6px",
+		fontFamily: "'Inter', sans-serif"
+	} }, t("viewModeLabel")), seg([{
 		id: "mobile",
 		label: t("viewModeMobile")
 	}, {
@@ -117313,7 +117325,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.10-24");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.10-25");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -120021,7 +120033,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.10-24" && !upd) {
+		if (seen && seen !== "2026.11.10-25" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -120030,7 +120042,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.10-24" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.10-25" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

@@ -27,7 +27,7 @@ function p10Draft(dr,players){const ents={},tch={};players.forEach(p=>{ents[p.id
 const P10_CSS=`
 .p10-flow{display:grid;gap:10px;grid-template-columns:minmax(0,1fr);grid-template-areas:"seg" "tie" "strip" "who" "stairs" "done" "hand" "foot"}
 .p10-seg{grid-area:seg;display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:16px;background:var(--p-card);border:1px solid var(--p-line)}
-.p10-seg button{height:40px;border:0;border-radius:12px;background:transparent;color:var(--p-muted);font:700 15px 'Inter',sans-serif;cursor:pointer;padding:0}
+.p10-seg button{height:44px;border:0;border-radius:12px;background:transparent;color:var(--p-muted);font:700 15px 'Inter',sans-serif;cursor:pointer;padding:0}
 .p10-seg button[aria-selected="true"]{background:var(--p-acc);color:var(--p-on)}
 .p10-tie{grid-area:tie;border:1.5px solid var(--p-gold);border-radius:16px;padding:10px 12px;display:flex;flex-direction:column;gap:8px;color:var(--p-ink);font:600 14px/1.35 'Inter',sans-serif}
 .p10-tie b{color:var(--p-gold)}

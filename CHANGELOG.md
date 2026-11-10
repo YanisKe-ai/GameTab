@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.10-21 (10.11.2026 22:13)
+- Einrichtung ohne unnötiges Scrollen, Startknopf überall gleiche Schrift, grössere Touchziele, Rommé fragt bei 0 Karten nach, Tabu und HeadsUp besser lesbar
+
 ## 2026.11.10-20 (10.11.2026 22:00)
 - Laptop: Darts-Bestätigen und Startknopf ohne Scrollen. Querformat: Am ehesten, Phase 10, Rommé, Minigolf, kein Überstand. Texte, Suche, Podest mit Escape, Freies Spiel feste Reihenfolge
 

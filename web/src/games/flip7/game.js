@@ -45,7 +45,7 @@ const F7_CSS=`
 .f7-sub{font:600 12px/1.2 'Inter',sans-serif;color:var(--f7-muted);margin-top:3px;letter-spacing:.02em}
 .f7-word{margin:0;font-family:'Bowlby One',sans-serif;font-weight:400;font-size:48px;line-height:1.05;color:#FF7A3D;-webkit-text-stroke:.028em #14100E;paint-order:stroke fill;text-shadow:.037em .037em 0 #14100E,.074em .074em 0 #2EC4B6,.093em .093em 0 #2EC4B6,.111em .111em 0 #14100E;white-space:nowrap}
 .f7-seg{grid-area:seg;display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:16px;background:var(--f7-card);border:1px solid var(--f7-line)}
-.f7-seg button{height:40px;border:0;border-radius:12px;background:transparent;color:var(--f7-muted);font:700 15px 'Inter',sans-serif;cursor:pointer;padding:0}
+.f7-seg button{height:44px;border:0;border-radius:12px;background:transparent;color:var(--f7-muted);font:700 15px 'Inter',sans-serif;cursor:pointer;padding:0}
 .f7-seg button[aria-selected="true"]{background:var(--f7-acc);color:var(--f7-on)}
 .f7-tie{grid-area:tie;border:1.5px solid var(--f7-gold);color:var(--f7-gold);border-radius:14px;padding:8px 12px;font:700 13px/1.35 'Inter',sans-serif;text-align:center}
 .f7-strip{grid-area:strip;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:2px}

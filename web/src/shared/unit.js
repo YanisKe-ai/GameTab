@@ -6,8 +6,8 @@ import { React } from "../vendor/react-globals.js";
 const GT_UNIT_CSS = `
 .gt-u-glow{display:none!important}
 
-.gt-u-col{position:relative;display:flex;flex-direction:column;min-height:calc(100dvh - 52px)}
-@media (display-mode: standalone){.gt-u-col{min-height:calc(100vh - 52px)}}
+.gt-u-col{position:relative;display:flex;flex-direction:column;min-height:calc(100dvh - 60px)}
+@media (display-mode: standalone){.gt-u-col{min-height:calc(100vh - 60px)}}
 .gt-u-col>*{position:relative;z-index:1}
 .gt-u-col>.gt-gamehead,.gt-u-col>:has(>.gt-gamehead){z-index:20}
 .gt-u-col>.gt-u-glow{position:absolute;z-index:0;top:calc(-20px - env(safe-area-inset-top,0px));left:calc(50% - 50vw);right:calc(50% - 50vw);height:calc(320px + env(safe-area-inset-top,0px));pointer-events:none;background:radial-gradient(120% 100% at 50% 0,color-mix(in oklab,var(--gt-u-acc) 30%,transparent),transparent 72%)}

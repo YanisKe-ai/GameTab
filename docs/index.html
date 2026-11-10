@@ -8348,6 +8348,7 @@ var TRANSLATIONS = {
 		stuQuote: "Quote {q} %",
 		stuOk: "OK",
 		stuUndo: "Rückgängig",
+		romZeroConfirm: "0 Karten? Nochmal tippen",
 		entryDelete: "Eintrag löschen",
 		stuRules: "Jede Partie ist ein kompletter Schieber. Ihr wählt die Teams selbst.\n\nNach der Partie: Siegerteam eintragen. Beide Sieger bekommen +1, beide Verlierer −1.\n\nPunkte = Siege minus Niederlagen. Bei gleichen Punkten zählt die Quote (Siege pro Partie), danach die Siege. Wer ganz gleich liegt, teilt den Rang. Wer pausiert, verliert nichts.\n\nMehrere Tische können unabhängig voneinander spielen.",
 		stuErrGeneric: "Das hat nicht geklappt. Deine Eingabe ist noch da, versuch es nochmals.",
@@ -10052,6 +10053,7 @@ var TRANSLATIONS = {
 		stuQuote: "Win rate {q} %",
 		stuOk: "OK",
 		stuUndo: "Undo",
+		romZeroConfirm: "0 cards? Tap again",
 		entryDelete: "Delete entry",
 		stuRules: "Each game is a complete Schieber. You choose the teams yourselves.\n\nAfter the game: enter the winning team. Both winners get +1, both losers −1.\n\nPoints = wins minus losses. With equal points, the win rate (wins per game) decides, then the wins. If everything is equal, the rank is shared. Sitting out costs nothing.\n\nSeveral tables can play independently.",
 		stuErrGeneric: "That did not work. Your input is still here, please try again.",
@@ -11756,6 +11758,7 @@ var TRANSLATIONS = {
 		stuQuote: "Taux {q} %",
 		stuOk: "OK",
 		stuUndo: "Annuler",
+		romZeroConfirm: "0 carte ? Touche encore",
 		entryDelete: "Supprimer l'entrée",
 		stuRules: "Chaque partie est un Schieber complet. Vous choisissez les équipes vous-mêmes.\n\nAprès la partie : note l'équipe gagnante. Les deux gagnants reçoivent +1, les deux perdants −1.\n\nPoints = victoires moins défaites. À points égaux, le taux de victoires (victoires par partie) décide, puis les victoires. Si tout est égal, le rang est partagé. Qui fait une pause ne perd rien.\n\nPlusieurs tables peuvent jouer indépendamment les unes des autres.",
 		stuErrGeneric: "Ça n'a pas marché. Ta saisie est toujours là, réessaie.",
@@ -13460,6 +13463,7 @@ var TRANSLATIONS = {
 		stuQuote: "Quota {q} %",
 		stuOk: "OK",
 		stuUndo: "Annulla",
+		romZeroConfirm: "0 carte? Tocca di nuovo",
 		entryDelete: "Elimina voce",
 		stuRules: "Ogni partita è uno Schieber completo. Le squadre le scegliete voi.\n\nDopo la partita: inserisci la squadra vincitrice. Entrambi i vincitori ricevono +1, entrambi gli sconfitti −1.\n\nPunti = vittorie meno sconfitte. A parità di punti conta la quota (vittorie per partita), poi le vittorie. Se è tutto uguale, la posizione è condivisa. Chi fa una pausa non perde nulla.\n\nPiù tavoli possono giocare in modo indipendente.",
 		stuErrGeneric: "Non ha funzionato. Quello che hai inserito c'è ancora, riprova.",
@@ -15164,6 +15168,7 @@ var TRANSLATIONS = {
 		stuQuote: "Cuota {q} %",
 		stuOk: "OK",
 		stuUndo: "Deshacer",
+		romZeroConfirm: "¿0 cartas? Toca otra vez",
 		entryDelete: "Eliminar entrada",
 		stuRules: "Cada partida es un Schieber completo. Los equipos los elegís vosotros.\n\nDespués de la partida: anota el equipo ganador. Los dos ganadores reciben +1, los dos perdedores −1.\n\nPuntos = victorias menos derrotas. Con los mismos puntos decide la cuota (victorias por partida) y luego las victorias. Si todo es igual, se comparte el puesto. Quien descansa no pierde nada.\n\nVarias mesas pueden jugar de forma independiente.",
 		stuErrGeneric: "No ha funcionado. Lo que escribiste sigue ahí, inténtalo de nuevo.",
@@ -16868,6 +16873,7 @@ var TRANSLATIONS = {
 		stuQuote: "Quota {q} %",
 		stuOk: "OK",
 		stuUndo: "Anular",
+		romZeroConfirm: "0 cartas? Toca de novo",
 		entryDelete: "Apagar entrada",
 		stuRules: "Cada jogo é um Schieber completo. As equipas escolhem-nas vocês.\n\nDepois do jogo: regista a equipa vencedora. Os dois vencedores recebem +1, os dois vencidos −1.\n\nPontos = vitórias menos derrotas. Com os mesmos pontos decide a quota (vitórias por jogo) e depois as vitórias. Se tudo for igual, a posição é partilhada. Quem faz pausa não perde nada.\n\nVárias mesas podem jogar de forma independente.",
 		stuErrGeneric: "Não correu bem. O que escreveste ainda lá está, tenta outra vez.",
@@ -24234,7 +24240,7 @@ function GtStartBar({ onClick, disabled, label, skin, icon }) {
 		},
 		disabled,
 		style: {
-			fontFamily: s.font,
+			fontFamily: "'Baloo 2', sans-serif",
 			background: disabled ? L ? "rgba(24,22,32,0.07)" : "rgba(255,255,255,0.08)" : s.fill,
 			color: disabled ? s.muted : s.on,
 			boxShadow: disabled ? "none" : `0 12px 26px -14px ${s.fill}, 0 2px 6px -2px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.22)`
@@ -24565,8 +24571,8 @@ function GroupManager({ t, tk }) {
 var GT_UNIT_CSS = `
 .gt-u-glow{display:none!important}
 
-.gt-u-col{position:relative;display:flex;flex-direction:column;min-height:calc(100dvh - 52px)}
-@media (display-mode: standalone){.gt-u-col{min-height:calc(100vh - 52px)}}
+.gt-u-col{position:relative;display:flex;flex-direction:column;min-height:calc(100dvh - 60px)}
+@media (display-mode: standalone){.gt-u-col{min-height:calc(100vh - 60px)}}
 .gt-u-col>*{position:relative;z-index:1}
 .gt-u-col>.gt-gamehead,.gt-u-col>:has(>.gt-gamehead){z-index:20}
 .gt-u-col>.gt-u-glow{position:absolute;z-index:0;top:calc(-20px - env(safe-area-inset-top,0px));left:calc(50% - 50vw);right:calc(50% - 50vw);height:calc(320px + env(safe-area-inset-top,0px));pointer-events:none;background:radial-gradient(120% 100% at 50% 0,color-mix(in oklab,var(--gt-u-acc) 30%,transparent),transparent 72%)}
@@ -24781,7 +24787,7 @@ function p10Draft(dr, players) {
 var P10_CSS = `
 .p10-flow{display:grid;gap:10px;grid-template-columns:minmax(0,1fr);grid-template-areas:"seg" "tie" "strip" "who" "stairs" "done" "hand" "foot"}
 .p10-seg{grid-area:seg;display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:16px;background:var(--p-card);border:1px solid var(--p-line)}
-.p10-seg button{height:40px;border:0;border-radius:12px;background:transparent;color:var(--p-muted);font:700 15px 'Inter',sans-serif;cursor:pointer;padding:0}
+.p10-seg button{height:44px;border:0;border-radius:12px;background:transparent;color:var(--p-muted);font:700 15px 'Inter',sans-serif;cursor:pointer;padding:0}
 .p10-seg button[aria-selected="true"]{background:var(--p-acc);color:var(--p-on)}
 .p10-tie{grid-area:tie;border:1.5px solid var(--p-gold);border-radius:16px;padding:10px 12px;display:flex;flex-direction:column;gap:8px;color:var(--p-ink);font:600 14px/1.35 'Inter',sans-serif}
 .p10-tie b{color:var(--p-gold)}
@@ -25706,13 +25712,14 @@ function romDraft(dr, players) {
 		hand: !!(dr && dr.hand),
 		cards,
 		tch,
-		cur
+		cur,
+		zc: dr && dr.zc != null ? dr.zc : null
 	};
 }
 var ROM_CSS = `
 .rm-flow{display:grid;gap:10px;grid-template-columns:minmax(0,1fr)}
 .rm-seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:16px;background:var(--r-card);border:1px solid var(--r-line)}
-.rm-seg button{height:40px;border:0;border-radius:12px;background:transparent;color:var(--r-muted);font:700 15px 'Inter',sans-serif;cursor:pointer;padding:0}
+.rm-seg button{height:44px;border:0;border-radius:12px;background:transparent;color:var(--r-muted);font:700 15px 'Inter',sans-serif;cursor:pointer;padding:0}
 .rm-seg button[aria-selected="true"]{background:var(--r-acc);color:var(--r-on)}
 .rm-q{margin:4px 0 0;font:800 22px/1.2 'Inter',sans-serif;color:var(--r-ink)}
 .rm-qh{margin:0;font:500 13.5px/1.35 'Inter',sans-serif;color:var(--r-muted)}
@@ -25742,7 +25749,7 @@ var ROM_CSS = `
 .rm-wt{flex:none;text-align:right;font:600 12.5px/1.35 'Inter',sans-serif;color:var(--r-muted)}
 .rm-wt b{display:block;font:800 30px/1 'Space Grotesk',sans-serif;color:var(--r-acc)}
 .rm-handrow{display:flex;flex-wrap:wrap;gap:5px;min-height:52px;align-content:flex-start;background:var(--r-card);border:1px solid var(--r-line);border-radius:16px;padding:8px;box-sizing:border-box}
-.rm-hc{width:32px;height:44px;border-radius:6px;border:1px solid rgba(0,0,0,.25);background:var(--r-face);color:var(--c);font:800 15px/1 'Space Grotesk',sans-serif;display:grid;place-items:center;cursor:pointer;padding:0;box-shadow:0 2px 0 rgba(0,0,0,.25);animation:rmIn .2s cubic-bezier(.2,.8,.2,1)}
+.rm-hc{width:36px;height:44px;border-radius:6px;border:1px solid rgba(0,0,0,.25);background:var(--r-face);color:var(--c);font:800 15px/1 'Space Grotesk',sans-serif;display:grid;place-items:center;cursor:pointer;padding:0;box-shadow:0 2px 0 rgba(0,0,0,.25);animation:rmIn .2s cubic-bezier(.2,.8,.2,1)}
 @keyframes rmIn{0%{transform:translateY(-8px) scale(.8);opacity:0}100%{transform:none;opacity:1}}
 .rm-empty{align-self:center;font:500 13px 'Inter',sans-serif;color:var(--r-muted);padding:0 4px}
 .rm-lab{font:700 11px 'Inter',sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--r-muted);margin:0 0 5px}
@@ -25958,8 +25965,18 @@ function RomFlow({ list, d, upd, roundNo, target, tk, t, theme, lap, onSave, vie
 	}, t("mgUndo")), /* @__PURE__ */ import_react.default.createElement("button", {
 		className: "rm-save press-fx",
 		"data-gt-sound": last ? "1" : void 0,
-		onClick: () => last ? save() : upd({ cur: cur + 1 })
-	}, last ? t("skyjoSaveRoundN")(roundNo) : t("skyjoFlowNextTo")(others[cur + 1].name))));
+		onClick: () => {
+			if (!(cards && cards.length) && d.zc !== p.id) {
+				upd({ zc: p.id });
+				return;
+			}
+			if (last) save();
+			else upd({
+				cur: cur + 1,
+				zc: null
+			});
+		}
+	}, !(cards && cards.length) && d.zc === p.id ? t("romZeroConfirm") : last ? t("skyjoSaveRoundN")(roundNo) : t("skyjoFlowNextTo")(others[cur + 1].name))));
 }
 function RomTable({ players, hist, list, onCell, t }) {
 	if (!hist.length) return /* @__PURE__ */ import_react.default.createElement("div", { className: "rm-tbl" }, /* @__PURE__ */ import_react.default.createElement("div", { className: "rm-none" }, t("skyjoTableEmpty")));
@@ -72783,7 +72800,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.10-20";
+var APP_BUILD = "2026.11.10-21";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -98668,8 +98685,10 @@ function TabuPlay({ card, secondsLeft, turnSeconds, correctCount, tabooCount, on
 	}, card.taboo.map((w, i) => /* @__PURE__ */ import_react.default.createElement("div", {
 		key: i,
 		style: {
-			fontSize: 19,
-			color: wt.muted,
+			fontSize: 23,
+			fontWeight: 700,
+			color: wt.ink || wt.muted,
+			opacity: .88,
 			fontFamily: "'Inter', sans-serif"
 		}
 	}, w)))), /* @__PURE__ */ import_react.default.createElement("div", {
@@ -99847,7 +99866,7 @@ function HeadsUpPlay({ word, secondsLeft, correctCount, onCorrect, onSkip, motio
 	} }, t("searchTerm")), /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-headsup-word-text",
 		style: {
-			fontSize: gtFitFs(word, 32, 290, 16),
+			fontSize: gtFitFs(word, 48, 320, 18),
 			fontWeight: 800,
 			color: wt.ink,
 			fontFamily: HEADSUP_FONT,
@@ -100494,7 +100513,7 @@ var F7_CSS = `
 .f7-sub{font:600 12px/1.2 'Inter',sans-serif;color:var(--f7-muted);margin-top:3px;letter-spacing:.02em}
 .f7-word{margin:0;font-family:'Bowlby One',sans-serif;font-weight:400;font-size:48px;line-height:1.05;color:#FF7A3D;-webkit-text-stroke:.028em #14100E;paint-order:stroke fill;text-shadow:.037em .037em 0 #14100E,.074em .074em 0 #2EC4B6,.093em .093em 0 #2EC4B6,.111em .111em 0 #14100E;white-space:nowrap}
 .f7-seg{grid-area:seg;display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:16px;background:var(--f7-card);border:1px solid var(--f7-line)}
-.f7-seg button{height:40px;border:0;border-radius:12px;background:transparent;color:var(--f7-muted);font:700 15px 'Inter',sans-serif;cursor:pointer;padding:0}
+.f7-seg button{height:44px;border:0;border-radius:12px;background:transparent;color:var(--f7-muted);font:700 15px 'Inter',sans-serif;cursor:pointer;padding:0}
 .f7-seg button[aria-selected="true"]{background:var(--f7-acc);color:var(--f7-on)}
 .f7-tie{grid-area:tie;border:1.5px solid var(--f7-gold);color:var(--f7-gold);border-radius:14px;padding:8px 12px;font:700 13px/1.35 'Inter',sans-serif;text-align:center}
 .f7-strip{grid-area:strip;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:2px}
@@ -117299,7 +117318,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.10-20");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.10-21");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -120007,7 +120026,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.10-20" && !upd) {
+		if (seen && seen !== "2026.11.10-21" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -120016,7 +120035,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.10-20" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.10-21" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

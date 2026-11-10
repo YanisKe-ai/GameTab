@@ -1,6 +1,6 @@
 // Erzeugt von tools/split.mjs aus index.html. Inhalt zwischen den gt-body-Markern ist 1:1 Originalcode.
 /*@gt-body-begin*/const GLOBAL_STYLES=`
-.gtL-gamecard-logo svg{width:40px !important;height:40px !important;}html[data-gt-theme="noir"] .gt-wm,html[data-gt-theme="noir"] .f7-word,html[data-gt-theme="noir"] .sk-word{color:#EBEBEB !important;-webkit-text-stroke-color:#000000 !important;text-shadow:.037em .037em 0 #000000,.074em .074em 0 #777777,.093em .093em 0 #777777,.111em .111em 0 #000000 !important;}
+.gtL-gamecard-logo svg{width:40px !important;height:40px !important;}html{-webkit-tap-highlight-color:transparent;}html[data-gt-theme="noir"] .gt-wm,html[data-gt-theme="noir"] .f7-word,html[data-gt-theme="noir"] .sk-word{color:#EBEBEB !important;-webkit-text-stroke-color:#000000 !important;text-shadow:.037em .037em 0 #000000,.074em .074em 0 #777777,.093em .093em 0 #777777,.111em .111em 0 #000000 !important;}
 
 :root { --gt-focus: #F2D48F; }
 html[data-gt-theme="light"] { --gt-focus: #1B4FA0; }

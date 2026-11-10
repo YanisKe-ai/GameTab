@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.11-1 (11.11.2026 00:19)
+- Technik: robuster bei beschädigten Darts-Ständen, kein blauer Tipp-Schimmer
+
 ## 2026.11.10-28 (10.11.2026 23:59)
 - Technik: keine Fehlermeldungen beim Öffnen der Spiele, Namensfelder im Freien Spiel beschriftet, Versionsanzeige besser lesbar
 

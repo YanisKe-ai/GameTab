@@ -19314,7 +19314,7 @@ function useGtStStore() {
 // web/src/styles/global.js
 var global_exports = /* @__PURE__ */ __exportAll({ GLOBAL_STYLES: () => GLOBAL_STYLES });
 var GLOBAL_STYLES = `
-.gtL-gamecard-logo svg{width:40px !important;height:40px !important;}html[data-gt-theme="noir"] .gt-wm,html[data-gt-theme="noir"] .f7-word,html[data-gt-theme="noir"] .sk-word{color:#EBEBEB !important;-webkit-text-stroke-color:#000000 !important;text-shadow:.037em .037em 0 #000000,.074em .074em 0 #777777,.093em .093em 0 #777777,.111em .111em 0 #000000 !important;}
+.gtL-gamecard-logo svg{width:40px !important;height:40px !important;}html{-webkit-tap-highlight-color:transparent;}html[data-gt-theme="noir"] .gt-wm,html[data-gt-theme="noir"] .f7-word,html[data-gt-theme="noir"] .sk-word{color:#EBEBEB !important;-webkit-text-stroke-color:#000000 !important;text-shadow:.037em .037em 0 #000000,.074em .074em 0 #777777,.093em .093em 0 #777777,.111em .111em 0 #000000 !important;}
 
 :root { --gt-focus: #F2D48F; }
 html[data-gt-theme="light"] { --gt-focus: #1B4FA0; }
@@ -68723,8 +68723,8 @@ function DartsPlay({ state, setState, tk, t, onConfirmTurn, onUndoTurn, onNewGam
 	const route = !bustPreview && effOpen && interimRem >= 2 && interimRem <= 170 ? dartsFinishRoute(interimRem, 3 - turn.length, checkoutMode) : null;
 	const statsFor = (pid) => {
 		let thrown = 0, scored = 0, best = 0;
-		state.history.forEach((e) => {
-			if (e.pid !== pid) return;
+		(state.history || []).forEach((e) => {
+			if (!e || e.pid !== pid) return;
 			thrown += e.darts.length;
 			if (!e.bust) {
 				scored += e.score;
@@ -69249,8 +69249,12 @@ function DartsGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 	};
 	const undoTurn = () => {
 		setState((st) => {
-			if (!st.history.length) return st;
+			if (!st.history || !st.history.length) return st;
 			const last = st.history[st.history.length - 1];
+			if (!last || !last.snap) return {
+				...st,
+				history: st.history.slice(0, -1)
+			};
 			return {
 				...st,
 				history: st.history.slice(0, -1),
@@ -69265,8 +69269,8 @@ function DartsGame({ state, setState, onBack, onHome, onEndGame, lang = "de", th
 	};
 	const statsFor = (pid) => {
 		let thrown = 0, scored = 0, best = 0;
-		state.history.forEach((e) => {
-			if (e.pid !== pid) return;
+		(state.history || []).forEach((e) => {
+			if (!e || e.pid !== pid) return;
 			thrown += e.darts.length;
 			if (!e.bust) {
 				scored += e.score;
@@ -70086,8 +70090,12 @@ function CricketGame({ state, setState, onBack, onHome, onEndGame, lang = "de", 
 	};
 	const undoTurn = () => {
 		setState((st) => {
-			if (!st.history.length) return st;
+			if (!st.history || !st.history.length) return st;
 			const last = st.history[st.history.length - 1];
+			if (!last || !last.snap) return {
+				...st,
+				history: st.history.slice(0, -1)
+			};
 			return {
 				...st,
 				history: st.history.slice(0, -1),
@@ -70802,8 +70810,12 @@ function HiScoreGame({ state, setState, onBack, onHome, onEndGame, lang = "de", 
 	};
 	const undoTurn = () => {
 		setState((st) => {
-			if (!st.history.length) return st;
+			if (!st.history || !st.history.length) return st;
 			const last = st.history[st.history.length - 1];
+			if (!last || !last.snap) return {
+				...st,
+				history: st.history.slice(0, -1)
+			};
 			return {
 				...st,
 				history: st.history.slice(0, -1),
@@ -71490,8 +71502,12 @@ function SplitScoreGame({ state, setState, onBack, onHome, onEndGame, lang = "de
 	};
 	const undoTurn = () => {
 		setState((st) => {
-			if (!st.history.length) return st;
+			if (!st.history || !st.history.length) return st;
 			const last = st.history[st.history.length - 1];
+			if (!last || !last.snap) return {
+				...st,
+				history: st.history.slice(0, -1)
+			};
 			return {
 				...st,
 				history: st.history.slice(0, -1),
@@ -72083,8 +72099,12 @@ function ShanghaiGame({ state, setState, onBack, onHome, onEndGame, lang = "de",
 	};
 	const undoTurn = () => {
 		setState((st) => {
-			if (!st.history.length) return st;
+			if (!st.history || !st.history.length) return st;
 			const last = st.history[st.history.length - 1];
+			if (!last || !last.snap) return {
+				...st,
+				history: st.history.slice(0, -1)
+			};
 			return {
 				...st,
 				history: st.history.slice(0, -1),
@@ -72795,7 +72815,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.10-28";
+var APP_BUILD = "2026.11.11-1";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -117362,7 +117382,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.10-28");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.11-1");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -120075,7 +120095,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.10-28" && !upd) {
+		if (seen && seen !== "2026.11.11-1" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -120084,7 +120104,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.10-28" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.11-1" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

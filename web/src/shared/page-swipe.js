@@ -29,6 +29,7 @@ const RADIUS = 22;
 const MAX_STACK = 4;
 const SHADOW = "-6px 0 26px rgba(0,0,0,.3)";
 
+function vw() { try { return document.documentElement.clientWidth || window.innerWidth; } catch (_) { return window.innerWidth; } }
 const S = { view: null, stack: [], armed: false, cur: null, g: null, suppress: false, navBack: false, noClickUntil: 0, installed: false, lastW: 0 };
 
 function mq(q) { try { return !!(window.matchMedia && window.matchMedia(q).matches); } catch (_) { return false; } }
@@ -92,10 +93,25 @@ function capture(root, withClone) {
     try {
       const laptop = isLaptop();
       const off = laptop ? root.scrollTop : (window.scrollY || 0);
+      box.dataset.gtY = String(Math.round(off));
       const clone = root.cloneNode(true);
       clone.removeAttribute("id");
       clone.querySelectorAll("[id]").forEach(n => n.removeAttribute("id"));
       clone.querySelectorAll("[autofocus]").forEach(n => n.removeAttribute("autofocus"));
+      // Klebende Elemente (position:sticky, z. B. Kopfzeile) in der Kopie dort zeigen, wo sie gerade sichtbar kleben.
+      try {
+        const srcAll = root.querySelectorAll("*"), dstAll = clone.querySelectorAll("*");
+        for (let i = 0; i < srcAll.length; i++) {
+          const el = srcAll[i];
+          if (getComputedStyle(el).position !== "sticky") continue;
+          const stuck = el.getBoundingClientRect().top;
+          const prev = el.style.position; el.style.position = "relative";
+          const natural = el.getBoundingClientRect().top;
+          el.style.position = prev;
+          const d = Math.round(stuck - natural), dst = dstAll[i];
+          if (dst && d) { dst.style.position = "relative"; dst.style.transform = "translateY(" + d + "px)"; dst.style.zIndex = "50"; }
+        }
+      } catch (_) {}
       const srcC = root.querySelectorAll("canvas"), dstC = clone.querySelectorAll("canvas");
       srcC.forEach((c, i) => { try { const d = dstC[i]; if (d) { d.width = c.width; d.height = c.height; d.getContext("2d").drawImage(c, 0, 0); } } catch (_) {} });
       const srcI = root.querySelectorAll("input,textarea,select"), dstI = clone.querySelectorAll("input,textarea,select");
@@ -231,7 +247,7 @@ export function gtSwipeAfter(plan) {
     L = makeLayers(plan.snap, root, root, false, rect);
     L.setP(0);
   } else {
-    S.stack.push({ from: plan.from, to: plan.to, box: plan.snap, theme: plan.theme, w: window.innerWidth });
+    S.stack.push({ from: plan.from, to: plan.to, box: plan.snap, theme: plan.theme, w: vw() });
     while (S.stack.length > MAX_STACK) S.stack.shift();
     L = makeLayers(root, plan.snap, root, true, rect);
     L.setP(1);
@@ -294,7 +310,7 @@ function activate(g) {
   const root = g.root, rect = g.rect;
   const navBack = g.back.hasAttribute("data-gt-nav");
   const top = S.stack[S.stack.length - 1];
-  const okSnap = navBack && top && top.to === S.view && top.theme === sig() && top.w === window.innerWidth && top.box;
+  const okSnap = navBack && top && top.to === S.view && top.theme === sig() && top.w === vw() && top.box;
   const under = okSnap ? top.box : capture(root, false);
   if (under.parentNode) under.parentNode.removeChild(under);
   placeBox(under, rect);
@@ -393,10 +409,13 @@ function clickBack(g, noLayers) {
     const changed = sigOf(root) !== before;
     if (noLayers) return;
     if (changed) {
+      // Zur gemerkten Scrollposition der vorigen Seite zurueck (wie iOS), sonst springt die Seite:
+      // die Kopie darunter zeigt die alte Position, die echte Seite kam nach setView oben an.
+      const y = g.under && g.under.dataset ? (parseInt(g.under.dataset.gtY, 10) || 0) : 0;
       try { L.frz.scrollTop(0); } catch (_) {}
       if (S.cur) S.cur = null;
       L.destroy();
-      try { window.scrollTo(0, 0); } catch (_) {}
+      try { window.scrollTo(0, y); } catch (_) {}
     } else {
       // Nichts passiert (z. B. Bestaetigungsdialog): sanft zurueck. Stapel wieder auffuellen.
       L.animateTo(0, 1, DUR, () => { if (S.cur) S.cur = null; L.destroy(); });
@@ -409,14 +428,14 @@ function onClickCapture(e) {
 }
 
 function onResize() {
-  if (window.innerWidth !== S.lastW) { S.lastW = window.innerWidth; S.stack = []; }
+  if (vw() !== S.lastW) { S.lastW = vw(); S.stack = []; }
 }
 
 function install() {
   if (S.installed) return () => {};
   S.installed = true;
   injectCss();
-  S.lastW = window.innerWidth;
+  S.lastW = vw();
   const o1 = { passive: true }, o2 = { passive: false };
   const ts = e => onStart(e), tm = e => onMove(e), te = e => onEnd(e, false), tc = e => onEnd(e, true);
   document.addEventListener("touchstart", ts, o1);

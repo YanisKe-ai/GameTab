@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.10-27 (10.11.2026 23:44)
+- Zurückwischen ohne Sprung: vorige Seite bleibt an ihrer Scrollposition, Kopfzeile gleitet mit
+
 ## 2026.11.10-26 (10.11.2026 23:33)
 - Noir: neue Grauskala nach Recherche (tiefes Schwarz, klarere Rahmen, Text ohne Überstrahlen)
 

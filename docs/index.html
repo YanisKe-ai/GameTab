@@ -27319,7 +27319,7 @@ var degrees = /*@__PURE__*/ createUnitType("deg");
 var percent = /*@__PURE__*/ createUnitType("%");
 var px = /*@__PURE__*/ createUnitType("px");
 var vh = /*@__PURE__*/ createUnitType("vh");
-var vw = /*@__PURE__*/ createUnitType("vw");
+var vw$1 = /*@__PURE__*/ createUnitType("vw");
 var progressPercentage = /*@__PURE__*/ (() => ({
 	...percent,
 	parse: (v) => percent.parse(v) / 100,
@@ -31459,7 +31459,7 @@ var dimensionValueTypes = [
 	px,
 	percent,
 	degrees,
-	vw,
+	vw$1,
 	vh,
 	auto
 ];
@@ -72795,7 +72795,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.10-26";
+var APP_BUILD = "2026.11.10-27";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -74051,6 +74051,13 @@ var COMPLETE_V = .35;
 var RADIUS = 22;
 var MAX_STACK = 4;
 var SHADOW = "-6px 0 26px rgba(0,0,0,.3)";
+function vw() {
+	try {
+		return document.documentElement.clientWidth || window.innerWidth;
+	} catch (_) {
+		return window.innerWidth;
+	}
+}
 var S = {
 	view: null,
 	stack: [],
@@ -74172,10 +74179,29 @@ function capture(root, withClone) {
 	if (withClone) try {
 		const laptop = isLaptop();
 		const off = laptop ? root.scrollTop : window.scrollY || 0;
+		box.dataset.gtY = String(Math.round(off));
 		const clone = root.cloneNode(true);
 		clone.removeAttribute("id");
 		clone.querySelectorAll("[id]").forEach((n) => n.removeAttribute("id"));
 		clone.querySelectorAll("[autofocus]").forEach((n) => n.removeAttribute("autofocus"));
+		try {
+			const srcAll = root.querySelectorAll("*"), dstAll = clone.querySelectorAll("*");
+			for (let i = 0; i < srcAll.length; i++) {
+				const el = srcAll[i];
+				if (getComputedStyle(el).position !== "sticky") continue;
+				const stuck = el.getBoundingClientRect().top;
+				const prev = el.style.position;
+				el.style.position = "relative";
+				const natural = el.getBoundingClientRect().top;
+				el.style.position = prev;
+				const d = Math.round(stuck - natural), dst = dstAll[i];
+				if (dst && d) {
+					dst.style.position = "relative";
+					dst.style.transform = "translateY(" + d + "px)";
+					dst.style.zIndex = "50";
+				}
+			}
+		} catch (_) {}
 		const srcC = root.querySelectorAll("canvas"), dstC = clone.querySelectorAll("canvas");
 		srcC.forEach((c, i) => {
 			try {
@@ -74422,7 +74448,7 @@ function gtSwipeAfter(plan) {
 			to: plan.to,
 			box: plan.snap,
 			theme: plan.theme,
-			w: window.innerWidth
+			w: vw()
 		});
 		while (S.stack.length > MAX_STACK) S.stack.shift();
 		L = makeLayers(root, plan.snap, root, true, rect);
@@ -74519,7 +74545,7 @@ function activate(g) {
 	const root = g.root, rect = g.rect;
 	const navBack = g.back.hasAttribute("data-gt-nav");
 	const top = S.stack[S.stack.length - 1];
-	const under = navBack && top && top.to === S.view && top.theme === sig() && top.w === window.innerWidth && top.box ? top.box : capture(root, false);
+	const under = navBack && top && top.to === S.view && top.theme === sig() && top.w === vw() && top.box ? top.box : capture(root, false);
 	if (under.parentNode) under.parentNode.removeChild(under);
 	placeBox(under, rect);
 	g.navBack = navBack;
@@ -74661,13 +74687,14 @@ function clickBack(g, noLayers) {
 		const changed = sigOf(root) !== before;
 		if (noLayers) return;
 		if (changed) {
+			const y = g.under && g.under.dataset ? parseInt(g.under.dataset.gtY, 10) || 0 : 0;
 			try {
 				L.frz.scrollTop(0);
 			} catch (_) {}
 			if (S.cur) S.cur = null;
 			L.destroy();
 			try {
-				window.scrollTo(0, 0);
+				window.scrollTo(0, y);
 			} catch (_) {}
 		} else L.animateTo(0, 1, DUR, () => {
 			if (S.cur) S.cur = null;
@@ -74682,8 +74709,8 @@ function onClickCapture(e) {
 	}
 }
 function onResize() {
-	if (window.innerWidth !== S.lastW) {
-		S.lastW = window.innerWidth;
+	if (vw() !== S.lastW) {
+		S.lastW = vw();
 		S.stack = [];
 	}
 }
@@ -74691,7 +74718,7 @@ function install() {
 	if (S.installed) return () => {};
 	S.installed = true;
 	injectCss();
-	S.lastW = window.innerWidth;
+	S.lastW = vw();
 	const o1 = { passive: true }, o2 = { passive: false };
 	const ts = (e) => onStart(e), tm = (e) => onMove(e), te = (e) => onEnd(e, false), tc = (e) => onEnd(e, true);
 	document.addEventListener("touchstart", ts, o1);
@@ -117325,7 +117352,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.10-26");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.10-27");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -120033,7 +120060,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.10-26" && !upd) {
+		if (seen && seen !== "2026.11.10-27" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -120042,7 +120069,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.10-26" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.10-27" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

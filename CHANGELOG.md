@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.10-16 (10.11.2026 19:57)
+- Fehler behoben: Kopf hat beim Scrollen wieder seinen Hintergrund
+
 ## 2026.11.10-15 (10.11.2026 19:50)
 - Schriftzüge überall gleich gross und gleich hoch, Kopf in allen Spielen an derselben Stelle, Flip 7 ohne Icon
 

@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.10-24 (10.11.2026 22:43)
+- Noir: Favoriten-Sterne weiss statt gold
+
 ## 2026.11.10-23 (10.11.2026 22:37)
 - Noir: Lösch-Einträge in den Einstellungen rot
 

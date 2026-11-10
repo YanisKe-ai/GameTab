@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.10-15 (10.11.2026 19:50)
+- Schriftzüge überall gleich gross und gleich hoch, Kopf in allen Spielen an derselben Stelle, Flip 7 ohne Icon
+
 ## 2026.11.10-14 (10.11.2026 19:31)
 - Schriftzüge: jede Farbkombination nur einmal, Skyjo und Flip 7 im gleichen Stil
 

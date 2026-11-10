@@ -25,7 +25,7 @@ const SK_CSS = `
 @font-face{font-family:'Anton';font-style:normal;font-weight:400;font-display:swap;src:url("./fonts/Anton-Regular.woff2") format('woff2');}
 .sk-hero{display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center;padding:0 0 2px}
 .sk-fan{display:block;width:104px;height:auto;filter:drop-shadow(0 4px 5px rgba(0,0,0,.34))}
-.sk-word{margin:0;font-family:'Bowlby One',sans-serif;font-weight:400;font-size:44px;line-height:1.05;letter-spacing:.01em;color:#2FD9A8;-webkit-text-stroke:.028em #14100E;paint-order:stroke fill;text-shadow:.037em .037em 0 #14100E,.074em .074em 0 #2B4C9B,.093em .093em 0 #2B4C9B,.111em .111em 0 #14100E}
+.sk-word{margin:0;font-family:'Bowlby One',sans-serif;font-weight:400;font-size:48px;line-height:1.05;letter-spacing:.01em;color:#2FD9A8;-webkit-text-stroke:.028em #14100E;paint-order:stroke fill;text-shadow:.037em .037em 0 #14100E,.074em .074em 0 #2B4C9B,.093em .093em 0 #2B4C9B,.111em .111em 0 #14100E}
 .sk-sub{margin:0;font:600 14px/1.3 'Inter',sans-serif;color:var(--sk-muted)}
 @media (max-height:700px){.sk-fan{width:84px}.sk-word{font-size:29px}.sk-sub{font-size:13px}}
 @media (max-height:620px){.sk-fan,.sk-sub{display:none}.sk-word{font-size:26px}}

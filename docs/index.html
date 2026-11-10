@@ -19314,7 +19314,7 @@ function useGtStStore() {
 // web/src/styles/global.js
 var global_exports = /* @__PURE__ */ __exportAll({ GLOBAL_STYLES: () => GLOBAL_STYLES });
 var GLOBAL_STYLES = `
-.gtL-gamecard-logo svg{width:40px !important;height:40px !important;}html[data-gt-theme="noir"] .gt-wm,html[data-gt-theme="noir"] .f7-word,html[data-gt-theme="noir"] .sk-word{color:#F2F2F2 !important;-webkit-text-stroke-color:#000000 !important;text-shadow:.037em .037em 0 #000000,.074em .074em 0 #6E6E6E,.093em .093em 0 #6E6E6E,.111em .111em 0 #000000 !important;}
+.gtL-gamecard-logo svg{width:40px !important;height:40px !important;}html[data-gt-theme="noir"] .gt-wm,html[data-gt-theme="noir"] .f7-word,html[data-gt-theme="noir"] .sk-word{color:#EBEBEB !important;-webkit-text-stroke-color:#000000 !important;text-shadow:.037em .037em 0 #000000,.074em .074em 0 #777777,.093em .093em 0 #777777,.111em .111em 0 #000000 !important;}
 
 :root { --gt-focus: #F2D48F; }
 html[data-gt-theme="light"] { --gt-focus: #1B4FA0; }
@@ -23266,7 +23266,7 @@ function gtFavToast(msg) {
 function FavStar({ fav, theme, t, muted, style }) {
 	if (!fav) return null;
 	const on = !!fav.on;
-	const gold = theme === "light" ? "#C8921F" : theme === "noir" ? "#EDEDED" : "#E8B84A";
+	const gold = theme === "light" ? "#C8921F" : theme === "noir" ? "#EBEBEB" : "#E8B84A";
 	const off = muted || (theme === "light" ? "#8A8F99" : "#8B90A0");
 	const label = t(on ? "favRemoveLabel" : "favAddLabel");
 	return /* @__PURE__ */ import_react.default.createElement("button", {
@@ -23762,7 +23762,7 @@ var shell_exports = /* @__PURE__ */ __exportAll({
 	noirAccent: () => noirAccent
 });
 function dartsAccent(theme) {
-	return theme === "light" ? "#B8331F" : theme === "noir" ? "#C9C9C9" : "#E4402E";
+	return theme === "light" ? "#B8331F" : theme === "noir" ? "#C1C1C1" : "#E4402E";
 }
 function dartsHead(title, onBack, onHome, onEndGame, onRules, tk, t, theme, subtitle, rulesText, moreItems, onMenuOpen) {
 	const ac = dartsAccent(theme);
@@ -23993,7 +23993,7 @@ function gtSkin(theme, tk, id, o) {
 		const s = String(v || "");
 		return s[0] === "#" && (s.length === 7 || s.length === 4) ? s : null;
 	};
-	const fade = pick(o.bg) || pick(tk.pageBg) || pick(tk.bg) || (L ? "#F4F1EA" : N ? "#0A0A0A" : "#121318");
+	const fade = pick(o.bg) || pick(tk.pageBg) || pick(tk.bg) || (L ? "#F4F1EA" : N ? "#000000" : "#121318");
 	return {
 		theme,
 		acc,
@@ -24925,7 +24925,7 @@ function P10Editor({ p, e, setE, tk, t, theme, noOut, outTaken }) {
 	}, /* @__PURE__ */ import_react.default.createElement("span", {
 		className: "p10-card",
 		"data-dk": x.k === "w" ? "1" : void 0,
-		style: { "--c": theme === "noir" ? "#8C8C8C" : x.c },
+		style: { "--c": theme === "noir" ? "#969696" : x.c },
 		"aria-hidden": true
 	}, cl[x.k]), /* @__PURE__ */ import_react.default.createElement("span", { className: "p10-rt" }, kl[x.k], /* @__PURE__ */ import_react.default.createElement("small", null, t("p10Each")(x.v))), /* @__PURE__ */ import_react.default.createElement("button", {
 		className: "p10-pm press-fx",
@@ -25812,7 +25812,7 @@ function romVars(tk, theme) {
 		"--r-line": theme === "light" ? "rgba(24,22,32,0.14)" : tk.border,
 		"--r-acc": tk.teal,
 		"--r-on": tk.onAccent,
-		"--r-face": theme === "noir" ? "#EDEDED" : "#FFF6EE"
+		"--r-face": theme === "noir" ? "#EBEBEB" : "#FFF6EE"
 	};
 }
 function romCol(c, i, theme) {
@@ -26586,7 +26586,7 @@ function pageShellStyle(theme) {
 	}
 	if (theme === "noir") return {
 		minHeight: "100vh",
-		background: "#0A0A0A",
+		background: "#000000",
 		padding: "20px 12px 32px"
 	};
 	return {
@@ -26858,7 +26858,7 @@ function GtInstallHint({ tokens: tk, theme, t, isLaptop }) {
 		done();
 	};
 	const body = ios ? t("installIos") : bip ? t("installWhy") : t("installAndroid");
-	const solid = theme === "light" ? "#FFFFFF" : theme === "noir" ? "#161616" : "#1E2230";
+	const solid = theme === "light" ? "#FFFFFF" : theme === "noir" ? "#111111" : "#1E2230";
 	const pos = isLaptop ? {
 		right: 24,
 		bottom: 24,
@@ -39176,7 +39176,7 @@ var { SchieberTournament, GtStuLogo } = (function() {
 		const L = T === "light", N = T === "noir";
 		const a = s.txt;
 		const al = (x, h) => /^#[0-9a-fA-F]{6}$/.test(x) ? x + h : x;
-		const solid = L ? "#FFFFFF" : N ? "#141414" : "#161C2E";
+		const solid = L ? "#FFFFFF" : N ? "#111111" : "#161C2E";
 		const v = {
 			"--st-hink": s.ink,
 			"--st-hmuted": s.muted,
@@ -39187,7 +39187,7 @@ var { SchieberTournament, GtStuLogo } = (function() {
 			"--st-data": "'Inter',sans-serif",
 			"--st-ui": "'Inter',sans-serif",
 			"--st-body": "transparent",
-			"--st-pagebg": L ? "#F8F9FA" : N ? "#0A0A0A" : "#12141C",
+			"--st-pagebg": L ? "#F8F9FA" : N ? "#000000" : "#12141C",
 			"--st-body-solid": solid,
 			"--st-body-r": "0",
 			"--st-body-pad": "0",
@@ -39205,7 +39205,7 @@ var { SchieberTournament, GtStuLogo } = (function() {
 			"--st-accent-soft": al(s.fill, "1F"),
 			"--st-focus": a,
 			"--st-danger": N ? s.ink : L ? "#B42318" : "#FF8A7A",
-			"--st-field": L ? "#FFFFFF" : N ? "#141414" : "rgba(255,255,255,0.05)",
+			"--st-field": L ? "#FFFFFF" : N ? "#111111" : "rgba(255,255,255,0.05)",
 			"--st-ph": s.muted,
 			"--st-hover": L ? "rgba(27,34,53,0.05)" : "rgba(255,255,255,0.06)",
 			"--st-tabgap": "0",
@@ -42038,7 +42038,7 @@ function gtShowcaseMain(theme) {
 	all.forEach((g) => {
 		by[g.view] = g;
 	});
-	const jassC = theme === "noir" ? "#C4C4C4" : "#D52B1E";
+	const jassC = theme === "noir" ? "#C1C1C1" : "#D52B1E";
 	const extra = {
 		phase10: {
 			view: "phase10",
@@ -42105,7 +42105,7 @@ function GtOnboarding3({ theme, lang, onDone }) {
 		outside: false
 	});
 	const overlayBg = theme === "light" ? "rgba(30,32,38,0.55)" : "rgba(0,0,0,0.74)";
-	const blue = theme === "light" ? "#3071CD" : theme === "noir" ? "#C4C4C4" : "#4FA8F5";
+	const blue = theme === "light" ? "#3071CD" : theme === "noir" ? "#C1C1C1" : "#4FA8F5";
 	const purple = showcaseAccent("impostor", "#C042E0", theme);
 	const titleSt = {
 		fontSize: 22,
@@ -42609,14 +42609,14 @@ function buildQuickResume(t, dismissedResume, flags, theme) {
 		hiscoreProgress && {
 			id: "hiscore",
 			label: "Hi Score",
-			accent: theme === "light" ? "#0A7788" : theme === "noir" ? "#C4C4C4" : "#22D3EE",
-			logo: /* @__PURE__ */ import_react.default.createElement(HiScoreLogo, { color: theme === "light" ? "#0A7788" : theme === "noir" ? "#C4C4C4" : "#22D3EE" })
+			accent: theme === "light" ? "#0A7788" : theme === "noir" ? "#C1C1C1" : "#22D3EE",
+			logo: /* @__PURE__ */ import_react.default.createElement(HiScoreLogo, { color: theme === "light" ? "#0A7788" : theme === "noir" ? "#C1C1C1" : "#22D3EE" })
 		},
 		splitscoreProgress && {
 			id: "splitscore",
 			label: "Split Score",
-			accent: theme === "light" ? "#8653C0" : theme === "noir" ? "#C4C4C4" : "#B478F0",
-			logo: /* @__PURE__ */ import_react.default.createElement(SplitScoreLogo, { color: theme === "light" ? "#8653C0" : theme === "noir" ? "#C4C4C4" : "#B478F0" })
+			accent: theme === "light" ? "#8653C0" : theme === "noir" ? "#C1C1C1" : "#B478F0",
+			logo: /* @__PURE__ */ import_react.default.createElement(SplitScoreLogo, { color: theme === "light" ? "#8653C0" : theme === "noir" ? "#C1C1C1" : "#B478F0" })
 		},
 		minigolfProgress && {
 			id: "minigolf",
@@ -43139,14 +43139,14 @@ function buildAllGamesList(theme) {
 		{
 			view: "wizard",
 			labelKey: "gameWizard",
-			accent: theme === "light" ? "#846125" : theme === "noir" ? "#C4C4C4" : "#D4AF5A",
+			accent: theme === "light" ? "#846125" : theme === "noir" ? "#C1C1C1" : "#D4AF5A",
 			Logo: WizardLogo,
 			extraKeys: ["scorepadsTitle"]
 		},
 		{
 			view: "jass",
 			labelKey: "differenzlerTitle",
-			accent: theme === "noir" ? "#C4C4C4" : "#D52B1E",
+			accent: theme === "noir" ? "#C1C1C1" : "#D52B1E",
 			Logo: DifferenzlerLogo,
 			extraKeys: ["scorepadsTitle", "gameJass"]
 		},
@@ -43205,14 +43205,14 @@ function buildAllGamesList(theme) {
 		{
 			view: "hiscore",
 			label: "Hi Score",
-			accent: theme === "light" ? "#0A7788" : theme === "noir" ? "#C4C4C4" : "#22D3EE",
+			accent: theme === "light" ? "#0A7788" : theme === "noir" ? "#C1C1C1" : "#22D3EE",
 			Logo: HiScoreLogo,
 			extraKeys: ["scorepadsTitle"]
 		},
 		{
 			view: "splitscore",
 			label: "Split Score",
-			accent: theme === "light" ? "#8653C0" : theme === "noir" ? "#C4C4C4" : "#B478F0",
+			accent: theme === "light" ? "#8653C0" : theme === "noir" ? "#C1C1C1" : "#B478F0",
 			Logo: SplitScoreLogo,
 			extraKeys: ["scorepadsTitle"]
 		},
@@ -43379,7 +43379,7 @@ function GameShowcaseStrip({ lang, theme, tokens, onSelect, fixedOrder, favorite
 	const favGames = (Array.isArray(favorites) ? favorites : []).map((v) => typeof v === "string" && v.indexOf("v:") === 0 ? gtVariantItem(v.slice(2), theme) : base.find((g) => g.view === v)).filter(Boolean);
 	const favSet = new Set(favGames.map((g) => g.fav || g.view));
 	const games = favGames.concat(base.filter((g) => !favSet.has(g.view)));
-	const starC = theme === "light" ? "#C8921F" : theme === "noir" ? "#EDEDED" : "#E8B84A";
+	const starC = theme === "light" ? "#C8921F" : theme === "noir" ? "#EBEBEB" : "#E8B84A";
 	const lpRef = useRef$16({
 		timer: null,
 		fired: false,
@@ -43402,7 +43402,7 @@ function GameShowcaseStrip({ lang, theme, tokens, onSelect, fixedOrder, favorite
 		} catch (e) {}
 		gtFavToast(t(was ? "favRemoved" : "favAdded"));
 	};
-	const fadeBg = theme === "noir" ? "#0A0A0A" : theme === "light" ? "#F8F9FA" : "#171425";
+	const fadeBg = theme === "noir" ? "#000000" : theme === "light" ? "#F8F9FA" : "#171425";
 	const rowRef = useRef$16(null);
 	const dragRef = useRef$16({
 		active: false,
@@ -45334,7 +45334,7 @@ function StartPage({ onSelect, lang, theme, viewMode, lastPlayed, dismissedResum
 		icon: "pencilPad",
 		title: t("scorepadsTitle"),
 		description: t("scorepadsDesc"),
-		accent: theme === "light" ? "#3071CD" : theme === "noir" ? "#C4C4C4" : "#4FA8F5",
+		accent: theme === "light" ? "#3071CD" : theme === "noir" ? "#C1C1C1" : "#4FA8F5",
 		tokens: tk,
 		theme,
 		gradient: theme === "light" ? `linear-gradient(120deg, #3071CD18, ${tk.card})` : theme === "noir" ? `linear-gradient(120deg, #FFFFFF0E, ${tk.card})` : `linear-gradient(120deg, #4FA8F522, ${tk.card})`,
@@ -46479,12 +46479,12 @@ function schAddTrump(tm, k) {
 	return tr;
 }
 function SchieberEditorPanel({ editing, teams, onSave, onClose, t, theme }) {
-	const _SBORDER = theme === "noir" ? "#454545" : BORDER;
-	const _SPAGEBG = theme === "noir" ? "#0A0A0A" : PAGE_BG;
-	const _SINK = theme === "noir" ? "#EDEDED" : INK$10;
-	const _SCARD = theme === "noir" ? "#1E1E1E" : CARD;
+	const _SBORDER = theme === "noir" ? "#5F5F5F" : BORDER;
+	const _SPAGEBG = theme === "noir" ? "#000000" : PAGE_BG;
+	const _SINK = theme === "noir" ? "#EBEBEB" : INK$10;
+	const _SCARD = theme === "noir" ? "#1A1A1A" : CARD;
 	const _SGOLD = theme === "noir" ? noirAccent("schieber") : GOLD$6;
-	const _SMUTED = theme === "noir" ? "#8A8A8A" : MUTED;
+	const _SMUTED = theme === "noir" ? "#969696" : MUTED;
 	const _SHUE0 = theme === "noir" ? noirAccent("schieber") : HUES[0];
 	const [value, setValue] = useState$11("");
 	const [sign, setSign] = useState$11(1);
@@ -46595,12 +46595,12 @@ function SchieberEditorPanel({ editing, teams, onSave, onClose, t, theme }) {
 		panelStyle.bottom = 0;
 		panelStyle.padding = "12px 16px calc(12px + env(safe-area-inset-bottom))";
 	}
-	const dispBg = isNoir ? "#0A0A0A" : "#1E1A16";
-	const dispInk = isNoir ? "#EDEDED" : "#F4F1E8";
-	const dispMuted = isNoir ? "#8A8A8A" : "#A9A296";
-	const cardBg = isNoir ? "#EDEDED" : "#FFFFFF";
-	const clrRed = isNoir ? "#6E6E6E" : "#C22A2A";
-	const clrBlk = isNoir ? "#2A2A2A" : "#1E1A16";
+	const dispBg = isNoir ? "#000000" : "#1E1A16";
+	const dispInk = isNoir ? "#EBEBEB" : "#F4F1E8";
+	const dispMuted = isNoir ? "#969696" : "#A9A296";
+	const cardBg = isNoir ? "#EBEBEB" : "#FFFFFF";
+	const clrRed = isNoir ? "#777777" : "#C22A2A";
+	const clrBlk = isNoir ? "#2C2C2C" : "#1E1A16";
 	const okLabel = num > 0 ? t("schEnterFor").replace("{p}", (sign === -1 ? "−" : "") + num * mult).replace("{team}", team?.name || "") : t("schEnter");
 	return /* @__PURE__ */ import_react.default.createElement("div", {
 		ref: edRef,
@@ -46774,7 +46774,7 @@ function SchieberEditorPanel({ editing, teams, onSave, onClose, t, theme }) {
 			width: "100%",
 			border: "none",
 			borderRadius: 8,
-			background: num === 0 ? isNoir ? "#2A2A2A" : "#8FA69B" : isNoir ? noirAccent("schieber") : "#2F6B52",
+			background: num === 0 ? isNoir ? "#2C2C2C" : "#8FA69B" : isNoir ? noirAccent("schieber") : "#2F6B52",
 			color: isNoir && num > 0 ? "#0A0A0A" : "#fff",
 			fontSize: 16,
 			fontWeight: 700,
@@ -49491,7 +49491,7 @@ function TuttoPlayerRow({ player, total, entryCount, color, target, isLeader, se
 }
 function TuttoSetup({ players, setPlayers, target, setTarget, onStart, tk: gtTk0, t, theme }) {
 	const tk = gtSoftTk(gtTk0, theme);
-	const gtS = gtSkin(theme, tk, "tutto", { acc: theme === "noir" ? "#C9C9C9" : theme === "light" ? "#8C4560" : void 0 });
+	const gtS = gtSkin(theme, tk, "tutto", { acc: theme === "noir" ? "#C1C1C1" : theme === "light" ? "#8C4560" : void 0 });
 	const rename = (idx, name) => setPlayers((ps) => ps.map((p, i) => i === idx ? {
 		...p,
 		name
@@ -50351,13 +50351,13 @@ function dartMachineTokens(theme) {
 		gold: "#946118"
 	};
 	if (theme === "noir") return {
-		pageBg: "#0A0A0A",
-		card: "#1E1E1E",
-		cardAlt: "#181818",
-		border: "#454545",
-		ink: "#EDEDED",
-		muted: "#A5A5A5",
-		gold: "#C9C9C9"
+		pageBg: "#000000",
+		card: "#1A1A1A",
+		cardAlt: "#1A1A1A",
+		border: "#5F5F5F",
+		ink: "#EBEBEB",
+		muted: "#969696",
+		gold: "#C1C1C1"
 	};
 	return {
 		pageBg: "radial-gradient(ellipse at 50% -10%, #24262E 0%, #17181C 55%, #0A0B0D 100%)",
@@ -50386,17 +50386,17 @@ function startPageTokens(theme) {
 	};
 	if (theme === "noir") return {
 		onAccent: "#111111",
-		pageBg: "#0A0A0A",
-		pageBg2: "#050505",
+		pageBg: "#000000",
+		pageBg2: "#000000",
 		headerBg: "#111111",
-		headerInk: "#EDEDED",
-		headerMuted: "#A5A5A5",
-		card: "#1E1E1E",
-		cardElevated: "#282828",
-		ink: "#EDEDED",
-		muted: "#A5A5A5",
-		border: "#454545",
-		gold: "#C9C9C9"
+		headerInk: "#EBEBEB",
+		headerMuted: "#969696",
+		card: "#1A1A1A",
+		cardElevated: "#2C2C2C",
+		ink: "#EBEBEB",
+		muted: "#969696",
+		border: "#5F5F5F",
+		gold: "#C1C1C1"
 	};
 	return {
 		onAccent: "#1A1408",
@@ -50428,17 +50428,17 @@ function shellTokens(theme) {
 		gold: "#8F6418"
 	};
 	if (theme === "noir") return {
-		pageBg: "#0A0A0A",
-		pageBg2: "#050505",
+		pageBg: "#000000",
+		pageBg2: "#000000",
 		headerBg: "#111111",
-		headerInk: "#EDEDED",
-		headerMuted: "#A5A5A5",
-		card: "#1E1E1E",
-		cardElevated: "#282828",
-		ink: "#EDEDED",
-		muted: "#A5A5A5",
-		border: "#454545",
-		gold: "#C9C9C9"
+		headerInk: "#EBEBEB",
+		headerMuted: "#969696",
+		card: "#1A1A1A",
+		cardElevated: "#2C2C2C",
+		ink: "#EBEBEB",
+		muted: "#969696",
+		border: "#5F5F5F",
+		gold: "#C1C1C1"
 	};
 	return {
 		pageBg: PAGE_BG,
@@ -50473,21 +50473,21 @@ function tuttoTokens(theme) {
 		cardPeek2: "#E9D3D0"
 	};
 	if (theme === "noir") return {
-		accentFill: "#C9C9C9",
+		accentFill: "#C1C1C1",
 		onAccent: "#111111",
-		pageBg: "#0A0A0A",
-		pageBg2: "#050505",
+		pageBg: "#000000",
+		pageBg2: "#000000",
 		headerBg: "#111111",
-		headerInk: "#EDEDED",
-		headerMuted: "#A5A5A5",
-		card: "#1E1E1E",
-		cardElevated: "#282828",
-		ink: "#EDEDED",
-		muted: "#A5A5A5",
-		border: "#454545",
-		gold: "#C9C9C9",
-		cardPeek1: "#161616",
-		cardPeek2: "#101010"
+		headerInk: "#EBEBEB",
+		headerMuted: "#969696",
+		card: "#1A1A1A",
+		cardElevated: "#2C2C2C",
+		ink: "#EBEBEB",
+		muted: "#969696",
+		border: "#5F5F5F",
+		gold: "#C1C1C1",
+		cardPeek1: "#111111",
+		cardPeek2: "#111111"
 	};
 	return {
 		accentFill: "#C8323A",
@@ -50528,7 +50528,7 @@ function yatzyPageShellStyle(theme) {
 	};
 	if (theme === "noir") return {
 		minHeight: "100vh",
-		background: "#0A0A0A",
+		background: "#000000",
 		padding: "12px 12px 16px"
 	};
 	return {
@@ -50556,29 +50556,29 @@ function wizardTokens(theme) {
 		subheadBg: "#EFE6D8"
 	};
 	if (theme === "noir") {
-		const ac = "#C9C9C9";
+		const ac = "#C1C1C1";
 		return {
 			onAccent: "#111111",
-			ink: "#EDEDED",
-			card: "#1E1E1E",
-			border: "#454545",
+			ink: "#EBEBEB",
+			card: "#1A1A1A",
+			border: "#5F5F5F",
 			gold: ac,
-			parch: "#EDEDED",
+			parch: "#EBEBEB",
 			hues: [
-				"#E0E0E0",
-				"#B8B8B8",
-				"#949494",
-				"#F2F2F2",
-				"#CACACA",
-				"#A2A2A2",
-				"#DEDEDE",
-				"#888888"
+				"#EBEBEB",
+				"#C1C1C1",
+				"#969696",
+				"#EBEBEB",
+				"#C1C1C1",
+				"#969696",
+				"#EBEBEB",
+				"#969696"
 			],
-			muted: "#A5A5A5",
-			mutedLight: "#A8A8A8",
+			muted: "#969696",
+			mutedLight: "#969696",
 			groupLine: "#3A3A3A",
-			cellEmptyBg: "#101010",
-			cellFilledBg: "#1C1C1C",
+			cellEmptyBg: "#111111",
+			cellFilledBg: "#1A1A1A",
 			cellEditBg: `${ac}22`,
 			placeholderDot: "#3A3A3A",
 			subheadBg: "#161616"
@@ -50614,7 +50614,7 @@ function wizardPageShellStyle(theme) {
 	}
 	if (theme === "noir") return {
 		minHeight: "100vh",
-		background: "#0A0A0A",
+		background: "#000000",
 		padding: "20px 12px 32px"
 	};
 	return {
@@ -50631,7 +50631,7 @@ function jassPageShellStyle(theme) {
 	};
 	if (theme === "noir") return {
 		minHeight: "100vh",
-		background: "#0A0A0A",
+		background: "#000000",
 		padding: "20px 12px 32px"
 	};
 	return {
@@ -50659,21 +50659,21 @@ function impostorTokens(theme) {
 		border: "#4A4038"
 	};
 	if (theme === "noir") return {
-		dangerFrom: "#6B6B6B",
-		dangerTo: "#474747",
+		dangerFrom: "#777777",
+		dangerTo: "#5F5F5F",
 		onDanger: "#FFFFFF",
-		tealFrom: "#9A9A9A",
-		tealTo: "#8A8A8A",
-		onTeal: "#0A0A0A",
-		bg: "#0A0A0A",
-		bg2: "#050505",
-		card: "#1E1E1E",
-		ink: "#EDEDED",
-		muted: "#A5A5A5",
-		red: "#C9C9C9",
-		teal: "#9A9A9A",
-		gold: "#9A9A9A",
-		border: "#454545"
+		tealFrom: "#969696",
+		tealTo: "#969696",
+		onTeal: "#000000",
+		bg: "#000000",
+		bg2: "#000000",
+		card: "#1A1A1A",
+		ink: "#EBEBEB",
+		muted: "#969696",
+		red: "#C1C1C1",
+		teal: "#969696",
+		gold: "#969696",
+		border: "#5F5F5F"
 	};
 	return {
 		dangerFrom: "#A333BF",
@@ -50716,18 +50716,18 @@ function wolfTokens(theme) {
 		border: "#4A4038"
 	};
 	if (theme === "noir") return {
-		btnFrom: "#C9C9C9",
-		btnTo: "#8A8A8A",
+		btnFrom: "#C1C1C1",
+		btnTo: "#969696",
 		onAccent: "#111111",
-		bg: "#0A0A0A",
-		bg2: "#050505",
-		card: "#1E1E1E",
-		ink: "#EDEDED",
-		muted: "#A5A5A5",
-		moon: "#C9C9C9",
-		blood: "#707070",
-		forest: "#E5E5E5",
-		border: "#454545"
+		bg: "#000000",
+		bg2: "#000000",
+		card: "#1A1A1A",
+		ink: "#EBEBEB",
+		muted: "#969696",
+		moon: "#C1C1C1",
+		blood: "#777777",
+		forest: "#EBEBEB",
+		border: "#5F5F5F"
 	};
 	return {
 		btnFrom: "#C8343F",
@@ -50766,17 +50766,17 @@ function mafiaTokens(theme) {
 		border: "#4A3830"
 	};
 	if (theme === "noir") return {
-		btnFrom: "#6B6B6B",
-		btnTo: "#474747",
+		btnFrom: "#777777",
+		btnTo: "#5F5F5F",
 		onAccent: "#FFFFFF",
-		bg: "#0A0A0A",
-		bg2: "#050505",
-		card: "#1E1E1E",
-		ink: "#EDEDED",
-		muted: "#A5A5A5",
-		gold: "#C9C9C9",
-		blood: "#707070",
-		border: "#454545"
+		bg: "#000000",
+		bg2: "#000000",
+		card: "#1A1A1A",
+		ink: "#EBEBEB",
+		muted: "#969696",
+		gold: "#C1C1C1",
+		blood: "#777777",
+		border: "#5F5F5F"
 	};
 	return {
 		btnFrom: "#B3272C",
@@ -50818,21 +50818,21 @@ function tabuTokens(theme) {
 		border: "#4A4038"
 	};
 	if (theme === "noir") return {
-		btnFrom: "#C9C9C9",
-		btnTo: "#8A8A8A",
+		btnFrom: "#C1C1C1",
+		btnTo: "#969696",
 		onAccent: "#111111",
-		okFrom: "#E5E5E5",
-		okTo: "#8A8A8A",
+		okFrom: "#EBEBEB",
+		okTo: "#969696",
 		onOk: "#0D2119",
-		bg: "#0A0A0A",
-		bg2: "#050505",
-		card: "#1E1E1E",
-		ink: "#EDEDED",
-		muted: "#A5A5A5",
-		yellow: "#C9C9C9",
-		red: "#707070",
-		green: "#E5E5E5",
-		border: "#454545"
+		bg: "#000000",
+		bg2: "#000000",
+		card: "#1A1A1A",
+		ink: "#EBEBEB",
+		muted: "#969696",
+		yellow: "#C1C1C1",
+		red: "#777777",
+		green: "#EBEBEB",
+		border: "#5F5F5F"
 	};
 	return {
 		btnFrom: "#FFC93C",
@@ -50878,21 +50878,21 @@ function headsupTokens(theme) {
 		border: "#4A4038"
 	};
 	if (theme === "noir") return {
-		btnFrom: "#C9C9C9",
-		btnTo: "#8A8A8A",
+		btnFrom: "#C1C1C1",
+		btnTo: "#969696",
 		onAccent: "#111111",
-		okFrom: "#E5E5E5",
-		okTo: "#8A8A8A",
+		okFrom: "#EBEBEB",
+		okTo: "#969696",
 		onOk: "#0D2119",
-		bg: "#0A0A0A",
-		bg2: "#050505",
-		card: "#1E1E1E",
-		ink: "#EDEDED",
-		muted: "#A5A5A5",
-		orange: "#C9C9C9",
-		blue: "#9A9A9A",
-		green: "#E5E5E5",
-		border: "#454545"
+		bg: "#000000",
+		bg2: "#000000",
+		card: "#1A1A1A",
+		ink: "#EBEBEB",
+		muted: "#969696",
+		orange: "#C1C1C1",
+		blue: "#969696",
+		green: "#EBEBEB",
+		border: "#5F5F5F"
 	};
 	return {
 		btnFrom: "#FF7A52",
@@ -50937,19 +50937,19 @@ function skyjoTokens(theme) {
 		border: "#4A4038"
 	};
 	if (theme === "noir") {
-		const ac = "#C9C9C9";
+		const ac = "#C1C1C1";
 		return {
-			btnFrom: "#C9C9C9",
-			btnTo: "#8A8A8A",
+			btnFrom: "#C1C1C1",
+			btnTo: "#969696",
 			onAccent: "#111111",
-			bg: "#0A0A0A",
-			bg2: "#050505",
-			card: "#1E1E1E",
-			ink: "#EDEDED",
-			muted: "#A5A5A5",
+			bg: "#000000",
+			bg2: "#000000",
+			card: "#1A1A1A",
+			ink: "#EBEBEB",
+			muted: "#969696",
 			teal: ac,
 			gold: ac,
-			border: "#454545"
+			border: "#5F5F5F"
 		};
 	}
 	return {
@@ -50990,20 +50990,20 @@ function flip7Tokens(theme) {
 		border: "#4A3018"
 	};
 	if (theme === "noir") {
-		const ac = "#C9C9C9";
+		const ac = "#C1C1C1";
 		return {
-			btnFrom: "#C9C9C9",
-			btnTo: "#8A8A8A",
+			btnFrom: "#C1C1C1",
+			btnTo: "#969696",
 			onAccent: "#111111",
-			bg: "#0A0A0A",
-			bg2: "#050505",
-			card: "#1E1E1E",
-			ink: "#EDEDED",
-			muted: "#A5A5A5",
+			bg: "#000000",
+			bg2: "#000000",
+			card: "#1A1A1A",
+			ink: "#EBEBEB",
+			muted: "#969696",
 			flame: ac,
 			gold: ac,
-			bust: "#707070",
-			border: "#454545"
+			bust: "#777777",
+			border: "#5F5F5F"
 		};
 	}
 	return {
@@ -51073,47 +51073,47 @@ function minigolfTokens(theme) {
 		]
 	};
 	if (theme === "noir") {
-		const ac = "#C9C9C9";
+		const ac = "#C1C1C1";
 		return {
-			btnFrom: "#EDEDED",
-			btnTo: "#EDEDED",
-			onAccent: "#0A0A0A",
-			bg: "#0A0A0A",
+			btnFrom: "#EBEBEB",
+			btnTo: "#EBEBEB",
+			onAccent: "#000000",
+			bg: "#000000",
 			bg2: "#121212",
-			card: "#161616",
-			ink: "#EDEDED",
-			muted: "#A5A5A5",
+			card: "#111111",
+			ink: "#EBEBEB",
+			muted: "#969696",
 			green: ac,
 			gold: ac,
 			border: "#2C2C2C",
 			gridLine: "#242424",
-			surf: "#161616",
-			surf2: "#101010",
+			surf: "#111111",
+			surf2: "#111111",
 			line: "#2C2C2C",
-			acc: "#EDEDED",
-			onAcc: "#0A0A0A",
-			accInk: "#EDEDED",
+			acc: "#EBEBEB",
+			onAcc: "#000000",
+			accInk: "#EBEBEB",
 			accSoft: "rgba(255,255,255,0.06)",
-			segBg: "#EDEDED",
-			segInk: "#0A0A0A",
-			track: "#2A2A2A",
+			segBg: "#EBEBEB",
+			segInk: "#000000",
+			track: "#2C2C2C",
 			ctrl: "transparent",
-			ctrlLine: "#4A4A4A",
+			ctrlLine: "#5F5F5F",
 			flag: "#BDBDBD",
-			accLine: "#8A8A8A",
-			solid: "#161616",
+			accLine: "#969696",
+			solid: "#111111",
 			err: "#FF8A80",
 			shadow: "none",
 			ctaShadow: "none",
 			hues: [
-				"#E0E0E0",
-				"#B8B8B8",
-				"#949494",
-				"#F2F2F2",
-				"#CACACA",
-				"#A2A2A2",
-				"#DEDEDE",
-				"#888888"
+				"#EBEBEB",
+				"#C1C1C1",
+				"#969696",
+				"#EBEBEB",
+				"#C1C1C1",
+				"#969696",
+				"#EBEBEB",
+				"#969696"
 			]
 		};
 	}
@@ -51186,20 +51186,20 @@ function fiveSecTokens(theme) {
 		border: "#4A4038"
 	};
 	if (theme === "noir") return {
-		btnFrom: "#C9C9C9",
-		btnTo: "#8A8A8A",
+		btnFrom: "#C1C1C1",
+		btnTo: "#969696",
 		onAccent: "#111111",
-		blueFrom: "#9A9A9A",
-		blueTo: "#8A8A8A",
+		blueFrom: "#969696",
+		blueTo: "#969696",
 		onBlue: "#04182A",
-		bg: "#0A0A0A",
-		bg2: "#050505",
-		card: "#1E1E1E",
-		ink: "#EDEDED",
-		muted: "#A5A5A5",
-		orange: "#C9C9C9",
-		blue: "#9A9A9A",
-		border: "#454545"
+		bg: "#000000",
+		bg2: "#000000",
+		card: "#1A1A1A",
+		ink: "#EBEBEB",
+		muted: "#969696",
+		orange: "#C1C1C1",
+		blue: "#969696",
+		border: "#5F5F5F"
 	};
 	return {
 		btnFrom: "#FF9640",
@@ -51240,17 +51240,17 @@ function mostLikelyTokens(theme) {
 		border: "#4A4038"
 	};
 	if (theme === "noir") return {
-		btnFrom: "#C9C9C9",
-		btnTo: "#8A8A8A",
+		btnFrom: "#C1C1C1",
+		btnTo: "#969696",
 		onAccent: "#111111",
-		bg: "#0A0A0A",
-		bg2: "#050505",
-		card: "#1E1E1E",
-		ink: "#EDEDED",
-		muted: "#A5A5A5",
-		purple: "#C9C9C9",
-		pink: "#9A9A9A",
-		border: "#454545"
+		bg: "#000000",
+		bg2: "#000000",
+		card: "#1A1A1A",
+		ink: "#EBEBEB",
+		muted: "#969696",
+		purple: "#C1C1C1",
+		pink: "#969696",
+		border: "#5F5F5F"
 	};
 	return {
 		btnFrom: "#B478F0",
@@ -55627,7 +55627,7 @@ function gtYatzyBonusCell(card, val, theme, t, muted) {
 		}
 	}, val);
 	const close = need <= open.reduce((s, c) => s + 3 * c.face, 0);
-	const col = close ? N ? "#D9D9D9" : theme === "light" ? "#8A5300" : "#E0A84A" : muted;
+	const col = close ? N ? "#EBEBEB" : theme === "light" ? "#8A5300" : "#E0A84A" : muted;
 	return /* @__PURE__ */ import_react.default.createElement("span", {
 		title: t("bonusToGo")(need),
 		"aria-label": t("bonusToGo")(need),
@@ -72406,7 +72406,7 @@ function GtStatsHeadBtn({ tk, t, theme, onClick }) {
 			padding: "0 14px 0 11px",
 			borderRadius: 999,
 			border: `1px solid ${theme === "light" ? "rgba(0,0,0,0.14)" : theme === "noir" ? "rgba(255,255,255,0.22)" : tk.gold + "66"}`,
-			background: theme === "light" ? "#FFFFFF" : theme === "noir" ? "#141414" : `${tk.gold}1F`,
+			background: theme === "light" ? "#FFFFFF" : theme === "noir" ? "#111111" : `${tk.gold}1F`,
 			color: c,
 			fontSize: 13,
 			fontWeight: 700,
@@ -72525,9 +72525,9 @@ function CategoryScorepads({ favorites, onToggleFavorite, onSelect, onBack, lang
 		t,
 		description: t("jassDesc"),
 		status: jassProgress || schieberProgress ? t("gameInProgress") : null,
-		accent: theme === "noir" ? "#C4C4C4" : "#D52B1E",
+		accent: theme === "noir" ? "#C1C1C1" : "#D52B1E",
 		logo: /* @__PURE__ */ import_react.default.createElement(JassLogo, {
-			color: theme === "noir" ? "#C4C4C4" : "#D52B1E",
+			color: theme === "noir" ? "#C1C1C1" : "#D52B1E",
 			theme
 		}),
 		onClick: () => onSelect("jass-select")
@@ -72575,7 +72575,7 @@ function CategoryScorepads({ favorites, onToggleFavorite, onSelect, onBack, lang
 		title: t("gameWizard"),
 		description: t("wizardDesc"),
 		status: wizardProgress ? t("gameInProgress") : null,
-		accent: theme === "light" ? "#846125" : theme === "noir" ? "#C4C4C4" : "#D4AF5A",
+		accent: theme === "light" ? "#846125" : theme === "noir" ? "#C1C1C1" : "#D4AF5A",
 		logo: /* @__PURE__ */ import_react.default.createElement(WizardLogo, { theme }),
 		fav: fv("wizard"),
 		t,
@@ -72795,7 +72795,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.10-25";
+var APP_BUILD = "2026.11.10-26";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -73261,7 +73261,7 @@ function SettingsPage({ onBack, backLabel, onReplayTour, lang, setLang, theme, s
 	];
 	const currentLang = LANGS.find((l) => l.id === lang) || LANGS[0];
 	const L = theme === "light", N = theme === "noir";
-	const onFill = L ? "#FFFFFF" : N ? "#0A0A0A" : tk.gold;
+	const onFill = L ? "#FFFFFF" : N ? "#000000" : tk.gold;
 	const selBg = L ? "#1A1D20" : N ? tk.gold : `${tk.gold}2E`;
 	const track = tk.pageBg2;
 	const dangerInk = L ? "#B3141D" : "#FF8A8A";
@@ -73379,7 +73379,7 @@ function SettingsPage({ onBack, backLabel, onReplayTour, lang, setLang, theme, s
 			width: 24,
 			height: 24,
 			borderRadius: 12,
-			background: on ? L ? "#FFFFFF" : N ? "#0A0A0A" : "#1A1408" : "#FFFFFF",
+			background: on ? L ? "#FFFFFF" : N ? "#000000" : "#1A1408" : "#FFFFFF",
 			boxShadow: "0 1px 3px rgba(0,0,0,0.3)",
 			transition: "left .2s cubic-bezier(.2,.8,.2,1)"
 		} })));
@@ -73784,8 +73784,8 @@ function JassVariantSelect({ onSelect, onBack, jassProgress, schieberProgress, l
 		title: t("differenzlerTitle"),
 		description: t("differenzlerDesc"),
 		status: jassProgress ? t("gameInProgress") : null,
-		accent: theme === "noir" ? "#C4C4C4" : HUES[3],
-		logo: /* @__PURE__ */ import_react.default.createElement(DifferenzlerLogo, { color: theme === "noir" ? "#C4C4C4" : "#D52B1E" }),
+		accent: theme === "noir" ? "#C1C1C1" : HUES[3],
+		logo: /* @__PURE__ */ import_react.default.createElement(DifferenzlerLogo, { color: theme === "noir" ? "#C1C1C1" : "#D52B1E" }),
 		fav: fv("jass"),
 		t,
 		onClick: () => onSelect("jass")
@@ -73796,8 +73796,8 @@ function JassVariantSelect({ onSelect, onBack, jassProgress, schieberProgress, l
 		title: t("gameSchieber"),
 		description: t("schieberDesc"),
 		status: schieberProgress ? t("gameInProgress") : null,
-		accent: theme === "noir" ? "#C4C4C4" : "#2F6B52",
-		logo: /* @__PURE__ */ import_react.default.createElement(SchieberLogo, { color: theme === "noir" ? "#C4C4C4" : "#2F6B52" }),
+		accent: theme === "noir" ? "#C1C1C1" : "#2F6B52",
+		logo: /* @__PURE__ */ import_react.default.createElement(SchieberLogo, { color: theme === "noir" ? "#C1C1C1" : "#2F6B52" }),
 		fav: fv("schieber"),
 		t,
 		onClick: () => onSelect("schieber")
@@ -73814,8 +73814,8 @@ function JassVariantSelect({ onSelect, onBack, jassProgress, schieberProgress, l
 			} catch (e) {}
 			return n === 1 ? t("stuCardRunningOne") : n > 1 ? t("stuCardRunningOther").replace("{n}", n) : null;
 		})(),
-		accent: theme === "noir" ? "#C4C4C4" : HUES[3],
-		logo: /* @__PURE__ */ import_react.default.createElement(GtStuLogo, { color: theme === "noir" ? "#C4C4C4" : "#D52B1E" }),
+		accent: theme === "noir" ? "#C1C1C1" : HUES[3],
+		logo: /* @__PURE__ */ import_react.default.createElement(GtStuLogo, { color: theme === "noir" ? "#C1C1C1" : "#D52B1E" }),
 		fav: fv("schieber-turnier"),
 		t,
 		onClick: () => onSelect("schieber-turnier")
@@ -76248,7 +76248,7 @@ function wolfBtnGhost(theme) {
 }
 function WerewolfSetup({ state, setState, onStart, theme, lang, t }) {
 	const wt = gtSoftTk(wolfTokens(theme), theme);
-	const gtS = gtSkin(theme, wt, "werwolf", { acc: theme === "noir" ? "#C9C9C9" : wt.blood });
+	const gtS = gtSkin(theme, wt, "werwolf", { acc: theme === "noir" ? "#C1C1C1" : wt.blood });
 	const ROLES = WEREWOLF_ROLES_FOR(lang);
 	const { players, enabledRoles, hauptmannOn, voteSecondsDefault } = state;
 	const n = players.length;
@@ -100465,7 +100465,7 @@ var F7_NUM_COL = [
 	"#6A3FA0"
 ];
 function f7NumCol(n, theme) {
-	return theme === "noir" ? "#2A2A2A" : F7_NUM_COL[n] || "#333";
+	return theme === "noir" ? "#2C2C2C" : F7_NUM_COL[n] || "#333";
 }
 function flip7BtnPrimary(theme) {
 	const k = f7T(theme);
@@ -115126,7 +115126,7 @@ function App() {
 		cricketLabel
 	}, theme);
 	const sideMuted = isLight ? "#454E5A" : laptopTk.muted;
-	const sideBg = isLight ? "#EFEAE0" : theme === "noir" ? "#0E0E0E" : "#14161F";
+	const sideBg = isLight ? "#EFEAE0" : theme === "noir" ? "#000000" : "#14161F";
 	const navBtn = (id, label, icon, active, onClick) => /* @__PURE__ */ import_react.default.createElement("button", {
 		key: id,
 		onClick,
@@ -115674,12 +115674,12 @@ function yzPal(theme) {
 	const N = theme === "noir", L = theme === "light";
 	return {
 		dark: !L,
-		card: N ? "#161616" : L ? "#FFFFFF" : "#1A1E2C",
-		panel: N ? "#1E1E1E" : L ? "#FFFFFF" : "#212741",
-		bg: N ? "#0A0A0A" : L ? "#F2F4F8" : "#272D45",
-		ink: L ? "#151826" : N ? "#EDEDED" : "#F2F4F8",
-		muted: N ? "#A5A5A5" : L ? "#4B5468" : "#AEB5C9",
-		border: N ? "#4A4A4A" : L ? "#333A4D" : "#5F6784",
+		card: N ? "#111111" : L ? "#FFFFFF" : "#1A1E2C",
+		panel: N ? "#1A1A1A" : L ? "#FFFFFF" : "#212741",
+		bg: N ? "#000000" : L ? "#F2F4F8" : "#272D45",
+		ink: L ? "#151826" : N ? "#EBEBEB" : "#F2F4F8",
+		muted: N ? "#969696" : L ? "#4B5468" : "#AEB5C9",
+		border: N ? "#5F5F5F" : L ? "#333A4D" : "#5F6784",
 		grid: L ? "#DDE2EE" : "rgba(255,255,255,0.07)",
 		acc: N ? noirAccent("yatzy") : L ? "#5B5FEF" : "#8487FF",
 		on: L ? "#FFFFFF" : N ? "#111111" : "#0F1220",
@@ -115793,7 +115793,7 @@ function YatzyTopBar({ subtitle, onBack, theme, t, onHome, rulesText, onEndGame,
 function YatzySetup({ players, setPlayers, onStart, t, theme }) {
 	const gtS = gtSkin(theme, shellTokens(theme), "yatzy", {
 		font: YATZY_FONT,
-		acc: theme === "noir" ? "#C9C9C9" : theme === "light" ? "#3D5E8C" : void 0
+		acc: theme === "noir" ? "#C1C1C1" : theme === "light" ? "#3D5E8C" : void 0
 	});
 	const _YP = yzPal(theme), _YCARD = _YP.card;
 	_YP.bg;
@@ -117325,7 +117325,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.10-25");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.10-26");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -120033,7 +120033,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.10-25" && !upd) {
+		if (seen && seen !== "2026.11.10-26" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -120042,7 +120042,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.10-25" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.10-26" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

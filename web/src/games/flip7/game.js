@@ -33,7 +33,7 @@ function f7T(theme){const b=flip7Tokens(theme);if(theme==="light")return{...b,bg
 function f7Shell(theme){const k=f7T(theme);return{minHeight:"100vh",background:`radial-gradient(ellipse at 50% -10%, ${k.bg2} 0%, ${k.bg} 65%)`,padding:"20px 12px 32px"};}
 function f7Vars(k){return{"--f7-card":k.card,"--f7-ink":k.ink,"--f7-muted":k.muted,"--f7-line":k.line,"--f7-acc":k.acc,"--f7-on":k.on,"--f7-red":k.red,"--f7-gold":k.gold,"--f7-face":k.face,"--f7-fline":k.faceLine,"--f7-back":k.back,"--f7-bink":k.bink||"#1A1205"};}
 const F7_NUM_COL=["#6B6F80","#8C5A2B","#2E7D5B","#B2384E","#2F6FB0","#3E8E41","#8A4FB0","#C2571A","#1F7F86","#A0367A","#A85A12","#3D5BA8","#6A3FA0"];
-function f7NumCol(n,theme){return theme==="noir"?"#2A2A2A":F7_NUM_COL[n]||"#333";}
+function f7NumCol(n,theme){return theme==="noir"?"#2C2C2C":F7_NUM_COL[n]||"#333";}
 function flip7BtnPrimary(theme){const k=f7T(theme);return{border:"none",borderRadius:18,background:k.acc,color:k.on,fontSize:15,fontWeight:800,padding:"14px 0",cursor:"pointer",fontFamily:FLIP7_FONT};}
 function flip7BtnGhost(theme){const k=f7T(theme);return{border:`1px solid ${k.line}`,borderRadius:18,background:"transparent",color:k.muted,fontSize:13,fontWeight:700,padding:"12px 20px",cursor:"pointer",fontFamily:"'Inter', sans-serif"};}
 function Flip7TopBar({subtitle,onBack,theme,t,hideTitle}){const k=f7T(theme);return <GameHeader title={t("gameFlip7")} subtitle={subtitle} onBack={onBack} backLabel={t("back")} tk={k} accent={k.acc} titleFont={FLIP7_FONT} icon={<Flip7Logo color={k.acc} theme={theme}/>} hideTitle={hideTitle}/>;}

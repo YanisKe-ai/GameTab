@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.10-26 (10.11.2026 23:33)
+- Noir: neue Grauskala nach Recherche (tiefes Schwarz, klarere Rahmen, Text ohne Überstrahlen)
+
 ## 2026.11.10-25 (10.11.2026 23:26)
 - Einstellungen: Beschriftung Erscheinungsbild und Ansicht
 

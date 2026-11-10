@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.10-14 (10.11.2026 19:31)
+- Schriftzüge: jede Farbkombination nur einmal, Skyjo und Flip 7 im gleichen Stil
+
 ## 2026.11.10-13 (10.11.2026 19:21)
 - Alle Spiele: Titel in der Yatzy-Schrift mit eigenen Farben, schwebende Symbole im Hintergrund wie bei Tutto
 

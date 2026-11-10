@@ -23417,14 +23417,19 @@ function gtIsNewMatch(x) {
 var GT_WM_FONTS = "@font-face{font-family:'Bowlby One';font-weight:400;font-display:swap;src:url(\"./fonts/BowlbyOne-Regular-lat.woff2\") format('woff2');}@font-face{font-family:'Archivo Black';font-weight:400;font-display:swap;src:url(\"./fonts/ArchivoBlack-Regular-lat.woff2\") format('woff2');}@font-face{font-family:'Caveat Brush';font-weight:400;font-display:swap;src:url(\"./fonts/CaveatBrush-Regular-lat.woff2\") format('woff2');}@font-face{font-family:'Kalam';font-weight:700;font-display:swap;src:url(\"./fonts/Kalam-700-1.woff2\") format('woff2');}@font-face{font-family:'Fraunces';font-weight:500;font-display:swap;src:url(\"./fonts/Fraunces-500-1.woff2\") format('woff2');}@font-face{font-family:'Inter';font-style:italic;font-weight:900;font-display:swap;src:url(\"./fonts/Inter-BlackItalic-lat.woff2\") format('woff2');}@keyframes gtWmIn{0%{opacity:0;transform:scale(1.18)}60%{opacity:1;transform:scale(.97)}100%{transform:scale(1)}}.gt-wm{margin:2px 0 10px;text-align:center;line-height:1.05;white-space:nowrap;animation:gtWmIn .45s cubic-bezier(.3,1.3,.5,1) both;transform-origin:50% 60%}@media (prefers-reduced-motion:reduce){.gt-wm{animation:none}}";
 var GT_WM_COL = [
 	[
+		/^skyjo/,
+		"#2FD9A8",
+		"#2B4C9B"
+	],
+	[
 		/^phase/,
-		"#FFC72C",
-		"#E63946"
+		"#1D6FD1",
+		"#FFC72C"
 	],
 	[
 		/^(romm|rami|ramino|rummy)/,
 		"#F25C9A",
-		"#FFFFFF"
+		"#7A3FB0"
 	],
 	[
 		/^(coiffeur|differenzler)/,
@@ -23439,17 +23444,17 @@ var GT_WM_COL = [
 	[
 		/^darts/,
 		"#E5383B",
-		"#FFFFFF"
+		"#F3E6C8"
 	],
 	[
 		/^cricket/,
 		"#2FD08A",
-		"#FFFFFF"
+		"#FFE08A"
 	],
 	[
 		/^cut throat/,
 		"#FF6B5E",
-		"#FFFFFF"
+		"#FFD6D1"
 	],
 	[
 		/^masters/,
@@ -23459,7 +23464,7 @@ var GT_WM_COL = [
 	[
 		/^shanghai/,
 		"#4FB0FF",
-		"#FFFFFF"
+		"#FF6B5E"
 	],
 	[
 		/^hi score/,
@@ -23469,7 +23474,7 @@ var GT_WM_COL = [
 	[
 		/^split score/,
 		"#B478F0",
-		"#FFFFFF"
+		"#22D3EE"
 	],
 	[
 		/^wizard/,
@@ -23479,7 +23484,7 @@ var GT_WM_COL = [
 	[
 		/^minigolf/,
 		"#7ED957",
-		"#FFFFFF"
+		"#E5484D"
 	],
 	[
 		/^mafia/,
@@ -23489,42 +23494,42 @@ var GT_WM_COL = [
 	[
 		/^impostor/,
 		"#C042E0",
-		"#FFFFFF"
+		"#F2C14E"
 	],
 	[
 		/^(werwolf|werewolf|loup|lupo|hombre lobo|lobisomem)/,
 		"#FFE9A8",
-		"#D9384A"
+		"#6B5BD6"
 	],
 	[
 		/^(am ehesten|most likely|qui plut|chi è|quién|quem)/,
 		"#2DD4BF",
-		"#FFFFFF"
+		"#FF6FB5"
 	],
 	[
 		/^(verräter|traitor|traît|tradit|traidor)/,
 		"#7FBF5A",
-		"#FFC24B"
+		"#7A1F2B"
 	],
 	[
 		/^(tabu|taboo)/,
-		"#FFC93C",
-		"#E5383B"
+		"#FFFFFF",
+		"#7B3FBF"
 	],
 	[
 		/^heads/,
-		"#6C7FE8",
-		"#FFC93C"
+		"#9DB4FF",
+		"#3B4A9C"
 	],
 	[
 		/^(5 |five)/,
 		"#FF9640",
-		"#FFD23F"
+		"#FFFFFF"
 	],
 	[
 		/^(freies spiel|free play|jeu libre|gioco libero|juego libre|jogo livre)/,
-		"#B49BC4",
-		"#FFFFFF"
+		"#E8DDF0",
+		"#9A7BA8"
 	]
 ];
 function gtWmStyle(title, accent) {
@@ -56699,8 +56704,7 @@ var SK_CSS = `
 @font-face{font-family:'Anton';font-style:normal;font-weight:400;font-display:swap;src:url("./fonts/Anton-Regular.woff2") format('woff2');}
 .sk-hero{display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center;padding:0 0 2px}
 .sk-fan{display:block;width:104px;height:auto;filter:drop-shadow(0 4px 5px rgba(0,0,0,.34))}
-.sk-word{margin:0;font-family:'Bowlby One',sans-serif;font-weight:400;font-size:34px;line-height:1.05;letter-spacing:.01em;color:var(--sk-acc);text-shadow:0 2px 0 rgba(0,0,0,.30),0 8px 20px color-mix(in oklab,var(--sk-acc) 30%,transparent)}
-html[data-gt-theme="light"] .sk-word{text-shadow:0 2px 0 rgba(0,0,0,.14)}
+.sk-word{margin:0;font-family:'Bowlby One',sans-serif;font-weight:400;font-size:44px;line-height:1.05;letter-spacing:.01em;color:#2FD9A8;-webkit-text-stroke:.028em #14100E;paint-order:stroke fill;text-shadow:.037em .037em 0 #14100E,.074em .074em 0 #2B4C9B,.093em .093em 0 #2B4C9B,.111em .111em 0 #14100E}
 .sk-sub{margin:0;font:600 14px/1.3 'Inter',sans-serif;color:var(--sk-muted)}
 @media (max-height:700px){.sk-fan{width:84px}.sk-word{font-size:29px}.sk-sub{font-size:13px}}
 @media (max-height:620px){.sk-fan,.sk-sub{display:none}.sk-word{font-size:26px}}
@@ -72543,7 +72547,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.10-13";
+var APP_BUILD = "2026.11.10-14";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -100247,8 +100251,7 @@ var F7_CSS = `
 .f7-hero{grid-area:hero;display:flex;align-items:center;justify-content:center;gap:10px;padding:0 0 2px}
 .f7-fan{display:block;width:62px;height:auto;filter:drop-shadow(0 4px 5px rgba(0,0,0,.34))}
 .f7-sub{font:600 12px/1.2 'Inter',sans-serif;color:var(--f7-muted);margin-top:3px;letter-spacing:.02em}
-.f7-word{margin:0;font-family:'Bowlby One',sans-serif;font-weight:400;font-size:34px;line-height:1;color:var(--f7-acc);text-shadow:0 2px 0 rgba(0,0,0,.3),0 8px 20px color-mix(in oklab,var(--f7-acc) 30%,transparent);white-space:nowrap}
-html[data-gt-theme="light"] .f7-word{text-shadow:0 2px 0 rgba(0,0,0,.14)}
+.f7-word{margin:0;font-family:'Bowlby One',sans-serif;font-weight:400;font-size:44px;line-height:1.05;color:#FF7A3D;-webkit-text-stroke:.028em #14100E;paint-order:stroke fill;text-shadow:.037em .037em 0 #14100E,.074em .074em 0 #2EC4B6,.093em .093em 0 #2EC4B6,.111em .111em 0 #14100E;white-space:nowrap}
 .f7-seg{grid-area:seg;display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:16px;background:var(--f7-card);border:1px solid var(--f7-line)}
 .f7-seg button{height:40px;border:0;border-radius:12px;background:transparent;color:var(--f7-muted);font:700 15px 'Inter',sans-serif;cursor:pointer;padding:0}
 .f7-seg button[aria-selected="true"]{background:var(--f7-acc);color:var(--f7-on)}
@@ -117022,7 +117025,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.10-13");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.10-14");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -119719,7 +119722,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.10-13" && !upd) {
+		if (seen && seen !== "2026.11.10-14" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -119728,7 +119731,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.10-13" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.10-14" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.10-19 (10.11.2026 21:21)
+- Endstand im Menü wieder öffnen, Rückgängig überall gleich benannt, Darts Rückgängig nach Spielende, Tutto Einträge einzeln löschen, Neues Spiel durch Halten
+
 ## 2026.11.10-18 (10.11.2026 21:08)
 - Sicherheit: sofort speichern, Darts Spieler ändern mit Rückfrage, Grenzen für unmögliche Werte, Neues Spiel statt Neue Runde, ehrliche Siegquote, Noir-Schriftzüge grau
 

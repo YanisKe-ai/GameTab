@@ -39,6 +39,7 @@ const GT_HM_CSS = `.gt-hmt-dark{--hm-btn:#1B2235;--hm-ring:#ffffff1f;--hm-ink:#E
 
 const IC = { fill: "none", stroke: "currentColor", strokeWidth: 2, strokeLinecap: "round", strokeLinejoin: "round" };
 const ICONS = {
+  trophy: [<path key="a" d="M7 4h10v5a5 5 0 0 1-10 0V4z" {...IC} />, <path key="b" d="M7 6H4.5a2.5 2.5 0 0 0 2.6 3.6M17 6h2.5a2.5 2.5 0 0 1-2.6 3.6" {...IC} />, <path key="c" d="M12 14v3.5M8.5 20.5h7M9.5 17.5h5v3h-5z" {...IC} />],
   restart: [<path key="a" d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1" {...IC} />, <path key="b" d="M3.5 4.5v4.6h4.6" {...IC} />],
   users: [<circle key="a" cx="9" cy="8.5" r="3.2" {...IC} />, <path key="b" d="M3 19.5a6 6 0 0 1 12 0" {...IC} />, <path key="c" d="M15.6 5.6a3.2 3.2 0 0 1 0 5.8M18.2 19.5a6 6 0 0 0-2.6-5" {...IC} />],
   flag: [<path key="m" d="M6 21V4" {...IC} />, <path key="f" d="M6 4.5h11.5l-2.4 4 2.4 4H6" {...IC} />],

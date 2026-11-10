@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.10-10 (10.11.2026 07:51)
+- Jass-Auswahl ohne «Neue Partie starten»
+
 ## 2026.11.10-9 (10.11.2026 07:46)
 - Spiellisten: Icons und Namen wieder in der früheren Grösse
 

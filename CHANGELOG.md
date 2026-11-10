@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.10-23 (10.11.2026 22:37)
+- Noir: Lösch-Einträge in den Einstellungen rot
+
 ## 2026.11.10-22 (10.11.2026 22:29)
 - Tutto: wieder jede Punktzahl eingeben
 

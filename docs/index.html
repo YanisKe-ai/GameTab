@@ -72795,7 +72795,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.10-22";
+var APP_BUILD = "2026.11.10-23";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -73264,10 +73264,10 @@ function SettingsPage({ onBack, backLabel, onReplayTour, lang, setLang, theme, s
 	const onFill = L ? "#FFFFFF" : N ? "#0A0A0A" : tk.gold;
 	const selBg = L ? "#1A1D20" : N ? tk.gold : `${tk.gold}2E`;
 	const track = tk.pageBg2;
-	const dangerInk = N ? tk.ink : L ? "#B3141D" : "#FF8A8A";
-	const dangerSoft = N ? tk.muted : L ? "#B3141D" : "#E39A9F";
-	const dangerFill = N ? tk.ink : "#D6202A";
-	const dangerOn = N ? "#0A0A0A" : "#FFFFFF";
+	const dangerInk = L ? "#B3141D" : "#FF8A8A";
+	const dangerSoft = L ? "#B3141D" : "#E39A9F";
+	const dangerFill = "#D6202A";
+	const dangerOn = "#FFFFFF";
 	const chev = (open) => /* @__PURE__ */ import_react.default.createElement("svg", {
 		width: "16",
 		height: "16",
@@ -117313,7 +117313,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.10-22");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.10-23");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -120021,7 +120021,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.10-22" && !upd) {
+		if (seen && seen !== "2026.11.10-23" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -120030,7 +120030,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.10-22" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.10-23" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

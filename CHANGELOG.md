@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.10-22 (10.11.2026 22:29)
+- Tutto: wieder jede Punktzahl eingeben
+
 ## 2026.11.10-21 (10.11.2026 22:13)
 - Einrichtung ohne unnötiges Scrollen, Startknopf überall gleiche Schrift, grössere Touchziele, Rommé fragt bei 0 Karten nach, Tabu und HeadsUp besser lesbar
 

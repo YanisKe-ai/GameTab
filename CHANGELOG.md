@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.10-17 (10.11.2026 20:21)
+- Varianten-Seiten Jass und Darts mit grossem Schriftzug
+
 ## 2026.11.10-16 (10.11.2026 19:57)
 - Fehler behoben: Kopf hat beim Scrollen wieder seinen Hintergrund
 

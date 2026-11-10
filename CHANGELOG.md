@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.10-11 (10.11.2026 08:02)
+- Listen: Namen etwas grösser und nicht fett, Jass und Darts als Favorit wählbar, Varianten schlicht unter dem Namen
+
 ## 2026.11.10-10 (10.11.2026 07:51)
 - Jass-Auswahl ohne «Neue Partie starten»
 

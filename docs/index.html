@@ -23339,12 +23339,21 @@ function GameCard({ title, description, status, accent, onClick, disabled, logo,
 	}, /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-gamecard-title",
 		style: {
-			fontSize: 20,
-			fontWeight: isNeon ? 700 : 600,
+			fontSize: 23,
+			fontWeight: 400,
 			color: tk.ink,
-			fontFamily: "'Baloo 2', sans-serif"
+			fontFamily: "'Baloo 2', sans-serif",
+			lineHeight: 1.15
 		}
-	}, title), status && /* @__PURE__ */ import_react.default.createElement("div", {
+	}, title), variants && !status && /* @__PURE__ */ import_react.default.createElement("div", {
+		className: "gtL-gamecard-var",
+		style: {
+			fontSize: 12,
+			color: tk.muted,
+			marginTop: 1,
+			fontFamily: "'Inter', sans-serif"
+		}
+	}, t ? t("gtVariantsN")(variants) : variants), status && /* @__PURE__ */ import_react.default.createElement("div", {
 		className: "gtL-gamecard-status",
 		style: {
 			display: "flex",
@@ -23382,24 +23391,7 @@ function GameCard({ title, description, status, accent, onClick, disabled, logo,
 		fontSize: 18,
 		flexShrink: 0
 	} }, "›"));
-	const vb = variants ? /* @__PURE__ */ import_react.default.createElement("span", {
-		"aria-hidden": "true",
-		style: {
-			position: "absolute",
-			top: 8,
-			right: 14,
-			padding: "2px 8px",
-			borderRadius: 999,
-			background: `${accent}26`,
-			border: `1px solid ${accent}66`,
-			color: tk.ink,
-			fontSize: 10.5,
-			fontWeight: 700,
-			letterSpacing: "0.04em",
-			pointerEvents: "none",
-			fontFamily: "'Inter', sans-serif"
-		}
-	}, t ? t("gtVariantsN")(variants) : variants) : null;
+	const vb = null;
 	const ord = fav && fav.on ? -1 : void 0;
 	return fav || vb ? /* @__PURE__ */ import_react.default.createElement("div", { style: {
 		position: "relative",
@@ -72240,6 +72232,7 @@ function CategoryScorepads({ favorites, onToggleFavorite, onSelect, onBack, lang
 		tokens: tk,
 		theme,
 		title: t("gameJass"),
+		fav: fv("jass-select"),
 		variants: 2,
 		t,
 		description: t("jassDesc"),
@@ -72279,6 +72272,7 @@ function CategoryScorepads({ favorites, onToggleFavorite, onSelect, onBack, lang
 		tokens: tk,
 		theme,
 		title: t("gameDarts"),
+		fav: fv("darts-select"),
 		variants: 7,
 		t,
 		description: t("gameDartsDesc"),
@@ -72513,7 +72507,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.10-10";
+var APP_BUILD = "2026.11.10-11";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -116672,7 +116666,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.10-10");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.10-11");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -119369,7 +119363,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.10-10" && !upd) {
+		if (seen && seen !== "2026.11.10-11" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -119378,7 +119372,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.10-10" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.10-11" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.10-28 (10.11.2026 23:59)
+- Technik: keine Fehlermeldungen beim Öffnen der Spiele, Namensfelder im Freien Spiel beschriftet, Versionsanzeige besser lesbar
+
 ## 2026.11.10-27 (10.11.2026 23:44)
 - Zurückwischen ohne Sprung: vorige Seite bleibt an ihrer Scrollposition, Kopfzeile gleitet mit
 

@@ -1,6 +1,6 @@
 // Erzeugt von tools/split.mjs aus index.html. Inhalt zwischen den gt-body-Markern ist 1:1 Originalcode.
 /*@gt-body-begin*/const GLOBAL_STYLES=`
-.gtL-gamecard-logo{width:40px !important;min-width:40px !important;}.gtL-gamecard-logo svg{width:36px !important;height:36px !important;}.gtL-gamecard{gap:18px !important;}.gtL-gamecard-title{font-size:26px !important;font-weight:800 !important;line-height:1.05;}
+.gtL-gamecard-logo svg{width:40px !important;height:40px !important;}
 
 :root { --gt-focus: #F2D48F; }
 html[data-gt-theme="light"] { --gt-focus: #1B4FA0; }

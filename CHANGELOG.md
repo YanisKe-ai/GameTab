@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.10-9 (10.11.2026 07:46)
+- Spiellisten: Icons und Namen wieder in der früheren Grösse
+
 ## 2026.11.10-8 (10.11.2026 00:53)
 - Einrichtungsseiten: grosser Schriftzug pro Spiel in eigener Schrift, Farbschimmer oben entfernt
 

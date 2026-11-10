@@ -386,14 +386,21 @@ def t_phase10(pg, env):
         finish(pg, "Phase 10", env, True)
 
 
+def rm_fill(pg):
+    """Je Kartenart hoechstens 8 (Joker 6): erste 8 Arten reichen sicher fuer 500."""
+    for i in range(8):
+        for _ in range(8):
+            click(pg, pg.locator(".rm-c").nth(i), 30)
+
+
 @test("Rommé")
 def t_romme(pg, env):
     open_game(pg, "Schreibunterlagen", "Rommé"); press_start(pg)
-    click(pg, pg.locator(".rm-tile", has_text="Spieler 1").first, 300)
-    click(pg, pg.locator(".rm-save").first, 500)
-    for _ in range(30):
-        click(pg, pg.locator(".rm-c").first, 40)
-    click(pg, pg.locator(".rm-save").first, 900)
+    for _ in range(2):
+        click(pg, pg.locator(".rm-tile", has_text="Spieler 1").first, 300)
+        click(pg, pg.locator(".rm-save").first, 500)
+        rm_fill(pg)
+        click(pg, pg.locator(".rm-save").first, 900)
     expect_text(pg, r"Spieler 1 gewinnt", "Rommé: Sieger nicht angezeigt")
     finish(pg, "Rommé", env, True)
 
@@ -841,12 +848,12 @@ def t_headsup3(pg, env):
 @test("Grenzfall Podium Gleichstand Rommé (Platz 2 und 2)", matrix=False)
 def t_romme_tie(pg, env):
     open_game(pg, "Schreibunterlagen", "Rommé"); set_players(pg, 3); press_start(pg)
-    click(pg, pg.locator(".rm-tile", has_text="Spieler 1").first, 300)
-    click(pg, pg.locator(".rm-save").first, 500)
     for _ in range(2):
-        for _ in range(30):
-            click(pg, pg.locator(".rm-c").first, 40)
-        click(pg, pg.locator(".rm-save").first, 600)
+        click(pg, pg.locator(".rm-tile", has_text="Spieler 1").first, 300)
+        click(pg, pg.locator(".rm-save").first, 500)
+        for _ in range(2):
+            rm_fill(pg)
+            click(pg, pg.locator(".rm-save").first, 600)
     wait(pg, 900)
     check(podium_ranks(pg) == ["1", "2", "2"], f"Podest zeigt {podium_ranks(pg)} statt ['1','2','2']")
     podium_and_share(pg, "Romme Gleichstand")

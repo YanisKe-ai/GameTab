@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.10-18 (10.11.2026 21:08)
+- Sicherheit: sofort speichern, Darts Spieler ändern mit Rückfrage, Grenzen für unmögliche Werte, Neues Spiel statt Neue Runde, ehrliche Siegquote, Noir-Schriftzüge grau
+
 ## 2026.11.10-17 (10.11.2026 20:21)
 - Varianten-Seiten Jass und Darts mit grossem Schriftzug
 

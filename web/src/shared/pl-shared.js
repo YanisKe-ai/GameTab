@@ -11,6 +11,9 @@ const PL_SHARED_CSS = `
 [data-phone-landscape] .gt-gamehead > div:nth-of-type(n+2):not(.gt-headbtns) { flex: 1 1 auto; min-width: 0; order: 1; }
 [data-phone-landscape] .gt-gamehead > .gt-headbtns { position: static !important; order: 2; flex: none; margin-left: auto; }
 [data-phone-landscape] .gt-gamehead > .gt-headbtns ~ .gt-headbtns { margin-left: 0; }
+/* Knoepfe (Hell/Menue) sind absolut mit right:-4px: im vollbreiten Querformat ragen sie 4 px ueber den Rand. */
+[data-phone-landscape] .gt-headbtns { right: 0 !important; }
+[data-phone-landscape] .pl-page > .gt-headbtns { right: var(--pl-gutter-r, 14px) !important; }
 [data-phone-landscape] .gt-gamehead h1 { font-size: 20px !important; line-height: 1.1 !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; overflow-wrap: normal !important; }
 [data-phone-landscape] .gt-gamehead h1 + div { margin-top: 1px !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 

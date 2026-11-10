@@ -76,6 +76,9 @@ const MG_LAND_CSS = `
 [data-phone-landscape] .mg-side > .gtL-e-only:first-child { display: block; }
 [data-phone-landscape] .mg-side > .gtL-e-only:first-child > section { margin-top: 0 !important; }
 [data-phone-landscape] .mg-land .mgPhoneOnly { display: none !important; }
+[data-phone-landscape] .mg-land .mgBoard { display: flex; flex-direction: row; align-items: center; gap: 10px; margin-bottom: 8px !important; padding-right: 4px !important; }
+[data-phone-landscape] .mg-land .mgBoard > div:nth-of-type(1) { flex: none; }
+[data-phone-landscape] .mg-land .mgBoard > div:nth-of-type(2) { flex: 1 1 auto; min-width: 0; margin-top: 0 !important; }
 [data-phone-landscape] .mg-land .mgBar { grid-column: 2; grid-row: 4; position: static !important; margin: 8px 0 0 !important; padding: 0 !important; background: transparent !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; border: 0 !important; border-radius: 0 !important; box-shadow: none !important; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
 [data-phone-landscape] .mg-land .mgBar #mg-status { flex: 1 0 100%; margin: 0 !important; justify-content: flex-start !important; text-align: left !important; font-size: 13px !important; line-height: 1.3 !important; }
 [data-phone-landscape] .mg-land .mgBar [data-mg-main] { width: auto !important; flex: 1 1 140px; min-height: 44px !important; height: 44px !important; font-size: 17px !important; }

@@ -90,6 +90,23 @@ const ROM_CSS=`
 @media (max-width:360px){.rm-grid{gap:4px}.rm-c{font-size:17px}}
 .gtL-content .rm-seg{display:none}
 @media (prefers-reduced-motion: reduce){.rm-hc{animation:none}}
+[data-phone-landscape] .gt-ug.gt-u-col>.gt-headbtns+.gt-gamehead{margin-top:0}
+[data-phone-landscape] .rm-flow{column-gap:14px;align-items:start}
+[data-phone-landscape] .rm-flow:has(>.rm-strip){grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"seg grid" "strip grid" "who grid" "hand foot"}
+[data-phone-landscape] .rm-flow:has(>.rm-strip)>.rm-seg{grid-area:seg}
+[data-phone-landscape] .rm-flow:has(>.rm-strip)>.rm-strip{grid-area:strip}
+[data-phone-landscape] .rm-flow:has(>.rm-strip)>.rm-who{grid-area:who}
+[data-phone-landscape] .rm-flow:has(>.rm-strip)>.rm-handrow{grid-area:hand}
+[data-phone-landscape] .rm-flow:has(>.rm-strip)>div:not([class]){grid-area:grid}
+[data-phone-landscape] .rm-flow:has(>.rm-strip)>.rm-foot{grid-area:foot;align-self:end}
+[data-phone-landscape] .rm-flow:has(>.rm-tiles){grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"seg tiles" "q tiles" "hand tiles" "foot foot"}
+[data-phone-landscape] .rm-flow:has(>.rm-tiles)>.rm-seg{grid-area:seg}
+[data-phone-landscape] .rm-flow:has(>.rm-tiles)>div:not([class]){grid-area:q}
+[data-phone-landscape] .rm-flow:has(>.rm-tiles)>.rm-tiles{grid-area:tiles}
+[data-phone-landscape] .rm-flow:has(>.rm-tiles)>.rm-hand{grid-area:hand}
+[data-phone-landscape] .rm-flow:has(>.rm-tiles)>.rm-foot{grid-area:foot}
+[data-phone-landscape] .rm-c{height:44px}
+[data-phone-landscape] .rm-hc{width:32px;height:44px}
 `;
 function romVars(tk,theme){return{"--r-card":tk.card,"--r-bg":tk.bg,"--r-ink":tk.ink,"--r-muted":tk.muted,"--r-line":theme==="light"?"rgba(24,22,32,0.14)":tk.border,"--r-acc":tk.teal,"--r-on":tk.onAccent,"--r-face":theme==="noir"?"#EDEDED":"#FFF6EE"};}
 function romCol(c,i,theme){if(theme==="noir")return"#1E1E1E";if(c==="J")return"#7A3FB0";return i%2?"#C8102E":"#1B1B24";}

@@ -7852,7 +7852,7 @@ var TRANSLATIONS = {
 			"Die Kategorie 'Pikant' bringt etwas frechere Aussagen mit sich, am besten mit Leuten spielen, die sich gut kennen.",
 			"Das Dorf gewinnt beim Werwolf erst, wenn wirklich alle Werwölfe enttarnt sind, die Wölfe siegen schon, sobald sie zahlenmässig gleichauf sind."
 		],
-		removeFromContinue: "Von Weiterspielen entfernen",
+		removeFromContinue: "Karte ausblenden (Partie bleibt gespeichert)",
 		settingsTitle: "Einstellungen",
 		languageLabel: "Sprache",
 		appearanceLabel: "Erscheinungsbild",
@@ -8507,7 +8507,7 @@ var TRANSLATIONS = {
 		st2FairNote: "Faire Quote: Wer wenig gespielt hat, startet nahe 50 %. Ein Gleichstand zählt als geteilter Sieg.",
 		st2Highlights: "Auffälliges",
 		st2YearTitle: "Dein Jahr {y}",
-		st2YearText: "{m} Partien in {n} Karten. Zum Durchtippen und Teilen.",
+		st2YearText: "{m} {m:Partie|Partien} in {n} {n:Karte|Karten}. Zum Durchtippen und Teilen.",
 		st2People: "Personen",
 		st2PeopleSub: "{n} {n:Person|Personen}, antippen für das Profil",
 		st2SearchPh: "Person suchen",
@@ -8705,6 +8705,7 @@ var TRANSLATIONS = {
 		statsResetButton: "Alle Ergebnisse löschen",
 		statsResetDone: "Statistiken gelöscht",
 		statsResetHint: "Löscht alle gespeicherten Partien-Ergebnisse unwiderruflich. Gruppen bleiben erhalten.",
+		statsResetConfirm: "Statistik ganz löschen? Nochmal tippen",
 		endAllLabel: "Laufende Spiele beenden",
 		endAllHint: "Beendet alle laufenden Partien ohne Wertung. Gruppen, Ergebnisse und Statistik bleiben.",
 		endAllButton: "Alle laufenden Spiele beenden",
@@ -9056,7 +9057,7 @@ var TRANSLATIONS = {
 		diebMustTakeWolf: "Beide Ersatzkarten sind Werwölfe: du musst eine davon nehmen.",
 		captainSuccessorHint: "Mit dem letzten Atemzug bestimmt der Hauptmann, wer sein Amt übernimmt.",
 		rulesWerewolfClassic: "Nachts wählen die Werwölfe heimlich ein Opfer, Sonderrollen wie Seherin oder Hexe greifen ebenfalls in der Nacht ein. Tagsüber diskutiert das Dorf offen und verbannt eine Person per Abstimmung. Das Dorf gewinnt, wenn alle Werwölfe tot sind; die Werwölfe gewinnen, wenn kein Dorfbewohner mehr lebt. Bleibt nur ein Liebespaar aus Werwolf und Dorfbewohner übrig, gewinnt das Paar.",
-		wolvesInstructionOne: (name) => `Wecke ${name}. Er wählt per Handzeichen ein Opfer.`,
+		wolvesInstructionOne: (name) => `Wecke ${name}. ${name} wählt per Handzeichen ein Opfer.`,
 		captainDied: (name) => `Hauptmann ${name} ist tot`,
 		werewolvesWin: "Die Werwölfe siegen!",
 		gameLeaderLabel: "Spielleiter",
@@ -9075,7 +9076,7 @@ var TRANSLATIONS = {
 		skipWord: "Weiter",
 		correctWord: "Richtig",
 		timeUp: "Zeit abgelaufen!",
-		teamsRound: (name) => `${name}s Runde`,
+		teamsRound: (name) => `${name} ist dran`,
 		tabooOpponentGets: (n) => `Tabu (Gegner +${n})`,
 		winnerWins: (name) => `${name} gewinnt!`,
 		changeTeams: "Teams ändern",
@@ -9289,7 +9290,7 @@ var TRANSLATIONS = {
 		roleMayor: "Bürgermeister",
 		roleMayorDesc: "Seine Stimme zählt bei der Abstimmung doppelt.",
 		mafiaWakes: "Die Mafia wacht auf",
-		mafiaKillInstruction: (names) => `${names} einigen sich leise auf ein Opfer.`,
+		mafiaKillInstruction: (names) => `Die Mafia (${names}) einigt sich leise auf ein Opfer.`,
 		detectiveWakes: "Der Ermittler wacht auf",
 		whoseAllegianceToSee: "Wessen Zugehörigkeit möchtest du prüfen?",
 		detectiveResultMafia: "Mafia",
@@ -9555,7 +9556,7 @@ var TRANSLATIONS = {
 			"The 'Spicy' category brings cheekier statements, best played with people who know each other well.",
 			"The village only wins in Werewolf once every werewolf is found, the wolves win as soon as they're equal in number."
 		],
-		removeFromContinue: "Remove from Continue",
+		removeFromContinue: "Hide card (match stays saved)",
 		settingsTitle: "Settings",
 		languageLabel: "Language",
 		appearanceLabel: "Appearance",
@@ -10210,7 +10211,7 @@ var TRANSLATIONS = {
 		st2FairNote: "Fair rate: anyone with few games starts close to 50 %. A tie counts as a shared win.",
 		st2Highlights: "Highlights",
 		st2YearTitle: "Your {y}",
-		st2YearText: "{m} games in {n} cards. Tap through and share.",
+		st2YearText: "{m} {m:game|games} in {n} {n:card|cards}. Tap through and share.",
 		st2People: "People",
 		st2PeopleSub: "{n} {n:person|people}, tap for the profile",
 		st2SearchPh: "Search person",
@@ -10408,6 +10409,7 @@ var TRANSLATIONS = {
 		statsResetButton: "Delete all results",
 		statsResetDone: "Statistics deleted",
 		statsResetHint: "Permanently deletes all recorded match results. Groups stay intact.",
+		statsResetConfirm: "Delete all statistics? Tap again",
 		endAllLabel: "End games in progress",
 		endAllHint: "Ends all games in progress without scoring. Groups, results and statistics stay.",
 		endAllButton: "End all games in progress",
@@ -10992,7 +10994,7 @@ var TRANSLATIONS = {
 		roleMayor: "Mayor",
 		roleMayorDesc: "Their vote counts double during the town vote.",
 		mafiaWakes: "The Mafia wakes up",
-		mafiaKillInstruction: (names) => `${names} quietly agree on a victim.`,
+		mafiaKillInstruction: (names) => `The Mafia (${names}) quietly agrees on a victim.`,
 		detectiveWakes: "The Detective wakes up",
 		whoseAllegianceToSee: "Whose allegiance do you want to check?",
 		detectiveResultMafia: "Mafia",
@@ -11258,7 +11260,7 @@ var TRANSLATIONS = {
 			"La catégorie 'Pimenté' propose des affirmations un peu plus osées, à réserver aux groupes qui se connaissent bien.",
 			"Le village ne gagne au Loup-Garou que lorsque tous les loups sont démasqués, les loups gagnent dès qu'ils sont à égalité en nombre."
 		],
-		removeFromContinue: "Retirer de Reprendre",
+		removeFromContinue: "Masquer la carte (la partie reste enregistrée)",
 		settingsTitle: "Réglages",
 		languageLabel: "Langue",
 		appearanceLabel: "Apparence",
@@ -11913,7 +11915,7 @@ var TRANSLATIONS = {
 		st2FairNote: "Taux équitable : avec peu de parties, on part près de 50 %. Une égalité compte comme victoire partagée.",
 		st2Highlights: "À retenir",
 		st2YearTitle: "Ton année {y}",
-		st2YearText: "{m} parties en {n} cartes. À parcourir et partager.",
+		st2YearText: "{m} {m:partie|parties} en {n} {n:carte|cartes}. À parcourir et partager.",
 		st2People: "Personnes",
 		st2PeopleSub: "{n} {n:personne|personnes}, touche pour le profil",
 		st2SearchPh: "Chercher une personne",
@@ -12111,6 +12113,7 @@ var TRANSLATIONS = {
 		statsResetButton: "Supprimer tous les résultats",
 		statsResetDone: "Statistiques supprimées",
 		statsResetHint: "Supprime définitivement tous les résultats de parties enregistrés. Les groupes restent conservés.",
+		statsResetConfirm: "Effacer toutes les statistiques ? Touche encore",
 		endAllLabel: "Terminer les parties en cours",
 		endAllHint: "Termine toutes les parties en cours sans les compter. Les groupes, résultats et statistiques restent.",
 		endAllButton: "Terminer toutes les parties en cours",
@@ -12462,7 +12465,7 @@ var TRANSLATIONS = {
 		diebMustTakeWolf: "Les deux cartes de réserve sont des loups-garous : tu dois en prendre une.",
 		captainSuccessorHint: "Dans son dernier souffle, le Capitaine désigne qui reprend sa charge.",
 		rulesWerewolfClassic: "La nuit, les loups-garous choisissent secrètement une victime, et les rôles spéciaux comme la Voyante ou la Sorcière agissent aussi. Le jour, le village discute ouvertement et bannit quelqu'un par vote. Le village gagne quand tous les loups-garous sont morts ; les loups-garous gagnent quand plus aucun villageois n'est en vie. S'il ne reste qu'un couple d'amoureux formé d'un loup-garou et d'un villageois, le couple gagne.",
-		wolvesInstructionOne: (name) => `Réveille ${name}. Il désigne une victime du doigt.`,
+		wolvesInstructionOne: (name) => `Réveille ${name}. ${name} désigne une victime du doigt.`,
 		captainDied: (name) => `Le Capitaine ${name} est mort`,
 		werewolvesWin: "Les loups-garous triomphent !",
 		gameLeaderLabel: "Narrateur",
@@ -12695,7 +12698,7 @@ var TRANSLATIONS = {
 		roleMayor: "Maire",
 		roleMayorDesc: "Son vote compte double lors du vote de la ville.",
 		mafiaWakes: "La Mafia se réveille",
-		mafiaKillInstruction: (names) => `${names} s'accordent silencieusement sur une victime.`,
+		mafiaKillInstruction: (names) => `La mafia (${names}) choisit en silence une victime.`,
 		detectiveWakes: "Le détective se réveille",
 		whoseAllegianceToSee: "L'allégeance de qui veux-tu vérifier ?",
 		detectiveResultMafia: "Mafia",
@@ -12961,7 +12964,7 @@ var TRANSLATIONS = {
 			"La categoria 'Piccante' porta con sé affermazioni un po' più audaci, meglio giocarla con persone che si conoscono bene.",
 			"Il villaggio vince al Lupo Mannaro solo quando tutti i lupi sono stati smascherati, i lupi vincono già quando sono pari o in maggioranza numerica."
 		],
-		removeFromContinue: "Rimuovi da \"Continua\"",
+		removeFromContinue: "Nascondi scheda (la partita resta salvata)",
 		settingsTitle: "Impostazioni",
 		languageLabel: "Lingua",
 		appearanceLabel: "Aspetto",
@@ -13616,7 +13619,7 @@ var TRANSLATIONS = {
 		st2FairNote: "Quota equa: con poche partite si parte vicino al 50 %. Un pareggio conta come vittoria condivisa.",
 		st2Highlights: "In evidenza",
 		st2YearTitle: "Il tuo {y}",
-		st2YearText: "{m} partite in {n} carte. Da sfogliare e condividere.",
+		st2YearText: "{m} {m:partita|partite} in {n} {n:carta|carte}. Da sfogliare e condividere.",
 		st2People: "Persone",
 		st2PeopleSub: "{n} {n:persona|persone}, tocca per il profilo",
 		st2SearchPh: "Cerca persona",
@@ -13814,6 +13817,7 @@ var TRANSLATIONS = {
 		statsResetButton: "Elimina tutti i risultati",
 		statsResetDone: "Statistiche eliminate",
 		statsResetHint: "Elimina definitivamente tutti i risultati delle partite registrati. I gruppi restano invariati.",
+		statsResetConfirm: "Eliminare tutte le statistiche? Tocca di nuovo",
 		endAllLabel: "Termina le partite in corso",
 		endAllHint: "Termina tutte le partite in corso senza conteggio. Gruppi, risultati e statistiche restano.",
 		endAllButton: "Termina tutte le partite in corso",
@@ -14398,7 +14402,7 @@ var TRANSLATIONS = {
 		roleMayor: "Sindaco",
 		roleMayorDesc: "Il suo voto conta doppio durante la votazione cittadina.",
 		mafiaWakes: "La Mafia si sveglia",
-		mafiaKillInstruction: (names) => `${names} si accordano in silenzio su una vittima.`,
+		mafiaKillInstruction: (names) => `La mafia (${names}) sceglie in silenzio una vittima.`,
 		detectiveWakes: "Il detective si sveglia",
 		whoseAllegianceToSee: "Di chi vuoi controllare l'affiliazione?",
 		detectiveResultMafia: "Mafia",
@@ -14664,7 +14668,7 @@ var TRANSLATIONS = {
 			"La categoría 'Picante' trae afirmaciones algo más atrevidas, mejor jugarla con gente que se conoce bien.",
 			"El pueblo gana en Hombre Lobo solo cuando todos los lobos han sido descubiertos, los lobos ganan en cuanto están en igualdad numérica o son mayoría."
 		],
-		removeFromContinue: "Quitar de \"Seguir jugando\"",
+		removeFromContinue: "Ocultar tarjeta (la partida sigue guardada)",
 		settingsTitle: "Ajustes",
 		languageLabel: "Idioma",
 		appearanceLabel: "Apariencia",
@@ -15319,7 +15323,7 @@ var TRANSLATIONS = {
 		st2FairNote: "Cuota justa: con pocas partidas se empieza cerca del 50 %. Un empate cuenta como victoria compartida.",
 		st2Highlights: "Destacado",
 		st2YearTitle: "Tu {y}",
-		st2YearText: "{m} partidas en {n} tarjetas. Para recorrer y compartir.",
+		st2YearText: "{m} {m:partida|partidas} en {n} {n:tarjeta|tarjetas}. Para recorrer y compartir.",
 		st2People: "Personas",
 		st2PeopleSub: "{n} {n:persona|personas}, toca para ver el perfil",
 		st2SearchPh: "Buscar persona",
@@ -15517,6 +15521,7 @@ var TRANSLATIONS = {
 		statsResetButton: "Borrar todos los resultados",
 		statsResetDone: "Estadísticas borradas",
 		statsResetHint: "Elimina permanentemente todos los resultados de partidas guardados. Los grupos se mantienen.",
+		statsResetConfirm: "¿Borrar todas las estadísticas? Toca otra vez",
 		endAllLabel: "Terminar partidas en curso",
 		endAllHint: "Termina todas las partidas en curso sin puntuar. Los grupos, resultados y estadísticas se mantienen.",
 		endAllButton: "Terminar todas las partidas en curso",
@@ -16101,7 +16106,7 @@ var TRANSLATIONS = {
 		roleMayor: "Alcalde",
 		roleMayorDesc: "Su voto cuenta doble en la votación de la ciudad.",
 		mafiaWakes: "La Mafia se despierta",
-		mafiaKillInstruction: (names) => `${names} se ponen de acuerdo en silencio sobre una víctima.`,
+		mafiaKillInstruction: (names) => `La mafia (${names}) elige en silencio a una víctima.`,
 		detectiveWakes: "El detective se despierta",
 		whoseAllegianceToSee: "¿De quién quieres comprobar la lealtad?",
 		detectiveResultMafia: "Mafia",
@@ -16367,7 +16372,7 @@ var TRANSLATIONS = {
 			"A categoria 'Picante' traz afirmações um pouco mais ousadas, melhor jogar com pessoas que se conhecem bem.",
 			"A aldeia só ganha no Lobisomem quando todos os lobos forem descobertos, os lobos ganham assim que estiverem em igualdade numérica ou em maioria."
 		],
-		removeFromContinue: "Remover de \"Continuar\"",
+		removeFromContinue: "Ocultar cartão (a partida fica guardada)",
 		settingsTitle: "Definições",
 		languageLabel: "Idioma",
 		appearanceLabel: "Aparência",
@@ -17022,7 +17027,7 @@ var TRANSLATIONS = {
 		st2FairNote: "Taxa justa: com poucas partidas começa-se perto de 50 %. Um empate conta como vitória partilhada.",
 		st2Highlights: "Destaques",
 		st2YearTitle: "O teu {y}",
-		st2YearText: "{m} partidas em {n} cartões. Para percorrer e partilhar.",
+		st2YearText: "{m} {m:partida|partidas} em {n} {n:cartão|cartões}. Para percorrer e partilhar.",
 		st2People: "Pessoas",
 		st2PeopleSub: "{n} {n:pessoa|pessoas}, toca para ver o perfil",
 		st2SearchPh: "Procurar pessoa",
@@ -17220,6 +17225,7 @@ var TRANSLATIONS = {
 		statsResetButton: "Apagar todos os resultados",
 		statsResetDone: "Estatísticas apagadas",
 		statsResetHint: "Apaga permanentemente todos os resultados de partidas guardados. Os grupos mantêm-se.",
+		statsResetConfirm: "Apagar todas as estatísticas? Toca de novo",
 		endAllLabel: "Terminar jogos em curso",
 		endAllHint: "Termina todos os jogos em curso sem pontuar. Os grupos, resultados e estatísticas mantêm-se.",
 		endAllButton: "Terminar todos os jogos em curso",
@@ -17804,7 +17810,7 @@ var TRANSLATIONS = {
 		roleMayor: "Presidente da Câmara",
 		roleMayorDesc: "O seu voto conta a dobrar na votação da cidade.",
 		mafiaWakes: "A Mafia acorda",
-		mafiaKillInstruction: (names) => `${names} combinam silenciosamente uma vítima.`,
+		mafiaKillInstruction: (names) => `A máfia (${names}) escolhe em silêncio uma vítima.`,
 		detectiveWakes: "O detetive acorda",
 		whoseAllegianceToSee: "De quem queres verificar a lealdade?",
 		detectiveResultMafia: "Mafia",
@@ -19324,7 +19330,10 @@ html[data-gt-theme="noir"] { --gt-focus: #FFFFFF; }
 .gtL-content .gtL-split:has(> .gtL-col-side2) > .gtL-col-main { grid-column: 1; grid-row: 1 / span 2; }
 .gtL-content .gtL-split:has(> .gtL-col-side2) > .gtL-col-side { grid-column: 2; grid-row: 1; position: static; }
 .gtL-content .gtL-split.gtL-e-fit { grid-template-columns: minmax(0, max-content) minmax(320px, 420px); justify-content: center; }
-.gtL-content .gtL-e-board { max-width: min(460px, calc(100dvh - 330px)) !important; }
+.gtL-content .gtL-e-board { max-width: min(460px, max(280px, calc(100dvh - 505px))) !important; }
+@media (min-width: 1400px) and (min-height: 880px) {
+  .gtL-content .gtL-e-board { max-width: min(460px, max(280px, calc(100dvh - 590px))) !important; }
+}
 @container gtl (max-width: 759px) {
   .gtL-content .gtL-split:has(> .gtL-col-side2) > * { grid-column: 1 !important; grid-row: auto !important; }
 }
@@ -23146,6 +23155,9 @@ var PL_SHARED_CSS = `
 [data-phone-landscape] .gt-gamehead > div:nth-of-type(n+2):not(.gt-headbtns) { flex: 1 1 auto; min-width: 0; order: 1; }
 [data-phone-landscape] .gt-gamehead > .gt-headbtns { position: static !important; order: 2; flex: none; margin-left: auto; }
 [data-phone-landscape] .gt-gamehead > .gt-headbtns ~ .gt-headbtns { margin-left: 0; }
+/* Knoepfe (Hell/Menue) sind absolut mit right:-4px: im vollbreiten Querformat ragen sie 4 px ueber den Rand. */
+[data-phone-landscape] .gt-headbtns { right: 0 !important; }
+[data-phone-landscape] .pl-page > .gt-headbtns { right: var(--pl-gutter-r, 14px) !important; }
 [data-phone-landscape] .gt-gamehead h1 { font-size: 20px !important; line-height: 1.1 !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; overflow-wrap: normal !important; }
 [data-phone-landscape] .gt-gamehead h1 + div { margin-top: 1px !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
@@ -24003,7 +24015,7 @@ function gtSkinTk(tk, s) {
 		gold: s.txt
 	};
 }
-var GT_SU_CSS = ".gt-su-label{font:700 12px/1.2 'Inter',sans-serif;letter-spacing:.07em;text-transform:uppercase;margin:6px 2px 10px}.gt-su-row{display:flex;align-items:center;gap:2px;min-height:56px;border-radius:16px;padding:4px 4px 4px 12px;transition:border-color .2s ease}.gt-su-row:focus-within{border-color:var(--gt-su-acc)!important}.gt-su-num{width:28px;height:28px;border-radius:50%;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;font:800 13px/1 'Inter',sans-serif;font-variant-numeric:tabular-nums;margin-right:8px}.gt-su-row input{flex:1;min-width:0;min-height:44px;border:none;outline:none;background:transparent;font:500 16px 'Inter',sans-serif;padding:0;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}.gt-su-ib{width:44px;height:44px;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;border:none;background:transparent;border-radius:12px;padding:0;cursor:pointer;transition:transform .12s ease,opacity .2s}.gt-su-ib:disabled{opacity:.25;cursor:default}.gt-su-ib:active:not(:disabled){transform:scale(.9)}.gt-su-ib:focus-visible,.gt-su-add:focus-visible,.gt-su-chip:focus-visible{outline:2px solid var(--gt-su-acc);outline-offset:2px}.gt-su-add{width:100%;min-height:48px;margin-top:8px;border-radius:16px;background:transparent;display:flex;align-items:center;justify-content:center;gap:8px;font:600 14px 'Inter',sans-serif;cursor:pointer;transition:transform .12s ease}.gt-su-add:active:not(:disabled){transform:scale(.98)}.gt-su-add:disabled{opacity:.4;cursor:default}.gt-su-chips{display:flex;gap:8px;flex-wrap:wrap}.gt-su-chip{flex:1 1 0;min-width:64px;min-height:48px;padding:0 10px;border-radius:14px;font:700 15px 'Inter',sans-serif;font-variant-numeric:tabular-nums;cursor:pointer;transition:background-color .18s ease,color .18s ease,border-color .18s ease,transform .12s ease}.gt-su-chip:active{transform:scale(.96)}.gt-su-numin{width:100%;margin-top:8px;min-height:48px;border-radius:14px;padding:0 14px;font:600 17px 'Inter',sans-serif;font-variant-numeric:tabular-nums;outline:none;box-sizing:border-box}.gt-su-numin:focus{border-color:var(--gt-su-acc)!important}.gt-su-cta{position:sticky;bottom:0;z-index:6;margin:6px -12px 0;padding:26px 12px calc(14px + env(safe-area-inset-bottom, 0px));pointer-events:none}.gt-su-cta::before{content:'';position:absolute;inset:0;z-index:0;background:var(--gt-su-fade);-webkit-backdrop-filter:blur(var(--gt-su-blur));backdrop-filter:blur(var(--gt-su-blur));-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 42%);mask-image:linear-gradient(to bottom,transparent 0,#000 42%);pointer-events:none}.gt-su-cta>button{position:relative;z-index:1;pointer-events:auto;width:100%}.gtL-content .gt-su-cta{position:relative;margin:6px 0 0;padding:0}.gtL-content .gt-su-cta::before{display:none}.gt-su-btn{border:none;border-radius:18px;min-height:56px;padding:0 16px;font-size:17px;font-weight:800;letter-spacing:.005em;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:transform .16s cubic-bezier(.2,.8,.2,1),box-shadow .2s ease,filter .2s ease}.gt-su-btn:active:not(:disabled){transform:scale(.97)}.gt-su-btn:focus-visible{outline:3px solid var(--gt-su-acc);outline-offset:3px}.gt-su-btn:disabled{cursor:default}@media (hover:hover){.gt-su-btn:hover:not(:disabled){filter:brightness(1.06)}}@media (prefers-reduced-motion:reduce){.gt-su-btn,.gt-su-chip,.gt-su-ib,.gt-su-add{transition:none}}";
+var GT_SU_CSS = ".gt-su-label{font:700 12px/1.2 'Inter',sans-serif;letter-spacing:.07em;text-transform:uppercase;margin:6px 2px 10px}.gt-su-row{display:flex;align-items:center;gap:2px;min-height:56px;border-radius:16px;padding:4px 4px 4px 12px;transition:border-color .2s ease}.gt-su-row:focus-within{border-color:var(--gt-su-acc)!important}.gt-su-num{width:28px;height:28px;border-radius:50%;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;font:800 13px/1 'Inter',sans-serif;font-variant-numeric:tabular-nums;margin-right:8px}.gt-su-row input{flex:1;min-width:0;min-height:44px;border:none;outline:none;background:transparent;font:500 16px 'Inter',sans-serif;padding:0;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}.gt-su-ib{width:44px;height:44px;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;border:none;background:transparent;border-radius:12px;padding:0;cursor:pointer;transition:transform .12s ease,opacity .2s}.gt-su-ib:disabled{opacity:.25;cursor:default}.gt-su-ib:active:not(:disabled){transform:scale(.9)}.gt-su-ib:focus-visible,.gt-su-add:focus-visible,.gt-su-chip:focus-visible{outline:2px solid var(--gt-su-acc);outline-offset:2px}.gt-su-add{width:100%;min-height:48px;margin-top:8px;border-radius:16px;background:transparent;display:flex;align-items:center;justify-content:center;gap:8px;font:600 14px 'Inter',sans-serif;cursor:pointer;transition:transform .12s ease}.gt-su-add:active:not(:disabled){transform:scale(.98)}.gt-su-add:disabled{opacity:.4;cursor:default}.gt-su-chips{display:flex;gap:8px;flex-wrap:wrap}.gt-su-chip{flex:1 1 0;min-width:64px;min-height:48px;padding:0 10px;border-radius:14px;font:700 15px 'Inter',sans-serif;font-variant-numeric:tabular-nums;cursor:pointer;transition:background-color .18s ease,color .18s ease,border-color .18s ease,transform .12s ease}.gt-su-chip:active{transform:scale(.96)}.gt-su-numin{width:100%;margin-top:8px;min-height:48px;border-radius:14px;padding:0 14px;font:600 17px 'Inter',sans-serif;font-variant-numeric:tabular-nums;outline:none;box-sizing:border-box}.gt-su-numin:focus{border-color:var(--gt-su-acc)!important}.gt-su-cta{position:sticky;bottom:0;z-index:6;margin:6px -12px 0;padding:26px 12px calc(14px + env(safe-area-inset-bottom, 0px));pointer-events:none}.gt-su-cta::before{content:'';position:absolute;inset:0;z-index:0;background:var(--gt-su-fade);-webkit-backdrop-filter:blur(var(--gt-su-blur));backdrop-filter:blur(var(--gt-su-blur));-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 42%);mask-image:linear-gradient(to bottom,transparent 0,#000 42%);pointer-events:none}.gt-su-cta>button{position:relative;z-index:1;pointer-events:auto;width:100%}.gtL-content .gt-su-cta{position:sticky;bottom:12px;z-index:6;margin:6px 0 0;padding:14px 0 0}.gtL-content .gt-su-cta::before{left:-12px;right:-12px;bottom:-12px}.gt-su-btn{border:none;border-radius:18px;min-height:56px;padding:0 16px;font-size:17px;font-weight:800;letter-spacing:.005em;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:transform .16s cubic-bezier(.2,.8,.2,1),box-shadow .2s ease,filter .2s ease}.gt-su-btn:active:not(:disabled){transform:scale(.97)}.gt-su-btn:focus-visible{outline:3px solid var(--gt-su-acc);outline-offset:3px}.gt-su-btn:disabled{cursor:default}@media (hover:hover){.gt-su-btn:hover:not(:disabled){filter:brightness(1.06)}}@media (prefers-reduced-motion:reduce){.gt-su-btn,.gt-su-chip,.gt-su-ib,.gt-su-add{transition:none}}";
 function gtSuIco(d, sz) {
 	return /* @__PURE__ */ import_react.default.createElement("svg", {
 		width: sz || 18,
@@ -24835,6 +24847,7 @@ var P10_CSS = `
 .gtL-content .p10-seg{display:none}
 [data-phone-landscape] .p10-flow{grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:14px;grid-template-areas:"seg hand" "tie hand" "strip hand" "who hand" "done foot";align-items:start}
 [data-phone-landscape] .p10-stairs{display:none}
+[data-phone-landscape] .gt-ug.gt-u-col>.gt-headbtns+.gt-gamehead{margin-top:0}
 `;
 function p10Vars(tk, theme) {
 	return {
@@ -25765,6 +25778,23 @@ var ROM_CSS = `
 @media (max-width:360px){.rm-grid{gap:4px}.rm-c{font-size:17px}}
 .gtL-content .rm-seg{display:none}
 @media (prefers-reduced-motion: reduce){.rm-hc{animation:none}}
+[data-phone-landscape] .gt-ug.gt-u-col>.gt-headbtns+.gt-gamehead{margin-top:0}
+[data-phone-landscape] .rm-flow{column-gap:14px;align-items:start}
+[data-phone-landscape] .rm-flow:has(>.rm-strip){grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"seg grid" "strip grid" "who grid" "hand foot"}
+[data-phone-landscape] .rm-flow:has(>.rm-strip)>.rm-seg{grid-area:seg}
+[data-phone-landscape] .rm-flow:has(>.rm-strip)>.rm-strip{grid-area:strip}
+[data-phone-landscape] .rm-flow:has(>.rm-strip)>.rm-who{grid-area:who}
+[data-phone-landscape] .rm-flow:has(>.rm-strip)>.rm-handrow{grid-area:hand}
+[data-phone-landscape] .rm-flow:has(>.rm-strip)>div:not([class]){grid-area:grid}
+[data-phone-landscape] .rm-flow:has(>.rm-strip)>.rm-foot{grid-area:foot;align-self:end}
+[data-phone-landscape] .rm-flow:has(>.rm-tiles){grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"seg tiles" "q tiles" "hand tiles" "foot foot"}
+[data-phone-landscape] .rm-flow:has(>.rm-tiles)>.rm-seg{grid-area:seg}
+[data-phone-landscape] .rm-flow:has(>.rm-tiles)>div:not([class]){grid-area:q}
+[data-phone-landscape] .rm-flow:has(>.rm-tiles)>.rm-tiles{grid-area:tiles}
+[data-phone-landscape] .rm-flow:has(>.rm-tiles)>.rm-hand{grid-area:hand}
+[data-phone-landscape] .rm-flow:has(>.rm-tiles)>.rm-foot{grid-area:foot}
+[data-phone-landscape] .rm-c{height:44px}
+[data-phone-landscape] .rm-hc{width:32px;height:44px}
 `;
 function romVars(tk, theme) {
 	return {
@@ -42363,11 +42393,11 @@ function QuickResumeSection({ quickResume, onSelect, onDismissResume, tokens, t 
 		className: "gt-hb",
 		style: {
 			position: "absolute",
-			top: big ? "50%" : -6,
-			right: big ? 4 : -6,
+			top: big ? "50%" : -10,
+			right: big ? 4 : -10,
 			transform: big ? "translateY(-50%)" : void 0,
-			minWidth: big ? 44 : 36,
-			height: big ? 44 : 36,
+			minWidth: 44,
+			height: 44,
 			color: tokens.muted,
 			zIndex: 2
 		}
@@ -42787,7 +42817,7 @@ function GameSearchBox({ lang, theme, tokens, onSelect }) {
 	const _norm = (s) => String(s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
 	const q = _norm(query.trim());
 	const filtered = q === "" ? allGames : allGames.filter((g) => {
-		const searchText = _norm((g.label || t(g.labelKey)) + " " + (g.extraKeys || []).concat(GT_SEARCH_TAGS[g.view] || []).map((k) => {
+		const searchText = _norm((g.label || t(g.labelKey)) + " " + (g.alt || "") + " " + (g.extraKeys || []).concat(GT_SEARCH_TAGS[g.view] || []).map((k) => {
 			const v = t(k);
 			return typeof v === "string" ? v : "";
 		}).join(" "));
@@ -43106,6 +43136,7 @@ function buildAllGamesList(theme) {
 		{
 			view: "schieber",
 			labelKey: "gameSchieber",
+			alt: "Turnier Tournament Torneo Tournoi",
 			accent: showcaseAccent("schieber", "#2F6B52", theme),
 			Logo: SchieberLogo,
 			extraKeys: ["scorepadsTitle", "gameJass"]
@@ -43134,6 +43165,7 @@ function buildAllGamesList(theme) {
 		{
 			view: "darts",
 			labelKey: "gameDarts",
+			alt: "Standard 301 501 701",
 			accent: showcaseAccent("darts", "#C8102E", theme),
 			Logo: DartsLogo,
 			extraKeys: ["scorepadsTitle"]
@@ -43141,6 +43173,7 @@ function buildAllGamesList(theme) {
 		{
 			view: "cricket",
 			labelKey: "gameCricket",
+			alt: "Cut Throat Masters",
 			accent: showcaseAccent("cricket", "#1B8A5A", theme),
 			Logo: CricketLogo,
 			extraKeys: ["scorepadsTitle"]
@@ -52680,6 +52713,9 @@ var MG_LAND_CSS = `
 [data-phone-landscape] .mg-side > .gtL-e-only:first-child { display: block; }
 [data-phone-landscape] .mg-side > .gtL-e-only:first-child > section { margin-top: 0 !important; }
 [data-phone-landscape] .mg-land .mgPhoneOnly { display: none !important; }
+[data-phone-landscape] .mg-land .mgBoard { display: flex; flex-direction: row; align-items: center; gap: 10px; margin-bottom: 8px !important; padding-right: 4px !important; }
+[data-phone-landscape] .mg-land .mgBoard > div:nth-of-type(1) { flex: none; }
+[data-phone-landscape] .mg-land .mgBoard > div:nth-of-type(2) { flex: 1 1 auto; min-width: 0; margin-top: 0 !important; }
 [data-phone-landscape] .mg-land .mgBar { grid-column: 2; grid-row: 4; position: static !important; margin: 8px 0 0 !important; padding: 0 !important; background: transparent !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; border: 0 !important; border-radius: 0 !important; box-shadow: none !important; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
 [data-phone-landscape] .mg-land .mgBar #mg-status { flex: 1 0 100%; margin: 0 !important; justify-content: flex-start !important; text-align: left !important; font-size: 13px !important; line-height: 1.3 !important; }
 [data-phone-landscape] .mg-land .mgBar [data-mg-main] { width: auto !important; flex: 1 1 140px; min-height: 44px !important; height: 44px !important; font-size: 17px !important; }
@@ -58474,7 +58510,7 @@ var GT_S8_TR = {
 		gameTraitorDesc: "Heimliche Verräter unter euch: enttarnt sie, bevor es zu spät ist",
 		rulesTraitor: "Das Handy verteilt geheime Rollen: wenige Verräter, alle anderen sind Getreue. Die Verräter kennen sich gegenseitig, die Getreuen wissen nichts.\n\nNacht: Alle schliessen die Augen. Nur die Verräter öffnen sie, nehmen das Handy und wählen leise eine getreue Person, die ermordet wird.\n\nTag: Alle erfahren, wer ermordet wurde. Dann diskutiert ihr mit Timer und stimmt geheim ab, indem das Handy herumgeht. Wer die meisten Stimmen hat, wird verbannt und seine Rolle aufgedeckt. Bei Gleichstand gibt es eine Stichwahl oder niemand wird verbannt.\n\nSieg: Die Getreuen gewinnen, sobald alle Verräter verbannt sind. Die Verräter gewinnen, sobald sie gleich viele sind wie die Getreuen.\n\nAnzahl Verräter automatisch: bis 6 Personen 1, bis 10 Personen 2, ab 11 Personen 3.",
 		trtTraitor: "Verräter",
-		trtFaithful: "Getreu",
+		trtFaithful: "Getreue",
 		trtTraitorHint: "Ermorde nachts heimlich Getreue und lass dich am Tag nicht enttarnen.",
 		trtFaithfulHint: "Finde die Verräter und verbanne sie, bevor sie in der Überzahl sind.",
 		trtAllies: "Mitverräter",
@@ -72747,7 +72783,7 @@ RECHTLICHES ZU DEN SPIELNAMEN
 Diese App ist ein inoffizielles Hilfsmittel (digitaler Punkte- und Spielblock) für bekannte Gesellschaftsspiele. Sie steht in keiner geschäftlichen oder sonstigen Verbindung zu den jeweiligen Rechteinhabern der genannten Spiele (u. a. Skyjo, Jass, Yatzy, Wizard). Alle erwähnten Namen und Marken gehören ihren jeweiligen Inhabern und werden hier ausschliesslich beschreibend verwendet, um auf das zugehörige Spiel hinzuweisen.`;
 // web/src/app/build.js
 var build_exports = /* @__PURE__ */ __exportAll({ APP_BUILD: () => APP_BUILD });
-var APP_BUILD = "2026.11.10-19";
+var APP_BUILD = "2026.11.10-20";
 // web/src/app/backup.js
 var GT_BK_TYPE = "gametab-backup";
 var GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
@@ -73522,7 +73558,7 @@ function SettingsPage({ onBack, backLabel, onReplayTour, lang, setLang, theme, s
 			cursor: "pointer",
 			fontWeight: confirmingStatsReset ? 700 : 500
 		}
-	}, confirmingStatsReset ? t("confirmAgain") : t("statsResetButton")))), /* @__PURE__ */ import_react.default.createElement("div", { className: "st-fill" }, backupMsg && /* @__PURE__ */ import_react.default.createElement("p", {
+	}, confirmingStatsReset ? t("statsResetConfirm") : t("statsResetButton")))), /* @__PURE__ */ import_react.default.createElement("div", { className: "st-fill" }, backupMsg && /* @__PURE__ */ import_react.default.createElement("p", {
 		role: "status",
 		"aria-live": "polite",
 		style: {
@@ -75548,7 +75584,7 @@ function FreeplayGame({ players, setPlayers, target, setTarget, lowWins, setLowW
 			flexDirection: "column",
 			gap: 9
 		}
-	}, ranked.map(({ p, i, rank }) => /* @__PURE__ */ import_react.default.createElement(FreeplayLeaderRow, {
+	}, [...ranked].sort((a, b) => a.i - b.i).map(({ p, i, rank }) => /* @__PURE__ */ import_react.default.createElement(FreeplayLeaderRow, {
 		key: p.id,
 		gtLead: gtFx === p.id,
 		gtGood: lowWins ? "low" : "high",
@@ -105835,19 +105871,22 @@ var MOSTLIKELY_LANDSCAPE_CSS = `
 .gtL-content .ml-skip, .gtL-content .ml-tally { order: 0; position: static; margin-top: 0; }
 .gtL-content .ml-rows { flex-direction: column; flex-wrap: nowrap; }
 [data-phone-landscape] .ml-rows { flex-direction: column; flex-wrap: nowrap; }
-[data-phone-landscape] .ml-skip { position: static; order: 0; margin-top: 0; }
-[data-phone-landscape] .ml-tally { order: 0; }
 [data-phone-landscape] .ml-ls { padding: max(6px, var(--pl-sat)) 0 max(8px, var(--pl-sab)) 0 !important; min-height: var(--pl-vh) !important; box-sizing: border-box; }
 [data-phone-landscape] .ml-ls .gtL-game { padding-top: 0 !important; }
-[data-phone-landscape] .ml-play { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); grid-template-areas: "card who" "card pick" "skip pick"; grid-template-rows: auto minmax(0, 1fr) auto; gap: 8px 14px !important; min-height: max(200px, calc(var(--pl-body) - 18px)); align-items: stretch; }
-[data-phone-landscape] .ml-card { grid-area: card; min-height: 0 !important; padding: 14px 18px !important; border-radius: 22px !important; overflow-wrap: break-word; }
-[data-phone-landscape] .ml-card > div { font-size: clamp(19px, 7.5vh, 30px) !important; line-height: 1.25 !important; }
-[data-phone-landscape] .ml-who { grid-area: who; align-self: end; }
-[data-phone-landscape] .ml-pick { grid-area: pick; align-self: start; align-content: start; grid-template-columns: repeat(auto-fit, minmax(min(100%, 120px), 1fr)) !important; }
+[data-phone-landscape] .ml-ls .gt-u-col { display: grid !important; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, 0.8fr); grid-template-rows: auto auto minmax(0, 1fr) auto; gap: 8px 14px; height: calc(var(--pl-vh) - 14px); box-sizing: border-box; align-content: stretch; }
+[data-phone-landscape] .ml-ls .gt-u-col > .gt-gamehead { grid-column: 1 / -1; grid-row: 1; margin-bottom: 0; }
+[data-phone-landscape] .ml-play { display: contents !important; }
+[data-phone-landscape] .ml-card { grid-column: 1; grid-row: 2 / 5; min-height: 0 !important; padding: 14px 18px !important; border-radius: 22px !important; overflow-wrap: break-word; overflow-y: auto; }
+[data-phone-landscape] .ml-card > div { font-size: clamp(19px, 7vh, 28px) !important; line-height: 1.25 !important; }
+[data-phone-landscape] .ml-who { grid-column: 2; grid-row: 2; align-self: end; }
+[data-phone-landscape] .ml-pick { grid-column: 2; grid-row: 3; align-self: stretch; align-content: start; overflow-y: auto; overscroll-behavior: contain; min-height: 0; grid-template-columns: repeat(auto-fit, minmax(min(100%, 110px), 1fr)) !important; }
 [data-phone-landscape] .ml-pick > button { min-height: 48px; font-size: 16px !important; padding: 8px 8px !important; overflow-wrap: break-word; }
-[data-phone-landscape] .ml-skip { grid-area: skip; min-height: 48px; align-self: end; }
-[data-phone-landscape] .ml-tally { margin-top: 12px !important; }
-[data-phone-landscape] .ml-tally button { min-height: 48px; }
+[data-phone-landscape] .ml-skip { grid-column: 2; grid-row: 4; min-height: 48px; align-self: end; }
+[data-phone-landscape] .ml-tally { grid-column: 3; grid-row: 2 / 5; min-height: 0; margin-top: 0 !important; display: flex; }
+[data-phone-landscape] .ml-tally > div { flex: 1 1 auto; min-height: 0; min-width: 0; }
+[data-phone-landscape] .ml-tally .ml-rows { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; align-content: flex-start; }
+[data-phone-landscape] .ml-tally .ml-row { flex: 0 0 auto; padding: 6px 12px !important; }
+[data-phone-landscape] .ml-tally button { min-height: 48px; margin-top: 0 !important; flex: none; }
 `;
 var MOSTLIKELY_FONT = "'Space Grotesk', sans-serif";
 function mostLikelyBtnGhost(theme) {
@@ -115655,7 +115694,7 @@ var YZ_UNIT_CSS = `
 .yz-hd{position:sticky;top:0;z-index:4;background:var(--yz-paper);display:grid;align-content:center;justify-items:center;padding:0 3px;min-width:0;overflow:hidden;border-bottom:2px solid var(--yz-strong);border-left:1px solid var(--yz-col)}
 .yz-hdtint{position:absolute;inset:0;background:var(--yz-act);opacity:0;transition:opacity .24s ease;pointer-events:none}
 .yz-nm{position:relative;max-width:100%;font:700 13px/1.2 'Inter',sans-serif;color:var(--yz-ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;word-break:keep-all;hyphens:none}
-.yz-turn{position:relative;font:800 9.5px/1.2 'Inter',sans-serif;letter-spacing:.04em;color:var(--yz-acc2);text-transform:uppercase;white-space:nowrap;transition:opacity .2s ease}
+.yz-turn{position:relative;font:800 11px/1.2 'Inter',sans-serif;letter-spacing:.04em;color:var(--yz-acc2);text-transform:uppercase;white-space:nowrap;transition:opacity .2s ease}
 .yz-sec{grid-column:1 / -1;display:flex;align-items:center;background:var(--yz-sec-bg);color:var(--yz-sec-ink);font:800 11px/1 'Inter',sans-serif;letter-spacing:.07em;text-transform:uppercase;position:relative;z-index:3;min-width:0;border-top:1px solid var(--yz-col)}
 .yz-sec.is-lo{border-top:2px solid var(--yz-strong)}
 .yz-sec{border-bottom:1px solid var(--yz-col)}
@@ -115689,7 +115728,7 @@ var YZ_UNIT_CSS = `
 @media (max-height:800px){.yz-hint{display:none}}
 @media (hover:hover) and (pointer:fine){.yz-cell:hover{background:var(--yz-act)}}
 @media (max-width:380px){.yz-lab{font-size:12px}.yz-nm{font-size:12px}}
-@media (min-width:700px) and (min-height:600px){.yz-lab{font-size:14px}.yz-lab.is-bold{font-size:15px}.yz-nm{font-size:14px}.yz-cell{font-size:18px}.yz-auto{font-size:16px}.yz-auto.is-bold{font-size:18px}.yz-auto.is-acc{font-size:21px}.yz-auto.is-bonus{font-size:13px}.yz-sec{font-size:12px}.yz-turn{font-size:10px}.yz-dot{font-size:22px}}
+@media (min-width:700px) and (min-height:600px){.yz-lab{font-size:14px}.yz-lab.is-bold{font-size:15px}.yz-nm{font-size:14px}.yz-cell{font-size:18px}.yz-auto{font-size:16px}.yz-auto.is-bold{font-size:18px}.yz-auto.is-acc{font-size:21px}.yz-auto.is-bonus{font-size:13px}.yz-sec{font-size:12px}.yz-turn{font-size:12px}.yz-dot{font-size:22px}}
 @media (prefers-reduced-motion: reduce){.yz-word{animation:none}.yz-pop{animation:yzFade .15s ease both}.yz-colov b{transition:opacity .15s ease}.yz-cell .yz-v,.yz-cell .yz-dot{transition:none}.yz-cell:active .yz-v,.yz-cell:active .yz-dot{transform:none}}
 `;
 var YATZY_BG = "#F2F4F8";
@@ -117260,7 +117299,7 @@ var GT_SNAPV = {
 	tabu: 1
 };
 function gtSnapOk(sn, key) {
-	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.10-19");
+	return gtIsObj(sn) && sn.ok === true && Array.isArray(sn.v) && (sn.s !== void 0 ? sn.s === GT_SNAPV[key] : sn.b === "2026.11.10-20");
 }
 function gtKeep(snap, onSnap, active, onFail, sv) {
 	const ctx = {
@@ -117785,6 +117824,17 @@ var podium_exports = /* @__PURE__ */ __exportAll({
 });
 function PodiumOverlay({ open, onClose, onRestart, extraAct, ranked, tk, t, bestRecord, gameLabel, titleLabel, hideCount, gameId, theme, shareExtra, onShare, noteEl }) {
 	const playCount = usePlayCount(open);
+	useEffect$14(() => {
+		if (!open || !onClose) return;
+		const k = (e) => {
+			if (e.key === "Escape" && !e.defaultPrevented && document.querySelectorAll("[aria-modal=\"true\"]").length <= 1) {
+				e.preventDefault();
+				onClose();
+			}
+		};
+		document.addEventListener("keydown", k);
+		return () => document.removeEventListener("keydown", k);
+	}, [open, onClose]);
 	const plLand = usePhoneLandscape();
 	const [isSharing, setIsSharing] = useState$11(false);
 	const [previewUrl, setPreviewUrl] = useState$11(null);
@@ -119957,7 +120007,7 @@ function UpdateBanner() {
 			localStorage.setItem(GT_BUILD_KEY, APP_BUILD);
 		} catch (e) {}
 		let doneTimer = 0;
-		if (seen && seen !== "2026.11.10-19" && !upd) {
+		if (seen && seen !== "2026.11.10-20" && !upd) {
 			setDone(true);
 			setReady(true);
 			doneTimer = setTimeout(() => {
@@ -119966,7 +120016,7 @@ function UpdateBanner() {
 		}
 		const check = () => {
 			fetch("./version.json?t=" + Date.now(), { cache: "no-store" }).then((r) => r.ok ? r.json() : null).then((v) => {
-				if (alive && v && v.build && v.build !== "2026.11.10-19" && v.build !== shown) {
+				if (alive && v && v.build && v.build !== "2026.11.10-20" && v.build !== shown) {
 					shown = v.build;
 					clearTimeout(doneTimer);
 					setDone(false);

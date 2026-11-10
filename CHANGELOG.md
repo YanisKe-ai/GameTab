@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.10-20 (10.11.2026 22:00)
+- Laptop: Darts-Bestätigen und Startknopf ohne Scrollen. Querformat: Am ehesten, Phase 10, Rommé, Minigolf, kein Überstand. Texte, Suche, Podest mit Escape, Freies Spiel feste Reihenfolge
+
 ## 2026.11.10-19 (10.11.2026 21:21)
 - Endstand im Menü wieder öffnen, Rückgängig überall gleich benannt, Darts Rückgängig nach Spielende, Tutto Einträge einzeln löschen, Neues Spiel durch Halten
 

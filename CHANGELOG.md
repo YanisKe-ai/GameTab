@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.11-5 (11.11.2026 19:30)
+- Noir: Erfolgsmedaillen grau, Podestziffer und Turnier-Meldung grau
+
 ## 2026.11.11-4 (11.11.2026 16:27)
 - Laptop Partyspiele: Titel wieder wie bei den Schreibunterlagen, Einrichtung ohne Scrollen
 

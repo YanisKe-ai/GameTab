@@ -2,6 +2,9 @@
 import { React } from "../vendor/react-globals.js";
 /*@gt-body-begin*/
 const ACHV_TIER_COLORS={bronze:{hi:"#E6B07A",lo:"#A8672F",ink:"#2B1A0B"},silver:{hi:"#E3E8EE",lo:"#97A3B2",ink:"#1D2530"},gold:{hi:"#F3D58C",lo:"#C99A2E",ink:"#2D2208"}};
+// Noir: Stufen nur ueber Helligkeit (Gold hell, Silber mittel, Bronze dunkel)
+const ACHV_TIER_NOIR={bronze:{hi:"#969696",lo:"#4A4A4A",ink:"#EBEBEB"},silver:{hi:"#D6D6D6",lo:"#777777",ink:"#111111"},gold:{hi:"#FFFFFF",lo:"#B4B4B4",ink:"#111111"}};
+const achvTierColors=noir=>noir?ACHV_TIER_NOIR:ACHV_TIER_COLORS;
 // Symbole im 24er-Raster, nur Linien (und wenige Punkte)
 const ACHV_GLYPHS={
   flag:{d:"M7 20V4M7 5h10l-2.5 3.5L17 12H7"},
@@ -36,8 +39,8 @@ const ACHV_GLYPHS={
   crown:{d:"M4 18h16M5 18L4 8l5 4 3-6 3 6 5-4-1 10"},
   stopwatch:{d:"M12 8a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM12 12v4M10 3h4M12 3v5"},
 };
-function AchvBadge({glyph,tier,locked,size=52,lockColor}){
-  const uid=React.useId().replace(/[^a-zA-Z0-9]/g,"");const c=ACHV_TIER_COLORS[tier]||ACHV_TIER_COLORS.bronze;const g=ACHV_GLYPHS[glyph]||ACHV_GLYPHS.flag;
+function AchvBadge({glyph,tier,locked,size=52,lockColor,noir}){
+  const uid=React.useId().replace(/[^a-zA-Z0-9]/g,"");const TC=achvTierColors(noir);const c=TC[tier]||TC.bronze;const g=ACHV_GLYPHS[glyph]||ACHV_GLYPHS.flag;
   const lc=lockColor||"#8891A0";
   if(locked)return <svg width={size} height={size} viewBox="0 0 48 48" aria-hidden="true" focusable="false" style={{display:"block",flex:"none"}}><circle cx="24" cy="24" r="21.5" fill="none" stroke={lc} strokeOpacity="0.45" strokeWidth="1.6" strokeDasharray="3 4" strokeLinecap="round"/><g transform="translate(12 12)" fill="none" stroke={lc} strokeOpacity="0.55" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d={g.d}/>{(g.dots||[]).map((p,i)=><circle key={i} cx={p[0]} cy={p[1]} r={p[2]} fill={lc} fillOpacity="0.55" stroke="none"/>)}</g></svg>;
   return <svg width={size} height={size} viewBox="0 0 48 48" aria-hidden="true" focusable="false" style={{display:"block",flex:"none"}}>
@@ -50,4 +53,4 @@ function AchvBadge({glyph,tier,locked,size=52,lockColor}){
   </svg>;
 }
 /*@gt-body-end*/
-export { ACHV_TIER_COLORS, ACHV_GLYPHS, AchvBadge };
+export { ACHV_TIER_COLORS, ACHV_TIER_NOIR, achvTierColors, ACHV_GLYPHS, AchvBadge };

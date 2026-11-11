@@ -32,7 +32,7 @@ const v={"--st-hink":s.ink,"--st-hmuted":s.muted,"--st-uline":a,"--st-live":a,"-
 "--st-tabgap":"0","--st-tabpad":"0","--st-tabbg":"transparent","--st-tabr":"6px","--st-tabline":"1px solid "+(L?"rgba(27,34,53,0.12)":"rgba(255,255,255,0.12)"),"--st-tabon-ink":s.ink,"--st-tabon-bg":"transparent",
 "--st-lead":al(s.fill,"14"),"--st-lead-ink":a,"--st-pt":s.ink,"--st-pos":a,"--st-chalk":s.ink,"--st-self":L?"#EEF0F3":"rgba(255,255,255,0.07)",
 "--st-leadbox":s.card,"--st-leadbox-ink":s.ink,"--st-leadbox-cap":a,"--st-leadbox-line":"none","--st-lname-font":"800 22px/1.15 'Inter',sans-serif",
-"--st-sel":al(s.fill,"55"),"--st-toast":L?"#1B2235":"#E9ECF4","--st-toast-ink":L?"#FFFFFF":"#12141C","--st-cta-shadow":L?"0 10px 24px -12px rgba(27,34,53,.35)":"0 10px 26px -10px rgba(0,0,0,.7)","--st-sheet-line":"1px solid "+(L?"rgba(27,34,53,0.12)":"rgba(255,255,255,0.1)")};
+"--st-sel":al(s.fill,"55"),"--st-toast":L?"#1B2235":N?"#EDEDED":"#E9ECF4","--st-toast-ink":L?"#FFFFFF":N?"#0A0A0A":"#12141C","--st-cta-shadow":L?"0 10px 24px -12px rgba(27,34,53,.35)":"0 10px 26px -10px rgba(0,0,0,.7)","--st-sheet-line":"1px solid "+(L?"rgba(27,34,53,0.12)":"rgba(255,255,255,0.1)")};
 return Object.assign({},v,pageShellStyle(T),{paddingBottom:"calc(env(safe-area-inset-bottom,0px) + 32px)"});}
 
 const DESIGNS={

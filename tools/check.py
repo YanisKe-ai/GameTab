@@ -19,7 +19,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 _dist = ROOT / "docs" / "index.html"
 HTML = Path(sys.argv[1]) if len(sys.argv) > 1 else (_dist if _dist.exists() else ROOT / "index.html")
-BUILD_RE = r'APP_BUILD\s*=\s*"([^"]*)"'
+BUILD_RE = r'APP_BUILD\s*=\s*["`]([^"`]*)["`]'
 
 
 def first_existing(name):
@@ -75,11 +75,11 @@ def main() -> int:
             print("OK   StartPage Klammern")
 
     # 4. Notausgang
-    if 'indexOf("reset=1")' in main_js and "localStorage.clear()" in main_js:
+    if re.search(r'indexOf\(["`\']reset=1["`\']\)', main_js) and "localStorage.clear()" in main_js:
         print("OK   ?reset=1 Notausgang vorhanden")
     else:
         problems.append("Notausgang ?reset=1 fehlt (Handler mit indexOf(\"reset=1\") + localStorage.clear())")
-    if "setLoaded(true)" in main_js and "Fehler beim Laden gespeicherter Daten" in main_js:
+    if re.search(r"setLoaded\((true|!0)\)", main_js) and "Fehler beim Laden gespeicherter Daten" in main_js:
         print("OK   Lade-Absicherung (setLoaded im catch) vorhanden")
     else:
         problems.append("Lade-Absicherung fehlt: catch-Zweig muss setLoaded(true) aufrufen, sonst haengt die App auf 'Laedt ...'")

@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.11-2 (11.11.2026 11:42)
+- Fehlergrenze statt weisser Seite, schnellerer Start bei schlechtem Netz, App 25 % kleiner, Laptop-Ansicht Partyspiele, Noir für Darts und weitere Spiele
+
 ## 2026.11.11-1 (11.11.2026 00:19)
 - Technik: robuster bei beschädigten Darts-Ständen, kein blauer Tipp-Schimmer
 

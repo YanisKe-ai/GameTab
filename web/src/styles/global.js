@@ -122,6 +122,10 @@ input[type="number"] { -moz-appearance: textfield; }
 .gt-count.gt-dp-r::after { left: 100%; bottom: auto; top: 50%; margin: 0 0 0 6px; transform: translateY(-50%); }
 .gt-count[data-gt-dt="g"]::after { background: #1E9E62; }
 .gt-count[data-gt-dt="b"]::after { background: #D64545; }
+html[data-gt-theme="noir"] .gtsp-primary { background: #EBEBEB !important; color: #000000 !important; }
+html[data-gt-theme="noir"] .gt-count::after { background: #5F5F5F; color: #FFFFFF; box-shadow: none; }
+html[data-gt-theme="noir"] .gt-count[data-gt-dt="g"]::after { background: #EBEBEB; color: #000000; }
+html[data-gt-theme="noir"] .gt-count[data-gt-dt="b"]::after { background: #2C2C2C; color: #EBEBEB; outline: 1px solid #969696; }
 .gt-count.gt-d-a::after { animation: gtDTa .7s var(--gt-ease-out, cubic-bezier(.23,1,.32,1)) forwards; }
 .gt-count.gt-d-b::after { animation: gtDTb .7s var(--gt-ease-out, cubic-bezier(.23,1,.32,1)) forwards; }
 .gt-count.gt-dp-l.gt-d-a::after, .gt-count.gt-dp-r.gt-d-a::after { animation-name: gtDSa; }

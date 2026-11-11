@@ -3,7 +3,7 @@
 // Diese Datei sorgt dafür, dass die App nach dem ersten Laden auch offline
 // funktioniert und schneller startet.
 
-const CACHE_NAME = "gametab-cache-2026.11.11-1";
+const CACHE_NAME = "gametab-cache-2026.11.11-2";
 const APP_SHELL = ["./", "./index.html"];
 // Zusatzdateien (Schriften, Icons, Bilder): wird beim Vite-Build aus docs/ erzeugt (web/vite.config.mjs).
 const PRECACHE_EXTRA = ["./fonts/Anton-Regular.woff2","./fonts/ArchivoBlack-Regular-lat.woff2","./fonts/Baloo2-400-1.woff2","./fonts/Baloo2-701-1.woff2","./fonts/BowlbyOne-Regular-lat.woff2","./fonts/CaveatBrush-Regular-lat.woff2","./fonts/Fraunces-500-1.woff2","./fonts/Fraunces-500-2.woff2","./fonts/IBMPlexMono-Regular-lat.woff2","./fonts/IBMPlexMono-SemiBold-lat.woff2","./fonts/Inter-400-1.woff2","./fonts/Inter-400-2.woff2","./fonts/Inter-BlackItalic-lat.woff2","./fonts/Kalam-400-1.woff2","./fonts/Kalam-400-2.woff2","./fonts/Kalam-700-1.woff2","./fonts/Kalam-700-2.woff2","./fonts/SpaceGrotesk-500-1.woff2","./fonts/SpaceGrotesk-500-2.woff2","./icons/192.png","./icons/512.png","./icons/apple-touch-icon.png","./icons/favicon-16.png","./icons/favicon-32.png","./icons/favicon.ico","./icons/maskable-192.png","./icons/maskable-512.png","./img/dragon-fly-head.png","./img/dragon-fly-lw.png","./img/dragon-fly-rw.png","./img/gt-logo-mask.png","./img/sch-bauer.webp","./img/sch-dame.webp","./img/sch-papier.webp","./img/sch-schiefer.webp","./manifest.webmanifest"];
@@ -28,7 +28,7 @@ self.addEventListener("activate", (event) => {
   self.clients.claim();
 });
 
-// Netzwerk-zuerst: bei bestehender Verbindung immer die aktuellste Version laden
+// Netzwerk-zuerst mit Zeitlimit: bei guter Verbindung immer die aktuellste Version laden
 // und den Cache dabei auffrischen. Nur wenn das Netzwerk nicht erreichbar ist
 // (offline), wird auf die zuletzt gespeicherte Version zurueckgegriffen.
 // So sind Updates sofort beim ersten Oeffnen sichtbar, Offline-Faehigkeit bleibt erhalten.
@@ -39,15 +39,21 @@ self.addEventListener("fetch", (event) => {
   const reqUrl = new URL(event.request.url);
   if (reqUrl.pathname.endsWith("/version.json")) return;
 
+  // Netz zuerst, aber hoechstens 3 s warten, wenn eine gespeicherte Version da ist.
+  // Das Netz laedt im Hintergrund weiter und frischt den Cache auf.
+  const net = fetch(event.request).then((response) => {
+    if (response && response.status === 200 && !reqUrl.search) {
+      const clone = response.clone();
+      return caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone)).then(() => response, () => response);
+    }
+    return response;
+  });
+  event.waitUntil(net.catch(() => {}));
   event.respondWith(
-    fetch(event.request)
-      .then((response) => {
-        if (response && response.status === 200 && !reqUrl.search) {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
-        }
-        return response;
-      })
-      .catch(() => caches.match(event.request, { ignoreSearch: true }))
+    caches.match(event.request, { ignoreSearch: true }).then((cached) => {
+      if (!cached) return net.catch(() => cached);
+      const timeout = new Promise((res) => setTimeout(() => res(cached), 3000));
+      return Promise.race([net.catch(() => cached), timeout]);
+    })
   );
 });

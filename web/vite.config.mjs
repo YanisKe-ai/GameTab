@@ -61,13 +61,14 @@ export default defineConfig({
   build: {
     outDir: "../docs",
     emptyOutDir: true,
-    minify: false,
-    cssMinify: false,
+    // Minifizieren ohne Umbenennen: Namen bleiben lesbar (tools/check.py sucht APP_BUILD, setLoaded, reset=1).
+    minify: "oxc",
+    cssMinify: true,
     target: "esnext",
     modulePreload: false,
     reportCompressedSize: false,
     chunkSizeWarningLimit: 10000,
-    rolldownOptions: { treeshake: false },
+    rolldownOptions: { treeshake: false, output: { minify: { mangle: false, compress: true } } },
   },
   server: { port: 5173 },
 });

@@ -3,7 +3,7 @@
 // Diese Datei sorgt dafür, dass die App nach dem ersten Laden auch offline
 // funktioniert und schneller startet.
 
-const CACHE_NAME = "gametab-cache-2026.11.11-1";
+const CACHE_NAME = "gametab-cache-2026.11.11-2";
 const APP_SHELL = ["./", "./index.html"];
 // Zusatzdateien (Schriften, Icons, Bilder): wird beim Vite-Build aus docs/ erzeugt (web/vite.config.mjs).
 const PRECACHE_EXTRA = [];
@@ -28,7 +28,7 @@ self.addEventListener("activate", (event) => {
   self.clients.claim();
 });
 
-// Netzwerk-zuerst: bei bestehender Verbindung immer die aktuellste Version laden
+// Netzwerk-zuerst mit Zeitlimit: bei guter Verbindung immer die aktuellste Version laden
 // und den Cache dabei auffrischen. Nur wenn das Netzwerk nicht erreichbar ist
 // (offline), wird auf die zuletzt gespeicherte Version zurueckgegriffen.
 // So sind Updates sofort beim ersten Oeffnen sichtbar, Offline-Faehigkeit bleibt erhalten.
@@ -39,15 +39,21 @@ self.addEventListener("fetch", (event) => {
   const reqUrl = new URL(event.request.url);
   if (reqUrl.pathname.endsWith("/version.json")) return;
 
+  // Netz zuerst, aber hoechstens 3 s warten, wenn eine gespeicherte Version da ist.
+  // Das Netz laedt im Hintergrund weiter und frischt den Cache auf.
+  const net = fetch(event.request).then((response) => {
+    if (response && response.status === 200 && !reqUrl.search) {
+      const clone = response.clone();
+      return caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone)).then(() => response, () => response);
+    }
+    return response;
+  });
+  event.waitUntil(net.catch(() => {}));
   event.respondWith(
-    fetch(event.request)
-      .then((response) => {
-        if (response && response.status === 200 && !reqUrl.search) {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
-        }
-        return response;
-      })
-      .catch(() => caches.match(event.request, { ignoreSearch: true }))
+    caches.match(event.request, { ignoreSearch: true }).then((cached) => {
+      if (!cached) return net.catch(() => cached);
+      const timeout = new Promise((res) => setTimeout(() => res(cached), 3000));
+      return Promise.race([net.catch(() => cached), timeout]);
+    })
   );
 });

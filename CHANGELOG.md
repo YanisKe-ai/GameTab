@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.11-6 (11.11.2026 23:43)
+- Freies Spiel: Rundenmodus, Notizblock-Optik, sicheres Spielende
+
 ## 2026.11.11-5 (11.11.2026 19:30)
 - Noir: Erfolgsmedaillen grau, Podestziffer und Turnier-Meldung grau
 

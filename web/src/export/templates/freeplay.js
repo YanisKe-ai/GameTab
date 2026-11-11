@@ -33,7 +33,7 @@ function fitRow(c, k, r, fsN, fsS, winner) {
   k.setFont(c, 700, vf.size, F_FRAUNCES); const vw = c.measureText(r.value).width;
   const maxW = x1 - nameX - vw - 44;
   const tiers = winner
-    ? [{ max: fsN, min: fsN * 0.62, lines: 1 }, { max: fsN * 0.8, min: fsN * 0.4, lines: 2 }, { max: fsN * 0.55, min: 22, lines: 3 }]
+    ? [{ max: fsN, min: fsN * 0.45, lines: 1 }, { max: fsN * 0.8, min: fsN * 0.4, lines: 2 }, { max: fsN * 0.55, min: 22, lines: 3 }]
     : [{ max: fsN, min: Math.max(22, fsN * 0.7), lines: 1 }, { max: fsN * 0.7, min: Math.max(18, fsN * 0.45), lines: 2 }, { max: fsN * 0.5, min: 14, lines: 3 }];
   const f = k.heroFit(c, r.name, { w: 700, fam: k.F_KALAM, maxW }, tiers);
   return { vf, vw, f };

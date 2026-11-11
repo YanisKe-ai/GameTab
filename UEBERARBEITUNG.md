@@ -206,7 +206,7 @@ Ab Nr. 5 ist die Reihenfolge frei. Ohne andere Anweisung von Yanis einfach der T
 | 9 | Phase 10 | phase10 | games/phase10 | fertig (2026.11.09-7) | Handkarten zählen, Stechen bei Gleichstand; 320 px scrollt leicht |
 | 10 | Rommé | romme | games/romme | fertig (2026.11.09-8) | Handkarten antippen, Hand-Rommé doppelt |
 | 11 | Darts (alle 7 Modi) | darts | games/darts | offen | Rapid Fire gestrichen (keine Quelle) |
-| 12 | Freies Spiel | freeplay | games/freeplay | offen | |
+| 12 | Freies Spiel | freeplay | games/freeplay | fertig 12.11.2026 | Zähler + neuer Rundenmodus (Tabelle mit Bearbeiten), Wertung ab erstem Eintrag gesperrt, Mit Wertung beenden ohne Ziel, Rückgängig im Menü, Notizblock-Optik. Nur Chromium. Offen: Doppeltipp beim ersten Eintrag (Layout springt), 7. Ziffer wird still abgeschnitten, Spieler entfernen ohne Rückfrage |
 | 13 | Impostor | impostor | games/impostor | offen | |
 | 14 | Werwolf | werwolf | games/werwolf | offen | |
 | 15 | Mafia | mafia | games/mafia | offen | |

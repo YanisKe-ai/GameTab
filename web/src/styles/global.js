@@ -239,6 +239,8 @@ html[data-gt-theme="noir"] .gt-count[data-gt-dt="b"]::after { background: #2C2C2
 .gt-timeup { position: fixed; inset: 0; z-index: 140; pointer-events: none; display: flex; align-items: center; justify-content: center; background: radial-gradient(ellipse at center, rgba(229,72,77,0) 40%, rgba(229,72,77,0.34) 100%); animation: gtTimeUp 1.1s ease-out both; }
 @keyframes gtTimeUp { 0% { opacity: 0; } 12% { opacity: 1; } 62% { opacity: 1; } 100% { opacity: 0; } }
 .gt-timeup-ring { width: 84px; height: 84px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; background: #E5484D; box-shadow: 0 12px 34px -10px rgba(229,72,77,0.8); animation: gtTimeUpPop 0.42s var(--gt-ease-spring, cubic-bezier(.34,1.3,.64,1)) both; }
+html[data-gt-theme="noir"] .gt-timeup { background: radial-gradient(ellipse at center, rgba(255,255,255,0) 40%, rgba(255,255,255,0.14) 100%); }
+html[data-gt-theme="noir"] .gt-timeup-ring { color: #000000; background: #EBEBEB; box-shadow: none; }
 @keyframes gtTimeUpPop { from { opacity: 0; transform: scale(0.85); } to { opacity: 1; transform: scale(1); } }
 .gt-flip { width: min(100%, 340px); perspective: 1100px; touch-action: none; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; cursor: pointer; outline: none; -webkit-tap-highlight-color: transparent; }
 .gt-flip-inner { display: grid; transform-style: preserve-3d; -webkit-transform-style: preserve-3d; transition: transform 0.16s var(--gt-ease-out, cubic-bezier(.23,1,.32,1)); }

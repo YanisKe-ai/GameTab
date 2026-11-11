@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.11-3 (11.11.2026 16:10)
+- Noir: Zeit-abgelaufen-Anzeige, Timer und Stempel schwarz-weiss
+
 ## 2026.11.11-2 (11.11.2026 11:42)
 - Fehlergrenze statt weisser Seite, schnellerer Start bei schlechtem Netz, App 25 % kleiner, Laptop-Ansicht Partyspiele, Noir für Darts und weitere Spiele
 

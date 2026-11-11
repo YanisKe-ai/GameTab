@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.11-4 (11.11.2026 16:27)
+- Laptop Partyspiele: Titel wieder wie bei den Schreibunterlagen, Einrichtung ohne Scrollen
+
 ## 2026.11.11-3 (11.11.2026 16:10)
 - Noir: Zeit-abgelaufen-Anzeige, Timer und Stempel schwarz-weiss
 

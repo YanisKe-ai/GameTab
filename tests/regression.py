@@ -368,6 +368,13 @@ def t_names_nm(pg, env):
     t_nm.run(pg)
 
 
+@test("Heads Up Kopf im Querformat (HU)", quick=False, matrix=False)
+def t_headsup_hu(pg, env):
+    import t_hu
+    t_hu.run(pg)
+    assert not t_hu.FAILS, t_hu.FAILS
+
+
 @test("Podest nur beim ersten Beenden (P)", quick=False, matrix=False)
 def t_podium_once(pg, env):
     import t_p

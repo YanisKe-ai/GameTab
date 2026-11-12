@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.12-15 (12.11.2026 17:21)
+- Querformat: Kopfzeile bleibt nach dem Drehen oben (Heads Up und alle Spiele)
+
 ## 2026.11.12-14 (12.11.2026 17:07)
 - Namen zuletzt im Setup, Suche mit Tippfehlern, Weiterspielen mit Spielstand, Favoriten-Hinweis, Druck-Rückmeldung, ruhigere Animationen
 

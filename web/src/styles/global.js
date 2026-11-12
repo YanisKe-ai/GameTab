@@ -323,6 +323,7 @@ body::after {
 [data-phone-landscape] .pl-split.pl-split-wide { --pl-main-fr: 1.35fr; --pl-side-fr: 1fr; }
 [data-phone-landscape] .pl-main, [data-phone-landscape] .pl-side { min-width: 0; box-sizing: border-box; }
 [data-phone-landscape] .pl-side.pl-sticky { position: sticky; top: calc(var(--pl-sat) + 8px); }
+[data-phone-landscape] .gt-gamehead, [data-phone-landscape] div:has(>.gt-gamehead~.gt-headbtns), [data-phone-landscape] div:has(>.gt-headbtns+.gt-gamehead)>.gt-headbtns { top: var(--pl-sat) !important; }
 [data-phone-landscape] .pl-scroll { overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; max-height: max(160px, var(--pl-body)); min-height: 0; }
 [data-phone-landscape] .pl-scroll-x { overflow-x: auto; overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch; max-width: 100%; }
 [data-phone-landscape] .pl-fill { min-height: max(160px, var(--pl-body)); box-sizing: border-box; }

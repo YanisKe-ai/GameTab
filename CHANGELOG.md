@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.12-11 (12.11.2026 14:49)
+- Statistik: eine Quote überall, Rangliste nach Siegen, Noch wenig Daten statt vorläufig, Fehlerkarte
+
 ## 2026.11.12-10 (12.11.2026 14:24)
 - Heads Up: Knöpfe unten in der Daumenzone; Statistik: Namen mit Akzenten werden eine Person
 

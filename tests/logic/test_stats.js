@@ -18,16 +18,17 @@ const NOW=new Date(2026,9,24,12);
 const pp=(model,key)=>model.people.find(x=>x.key===key);
 
 // ---------- Rechenregeln ----------
-T("Quote geglaettet k=4, roh, vorlaeufig",()=>{
+T("Quote roh = Siege/Partien, unter 3 entschiedenen vorlaeufig (A2)",()=>{
   const L=[1,2,3].map(i=>M("yatzy",[2026,1,i],[["A",200,1],["B",100,2]],["A"]));
   const m=S.build(L,{now:NOW});const A=pp(m,"a"),B=pp(m,"b");
-  near(A.rate,(3+2)/(3+4));near(A.rateRaw,1);near(B.rate,2/7);near(B.rateRaw,0);
-  assert.equal(A.provisional,true);assert.equal(S.K,4);
+  near(A.rate,1);near(A.rateRaw,1);near(B.rate,0);near(B.rateRaw,0);
+  assert.equal(A.provisional,false);assert.equal(S.MIN_RANK,3);assert.equal(S.MIN_FIRM,3);
   assert.equal(m.ranking.length,2);assert.equal(m.ranking[0].key,"a");assert.equal(m.ranking[0].rank,1);assert.equal(m.ranking[1].rank,2);
 });
-T("vorlaeufig ab 5 Partien weg",()=>{
-  const L=[1,2,3,4,5].map(i=>M("yatzy",[2026,1,i],[["A",2,1],["B",1,2]],["A"]));
-  assert.equal(pp(S.build(L),"a").provisional,false);
+T("vorlaeufig ab 3 Partien weg",()=>{
+  const L=[1,2].map(i=>M("yatzy",[2026,1,i],[["A",2,1],["B",1,2]],["A"]));
+  assert.equal(pp(S.build(L),"a").provisional,true);
+  assert.equal(pp(S.build(L.concat([M("yatzy",[2026,1,3],[["A",2,1],["B",1,2]],["A"])])),"a").provisional,false);
 });
 T("Rangliste erst ab 3 entschiedenen Partien",()=>{
   const L=[M("skyjo",[2026,1,1],[["A",1,1],["B",2,2]],["A"]),M("skyjo",[2026,1,2],[["A",1,1],["B",2,2]],["A"]),M("skyjo",[2026,1,3],[["A",1,1],["C",2,2]],["A"])];
@@ -39,7 +40,7 @@ T("Gleichstand geteilt: winPoints 1/n, wins ganz, sharedWins",()=>{
   const m=S.build(L);const A=pp(m,"a"),B=pp(m,"b"),C=pp(m,"c");
   assert.equal(A.wins,2);assert.equal(A.sharedWins,1);near(A.winPoints,1.5);
   assert.equal(B.wins,1);assert.equal(B.sharedWins,1);near(B.winPoints,0.5);near(C.winPoints,0);
-  near(A.rateRaw,0.75);
+  near(A.rateRaw,1);near(B.rateRaw,0.5);
 });
 T("Gleiche Quote = gleicher Rang",()=>{
   const L=[];for(let i=1;i<=3;i++){L.push(M("yatzy",[2026,1,i],[["A",2,1],["B",1,2]],["A"]));L.push(M("yatzy",[2026,2,i],[["C",2,1],["D",1,2]],["C"]));}
@@ -109,7 +110,7 @@ T("Spielabend: 05:00-Grenze und Personen-Ueberschneidung",()=>{
   const n7=m.nights.find(x=>x.date==="2026-03-07");assert.equal(n7.matches,2);assert.deepEqual(n7.winners.sort(),["a","b"]);
   assert.equal(m.nights[0].date,"2026-03-07");
 });
-T("Einzelne Partie ist kein Spielabend",()=>{assert.equal(S.build([M("yatzy",[2026,1,1],[["A",1,1],["B",0,2]],["A"])]).summary.nights,0);});
+T("Einzelne Partie zaehlt als ein Spielabend (A2, ST-9)",()=>{const m=S.build([M("yatzy",[2026,1,1],[["A",1,1],["B",0,2]],["A"])]);assert.equal(m.summary.matches,1);assert.equal(m.summary.nights,1);assert.equal(m.highlights.some(h=>h.kind==="night"),false);});
 // ---------- Nemesis ----------
 T("Nemesis nach NemeStats und Lieblingsgegner",()=>{
   const L=[];
@@ -160,8 +161,9 @@ T("Gruppenfilter: groupId, Namensliste, Teilmenge",()=>{
     M("yatzy",[2026,1,4],[["Anna",1,1]],["Anna"]),
     M("tabu",[2026,1,5],[["Anna & Ben",3,1,{isTeam:true}],["Cleo und Anna",1,2,{isTeam:true}]],["Anna & Ben"]),
     M("yatzy",[2026,1,6],[["Ben",1,1],["Cleo",0,2]],["Ben"])];
-  const g=S.build(L,{group:7,groups});assert.equal(g.summary.matches,4,"Teilmenge(2)+groupId+Team+BenCleo");
-  assert.equal(S.build(L,{group:["anna","BEN","cleo"]}).summary.matches,3,"ohne groupId-Treffer");
+  const g=S.build(L,{group:7,groups});assert.equal(g.summary.matches,5,"mind. 2 Mitglieder: Anna+Ben, Anna+Ben+Dora, groupId, Team, Ben+Cleo");
+  assert.equal(S.build(L,{group:["anna","BEN","cleo"]}).summary.matches,4,"ohne groupId-Treffer");
+  assert(g.people.some(x=>x.key==="dora"),"Gast sichtbar");
   assert.equal(S.build(L,{group:7}).summary.matches,1,"ohne groups-Liste nur groupId");
   assert.equal(S.build(L,{group:null}).summary.matches,6);
 });
@@ -286,7 +288,7 @@ T("Jahresrueckblick: mind. 8 Karten, keine erfundenen Werte",()=>{
   Y.cards.forEach(c=>{assert(c.title&&c.text&&!/gtS2|undefined|NaN/.test(c.title+c.text),c.kind+": "+c.title+" / "+c.text);assert(c.value!==undefined&&c.value!==null&&!(typeof c.value==="number"&&!isFinite(c.value)),c.kind);});
   const kinds=Y.cards.map(c=>c.kind);assert(kinds.includes("newcomer")===false||true);
   const small=S.yearReview([M("yatzy",[2026,1,1],[["A",1,1],["B",0,2]],["A"])],2026,{t:tDe});if(process.env.DBG)console.log(small.cards.map(c=>c.kind));
-  assert.deepEqual(small.cards.map(c=>c.kind),["intro","favGame","social","outro"]);
+  assert.deepEqual(small.cards.map(c=>c.kind),["intro","nights","favGame","social","outro"]);
   assert.equal(S.yearReview(FX.gt_matchLog,2020,{t:tDe}).cards.length,0);
 });
 T("Jahresrueckblick: Neu dabei nur mit Vorjahresdaten",()=>{
@@ -298,6 +300,65 @@ T("Leistung: 1500 Partien unter 1.5 s",()=>{
   const L=[];for(let i=0;i<1500;i++){const nm=["A","B","C","D","E","F","G","H"];const ps=nm.slice(i%4,i%4+4).map((x,j)=>[x,(i*7+j*13)%50,j+1]);L.push(M(["yatzy","skyjo","tutto"][i%3],[2025,1+(i%12),1+(i%27),18+(i%5)],ps,[ps[0][0]]));}
   const t0=Date.now();S.build(L,{now:NOW});S.profile(L,"a");S.yearReview(L,2025);assert(Date.now()-t0<1500,"zu langsam "+(Date.now()-t0));
 });
+
+// ---------- Paket A2: Zahlen stimmig ----------
+T("A2 Rangliste nach Siegen, dann Quote, dann weniger Partien",()=>{
+  const L=[];let d=1;
+  // A: 5 Siege aus 10 (50 %), B: 3 aus 3 (100 %), C: 3 aus 4 (75 %), D: 3 aus 3 (100 %, gleich B)
+  for(let i=0;i<5;i++)L.push(M("yatzy",[2026,2,d++],[["A",2,1],["X",1,2]],["A"]));
+  for(let i=0;i<5;i++)L.push(M("yatzy",[2026,2,d++],[["A",1,2],["X",2,1]],["X"]));
+  for(let i=0;i<3;i++)L.push(M("skyjo",[2026,3,d++],[["B",2,1],["Y",1,2]],["B"]));
+  for(let i=0;i<3;i++)L.push(M("skyjo",[2026,3,d++],[["D",2,1],["Z",1,2]],["D"]));
+  for(let i=0;i<3;i++)L.push(M("tutto",[2026,4,d++],[["C",2,1],["W",1,2]],["C"]));
+  L.push(M("tutto",[2026,4,d++],[["C",1,2],["W",2,1]],["W"]));
+  const m=S.build(L,{now:NOW});const keys=m.ranking.map(r=>r.key);
+  assert.equal(keys[0],"a");assert.equal(m.ranking[0].wins,5);near(m.ranking[0].rate,0.5);
+  const iB=keys.indexOf("b"),iD=keys.indexOf("d"),iC=keys.indexOf("c");
+  assert(iB<iC&&iD<iC&&iB>0,"A (5 Siege) zuerst, dann B und D (3 Siege, 100 %) vor C (3 Siege, 75 %)");
+});
+T("A2 gleiche Siege: hoehere Quote, dann weniger Partien, Rang gleich bei Gleichstand",()=>{
+  const L=[];let d=1;
+  for(let i=0;i<3;i++)L.push(M("yatzy",[2026,2,d++],[["B",2,1],["Y",1,2]],["B"]));
+  for(let i=0;i<3;i++)L.push(M("yatzy",[2026,2,d++],[["D",2,1],["Z",1,2]],["D"]));
+  for(let i=0;i<3;i++)L.push(M("yatzy",[2026,2,d++],[["C",2,1],["W",1,2]],["C"]));
+  L.push(M("yatzy",[2026,2,d++],[["C",1,2],["W",2,1]],["W"]));
+  const r=S.build(L).ranking;const of=k=>r.find(x=>x.key===k);
+  assert.equal(of("b").rank,of("d").rank,"gleich");assert(of("b").rank<of("c").rank);
+  near(of("c").rate,0.75);
+});
+T("A2 Quote ohne Glaettung, geteilter Sieg zaehlt ganz",()=>{
+  const L=[M("yatzy",[2026,1,1],[["A",5,1],["B",5,1]],["A","B"]),M("yatzy",[2026,1,2],[["A",5,1],["B",1,2]],["A"]),M("yatzy",[2026,1,3],[["A",1,2],["B",5,1]],["B"]),M("yatzy",[2026,1,4],[["A",1,2],["B",5,1]],["B"])];
+  const m=S.build(L);const A=pp(m,"a"),B=pp(m,"b");
+  assert.equal(A.wins,2);assert.equal(A.sharedWins,1);near(A.rate,0.5);assert.equal(B.wins,3);assert.equal(B.sharedWins,1);near(B.rate,0.75);
+  assert.equal(m.ranking[0].key,"b");
+  const pr=S.profile(L,"A");near(pr.rate,0.5);assert.equal(pr.sharedWins,1);
+  pr.perGame.forEach(g=>near(g.rate,g.decided?g.wins/g.decided:0));
+});
+T("A2 unter 3 entschiedenen: provisional, nicht in Rangliste",()=>{
+  const L=[1,2,3].map(i=>M("yatzy",[2026,1,i],[["A",2,1],["B",1,2],["C",0,3]],["A"])).concat([M("yatzy",[2026,1,4],[["A",2,1],["C",1,2]],["A"])]);
+  const m=S.build(L);assert.equal(pp(m,"c").provisional,false);
+  const L2=[M("yatzy",[2026,1,1],[["A",2,1],["B",1,2],["C",0,3]],["A"]),M("yatzy",[2026,1,2],[["A",2,1],["B",1,2]],["A"]),M("yatzy",[2026,1,3],[["A",2,1],["B",1,2]],["A"])];
+  const m2=S.build(L2);assert.equal(pp(m2,"c").provisional,true);assert(!m2.ranking.some(r=>r.key==="c"));assert(m2.tooFew.some(r=>r.key==="c"));
+  assert.equal(S.profile(L2,"C").provisional,true);
+});
+T("A2 Solo-Partie: kein Sieg, keine entschiedene Partie, Bestwert bleibt",()=>{
+  const x=M("yatzy",[2026,1,1],[["A",250,1]],["A"]);
+  const m=S.build([x]);const A=pp(m,"a");assert.equal(A.matches,1);assert.equal(A.decided,0);assert.equal(A.wins,0);
+  const pr=S.profile([x],"A");assert.equal(pr.bests.length,1);assert.equal(pr.bests[0].value,250);
+});
+T("A2 doppelte id wird nur einmal gezaehlt",()=>{
+  const x=M("yatzy",[2026,1,1],[["A",2,1],["B",1,2]],["A"]);const y=JSON.parse(JSON.stringify(x));
+  const m=S.build([x,y,Object.assign(JSON.parse(JSON.stringify(x)),{id:"andere"})]);assert.equal(pp(m,"a").matches,2);
+  assert.equal(S.build([x,y]).summary.matches,1);
+});
+T("A2 Gruppenfilter: mind. 2 Mitglieder, Gast bleibt sichtbar, 1 Mitglied zaehlt nicht",()=>{
+  const groups=[{id:9,name:"G",players:["Anna","Ben"]}];
+  const L=[M("yatzy",[2026,1,1],[["Anna",2,1],["Ben",1,2],["Gast",0,3]],["Anna"]),M("yatzy",[2026,1,2],[["Anna",2,1],["Gast",1,2]],["Anna"])];
+  const m=S.build(L,{group:9,groups});assert.equal(m.summary.matches,1);assert(m.people.some(x=>x.key==="gast"));
+  assert.equal(m.summary.nights,1);
+});
+T("A2 Werwolf-Farbe: legacy-ui hat werwolf",()=>{const f=require("fs").readFileSync(path.join(__dirname,"../../web/src/stats/legacy-ui.js"),"utf8");assert(/werwolf:"#D9384A"/.test(f));assert(!/werewolf:"#/.test(f));});
+T("A2 Texte: kein vorlaeufig, keine faire Quote in allen 6 Sprachen",()=>{["de","en","fr","it","es","pt"].forEach(l=>{["st2Provisional","st2ProvisionalText","st2TooFew","st2RateNote","st2SharedShort","st2StatsFailTitle","st2StatsFailText","st2StatsBackup","st2StatsRetry"].forEach(k=>{const v=TR[l][k];assert(typeof v==="string"&&v.length>3,l+" "+k);assert(!/vorl[aä]ufig|provisional|provisoire|provvisori|provisória|fair rate|faire quote|équitable|quota equa|cuota justa|taxa justa/i.test(v),l+" "+k+": "+v);});assert(!TR[l].st2FairNote,l+" FairNote noch da");assert(!/faire?\b|équitable|equa\b|justa/i.test(TR[l].st2PerGameSub),l+" PerGameSub");});});
 
 // ---------- Datenpunkte 7 in GT_PS (recordMatch, mergeNames) ----------
 (function(){

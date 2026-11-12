@@ -344,6 +344,12 @@ def t_stats_ghost(pg, env):
     t_a1.run(pg)
 
 
+@test("Statistik Zahlen stimmig (A2)", quick=False, matrix=False)
+def t_stats_numbers(pg, env):
+    import t_a2
+    t_a2.run(pg)
+
+
 @test("Spielfehler Teil 1 (GA)", quick=False, matrix=False)
 def t_ga_fixes(pg, env):
     import t_ga

@@ -350,6 +350,12 @@ def t_ga_fixes(pg, env):
     t_ga.run(pg)
 
 
+@test("Speicher sicher (B)", quick=False, matrix=False)
+def t_b_storage(pg, env):
+    import t_b
+    t_b.run(pg)
+
+
 @test("Skyjo")
 def t_skyjo(pg, env):
     open_game(pg, "Schreibunterlagen", "Skyjo"); press_start(pg)

@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.12-3 (12.11.2026 10:22)
+- Speicher: Schutz bei beschädigten Daten, Fehlerprotokoll, Sicherungs-Erinnerung
+
 ## 2026.11.12-2 (12.11.2026 10:00)
 - Skyjo-Grenzen, Tutto-Eingabe, Freies Spiel ohne Sprung
 

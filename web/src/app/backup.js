@@ -1,6 +1,9 @@
 // Sicherung und Wiederherstellen (Einstellungen). Reine Funktionen ohne Oberflaeche, geprueft in tests/backup_restore.py.
 // Ablauf Wiederherstellen: gtBkInspect (Datei lesen, validieren, Version erkennen, nichts aendern) -> Vorschau und Bestaetigung
 // in backup-dialog.js -> gtBkApply (schreiben, bei Fehler alles zurueck). Ohne Bestaetigung wird nie etwas ueberschrieben.
+import { React } from "../vendor/react-globals.js";
+import { useEffect, useState } from "../prelude.js";
+import { TRANSLATIONS } from "../i18n/translations.js";
 import { gtIsObj } from "./storage.js";
 import { MATCH_LOG_KEY } from "../stats/match-log.js";
 import { GT_ST, GT_ST_STORE } from "../games/schieber/tournament-core.js";
@@ -8,7 +11,7 @@ import { APP_BUILD } from "./build.js";
 
 const GT_BK_TYPE = "gametab-backup";
 const GT_BK_VERSION = 2; /* Format-Version. Dateien mit 1, 2 oder ohne Angabe (aelteste) werden gelesen, hoehere abgewiesen. */
-const GT_BK_KEY_RE = /^(?!gt_matchLog_corrupt_)(gt_|gametab-|spieleblock-)/;
+const GT_BK_KEY_RE = /^(?!gt_matchLog_corrupt_|spieleblock-app-state-corrupt-)(gt_|gametab-|spieleblock-)/;
 const GT_BK_STATE_KEY = "spieleblock-app-state-v1";
 const GT_BK_MAX_BYTES = 40 * 1024 * 1024;
 
@@ -40,6 +43,53 @@ function gtBkBuild(now) {
   const text = JSON.stringify(payload, null, 2);
   if (!text || text.length < 20) throw new Error("empty");
   return { text, fileName: gtBkFileName(d) };
+}
+
+/* Sicherung erstellen, herunterladen und den Zeitpunkt merken (Einstellungen, Sicherungs-Zeile). Wirft bei Fehlern in gtBkBuild. */
+function gtBkExport() {
+  const b = gtBkBuild();
+  gtBkDownload(b.text, b.fileName);
+  try { localStorage.setItem("gt_lastBackupAt", String(Date.now())); } catch (_) {}
+  return b;
+}
+
+/* Ruhige Leiste oben, wenn der Hauptspeicher beim Start kaputt war (window.__gtStateCorrupt, gesetzt in loadAppState). */
+function GtCorruptBanner() {
+  const [info, setInfo] = useState(() => window.__gtStateCorrupt || null);
+  const [gone, setGone] = useState(false);
+  const [lang, setLang] = useState(document.documentElement.lang || "de");
+  const [theme, setTheme] = useState(document.documentElement.getAttribute("data-gt-theme") || "dark");
+  useEffect(() => {
+    const read = () => { setLang(document.documentElement.lang || "de"); setTheme(document.documentElement.getAttribute("data-gt-theme") || "dark"); if (window.__gtStateCorrupt) setInfo((o) => o || window.__gtStateCorrupt); };
+    let mo = null;
+    try { mo = new MutationObserver(read); mo.observe(document.documentElement, { attributes: true, attributeFilter: ["lang", "data-gt-theme"] }); } catch (_) {}
+    const iv = setInterval(read, 400);
+    const st = setTimeout(() => clearInterval(iv), 20000);
+    return () => { if (mo) mo.disconnect(); clearInterval(iv); clearTimeout(st); };
+  }, []);
+  if (!info || gone) return null;
+  const L = TRANSLATIONS[lang] || TRANSLATIONS.de;
+  const tx = (k) => L[k] || TRANSLATIONS.de[k];
+  const light = theme === "light", noir = theme === "noir";
+  const bg = light ? "#FFFFFF" : noir ? "#111111" : "#1E2230";
+  const fg = light ? "#1A1D20" : noir ? "#EBEBEB" : "#F3F4F8";
+  const bd = light ? "rgba(0,0,0,.16)" : "rgba(255,255,255,.2)";
+  const save = () => {
+    try {
+      const raw = info.key ? localStorage.getItem(info.key) : null;
+      if (raw) gtBkDownload(raw, "gametab-beschaedigter-speicher-" + new Date().toISOString().slice(0, 10) + ".json");
+    } catch (_) {}
+  };
+  const btn = { minHeight: 44, minWidth: 44, padding: "0 14px", borderRadius: 12, border: "1px solid " + bd, background: "transparent", color: fg, fontFamily: "'Inter',sans-serif", fontSize: 13, fontWeight: 700, cursor: "pointer" };
+  return <div role="status" style={{ position: "fixed", left: 0, right: 0, top: "calc(10px + env(safe-area-inset-top, 0px))", zIndex: 2147483000, display: "flex", justifyContent: "center", padding: "0 12px", pointerEvents: "none" }}>
+    <div style={{ pointerEvents: "auto", boxSizing: "border-box", width: "100%", maxWidth: 420, background: bg, color: fg, border: "1px solid " + bd, borderRadius: 16, padding: "10px 10px 10px 14px", boxShadow: "0 14px 40px -12px rgba(0,0,0,.5)", fontFamily: "'Inter',sans-serif" }}>
+      <div style={{ fontSize: 13, fontWeight: 600, lineHeight: 1.4, marginBottom: 8 }}>{tx("stateCorruptMsg")}</div>
+      <div style={{ display: "flex", gap: 8, justifyContent: "flex-end" }}>
+        {info.key && <button type="button" style={btn} onClick={save}>{tx("stateCorruptSave")}</button>}
+        <button type="button" style={btn} onClick={() => setGone(true)}>{tx("stateCorruptClose")}</button>
+      </div>
+    </div>
+  </div>;
 }
 
 function gtBkDownload(text, fileName) {
@@ -125,4 +175,4 @@ function gtBkApply(entries, isQuota) {
   }
 }
 
-export { GT_BK_TYPE, GT_BK_VERSION, gtBkFileName, gtBkBuild, gtBkDownload, gtBkInspect, gtBkCurrent, gtBkApply };
+export { GT_BK_TYPE, GT_BK_VERSION, gtBkFileName, gtBkBuild, gtBkExport, GtCorruptBanner, gtBkDownload, gtBkInspect, gtBkCurrent, gtBkApply };

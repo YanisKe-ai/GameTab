@@ -72,7 +72,7 @@ def _open_settings(pg):
 def _open_stats(pg):
     pg.get_by_text("Schreibunterlagen", exact=True).first.click()
     wait(pg, 800)
-    pg.get_by_label("Statistiken").first.click()
+    pg.get_by_label("Statistik", exact=True).first.click()
     wait(pg, 1200)
 
 
@@ -157,6 +157,8 @@ def run_match_and_merge(b):
     try:
         _start(pg)
         _open_stats(pg)
+        pg.get_by_role("tab", name="Personen").click()  # SD: Profil über den Reiter Personen
+        wait(pg, 400)
         pg.get_by_role("button", name=re.compile(r"^Cleo")).first.click()
         wait(pg, 900)
         # UX-3: Partie loeschen, sofort, 44-px-Flaeche, Toast, Rueckgaengig

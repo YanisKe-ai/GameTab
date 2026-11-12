@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.12-13 (12.11.2026 16:49)
+- Neue Statistik: Tabelle mit Rangliste, Spielen und Personen, ohne Podest
+
 ## 2026.11.12-12 (12.11.2026 15:57)
 - Podest nur beim ersten Beenden ohne Feier-Wiederholung; Rückgängig statt Doppeltipp bei Gruppen, Partien, Namen; Dialog bei Alles löschen
 

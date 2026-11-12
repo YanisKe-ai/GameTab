@@ -126,9 +126,9 @@ def run(pg):
     goto_start(pg)
     pg.get_by_text("Schreibunterlagen", exact=True).first.click()
     wait(pg, 700)
-    pg.get_by_label("Statistiken").first.click()
+    pg.get_by_label("Statistik", exact=True).first.click()
     wait(pg, 900)
-    check_title(pg, "Statistik", r"Statistiken · GameTab")
+    check_title(pg, "Statistik", r"Statistik · GameTab")
     check_labels(pg, "Statistik")
     check_live(pg, "Statistik")
 
@@ -194,7 +194,7 @@ def _open_stats(pg):
     wait(pg, 900)
     pg.get_by_text("Schreibunterlagen", exact=True).first.click()
     wait(pg, 700)
-    pg.get_by_label("Statistiken").first.click()
+    pg.get_by_label("Statistik", exact=True).first.click()
     wait(pg, 1000)
 
 

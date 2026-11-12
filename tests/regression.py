@@ -350,6 +350,12 @@ def t_stats_numbers(pg, env):
     t_a2.run(pg)
 
 
+@test("Statistik neue Oberfläche (SD)", quick=False, matrix=False)
+def t_stats_sd(pg, env):
+    import t_sd
+    t_sd.run(pg)
+
+
 @test("Podest nur beim ersten Beenden (P)", quick=False, matrix=False)
 def t_podium_once(pg, env):
     import t_p
@@ -411,7 +417,11 @@ def t_erfolge(pg, env):
     if pg.viewport_size["width"] < 768:
         click(pg, pg.get_by_text("Schreibunterlagen", exact=True).first, 700)
     click(pg, pg.get_by_text(re.compile(r"Statistik", re.I)).first, 900)
-    click(pg, pg.get_by_text("Spieler 1", exact=True).first, 1000)
+    # Neue Statistik (Paket SD): Profil ueber den Reiter "Personen"
+    tab = pg.get_by_role("tab", name=re.compile(r"^Personen$"))
+    if tab.count():
+        click(pg, tab.first, 600)
+    click(pg, pg.get_by_role("button", name=re.compile(r"Spieler 1")).first, 1000)
     expect_text(pg, r"Erfolge", "Erfolge: Abschnitt fehlt in der Personenansicht")
     check(pg.locator("[data-gt-achv-state=on]").count() >= 1, "Erfolge: kein freigeschaltetes Abzeichen")
     finish(pg, "Erfolge", env)

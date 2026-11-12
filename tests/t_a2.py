@@ -50,7 +50,7 @@ def _open_stats(pg):
         pass
     pg.get_by_text("Schreibunterlagen", exact=True).first.click()
     wait(pg, 800)
-    pg.get_by_label("Statistiken").first.click()
+    pg.get_by_label("Statistik", exact=True).first.click()
     wait(pg, 1200)
 
 
@@ -65,18 +65,22 @@ def run_numbers(b):
     try:
         _open_stats(pg)
         txt = pg.evaluate("document.body.innerText")
-        assert "3 von 4 gewonnen" in txt, "Anna: 3 von 4 fehlt"
-        assert "2 von 4 gewonnen" in txt, "Ben: 2 von 4 fehlt"
-        assert "75%" in txt.replace(" %", "%") and "50%" in txt.replace(" %", "%"), "Prozent passen nicht zu x von y"
+        lab = pg.evaluate("[...document.querySelectorAll('ol[aria-label] > li[aria-label]')].map(e=>e.getAttribute('aria-label'))")  # SD: Zeilen mit aria-label
+        assert any(x.startswith("Anna") and "3 Siege aus 4 Partien" in x for x in lab), "Anna: 3 Siege aus 4 fehlt"
+        assert any(x.startswith("Ben") and "2 Siege aus 4 Partien" in x for x in lab), "Ben: 2 Siege aus 4 fehlt"
+        assert "75 %" in txt and "50 %" in txt, "Prozent passen nicht zu x von y"
         assert "davon 1 geteilt" in txt, "Hinweis geteilter Sieg fehlt"
         assert "Noch wenig Daten" in txt, "Cleo ohne Hinweis"
         for bad in ("vorläufig", "Faire Quote"):
             assert bad not in txt, f"unerwartet: {bad}"
         assert not re.search(r"(?<!\d)0\s?%", txt), "0 % darf nicht stehen"
         # Cleo steht nicht in der Rangliste: Reihenfolge Anna (3 Siege) vor Ben (2 Siege)
-        assert pg.get_by_role("button", name=re.compile(r"^Platz 1: Anna, 75 Prozent")).count() == 1, "Platz 1 ist nicht Anna mit 75 Prozent"
-        assert pg.get_by_role("button", name=re.compile(r"^Platz 2: Ben, 50 Prozent")).count() == 1, "Platz 2 ist nicht Ben"
+        assert lab[0].startswith("Anna, Platz 1, 3 Siege aus 4 Partien"), "Platz 1 ist nicht Anna"
+        assert lab[1].startswith("Ben, Platz 2, 2 Siege aus 4 Partien"), "Platz 2 ist nicht Ben"
+        assert lab[2].startswith("Cleo, 0 Siege aus 2 Partien") and lab[2].endswith("noch wenig Daten"), f"Cleo unter dem Strich: {lab[2]}"
         _shot(pg, "a2_stats_393.png")
+        pg.get_by_role("tab", name="Personen").click()  # SD: Profil über den Reiter Personen
+        wait(pg, 400)
         pg.get_by_role("button", name=re.compile(r"^Cleo")).first.click()
         wait(pg, 900)
         ptxt = pg.evaluate("document.body.innerText")
@@ -109,7 +113,7 @@ def run_error(b):
         pg.get_by_role("button", name="Nochmal versuchen", exact=True).click()
         wait(pg, 800)
         assert pg.locator("[data-gt-stats-error]").count() == 0, "Karte bleibt nach Retry"
-        assert "3 von 4 gewonnen" in pg.evaluate("document.body.innerText")
+        assert "Anna führt, 3 Siege aus 4 Partien." in pg.evaluate("document.body.innerText")
     finally:
         ctx.close()
 

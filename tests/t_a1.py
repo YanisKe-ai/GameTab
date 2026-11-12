@@ -34,7 +34,7 @@ def _stats_text(pg):
     wait(pg, 1000)
     pg.get_by_text("Schreibunterlagen", exact=True).first.click()
     wait(pg, 800)
-    pg.get_by_label("Statistiken").first.click()
+    pg.get_by_label("Statistik", exact=True).first.click()
     wait(pg, 1000)
     return pg.evaluate("document.body.innerText")
 

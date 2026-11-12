@@ -125,7 +125,7 @@ def migration(pg):
     ok(lg[0].get("winners") == ["A", "B"], f"Migration: alter Gleichstand bekommt beide Sieger {lg[0].get('winners')}")
     ok(lg[1].get("status") == "open" and lg[1].get("gtMig") == "fp-0", "Migration: Freies Spiel 0:0 (ungespielt) zaehlt nicht mehr, bleibt gespeichert")
     ok(lg[2].get("winners") is None and lg[3].get("status") is None, "Migration: eindeutige Eintraege unveraendert")
-    ok(v == "2" and vis == ["a1", "a3", "a4"], f"Migration versioniert {v}, sichtbar {vis}")
+    ok(v == "3" and vis == ["a1", "a3", "a4"], f"Migration versioniert {v}, sichtbar {vis}")
     pg.evaluate("()=>{const l=JSON.parse(localStorage.getItem('gt_matchLog'));l[1].status='done';localStorage.setItem('gt_matchLog',JSON.stringify(l));}")
     pg.reload(); pg.wait_for_timeout(1000)
     ok(pg.evaluate("()=>{loadMatchLog();return JSON.parse(localStorage.getItem('gt_matchLog'))[1].status}") == "done", "Migration laeuft nur einmal (idempotent, Version)")

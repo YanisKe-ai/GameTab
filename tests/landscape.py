@@ -340,7 +340,7 @@ def main():
         raise SystemExit(f"Datei fehlt: {HTML_PATH} (npm run build?)")
     errs, notes = [], []
     with sync_playwright() as p:
-        b = p.chromium.launch()
+        b = p.chromium.launch(args=["--mute-audio"])
         for name in [s.strip() for s in a.only.split(",") if s.strip()]:
             if name not in SCENARIOS:
                 raise SystemExit(f"--only: unbekannt {name!r}")

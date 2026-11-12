@@ -338,6 +338,12 @@ FAST = 130  # Wartezeit in Eintrags-Schleifen
 
 
 # ---------------------------------------------------------------- Schreibunterlagen
+@test("Statistik Geisterpartie (A1)", quick=False, matrix=False)
+def t_stats_ghost(pg, env):
+    import t_a1
+    t_a1.run(pg)
+
+
 @test("Skyjo")
 def t_skyjo(pg, env):
     open_game(pg, "Schreibunterlagen", "Skyjo"); press_start(pg)
@@ -966,7 +972,7 @@ def main():
     with sync_playwright() as p:
         for engine in ENGINES:
             try:
-                browser = getattr(p, engine).launch()
+                browser = getattr(p, engine).launch(**({"args": ["--mute-audio"]} if engine == "chromium" else {}))
             except Exception as e:  # noqa: BLE001
                 report("FEHLER", f"{engine} starten", f"{str(e).splitlines()[0][:150]}", 0)
                 continue

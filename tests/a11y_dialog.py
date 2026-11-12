@@ -353,7 +353,7 @@ def main():
     if "--only" in sys.argv:
         only = sys.argv[sys.argv.index("--only") + 1].split(",")
     with sync_playwright() as p:
-        b = p.chromium.launch()
+        b = p.chromium.launch(args=["--mute-audio"])
         for name, fn in CASES.items():
             if only and name not in only:
                 continue

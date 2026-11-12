@@ -45,7 +45,7 @@ def w(pg, ms=500):
 def run(pw, vp, theme, mode):
     W, H = vp
     tag = f"{W}x{H}-{theme}"
-    ctx = pw.chromium.launch().new_context(viewport={"width": W, "height": H}, has_touch=(mode == "Handy"), device_scale_factor=1)
+    ctx = pw.chromium.launch(args=["--mute-audio"]).new_context(viewport={"width": W, "height": H}, has_touch=(mode == "Handy"), device_scale_factor=1)
     ctx.add_init_script(INIT)
     pg = ctx.new_page()
     errs = []

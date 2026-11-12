@@ -363,7 +363,7 @@ def main():
     ap.add_argument("--only", default=",".join(ALL))
     a = ap.parse_args()
     with sync_playwright() as p:
-        b = p.chromium.launch()
+        b = p.chromium.launch(args=["--mute-audio"])
         for n in a.only.split(","):
             ALL[n.strip()](b)
         b.close()

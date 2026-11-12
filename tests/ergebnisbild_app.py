@@ -30,7 +30,7 @@ OUT.mkdir(parents=True, exist_ok=True)
 
 def launch(p, name):
     try:
-        return getattr(p, name).launch()
+        return getattr(p, name).launch(**({"args": ["--mute-audio"]} if name == "chromium" else {}))
     except Exception:
         c = sorted(glob.glob(os.path.expanduser(f"~/Library/Caches/ms-playwright/{name}-*/pw_run.sh")))
         if name == "webkit" and c:

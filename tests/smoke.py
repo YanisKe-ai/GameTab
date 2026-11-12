@@ -49,7 +49,7 @@ def set_theme(page, theme):
 def main():
     errors = []
     with sync_playwright() as p:
-        b = p.chromium.launch()
+        b = p.chromium.launch(args=["--mute-audio"])
         for vname, (w, h) in VIEWPORTS.items():
             mode = "Handy" if vname == "mobile" else "Laptop"
             for theme in THEMES:

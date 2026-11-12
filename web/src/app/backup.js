@@ -8,7 +8,7 @@ import { APP_BUILD } from "./build.js";
 
 const GT_BK_TYPE = "gametab-backup";
 const GT_BK_VERSION = 2; /* Format-Version. Dateien mit 1, 2 oder ohne Angabe (aelteste) werden gelesen, hoehere abgewiesen. */
-const GT_BK_KEY_RE = /^(gt_|gametab-|spieleblock-)/;
+const GT_BK_KEY_RE = /^(?!gt_matchLog_corrupt_)(gt_|gametab-|spieleblock-)/;
 const GT_BK_STATE_KEY = "spieleblock-app-state-v1";
 const GT_BK_MAX_BYTES = 40 * 1024 * 1024;
 

@@ -32,7 +32,7 @@ def page(b, seen=None, clicked=False):
 card = lambda p: p.locator(".gtU-card")
 
 with sync_playwright() as pw:
-    b = pw.chromium.launch()
+    b = pw.chromium.launch(args=["--mute-audio"])
     ctx, p, ver = page(b)
     ok("erster Besuch: keine Meldung", card(p).count() == 0)
     ver["build"] = "neu-1"; p.evaluate("window.dispatchEvent(new Event('focus'))"); p.wait_for_timeout(500)

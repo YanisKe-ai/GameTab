@@ -118,7 +118,7 @@ def main():
     errors = []
     bad = 0
     with sync_playwright() as p:
-        b = p.chromium.launch()
+        b = p.chromium.launch(args=["--mute-audio"])
         for th in themes:
             bad += one(b, w, h, mode, th, errors)
         b.close()

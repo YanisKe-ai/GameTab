@@ -38,7 +38,7 @@ PORT = 8790 + os.getpid() % 100
 
 def launch(p, name):
     try:
-        return getattr(p, name).launch()
+        return getattr(p, name).launch(**({"args": ["--mute-audio"]} if name == "chromium" else {}))
     except Exception:
         # Playwright-Version und installierter Browser passen nicht immer: neuesten vorhandenen nehmen
         cands = sorted(glob.glob(os.path.expanduser(f"~/Library/Caches/ms-playwright/{name}-*/pw_run.sh")))

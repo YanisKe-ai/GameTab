@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.12-1 (12.11.2026 09:25)
+- Statistik: Geisterpartie behoben, Partien-Zähler korrekt, Speicherfehler sichtbar
+
 ## 2026.11.11-6 (11.11.2026 23:43)
 - Freies Spiel: Rundenmodus, Notizblock-Optik, sicheres Spielende
 

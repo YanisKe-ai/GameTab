@@ -5,7 +5,7 @@ OUT = os.path.expanduser('~/Desktop/Gametab/tests/out/szenen')
 only = sys.argv[1].split(',') if len(sys.argv) > 1 else None
 URL = 'file://' + os.path.expanduser('~/Desktop/Gametab/dev-notes/entwuerfe/motion/szenen.html')
 with sync_playwright() as p:
-    b = p.chromium.launch()
+    b = p.chromium.launch(args=["--mute-audio"])
     pg = b.new_page(viewport={'width': 1100, 'height': 900})
     errs = []
     pg.on('console', lambda m: errs.append(m.text) if m.type in ('error', 'warning') else None)

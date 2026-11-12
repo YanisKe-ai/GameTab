@@ -272,7 +272,7 @@ CASES = {"mehr": case_mehr, "regeln": case_regeln, "weis": case_weis, "pad": cas
 def main():
     only = sys.argv[sys.argv.index("--only") + 1].split(",") if "--only" in sys.argv else None
     with sync_playwright() as p:
-        b = p.chromium.launch()
+        b = p.chromium.launch(args=["--mute-audio"])
         for name, fn in CASES.items():
             if only and name not in only:
                 continue

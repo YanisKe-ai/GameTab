@@ -8,46 +8,16 @@ const mem={};
 global.localStorage={getItem:k=>(k in mem?mem[k]:null),setItem:(k,v)=>{mem[k]=String(v);},removeItem:k=>{delete mem[k];}};
 const GTRK=src.slice(src.indexOf("/*GT_RANK_BEGIN*/"),src.indexOf("/*GT_RANK_END*/"));
 const pre=GTRK+';function gtIsObj(v){return v!==null&&typeof v==="object"&&!Array.isArray(v);}function gtNum(v){if(typeof v==="number")return isFinite(v)?v:null;return null;}const GT_MATCH_IDS={};';
-const F=new Function(pre+src.slice(g,ge)+";"+src.slice(a,b)+`;return{normalizeName,getMatchesForName,getPersonStats,getHeadToHead,getCoPlayers,getRivalries,getGroupMatches,getAllKnownNames,getNameSuggestions:typeof getNameSuggestions=="function"?getNameSuggestions:()=>[],mergeNames,getLeaderboard,computeWinStreaks,gtWon};`)();
+const F=new Function(pre+src.slice(g,ge)+";"+src.slice(a,b)+`;return{normalizeName,getAllKnownNames,getNameSuggestions,mergeNames,loadMatchLog,gtMigrateMatchLog,gtGroupTag,gtNoteGroup,recordMatch,gtWon,GT_MLOG_MIG_V};`)();
 let n=0;const fails=[];
 function T(name,fn){try{fn();n++;}catch(e){fails.push(name+": "+(e.message||e).split("\n")[0]);}}
 let ts=1000,id=0;
 // Partie: ps = [[Name,Punkte]], winners = [Namen]
 function M(game,ps,winners,extra){ts+=1000;return Object.assign({id:"m"+(++id),ts,game,participants:ps.map(([name,score,team])=>Object.assign({name,norm:name.trim().toLowerCase(),score:score==null?null:score,rank:winners.includes(name)?1:2},team?{isTeam:true}:{})),winner:winners.length===1?winners[0]:null},winners.length>1?{winners}:{},extra||{});}
 function seed(list){mem.gt_matchLog=JSON.stringify(list);}
-const S=q=>F.getPersonStats(q);
+// Mini-Auswertung (der alte getPersonStats ist entfernt): Partien/Siege/Treffer einer Person aus dem Matchlog
+const S=q=>{const k=F.normalizeName(q);const ms=F.loadMatchLog().filter(m=>m.participants.some(p=>p.norm===k&&p.isTeam!==true));return{played:ms.length,wins:ms.filter(m=>F.gtWon(m,k)).length,matches:ms};};
 
-T("Anna/Hanna Pflichtfall",()=>{
-  seed([M("skyjo",[["Anna",10],["Hanna",20]],["Anna"]),M("skyjo",[["Hanna",5],["Bob",9]],["Hanna"])]);
-  const a=S("Anna"),h=S("Hanna");
-  assert.equal(a.played,1);assert.equal(a.wins,1);assert.equal(a.displayName,"Anna");assert.equal(a.winRate,100);
-  assert.equal(h.played,2);assert.equal(h.wins,1);assert.equal(h.displayName,"Hanna");assert.equal(h.winRate,50);
-  const hh=F.getHeadToHead("Anna","Hanna");assert.equal(hh.together,1);assert.equal(hh.winsA,1);assert.equal(hh.winsB,0);
-  const hh2=F.getHeadToHead("Hanna","Anna");assert.equal(hh2.winsA,0);assert.equal(hh2.winsB,1);
-  assert.equal(F.getHeadToHead("Anna","Bob").together,0);
-});
-T("Jan/Janis",()=>{
-  seed([M("yatzy",[["Jan",1],["Janis",2]],["Janis"]),M("yatzy",[["Janis",5],["Eva",1]],["Janis"]),M("yatzy",[["Jan",9],["Eva",1]],["Jan"])]);
-  assert.equal(S("Jan").played,2);assert.equal(S("Jan").wins,1);
-  assert.equal(S("Janis").played,2);assert.equal(S("Janis").wins,2);
-  assert.equal(F.getHeadToHead("Jan","Janis").together,1);
-  assert.deepEqual(F.getCoPlayers("Jan").map(c=>c.name).sort(),["Eva","Janis"]);
-});
-T("Spieler 1 / Spieler 10",()=>{
-  seed([M("skyjo",[["Spieler 1",1],["Spieler 10",2]],["Spieler 1"]),M("skyjo",[["Spieler 10",1],["Spieler 2",2]],["Spieler 10"]),M("skyjo",[["Spieler 1",1],["Spieler 2",2]],["Spieler 2"])]);
-  assert.equal(S("Spieler 1").played,2);assert.equal(S("Spieler 1").wins,1);
-  assert.equal(S("Spieler 10").played,2);assert.equal(S("Spieler 10").wins,1);
-  assert.equal(F.getHeadToHead("Spieler 1","Spieler 10").together,1);
-  assert.equal(F.getHeadToHead("Spieler 1","Spieler 2").together,1);
-});
-T("Name komplett in anderem enthalten (Al/Alexander/Alexandra)",()=>{
-  seed([M("skyjo",[["Al",1],["Alexander",2]],["Alexander"]),M("skyjo",[["Alexandra",1],["Alexander",2]],["Alexandra"])]);
-  assert.equal(S("Al").played,1);assert.equal(S("Al").wins,0);
-  assert.equal(S("Alexander").played,2);assert.equal(S("Alexander").wins,1);
-  assert.equal(S("Alex").played,0);assert.equal(S("Alex").displayName,"Alex");
-  assert.equal(F.getHeadToHead("Al","Alexandra").together,0);
-  assert.equal(F.getHeadToHead("Al","Alexander").together,1);assert.equal(F.getHeadToHead("Al","Alexander").winsA,0);assert.equal(F.getHeadToHead("Al","Alexander").winsB,1);
-});
 T("Gross/klein und Leerzeichen",()=>{
   seed([M("skyjo",[["ANNA",1],["bob",2]],["ANNA"]),M("skyjo",[["  anna ",1],["Bob",2]],["  anna "]),M("skyjo",[["Anna  Lena",1],["Bob",2]],["Anna  Lena"]),M("skyjo",[["Anna Lena",1],["Bob",2]],["Bob"])]);
   assert.equal(S("anna").played,2);assert.equal(S("  Anna").wins,2);
@@ -66,67 +36,18 @@ T("Umlaute, Bindestrich, Unicode NFC/NFD",()=>{
   assert.equal(S(nfc).played,2);assert.equal(S("JOSÉ").wins,1);
   seed([M("skyjo",[["Anna-Lena",1],["Anna Lena",2],["Anna",3],["Lena",4]],["Anna-Lena"])]);
   assert.equal(S("Anna-Lena").played,1);assert.equal(S("Anna Lena").played,1);assert.equal(S("Anna Lena").wins,0);assert.equal(S("Anna").wins,0);assert.equal(S("Lena").played,1);
-  assert.equal(F.getHeadToHead("Anna-Lena","Anna Lena").winsA,1);
   seed([M("skyjo",[["Müller",1],["Mueller",2],["Muller",3]],["Müller"])]);
-  assert.equal(S("Müller").wins,1);assert.equal(S("Mueller").wins,0);assert.equal(S("Muller").played,1);
-});
-T("gemeinsamer Sieg zaehlt fuer beide",()=>{
-  seed([M("skyjo",[["Anna",1],["Bob",1],["Cy",5]],["Anna","Bob"]),M("skyjo",[["Anna",1],["Bob",3]],["Anna"]),M("skyjo",[["Anna",4],["Bob",3]],["Bob"])]);
-  const h=F.getHeadToHead("Anna","Bob");
-  assert.equal(h.together,3);assert.equal(h.winsA,2);assert.equal(h.winsB,2);assert.equal(h.bothWon,1);
-  assert.equal(S("Anna").wins,2);assert.equal(S("Bob").wins,2);
-  const hb=F.getHeadToHead("Bob","Anna");assert.equal(hb.winsA,2);assert.equal(hb.winsB,2);
-});
-T("Partie mit nur einer der Personen",()=>{
-  seed([M("skyjo",[["Anna",1],["Cy",2]],["Anna"]),M("skyjo",[["Bob",1],["Cy",2]],["Bob"])]);
-  const h=F.getHeadToHead("Anna","Bob");assert.equal(h.together,0);assert.equal(h.winsA,0);assert.equal(h.winsB,0);assert.equal(h.matches.length,0);
-  assert.equal(F.getHeadToHead("Anna","Anna"),null);assert.equal(F.getHeadToHead("","Bob"),null);
-});
-T("Serien und Erfolge nur eigene Partien",()=>{
-  const l=[];for(let i=0;i<5;i++)l.push(M("skyjo",[["Anna",1],["Hanna",9]],["Anna"]));
-  for(let i=0;i<3;i++)l.push(M("yatzy",[["Hanna",9],["Cy",1]],["Hanna"]));
-  seed(l);
-  const a=S("Anna"),h=S("Hanna");
-  assert.equal(a.played,5);assert.equal(a.wins,5);
-  assert.equal(F.computeWinStreaks("anna",a.matches).best,5);
-  assert.ok(a.achievements.find(x=>x.id==="streak5").unlocked);
-  assert.ok(a.achievements.find(x=>x.id==="first_win").unlocked);
-  assert.equal(h.played,8);assert.equal(h.wins,3);
-  assert.equal(F.computeWinStreaks("hanna",h.matches).best,3);
-  assert.ok(!h.achievements.find(x=>x.id==="streak5").unlocked);
-  assert.ok(!h.achievements.find(x=>x.id==="played10").unlocked);
-  assert.equal(h.perGame.skyjo.played,5);assert.equal(h.perGame.skyjo.wins,0);
-});
-T("Lieblingsspiel und Mitspieler getrennt",()=>{
-  seed([M("skyjo",[["Anna",1],["Cy",2]],["Anna"]),M("yatzy",[["Hanna",1],["Cy",2]],["Hanna"]),M("yatzy",[["Hanna",1],["Dan",2]],["Hanna"]),M("yatzy",[["Hanna",1],["Dan",2]],["Dan"])]);
-  assert.equal(S("Anna").favoriteGame,"skyjo");assert.equal(S("Hanna").favoriteGame,"yatzy");
-  assert.deepEqual(F.getCoPlayers("Anna").map(c=>c.name),["Cy"]);
-  const ch=F.getCoPlayers("Hanna");assert.deepEqual(ch.map(c=>c.name+":"+c.together+":"+c.meWins).sort(),["Cy:1:1","Dan:2:1"]);
-});
-T("Rivalitaeten exakt",()=>{
-  const l=[];for(let i=0;i<3;i++)l.push(M("skyjo",[["Anna",1],["Hanna",9]],["Anna"]));
-  for(let i=0;i<3;i++)l.push(M("skyjo",[["Anna",9],["Hans",1]],["Hans"]));
-  seed(l);
-  const r=F.getRivalries("Anna");assert.equal(r.nemesis.name,"Hans");assert.equal(r.favorite.name,"Hanna");
-  assert.equal(F.getRivalries("Han"),null);
-  assert.equal(F.getRivalries("Hanna").nemesis.name,"Anna");
+  // Akzentfaltung: Müller und Muller sind eine Person, Mueller bleibt getrennt
+  assert.equal(S("Müller").played,1);assert.equal(S("Müller").wins,1);assert.equal(S("Mueller").played,1);assert.equal(S("Mueller").wins,0);assert.equal(S("Muller").wins,1);assert.equal(F.getAllKnownNames().filter(n=>n.norm==="muller").length,1);
 });
 T("Teams nicht mit Personen vermischt",()=>{
   seed([M("schieber",[["Anna & Bob",1000,true],["Cy & Dan",900,true]],["Anna & Bob"]),M("schieber",[["Anna",1000,true],["Cy",900,true]],["Anna"]),M("skyjo",[["Anna",1],["Cy",2]],["Anna"])]);
   assert.equal(S("Anna").played,1);assert.equal(S("Anna").wins,1);
   assert.equal(S("Anna & Bob").played,0);
-  assert.equal(F.getHeadToHead("Anna","Cy").together,1);
   assert.ok(!F.getAllKnownNames().some(n=>n.name.includes("&")));
   // ohne Markierung: Teamname "Anna & Bob" ist trotzdem nicht Anna
   seed([M("schieber",[["Anna & Bob",1000],["Cy & Dan",900]],["Anna & Bob"])]);
   assert.equal(S("Anna").played,0);assert.equal(S("Anna & Bob").played,1);
-});
-T("Gruppenpartien exakt",()=>{
-  seed([M("skyjo",[["Anna",1],["Bob",2],["Cy",3]],["Anna"]),M("skyjo",[["Hanna",1],["Bob",2]],["Hanna"]),M("skyjo",[["Anna",1],["Bob",2]],["Bob"])]);
-  assert.equal(F.getGroupMatches(["Anna","Bob"]).length,2);
-  assert.equal(F.getGroupMatches(["anna "," BOB"]).length,2);
-  assert.equal(F.getGroupMatches(["Anna","Bob","Cy"]).length,1);
-  assert.equal(F.getGroupMatches(["Anna","Anna"]).length,0);
 });
 T("Vorschlaege unscharf, Berechnung nicht",()=>{
   seed([M("skyjo",[["Anna",1],["Hanna",9]],["Anna"]),M("skyjo",[["Anna",1],["Hanna",9]],["Anna"]),M("skyjo",[["Hanna",1],["Hannes",9]],["Hanna"])]);
@@ -145,8 +66,6 @@ T("Bewusstes Zusammenfuehren",()=>{
   const a2=S("Anna");assert.equal(a2.played,4);assert.equal(a2.wins,3);
   // beide in derselben Partie: Partie zaehlt einmal, kein Doppelsieg, keine Selbst-Mitspielerin
   assert.equal(a2.matches.length,4);
-  assert.ok(!F.getCoPlayers("Anna").some(c=>c.name==="Anna"));
-  assert.equal(F.getLeaderboard("skyjo",5).find(x=>x.name==="Anna").played,4);
   assert.ok(!JSON.parse(mem.gt_matchLog).some(m=>m.participants.filter(p=>p.name==="Anna").length>1));
   const wm=JSON.parse(mem.gt_matchLog)[0];assert.equal(wm.participants.length,1);assert.equal(wm.participants[0].rank,1);assert.equal(wm.winner,"Anna");
 });
@@ -160,12 +79,49 @@ T("alte Eintraege: fehlende norm, fehlende ids, kaputte Eintraege",()=>{
   assert.equal(S("Anna").played,1);assert.equal(S("Anna").wins,1);assert.equal(S("Hanna").played,2);assert.equal(S("Hanna").wins,1);
 });
 T("Leere Anfrage und leeres Log",()=>{
-  seed([]);assert.equal(S("Anna").played,0);assert.deepEqual(F.getMatchesForName(""),[]);assert.equal(F.getRivalries("Anna"),null);
+  seed([]);assert.equal(S("Anna").played,0);assert.equal(S("").played,0);
   delete mem.gt_matchLog;assert.equal(S("Anna").played,0);
 });
-T("Quote und Rundung",()=>{
-  seed([M("skyjo",[["Anna",1],["Bob",2]],["Anna"]),M("skyjo",[["Anna",2],["Bob",1]],["Bob"]),M("skyjo",[["Anna",2],["Bob",1]],["Bob"])]);
-  assert.equal(S("Anna").winRate,33);assert.equal(S("Bob").winRate,67);
+T("alte Sicherung laden: Akzent-Migration (Zoë/zoe, Erfolge gesehen, Anna)",()=>{
+  // Zustand wie vor der Umstellung: Schluessel alt (zoë und zoe getrennt), Version 2
+  const mk=(id,ts,ps,w)=>({id,ts,game:"skyjo",status:"done",participants:ps.map(([name,sc,rk])=>({name,norm:name.trim().toLowerCase(),score:sc,rank:rk})),winner:w});
+  mem.gt_matchLog=JSON.stringify([mk("a",1,[["Zoë",1,1],["Anna",5,2]],"Zoë"),mk("b",2,[["zoe ",1,1],["Anna",5,2]],"zoe "),mk("c",3,[["Anna",1,1],["Zoë",5,2]],"Anna")]);
+  mem["gametab-achv-seen-v1"]=JSON.stringify({"zoë":["first_win:1"],"zoe":["played:1","first_win:1"],"anna":["first_win:1"]});
+  mem.gt_achSeen=JSON.stringify({"zoë":["first_win"],"anna":["streak3"]});
+  mem.gt_matchLogMig="2";
+  // frisch geladen: Migration laeuft einmalig beim ersten Lesen (neue Funktionsinstanz nur fuer diesen Test)
+  const G=new Function(pre+src.slice(g,ge)+";"+src.slice(a,b)+";return{loadMatchLog,gtWon,normalizeName,GT_MLOG_MIG_V};")();
+  assert.equal(G.GT_MLOG_MIG_V,3);
+  const log=G.loadMatchLog();
+  const z=log.filter(m=>m.participants.some(p=>p.norm==="zoe"));assert.equal(z.length,3);
+  assert.equal(z.filter(m=>G.gtWon(m,"zoe")).length,2);
+  const an=log.filter(m=>m.participants.some(p=>p.norm==="anna"));assert.equal(an.length,3);assert.equal(an.filter(m=>G.gtWon(m,"anna")).length,1);
+  assert.equal(mem.gt_matchLogMig,"3");
+  const stored=JSON.parse(mem.gt_matchLog);assert.ok(stored.every(m=>m.participants.every(p=>p.norm===G.normalizeName(p.name))),"gespeicherte norm neu berechnet");
+  assert.equal(stored[0].participants[0].norm,"zoe");assert.equal(stored[0].participants[1].norm,"anna");
+  const seen=JSON.parse(mem["gametab-achv-seen-v1"]);
+  assert.deepEqual(Object.keys(seen).sort(),["anna","zoe"]);
+  assert.deepEqual(seen.zoe.slice().sort(),["first_win:1","played:1"]);   // vereinigt, ohne Doppelte: nichts wird wieder "neu"
+  assert.deepEqual(seen.anna,["first_win:1"]);
+  const so=JSON.parse(mem.gt_achSeen);assert.deepEqual(so,{zoe:["first_win"],anna:["streak3"]});
+  // zweiter Lauf aendert nichts (Version 3 gesetzt)
+  const before=mem.gt_matchLog,b2=mem["gametab-achv-seen-v1"];
+  new Function(pre+src.slice(g,ge)+";"+src.slice(a,b)+";loadMatchLog();")();
+  assert.equal(mem.gt_matchLog,before);assert.equal(mem["gametab-achv-seen-v1"],b2);
+});
+T("gt_lastGroup (sessionStorage) mit alter Schluesselform wird neu gefaltet",()=>{
+  global.sessionStorage={_m:{},getItem(k){return k in this._m?this._m[k]:null;},setItem(k,v){this._m[k]=String(v);},removeItem(k){delete this._m[k];}};
+  sessionStorage.setItem("gt_lastGroup",JSON.stringify({id:7,set:["zoë","anna"]}));
+  assert.equal(F.gtGroupTag([{name:"Zoe"},{name:"Anna"}]),7);
+  assert.equal(F.gtGroupTag([{name:"Zoe"},{name:"Bob"}]),undefined);
+  delete global.sessionStorage;
+});
+T("Akzentfaltung im Namensschluessel und recordMatch",()=>{
+  assert.equal(F.normalizeName("Zoë"),"zoe");assert.equal(F.normalizeName(" ZOE  "),"zoe");assert.equal(F.normalizeName("Müller"),"muller");assert.equal(F.normalizeName("Anna   Lena "),"anna lena");
+  // GT_STATS.norm und normalizeName muessen identisch sein
+  const ca=src.indexOf("/*GT_STATS_BEGIN*/"),cs=src.slice(ca,src.indexOf("/*GT_STATS_END*/")),ni=cs.indexOf("function norm(name)"),ne=cs.indexOf("\n",ni);
+  const N=new Function(cs.slice(ni,ne)+";return norm;")();
+  ["Zoë","zoe ","  Anna   Lena ","Müller","José","ÄRIN","","   ",null,undefined,"Anna K.","Anna-Lena","ß","Ørsted","\u0041\u030a"].forEach(x=>assert.equal(N(x),F.normalizeName(x),"norm("+x+")"));
 });
 console.log((n)+" bestanden, "+fails.length+" fehlgeschlagen");fails.forEach(f=>console.log("FAIL "+f));
 process.exit(fails.length?1:0);

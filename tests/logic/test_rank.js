@@ -47,6 +47,6 @@ T("nightKey: 04:59 gehoert zum Vortag, 05:00 zum neuen Tag",()=>{
   assert.equal(S.nightKey(new Date(2026,5,2,23,59).getTime()),"2026-06-02");
   assert.equal(S.nightKey(new Date(2026,0,1,2,0).getTime()),"2025-12-31");
   assert.equal(S.nightKey(NaN),null);});
-T("norm: heutige Normalisierung (noch ohne Akzentfaltung)",()=>{assert.equal(S.norm("  Anna   Lena "),"anna lena");assert.equal(S.norm("Zoë"),"zoë");assert.notEqual(S.norm("Zoë"),S.norm("Zoe"));assert.equal(S.norm(null),"");assert.equal(S.norm("Z"),F.normalizeName("Z"));});
+T("norm: mit Akzentfaltung (Zoë = Zoe)",()=>{assert.equal(S.norm("  Anna   Lena "),"anna lena");assert.equal(S.norm("Zoe\u0308"),"zoe");assert.equal(S.norm("Zo\u00eb"),S.norm("Zoe"));assert.equal(S.norm(null),"");assert.equal(S.norm("Z"),F.normalizeName("Z"));assert.equal(S.norm("Zo\u00eb"),F.normalizeName("Zoe"));});
 console.log(fails.length?"FEHLER:\n"+fails.join("\n"):"OK test_rank: "+n+" Tests");
 process.exit(fails.length?1:0);

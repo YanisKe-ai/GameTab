@@ -189,8 +189,37 @@ T("Anna/Hanna exakt getrennt, Gross/Klein und Leerzeichen gleich",()=>{
   const m=S.build(L);assert.equal(pp(m,"anna").matches,2);assert.equal(pp(m,"hanna").matches,2);assert.equal(pp(m,"anna").wins,2);
   assert.equal(pp(m,"anna").name,"anna","neueste Schreibweise");
   const h=S.headToHead(L,"Anna","Hanna");assert.equal(h.together,1);assert.equal(h.aWins,1);assert.equal(h.bWins,0);
-  assert.equal(S.headToHead(L,"Hanna","Anna").bWins,1);assert.equal(S.norm("  ÄBC  d "),"äbc d");
+  assert.equal(S.headToHead(L,"Hanna","Anna").bWins,1);assert.equal(S.norm("  ÄBC  d "),"abc d");
   assert.equal(S.profile(L,"Ann"),null);
+});
+// Aus test_person_stats.js uebertragen (alter Personenblock entfernt)
+T("Namensschluessel: Akzentfaltung, Leerzeichen, Gross/Klein",()=>{
+  assert.equal(S.norm("Zoë"),"zoe");assert.equal(S.norm(" ZOE  "),"zoe");assert.equal(S.norm("Müller"),"muller");
+  assert.equal(S.norm("José"),S.norm("José"));assert.equal(S.norm("ÄRIN"),S.norm("ärin"));
+  assert.equal(S.norm("Anna   Lena"),"anna lena");assert.equal(S.norm(null),"");assert.equal(S.norm("   "),"");
+  assert.notEqual(S.norm("Anna-Lena"),S.norm("Anna Lena"));assert.notEqual(S.norm("Anna K."),S.norm("Anna"));
+});
+T("Zoe/Zoë zaehlt als eine Person (auch mit alter gespeicherter norm)",()=>{
+  const a=M("skyjo",[2026,1,1],[["Zoë",1,1],["Bob",2,2]],["Zoë"]);a.participants[0].norm="zoë";
+  const L=[a,M("skyjo",[2026,1,2],[["zoe ",1,1],["Bob",2,2]],["zoe "]),M("skyjo",[2026,1,3],[["Zoe",5,2],["Bob",1,1]],["Bob"])];
+  const m=S.build(L);assert.equal(pp(m,"zoe").matches,3);assert.equal(pp(m,"zoe").wins,2);assert.equal(m.people.filter(p=>p.key.indexOf("zo")===0).length,1);
+  assert.equal(S.profile(L,"ZOË").matches,3);assert.equal(S.headToHead(L,"Zoë","Bob").together,3);
+  assert.equal(S.won(a,"zoe"),true);
+});
+T("Jan/Janis, Spieler 1/Spieler 10, Al/Alexander: exakte Schluessel",()=>{
+  const L=[M("yatzy",[2026,1,1],[["Jan",1,2],["Janis",2,1]],["Janis"]),M("yatzy",[2026,1,2],[["Janis",5,1],["Eva",1,2]],["Janis"]),M("yatzy",[2026,1,3],[["Jan",9,1],["Eva",1,2]],["Jan"])];
+  assert.equal(S.profile(L,"Jan").matches,2);assert.equal(S.profile(L,"Jan").wins,1);assert.equal(S.profile(L,"Janis").wins,2);
+  assert.equal(S.headToHead(L,"Jan","Janis").together,1);
+  const L2=[M("skyjo",[2026,1,1],[["Spieler 1",1,1],["Spieler 10",2,2]],["Spieler 1"]),M("skyjo",[2026,1,2],[["Spieler 10",1,1],["Spieler 2",2,2]],["Spieler 10"])];
+  assert.equal(S.profile(L2,"Spieler 1").matches,1);assert.equal(S.profile(L2,"Spieler 10").matches,2);assert.equal(S.headToHead(L2,"Spieler 1","Spieler 10").together,1);
+  const L3=[M("skyjo",[2026,1,1],[["Al",1,1],["Alexander",2,2]],["Al"]),M("skyjo",[2026,1,2],[["Alexandra",1,1],["Alexander",2,2]],["Alexandra"])];
+  assert.equal(S.profile(L3,"Alex"),null);assert.equal(S.headToHead(L3,"Al","Alexandra").together,0);assert.equal(S.headToHead(L3,"Al","Alexander").together,1);
+});
+T("Partie nur mit einer der Personen; Teamname ist keine Person",()=>{
+  const L=[M("skyjo",[2026,1,1],[["Anna",1,1],["Cy",2,2]],["Anna"]),M("skyjo",[2026,1,2],[["Bob",1,1],["Cy",2,2]],["Bob"])];
+  const h=S.headToHead(L,"Anna","Bob");assert.equal(h.together,0);assert.equal(h.aWins,0);assert.equal(h.bWins,0);
+  const T2=[M("schieber",[2026,1,3],[["Anna & Bob",1000,1],["Cy & Dan",900,2]],["Anna & Bob"])];
+  assert.equal(S.profile(T2,"Anna")&&S.profile(T2,"Anna").matches||0,0);
 });
 // ---------- Direktvergleich ----------
 T("Direktvergleich: Siege, geteilt, keiner, Platzierung, Spiele",()=>{

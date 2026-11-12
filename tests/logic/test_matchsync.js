@@ -68,7 +68,7 @@ T("b2) Migration setzt Zaehler auf Zahl beendeter Partien",()=>{
   mem.gt_matchLog=JSON.stringify([{id:"1",status:"done",participants:[]},{id:"2",participants:[]},{id:"3",status:"open",participants:[]}]);
   mem.gt_totalGamesPlayed="17";mem.gt_matchLogMig="1";
   F.loadMatchLogRaw();
-  assert.equal(cnt(),2);assert.equal(mem.gt_matchLogMig,"2");
+  assert.equal(cnt(),2);assert.equal(mem.gt_matchLogMig,"3");
 });
 T("c) kaputter Rohtext: Sicherung und []",()=>{
   const F=load();mem.gt_matchLog="{kaputt";

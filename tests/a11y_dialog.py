@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Dialoge und Schieber-Tafel per Tastatur (Playwright, Python).
 
-Aufruf: GAMETAB_HTML=docs/index.html $VENV tests/a11y_dialog.py [--only onboarding,mehr,regeln,jahr,weis,pad,tour,podium,schieber]
+Aufruf: GAMETAB_HTML=docs/index.html $VENV tests/a11y_dialog.py [--only onboarding,mehr,regeln,jahr,weis,pad,tour,podium,teilen,schieber]
 
 Je Dialog: Fokus rutscht hinein, Tab und Shift+Tab bleiben im Dialog (Schleife), alles ausserhalb ist inert,
 Escape schliesst (wo erlaubt), Fokus kehrt auf den Ausloeser zurueck. Schieber: Punkte nur mit Tab, Enter, Leertaste.
@@ -265,6 +265,35 @@ def case_podium(b):
     ctx.close()
 
 
+def case_teilen(b):
+    """Teilen-Vorschau (export/share-preview.js) ueber dem Podest: Tab bleibt drin, Escape schliesst nur sie, Fokus zurueck."""
+    errors = []
+    ctx, pg = new_phone(b, errors)
+    A.flow_freeplay(pg)
+    R.wait(pg, 4000)
+    trig = pg.get_by_role("button", name=re.compile(r"Bild teilen")).first
+    trig.focus()
+    pg.keyboard.press("Enter")
+    R.wait(pg, 1500)
+    dlg = pg.locator(".gtsp-ov")
+    ok(dlg.count() == 1, "Teilen-Vorschau: Dialog offen")
+    if dlg.count() == 1:
+        st = state(pg)
+        ok(st is not None and st["inside"], "Teilen-Vorschau: Startfokus im Dialog")
+        ok(st is not None and st["modal"] == "true", "Teilen-Vorschau: aria-modal")
+        ok(st is not None and bool(st["label"]), f"Teilen-Vorschau: zugaenglicher Name ({(st or {}).get('label', '')[:30]!r})")
+        ok(st is not None and not st["outsideOpen"], f"Teilen-Vorschau: Hintergrund inert (offen: {(st or {}).get('outsideOpen', [])[:3]})")
+        tab_loop(pg, "Teilen-Vorschau")
+        pg.screenshot(path=str(OUT / "teilen.png"))
+        pg.keyboard.press("Escape")
+        R.wait(pg, 700)
+        ok(pg.locator(".gtsp-ov").count() == 0, "Teilen-Vorschau: Escape schliesst sie")
+        ok(pg.locator("[data-gt-podium]").count() >= 1, "Teilen-Vorschau: Podest darunter bleibt offen")
+        ok(focus_is(pg, trig), "Teilen-Vorschau: Fokus zurueck auf 'Als Bild teilen'")
+    ok(not errors, f"Teilen-Vorschau: keine Seitenfehler {errors[:1]}")
+    ctx.close()
+
+
 def tab_to(pg, pred_js, name, limit=60):
     """Mit Tab zum Element, dessen Name pred_js (JS-Ausdruck mit el) erfuellt."""
     for _ in range(limit):
@@ -344,7 +373,7 @@ def case_schieber(b):
 
 CASES = {
     "onboarding": case_onboarding, "mehr": case_mehr, "regeln": case_regeln, "jahr": case_jahr, "weis": case_weis,
-    "pad": case_pad, "tour": case_tour, "podium": case_podium, "schieber": case_schieber,
+    "pad": case_pad, "tour": case_tour, "podium": case_podium, "teilen": case_teilen, "schieber": case_schieber,
 }
 
 

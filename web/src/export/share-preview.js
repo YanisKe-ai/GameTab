@@ -7,10 +7,15 @@ import { usePhoneLandscape } from "../shared/phone-landscape.js";
 import { useEffect, useRef, useState } from "../prelude.js";
 import { gtImgCanShare, gtImgDevice, gtImgDownload, gtImgFree, gtImgPlan, gtImgShare } from "./save-image.js";
 import { useGtDialog } from "../shared/dialog.js";
+// Der Teilen-Knopf ist waehrend der Bildberechnung disabled und verliert dann den Fokus. Darum den zuletzt angeklickten Knopf merken
+// und beim Oeffnen der Vorschau wieder fokussieren: useGtDialog gibt den Fokus danach an genau diesen Knopf zurueck.
+let gtShareTrigger = null;
+try { document.addEventListener("click", (e) => { const b = e.target && e.target.closest ? e.target.closest("button") : null; if (b) gtShareTrigger = b; }, true); } catch (_) { /* nur Komfort */ }
 /*@gt-body-begin*/
 /*GT_ST_EXPORT_END*/
 function ShareImagePreview({url,onClose,t}){
 const plLand=usePhoneLandscape();const[note,setNote]=useState("");const[forceSave,setForceSave]=useState(false);const[busy,setBusy]=useState(false);const alive=useRef(true);
+React.useLayoutEffect(()=>{if(!url)return;const a=document.activeElement;if(a&&a!==document.body&&a.isConnected)return;const b=gtShareTrigger;if(b&&b.isConnected&&!b.disabled){try{b.focus({preventScroll:true});}catch(_f){}}},[!!url]);
 const dlg=useGtDialog({open:!!url,onClose});
 useEffect(()=>{alive.current=true;return()=>{alive.current=false;};},[]);
 useEffect(()=>{setNote("");setForceSave(false);setBusy(false);if(!url)return;const items=Array.isArray(url)?url:[url];return()=>gtImgFree(items);},[url]);

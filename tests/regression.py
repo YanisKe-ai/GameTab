@@ -362,6 +362,13 @@ def t_b_storage(pg, env):
     t_b.run(pg)
 
 
+@test("Barrierefreiheit Grundlagen (U1)", quick=False, matrix=False)
+def t_a11y_checks(pg, env):
+    import a11y_checks
+    a11y_checks.run(pg)
+    a11y_checks.run_restore(pg)
+
+
 @test("Texte und Menue (T)", quick=False, matrix=False)
 def t_t_menu(pg, env):
     import t_t

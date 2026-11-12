@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.12-6 (12.11.2026 11:45)
+- Barrierefreiheit: Beschriftungen, Seitentitel, Ansagen, Meldung nach Wiederherstellen
+
 ## 2026.11.12-5 (12.11.2026 11:19)
 - Menü: Spiel verwerfen, eigenes Rückgängig-Symbol, Regeltexte korrigiert
 

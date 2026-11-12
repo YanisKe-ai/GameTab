@@ -1,6 +1,6 @@
 // Liefert den App-Quelltext fuer die Logiktests.
-// Standard: Inhalt der HTML-Datei (Argument, GAMETAB_HTML oder index.html).
-// GAMETAB_SRC=web und web/src vorhanden: Module in Import-Reihenfolge von
+// Standard (ohne Argument/GAMETAB_HTML, web/src/main.js vorhanden): web/src zusammensetzen.
+// Mit Argument oder GAMETAB_HTML: Inhalt dieser HTML-Datei. GAMETAB_SRC=web erzwingt web/src. Module in Import-Reihenfolge von
 // web/src/main.js zusammengesetzt, Import/Export-Zeilen entfernt (wie tools/split.mjs --verify).
 // JSX (Etappe 4c) wird dabei zeilenerhaltend zurueck in React.createElement verwandelt (tools/jsx2ce.cjs),
 // damit die Tests Codezeilen weiterhin mit new Function auswerten koennen.
@@ -58,7 +58,10 @@ function composeWeb() {
 }
 
 function getSource(arg) {
-  if (process.env.GAMETAB_SRC === "web" && fs.existsSync(path.join(ROOT, "web", "src", "main.js"))) return composeWeb();
+  const hasWeb = fs.existsSync(path.join(ROOT, "web", "src", "main.js"));
+  // Ohne Argument und ohne GAMETAB_HTML: web/src (Quelle). GAMETAB_HTML oder Argument bleiben moeglich.
+  if (hasWeb && !arg && !process.env.GAMETAB_HTML) { process.env.GAMETAB_SRC = "web"; return composeWeb(); }
+  if (process.env.GAMETAB_SRC === "web" && hasWeb) return composeWeb();
   return fs.readFileSync(htmlPath(arg), "utf8");
 }
 

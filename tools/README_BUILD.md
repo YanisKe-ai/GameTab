@@ -1,6 +1,6 @@
 # Bauen und Veröffentlichen
 
-Quelle liegt in `web/src/`, gebaut wird eine einzige Datei `docs/index.html` (Vite, kein Minify).
+Quelle liegt in `web/src/`, gebaut wird eine einzige Datei `docs/index.html` (Vite 8, Minify mit oxc: `minify: "oxc"`, Namen bleiben lesbar, `mangle: false`).
 
 ## Release (ein Befehl)
     python3 tools/release.py "Kurze Beschreibung"
@@ -10,7 +10,7 @@ Das Skript erhöht APP_BUILD (`web/src/app/build.js`), `version.json`, den Cache
 Danach: `docs/` mitcommitten, dann pushen (erst nach OK von Yanis).
 
 ## Nur prüfen
-    python3 tools/check.py            # nimmt docs/index.html, sonst index.html
+    python3 tools/check.py            # nimmt docs/index.html
     python3 tools/check.py pfad.html  # andere Datei
 
 check.py prüft auch, dass Quelle, docs/index.html, version.json und sw.js dieselbe Version haben.

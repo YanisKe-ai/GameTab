@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "tests" / "out"
 OUT.mkdir(parents=True, exist_ok=True)
 import os
-HTML_PATH = (ROOT / os.environ.get("GAMETAB_HTML", "index.html")).resolve()
+HTML_PATH = (ROOT / os.environ.get("GAMETAB_HTML", "docs/index.html")).resolve()
 URL = HTML_PATH.as_uri()
 QUICK = "--quick" in sys.argv
 

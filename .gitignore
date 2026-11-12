@@ -4,3 +4,6 @@ __pycache__/
 node_modules/
 web/public/
 dev-notes/
+web/public 2/
+docs 2/
+* 2.*

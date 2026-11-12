@@ -4,7 +4,7 @@
     python3 tools/release.py "Kurze Beschreibung der Änderung"
 
 Erhöht gemeinsam:
-  1. APP_BUILD in index.html (steuert den Hinweis "Neue Version ist da")
+  1. APP_BUILD in web/src/app/build.js (gebaut nach docs/index.html) (steuert den Hinweis "Neue Version ist da")
   2. version.json (die App vergleicht ihren APP_BUILD damit)
   3. CACHE_NAME in sw.js
   4. Eintrag oben in CHANGELOG.md

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""GameTab Schnellcheck. Nach JEDER Änderung an index.html ausführen:
+"""GameTab Schnellcheck. Nach JEDER Änderung (gebaute Datei docs/index.html) ausführen:
 
     python3 tools/check.py
 

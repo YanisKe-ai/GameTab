@@ -1,5 +1,5 @@
 // Spielkopf rechts: zwei runde Knoepfe (Erscheinungsbild, Menue). Das Menue klappt direkt unter dem Knopf auf.
-// Inhalt: Gruppe "Partie" (Aktionen des Spiels aus `items`, dann "Spiel beenden"), Trennlinie, "Regeln", "Startseite".
+// Inhalt: Gruppe "Partie" (Aktionen des Spiels aus `items`, dann "Spiel verwerfen"), Trennlinie, "Regeln", "Startseite".
 // items: [{ key, icon, label, onClick, hold, confirming, confirmLabel, twoStep }]
 //   hold: Gedrueckt-halten-Aktion (gtHold, Tastatur: zweimal innert 3 s). onClick: normales Tippen.
 //   twoStep: erstes Tippen fragt nur nach (confirming), das Menue schliesst erst beim zweiten Tippen.
@@ -41,6 +41,7 @@ const IC = { fill: "none", stroke: "currentColor", strokeWidth: 2, strokeLinecap
 const ICONS = {
   trophy: [<path key="a" d="M7 4h10v5a5 5 0 0 1-10 0V4z" {...IC} />, <path key="b" d="M7 6H4.5a2.5 2.5 0 0 0 2.6 3.6M17 6h2.5a2.5 2.5 0 0 1-2.6 3.6" {...IC} />, <path key="c" d="M12 14v3.5M8.5 20.5h7M9.5 17.5h5v3h-5z" {...IC} />],
   restart: [<path key="a" d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1" {...IC} />, <path key="b" d="M3.5 4.5v4.6h4.6" {...IC} />],
+  undo: [<path key="a" d="M9 14 4 9l5-5" {...IC} />, <path key="b" d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11" {...IC} />],
   users: [<circle key="a" cx="9" cy="8.5" r="3.2" {...IC} />, <path key="b" d="M3 19.5a6 6 0 0 1 12 0" {...IC} />, <path key="c" d="M15.6 5.6a3.2 3.2 0 0 1 0 5.8M18.2 19.5a6 6 0 0 0-2.6-5" {...IC} />],
   flag: [<path key="m" d="M6 21V4" {...IC} />, <path key="f" d="M6 4.5h11.5l-2.4 4 2.4 4H6" {...IC} />],
   rules: [<circle key="a" cx="12" cy="12" r="9" {...IC} />, <path key="b" d="M9.6 9.4a2.5 2.5 0 1 1 3.6 2.2c-.8.5-1.2 1-1.2 1.8" {...IC} />, <circle key="c" cx="12" cy="17" r=".6" fill="currentColor" stroke="currentColor" strokeWidth="1" />],
@@ -53,9 +54,9 @@ const ICONS = {
   trash: [<path key="a" d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3" {...IC} />],
 };
 const COLORS = {
-  dark: { restart: "#F0A63A", users: "#3FB8A6", flag: "#FF7B7F", rules: "#8C9AFF", gear: "#9AA4BE", home: "#5FB38C", plus: "#8C9AFF", table: "#3FB8A6", share: "#8C9AFF", copy: "#F0A63A", trash: "#FF7B7F" },
-  light: { restart: "#B86F00", users: "#12806F", flag: "#C9302C", rules: "#4353D6", gear: "#5C6580", home: "#2A7F5A", plus: "#4353D6", table: "#12806F", share: "#4353D6", copy: "#B86F00", trash: "#C9302C" },
-  noir: { restart: "#D2D2D2", users: "#D2D2D2", flag: "#FF8F8F", rules: "#D2D2D2", gear: "#D2D2D2", home: "#D2D2D2", plus: "#D2D2D2", table: "#D2D2D2", share: "#D2D2D2", copy: "#D2D2D2", trash: "#FF8F8F" },
+  dark: { restart: "#F0A63A", undo: "#F0A63A", users: "#3FB8A6", flag: "#FF7B7F", rules: "#8C9AFF", gear: "#9AA4BE", home: "#5FB38C", plus: "#8C9AFF", table: "#3FB8A6", share: "#8C9AFF", copy: "#F0A63A", trash: "#FF7B7F" },
+  light: { restart: "#B86F00", undo: "#B86F00", users: "#12806F", flag: "#C9302C", rules: "#4353D6", gear: "#5C6580", home: "#2A7F5A", plus: "#4353D6", table: "#12806F", share: "#4353D6", copy: "#B86F00", trash: "#C9302C" },
+  noir: { restart: "#D2D2D2", undo: "#D2D2D2", users: "#D2D2D2", flag: "#FF8F8F", rules: "#D2D2D2", gear: "#D2D2D2", home: "#D2D2D2", plus: "#D2D2D2", table: "#D2D2D2", share: "#D2D2D2", copy: "#D2D2D2", trash: "#FF8F8F" },
 };
 
 function GtHmRow({ icon, color, danger, confirming, warm, onClick, children, extra, ...rest }) {
@@ -139,7 +140,7 @@ function GtHeadButtons({ theme, css, L, onRules, onHome, onEndGame, items, onOpe
         {showGroup && <div className="gt-hm-h" role="presentation">{L.group}</div>}
         {list.map(itemRow)}
         {onEndGame && (
-          <GtHmRow icon="flag" color={col.flag} danger={!confirmEnd} confirming={confirmEnd} onClick={endTap}>
+          <GtHmRow icon="trash" color={col.trash} danger={!confirmEnd} confirming={confirmEnd} onClick={endTap}>
             <span aria-live="polite">{confirmEnd ? L.endConfirm : L.end}</span>
           </GtHmRow>
         )}

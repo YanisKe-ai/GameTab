@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.12-5 (12.11.2026 11:19)
+- Menü: Spiel verwerfen, eigenes Rückgängig-Symbol, Regeltexte korrigiert
+
 ## 2026.11.12-4 (12.11.2026 10:59)
 - Darts sagt Startspieler an, Yatzy zwei verschiedene Paare, Coiffeur mit Differenz, Verräter schneller
 

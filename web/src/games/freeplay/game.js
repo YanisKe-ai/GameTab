@@ -78,7 +78,7 @@ const undoAny=()=>{globalThis.__gtUndoAt=Date.now();if(ended){setFp(f=>({...f,en
 const endNow=()=>setFp(f=>({...f,ended:true}));
 const setMode=v=>{if(hasEntries)return;setDraft({});setFp(f=>({...f,mode:v}));};
 const editCell=(pi,ri,val)=>{setFp(f=>({...f,players:f.players.map((p,i)=>i===pi?{...p,entries:p.entries.map((e,j)=>j===ri?val:e)}:p)}));setEdit(null);};
-const fpItems=[...(winnerIdx!==-1?[{key:"result",icon:"trophy",label:t("mgShowResult"),onClick:()=>setPodiumOpen(true)}]:[]),...((hasEntries||ended)?[{key:"undo",icon:"restart",label:t("mgUndo"),onClick:undoAny}]:[]),...(hasEntries&&!done&&totals.some(v=>v!==0)?[{key:"end",icon:"flag",label:t("wzEndScored"),onClick:endNow}]:[]),{key:"new",icon:"restart",label:t("newGame"),hold:performReset}];
+const fpItems=[...(winnerIdx!==-1?[{key:"result",icon:"trophy",label:t("mgShowResult"),onClick:()=>setPodiumOpen(true)}]:[]),...((hasEntries||ended)?[{key:"undo",icon:"undo",label:t("mgUndo"),onClick:undoAny}]:[]),...(hasEntries&&!done&&totals.some(v=>v!==0)?[{key:"end",icon:"flag",label:t("wzEndScored"),onClick:endNow}]:[]),{key:"new",icon:"restart",label:t("newGame"),hold:performReset}];
 const log=(()=>{if(mode==="rounds")return null;const tot=players.reduce((s,p)=>s+p.entries.length,0);if(!tot||order.length!==tot)return null;const cnt={};const arr=[];for(const id of order){const k=cnt[id]||0;cnt[id]=k+1;const pi=players.findIndex(p=>p.id===id);if(pi<0)return null;arr.push({pi,v:players[pi].entries[k]});}return arr;})();
 const medalFor=(i,rank)=>(totals[i]===0||allEqual)?null:rank===1?tk.gold:rank===2?(theme==="noir"?"#C1C1C1":"#B9C1CC"):rank===3?(theme==="noir"?"#8A8A8A":"#C98A4B"):null;
 const winners=winnerIdx!==-1?players.map((p,i)=>totals[i]===bestValue):[];

@@ -362,6 +362,12 @@ def t_b_storage(pg, env):
     t_b.run(pg)
 
 
+@test("Texte und Menue (T)", quick=False, matrix=False)
+def t_t_menu(pg, env):
+    import t_t
+    t_t.run(pg)
+
+
 @test("Skyjo")
 def t_skyjo(pg, env):
     open_game(pg, "Schreibunterlagen", "Skyjo"); press_start(pg)

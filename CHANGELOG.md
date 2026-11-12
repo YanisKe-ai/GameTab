@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.12-19 (12.11.2026 22:54)
+- Menü: Neues Spiel mit zweimal Tippen statt Gedrückthalten; Neon-Schild: Rangliste als «2. Name · Punkte»
+
 ## 2026.11.12-18 (12.11.2026 22:36)
 - Neon-Hängeschild in allen Spielen (Spielfarben aus den Titeln); Knöpfe ganz unten, Schliessen-X unter der Statusleiste, Querformat mit Knöpfen rechts
 

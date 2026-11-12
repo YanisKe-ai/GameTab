@@ -1,12 +1,12 @@
 // Spielkopf rechts: zwei runde Knoepfe (Erscheinungsbild, Menue). Das Menue klappt direkt unter dem Knopf auf.
 // Inhalt: Gruppe "Partie" (Aktionen des Spiels aus `items`, dann "Spiel verwerfen"), Trennlinie, "Regeln", "Startseite".
 // items: [{ key, icon, label, onClick, hold, confirming, confirmLabel, twoStep }]
-//   hold: Gedrueckt-halten-Aktion (gtHold, Tastatur: zweimal innert 3 s). onClick: normales Tippen.
+//   hold: Aktion mit Rueckfrage: erstes Tippen zeigt "Nochmal tippen", zweites Tippen fuehrt aus (frueher gedrueckt halten).
 //   twoStep: erstes Tippen fragt nur nach (confirming), das Menue schliesst erst beim zweiten Tippen.
 // Dialogverhalten (Escape, Tippen ausserhalb, Fokus, Hintergrund inert) kommt von useGtDialog.
 import { React, ReactDOM } from "../vendor/react-globals.js";
 import { useGtDialog } from "./dialog.js";
-import { GtHoldLabel, gtHold } from "./fx.js";
+// (gtHold und GtHoldLabel aus fx.js werden hier nicht mehr gebraucht)
 
 const GT_HM_CSS = `.gt-hmt-dark{--hm-btn:#1B2235;--hm-ring:#ffffff1f;--hm-ink:#E9ECF4;--hm-on-bg:#E9ECF4;--hm-on-ink:#0D1220;--hm-panel:#161C2E;--hm-line:rgba(255,255,255,.11);--hm-muted:#9AA4BE;--hm-hover:rgba(255,255,255,.08);--hm-shadow:0 18px 44px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.1);--hm-dim:rgba(4,8,18,.5);--hm-danger:#FF7B7F}
 .gt-hmt-light{--hm-btn:#FFFFFF;--hm-ring:rgba(27,34,53,.18);--hm-ink:#1B2235;--hm-on-bg:#1B2235;--hm-on-ink:#FFFFFF;--hm-panel:#FFFFFF;--hm-line:rgba(27,34,53,.1);--hm-muted:#5C6580;--hm-hover:rgba(27,34,53,.06);--hm-shadow:0 18px 40px rgba(20,28,50,.22),0 0 0 1px rgba(27,34,53,.1);--hm-dim:rgba(20,26,44,.34);--hm-danger:#C9302C}
@@ -75,9 +75,11 @@ function GtHeadButtons({ theme, css, L, onRules, onHome, onEndGame, items, onOpe
   const [open, setOpen] = React.useState(false);
   const [pos, setPos] = React.useState(null);
   const [confirmEnd, setConfirmEnd] = React.useState(false);
+  const [armHold, setArmHold] = React.useState(null);
+  const holdT = React.useRef(0);
   const faceRef = React.useRef(null);
   const endT = React.useRef(0);
-  const close = React.useCallback(() => { clearTimeout(endT.current); setConfirmEnd(false); setOpen(false); }, []);
+  const close = React.useCallback(() => { clearTimeout(endT.current); clearTimeout(holdT.current); setConfirmEnd(false); setArmHold(null); setOpen(false); }, []);
   const dlgRef = useGtDialog({ open, onClose: close });
   React.useEffect(() => {
     if (!open) return undefined;
@@ -119,10 +121,14 @@ function GtHeadButtons({ theme, css, L, onRules, onHome, onEndGame, items, onOpe
     const label = it.confirming && it.confirmLabel ? it.confirmLabel : it.label;
     const common = { icon: it.icon || "plus", color: col[it.icon] || col.plus, confirming: !!(it.confirming && it.twoStep), warm: true, danger: !!it.danger };
     if (it.hold) {
-      const hp = gtHold(() => { close(); it.hold(); });
+      // Frueher gedrueckt halten, seit 12.11.2026 zweimal tippen wie bei "Spieler aendern" (Wunsch Yanis)
+      const hk = it.key || it.label, armed = armHold === hk;
       return (
-        <GtHmRow key={it.key || it.label} {...common} confirming={false} extra={hp} style={{ "--gt-hold-c": th === "light" ? "rgba(184,111,0,0.22)" : "rgba(240,166,58,0.28)" }}>
-          <GtHoldLabel label={it.label} hint={L.hold} again={L.again} />
+        <GtHmRow key={hk} {...common} confirming={armed} onClick={() => {
+          if (armed) { close(); it.hold(); return; }
+          setArmHold(hk); clearTimeout(holdT.current); holdT.current = setTimeout(() => setArmHold(null), 3000);
+        }}>
+          {armed ? L.again : it.label}
         </GtHmRow>
       );
     }

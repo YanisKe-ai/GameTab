@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.12-4 (12.11.2026 10:59)
+- Darts sagt Startspieler an, Yatzy zwei verschiedene Paare, Coiffeur mit Differenz, Verräter schneller
+
 ## 2026.11.12-3 (12.11.2026 10:22)
 - Speicher: Schutz bei beschädigten Daten, Fehlerprotokoll, Sicherungs-Erinnerung
 

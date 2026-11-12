@@ -350,6 +350,12 @@ def t_ga_fixes(pg, env):
     t_ga.run(pg)
 
 
+@test("Spielfehler Teil 2 (GB)", quick=False, matrix=False)
+def t_gb_fixes(pg, env):
+    import t_gb
+    t_gb.run(pg)
+
+
 @test("Speicher sicher (B)", quick=False, matrix=False)
 def t_b_storage(pg, env):
     import t_b
@@ -441,7 +447,7 @@ def t_differenzler(pg, env):
     if env.quick:
         wait(pg, 300)
         check(blank.count() == 16, "Differenzler: Felder nicht eingetragen")
-        expect_text(pg, r"führt mit|Gleichstand", "Differenzler: Schlagzeile fehlt")
+        expect_text(pg, r"führt|Gleichstand", "Differenzler: Schlagzeile fehlt")
         # Tastatur (Laptop): Ziffern, Rücktaste, Escape schliesst ohne Speichern, Enter speichert
         click(pg, blank.first, 350)
         pg.keyboard.type("62"); pg.keyboard.press("Backspace"); pg.keyboard.type("5"); wait(pg, 200)
@@ -565,10 +571,10 @@ def yz_enter(pg):
                 if t.count():
                     click(pg, t.first, 60)
                     clicked = True
-        if not clicked:  # 2 Paare: ein gewaehltes Paar nochmals antippen = zweimal dasselbe Paar
-            pr = pg.locator('.yz-tile[aria-pressed="true"]')
-            if pr.count():
-                click(pg, pr.first, 60)
+        if not clicked:  # 2 Paare: ein zweites, anderes Paar waehlen (dasselbe Paar zweimal gibt es nicht mehr)
+            ot = pg.locator('.yz-tiles .yz-tile:not([aria-pressed="true"]):not([aria-disabled="true"])')
+            if ot.count():
+                click(pg, ot.first, 60)
     raise AssertionError("Yatzy: Eingabe nicht abschliessbar")
 
 

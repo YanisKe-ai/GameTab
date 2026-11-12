@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.12-12 (12.11.2026 15:57)
+- Podest nur beim ersten Beenden ohne Feier-Wiederholung; Rückgängig statt Doppeltipp bei Gruppen, Partien, Namen; Dialog bei Alles löschen
+
 ## 2026.11.12-11 (12.11.2026 14:49)
 - Statistik: eine Quote überall, Rangliste nach Siegen, Noch wenig Daten statt vorläufig, Fehlerkarte
 

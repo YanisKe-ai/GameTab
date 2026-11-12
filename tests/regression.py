@@ -350,6 +350,18 @@ def t_stats_numbers(pg, env):
     t_a2.run(pg)
 
 
+@test("Podest nur beim ersten Beenden (P)", quick=False, matrix=False)
+def t_podium_once(pg, env):
+    import t_p
+    t_p.run(pg)
+
+
+@test("Rückgängig statt Doppeltipp (U3)", quick=False, matrix=False)
+def t_undo_u3(pg, env):
+    import t_u3
+    t_u3.run(pg)
+
+
 @test("Spielfehler Teil 1 (GA)", quick=False, matrix=False)
 def t_ga_fixes(pg, env):
     import t_ga

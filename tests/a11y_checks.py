@@ -113,13 +113,14 @@ def run(pg):
     print("OK    ", "Einstellungen: Gruppen- und Datei-Eingabe richtig ausgezeichnet")
     check_live(pg, "Einstellungen")
 
-    # Ansage: erster Tipp auf Alle Ergebnisse loeschen sagt den Hinweis an
+    # Alle Ergebnisse loeschen: seit Paket U3 ein echter Dialog (role=dialog), Escape schliesst ihn
     pg.get_by_role("button", name=re.compile(r"Alle Ergebnisse|Statistik.*l(ö|oe)schen", re.I)).first.click()
+    wait(pg, 500)
+    if pg.locator('[role="dialog"]').count() < 1:
+        _fail("Einstellungen: Alle-Ergebnisse-Dialog fehlt")
+    pg.keyboard.press("Escape")
     wait(pg, 400)
-    txt = pg.locator('[data-gt-live="polite"]').inner_text()
-    if len(txt.strip()) < 5:
-        _fail("Einstellungen: Ansage-Region bleibt leer nach Rueckfrage")
-    print("OK    ", f"Einstellungen: Ansage gelesen ({txt[:40]!r})")
+    print("OK    ", "Einstellungen: Alle-Ergebnisse-Dialog mit Escape")
 
     # Statistik
     goto_start(pg)

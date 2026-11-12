@@ -195,7 +195,7 @@ const CSS=`
 .gtst-filt{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
 .gtst-sel{min-height:44px;width:100%;border-radius:12px;border:1px solid var(--st-bline);background:var(--st-field);color:var(--st-ink);font:500 15px/1.2 var(--st-ui);padding:8px 10px}
 .gtst-ovl{position:fixed;inset:0;z-index:95;display:flex;align-items:flex-end;justify-content:center;background:rgba(5,8,14,.56);animation:gtstFade .2s ease-out}
-.gtst-sheet{width:100%;max-width:560px;max-height:calc(100dvh - env(safe-area-inset-top,0px) - 10px);display:flex;flex-direction:column;background:var(--st-body-solid);color:var(--st-ink);border-radius:20px 20px 0 0;box-shadow:0 -12px 40px -12px rgba(0,0,0,.5);animation:gtstUp .24s cubic-bezier(.23,1,.32,1);border:var(--st-sheet-line)}
+.gtst-sheet{width:100%;max-width:560px;max-height:calc(100dvh - env(safe-area-inset-top,0px) - 10px);display:flex;flex-direction:column;background:var(--st-body-solid);color:var(--st-ink);border-radius:20px 20px 0 0;box-shadow:0 -12px 40px -12px rgba(0,0,0,.5);animation:gtstUp .22s cubic-bezier(.23,1,.32,1);border:var(--st-sheet-line)}
 @media (min-width:700px){.gtst-ovl{align-items:center;padding:24px}.gtst-sheet{border-radius:20px;max-height:calc(100dvh - 48px)}}
 .gtst-shead{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 10px 6px 18px}
 .gtst-shead h2{margin:0;font:700 18px/1.25 var(--st-ui);overflow-wrap:break-word}

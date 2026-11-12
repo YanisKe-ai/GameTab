@@ -61,7 +61,7 @@ function GtLive() {
   return <React.Fragment>
     <div style={SR} aria-live="polite" aria-atomic="true" data-gt-live="polite">{polite}</div>
     <div style={SR} role="alert" aria-atomic="true" data-gt-live="alert">{alertText}</div>
-    {line && <div aria-hidden="true" data-gt-restored="" style={{ position: "fixed", left: 16, right: 16, bottom: "calc(14px + env(safe-area-inset-bottom))", margin: "0 auto", maxWidth: 420, boxSizing: "border-box", padding: "12px 16px", borderRadius: 16, background: "#1E202C", color: "#F3F4F8", border: "1px solid rgba(255,255,255,.2)", fontFamily: "'Inter', sans-serif", fontSize: 14, fontWeight: 600, lineHeight: 1.35, textAlign: "center", zIndex: 2147482000, pointerEvents: "none" }}>{line}</div>}
+    {line && <div aria-hidden="true" data-gt-restored="" style={{ position: "fixed", left: 16, right: 16, bottom: "calc(14px + env(safe-area-inset-bottom))", margin: "0 auto", maxWidth: 420, boxSizing: "border-box", padding: "12px 16px", borderRadius: 16, background: "#1E202C", color: "#F3F4F8", border: "1px solid rgba(255,255,255,.2)", fontFamily: "'Inter', sans-serif", fontSize: "0.875rem", fontWeight: 600, lineHeight: 1.35, textAlign: "center", zIndex: 2147482000, pointerEvents: "none" }}>{line}</div>}
     <GtToastHost announce={gtAnnounce} />
   </React.Fragment>;
 }

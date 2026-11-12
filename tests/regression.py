@@ -356,6 +356,18 @@ def t_stats_sd(pg, env):
     t_sd.run(pg)
 
 
+@test("Suche und Favoriten-Hinweis (PS)", quick=False, matrix=False)
+def t_search_ps(pg, env):
+    import t_ps
+    t_ps.run(pg)
+
+
+@test("Namen merken (NM)", quick=False, matrix=False)
+def t_names_nm(pg, env):
+    import t_nm
+    t_nm.run(pg)
+
+
 @test("Podest nur beim ersten Beenden (P)", quick=False, matrix=False)
 def t_podium_once(pg, env):
     import t_p

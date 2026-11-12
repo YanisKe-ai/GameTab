@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.12-14 (12.11.2026 17:07)
+- Namen zuletzt im Setup, Suche mit Tippfehlern, Weiterspielen mit Spielstand, Favoriten-Hinweis, Druck-Rückmeldung, ruhigere Animationen
+
 ## 2026.11.12-13 (12.11.2026 16:49)
 - Neue Statistik: Tabelle mit Rangliste, Spielen und Personen, ohne Podest
 

@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.12-8 (12.11.2026 12:35)
+- Korrektur Startseite in der Home-Bildschirm-App (füllt wieder den ganzen Bildschirm), Timer-Ansagen, Kontrast, Tippflächen
+
 ## 2026.11.12-7 (12.11.2026 12:28)
 - Timer-Ansagen, besserer Kontrast, grössere Tippflächen
 

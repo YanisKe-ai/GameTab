@@ -331,9 +331,9 @@ body::after {
 [data-phone-landscape] :is(.pl-head-compact .gt-gamehead, .gt-gamehead.pl-head-compact) > .gt-headbtns { position: static !important; order: 2; flex: none; margin-left: auto; }
 [data-phone-landscape] :is(.pl-head-compact .gt-gamehead, .gt-gamehead.pl-head-compact) h1 { font-size: 20px !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; overflow-wrap: normal !important; }
 [data-phone-landscape] :is(.pl-head-compact .gt-gamehead, .gt-gamehead.pl-head-compact) h1 + div { margin-top: 1px !important; }
-html[data-phone-landscape] body:has(> #root > div.gtL-start) { position: static !important; overflow: visible !important; top: auto !important; width: auto !important; }
-[data-phone-landscape] #root > div.gtL-start { height: auto !important; min-height: var(--pl-vh) !important; overflow: visible !important; }
-@media (display-mode: standalone) { html[data-phone-landscape] body #root > div.gtL-start { height: auto !important; min-height: 100vh !important; padding-top: max(12px, env(safe-area-inset-top, 0px)) !important; } }
+html[data-phone-landscape] body:has(> #root > .gtL-start) { position: static !important; overflow: visible !important; top: auto !important; width: auto !important; }
+[data-phone-landscape] #root > .gtL-start { height: auto !important; min-height: var(--pl-vh) !important; overflow: visible !important; }
+@media (display-mode: standalone) { html[data-phone-landscape] body #root > .gtL-start { height: auto !important; min-height: 100vh !important; padding-top: max(12px, env(safe-area-inset-top, 0px)) !important; } }
 /* Lesbarkeit Handy: Kleintext mindestens 13 px (Grossbuchstaben-Kleinlabels 12 px). Ausnahmen: Tabellenzellen, Laptop, .gt-nofloor. */
 @media (max-width: 700px) {
   :is([style*="font-size: 9.5px"],[style*="font-size: 10px"],[style*="font-size: 10.5px"],[style*="font-size: 11px"],[style*="font-size: 11.5px"],[style*="font-size: 12px"],[style*="font-size: 12.5px"]):not(td, th, .gtL-content *, .gt-nofloor, .gt-nofloor *) { font-size: 13px !important; }

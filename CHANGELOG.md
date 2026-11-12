@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.12-18 (12.11.2026 22:36)
+- Neon-Hängeschild in allen Spielen (Spielfarben aus den Titeln); Knöpfe ganz unten, Schliessen-X unter der Statusleiste, Querformat mit Knöpfen rechts
+
 ## 2026.11.12-17 (12.11.2026 22:05)
 - Tutto: neuer Siegesbildschirm als Neon-Hängeschild (herabgelassen, Spielfarben, GameTab-Logo, lange Namen)
 

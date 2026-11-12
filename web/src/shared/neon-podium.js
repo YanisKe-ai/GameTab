@@ -24,6 +24,7 @@ const GT_NEON_CSS = `
 .gtn-l{display:inline-block;color:#34313A;text-shadow:0 1px 0 rgba(255,255,255,.07),0 -1px 0 rgba(0,0,0,.6)}
 .gtn-lit .gtn-l{${LIT}}
 .gtn-w{white-space:nowrap}
+.gtn-num::before{content:attr(data-n)}
 [data-gt-podium] .gtsb-name{font:inherit;letter-spacing:inherit}
 @keyframes gtnOn{0%{color:#34313A;text-shadow:0 1px 0 rgba(255,255,255,.07)}5%{${LIT}}8%{color:#4A4650;text-shadow:0 0 6px var(--g2)}15%{${LIT}}18%{color:#34313A;text-shadow:none}24%{color:#4A4650;text-shadow:0 0 6px var(--g2)}30%,100%{${LIT}}}
 @keyframes gtnBuzz{0%,90%{${LIT}}91%{color:#4A4650;text-shadow:0 0 6px var(--g2)}92.5%{${LIT}}94%{color:#4A4650;text-shadow:0 0 6px var(--g2)}95.5%,100%{${LIT}}}
@@ -101,13 +102,15 @@ function useFitName(ref, deps) {
   }, deps);
 }
 
-export function GtNeonPodium({ ranked, ranks, gameId, gameLabel, theme, t, play, onClose, onSkip, onRestart, extraAct, onShare, isSharing, playCount, hideCount, bestRecord, noteEl, achvEl, dlgRef }) {
+export function GtNeonPodium({ phase, ranked, ranks, gameId, gameLabel, theme, t, play, onClose, onSkip, onRestart, extraAct, onShare, isSharing, playCount, hideCount, bestRecord, noteEl, achvEl, dlgRef }) {
   const [pc, pg, sc, sg] = gtNeonCol(gameId, theme);
   const P = gtNeonVars(pc, pg), S = gtNeonVars(sc, sg);
   const rigRef = useRef(null), nameRef = useRef(null), wrapRef = useRef(null), boardRef = useRef(null);
   const [rt, setRt] = useState(470);
   const run = !!play;
   const [k, setK] = useState(1);
+  const [land, setLand] = useState(false);
+  const [fh, setFh] = useState(800);
   const winners = ranked.filter((e, i) => ranks[i] === 1);
   const others = ranked.map((e, i) => ({ e, i })).filter(o => ranks[o.i] !== 1);
   const T0 = 2.75;
@@ -125,7 +128,7 @@ export function GtNeonPodium({ ranked, ranks, gameId, gameLabel, theme, t, play,
     return () => { if (ro) ro.disconnect(); };
   }, []);
   React.useLayoutEffect(() => {
-    const fit = () => { const vh = window.innerHeight || 800; const vw = window.innerWidth || 390; setK(Math.max(0.55, Math.min(1, (vh - 8) / 800, vw / 390))); };
+    const fit = () => { const vh = window.innerHeight || 800; const vw = window.innerWidth || 390; const ld = vw > vh && vh < 560; setLand(ld); const kk = ld ? Math.max(0.4, Math.min(1, (vh - 8) / 800)) : Math.max(0.55, Math.min(1, (vh - 8) / 800, vw / 390)); setK(kk); setFh(Math.max(800, Math.round(vh / kk))); };
     fit(); window.addEventListener("resize", fit); return () => window.removeEventListener("resize", fit);
   }, []);
   const wsc = winners.length ? gtFmt(winners[0].score) : "";
@@ -135,8 +138,8 @@ export function GtNeonPodium({ ranked, ranks, gameId, gameLabel, theme, t, play,
   return <div onClick={() => { if (onSkip()) return; onClose(); }} className="gt-scrim-in" style={{ position: "fixed", inset: 0, zIndex: 130, background: "linear-gradient(180deg,#1B1722 0%,#141119 64%,#0F0D13 100%)", overflow: "hidden" }}>
     <style>{GT_NEON_CSS}</style>
     <div aria-hidden style={{ position: "absolute", inset: 0, opacity: 0.5, background: `url("${NOISE_URI}")` }} />
-    <div ref={wrapRef} style={{ position: "absolute", left: "50%", top: 0, width: 390, height: 800, marginLeft: -195, transform: `scale(${k})`, transformOrigin: "50% 0" }}>
-      <div ref={dlgRef} data-gt-podium="1" role="dialog" aria-modal="true" aria-label={label} onClick={e => { e.stopPropagation(); onSkip(); }} className={run ? "gtn-run" : "gtn-lit"} style={{ position: "absolute", inset: 0, fontFamily: "'Tilt Neon','Inter',sans-serif", color: "#FFF4E6" }}>
+    <div ref={wrapRef} style={{ position: "absolute", left: "50%", top: 0, width: 390, height: fh, marginLeft: -195, transform: `scale(${k})`, transformOrigin: "50% 0" }}>
+      <div ref={dlgRef} data-gt-podium="1" role="dialog" aria-modal="true" aria-label={label} onClick={e => { e.stopPropagation(); onSkip(); }} className={(run ? "gtn-run" : "gtn-lit") + " gtsb-" + (phase || "done")} style={{ position: "absolute", inset: 0, fontFamily: "'Tilt Neon','Inter',sans-serif", color: "#FFF4E6" }}>
         <div ref={rigRef} style={{ position: "absolute", left: 0, right: 0, top: 0, height: 800, transformOrigin: "195px -420px" }}>
           {[92, 298].map(x => <div key={x} aria-hidden style={{ position: "absolute", left: x - 6, top: -760, width: 12, height: 900, background: `url("${CHAIN_URI}") 0 0/12px 24px repeat-y`, filter: "drop-shadow(0 2px 2px rgba(0,0,0,.5))" }} />)}
           <div aria-hidden style={{ position: "absolute", left: 306, top: -760, width: 3, height: 900, borderRadius: 2, background: "linear-gradient(90deg,#1C1A21,#3A3743,#1C1A21)" }} />
@@ -156,10 +159,10 @@ export function GtNeonPodium({ ranked, ranks, gameId, gameLabel, theme, t, play,
             </div>
           </div>
         </div>
-        <div style={{ position: "absolute", left: 22, right: 22, top: rt, bottom: 100, display: "flex", flexDirection: "column", alignItems: "center", pointerEvents: "none", overflowY: "auto", scrollbarWidth: "none" }}>
+        <div style={{ position: "absolute", left: 22, right: 22, top: rt, bottom: "calc(env(safe-area-inset-bottom, 0px) + 92px)", display: "flex", flexDirection: "column", alignItems: "center", pointerEvents: "none", overflowY: "auto", scrollbarWidth: "none" }}>
           {others.length > 0 && <ol className="gtn-ranks" style={{ listStyle: "none", margin: 0, padding: 0, width: "100%", flexShrink: 0, maxHeight: 170, overflowY: "auto", scrollbarWidth: "none", pointerEvents: "auto", ...S }}>
             {others.map(({ e, i }, n) => { const r = ranks[i]; const d = 4.4 + n * 0.22; return <li key={i} style={{ display: "flex", justifyContent: "center", gap: 14, font: "400 22px/1.2 'Tilt Neon','Inter',sans-serif", marginTop: n ? 8 : 0 }}>
-              <span>{i < 3 ? <span className="gtsb-name"><span className="gtsb-sr gtn-sr">{r + ". "}</span><span aria-hidden><NeonText text={String(r)} start={d} step={0.04} run={run} /></span></span> : <NeonText text={String(r)} start={d} step={0.04} run={run} />}</span>
+              <span>{i < 3 ? <span className="gtsb-name"><span className="gtsb-sr gtn-sr">{r + ". "}</span><span aria-hidden className="gtn-l gtn-num" data-n={r} style={run ? { animationDelay: `${d.toFixed(2)}s` } : undefined} /></span> : <span aria-hidden className="gtn-l gtn-num" data-n={r} style={run ? { animationDelay: `${d.toFixed(2)}s` } : undefined} />}</span>
               <span dir="auto" style={{ minWidth: 0, overflowWrap: "normal" }}><NeonText text={e && e.name} start={d + 0.05} step={0.035} run={run} /></span>
               <span dir="ltr"><NeonText text={gtFmt(e && e.score)} start={d + 0.25} step={0.04} run={run} /></span>
             </li>; })}
@@ -169,10 +172,10 @@ export function GtNeonPodium({ ranked, ranks, gameId, gameLabel, theme, t, play,
           {noteEl && <div style={{ marginTop: 8, font: "400 14px/1.4 'Inter',sans-serif", color: "#E8E2EE", textAlign: "center", pointerEvents: "auto" }}>{noteEl}</div>}
           {achvEl && <div style={{ flexShrink: 0, pointerEvents: "auto", marginTop: 8 }}>{achvEl}</div>}
         </div>
-        <button onClick={e => { e.stopPropagation(); onClose(); }} className="gtn-x gtsb-x press-fx" aria-label={t("stxClose")} style={{ position: "absolute", right: 22, top: 26, width: 44, height: 44, borderRadius: 22, border: "1.5px solid rgba(255,244,230,.3)", background: "rgba(20,17,25,.5)", color: "#FFF4E6", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}><svg width={14} height={14} viewBox="0 0 24 24" fill="none" aria-hidden><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round" /></svg></button>
-        <div style={{ position: "absolute", left: 22, right: 22, bottom: 30, display: "flex", gap: 12 }}>
-          {(onRestart || extraAct) && <button onClick={e => { e.stopPropagation(); if (extraAct) { extraAct.onClick(); return; } onRestart(); onClose(); }} className="gtn-btn" style={{ flex: 1, border: `2px solid ${pg}`, background: gtRgba(pg, 0.08), color: pc, textShadow: `0 0 8px ${gtRgba(pg, 0.9)}`, boxShadow: `0 0 14px ${gtRgba(pg, 0.45)},inset 0 0 12px ${gtRgba(pg, 0.25)}` }}>{extraAct ? extraAct.label : t("rematch")}</button>}
-          <button onClick={e => { e.stopPropagation(); onShare(); }} disabled={isSharing} aria-label={t("shareResultAria")} className="gtn-btn" style={{ flex: 1, border: "2px solid rgba(255,244,230,.55)", background: "rgba(20,17,25,.4)", color: "#FFF4E6" }}>{t("shareResultLabel")}</button>
+        <button onClick={e => { e.stopPropagation(); onClose(); }} className="gtn-x gtsb-x press-fx" aria-label={t("stxClose")} style={{ position: "absolute", right: 18, top: "calc(env(safe-area-inset-top, 0px) + 14px)", width: 44, height: 44, borderRadius: 22, border: "1.5px solid rgba(255,244,230,.3)", background: "rgba(20,17,25,.5)", color: "#FFF4E6", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}><svg width={20} height={20} viewBox="0 0 24 24" fill="none" aria-hidden><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth={2.6} strokeLinecap="round" /></svg></button>
+        <div style={land ? { position: "absolute", left: 404, bottom: 24, width: 210, display: "flex", flexDirection: "column", gap: 10, transform: `scale(${(1 / k).toFixed(4)})`, transformOrigin: "0 100%" } : { position: "absolute", left: 22, right: 22, bottom: "calc(env(safe-area-inset-bottom, 0px) + 22px)", display: "flex", gap: 12 }}>
+          {(onRestart || extraAct) && <button onClick={e => { e.stopPropagation(); if (extraAct) { extraAct.onClick(); return; } onRestart(); onClose(); }} className="gtn-btn" style={{ flex: land ? "none" : 1, border: `2px solid ${pg}`, background: gtRgba(pg, 0.08), color: pc, textShadow: `0 0 8px ${gtRgba(pg, 0.9)}`, boxShadow: `0 0 14px ${gtRgba(pg, 0.45)},inset 0 0 12px ${gtRgba(pg, 0.25)}` }}>{extraAct ? extraAct.label : t("rematch")}</button>}
+          <button onClick={e => { e.stopPropagation(); onShare(); }} disabled={isSharing} aria-label={t("shareResultAria")} className="gtn-btn" style={{ flex: land ? "none" : 1, border: "2px solid rgba(255,244,230,.55)", background: "rgba(20,17,25,.4)", color: "#FFF4E6" }}>{t("shareResultLabel")}</button>
         </div>
       </div>
     </div>

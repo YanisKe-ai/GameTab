@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.12-20 (12.11.2026 23:29)
+- Hellmodus überarbeitet: warme Papier-Basis statt kühlem Grau, Gold als Akzent, Auswahl in den Einstellungen als heller Chip mit Goldrand statt fast schwarz, Schalter in Gold, wärmere Suche, Statistik und Jahresrückblick (Nocturne und Noir unverändert)
+
 ## 2026.11.12-19 (12.11.2026 22:54)
 - Menü: Neues Spiel mit zweimal Tippen statt Gedrückthalten; Neon-Schild: Rangliste als «2. Name · Punkte»
 

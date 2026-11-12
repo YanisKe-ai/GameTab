@@ -58,7 +58,7 @@ def run(pg):
     check(pg.locator('[data-gt-didyoumean]').count() == 1, "Meintest-du-Zeile fehlt")
     pg.locator('[data-gt-didyoumean]').click(); wait(pg, 800)
     # 5. Kontrast des Favoriten-Hinweises (Token-Farben gegen Seitenhintergrund, alle Themes)
-    for n, fg, bgs in [("Nocturne", "#8890A0", ["#12141C", "#181B25"]), ("Hell", "#5B6470", ["#F8F9FA", "#EDEFF2"]), ("Noir", "#969696", ["#000000"])]:
+    for n, fg, bgs in [("Nocturne", "#8890A0", ["#12141C", "#181B25"]), ("Hell", "#5E574C", ["#F6F1E7", "#ECE4D3"]), ("Noir", "#969696", ["#000000"])]:
         for bg in bgs:
             check(contrast(fg, bg) >= 4.5, f"Kontrast Hinweis {n} {bg}")
 

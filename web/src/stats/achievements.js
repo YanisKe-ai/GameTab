@@ -1,14 +1,15 @@
 // Erfolge (Abzeichen). Reine Funktionen: alles wird aus dem Match-Log berechnet, nichts wird gespeichert.
 // Einzige Ausnahme: die Merkliste "schon gesehen" (localStorage, nur fuer die Neu-Markierung).
+import { GT_STATS } from "./core.js";
 /*@gt-body-begin*/
 /*GT_ACH_BEGIN*/
 const ACHV_SEEN_KEY="gametab-achv-seen-v1";
-function achvNorm(name){let s=typeof name==="string"?name:(name==null?"":String(name));try{s=s.normalize("NFC");}catch(e){}return s.replace(/\s+/g," ").trim().toLowerCase();}
+function achvNorm(name){return GT_STATS.norm(name);}
 function achvNames(v){return Array.isArray(v)?v.map(achvNorm):[];}
-function achvNight(ts){const d=new Date(ts);if(d.getHours()<5)d.setDate(d.getDate()-1);return d.getFullYear()+"-"+d.getMonth()+"-"+d.getDate();}
+function achvNight(ts){return GT_STATS.nightKey(ts);}
 // Eigene, nicht-Team-Teilnahme einer Person
 function achvPart(m,norm){if(!m||!Array.isArray(m.participants))return null;return m.participants.find(p=>p&&p.isTeam!==true&&(p.norm||achvNorm(p.name))===norm)||null;}
-function achvWon(m,norm){if(Array.isArray(m.winners)&&m.winners.length)return m.winners.some(w=>achvNorm(w)===norm);return!!m.winner&&achvNorm(m.winner)===norm;}
+function achvWon(m,norm){return GT_STATS.won(m,norm);}
 // Zaehler pro Name in einem Objekt {Name: Anzahl}
 function achvCount(o,norm){if(!o||typeof o!=="object"||Array.isArray(o))return 0;return Object.keys(o).reduce((s,k)=>achvNorm(k)===norm&&typeof o[k]==="number"&&o[k]>0?s+o[k]:s,0);}
 function achvDecided(m){return(Array.isArray(m.winners)&&m.winners.length>0)||!!m.winner;}

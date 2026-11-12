@@ -5,7 +5,7 @@ function lineOf(marker) { const i = html.indexOf(marker); if (i < 0) throw Error
 function fromTo(marker) { const i = html.indexOf(marker); if (i < 0) throw Error("fehlt: " + marker); return html.slice(i, html.indexOf("\n", i)); }
 const parts = [
   lineOf("const MATCH_LOG_KEY="), lineOf("const GT_MATCH_IDS="), lineOf("function gtIsObj("), fromTo("function gtWon("),
-  lineOf("function rankedPodium("), lineOf("function shanghaiHitInfo("), lineOf("function splitScoreHitValue("),
+  lineOf("/*GT_RANK_BEGIN*/"), lineOf("function rankedPodium("), lineOf("function shanghaiHitInfo("), lineOf("function splitScoreHitValue("),
   lineOf("const SPLIT_SCORE_TARGETS="), lineOf("function dartsScoreEnd("),
   lineOf("function HiScoreGame("), lineOf("function SplitScoreGame("), lineOf("function ShanghaiGame("),
 ];

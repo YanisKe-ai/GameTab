@@ -10,7 +10,8 @@ let mem,throwQuota,notices;
 global.localStorage={getItem:k=>(k in mem?mem[k]:null),setItem:(k,v)=>{if(throwQuota){const e=new Error("q");e.name="QuotaExceededError";throw e;}mem[k]=String(v);},removeItem:k=>{delete mem[k];},get length(){return Object.keys(mem).length;},key:i=>Object.keys(mem)[i]||null};
 function load(){
   mem={};throwQuota=false;notices=[];
-  const pre='function gtIsObj(v){return v!==null&&typeof v==="object"&&!Array.isArray(v);}function gtNum(v){return typeof v==="number"&&isFinite(v)?v:null;}const STORAGE_KEY="spieleblock-app-state-v1";function gtPadDone(k,s){return !!s.__done;}function gtStorageFullNotice(l,k){NOTICES.push(k||"storageFull");}'+quota+";"+gtWon+";";
+  const GTRK=src.slice(src.indexOf("/*GT_RANK_BEGIN*/"),src.indexOf("/*GT_RANK_END*/"));
+  const pre=GTRK+';function gtIsObj(v){return v!==null&&typeof v==="object"&&!Array.isArray(v);}function gtNum(v){return typeof v==="number"&&isFinite(v)?v:null;}const STORAGE_KEY="spieleblock-app-state-v1";function gtPadDone(k,s){return !!s.__done;}function gtStorageFullNotice(l,k){NOTICES.push(k||"storageFull");}'+quota+";"+gtWon+";";
   return new Function("NOTICES",pre+mid+";"+ps+";return{recordMatch,gtAutoReopen,gtPurgeOpenOrphans,gtSyncMatchId,saveMatchLog,loadMatchLogRaw,GT_MATCH_IDS,gtMatchHasData};")(notices);
 }
 let n=0;const fails=[];

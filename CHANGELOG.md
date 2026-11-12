@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.12-9 (12.11.2026 12:47)
+- Statistik intern: eine gemeinsame Rechenstelle für Sieg, Spielabend und Rangfolge
+
 ## 2026.11.12-8 (12.11.2026 12:35)
 - Korrektur Startseite in der Home-Bildschirm-App (füllt wieder den ganzen Bildschirm), Timer-Ansagen, Kontrast, Tippflächen
 

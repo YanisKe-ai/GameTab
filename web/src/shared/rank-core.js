@@ -1,0 +1,5 @@
+// Gemeinsame Rangrechnung (reine Funktion, keine Importe). Genutzt von rankedPodium und recordMatch.
+/*@gt-body-begin*/
+/*GT_RANK_BEGIN*/function gtRankList(list,o){const op=o&&typeof o==="object"?o:{};const low=!!op.low;const strict=!!op.strictNull;const kf=typeof op.keyFn==="function"?op.keyFn:(p=>p&&p.norm);const W=op.winners;const wf=typeof W==="function"?W:(Array.isArray(W)&&W.length?(p=>W.includes(kf(p))):null);const arr=Array.isArray(list)?list:[];const isW=arr.map(p=>wf?!!wf(p):false);const nW=isW.filter(Boolean).length;const ok=strict?(v=>v!==null&&v!==undefined):(v=>typeof v==="number"&&isFinite(v));const bt=(a,b)=>ok(a.score)&&ok(b.score)&&(low?a.score<b.score:a.score>b.score);const cnt=e=>arr.filter((x,j)=>!isW[j]&&bt(x,e)).length;if(strict){if(nW>0)return arr.map((e,i)=>isW[i]?1:(ok(e.score)?1+nW+cnt(e):null));if(arr.every(e=>ok(e.score)))return arr.map(e=>1+cnt(e));return arr.map(()=>null);}return arr.map((e,i)=>isW[i]?1:1+nW+cnt(e));}/*GT_RANK_END*/
+/*@gt-body-end*/
+export { gtRankList };

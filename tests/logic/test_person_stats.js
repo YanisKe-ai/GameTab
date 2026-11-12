@@ -6,7 +6,8 @@ assert(a>0&&b>a,"Marker GT_PS nicht gefunden");
 const g=src.indexOf("function gtWon("),ge=src.indexOf("\n",g);
 const mem={};
 global.localStorage={getItem:k=>(k in mem?mem[k]:null),setItem:(k,v)=>{mem[k]=String(v);},removeItem:k=>{delete mem[k];}};
-const pre='function gtIsObj(v){return v!==null&&typeof v==="object"&&!Array.isArray(v);}function gtNum(v){if(typeof v==="number")return isFinite(v)?v:null;return null;}const GT_MATCH_IDS={};';
+const GTRK=src.slice(src.indexOf("/*GT_RANK_BEGIN*/"),src.indexOf("/*GT_RANK_END*/"));
+const pre=GTRK+';function gtIsObj(v){return v!==null&&typeof v==="object"&&!Array.isArray(v);}function gtNum(v){if(typeof v==="number")return isFinite(v)?v:null;return null;}const GT_MATCH_IDS={};';
 const F=new Function(pre+src.slice(g,ge)+";"+src.slice(a,b)+`;return{normalizeName,getMatchesForName,getPersonStats,getHeadToHead,getCoPlayers,getRivalries,getGroupMatches,getAllKnownNames,getNameSuggestions:typeof getNameSuggestions=="function"?getNameSuggestions:()=>[],mergeNames,getLeaderboard,computeWinStreaks,gtWon};`)();
 let n=0;const fails=[];
 function T(name,fn){try{fn();n++;}catch(e){fails.push(name+": "+(e.message||e).split("\n")[0]);}}

@@ -14,6 +14,7 @@ function gameLabel(id,t){const g=GAMES[id];if(g&&typeof t==="function"){try{cons
 function pad(n){return(n<10?"0":"")+n;}
 function ymd(d){return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());}
 function nightDate(ts){if(!fin(ts))return null;const d=new Date(ts);if(d.getHours()<NIGHT_H)return ymd(new Date(d.getFullYear(),d.getMonth(),d.getDate()-1));return ymd(d);}
+function won(m,key){if(!isObj(m)||!key)return false;if(Array.isArray(m.winners)&&m.winners.length)return m.winners.some(w=>norm(w)===key);if(m.winner)return norm(m.winner)===key;return Array.isArray(m.participants)&&m.participants.some(p=>isObj(p)&&p.rank===1&&(p.norm||norm(p.name))===key);}
 function fmtDate(s){if(!s)return"";const p=String(s).split("-");return p.length===3?(+p[2])+"."+(+p[1])+"."+p[0]:String(s);}
 function nowMs(o){const n=o&&o.now;if(n instanceof Date)return n.getTime();if(fin(n))return n;return Date.now();}
 function nowYear(o){return new Date(nowMs(o)).getFullYear();}
@@ -79,5 +80,6 @@ if(M.people.length){const p=M.people[0];c("social",[p.key],null,p.matches,{name:
 const y0=new Date(year,0,1).getTime();const before=P.all.some(m=>fin(m.ts)&&m.ts<y0);if(before){const first={};P.all.forEach(m=>m.ind.forEach(p=>{if(first[p.key]==null)first[p.key]=fin(m.ts)?m.ts:-1;}));const nc=M.people.filter(s=>first[s.key]>=y0&&s.matches>=3).sort((a,b)=>b.matches-a.matches);if(nc.length)c("newcomer",[nc[0].key],null,nc[0].matches,{name:nc[0].name,n:nc[0].matches,date:fmtDate(nightDate(first[nc[0].key]))});}
 c("outro",[],null,S.matches,{n:S.matches,people:S.people,games:S.games,nights:S.nights});return res;}
 function storeTournaments(){try{return typeof GT_ST_STORE!=="undefined"?GT_ST_STORE.getSnapshot().tournaments.slice():[];}catch(e){return[];}}
-return{K,MIN_RANK,MIN_FIRM,GAMES,norm,gameLabel,nightDate,fmtDate,filter,build,profile,headToHead,yearReview,storeTournaments};})();/*@gt-body-end*/
+function nightKey(ts){return nightDate(ts);}
+return{K,MIN_RANK,MIN_FIRM,GAMES,norm,won,nightKey,gameLabel,nightDate,fmtDate,filter,build,profile,headToHead,yearReview,storeTournaments};})();/*@gt-body-end*/
 export { GT_STATS };

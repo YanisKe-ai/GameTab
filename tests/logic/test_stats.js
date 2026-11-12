@@ -278,7 +278,8 @@ T("Leistung: 1500 Partien unter 1.5 s",()=>{
   const mem={},ses={};
   const LS={getItem:k=>(k in mem?mem[k]:null),setItem:(k,v)=>{mem[k]=String(v);},removeItem:k=>{delete mem[k];}};
   const SS={getItem:k=>(k in ses?ses[k]:null),setItem:(k,v)=>{ses[k]=String(v);}};
-  const pre='function gtIsObj(v){return v!==null&&typeof v==="object"&&!Array.isArray(v);}function gtNum(v){if(typeof v==="number")return isFinite(v)?v:null;return null;}const GT_MATCH_IDS={};const gtSidesDone=null;';
+  const GTRK=src.slice(src.indexOf("/*GT_RANK_BEGIN*/"),src.indexOf("/*GT_RANK_END*/"));
+  const pre=GTRK+';function gtIsObj(v){return v!==null&&typeof v==="object"&&!Array.isArray(v);}function gtNum(v){if(typeof v==="number")return isFinite(v)?v:null;return null;}const GT_MATCH_IDS={};const gtSidesDone=null;';
   const F=new Function("localStorage","sessionStorage",pre+src.slice(g,ge)+";"+src.slice(pa,pb)+";"+src.slice(sides,se)+";return{recordMatch,mergeNames,loadMatchLog,gtNoteGroup,gtRecordSides,statsGameLabel,STATS_SCOREPAD_GAMES};")(LS,SS);
   const log=()=>JSON.parse(mem.gt_matchLog||"[]");
   T("recordMatch ohne Gruppe: kein groupId (rueckwaertsvertraeglich)",()=>{mem.gt_matchLog="[]";F.recordMatch("yatzy",[{name:"A",score:2},{name:"B",score:1}],false);const e=log()[0];assert.equal(e.groupId,undefined);assert.equal(e.winner,"A");assert.equal(e.status,"done");});

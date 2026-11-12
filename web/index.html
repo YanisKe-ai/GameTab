@@ -48,10 +48,10 @@ var pld=plDecide({viewMode:vm==="laptop"?"laptop":"mobile",force:f,touch:(w.navi
   html, body { margin: 0; padding: 0; background: #12141C; }
 html { height: 100%; }
 #root { min-height: 100%; display: flex; flex-direction: column; }
-#root > div:first-child { flex: 1 0 auto; }
-@media (display-mode: standalone) { html body #root > div:first-child { box-sizing: border-box !important; min-height: 100vh !important; padding-bottom: env(safe-area-inset-bottom, 0px); }
-html body #root > div.gtL-start { box-sizing: border-box !important; min-height: 100vh !important; height: 100vh !important; padding-top: 76px !important; padding-bottom: env(safe-area-inset-bottom, 0px) !important; }
-html body #root > div.gtL-start > div { overflow: visible !important; } }
+#root > :is(div,main):first-child { flex: 1 0 auto; }
+@media (display-mode: standalone) { html body #root > :is(div,main):first-child { box-sizing: border-box !important; min-height: 100vh !important; padding-bottom: env(safe-area-inset-bottom, 0px); }
+html body #root > .gtL-start { box-sizing: border-box !important; min-height: 100vh !important; height: 100vh !important; padding-top: 76px !important; padding-bottom: env(safe-area-inset-bottom, 0px) !important; }
+html body #root > .gtL-start > div { overflow: visible !important; } }
   #root { min-height: 100vh; min-height: 100dvh; }
   #loading { display: flex; align-items: center; justify-content: center; min-height: 100vh; font-family: sans-serif; color: #9C8F7C; background: #12141C; }
 </style>

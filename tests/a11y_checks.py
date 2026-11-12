@@ -7,6 +7,8 @@ Start, Einstellungen, Statistik, Skyjo-Setup, Freies Spiel: jedes input/select/t
 aria-labelledby (versteckte ausgenommen). Startseite: genau ein main, genau ein h1, Abschnitte als h2, Handy und Laptop.
 document.title passt je Ansicht. Ansage-Regionen (polite und alert) sind da und melden Text (gtAnnounce).
 Nach dem Wiederherstellen erscheint «Sicherung geladen: n Partien, g Gruppen.».
+Paket U2: Timer (role=timer, Ansage nur bei 30/10/5/0 s), Kontrast >= 4,5 (Favoriten-Hinweis, Statistik-Untertitel,
+Freies Spiel Umschalter, Nocturne und Hell), Touchziele >= 44 px auf der Statistik (390 und 320).
 Auch von tests/regression.py aufrufbar: run(pg). Kein Ton: Chromium mit --mute-audio.
 """
 import json
@@ -15,7 +17,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from landscape import new_phone, start, goto_game, wait, URL  # noqa: E402
+from landscape import new_phone, start, goto_game, wait, URL, small_targets, calm  # noqa: E402
 
 MUTE = 'try{localStorage.setItem("gt_soundEnabled","false")}catch(e){}'
 
@@ -166,6 +168,136 @@ def run_restore(pg):
     print("OK    ", "UX-10: Meldung nach Wiederherstellen (Zeile und Ansage), Flag entfernt")
 
 
+CONTRAST_JS = """(el)=>{
+const parse=c=>{const m=c.match(/rgba?\\(([^)]+)\\)/);if(!m)return[0,0,0,0];const p=m[1].split(/[ ,\\/]+/).map(Number);return[p[0],p[1],p[2],p.length>3?p[3]:1];};
+const lin=v=>{v/=255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4)};
+const L=c=>0.2126*lin(c[0])+0.7152*lin(c[1])+0.0722*lin(c[2]);
+let op=1;for(let e=el;e;e=e.parentElement){op*=parseFloat(getComputedStyle(e).opacity)}
+let bg=[255,255,255];const chain=[];for(let e=el;e;e=e.parentElement){chain.push(e)}
+for(const e of chain.reverse()){const c=parse(getComputedStyle(e).backgroundColor);if(c[3]>0){bg=[0,1,2].map(i=>c[i]*c[3]+bg[i]*(1-c[3]));}}
+const fc=parse(getComputedStyle(el).color);const a=fc[3]*op;
+const fg=[0,1,2].map(i=>fc[i]*a+bg[i]*(1-a));
+const l1=L(fg),l2=L(bg);return Math.round((Math.max(l1,l2)+0.05)/(Math.min(l1,l2)+0.05)*100)/100;}"""
+
+STATS_FIX = Path(__file__).resolve().parent / "fixtures_st" / "stats_fixtures.json"
+
+
+def _seed_stats(pg):
+    fx = json.loads(STATS_FIX.read_text())
+    pg.evaluate("([a,b])=>{localStorage.setItem('gt_matchLog',a);localStorage.setItem('gt_playerGroups',b);}",
+                [json.dumps(fx["gt_matchLog"]), json.dumps(fx["gt_playerGroups"])])
+
+
+def _open_stats(pg):
+    pg.goto(URL)
+    wait(pg, 900)
+    pg.get_by_text("Schreibunterlagen", exact=True).first.click()
+    wait(pg, 700)
+    pg.get_by_label("Statistiken").first.click()
+    wait(pg, 1000)
+
+
+def run_contrast(pg, theme):
+    """AX-8: drei Stellen >= 4,5 : 1 (Favoriten-Hinweis, Statistik-Untertitel, Freies Spiel Umschalter aktiv)."""
+    start(pg, theme=theme)
+    calm(pg)
+    vals = {}
+    vals["Favoriten-Hinweis"] = [pg.locator(".gtL-showcase-hint").first.evaluate(CONTRAST_JS)]
+    _seed_stats(pg)
+    _open_stats(pg)
+    calm(pg)
+    vals["Statistik-Untertitel"] = pg.evaluate(
+        "(f)=>{const C=(" + CONTRAST_JS + ");return [...document.querySelectorAll('span,div')].filter(e=>/^\\d+ Partien?( ·.*)?$/.test(e.textContent.trim())&&e.children.length===0).map(e=>C(e))}")
+    pg.goto(URL)
+    wait(pg, 900)
+    goto_game(pg, "Schreibunterlagen", "Freies Spiel")
+    calm(pg)
+    vals["Freies Spiel Umschalter"] = pg.evaluate(
+        "()=>{const C=(" + CONTRAST_JS + ");return [...document.querySelectorAll('.fp-seg button[aria-pressed=\"true\"]')].map(C)}")
+    for name, vs in vals.items():
+        if not vs:
+            _fail(f"Kontrast {theme}: {name} nicht gefunden")
+        if min(vs) < 4.5:
+            _fail(f"Kontrast {theme}: {name} {min(vs)} < 4,5")
+    print("OK    ", f"Kontrast {theme}: " + ", ".join(f"{k} {min(v)}" for k, v in vals.items()))
+
+
+def run_touch(pg, w):
+    """AX-9: Statistikseite, alle Bedienelemente beim Durchscrollen >= 44 px (Loeschen-Symbol folgt in U3)."""
+    start(pg)
+    _seed_stats(pg)
+    _open_stats(pg)
+    calm(pg)
+    found = {}
+    for _ in range(14):
+        for t in small_targets(pg):
+            if re.search(r"l(ö|oe)sch|entfern|delete", t["name"], re.I):
+                continue
+            found[t["name"] + str((t["w"], t["h"]))] = t
+        done = pg.evaluate("()=>{const y=scrollY;scrollBy(0,Math.round(innerHeight*0.8));return scrollY===y}")
+        wait(pg, 150)
+        if done:
+            break
+    if found:
+        _fail(f"Touchziele {w}px: unter 44 px {list(found)[:5]}")
+    print("OK    ", f"Touchziele Statistik {w}px: nichts unter 44 px")
+
+
+def run_timer(pg):
+    """AX-4: role=timer in Heads Up, Tabu, 5 Sekunden; Ansage nur bei 30, 10, 5 und 0 Sekunden."""
+    start(pg)
+    pg.clock.install()
+    for game in ("HeadsUp", "Tabu"):
+        pg.goto(URL)
+        wait(pg, 700)
+        goto_game(pg, "Partyspiele", game)
+        pg.get_by_role("button", name="30s", exact=True).click()
+        wait(pg, 300)
+        pg.get_by_role("button", name="Spiel starten", exact=True).click()
+        wait(pg, 700)
+        pg.get_by_role("button", name=re.compile("Bereit")).click()
+        wait(pg, 700)
+        if pg.get_by_role("button", name="Ohne Drehen spielen").count():
+            pg.get_by_role("button", name="Ohne Drehen spielen").click()
+            wait(pg, 700)
+        tm = pg.locator("[role=timer]")
+        if tm.count() < 1:
+            _fail(f"{game}: kein [role=timer]")
+        if tm.first.get_attribute("aria-live") != "off":
+            _fail(f"{game}: Timer ohne aria-live=off")
+        if pg.locator(".gt-tring svg[aria-hidden=true]").count() < 1:
+            _fail(f"{game}: Ring nicht aria-hidden")
+        heard = []
+        for _ in range(40):
+            pg.clock.run_for(1000)
+            wait(pg, 80)
+            lab = (tm.first.get_attribute("aria-label", timeout=1500) if tm.count() else "Zeit abgelaufen")
+            pol = pg.locator('[data-gt-live="polite"]').inner_text().strip()
+            if pol and (not heard or heard[-1] != pol):
+                heard.append(pol)
+            if re.search(r"abgelaufen", lab, re.I):
+                break
+        pg.clock.run_for(300)
+        wait(pg, 150)
+        pol = pg.locator('[data-gt-live="polite"]').inner_text().strip()
+        if pol and (not heard or heard[-1] != pol):
+            heard.append(pol)
+        want = ["Noch 30 Sekunden", "Noch 10 Sekunden", "Noch 5 Sekunden", "Zeit abgelaufen!"]
+        if heard != want:
+            _fail(f"{game}: Ansagen {heard} statt {want}")
+        print("OK    ", f"{game}: role=timer, Ansage nur bei 30/10/5/0 ({heard})")
+    pg.goto(URL)
+    wait(pg, 700)
+    goto_game(pg, "Partyspiele", "5 Sekunden")
+    pg.get_by_role("button", name="Spiel starten", exact=True).click()
+    wait(pg, 700)
+    pg.get_by_role("button", name="Kategorie aufdecken", exact=True).click()
+    wait(pg, 700)
+    if pg.locator("[role=timer]").count() < 1:
+        _fail("5 Sekunden: kein [role=timer]")
+    print("OK    ", "5 Sekunden: role=timer vorhanden")
+
+
 def run_laptop(pg):
     start(pg, mode="Laptop")
     goto_start(pg)
@@ -178,7 +310,9 @@ def main():
     with sync_playwright() as p:
         b = p.chromium.launch(args=["--mute-audio"])
         try:
-            for fn, w, h in ((run, 393, 852), (run_restore, 393, 852), (run_laptop, 1280, 800)):
+            for fn, w, h in ((run, 393, 852), (run_restore, 393, 852), (run_laptop, 1280, 800), (run_timer, 393, 852),
+                             (lambda pg: run_contrast(pg, "Nocturne"), 393, 852), (lambda pg: run_contrast(pg, "Hell"), 393, 852),
+                             (lambda pg: run_touch(pg, 390), 390, 844), (lambda pg: run_touch(pg, 320), 320, 568)):
                 ctx, pg = new_phone(b, w, h, mobile=(w < 600))
                 ctx.add_init_script(MUTE)
                 try:

@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.12-7 (12.11.2026 12:28)
+- Timer-Ansagen, besserer Kontrast, grössere Tippflächen
+
 ## 2026.11.12-6 (12.11.2026 11:45)
 - Barrierefreiheit: Beschriftungen, Seitentitel, Ansagen, Meldung nach Wiederherstellen
 

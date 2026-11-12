@@ -117,6 +117,38 @@ def run(pg):
     assert "Spieler 1" not in txt, "Statistik zeigt die zurueckgenommene Partie"
 
 
+def run_tutto(pg):
+    """Tutto: Eintrag >= Ziel beendet die Partie, Eintrag loeschen bis leer, neu laden: keine Geisterpartie."""
+    start(pg)
+    goto_game(pg, "Schreibunterlagen", "Tutto")
+    _btn(pg, "Spiel starten").first.click()
+    wait(pg, 800)
+    pg.get_by_role("button", name="Spieler 1:").first.click()
+    wait(pg, 400)
+    for ch in "99999":
+        _btn(pg, ch).first.click()
+        wait(pg, 100)
+    _btn(pg, "Punkte eintragen").last.click()
+    wait(pg, 1800)
+    log = _log(pg)
+    assert [m.get("status") for m in log] == ["done"], f"Tutto-Ende: {log}"
+    for _ in range(3):
+        if _btn(pg, "Schliessen").count():
+            _btn(pg, "Schliessen").first.click()
+            wait(pg, 700)
+    # Eintrag loeschen ueber das Mehr-Blatt
+    pg.get_by_role("button", name="Spieler 1:").first.click()
+    wait(pg, 500)
+    pg.get_by_role("button", name="Mehr für Spieler 1").first.click(timeout=3000)
+    wait(pg, 600)
+    pg.get_by_role("button", name=re.compile(r"^Eintrag l")).first.click()
+    wait(pg, 1000)
+    pg.reload()
+    wait(pg, 1500)
+    done = [m for m in _log(pg) if m.get("status") != "open"]
+    assert not done, f"Tutto-Geisterpartie nach Eintrag loeschen: {done}"
+
+
 def main():
     from playwright.sync_api import sync_playwright
     with sync_playwright() as p:
@@ -127,6 +159,9 @@ def main():
             ctx.close()
             ctx, pg = new_phone(b, 393, 852)
             run_revanche(pg)
+            ctx.close()
+            ctx, pg = new_phone(b, 393, 852)
+            run_tutto(pg)
             errs = [e for e in pg._pl_errors if "manifest" not in e and "sw.js" not in e and "favicon" not in e and "Failed to load resource" not in e]
             assert not errs, f"Seitenfehler: {errs[:2]}"
             print("t_a1 OK")

@@ -35,11 +35,12 @@ T("winners mit Gross-/Kleinschreibung (Norm)",()=>{const r=both(P(["Anna",1],["B
 T("gtRankList direkt, Reihenfolge und keyFn",()=>{const L=[{k:"a",score:5},{k:"b",score:9},{k:"c",score:9}];assert.deepEqual(F.gtRankList(L,{}),[3,1,1]);assert.deepEqual(F.gtRankList(L,{low:true}),[1,2,2]);assert.deepEqual(F.gtRankList(L,{winners:["a"],keyFn:p=>p.k}),[1,2,2]);assert.deepEqual(F.gtRankList([],{}),[]);});
 T("Nullpunkte: recordMatch ohne Wertung gibt keinen Rang (unveraendert)",()=>{const r=both(P(["A",null],["B",null]));assert.deepEqual(r.a,{A:null,B:null});});
 // GT_STATS.won
-const mk=(o)=>Object.assign({participants:[]},o);
+const mk=(o)=>Object.assign({participants:[{name:"Anna"},{name:"Bob"},{name:"Cleo"},{name:"ANNA  x"}]},o);
 T("won: winner",()=>{assert.equal(S.won(mk({winner:"Anna"}),"anna"),true);assert.equal(S.won(mk({winner:"Anna"}),"bob"),false);});
 T("won: geteilter Sieg zaehlt fuer alle (E1)",()=>{const m=mk({winner:"Anna",winners:["Anna","Bob"]});assert.equal(S.won(m,"anna"),true);assert.equal(S.won(m,"bob"),true);assert.equal(S.won(m,"cleo"),false);});
 T("won: Rang 1 ohne winner/winners",()=>{const m=mk({participants:[{name:"Anna",rank:1},{name:"Bob",rank:2},{name:"Cleo",rank:1}]});assert.equal(S.won(m,"anna"),true);assert.equal(S.won(m,"cleo"),true);assert.equal(S.won(m,"bob"),false);});
 T("won: Normalisierung der winners, Leerwerte",()=>{assert.equal(S.won(mk({winners:["  ANNA  x"]}),"anna x"),true);assert.equal(S.won(null,"a"),false);assert.equal(S.won(mk({}),""),false);assert.equal(S.won(mk({}),"anna"),false);});
+T("won: Solo-Partie und noWinner-Spiel zaehlen nicht als Sieg (angeglichen an prep)",()=>{assert.equal(S.won({participants:[{name:"Anna"}],winner:"Anna"},"anna"),false);assert.equal(S.won({game:"mostlikely",participants:[{name:"Anna"},{name:"Bob"}],winner:"Anna"},"anna"),false);assert.equal(S.won({game:"skyjo",participants:[{name:"Anna"},{name:"Bob"}],winner:"Anna"},"anna"),true);});
 // nightKey
 T("nightKey: 04:59 gehoert zum Vortag, 05:00 zum neuen Tag",()=>{
   assert.equal(S.nightKey(new Date(2026,5,2,4,59,59).getTime()),"2026-06-01");

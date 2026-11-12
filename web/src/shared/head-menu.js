@@ -127,7 +127,7 @@ function GtHeadButtons({ theme, css, L, onRules, onHome, onEndGame, items, onOpe
       );
     }
     return (
-      <GtHmRow key={it.key || it.label} {...common} onClick={() => { if (!it.twoStep || it.confirming) close(); if (it.onClick) it.onClick(); }}>
+      <GtHmRow key={it.key || it.label} {...common} onClick={() => { if (!it.twoStep || it.confirming) close(); if (it.key === "undo" || it.icon === "undo") globalThis.__gtUndoAt = Date.now(); if (it.onClick) it.onClick(); }}>
         <span aria-live="polite">{label}</span>
       </GtHmRow>
     );

@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.12-16 (12.11.2026 18:10)
+- Korrekturen aus der Qualitätskontrolle: Partien-Zähler, Profil-Kurve, geteilter Sieg überall, Geisterpartie in allen Spielen
+
 ## 2026.11.12-15 (12.11.2026 17:21)
 - Querformat: Kopfzeile bleibt nach dem Drehen oben (Heads Up und alle Spiele)
 

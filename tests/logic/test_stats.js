@@ -389,6 +389,21 @@ T("A2 Texte: kein vorlaeufig, keine faire Quote in allen 6 Sprachen",()=>{["de",
   T("statsGameLabel kennt Flip 7, Bestenliste enthaelt flip7",()=>{assert.equal(F.statsGameLabel("flip7",tDe),"Flip 7");assert.equal(F.statsGameLabel("hiscore",tDe),"Hi Score");assert(F.STATS_SCOREPAD_GAMES.includes("flip7"));});
 })();
 
+// ---------- E1 vollstaendig: ganze Siege bei Spielabend und Spiel-Champion ----------
+T("Spielabend-Sieger zaehlt geteilten Sieg voll (E1)",()=>{
+  const L=[M("yatzy",[2026,1,5,20],[["A",2,1],["B",2,1],["C",1,3]],["A","B"]),M("yatzy",[2026,1,5,21],[["A",2,1],["B",1,2],["C",1,2]],["A"])];
+  const m=S.build(L,{now:NOW});const n=m.nights[0];
+  near(n.points.a,2);near(n.points.b,1);assert.deepEqual(n.winners,["a"]);
+});
+T("Spiel-Champion nach ganzen Siegen, Gleichstand bei gleichen Siegen (E1)",()=>{
+  const L=[M("yatzy",[2026,1,1],[["A",2,1],["B",2,1]],["A","B"]),M("yatzy",[2026,1,2],[["A",2,1],["B",2,1]],["A","B"]),M("yatzy",[2026,1,3],[["A",2,1],["B",1,2]],["A"]),M("yatzy",[2026,1,4],[["A",1,2],["B",2,1]],["B"])];
+  const g=S.build(L,{now:NOW}).games[0];assert.equal(g.champion.wins,3);assert.equal(g.champion.tied,true);
+});
+T("won() wie prep(): Solo ohne Sieg (E1)",()=>{
+  const solo=M("yatzy",[2026,1,1],[["A",5,1]],["A"]);assert.equal(S.won(solo,"a"),false);
+  const duo=M("yatzy",[2026,1,1],[["A",5,1],["B",3,2]],["A"]);assert.equal(S.won(duo,"a"),true);assert.equal(S.won(duo,"b"),false);
+});
+
 console.log((fails.length?"FEHLER":"OK")+": "+n+" Tests bestanden, "+fails.length+" fehlgeschlagen");
 fails.forEach(f=>console.log("  x "+f));
 process.exit(fails.length?1:0);

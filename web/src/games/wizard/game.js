@@ -194,7 +194,7 @@ const who=rs&&rs.next;const isBid=!!rs&&rs.phase==="bid";const cards=curRound||r
 const remaining=rs?rs.cards-rs.trickSum:0;const lastTrick=!!rs&&rs.phase==="tricks"&&rs.trickLeft===1&&remaining>=0&&remaining<=rs.cards;
 const allowed=v=>{if(!rs||isBid)return true;if(remaining<0)return true;if(lastTrick)return v===remaining;return v<=remaining;};
 const pick=v=>{if(!rs||!who||!allowed(v))return;const k=isBid?"bid":"tricks";if(k==="tricks"){const c=wzCell(rounds,curRound,who.id);if(c.bid===v&&v>=4){playWinSound();hapticWin();firePerfectBid();}}setState(s=>wzSet(s,curRound,who.id,k,v));};
-const undo=()=>setState(s=>{const h=s.hist||[];if(!h.length)return{...s,ended:false};const e=h[h.length-1];const cur=wzCell(s.rounds||{},e.r,e.p);return{...s,ended:false,hist:h.slice(0,-1),rounds:{...s.rounds,[e.r]:{...((s.rounds||{})[e.r]||{}),[e.p]:{...cur,[e.k]:e.v}}}};});
+const undo=()=>{globalThis.__gtUndoAt=Date.now();undo0();};const undo0=()=>setState(s=>{const h=s.hist||[];if(!h.length)return{...s,ended:false};const e=h[h.length-1];const cur=wzCell(s.rounds||{},e.r,e.p);return{...s,ended:false,hist:h.slice(0,-1),rounds:{...s.rounds,[e.r]:{...((s.rounds||{})[e.r]||{}),[e.p]:{...cur,[e.k]:e.v}}}};});
 const saveCell=(pid,round,bidNum,tricksNum)=>{if(bidNum!==null&&bidNum===tricksNum&&bidNum>=4){playWinSound();hapticWin();firePerfectBid();}setState(s=>wzSet(wzSet(s,round,pid,"bid",bidNum),round,pid,"tricks",tricksNum));setEditing(null);};
 const resetDone=()=>setState(s=>({...s,rounds:{},hist:[],ended:false}));
 const editPlayers=()=>{if(!confirmingSetup){setConfirmingSetup(true);setTimeout(()=>setConfirmingSetup(false),3000);return;}setState(s=>({...s,phase:"setup"}));setConfirmingSetup(false);};

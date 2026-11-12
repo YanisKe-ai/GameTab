@@ -788,7 +788,7 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
         <button
           className="mgPress"
           data-mg-undo="1"
-          onClick={() => lastUndo && upd((s) => mgUndo(s))}
+          onClick={() => { if (lastUndo) { globalThis.__gtUndoAt = Date.now(); upd((s) => mgUndo(s)); } }}
           disabled={!lastUndo}
           aria-label={lastUndo ? t("mgUndoAria")(holesTxt(lastUndo.holes)) : t("mgUndo")}
           title={t("mgUndo")}

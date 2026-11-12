@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.12-17 (12.11.2026 22:05)
+- Tutto: neuer Siegesbildschirm als Neon-Hängeschild (herabgelassen, Spielfarben, GameTab-Logo, lange Namen)
+
 ## 2026.11.12-16 (12.11.2026 18:10)
 - Korrekturen aus der Qualitätskontrolle: Partien-Zähler, Profil-Kurve, geteilter Sieg überall, Geisterpartie in allen Spielen
 

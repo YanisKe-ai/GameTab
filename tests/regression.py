@@ -344,6 +344,12 @@ def t_stats_ghost(pg, env):
     t_a1.run(pg)
 
 
+@test("Spielfehler Teil 1 (GA)", quick=False, matrix=False)
+def t_ga_fixes(pg, env):
+    import t_ga
+    t_ga.run(pg)
+
+
 @test("Skyjo")
 def t_skyjo(pg, env):
     open_game(pg, "Schreibunterlagen", "Skyjo"); press_start(pg)

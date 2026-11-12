@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.12-2 (12.11.2026 10:00)
+- Skyjo-Grenzen, Tutto-Eingabe, Freies Spiel ohne Sprung
+
 ## 2026.11.12-1 (12.11.2026 09:25)
 - Statistik: Geisterpartie behoben, Partien-Zähler korrekt, Speicherfehler sichtbar
 

@@ -112,6 +112,35 @@ import { GtUbStyle } from "../../shared/unit-boards.js";
 .gtL-content .wz-sheet.edit{padding-bottom:0}
 .gtL-content .wz-editor{position:sticky;bottom:12px;left:auto;right:auto;margin:10px 0 0;border:1px solid var(--wz-gold);border-radius:18px;max-height:none;box-shadow:0 10px 28px rgba(0,0,0,.3);background:var(--wz-bg)}
 .gtL-content .wz-dockbox{position:static;margin:10px 0 0;border:1px solid var(--wz-line);border-radius:18px;box-shadow:none;background:var(--wz-card)}
+.gtL-content .wz-split.gtL-e-fit{grid-template-columns:minmax(400px,540px) minmax(0,1fr)!important;gap:32px!important;align-items:stretch}
+.gtL-content .wz-aside{position:relative;min-height:0;min-width:0}
+.gtL-content .wz-aside .wz-sheet{position:absolute;inset:0;overflow:auto;overscroll-behavior:contain;border-radius:18px;scrollbar-width:thin}
+.gtL-content .wz-aside .wz-scroll{overflow:clip;border-radius:18px}
+.gtL-content .wz-wheelrow{--wz-sw:104px;margin-top:6px;gap:10px}
+.gtL-content .wz-wheel{width:196px}
+.gtL-content .wz-mid b{font-size:62px}
+.gtL-content .wz-side b{font-size:38px}
+.gtL-content .wz-side span{font-size:14px}
+.gtL-content .wz-sum{font-size:15px;min-height:30px;margin:2px 0 6px}
+.gtL-content .wz-cap{grid-template-columns:34px minmax(0,1fr) 48px 48px 76px;gap:8px;padding:0 16px;font-size:13px}
+.gtL-content .wz-row{grid-template-columns:34px minmax(0,1fr) 48px 48px 76px;gap:8px;min-height:50px;padding:0 16px;border-radius:16px}
+.gtL-content .wz-rank{gap:4px}
+.gtL-content .wz-pl{font-size:20px}
+.gtL-content .wz-nm{font-size:20px}
+.gtL-content .wz-deal{font-size:11px;padding:3px 8px}
+.gtL-content .wz-c{width:38px;height:38px;font-size:19px}
+.gtL-content .wz-tot{font-size:30px}
+.gtL-content .wz-dockbox{padding:10px 14px 12px}
+.gtL-content .wz-prompt b{font-size:21px}
+.gtL-content .wz-hint{font-size:14px}
+.gtL-content .wz-pad{grid-template-columns:repeat(auto-fit,50px);gap:8px}
+.gtL-content .wz-n{width:50px;height:50px;font-size:21px}
+.gtL-content .wz-cta{min-height:54px;font-size:17px}
+.gtL-content .wz-th{font-size:16px;padding:16px 4px}
+.gtL-content .wz-rd{font-size:20px;min-height:52px}
+.gtL-content .wz-cell{min-height:52px}
+.gtL-content .wz-cell small{font-size:13px}
+.gtL-content .wz-cell b{font-size:22px}
 @media (max-height:860px){:root:not(.gt-laptopmode) .wz-wheel{width:min(172px,calc(100vw - 2*var(--wz-sw) - 36px))}:root:not(.gt-laptopmode) .wz-mid b{font-size:44px}:root:not(.gt-laptopmode) .wz-side b{font-size:26px}:root:not(.gt-laptopmode) .wz-sum{min-height:24px;margin:0 0 2px}:root:not(.gt-laptopmode) .wz-row{min-height:40px}}
 @media (max-height:700px){:root:not(.gt-laptopmode) .wz-root .gt-u-col{min-height:0}:root:not(.gt-laptopmode) .wz-side{display:none}:root:not(.gt-laptopmode) .wz-infoline{display:flex}:root:not(.gt-laptopmode) .wz-wheel{width:min(112px,calc(100vw - 60px))}:root:not(.gt-laptopmode) .wz-mid b{font-size:34px}:root:not(.gt-laptopmode) .wz-mid span{display:none}:root:not(.gt-laptopmode) .wz-sum{min-height:20px;font-size:12px;margin:0}:root:not(.gt-laptopmode) .wz-row{min-height:36px;border-radius:12px}:root:not(.gt-laptopmode) .wz-c{width:30px;height:30px;font-size:14px}:root:not(.gt-laptopmode) .wz-tot{font-size:21px}:root:not(.gt-laptopmode) .wz-hint{margin-bottom:4px}:root:not(.gt-laptopmode) .wz-dockbox{padding-top:4px;padding-bottom:4px}}
 @media (max-height:600px){:root:not(.gt-laptopmode):not([data-phone-landscape]) .wz-wheel{width:84px}:root:not(.gt-laptopmode):not([data-phone-landscape]) .wz-mid b{font-size:28px}:root:not(.gt-laptopmode):not([data-phone-landscape]) .wz-mid span{display:none}:root:not(.gt-laptopmode):not([data-phone-landscape]) .wz-row{min-height:34px}:root:not(.gt-laptopmode):not([data-phone-landscape]) .wz-cap{display:none}:root:not(.gt-laptopmode):not([data-phone-landscape]) .wz-sum{display:none}:root:not(.gt-laptopmode):not([data-phone-landscape]) .wz-hint:not(.warn){display:none}}
@@ -177,7 +206,7 @@ const cols="36px repeat("+n+",minmax(54px,1fr))";
 return <div className={"wz-sheet"+(open?" open":"")+(editPad?" edit":"")}><div className="wz-sheet-h"><b className="wz-serif">{t("wzSheetTitle")}</b><button type="button" className="wz-x" onClick={onClose} aria-label={t("mgClose")}><XMark/></button></div><div className="wz-scroll"><div className="wz-grid" style={{gridTemplateColumns:cols}}><div className="wz-th corner"/>{players.map(p=><div key={p.id} className="wz-th" title={p.name}>{p.name}</div>)}{Array.from({length:roundCount},(_,i)=>i+1).map(r=>{const run=wizardTotals(players,rounds,r);return <Fragment key={r}><div className={"wz-rd"+(r===curRound?" cur":"")}>{r}</div>{players.map(p=>{const c=wzCell(rounds,r,p.id);const sel=editing&&editing.round===r&&editing.playerId===p.id;return <div key={p.id} role="button" tabIndex={0} className={"wz-cell"+(r===curRound?" cur":"")+(sel?" sel":"")} onClick={()=>setEditing({round:r,playerId:p.id})} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();setEditing({round:r,playerId:p.id});}}} aria-label={p.name+", "+t("roundLabel")(r)+": "+(c.bid===null?"-":c.bid)+" / "+(c.tricks===null?"-":c.tricks)}>{(c.bid!==null||c.tricks!==null)&&<small>{c.bid===null?"·":c.bid}{"/"}{c.tricks===null?"·":c.tricks}</small>}<b style={c.tricks!==null&&c.bid!==null?undefined:{color:"var(--wz-mu)",opacity:0.45}}>{c.tricks!==null&&c.bid!==null?run[p.id]:"·"}</b></div>;})}</Fragment>;})}</div></div>{chart}{editor}</div>;}
 function WizardPlay({state,setState,onBack,onHome,onEndGame,lang="de",theme="dark"}){const t=useT(lang);const tk=wzTk(theme);const wt=wizardTokens(theme);
 const players=state.players,rounds=state.rounds||{},hist=state.hist||[],ended=!!state.ended;
-const[editing,setEditing]=useState(null);const[sheet,setSheet]=useState(false);const[confirmingSetup,setConfirmingSetup]=useState(false);const[confirmingEnd,setConfirmingEnd]=useState(false);const[rulesOpen,setRulesOpen]=useState(false);const{node:perfectBidNode,fire:firePerfectBid}=useMilestoneBurst();
+const[editing,setEditing]=useState(null);const[sheet,setSheet]=useState(false);const lapRound=useRef("");useEffect(()=>{const el=document.querySelector(".gtL-content .wz-aside .wz-rd.cur");const key=el?el.textContent:"";if(key===lapRound.current)return;lapRound.current=key;const box=el&&el.closest(".wz-sheet");if(!box)return;box.scrollTo({top:Math.max(0,el.offsetTop-150),behavior:"auto"});});const[confirmingSetup,setConfirmingSetup]=useState(false);const[confirmingEnd,setConfirmingEnd]=useState(false);const[rulesOpen,setRulesOpen]=useState(false);const{node:perfectBidNode,fire:firePerfectBid}=useMilestoneBurst();
 const n=players.length;const roundCount=wizardRoundCount(Math.max(n,1));const sIdx=wzStartIdx(players,state.startId);
 const roundDone=r=>n>0&&players.every(p=>{const c=wzCell(rounds,r,p.id);return c.bid!==null&&c.tricks!==null;});
 let curRound=0,doneCount=0,lastDone=0;for(let r=1;r<=roundCount;r++){if(roundDone(r)){doneCount++;lastDone=r;}else if(!curRound)curRound=r;}

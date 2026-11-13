@@ -119,6 +119,20 @@ const MG_CSS = `
 .mgGL .mgCard { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 12px; }
 .gtL-content .mgPhoneOnly { display: none !important; }
 .gtL-content .mgGL .mgBar { border-radius: 0; }
+.gtL-content .gtL-split.mg-split { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) !important; gap: 0 32px !important; align-items: stretch; }
+.gtL-content .mgGL .mgBar { margin-top: 16px !important; }
+.gtL-content .gtL-split.mg-split > .mg-main { min-height: 0 !important; }
+.gtL-content .gtL-split.mg-split > .mg-main > .mgBar { margin-top: 16px !important; }
+.gtL-content .mgGL .mgKeys { gap: 8px; }
+.gtL-content .mgGL .mgKey { min-height: 60px; font-size: 28px; border-radius: 14px; }
+.gtL-content .mgGL .mg-main .mgPc { padding: 14px 16px 16px; border-radius: 20px; }
+.gtL-content .mgGL .mgPc > div:first-child { margin-bottom: 10px !important; }
+.gtL-content .mgGL .mgPc > div:first-child > span:first-child { font-size: 24px !important; }
+.gtL-content .mgGL .mgPc > div:first-child > span:last-child { font-size: 15px !important; }
+.gtL-content .mgGL .mgPc > div:first-child > span:last-child > span { font-size: 26px !important; }
+.gtL-content .mgGL .mgTile { width: 52px; height: 68px; font-size: 46px; border-radius: 9px; }
+.gtL-content .mgGL .mg-side > .gtL-e-only:first-child { zoom: 1.3; }
+.gtL-content .mgGL .mg-main .mg-panel > div[style*="flex-direction: column"] { gap: 10px !important; }
 @media (prefers-reduced-motion: reduce) {
   .mgGL .mgPress, .mgGL .mgPress:active:not(:disabled) { transition: none; transform: none; }
   .mgGL .mgHoleNum { animation: none; }

@@ -26,6 +26,8 @@ import { LAPTOP_SU_CSS } from "../impostor/laptop-su.js";
 .gt-u-col.gt-u-off { min-height: 0; }
 .gt-u-col.gt-u-off > .gt-u-glow { display: none; }
 .hu-intro .hu-a > :first-child { margin-top: auto; }
+html:not([data-phone-landscape]) .gtL-shellpage.hu-ls { padding-top: 20px !important; }
+html:not([data-phone-landscape]) .gtL-shellpage.hu-ls .gt-gamehead { position: relative; top: 0 !important; }
 [data-phone-landscape] .hu-intro .hu-a > :first-child { margin-top: 0; }
 [data-phone-landscape] .hu-ls { padding: max(6px, var(--pl-sat)) 0 max(8px, var(--pl-sab)) 0 !important; height: auto !important; min-height: var(--pl-vh) !important; box-sizing: border-box; }
 [data-phone-landscape] .hu-ls .gtL-headsup-wrap { height: auto; padding-top: 0 !important; }

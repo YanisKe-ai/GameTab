@@ -57,7 +57,7 @@ const SK_CSS = `
 .sk-acts{display:flex;gap:8px}
 .sk-ghost{flex:none;min-height:54px;padding:0 14px;border-radius:18px;border:1px solid var(--sk-line);background:transparent;color:var(--sk-muted);font:700 14px 'Inter',sans-serif;cursor:pointer;display:flex;align-items:center;gap:6px}
 .sk-ghost:disabled{opacity:.4;cursor:default}
-.sk-save{flex:1;min-height:54px;border:0;border-radius:18px;background:var(--sk-acc);color:var(--sk-on);font:800 17px 'Space Grotesk',sans-serif;cursor:pointer;padding:0 10px}
+.sk-save{flex:1;min-width:0;max-width:100%;overflow:hidden;min-height:54px;border:0;border-radius:18px;background:var(--sk-acc);color:var(--sk-on);font:800 17px 'Space Grotesk',sans-serif;cursor:pointer;padding:0 10px}
 .sk-save:disabled{background:rgba(127,127,127,.18);color:var(--sk-muted);cursor:default}
 .sk-hint{font:500 13px/1.3 'Inter',sans-serif;color:var(--sk-muted);text-align:center}
 @media (max-height:700px){.sk-key{height:42px}.sk-row{min-height:62px;padding:6px 10px}.sk-save,.sk-ghost{min-height:48px}}

@@ -42,6 +42,7 @@ const GT_NEON_CSS = `
 .gtn-btn{min-height:52px;border-radius:26px;font:400 20px/1 'Tilt Neon','Inter',sans-serif;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .gtn-btn:active{transform:scale(.97)}
 .gtn-btn:focus-visible,.gtn-x:focus-visible{outline:2px solid #fff;outline-offset:3px}
+html[data-gt-podium-open] .gt-gamehead,html[data-gt-podium-open] .gt-headbtns{visibility:hidden!important}
 .gtn-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .gtn-ranks::-webkit-scrollbar{display:none}
 @media (prefers-reduced-motion: reduce){.gtn-run .gtn-l,.gtn-run .gtn-buzz{animation:none;${LIT}}}
@@ -115,6 +116,24 @@ export function GtNeonPodium({ phase, ranked, ranks, gameId, gameLabel, theme, t
   const winners = ranked.filter((e, i) => ranks[i] === 1);
   const others = ranked.map((e, i) => ({ e, i })).filter(o => ranks[o.i] !== 1);
   const T0 = 2.75;
+  // Spielkopf ausblenden, solange das Schild offen ist (sonst liegt er ueber dem Schild und ist nicht klickbar)
+  React.useLayoutEffect(() => {
+    const root = document.documentElement;
+    const n = (+root.getAttribute("data-gt-podium-open") || 0) + 1;
+    root.setAttribute("data-gt-podium-open", String(n));
+    return () => { const m = (+root.getAttribute("data-gt-podium-open") || 1) - 1; if (m > 0) root.setAttribute("data-gt-podium-open", String(m)); else root.removeAttribute("data-gt-podium-open"); };
+  }, []);
+  // Bereich unter dem Schild scrollt in sich: weicher Rand oben/unten, wo noch Inhalt ist
+  const scrRef = useRef(null);
+  const [fade, setFade] = useState({ t: false, b: false });
+  React.useLayoutEffect(() => {
+    const el = scrRef.current; if (!el) return;
+    const u = () => { const t2 = el.scrollTop > 2, b2 = el.scrollTop + el.clientHeight < el.scrollHeight - 2; setFade(f => (f.t === t2 && f.b === b2 ? f : { t: t2, b: b2 })); };
+    u(); el.addEventListener("scroll", u, { passive: true });
+    let ro = null; try { ro = new ResizeObserver(u); ro.observe(el); Array.from(el.children).forEach(c => ro.observe(c)); } catch (e) { ro = null; }
+    const mo = new MutationObserver(u); mo.observe(el, { childList: true, subtree: true });
+    return () => { el.removeEventListener("scroll", u); if (ro) ro.disconnect(); mo.disconnect(); };
+  }, []);
   useFitName(nameRef, [winners.map(w => w && w.name).join("|")]);
   React.useLayoutEffect(() => {
     if (!run || !rigRef.current || typeof rigRef.current.animate !== "function") return;
@@ -160,7 +179,7 @@ export function GtNeonPodium({ phase, ranked, ranks, gameId, gameLabel, theme, t
             </div>
           </div>
         </div>
-        <div style={{ position: "absolute", left: 22, right: 22, top: rt, bottom: onEnd && !land ? "calc(env(safe-area-inset-bottom, 0px) + 134px)" : "calc(env(safe-area-inset-bottom, 0px) + 92px)", display: "flex", flexDirection: "column", alignItems: "center", pointerEvents: "none", overflowY: "auto", scrollbarWidth: "none" }}>
+        <div ref={scrRef} data-gt-podium-scroll="" style={{ position: "absolute", left: 22, right: 22, top: rt, bottom: onEnd && !land ? "calc(env(safe-area-inset-bottom, 0px) + 134px)" : "calc(env(safe-area-inset-bottom, 0px) + 92px)", display: "flex", flexDirection: "column", alignItems: "center", overflowY: "auto", overscrollBehavior: "contain", scrollbarWidth: "none", paddingBottom: 6, ...((fade.t || fade.b) ? (m => ({ WebkitMaskImage: m, maskImage: m }))(`linear-gradient(180deg,${fade.t ? "transparent 0,#000 16px" : "#000 0"},${fade.b ? "#000 calc(100% - 22px),transparent 100%" : "#000 100%"})`) : null) }}>
           {others.length > 0 && <ol className="gtn-ranks" style={{ listStyle: "none", margin: 0, padding: 0, width: "100%", flexShrink: 0, maxHeight: 170, overflowY: "auto", scrollbarWidth: "none", pointerEvents: "auto", ...S }}>
             {others.map(({ e, i }, n) => { const r = ranks[i]; const d = 4.4 + n * 0.22; return <li key={i} style={{ display: "flex", justifyContent: "center", alignItems: "baseline", gap: 10, font: "400 22px/1.2 'Tilt Neon','Inter',sans-serif", marginTop: n ? 8 : 0 }}>
               <span>{i < 3 ? <span className="gtsb-name"><span className="gtsb-sr gtn-sr">{r + ". "}</span><span aria-hidden className="gtn-l gtn-num" data-n={r + "."} style={run ? { animationDelay: `${d.toFixed(2)}s` } : undefined} /></span> : <span aria-hidden className="gtn-l gtn-num" data-n={r + "."} style={run ? { animationDelay: `${d.toFixed(2)}s` } : undefined} />}</span>

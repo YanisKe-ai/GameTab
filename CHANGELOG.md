@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.13-7 (13.11.2026 14:37)
+- Statistik: Welle wieder rund ohne KW-Beschriftung, neuer Katalog «Alle Partien» zum Löschen (einzeln, mehrere, alle ohne Namen)
+
 ## 2026.11.13-6 (13.11.2026 14:23)
 - Statistik: Du-Kacheln (Welle, Erzfeind, Lieblingsspiel, Bester Partner, Teamfrage), zählen beim Sichtbarwerden hoch
 

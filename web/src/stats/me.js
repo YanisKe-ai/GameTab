@@ -107,13 +107,14 @@ function gtMeModel(matches, prof, o) {
   };
 }
 
-// Weiche Kurve (Catmull-Rom) ohne Ueberschwingen: Steuerpunkte bleiben zwischen den Nachbarpunkten.
-function gtMeCtrl(P) {
+// Weiche Kurve (Catmull-Rom); Steuerpunkte werden nur an den Feldrand begrenzt.
+function gtMeCtrl(P, lo, hi) {
   const C = [];
-  const cl = (v, a, b) => Math.min(Math.max(v, Math.min(a, b)), Math.max(a, b));
+  // Steuerpunkte nur im Feld halten (nicht zwischen den Nachbarn), so bleibt die Kurve wellig und rund
+  const cl = (v) => Math.min(Math.max(v, lo == null ? -Infinity : lo), hi == null ? Infinity : hi);
   for (let i = 0; i < P.length - 1; i++) {
     const p0 = P[i - 1] || P[i], p1 = P[i], p2 = P[i + 1], p3 = P[i + 2] || p2;
-    C.push([p1[0] + (p2[0] - p0[0]) / 6, cl(p1[1] + (p2[1] - p0[1]) / 6, p1[1], p2[1]), p2[0] - (p3[0] - p1[0]) / 6, cl(p2[1] - (p3[1] - p1[1]) / 6, p1[1], p2[1])]);
+    C.push([p1[0] + (p2[0] - p0[0]) / 6, cl(p1[1] + (p2[1] - p0[1]) / 6), p2[0] - (p3[0] - p1[0]) / 6, cl(p2[1] - (p3[1] - p1[1]) / 6)]);
   }
   return C;
 }
@@ -139,8 +140,8 @@ function gtMeWave(weeks, W, H) {
   const y = (v) => H - (v / max) * (H - top);
   const PB = weeks.map((w, i) => [X[i], y(w.score)]);
   const PT = weeks.map((w, i) => [X[i], y(w.score + w.party)]);
-  const CB = gtMeCtrl(PB);
-  const CT = gtMeCtrl(PT).map((c, i) => [c[0], Math.min(c[1], CB[i][1]), c[2], Math.min(c[3], CB[i][3])]);
+  const CB = gtMeCtrl(PB, 2, H);
+  const CT = gtMeCtrl(PT, 2, H).map((c, i) => [c[0], Math.min(c[1], CB[i][1]), c[2], Math.min(c[3], CB[i][3])]);
   const lineB = gtMeCurve(PB, CB), lineT = gtMeCurve(PT, CT);
   const areaB = lineB + "L" + W + " " + H + "L0 " + H + "Z";
   const areaT = lineT + gtMeRev(PB, CB) + "Z";

@@ -103,7 +103,8 @@ function GtMeBento({ matches, opts, t, tk, lk, theme }) {
   const W = gtMeWave(model.weeks, VW, VH);
   const S = Math.min(sel, model.weeks.length - 1);
   const wk = model.weeks[S];
-  const kw = (w) => fmt(t("meWeekShort"), { n: w.kw });
+  const nW = model.weeks.length;
+  const kw = (w, i) => { const ago = nW - 1 - i; return ago === 0 ? t("meWeekNow") : ago === 1 ? t("meWeekLast") : fmt(t("meWeekAgo"), { n: ago }); };
   const pct = (x) => (x / VW) * 100 + "%";
   const tipP = (W.X[S] / VW) * 100;
   const tipX = tipP > 62 ? "calc(-100% + 4px)" : tipP < 38 ? "-4px" : "-50%";
@@ -133,7 +134,7 @@ function GtMeBento({ matches, opts, t, tk, lk, theme }) {
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", gap: 8, marginBottom: 8 }}>
           <div style={{ minWidth: 0 }}>{sm(t("meWeeks"))}<Num v={model.weekTotal} size={32} color={tk.ink} /></div>{legend}
         </div>
-        <div style={{ position: "relative", height: VH + 30 }}>
+        <div style={{ position: "relative", height: VH + 6 }}>
           <svg width="100%" height={VH} viewBox={`0 0 ${VW} ${VH}`} preserveAspectRatio="none" role="img" aria-label={t("meChartLabel")} style={{ display: "block", overflow: "visible" }}>
             {[10, 60, 110].map((y) => <line key={y} x1="0" y1={y} x2={VW} y2={y} stroke={lk.line || tk.border} strokeWidth="1" vectorEffect="non-scaling-stroke" />)}
             <path className="gtMe-area" d={W.areaB} fill={c.base} />
@@ -144,9 +145,8 @@ function GtMeBento({ matches, opts, t, tk, lk, theme }) {
           <div aria-hidden="true" className="gtMe-cross" style={{ position: "absolute", top: 0, height: VH, width: 1, background: tk.ink, opacity: 0.4, left: pct(W.X[S]) }} />
           <div aria-hidden="true" className="gtMe-dot" style={{ position: "absolute", width: 10, height: 10, margin: "-5px 0 0 -5px", borderRadius: "50%", background: c.top, boxShadow: `0 0 0 2px ${c.ring}`, left: pct(W.X[S]), top: W.YT[S] }} />
           <div aria-hidden="true" className="gtMe-dot" style={{ position: "absolute", width: 10, height: 10, margin: "-5px 0 0 -5px", borderRadius: "50%", background: c.base, boxShadow: `0 0 0 2px ${c.ring}`, left: pct(W.X[S]), top: W.YB[S] }} />
-          <div aria-hidden="true" className="gtMe-tip" style={{ position: "absolute", padding: "6px 10px", borderRadius: 10, background: c.tipBg, border: `1px solid ${c.tipBd}`, color: c.tipInk, fontSize: 12, whiteSpace: "nowrap", transform: `translate(${tipX},-115%)`, left: pct(W.X[S]), top: W.YT[S] }}><b>{kw(wk)}</b> · {fmt(t("meTip"), { a: wk.score, b: wk.party })}</div>
-          <div aria-hidden="true" style={{ position: "absolute", left: 0, right: 0, top: VH + 10, display: "flex", justifyContent: "space-between", fontSize: 11, color: tk.muted }}>{model.weeks.map((w, i) => <span key={i}>{kw(w)}</span>)}</div>
-          {model.weeks.map((w, i) => { const step = VW / (model.weeks.length - 1); return <button key={i} type="button" className="gtMe-hit" aria-pressed={i === S} aria-label={fmt(t("meWeekAria"), { w: kw(w), a: w.score, b: w.party })} onClick={() => setSel(i)} style={{ left: `calc(${pct(W.X[i])} - max(22px, ${pct(step / 2)}))`, width: `max(44px, ${pct(step)})` }} />; })}
+          <div aria-hidden="true" className="gtMe-tip" style={{ position: "absolute", padding: "6px 10px", borderRadius: 10, background: c.tipBg, border: `1px solid ${c.tipBd}`, color: c.tipInk, fontSize: 12, whiteSpace: "nowrap", transform: `translate(${tipX},-115%)`, left: pct(W.X[S]), top: W.YT[S] }}><b>{kw(wk, S)}</b> · {fmt(t("meTip"), { a: wk.score, b: wk.party })}</div>
+          {model.weeks.map((w, i) => { const step = VW / (model.weeks.length - 1); return <button key={i} type="button" className="gtMe-hit" aria-pressed={i === S} aria-label={fmt(t("meWeekAria"), { w: kw(w, i), a: w.score, b: w.party })} onClick={() => setSel(i)} style={{ left: `calc(${pct(W.X[i])} - max(22px, ${pct(step / 2)}))`, width: `max(44px, ${pct(step)})` }} />; })}
         </div>
       </div>}
 

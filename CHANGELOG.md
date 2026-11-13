@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.13-14 (13.11.2026 18:59)
+- Laptop-Ansicht: alle Spiele füllen den Bildschirm (Auto-Fit), neue Anordnungen für Tutto, Yatzy, Wizard, Minigolf, Coiffeur, Schieber, Partyspiele, Darts, Einrichtung
+
 ## 2026.11.13-13 (13.11.2026 17:13)
 - Siegesschild: Blitz der Duell-Bilanz pumpt wie ein Herzschlag
 

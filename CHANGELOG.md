@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.13-13 (13.11.2026 17:13)
+- Siegesschild: Blitz der Duell-Bilanz pumpt wie ein Herzschlag
+
 ## 2026.11.13-12 (13.11.2026 16:50)
 - Siegesschild: Duell-Box auf dem Laptop ganz sichtbar
 

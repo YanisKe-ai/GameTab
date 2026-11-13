@@ -44,7 +44,8 @@ const DUEL_CSS = `
 @keyframes gtdIn{from{opacity:0;filter:blur(6px);transform:translateY(10px)}to{opacity:1;filter:none;transform:none}}
 @keyframes gtdZap{0%,100%{opacity:1}40%{opacity:.3}45%{opacity:1}52%{opacity:.45}58%{opacity:1}}
 .gtd{animation:gtdIn .8s cubic-bezier(.23,1,.32,1) var(--d,0s) both}
-.gtd-zap{animation:gtdZap 2.4s ease-in-out calc(var(--d,0s) + .6s) 3}
+@keyframes gtdPump{0%{transform:scale(1);filter:drop-shadow(0 0 6px var(--gz))}14%{transform:scale(1.32);filter:drop-shadow(0 0 16px var(--gz)) drop-shadow(0 0 30px var(--gz))}28%{transform:scale(.94);filter:drop-shadow(0 0 5px var(--gz))}42%{transform:scale(1.16);filter:drop-shadow(0 0 12px var(--gz))}60%,100%{transform:scale(1);filter:drop-shadow(0 0 6px var(--gz))}}
+.gtd-zap{transform-origin:50% 50%;animation:gtdZap 1.2s ease-in-out calc(var(--d,0s) + .5s) 1,gtdPump 1.1s cubic-bezier(.34,1.4,.64,1) calc(var(--d,0s) + 1.7s) infinite}
 @media (prefers-reduced-motion: reduce){.gtd,.gtd-zap{animation:none}}
 `;
 
@@ -82,7 +83,7 @@ export function GtNeonDuel({ ranked, ranks, gameId, t, run, col, lang, theme }) 
     <style>{DUEL_CSS}</style>
     <div aria-hidden="true" style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) auto minmax(0,1fr)", alignItems: "center", gap: 6 }}>
       <div style={{ minWidth: 0 }}><div dir="auto" style={{ ...nm, ...glow(mc) }}>{data.me}</div><div style={{ ...num, ...glow(mc) }}>{data.mine}</div></div>
-      <svg className="gtd-zap" width="30" height="54" viewBox="0 0 40 70" style={{ "--d": d, filter: noir ? "drop-shadow(0 0 8px #FFFFFF)" : "drop-shadow(0 0 8px #FFE7A0)" }}><path d="M24 2 6 40h12l-4 28 20-40H22z" fill="none" stroke={noir ? "#FFFFFF" : "#FFF1C4"} strokeWidth="2.6" strokeLinejoin="round" /></svg>
+      <svg className="gtd-zap" width="30" height="54" viewBox="0 0 40 70" style={{ "--d": d, "--gz": noir ? "#FFFFFF" : "#FFE7A0", overflow: "visible", filter: noir ? "drop-shadow(0 0 8px #FFFFFF)" : "drop-shadow(0 0 8px #FFE7A0)" }}><path d="M24 2 6 40h12l-4 28 20-40H22z" fill="none" stroke={noir ? "#FFFFFF" : "#FFF1C4"} strokeWidth="2.6" strokeLinejoin="round" /></svg>
       <div style={{ minWidth: 0 }}><div dir="auto" style={{ ...nm, ...glow(oc) }}>{data.opp}</div><div style={{ ...num, ...glow(oc) }}>{data.theirs}</div></div>
     </div>
     <div style={{ marginTop: 8, font: "400 13px/1.35 'Inter',sans-serif", color: "#C9C1D0" }}>{line}</div>

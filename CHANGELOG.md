@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.13-4 (13.11.2026 12:49)
+- Yatzy im Hellmodus wärmer: Blatt in warmem Papier statt kühlem Weiss-Blau, blaues YATZY und Akzente bleiben; Hinweis über der Tabelle lesbar
+
 ## 2026.11.13-3 (13.11.2026 09:10)
 - Hellmodus: Pfeile der Kategorien in Textfarbe, Spielkreise einheitlich hell mit warmem Rand (Icons bleiben farbig)
 

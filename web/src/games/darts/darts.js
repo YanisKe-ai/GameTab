@@ -58,6 +58,7 @@ function DartsPlay({state,setState,tk,t,onConfirmTurn,onUndoTurn,onNewGame,onEdi
 const DARTS_LANDSCAPE_CSS=`
 .gtL-content .gtL-e-board{max-width:min(100%,max(300px,min(560px,calc((100dvh - 510px) / var(--gtL-fit, 1)))))!important}
 .gtL-content .dl-side-players .press-fx{min-height:92px!important}
+.gtL-content div:has(>.gtL-e-board)>div:not(.gtL-e-board)>*{font-size:19px!important;min-height:54px;box-sizing:border-box;display:flex;align-items:center;justify-content:center}
 [data-phone-landscape] .dl-shell{padding-left:0!important;padding-right:0!important;padding-top:calc(var(--pl-sat) + 4px)!important;padding-bottom:calc(var(--pl-sab) + 10px)!important}
 [data-phone-landscape] .dl-split{display:grid;grid-template-columns:minmax(0,1fr) clamp(236px,calc(var(--pl-body) - 8px),46vw);grid-template-rows:repeat(10,auto) 1fr;column-gap:var(--pl-gap);row-gap:0;align-items:start;width:100%;box-sizing:border-box}
 [data-phone-landscape] .dl-split>.gtL-col-main,[data-phone-landscape] .dl-split>.gtL-col-side,[data-phone-landscape] .dl-split .gtL-col-main>div:has(>.gtL-e-board){display:contents}

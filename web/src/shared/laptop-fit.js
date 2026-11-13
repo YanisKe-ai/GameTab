@@ -33,27 +33,39 @@ function gtFitNatural(page) {
 function gtFitMeasure(root) {
   const page = root.firstElementChild;
   if (!page) return 1;
-  root.style.setProperty("--gtL-fit", "1");
-  root.classList.add("gtL-measure");
+  const set = (v) => root.style.setProperty("--gtL-fit", String(v));
+  set(1);
   const avail = root.clientHeight;
-  const natW = page.scrollWidth, availW = root.clientWidth;
-  const need0 = gtFitNatural(page);
-  if (!avail || !need0) { root.classList.remove("gtL-measure"); return 1; }
-  let need = need0;
-  const zMinG = 1;
+  const nat = gtFitNatural(page);
+  if (!avail || !nat) return 1;
   // Grosse Laptops (ab 1400x880) wie bisher mindestens 14 % grösser
-  const zMin = window.innerWidth >= 1400 && window.innerHeight >= 880 ? 1.14 : 1;
-  let z = Math.min(GT_FIT_MAX, avail / need);
-  if (z < zMin + 0.04) { root.classList.remove("gtL-measure"); return zMin; }
-  for (let i = 0; i < 4; i++) {
-    root.style.setProperty("--gtL-fit", z.toFixed(3));
-    const h = gtFitNatural(page) * z;
-    const w = page.scrollWidth;
-    if (h <= avail + 1 && w <= availW + 1) break;
-    z = Math.max(zMin, z * Math.min(avail / h, availW / Math.max(w, 1)) * 0.995);
+  const zBig = window.innerWidth >= 1400 && window.innerHeight >= 880 ? 1.14 : 1;
+  const z0 = avail / nat;
+  // Lange Seiten (Tabellen) scrollen wie bisher; knapp zu hohe Seiten (bis 13 %) werden leicht verkleinert, damit nichts abgeschnitten ist
+  if (z0 < 0.87) return zBig;
+  const lo = z0 < 1 ? 0.88 : 1;
+  let z = Math.min(GT_FIT_MAX, Math.max(z0 < 1 ? lo : zBig, z0));
+  // Kontrolle am echten Ergebnis: läuft die Seite nach dem Zoom über (z. B. absolut platzierte Teile), schrittweise verkleinern
+  const over = () => root.scrollHeight - root.clientHeight;
+  for (let i = 0; i < 6; i++) {
+    set(z.toFixed(3));
+    const o = over();
+    if (o <= 2) break;
+    if (z <= lo) break;
+    z = Math.max(lo, z * (root.clientHeight / (root.clientHeight + o)) * 0.995);
   }
-  root.classList.remove("gtL-measure");
-  return Math.max(zMin, Math.floor(z * 100) / 100);
+  // Läuft es danach immer noch über: knapp (bis 13 %) leicht verkleinern, sonst normale Grösse und scrollen (lange Tabellen)
+  let o = over();
+  if (o > 2) {
+    const k = root.clientHeight / (root.clientHeight + o);
+    if (z * k >= 0.87) {
+      z = Math.max(0.88, z * k * 0.99);
+      set(z.toFixed(3));
+      // Bleibt ein Rest durch innere Bildschirmhöhen-Flächen (wachsen mit dem Zoom), zählt der sichtbare Inhalt
+      if (over() > 2) z = z0 < 1 ? Math.max(0.88, z0 * 0.995) : zBig;
+    } else z = z0 < 1 ? Math.max(0.88, z0 * 0.995) : zBig;
+  }
+  return Math.floor(z * 100) / 100;
 }
 
 export function useLaptopFit(active, key) {
@@ -82,7 +94,7 @@ export function useLaptopFit(active, key) {
       const pg = root.firstElementChild;
       if (!pg) return;
       const nat = gtFitNatural(pg) * cur, av = root.clientHeight;
-      if (nat > av + 2 || nat < av * 0.82) run();
+      if (nat > av + 2 || nat < av * 0.82 || (root.scrollHeight > av + 2 && root.scrollHeight < av * 1.14)) run();
     };
     try {
       mo = new MutationObserver(() => { clearTimeout(mt); mt = setTimeout(check, 260); });

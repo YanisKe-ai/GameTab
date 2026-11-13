@@ -47,6 +47,8 @@ html[data-gt-theme="noir"] .fp-band{background:linear-gradient(90deg,#5F5F5F,#8A
 .gtL-content .fp-log{order:6}
 .gtL-content .fp-addp{order:3}
 .gtL-content .fp-tablewrap{max-height:none}
+.gtL-content .fp-chips{gap:12px}
+.gtL-content .fp-chips>button{max-width:104px;height:58px;font-size:20px}
 [data-phone-landscape] .fp-tablewrap{max-height:none}
 [data-phone-landscape] .fp-seg button{min-height:44px!important}
 .gt-u-dock.fp-dock{background:linear-gradient(to bottom,transparent 0,var(--fp-bg) 14px);padding-top:22px;padding-bottom:4px}

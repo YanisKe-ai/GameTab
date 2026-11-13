@@ -32,6 +32,8 @@ export function gtLastRound() {
 export function gtRecentNames(limit = 8) {
   const out = [], seen = new Set();
   const add = (n) => { const k = normalizeName(n); if (seen.has(k)) return; seen.add(k); out.push(n); };
+  // Profil («Ich bin») steht immer zuerst. Direkt gelesen, damit kein Ring-Import mit profile.js entsteht.
+  try { const pr = JSON.parse(localStorage.getItem("gt_profile") || "null"); const pn = pr && typeof pr.name === "string" ? pr.name.trim() : ""; if (pn && !gtIsDefName(pn)) add(pn); } catch (e) {}
   gtLastRound().forEach(add);
   try {
     const log = loadMatchLog();

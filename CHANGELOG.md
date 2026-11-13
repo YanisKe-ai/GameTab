@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.13-12 (13.11.2026 16:50)
+- Siegesschild: Duell-Box auf dem Laptop ganz sichtbar
+
 ## 2026.11.13-11 (13.11.2026 16:25)
 - Siegesschild: Duell-Bilanz mit Neon-Blitz (du gegen Sieger oder Zweiten, nur mit Profil, ab 2 gemeinsamen Partien)
 

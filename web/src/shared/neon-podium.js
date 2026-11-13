@@ -160,7 +160,7 @@ export function GtNeonPodium({ phase, ranked, ranks, gameId, gameLabel, theme, t
             </div>
           </div>
         </div>
-        <div style={{ position: "absolute", left: 22, right: 22, top: rt, bottom: onEnd && !land ? "calc(env(safe-area-inset-bottom, 0px) + 148px)" : "calc(env(safe-area-inset-bottom, 0px) + 92px)", display: "flex", flexDirection: "column", alignItems: "center", pointerEvents: "none", overflowY: "auto", scrollbarWidth: "none" }}>
+        <div style={{ position: "absolute", left: 22, right: 22, top: rt, bottom: onEnd && !land ? "calc(env(safe-area-inset-bottom, 0px) + 134px)" : "calc(env(safe-area-inset-bottom, 0px) + 92px)", display: "flex", flexDirection: "column", alignItems: "center", pointerEvents: "none", overflowY: "auto", scrollbarWidth: "none" }}>
           {others.length > 0 && <ol className="gtn-ranks" style={{ listStyle: "none", margin: 0, padding: 0, width: "100%", flexShrink: 0, maxHeight: 170, overflowY: "auto", scrollbarWidth: "none", pointerEvents: "auto", ...S }}>
             {others.map(({ e, i }, n) => { const r = ranks[i]; const d = 4.4 + n * 0.22; return <li key={i} style={{ display: "flex", justifyContent: "center", alignItems: "baseline", gap: 10, font: "400 22px/1.2 'Tilt Neon','Inter',sans-serif", marginTop: n ? 8 : 0 }}>
               <span>{i < 3 ? <span className="gtsb-name"><span className="gtsb-sr gtn-sr">{r + ". "}</span><span aria-hidden className="gtn-l gtn-num" data-n={r + "."} style={run ? { animationDelay: `${d.toFixed(2)}s` } : undefined} /></span> : <span aria-hidden className="gtn-l gtn-num" data-n={r + "."} style={run ? { animationDelay: `${d.toFixed(2)}s` } : undefined} />}</span>

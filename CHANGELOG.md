@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.13-3 (13.11.2026 09:10)
+- Hellmodus: Pfeile der Kategorien in Textfarbe, Spielkreise einheitlich hell mit warmem Rand (Icons bleiben farbig)
+
 ## 2026.11.13-2 (13.11.2026 08:53)
 - Hellmodus mit mehr Kontrast: tieferer Hintergrund, Karten mit sichtbaren Rändern, dunklerer Nebentext und satteres Gold (Nocturne und Noir unverändert)
 

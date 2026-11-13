@@ -155,7 +155,7 @@ function RulesButton({onClick,onHome,onEndGame,moreItems,onMenuOpen,tokens}){ret
         /* Auto-Fit (shared/laptop-fit.js): die ganze Seite fuellt das Fenster, ersetzt den festen Zoom 1.14 */
         .gtL-content > :first-child { zoom: var(--gtL-fit, 1); }
         /* Seitenhöhe in Prozent (wird nicht mitgezoomt, 100vh schon: sonst scrollt jede gezoomte Seite), Overlays wie Siegesschild und Bildvorschau in Originalgrösse */
-        .gtL-content > :first-child { min-height: 100% !important; }
+        .gtL-content > :first-child { min-height: calc(100% / max(1, var(--gtL-fit, 1))) !important; }
         .gtL-content .gt-scrim-in, .gtL-content .gtsp-ov { zoom: calc(1 / var(--gtL-fit, 1)); }
         /* C9 Einstellungen schmal */
         .gtL-content .gtL-settings > * { max-width: 720px !important; }

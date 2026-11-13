@@ -67,7 +67,15 @@ def _podium_open(pg, timeout=4000):
 
 
 def _close_podium(pg):
-    pg.locator(POD + " .gtsb-x").first.click()
+    # Seit 2026.11.13: Spiele mit «Spiel beenden» haben kein X mehr, Schliessen geht per Escape/Zurück
+    if pg.locator(POD + " .gtsb-x").count():
+        pg.locator(POD + " .gtsb-x").first.click()
+    else:
+        assert pg.locator(POD + " [data-gt-podium-end]").count() == 1, "Spiel beenden fehlt auf dem Schild"
+        pg.keyboard.press("Escape")  # erstes Escape beendet laufende Bewegung, zweites schliesst
+        pg.wait_for_timeout(900)
+        if pg.locator(POD if "POD" in globals() else "[data-gt-podium]").count():
+            pg.keyboard.press("Escape")
     wait(pg, 500)
     assert pg.locator(POD).count() == 0, "Podest nach Schliessen noch da"
 

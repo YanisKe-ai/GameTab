@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.13-8 (13.11.2026 15:20)
+- Siegesschild: Spiel beenden neben Revanche, ohne X (Spiel startet danach frisch). Statistik: Zurück führt zur Herkunft (Partyspiele/Schreibunterlagen), Welle in Startseiten-Farben
+
 ## 2026.11.13-7 (13.11.2026 14:37)
 - Statistik: Welle wieder rund ohne KW-Beschriftung, neuer Katalog «Alle Partien» zum Löschen (einzeln, mehrere, alle ohne Namen)
 

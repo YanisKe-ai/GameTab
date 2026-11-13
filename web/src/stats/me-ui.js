@@ -50,8 +50,8 @@ const GT_ME_CSS = `
 function gtMeLook(theme, tk) {
   const L = theme === "light", N = theme === "noir";
   if (N) return { L, N, top: "#D6D6D6", base: "#6B6B6B", lt: "#FFFFFF", lb: "#A8A8A8", erz: tk.ink, fav: tk.ink, team: tk.ink, erzBg: "#EBEBEB", erzInk: "#000000", av1: "#5F5F5F", av2: "#8A8A8A", avInk: "#FFFFFF", beam: "#FFFFFF", spot: "rgba(255,255,255,.07)", tipBg: "#000000", tipBd: "#5F5F5F", tipInk: "#EBEBEB", btnInk: "#000000", chip: "#2E2E2E", ring: tk.card };
-  if (L) return { L, N, top: "#2FA85A", base: "#2C62E0", lt: "#1F7A40", lb: "#1D47B0", erz: "#A8461A", fav: "#1F7A40", team: "#2A4FB0", erzBg: "#C2521D", erzInk: "#FFFFFF", av1: "#2C62E0", av2: "#6B4FD0", avInk: "#FFFFFF", beam: "#C2521D", spot: "rgba(110,75,10,.07)", tipBg: "#17130F", tipBd: "#17130F", tipInk: "#FFFFFF", btnInk: "#FFFFFF", chip: tk.pageBg2 || "#E0D5BF", ring: tk.card };
-  return { L, N, top: "#2FA85A", base: "#2C62E0", lt: "#7CE29C", lb: "#8FB0FF", erz: "#F0A27A", fav: "#7CD8A0", team: "#9DB8FF", erzBg: "#E0662B", erzInk: "#1A0E08", av1: "#2C62E0", av2: "#6B4FD0", avInk: "#FFFFFF", beam: "#E0662B", spot: "rgba(157,184,255,.12)", tipBg: "#0F1522", tipBd: "#2C3A55", tipInk: "#EEF2F8", btnInk: "#1A1408", chip: "rgba(255,255,255,.08)", ring: tk.card };
+  if (L) return { L, N, top: "#982DB3", base: "#3071CD", lt: "#6E1F84", lb: "#1F56A8", erz: "#A8461A", fav: "#1F7A40", team: "#2A4FB0", erzBg: "#C2521D", erzInk: "#FFFFFF", av1: "#2C62E0", av2: "#6B4FD0", avInk: "#FFFFFF", beam: "#C2521D", spot: "rgba(110,75,10,.07)", tipBg: "#17130F", tipBd: "#17130F", tipInk: "#FFFFFF", btnInk: "#FFFFFF", chip: tk.pageBg2 || "#E0D5BF", ring: tk.card };
+  return { L, N, top: "#C042E0", base: "#4FA8F5", lt: "#DE96F2", lb: "#A9D3FA", erz: "#F0A27A", fav: "#7CD8A0", team: "#9DB8FF", erzBg: "#E0662B", erzInk: "#1A0E08", av1: "#2C62E0", av2: "#6B4FD0", avInk: "#FFFFFF", beam: "#E0662B", spot: "rgba(157,184,255,.12)", tipBg: "#0F1522", tipBd: "#2C3A55", tipInk: "#EEF2F8", btnInk: "#1A1408", chip: "rgba(255,255,255,.08)", ring: tk.card };
 }
 
 function fmt(s, o) { return String(s || "").replace(/\{(\w+)\}/g, (m, k) => (o && o[k] != null ? o[k] : "")); }

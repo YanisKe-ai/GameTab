@@ -179,8 +179,8 @@ def ui_tutto(pg):
     lg = log()
     ok(len(lg) == 1 and lg[0]["participants"][0]["score"] == 6000, "UI Tutto Abschluss 6000 erfasst")
     pg.keyboard.press("Escape"); pg.wait_for_timeout(500)
-    if pg.locator("[data-gt-podium]").count():
-        pg.locator(".gtsb-x").first.click(); pg.wait_for_timeout(600)
+    if pg.locator("[data-gt-podium]").count():  # Schild ohne X: zweites Escape schliesst (das erste beendet die Bewegung)
+        pg.wait_for_timeout(900); pg.keyboard.press("Escape"); pg.wait_for_timeout(600)
     pg.locator(".tt-lane").first.click(); pg.wait_for_timeout(300)  # Person 1 wieder antippen
     pg.get_by_placeholder("Punkte").first.fill("100"); pg.keyboard.press("Enter"); pg.wait_for_timeout(1200)
     lg = log()

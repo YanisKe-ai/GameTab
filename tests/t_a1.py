@@ -28,6 +28,20 @@ def _btn(pg, name):
     return pg.get_by_role("button", name=name, exact=True)
 
 
+def _close_any(pg):
+    """Schliessen-Knopf klicken; das Siegesschild ohne X (mit Spiel beenden) schliesst per Escape."""
+    if _btn(pg, "Schliessen").count():
+        _btn(pg, "Schliessen").first.click()
+        return True
+    if pg.locator("[data-gt-podium]").count():
+        pg.keyboard.press("Escape")  # erstes Escape beendet laufende Bewegung, zweites schliesst
+        pg.wait_for_timeout(900)
+        if pg.locator(POD if "POD" in globals() else "[data-gt-podium]").count():
+            pg.keyboard.press("Escape")
+        return True
+    return False
+
+
 def _stats_text(pg):
     """Text der Statistik-Seite (leer, wenn es keinen Einstieg gibt)."""
     pg.goto(URL)
@@ -85,8 +99,8 @@ def run(pg):
     assert len(log) == 1 and log[0]["status"] == "done", f"Skyjo-Ende: Log {log}"
     assert _count(pg) == 1, f"Zaehler nach Ende: {_count(pg)}"
     # Podest schliessen, wieder oeffnen ("Endstand") zaehlt nicht doppelt: Neuladen der Seite
-    if _btn(pg, "Schliessen").count():
-        _btn(pg, "Schliessen").first.click()
+    if _close_any(pg):
+        pass
         wait(pg, 700)
     pg.reload()
     wait(pg, 1200)
@@ -101,8 +115,8 @@ def run(pg):
     pg.locator("button", has_text=re.compile(r"^\d*\s*Skyjo")).first.click()
     wait(pg, 900)
     for _ in range(6):
-        if _btn(pg, "Schliessen").count():  # Podest beim Wiederbetreten
-            _btn(pg, "Schliessen").first.click()
+        if _close_any(pg):  # Podest beim Wiederbetreten
+            pass
             wait(pg, 700)
         r = _btn(pg, "Rückgängig")
         if not r.count():
@@ -133,8 +147,8 @@ def run_tutto(pg):
     log = _log(pg)
     assert [m.get("status") for m in log] == ["done"], f"Tutto-Ende: {log}"
     for _ in range(3):
-        if _btn(pg, "Schliessen").count():
-            _btn(pg, "Schliessen").first.click()
+        if _close_any(pg):
+            pass
             wait(pg, 700)
     # Eintrag loeschen ueber das Mehr-Blatt
     pg.get_by_role("button", name="Spieler 1:").first.click()

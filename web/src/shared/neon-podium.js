@@ -102,7 +102,7 @@ function useFitName(ref, deps) {
   }, deps);
 }
 
-export function GtNeonPodium({ phase, ranked, ranks, gameId, gameLabel, theme, t, play, onClose, onSkip, onRestart, extraAct, onShare, isSharing, playCount, hideCount, bestRecord, noteEl, achvEl, dlgRef }) {
+export function GtNeonPodium({ phase, ranked, ranks, gameId, gameLabel, theme, t, play, onClose, onEnd, onSkip, onRestart, extraAct, onShare, isSharing, playCount, hideCount, bestRecord, noteEl, achvEl, dlgRef }) {
   const [pc, pg, sc, sg] = gtNeonCol(gameId, theme);
   const P = gtNeonVars(pc, pg), S = gtNeonVars(sc, sg);
   const rigRef = useRef(null), nameRef = useRef(null), wrapRef = useRef(null), boardRef = useRef(null);
@@ -135,7 +135,7 @@ export function GtNeonPodium({ phase, ranked, ranks, gameId, gameLabel, theme, t
   const label = (gameLabel ? gameLabel + " " : "") + t("podiumTitle");
   const glow = pg;
   const anim = (name, dur, delay) => run ? { animation: `${name} ${dur}s linear ${delay}s both` } : undefined;
-  return <div onClick={() => { if (onSkip()) return; onClose(); }} className="gt-scrim-in" style={{ position: "fixed", inset: 0, zIndex: 130, background: "linear-gradient(180deg,#1B1722 0%,#141119 64%,#0F0D13 100%)", overflow: "hidden" }}>
+  return <div onClick={() => { if (onSkip()) return; if (!onEnd) onClose(); }} className="gt-scrim-in" style={{ position: "fixed", inset: 0, zIndex: 130, background: "linear-gradient(180deg,#1B1722 0%,#141119 64%,#0F0D13 100%)", overflow: "hidden" }}>
     <style>{GT_NEON_CSS}</style>
     <div aria-hidden style={{ position: "absolute", inset: 0, opacity: 0.5, background: `url("${NOISE_URI}")` }} />
     <div ref={wrapRef} style={{ position: "absolute", left: "50%", top: 0, width: 390, height: fh, marginLeft: -195, transform: `scale(${k})`, transformOrigin: "50% 0" }}>
@@ -172,10 +172,11 @@ export function GtNeonPodium({ phase, ranked, ranks, gameId, gameLabel, theme, t
           {noteEl && <div style={{ marginTop: 8, font: "400 14px/1.4 'Inter',sans-serif", color: "#E8E2EE", textAlign: "center", pointerEvents: "auto" }}>{noteEl}</div>}
           {achvEl && <div style={{ flexShrink: 0, pointerEvents: "auto", marginTop: 8 }}>{achvEl}</div>}
         </div>
-        <button onClick={e => { e.stopPropagation(); onClose(); }} className="gtn-x gtsb-x press-fx" aria-label={t("stxClose")} style={{ position: "absolute", right: 18, top: "calc(env(safe-area-inset-top, 0px) + 14px)", width: 44, height: 44, borderRadius: 22, border: "1.5px solid rgba(255,244,230,.3)", background: "rgba(20,17,25,.5)", color: "#FFF4E6", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}><svg width={20} height={20} viewBox="0 0 24 24" fill="none" aria-hidden><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth={2.6} strokeLinecap="round" /></svg></button>
-        <div style={land ? { position: "absolute", left: 404, bottom: 24, width: 210, display: "flex", flexDirection: "column", gap: 10, transform: `scale(${(1 / k).toFixed(4)})`, transformOrigin: "0 100%" } : { position: "absolute", left: 22, right: 22, bottom: "calc(env(safe-area-inset-bottom, 0px) + 22px)", display: "flex", gap: 12 }}>
-          {(onRestart || extraAct) && <button onClick={e => { e.stopPropagation(); if (extraAct) { extraAct.onClick(); return; } onRestart(); onClose(); }} className="gtn-btn" style={{ flex: land ? "none" : 1, border: `2px solid ${pg}`, background: gtRgba(pg, 0.08), color: pc, textShadow: `0 0 8px ${gtRgba(pg, 0.9)}`, boxShadow: `0 0 14px ${gtRgba(pg, 0.45)},inset 0 0 12px ${gtRgba(pg, 0.25)}` }}>{extraAct ? extraAct.label : t("rematch")}</button>}
-          <button onClick={e => { e.stopPropagation(); onShare(); }} disabled={isSharing} aria-label={t("shareResultAria")} className="gtn-btn" style={{ flex: land ? "none" : 1, border: "2px solid rgba(255,244,230,.55)", background: "rgba(20,17,25,.4)", color: "#FFF4E6" }}>{t("shareResultLabel")}</button>
+        {!onEnd && <button onClick={e => { e.stopPropagation(); onClose(); }} className="gtn-x gtsb-x press-fx" aria-label={t("stxClose")} style={{ position: "absolute", right: 18, top: "calc(env(safe-area-inset-top, 0px) + 14px)", width: 44, height: 44, borderRadius: 22, border: "1.5px solid rgba(255,244,230,.3)", background: "rgba(20,17,25,.5)", color: "#FFF4E6", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}><svg width={20} height={20} viewBox="0 0 24 24" fill="none" aria-hidden><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth={2.6} strokeLinecap="round" /></svg></button>}
+        <div style={land ? { position: "absolute", left: 404, bottom: 24, width: 210, display: "flex", flexDirection: "column", gap: 10, transform: `scale(${(1 / k).toFixed(4)})`, transformOrigin: "0 100%" } : { position: "absolute", left: 22, right: 22, bottom: "calc(env(safe-area-inset-bottom, 0px) + 22px)", display: "flex", flexWrap: "wrap", gap: 12 }}>
+          {(onRestart || extraAct) && <button onClick={e => { e.stopPropagation(); if (extraAct) { extraAct.onClick(); return; } onRestart(); onClose(); }} className="gtn-btn" style={{ flex: land ? "none" : (onEnd ? "1 1 40%" : 1), border: `2px solid ${pg}`, background: gtRgba(pg, 0.08), color: pc, textShadow: `0 0 8px ${gtRgba(pg, 0.9)}`, boxShadow: `0 0 14px ${gtRgba(pg, 0.45)},inset 0 0 12px ${gtRgba(pg, 0.25)}` }}>{extraAct ? extraAct.label : t("rematch")}</button>}
+          {onEnd && <button onClick={e => { e.stopPropagation(); onEnd(); }} className="gtn-btn" data-gt-podium-end="" style={{ flex: land ? "none" : "1 1 40%", border: "2px solid rgba(255,244,230,.55)", background: "rgba(20,17,25,.4)", color: "#FFF4E6" }}>{t("apEnd")}</button>}
+          <button onClick={e => { e.stopPropagation(); onShare(); }} disabled={isSharing} aria-label={t("shareResultAria")} className="gtn-btn" style={onEnd && !land ? { flex: "1 1 100%", minHeight: 44, border: "none", background: "transparent", color: "#CFC6D6", fontSize: 17, textDecoration: "underline", textUnderlineOffset: 4 } : { flex: land ? "none" : 1, border: "2px solid rgba(255,244,230,.55)", background: "rgba(20,17,25,.4)", color: "#FFF4E6" }}>{t("shareResultLabel")}</button>
         </div>
       </div>
     </div>

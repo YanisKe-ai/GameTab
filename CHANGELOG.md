@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.13-1 (13.11.2026 08:38)
+- Hellmodus: farbige Balken links an Startkacheln und Spiellisten entfernt (wie Nocturne und Noir)
+
 ## 2026.11.12-20 (12.11.2026 23:29)
 - Hellmodus überarbeitet: warme Papier-Basis statt kühlem Grau, Gold als Akzent, Auswahl in den Einstellungen als heller Chip mit Goldrand statt fast schwarz, Schalter in Gold, wärmere Suche, Statistik und Jahresrückblick (Nocturne und Noir unverändert)
 

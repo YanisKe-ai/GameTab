@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.13-2 (13.11.2026 08:53)
+- Hellmodus mit mehr Kontrast: tieferer Hintergrund, Karten mit sichtbaren Rändern, dunklerer Nebentext und satteres Gold (Nocturne und Noir unverändert)
+
 ## 2026.11.13-1 (13.11.2026 08:38)
 - Hellmodus: farbige Balken links an Startkacheln und Spiellisten entfernt (wie Nocturne und Noir)
 

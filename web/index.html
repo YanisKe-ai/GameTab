@@ -9,7 +9,7 @@
 <title>GameTab · All-in-One</title>
 <meta name="description" content="GameTab: der digitale Spiele- und Punkteblock für unterwegs: Jass, Skyjo, Werwolf, Impostor, Tabu, Minigolf und mehr, in 6 Sprachen." />
 <meta name="theme-color" content="#12141C" />
-<script>(function(){try{var t=(JSON.parse(localStorage.getItem("spieleblock-app-state-v1")||"{}")||{}).theme;var c={light:"#F6F1E7",noir:"#0A0A0A",dark:"#2E2247"}[t]||"#2E2247";document.querySelector('meta[name="theme-color"]').setAttribute("content",c);document.documentElement.style.background=c;}catch(e){}})();</script>
+<script>(function(){try{var t=(JSON.parse(localStorage.getItem("spieleblock-app-state-v1")||"{}")||{}).theme;var c={light:"#EDE5D5",noir:"#0A0A0A",dark:"#2E2247"}[t]||"#2E2247";document.querySelector('meta[name="theme-color"]').setAttribute("content",c);document.documentElement.style.background=c;}catch(e){}})();</script>
 
 <script>/* Handy-Querformat: Attribut data-phone-landscape vor dem ersten Paint (Regel und Doku: web/src/shared/phone-landscape.js). */(function(){try{
 /*pl-decide-begin*/function plDecide(e){if(!e||e.viewMode==="laptop")return false;if(e.force===true)return true;if(e.force===false)return false;if(!e.touch)return false;var iw=e.innerW||0,ih=e.innerH||0,sw=e.screenW||0,sh=e.screenH||0;var sh2=sw&&sh?Math.min(sw,sh):Math.min(iw,ih);if(!sh2||sh2>500)return false;var l;if(typeof e.orientationType==="string"&&e.orientationType)l=e.orientationType.indexOf("landscape")===0;else if(typeof e.windowOrientation==="number")l=Math.abs(e.windowOrientation)===90;else if(sw&&sh&&sw!==sh)l=sw>sh;else l=!!e.mqLandscape;if(!l)return false;return iw>ih;}/*pl-decide-end*/

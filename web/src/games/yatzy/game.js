@@ -58,6 +58,29 @@ const YZ_UNIT_CSS=`
 .yz-paper{background:var(--yz-paper);color:var(--yz-ink);border-radius:18px;overflow:clip;display:flex;flex-direction:column;flex:none;border:2px solid var(--yz-frame);box-sizing:border-box;box-shadow:0 1px 3px rgba(21,24,38,.14)}
 .yz-sheets.is-wide .yz-paper{flex:1 1 0;min-width:0;--yz-lw:clamp(112px,30%,140px)}
 .gtL-content .yz-root.gtL-game{max-width:min(1180px,calc(100% - 32px)) !important;margin-left:auto !important;margin-right:auto !important}
+.gtL-content .yz-root{height:auto;min-height:0;--yz-hh:54px;--yz-sech:28px;--yz-rmin:44px;--yz-rmax:44px;--yz-rmaxw:44px;--yz-colmin:64px;--yz-sp:24px}
+.gtL-content .yz-word{font-size:56px}
+.gtL-content .yz-title{padding:2px 14px 14px}
+.gtL-content .yz-wrap{flex:none;overflow:visible;container-type:normal}
+.gtL-content .yz-sheets.is-wide{align-items:stretch;gap:22px}
+.gtL-content .yz-paper{height:auto !important;align-self:stretch !important;border-radius:22px}
+.gtL-content .yz-paper .yz-grid{flex:1 1 auto;height:auto}
+.gtL-content .yz-sheets.is-wide .yz-paper{--yz-lw:clamp(158px,37%,230px)}
+.gtL-content .yz-nm{font-size:17px}
+.gtL-content .yz-turn{font-size:12px}
+.gtL-content .yz-sec{font-size:13px}
+.gtL-content .yz-lab{font-size:16px;padding-left:12px}
+.gtL-content .yz-lab.is-bold{font-size:17px}
+.gtL-content .yz-cell{font-size:22px}
+.gtL-content .yz-dot{font-size:26px}
+.gtL-content .yz-auto{font-size:20px}
+.gtL-content .yz-auto.is-bold{font-size:23px}
+.gtL-content .yz-auto.is-acc{font-size:26px}
+.gtL-content .yz-auto.is-bonus{font-size:15px}
+.gtL-content .yz-paper.is-many .yz-lab{font-size:14px}
+.gtL-content .yz-paper.is-many .yz-lab.is-bold{font-size:14.5px}
+.gtL-content .yz-paper.is-many .yz-auto{font-size:17px}
+.gtL-content .yz-paper.is-many .yz-cell{font-size:19px}
 .yz-grid{flex:none;height:100%;display:grid;position:relative}
 .yz-corner{position:sticky;left:0;top:0;z-index:5;background:var(--yz-paper);border-bottom:2px solid var(--yz-strong);border-right:1px solid var(--yz-col)}
 .yz-hd{position:sticky;top:0;z-index:4;background:var(--yz-paper);display:grid;align-content:center;justify-items:center;padding:0 3px;min-width:0;overflow:hidden;border-bottom:2px solid var(--yz-strong);border-left:1px solid var(--yz-col)}

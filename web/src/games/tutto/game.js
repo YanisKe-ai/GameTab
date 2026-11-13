@@ -36,8 +36,8 @@ const TT_BIG_IMP=1720,TT_BIG_END=2340;const TT_SQ=[[0,1,1],[54,1.32,.56],[144,1.
 function ttBigStep(fx,ms){const ei=p=>p*p*p;let hov;if(ms<700)hov=-20*(1-Math.pow(1-ms/700,3));else if(ms<1500)hov=-20;else if(ms<TT_BIG_IMP)hov=-20*(1-ei((ms-1500)/(TT_BIG_IMP-1500)));else hov=0;fx.hov=hov;let sx=1,sy=1;const d=ms-TT_BIG_IMP;if(d>=0){for(let i=1;i<TT_SQ.length;i++){const a=TT_SQ[i-1],b=TT_SQ[i];if(d<=b[0]){const q=(d-a[0])/(b[0]-a[0]);sx=a[1]+(b[1]-a[1])*q;sy=a[2]+(b[2]-a[2])*q;break;}}}fx.sx=sx;fx.sy=sy;}
 function ttBigFx(v,x,tr,big,wave,t0){const fx={hov:0,sx:1,sy:1};if(!tr||!big||!wave||!big.animate)return fx;big.textContent="+"+ttFmt(v);const w=big.offsetWidth||80,W=tr.clientWidth;const cx=Math.max(w/2-12,Math.min(W-w/2+12,x+12));big.style.left=cx+"px";wave.style.left=(x+12)+"px";const D=3900,o=ms=>ms/D,EI="cubic-bezier(.55,0,1,.45)";const tf=(y,s)=>"translate(-50%,"+y+"px) scale("+s+")";big.animate([{offset:0,opacity:0,transform:tf(-60,1.2)},{offset:o(950),opacity:0,transform:tf(-60,1.2),easing:EI},{offset:o(1050),opacity:1},{offset:o(1500),opacity:1,transform:tf(-20,1),easing:EI},{offset:o(TT_BIG_IMP),transform:tf(0,"1,1")},{offset:o(TT_BIG_IMP+54),transform:tf(9,"1.08,.86")},{offset:o(TT_BIG_IMP+144),transform:tf(9,"1.08,.86")},{offset:o(TT_BIG_IMP+288),transform:tf(-4,".98,1.03")},{offset:o(TT_BIG_IMP+432),transform:tf(1,"1,1")},{offset:o(TT_BIG_IMP+576),opacity:1,transform:tf(0,"1,1")},{offset:o(3300),opacity:1,transform:tf(0,"1,1")},{offset:1,opacity:0,transform:tf(0,"1,1")}],{duration:D,fill:"none"});wave.animate([{opacity:0,transform:"translate(-50%,-50%) scale(.2)"},{opacity:.9,transform:"translate(-50%,-50%) scale(.5)",offset:.08},{opacity:0,transform:"translate(-50%,-50%) scale(1.8)"}],{duration:700,delay:TT_BIG_IMP});const lane=tr.closest(".tt-lane");const nm=lane&&lane.querySelector(".tt-nmt");if(nm&&nm.animate)nm.animate([{opacity:1},{opacity:1,offset:o(900)},{opacity:.1,offset:o(1150)},{opacity:.1,offset:o(3300)},{opacity:1}],{duration:D});if(lane&&lane.animate)lane.animate([{transform:"translateY(0)"},{transform:"translateY(3px)",offset:.13},{transform:"translateY(3px)",offset:.36},{transform:"translateY(-1px)",offset:.62},{transform:"translateY(0)"}],{duration:400,delay:TT_BIG_IMP});return fx;}
 function TuttoPlayerRow({player,total,entryCount,color,target,isLeader,selected,onPick,gtLead,t,theme,laneRef}){const dieRef=useRef(null),trackRef=useRef(null),bigRef=useRef(null),waveRef=useRef(null),trailRef=useRef(null),trailwRef=useRef(null),numRef=useRef(null);const st=useRef({v:total,raf:0,first:true,face:0,ec:entryCount,ecL:entryCount,fx:null});const targetRef=useRef(target);targetRef.current=target;const[face,setFace]=useState(()=>ttRoll(total,target,200).face);const[pop,setPop]=useState(null);
-const paint=v=>{const s=st.current,tr=trackRef.current,d=dieRef.current;if(!tr||!d)return;const W=Math.max(0,tr.clientWidth-48);const r=ttRoll(v,targetRef.current,W);const snap=x=>Math.round(x/90)*90;let deg=snap(r.deg);if(s.anim&&s.to!==s.from){const a=snap(ttRoll(s.from,targetRef.current,W).deg),b=snap(ttRoll(s.to,targetRef.current,W).deg);deg=a+(b-a)*(v-s.from)/(s.to-s.from);}const lift=Math.abs(Math.sin(deg*Math.PI/90))*5;const fx=s.fx;d.style.transform=fx?"translate3d("+r.x+"px,"+(fx.hov-lift+(1-fx.sy)*12)+"px,0) scale("+fx.sx+","+fx.sy+") rotate("+deg+"deg)":"translate3d("+r.x+"px,"+(-lift)+"px,0) rotate("+deg+"deg)";if(trailwRef.current)trailwRef.current.style.width=(W+12)+"px";if(trailRef.current)trailRef.current.style.transform="translate3d("+(r.x-W)+"px,0,0)";if(numRef.current){const txt=ttFmt(Math.round(v));if(numRef.current.textContent!==txt)numRef.current.textContent=txt;}if(r.face!==s.face){s.face=r.face;setFace(r.face);}};
-React.useLayoutEffect(()=>{const s=st.current;if(s.first){s.first=false;s.v=total;paint(total);return;}if(s.v===total&&!s.raf)return;if(s.raf){cancelAnimationFrame(s.raf);s.raf=0;}const from=s.v,to=total;if(from===to||ttRM()){s.anim=false;s.ecL=entryCount;s.fx=null;s.v=to;paint(to);return;}s.anim=true;s.from=from;s.to=to;const last=player.entries[player.entries.length-1];const big=entryCount===s.ecL+1&&last>=1000;s.ecL=entryCount;s.fx=null;const t0=performance.now();if(big)s.fx=ttBigFx(last,ttRoll(to,targetRef.current,Math.max(0,trackRef.current?trackRef.current.clientWidth-48:0)).x,trackRef.current,bigRef.current,waveRef.current,t0);const step=now=>{const ms=now-t0;const k=Math.max(0,Math.min(1,ms/1150));const e=k<0.5?2*k*k:1-Math.pow(-2*k+2,2)/2;s.v=from+(to-from)*e;if(k>=1)s.anim=false;if(s.fx)ttBigStep(s.fx,ms);paint(s.v);if(k<1||(s.fx&&ms<TT_BIG_END))s.raf=requestAnimationFrame(step);else{s.raf=0;if(s.fx){s.fx=null;paint(s.v);}}};s.raf=requestAnimationFrame(step);},[total,target]);
+const paint=v=>{const s=st.current,tr=trackRef.current,d=dieRef.current;if(!tr||!d)return;const W=Math.max(0,tr.clientWidth-24-d.offsetWidth);const r=ttRoll(v,targetRef.current,W);const snap=x=>Math.round(x/90)*90;let deg=snap(r.deg);if(s.anim&&s.to!==s.from){const a=snap(ttRoll(s.from,targetRef.current,W).deg),b=snap(ttRoll(s.to,targetRef.current,W).deg);deg=a+(b-a)*(v-s.from)/(s.to-s.from);}const lift=Math.abs(Math.sin(deg*Math.PI/90))*5;const fx=s.fx;d.style.transform=fx?"translate3d("+r.x+"px,"+(fx.hov-lift+(1-fx.sy)*12)+"px,0) scale("+fx.sx+","+fx.sy+") rotate("+deg+"deg)":"translate3d("+r.x+"px,"+(-lift)+"px,0) rotate("+deg+"deg)";if(trailwRef.current)trailwRef.current.style.width=(W+12)+"px";if(trailRef.current)trailRef.current.style.transform="translate3d("+(r.x-W)+"px,0,0)";if(numRef.current){const txt=ttFmt(Math.round(v));if(numRef.current.textContent!==txt)numRef.current.textContent=txt;}if(r.face!==s.face){s.face=r.face;setFace(r.face);}};
+React.useLayoutEffect(()=>{const s=st.current;if(s.first){s.first=false;s.v=total;paint(total);return;}if(s.v===total&&!s.raf)return;if(s.raf){cancelAnimationFrame(s.raf);s.raf=0;}const from=s.v,to=total;if(from===to||ttRM()){s.anim=false;s.ecL=entryCount;s.fx=null;s.v=to;paint(to);return;}s.anim=true;s.from=from;s.to=to;const last=player.entries[player.entries.length-1];const big=entryCount===s.ecL+1&&last>=1000;s.ecL=entryCount;s.fx=null;const t0=performance.now();if(big)s.fx=ttBigFx(last,ttRoll(to,targetRef.current,Math.max(0,trackRef.current?trackRef.current.clientWidth-24-(dieRef.current?dieRef.current.offsetWidth:24):0)).x,trackRef.current,bigRef.current,waveRef.current,t0);const step=now=>{const ms=now-t0;const k=Math.max(0,Math.min(1,ms/1150));const e=k<0.5?2*k*k:1-Math.pow(-2*k+2,2)/2;s.v=from+(to-from)*e;if(k>=1)s.anim=false;if(s.fx)ttBigStep(s.fx,ms);paint(s.v);if(k<1||(s.fx&&ms<TT_BIG_END))s.raf=requestAnimationFrame(step);else{s.raf=0;if(s.fx){s.fx=null;paint(s.v);}}};s.raf=requestAnimationFrame(step);},[total,target]);
 useEffect(()=>{const tr=trackRef.current;let ro=null;if(tr&&window.ResizeObserver){ro=new ResizeObserver(()=>paint(st.current.v));ro.observe(tr);}return()=>{if(ro)ro.disconnect();if(st.current.raf)cancelAnimationFrame(st.current.raf);};},[]);
 useEffect(()=>{const s=st.current;if(entryCount===s.ec)return;const inc=entryCount===s.ec+1;s.ec=entryCount;const last=player.entries[player.entries.length-1];if(!inc||!last||ttRM()||last>=1000){setPop(null);return;}setPop({v:last,id:Date.now()});const to=setTimeout(()=>setPop(null),1300);return()=>clearTimeout(to);},[entryCount]);
 const remaining=Math.max(0,target-total);const label=player.name+": "+ttFmt(total)+(total>0&&total<target?", "+t("stillToTarget")(remaining):"");const pip=ttLum(color)>0.3?"#14101C":"#FFFFFF";const numC="var(--tt-num)";
@@ -122,6 +122,57 @@ function TuttoSetup({players,setPlayers,target,setTarget,onStart,tk:gtTk0,t,them
 .gtL-content .tt-lanes{display:grid;grid-template-columns:repeat(auto-fit,minmax(max(260px,calc(50% - 6px)),1fr));gap:12px;}
 .gtL-content .tt-tray{position:static;margin:0 0 14px;border-radius:24px;border:1px solid var(--tt-trayline);padding:14px 14px 16px;box-shadow:0 8px 24px -10px rgba(0,0,0,.4);}
 .gtL-content .gtL-col-side{position:sticky;top:12px;}
+.gtL-content .tt-split{grid-template-columns:minmax(0,1fr) clamp(340px,38%,520px) !important;gap:24px;align-items:stretch;}
+.gtL-content .tt-split>.gtL-col-main{display:flex;flex-direction:column;}
+.gtL-content .tt-title{padding:2px 0 18px;}
+.gtL-content .tt-word{font-size:64px;}
+.gtL-content .tt-goal{font-size:17px;}
+.gtL-content .tt-lanes{flex:1 1 auto;grid-template-columns:minmax(0,1fr);grid-auto-rows:minmax(92px,1fr);gap:14px;--tt-dz:44px;}
+.gtL-content .tt-lanes.n5,.gtL-content .tt-lanes.n6,.gtL-content .tt-lanes.n7,.gtL-content .tt-lanes.n8{grid-template-columns:repeat(2,minmax(0,1fr));}
+.gtL-content .tt-lanes .tt-lane{height:auto;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:14px;padding:16px 24px;border-radius:26px;}
+.gtL-content .tt-lanes .tt-glide{border-radius:26px;}
+.gtL-content .tt-lanes .tt-lt{height:auto;gap:12px;}
+.gtL-content .tt-lanes .tt-nmt{font-size:28px;}
+.gtL-content .tt-lanes .tt-num{font-size:84px;}
+.gtL-content .tt-lanes .tt-pop{font-size:24px;}
+.gtL-content .tt-lanes .tt-track{height:calc(var(--tt-dz) + 2px);margin-top:0;}
+.gtL-content .tt-lanes .tt-die{width:var(--tt-dz);height:var(--tt-dz);top:1px;border-radius:calc(var(--tt-dz)*.25);}
+.gtL-content .tt-lanes .tt-pip{width:calc(var(--tt-dz)*.19);height:calc(var(--tt-dz)*.19);margin:calc(var(--tt-dz)*-.095);}
+.gtL-content .tt-lanes .tt-path{top:calc(var(--tt-dz)/2 + 1px);border-top-width:3px;}
+.gtL-content .tt-lanes .tt-trailw{top:calc(var(--tt-dz)/2 - 1px);height:6px;border-radius:3px;}
+.gtL-content .tt-lanes .tt-flag{top:1px;width:calc(var(--tt-dz)*.7);height:var(--tt-dz);}
+.gtL-content .tt-lanes .tt-wave{top:calc(var(--tt-dz) + 1px);}
+.gtL-content .tt-lanes .tt-big{font-size:34px;}
+.gtL-content .tt-lanes.n3{--tt-dz:38px;}.gtL-content .tt-lanes.n3 .tt-num{font-size:66px;}.gtL-content .tt-lanes.n3 .tt-nmt{font-size:26px;}
+.gtL-content .tt-lanes.n4{--tt-dz:34px;gap:12px;}.gtL-content .tt-lanes.n4 .tt-num{font-size:56px;}.gtL-content .tt-lanes.n4 .tt-nmt{font-size:24px;}.gtL-content .tt-lanes.n4 .tt-lane{gap:10px;padding:12px 22px;}
+.gtL-content .tt-lanes.n5,.gtL-content .tt-lanes.n6,.gtL-content .tt-lanes.n7,.gtL-content .tt-lanes.n8{--tt-dz:28px;gap:12px;}
+.gtL-content .tt-lanes.n5 .tt-num,.gtL-content .tt-lanes.n6 .tt-num,.gtL-content .tt-lanes.n7 .tt-num,.gtL-content .tt-lanes.n8 .tt-num{font-size:44px;}
+.gtL-content .tt-lanes.n5 .tt-nmt,.gtL-content .tt-lanes.n6 .tt-nmt,.gtL-content .tt-lanes.n7 .tt-nmt,.gtL-content .tt-lanes.n8 .tt-nmt{font-size:20px;}
+.gtL-content .tt-lanes.n5 .tt-lane,.gtL-content .tt-lanes.n6 .tt-lane,.gtL-content .tt-lanes.n7 .tt-lane,.gtL-content .tt-lanes.n8 .tt-lane{gap:8px;padding:10px 16px;}
+.gtL-content .tt-tray{padding:18px 18px 20px;gap:12px;}
+.gtL-content .tt-dh{min-height:56px;font-size:18px;row-gap:2px;}
+.gtL-content .tt-dn{grid-column:1/-1;min-height:26px;font-size:20px;}
+.gtL-content .tt-disp{grid-column:1/3;margin-left:0;}
+.gtL-content .tt-disp,.gtL-content .tt-in{font-size:34px;}
+.gtL-content .tt-dg{gap:10px;}
+.gtL-content .tt-k{height:56px;font-size:28px;border-radius:16px;}
+.gtL-content .tt-ac{gap:10px;}
+.gtL-content .tt-minus,.gtL-content .tt-save{height:60px;border-radius:16px;}
+.gtL-content .tt-minus{font-size:19px;}
+.gtL-content .tt-save{font-size:18px;flex:3;}
+@container gtl (min-width:560px){
+.gtL-content .tt-split{grid-template-rows:auto auto minmax(0,1fr) auto;column-gap:26px;row-gap:0;}
+.gtL-content .tt-split>.gtL-col-main,.gtL-content .tt-split>.gtL-col-side{display:contents;}
+.gtL-content .tt-split .tt-title{grid-column:1;grid-row:1;}
+.gtL-content .tt-split .gtL-col-main>[role="status"]{grid-column:1;grid-row:2;}
+.gtL-content .tt-split .tt-lanes{grid-column:1;grid-row:3;}
+.gtL-content .tt-split:not(:has(.gtL-chart)) .tt-lanes{grid-row:3/5;}
+.gtL-content .tt-split .gtL-chart{grid-column:1;grid-row:4;margin-top:16px !important;}
+.gtL-content .tt-split .tt-tray{grid-column:2;grid-row:1/4;margin:0;display:flex;flex-direction:column;}
+.gtL-content .tt-split .tt-dg{flex:1 1 auto;grid-auto-rows:minmax(56px,1fr);}
+.gtL-content .tt-split .tt-k{height:auto;}
+.gtL-content .tt-split .gtL-e-only{grid-column:2;grid-row:4;margin:16px 0 0 !important;}
+}
 @container gtl (max-width:559px){.gtL-content .tt-split{grid-template-columns:minmax(0,1fr) !important;}.gtL-content .gtL-col-side{position:static;}.gtL-content .tt-lanes{margin-bottom:14px;}}
 [data-phone-landscape] .tt-root{min-height:0;display:block;height:auto;}
 [data-phone-landscape] .tt-sp{display:none;}

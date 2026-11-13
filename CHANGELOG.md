@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.13-10 (13.11.2026 16:11)
+- Tutto: Knopf ±1000 für die Plus/Minus-Karte (1000 für den Spieler, 1000 weg bei den Führenden, mit Rückgängig)
+
 ## 2026.11.13-9 (13.11.2026 15:46)
 - Yatzy: Chance wieder als Zahlenfeld (5 bis 30) statt Würfel antippen
 

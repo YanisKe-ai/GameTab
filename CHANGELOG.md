@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.13-16 (13.11.2026 22:08)
+- Wer beginnt: die gezogene Person steht in allen Spielen zuerst in der Liste und beginnt (Darts übernimmt die Ziehung).
+
 ## 2026.11.13-15 (13.11.2026 19:21)
 - Laptop: HeadsUp füllt den Bildschirm, Seitenhöhe korrigiert
 

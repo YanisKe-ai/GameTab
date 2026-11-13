@@ -1,6 +1,7 @@
 // Neon-Haengeschild als Siegesbildschirm (ersetzt die Bloecke, Entwurf "H-b Herabgelassen", 12.11.2026).
 // Farben: Haupt- und Zweitroehre aus den Titel-Schriftzuegen (shared/game-header.js), in OKLCH auf Neon-Helligkeit gebracht.
 // Hell bleibt Neon auf dunkler Wand; Noir leuchtet weiss (auch das Logo).
+import { GtNeonDuel } from "./neon-duel.js";
 import { React } from "../vendor/react-globals.js";
 import { useEffect, useRef, useState } from "../prelude.js";
 import GT_NEON_LOGO from "../assets/img/gt-logo-neon.webp";
@@ -159,7 +160,7 @@ export function GtNeonPodium({ phase, ranked, ranks, gameId, gameLabel, theme, t
             </div>
           </div>
         </div>
-        <div style={{ position: "absolute", left: 22, right: 22, top: rt, bottom: "calc(env(safe-area-inset-bottom, 0px) + 92px)", display: "flex", flexDirection: "column", alignItems: "center", pointerEvents: "none", overflowY: "auto", scrollbarWidth: "none" }}>
+        <div style={{ position: "absolute", left: 22, right: 22, top: rt, bottom: onEnd && !land ? "calc(env(safe-area-inset-bottom, 0px) + 148px)" : "calc(env(safe-area-inset-bottom, 0px) + 92px)", display: "flex", flexDirection: "column", alignItems: "center", pointerEvents: "none", overflowY: "auto", scrollbarWidth: "none" }}>
           {others.length > 0 && <ol className="gtn-ranks" style={{ listStyle: "none", margin: 0, padding: 0, width: "100%", flexShrink: 0, maxHeight: 170, overflowY: "auto", scrollbarWidth: "none", pointerEvents: "auto", ...S }}>
             {others.map(({ e, i }, n) => { const r = ranks[i]; const d = 4.4 + n * 0.22; return <li key={i} style={{ display: "flex", justifyContent: "center", alignItems: "baseline", gap: 10, font: "400 22px/1.2 'Tilt Neon','Inter',sans-serif", marginTop: n ? 8 : 0 }}>
               <span>{i < 3 ? <span className="gtsb-name"><span className="gtsb-sr gtn-sr">{r + ". "}</span><span aria-hidden className="gtn-l gtn-num" data-n={r + "."} style={run ? { animationDelay: `${d.toFixed(2)}s` } : undefined} /></span> : <span aria-hidden className="gtn-l gtn-num" data-n={r + "."} style={run ? { animationDelay: `${d.toFixed(2)}s` } : undefined} />}</span>
@@ -168,6 +169,7 @@ export function GtNeonPodium({ phase, ranked, ranks, gameId, gameLabel, theme, t
             </li>; })}
           </ol>}
           {(playCount > 0 && !hideCount) && <div style={{ flexShrink: 0, marginTop: 14, font: "400 15px/1.3 'Inter',sans-serif", color: "#9E97A8", ...(anim("gtnFade", 0.6, 5) || {}) }}>{t("gamesPlayedTogether")(playCount)}</div>}
+          <GtNeonDuel ranked={ranked} ranks={ranks} gameId={gameId} t={t} run={run} col={pg} theme={theme} />
           {bestRecord && bestRecord.isNew && <div style={{ marginTop: 6, font: "700 13px/1.3 'Inter',sans-serif", color: sc }}>{t("newPersonalBest")}</div>}
           {noteEl && <div style={{ marginTop: 8, font: "400 14px/1.4 'Inter',sans-serif", color: "#E8E2EE", textAlign: "center", pointerEvents: "auto" }}>{noteEl}</div>}
           {achvEl && <div style={{ flexShrink: 0, pointerEvents: "auto", marginTop: 8 }}>{achvEl}</div>}

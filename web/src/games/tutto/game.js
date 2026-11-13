@@ -159,7 +159,8 @@ function TuttoSetup({players,setPlayers,target,setTarget,onStart,tk:gtTk0,t,them
 .gtL-content .tt-ac{gap:10px;}
 .gtL-content .tt-minus,.gtL-content .tt-save{height:60px;border-radius:16px;}
 .gtL-content .tt-minus{font-size:19px;}
-.gtL-content .tt-save{font-size:18px;flex:3;}
+.gtL-content .tt-ac{flex-wrap:wrap;}
+.gtL-content .tt-save{font-size:19px;flex:1 1 100%;order:3;}
 @container gtl (min-width:560px){
 .gtL-content .tt-split{grid-template-rows:auto auto minmax(0,1fr) auto;column-gap:26px;row-gap:0;}
 .gtL-content .tt-split>.gtL-col-main,.gtL-content .tt-split>.gtL-col-side{display:contents;}

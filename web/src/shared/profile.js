@@ -8,6 +8,7 @@ export const GT_PROFILE_KEY = "gt_profile";
 const EVT = "gt-profile";
 
 function clean(s) { return String(s == null ? "" : s).replace(/\s+/g, " ").trim().slice(0, 24); }
+function cleanT(s) { return String(s == null ? "" : s).replace(/\s+/g, " ").trim().slice(0, 120); }
 
 export function gtGetProfile() {
   try {
@@ -16,7 +17,8 @@ export function gtGetProfile() {
     const name = clean(v.name);
     if (!name || gtIsDefName(name)) return null;
     const aliases = Array.isArray(v.aliases) ? v.aliases.map(clean).filter((a) => a && normalizeName(a) !== normalizeName(name)) : [];
-    return { name, aliases, since: typeof v.since === "string" ? v.since : "" };
+    const list = (x) => (Array.isArray(x) ? x.map(cleanT).filter(Boolean) : []);
+    return { name, aliases, since: typeof v.since === "string" ? v.since : "", teams: list(v.teams), notTeams: list(v.notTeams) };
   } catch (e) { return null; }
 }
 
@@ -29,7 +31,8 @@ export function gtSetProfile(name, aliases) {
   const al = [];
   (aliases || []).forEach((a) => { const c = clean(a); const k = normalizeName(c); if (c && !seen.has(k)) { seen.add(k); al.push(c); } });
   const since = old && old.since ? old.since : new Date().toISOString().slice(0, 10);
-  try { localStorage.setItem(GT_PROFILE_KEY, JSON.stringify({ name: n, aliases: al, since })); } catch (e) { return false; }
+  const keep = old ? { teams: old.teams || [], notTeams: old.notTeams || [] } : { teams: [], notTeams: [] };
+  try { localStorage.setItem(GT_PROFILE_KEY, JSON.stringify({ name: n, aliases: al, since, teams: keep.teams, notTeams: keep.notTeams })); } catch (e) { return false; }
   try { window.dispatchEvent(new Event(EVT)); } catch (e) {}
   return true;
 }
@@ -61,4 +64,18 @@ export function useGtProfile() {
   const [p, setP] = useState(() => gtGetProfile());
   useEffect(() => gtOnProfile(() => setP(gtGetProfile())), []);
   return p;
+}
+
+// Team ohne Mitgliedernamen («Die Füchse») einmal zuordnen: yes = mein Team, sonst nicht mehr fragen.
+export function gtProfileTeam(team, yes) {
+  const p = gtGetProfile();
+  const t = cleanT(team);
+  if (!p || !t) return false;
+  const k = normalizeName(t);
+  const strip = (l) => (l || []).filter((x) => normalizeName(x) !== k);
+  const teams = strip(p.teams), notTeams = strip(p.notTeams);
+  (yes ? teams : notTeams).push(t);
+  try { localStorage.setItem(GT_PROFILE_KEY, JSON.stringify({ name: p.name, aliases: p.aliases, since: p.since, teams, notTeams })); } catch (e) { return false; }
+  try { window.dispatchEvent(new Event(EVT)); } catch (e) {}
+  return true;
 }

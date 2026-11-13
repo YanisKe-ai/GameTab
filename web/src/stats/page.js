@@ -8,6 +8,7 @@ import { shellTokens } from "../themes/tokens.js";
 import { GT_STATS } from "./core.js";
 import { GtYearReview } from "./year-review.js";
 import { gtIsMe } from "../shared/profile.js";
+import { GtMeBento } from "./me-ui.js";
 import { deleteMatchUndo, restoreMatch, getAllKnownNames, getNameSuggestions, loadMatchLog, mergeNames, normalizeName, statsGameLabel } from "./match-log.js";
 import { drawLetterSpacedText, hexToRgb, loadGtLogoImage, roundRectPath, shadeHex, truncateForWidth } from "../export/canvas-utils.js";
 import { ShareImagePreview } from "../export/share-preview.js";
@@ -201,7 +202,7 @@ else if(person){body=<GtSt2Profile pkey={person} matches={matches} opts={opts} p
 else if(view==="achv"){const pl=(base&&base.people)||[];const lead=((base&&base.ranking)||[])[0];const sel=pl.find(x=>x.key===achP)||(lead&&pl.find(x=>x.key===lead.key))||pl[0];body=sel?<div><GtSt2Select label={t("st2People")} value={sel.key} display={sel.name} onChange={k=>{if(k)setAchP(k);}} tk={tk} lk={lk} active={false} options={pl.map(x=>({v:x.key,l:x.name}))}/><div style={{marginTop:6}}><GtSt2Achievements key={sel.key} matches={matches} pname={sel.name} t={t} tk={tk} lk={lk} theme={theme} acc={acc}/></div></div>:null;}
 else if(empty){body=<GtSt2Card theme={theme} tk={tk} i={0} style={{textAlign:"center",padding:"24px 18px"}}><p style={{margin:"0 0 14px",fontSize:".875rem",color:tk.muted,fontFamily:GT_ST2_FF,lineHeight:1.45}}>{t("st2EmptyFilter")}</p><button type="button" onClick={reset} className="gtSt2-btn" style={{border:0,borderRadius:14,background:lk.acc,color:lk.onAcc,fontSize:".875rem",fontWeight:700,padding:"0 22px",minHeight:44,cursor:"pointer",fontFamily:GT_ST2_FF}}>{t("st2EmptyFilterCta")}</button></GtSt2Card>;}
 else{const m=model;const MR=GT_STATS.MIN_RANK||3;const hiR=m.ranking||[];const lowR=(m.people||[]).filter(p=>p.decided>0&&p.decided<MR).slice().sort((a,b)=>(b.wins-a.wins)||(a.decided-b.decided)||(a.name<b.name?-1:a.name>b.name?1:0));const gl=(base&&base.games)||m.games||[];
-const head=<div key={animKey} className={moved?"gtSt2-xf":undefined}><GtSt2Kpis s={m.summary} t={t} tk={tk} lk={lk}/><GtSt2Lead rows={hiR} t={t} tk={tk}/></div>;
+const head=<div key={animKey} className={moved?"gtSt2-xf":undefined}><GtMeBento matches={matches} opts={opts} t={t} tk={tk} lk={lk} theme={theme}/><GtSt2Kpis s={m.summary} t={t} tk={tk} lk={lk}/><GtSt2Lead rows={hiR} t={t} tk={tk}/></div>;
 const tabsEl=<div style={{marginTop:12}}><GtSt2Seg tabs idp="gtSt2t-" value={tab} onChange={setTab} lk={lk} tk={tk} label={t("viewModeLabel")} options={[{v:"rank",l:t("st2Ranking")}].concat(lap?[]:[{v:"games",l:t("st2Games")}]).concat([{v:"people",l:t("st2People")}])}/></div>;
 const panelC=tab==="games"&&!lap?<GtSt2Games games={gl} t={t} tk={tk} lk={lk} theme={theme} onPick={pickGame} current={game} load={gLoad} setLoad={setGLoad}/>:tab==="people"?<GtSt2People people={m.people||[]} t={t} tk={tk} lk={lk} theme={theme} acc={acc} onOpen={open} q={q} setQ={setQ} load={pLoad} setLoad={setPLoad}/>:<GtSt2RankList hi={hiR} low={lowR} allRank={allRank} setAllRank={setAllRank} t={t} tk={tk} lk={lk}/>;
 const panel=<div id="gtSt2t-panel" role="tabpanel" aria-labelledby={"gtSt2t-"+tab} key={animKey+"|"+tab} className={moved?"gtSt2-xf":undefined} style={{marginTop:10}}>{panelC}</div>;

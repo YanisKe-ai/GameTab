@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.13-6 (13.11.2026 14:23)
+- Statistik: Du-Kacheln (Welle, Erzfeind, Lieblingsspiel, Bester Partner, Teamfrage), zählen beim Sichtbarwerden hoch
+
 ## 2026.11.13-5 (13.11.2026 13:51)
 - Benutzername: Zeile «Ich bin» in den Einstellungen, «Du» in der Statistik, eigener Name zuerst im Setup
 

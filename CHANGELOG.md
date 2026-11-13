@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.13-9 (13.11.2026 15:46)
+- Yatzy: Chance wieder als Zahlenfeld (5 bis 30) statt Würfel antippen
+
 ## 2026.11.13-8 (13.11.2026 15:20)
 - Siegesschild: Spiel beenden neben Revanche, ohne X (Spiel startet danach frisch). Statistik: Zurück führt zur Herkunft (Partyspiele/Schreibunterlagen), Welle in Startseiten-Farben
 

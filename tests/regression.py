@@ -620,6 +620,10 @@ def t_schieber_schwaetzer(pg, env):
 def yz_enter(pg):
     """Yatzy-Eingabeblatt: je Kachelreihe die erste freie Kachel waehlen, dann eintragen."""
     for _ in range(12):
+        ch = pg.locator("input.yz-chance-in")  # Chance: Zahlenfeld statt Wuerfel (seit 2026.11.13)
+        if ch.count() and not ch.first.input_value():
+            ch.first.fill("20")
+            wait(pg, 60)
         c = pg.locator(".yz-commit")
         if c.count() and c.first.get_attribute("aria-disabled") != "true":
             click(pg, c.first, FAST)

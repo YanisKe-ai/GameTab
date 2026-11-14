@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.14-12 (14.11.2026 17:42)
+- Kachelfarben passen zu den Icons: Jass grün (Jassteppich), Tutto rosé, Yatzy in Becherfarbe, Verräter mit grüner Kapuze, Tabu mit gelbem Kartenkopf; gilt auch für die Kreise auf der Startseite.
+
 ## 2026.11.14-11 (14.11.2026 17:31)
 - Startseite: neue schlichte Symbole, Bleistift für Schreibunterlagen und lachende Maske für Partyspiele.
 

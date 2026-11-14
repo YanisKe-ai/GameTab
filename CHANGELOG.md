@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.14-8 (14.11.2026 16:45)
+- Neues Icon für Stadt Land Fluss: das Blatt mit Haus, Berg und Welle.
+
 ## 2026.11.14-7 (14.11.2026 16:13)
 - Haptik auf dem iPhone jetzt auch bei Knöpfen, die eine neue Ansicht öffnen (Spiellisten, Menüs); unsichtbare Tipp-Flächen liegen nicht mehr über Fenstern.
 

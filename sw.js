@@ -3,7 +3,7 @@
 // Diese Datei sorgt dafür, dass die App nach dem ersten Laden auch offline
 // funktioniert und schneller startet.
 
-const CACHE_NAME = "gametab-cache-2026.11.14-7";
+const CACHE_NAME = "gametab-cache-2026.11.14-8";
 const APP_SHELL = ["./", "./index.html"];
 // Zusatzdateien (Schriften, Icons, Bilder): wird beim Vite-Build aus docs/ erzeugt (web/vite.config.mjs).
 const PRECACHE_EXTRA = [];

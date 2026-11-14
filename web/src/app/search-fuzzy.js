@@ -169,6 +169,12 @@ function gtResumeInfo(id, st) {
       const lead = gtSLeader(ts.map(p => ({ name: p.name, total: gtSSum(p.entries) })), false);
       return lead ? { round: null, lead } : null;
     }
+    if (id === "molotow") {
+      const ps = Array.isArray(g.players) ? g.players : [];
+      const rs = Array.isArray(g.rounds) ? g.rounds : [];
+      const n = rs.filter(r => r && r.cells && ps.length && ps.every(p => r.cells[p.id] && gtSNum(r.cells[p.id].k))).length;
+      return n > 0 ? { round: n + 1, lead: null } : null;
+    }
     if (id === "freeplay") {
       if (g.mode !== "rounds") return null;
       const ps = Array.isArray(g.players) ? g.players : [];

@@ -4,7 +4,7 @@ import { gtImgFree, gtImgItems } from "./save-image.js";
 const GT_EC=(function(){'use strict';
 /* Night League Ergebnisbild. Farben und Texte aus dem Designpaket (themes.json). Schriften: GT Anton (Name, 01), GT InterBI (gewinnt., Score), GT Inter (Tabelle), Baloo 2 (Logo).
    Layout: jedes Element wird als Menge transformierter Glyphen-Vierecke gemessen (Neigung, Scherung, Skalierung). Die Abstaende entstehen aus diesen Konturen, nicht aus festen Koordinaten. */
-const acc={skyjo:"#C5FF25",flip7:"#FFAE57","jass-differenzler":"#EFD58A",schieber:"#EFD58A",yatzy:"#FF8FA3",tutto:"#FF6654",darts:"#54E0D0",cricket:"#51DFC1",hiscore:"#72D9FF",splitscore:"#FFCC62",shanghai:"#FF836D",wizard:"#C4A1FF",minigolf:"#AAE36B",freeplay:"#92B5FF",phase10:"#7CC0FF",romme:"#FF8FBE",tabu:"#FFAD70",headsup:"#A9AAFF"};
+const acc={skyjo:"#C5FF25",flip7:"#FFAE57","jass-differenzler":"#EFD58A",schieber:"#EFD58A",molotow:"#D6EC6B",yatzy:"#FF8FA3",tutto:"#FF6654",darts:"#54E0D0",cricket:"#51DFC1",hiscore:"#72D9FF",splitscore:"#FFCC62",shanghai:"#FF836D",wizard:"#C4A1FF",minigolf:"#AAE36B",freeplay:"#92B5FF",phase10:"#7CC0FF",romme:"#FF8FBE",tabu:"#FFAD70",headsup:"#A9AAFF"};
 const themes={};Object.keys(acc).forEach(k=>{themes[k]=["#0B0B0C",acc[k]];});
 const fallback=["#0B0B0C","#92B5FF"];
 const FG="#F7F3E3",ON="#0A0A0A";
@@ -186,7 +186,7 @@ function gtEcSeg(s){const cps=Array.from(String(s));const out=[];let ri=0;for(le
 
 const GT_EC_TEAM={schieber:1,tabu:1,headsup:1};
 const GT_EC_UNIT={darts:"legs",cricket:"legs",minigolf:"strokes",phase10:"phases"};
-const GT_EC_LOWSLOG={skyjo:1,minigolf:1};
+const GT_EC_LOWSLOG={skyjo:1,minigolf:1,molotow:1};
 const GT_EC_LOC={de:"de-CH",en:"en-GB",fr:"fr-CH",it:"it-CH",es:"es-ES",pt:"pt-PT"};
 const GT_EC_CJK=/[⺀-ヿ㄀-鿿가-힯豈-﫿＀-￯]|[\u{20000}-\u{3FFFF}]/u;
 let gtEcFontP=null,gtEcCjkP=null,gtEcSeq=0;

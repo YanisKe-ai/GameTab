@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.14-11 (14.11.2026 17:31)
+- Startseite: neue schlichte Symbole, Bleistift für Schreibunterlagen und lachende Maske für Partyspiele.
+
 ## 2026.11.14-10 (14.11.2026 17:17)
 - Suche öffnet auf dem iPhone ohne Springen, Freies Spiel mit richtigem Icon auf der Startseite, Molotow in «Alle Spiele», Stadt Land Fluss dort kurz als «SLF».
 

@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.14-17 (14.11.2026 21:40)
+- Logo: GAMETAB in Bagel Fat One mit Drache
+
 ## 2026.11.14-16 (14.11.2026 21:05)
 - Neues Startseiten-Logo: Monoton-Schriftzug mit Drache
 

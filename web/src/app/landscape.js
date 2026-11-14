@@ -16,6 +16,7 @@ export const APP_LANDSCAPE_CSS = `
 [data-phone-landscape] .gtL-headwrap > div { flex-direction: row !important; align-items: center !important; justify-content: flex-start !important; text-align: left !important; gap: 14px; }
 [data-phone-landscape] .gtL-headwrap > div > div:first-child { margin-bottom: 0 !important; flex: none; width: auto !important; }
 [data-phone-landscape] .gtL-headwrap .gt-hero-logo { --hm-w: 190px !important; margin: 0 !important; }
+[data-phone-landscape] .gtL-headwrap .gt-hero-wrap { transform: none !important; }
 
 [data-phone-landscape] .gtL-headwrap > div > div:last-child { transform: none !important; }
 

@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.14-7 (14.11.2026 16:13)
+- Haptik auf dem iPhone jetzt auch bei Knöpfen, die eine neue Ansicht öffnen (Spiellisten, Menüs); unsichtbare Tipp-Flächen liegen nicht mehr über Fenstern.
+
 ## 2026.11.14-6 (14.11.2026 15:40)
 - Haptik auf dem iPhone überall, auch in Listen, und Scrollen bleibt flüssig (durchsichtiges Label statt Schalter im Knopf).
 

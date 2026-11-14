@@ -141,7 +141,10 @@ def new_page(browser, w, h, mode, errors, theme=None, touch=False):
         wait(p0)
         _STATE[key] = p0.evaluate("JSON.stringify(Object.assign({}, localStorage))")
         c0.close()
-    ctx = browser.new_context(viewport={"width": w, "height": h}, has_touch=touch)
+    _ios = bool(os.environ.get("GT_IOS"))  # iPhone-Haptik-Weg testen (kein vibrate, Touch)
+    ctx = browser.new_context(viewport={"width": w, "height": h}, has_touch=touch or _ios)
+    if _ios:
+        ctx.add_init_script("delete Navigator.prototype.vibrate; navigator.vibrate=undefined;")
     # file:// kennt kein storage_state: Zustand per Init-Skript einmalig pro Tab in localStorage setzen
     ctx.add_init_script(
         "try{if(!sessionStorage.getItem('__gt_seed')){const d=" + _STATE[key] + ";"

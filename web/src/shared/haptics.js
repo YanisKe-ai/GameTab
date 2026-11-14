@@ -6,13 +6,16 @@
 // Scrollen. Lösung (am iPhone mit iOS 27.2.1 geprüft, Testseite Liste K): In jedem Knopf
 // liegt ein durchsichtiges <label>, verbunden mit EINEM Schalter ausserhalb. Auf einem
 // Label kann man wischen und scrollen; ein Tippen legt über das Label den Schalter um
-// (Haptik) und steigt normal zum Knopf auf (onClick feuert einmal).
+// (Haptik). Knöpfe, die sofort eine neue Ansicht öffnen, würden das Label aber vor dem
+// Umlegen aus dem Dokument entfernen (dann keine Haptik). Darum hält die App den Klick
+// auf dem Label zuerst an, lässt Safari den Schalter umlegen und gibt den Klick erst
+// danach an den Knopf weiter (genau einmal, mit denselben Koordinaten).
 import { hapticEnabled } from "./sound.js";
 
 const SW_ID = "gt-hx-sw";
 const TARGETS = 'button,[role="button"],[data-gt-sound]';
 const INTERACTIVE = 'button,[role="button"],a[href],input,select,textarea,label,[contenteditable="true"],[data-gt-sound]';
-const HX_CSS = ".gt-hx{position:absolute!important;inset:0!important;margin:0!important;padding:0!important;border:0!important;border-radius:inherit;background:transparent!important;cursor:pointer;z-index:2147483646;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none;}html.gt-hx-off .gt-hx{display:none!important}#" + SW_ID + "{position:fixed;left:0;bottom:0;width:40px;height:24px;margin:0;opacity:0.011;pointer-events:none;z-index:-1}";
+const HX_CSS = ".gt-hx{position:absolute!important;inset:0!important;margin:0!important;padding:0!important;border:0!important;border-radius:inherit;background:transparent!important;cursor:pointer;z-index:1;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none;}html.gt-hx-off .gt-hx{display:none!important}#" + SW_ID + "{position:fixed;left:0;bottom:0;width:40px;height:24px;margin:0;opacity:0.011;pointer-events:none;z-index:-1}";
 
 function isTouchIOSWithoutVibrate() {
   try {
@@ -84,6 +87,24 @@ export function gtHapticsInit() {
   sw.setAttribute("aria-hidden", "true");
   sw.setAttribute("data-gt-keep", "");
   document.body.appendChild(sw);
+  let fwd = null;
+  const deliver = () => {
+    const f = fwd; fwd = null;
+    if (!f || !f.host.isConnected) return;
+    f.host.dispatchEvent(new MouseEvent("click", f.init));
+  };
+  window.addEventListener("click", (e) => {
+    const l = e.target;
+    if (!l || !l.classList || !l.classList.contains("gt-hx") || l.tagName !== "LABEL") return;
+    const host = l.parentElement;
+    if (!host) return;
+    e.stopImmediatePropagation();
+    fwd = { host, init: { bubbles: true, cancelable: true, composed: true, view: window, detail: e.detail, screenX: e.screenX, screenY: e.screenY, clientX: e.clientX, clientY: e.clientY, ctrlKey: e.ctrlKey, shiftKey: e.shiftKey, altKey: e.altKey, metaKey: e.metaKey, button: e.button, buttons: e.buttons } };
+    setTimeout(deliver, 0); // Rückfall, falls der Schalter nicht umgelegt wurde
+  }, true);
+  // Safari legt den Schalter (Haptik) nach dem Label-Klick um; jetzt den Knopf auslösen,
+  // noch innerhalb der Nutzer-Geste (wichtig z. B. für Teilen).
+  sw.addEventListener("click", () => { if (fwd) deliver(); });
   let pending = new Set(), raf = 0;
   const flush = () => { raf = 0; const list = pending; pending = new Set(); list.forEach(scan); };
   const mo = new MutationObserver((muts) => {

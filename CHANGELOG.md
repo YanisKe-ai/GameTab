@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.14-13 (14.11.2026 17:52)
+- Ruhigere Listen: Spielkacheln und die zwei grossen Knöpfe der Startseite neutral, ohne farbigen Rand und ohne Farbschimmer; Farbe nur noch in Icons, Kreis und Pfeil.
+
 ## 2026.11.14-12 (14.11.2026 17:42)
 - Kachelfarben passen zu den Icons: Jass grün (Jassteppich), Tutto rosé, Yatzy in Becherfarbe, Verräter mit grüner Kapuze, Tabu mit gelbem Kartenkopf; gilt auch für die Kreise auf der Startseite.
 

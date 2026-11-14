@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.14-9 (14.11.2026 16:56)
+- Neues Icon für Molotow: Jasskarte mit grüner Molotow-Flasche als Kartenfarbe.
+
 ## 2026.11.14-8 (14.11.2026 16:45)
 - Neues Icon für Stadt Land Fluss: das Blatt mit Haus, Berg und Welle.
 

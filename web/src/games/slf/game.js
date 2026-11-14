@@ -180,9 +180,9 @@ function EndSheet({ open, onClose, total, hasOpen, onSolo, onShow, t }) {
     {rows.map((r, i) => <div className="slf-rowin" key={i}>
       <input className="slf-input nm" value={r.name} maxLength={24} onChange={(e) => setRow(i, "name", e.target.value)} placeholder={t("slfOtherName")} aria-label={t("slfOtherName") + " " + (i + 1)} autoCapitalize="words" autoCorrect="off" enterKeyHint="next" />
       <input className="slf-input pt" value={r.pts} inputMode="numeric" pattern="[0-9]*" maxLength={5} onChange={(e) => setRow(i, "pts", e.target.value.replace(/[^0-9]/g, ""))} placeholder={t("slfOtherPts")} aria-label={t("slfOtherPts") + " " + (i + 1)} enterKeyHint="done" />
-      {rows.length > 1 ? <button type="button" className="x" aria-label={t("slfRemove")(r.name || String(i + 1))} onClick={() => setRows((rs) => rs.filter((_, j) => j !== i))}><IcX /></button> : <span className="x" />}
+      {rows.length > 1 ? <button type="button" data-gt-nohaptic="1" className="x" aria-label={t("slfRemove")(r.name || String(i + 1))} onClick={() => setRows((rs) => rs.filter((_, j) => j !== i))}><IcX /></button> : <span className="x" />}
     </div>)}
-    {rows.length < 12 && <button type="button" className="slf-ghost" onClick={() => setRows((rs) => [...rs, { name: "", pts: "" }])}>{t("slfAddPerson")}</button>}
+    {rows.length < 12 && <button type="button" data-gt-nohaptic="1" className="slf-ghost" onClick={() => setRows((rs) => [...rs, { name: "", pts: "" }])}>{t("slfAddPerson")}</button>}
     {needName && <p className="slf-status bad" role="status">{t("slfNameNeeded")}</p>}
     <div className="slf-btns">
       <button type="button" className="slf-btn" disabled={!valid.length || !me.trim()} onClick={show}>{t("slfShowResult")}</button>
@@ -263,11 +263,11 @@ function Setup({ S, upd, t, lang, theme, tk, onStart, onShow }) {
         <div className="slf-h">{t("slfOwn")}</div>
         <div className="slf-own">
           <input className="slf-input" value={own} maxLength={32} onChange={(e) => setOwn(e.target.value)} onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); addOwn(); } }} placeholder={t("slfOwnPlaceholder")} aria-label={t("slfOwn")} enterKeyHint="done" autoCapitalize="sentences" autoCorrect="off" />
-          <button type="button" className="slf-ghost" disabled={!cleanCustom(own) || full} onClick={addOwn}>{t("slfAdd")}</button>
+          <button type="button" data-gt-nohaptic="1" className="slf-ghost" disabled={!cleanCustom(own) || full} onClick={addOwn}>{t("slfAdd")}</button>
         </div>
       </div>
     </div><div className="gtL-col-side slf-body">
-      <GtChips options={SLF_TIMERS} value={S.timer} onChange={(v) => upd((s) => ({ ...s, timer: v }))} skin={gtS} t={t} label={t("slfTimer")} fmt={(v) => (v === 0 ? t("slfTimerOff") : t("slfSec")(v))} />
+      <div><div className="slf-h">{t("slfTimer")}</div><GtChips options={SLF_TIMERS} value={S.timer} onChange={(v) => upd((s) => ({ ...s, timer: v }))} skin={gtS} t={t} fmt={(v) => (v === 0 ? t("slfTimerOff") : t("slfSec")(v))} /></div>
       <div className="slf-card">
         <div className="slf-h">{t("slfShare")}</div>
         <button type="button" className="slf-ghost is-block" disabled={total < 1} onClick={onShow}><IcQr />{t("slfShowCode")}</button>

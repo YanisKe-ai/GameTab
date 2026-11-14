@@ -96,7 +96,18 @@ function capture(root, withClone) {
       box.dataset.gtY = String(Math.round(off));
       const clone = root.cloneNode(true);
       clone.removeAttribute("id");
-      clone.querySelectorAll("[id]").forEach(n => n.removeAttribute("id"));
+      // IDs eindeutig umbenennen statt loeschen, damit SVG-Masken/Filter (url(#…)) in der Kopie weiter greifen
+      const idMap = {};
+      clone.querySelectorAll("[id]").forEach(n => { const o = n.id, nu = o + "-gtsnap"; idMap[o] = nu; n.id = nu; });
+      if (Object.keys(idMap).length) {
+        clone.querySelectorAll("*").forEach(n => {
+          for (const at of ["mask", "clip-path", "filter", "fill", "stroke", "href", "xlink:href", "style"]) {
+            const v = n.getAttribute(at); if (!v || v.indexOf("#") < 0) continue;
+            const nv = v.replace(/#([A-Za-z0-9_:.-]+)/g, (m, id) => idMap[id] ? "#" + idMap[id] : m);
+            if (nv !== v) n.setAttribute(at, nv);
+          }
+        });
+      }
       clone.querySelectorAll("[autofocus]").forEach(n => n.removeAttribute("autofocus"));
       // Klebende Elemente (position:sticky, z. B. Kopfzeile) in der Kopie dort zeigen, wo sie gerade sichtbar kleben.
       try {
@@ -121,7 +132,11 @@ function capture(root, withClone) {
       cs.display = "flex"; cs.flexDirection = "column"; cs.minHeight = "0"; cs.height = "auto"; cs.margin = "0";
       const topOff = laptop ? -off : Math.round(root.getBoundingClientRect().top); cs.transform = "translateY(" + topOff + "px)"; cs.overflow = "visible";
       const pg = root.firstElementChild, cpg = clone.firstElementChild;
-      if (pg && cpg) { const h = pg.getBoundingClientRect().height; cpg.style.boxSizing = "border-box"; cpg.style.height = h + "px"; cpg.style.minHeight = h + "px"; cpg.style.flex = "none"; }
+      if (pg && cpg) {
+        const h = pg.getBoundingClientRect().height; cpg.style.boxSizing = "border-box"; cpg.style.height = h + "px"; cpg.style.minHeight = h + "px"; cpg.style.flex = "none";
+        // Regeln mit #root (z. B. Abstand oben in der Home-Bildschirm-App) gelten in der Kopie nicht: Werte uebernehmen
+        try { const pcs = getComputedStyle(pg); ["paddingTop", "paddingBottom", "borderTopWidth", "borderTopStyle", "borderTopColor", "backgroundOrigin"].forEach(k => { cpg.style[k] = pcs[k]; }); } catch (_) {}
+      }
       box.appendChild(clone);
     } catch (_) {}
   }

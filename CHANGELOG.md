@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.14-19 (14.11.2026 22:39)
+- Zurückwischen: Drache ohne Kasten, kein Sprung in der Home-Bildschirm-App
+
 ## 2026.11.14-18 (14.11.2026 21:52)
 - Startseite: Einstellungen-Knopf etwas tiefer
 

@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.14-10 (14.11.2026 17:17)
+- Suche öffnet auf dem iPhone ohne Springen, Freies Spiel mit richtigem Icon auf der Startseite, Molotow in «Alle Spiele», Stadt Land Fluss dort kurz als «SLF».
+
 ## 2026.11.14-9 (14.11.2026 16:56)
 - Neues Icon für Molotow: Jasskarte mit grüner Molotow-Flasche als Kartenfarbe.
 

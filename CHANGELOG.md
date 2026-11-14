@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.14-21 (14.11.2026 23:35)
+- Startseite: gleichmässigere Abstände auf hohen Handys
+
 ## 2026.11.14-20 (14.11.2026 23:16)
 - Startseite: Logo grösser und höher, ALL-IN-ONE näher
 

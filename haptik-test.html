@@ -42,6 +42,10 @@
 
 <button class="t" id="f">F <span class="cnt" id="cf">0</span><small>Wie E, aber die App hört zentral mit (wie React)</small></button>
 
+<p class="lead" style="margin-top:20px">Neu: G. Tippe G an und wische dann in der Liste darunter auf und ab. Spürst du beim Tippen etwas, und scrollt die Liste flüssig?</p>
+<button class="t" id="g">G <span class="cnt" id="cg">0</span><small>Schalter erscheint erst beim Berühren</small></button>
+<div id="glist"></div>
+
 <label class="hid" id="blabel"><input type="checkbox" switch id="bsw"></label>
 
 <div class="info" id="info"></div>
@@ -57,6 +61,23 @@
   addSw(e); addSw(f);
   e.addEventListener("click", () => inc("ce"));
   document.addEventListener("click", ev => { if (ev.target.closest && ev.target.closest("#f")) inc("cf"); });
+  // G: Schalter nur während der Berührung
+  const lazy = el => {
+    let sw = null, sx = 0, sy = 0;
+    const kill = () => { if (sw) { sw.remove(); sw = null; } };
+    el.addEventListener("touchstart", ev => {
+      kill(); const t = ev.touches[0]; sx = t.clientX; sy = t.clientY;
+      sw = document.createElement("input"); sw.type = "checkbox"; sw.setAttribute("switch", ""); sw.tabIndex = -1; sw.setAttribute("aria-hidden", "true");
+      sw.style.cssText = "position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0.011;border-radius:inherit";
+      el.appendChild(sw);
+    }, { passive: true });
+    el.addEventListener("touchmove", ev => { const t = ev.touches[0]; if (Math.abs(t.clientX - sx) > 8 || Math.abs(t.clientY - sy) > 8) kill(); }, { passive: true });
+    el.addEventListener("touchcancel", kill, { passive: true });
+    el.addEventListener("click", () => setTimeout(kill, 0));
+  };
+  const g = document.getElementById("g"); lazy(g); g.addEventListener("click", () => inc("cg"));
+  const gl = document.getElementById("glist");
+  for (let k = 1; k <= 12; k++) { const bt = document.createElement("button"); bt.className = "t"; bt.textContent = "Listenzeile " + k; lazy(bt); gl.appendChild(bt); }
   const standalone = window.matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
   document.getElementById("info").textContent = "Modus: " + (standalone ? "Home-Bildschirm-App" : "Browser") + " · " + navigator.userAgent;
 </script>

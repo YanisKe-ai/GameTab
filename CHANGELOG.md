@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.14-3 (14.11.2026 14:00)
+- Neu: Molotow (Jass für 3 bis 6 Personen, Jasstafel mit Wyys, Stöck und Tischwyys, französische Karten) und Stadt Land Fluss (jedes Handy ein Blatt, Buchstabe wird erkannt, über 120 Kategorien, Code und QR für gleiche Kategorien, Stopp, Punkte 20/10/5).
+
 ## 2026.11.14-2 (14.11.2026 13:49)
 - Echte Haptik auf dem iPhone: jeder Knopf gibt einen feinen Tick (unsichtbarer Schalter unter dem Finger), Android mit kürzeren, feineren Ticks.
 

@@ -89,7 +89,8 @@ const SLF_CSS = `
 .slf-mini-head span{font:700 13px 'Space Grotesk',sans-serif;color:var(--s-mut)}
 .slf-mini-list{list-style:none;margin:0;padding:0 8px 0 0;display:grid;grid-template-columns:repeat(auto-fill,minmax(138px,1fr));position:relative}
 .slf-mini-list li{display:flex;align-items:center;min-height:44px;border-bottom:1px solid var(--s-line);padding-left:30px;gap:2px;min-width:0}
-.slf-mini-list .nm{flex:1;min-width:0;font:700 17px/1.15 'Kalam','Inter',cursive;color:var(--s-hand);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.slf-mini-list li.wide{grid-column:1/-1}
+.slf-mini-list .nm{flex:1;min-width:0;font:700 17px/1.15 'Kalam','Inter',cursive;color:var(--s-hand);overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;overflow-wrap:anywhere}
 .slf-mini-list .x{flex-shrink:0;width:44px;height:44px;border:none;background:transparent;color:var(--s-mut);display:inline-flex;align-items:center;justify-content:center;border-radius:50%;cursor:pointer}
 .slf-mini-wrap{position:relative}
 .slf-mini-wrap::after,.slf-sheet::after{content:"";position:absolute;top:0;bottom:0;left:20px;width:2px;background:var(--s-margin);pointer-events:none}
@@ -97,6 +98,8 @@ const SLF_CSS = `
 .slf-mini-actions{display:flex;gap:8px;padding:10px 12px 12px 30px;flex-wrap:wrap}
 
 .slf-own{display:flex;gap:8px;align-items:stretch}
+@media (max-width:380px){.slf-own.is-stack{flex-direction:column}.slf-own.is-stack>.slf-ghost{width:100%}}
+[data-phone-landscape] .slf-own.is-stack{flex-direction:column}[data-phone-landscape] .slf-own.is-stack>.slf-ghost{width:100%}
 .slf-input{flex:1;min-width:0;min-height:48px;box-sizing:border-box;padding:8px 14px;border-radius:16px;border:1px solid var(--s-border);background:var(--s-card);color:var(--s-ink);font:500 16px/1.2 'Inter',sans-serif;outline:none}
 .slf-input:focus{border-color:var(--s-acc)}
 .slf-input::placeholder{color:var(--s-mut);opacity:.8}
@@ -134,7 +137,8 @@ const SLF_CSS = `
 .slf-row.is-off .slf-in{border-bottom:2px dashed var(--s-off)}
 .slf-off{position:absolute;right:14px;bottom:12px;font:800 12px/1 'Space Grotesk',sans-serif;color:var(--s-off);padding:4px 6px;border:1px solid currentColor;border-radius:8px;pointer-events:none}
 .slf-row.is-locked .slf-in{caret-color:transparent}
-.slf-stamp{position:absolute;right:12px;top:26px;z-index:2;transform:rotate(7deg);border:3px solid var(--s-stop1);color:var(--s-stop1);background:var(--s-paper);font:400 24px/1 'Bowlby One',sans-serif;padding:4px 14px 3px;border-radius:12px;pointer-events:none;animation:slfStamp .34s cubic-bezier(.23,1,.32,1)}
+.slf-stampbar{display:flex;justify-content:flex-end;padding:10px 20px 8px 34px}
+.slf-stamp{display:inline-block;transform:rotate(7deg);border:3px solid var(--s-stop1);color:var(--s-stop1);background:var(--s-paper);font:400 24px/1 'Bowlby One',sans-serif;padding:4px 14px 3px;border-radius:12px;pointer-events:none;animation:slfStamp .34s cubic-bezier(.23,1,.32,1)}
 @keyframes slfStamp{0%{transform:rotate(7deg) scale(1.9);opacity:0}70%{transform:rotate(7deg) scale(.94);opacity:1}100%{transform:rotate(7deg) scale(1)}}
 
 .slf-stop{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;min-height:68px;border:none;border-radius:24px;background:linear-gradient(135deg,var(--s-stop1),var(--s-stop2));color:var(--s-onstop);font:400 28px/1 'Bowlby One',sans-serif;cursor:pointer;box-shadow:0 7px 0 -2px rgba(0,0,0,.35),0 18px 26px -14px var(--s-stop2);transition:transform .14s cubic-bezier(.23,1,.32,1),box-shadow .14s}
@@ -202,7 +206,7 @@ const SLF_CSS = `
 /* Laptop: zwei Spalten, Blatt links, Tabelle rechts */
 .gtL-content .slf-wrap{max-width:none!important}
 .gtL-content .slf-letter{width:112px;height:112px;font-size:80px}
-.gtL-content .slf-root .gt-u-dock{bottom:12px}
+.gtL-content .slf-root .gt-u-dock{position:sticky;bottom:12px;margin-top:16px}
 @media (prefers-reduced-motion:reduce){.slf-letter .ch,.slf-stamp,.slf-ov,.slf-box{animation:none}.slf-btn,.slf-ghost,.slf-chip,.slf-pt,.slf-stop,.slf-lb,.slf-letter{transition:none}}
 [data-phone-landscape] .slf-top{gap:12px}
 [data-phone-landscape] .slf-letter{width:84px;height:84px;border-radius:22px;font-size:58px}

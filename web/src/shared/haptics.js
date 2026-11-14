@@ -28,11 +28,44 @@ function isLeafTarget(el) {
   return true;
 }
 
+// Ein Schalter unter dem Finger verhindert auf dem iPhone, dass ein Wischen dort scrollt
+// (am iPhone geprüft, Testseite Listen H, I, J). Darum nur Schalter, wo nichts scrollt:
+// in festen/klebenden Leisten und Fenstern ohne eigenen Scrollbereich, oder wenn die
+// ganze Seite nicht scrollt. data-gt-haptic erzwingt, data-gt-nohaptic verbietet.
+function scrolls(n) {
+  try {
+    const cs = getComputedStyle(n);
+    const oy = cs.overflowY, ox = cs.overflowX;
+    if ((oy === "auto" || oy === "scroll") && n.scrollHeight > n.clientHeight + 1) return true;
+    return (ox === "auto" || ox === "scroll") && n.scrollWidth > n.clientWidth + 1; // Karussell quer
+  } catch (e) { return false; }
+}
+function docScrolls() {
+  const d = document.scrollingElement || document.documentElement;
+  return d.scrollHeight > window.innerHeight + 1;
+}
+function hapticAllowed(el) {
+  if (el.hasAttribute("data-gt-haptic")) return true;
+  for (let n = el.parentElement; n && n !== document.body && n !== document.documentElement; n = n.parentElement) {
+    if (scrolls(n)) return false;
+    let pos = "";
+    try { pos = getComputedStyle(n).position; } catch (e) {}
+    if (pos === "fixed" || pos === "sticky") return true;
+  }
+  return !docScrolls();
+}
+
+function removeSwitch(el) {
+  const i = el.__gtHx;
+  if (i && i.parentNode) i.parentNode.removeChild(i);
+  el.__gtHx = null;
+}
+
 function addSwitch(el) {
   // React ersetzt bei reinem Text manchmal den ganzen Inhalt (textContent): dann neu einsetzen.
   if (el.__gtHx && el.__gtHx.parentNode === el) return;
   el.__gtHx = null;
-  if (!isLeafTarget(el)) return;
+  if (!isLeafTarget(el) || !hapticAllowed(el)) return;
   let pos = "";
   try { pos = getComputedStyle(el).position; } catch (e) {}
   if (pos === "static" || pos === "") el.style.position = "relative";
@@ -77,7 +110,13 @@ export function gtHapticsInit() {
   st.textContent = HX_CSS;
   document.head.appendChild(st);
   let pending = new Set(), raf = 0;
-  const flush = () => { raf = 0; const list = pending; pending = new Set(); list.forEach(scan); };
+  const recheck = () => {
+    document.querySelectorAll(".gt-hx").forEach((i) => {
+      const el = i.parentElement;
+      if (el && !hapticAllowed(el)) removeSwitch(el);
+    });
+  };
+  const flush = () => { raf = 0; const list = pending; pending = new Set(); list.forEach(scan); recheck(); };
   const mo = new MutationObserver((muts) => {
     for (const m of muts) {
       m.addedNodes.forEach((n) => { if (n.nodeType === 1 && !(n.classList && n.classList.contains("gt-hx"))) pending.add(n); });
@@ -88,4 +127,9 @@ export function gtHapticsInit() {
   });
   mo.observe(document.body, { childList: true, subtree: true });
   scan(document.body);
+  recheck();
+  let sraf = 0;
+  const onScrollish = () => { if (!sraf) sraf = requestAnimationFrame(() => { sraf = 0; recheck(); }); };
+  document.addEventListener("scroll", onScrollish, { passive: true, capture: true });
+  window.addEventListener("resize", () => { onScrollish(); pending.add(document.body); if (!raf) raf = requestAnimationFrame(flush); }, { passive: true });
 }

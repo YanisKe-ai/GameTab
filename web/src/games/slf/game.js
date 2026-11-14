@@ -238,7 +238,7 @@ function Setup({ S, upd, t, lang, theme, tk, onStart, onShow }) {
         <div className="slf-mini-wrap">
           <div className="slf-mini-head"><b>{t("slfSheet")}</b><span aria-live="polite">{t("slfCatsCount")(total)}</span></div>
           {items.length === 0 ? <p className="slf-empty">{t("slfSheetEmpty")}</p> : <ul className="slf-mini-list">
-            {items.map((it) => <li key={it.k}><span className="nm" title={it.name}>{it.name}</span><button type="button" className="x" aria-label={t("slfRemove")(it.name)} onClick={it.rm}><IcX /></button></li>)}
+            {items.map((it) => <li key={it.k} className={it.name.length > 14 ? "wide" : undefined}><span className="nm" title={it.name}>{it.name}</span><button type="button" className="x" aria-label={t("slfRemove")(it.name)} onClick={it.rm}><IcX /></button></li>)}
           </ul>}
           <div className="slf-mini-actions">
             <button type="button" className="slf-ghost" onClick={mix}><IcShuffle />{t("slfMix")}</button>
@@ -271,7 +271,7 @@ function Setup({ S, upd, t, lang, theme, tk, onStart, onShow }) {
       <div className="slf-card">
         <div className="slf-h">{t("slfShare")}</div>
         <button type="button" className="slf-ghost is-block" disabled={total < 1} onClick={onShow}><IcQr />{t("slfShowCode")}</button>
-        <div className="slf-own" style={{ marginTop: 10 }}>
+        <div className="slf-own is-stack" style={{ marginTop: 10 }}>
           <input className="slf-input" value={codeIn} onChange={(e) => { setCodeIn(e.target.value); setMsg(null); }} onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); apply(); } }} placeholder={t("slfCodePh")} aria-label={t("slfEnterCode")} enterKeyHint="go" autoCapitalize="characters" autoCorrect="off" spellCheck={false} />
           <button type="button" className="slf-ghost" disabled={!codeIn.trim()} onClick={apply}><IcKey />{t("slfCodeApply")}</button>
         </div>
@@ -321,7 +321,7 @@ function Play({ S, upd, cols, eff, t, left, tk, onLetter, onStartRound, firstRef
       </div>
       <AlphaStrip used={used} cur={eff} t={t} />
       <div className="slf-paper" style={{ position: "relative" }}>
-        {S.stage === "stopped" && <span className="slf-stamp" aria-hidden="true">{t("slfStop")}</span>}
+        {S.stage === "stopped" && <div className="slf-stampbar" aria-hidden="true"><span className="slf-stamp">{t("slfStop")}</span></div>}
         <ol className="slf-sheet">
           {cols.map((c, i) => {
             const off = isOff(S.answers[i], eff);
@@ -348,7 +348,7 @@ function Play({ S, upd, cols, eff, t, left, tk, onLetter, onStartRound, firstRef
 function Score({ S, upd, cols, eff, t }) {
   const sum = roundSum(S.pts);
   const total = totalOf(S.rounds) + sum;
-  return <div className="slf-body">
+  return <div className="slf-body" style={{ paddingBottom: 20 }}>
     <p className="slf-hint" style={{ margin: "0 2px" }}>{t("slfScoreHint")}</p>
     <div className="slf-legend"><span><b>20</b>{t("slfL20")}</span><span><b>10</b>{t("slfL10")}</span><span><b>5</b>{t("slfL5")}</span><span><b>0</b>{t("slfL0")}</span></div>
     <div className="slf-paper">

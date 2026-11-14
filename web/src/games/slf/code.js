@@ -1,7 +1,7 @@
 // Stadt Land Fluss: Kurzcode fuer die Auswahl vorgefertigter Kategorien (ohne Verbindung zwischen den Handys).
 // Aufbau: Auswahl = Menge von 0 bis 10 Kategorie-IDs (Index in SLF_CATS, kleiner als SLF_N).
 // Wert V = Anzahl aller kleineren Auswahlen (nach Groesse) + Rang der Auswahl (kombinatorisches Zahlensystem).
-// V wird in Base32 (Crockford: ohne I, L, O, U) geschrieben, dahinter steht ein Pruefzeichen.
+// V wird in Base32 (Crockford: ohne I, L, O, U) geschrieben, dahinter stehen zwei Pruefzeichen.
 // Beim Eingeben gilt: O wird 0, I und L werden 1, U wird V. Leerzeichen, Striche und Kleinbuchstaben sind egal.
 // SLF_N ist fest: Die Liste darf bis 128 Eintraege wachsen, ohne dass alte Codes ungueltig werden.
 const SLF_N = 128;
@@ -27,10 +27,15 @@ function offsets() {
   for (let k = 0; k <= SLF_MAX_PICK; k++) off.push(off[k] + b[SLF_N][k]);
   return off;
 }
+// Zwei Pruefzeichen (Fletcher-Summe modulo 31): jeder einzelne Tippfehler und jedes Vertauschen
+// zweier benachbarter Zeichen wird erkannt, zufaellige Mehrfachfehler rutschen nur mit etwa 1 zu 1000 durch.
 function checkChar(body) {
-  let s = 7;
-  for (let i = 0; i < body.length; i++) s = (s * 3 + ALPHA.indexOf(body[i]) + 1) % 32;
-  return ALPHA[s];
+  let s = 1, u = 0;
+  for (let i = 0; i < body.length; i++) {
+    s = (s + ALPHA.indexOf(body[i]) + 1) % 31;
+    u = (u + s) % 31;
+  }
+  return ALPHA[s] + ALPHA[u];
 }
 
 // ids: Array von Zahlen. Gibt den Code ohne Trennstriche zurueck oder null, wenn nicht kodierbar.
@@ -57,10 +62,10 @@ function slfNormalizeCode(raw) {
 function slfDecode(raw) {
   try {
     const s = slfNormalizeCode(raw);
-    if (s.length < 2 || s.length > 14) return null;
-    const body = s.slice(0, -1);
+    if (s.length < 3 || s.length > 15) return null;
+    const body = s.slice(0, -2);
     if ([...body].some((ch) => ALPHA.indexOf(ch) < 0)) return null;
-    if (checkChar(body) !== s[s.length - 1]) return null;
+    if (checkChar(body) !== s.slice(-2)) return null;
     let v = 0n;
     for (const ch of body) v = v * 32n + BigInt(ALPHA.indexOf(ch));
     const off = offsets();

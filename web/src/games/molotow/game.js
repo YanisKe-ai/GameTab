@@ -71,7 +71,13 @@ const MO_CSS = `
 .mo-board{width:100%;margin:6px 0 0;position:relative}
 .mo-frame{padding:9px;border-radius:18px;background:linear-gradient(145deg,var(--mo-w1),var(--mo-w2));box-shadow:0 12px 28px -14px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.2)}
 .mo-slate{border-radius:9px;padding:4px 6px 8px;background:radial-gradient(120% 90% at 25% 0%,rgba(255,255,255,.07),transparent 60%),var(--mo-sl);box-shadow:inset 0 0 0 1px rgba(0,0,0,.45),inset 0 10px 26px rgba(0,0,0,.35);color:var(--mo-ch);--mo-lc:44px;--mo-rh:44px}
-.mo-slate.dense{--mo-rh:36px}
+.mo-slate.dense{--mo-rh:44px}
+/* Rundenzeilen scrollen in sich, damit Tafel und Dock auf kurzen Handys zusammenpassen (Zeilen bleiben 44 px hoch, antippbar) */
+.mo-rows{display:flex;flex-direction:column;max-height:max(132px,calc(100dvh - var(--mo-over,478px)));overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.mo-rows::-webkit-scrollbar{display:none}
+.mo-rows.fade{-webkit-mask-image:linear-gradient(to bottom,#000 calc(100% - 14px),transparent);mask-image:linear-gradient(to bottom,#000 calc(100% - 14px),transparent)}
+.mo-rows.fade.top{-webkit-mask-image:linear-gradient(to bottom,transparent,#000 14px,#000 calc(100% - 14px),transparent);mask-image:linear-gradient(to bottom,transparent,#000 14px,#000 calc(100% - 14px),transparent)}
+.mo-rows.fade.end{-webkit-mask-image:linear-gradient(to bottom,transparent,#000 14px);mask-image:linear-gradient(to bottom,transparent,#000 14px)}
 .mo-grid{display:flex;flex-direction:column;text-align:center}
 .mo-hrow,.mo-row,.mo-trow{display:grid;grid-template-columns:var(--mo-lc) repeat(var(--n),minmax(0,1fr));align-items:center;width:100%;box-sizing:border-box}
 .mo-hrow{padding:4px 0 6px;border-bottom:2px solid rgba(244,241,232,.34)}
@@ -136,7 +142,9 @@ const MO_CSS = `
 .mo-tb:active{transform:scale(.96)}
 .mo-tb[aria-pressed="true"]{box-shadow:inset 0 0 0 2px var(--mo-acc);background:rgba(127,127,127,.2)}
 .mo-eb{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:0 10px 6px}
-.mo-ecap,.mo-er{display:grid;grid-template-columns:minmax(40px,1fr) var(--mo-cc);gap:5px;align-items:center}
+.mo-ecap,.mo-er{display:grid;grid-template-columns:minmax(40px,1fr) auto;gap:5px;align-items:center}
+.mo-cs{grid-template-columns:var(--mo-cc)}
+@media (max-width:340px){.mo-sheet.mo-w4{--mo-cc:52px 46px 44px 46px!important}.mo-sheet.mo-w2{--mo-cc:58px 50px!important}.mo-en b{font-size:13.5px}}
 .mo-ecap{padding:2px 8px 4px;font:700 11px/1.1 'Inter',sans-serif;color:var(--mo-mu);position:sticky;top:0;background:var(--mo-sheet);z-index:2}
 .mo-ecap span{text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .mo-er{padding:3px 8px;border-radius:14px;border:1px solid transparent;margin-bottom:3px;transition:background-color .15s ease,border-color .15s ease}
@@ -156,6 +164,7 @@ const MO_CSS = `
 .mo-pad button{height:46px;border:0;border-radius:12px;background:rgba(127,127,127,.16);color:var(--mo-ink);font:700 20px 'Inter',sans-serif;cursor:pointer;display:grid;place-items:center;font-variant-numeric:tabular-nums;transition:transform .1s ease-out}
 .mo-pad button:active{transform:scale(.95)}
 .mo-pad .nx{background:var(--mo-acc);color:var(--mo-on);font-size:15px}
+.mo-pad-note.warn{color:var(--mo-ink);font-weight:700}
 .mo-pad-note{grid-column:1/-1;font:500 12px/1.3 'Inter',sans-serif;color:var(--mo-mu);text-align:center;min-height:16px}
 @keyframes moFade{from{opacity:0}to{opacity:1}}
 @keyframes moUp{from{transform:translateY(100%)}to{transform:none}}
@@ -164,6 +173,8 @@ const MO_CSS = `
 .mo-wsum{font:700 13px/1.2 'Inter',sans-serif;color:var(--wy-pt);padding:2px 6px 6px}
 /* Laptop: Tafel links, Rangliste rechts */
 .gtL-content .mo-split{align-items:start}
+.gtL-content .mo-rows{max-height:max(180px,calc(100dvh - 470px))}
+.gtL-content .mo-slate.dense{--mo-rh:36px}
 .gtL-content .mo-main{width:min(560px,56vw)}
 .gtL-content .mo-rank{display:flex;flex-direction:column;gap:6px}
 .gtL-content .mo-rank h3{margin:0 0 4px;font:700 12px/1.2 'Inter',sans-serif;letter-spacing:.06em;color:var(--mo-mu)}
@@ -173,6 +184,15 @@ const MO_CSS = `
 .gtL-content .mo-rk-row i{font:800 20px/1 'Inter',sans-serif;font-style:normal;font-variant-numeric:tabular-nums}
 .gtL-content .mo-dock{position:static;margin:12px 0 0;padding:0;background:none}
 [data-phone-landscape] .mo-main,[data-phone-landscape] .mo-board{max-width:none}
+/* Querformat: Eingabe-Blatt zweispaltig, links Kopf und Spieler, rechts die Ziffern */
+[data-phone-landscape] .mo-sheet{max-width:none;max-height:none;height:calc(var(--pl-vh,100vh) - 8px);display:grid;grid-template-columns:minmax(0,1fr) min(270px,42%);grid-template-rows:auto auto minmax(0,1fr);border-radius:18px 18px 0 0;padding-left:var(--pl-sal,0px);padding-right:var(--pl-sar,0px)}
+[data-phone-landscape] .mo-eh{grid-column:1;grid-row:1;padding-top:6px}
+[data-phone-landscape] .mo-trump{grid-column:1;grid-row:2;padding-top:2px;padding-bottom:6px}
+[data-phone-landscape] .mo-tb{height:46px;max-width:56px}
+[data-phone-landscape] .mo-tb img{height:36px}
+[data-phone-landscape] .mo-eb{grid-column:1;grid-row:3;min-height:0}
+[data-phone-landscape] .mo-pad{grid-column:2;grid-row:1/4;border-top:0;border-left:1px solid var(--mo-sline);align-content:center;padding-top:8px}
+[data-phone-landscape] .mo-pad button{height:44px}
 `;
 
 function MoSuitLabel(t, s) { return t(MOL_SUIT_KEY[s]); }
@@ -223,13 +243,16 @@ function MolRoundSheet({ idx, st, state, setCell, setTrump, onClose, t, theme })
   const firstOpen = () => { const p = players.find(q => molCell(round, q.id).k === null); return p ? p.id : (players[0] ? players[0].id : 0); };
   const [active, setActive] = useState(firstOpen);
   const [pick, setPick] = useState(null);
+  const [limit, setLimit] = useState(false);
+  useEffect(() => { if (!limit) return undefined; const id = setTimeout(() => setLimit(false), 2200); return () => clearTimeout(id); }, [limit]);
   const ref = useGtDialog({ open: true, onClose });
   const bodyRef = useRef(null);
   const cur = pid => molCell(round, pid);
   const addDigit = d => {
     const c = cur(active).k;
     const next = parseInt((c === null ? "" : String(c)) + d, 10);
-    if (!isFinite(next) || next > MOL_MAX_CARD_PTS) return;
+    if (!isFinite(next)) return;
+    if (next > MOL_MAX_CARD_PTS) { setLimit(true); return; }
     try { hapticTap(); } catch (e) { /* ignore */ }
     setCell(idx, active, { k: next });
   };
@@ -261,7 +284,7 @@ function MolRoundSheet({ idx, st, state, setCell, setTrump, onClose, t, theme })
   const cols = noWeis ? "62px 52px" : "58px 50px 46px 50px";
   const pickPlayer = pick ? players.find(p => p.id === pick.pid) : null;
   return <div ref={ref} role="dialog" aria-modal="true" aria-label={t("molRoundOf")(idx + 1, st.rc)} className={"mo-ov gt-weis-ov mo-root" + (theme === "noir" ? " mo-noir" : "")} style={molVars(molTk(theme))} onClick={onClose}>
-    <div className="mo-sheet" style={{ "--mo-cc": cols }} onClick={e => e.stopPropagation()}>
+    <div className={"mo-sheet " + (noWeis ? "mo-w2" : "mo-w4")} style={{ "--mo-cc": cols }} onClick={e => e.stopPropagation()}>
       <div className="mo-eh">
         <div style={{ minWidth: 0 }}><h2>{t("molRoundOf")(idx + 1, st.rc)}</h2>{starter && <p>{t("molBegins")(starter.name)}</p>}</div>
         <button type="button" className="mo-x" onClick={onClose} aria-label={t("weisClose")}><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" /></svg></button>
@@ -271,14 +294,14 @@ function MolRoundSheet({ idx, st, state, setCell, setTrump, onClose, t, theme })
         {MOL_SUITS.map(s => <button key={s} type="button" className="mo-tb" aria-pressed={!!round && round.trump === s} aria-label={MoSuitLabel(t, s)} title={MoSuitLabel(t, s)} onClick={() => setTrump(idx, round && round.trump === s ? null : s)}><img src={MOL_SUIT_IMG[s]} alt="" draggable={false} /></button>)}
       </div>
       <div className="mo-eb" ref={bodyRef}>
-        <div className="mo-ecap" aria-hidden="true"><span style={{ textAlign: "left" }} /><div className="mo-cs" style={{ gridTemplateColumns: cols.split(" ").join(" ") }}><span>{t("molColCards")}</span>{!noWeis && <span>{t("molColWeis")}</span>}<span>{t("molColStoeck")}</span>{!noWeis && <span>{t("molColTisch")}</span>}</div></div>
+        <div className="mo-ecap" aria-hidden="true"><span style={{ textAlign: "left" }} /><div className="mo-cs"><span>{t("molColCards")}</span>{!noWeis && <span>{t("molColWeis")}</span>}<span>{t("molColStoeck")}</span>{!noWeis && <span>{t("molColTisch")}</span>}</div></div>
         {players.map((p, i) => {
           const c = cur(p.id);
           const val = c.k === null ? "" : "= " + molFmt(molValue(c, noWeis, tens));
           const wsum = molWeisSum(c.w), tsum = molWeisSum(c.t);
           return <div key={p.id} data-pid={p.id} className={"mo-er" + (active === p.id ? " act" : "")} role="group" aria-label={p.name}>
             <div className="mo-en" title={p.name}><b>{p.name}</b><small>{val}</small></div>
-            <div className="mo-cs" style={{ gridTemplateColumns: cols }}>
+            <div className="mo-cs">
               <button type="button" className={"mo-c ck" + (active === p.id ? " act" : "")} aria-label={t("molColCards") + ": " + (c.k === null ? "-" : c.k)} onClick={() => setActive(p.id)}>{c.k === null ? "–" : c.k}</button>
               {!noWeis && <button type="button" className={"mo-c mi" + (wsum > 0 ? " on" : "")} aria-label={t("molColWeis") + ": " + (wsum > 0 ? wsum : "-")} onClick={() => setPick({ pid: p.id, kind: "w" })}>{wsum > 0 ? "−" + wsum : "–"}</button>}
               <button type="button" className={"mo-c mi" + (c.s ? " on" : "")} aria-pressed={c.s} aria-label={t("molColStoeck") + " −" + MOL_STOECK} onClick={() => setCell(idx, p.id, { s: !c.s })}>{c.s ? "−" + MOL_STOECK : "–"}</button>
@@ -288,7 +311,7 @@ function MolRoundSheet({ idx, st, state, setCell, setTrump, onClose, t, theme })
         })}
       </div>
       <div className="mo-pad" role="group" aria-label={t("molColCards")}>
-        <div className="mo-pad-note" aria-live="polite">{missing > 0 ? t("molMissing")(missing) : t("molAllIn")}</div>
+        <div className={"mo-pad-note" + (limit ? " warn" : "")} aria-live="polite">{limit ? t("molMax") : missing > 0 ? t("molMissing")(missing) : t("molAllIn")}</div>
         {["1", "2", "3", "4", "5", "6", "7", "8", "9"].map(d => <button key={d} type="button" aria-label={d} onClick={() => addDigit(d)}>{d}</button>)}
         <button type="button" aria-label={t("molDelete")} onClick={del}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5h11v14H9L3 12l6-7Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" /><path d="M12.5 9.5l5 5M17.5 9.5l-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /></svg></button>
         <button type="button" aria-label="0" onClick={() => addDigit("0")}>0</button>
@@ -309,9 +332,26 @@ function MolBoard({ st, state, onOpen, t, mk }) {
   const curRound = cur >= 0 ? rounds[cur] : null;
   const dense = rc > 8;
   const style = { "--n": n };
+  const rowsRef = useRef(null);
+  const [fade, setFade] = useState({ scroll: false, top: false, end: false });
+  const measure = () => {
+    const el = rowsRef.current; if (!el) return;
+    const sc = el.scrollHeight > el.clientHeight + 2;
+    const top = sc && el.scrollTop > 4, end = sc && el.scrollTop + el.clientHeight >= el.scrollHeight - 4;
+    setFade(f => f.scroll === sc && f.top === top && f.end === end ? f : { scroll: sc, top, end });
+  };
+  // aktuelle Runde im Scrollbereich sichtbar halten (nur dort, nicht die ganze Seite)
+  useEffect(() => {
+    const el = rowsRef.current; if (!el) return;
+    const row = el.children[cur >= 0 ? cur : Math.max(0, rc - 1)];
+    if (row && el.scrollHeight > el.clientHeight) { const rt = row.offsetTop, rb = rt + row.offsetHeight; if (rb > el.scrollTop + el.clientHeight) el.scrollTop = rb - el.clientHeight + 24; else if (rt < el.scrollTop) el.scrollTop = Math.max(0, rt - 24); }
+    measure();
+  }, [cur, rc, st.doneCount]);
+  useEffect(() => { measure(); window.addEventListener("resize", measure); return () => window.removeEventListener("resize", measure); }, []);
   return <div className={"mo-board" + (n >= 6 ? " mo-n6" : "")} role="table" aria-label={t("gameMolotow")}>
     <div className="mo-frame"><div className={"mo-slate" + (dense ? " dense" : "")} style={style}><div className="mo-grid">
       <div className="mo-hrow" role="row"><span />{players.map((p, i) => <div key={p.id} className="mo-hc" role="columnheader" title={p.name}><span className="mo-bd" style={{ background: mk.hues[i % mk.hues.length] }}>{i + 1}</span><span className="mo-hn">{p.name}</span></div>)}</div>
+      <div className={"mo-rows" + (fade.scroll ? " fade" : "") + (fade.top ? " top" : "") + (fade.end ? " end" : "")} ref={rowsRef} onScroll={measure}>
       {Array.from({ length: rc }, (_, i) => {
         const r = rounds[i], isDone = done[i], isCur = i === cur;
         const fut = !isDone && !isCur;
@@ -325,6 +365,7 @@ function MolBoard({ st, state, onOpen, t, mk }) {
           })}
         </button>;
       })}
+      </div>
       <div className="mo-div" />
       <div className="mo-trow mi" role="row"><span className="mo-sg" aria-label={t("molBoardMinus")}>{"−"}</span>{players.map(p => { const v = curRound && !finished ? molMinus(molCell(curRound, p.id), noWeis) : 0; return <span key={p.id} role="cell" className={"mo-v" + (v ? "" : " zero")} style={v ? undefined : { opacity: 0.35 }}>{v ? "−" + v : "·"}</span>; })}</div>
       <div className="mo-trow pl" role="row"><span className="mo-sg" aria-label={t("molBoardPlus")}>+</span>{players.map(p => { const v = curRound && !finished ? molPlus(molCell(curRound, p.id), noWeis) : 0; return <span key={p.id} role="cell" className="mo-v" style={v ? undefined : { opacity: 0.35 }}>{v ? "+" + v : "·"}</span>; })}</div>

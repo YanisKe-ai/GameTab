@@ -26,9 +26,12 @@ const DEFAULT_SLF = {
   result: null, // {me, others:[{name, pts}]} nach "Spiel beenden"
 };
 
+// Buchstaben, die sich nicht in Grund und Akzent zerlegen lassen (NFD hilft hier nicht).
+const SPECIAL_FIRST = { "Ø": "O", "ø": "o", "Ł": "L", "ł": "l", "Æ": "A", "æ": "a", "Œ": "O", "œ": "o", "ß": "s", "ẞ": "S", "Đ": "D", "đ": "d", "Ð": "D", "ð": "d" };
+
 // Anfangsbuchstabe: Akzente weg (Ä wird A), erster Buchstabe a bis z.
 function firstLetter(s) {
-  let x = String(s == null ? "" : s);
+  let x = String(s == null ? "" : s).replace(/[ØøŁłÆæŒœßẞĐđÐð]/g, (c) => SPECIAL_FIRST[c] || c);
   try { x = x.normalize("NFD").replace(/[̀-ͯ]/g, ""); } catch (e) { /* alte Browser */ }
   const m = x.match(/[A-Za-z]/);
   return m ? m[0].toUpperCase() : "";

@@ -42,7 +42,11 @@
 
 <button class="t" id="f">F <span class="cnt" id="cf">0</span><small>Wie E, aber die App hört zentral mit (wie React)</small></button>
 
-<p class="lead" style="margin-top:20px">Neu: G. Tippe G an und wische dann in der Liste darunter auf und ab. Spürst du beim Tippen etwas, und scrollt die Liste flüssig?</p>
+<h1 style="margin-top:28px">Scroll-Vergleich</h1>
+<p class="lead">Wische in Liste H und in Liste I auf und ab, beginne dabei auf einer Zeile. Welche scrollt flüssiger?</p>
+<div id="hlist" style="max-height:340px;overflow-y:auto;border:2px solid #6C7FE8;border-radius:18px;padding:10px;margin-bottom:18px"><b style="display:block;margin:4px 6px 10px">Liste H (mit Schalter, wie die App jetzt)</b></div>
+<div id="ilist" style="max-height:340px;overflow-y:auto;border:2px solid #2FD9A8;border-radius:18px;padding:10px;margin-bottom:18px"><b style="display:block;margin:4px 6px 10px">Liste I (ohne Schalter)</b></div>
+<p class="lead" style="margin-top:20px">Alt: G. Tippe G an und wische dann in der Liste darunter auf und ab. Spürst du beim Tippen etwas, und scrollt die Liste flüssig?</p>
 <button class="t" id="g">G <span class="cnt" id="cg">0</span><small>Schalter erscheint erst beim Berühren</small></button>
 <div id="glist"></div>
 
@@ -78,6 +82,11 @@
   const g = document.getElementById("g"); lazy(g); g.addEventListener("click", () => inc("cg"));
   const gl = document.getElementById("glist");
   for (let k = 1; k <= 12; k++) { const bt = document.createElement("button"); bt.className = "t"; bt.textContent = "Listenzeile " + k; lazy(bt); gl.appendChild(bt); }
+  const hl = document.getElementById("hlist"), il = document.getElementById("ilist");
+  for (let k = 1; k <= 20; k++) {
+    const h = document.createElement("button"); h.className = "t"; h.textContent = "Zeile H" + k; addSw(h); hl.appendChild(h);
+    const i2 = document.createElement("button"); i2.className = "t"; i2.textContent = "Zeile I" + k; il.appendChild(i2);
+  }
   const standalone = window.matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
   document.getElementById("info").textContent = "Modus: " + (standalone ? "Home-Bildschirm-App" : "Browser") + " · " + navigator.userAgent;
 </script>

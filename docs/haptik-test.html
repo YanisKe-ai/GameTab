@@ -42,6 +42,11 @@
 
 <button class="t" id="f">F <span class="cnt" id="cf">0</span><small>Wie E, aber die App hört zentral mit (wie React)</small></button>
 
+<h1 style="margin-top:28px">Neu: Liste K und L</h1>
+<p class="lead">Bitte in K und in L: 1) eine Zeile antippen, spürst du etwas? 2) auf einer Zeile beginnend auf und ab wischen, scrollt es flüssig wie I?</p>
+<div id="klist" style="max-height:340px;overflow-y:auto;border:2px solid #FF7A3D;border-radius:18px;padding:10px;margin-bottom:18px"><b style="display:block;margin:4px 6px 10px">Liste K (Label statt Schalter)</b></div>
+<div id="llist" style="max-height:340px;overflow-y:auto;border:2px solid #C042E0;border-radius:18px;padding:10px;margin-bottom:18px"><b style="display:block;margin:4px 6px 10px">Liste L (Schalter verschwindet beim Wischen)</b></div>
+<input type="checkbox" switch id="ksw" tabindex="-1" aria-hidden="true" style="position:fixed;left:0;bottom:0;width:40px;height:24px;opacity:0.011;pointer-events:none">
 <h1 style="margin-top:28px">Scroll-Vergleich</h1>
 <p class="lead">Wische in Liste H und in Liste I auf und ab, beginne dabei auf einer Zeile. Welche scrollt flüssiger?</p>
 <div id="hlist" style="max-height:340px;overflow-y:auto;border:2px solid #6C7FE8;border-radius:18px;padding:10px;margin-bottom:18px"><b style="display:block;margin:4px 6px 10px">Liste H (mit Schalter, wie die App jetzt)</b></div>
@@ -84,6 +89,24 @@
   const gl = document.getElementById("glist");
   for (let k = 1; k <= 12; k++) { const bt = document.createElement("button"); bt.className = "t"; bt.textContent = "Listenzeile " + k; lazy(bt); gl.appendChild(bt); }
   const hl = document.getElementById("hlist"), il = document.getElementById("ilist");
+  // K: durchsichtiges Label im Knopf, verbunden mit einem Schalter ausserhalb
+  const kl = document.getElementById("klist");
+  for (let k = 1; k <= 20; k++) {
+    const bt = document.createElement("button"); bt.className = "t"; bt.textContent = "Zeile K" + k;
+    const lb = document.createElement("label"); lb.htmlFor = "ksw"; lb.setAttribute("aria-hidden", "true");
+    lb.style.cssText = "position:absolute;inset:0;border-radius:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent";
+    bt.appendChild(lb); kl.appendChild(bt);
+  }
+  // L: Schalter im Knopf, beim Wischen sofort weg
+  const ll = document.getElementById("llist");
+  for (let k = 1; k <= 20; k++) {
+    const bt = document.createElement("button"); bt.className = "t"; bt.textContent = "Zeile L" + k; addSw(bt);
+    let sx = 0, sy = 0;
+    bt.addEventListener("touchstart", ev => { sx = ev.touches[0].clientX; sy = ev.touches[0].clientY; }, { passive: true });
+    bt.addEventListener("touchmove", ev => { const t = ev.touches[0]; if (Math.abs(t.clientY - sy) > 6 || Math.abs(t.clientX - sx) > 6) { const sw = bt.querySelector("input"); if (sw) sw.remove(); } }, { passive: true });
+    bt.addEventListener("touchend", () => setTimeout(() => { if (!bt.querySelector("input")) addSw(bt); }, 50), { passive: true });
+    ll.appendChild(bt);
+  }
   const jl = document.getElementById("jlist");
   for (let k = 1; k <= 20; k++) {
     const j = document.createElement("button"); j.className = "t"; j.style.touchAction = "pan-y"; j.textContent = "Zeile J" + k; addSw(j); j.lastChild.style.touchAction = "pan-y"; jl.appendChild(j);

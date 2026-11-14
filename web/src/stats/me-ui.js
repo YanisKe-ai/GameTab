@@ -107,7 +107,7 @@ function GtMeBento({ matches, opts, t, tk, lk, theme }) {
   const kw = (w, i) => { const ago = nW - 1 - i; return ago === 0 ? t("meWeekNow") : ago === 1 ? t("meWeekLast") : fmt(t("meWeekAgo"), { n: ago }); };
   const pct = (x) => (x / VW) * 100 + "%";
   const tipP = (W.X[S] / VW) * 100;
-  const tipX = tipP > 62 ? "calc(-100% + 4px)" : tipP < 38 ? "-4px" : "-50%";
+  const tipX = tipP > 62 ? "-100%" : tipP < 38 ? "0px" : "-50%";
   const legend = <div style={{ display: "flex", flexDirection: "column", gap: 3, fontSize: 12, color: tk.muted, flex: "none" }}>
     <span style={{ display: "flex", alignItems: "center", gap: 5 }}><i aria-hidden="true" style={{ width: 10, height: 10, borderRadius: 3, background: c.base }} />{t("scorepadsTitle")}</span>
     <span style={{ display: "flex", alignItems: "center", gap: 5 }}><i aria-hidden="true" style={{ width: 10, height: 10, borderRadius: 3, background: c.top }} />{t("partyGamesTitle")}</span></div>;

@@ -28,7 +28,7 @@ import { GT_UG_CSS } from "../../shared/unit-games.js";
 [data-phone-landscape] .gt-jd-side>div:first-child{margin-top:0!important}
 `;const JASS_DIFF_CSS=`
 .jdp{font-family:'Inter',system-ui,sans-serif;font-weight:600;font-variant-numeric:tabular-nums;color:var(--tx);-webkit-font-smoothing:antialiased}
-.jdp-body{padding:0 4px}
+.jdp-body{padding:0}
 .jdp-status{margin:10px 0;min-height:20px;text-align:center;font-size:14px;font-weight:600;line-height:1.35;color:var(--mu)}
 .jdp-status .win{display:block;font-size:17px;font-weight:800;color:var(--tx)}
 .jdp-status .hn{display:inline-block;vertical-align:bottom;max-width:60%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:800;color:var(--tx)}
@@ -92,8 +92,8 @@ import { GT_UG_CSS } from "../../shared/unit-games.js";
 .jdp-nmw{display:flex;flex-wrap:wrap;justify-content:center;column-gap:.28em;max-width:100%;max-height:2.5em;overflow:hidden;font-size:13px;line-height:1.25}
 .is-ed .jdp-colh{position:sticky;top:var(--jd-stick,0px);z-index:2;background:var(--bgs)}
 .jdp-err{margin:-4px 0 8px;text-align:center;font-size:14px;font-weight:800;line-height:1.3;color:var(--neg)}
-.jdp-keys{display:grid;grid-template-columns:repeat(3,64px);justify-content:space-between;row-gap:10px;padding:0 22px}
-.jdp-k{appearance:none;-webkit-appearance:none;width:64px;height:64px;margin:0;padding:0;border:0;border-radius:50%;background:var(--s2);color:var(--tx);font:inherit;font-size:26px;font-weight:800;display:grid;place-items:center;cursor:pointer;touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;transition:transform .12s ease-out}
+.jdp-keys{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:8px;row-gap:10px;padding:0 16px;max-width:380px;margin:0 auto}
+.jdp-k{appearance:none;-webkit-appearance:none;width:100%;height:64px;margin:0;padding:0;border:0;border-radius:14px;background:var(--s2);color:var(--tx);font:inherit;font-size:26px;font-weight:800;display:grid;place-items:center;cursor:pointer;touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;transition:transform .12s ease-out}
 .jdp-k:active{transform:scale(.94)}
 .jdp-k svg{width:26px;height:26px}
 .jdp-k.ok{background:var(--acc);color:var(--onacc)}
@@ -104,7 +104,7 @@ import { GT_UG_CSS } from "../../shared/unit-games.js";
 .jd-grp button{background:var(--jd-btn)!important;border:0!important;box-shadow:inset 0 0 0 1px var(--jd-ring);color:var(--jd-mu)!important}
 .jdp-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .jdp-act{appearance:none;-webkit-appearance:none;flex:1;min-height:44px;margin:0;padding:11px 8px;border-radius:14px;font:inherit;font-size:13px;font-weight:800;letter-spacing:.02em;cursor:pointer;touch-action:manipulation}
-@media (max-height:700px){.jdp-keys{grid-template-columns:repeat(3,52px);row-gap:8px}.jdp-k{width:52px;height:52px;font-size:24px}.jdp-val{height:56px;font-size:52px}.jdp-big{margin:2px 0 8px}}
+@media (max-height:700px){.jdp-keys{row-gap:8px}.jdp-k{height:52px;font-size:24px}.jdp-val{height:56px;font-size:52px}.jdp-big{margin:2px 0 8px}}
 @media (max-width:420px){.jdp-who{font-size:22px}}
 @media (max-width:359px){.jdp-who{font-size:20px}.jdp-cat{padding:0 10px;font-size:14px}.jdp-strike{padding:0 4px;font-size:14px}}
 @media (hover:hover) and (pointer:fine){.jdp-k:hover{filter:brightness(1.12)}.jdp-c:hover{filter:brightness(1.08)}.jdp-cta:hover{filter:brightness(1.08)}}
@@ -171,7 +171,7 @@ import { GT_UG_CSS } from "../../shared/unit-games.js";
 [data-phone-landscape] .jdp-big{margin:0 0 6px}
 [data-phone-landscape] .jdp-val{height:48px;font-size:44px}
 [data-phone-landscape] .jdp-calc{min-height:22px;font-size:17px;line-height:22px}
-[data-phone-landscape] .jdp-keys{grid-template-columns:repeat(3,44px);row-gap:6px;padding:0 24px}
+[data-phone-landscape] .jdp-keys{grid-template-columns:repeat(3,44px);justify-content:space-between;row-gap:6px;padding:0 24px;max-width:none}
 [data-phone-landscape] .jdp-k{width:44px;height:44px;font-size:21px}
 [data-phone-landscape] .jdp-k svg{width:22px;height:22px}
 .jdp-tl,.jdp-tv{min-width:0;display:flex;align-items:center;border-top:1px solid color-mix(in srgb,var(--mu) 38%,transparent);padding-top:4px;font-weight:800;white-space:nowrap}

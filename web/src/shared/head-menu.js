@@ -30,6 +30,9 @@ const GT_HM_CSS = `.gt-hmt-dark{--hm-btn:#1B2235;--hm-ring:#ffffff1f;--hm-ink:#E
 .gt-hm-row .gt-hold-hint{font-size:11px;font-weight:600;margin-top:1px;color:var(--hm-muted);opacity:1}
 .gt-hm-row.is-danger{color:var(--hm-danger)}
 .gt-hm-row.is-confirm{background:#C9302C;color:#FFFFFF}
+.gt-hm-row.has-timer{padding-bottom:14px}.gt-hm-row.has-timer::after{content:"";position:absolute;left:12px;right:12px;bottom:6px;height:3px;border-radius:2px;background:currentColor;opacity:.6;transform-origin:left center;animation:gtHmCount 3s linear forwards}
+@keyframes gtHmCount{from{transform:scaleX(1)}to{transform:scaleX(0)}}
+@media (prefers-reduced-motion:reduce){.gt-hm-row.has-timer::after{animation:none}}
 .gt-hm-row.is-confirm .gt-hm-ic{color:#FFFFFF;background:rgba(255,255,255,.2)}
 .gt-hm-row.is-confirm.is-warm{background:var(--hm-on-bg);color:var(--hm-on-ink)}
 .gt-hm-row.is-confirm.is-warm .gt-hm-ic{color:var(--hm-on-ink);background:rgba(128,128,128,.22)}
@@ -59,9 +62,9 @@ const COLORS = {
   noir: { restart: "#D2D2D2", undo: "#D2D2D2", users: "#D2D2D2", flag: "#FF8F8F", rules: "#D2D2D2", gear: "#D2D2D2", home: "#D2D2D2", plus: "#D2D2D2", table: "#D2D2D2", share: "#D2D2D2", copy: "#D2D2D2", trash: "#FF8F8F" },
 };
 
-function GtHmRow({ icon, color, danger, confirming, warm, onClick, children, extra, ...rest }) {
+function GtHmRow({ icon, color, danger, confirming, warm, timer, onClick, children, extra, ...rest }) {
   return (
-    <button type="button" role="menuitem" className={"gt-hm-row" + (danger ? " is-danger" : "") + (confirming ? " is-confirm" : "") + (confirming && warm ? " is-warm" : "")} onClick={onClick} {...rest} {...extra}>
+    <button type="button" role="menuitem" className={"gt-hm-row" + (danger ? " is-danger" : "") + (confirming ? " is-confirm" : "") + (confirming && warm ? " is-warm" : "") + (confirming && timer ? " has-timer" : "")} onClick={onClick} {...rest} {...extra}>
       <span className="gt-hm-ic" aria-hidden style={{ "--ic": color }}><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden>{ICONS[icon] || ICONS.plus}</svg></span>
       <span className="gt-hm-txt">{children}</span>
     </button>
@@ -124,7 +127,7 @@ function GtHeadButtons({ theme, css, L, onRules, onHome, onEndGame, items, onOpe
       // Frueher gedrueckt halten, seit 12.11.2026 zweimal tippen wie bei "Spieler aendern" (Wunsch Yanis)
       const hk = it.key || it.label, armed = armHold === hk;
       return (
-        <GtHmRow key={hk} {...common} confirming={armed} onClick={() => {
+        <GtHmRow key={hk} {...common} confirming={armed} timer onClick={() => {
           if (armed) { close(); it.hold(); return; }
           setArmHold(hk); clearTimeout(holdT.current); holdT.current = setTimeout(() => setArmHold(null), 3000);
         }}>
@@ -146,7 +149,7 @@ function GtHeadButtons({ theme, css, L, onRules, onHome, onEndGame, items, onOpe
         {showGroup && <div className="gt-hm-h" role="presentation">{L.group}</div>}
         {list.map(itemRow)}
         {onEndGame && (
-          <GtHmRow icon="trash" color={col.trash} danger={!confirmEnd} confirming={confirmEnd} onClick={endTap}>
+          <GtHmRow icon="trash" color={col.trash} danger={!confirmEnd} confirming={confirmEnd} timer onClick={endTap}>
             <span aria-live="polite">{confirmEnd ? L.endConfirm : L.end}</span>
           </GtHmRow>
         )}

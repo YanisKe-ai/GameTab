@@ -8,6 +8,7 @@ import { playerHue } from "../themes/palette.js";
 import { gtFill } from "./setup-ui.js";
 const GT_UG_CSS = `
 .gt-ug.gt-u-col{gap:10px}.gt-ug.gt-u-col>.gt-headbtns+.gt-gamehead{margin-top:-16px}
+.gtL-content .gt-ug.gt-u-col>.gt-headbtns:has(+.gt-gamehead){top:-16px!important}
 .gtL-content .gt-ug.gt-u-col,[data-phone-landscape] .gt-ug.gt-u-col{gap:0}
 .gt-ug-ent{display:contents}
 .gtL-content .gt-ug-ent{display:flex;flex-direction:column;gap:10px}

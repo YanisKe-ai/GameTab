@@ -4,7 +4,7 @@
 // nicht bei jeder kleinen Eingabe (Hysterese), damit nichts springt.
 import { useEffect } from "../prelude.js";
 
-const GT_FIT_MAX = 1.5;
+const GT_FIT_MAX = 1.25;
 
 // Natürliche Höhe des Inhalts (ohne min-height:100vh der Seite): tiefster Punkt der sichtbaren Elemente im Fluss
 function gtFitNatural(page) {

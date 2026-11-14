@@ -70,7 +70,7 @@ import herzA from "./img/herz-A.svg";
 .gt-sch-classic:where(:not(.gt-sch-night)) .gt-gamehead h1{color:#23211E!important}
 .gt-sch-classic:where(:not(.gt-sch-night)) .gt-gamehead h1+*{color:#3B3833!important}
 .gt-sch-classic:where(:not(.gt-sch-night)) .gt-gamehead.is-stuck{background:#F5EAD6!important;background-image:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;box-shadow:0 1px 0 rgba(35,33,30,.16)!important}
-.gt-sch-classic:where(:not(.gt-sch-night)) .gt-hf{background:#1F2021!important;color:#F5EAD6!important;border-color:#1F2021!important}
+.gt-sch-classic:where(:not(.gt-sch-night)) .gt-hf{background:#FFFCF6!important;color:#17130F!important;border-color:#CBBDA2!important}
 .gt-sch-classic:where(:not(.gt-sch-night)) .gt-sch-split label{color:#23211E!important}
 .gt-sch-classic:where(:not(.gt-sch-night)) .gt-sch-tourtag,.gt-sch-classic:where(:not(.gt-sch-night)) .gt-sch-win{color:#23211E!important;border-color:#23211E!important}
 .gt-sch-classic:where(:not(.gt-sch-night)) .gt-foot-acts .gt-sch-act-q{background:#1F2021!important;color:#F5EAD6!important;border-color:#1F2021!important}

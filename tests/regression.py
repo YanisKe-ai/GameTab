@@ -918,7 +918,8 @@ def t_headsup3(pg, env):
     seen = []
     for _ in range(8):
         t = body(pg)
-        if re.search(r"ERGEBNIS", t) and btn(pg, "Revanche").count():
+        # Ergebnis: Siegesschild blendet den Spielkopf (mit "ERGEBNIS") seit 14.11. aus, Revanche genuegt
+        if btn(pg, "Revanche").count():
             break
         m = re.search(r"Spieler (\d+) rät", t, re.I)
         check(m is not None, "HeadsUp: kein 'Spieler N raet' auf dem Wechselbild")

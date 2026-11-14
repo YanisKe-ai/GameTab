@@ -12,6 +12,8 @@ const FF = "'Inter', sans-serif";
 const LOC = { de: "de-CH", en: "en-GB", fr: "fr-CH", it: "it-CH", es: "es-ES", pt: "pt-PT" };
 function fmt(s, o) { return String(s || "").replace(/\{(\w+)\}/g, (m, k) => (o && o[k] != null ? o[k] : "")); }
 
+function gtCatJoin(a, t) { const and = t("st2And"); return a.length < 2 ? a.join("") : a.slice(0, -1).join(", ") + " " + and + " " + a[a.length - 1]; }
+
 function GtMatchCatalog({ matches, t, tk, lk, theme, lang, onChanged, Mark }) {
   const loc = LOC[lang] || "de-CH";
   const L = theme === "light", N = theme === "noir";
@@ -64,7 +66,7 @@ function GtMatchCatalog({ matches, t, tk, lk, theme, lang, onChanged, Mark }) {
           const id = String(m.id);
           const game = statsGameLabel(m.game, t);
           const names = (m.participants || []).map((p) => p && p.name).filter(Boolean);
-          const win = Array.isArray(m.winners) && m.winners.length ? m.winners.join(" & ") : m.winner || "";
+          const win = Array.isArray(m.winners) && m.winners.length ? gtCatJoin(m.winners, t) : m.winner || "";
           const on = !!(sel && sel.has(id));
           const nn = noName(m);
           const body = <React.Fragment>

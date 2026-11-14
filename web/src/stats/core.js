@@ -69,7 +69,7 @@ function yearReview(matches,year,o){o=Object.assign({},o||{});year=+year||nowYea
 c("intro",[],null,S.matches,{n:S.matches,nights:S.nights,people:S.people});
 if(o.focus){const pr=profile(matches,o.focus,oo);if(pr&&pr.matches)c("me",[pr.key],pr.favGame&&pr.favGame.game,pr.wins,{name:pr.name,n:pr.matches,wins:pr.wins,game:pr.favGame?pr.favGame.label:""});}
 if(S.nights){const tot=M.nights.reduce((a,n)=>a+n.matches,0);c("nights",[],null,S.nights,{n:S.nights,avg:Math.round(tot/S.nights*10)/10});}
-if(S.favGame)c("favGame",[],S.favGame.game,S.favGame.count,{game:S.favGame.label,n:S.favGame.count});
+if(S.favGame)c("favGame",[],S.favGame.game,S.favGame.label,{game:S.favGame.label,n:S.favGame.count});
 if(M.ranking.length){const r=M.ranking[0];const co=M.ranking.filter(x=>x.rank===1);c("champion",co.map(x=>x.key),null,Math.round(r.rateRaw*100),{name:co.map(x=>x.name).join(", "),many:co.length>1,wins:r.wins,n:r.decided,pct:Math.round(r.rateRaw*100)});}
 const sb=M.people.map(s=>({s,b:streakOf(ms,s.key).best})).filter(x=>x.b>=2).sort((x,y)=>y.b-x.b);if(sb.length)c("streak",[sb[0].s.key],null,sb[0].b,{name:sb[0].s.name,n:sb[0].b});
 const rv=rivalryOf(ms,names,o);if(rv)cards.push(Object.assign(rv,{params:Object.assign({year},rv.params)}));

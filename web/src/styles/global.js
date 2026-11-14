@@ -5,6 +5,7 @@
 :root { --gt-focus: #F2D48F; }
 html[data-gt-theme="light"] { --gt-focus: #1B4FA0; }
 html[data-gt-theme="noir"] { --gt-focus: #FFFFFF; }
+html:not([data-gt-theme="light"]) body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 :where(button, a[href], summary, [role="button"], [tabindex]:not([tabindex="-1"])):focus-visible { outline: 2px solid var(--gt-focus); outline-offset: 2px; }
 :root { --gt-ease-out: cubic-bezier(.23,1,.32,1); --gt-ease-io: cubic-bezier(.77,0,.175,1); --gt-ease-spring: cubic-bezier(.34,1.3,.64,1); }
 /* Motion-Tokens (eine Quelle): Dauer, Abstand, Skala. Nur transform und opacity animieren, nichts wartet auf das Ende. */

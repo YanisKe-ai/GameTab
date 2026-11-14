@@ -81,7 +81,7 @@ function gtFmt(v) {
   const s = String(v);
   if (!/^-?\d{1,9}(\.\d{1,2})?$/.test(s)) return s;
   const d = s.indexOf(".") < 0 ? 0 : s.length - s.indexOf(".") - 1;
-  try { return Intl.NumberFormat("de-CH", { minimumFractionDigits: d, maximumFractionDigits: d }).format(Number(s)); } catch (e) { return s; }
+  try { return Intl.NumberFormat("de-CH", { minimumFractionDigits: d, maximumFractionDigits: d }).format(Number(s)).replace(/'/g, "’").replace(/^-/, "−"); } catch (e) { return s; }
 }
 
 // Name passt sich der Breite an: zuerst einzeilig gross, sonst bis zwei Zeilen, nie im Wort getrennt

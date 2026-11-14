@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.14-1 (14.11.2026 02:04)
+- Optik-Feinschliff in allen Spielen: Siegesschild ohne Kopfzeile und mit scrollbaren Erfolgen, Darts ohne Springen und mit Modusfarben, lange Namen mit Auslassungspunkten, deckende Knöpfe, einheitliche Timer und Endseiten der Partyspiele, echte Minus- und Tausenderzeichen, wärmerer Hellmodus, Laptop-Zoom höchstens 1.25.
+
 ## 2026.11.13-16 (13.11.2026 22:08)
 - Wer beginnt: die gezogene Person steht in allen Spielen zuerst in der Liste und beginnt (Darts übernimmt die Ziehung).
 

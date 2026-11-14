@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.15-1 (15.11.2026 00:40)
+- Neuer Modus Plakat (Grundstufe): wählbar in den Einstellungen, Creme-Papier mit Plakat-Rändern
+
 ## 2026.11.14-21 (14.11.2026 23:35)
 - Startseite: gleichmässigere Abstände auf hohen Handys
 

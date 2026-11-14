@@ -2,9 +2,11 @@
 // Drache mittig über dem Schriftzug, Halsende genau auf der Oberkante des «M», liegt hinter der Schrift.
 // Drache als Maske, damit er pro Theme eingefärbt werden kann (Seitenverhältnis fix, keine Verzerrung).
 import { React } from "../vendor/react-globals.js";
+import { isPlakat } from "../themes/plakat.js";
 import DRAGON_MASK from "../assets/img/gt-dragon-mask.webp";
 
 const HM_COLORS = {
+  plakat: { game: "#8B6CFF", tab: "#F9C22E", dragon: "#141414", stroke: "#141414" },
   dark: { game: "#B48CFF", tab: "#FFD27A", dragon: "#FFECC8" },
   light: { game: "#111111", tab: "#111111", dragon: "#111111" },
   noir: { game: "#F2F2F2", tab: "#F2F2F2", dragon: "#F2F2F2" },
@@ -30,7 +32,7 @@ const HM_CSS = ".gt-hero-mark{position:relative;width:var(--hm-w,330px);margin:0
 let hmUid = 0;
 
 function GtHeroMark({ theme, width, className, style, markRef }) {
-  const c = HM_COLORS[theme] || HM_COLORS.dark;
+  const c = (isPlakat() ? HM_COLORS.plakat : HM_COLORS[theme]) || HM_COLORS.dark;
   const idRef = React.useRef(null);
   if (idRef.current === null) { hmUid += 1; idRef.current = "gthm" + hmUid; }
   const mid = idRef.current;
@@ -44,7 +46,7 @@ function GtHeroMark({ theme, width, className, style, markRef }) {
           </mask>
         </defs>
         <rect x={HM_DX} y={HM_DY} width={HM_DW} height={HM_DH} fill={c.dragon} mask={"url(#" + mid + ")"} />
-        <text x="320" y={HM_BASE} textAnchor="middle" fontFamily="'Bagel Fat One', sans-serif" fontSize={HM_FONT}>
+        <text x="320" y={HM_BASE} textAnchor="middle" fontFamily="'Bagel Fat One', sans-serif" fontSize={HM_FONT} stroke={c.stroke || undefined} strokeWidth={c.stroke ? 5 : undefined} paintOrder="stroke fill" style={c.stroke ? { filter: "drop-shadow(4px 5px 0 #141414)" } : undefined}>
           <tspan fill={c.game}>GAME</tspan>
           <tspan fill={c.tab}>TAB</tspan>
         </text>
@@ -55,7 +57,7 @@ function GtHeroMark({ theme, width, className, style, markRef }) {
 
 // Nur der Drache (eingeklappte Laptop-Seitenleiste)
 function GtHeroDragon({ theme, width, className }) {
-  const c = HM_COLORS[theme] || HM_COLORS.dark;
+  const c = (isPlakat() ? HM_COLORS.plakat : HM_COLORS[theme]) || HM_COLORS.dark;
   return <span className={"gt-hm-solo" + (className ? " " + className : "")} aria-hidden="true" style={{ width: width || 56, "--hm-mask": "url(" + DRAGON_MASK + ")", background: c.dragon }} />;
 }
 

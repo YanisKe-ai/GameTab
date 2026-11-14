@@ -136,7 +136,7 @@ def run(pw, vp, theme, mode):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--vp", default="393x852,1280x800")
-    ap.add_argument("--theme", default="Nocturne,Hell,Noir")
+    ap.add_argument("--theme", default="Nocturne,Hell,Noir,Plakat")
     a = ap.parse_args()
     vps = [tuple(int(n) for n in v.split("x")) for v in a.vp.split(",")]
     with sync_playwright() as pw:

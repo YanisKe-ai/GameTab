@@ -1,16 +1,18 @@
 // Haptik app-weit.
 // Android und andere: navigator.vibrate (kurze Ticks).
 // iPhone (Safari kennt navigator.vibrate nicht): Safari gibt beim Umlegen eines echten
-// Schalters (<input type="checkbox" switch>) einen Haptik-Tick. Seit iOS 26.5 nur noch,
-// wenn der Finger den Schalter wirklich trifft. Darum liegt in jedem Knopf ein
-// unsichtbarer Schalter über der ganzen Fläche. Der Klick landet auf dem Schalter und
-// steigt danach normal zum Knopf auf (onClick feuert einmal). Am iPhone mit iOS 27.2.1
-// geprüft (Haptik-Testseite, Knöpfe C, E und F).
+// Schalters (<input type="checkbox" switch>) einen Haptik-Tick, seit iOS 26.5 aber nur
+// durch ein echtes Tippen. Ein Schalter direkt unter dem Finger verhindert jedoch das
+// Scrollen. Lösung (am iPhone mit iOS 27.2.1 geprüft, Testseite Liste K): In jedem Knopf
+// liegt ein durchsichtiges <label>, verbunden mit EINEM Schalter ausserhalb. Auf einem
+// Label kann man wischen und scrollen; ein Tippen legt über das Label den Schalter um
+// (Haptik) und steigt normal zum Knopf auf (onClick feuert einmal).
 import { hapticEnabled } from "./sound.js";
 
+const SW_ID = "gt-hx-sw";
 const TARGETS = 'button,[role="button"],[data-gt-sound]';
 const INTERACTIVE = 'button,[role="button"],a[href],input,select,textarea,label,[contenteditable="true"],[data-gt-sound]';
-const HX_CSS = ".gt-hx{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;margin:0!important;padding:0!important;opacity:0.011!important;border:0!important;border-radius:inherit;cursor:pointer;z-index:2147483646;-webkit-appearance:none;appearance:none;background:transparent;-webkit-tap-highlight-color:transparent;}html.gt-hx-off .gt-hx{display:none!important}";
+const HX_CSS = ".gt-hx{position:absolute!important;inset:0!important;margin:0!important;padding:0!important;border:0!important;border-radius:inherit;background:transparent!important;cursor:pointer;z-index:2147483646;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none;}html.gt-hx-off .gt-hx{display:none!important}#" + SW_ID + "{position:fixed;left:0;bottom:0;width:40px;height:24px;margin:0;opacity:0.011;pointer-events:none;z-index:-1}";
 
 function isTouchIOSWithoutVibrate() {
   try {
@@ -28,61 +30,26 @@ function isLeafTarget(el) {
   return true;
 }
 
-// Ein Schalter unter dem Finger verhindert auf dem iPhone, dass ein Wischen dort scrollt
-// (am iPhone geprüft, Testseite Listen H, I, J). Darum nur Schalter, wo nichts scrollt:
-// in festen/klebenden Leisten und Fenstern ohne eigenen Scrollbereich, oder wenn die
-// ganze Seite nicht scrollt. data-gt-haptic erzwingt, data-gt-nohaptic verbietet.
-function scrolls(n) {
-  try {
-    const cs = getComputedStyle(n);
-    const oy = cs.overflowY, ox = cs.overflowX;
-    if ((oy === "auto" || oy === "scroll") && n.scrollHeight > n.clientHeight + 1) return true;
-    return (ox === "auto" || ox === "scroll") && n.scrollWidth > n.clientWidth + 1; // Karussell quer
-  } catch (e) { return false; }
-}
-function docScrolls() {
-  const d = document.scrollingElement || document.documentElement;
-  return d.scrollHeight > window.innerHeight + 1;
-}
-function hapticAllowed(el) {
-  if (el.hasAttribute("data-gt-haptic")) return true;
-  for (let n = el.parentElement; n && n !== document.body && n !== document.documentElement; n = n.parentElement) {
-    if (scrolls(n)) return false;
-    let pos = "";
-    try { pos = getComputedStyle(n).position; } catch (e) {}
-    if (pos === "fixed" || pos === "sticky") return true;
-  }
-  return !docScrolls();
-}
-
-function removeSwitch(el) {
-  const i = el.__gtHx;
-  if (i && i.parentNode) i.parentNode.removeChild(i);
-  el.__gtHx = null;
-}
-
-function addSwitch(el) {
+function addLabel(el) {
   // React ersetzt bei reinem Text manchmal den ganzen Inhalt (textContent): dann neu einsetzen.
   if (el.__gtHx && el.__gtHx.parentNode === el) return;
   el.__gtHx = null;
-  if (!isLeafTarget(el) || !hapticAllowed(el)) return;
+  if (!isLeafTarget(el)) return;
   let pos = "";
   try { pos = getComputedStyle(el).position; } catch (e) {}
   if (pos === "static" || pos === "") el.style.position = "relative";
-  const i = document.createElement("input");
-  i.type = "checkbox";
-  i.setAttribute("switch", "");
-  i.className = "gt-hx";
-  i.tabIndex = -1;
-  i.setAttribute("aria-hidden", "true");
-  el.appendChild(i);
-  el.__gtHx = i;
+  const l = document.createElement("label");
+  l.htmlFor = SW_ID;
+  l.className = "gt-hx";
+  l.setAttribute("aria-hidden", "true");
+  el.appendChild(l);
+  el.__gtHx = l;
 }
 
 function scan(root) {
   if (!root || root.nodeType !== 1) return;
-  if (root.matches && root.matches(TARGETS)) addSwitch(root);
-  root.querySelectorAll && root.querySelectorAll(TARGETS).forEach(addSwitch);
+  if (root.matches && root.matches(TARGETS)) addLabel(root);
+  root.querySelectorAll && root.querySelectorAll(TARGETS).forEach(addLabel);
 }
 
 function syncOff() {
@@ -109,27 +76,24 @@ export function gtHapticsInit() {
   const st = document.createElement("style");
   st.textContent = HX_CSS;
   document.head.appendChild(st);
+  const sw = document.createElement("input");
+  sw.type = "checkbox";
+  sw.setAttribute("switch", "");
+  sw.id = SW_ID;
+  sw.tabIndex = -1;
+  sw.setAttribute("aria-hidden", "true");
+  sw.setAttribute("data-gt-keep", "");
+  document.body.appendChild(sw);
   let pending = new Set(), raf = 0;
-  const recheck = () => {
-    document.querySelectorAll(".gt-hx").forEach((i) => {
-      const el = i.parentElement;
-      if (el && !hapticAllowed(el)) removeSwitch(el);
-    });
-  };
-  const flush = () => { raf = 0; const list = pending; pending = new Set(); list.forEach(scan); recheck(); };
+  const flush = () => { raf = 0; const list = pending; pending = new Set(); list.forEach(scan); };
   const mo = new MutationObserver((muts) => {
     for (const m of muts) {
       m.addedNodes.forEach((n) => { if (n.nodeType === 1 && !(n.classList && n.classList.contains("gt-hx"))) pending.add(n); });
-      // Ein Knopf, der jetzt keine inneren Knöpfe mehr hat, bekommt ebenfalls einen Schalter.
+      // Ein Knopf, dessen Inhalt React ersetzt hat, bekommt sein Label zurück.
       if (m.target && m.target.nodeType === 1 && m.target.closest) { const t = m.target.closest(TARGETS); if (t) pending.add(t); }
     }
     if (!raf) raf = requestAnimationFrame(flush);
   });
   mo.observe(document.body, { childList: true, subtree: true });
   scan(document.body);
-  recheck();
-  let sraf = 0;
-  const onScrollish = () => { if (!sraf) sraf = requestAnimationFrame(() => { sraf = 0; recheck(); }); };
-  document.addEventListener("scroll", onScrollish, { passive: true, capture: true });
-  window.addEventListener("resize", () => { onScrollish(); pending.add(document.body); if (!raf) raf = requestAnimationFrame(flush); }, { passive: true });
 }

@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.14-6 (14.11.2026 15:40)
+- Haptik auf dem iPhone überall, auch in Listen, und Scrollen bleibt flüssig (durchsichtiges Label statt Schalter im Knopf).
+
 ## 2026.11.14-5 (14.11.2026 15:18)
 - Flüssiges Scrollen auf dem iPhone (Haptik nur noch, wo nichts scrollt), Stadt Land Fluss bei den Schreibunterlagen, Molotow-Tafel passt auf kleine Handys, Stopp-Stempel verdeckt nichts mehr, Buchstaben wie Ø und ß richtig erkannt, sichererer Kategorien-Code, Hinweis bei mehr als 257 Kartenpunkten.
 

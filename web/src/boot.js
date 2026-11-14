@@ -5,6 +5,7 @@ import { App } from "./app/App.js";
 import { APP_BUILD } from "./app/build.js";
 import { GtCorruptBanner } from "./app/backup.js";
 import { GtLive } from "./shared/gt-live.js";
+import { gtHapticsInit } from "./shared/haptics.js";
 /*@gt-body-begin*/
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const GT_ERR_TEXTS={"de":["Da ist etwas schiefgelaufen","Deine Spielstände sind gespeichert. Lade GameTab neu. Hilft das nicht, verwirf das offene Spiel.","Neu laden","Offenes Spiel verwerfen"],"en":["Something went wrong","Your games are saved. Reload GameTab. If that does not help, discard the open game.","Reload","Discard open game"],"fr":["Un problème est survenu","Tes parties sont enregistrées. Recharge GameTab. Si cela ne suffit pas, abandonne la partie ouverte.","Recharger","Abandonner la partie ouverte"],"it":["Qualcosa è andato storto","Le tue partite sono salvate. Ricarica GameTab. Se non basta, scarta la partita aperta.","Ricarica","Scarta la partita aperta"],"es":["Algo ha salido mal","Tus partidas están guardadas. Vuelve a cargar GameTab. Si no funciona, descarta la partida abierta.","Volver a cargar","Descartar la partida abierta"],"pt":["Algo correu mal","Os teus jogos estão guardados. Recarrega o GameTab. Se não resultar, descarta o jogo aberto.","Recarregar","Descartar o jogo aberto"]};
@@ -24,6 +25,7 @@ function UpdateBanner(){const[ready,setReady]=React.useState(false);const[hidden
 // Passt der Inhalt in die Mindesthoehe der Spalte, wird senkrechtes Wischen gesperrt. Eigene Scrollbereiche und laengere Seiten bleiben frei.
 try{const gtStandalone=window.navigator.standalone===true||(window.matchMedia&&window.matchMedia("(display-mode: standalone)").matches);if(gtStandalone){let sx=0,sy=0;document.addEventListener("touchstart",e=>{const p=e.touches[0];if(p){sx=p.clientX;sy=p.clientY;}},{passive:true});document.addEventListener("touchmove",e=>{if(e.touches.length!==1)return;const p=e.touches[0];if(Math.abs(p.clientX-sx)>Math.abs(p.clientY-sy))return;const c=document.querySelector(".gt-u-col,.tt-root");if(!c)return;const mh=parseFloat(getComputedStyle(c).minHeight)||0;if(!mh||c.offsetHeight>mh+1)return;for(let el=e.target;el&&el!==document.body&&el.nodeType===1;el=el.parentElement){const o=getComputedStyle(el).overflowY;if((o==="auto"||o==="scroll")&&el.scrollHeight>el.clientHeight+1)return;}e.preventDefault();},{passive:false});}}catch(e){}
 try{const corruptHost=document.createElement("div");corruptHost.setAttribute("data-gt-keep","");document.body.appendChild(corruptHost);ReactDOM.createRoot(corruptHost).render(<GtCorruptBanner/>);}catch(e){}
+try{gtHapticsInit();}catch(e){}
 try{const liveHost=document.createElement("div");liveHost.setAttribute("data-gt-keep","");document.body.appendChild(liveHost);ReactDOM.createRoot(liveHost).render(<GtLive/>);}catch(e){}
 try{const updateHost=document.createElement("div");updateHost.setAttribute("data-gt-keep","");document.body.appendChild(updateHost);ReactDOM.createRoot(updateHost).render(<UpdateBanner/>);}catch(e){}
 

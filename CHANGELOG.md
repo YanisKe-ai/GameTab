@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.14-2 (14.11.2026 13:49)
+- Echte Haptik auf dem iPhone: jeder Knopf gibt einen feinen Tick (unsichtbarer Schalter unter dem Finger), Android mit kürzeren, feineren Ticks.
+
 ## 2026.11.14-1 (14.11.2026 02:04)
 - Optik-Feinschliff in allen Spielen: Siegesschild ohne Kopfzeile und mit scrollbaren Erfolgen, Darts ohne Springen und mit Modusfarben, lange Namen mit Auslassungspunkten, deckende Knöpfe, einheitliche Timer und Endseiten der Partyspiele, echte Minus- und Tausenderzeichen, wärmerer Hellmodus, Laptop-Zoom höchstens 1.25.
 

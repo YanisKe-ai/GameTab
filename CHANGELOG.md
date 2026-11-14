@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.14-14 (14.11.2026 18:06)
+- Startseite einheitlich: Kreise um die Icons (Alle Spiele, Suche, Hauptknöpfe) neutral statt farbig.
+
 ## 2026.11.14-13 (14.11.2026 17:52)
 - Ruhigere Listen: Spielkacheln und die zwei grossen Knöpfe der Startseite neutral, ohne farbigen Rand und ohne Farbschimmer; Farbe nur noch in Icons, Kreis und Pfeil.
 

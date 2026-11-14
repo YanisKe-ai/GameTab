@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.14-15 (14.11.2026 18:49)
+- Startseite: Drachen-Logo etwas kleiner
+
 ## 2026.11.14-14 (14.11.2026 18:06)
 - Startseite einheitlich: Kreise um die Icons (Alle Spiele, Suche, Hauptknöpfe) neutral statt farbig.
 

@@ -14,12 +14,12 @@ export const APP_LANDSCAPE_CSS = `
 [data-phone-landscape] .gtL-startheadpad { padding: calc(var(--pl-sat) + 6px) calc(var(--pl-gutter-r) + 52px) 0 var(--pl-gutter-l) !important; }
 [data-phone-landscape] .gtL-headwrap { max-width: none !important; padding-top: 0 !important; }
 [data-phone-landscape] .gtL-headwrap > div { flex-direction: row !important; align-items: center !important; justify-content: flex-start !important; text-align: left !important; gap: 14px; }
-[data-phone-landscape] .gtL-headwrap > div > div:first-child { margin-bottom: 0 !important; flex: none; }
-[data-phone-landscape] .gtL-headwrap .gt-hero-logo { transform: none !important; }
-[data-phone-landscape] .gtL-headwrap .gt-hero-logo > div { width: 92px !important; }
+[data-phone-landscape] .gtL-headwrap > div > div:first-child { margin-bottom: 0 !important; flex: none; width: auto !important; }
+[data-phone-landscape] .gtL-headwrap .gt-hero-logo { --hm-w: 190px !important; margin: 0 !important; }
+
 [data-phone-landscape] .gtL-headwrap > div > div:last-child { transform: none !important; }
-[data-phone-landscape] .gtL-headwrap > div > div:last-child > div:first-child { justify-content: flex-start !important; font-size: 26px !important; }
-[data-phone-landscape] .gtL-headwrap > div > div:last-child > div:first-child > span:nth-child(1), [data-phone-landscape] .gtL-headwrap > div > div:last-child > div:first-child > span:nth-child(3) { font-size: 36px !important; }
+
+
 [data-phone-landscape] .gtL-start .gtL-start-gear { top: calc(var(--pl-sat) + 8px) !important; right: calc(var(--pl-gutter-r) - 2px) !important; width: 44px !important; height: 44px !important; }
 [data-phone-landscape] .gtL-startcol { max-width: none !important; margin: 0 !important; width: 100% !important; box-sizing: border-box; padding: 6px var(--pl-gutter-r) 0 var(--pl-gutter-l) !important; display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 16px; align-items: start; }
 [data-phone-landscape] .gtL-startcol > .gtL-startmain-tiles { grid-column: 1; grid-row: 1; transform: none !important; }

@@ -38,6 +38,10 @@
   <small style="margin:0">Echter, sichtbarer Schalter: tippe direkt auf den Schalter</small>
 </div>
 
+<button class="t" id="e">E <span class="cnt" id="ce">0</span><small>Echter Knopf mit Schalter darin (so käme es in die App)</small></button>
+
+<button class="t" id="f">F <span class="cnt" id="cf">0</span><small>Wie E, aber die App hört zentral mit (wie React)</small></button>
+
 <label class="hid" id="blabel"><input type="checkbox" switch id="bsw"></label>
 
 <div class="info" id="info"></div>
@@ -48,6 +52,11 @@
   document.getElementById("b").addEventListener("click", () => { inc("cb"); document.getElementById("blabel").click(); });
   document.getElementById("csw").addEventListener("change", () => inc("cc"));
   document.getElementById("dsw").addEventListener("change", () => inc("cd"));
+  const addSw = el => { const i = document.createElement("input"); i.type = "checkbox"; i.setAttribute("switch", ""); i.tabIndex = -1; i.setAttribute("aria-hidden", "true"); i.style.cssText = "position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0.011;border-radius:inherit;cursor:pointer"; el.appendChild(i); };
+  const e = document.getElementById("e"), f = document.getElementById("f");
+  addSw(e); addSw(f);
+  e.addEventListener("click", () => inc("ce"));
+  document.addEventListener("click", ev => { if (ev.target.closest && ev.target.closest("#f")) inc("cf"); });
   const standalone = window.matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
   document.getElementById("info").textContent = "Modus: " + (standalone ? "Home-Bildschirm-App" : "Browser") + " · " + navigator.userAgent;
 </script>

@@ -21,6 +21,8 @@ import { GtStatsEmpty } from "./start-bits.js";
 import { GameHeader } from "../shared/game-header.js";
 import { GT_ST_STORE } from "../games/schieber/tournament-core.js";
 import { Phase10Logo, RommeLogo, TraitorLogo } from "../games/s8/shared.js";
+import { MolotowLogo } from "../games/molotow/logo.js";
+import { SlfLogo } from "../games/slf/logo.js";
 import { gtBkExport } from "../app/backup.js";
 import { gtAnnounce } from "../shared/gt-live.js";
 import { useSavedGroups } from "../shared/groups.js";
@@ -94,7 +96,7 @@ return <div className="gtSt2-filters" style={{marginBottom:14}}><GtSt2Seg value=
 <GtSt2Select label={t("st2Game")} value={game} display={game?gtSt2Label(game,t):t("st2AllGames")} onChange={setGame} tk={tk} lk={lk} active={!!game} options={[{v:"",l:t("st2AllGames")}].concat(gameOpts.map(g=>({v:g.game,l:g.label})))}/>{groups.length>0&&<GtSt2Select label={t("st2Group")} value={grp?grp.id:null} display={grp?grp.name:t("st2AllGroups")} onChange={setGroupId} tk={tk} lk={lk} active={!!grp} options={[{v:"",l:t("st2AllGroups")}].concat(groups.map(g=>({v:String(g.id),l:g.name})))}/>}
 {active&&<div role="status" style={{display:"flex",alignItems:"center",gap:8,padding:"0 2px",minHeight:44}}><span style={{flex:1,minWidth:0,fontSize:".8125rem",color:tk.muted,fontFamily:GT_ST2_FF,lineHeight:1.35}}>{t("st2Filtered")+": "}<b style={{color:tk.ink,fontWeight:700}}>{parts.join(" · ")}</b></span><GtSt2Link tk={tk} acc={lk.acc} onClick={onReset}>{t("st2Reset")}</GtSt2Link></div>}</div>;}
 const GT_ST2_FF="'Inter', sans-serif";
-const GT_ST2_LOGOS={skyjo:SkyjoLogo,flip7:Flip7Logo,"jass-differenzler":DifferenzlerLogo,schieber:SchieberLogo,yatzy:YatzyLogo,tutto:TuttoLogo,wizard:WizardLogo,minigolf:MinigolfLogo,freeplay:FreeplayLogo,darts:DartsLogo,cricket:CricketLogo,hiscore:HiScoreLogo,splitscore:SplitScoreLogo,shanghai:ShanghaiLogo,tabu:TabuLogo,headsup:HeadsUpLogo,fivesec:FiveSecLogo,impostor:ImpostorLogo,werwolf:WerewolfLogo,mafia:MafiaLogo,mostlikely:MostLikelyLogo,phase10:Phase10Logo,romme:RommeLogo,traitor:TraitorLogo};
+const GT_ST2_LOGOS={slf:SlfLogo,skyjo:SkyjoLogo,flip7:Flip7Logo,"jass-differenzler":DifferenzlerLogo,schieber:SchieberLogo,molotow:MolotowLogo,yatzy:YatzyLogo,tutto:TuttoLogo,wizard:WizardLogo,minigolf:MinigolfLogo,freeplay:FreeplayLogo,darts:DartsLogo,cricket:CricketLogo,hiscore:HiScoreLogo,splitscore:SplitScoreLogo,shanghai:ShanghaiLogo,tabu:TabuLogo,headsup:HeadsUpLogo,fivesec:FiveSecLogo,impostor:ImpostorLogo,werwolf:WerewolfLogo,mafia:MafiaLogo,mostlikely:MostLikelyLogo,phase10:Phase10Logo,romme:RommeLogo,traitor:TraitorLogo};
 function gtSt2Join(a,t){const and=t("st2And");return a.length<2?a.join(""):a.slice(0,-1).join(", ")+" "+and+" "+a[a.length-1];}
 function GtSt2GameMark({game,theme,size}){const S=size||34;const Lg=GT_ST2_LOGOS[game];const c=(typeof STATS_GAME_COLORS!=="undefined"&&STATS_GAME_COLORS[game])||"#8E96A6";return Lg?<Lg color={c} theme={theme} size={S}/>:<span aria-hidden style={{width:S,height:S,display:"inline-flex",alignItems:"center",justifyContent:"center",flexShrink:0}}><span style={{width:12,height:12,borderRadius:"50%",background:c}}/></span>;}
 function GtSt2Sec({tk,children,id}){return <h2 id={id} className="gtSt2-sec" style={{margin:"22px 2px 8px",fontSize:".8125rem",fontWeight:600,color:tk.muted,fontFamily:GT_ST2_FF,letterSpacing:".02em"}}>{children}</h2>;}

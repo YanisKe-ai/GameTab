@@ -33,7 +33,7 @@ function gtPodSeenList(){try{const v=JSON.parse(localStorage.getItem("gt_podiumS
 function gtPodSeenAdd(id){try{const l=gtPodSeenList().filter(x=>x!==id);l.push(id);localStorage.setItem("gt_podiumSeen",JSON.stringify(l.slice(-50)));}catch(e){}}
 /* gt_podiumSeen: Kennungen bereits gefeierter Partien. Wiederoeffnen einer beendeten Partie zeigt kein Podest und keine Feier (Konfetti, Ton, Haptik). gtPodGame: Spiel, dessen Podest gerade gemountet ist; gtPodMark: Zeitpunkt der ersten Feier in dieser Sitzung */
 /* Spiele mit eigenem Weg zurueck zum Podest (Leiste oder Knopf): dort bleibt das Podest beim Wiederoeffnen zu. Alle anderen oeffnen es wie bisher, aber sofort fertig und ohne Feier */
-const GT_POD_BACK=new Set(["freeplay","yatzy","tutto","schieber","hiscore","shanghai","splitscore","darts","cricket","minigolf","jass-differenzler","wizard"]);
+const GT_POD_BACK=new Set(["freeplay","yatzy","tutto","schieber","hiscore","shanghai","splitscore","darts","cricket","minigolf","jass-differenzler","wizard","molotow"]);
 let gtPodGame=null;const gtPodMark={};
 function gtPodRepeat(){try{const g=gtPodGame;if(!g)return false;const mid=GT_MATCH_IDS[g];if(!mid)return false;if(!gtPodSeenList().includes(mid))return false;return performance.now()-(gtPodMark[mid]===undefined?-1e9:gtPodMark[mid])>1500;}catch(e){return false;}}
 function PodiumOverlay(props){const{open,onClose,gameId}=props;const mt=useRef(performance.now());let mid=null;try{mid=GT_MATCH_IDS[gameId]||null;}catch(e){mid=null;}

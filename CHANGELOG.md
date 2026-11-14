@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.14-18 (14.11.2026 21:52)
+- Startseite: Einstellungen-Knopf etwas tiefer
+
 ## 2026.11.14-17 (14.11.2026 21:40)
 - Logo: GAMETAB in Bagel Fat One mit Drache
 

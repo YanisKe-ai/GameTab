@@ -11,6 +11,7 @@ Live: https://yaniske-ai.github.io/GameTab/ (Repo-Name auf GitHub prüfen: `Game
 - Wurzel-`index.html` ist ALT und wird nicht mehr gepflegt. Nie grosse Dateiteile ausgeben (translations.js, Inhaltslisten sind gross), gezielt grep/Slices.
 - Grosse Edits per Python-Skript mit `assert text.count(alt) == 1`, kleine mit dem Edit-Tool.
 - Dark und Light dürfen nie regressieren. Jede Design-Änderung in allen 3 Themes prüfen.
+- Spiel-Icons NUR in Spiellisten (Schreibunterlagen, Partyspiele) und auf der Startseite. Nie im Titel einer Spielseite: Spieltitel ist immer der grosse Schriftzug (gt-wm) ohne Icon, in allen Modi.
 
 ## Architektur
 - Quelle: `web/src/**` (ES-Module, JSX in `.js`-Dateien, klassische Runtime, jede JSX-Datei braucht `React` im Scope). Vite 8 baut `docs/index.html` als EINE Datei (vite-plugin-singlefile), Pages liefert `/docs` aus. Config `web/vite.config.mjs` (Plugin `gt-jsx-in-js`, Precache-Liste für sw.js). Statische Dateien (sw.js, version.json, fonts/, icons/, img/, Rechtstexte) liegen in der Wurzel und werden per `web/scripts/copy-public.mjs` kopiert.

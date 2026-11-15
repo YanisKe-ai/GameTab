@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.15-18 (15.11.2026 17:38)
+- Nocturne-Startseite: Stift violett, Maske gelb wie GameTab, Pfeile grau
+
 ## 2026.11.15-17 (15.11.2026 17:27)
 - Ryū: Jass-Auswahl, Coiffeur, Schieber, Schieber-Turnier und Molotow im neuen Stil
 

@@ -267,6 +267,11 @@ const JD_PK_CSS=`
 .jdp-pk .jdp-body{padding-top:10px}
 .jdp-pk .gt-gamehead h1{color:#1A1716!important;-webkit-text-fill-color:#1A1716!important;paint-order:normal!important;-webkit-text-stroke:0!important;letter-spacing:0!important;font-family:'Bagel Fat One','Bowlby One',sans-serif!important;font-weight:400!important;font-size:28px!important;display:inline-block;overflow:visible!important;text-overflow:clip!important;transform:rotate(-2deg);padding:0 .1em;text-shadow:3.0px 0.0px 0 #F3EAD3,2.9px 0.8px 0 #F3EAD3,2.6px 1.5px 0 #F3EAD3,2.1px 2.1px 0 #F3EAD3,1.5px 2.6px 0 #F3EAD3,0.8px 2.9px 0 #F3EAD3,0.0px 3.0px 0 #F3EAD3,-0.8px 2.9px 0 #F3EAD3,-1.5px 2.6px 0 #F3EAD3,-2.1px 2.1px 0 #F3EAD3,-2.6px 1.5px 0 #F3EAD3,-2.9px 0.8px 0 #F3EAD3,-3.0px 0.0px 0 #F3EAD3,-2.9px -0.8px 0 #F3EAD3,-2.6px -1.5px 0 #F3EAD3,-2.1px -2.1px 0 #F3EAD3,-1.5px -2.6px 0 #F3EAD3,-0.8px -2.9px 0 #F3EAD3,-0.0px -3.0px 0 #F3EAD3,0.8px -2.9px 0 #F3EAD3,1.5px -2.6px 0 #F3EAD3,2.1px -2.1px 0 #F3EAD3,2.6px -1.5px 0 #F3EAD3,2.9px -0.8px 0 #F3EAD3,4px 4px 0 #1A1716,5px 5px 0 #1A1716,6px 6px 0 #1A1716!important}
 .jdp-pk .gt-gamehead{padding-bottom:6px}
+.jdp-pk .gt-gamehead>div:nth-of-type(2){justify-content:center!important;margin-top:14px}
+.jdp-pk .gt-gamehead>div:nth-of-type(2)>span:first-child{display:none!important}
+.jdp-pk .gt-gamehead>div:nth-of-type(2)>div{text-align:center;align-items:center}
+.jdp-pk .gt-gamehead>div:nth-of-type(2)>div>div{display:none!important}
+html[data-gt-skin="plakat"] .jdp-pk.jdp-pk .gt-gamehead h1:not(.gt-wm){font-size:40px!important;transform:rotate(-3deg)}
 .jdp-pk .jdp-tl .l1,.jdp-pk .jdp-tv .l1{height:18px;font-size:15px}
 .jdp-pk .jdp-tl .l2,.jdp-pk .jdp-tv .l2{height:26px;font-size:22px}
 .jdp-pk .jdp-tl .l2{font-size:13px}

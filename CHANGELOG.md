@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.15-19 (15.11.2026 17:50)
+- Nocturne-Startseite: Kacheln höher, Suche und Alle Spiele gleichmässig verteilt. Ryū-Coiffeur: Titel mittig ohne Icon
+
 ## 2026.11.15-18 (15.11.2026 17:38)
 - Nocturne-Startseite: Stift violett, Maske gelb wie GameTab, Pfeile grau
 

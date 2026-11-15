@@ -73,6 +73,49 @@ function GtHeroMark({ theme, width, className, style, markRef }) {
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit).catch(() => {});
     return () => { tms.forEach(clearTimeout); if (ro) ro.disconnect(); window.removeEventListener("resize", fit); page.style.removeProperty("--pk-tshift"); };
   }, []);
+  // Nocturne-Startseite (Handy): Kacheln etwas höher; Suche und «Alle Spiele» gleichmässig zwischen Kacheln und Tippkarte.
+  React.useEffect(() => {
+    if (theme !== "dark" || isPlakat()) return undefined;
+    const root = document.documentElement;
+    if (root.classList.contains("gt-laptopmode") || root.hasAttribute("data-phone-landscape")) return undefined;
+    const page = document.querySelector(".gtL-start");
+    if (!page) return undefined;
+    const UP = 16;
+    const els = () => ({
+      tiles: [page.querySelector('[data-onboard="scorepads-tile"]'), page.querySelector('[data-onboard="party-tile"]')],
+      party: page.querySelector('[data-onboard="party-tile"] .gtL-tile'),
+      search: page.querySelector('[data-onboard="search"]'),
+      show: page.querySelector(".gtL-showcase"),
+      tip: page.querySelector(".gtL-tipcard"),
+      resume: page.querySelector(".gt-resume"),
+    });
+    const set = (el, y) => { if (el) el.style.translate = y ? "0 " + y + "px" : ""; };
+    const fit = () => {
+      try {
+        const e = els();
+        if (!e.party || !e.search || !e.show || !e.tip || e.tiles.some((x) => !x)) return;
+        e.tiles.forEach((x) => set(x, -UP));
+        if (e.resume) { set(e.search, 0); set(e.show, 0); return; }
+        // sichtbare Lage ohne eigene Verschiebung (Einblend-Animationen sind dann fertig)
+        const tr = (el) => { const v = parseFloat(String(el.style.translate || "").split(" ")[1]); return isNaN(v) ? 0 : v; };
+        const top = (el) => el.getBoundingClientRect().top - tr(el);
+        const pr = e.party.getBoundingClientRect();
+        const A = pr.bottom - tr(e.tiles[1]) - UP;
+        const s0 = top(e.search), h = e.search.getBoundingClientRect().height;
+        const l0 = top(e.show), H = e.show.getBoundingClientRect().height;
+        const T = e.tip.getBoundingClientRect().top - tr(e.tip);
+        const g = (T - A - h - H) / 3;
+        if (g < 6) { set(e.search, 0); set(e.show, 0); return; }
+        set(e.search, Math.round(A + g - s0));
+        set(e.show, Math.round(A + g + h + g - l0));
+      } catch (err) { /* nur Optik */ }
+    };
+    fit();
+    const tms = [150, 500, 1200].map((ms) => setTimeout(fit, ms));
+    window.addEventListener("resize", fit);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit).catch(() => {});
+    return () => { tms.forEach(clearTimeout); window.removeEventListener("resize", fit); const e = els(); e.tiles.forEach((x) => set(x, 0)); set(e.search, 0); set(e.show, 0); };
+  }, [theme]);
   if (isPlakat()) {
     return (
       <div ref={markRef} className={"gt-hero-mark gt-hero-mark-pk" + (className ? " " + className : "")} style={{ "--hm-w": width || "330px", ...style }}>

@@ -59,7 +59,7 @@ import { pkPage } from "../../shared/plakat/kit.js";
 .gtL-content .fs-tile span:last-child,[data-phone-landscape] .fs-tile span:last-child{font-size:24px !important}
 .gtL-content .fs-sb>button,[data-phone-landscape] .fs-sb>button{order:0}
 [data-phone-landscape] .fs-star{margin-block:0;gap:8px}
-`;const FS_BG="#FF9640",FS_INK="#141414",FS_PAPER="#FFFDF7",FS_CREAM="#F4EAD5",FS_PKF="'Bagel Fat One','Bowlby One',sans-serif";
+`;const FS_BG="#E4312B",FS_INK="#141414",FS_PAPER="#FFFDF7",FS_CREAM="#F4EAD5",FS_PKF="'Bagel Fat One','Bowlby One',sans-serif";
 function fsPk(theme){return theme==="light"&&isPlakat();}
 function fsTk(theme){const k=fiveSecTokens(theme);if(!fsPk(theme))return k;return{...k,bg:FS_BG,bg2:FS_BG,card:FS_PAPER,ink:FS_INK,muted:FS_INK,orange:FS_INK,blue:FS_INK,green:FS_INK,border:FS_INK,btnFrom:FS_INK,btnTo:FS_INK,onAccent:FS_PAPER,blueFrom:FS_INK,blueTo:FS_INK,onBlue:FS_PAPER};}
 const FS_PK_CSS=`

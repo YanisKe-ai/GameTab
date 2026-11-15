@@ -62,7 +62,7 @@ function DartsPlay({state,setState,tk,t,onConfirmTurn,onUndoTurn,onNewGame,onEdi
 </div></div></div>;}
 // Modus Plakat (nur unter html[data-gt-skin="plakat"], Rest unveraendert): Darts rot #C8102E, Creme #F4EAD5, Papier, harte Schatten.
 const DT_PK_CSS=(()=>{const S='html[data-gt-skin="plakat"] .dl-shell';const F="'Bagel Fat One','Bowlby One',sans-serif";return `
-${S}{--pk-bg:#C8102E;font-family:'Inter',sans-serif}
+${S}{--pk-bg:#E4312B;font-family:'Inter',sans-serif}
 ${S} .gt-wm{color:#F4EAD5!important;white-space:nowrap!important;hyphens:none!important;word-break:keep-all!important}
 ${S} .gt-su-label{color:#F4EAD5!important}
 ${S} .gt-su-title,${S} .gt-su-h{color:#F4EAD5!important}

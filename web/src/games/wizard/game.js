@@ -171,17 +171,17 @@ const WIZARD_GOLD_DARK="#D4AF5A";
 const WIZARD_PARCH_DARK="#EFE6D2";
 const WZ_ROMAN=["I","II","III","IV","V","VI","VII","VIII"];
 const WZ_PK_CSS=`
-.gtL-shellpage:has(.wz-pk),.gtL-shellpage.wz-pk{--pk-bg:#3A2A6B}
+.gtL-shellpage:has(.wz-pk),.gtL-shellpage.wz-pk{--pk-bg:#E4312B}
 .wz-pk{--pkf:'Bagel Fat One','Bowlby One',sans-serif}
-.wz-pk .gt-wm{color:#E0BA72!important;font-size:clamp(34px,12vw,48px)!important;white-space:nowrap!important;word-break:keep-all!important}
+.wz-pk .gt-wm{color:#F3EAD3!important;font-size:clamp(34px,12vw,48px)!important;white-space:nowrap!important;word-break:keep-all!important}
 .wz-pk .gt-su-label,.wz-pk .wz-lbl{color:#F4EAD5!important;font-family:var(--pkf);font-weight:400;letter-spacing:.06em}
 .wz-pk .wz-info{color:#F4EAD5}
 .wz-pk .wz-chip{outline:2.5px solid #141414;outline-offset:-2.5px;background:#FFFDF7;color:#141414;font-family:var(--pkf);font-weight:400;box-shadow:0 3px 0 #141414;}
-.wz-pk .wz-chip.on{background:#E0BA72;color:#141414}
+.wz-pk .wz-chip.on{background:#1A1716;color:#F3EAD3}
 .wz-pk .wz-serif,.wz-pk .wz-side b,.wz-pk .wz-side .n,.wz-pk .wz-mid b,.wz-pk .wz-tot,.wz-pk .wz-pl,.wz-pk .wz-sheet-h b,.wz-pk .wz-rd,.wz-pk .wz-cell b,.wz-pk .wz-prompt b,.wz-pk .wz-ed-h b,.wz-pk .wz-tab b,.wz-pk .wz-win{font-family:var(--pkf);font-weight:400}
 .wz-pk .wz-side b,.wz-pk .wz-mid b{-webkit-text-stroke:.07em #141414;paint-order:stroke fill;text-shadow:.04em .06em 0 #141414}
 .wz-pk .wz-side span,.wz-pk .wz-mid span,.wz-pk .wz-infoline,.wz-pk .wz-cap{color:#F4EAD5}
-.wz-pk .wz-side .n,.wz-pk .wz-infoline .n,.wz-pk .wz-infoline .k{color:#E0BA72}
+.wz-pk .wz-side .n,.wz-pk .wz-infoline .n,.wz-pk .wz-infoline .k{color:#E4312B}
 .wz-pk .wz-seg{stroke:#141414;stroke-width:1.5px}
 .wz-pk .wz-seg.cur{filter:none}
 .wz-pk .wz-sum{background:#141414;color:#F4EAD5;clip-path:polygon(0 0,100% 0,97% 50%,100% 100%,0 100%,3% 50%);padding:4px 24px;width:fit-content;max-width:100%;margin:2px auto 4px;transform:rotate(-1.5deg);font-family:var(--pkf);font-size:13px;letter-spacing:.03em}
@@ -189,14 +189,14 @@ const WZ_PK_CSS=`
 .wz-pk .wz-rank{gap:6px}
 .wz-pk .wz-row,.wz-pk .wz-dockbox,.wz-pk .wz-editor,.wz-pk .wz-scroll{--wz-tx:#141414;--wz-mu:#4A4236;--wz-gold:#141414;--wz-soft:#141414;--wz-line:#141414;--wz-open:#EDE1BE;--wz-on:#141414;--wz-card:#FFFDF7;--wz-bg:#FFFDF7}
 .wz-pk .wz-row{background:#FFFDF7;outline:2.5px solid #141414;outline-offset:-2.5px;box-shadow:0 3px 0 #141414;border-radius:16px}
-.wz-pk .wz-row.act{background:#E0BA72}
+.wz-pk .wz-row.act{background:#E4312B}
 .wz-pk .wz-row,.wz-pk .wz-dockbox,.wz-pk .wz-editor,.wz-pk .wz-scroll{color:#141414}
 .wz-pk .gt-su-add{background:#FFFDF7!important;color:#141414!important;font-family:var(--pkf);font-weight:400;box-shadow:0 3px 0 #141414}
 .wz-pk .wz-nm{font-weight:600;color:#141414}
 .wz-pk .wz-deal{outline:2px solid #141414;outline-offset:-2px;background:#141414;color:#F4EAD5}
 .wz-pk .wz-c{outline:2px solid #141414;outline-offset:-2px;background:transparent;color:#141414;font-family:var(--pkf);font-weight:400}
 .wz-pk .wz-c.on{outline:2.5px solid #141414;outline-offset:-2.5px;box-shadow:0 0 0 3px #F4EAD5;background:#FFFDF7}
-.wz-pk .wz-c.fill{background:#3A2A6B;border-color:#141414;color:#F4EAD5}
+.wz-pk .wz-c.fill{background:#1A1716;border-color:#141414;color:#F4EAD5}
 .wz-pk .wz-c.ring{border-color:#141414;background:#FFFDF7;color:#141414}
 .wz-pk .wz-tot.lead{color:#141414}
 .wz-pk .wz-dockbox{background:#FFFDF7;outline:2.5px solid #141414;outline-offset:-2.5px;box-shadow:0 4px 0 #141414;border-radius:20px}
@@ -206,35 +206,35 @@ const WZ_PK_CSS=`
 .wz-pk .wz-n{outline:2.5px solid #141414;outline-offset:-2.5px;background:#FFFDF7;color:#141414;font-family:var(--pkf);font-weight:400;box-shadow:0 3px 0 #141414;}
 .wz-pk .wz-n:active{transform:translateY(2px);box-shadow:0 1px 0 #141414;background:#EDE1BE}
 .wz-pk .wz-n:disabled{opacity:.35;border-color:#141414}
-.wz-pk .wz-n.sel{background:#E0BA72;color:#141414}
-.wz-pk .wz-cta{position:relative;overflow:hidden;outline:2.5px solid #141414;outline-offset:-2.5px;background:#E0BA72;color:#141414;box-shadow:0 6px 0 #141414;font-family:var(--pkf);font-weight:400;font-size:17px;}
+.wz-pk .wz-n.sel{background:#1A1716;color:#F3EAD3}
+.wz-pk .wz-cta{position:relative;overflow:hidden;outline:2.5px solid #141414;outline-offset:-2.5px;background:#1A1716;color:#F3EAD3;box-shadow:0 6px 0 #141414;font-family:var(--pkf);font-weight:400;font-size:17px;}
 .wz-pk .wz-cta::after{content:"";position:absolute;top:0;bottom:0;left:0;width:35%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.42),transparent);animation:pk-shine 3.2s ease-in-out infinite;pointer-events:none}
 .wz-pk .wz-cta:active{transform:translateY(3px);box-shadow:0 2px 0 #141414}
-.wz-pk .wz-win{background:#E0BA72;outline:2.5px solid #141414;outline-offset:-2.5px;color:#141414;box-shadow:0 3px 0 #141414}
+.wz-pk .wz-win{background:#E4312B;outline:2.5px solid #141414;outline-offset:-2.5px;color:#141414;box-shadow:0 3px 0 #141414}
 .wz-pk .wz-link{color:#141414;font-family:var(--pkf);font-weight:400}
 .wz-pk .wz-x{background:#FFFDF7;outline:2.5px solid #141414;outline-offset:-2.5px;color:#141414;box-shadow:0 3px 0 #141414}
-.wz-pk .wz-sheet{--wz-bg:#3A2A6B;background:#3A2A6B}
-.wz-pk .wz-sheet-h b{color:#E0BA72}
+.wz-pk .wz-sheet{--wz-bg:#E4312B;background:#E4312B}
+.wz-pk .wz-sheet-h b{color:#E4312B}
 .wz-pk .wz-scroll{background:#FFFDF7;outline:2.5px solid #141414;outline-offset:-2.5px;box-shadow:0 4px 0 #141414;border-radius:18px;color:#141414}
-.wz-pk .wz-th{background:#E0BA72;color:#141414;border-bottom:2.5px solid #141414;font-family:var(--pkf);font-weight:400}
+.wz-pk .wz-th{background:#1A1716;color:#F3EAD3;border-bottom:2.5px solid #141414;font-family:var(--pkf);font-weight:400}
 .wz-pk .wz-th.corner{border-right:2.5px solid #141414}
 .wz-pk .wz-rd{background:#EDE1BE;color:#141414;border-bottom:1.5px solid #141414;border-right:2.5px solid #141414}
-.wz-pk .wz-rd.cur{background:#E0BA72}
+.wz-pk .wz-rd.cur{background:#E4312B}
 .wz-pk .wz-cell{border-bottom:1.5px solid rgba(20,20,20,.35);border-left:1.5px solid rgba(20,20,20,.35);color:#141414}
 .wz-pk .wz-cell small{color:#4A4236}
 .wz-pk .wz-cell.cur{background:#F6E7B8}
-.wz-pk .wz-cell.sel{background:#E0BA72;box-shadow:inset 0 0 0 2.5px #141414}
+.wz-pk .wz-cell.sel{background:#E4312B;box-shadow:inset 0 0 0 2.5px #141414}
 .wz-pk .wz-editor{background:#FFFDF7;border-top:2.5px solid #141414;box-shadow:0 -6px 0 #141414;border-radius:20px 20px 0 0}
 .wz-pk .wz-tab{outline:2.5px solid #141414;outline-offset:-2.5px;background:#FFFDF7;color:#141414;box-shadow:0 3px 0 #141414;}
-.wz-pk .wz-tab.on{background:#E0BA72;color:#141414}
+.wz-pk .wz-tab.on{background:#1A1716;color:#F3EAD3}
 .gtL-content .wz-pk .wz-editor{outline:2.5px solid #141414;outline-offset:-2.5px;border-radius:20px;box-shadow:0 4px 0 #141414}
 @media (max-height:700px){:root:not(.gt-laptopmode) .wz-pk .wz-sum{display:none}}
 @media (prefers-reduced-motion:reduce){.wz-pk .wz-cta::after{animation:none}}
 `;
-function wzTk(theme,pk){if(pk)return{bg:pkPage("#3A2A6B").background,bgSolid:"#3A2A6B",gold:"#E0BA72",hi:"#F4EAD5",seg:"#E0BA72",open:"rgba(244,234,213,0.24)",tx:"#F4EAD5",mu:"#EFE6CF",line:"#141414",soft:"rgba(244,234,213,0.6)",card:"#FFFDF7",rowa:"#E0BA72",on:"#141414",cardSolid:"#FFFDF7",borderSolid:"#141414"};if(theme==="light")return{bg:"linear-gradient(180deg,#F6F7FD 0%,#E9ECF7 100%)",bgSolid:"#EEF0F9",gold:"#7A5A12",hi:"#D9A72E",seg:"#B8862B",open:"rgba(122,90,18,0.16)",tx:"#1E1B4B",mu:"#4A4768",line:"rgba(122,90,18,0.5)",soft:"rgba(30,27,75,0.2)",card:"rgba(255,255,255,0.85)",rowa:"rgba(122,90,18,0.12)",on:"#FFFFFF",cardSolid:"#FFFFFF",borderSolid:"#B9B5D0"};if(theme==="noir")return{bg:"#0A0A0A",bgSolid:"#0A0A0A",gold:"#C4C4C4",hi:"#F2F2F2",seg:"#9A9A9A",open:"rgba(255,255,255,0.14)",tx:"#EDEDED",mu:"#A5A5A5",line:"rgba(255,255,255,0.3)",soft:"rgba(255,255,255,0.16)",card:"rgba(255,255,255,0.05)",rowa:"rgba(255,255,255,0.1)",on:"#111111",cardSolid:"#1E1E1E",borderSolid:"#454545"};return{bg:"radial-gradient(ellipse at 50% -8%, #1B1E52 0%, #0E1030 55%, #070818 100%)",bgSolid:"#0E1030",gold:"#D9B46A",hi:"#F3DFA9",seg:"#D9B46A",open:"rgba(217,180,106,0.2)",tx:"#ECE6D6",mu:"#B8B0C8",line:"rgba(217,180,106,0.34)",soft:"rgba(236,230,214,0.14)",card:"rgba(255,255,255,0.05)",rowa:"rgba(217,180,106,0.13)",on:"#1A1230",cardSolid:"#171A45",borderSolid:"#3A3B6B"};}
+function wzTk(theme,pk){if(pk)return{bg:pkPage().background,bgSolid:"#E4312B",gold:"#1A1716",hi:"#F4EAD5",seg:"#1A1716",open:"rgba(244,234,213,0.24)",tx:"#F4EAD5",mu:"#EFE6CF",line:"#141414",soft:"rgba(244,234,213,0.6)",card:"#FFFDF7",rowa:"#E4312B",on:"#F3EAD3",cardSolid:"#FFFDF7",borderSolid:"#141414"};if(theme==="light")return{bg:"linear-gradient(180deg,#F6F7FD 0%,#E9ECF7 100%)",bgSolid:"#EEF0F9",gold:"#7A5A12",hi:"#D9A72E",seg:"#B8862B",open:"rgba(122,90,18,0.16)",tx:"#1E1B4B",mu:"#4A4768",line:"rgba(122,90,18,0.5)",soft:"rgba(30,27,75,0.2)",card:"rgba(255,255,255,0.85)",rowa:"rgba(122,90,18,0.12)",on:"#FFFFFF",cardSolid:"#FFFFFF",borderSolid:"#B9B5D0"};if(theme==="noir")return{bg:"#0A0A0A",bgSolid:"#0A0A0A",gold:"#C4C4C4",hi:"#F2F2F2",seg:"#9A9A9A",open:"rgba(255,255,255,0.14)",tx:"#EDEDED",mu:"#A5A5A5",line:"rgba(255,255,255,0.3)",soft:"rgba(255,255,255,0.16)",card:"rgba(255,255,255,0.05)",rowa:"rgba(255,255,255,0.1)",on:"#111111",cardSolid:"#1E1E1E",borderSolid:"#454545"};return{bg:"radial-gradient(ellipse at 50% -8%, #1B1E52 0%, #0E1030 55%, #070818 100%)",bgSolid:"#0E1030",gold:"#D9B46A",hi:"#F3DFA9",seg:"#D9B46A",open:"rgba(217,180,106,0.2)",tx:"#ECE6D6",mu:"#B8B0C8",line:"rgba(217,180,106,0.34)",soft:"rgba(236,230,214,0.14)",card:"rgba(255,255,255,0.05)",rowa:"rgba(217,180,106,0.13)",on:"#1A1230",cardSolid:"#171A45",borderSolid:"#3A3B6B"};}
 function wzVars(tk){return{"--wz-gold":tk.gold,"--wz-hi":tk.hi,"--wz-tx":tk.tx,"--wz-mu":tk.mu,"--wz-line":tk.line,"--wz-soft":tk.soft,"--wz-card":tk.card,"--wz-rowa":tk.rowa,"--wz-on":tk.on,"--wz-bg":tk.bgSolid,"--wz-seg":tk.seg,"--wz-open":tk.open};}
-function wzShell(theme,pk){const tk=wzTk(theme,pk);return{minHeight:"100vh",boxSizing:"border-box",background:tk.bg,padding:"20px 12px 32px",...wzVars(tk),...(pk?{"--pk-bg":"#3A2A6B"}:{})};}
-function wzCompat(theme,pk){if(pk){const b=wzTk(theme,true);return{...wizardTokens(theme),gold:"#E0BA72",parch:"#141414",ink:"#141414",muted:"#4A4236",mutedLight:"#EFE6CF",card:b.cardSolid,border:b.borderSolid,groupLine:b.borderSolid,onAccent:"#141414"};}const tk=wzTk(theme);return{...wizardTokens(theme),gold:tk.gold,parch:tk.tx,ink:tk.tx,muted:tk.mu,mutedLight:tk.mu,card:tk.cardSolid,border:tk.borderSolid,groupLine:tk.borderSolid,onAccent:tk.on};}
+function wzShell(theme,pk){const tk=wzTk(theme,pk);return{minHeight:"100vh",boxSizing:"border-box",background:tk.bg,padding:"20px 12px 32px",...wzVars(tk),...(pk?{"--pk-bg":"#E4312B"}:{})};}
+function wzCompat(theme,pk){if(pk){const b=wzTk(theme,true);return{...wizardTokens(theme),gold:"#1A1716",parch:"#141414",ink:"#141414",muted:"#4A4236",mutedLight:"#EFE6CF",card:b.cardSolid,border:b.borderSolid,groupLine:b.borderSolid,onAccent:"#141414"};}const tk=wzTk(theme);return{...wizardTokens(theme),gold:tk.gold,parch:tk.tx,ink:tk.tx,muted:tk.mu,mutedLight:tk.mu,card:tk.cardSolid,border:tk.borderSolid,groupLine:tk.borderSolid,onAccent:tk.on};}
 function wzCell(rounds,r,pid){return(rounds[r]&&rounds[r][pid])||{bid:null,tricks:null};}
 function wzStartIdx(players,startId){const i=players.findIndex(p=>p.id===startId);return i<0?0:i;}
 function wzRound(players,rounds,sIdx,r){const n=players.length;const f=(sIdx+r-1)%n;const order=players.map((_,k)=>players[(f+k)%n]);const cells=order.map(p=>wzCell(rounds,r,p.id));const bidsIn=cells.filter(c=>c.bid!==null).length;const phase=bidsIn<n?"bid":(cells.some(c=>c.tricks===null)?"tricks":"done");const key=phase==="bid"?"bid":"tricks";const ni=cells.findIndex(c=>c[key]===null);return{order,phase,next:ni<0?null:order[ni],bidSum:cells.reduce((s,c)=>s+(c.bid||0),0),trickSum:cells.reduce((s,c)=>s+(c.tricks||0),0),trickLeft:cells.filter(c=>c.tricks===null).length,cards:r,dealer:players[(f-1+n)%n]};}
@@ -246,13 +246,13 @@ const ticks=[];for(let k=0;k<60;k++){const a=k/60*Math.PI*2;const big=k%5===0;co
 return <div className="wz-wheel"><svg viewBox="0 0 220 220" aria-hidden="true"><circle cx="110" cy="110" r="76" fill="none" stroke="var(--wz-gold)" strokeOpacity="0.35" strokeWidth="0.8"/><circle cx="110" cy="110" r="72" fill="none" stroke="var(--wz-gold)" strokeOpacity="0.18" strokeWidth="0.6" strokeDasharray="1 4"/>{ticks}{segs}</svg><div className="wz-mid"><b className="wz-serif">{label}</b><span>{sub}</span></div></div>;}
 function WizardTopBar({subtitle,onBack,theme,t,onHome,rulesText,onEndGame}){const pk=usePlakat();const wt=wzCompat(theme,pk);return <GameHeader title={t("gameWizard")} titleFont="'Fraunces', Georgia, serif" subtitle={subtitle} onBack={onBack} backLabel={t("back")} tk={pk?{...wt,ink:wt.mutedLight,muted:"#EFE6CF"}:{...wt,ink:wt.mutedLight}} accent={wt.gold} icon={<WizardLogo theme={theme}/>} onHome={onHome} onEndGame={onEndGame} rulesText={rulesText}/>;}
 function WizardSetup({players,setPlayers,startId,setStartId,onStart,theme,t}){const pk=usePlakat();const wt=gtSoftTk(wzCompat(theme,pk),theme);
-const gtS=gtSkin(theme,wt,"wizard",{ink:wt.parch,acc:pk?"#E0BA72":wt.gold});
+const gtS=gtSkin(theme,wt,"wizard",{ink:wt.parch,acc:pk?"#1A1716":wt.gold});
 const rename=(idx,name)=>setPlayers(ps=>ps.map((p,i)=>i===idx?{...p,name}:p));
 const addPlayer=()=>setPlayers(ps=>{const nextId=ps.length?Math.max(...ps.map(p=>p.id))+1:1;return[...ps,{id:nextId,name:t("defaultPlayerName")(ps.length+1)}];});
 const removePlayer=idx=>setPlayers(ps=>ps.filter((_,i)=>i!==idx));
 const move=(idx,dir)=>setPlayers(ps=>{const next=[...ps];
 const target=idx+dir;if(target<0||target>=next.length)return ps;[next[idx],next[target]]=[next[target],next[idx]];return next;});
-const tooFew=players.length<3;const sIdx=wzStartIdx(players,startId);return <div className={"gt-ub-fill"+(pk?" wz-pk":"")}><div className="gtL-split gtL-split-setup"><div className="gtL-col-main" style={{gap:8}}><GroupPicker getNames={()=>players.map(p=>p.name)} setNames={names=>setPlayers(names.map((name,i)=>({id:i+1,name})))} t={t} tk={gtSkinTk(wt,gtS)} onStarter={nm=>{const q=players.find(x=>String(x.name||"").trim()===nm);if(q)setStartId(q.id);}}/><GtPlayerList players={players} onRename={rename} onRemove={removePlayer} onAdd={addPlayer} skin={gtS} t={t} onMove={move} minPlayers={3} maxPlayers={6} hues={wt.hues}/></div><div className="gtL-col-side" style={{gap:8}}><div className="wz-lbl">{t("wzFirstBidder")}</div><div className="wz-start" role="radiogroup" aria-label={t("wzFirstBidder")}>{players.map((p,i)=><button key={p.id} type="button" role="radio" aria-checked={i===sIdx} className={"wz-chip"+(i===sIdx?" on":"")} onClick={()=>setStartId(p.id)}>{p.name}</button>)}</div><div className="wz-info">{t("wzSetupInfo")(players.length,wizardRoundCount(Math.max(players.length,1)))}</div><GtStartBar onClick={onStart} disabled={tooFew} label={tooFew?t("wzNeedThree"):t("startGame")} skin={pk?{...gtS,fill:"#E0BA72",on:"#141414",fade:"#3A2A6B"}:gtS}/></div></div></div>;}
+const tooFew=players.length<3;const sIdx=wzStartIdx(players,startId);return <div className={"gt-ub-fill"+(pk?" wz-pk":"")}><div className="gtL-split gtL-split-setup"><div className="gtL-col-main" style={{gap:8}}><GroupPicker getNames={()=>players.map(p=>p.name)} setNames={names=>setPlayers(names.map((name,i)=>({id:i+1,name})))} t={t} tk={gtSkinTk(wt,gtS)} onStarter={nm=>{const q=players.find(x=>String(x.name||"").trim()===nm);if(q)setStartId(q.id);}}/><GtPlayerList players={players} onRename={rename} onRemove={removePlayer} onAdd={addPlayer} skin={gtS} t={t} onMove={move} minPlayers={3} maxPlayers={6} hues={wt.hues}/></div><div className="gtL-col-side" style={{gap:8}}><div className="wz-lbl">{t("wzFirstBidder")}</div><div className="wz-start" role="radiogroup" aria-label={t("wzFirstBidder")}>{players.map((p,i)=><button key={p.id} type="button" role="radio" aria-checked={i===sIdx} className={"wz-chip"+(i===sIdx?" on":"")} onClick={()=>setStartId(p.id)}>{p.name}</button>)}</div><div className="wz-info">{t("wzSetupInfo")(players.length,wizardRoundCount(Math.max(players.length,1)))}</div><GtStartBar onClick={onStart} disabled={tooFew} label={tooFew?t("wzNeedThree"):t("startGame")} skin={pk?{...gtS,fill:"#1A1716",on:"#F3EAD3",fade:"#E4312B"}:gtS}/></div></div></div>;}
 function WizardEditorPanel({editing,players,rounds,onSave,onClose,theme,t}){const[bid,setBid]=useState(null);const[tricks,setTricks]=useState(null);const[tab,setTab]=useState("bid");const eR=editing?editing.round:0,eP=editing?editing.playerId:0;useEffect(()=>{if(eR){const c=wzCell(rounds,eR,eP);setBid(c.bid);setTricks(c.tricks);setTab(c.bid===null?"bid":"tricks");}},[eR,eP]);if(!editing)return null;
 const player=players.find(p=>p.id===eP);const cards=eR;
 const sumOf=(useNew)=>players.reduce((s,p)=>{const c=p.id===eP?{tricks:useNew?tricks:wzCell(rounds,eR,p.id).tricks}:wzCell(rounds,eR,p.id);return s+(c.tricks||0);},0);

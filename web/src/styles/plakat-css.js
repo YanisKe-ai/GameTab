@@ -11,7 +11,7 @@ const PLAKAT_CSS = `
 ${P} body{background:${CREAM}}
 ${P} .gtL-shellpage::before{display:none!important}
 ${P} .gt-gamehead h1.gt-wm{display:block!important;width:100%!important;text-align:center!important}
-${P} ::selection{background:#F9C22E;color:${INK}}
+${P} ::selection{background:${INK};color:#F3EAD3}
 /* Ränder als Outline nach innen: sie nehmen keinen Platz, Aufbau bleibt wie in Hell */
 /* Titel-Schriftzüge der Spiele */
 ${P} .gt-wm{font-family:${FONT}!important;-webkit-text-stroke:.05em ${INK}!important;paint-order:stroke fill!important;text-shadow:.05em .065em 0 ${INK}!important;letter-spacing:0!important}
@@ -141,6 +141,8 @@ ${P} [data-pk-cat] .gtL-gamecard-status>span[aria-hidden]{background:${RED}!impo
 ${P} .gt-wm.gt-wm.gt-wm{display:block!important;width:100%!important;text-align:center!important;box-sizing:border-box}
 ${P} .gt-gamehead h1:not(.gt-wm){font-family:${FONT}!important;font-weight:400!important;text-transform:uppercase!important;color:${INK2}!important;-webkit-text-fill-color:${INK2}!important;-webkit-text-stroke:.05em #141414!important;paint-order:stroke fill!important;text-shadow:.05em .065em 0 #141414!important;letter-spacing:0!important;white-space:nowrap!important;word-break:keep-all!important;hyphens:none!important!important}
 ${P} :focus-visible{outline-color:#2D6BFF!important}
+/* Ryū: Seiten mit Körnung (pkPage().background ohne eigenes Blend) richtig einfärben */
+${P} [style*="feTurbulence"]{background-blend-mode:multiply}
 /* Statistik-Knopf Spielliste: Form F1 Gezackter Sticker (Ryū) */
 ${P} .gt-ryu-statsbtn{position:relative;display:block!important;box-sizing:border-box;width:auto!important;min-width:140px;height:44px!important;min-height:44px;margin:0 4px 0 0!important;padding:0 6px!important;border:0!important;background:none!important;border-radius:0!important;box-shadow:none!important;cursor:pointer;color:${INK2}!important;font-family:${FONT}!important;font-weight:400!important;font-size:15px!important;-webkit-tap-highlight-color:transparent;rotate:3deg;translate:0 4px;transition:transform .2s cubic-bezier(.34,1.56,.64,1)}
 ${P} .gt-ryu-statsbtn:active{transform:translateY(3px) scale(.98)}

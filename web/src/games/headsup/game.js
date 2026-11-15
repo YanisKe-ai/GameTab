@@ -23,7 +23,7 @@ import { LAPTOP_SU_CSS } from "../impostor/laptop-su.js";
 import { gtSelDefault } from "../s8/sel-default.js";
 import { isPlakat } from "../../themes/plakat.js";
 import { pkPage } from "../../shared/plakat/kit.js";
-/*@gt-body-begin*/const HU_BG="#6C7FE8",HU_INK="#141414",HU_PAPER="#FFFDF7",HU_CREAM="#F4EAD5",HU_PKF="'Bagel Fat One','Bowlby One',sans-serif";
+/*@gt-body-begin*/const HU_BG="#E4312B",HU_INK="#141414",HU_PAPER="#FFFDF7",HU_CREAM="#F4EAD5",HU_PKF="'Bagel Fat One','Bowlby One',sans-serif";
 function huPk(theme){return theme==="light"&&isPlakat();}
 function huTk(theme){const k=headsupTokens(theme);if(huPk(theme))return{...k,bg:HU_BG,bg2:HU_BG,card:HU_PAPER,ink:HU_INK,muted:HU_INK,orange:HU_INK,blue:HU_INK,green:HU_INK,border:HU_INK,btnFrom:HU_INK,btnTo:HU_INK,onAccent:HU_PAPER,okFrom:HU_INK,okTo:HU_INK,onOk:HU_PAPER};if(theme==="noir")return k;if(theme==="light")return{...k,orange:"#4453B8",blue:"#4453B8",btnFrom:"#4F5FCB",btnTo:"#3F4DB0",onAccent:"#FFFFFF"};return{...k,orange:"#6C7FE8",blue:"#6C7FE8",btnFrom:"#6C7FE8",btnTo:"#5A6CDA",onAccent:"#0B0E26"};}const HEADSUP_LANDSCAPE_CSS=`
 

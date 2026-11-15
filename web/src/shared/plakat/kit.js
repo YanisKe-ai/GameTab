@@ -14,8 +14,9 @@ function pkContrast(a, b) { const x = pkLum(a), y = pkLum(b); return (Math.max(x
 function pkOn(bg) { return pkContrast(bg, PK.ink) >= pkContrast(bg, PK.cream) ? PK.ink : PK.cream; }
 
 // Seitenhülle: Spielfarbe mit feinem Punktraster
+// Ryū: jede Spielseite rot mit Körnung (Entscheid Yanis 2026-11-15), die übergebene Spielfarbe wird nicht mehr verwendet
 function pkPage(bg, extra) {
-  return Object.assign({ "--pk-bg": bg, minHeight: "100vh", background: `radial-gradient(rgba(20,20,20,.10) 1.2px, transparent 1.4px) 0 0/14px 14px, ${bg}`, padding: "20px 12px 32px" }, extra || {});
+  return Object.assign({ minHeight: "100vh", padding: "20px 12px 32px" }, ryuPage(), extra || {});
 }
 // Karte: Papier, schwarzer Rand, harter Schatten
 function pkCard(bg, extra) {

@@ -161,13 +161,13 @@ function MgFlag({ mg, size = 44 }) {
   );
 }
 const MG_PK_CSS = `
-.mg-pk{--pkf:'Bagel Fat One','Bowlby One',sans-serif;--pk-bg:#3F8F42}
-.mg-pk .gt-wm{color:#F9C22E!important;font-size:clamp(34px,12vw,48px)!important;white-space:nowrap!important;word-break:keep-all!important}
+.mg-pk{--pkf:'Bagel Fat One','Bowlby One',sans-serif;--pk-bg:#E4312B}
+.mg-pk .gt-wm{color:#F3EAD3!important;font-size:clamp(34px,12vw,48px)!important;white-space:nowrap!important;word-break:keep-all!important}
 .mg-pk .gt-su-label{color:#141414!important}
 .mg-pk .gt-su-add{background:#FFFDF7!important;color:#141414!important;font-family:var(--pkf);font-weight:400;box-shadow:0 3px 0 #141414}
 .mg-pk .mg-seg{background:#FFFDF7!important;outline:2.5px solid #141414!important;outline-offset:-2.5px!important;box-shadow:0 4px 0 #141414;border-radius:18px!important}
 .mg-pk .mg-seg button{font-family:var(--pkf)!important;font-weight:400!important;color:#141414!important;border-radius:13px!important;box-shadow:none!important}
-.mg-pk .mg-seg button[aria-selected="true"]{background:#F9C22E!important}
+.mg-pk .mg-seg button[aria-selected="true"]{background:#E4312B!important}
 .mg-pk .mgBoard{border:6px solid #7A4E2A!important;outline:2.5px solid #141414;border-radius:18px!important;box-shadow:0 6px 0 #141414!important}
 .mg-pk .mgTile{box-shadow:inset 0 -3px 0 rgba(0,0,0,.13),0 0 0 2px #141414,0 3px 0 2px #141414}
 .mg-pk .mgNav{border:2px solid #F4EAD5!important}
@@ -176,27 +176,27 @@ const MG_PK_CSS = `
 .mg-pk .mgKeys{gap:6px}
 .mg-pk .mgKey{outline:2.5px solid #141414!important;outline-offset:-2.5px!important;background:#FFFDF7!important;color:#141414!important;box-shadow:0 3px 0 #141414;font-family:var(--pkf)!important;font-weight:400;border-radius:12px!important}
 .mg-pk .mgKey:active:not(:disabled){transform:translateY(2px)!important;box-shadow:0 1px 0 #141414}
-.mg-pk .mgKey[aria-pressed="true"]{background:#F9C22E!important}
+.mg-pk .mgKey[aria-pressed="true"]{background:#E4312B!important}
 .mg-pk .mgKey[data-mg-giveup="1"]{border-style:dashed!important}
 .mg-pk .mgKey span{color:#141414!important}
 .mg-pk #mg-status{color:#141414!important;font-family:var(--pkf)!important;font-weight:400!important}
 .mg-pk [data-mg-undo]{outline:2.5px solid #141414!important;outline-offset:-2.5px!important;background:#FFFDF7!important;color:#141414!important;box-shadow:0 4px 0 #141414;}
 .mg-pk [data-mg-main]{position:relative;overflow:hidden;outline:2.5px solid #141414!important;outline-offset:-2.5px!important;box-shadow:0 6px 0 #141414!important;font-family:var(--pkf)!important;font-weight:400!important;}
-.mg-pk [data-mg-main]:not(:disabled):not([aria-disabled="true"]){background:#F9C22E!important;color:#141414!important}
+.mg-pk [data-mg-main]:not(:disabled):not([aria-disabled="true"]){background:#1A1716!important;color:#F3EAD3!important}
 .mg-pk [data-mg-main]:disabled,.mg-pk [data-mg-main][aria-disabled="true"]{background:#FFFDF7!important;color:#4A4236!important;box-shadow:0 4px 0 #141414!important}
 .mg-pk [data-mg-main]:active:not(:disabled){transform:translateY(3px)!important;box-shadow:0 2px 0 #141414!important}
-.mg-pk .mg-banner{background:#F9C22E!important;color:#141414!important;outline:2.5px solid #141414;outline-offset:-2.5px;box-shadow:0 4px 0 #141414;font-family:var(--pkf)!important;font-weight:400!important}
+.mg-pk .mg-banner{background:#1A1716!important;color:#F3EAD3!important;outline:2.5px solid #141414;outline-offset:-2.5px;box-shadow:0 4px 0 #141414;font-family:var(--pkf)!important;font-weight:400!important}
 .mg-pk .mgTableWrap{background:#FFFDF7!important;outline:2.5px solid #141414!important;outline-offset:-2.5px!important;box-shadow:0 4px 0 #141414!important;border-radius:20px!important}
 .mg-pk .mgTableWrap th,.mg-pk .mgTableWrap td{border-color:rgba(20,20,20,.3)!important}
-.mg-pk .mgTableWrap thead th{border-bottom:2.5px solid #141414!important;font-family:var(--pkf)!important;font-weight:400!important;color:#141414!important;background:#F9C22E!important}
+.mg-pk .mgTableWrap thead th{border-bottom:2.5px solid #141414!important;font-family:var(--pkf)!important;font-weight:400!important;color:#141414!important;background:#E4312B!important}
 .mg-pk .mgTableWrap tbody th{font-family:var(--pkf)!important;font-weight:400!important}
 .mg-pk .mgTableWrap [data-mg-cell]{font-family:var(--pkf)!important;font-weight:400!important}
 .mg-pk .mg-editor{background:#FFFDF7!important;border-top:2.5px solid #141414!important;box-shadow:0 -6px 0 #141414!important}
 .mg-pk .mg-editor span{color:#141414!important;font-family:var(--pkf)!important;font-weight:400!important}
 .mg-pk .mg-editor .mg-edhint{color:#4A4236!important}
 .mg-pk .mg-editor button{outline:2.5px solid #141414!important;outline-offset:-2.5px!important;background:#FFFDF7!important;color:#141414!important;box-shadow:0 3px 0 #141414;font-family:var(--pkf)!important;font-weight:400!important;}
-.mg-pk .mg-editor button[aria-pressed="true"]{background:#F9C22E!important}
-.mg-pk .mg-editor div[style*="gap: 6px"]>button:last-child{background:#F9C22E!important}
+.mg-pk .mg-editor button[aria-pressed="true"]{background:#E4312B!important}
+.mg-pk .mg-editor div[style*="gap: 6px"]>button:last-child{background:#E4312B!important}
 .mg-pk .mg-editor div[style*="gap: 6px"]>button:last-child:disabled{background:#EDE1BE!important;opacity:.6}
 .mg-pk .mg-editor input{outline:2.5px solid #141414!important;outline-offset:-2.5px!important;background:#FFFDF7!important;color:#141414!important}
 @media (prefers-reduced-motion:reduce){.mg-pk [data-mg-main]::after{animation:none!important}}
@@ -211,9 +211,9 @@ function MinigolfTopBar({ subtitle, onBack, theme, t, onHome, rulesText, onEndGa
       onBack={onBack}
       backLabel={t("back")}
       tk={pk ? { ...mg, muted: "#141414" } : mg}
-      accent={pk ? "#F9C22E" : mg.accInk}
+      accent={pk ? "#1A1716" : mg.accInk}
       titleFont={MINIGOLF_FONT}
-      icon={<MinigolfLogo color={pk ? "#F9C22E" : mg.accInk} />}
+      icon={<MinigolfLogo color={pk ? "#1A1716" : mg.accInk} />}
       onHome={onHome}
       onEndGame={onEndGame}
       moreItems={moreItems}
@@ -225,7 +225,7 @@ function MinigolfTopBar({ subtitle, onBack, theme, t, onHome, rulesText, onEndGa
 function MinigolfSetup({ players, setPlayers, onStart, theme, t }) {
   const pk = usePlakat();
   const mg = gtSoftTk(minigolfTokens(theme), theme);
-  const gtS = gtSkin(theme, mg, "minigolf", theme === "noir" ? { font: MINIGOLF_FONT } : { font: MINIGOLF_FONT, acc: pk ? "#F9C22E" : mg.acc });
+  const gtS = gtSkin(theme, mg, "minigolf", theme === "noir" ? { font: MINIGOLF_FONT } : { font: MINIGOLF_FONT, acc: pk ? "#1A1716" : mg.acc });
   const rename = (idx, name) => setPlayers((ps) => ps.map((p, i) => (i === idx ? { ...p, name } : p)));
   const addPlayer = () =>
     setPlayers((ps) => {
@@ -249,7 +249,7 @@ function MinigolfSetup({ players, setPlayers, onStart, theme, t }) {
           <GtPlayerList players={players} onRename={rename} onRemove={removePlayer} onAdd={addPlayer} skin={gtS} t={t} onMove={move} minPlayers={1} maxPlayers={8} hues={mg.hues} />
         </div>
         <div className="plsu-side">
-          <GtStartBar onClick={onStart} disabled={false} label={t("startGame")} skin={pk ? { ...gtS, fill: "#F9C22E", on: "#141414", fade: "#3F8F42" } : gtS} />
+          <GtStartBar onClick={onStart} disabled={false} label={t("startGame")} skin={pk ? { ...gtS, fill: "#1A1716", on: "#F3EAD3", fade: "#E4312B" } : gtS} />
         </div>
       </div>
     </div>
@@ -462,6 +462,8 @@ function mgBoardTk(theme) {
     btn: noir ? "rgba(237,237,237,0.10)" : "rgba(243,235,211,0.12)",
   };
 }
+// Ryū: Tafel schwarz mit Creme-Kacheln und roten Ziffern (nur Rot, Schwarz, Creme)
+const MG_BOARD_RYU = { frame: "#1A1716", inner: "#1A1716", tile: "#F3EAD3", tileInk: "#1A1716", lime: "#E4312B", ink: "#F3EAD3", muted: "#CFC4A8", grass: "#2A2523", grassHi: "#3A3330", dim: "rgba(243,234,211,0.34)", flag: "#E4312B", pole: "#F3EAD3", hole: "#000000", btn: "rgba(243,234,211,0.12)" };
 // Spielerkarten und Schlagtasten je Theme
 function mgCardTk(theme, mg) {
   if (theme === "light") return { card: mg.surf, keyBg: mg.surf2, keyLine: mg.ctrlLine, keyOn: mg.acc, keyOnInk: "#FFFFFF" };
@@ -733,7 +735,7 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
   const [nudge, setNudge] = useState(false);
   const t = useT(lang);
   const mg = minigolfTokens(theme);
-  const bt = mgBoardTk(theme);
+  const bt = pk ? MG_BOARD_RYU : mgBoardTk(theme);
   const ct = mgCardTk(theme, mg);
   const segOn = theme === "light" ? mg.acc : mg.segBg;
   const segInk = theme === "light" ? "#FFFFFF" : mg.segInk;

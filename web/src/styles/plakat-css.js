@@ -11,6 +11,8 @@ const PLAKAT_CSS = `
 ${P} body{background:${CREAM}}
 ${P} .gtL-shellpage::before{display:none!important}
 ${P} .gt-gamehead h1.gt-wm{display:block!important;width:100%!important;text-align:center!important}
+/* Unterzeile unter dem Spieltitel: schwarzes Etikett statt grauer Kleinschrift auf Rot */
+${P} .gt-wm-sub{display:table!important;margin:-2px auto 8px!important;background:${INK2}!important;color:${CREAM2}!important;-webkit-text-fill-color:${CREAM2}!important;padding:3px 11px 2px!important;border-radius:8px!important;font-weight:700!important;opacity:1!important}
 ${P} ::selection{background:${INK};color:#F3EAD3}
 /* Ränder als Outline nach innen: sie nehmen keinen Platz, Aufbau bleibt wie in Hell */
 /* Titel-Schriftzüge der Spiele */
@@ -26,6 +28,8 @@ ${P} .gt-su-chip,${P} .gt-su-ib,${P} .gt-su-add,${P} .gt-su-numin{outline:2px so
 ${P} .gt-su-add{background:${CREAM2}!important;color:${INK2}!important;border:2px dashed ${INK2}!important;outline:none!important;font-family:${FONT}!important;font-weight:400!important}
 ${P} .gt-su-add svg{stroke:${INK2}!important;color:${INK2}!important}
 ${P} .gt-su-add:disabled{opacity:.55}
+${P} .gt-cdeck-btn{background:${CREAM2}!important;color:${INK2}!important;border:2px dashed ${INK2}!important;font-family:${FONT}!important;font-weight:400!important}
+${P} .gt-cdeck-btn svg{color:${INK2}!important;stroke:${INK2}!important}
 ${P} .gt-su-chip{font-family:${FONT}!important;font-weight:400!important}
 ${P} .gt-su-btn{position:relative;overflow:hidden;outline:2.5px solid ${INK}!important;outline-offset:-2.5px!important;box-shadow:0 5px 0 ${INK}!important;font-family:${FONT}!important;font-weight:400!important;letter-spacing:.02em}
 ${P} .gt-su-cta::before{background:var(--pk-bg,${CREAM})!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}

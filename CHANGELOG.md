@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.15-28 (15.11.2026 21:20)
+- Tutto: Punkte zuerst tippen, dann Spieler wählen
+
 ## 2026.11.15-27 (15.11.2026 21:04)
 - Stadt Land Fluss neu als Liste (M2), alle Spieltitel als grosser Schriftzug ohne Icon, Startseite Hell und Noir wie Nocturne, Scrollen nach Tastatur in der Home-Bildschirm-App
 

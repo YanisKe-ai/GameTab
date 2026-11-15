@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.15-30 (15.11.2026 22:38)
+- Ryū: Statistikseite als Bento-Sticker, Statistik-Knopf als gezackter Sticker, Siegesschild als rotes Hängeschild
+
 ## 2026.11.15-29 (15.11.2026 21:41)
 - Tutto: Punkte bleiben auch beim Spielerwechsel stehen
 

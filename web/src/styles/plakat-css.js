@@ -141,6 +141,13 @@ ${P} [data-pk-cat] .gtL-gamecard-status>span[aria-hidden]{background:${RED}!impo
 ${P} .gt-wm.gt-wm.gt-wm{display:block!important;width:100%!important;text-align:center!important;box-sizing:border-box}
 ${P} .gt-gamehead h1:not(.gt-wm){font-family:${FONT}!important;font-weight:400!important;text-transform:uppercase!important;color:${INK2}!important;-webkit-text-fill-color:${INK2}!important;-webkit-text-stroke:.05em #141414!important;paint-order:stroke fill!important;text-shadow:.05em .065em 0 #141414!important;letter-spacing:0!important;white-space:nowrap!important;word-break:keep-all!important;hyphens:none!important!important}
 ${P} :focus-visible{outline-color:#2D6BFF!important}
+/* Statistik-Knopf Spielliste: Form F1 Gezackter Sticker (Ryū) */
+${P} .gt-ryu-statsbtn{position:relative;display:block!important;box-sizing:border-box;width:auto!important;min-width:140px;height:44px!important;min-height:44px;margin:0 4px 0 0!important;padding:0 6px!important;border:0!important;background:none!important;border-radius:0!important;box-shadow:none!important;cursor:pointer;color:${INK2}!important;font-family:${FONT}!important;font-weight:400!important;font-size:15px!important;-webkit-tap-highlight-color:transparent;transition:transform .2s cubic-bezier(.34,1.56,.64,1)}
+${P} .gt-ryu-statsbtn:active{transform:translateY(3px) scale(.98)}
+${P} .gt-ryu-statsbtn:focus-visible{outline:3px solid ${INK2};outline-offset:4px;border-radius:12px}
+${P} .gt-ryu-sb-bg{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+${P} .gt-ryu-sb-in{position:relative;display:flex;align-items:center;justify-content:center;gap:7px;height:100%;white-space:nowrap;padding:0 10px}
+${P} .gt-ryu-statsbtn .gtL-statsbtn-txt{display:inline!important}
 @media (prefers-reduced-motion: reduce){${P} .gt-su-btn::after,${P} .pk-shine::after,${P} .gt-wm{animation:none!important}}
 `;
 

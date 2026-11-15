@@ -6,6 +6,7 @@ import { GT_STATS } from "./core.js";
 import { gtMeModel, gtMeWave, gtMeSplit } from "./me.js";
 import { useGtProfile, gtProfileTeam } from "../shared/profile.js";
 import { gtAnnounce } from "../shared/gt-live.js";
+import { isPlakat } from "../themes/plakat.js";
 
 const FF = "'Inter', sans-serif";
 const FD = "'Baloo 2', sans-serif";
@@ -47,7 +48,19 @@ const GT_ME_CSS = `
 @media (prefers-reduced-motion: reduce){.gtMe-tile,.gtMe-tile *{animation:none!important;transition:none!important}.gtMe-tile:not(.on){opacity:1}.gtMe-shine::before{animation:none}}
 `;
 
+// Ryū (Entwurf B1 «Bento-Sticker»): nur Rot, Schwarz, Creme
+function gtRyuWave(weeks, W, H) {
+  const n = weeks.length, top = 10;
+  const max = Math.max(4, ...weeks.map((w) => w.score + w.party));
+  const slot = W / n, bw = Math.min(30, slot * 0.64);
+  const sc = (H - top - 2) / max;
+  const X = weeks.map((_, i) => (i + 0.5) * slot);
+  const bars = weeks.map((w, i) => { const hb = w.score * sc, ht = w.party * sc; return { x: X[i] - bw / 2, bw, yb: H - 1 - hb, hb, yt: H - 1 - hb - ht, ht }; });
+  return { X, YB: bars.map((b) => b.yb), YT: bars.map((b) => b.yt), bars };
+}
+
 function gtMeLook(theme, tk) {
+  if (isPlakat()) return { L: true, N: false, ryu: true, top: "#1A1716", base: "#E4312B", lt: "#1A1716", lb: "#E4312B", erz: "#E4312B", fav: "#E4312B", team: "#E4312B", erzBg: "#E4312B", erzInk: "#F3EAD3", av1: "#E4312B", av2: "#1A1716", avInk: "#F3EAD3", beam: "#E4312B", spot: "rgba(228,49,43,.10)", tipBg: "#1A1716", tipBd: "#F3EAD3", tipInk: "#F3EAD3", btnInk: "#F3EAD3", chip: "#F3EAD3", ring: "#F3EAD3" };
   const L = theme === "light", N = theme === "noir";
   if (N) return { L, N, top: "#D6D6D6", base: "#6B6B6B", lt: "#FFFFFF", lb: "#A8A8A8", erz: tk.ink, fav: tk.ink, team: tk.ink, erzBg: "#EBEBEB", erzInk: "#000000", av1: "#5F5F5F", av2: "#8A8A8A", avInk: "#FFFFFF", beam: "#FFFFFF", spot: "rgba(255,255,255,.07)", tipBg: "#000000", tipBd: "#5F5F5F", tipInk: "#EBEBEB", btnInk: "#000000", chip: "#2E2E2E", ring: tk.card };
   if (L) return { L, N, top: "#982DB3", base: "#3071CD", lt: "#6E1F84", lb: "#1F56A8", erz: "#A8461A", fav: "#1F7A40", team: "#2A4FB0", erzBg: "#C2521D", erzInk: "#FFFFFF", av1: "#2C62E0", av2: "#6B4FD0", avInk: "#FFFFFF", beam: "#C2521D", spot: "rgba(110,75,10,.07)", tipBg: "#17130F", tipBd: "#17130F", tipInk: "#FFFFFF", btnInk: "#FFFFFF", chip: tk.pageBg2 || "#E0D5BF", ring: tk.card };
@@ -58,7 +71,7 @@ function fmt(s, o) { return String(s || "").replace(/\{(\w+)\}/g, (m, k) => (o &
 function initial(n) { return (String(n || "?").trim().charAt(0) || "?").toUpperCase(); }
 
 function Num({ v, size, color }) {
-  return <span style={{ font: `800 ${size || 24}px/1.1 ${FD}`, color, fontVariantNumeric: "tabular-nums" }}><span className="gtMe-n" aria-hidden="true" style={{ "--to": v }} /><span className="gtMe-sr">{v}</span></span>;
+  return <span className="gtMe-nw" style={{ font: `800 ${size || 24}px/1.1 ${FD}`, color, fontVariantNumeric: "tabular-nums" }}><span className="gtMe-n" aria-hidden="true" style={{ "--to": v }} /><span className="gtMe-sr">{v}</span></span>;
 }
 
 function GtMeBento({ matches, opts, t, tk, lk, theme }) {
@@ -100,7 +113,7 @@ function GtMeBento({ matches, opts, t, tk, lk, theme }) {
   const sm = (txt) => <div style={{ fontSize: 12, color: tk.muted, fontFamily: FF, lineHeight: 1.35 }}>{txt}</div>;
 
   // Welle
-  const W = gtMeWave(model.weeks, VW, VH);
+  const W = c.ryu ? gtRyuWave(model.weeks, VW, VH) : gtMeWave(model.weeks, VW, VH);
   const S = Math.min(sel, model.weeks.length - 1);
   const wk = model.weeks[S];
   const nW = model.weeks.length;
@@ -136,17 +149,23 @@ function GtMeBento({ matches, opts, t, tk, lk, theme }) {
         </div>
         <div style={{ position: "relative", height: VH + 6 }}>
           <svg width="100%" height={VH} viewBox={`0 0 ${VW} ${VH}`} preserveAspectRatio="none" role="img" aria-label={t("meChartLabel")} style={{ display: "block", overflow: "visible" }}>
-            {[10, 60, 110].map((y) => <line key={y} x1="0" y1={y} x2={VW} y2={y} stroke={lk.line || tk.border} strokeWidth="1" vectorEffect="non-scaling-stroke" />)}
+            {[10, 60, 110].map((y) => <line key={y} x1="0" y1={y} x2={VW} y2={y} stroke={c.ryu ? "#D8CBA8" : (lk.line || tk.border)} strokeWidth="1" vectorEffect="non-scaling-stroke" />)}
+            {c.ryu && <line x1="0" y1={VH - 1} x2={VW} y2={VH - 1} stroke="#1A1716" strokeWidth="2.5" vectorEffect="non-scaling-stroke" />}
+            {c.ryu ? W.bars.map((b, i) => <g key={i} className={"gtMe-bar" + (i === S ? " is-sel" : "")} style={{ "--i": i }}>
+              {b.hb > 0 && <rect x={b.x} y={b.yb} width={b.bw} height={b.hb} rx="3" fill={c.base} stroke="#1A1716" strokeWidth="2" vectorEffect="non-scaling-stroke" />}
+              {b.ht > 0 && <rect x={b.x} y={b.yt} width={b.bw} height={b.ht} rx="3" fill={c.top} stroke="#1A1716" strokeWidth="2" vectorEffect="non-scaling-stroke" />}
+            </g>) : <React.Fragment>
             <path className="gtMe-area" d={W.areaB} fill={c.base} />
             <path className="gtMe-area" d={W.areaT} fill={c.top} style={{ animationDelay: ".22s" }} />
             <path className="gtMe-line" pathLength="1000" d={W.lineT} fill="none" stroke={c.lt} strokeWidth="2.2" vectorEffect="non-scaling-stroke" />
             <path className="gtMe-line" pathLength="1000" d={W.lineB} fill="none" stroke={c.lb} strokeWidth="2.2" vectorEffect="non-scaling-stroke" />
+            </React.Fragment>}
           </svg>
           <div aria-hidden="true" className="gtMe-cross" style={{ position: "absolute", top: 0, height: VH, width: 1, background: tk.ink, opacity: 0.4, left: pct(W.X[S]) }} />
           <div aria-hidden="true" className="gtMe-dot" style={{ position: "absolute", width: 10, height: 10, margin: "-5px 0 0 -5px", borderRadius: "50%", background: c.top, boxShadow: `0 0 0 2px ${c.ring}`, left: pct(W.X[S]), top: W.YT[S] }} />
           <div aria-hidden="true" className="gtMe-dot" style={{ position: "absolute", width: 10, height: 10, margin: "-5px 0 0 -5px", borderRadius: "50%", background: c.base, boxShadow: `0 0 0 2px ${c.ring}`, left: pct(W.X[S]), top: W.YB[S] }} />
           <div aria-hidden="true" className="gtMe-tip" style={{ position: "absolute", padding: "6px 10px", borderRadius: 10, background: c.tipBg, border: `1px solid ${c.tipBd}`, color: c.tipInk, fontSize: 12, whiteSpace: "nowrap", transform: `translate(${tipX},-115%)`, left: pct(W.X[S]), top: W.YT[S] }}><b>{kw(wk, S)}</b> · {fmt(t("meTip"), { a: wk.score, b: wk.party })}</div>
-          {model.weeks.map((w, i) => { const step = VW / (model.weeks.length - 1); return <button key={i} type="button" className="gtMe-hit" aria-pressed={i === S} aria-label={fmt(t("meWeekAria"), { w: kw(w, i), a: w.score, b: w.party })} onClick={() => setSel(i)} style={{ left: `calc(${pct(W.X[i])} - max(22px, ${pct(step / 2)}))`, width: `max(44px, ${pct(step)})` }} />; })}
+          {model.weeks.map((w, i) => { const step = VW / (c.ryu ? model.weeks.length : model.weeks.length - 1); return <button key={i} type="button" className="gtMe-hit" aria-pressed={i === S} aria-label={fmt(t("meWeekAria"), { w: kw(w, i), a: w.score, b: w.party })} onClick={() => setSel(i)} style={{ left: `calc(${pct(W.X[i])} - max(22px, ${pct(step / 2)}))`, width: `max(44px, ${pct(step)})` }} />; })}
         </div>
       </div>}
 
@@ -163,8 +182,8 @@ function GtMeBento({ matches, opts, t, tk, lk, theme }) {
         {lab(t("meFav"), c.fav)}
         <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 8, minWidth: 0 }}>
           <svg width="58" height="58" viewBox="0 0 64 64" aria-hidden="true" style={{ flex: "none" }}>
-            <circle cx="32" cy="32" r="28" fill="none" stroke={lk.line || tk.border} strokeWidth="7" />
-            {favPct != null && <circle className="gtMe-ring" cx="32" cy="32" r="28" fill="none" stroke={c.top} strokeWidth="7" strokeLinecap="round" strokeDasharray="176" strokeDashoffset={favOff} transform="rotate(-90 32 32)" />}
+            <circle cx="32" cy="32" r="28" fill="none" stroke={c.ryu ? "#D8CBA8" : (lk.line || tk.border)} strokeWidth="7" />
+            {favPct != null && <circle className="gtMe-ring" cx="32" cy="32" r="28" fill="none" stroke={c.ryu ? c.base : c.top} strokeWidth="7" strokeLinecap="round" strokeDasharray="176" strokeDashoffset={favOff} transform="rotate(-90 32 32)" />}
             <text x="32" y="37" textAnchor="middle" fill={tk.ink} fontFamily="Inter" fontWeight="800" fontSize="14">{favPct != null ? favPct + "%" : ""}</text>
           </svg>
           <div style={{ minWidth: 0 }}>

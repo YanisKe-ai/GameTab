@@ -6,6 +6,7 @@ import { useMemo } from "../prelude.js";
 import { GT_STATS } from "../stats/core.js";
 import { loadMatchLog } from "../stats/match-log.js";
 import { gtGetProfile, gtMeKeys } from "./profile.js";
+import { usePlakat } from "../themes/theme-id.js";
 
 /*GT_DUEL_BEGIN*/
 // ms: vorbereitete Partien (GT_STATS.filter); me: Set eigener Schluessel; opp: Schluessel des Gegners
@@ -53,6 +54,7 @@ function glow(c) { return { color: "#FFF8FB", textShadow: `0 0 4px ${c},0 0 14px
 
 export function GtNeonDuel({ ranked, ranks, gameId, t, run, col, lang, theme }) {
   const noir = theme === "noir";
+  const ryu = usePlakat();
   const mc = noir ? "#FFFFFF" : CY;
   const data = useMemo(() => {
     try {
@@ -77,6 +79,18 @@ export function GtNeonDuel({ ranked, ranks, gameId, t, run, col, lang, theme }) 
   const line = [since ? tx("duelSince", { d: since }) : "", tx("duelGames", { n: data.together }), lead].filter(Boolean).join(" · ");
   const oc = noir ? "#BDBDBD" : (col || "#FF9DB5");
   const d = run ? "5.6s" : "0s";
+  if (ryu) {
+    const rn = { font: "400 23px/1.1 'Bagel Fat One','Inter',sans-serif", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", maxWidth: "100%" };
+    const rv = { font: "400 38px/1 'Bagel Fat One','Inter',sans-serif", fontVariantNumeric: "tabular-nums", marginTop: 4 };
+    return <div className="gtr-fi" role="group" aria-label={tx("duelAria", { a: data.me, b: data.opp, x: data.mine, y: data.theirs })} data-gt-duel="" style={{ "--d": d, flexShrink: 0, marginTop: 14, width: "100%", maxWidth: 340, boxSizing: "border-box", padding: "10px 12px", borderRadius: 18, background: "#F3EAD3", color: "#1A1716", border: "2.5px solid #1A1716", boxShadow: "0 0 0 2.5px #F3EAD3,0 6px 0 2.5px #E4312B", textAlign: "center", pointerEvents: "auto" }}>
+      <div aria-hidden="true" style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) auto minmax(0,1fr)", alignItems: "center", gap: 6 }}>
+        <div style={{ minWidth: 0 }}><div dir="auto" style={rn}>{data.me}</div><div style={rv}>{data.mine}</div></div>
+        <svg width="24" height="36" viewBox="0 0 20 26" style={{ overflow: "visible" }}><polygon points="12,1 2,15 9,15 6,25 18,10 11,10" fill="#E4312B" stroke="#1A1716" strokeWidth="2" strokeLinejoin="round" /></svg>
+        <div style={{ minWidth: 0 }}><div dir="auto" style={rn}>{data.opp}</div><div style={rv}>{data.theirs}</div></div>
+      </div>
+      <div style={{ marginTop: 8, font: "600 13px/1.35 'Inter',sans-serif" }}>{line}</div>
+    </div>;
+  }
   const nm = { font: "400 23px/1.1 'Tilt Neon','Inter',sans-serif", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", maxWidth: "100%" };
   const num = { font: "400 38px/1 'Tilt Neon','Inter',sans-serif", fontVariantNumeric: "tabular-nums", marginTop: 4 };
   return <div className="gtd" role="group" aria-label={tx("duelAria", { a: data.me, b: data.opp, x: data.mine, y: data.theirs })} data-gt-duel="" style={{ "--d": d, flexShrink: 0, marginTop: 14, width: "100%", maxWidth: 340, boxSizing: "border-box", padding: "10px 12px 10px", borderRadius: 18, background: "rgba(255,255,255,.035)", border: `1px solid ${oc}55`, boxShadow: `0 0 22px ${oc}22`, textAlign: "center", pointerEvents: "auto" }}>

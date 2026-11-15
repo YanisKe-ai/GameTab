@@ -53,15 +53,15 @@ function GtMatchCatalog({ matches, t, tk, lk, theme, lang, onChanged, Mark }) {
   const selN = sel ? sel.size : 0;
   return <div>
     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8, flexWrap: "wrap", margin: "4px 2px 12px" }}>
-      <span style={{ fontSize: ".875rem", color: tk.muted, fontFamily: FF }}>{fmt(t("catCount"), { n: list.length })}</span>
+      <span className="gtSt2-sub" style={{ fontSize: ".875rem", color: tk.muted, fontFamily: FF }}>{fmt(t("catCount"), { n: list.length })}</span>
       <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-        {sel && noNames.length > 0 && <button type="button" className="gtSt2-btn" style={pill(false)} onClick={() => setSel(new Set(noNames.map((m) => String(m.id))))}>{fmt(t("catPickNoNames"), { n: noNames.length })}</button>}
+        {sel && noNames.length > 0 && <button type="button" className="gtSt2-btn gtSt2-pill" style={pill(false)} onClick={() => setSel(new Set(noNames.map((m) => String(m.id))))}>{fmt(t("catPickNoNames"), { n: noNames.length })}</button>}
         <button type="button" className="gtSt2-btn" aria-pressed={!!sel} style={pill(!!sel)} onClick={() => setSel(sel ? null : new Set())}>{sel ? t("catDone") : t("catSelect")}</button>
       </div>
     </div>
     {groups.map((g) => <section key={g.d} aria-label={g.d} style={{ marginBottom: 14 }}>
-      <h2 style={{ margin: "0 4px 6px", fontSize: ".8125rem", fontWeight: 600, color: tk.muted, fontFamily: FF }}>{g.d}</h2>
-      <ul style={{ listStyle: "none", margin: 0, padding: 0, background: tk.card, border: `1px solid ${tk.border}`, borderRadius: 18, overflow: "hidden" }}>
+      <h2 className="gtSt2-h2" style={{ margin: "0 4px 6px", fontSize: ".8125rem", fontWeight: 600, color: tk.muted, fontFamily: FF }}>{g.d}</h2>
+      <ul className="gtSt2-lc" style={{ listStyle: "none", margin: 0, padding: 0, background: tk.card, border: `1px solid ${tk.border}`, borderRadius: 18, overflow: "hidden" }}>
         {g.items.map((m, i) => {
           const id = String(m.id);
           const game = statsGameLabel(m.game, t);
@@ -94,7 +94,7 @@ function GtMatchCatalog({ matches, t, tk, lk, theme, lang, onChanged, Mark }) {
         })}
       </ul>
     </section>)}
-    {list.length > load && <div style={{ display: "flex", justifyContent: "center" }}><button type="button" className="gtSt2-btn" style={pill(false)} onClick={() => setLoad((n) => n + 40)}>{t("catMore")}</button></div>}
+    {list.length > load && <div style={{ display: "flex", justifyContent: "center" }}><button type="button" className="gtSt2-btn gtSt2-pill" style={pill(false)} onClick={() => setLoad((n) => n + 40)}>{t("catMore")}</button></div>}
     {sel && <div style={{ position: "sticky", bottom: 0, zIndex: 5, margin: "8px -4px 0", padding: "10px 4px calc(10px + env(safe-area-inset-bottom))", background: tk.pageBg, display: "flex", justifyContent: "center" }}>
       <button type="button" className="gtSt2-btn" disabled={!selN} onClick={() => setAsk(true)} style={{ width: "100%", maxWidth: 380, minHeight: 50, borderRadius: 14, border: 0, background: selN ? "#D6202A" : tk.card, color: selN ? "#FFFFFF" : tk.muted, font: `700 15px ${FF}`, textAlign: "center", cursor: selN ? "pointer" : "default" }}>{fmt(t("catDeleteN"), { n: selN })}</button>
     </div>}

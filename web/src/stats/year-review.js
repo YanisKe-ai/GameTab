@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "../prelude.js";
 import { gtRM } from "../shared/fx.js";
 import { APP_LOGO_URI_GOLD } from "../assets/logo-data.js";
 import { shellTokens } from "../themes/tokens.js";
+import { isPlakat } from "../themes/plakat.js";
 import { GT_STATS } from "./core.js";
 import { loadMatchLog } from "./match-log.js";
 import { GT_EC_CJK } from "../export/result-card.js";
@@ -17,10 +18,10 @@ import { useGtDialog } from "../shared/dialog.js";
 /*GT_YR_BEGIN*/
 const GT_YR_SUIT={spade:"M12 2C9 6 4 9.5 4 13.5a4 4 0 0 0 6.5 3.1C10.3 18.8 9.5 20.5 8 22h8c-1.5-1.5-2.3-3.2-2.5-5.4A4 4 0 0 0 20 13.5C20 9.5 15 6 12 2z",heart:"M12 21C5 15.5 2 12 2 8.5A5 5 0 0 1 12 6a5 5 0 0 1 10 2.5c0 3.5-3 7-10 12.5z",diamond:"M12 2l7 10-7 10-7-10z",club:"M12 2a4.5 4.5 0 0 0-2.2 8.4A4.5 4.5 0 1 0 11 16.5c-.1 2-.8 3.7-2.2 5.5h6.4c-1.4-1.8-2.1-3.5-2.2-5.5a4.5 4.5 0 1 0 1.2-6.1A4.5 4.5 0 0 0 12 2z"};
 const GT_YR_SUIT_ORDER=["spade","heart","diamond","club"];
-function gtYrAccent(game,theme,fb){if(theme==="noir")return"#E8E8E8";const m=(typeof STATS_GAME_COLORS!=="undefined"&&STATS_GAME_COLORS[game])||(typeof GT_SU_ACC!=="undefined"&&GT_SU_ACC[game])||fb||"#C9A15C";if(theme==="light"){const c=gtHexRgb(m);return c?gtRgbHex(gtMixDark(c,0.32)):m;}return m;}
-function gtYrRaw(game,theme,fb){if(theme==="noir")return"#E8E8E8";return(typeof STATS_GAME_COLORS!=="undefined"&&STATS_GAME_COLORS[game])||(typeof GT_SU_ACC!=="undefined"&&GT_SU_ACC[game])||fb||"#C9A15C";}
+function gtYrAccent(game,theme,fb){if(isPlakat())return"#E4312B";if(theme==="noir")return"#E8E8E8";const m=(typeof STATS_GAME_COLORS!=="undefined"&&STATS_GAME_COLORS[game])||(typeof GT_SU_ACC!=="undefined"&&GT_SU_ACC[game])||fb||"#C9A15C";if(theme==="light"){const c=gtHexRgb(m);return c?gtRgbHex(gtMixDark(c,0.32)):m;}return m;}
+function gtYrRaw(game,theme,fb){if(isPlakat())return"#E4312B";if(theme==="noir")return"#E8E8E8";return(typeof STATS_GAME_COLORS!=="undefined"&&STATS_GAME_COLORS[game])||(typeof GT_SU_ACC!=="undefined"&&GT_SU_ACC[game])||fb||"#C9A15C";}
 function gtYrA(hex,a){const c=gtHexRgb(hex);return c?"rgba("+c[0]+","+c[1]+","+c[2]+","+a+")":hex;}
-function gtYrPal(theme){if(theme==="light")return{bg:"#EDE5D5",bg2:"#E0D5BF",ink:"#17130F",muted:"#4A443A",line:"rgba(23,19,15,0.22)",chip:"rgba(23,19,15,0.08)",glow:0.12,onAcc:"#FFFFFF",gold:"#6E4B0A"};if(theme==="noir")return{bg:"#0A0A0A",bg2:"#050505",ink:"#EDEDED",muted:"#A5A5A5",line:"rgba(255,255,255,0.2)",chip:"#1E1E1E",glow:0.1,onAcc:"#111111",gold:"#C9C9C9"};return{bg:"#12141C",bg2:"#0B0C12",ink:"#F0F1F5",muted:"#8890A0",line:"rgba(240,241,245,0.16)",chip:"#1D212D",glow:0.26,onAcc:"#1A1408",gold:"#C9A15C"};}
+function gtYrPal(theme){if(isPlakat())return{bg:"#F3EAD3",bg2:"#E6DABC",ink:"#1A1716",muted:"#4A4236",line:"rgba(26,23,22,0.3)",chip:"rgba(26,23,22,0.08)",glow:0.12,onAcc:"#F3EAD3",gold:"#E4312B"};if(theme==="light")return{bg:"#EDE5D5",bg2:"#E0D5BF",ink:"#17130F",muted:"#4A443A",line:"rgba(23,19,15,0.22)",chip:"rgba(23,19,15,0.08)",glow:0.12,onAcc:"#FFFFFF",gold:"#6E4B0A"};if(theme==="noir")return{bg:"#0A0A0A",bg2:"#050505",ink:"#EDEDED",muted:"#A5A5A5",line:"rgba(255,255,255,0.2)",chip:"#1E1E1E",glow:0.1,onAcc:"#111111",gold:"#C9C9C9"};return{bg:"#12141C",bg2:"#0B0C12",ink:"#F0F1F5",muted:"#8890A0",line:"rgba(240,241,245,0.16)",chip:"#1D212D",glow:0.26,onAcc:"#1A1408",gold:"#C9A15C"};}
 function gtYrNames(c,map){if(!c)return[];const src=Array.isArray(c.people)?c.people:[];const out=src.map(p=>p&&typeof p==="object"?(p.name||p.key||""):((map&&map[p])||String(p))).filter(Boolean);return out.filter((n,k)=>out.indexOf(n)===k).slice(0,6);}
 function gtYrVal(c){const v=c.value==null?"":String(c.value);return c.kind==="champion"&&/^\d+$/.test(v)?v+" %":v;}
 function gtYrSplit(v){const s=String(v==null?"":v);const m=/^(\d{1,7})(\D*)$/.exec(s.trim());return m?{n:parseInt(m[1],10),suf:m[2]}:null;}

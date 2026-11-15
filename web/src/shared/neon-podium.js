@@ -5,6 +5,7 @@ import { GtNeonDuel } from "./neon-duel.js";
 import { React } from "../vendor/react-globals.js";
 import { useEffect, useRef, useState } from "../prelude.js";
 import GT_NEON_LOGO from "../assets/img/gt-logo-neon.webp";
+import { usePlakat } from "../themes/theme-id.js";
 
 // [Kern Hauptroehre, Gluehen Hauptroehre, Kern Zweitroehre, Gluehen Zweitroehre]
 const GT_NEON_COL = {"slf":["#EEE8FF","#8B6CFF","#FFF7D6","#FFD84D"],"skyjo":["#D8FEEE","#13DAA7","#EEF4FF","#6D9AFF"],"phase10":["#ECF4FF","#569FFF","#FFF2D6","#FBC100"],"romme":["#FFEEF3","#FB5C9E","#F6F0FF","#B97CF8"],"jass-differenzler":["#FFF9F3","#F0CA9B","#FFEFED","#FF6459"],"schieber":["#FDFAF1","#F0CA9B","#D9FEEB","#00BB85"],"schieber-turnier":["#FDFAF1","#F0CA9B","#D9FEEB","#00BB85"],"molotow":["#F7FFD0","#B8D52A","#FFF0E6","#FF8A5E"],"darts":["#FFEFEE","#FF635E","#FFF2D6","#E7C77B"],"cricket":["#DBFDE9","#18D188","#FFF3D2","#F2C535"],"shanghai":["#EAF5FF","#4FB0FF","#FFEFED","#FF6B5E"],"hiscore":["#DEF9FF","#00D4F0","#FFF2DC","#FFBE38"],"splitscore":["#F7F0FF","#BA7BFA","#DEF9FF","#00D4F0"],"wizard":["#FFF2DA","#F1B526","#F3F1FF","#A486FF"],"minigolf":["#E5FBDE","#7ADA4F","#FFEFEE","#FF6364"],"mafia":["#FFF2DC","#D99B00","#FFEFEE","#FF6362"],"impostor":["#FBEEFF","#DD5AFF","#FFF2D8","#F7C033"],"werwolf":["#FEF3D2","#F0C635","#F2F2FF","#958DFF"],"mostlikely":["#D3FEF6","#00D5BF","#FFEEF5","#FF6FB5"],"traitor":["#E7FBDD","#7CC054","#FFEFEF","#F07079"],"tabu":["#F6F1FF","#B47DFF","#FEF9F1","#F0CA9B"],"headsup":["#EFF3FF","#9DB4FF","#E6F6FF","#4AC9FF"],"fivesec":["#FFF0E6","#FF9640","#FEF9F1","#F0CA9B"],"flip7":["#FFF0EA","#FF7A3D","#FEF9F1","#F0CA9B"],"yatzy":["#F1F3FF","#8C90FF","#FEF9F1","#F0CA9B"],"tutto":["#FFEFEE","#FF6265","#FEF9F1","#F0CA9B"],"freeplay":["#FAEFFF","#C37DE1","#FCF8FF","#F0CA9B"],"jass":["#FFEFED","#FF6552","#DEFDE5","#39BA6E"]};
@@ -63,6 +64,80 @@ function NeonText({ text, start, step, run, buzzLast }) {
   });
 }
 
+
+// ===== Ryu (vierter Modus): gleicher Aufbau und gleiche Physik, aber Sticker statt Neonroehren (Entwurf R1 Rotes Schild) =====
+const RYU_CHAIN = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='24'%3E%3Cellipse cx='6' cy='6' rx='3.7' ry='5.6' fill='none' stroke='%23F3EAD3' stroke-width='3.8'/%3E%3Cellipse cx='6' cy='6' rx='3.7' ry='5.6' fill='none' stroke='%231A1716' stroke-width='1.8'/%3E%3Crect x='4.4' y='10.5' width='3.2' height='13.5' rx='1.2' fill='%23F3EAD3'/%3E%3Crect x='5.1' y='10.5' width='1.8' height='13.5' rx='.8' fill='%231A1716'/%3E%3C/svg%3E";
+const RYU_NOISE = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.32'/%3E%3C/svg%3E";
+const RYU_CSS = `
+.gtr{--red:#E4312B;--ink:#1A1716;--cream:#F3EAD3;font-family:'Bagel Fat One','Inter',sans-serif;color:var(--cream)}
+.gtr-chain{position:absolute;top:-760px;width:12px;height:900px;background:url("${RYU_CHAIN}") 0 0/12px 24px repeat-y;filter:drop-shadow(0 2px 0 rgba(0,0,0,.45))}
+.gtr-glow{position:absolute;left:-70px;right:-70px;top:-60px;height:420px;background:radial-gradient(48% 44% at 50% 50%,rgba(228,49,43,.34),rgba(228,49,43,.08) 60%,transparent 76%);pointer-events:none}
+.gtr-eye{position:absolute;top:-8px;width:16px;height:16px;border-radius:50%;background:var(--cream);border:2.5px solid var(--ink);box-shadow:0 0 0 2px var(--cream);box-sizing:border-box}
+.gtr-board{position:relative;padding:20px 16px 24px;border-radius:22px;text-align:center;border:4px solid var(--ink);background:var(--red) url("${RYU_NOISE}") 0 0/180px 180px;background-blend-mode:multiply;color:var(--cream);box-shadow:0 0 0 2.5px var(--cream),0 9px 0 2.5px var(--ink),0 34px 40px rgba(0,0,0,.5)}
+.gtr-board::after{content:"";position:absolute;inset:5px;border-radius:16px;border:2.5px solid var(--cream);pointer-events:none}
+.gtr-scr{position:absolute;width:11px;height:11px;border-radius:50%;background:var(--ink);border:2px solid var(--cream);z-index:2;box-sizing:border-box}
+.gtr-scr::after{content:"";position:absolute;left:1px;right:1px;top:50%;height:1.5px;background:var(--cream);transform:translateY(-50%) rotate(35deg)}
+.gtr-logo{width:170px;height:52px;margin:0 auto;background:var(--cream);-webkit-mask:url(${GT_NEON_LOGO}) center/contain no-repeat;mask:url(${GT_NEON_LOGO}) center/contain no-repeat;position:relative;z-index:1}
+.gtr-w{white-space:nowrap}
+.gtr-p{display:inline-block;white-space:nowrap}
+.gtr-brk .gtr-w{white-space:normal}
+.gtr-l{display:inline-block}
+.gtr-gname,.gtr-wname,.gtr-pts{position:relative;z-index:1;color:var(--cream);-webkit-text-stroke:.12em var(--ink);paint-order:stroke fill}
+.gtr-gname{font:400 22px/1 'Bagel Fat One','Inter',sans-serif;text-transform:uppercase;margin-top:10px;letter-spacing:.01em;-webkit-text-stroke-width:.18em;filter:drop-shadow(0 .09em 0 var(--ink))}
+.gtr-wname{font:400 92px/1.06 'Bagel Fat One','Inter',sans-serif;text-transform:uppercase;margin-top:8px;letter-spacing:-.005em;overflow-wrap:normal;word-break:keep-all;hyphens:manual;filter:drop-shadow(0 .05em 0 var(--ink))}
+.gtr-pts{font:400 40px/1 'Bagel Fat One','Inter',sans-serif;margin-top:8px;font-variant-numeric:tabular-nums;filter:drop-shadow(0 .05em 0 var(--ink))}
+.gtr-rk li{display:flex;justify-content:center;align-items:baseline;gap:10px;font:400 22px/1.2 'Bagel Fat One','Inter',sans-serif;color:var(--cream)}
+.gtr-rk li>*{-webkit-text-stroke:.14em var(--ink);paint-order:stroke fill}
+.gtr-dot{opacity:.6}
+.gtr-played{margin-top:14px;font:400 15px/1.3 'Inter',sans-serif;color:#d8cfb8}
+.gtr-btn{min-height:52px;border-radius:26px;font:400 20px/1 'Bagel Fat One','Inter',sans-serif;cursor:pointer;-webkit-tap-highlight-color:transparent;border:2.5px solid var(--ink);padding:0 8px}
+.gtr-btn:active{transform:translateY(3px)}
+.gtr-p1{background:var(--ink);color:var(--cream);border-color:var(--cream);box-shadow:0 4px 0 var(--red)}
+.gtr-p2{background:var(--cream);color:var(--ink);box-shadow:0 4px 0 var(--red)}
+.gtr-p3{border:0;background:transparent;color:var(--cream);font:700 17px 'Inter',sans-serif;text-decoration:underline;text-underline-offset:4px}
+/* Schutz gegen Spiel-Regeln der Form «.xx-pk [role=dialog]» (z. B. Freies Spiel): das Schild bleibt ein eigenes Ding */
+.gtr.gtr[role="dialog"]{background:transparent!important;border-top:0!important;box-shadow:none!important;color:var(--cream)!important}
+.gtr.gtr .gtr-btn,.gtr.gtr .gtr-x{outline:0!important;font-family:'Bagel Fat One','Inter',sans-serif!important;font-weight:400!important}
+.gtr.gtr .gtr-p1{background:var(--ink)!important;color:var(--cream)!important;box-shadow:0 4px 0 var(--red)!important}
+.gtr.gtr .gtr-p2{background:var(--cream)!important;color:var(--ink)!important;box-shadow:0 4px 0 var(--red)!important}
+.gtr.gtr .gtr-p3{background:transparent!important;color:var(--cream)!important;box-shadow:none!important;font-family:'Inter',sans-serif!important;font-weight:700!important}
+.gtr.gtr .gtr-x{background:var(--cream)!important;color:var(--ink)!important}
+.gtr-btn:focus-visible,.gtr-x:focus-visible{outline:3px solid var(--cream);outline-offset:3px}
+@keyframes gtrPop{0%{opacity:0;transform:scale(.25) translateY(10px) rotate(-10deg)}60%{opacity:1;transform:scale(1.18) rotate(3deg)}100%{opacity:1;transform:none}}
+@keyframes gtrFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes gtrGlow{0%{opacity:0}35%{opacity:.8}100%{opacity:1}}
+@keyframes gtrRing{0%{transform:scale(.3);opacity:.9}100%{transform:scale(2.4);opacity:0}}
+.gtr-run .gtr-l{animation:gtrPop .5s cubic-bezier(.34,1.56,.64,1) var(--d,0s) both}
+.gtr-run .gtr-fi{animation:gtrFade .6s cubic-bezier(.22,1,.36,1) var(--d,0s) both}
+.gtr-run .gtr-glow{animation:gtrGlow 1.6s linear 3s both}
+.gtr-run .gtr-logo{animation:gtrPop .55s cubic-bezier(.34,1.56,.64,1) 2.75s both}
+.gtr-run .gtr-scr{animation:gtrPop .4s cubic-bezier(.34,1.56,.64,1) calc(2.7s + var(--i)*.06s) both}
+.gtr-ring{position:absolute;left:50%;top:50%;width:150px;height:150px;margin:-75px;border-radius:50%;border:5px solid var(--cream);opacity:0;pointer-events:none;z-index:0;box-sizing:border-box}
+.gtr-run .gtr-ring{animation:gtrRing .8s ease-out 2.8s both}
+.gtr-ranks::-webkit-scrollbar{display:none}
+[data-gt-achv-hint]{--gtr-x:1}
+.gtr [data-gt-achv-hint]>div{background:#F3EAD3!important;border:2.5px solid #1A1716!important;box-shadow:0 3px 0 #E4312B}
+.gtr [data-gt-achv-hint] *{color:#1A1716!important}
+[data-gt-podium] .gtsb-name{font:inherit;letter-spacing:inherit}
+.gtr .gtn-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+html[data-gt-podium-open] .gt-gamehead,html[data-gt-podium-open] .gt-headbtns{visibility:hidden!important}
+@media (prefers-reduced-motion: reduce){.gtr-run *,.gtr-run *::before,.gtr-run *::after{animation:none!important}}
+`;
+
+// Ryu-Text: Buchstaben einzeln (poppen als Sticker auf), Woerter bleiben ganz, Bindestrich-Teile als Notumbruch
+function RyuText({ text, start, step, run }) {
+  const words = String(text == null ? "" : text).split(/\s+/).filter(Boolean);
+  let k = 0;
+  return words.map((w, wi) => {
+    const parts = w.split(/(?<=-)/);
+    const span = <span key={wi} className="gtn-w gtr-w">{parts.map((p, pi) => <span key={pi} className="gtr-p">{Array.from(p).map((ch, ci) => {
+      const d = start + (k++) * step;
+      return <span key={ci} className="gtr-l" style={run ? { "--d": `${d.toFixed(2)}s` } : undefined}>{ch}</span>;
+    })}</span>)}</span>;
+    return wi < words.length - 1 ? [span, " "] : span;
+  });
+}
+
 // Herablassen: Motor (smootherstep) bis 2.8 s, dann kurzer Ruck und kleines Auspendeln (gerechnet wie im Entwurf)
 function gtNeonDrop() {
   const fr = [], FPS = 30, DUR = 6;
@@ -96,6 +171,14 @@ function useFitName(ref, deps) {
       const lines = () => Math.round(el.scrollHeight / (fs * 1.06));
       while (fs > 56 && (tooWide() || lines() > 1)) { fs -= 2; el.style.fontSize = fs + "px"; }
       while (fs > 30 && (tooWide() || lines() > 2)) { fs -= 2; el.style.fontSize = fs + "px"; }
+      if (el.hasAttribute("data-ryu")) { // Ryu: sehr lange Woerter duerfen an Bindestrichen umbrechen
+        el.classList.remove("gtr-brk");
+        if (tooWide()) {
+          el.classList.add("gtr-brk"); fs = Math.min(fs, 48); el.style.fontSize = fs + "px";
+          const parts = Array.from(el.querySelectorAll(".gtr-p"));
+          while (fs > 28 && parts.some(x => x.offsetWidth > w + 0.5)) { fs -= 2; el.style.fontSize = fs + "px"; }
+        }
+      }
     };
     fit();
     let ro = null; try { ro = new ResizeObserver(fit); ro.observe(el); } catch (e) { ro = null; }
@@ -105,6 +188,7 @@ function useFitName(ref, deps) {
 }
 
 export function GtNeonPodium({ phase, ranked, ranks, gameId, gameLabel, theme, t, play, onClose, onEnd, onSkip, onRestart, extraAct, onShare, isSharing, playCount, hideCount, bestRecord, noteEl, achvEl, dlgRef }) {
+  const ryu = usePlakat();
   const [pc, pg, sc, sg] = gtNeonCol(gameId, theme);
   const P = gtNeonVars(pc, pg), S = gtNeonVars(sc, sg);
   const rigRef = useRef(null), nameRef = useRef(null), wrapRef = useRef(null), boardRef = useRef(null);
@@ -155,6 +239,57 @@ export function GtNeonPodium({ phase, ranked, ranks, gameId, gameLabel, theme, t
   const label = (gameLabel ? gameLabel + " " : "") + t("podiumTitle");
   const glow = pg;
   const anim = (name, dur, delay) => run ? { animation: `${name} ${dur}s linear ${delay}s both` } : undefined;
+  if (ryu) {
+    const rm = onRestart || extraAct;
+    const rmLabel = extraAct ? extraAct.label : t("rematch");
+    const scrMask = (fade.t || fade.b) ? (m => ({ WebkitMaskImage: m, maskImage: m }))(`linear-gradient(180deg,${fade.t ? "transparent 0,#000 16px" : "#000 0"},${fade.b ? "#000 calc(100% - 22px),transparent 100%" : "#000 100%"})`) : null;
+    const fi = (d) => run ? { "--d": `${d}s` } : undefined;
+    return <div onClick={() => { if (onSkip()) return; if (!onEnd) onClose(); }} className="gt-scrim-in" style={{ position: "fixed", inset: 0, zIndex: 130, background: "linear-gradient(180deg,#221d1b 0%,#1A1716 60%,#120f0e 100%)", overflow: "hidden" }}>
+      <style>{RYU_CSS}</style>
+      <div ref={wrapRef} style={{ position: "absolute", left: "50%", top: 0, width: 390, height: fh, marginLeft: -195, transform: `scale(${k})`, transformOrigin: "50% 0" }}>
+        <div ref={dlgRef} data-gt-podium="1" role="dialog" aria-modal="true" aria-label={label} onClick={e => { e.stopPropagation(); onSkip(); }} className={"gtr " + (run ? "gtr-run" : "gtr-lit") + " gtsb-" + (phase || "done")} style={{ position: "absolute", inset: 0 }}>
+          <div ref={rigRef} style={{ position: "absolute", left: 0, right: 0, top: 0, height: 800, transformOrigin: "195px -420px" }}>
+            {[86, 292].map(x => <div key={x} aria-hidden className="gtr-chain" style={{ left: x }} />)}
+            <div style={{ position: "absolute", left: 34, right: 34, top: 140 }}>
+              <div aria-hidden className="gtr-glow" />
+              {[50, 256].map(x => <div key={x} aria-hidden className="gtr-eye" style={{ left: x }} />)}
+              <div ref={boardRef} className="gtr-board">
+                <div aria-hidden className="gtr-ring" />
+                {[["left:12px;top:12px", 0], ["right:12px;top:12px", 1], ["left:12px;bottom:12px", 2], ["right:12px;bottom:12px", 3]].map(([p, i]) => { const o = {}; p.split(";").forEach(kv => { const [a, b] = kv.split(":"); o[a] = b; }); return <i key={p} aria-hidden className="gtr-scr" style={{ ...o, "--i": i }} />; })}
+                <div aria-hidden className="gtr-logo" />
+                <span className="gtn-sr">{label}</span>
+                {gameLabel && <div className="gtr-gname" aria-hidden><RyuText text={gameLabel} start={T0 + 0.25} step={0.05} run={run} /></div>}
+                <div ref={nameRef} data-ryu="1" dir="auto" className="gtr-wname">
+                  {winners.map((w, wi) => <div key={wi} className="gtsb-name"><span className="gtsb-sr gtn-sr">{"1. "}</span><RyuText text={w && w.name} start={T0 + 0.55 + wi * 0.4} step={0.07} run={run} /></div>)}
+                </div>
+                {wsc !== "" && <div dir="ltr" className="gtr-pts"><RyuText text={wsc} start={T0 + 1.4} step={0.05} run={run} /></div>}
+              </div>
+            </div>
+          </div>
+          <div ref={scrRef} data-gt-podium-scroll="" style={{ position: "absolute", left: 22, right: 22, top: rt, bottom: onEnd && !land ? "calc(env(safe-area-inset-bottom, 0px) + 134px)" : "calc(env(safe-area-inset-bottom, 0px) + 92px)", display: "flex", flexDirection: "column", alignItems: "center", overflowY: "auto", overscrollBehavior: "contain", scrollbarWidth: "none", paddingBottom: 6, ...(scrMask || {}) }}>
+            {others.length > 0 && <ol className="gtn-ranks gtr-ranks gtr-rk" style={{ listStyle: "none", margin: 0, padding: 0, width: "100%", flexShrink: 0, maxHeight: 170, overflowY: "auto", scrollbarWidth: "none", pointerEvents: "auto" }}>
+              {others.map(({ e, i }, n) => { const r = ranks[i]; const d = 4.4 + n * 0.22; return <li key={i} style={{ marginTop: n ? 8 : 0 }}>
+                <span className={i < 3 ? "gtsb-name" : undefined}>{i < 3 && <span className="gtsb-sr gtn-sr">{r + ". "}</span>}<span aria-hidden className="gtr-l" style={run ? { "--d": `${d.toFixed(2)}s` } : undefined}>{r + "."}</span></span>
+                <span dir="auto" style={{ minWidth: 0, overflowWrap: "normal" }}><RyuText text={e && e.name} start={d + 0.05} step={0.03} run={run} /></span>
+                {gtFmt(e && e.score) !== "" && <span aria-hidden className="gtr-l gtr-dot" style={run ? { "--d": `${(d + 0.2).toFixed(2)}s` } : undefined}>·</span>}<span dir="ltr"><RyuText text={gtFmt(e && e.score)} start={d + 0.25} step={0.04} run={run} /></span>
+              </li>; })}
+            </ol>}
+            {(playCount > 0 && !hideCount) && <div className="gtr-played gtr-fi" style={{ flexShrink: 0, ...(fi(5) || {}) }}>{t("gamesPlayedTogether")(playCount)}</div>}
+            <GtNeonDuel ranked={ranked} ranks={ranks} gameId={gameId} t={t} run={run} col={pg} theme={theme} />
+            {bestRecord && bestRecord.isNew && <div style={{ marginTop: 6, font: "700 13px/1.3 'Inter',sans-serif", color: "#F3EAD3" }}>{t("newPersonalBest")}</div>}
+            {noteEl && <div style={{ marginTop: 8, font: "400 14px/1.4 'Inter',sans-serif", color: "#d8cfb8", textAlign: "center", pointerEvents: "auto" }}>{noteEl}</div>}
+            {achvEl && <div style={{ flexShrink: 0, pointerEvents: "auto", marginTop: 8 }}>{achvEl}</div>}
+          </div>
+          {!onEnd && <button onClick={e => { e.stopPropagation(); onClose(); }} className="gtr-x gtsb-x press-fx" aria-label={t("stxClose")} style={{ position: "absolute", right: 18, top: "calc(env(safe-area-inset-top, 0px) + 14px)", width: 44, height: 44, borderRadius: 22, border: "2.5px solid #1A1716", background: "#F3EAD3", color: "#1A1716", boxShadow: "0 3px 0 #1A1716", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}><svg width={20} height={20} viewBox="0 0 24 24" fill="none" aria-hidden><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth={3.2} strokeLinecap="round" /></svg></button>}
+          <div style={land ? { position: "absolute", left: 404, bottom: 24, width: 210, display: "flex", flexDirection: "column", gap: 10, transform: `scale(${(1 / k).toFixed(4)})`, transformOrigin: "0 100%" } : { position: "absolute", left: 22, right: 22, bottom: "calc(env(safe-area-inset-bottom, 0px) + 22px)", display: "flex", flexWrap: "wrap", gap: 12 }}>
+            {rm && <button onClick={e => { e.stopPropagation(); if (extraAct) { extraAct.onClick(); return; } onRestart(); onClose(); }} className="gtr-btn gtr-p1" style={{ flex: land ? "none" : (onEnd ? "1 1 40%" : 1) }}>{rmLabel}</button>}
+            {onEnd && <button onClick={e => { e.stopPropagation(); onEnd(); }} className="gtr-btn gtr-p2" data-gt-podium-end="" style={{ flex: land ? "none" : "1 1 40%" }}>{t("apEnd")}</button>}
+            <button onClick={e => { e.stopPropagation(); onShare(); }} disabled={isSharing} aria-label={t("shareResultAria")} className={"gtr-btn " + (onEnd && !land ? "gtr-p3" : "gtr-p2")} style={onEnd && !land ? { flex: "1 1 100%", minHeight: 44 } : { flex: land ? "none" : 1 }}>{t("shareResultLabel")}</button>
+          </div>
+        </div>
+      </div>
+    </div>;
+  }
   return <div onClick={() => { if (onSkip()) return; if (!onEnd) onClose(); }} className="gt-scrim-in" style={{ position: "fixed", inset: 0, zIndex: 130, background: "linear-gradient(180deg,#1B1722 0%,#141119 64%,#0F0D13 100%)", overflow: "hidden" }}>
     <style>{GT_NEON_CSS}</style>
     <div aria-hidden style={{ position: "absolute", inset: 0, opacity: 0.5, background: `url("${NOISE_URI}")` }} />

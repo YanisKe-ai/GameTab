@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.15-17 (15.11.2026 17:27)
+- Ryū: Jass-Auswahl, Coiffeur, Schieber, Schieber-Turnier und Molotow im neuen Stil
+
 ## 2026.11.15-16 (15.11.2026 17:04)
 - Ryū: Yatzy im neuen Stil (rote Seite, Cremeblatt, schwarzes Eingabeblatt), Hintergrund-Deko im Ryū-Modus aus
 

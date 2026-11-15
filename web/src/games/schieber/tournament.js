@@ -16,7 +16,7 @@ import { GT_ST, GT_ST_STORE, useGtStStore } from "./tournament-core.js";
 import { useSavedGroups } from "../../shared/groups.js";
 import { gtCR, gtHexRgb, gtSkin } from "../../shared/setup-ui.js";
 import { usePlakat } from "../../themes/theme-id.js";
-import { pkPage } from "../../shared/plakat/kit.js";
+import { ryuPage } from "../../shared/plakat/kit.js";
 /*@gt-body-begin*/
 /*GT_ST_END*/
 /*GT_STU_BEGIN*/
@@ -317,51 +317,72 @@ const ST_PL_CSS=`
 [data-phone-landscape] .gtst-mx-ppl .gtst-plist2{grid-template-columns:repeat(auto-fill,minmax(180px,1fr))}
 `;
 /* Modus «Plakat»: nur aktiv, wenn usePlakat() true ist (Aufbau bleibt, nur Aussehen) */
-const ST_PK_VARS={"--st-hink":"#F4EAD5","--st-hmuted":"#F4EAD5","--st-uline":"#F4EAD5","--st-live":"#F4EAD5","--st-title-font":"400 30px/1.1 'Bagel Fat One','Bowlby One',sans-serif","--st-title-track":"0","--st-pagebg":"#2F6B52","--st-body-solid":"#FFFDF7","--st-panel":"#FFFDF7","--st-pline":"#141414","--st-pshadow":"0 4px 0 #141414","--st-ink":"#141414","--st-muted":"#4A4236","--st-bline":"#141414","--st-rline":"rgba(20,20,20,0.22)","--st-accent":"#071743","--st-on-accent":"#F4EAD5","--st-accent-soft":"rgba(7,23,67,0.1)","--st-focus":"#071743","--st-danger":"#B3242E","--st-field":"#FFFFFF","--st-ph":"#6A6252","--st-hover":"rgba(20,20,20,0.07)","--st-tabgap":"4px","--st-tabpad":"4px","--st-tabbg":"#F4EAD5","--st-tabr":"16px","--st-tabline":"none","--st-tabon-ink":"#F4EAD5","--st-tabon-bg":"#071743","--st-lead":"#F4EAD5","--st-lead-ink":"#2F6B52","--st-pt":"#141414","--st-pos":"#2F6B52","--st-chalk":"#141414","--st-self":"#F4EAD5","--st-leadbox":"#F4EAD5","--st-leadbox-ink":"#141414","--st-leadbox-cap":"#2F6B52","--st-leadbox-line":"2.5px solid #141414","--st-lname-font":"400 26px/1.1 'Bagel Fat One','Bowlby One',sans-serif","--st-sel":"rgba(7,23,67,0.25)","--st-toast":"#141414","--st-toast-ink":"#F4EAD5","--st-cta-shadow":"0 4px 0 #141414","--st-sheet-line":"2.5px solid #141414"};
+const ST_PK_VARS={"--st-hink":"#F3EAD3","--st-hmuted":"#F3EAD3","--st-uline":"#F3EAD3","--st-live":"#F3EAD3","--st-title-font":"400 30px/1.1 'Bagel Fat One','Bowlby One',sans-serif","--st-title-track":"0","--st-pagebg":"#E4312B","--st-body-solid":"#F3EAD3","--st-panel":"#F3EAD3","--st-pline":"#1A1716","--st-pshadow":"0 4px 0 #1A1716","--st-ink":"#1A1716","--st-muted":"#6B6255","--st-bline":"#1A1716","--st-rline":"rgba(20,20,20,0.22)","--st-accent":"#1A1716","--st-on-accent":"#E4312B","--st-accent-soft":"rgba(7,23,67,0.1)","--st-focus":"#1A1716","--st-danger":"#E4312B","--st-field":"#FFF8EA","--st-ph":"#6B6255","--st-hover":"rgba(20,20,20,0.07)","--st-tabgap":"4px","--st-tabpad":"4px","--st-tabbg":"#F3EAD3","--st-tabr":"16px","--st-tabline":"none","--st-tabon-ink":"#F3EAD3","--st-tabon-bg":"#1A1716","--st-lead":"#F3EAD3","--st-lead-ink":"#E4312B","--st-pt":"#1A1716","--st-pos":"#E4312B","--st-chalk":"#1A1716","--st-self":"#F3EAD3","--st-leadbox":"#F3EAD3","--st-leadbox-ink":"#1A1716","--st-leadbox-cap":"#E4312B","--st-leadbox-line":"2.5px solid #1A1716","--st-lname-font":"400 26px/1.1 'Bagel Fat One','Bowlby One',sans-serif","--st-sel":"rgba(7,23,67,0.25)","--st-toast":"#1A1716","--st-toast-ink":"#F3EAD3","--st-cta-shadow":"0 4px 0 #1A1716","--st-sheet-line":"2.5px solid #1A1716"};
 const ST_PK_CSS=`
-.gtst-pk .gt-gamehead h1{font-family:'Bagel Fat One','Bowlby One',sans-serif!important;font-weight:400!important;font-size:28px!important;letter-spacing:0!important;color:#F4EAD5!important;-webkit-text-stroke:5px #141414;paint-order:stroke fill;text-shadow:2px 3px 0 #141414;white-space:nowrap}
-.gtst-pk .gt-gamehead h1+div{color:#F4EAD5!important}
-.gtst-pk .gtst-title{font-weight:400!important;-webkit-text-stroke:4px #141414;paint-order:stroke fill;text-shadow:2px 3px 0 #141414}
-.gtst-pk .gtst-panel,.gtst-pk .gtst-lead{outline:2.5px solid #141414;outline-offset:-2.5px;border-radius:20px;box-shadow:0 4px 0 #141414}
+html[data-gt-skin="plakat"] .gtst-pk .gt-gamehead h1:not(.gt-wm){font-family:'Bagel Fat One','Bowlby One',sans-serif!important;font-weight:400!important;font-size:28px!important;letter-spacing:0!important;color:#1A1716!important;-webkit-text-stroke:0!important;paint-order:normal;padding:0 .08em;transform:rotate(-2deg);white-space:nowrap;text-shadow:4.0px 0.0px 0 #F3EAD3, 3.9px 1.0px 0 #F3EAD3, 3.5px 2.0px 0 #F3EAD3, 2.8px 2.8px 0 #F3EAD3, 2.0px 3.5px 0 #F3EAD3, 1.0px 3.9px 0 #F3EAD3, 0.0px 4.0px 0 #F3EAD3, -1.0px 3.9px 0 #F3EAD3, -2.0px 3.5px 0 #F3EAD3, -2.8px 2.8px 0 #F3EAD3, -3.5px 2.0px 0 #F3EAD3, -3.9px 1.0px 0 #F3EAD3, -4.0px 0.0px 0 #F3EAD3, -3.9px -1.0px 0 #F3EAD3, -3.5px -2.0px 0 #F3EAD3, -2.8px -2.8px 0 #F3EAD3, -2.0px -3.5px 0 #F3EAD3, -1.0px -3.9px 0 #F3EAD3, -0.0px -4.0px 0 #F3EAD3, 1.0px -3.9px 0 #F3EAD3, 2.0px -3.5px 0 #F3EAD3, 2.8px -2.8px 0 #F3EAD3, 3.5px -2.0px 0 #F3EAD3, 3.9px -1.0px 0 #F3EAD3, 3px 3px 0 #1A1716, 4px 4px 0 #1A1716, 5px 5px 0 #1A1716, 6px 6px 0 #1A1716, 7px 7px 0 #1A1716!important}
+html[data-gt-skin="plakat"] .gtst-pk .gt-gamehead h1+div{color:#F3EAD3!important;font-family:'Bagel Fat One','Bowlby One',sans-serif!important;font-weight:400!important;font-size:12px!important;letter-spacing:.08em;margin-top:6px}
+.gtst-pk .gtst-title{font-weight:400!important;-webkit-text-stroke:4px #1A1716;paint-order:stroke fill;text-shadow:2px 3px 0 #1A1716}
+.gtst-pk .gtst-panel,.gtst-pk .gtst-lead{outline:none;border-radius:22px;box-shadow:0 0 0 4px #1A1716,6px 7px 0 4px #1A1716}
 .gtst-pk .gtst-lname,.gtst-pk .gtst-nm,.gtst-pk .gtst-tname,.gtst-pk .gtst-label,.gtst-pk .gtst-lrow .nm,.gtst-pk .gtst-shead h2,.gtst-pk .gtst-rk,.gtst-pk .gtst-pt,.gtst-pk .gtst-lpts{font-family:'Bagel Fat One','Bowlby One',sans-serif!important;font-weight:400!important}
-.gtst-pk .gtst-label{color:#141414;font-size:14px}
-.gtst-pk .gtst-btn{outline:2.5px solid #141414;outline-offset:-2.5px;border-radius:16px;background:#FFFDF7;color:#141414;box-shadow:0 3px 0 #141414;font-family:'Bagel Fat One','Bowlby One',sans-serif;font-weight:400;letter-spacing:.01em}
-.gtst-pk .gtst-btn:active:not(:disabled){transform:translateY(2px);box-shadow:0 1px 0 #141414}
-.gtst-pk .gtst-btn.is-primary{background:#071743;border-color:#141414;color:#F4EAD5;font-weight:400;box-shadow:0 4px 0 #141414}
+.gtst-pk .gtst-label{color:#1A1716;font-size:14px}
+.gtst-pk .gtst-btn{outline:2.5px solid #1A1716;outline-offset:-2.5px;border-radius:16px;background:#F3EAD3;color:#1A1716;box-shadow:0 3px 0 #1A1716;font-family:'Bagel Fat One','Bowlby One',sans-serif;font-weight:400;letter-spacing:.01em}
+.gtst-pk .gtst-btn:active:not(:disabled){transform:translateY(2px);box-shadow:0 1px 0 #1A1716}
+.gtst-pk .gtst-btn.is-primary{background:#1A1716;border-color:#1A1716;color:#F3EAD3;font-weight:400;box-shadow:0 4px 0 #1A1716}
 .gtst-pk .gtst-btn.is-ghost{background:transparent;border-color:transparent;box-shadow:none}
-.gtst-pk .gtst-btn.is-danger{color:#B3242E}
-.gtst-pk .gtst-btn:disabled{opacity:1;background:#C9BFA8;color:#4A4236;box-shadow:none}
-.gtst-pk .gtst-btn.is-primary:disabled{background:#C9BFA8;color:#4A4236}
-.gtst-pk .gtst-cap{color:#F4EAD5}
-.gtst-pk .gtst-help{color:#F4EAD5}
-.gtst-pk .gtst-panel .gtst-help,.gtst-pk .gtst-sheet .gtst-help{color:#4A4236}
-.gtst-pk .gtst-panel .gtst-dot{background:#2F6B52}
-.gtst-pk .gtst-panel .gtst-state{color:#4A4236}
-.gtst-pk .gtst-panel .gtst-cap,.gtst-pk .gtst-sheet .gtst-cap{color:#4A4236}
-.gtst-pk .gtst-lead .gtst-cap{color:#2F6B52}
-.gtst-pk .gtst-title span{-webkit-text-stroke:2px #141414}
-.gtst-pk .gtst-ibtn{outline:2.5px solid #141414;outline-offset:-2.5px;background:#FFFDF7;box-shadow:0 2px 0 #141414;border-radius:14px}
+.gtst-pk .gtst-btn.is-danger{color:#E4312B}
+.gtst-pk .gtst-btn:disabled{opacity:1;background:#B9AF9C;color:#6B6255;box-shadow:none}
+.gtst-pk .gtst-btn.is-primary:disabled{background:#B9AF9C;color:#6B6255}
+.gtst-pk .gtst-cap{color:#F3EAD3}
+.gtst-pk .gtst-help{color:#F3EAD3}
+.gtst-pk .gtst-panel .gtst-help,.gtst-pk .gtst-sheet .gtst-help{color:#6B6255}
+.gtst-pk .gtst-panel .gtst-dot{background:#E4312B}
+.gtst-pk .gtst-panel .gtst-state{color:#6B6255}
+.gtst-pk .gtst-panel .gtst-cap,.gtst-pk .gtst-sheet .gtst-cap{color:#6B6255}
+.gtst-pk .gtst-lead .gtst-cap{color:#E4312B}
+.gtst-pk .gtst-title span{-webkit-text-stroke:2px #1A1716}
+.gtst-pk .gtst-ibtn{outline:2.5px solid #1A1716;outline-offset:-2.5px;background:#F3EAD3;box-shadow:0 2px 0 #1A1716;border-radius:14px}
 .gtst-pk .gtst-ibtn:active{transform:translateY(2px);box-shadow:none}
-.gtst-pk .gtst-input,.gtst-pk .gtst-sel{outline:2.5px solid #141414;outline-offset:-2.5px;border-radius:14px}
-.gtst-pk .gtst-tabs{outline:2.5px solid #141414;outline-offset:-2.5px;box-shadow:0 3px 0 #141414}
-.gtst-pk .gtst-tab{font-family:'Bagel Fat One','Bowlby One',sans-serif;font-weight:400;color:#141414}
-.gtst-pk .gtst-tab[aria-selected=true]{color:#F4EAD5}
+.gtst-pk .gtst-input,.gtst-pk .gtst-sel{outline:2.5px solid #1A1716;outline-offset:-2.5px;border-radius:14px}
+.gtst-pk .gtst-tabs{outline:2.5px solid #1A1716;outline-offset:-2.5px;box-shadow:0 3px 0 #1A1716}
+.gtst-pk .gtst-tab{font-family:'Bagel Fat One','Bowlby One',sans-serif;font-weight:400;color:#1A1716}
+.gtst-pk .gtst-tab[aria-selected=true]{color:#F3EAD3}
 .gtst[data-d=app].gtst-pk .gtst-tab[aria-selected=true]::after{display:none}
-.gtst-pk .gtst-chip,.gtst-pk .gtst-pbtn,.gtst-pk .gtst-wbtn,.gtst-pk .gtst-slot,.gtst-pk .gtst-mini,.gtst-pk .gtst-team,.gtst-pk .gtst-tbox,.gtst-pk .gtst-when,.gtst-pk .gtst-mx{border-width:2px;border-color:#141414}
-.gtst-pk .gtst-chip,.gtst-pk .gtst-pbtn,.gtst-pk .gtst-wbtn,.gtst-pk .gtst-mini{background:#FFFDF7}
+.gtst-pk .gtst-chip,.gtst-pk .gtst-pbtn,.gtst-pk .gtst-wbtn,.gtst-pk .gtst-slot,.gtst-pk .gtst-mini,.gtst-pk .gtst-team,.gtst-pk .gtst-tbox,.gtst-pk .gtst-when,.gtst-pk .gtst-mx{border-width:2px;border-color:#1A1716}
+.gtst-pk .gtst-chip,.gtst-pk .gtst-pbtn,.gtst-pk .gtst-wbtn,.gtst-pk .gtst-mini{background:#F3EAD3}
 .gtst-pk .gtst-chip{font-family:'Bagel Fat One','Bowlby One',sans-serif;font-weight:400}
-.gtst-pk .gtst-chip[aria-pressed=true],.gtst-pk .gtst-wbtn[aria-pressed=true]{background:#071743;color:#F4EAD5}
-.gtst-pk .gtst-chip[aria-pressed=true] .gtst-av{background:#F4EAD5!important;box-shadow:none!important}
-.gtst-pk .gtst-pbtn[aria-pressed=true]{background:#F4EAD5;border-width:3px}
-.gtst-pk .gtst-sheet{outline:2.5px solid #141414;outline-offset:-2.5px;border-bottom:none}
-.gtst-pk .gtst-sfoot{border-top:2.5px solid #141414}
-.gtst-pk .gtst-toast{border:2.5px solid #F4EAD5;border-radius:16px}
-.gtst-pk .gtst-badge{border-width:2px;border-color:#141414;font-family:'Bagel Fat One','Bowlby One',sans-serif;font-weight:400}
-.gtst-pk .gtst-sum,.gtst-pk .gtst-ro,.gtst-pk .gtst-note{outline:2px solid #141414;outline-offset:-2px}
-.gtst-pk .gtst-cta::before{background:linear-gradient(to bottom,transparent,#2F6B52 55%)}
-.gtst-pk :focus-visible{outline-color:#F4EAD5}
-.gtst-pk .gtst-panel :focus-visible,.gtst-pk .gtst-sheet :focus-visible{outline-color:#071743}
-.gtst-pk .gtst-toast :focus-visible{outline-color:#F4EAD5}
+.gtst-pk .gtst-chip[aria-pressed=true],.gtst-pk .gtst-wbtn[aria-pressed=true]{background:#1A1716;color:#F3EAD3}
+.gtst-pk .gtst-chip[aria-pressed=true] .gtst-av{background:#F3EAD3!important;box-shadow:none!important}
+.gtst-pk .gtst-pbtn[aria-pressed=true]{background:#F3EAD3;border-width:3px}
+.gtst-pk .gtst-sheet{outline:2.5px solid #1A1716;outline-offset:-2.5px;border-bottom:none}
+.gtst-pk .gtst-sfoot{border-top:2.5px solid #1A1716}
+.gtst-pk .gtst-toast{border:2.5px solid #F3EAD3;border-radius:16px}
+.gtst-pk .gtst-badge{border-width:2px;border-color:#1A1716;font-family:'Bagel Fat One','Bowlby One',sans-serif;font-weight:400}
+.gtst-pk .gtst-sum,.gtst-pk .gtst-ro,.gtst-pk .gtst-note{outline:2px solid #1A1716;outline-offset:-2px}
+.gtst-pk .gtst-cta::before{background:linear-gradient(to bottom,rgba(228,49,43,0),#E4312B 55%)}
+.gtst-pk :focus-visible{outline-color:#F3EAD3}
+.gtst-pk .gtst-panel :focus-visible,.gtst-pk .gtst-sheet :focus-visible{outline-color:#1A1716}
+.gtst-pk .gtst-toast :focus-visible{outline-color:#F3EAD3}
+
+.gtst-pk .gtst-panel{background:#F3EAD3}
+.gtst-pk .gtst-av{color:#1A1716!important;box-shadow:inset 0 0 0 1.5px #1A1716!important}
+.gtst-pk .gtst-input:focus-visible,.gtst-pk .gtst-sel:focus-visible{outline:2.5px solid #1A1716!important;outline-offset:-2.5px!important;box-shadow:0 0 0 3px #E4312B}
+.gtst-pk .gtst-titlerow .gtst-ibtn{color:#1A1716!important}
+.gtst-pk .gtst-su .pl-main>.gtst-panel:nth-child(1){transform:rotate(-1deg)}
+.gtst-pk .gtst-su .pl-main>.gtst-panel:nth-child(2){transform:rotate(1deg);margin-top:18px!important}
+.gtst-pk .gtst-su .pl-side>.gtst-panel{transform:rotate(-.6deg);margin-top:18px!important}
+.gtst-pk .gtst-input,.gtst-pk .gtst-sel{background:#FFF8EA;color:#1A1716;outline:2.5px solid #1A1716;outline-offset:-2.5px;border-radius:14px}
+.gtst-pk .gtst-btn.is-primary{background:#1A1716;color:#E4312B;outline:none;border-color:transparent;border-radius:999px;box-shadow:0 0 0 4px #F3EAD3,6px 7px 0 4px #1A1716;font-family:'Bagel Fat One','Bowlby One',sans-serif;font-weight:400}
+.gtst-pk .gtst-btn.is-primary:active:not(:disabled){transform:translateY(3px);box-shadow:0 0 0 4px #F3EAD3,3px 4px 0 4px #1A1716}
+.gtst-pk .gtst-btn.is-primary:disabled{background:#B9AF9C;color:#6B6255;box-shadow:0 0 0 4px #1A1716}
+.gtst-pk .gtst-su #gtst-add+.gtst-btn{background:#E4312B;color:#1A1716;border-radius:50%;outline:2.5px solid #1A1716;outline-offset:-2.5px;box-shadow:0 3px 0 #1A1716}
+.gtst-pk .gtst-su #gtst-add+.gtst-btn:disabled{background:#B9AF9C;color:#6B6255}
+.gtst-pk .gtst-step .gtst-btn{border-radius:50%;background:#F3EAD3;color:#1A1716;outline:2.5px solid #1A1716;outline-offset:-2.5px;box-shadow:0 3px 0 #1A1716}
+.gtst-pk .gtst-step .gtst-btn:disabled{background:#B9AF9C;color:#6B6255}
+.gtst-pk .gtst-step output{font-family:'Bagel Fat One','Bowlby One',sans-serif;font-weight:400;color:#1A1716}
+.gtst-pk .gtst-panel .gtst-dot,.gtst-pk .gtst-dot{background:#E4312B}
+.gtst-pk .gtst-err{color:#E4312B}
+.gtst-pk .gtst-panel .gtst-err{color:#C0221C}
+.gtst-pk .gtst-panel :focus-visible,.gtst-pk .gtst-sheet :focus-visible{outline-color:#1A1716}
 `;
 function rootStyle(d){const v=VARS[d]||VARS.strichliste;const bg=d==="grandslam"?"#2448E8":"radial-gradient(120% 55% at 12% -4%, rgba(244,243,234,0.07) 0%, rgba(244,243,234,0) 62%), radial-gradient(80% 40% at 100% 100%, rgba(133,209,245,0.05) 0%, rgba(133,209,245,0) 70%), #15191C";return Object.assign({},v,{minHeight:"100vh",background:bg,padding:"20px 12px calc(env(safe-area-inset-bottom,0px) + 32px)"});}
 /* ---------- Bausteine ---------- */
@@ -561,7 +582,7 @@ if(r.mode==="enter")toast({msg,undo:()=>GT_ST_STORE.commit(tid,x=>GT_ST.voidMatc
 else if(r.mode==="edit"&&r.prev){const p=r.prev;toast({msg:t("stuToastEdited"),undo:()=>GT_ST_STORE.commit(tid,x=>GT_ST.editMatch(x,p.id,{teamA:p.teamA,teamB:p.teamB,winner:p.winner}))});}
 else toast({msg});};
 const commitT=(fn,okMsg)=>{const r=GT_ST_STORE.commit(tour.id,fn);if(!r.ok){toast({msg:errText(t,r,lbl,tour)});return r;}if(okMsg)toast({msg:okMsg});return r;};
-const sk=stuSkin(theme);const tk=pk?{ink:"#F4EAD5",muted:"#F4EAD5",border:"#141414",card:"#FFFDF7"}:{ink:sk.ink,muted:sk.muted,border:sk.border,card:sk.card};
+const sk=stuSkin(theme);const tk=pk?{ink:"#F3EAD3",muted:"#F3EAD3",border:"#1A1716",card:"#F3EAD3"}:{ink:sk.ink,muted:sk.muted,border:sk.border,card:sk.card};
 const roT=!!tour&&tour.status==="completed";
 const moreItems=scr==="tour"&&tour?[{key:"people",icon:"users",label:t("stuManagePeople"),onClick:()=>openSheet({k:"people"})},!roT&&{key:"tables",icon:"table",label:t("stuTables"),onClick:()=>openSheet({k:"tables"})},!roT&&{key:"export",icon:"share",label:t("stuExport"),onClick:()=>openSheet({k:"export"})},!roT&&{key:"end",icon:"flag",label:t("stuEndTour"),onClick:()=>openSheet({k:"end"})},{key:"repeat",icon:"copy",label:t("stuRepeat"),onClick:()=>openSheet({k:"repeat"})},{key:"delete",icon:"trash",danger:true,label:t("stuDeleteTour"),onClick:()=>openSheet({k:"delete"})}].filter(Boolean):[];
 let sheetEl=null;
@@ -581,9 +602,9 @@ else if(k==="export")sheetEl=typeof GtStExportSheet==="function"?<GtStExportShee
 if(sheet&&sheet.k==="rules")sheetEl=<Sheet title={t("stuRulesT")} onClose={close}>{String(t("stuRules")).split("\n\n").map((x,i)=><p key={i} style={{margin:"0 0 12px",font:"500 15px/1.55 var(--st-ui)"}}>{x}</p>)}</Sheet>;
 else if(sheet&&sheet.k==="delete"&&sheet.target)sheetEl=<ConfirmSheet cancel={t("stuCancel")} title={fmt(t("stuDeleteT"),{name:sheet.target.name})} text={t("stuDeleteText")} ok={t("stuDeleteOk")} danger onClose={close} onOk={()=>doDelete(sheet.target)}/>;
 const gtitle=t("stuMode");
-return <div className={"gtL-shellpage gtst"+(pk?" gtst-pk":"")} data-d="app" data-t={stuT(theme)} data-scr={scr} lang={lang} style={pk?{...stuRoot(theme),...ST_PK_VARS,"--pk-bg":"#2F6B52",background:pkPage("#2F6B52").background}:stuRoot(theme)}><style>{GLOBAL_STYLES}{CSS}{ST_PL_CSS}{pk?ST_PK_CSS:""}</style>
+return <div className={"gtL-shellpage gtst"+(pk?" gtst-pk":"")} data-d="app" data-t={stuT(theme)} data-scr={scr} lang={lang} style={pk?{...stuRoot(theme),...ST_PK_VARS,...ryuPage()}:stuRoot(theme)}><style>{GLOBAL_STYLES}{CSS}{ST_PL_CSS}{pk?ST_PK_CSS:""}</style>
 <div className="gtL-page gtL-game gtst-page pl-head-compact" style={{maxWidth:scr==="tour"?380:420,margin:"0 auto"}}>
-<GameHeader title={gtitle} subtitle={scr==="list"?t("stuListSub"):scr==="setup"?t("stuSetupSub"):null} onBack={back} backLabel={t("back")} tk={tk} accent={pk?"#F4EAD5":sk.txt} icon={<GtStuLogo color={pk?"#F4EAD5":sk.txt}/>} titleFont="'Inter', sans-serif" onRules={()=>openSheet({k:"rules"})} onHome={onHome} moreItems={moreItems}/>
+<GameHeader title={gtitle} subtitle={scr==="list"?t("stuListSub"):scr==="setup"?t("stuSetupSub"):null} onBack={back} backLabel={t("back")} tk={tk} accent={pk?"#F3EAD3":sk.txt} icon={<GtStuLogo color={pk?"#F3EAD3":sk.txt}/>} titleFont="'Inter', sans-serif" onRules={()=>openSheet({k:"rules"})} onHome={onHome} moreItems={moreItems}/>
 {snap.error&&snap.error.code==="STORAGE"&&<div className="gtst-note" role="alert" style={{marginBottom:10,background:"var(--st-body-solid)"}}>{t("stuErr_STORAGE")}<button type="button" className="gtst-btn is-small" style={{marginLeft:8}} onClick={()=>GT_ST_STORE.dismissError()}>{t("stuOk")}</button></div>}
 {scr==="tour"&&tour?<Fragment><TourHead tour={tour} t={t} lang={lang} onRename={nm=>{const r=GT_ST_STORE.commit(tour.id,x=>GT_ST.rename(x,nm));return r.ok?r:{ok:false,msg:errText(t,r,lbl,tour)};}}/><TourView tour={tour} t={t} lang={lang} toast={toast} openSheet={openSheet} onToTafel={onToTafel} tafelMid={tafelMid}/></Fragment>
 :scr==="setup"?<SetupView t={t} lang={lang} onCreate={create} err={err} usedNames={snap.tournaments.filter(x=>!x.deletedAt).map(x=>x.name)}/>

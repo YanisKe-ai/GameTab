@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.15-6 (15.11.2026 12:54)
+- Plakat: Spiellisten als Spielkarten (Name in zwei Ecken, Icon in der Mitte), Schreibunterlagen rot, Partyspiele schwarz
+
 ## 2026.11.15-5 (15.11.2026 12:31)
 - Plakat: Einstellungen im neuen Stil (Creme und Schwarz gemischt, schräg), Haptik-Schalter nur in Konzeptfarben, Fusszeile kleiner
 

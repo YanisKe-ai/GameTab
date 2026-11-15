@@ -176,7 +176,7 @@ def run_main(b):
         pg.get_by_role("button", name=re.compile(r"^Anna")).first.click()
         wait(pg, 900)
         shot(pg, "t_sd_393_profil.png")
-        assert pg.locator("h1").first.inner_text().strip().startswith("Anna"), "Profil öffnet nicht"
+        assert pg.locator("h1").first.inner_text().strip().lower().startswith("anna"), "Profil öffnet nicht"
         pg.get_by_role("button", name="Zurück").first.click()
         wait(pg, 600)
         # Mehr: Dein Jahr, Erfolge
@@ -186,7 +186,7 @@ def run_main(b):
         pg.locator("[data-gt-achv-row]").click()
         wait(pg, 700)
         shot(pg, "t_sd_393_erfolge.png")
-        assert "Erfolge" in pg.locator("h1").first.inner_text(), "Erfolge-Ansicht fehlt"
+        assert "erfolge" in pg.locator("h1").first.inner_text().lower(), "Erfolge-Ansicht fehlt"
         assert pg.locator("[data-gt-achv]").count() > 3, "keine Erfolge sichtbar"
         pg.get_by_role("button", name="Zurück").first.click()
         wait(pg, 500)

@@ -76,7 +76,7 @@ const MO_CSS = `
 .mo-slate{border-radius:9px;padding:4px 6px 8px;background:radial-gradient(120% 90% at 25% 0%,rgba(255,255,255,.07),transparent 60%),var(--mo-sl);box-shadow:inset 0 0 0 1px rgba(0,0,0,.45),inset 0 10px 26px rgba(0,0,0,.35);color:var(--mo-ch);--mo-lc:44px;--mo-rh:44px}
 .mo-slate.dense{--mo-rh:44px}
 /* Rundenzeilen scrollen in sich, damit Tafel und Dock auf kurzen Handys zusammenpassen (Zeilen bleiben 44 px hoch, antippbar) */
-.mo-rows{display:flex;flex-direction:column;max-height:max(132px,calc(100dvh - var(--mo-over,478px)));overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.mo-rows{display:flex;flex-direction:column;max-height:max(132px,calc(100dvh - var(--mo-over,542px)));overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .mo-rows::-webkit-scrollbar{display:none}
 .mo-rows.fade{-webkit-mask-image:linear-gradient(to bottom,#000 calc(100% - 14px),transparent);mask-image:linear-gradient(to bottom,#000 calc(100% - 14px),transparent)}
 .mo-rows.fade.top{-webkit-mask-image:linear-gradient(to bottom,transparent,#000 14px,#000 calc(100% - 14px),transparent);mask-image:linear-gradient(to bottom,transparent,#000 14px,#000 calc(100% - 14px),transparent)}
@@ -222,7 +222,7 @@ const MO_PK_CSS = `
 .mo-pk.mo-pk .gt-su-add{background:#F3EAD3!important;color:#1A1716!important;outline:none!important;border:2.5px dashed #1A1716!important;box-shadow:0 3px 0 #1A1716!important}
 /* Tafel als Cremeblatt */
 .mo-pk .mo-board{margin-top:8px}
-.mo-pk .mo-rows{max-height:max(132px,calc(100dvh - var(--mo-over,478px) - 44px))}
+.mo-pk .mo-rows{max-height:max(132px,calc(100dvh - var(--mo-over,542px) - 44px))}
 .mo-pk .mo-frame{padding:4px 10px 12px 4px;background:none;box-shadow:none;border-radius:0}
 .mo-pk .mo-slate{border-radius:18px;padding:8px 8px 10px;background:#F3EAD3;box-shadow:0 0 0 4px #1A1716,6px 7px 0 4px #1A1716;color:#1A1716}
 .mo-pk .mo-hrow{border-bottom:2px solid #D9CCAE;padding:2px 0 8px}

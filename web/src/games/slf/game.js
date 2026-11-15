@@ -19,7 +19,6 @@ import { SLF_CATS, SLF_GROUPS, slfCatName, slfGroupName } from "../../content/sl
 import { cleanCustom, slfBuildLink, slfEncode, slfFormatCode, slfParseInput, slfParseLink } from "./code.js";
 import { slfQr, slfQrPath } from "./qr-gen.js";
 import { DEFAULT_SLF, LETTERS, SLF_MAX_CATS, SLF_MIN_CATS, SLF_POINTS, SLF_TIMERS, detectLetter, firstLetter, freshGame, freshRound, isOff, roundSum, slfNormalize, totalOf } from "./logic.js";
-import { SlfLogo } from "./logo.js";
 import { SLF_CSS, SLF_FONTS, SLF_PK_CSS, slfPkTk, slfTk, slfVars } from "./styles.js";
 import { usePlakat } from "../../themes/theme-id.js";
 import { PK_STAMP_CSS } from "../../shared/plakat/kit.js";
@@ -91,14 +90,18 @@ function Sheet({ open, onClose, title, children, label }) {
   </div>;
 }
 
-function AlphaStrip({ used, cur, t, pk, onLetter }) {
+function AlphaStrip({ used, cur, t }) {
   const usedList = LETTERS.filter((l) => used.includes(l));
-  const strip = <div className="slf-strip" role="img" aria-label={usedList.length ? usedList.join(", ") + " " + t("slfUsedLetter") : "A bis Z"}>
+  const ref = useRef(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const c = el.querySelector(".is-cur");
+    if (c) el.scrollLeft = Math.max(0, c.offsetLeft - (el.clientWidth - c.offsetWidth) / 2);
+    else el.scrollLeft = 0;
+  }, [cur]);
+  return <div className="slm-az" ref={ref} role="img" aria-label={usedList.length ? usedList.join(", ") + " " + t("slfUsedLetter") : "A bis Z"}>
     {LETTERS.map((l) => <span key={l} className={(used.includes(l) ? "is-used " : "") + (cur === l ? "is-cur" : "")}>{l}</span>)}
-  </div>;
-  // Buchstabe ändern als kleiner Knopf neben der Leiste (alle Modi)
-  return <div className="slf-alpha">{strip}
-    <button type="button" className={"slf-lettbtn" + (cur ? "" : " is-unknown")} onClick={onLetter} aria-label={t("slfLetterBtn") + (cur ? ": " + cur : "")}><span aria-hidden="true">{cur || "?"}</span><IcPen /></button>
   </div>;
 }
 
@@ -305,39 +308,43 @@ function Play({ S, upd, cols, eff, t, left, tk, onLetter, onStartRound, firstRef
     if (!answers.some((a) => firstLetter(a))) lead = "";
     return { ...s, answers, lead };
   });
+  const doneN = cols.filter((c, i) => (S.answers[i] || "").trim() && !isOff(S.answers[i], eff)).length;
   const onFocus = (e) => {
     const el = e.target;
-    setTimeout(() => { try { el.scrollIntoView({ block: "center", behavior: window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }); } catch (err) { /* egal */ } }, 320);
+    setTimeout(() => { try { el.scrollIntoView({ block: "nearest", behavior: window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }); } catch (err) { /* egal */ } }, 320);
   };
   return <React.Fragment>
-    <div className="gtL-split"><div className="gtL-col-main slf-body">
-      {pk ? (S.stage === "write" && S.timer > 0) || (S.stage === "write" && !eff) || ready || S.stage === "stopped" ? <div className="slf-pkrow">
-        {S.stage === "write" && S.timer > 0 && <GtTimerRing left={left} total={S.timer} size={48} stroke={5} color="#141414"><span style={{ font: "400 17px 'Bagel Fat One',sans-serif" }}>{left}</span></GtTimerRing>}
-        {S.stage === "write" && !eff && <p className="slf-hint" style={{ margin: 0 }}>{t("slfLetterHint")}</p>}
-        {ready && <p className="slf-hint" style={{ margin: 0 }}>{t("slfReady")}</p>}
-        {S.stage === "stopped" && <p className="slf-hint" role="status" style={{ margin: 0, fontWeight: 700 }}>{S.stopWhy === "time" ? t("slfTimeUp") : t("slfLocked")}</p>}
-      </div> : null : <div className="slf-pkrow slf-toprow">
-        <div className="slf-round">{t("slfRound")(S.rounds.length + 1)}</div>
-        {S.stage === "write" && S.timer > 0 && <GtTimerRing left={left} total={S.timer} size={48} stroke={5} color={tk.acc}><span style={{ font: "800 16px 'Space Grotesk',sans-serif" }}>{left}</span></GtTimerRing>}
-        {S.stage === "write" && !eff && <p className="slf-hint" style={{ margin: 0 }}>{t("slfLetterHint")}</p>}
-        {ready && <p className="slf-hint" style={{ margin: 0 }}>{t("slfReady")}</p>}
-        {S.stage === "stopped" && <p className="slf-hint" role="status" style={{ margin: 0, color: "var(--s-ink)", fontWeight: 700 }}>{S.stopWhy === "time" ? t("slfTimeUp") : t("slfLocked")}</p>}
-      </div>}
-      <AlphaStrip used={used} cur={eff} t={t} pk={pk} onLetter={onLetter} />
-      {S.stage === "stopped" && <div className="slf-stampbar" aria-hidden="true"><span className="slf-stamp">{t("slfStop")}</span></div>}
-      <ol className="slf-cards">
+    <div className="gtL-split"><div className="gtL-col-main slf-body slm-body">
+      <div className={"slm-hero" + (S.stage === "stopped" ? " is-stop" : "")}>
+        <button type="button" className="slm-ring" onClick={onLetter} aria-label={t("slfLetterBtn") + (eff ? ": " + eff : "")}>
+          {S.stage === "write" && S.timer > 0
+            ? <GtTimerRing left={left} total={S.timer} size={56} stroke={5} color="var(--m-ring)"><span className="slm-let" aria-hidden="true">{eff || "?"}</span></GtTimerRing>
+            : <span className="slm-ringbox"><svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="25" fill="none" strokeWidth="5" /></svg><span className="slm-let" aria-hidden="true">{eff || "?"}</span></span>}
+        </button>
+        <div className="slm-tx">
+          <b className="slf-round">{t("slfRound")(S.rounds.length + 1)}</b>
+          {S.stage === "stopped" ? <span role="status">{S.stopWhy === "time" ? t("slfTimeUp") : t("slfLocked")}</span>
+            : ready ? <span>{t("slfReady")}</span>
+            : !eff ? <span>{t("slfLetterHint")}</span>
+            : S.timer > 0 ? <span>{t("slfSec")(left)}</span> : null}
+        </div>
+        <div className="slm-cnt" aria-label={doneN + "/" + cols.length}><b>{doneN}/{cols.length}</b><span aria-hidden="true">{"✓"}</span></div>
+        {S.stage === "stopped" && <div className="slm-stampbar" aria-hidden="true"><span className="slf-stamp">{t("slfStop")}</span></div>}
+      </div>
+      <AlphaStrip used={used} cur={eff} t={t} />
+      <ol className="slm-list">
         {cols.map((c, i) => {
           const off = isOff(S.answers[i], eff);
           const fl = firstLetter(S.answers[i]);
           const done = !!(S.answers[i] || "").trim();
-          return <li key={c.k} className={"slf-card2" + (off ? " is-off" : "") + (locked ? " is-locked" : "") + (done ? " is-done" : "")}>
-            <label className="slf-lab" htmlFor={"slf-in-" + i}>{c.name}</label>
-            {done && <span className="slf-chk" aria-hidden="true">{"✓"}</span>}
+          return <li key={c.k} className={"slm-row" + (off ? " is-off" : "") + (locked ? " is-locked" : "") + (done ? " is-done" : "")}>
+            <label className="slm-lab" htmlFor={"slf-in-" + i}>{c.name}</label>
             <input id={"slf-in-" + i} ref={(el) => { inputs.current[i] = el; if (i === 0) firstRef.current = el; }} className="slf-in" type="text" value={S.answers[i] || ""} readOnly={locked} aria-readonly={locked ? "true" : undefined}
               maxLength={60} autoComplete="off" autoCorrect="off" autoCapitalize="words" spellCheck={false} enterKeyHint={i + 1 < cols.length ? "next" : "done"}
               aria-label={t("slfAnswerFor")(c.name)} aria-describedby={off ? "slf-off-" + i : undefined}
               onChange={(e) => set(i, e.target.value)} onFocus={onFocus} onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); focusNext(i); } }} />
-            {off && <span className="slf-off" id={"slf-off-" + i} aria-label={t("slfOffLetter")(eff)}>{fl}{"≠"}{eff}</span>}
+            {off && <span className="slf-off slm-off" id={"slf-off-" + i} aria-label={t("slfOffLetter")(eff)}>{fl}{"≠"}{eff}</span>}
+            {done && !off && <span className="slm-ok" aria-hidden="true">{"✓"}</span>}
           </li>;
         })}
       </ol>
@@ -352,27 +359,26 @@ function Play({ S, upd, cols, eff, t, left, tk, onLetter, onStartRound, firstRef
 function Score({ S, upd, cols, eff, t }) {
   const sum = roundSum(S.pts);
   const total = totalOf(S.rounds) + sum;
-  return <div className="slf-body" style={{ paddingBottom: 20 }}>
-    <p className="slf-hint" style={{ margin: "0 2px" }}>{t("slfScoreHint")}</p>
-    <div className="slf-legend"><span><b>20</b>{t("slfL20")}</span><span><b>10</b>{t("slfL10")}</span><span><b>5</b>{t("slfL5")}</span><span><b>0</b>{t("slfL0")}</span></div>
-    <div className="slf-paper">
-      <div style={{ position: "relative" }} className="slf-sheet">
-        {cols.map((c, i) => {
-          const a = (S.answers[i] || "").trim();
-          const off = isOff(a, eff);
-          return <div className="slf-srow" key={c.k}>
-            <span className="slf-lab">{c.name}</span>
-            <div className={"slf-ans" + (a ? "" : " is-empty")}>{a || t("slfEmpty")}{off && <span style={{ font: "800 12px 'Space Grotesk',sans-serif", color: "var(--s-off)", marginLeft: 8 }}>{firstLetter(a)}{"≠"}{eff}</span>}</div>
-            <div className="slf-pts" role="radiogroup" aria-label={c.name}>
-              {SLF_POINTS.map((p) => <button key={p} type="button" role="radio" aria-checked={S.pts[i] === p} aria-label={t("slfPtsAria")(p)} className={"slf-pt" + (p === 0 ? " z" : "")}
-                onClick={() => { hapticTap(); upd((s) => ({ ...s, pts: s.pts.map((v, j) => (j === i ? p : v)) })); }}>{p}</button>)}
-            </div>
-          </div>;
-        })}
-        <div className="slf-sum"><span>{t("slfRoundSum")} {S.rounds.length + 1}</span><b>{sum}</b></div>
-        <div className="slf-sum" style={{ paddingTop: 0 }}><span>{t("slfTotal")}</span><b>{total}</b></div>
-      </div>
-    </div>
+  return <div className="slf-body slm-body" style={{ paddingBottom: 20 }}>
+    <p className="slf-hint slm-sh">{t("slfScoreHint")}</p>
+    <div className="slm-legend"><span><b>20</b>{t("slfL20")}</span><span><b>10</b>{t("slfL10")}</span><span><b>5</b>{t("slfL5")}</span><span><b>0</b>{t("slfL0")}</span></div>
+    <ol className="slm-list">
+      {cols.map((c, i) => {
+        const a = (S.answers[i] || "").trim();
+        const off = isOff(a, eff);
+        return <li className="slm-row is-score" key={c.k}>
+          <div className="slm-w">
+            <span className="slm-lab">{c.name}</span>
+            <div className={"slm-ans" + (a ? "" : " is-empty")}>{a || t("slfEmpty")}{off && <span className="slf-off slm-off">{firstLetter(a)}{"≠"}{eff}</span>}</div>
+          </div>
+          <div className="slm-chips" role="radiogroup" aria-label={c.name}>
+            {SLF_POINTS.map((p) => <button key={p} type="button" role="radio" aria-checked={S.pts[i] === p} aria-label={t("slfPtsAria")(p)} className={"slf-pt" + (p === 0 ? " z" : "")}
+              onClick={() => { hapticTap(); upd((s) => ({ ...s, pts: s.pts.map((v, j) => (j === i ? p : v)) })); }}>{p}</button>)}
+          </div>
+        </li>;
+      })}
+    </ol>
+    <div className="slm-sum"><div><span>{t("slfRoundSum")} {S.rounds.length + 1}</span><b>{sum}</b></div><div className="r"><span>{t("slfTotal")}</span><b>{total}</b></div></div>
   </div>;
 }
 
@@ -512,7 +518,6 @@ function SlfGame({ state, setState, onBack, onHome, onEndGame, lang = "de", them
   ].filter(Boolean) : [];
 
   const rulesTitle = t("gameSlf");
-  const subtitle = S.phase === "setup" ? t("gtNewMatch") : S.phase === "done" ? t("slfSummary") : t("slfRound")(S.rounds.length + 1);
   const headTk = { border: tk.border, card: tk.card, ink: tk.ink, muted: tk.muted };
   const podTk = { bg2: tk.bg2, border: tk.border, card: tk.card, gold: tk.acc, ink: tk.ink, muted: tk.muted };
 
@@ -534,13 +539,12 @@ function SlfGame({ state, setState, onBack, onHome, onEndGame, lang = "de", them
     </GtDock>;
   }
 
-  const wordmark = S.phase === "setup";
-  return <div className={"gtL-shellpage slf-root" + (pk ? " slf-pk" : "")} style={{ minHeight: "100vh", background: tk.pageBg, padding: "20px 12px 32px", ...slfVars(tk) }}>
+  return <div className={"gtL-shellpage slf-root slf-th-" + (theme === "light" ? "light" : theme === "noir" ? "noir" : "dark") + (pk ? " slf-pk" : "")} style={{ minHeight: "100vh", background: tk.pageBg, padding: "20px 12px 32px", ...slfVars(tk) }}>
     <style>{GLOBAL_STYLES}{SLF_FONTS}{SLF_CSS}{pk ? SLF_PK_CSS + PK_STAMP_CSS : null}</style>
     {celebration}
     <div className="gtL-game pl-wide pl-page pl-head-compact slf-wrap" style={{ maxWidth: 440, margin: "0 auto", position: "relative" }}>
       <GtCol accent={tk.acc} style={{ gap: 14 }}>
-        <GameHeader title={rulesTitle} subtitle={subtitle} onBack={goBack} backLabel={t("back")} tk={headTk} accent={tk.acc} icon={wordmark ? undefined : <SlfLogo color={tk.acc} />}
+        <GameHeader title={rulesTitle} subtitle={t("gtNewMatch")} onBack={goBack} backLabel={t("back")} tk={headTk} accent={tk.acc}
           onHome={onHome} onEndGame={playing ? onEndGame : undefined} onRules={undefined} rulesText={t("rulesSlf")} rulesTitle={rulesTitle} moreItems={items} onMenuOpen={() => { try { if (document.activeElement && document.activeElement.blur) document.activeElement.blur(); } catch (e) { /* egal */ } }} />
         {body}
         {dock}

@@ -73,9 +73,9 @@ function GtHeroMark({ theme, width, className, style, markRef }) {
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit).catch(() => {});
     return () => { tms.forEach(clearTimeout); if (ro) ro.disconnect(); window.removeEventListener("resize", fit); page.style.removeProperty("--pk-tshift"); };
   }, []);
-  // Nocturne-Startseite (Handy): Kacheln etwas höher; Suche und «Alle Spiele» gleichmässig zwischen Kacheln und Tippkarte.
+  // Startseite Nocturne, Hell, Noir (Handy): Kacheln etwas höher; Suche und «Alle Spiele» gleichmässig zwischen Kacheln und Tippkarte.
   React.useEffect(() => {
-    if (theme !== "dark" || isPlakat()) return undefined;
+    if (isPlakat()) return undefined;
     const root = document.documentElement;
     if (root.classList.contains("gt-laptopmode") || root.hasAttribute("data-phone-landscape")) return undefined;
     const page = document.querySelector(".gtL-start");

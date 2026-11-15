@@ -96,6 +96,7 @@ const P10_CSS=`
 [data-phone-landscape] .p10-flow{grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:14px;grid-template-areas:"seg hand" "tie hand" "strip hand" "who hand" "done foot";align-items:start}
 [data-phone-landscape] .p10-stairs{display:none}
 [data-phone-landscape] .gt-ug.gt-u-col>.gt-headbtns+.gt-gamehead{margin-top:0}
+html:not([data-phone-landscape]) .pld .gt-wm{margin-top:8px}
 `;
 const P10_PK_CSS=`
 .gtL-shellpage:has(.p10-pk){--pk-bg:#E0464E;background:radial-gradient(rgba(20,20,20,.10) 1.2px,transparent 1.4px) 0 0/14px 14px,#E0464E!important}

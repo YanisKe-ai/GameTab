@@ -24,7 +24,7 @@ import { pkPage } from "../../shared/plakat/kit.js";
 import { PK_GAME } from "../../themes/plakat.js";
 /*@gt-body-begin*/const mlPk=theme=>theme==="light"&&isPlakat();
 function mlTok(theme){const w=mostLikelyTokens(theme);return mlPk(theme)?pkPartyTk(w):w;}
-function MlFinger({size=32,style}){return <svg aria-hidden="true" focusable="false" className="ml-finger" width={size} height={size*1.45} viewBox="0 0 28 40" style={style}><path d="M8 2h14a6 6 0 0 1 6 6v6a5 5 0 0 1-5 5h-1v14.2a3.4 3.4 0 0 1-6.8 0V19H8a6 6 0 0 1-6-6V8a6 6 0 0 1 6-6z" fill="#141414"/><rect x="0" y="9" width="9" height="13" rx="4.5" transform="rotate(14 4 15)" fill="#141414"/><path d="M11 5.5v8M16 5.5v8M21 5.5v8" stroke="#F3EAD3" strokeWidth="1.5" strokeLinecap="round" opacity=".7"/></svg>;}
+function MlFinger({size=34,style}){return <svg aria-hidden="true" focusable="false" className="ml-finger" width={size*1.55} height={size} viewBox="0 0 52 34" style={style}><rect x="0" y="9" width="9" height="19" rx="2" fill="#141414"/><path d="M22 11h22.5a4.5 4.5 0 0 1 0 9H22z" fill="#FFFDF7" stroke="#141414" strokeWidth="2.6" strokeLinejoin="round"/><path d="M9 7h8a8 8 0 0 1 8 8v8a7 7 0 0 1-7 7H9z" fill="#FFFDF7" stroke="#141414" strokeWidth="2.6" strokeLinejoin="round"/><path d="M17 21.5h5.5a4 4 0 0 1 0 8H17" fill="none" stroke="#141414" strokeWidth="2.4" strokeLinecap="round"/><path d="M12 3.5a5 5 0 0 1 9 0l1.5 4.5h-11z" fill="#FFFDF7" stroke="#141414" strokeWidth="2.4" strokeLinejoin="round"/><path d="M15.5 15.5h8M15.5 20.5h6" stroke="#141414" strokeWidth="2" strokeLinecap="round"/></svg>;}
 function MlTally({n}){if(n<=0)return null;const shown=Math.min(n,15);const groups=[];for(let i=0;i<shown;i+=5)groups.push(Math.min(5,shown-i));return <span className="ml-tm" aria-hidden="true">{groups.map((g,gi)=><svg key={gi} width={g*5+3} height="16" viewBox={`0 0 ${g*5+3} 16`}>{Array.from({length:Math.min(g,4)},(_,k)=><line key={k} x1={2.5+k*5} y1="1.5" x2={2.5+k*5} y2="14.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>)}{g===5&&<line x1="0.5" y1="12.5" x2={g*5+1} y2="3.5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/>}</svg>)}</span>;}
 const ML_PK_CSS=`
 html[data-gt-skin="plakat"] .pkp .gt-su-label,.pkp .ml-lab{display:inline-block!important;background:#141414!important;color:#F3EAD3!important;font-family:'Bagel Fat One','Bowlby One',sans-serif!important;font-weight:400!important;font-size:13px!important;letter-spacing:.06em!important;padding:5px 12px 4px!important;border-radius:999px;transform:rotate(-1.5deg);margin-bottom:10px}
@@ -38,8 +38,8 @@ html[data-gt-skin="plakat"] .pkp .gt-su-label,.pkp .ml-lab{display:inline-block!
 .pkp .ml-who{display:flex!important;align-items:center;justify-content:center;gap:10px;color:#141414}
 .pkp .ml-who>span{background:#141414;color:#F3EAD3;font-family:'Bagel Fat One','Bowlby One',sans-serif;font-weight:400;font-size:13px;letter-spacing:.05em;padding:6px 14px 5px;border-radius:999px;text-align:center}
 .pkp .ml-finger{flex:none;animation:ml-bob 1.6s ease-in-out infinite}
-.pkp .ml-finger:last-child{animation-delay:.8s}
-@keyframes ml-bob{0%,100%{transform:translateY(-2px)}50%{transform:translateY(4px)}}
+.pkp .ml-finger:last-child{animation-delay:.8s;scale:-1 1}
+@keyframes ml-bob{0%,100%{transform:translateX(-3px)}50%{transform:translateX(3px)}}
 .pkp .ml-pick>button{position:relative;padding-left:44px!important;padding-right:12px!important;text-align:left;min-height:56px!important;font-size:18px!important}
 .pkp .ml-pick>button:nth-child(odd){transform:rotate(-1deg)}
 .pkp .ml-pick>button:nth-child(even){transform:rotate(1deg)}
@@ -57,7 +57,7 @@ html[data-gt-skin="plakat"] .pkp .gt-su-label,.pkp .ml-lab{display:inline-block!
 .pkp [data-ml-result-panel]>div:first-child{font-size:20px!important}
 .pkp [data-ml-result-panel] div.ml-win{position:relative;background:#141414!important;outline:2.5px solid #141414!important;border:3px double #F3EAD3!important;box-shadow:0 5px 0 rgba(20,20,20,.35)!important;transform:rotate(-2deg);padding:14px 10px 12px!important;border-radius:14px!important}
 .pkp [data-ml-result-panel] .ml-win div{color:#F3EAD3!important}
-.pkp .ml-win .ml-finger{position:absolute;right:-8px;top:-18px;transform:rotate(25deg);animation:none}
+.pkp .ml-win .ml-finger{position:absolute;right:-8px;top:-18px;transform:rotate(-8deg);scale:1;animation:none}
 .pkp [data-ml-result-panel] div[aria-hidden]{height:14px!important;border-radius:4px!important;background:#FFFDF7!important;opacity:1!important;outline:2px solid #141414;outline-offset:-2px;overflow:hidden}
 .pkp [data-ml-result-panel] div[aria-hidden]>div{border-radius:0!important;background:repeating-linear-gradient(45deg,#141414 0 4px,#FFFDF7 4px 7px)!important;opacity:1!important}
 .pkp [data-ml-result-panel] div[aria-hidden]>div[style*="opacity: 1"]{background:#141414!important}

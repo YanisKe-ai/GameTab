@@ -1,10 +1,13 @@
 // Abzeichen-Grafik fuer Erfolge (eigene SVG-Symbole, keine Emoji). Genutzt von der Statistik und vom Podest.
 import { React } from "../vendor/react-globals.js";
+import { isPlakat } from "../themes/plakat.js";
 /*@gt-body-begin*/
 const ACHV_TIER_COLORS={bronze:{hi:"#E6B07A",lo:"#A8672F",ink:"#2B1A0B"},silver:{hi:"#E3E8EE",lo:"#97A3B2",ink:"#1D2530"},gold:{hi:"#F3D58C",lo:"#C99A2E",ink:"#2D2208"}};
 // Noir: Stufen nur ueber Helligkeit (Gold hell, Silber mittel, Bronze dunkel)
 const ACHV_TIER_NOIR={bronze:{hi:"#969696",lo:"#4A4A4A",ink:"#EBEBEB"},silver:{hi:"#D6D6D6",lo:"#777777",ink:"#111111"},gold:{hi:"#FFFFFF",lo:"#B4B4B4",ink:"#111111"}};
-const achvTierColors=noir=>noir?ACHV_TIER_NOIR:ACHV_TIER_COLORS;
+// Ryū: nur Rot, Schwarz, Creme. Gold rot, Silber creme, Bronze schwarz; flach mit schwarzem Rand
+const ACHV_TIER_RYU={bronze:{hi:"#1A1716",lo:"#1A1716",ink:"#F3EAD3"},silver:{hi:"#F3EAD3",lo:"#F3EAD3",ink:"#1A1716"},gold:{hi:"#E4312B",lo:"#E4312B",ink:"#F3EAD3"}};
+const achvTierColors=noir=>isPlakat()?ACHV_TIER_RYU:noir?ACHV_TIER_NOIR:ACHV_TIER_COLORS;
 // Symbole im 24er-Raster, nur Linien (und wenige Punkte)
 const ACHV_GLYPHS={
   flag:{d:"M7 20V4M7 5h10l-2.5 3.5L17 12H7"},
@@ -41,14 +44,14 @@ const ACHV_GLYPHS={
 };
 function AchvBadge({glyph,tier,locked,size=52,lockColor,noir}){
   const uid=React.useId().replace(/[^a-zA-Z0-9]/g,"");const TC=achvTierColors(noir);const c=TC[tier]||TC.bronze;const g=ACHV_GLYPHS[glyph]||ACHV_GLYPHS.flag;
-  const lc=lockColor||"#8891A0";
+  const lc=lockColor||"#8891A0";const ryu=isPlakat();
   if(locked)return <svg width={size} height={size} viewBox="0 0 48 48" aria-hidden="true" focusable="false" style={{display:"block",flex:"none"}}><circle cx="24" cy="24" r="21.5" fill="none" stroke={lc} strokeOpacity="0.45" strokeWidth="1.6" strokeDasharray="3 4" strokeLinecap="round"/><g transform="translate(12 12)" fill="none" stroke={lc} strokeOpacity="0.55" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d={g.d}/>{(g.dots||[]).map((p,i)=><circle key={i} cx={p[0]} cy={p[1]} r={p[2]} fill={lc} fillOpacity="0.55" stroke="none"/>)}</g></svg>;
   return <svg width={size} height={size} viewBox="0 0 48 48" aria-hidden="true" focusable="false" style={{display:"block",flex:"none"}}>
     <defs><linearGradient id={"ab"+uid} x1="0.2" y1="0" x2="0.8" y2="1"><stop offset="0" stopColor={c.hi}/><stop offset="1" stopColor={c.lo}/></linearGradient><radialGradient id={"ag"+uid} cx="0.35" cy="0.22" r="0.7"><stop offset="0" stopColor="#fff" stopOpacity="0.55"/><stop offset="1" stopColor="#fff" stopOpacity="0"/></radialGradient></defs>
     <circle cx="24" cy="24" r="22" fill={"url(#ab"+uid+")"}/>
-    <circle cx="24" cy="24" r="22" fill={"url(#ag"+uid+")"}/>
+    {ryu?<><circle cx="24" cy="24" r="21.6" fill="none" stroke="#1A1716" strokeWidth="2.6"/><circle cx="24" cy="24" r="17.6" fill="none" stroke={c.ink} strokeOpacity="0.5" strokeWidth="1.3" strokeDasharray="2.5 3"/></>:<><circle cx="24" cy="24" r="22" fill={"url(#ag"+uid+")"}/>
     <circle cx="24" cy="24" r="18.5" fill="none" stroke={c.ink} strokeOpacity="0.22" strokeWidth="1.2"/>
-    <circle cx="24" cy="24" r="21.4" fill="none" stroke="#fff" strokeOpacity="0.35" strokeWidth="1"/>
+    <circle cx="24" cy="24" r="21.4" fill="none" stroke="#fff" strokeOpacity="0.35" strokeWidth="1"/></>}
     <g transform="translate(12 12)" fill="none" stroke={c.ink} strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round"><path d={g.d}/>{(g.dots||[]).map((p,i)=><circle key={i} cx={p[0]} cy={p[1]} r={p[2]} fill={c.ink} stroke="none"/>)}</g>
   </svg>;
 }

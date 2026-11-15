@@ -22,8 +22,10 @@ ${S} .gtSt2-filters{gap:12px}
 /* Abschnitts-Chips */
 ${S} .gtSt2-sec,${S} .gtSt2-h2{display:inline-block;background:${CR};color:${INK}!important;border:2.5px solid ${INK};box-shadow:0 3px 0 ${INK};border-radius:999px;padding:4px 14px 3px;font-family:${FONT}!important;font-weight:400!important;font-size:.95rem!important;letter-spacing:.01em!important;transform:rotate(-1deg)}
 ${S} .gtSt2-more+*,${S} .gtSt2-more~div{margin-top:8px}
-${S} .gtSt2-sub{color:${INK}!important;margin-top:8px!important}
-${S} .gtSt2-lead{color:${INK}!important}
+/* Kleintext nie direkt auf Rot (Kontrast): Creme-Etikett */
+${S} .gtSt2-sub,${S} .gtSt2-lead{color:${INK}!important;display:block;width:fit-content;max-width:100%;box-sizing:border-box;background:${CR};border:2px solid ${INK};border-radius:10px;box-shadow:0 2px 0 ${INK};padding:3px 10px!important;line-height:1.35!important}
+${S} .gtSt2-sub{margin-top:8px!important;font-weight:600!important}
+${S} .gtSt2-lead{margin-left:2px!important}
 /* Sticker: Karten, Listen, Kacheln */
 ${S} .gtSt2-card,${S} .gtSt2-lc,${S} .gtSt2-stat,${S} .gtSt2-kpi{background:${CR}!important;color:${INK}!important;border:2.5px solid ${INK}!important;border-radius:18px!important;box-shadow:0 4px 0 ${INK}}
 ${S} .gtSt2-kpi:nth-child(even),${S} .gtSt2-grid2>.gtSt2-stat:nth-child(even){background:${INK}!important;color:${CR}!important;border-color:${CR}!important}
@@ -43,8 +45,6 @@ ${S} .gtSt2-pill{background:${CR}!important;color:${INK}!important;border:2.5px 
 ${S} .gtSt2-pill[aria-pressed="true"]{background:${INK}!important;color:${CR}!important}
 ${S} .gtSt2-h2+.gtSt2-lc{margin-top:8px}
 ${S} .gtSt2-lc li button,${S} .gtSt2-lc li{color:${INK}}
-${S} [data-gt-achv] svg stop{stop-color:${RED}!important}
-${S} [data-gt-achv-state="on"] svg circle:first-of-type{stroke:${INK};stroke-width:2.5}
 ${S} [data-gt-achv] span{color:${INK}!important}
 /* Mehr: jede Zeile ein Creme-Knopf */
 ${S} .gtSt2-more .gtSt2-lc{background:transparent!important;border:0!important;box-shadow:none!important;overflow:visible!important;display:flex;flex-direction:column;gap:14px}

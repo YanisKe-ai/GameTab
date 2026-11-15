@@ -24,6 +24,8 @@ ${P} .gt-su-chip{font-family:${FONT}!important;font-weight:400!important}
 ${P} .gt-su-btn{position:relative;overflow:hidden;outline:2.5px solid ${INK}!important;outline-offset:-2.5px!important;box-shadow:0 5px 0 ${INK}!important;font-family:${FONT}!important;font-weight:400!important;letter-spacing:.02em}
 ${P} .gt-su-cta::before{background:var(--pk-bg,${CREAM})!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
 ${P} .gt-gp-row>button,${P} .gt-rn-chip{outline:2px solid ${INK}!important;outline-offset:-2px!important;background:${PAPER}!important;color:${INK}!important;box-shadow:0 3px 0 ${INK}!important}
+${P} .gt-rn-chip{box-shadow:none!important}
+${P} .gt-rn-row{overflow-y:hidden!important;overscroll-behavior:contain;touch-action:pan-x pan-y}
 ${P} .gt-gamehead.is-stuck,${P} .gt-gamehead.is-stuck::before{background:radial-gradient(rgba(20,20,20,.10) 1.2px,transparent 1.4px) 0 0/14px 14px,var(--pk-bg,${CREAM})!important;background-attachment:fixed!important}
 ${P} .gt-gamehead.is-stuck{box-shadow:0 2.5px 0 ${INK}!important}
 ${P} .gtL-content .gt-gamehead.is-stuck{background:none!important;box-shadow:none!important}

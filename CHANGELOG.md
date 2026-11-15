@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.15-8 (15.11.2026 13:22)
+- Ryū-Startseite: Logo etwas höher, Knöpfe mittig zwischen ALL-IN-ONE und Suche
+
 ## 2026.11.15-7 (15.11.2026 13:11)
 - Modus heisst jetzt Ryū (japanisch für Drache), in allen Sprachen
 

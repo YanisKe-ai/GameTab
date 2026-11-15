@@ -40,6 +40,31 @@ function GtHeroMark({ theme, width, className, style, markRef }) {
   const idRef = React.useRef(null);
   if (idRef.current === null) { hmUid += 1; idRef.current = "gthm" + hmUid; }
   const mid = idRef.current;
+  // Ryū-Startseite: Kacheln genau mittig zwischen «ALL-IN-ONE» und Suche (nur per transform, nichts anderes verschiebt sich)
+  React.useEffect(() => {
+    if (!isPlakat() || document.documentElement.classList.contains("gt-laptopmode")) return undefined;
+    const page = document.querySelector(".gtL-start");
+    if (!page) return undefined;
+    const fit = () => {
+      try {
+        const sub = page.querySelector(".gt-hero-sub div"), search = page.querySelector('[data-onboard="search"]');
+        const a = page.querySelector('[data-onboard="scorepads-tile"] .gtL-tile'), b = page.querySelector('[data-onboard="party-tile"] .gtL-tile');
+        if (!sub || !search || !a || !b) return;
+        const cur = parseFloat(page.style.getPropertyValue("--pk-tshift")) || 0;
+        const top = a.getBoundingClientRect().top - 5 - cur, bot = b.getBoundingClientRect().bottom + 9 - cur;
+        const gapTop = sub.getBoundingClientRect().bottom, gapBot = search.getBoundingClientRect().top;
+        const shift = Math.round((gapTop + gapBot) / 2 - (top + bot) / 2);
+        page.style.setProperty("--pk-tshift", shift + "px");
+      } catch (e) { /* nur Optik */ }
+    };
+    fit();
+    const tms = [120, 400, 900, 1600].map((ms) => setTimeout(fit, ms));
+    let ro = null;
+    if (window.ResizeObserver) { ro = new ResizeObserver(() => fit()); ro.observe(page); }
+    window.addEventListener("resize", fit);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit).catch(() => {});
+    return () => { tms.forEach(clearTimeout); if (ro) ro.disconnect(); window.removeEventListener("resize", fit); page.style.removeProperty("--pk-tshift"); };
+  }, []);
   if (isPlakat()) {
     return (
       <div ref={markRef} className={"gt-hero-mark gt-hero-mark-pk" + (className ? " " + className : "")} style={{ "--hm-w": width || "330px", ...style }}>

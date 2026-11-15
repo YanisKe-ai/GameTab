@@ -3,6 +3,9 @@
 const P = 'html[data-gt-skin="plakat"]';
 const INK = "#141414", CREAM = "#F4EAD5", PAPER = "#FFFDF7";
 const FONT = "'Bagel Fat One','Bowlby One',sans-serif";
+// Startseite Plakat (Entwurf R2b): kräftiges Rot, warmes Schwarz, Creme, Körnung
+const RED = "#E4312B", INK2 = "#1A1716", CREAM2 = "#F3EAD3";
+const NOISE = "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.32'/%3E%3C/svg%3E\")";
 
 const PLAKAT_CSS = `
 ${P} body{background:${CREAM}}
@@ -45,21 +48,28 @@ ${P} .card-fx:not(.gtL-showcase-item):not(.gtL-tile){outline:2.5px solid ${INK}!
 ${P} .gtL-gamecard-title{font-family:${FONT}!important;font-weight:400!important}
 ${P} .gtL-showcase-icon{outline:2px solid ${INK}!important;outline-offset:-2px!important;box-shadow:0 3px 0 ${INK}!important;background:${PAPER}!important}
 
-/* ===== Startseite neu (Plakat) ===== */
-${P} .gtL-start{--pk-bg:#8B6CFF;background:radial-gradient(rgba(20,20,20,.12) 1.2px,transparent 1.4px) 0 0/14px 14px,#8B6CFF!important}
-${P} .gtL-start .gt-hero-sub div{color:${INK}!important;font-family:${FONT}!important;letter-spacing:.3em!important}
-${P} .gtL-start-gear{background:${PAPER}!important;outline:2.5px solid ${INK}!important;outline-offset:-2.5px!important;box-shadow:0 3px 0 ${INK}!important;color:${INK}!important}
-${P} [data-onboard="scorepads-tile"] .gtL-tile{background:#F9C22E!important;transform:rotate(-1.2deg)}
-${P} [data-onboard="party-tile"] .gtL-tile{background:#FF7A6B!important;transform:rotate(1.2deg)}
-${P} [data-onboard="scorepads-tile"] .gtL-tile:active{transform:rotate(-1.2deg) translateY(3px)}
-${P} [data-onboard="party-tile"] .gtL-tile:active{transform:rotate(1.2deg) translateY(3px)}
-${P} .gtL-tile-title{color:${INK}!important}
-${P} .gtL-tile-iconwrap{background:${PAPER}!important}
-${P} .gtL-tile-chevron{color:${INK}!important;width:34px;height:34px;margin:-4px 0;border-radius:50%;background:${PAPER};outline:2px solid ${INK};outline-offset:-2px;display:flex;align-items:center;justify-content:center;font-size:20px!important;line-height:1}
-${P} [data-onboard="search"] input,${P} [data-onboard="search"] [class*="search"]{outline:2.5px solid ${INK}!important;outline-offset:-2.5px!important;box-shadow:0 3px 0 ${INK}!important;background:${PAPER}!important;color:${INK}!important}
-${P} [data-onboard="showcase"] .gtL-showcase-label,${P} .gtL-showcase-hint{color:${INK}!important}
-${P} .gtL-showcase-icon{background:${PAPER}!important}
-${P} .gtL-showcase h2{color:${INK}!important;font-family:${FONT}!important;font-weight:400!important;letter-spacing:.12em!important}
+/* ===== Startseite neu (Plakat, Entwurf S1 / R2b, 2026-11-15) ===== */
+${P} .gtL-start{--pk-bg:${RED};background:${NOISE} 0 0/180px 180px,${RED}!important;background-blend-mode:multiply}
+${P} .gtL-start .gtL-start-gear{background:${CREAM2}!important;outline:none!important;border:none!important;box-shadow:4px 5px 0 ${INK2}!important;color:${INK2}!important}
+${P} .gtL-start .gt-hero-sub{display:flex;justify-content:center}
+${P} .gtL-start .gt-hero-sub div{display:inline-block;background:${INK2};color:${CREAM2}!important;font-family:${FONT}!important;font-size:12px!important;letter-spacing:.28em!important;padding:7px 26px 7px 30px;margin-top:8px!important;transform:rotate(2deg);clip-path:polygon(0 0,100% 0,95% 50%,100% 100%,0 100%,5% 50%)}
+${P} .gtL-start .gtL-tile{border:none!important;outline:none!important;border-radius:999px!important;justify-content:center!important;padding:18px 20px!important;margin:10px 10px 18px 8px!important;width:calc(100% - 18px)!important}
+${P} .gtL-start .gtL-tile-iconwrap,${P} .gtL-start .gtL-tile-chevron{display:none!important}
+${P} .gtL-start .gtL-tile>div{flex:1;text-align:center}
+${P} .gtL-start .gtL-tile-title{font-family:${FONT}!important;font-weight:400!important;font-size:clamp(22px,7.4vw,30px)!important;line-height:1.05!important;color:${RED}!important;letter-spacing:0!important}
+${P} .gtL-start [data-onboard="scorepads-tile"] .gtL-tile{background:${CREAM2}!important;box-shadow:0 0 0 5px ${INK2},7px 9px 0 5px ${INK2}!important;transform:rotate(-2deg)}
+${P} .gtL-start [data-onboard="scorepads-tile"] .gtL-tile-title{text-shadow:1px 1px 0 ${INK2},2px 2px 0 ${INK2},3px 3px 0 ${INK2},4px 4px 0 ${INK2}}
+${P} .gtL-start [data-onboard="party-tile"] .gtL-tile{background:${INK2}!important;box-shadow:0 0 0 5px ${CREAM2},7px 9px 0 5px ${INK2}!important;transform:rotate(2deg)}
+${P} .gtL-start [data-onboard="scorepads-tile"] .gtL-tile:active{transform:rotate(-2deg) translateY(4px);box-shadow:0 0 0 5px ${INK2},3px 4px 0 5px ${INK2}!important}
+${P} .gtL-start [data-onboard="party-tile"] .gtL-tile:active{transform:rotate(2deg) translateY(4px);box-shadow:0 0 0 5px ${CREAM2},3px 4px 0 5px ${INK2}!important}
+${P} .gtL-start [data-onboard="search"] input,${P} .gtL-start [data-onboard="search"] [class*="search"]{outline:none!important;border:none!important;border-radius:26px!important;background:${CREAM2}!important;box-shadow:4px 5px 0 ${INK2}!important;color:${INK2}!important}
+${P} .gtL-start .gtL-seclabel{color:${INK2}!important;font-family:${FONT}!important;font-weight:400!important;letter-spacing:.12em!important}
+${P} .gtL-start .gtL-showcase-icon{background:${CREAM2}!important;outline:none!important;border:none!important;box-shadow:3px 4px 0 ${INK2}!important}
+${P} .gtL-start .gtL-showcase-label{color:${INK2}!important;opacity:1!important;font-family:${FONT}!important;font-weight:400!important;font-size:11px!important}
+${P} .gtL-start .gtL-showcase-hint,${P} .gtL-start .gtL-showcase-arrow{color:${INK2}!important}
+${P} .gtL-start .gtL-tipcard-body{background:${INK2}!important;border:none!important;outline:none!important;border-radius:10px!important;box-shadow:none!important}
+${P} .gtL-start .gtL-tipcard-body *{color:${CREAM2}!important}
+${P} .gtL-start .gtL-tipcard>button{color:${INK2}!important}
 /* ===== Einstellungen neu (Plakat) ===== */
 ${P} .st-page{--pk-bg:#F9C22E;background:radial-gradient(rgba(20,20,20,.10) 1.2px,transparent 1.4px) 0 0/14px 14px,#F9C22E!important}
 ${P} .st-title{font-family:${FONT}!important;font-weight:400!important;color:${INK}!important;-webkit-text-stroke:0;text-shadow:3px 3px 0 ${PAPER}!important}

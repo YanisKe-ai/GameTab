@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.15-13 (15.11.2026 14:52)
+- Ryū-Tutto-Einrichtung: Spiel starten schwarz, Ziel und Nummern schwarz, Spieler hinzufügen creme
+
 ## 2026.11.15-12 (15.11.2026 14:40)
 - Ryū: alle Spiel-Icons in Rot, Schwarz und Creme
 

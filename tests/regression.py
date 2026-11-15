@@ -438,7 +438,7 @@ def t_erfolge(pg, env):
     pg.goto(URL); wait(pg, 700)
     if pg.viewport_size["width"] < 768:
         click(pg, pg.get_by_text("Schreibunterlagen", exact=True).first, 700)
-    click(pg, pg.get_by_text(re.compile(r"Statistik", re.I)).first, 900)
+    click(pg, pg.get_by_role("button", name=re.compile(r"Statistik", re.I)).first, 900)
     # Neue Statistik (Paket SD): Profil ueber den Reiter "Personen"
     tab = pg.get_by_role("tab", name=re.compile(r"^Personen$"))
     if tab.count():

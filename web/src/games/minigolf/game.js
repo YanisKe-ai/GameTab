@@ -18,7 +18,7 @@ import { GroupPicker, GtPlayerList, GtStartBar, gtSkin, gtSkinTk, gtSoftTk } fro
 import { GtCol } from "../../shared/unit.js";
 import { GtUbStyle } from "../../shared/unit-boards.js";
 import { usePlakat } from "../../themes/theme-id.js";
-import { pkPage } from "../../shared/plakat/kit.js";
+import { ryuPage } from "../../shared/plakat/kit.js";
 import {
   MINIGOLF_HOLES,
   MINIGOLF_MAX_STROKES,
@@ -160,46 +160,85 @@ function MgFlag({ mg, size = 44 }) {
     </svg>
   );
 }
+// Ryū-Hilfe: Ring aus Schattenpunkten (Schriftzug mit Rand)
+function mgRing(r, col) {
+  const out = [];
+  for (let i = 0; i < 16; i++) {
+    const an = (i / 16) * Math.PI * 2;
+    out.push((Math.cos(an) * r).toFixed(1) + "px " + (Math.sin(an) * r).toFixed(1) + "px 0 " + col);
+  }
+  return out.join(",");
+}
+const MG_FLAG_URI = "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 18'%3E%3Cpath d='M2.5 1.5v15.5' stroke='%231A1716' stroke-width='2.2' stroke-linecap='round'/%3E%3Cpath d='M3.6 2l11 3.9-11 3.9z' fill='%23E4312B' stroke='%231A1716' stroke-width='1.3' stroke-linejoin='round'/%3E%3C/svg%3E\")";
+const MG_DIMPLES = "radial-gradient(circle at 50% 50%, rgba(26,23,22,.16) 1.1px, transparent 1.5px) 0 0/7px 7px";
 const MG_PK_CSS = `
-.mg-pk{--pkf:'Bagel Fat One','Bowlby One',sans-serif;--pk-bg:#3F8F42}
-.mg-pk .gt-wm{color:#F9C22E!important;font-size:clamp(34px,12vw,48px)!important;white-space:nowrap!important;word-break:keep-all!important}
-.mg-pk .gt-su-label{color:#141414!important}
-.mg-pk .gt-su-add{background:#FFFDF7!important;color:#141414!important;font-family:var(--pkf);font-weight:400;box-shadow:0 3px 0 #141414}
-.mg-pk .mg-seg{background:#FFFDF7!important;outline:2.5px solid #141414!important;outline-offset:-2.5px!important;box-shadow:0 4px 0 #141414;border-radius:18px!important}
-.mg-pk .mg-seg button{font-family:var(--pkf)!important;font-weight:400!important;color:#141414!important;border-radius:13px!important;box-shadow:none!important}
-.mg-pk .mg-seg button[aria-selected="true"]{background:#F9C22E!important}
-.mg-pk .mgBoard{border:6px solid #7A4E2A!important;outline:2.5px solid #141414;border-radius:18px!important;box-shadow:0 6px 0 #141414!important}
-.mg-pk .mgTile{box-shadow:inset 0 -3px 0 rgba(0,0,0,.13),0 0 0 2px #141414,0 3px 0 2px #141414}
-.mg-pk .mgNav{border:2px solid #F4EAD5!important}
-.mg-pk .mgPc{border-width:2.5px!important;border-color:#141414!important;box-shadow:0 4px 0 #141414!important;border-radius:18px!important;background:#FFFDF7!important;}
-.mg-pk .mgPc span{font-family:var(--pkf)!important;font-weight:400!important;letter-spacing:0!important;color:#141414!important}
+.mg-pk{--pkf:'Bagel Fat One','Bowlby One',sans-serif;--pk-bg:#E4312B}
+html[data-gt-skin] body .mg-pk h1.gt-wm.gt-wm.gt-wm.gt-wm{color:#F3EAD3!important;-webkit-text-fill-color:#F3EAD3!important;-webkit-text-stroke:0!important;paint-order:normal!important}
+html[data-gt-skin] body .mg-pk h1.gt-wm.gt-wm.gt-wm.gt-wm{letter-spacing:0!important;font-size:clamp(34px,12vw,48px)!important;white-space:nowrap!important;word-break:keep-all!important;transform:rotate(-2.5deg)!important;text-shadow:${mgRing(4.5, "#1A1716")},0 8px 0 #1A1716,0 9px 0 #1A1716!important}
+.mg-pk .gt-su-label{color:#1A1716!important}
+.mg-pk .gt-su-add{background:#F3EAD3!important;color:#1A1716!important;font-family:var(--pkf);font-weight:400;box-shadow:0 3px 0 #1A1716;border:2.5px dashed #1A1716!important;outline:none!important}
+.mg-pk .mg-seg{background:#F3EAD3!important;outline:2.5px solid #141414!important;outline-offset:-2.5px!important;box-shadow:0 4px 0 #141414;border-radius:18px!important}
+.mg-pk .mg-seg button{font-family:var(--pkf)!important;font-weight:400!important;color:#1A1716!important;border-radius:13px!important;box-shadow:none!important}
+.mg-pk .mg-seg button[aria-selected="true"]{background:#1A1716!important;color:#F3EAD3!important}
+.mg-pk .mgBoard,.mg-pk .mg-side>.gtL-e-only:first-child>section{position:relative;border:6px solid #F3EAD3!important;outline:2.5px solid #141414;border-radius:20px!important;box-shadow:0 6px 0 #141414!important;background-color:#1A1716!important;background-image:radial-gradient(circle at 7px 7px,#F3EAD3 1.8px,transparent 2.4px),radial-gradient(circle at calc(100% - 7px) 7px,#F3EAD3 1.8px,transparent 2.4px),radial-gradient(circle at 7px calc(100% - 7px),#F3EAD3 1.8px,transparent 2.4px),radial-gradient(circle at calc(100% - 7px) calc(100% - 7px),#F3EAD3 1.8px,transparent 2.4px)!important}
+.mg-pk .mgTile{box-shadow:inset 0 -3px 0 rgba(26,23,22,.16),0 0 0 2px #141414,0 3px 0 2px #E4312B;border-radius:6px}
+.mg-pk .mgTile::after{background:rgba(26,23,22,.5)!important;height:2px!important}
+.mg-pk .mgNav{border:none!important;background:#F3EAD3!important;color:#1A1716!important;box-shadow:0 3px 0 #E4312B}
+.mg-pk .mgFlagW{transform-box:fill-box;transform-origin:0 50%;animation:mgWave 2.6s ease-in-out infinite}
+@keyframes mgWave{0%,100%{transform:scale(1,1) skewY(0)}50%{transform:scale(.86,1.04) skewY(-5deg)}}
+.mg-pk .mgTrail{animation:mgMarch 1.6s linear infinite}
+@keyframes mgMarch{to{stroke-dashoffset:-12}}
+.mg-pk .mgPc{position:relative;border-width:2.5px!important;border-color:#141414!important;box-shadow:0 5px 0 #141414!important;border-radius:16px!important;background:#F3EAD3!important}
+.mg-pk .mg-main .mgPc:nth-child(odd){transform:rotate(-.5deg)}
+.mg-pk .mg-main .mgPc:nth-child(even){transform:rotate(.5deg)}
+.gtL-content .mg-pk .mgPc,[data-phone-landscape] .mg-pk .mgPc{transform:none!important}
+.mg-pk .mgPc>div:first-child{border-bottom:2px dashed rgba(26,23,22,.4);padding-bottom:5px;margin-bottom:8px!important;align-items:center!important}
+.mg-pk .mgPc>div:first-child>span:first-child{font-family:var(--pkf)!important;font-weight:400!important;letter-spacing:0!important;color:#1A1716!important;display:flex;align-items:center;gap:7px}
+.mg-pk .mgPc>div:first-child>span:first-child::before{content:"";flex:none;width:16px;height:18px;background:${MG_FLAG_URI} center/contain no-repeat}
+.mg-pk .mgPc>div:first-child>span:last-child{font-family:'Inter',sans-serif!important;color:#1A1716!important;font-weight:700!important}
+.mg-pk .mgPc [data-mg-total]{display:inline-block;min-width:30px;padding:3px 9px 2px;border-radius:999px;background:#1A1716;color:#F3EAD3!important;font-family:var(--pkf)!important;font-weight:400!important;text-align:center;vertical-align:middle}
 .mg-pk .mgKeys{gap:6px}
-.mg-pk .mgKey{outline:2.5px solid #141414!important;outline-offset:-2.5px!important;background:#FFFDF7!important;color:#141414!important;box-shadow:0 3px 0 #141414;font-family:var(--pkf)!important;font-weight:400;border-radius:12px!important}
+.mg-pk .mgKey{max-width:64px;width:100%;aspect-ratio:1;justify-self:center}
+.mg-pk .mgKey{border-radius:50%!important;border:none!important;outline:2.5px solid #141414!important;outline-offset:-2.5px!important;background:${MG_DIMPLES},#FFFDF7!important;color:#1A1716!important;box-shadow:0 3px 0 #141414;font-family:var(--pkf)!important;font-weight:400!important}
 .mg-pk .mgKey:active:not(:disabled){transform:translateY(2px)!important;box-shadow:0 1px 0 #141414}
-.mg-pk .mgKey[aria-pressed="true"]{background:#F9C22E!important}
-.mg-pk .mgKey[data-mg-giveup="1"]{border-style:dashed!important}
-.mg-pk .mgKey span{color:#141414!important}
-.mg-pk #mg-status{color:#141414!important;font-family:var(--pkf)!important;font-weight:400!important}
-.mg-pk [data-mg-undo]{outline:2.5px solid #141414!important;outline-offset:-2.5px!important;background:#FFFDF7!important;color:#141414!important;box-shadow:0 4px 0 #141414;}
-.mg-pk [data-mg-main]{position:relative;overflow:hidden;outline:2.5px solid #141414!important;outline-offset:-2.5px!important;box-shadow:0 6px 0 #141414!important;font-family:var(--pkf)!important;font-weight:400!important;}
-.mg-pk [data-mg-main]:not(:disabled):not([aria-disabled="true"]){background:#F9C22E!important;color:#141414!important}
-.mg-pk [data-mg-main]:disabled,.mg-pk [data-mg-main][aria-disabled="true"]{background:#FFFDF7!important;color:#4A4236!important;box-shadow:0 4px 0 #141414!important}
+.mg-pk .mgKey[aria-pressed="true"]{background:#E4312B!important;color:#F3EAD3!important;animation:mgPop 260ms cubic-bezier(.3,1.5,.5,1)}
+.mg-pk .mgKey[aria-pressed="true"] span{color:#F3EAD3!important}
+@keyframes mgPop{0%{transform:scale(.82)}60%{transform:scale(1.1)}100%{transform:scale(1)}}
+.mg-pk .mgKey[data-mg-giveup="1"]{outline-style:dashed!important}
+.mg-pk .mgKey span{color:#1A1716!important}
+.mg-pk #mg-status{color:#1A1716!important;font-family:var(--pkf)!important;font-weight:400!important}
+.mg-pk [data-mg-undo]{outline:2.5px solid #141414!important;outline-offset:-2.5px!important;background:#F3EAD3!important;color:#1A1716!important;border:none!important;box-shadow:0 4px 0 #141414}
+.mg-pk [data-mg-main]{position:relative;overflow:hidden;outline:2.5px solid #141414!important;outline-offset:-2.5px!important;box-shadow:0 6px 0 #141414!important;font-family:var(--pkf)!important;font-weight:400!important;letter-spacing:.01em}
+.mg-pk [data-mg-main]:not(:disabled):not([aria-disabled="true"]){background:#1A1716!important;color:#F3EAD3!important}
+.mg-pk [data-mg-main]:disabled,.mg-pk [data-mg-main][aria-disabled="true"]{background:#F3EAD3!important;color:#4A4236!important;box-shadow:0 4px 0 #141414!important}
 .mg-pk [data-mg-main]:active:not(:disabled){transform:translateY(3px)!important;box-shadow:0 2px 0 #141414!important}
-.mg-pk .mg-banner{background:#F9C22E!important;color:#141414!important;outline:2.5px solid #141414;outline-offset:-2.5px;box-shadow:0 4px 0 #141414;font-family:var(--pkf)!important;font-weight:400!important}
-.mg-pk .mgTableWrap{background:#FFFDF7!important;outline:2.5px solid #141414!important;outline-offset:-2.5px!important;box-shadow:0 4px 0 #141414!important;border-radius:20px!important}
-.mg-pk .mgTableWrap th,.mg-pk .mgTableWrap td{border-color:rgba(20,20,20,.3)!important}
-.mg-pk .mgTableWrap thead th{border-bottom:2.5px solid #141414!important;font-family:var(--pkf)!important;font-weight:400!important;color:#141414!important;background:#F9C22E!important}
-.mg-pk .mgTableWrap tbody th{font-family:var(--pkf)!important;font-weight:400!important}
-.mg-pk .mgTableWrap [data-mg-cell]{font-family:var(--pkf)!important;font-weight:400!important}
-.mg-pk .mg-editor{background:#FFFDF7!important;border-top:2.5px solid #141414!important;box-shadow:0 -6px 0 #141414!important}
+.mg-pk .mg-banner{background:#1A1716!important;color:#F3EAD3!important;outline:2.5px solid #F3EAD3;outline-offset:-6px;box-shadow:0 4px 0 #141414;font-family:var(--pkf)!important;font-weight:400!important}
+.mg-pk .mgTableWrap{background:#F3EAD3!important;outline:2.5px solid #141414!important;outline-offset:-2.5px!important;box-shadow:0 5px 0 #141414!important;border:none!important;border-radius:20px!important}
+.mg-pk .mgTableWrap th,.mg-pk .mgTableWrap td{border-color:rgba(26,23,22,.28)!important}
+.mg-pk .mgTableWrap thead th:last-child{border-top-right-radius:18px}
+.mg-pk .mgTableWrap thead th{border-bottom:4px solid #E4312B!important;font-family:var(--pkf)!important;font-weight:400!important;color:#F3EAD3!important;background:#1A1716!important}
+.mg-pk .mgTableWrap tbody th{font-family:var(--pkf)!important;font-weight:400!important;background:#F3EAD3!important;color:#1A1716!important;box-shadow:none!important}
+.mg-pk .mgTableWrap tbody tr:nth-child(even) td,.mg-pk .mgTableWrap tbody tr:nth-child(even) th{background:#EADDC2!important}
+.mg-pk .mgTableWrap tbody tr[aria-current="true"] td,.mg-pk .mgTableWrap tbody tr[aria-current="true"] th{background:#F0C3AE!important}
+.mg-pk .mgTableWrap tbody tr[aria-current="true"] th{box-shadow:inset 5px 0 0 #E4312B!important}
+.mg-pk .mgTableWrap tbody tr:nth-child(10) td,.mg-pk .mgTableWrap tbody tr:nth-child(10) th,.mg-pk .mgTableWrap tbody tr:nth-child(20) td,.mg-pk .mgTableWrap tbody tr:nth-child(20) th{background:#D8CBA8!important;color:#1A1716!important;border-top:2px dashed #1A1716!important}
+.mg-pk .mgTableWrap tbody tr:nth-child(21) td,.mg-pk .mgTableWrap tbody tr:nth-child(21) th{background:#1A1716!important;color:#F3EAD3!important;border-top:none!important}
+.mg-pk .mgTableWrap tbody tr:nth-child(21) td{font-size:22px!important}
+.mg-pk .mgTableWrap [data-mg-cell]{font-family:var(--pkf)!important;font-weight:400!important;color:#1A1716!important}
+.mg-pk .mgTableWrap [data-mg-cell][style*="inset"]{box-shadow:inset 0 0 0 2.5px #E4312B!important;background:rgba(228,49,43,.14)!important}
+.mg-pk .mg-editor{background:#F3EAD3!important;border-top:2.5px solid #141414!important;box-shadow:0 -6px 0 #141414!important}
 .mg-pk .mg-editor span{color:#141414!important;font-family:var(--pkf)!important;font-weight:400!important}
 .mg-pk .mg-editor .mg-edhint{color:#4A4236!important}
-.mg-pk .mg-editor button{outline:2.5px solid #141414!important;outline-offset:-2.5px!important;background:#FFFDF7!important;color:#141414!important;box-shadow:0 3px 0 #141414;font-family:var(--pkf)!important;font-weight:400!important;}
-.mg-pk .mg-editor button[aria-pressed="true"]{background:#F9C22E!important}
-.mg-pk .mg-editor div[style*="gap: 6px"]>button:last-child{background:#F9C22E!important}
-.mg-pk .mg-editor div[style*="gap: 6px"]>button:last-child:disabled{background:#EDE1BE!important;opacity:.6}
+.mg-pk .mg-editor button{outline:2.5px solid #141414!important;outline-offset:-2.5px!important;background:#FFFDF7!important;color:#141414!important;box-shadow:0 3px 0 #141414;font-family:var(--pkf)!important;font-weight:400!important}
+.mg-pk .mg-editor button[aria-pressed="true"]{background:#E4312B!important;color:#F3EAD3!important}
+.mg-pk .mg-editor div[style*="gap: 6px"]>button:last-child{background:#1A1716!important;color:#F3EAD3!important}
+.mg-pk .mg-editor div[style*="gap: 6px"]>button:last-child:disabled{background:#EDE1BE!important;color:#4A4236!important;opacity:.6}
 .mg-pk .mg-editor input{outline:2.5px solid #141414!important;outline-offset:-2.5px!important;background:#FFFDF7!important;color:#141414!important}
-@media (prefers-reduced-motion:reduce){.mg-pk [data-mg-main]::after{animation:none!important}}
+.mg-pk .mgDeco{margin:18px auto 0;width:min(100%,330px);transform:rotate(-1.5deg);pointer-events:none}
+.mg-pk .mgDeco .mgTrailS{animation:mgMarch 1.6s linear infinite}
+@media (max-height:720px){.mg-pk .mgDeco{display:none}}
+[data-phone-landscape] .mg-pk .mgDeco{display:none}
+@media (prefers-reduced-motion:reduce){.mg-pk [data-mg-main]::after{animation:none!important}.mg-pk .mgFlagW,.mg-pk .mgTrail,.mg-pk .mgDeco .mgTrailS,.mg-pk .mgKey[aria-pressed="true"]{animation:none!important}}
 `;
 function MinigolfTopBar({ subtitle, onBack, theme, t, onHome, rulesText, onEndGame, moreItems, onMenuOpen }) {
   const pk = usePlakat();
@@ -211,9 +250,9 @@ function MinigolfTopBar({ subtitle, onBack, theme, t, onHome, rulesText, onEndGa
       onBack={onBack}
       backLabel={t("back")}
       tk={pk ? { ...mg, muted: "#141414" } : mg}
-      accent={pk ? "#F9C22E" : mg.accInk}
+      accent={pk ? "#1A1716" : mg.accInk}
       titleFont={MINIGOLF_FONT}
-      icon={<MinigolfLogo color={pk ? "#F9C22E" : mg.accInk} />}
+      icon={<MinigolfLogo color={pk ? "#1A1716" : mg.accInk} />}
       onHome={onHome}
       onEndGame={onEndGame}
       moreItems={moreItems}
@@ -222,10 +261,32 @@ function MinigolfTopBar({ subtitle, onBack, theme, t, onHome, rulesText, onEndGa
     />
   );
 }
+const MG_RYU_HUES = ["#1A1716", "#E4312B", "#1A1716", "#E4312B", "#1A1716", "#E4312B", "#1A1716", "#E4312B"];
+// Ryū: Bahnskizze als Sticker (reine Deko, ohne Text): Ball spielt über die Bande ins Loch mit Fahne
+function MgRyuCourse() {
+  return (
+    <div className="mgDeco" aria-hidden="true">
+      <svg viewBox="0 0 330 150" width="100%" focusable="false" style={{ display: "block", overflow: "visible" }}>
+        <rect x="3" y="3" width="324" height="144" rx="26" fill="#F3EAD3" stroke="#1A1716" strokeWidth="3" />
+        <rect x="3" y="9" width="324" height="144" rx="26" fill="none" />
+        <rect x="14" y="14" width="302" height="122" rx="18" fill="none" stroke="#1A1716" strokeWidth="2" strokeDasharray="2 7" strokeLinecap="round" />
+        <rect x="132" y="38" width="22" height="66" rx="8" fill="#1A1716" />
+        <path className="mgTrailS" d="M48 112 C 92 128, 118 128, 143 108 C 160 94, 164 70, 150 44 C 140 28, 190 24, 240 46" fill="none" stroke="#1A1716" strokeWidth="4" strokeLinecap="round" strokeDasharray="1 11" />
+        <circle cx="46" cy="112" r="10" fill="#FFFDF7" stroke="#1A1716" strokeWidth="3" />
+        <circle cx="43" cy="109" r="1.6" fill="#1A1716" />
+        <circle cx="49" cy="115" r="1.4" fill="#1A1716" />
+        <ellipse cx="262" cy="62" rx="24" ry="9" fill="#1A1716" />
+        <ellipse cx="262" cy="60" rx="17" ry="6" fill="#000" />
+        <path d="M262 60V18" stroke="#1A1716" strokeWidth="3.5" strokeLinecap="round" />
+        <path d="M264 19l24 9-24 9z" fill="#E4312B" stroke="#1A1716" strokeWidth="2.6" strokeLinejoin="round" />
+      </svg>
+    </div>
+  );
+}
 function MinigolfSetup({ players, setPlayers, onStart, theme, t }) {
   const pk = usePlakat();
   const mg = gtSoftTk(minigolfTokens(theme), theme);
-  const gtS = gtSkin(theme, mg, "minigolf", theme === "noir" ? { font: MINIGOLF_FONT } : { font: MINIGOLF_FONT, acc: pk ? "#F9C22E" : mg.acc });
+  const gtS = gtSkin(theme, mg, "minigolf", theme === "noir" ? { font: MINIGOLF_FONT } : { font: MINIGOLF_FONT, acc: pk ? "#1A1716" : mg.acc });
   const rename = (idx, name) => setPlayers((ps) => ps.map((p, i) => (i === idx ? { ...p, name } : p)));
   const addPlayer = () =>
     setPlayers((ps) => {
@@ -246,10 +307,11 @@ function MinigolfSetup({ players, setPlayers, onStart, theme, t }) {
       <div className="plsu-split">
         <div className="plsu-main">
           <GroupPicker getNames={() => players.map((p) => p.name)} setNames={(names) => setPlayers(names.map((name, i) => ({ id: i + 1, name })))} t={t} tk={gtSkinTk(mg, gtS)} />
-          <GtPlayerList players={players} onRename={rename} onRemove={removePlayer} onAdd={addPlayer} skin={gtS} t={t} onMove={move} minPlayers={1} maxPlayers={8} hues={mg.hues} />
+          <GtPlayerList players={players} onRename={rename} onRemove={removePlayer} onAdd={addPlayer} skin={gtS} t={t} onMove={move} minPlayers={1} maxPlayers={8} hues={pk ? MG_RYU_HUES : mg.hues} />
+          {pk && <MgRyuCourse />}
         </div>
         <div className="plsu-side">
-          <GtStartBar onClick={onStart} disabled={false} label={t("startGame")} skin={pk ? { ...gtS, fill: "#F9C22E", on: "#141414", fade: "#3F8F42" } : gtS} />
+          <GtStartBar onClick={onStart} disabled={false} label={t("startGame")} skin={pk ? { ...gtS, fill: "#1A1716", on: "#F3EAD3", fade: "#E4312B" } : gtS} />
         </div>
       </div>
     </div>
@@ -462,6 +524,8 @@ function mgBoardTk(theme) {
     btn: noir ? "rgba(237,237,237,0.10)" : "rgba(243,235,211,0.12)",
   };
 }
+// Ryū: Tafel schwarz mit Creme-Kacheln und roten Ziffern (nur Rot, Schwarz, Creme)
+const MG_BOARD_RYU = { frame: "#F3EAD3", inner: "#1A1716", tile: "#F3EAD3", tileInk: "#1A1716", lime: "#E4312B", ink: "#F3EAD3", muted: "#CFC4A8", grass: "rgba(243,234,211,0.16)", grassHi: "rgba(243,234,211,0.30)", dim: "rgba(243,234,211,0.34)", flag: "#E4312B", flagLine: "#F3EAD3", pole: "#F3EAD3", hole: "#000000", rim: "#F3EAD3", ball: "#F3EAD3", ballDot: "#1A1716", ballLine: "#1A1716", btn: "rgba(243,234,211,0.12)" };
 // Spielerkarten und Schlagtasten je Theme
 function mgCardTk(theme, mg) {
   if (theme === "light") return { card: mg.surf, keyBg: mg.surf2, keyLine: mg.ctrlLine, keyOn: mg.acc, keyOnInk: "#FFFFFF" };
@@ -518,7 +582,7 @@ function MgTrack({ hole, done, b, t }) {
       <rect x="4" y="42" width="332" height="12" rx="6" fill="url(#mgGrassPat)" />
       <g clipPath="url(#mgTrailClip)">
         <g className="mgBallG" style={{ transform: `translateX(${bx}px)` }}>
-          <line x1="-320" y1="48" x2="0" y2="48" stroke={b.lime} strokeWidth="2.6" strokeLinecap="round" strokeDasharray="0.1 6" />
+          <line className="mgTrail" x1="-320" y1="48" x2="0" y2="48" stroke={b.lime} strokeWidth="2.6" strokeLinecap="round" strokeDasharray="0.1 6" />
         </g>
       </g>
       {Array.from({ length: MINIGOLF_HOLES - 1 }, (_, i) => {
@@ -526,15 +590,15 @@ function MgTrack({ hole, done, b, t }) {
         return done[i] ? <circle key={i} cx={x} cy="48" r="3.2" fill={b.lime} /> : <circle key={i} cx={x} cy="48" r="2.1" fill={b.dim} />;
       })}
       <circle cx={mgX(Math.min(hole, MINIGOLF_HOLES - 2))} cy="48" r="5" fill="none" stroke={b.lime} strokeWidth="1.4" opacity={last ? 0 : 1} />
-      <ellipse cx={MG_XH} cy="47" rx="12.5" ry="4.4" fill={b.grassHi} />
+      <ellipse cx={MG_XH} cy="47" rx="12.5" ry="4.4" fill={b.rim || b.grassHi} />
       <ellipse cx={MG_XH} cy="47" rx="8" ry="2.9" fill={b.hole} />
       <path d={`M${MG_XH} 47V7`} stroke={b.pole} strokeWidth="2.2" strokeLinecap="round" />
-      <path d={`M${MG_XH + 1.1} 7.6l17 6.6-17 6.6z`} fill={b.flag} />
+      <path className="mgFlagW" d={`M${MG_XH + 1.1} 7.6l17 6.6-17 6.6z`} fill={b.flag} stroke={b.flagLine} strokeWidth={b.flagLine ? 1.4 : undefined} strokeLinejoin="round" />
       <g className="mgBallG" style={{ transform: `translateX(${bx}px)` }}>
         <ellipse cx="0" cy="42.4" rx="5" ry="1.5" fill="#000" opacity="0.28" />
-        <circle cx="0" cy="36.6" r="5.6" fill="#FFFFFF" />
-        <circle cx="-1.7" cy="34.8" r="1.1" fill="#D9E2D6" />
-        <circle cx="1.8" cy="38" r="0.9" fill="#D9E2D6" />
+        <circle cx="0" cy="36.6" r="5.6" fill={b.ball || "#FFFFFF"} stroke={b.ballLine} strokeWidth={b.ballLine ? 1.6 : undefined} />
+        <circle cx="-1.7" cy="34.8" r="1.1" fill={b.ballDot || "#D9E2D6"} />
+        <circle cx="1.8" cy="38" r="0.9" fill={b.ballDot || "#D9E2D6"} />
       </g>
     </svg>
   );
@@ -733,7 +797,7 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
   const [nudge, setNudge] = useState(false);
   const t = useT(lang);
   const mg = minigolfTokens(theme);
-  const bt = mgBoardTk(theme);
+  const bt = pk ? MG_BOARD_RYU : mgBoardTk(theme);
   const ct = mgCardTk(theme, mg);
   const segOn = theme === "light" ? mg.acc : mg.segBg;
   const segInk = theme === "light" ? "#FFFFFF" : mg.segInk;
@@ -936,7 +1000,7 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
     fontFamily: MG_UI,
   });
   return (
-    <div className={"gtL-shellpage mgGL mg-land pl-page pl-head-compact" + (pk ? " mg-pk" : "")} style={{ ...minigolfPageShellStyle(theme), ...(pk ? pkPage("#3F8F42") : null), position: "relative", overflowX: "clip", paddingBottom: editing ? 290 : 24 }}>
+    <div className={"gtL-shellpage mgGL mg-land pl-page pl-head-compact" + (pk ? " mg-pk" : "")} style={{ ...minigolfPageShellStyle(theme), ...(pk ? ryuPage() : null), position: "relative", overflowX: "clip", paddingBottom: editing ? 290 : 24 }}>
       <style>
         {GLOBAL_STYLES}
         {MG_CSS}
@@ -1030,7 +1094,7 @@ function MinigolfGame({ state, setState, onBack, onHome, onEndGame, lang = "de",
   const goToSetup = () => setState((s) => ({ ...s, phase: "setup" }));
   if (state.phase === "setup") {
     return (
-      <div className={"gtL-shellpage" + (pk ? " mg-pk" : "")} style={{ ...minigolfPageShellStyle(theme), ...(pk ? pkPage("#3F8F42") : null) }}>
+      <div className={"gtL-shellpage" + (pk ? " mg-pk" : "")} style={{ ...minigolfPageShellStyle(theme), ...(pk ? ryuPage() : null) }}>
         <style>{GLOBAL_STYLES}{pk ? MG_PK_CSS : ""}</style>
         <div className="gtL-page gtL-game" style={{ maxWidth: 380, margin: "0 auto", position: "relative", zIndex: 1 }}>
           <GtCol accent={minigolfTokens(theme).acc}>

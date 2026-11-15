@@ -1,3 +1,4 @@
+import { ryuLogo } from "../../themes/plakat.js";
 import { React } from "../../vendor/react-globals.js";
 
 // Spiel-Icon Molotow: Jasskarte, deren Kartenfarbe eine grüne Weinflasche mit Stofftuch und
@@ -23,4 +24,5 @@ function MolotowLogo({ size }) {
   </svg>;
 }
 
-export { MolotowLogo, MOL_SPADE };
+const MolotowLogo__ryu = ryuLogo(MolotowLogo);
+export { MolotowLogo__ryu as MolotowLogo, MOL_SPADE };

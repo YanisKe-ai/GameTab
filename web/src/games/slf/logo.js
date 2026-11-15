@@ -1,5 +1,6 @@
 // Stadt Land Fluss: Icon «Das Blatt» (Wahl Yanis 14.11.2026, Claude-Design-Seite Entwurf 2).
 // Zettel mit drei Spalten (Haus, Berg, Welle), ausgefüllte Zeilen, Bleistift. Eigene Zeichnung, keine Emoji.
+import { ryuLogo } from "../../themes/plakat.js";
 import { React } from "../../vendor/react-globals.js";
 
 const SLF_ACC_DARK = "#8B6CFF";
@@ -25,4 +26,5 @@ function SlfLogo({ color, size }) {
     </g>
   </svg>;
 }
-export { SlfLogo, SLF_ACC_DARK };
+const SlfLogo__ryu = ryuLogo(SlfLogo);
+export { SlfLogo__ryu as SlfLogo, SLF_ACC_DARK };

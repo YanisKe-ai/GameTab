@@ -1,4 +1,5 @@
 // Erzeugt von tools/split.mjs aus index.html. Inhalt zwischen den gt-body-Markern ist 1:1 Originalcode.
+import { ryuLogo } from "../../themes/plakat.js";
 import { React } from "../../vendor/react-globals.js";
 import { useGtDialog } from "../../shared/dialog.js";
 import { Fragment, useEffect, useMemo, useRef, useState } from "../../prelude.js";
@@ -591,4 +592,5 @@ return <div className={"gtL-shellpage gtst"+(pk?" gtst-pk":"")} data-d="app" dat
 {toastS&&!sheetEl&&<div key={toastS.id} className="gtst-toast" role="status" aria-live="polite"><span>{toastS.msg}</span>{toastS.undo&&<button type="button" className="gtst-btn is-small" onClick={()=>{const u=toastS.undo;setToastS(null);const r=u();if(r&&r.ok===false)toast({msg:errText(t,r,lbl,tour)});}}><Icon n="undo" size={17}/>{t("stuUndo")}</button>}</div>}</div>;}
 return{SchieberTournament,GtStuLogo};})();
 function gtStuResume(t,theme){try{const n=GT_ST_STORE.getSnapshot().list.filter(x=>x.status!=="completed").length;if(!n)return[];const c=showcaseAccent("jass","#D52B1E",theme);return[{id:"schieber-turnier",label:t("stuMode"),accent:c,logo:<GtStuLogo color={c}/>}];}catch(e){return[];}}/*@gt-body-end*/
-export { SchieberTournament, GtStuLogo, gtStuResume };
+const GtStuLogo__ryu = ryuLogo(GtStuLogo);
+export { SchieberTournament, GtStuLogo__ryu as GtStuLogo, gtStuResume };

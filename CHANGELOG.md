@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.15-12 (15.11.2026 14:40)
+- Ryū: alle Spiel-Icons in Rot, Schwarz und Creme
+
 ## 2026.11.15-11 (15.11.2026 14:22)
 - Ryū-Startseite: Knöpfe springen beim Zurückwischen nicht mehr
 

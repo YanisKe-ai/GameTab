@@ -45,16 +45,24 @@ function GtHeroMark({ theme, width, className, style, markRef }) {
     if (!isPlakat() || document.documentElement.classList.contains("gt-laptopmode")) return undefined;
     const page = document.querySelector(".gtL-start");
     if (!page) return undefined;
+    // Mit Layout-Positionen (offsetTop) rechnen: Animationen und Zurückwischen (transform) verfälschen sonst die Werte
+    const absTop = (el) => { let y = 0; while (el) { y += el.offsetTop; el = el.offsetParent; } return y; };
     const fit = () => {
       try {
         const sub = page.querySelector(".gt-hero-sub div"), search = page.querySelector('[data-onboard="search"]');
         const a = page.querySelector('[data-onboard="scorepads-tile"] .gtL-tile'), b = page.querySelector('[data-onboard="party-tile"] .gtL-tile');
         if (!sub || !search || !a || !b) return;
-        const cur = parseFloat(page.style.getPropertyValue("--pk-tshift")) || 0;
-        const top = a.getBoundingClientRect().top - 5 - cur, bot = b.getBoundingClientRect().bottom + 9 - cur;
-        const gapTop = sub.getBoundingClientRect().bottom, gapBot = search.getBoundingClientRect().top;
-        const shift = Math.round((gapTop + gapBot) / 2 - (top + bot) / 2);
-        page.style.setProperty("--pk-tshift", shift + "px");
+        // Logo-Band: sichtbare Lage (Hero ist skaliert), auf die Seite bezogen und um Seiten-Skalierung bereinigt
+        const P = page.getBoundingClientRect(), k = page.offsetHeight ? P.height / page.offsetHeight : 1;
+        const gapTop = (sub.getBoundingClientRect().bottom - P.top) / (k || 1);
+        // Kacheln und Suche: Layout-Lage (unabhängig von Einblend-Animationen und der eigenen Verschiebung)
+        const base = absTop(page), gapBot = absTop(search) - base;
+        const top = absTop(a) - base - 5, bot = absTop(b) - base + b.offsetHeight + 9;
+        // Versatz durch Transforms der Vorfahren (sichtbar minus Layout), an der Suche gemessen
+        const dv = (search.getBoundingClientRect().top - P.top) / (k || 1) - gapBot;
+        const shift = Math.round((gapTop + gapBot - top - bot - dv) / 2);
+        const curS = parseFloat(page.style.getPropertyValue("--pk-tshift"));
+        if (isNaN(curS) || Math.abs(curS - shift) >= 2) page.style.setProperty("--pk-tshift", shift + "px");
       } catch (e) { /* nur Optik */ }
     };
     fit();

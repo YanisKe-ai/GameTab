@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.15-11 (15.11.2026 14:22)
+- Ryū-Startseite: Knöpfe springen beim Zurückwischen nicht mehr
+
 ## 2026.11.15-10 (15.11.2026 13:49)
 - Ryū: Zeile «Zuletzt» in der Einrichtung wackelt nicht mehr
 

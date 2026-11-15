@@ -321,10 +321,10 @@ const ST_PK_CSS=`
 .gtst-pk .gt-gamehead h1{font-family:'Bagel Fat One','Bowlby One',sans-serif!important;font-weight:400!important;font-size:28px!important;letter-spacing:0!important;color:#F4EAD5!important;-webkit-text-stroke:5px #141414;paint-order:stroke fill;text-shadow:2px 3px 0 #141414;white-space:nowrap}
 .gtst-pk .gt-gamehead h1+div{color:#F4EAD5!important}
 .gtst-pk .gtst-title{font-weight:400!important;-webkit-text-stroke:4px #141414;paint-order:stroke fill;text-shadow:2px 3px 0 #141414}
-.gtst-pk .gtst-panel,.gtst-pk .gtst-lead{border:2.5px solid #141414;border-radius:20px;box-shadow:0 4px 0 #141414}
+.gtst-pk .gtst-panel,.gtst-pk .gtst-lead{outline:2.5px solid #141414;outline-offset:-2.5px;border-radius:20px;box-shadow:0 4px 0 #141414}
 .gtst-pk .gtst-lname,.gtst-pk .gtst-nm,.gtst-pk .gtst-tname,.gtst-pk .gtst-label,.gtst-pk .gtst-lrow .nm,.gtst-pk .gtst-shead h2,.gtst-pk .gtst-rk,.gtst-pk .gtst-pt,.gtst-pk .gtst-lpts{font-family:'Bagel Fat One','Bowlby One',sans-serif!important;font-weight:400!important}
 .gtst-pk .gtst-label{color:#141414;font-size:14px}
-.gtst-pk .gtst-btn{border:2.5px solid #141414;border-radius:16px;background:#FFFDF7;color:#141414;box-shadow:0 3px 0 #141414;font-family:'Bagel Fat One','Bowlby One',sans-serif;font-weight:400;letter-spacing:.01em}
+.gtst-pk .gtst-btn{outline:2.5px solid #141414;outline-offset:-2.5px;border-radius:16px;background:#FFFDF7;color:#141414;box-shadow:0 3px 0 #141414;font-family:'Bagel Fat One','Bowlby One',sans-serif;font-weight:400;letter-spacing:.01em}
 .gtst-pk .gtst-btn:active:not(:disabled){transform:translateY(2px);box-shadow:0 1px 0 #141414}
 .gtst-pk .gtst-btn.is-primary{background:#071743;border-color:#141414;color:#F4EAD5;font-weight:400;box-shadow:0 4px 0 #141414}
 .gtst-pk .gtst-btn.is-ghost{background:transparent;border-color:transparent;box-shadow:none}
@@ -339,10 +339,10 @@ const ST_PK_CSS=`
 .gtst-pk .gtst-panel .gtst-cap,.gtst-pk .gtst-sheet .gtst-cap{color:#4A4236}
 .gtst-pk .gtst-lead .gtst-cap{color:#2F6B52}
 .gtst-pk .gtst-title span{-webkit-text-stroke:2px #141414}
-.gtst-pk .gtst-ibtn{border:2.5px solid #141414;background:#FFFDF7;box-shadow:0 2px 0 #141414;border-radius:14px}
+.gtst-pk .gtst-ibtn{outline:2.5px solid #141414;outline-offset:-2.5px;background:#FFFDF7;box-shadow:0 2px 0 #141414;border-radius:14px}
 .gtst-pk .gtst-ibtn:active{transform:translateY(2px);box-shadow:none}
-.gtst-pk .gtst-input,.gtst-pk .gtst-sel{border:2.5px solid #141414;border-radius:14px}
-.gtst-pk .gtst-tabs{border:2.5px solid #141414;box-shadow:0 3px 0 #141414}
+.gtst-pk .gtst-input,.gtst-pk .gtst-sel{outline:2.5px solid #141414;outline-offset:-2.5px;border-radius:14px}
+.gtst-pk .gtst-tabs{outline:2.5px solid #141414;outline-offset:-2.5px;box-shadow:0 3px 0 #141414}
 .gtst-pk .gtst-tab{font-family:'Bagel Fat One','Bowlby One',sans-serif;font-weight:400;color:#141414}
 .gtst-pk .gtst-tab[aria-selected=true]{color:#F4EAD5}
 .gtst[data-d=app].gtst-pk .gtst-tab[aria-selected=true]::after{display:none}
@@ -352,11 +352,11 @@ const ST_PK_CSS=`
 .gtst-pk .gtst-chip[aria-pressed=true],.gtst-pk .gtst-wbtn[aria-pressed=true]{background:#071743;color:#F4EAD5}
 .gtst-pk .gtst-chip[aria-pressed=true] .gtst-av{background:#F4EAD5!important;box-shadow:none!important}
 .gtst-pk .gtst-pbtn[aria-pressed=true]{background:#F4EAD5;border-width:3px}
-.gtst-pk .gtst-sheet{border:2.5px solid #141414;border-bottom:none}
+.gtst-pk .gtst-sheet{outline:2.5px solid #141414;outline-offset:-2.5px;border-bottom:none}
 .gtst-pk .gtst-sfoot{border-top:2.5px solid #141414}
 .gtst-pk .gtst-toast{border:2.5px solid #F4EAD5;border-radius:16px}
 .gtst-pk .gtst-badge{border-width:2px;border-color:#141414;font-family:'Bagel Fat One','Bowlby One',sans-serif;font-weight:400}
-.gtst-pk .gtst-sum,.gtst-pk .gtst-ro,.gtst-pk .gtst-note{border:2px solid #141414}
+.gtst-pk .gtst-sum,.gtst-pk .gtst-ro,.gtst-pk .gtst-note{outline:2px solid #141414;outline-offset:-2px}
 .gtst-pk .gtst-cta::before{background:linear-gradient(to bottom,transparent,#2F6B52 55%)}
 .gtst-pk :focus-visible{outline-color:#F4EAD5}
 .gtst-pk .gtst-panel :focus-visible,.gtst-pk .gtst-sheet :focus-visible{outline-color:#071743}

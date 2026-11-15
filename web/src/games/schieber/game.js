@@ -39,13 +39,13 @@ import herzA from "./img/herz-A.svg";
 html[data-gt-skin="plakat"] .sch-pk.gt-sch-classic{background:radial-gradient(rgba(20,20,20,.10) 1.2px,transparent 1.4px) 0 0/14px 14px,#2F6B52!important}
 @media (display-mode:standalone){html[data-gt-skin="plakat"] .sch-pk.gt-sch-classic::before{background:#2F6B52!important}}
 html[data-gt-skin="plakat"] .sch-pk .gt-su-label{color:#F4EAD5!important}
-html[data-gt-skin="plakat"] .sch-pk .gt-sch-tour{background:#FFFDF7!important;border:2.5px solid #141414!important;box-shadow:0 4px 0 #141414;border-radius:18px!important}
+html[data-gt-skin="plakat"] .sch-pk .gt-sch-tour{background:#FFFDF7!important;outline:2.5px solid #141414!important;outline-offset:-2.5px!important;box-shadow:0 4px 0 #141414;border-radius:18px!important}
 html[data-gt-skin="plakat"] .sch-pk .gt-sch-tour>div:first-child{color:#2F6B52!important;font-family:'Bagel Fat One','Bowlby One',sans-serif!important;font-weight:400!important}
-html[data-gt-skin="plakat"] .sch-pk .gt-sch-tour button{border:2px solid #141414!important;border-radius:14px!important;background:#F4EAD5!important;color:#141414!important}
-html[data-gt-skin="plakat"] .sch-pk .gt-sch-board{border:2.5px solid #141414!important;border-radius:18px!important;box-shadow:0 6px 0 #141414!important}
-html[data-gt-skin="plakat"] .sch-pk .gt-sch-name{font-family:'Bagel Fat One','Bowlby One',sans-serif!important;font-weight:400!important;font-size:18px!important;letter-spacing:.01em!important}
+html[data-gt-skin="plakat"] .sch-pk .gt-sch-tour button{outline:2px solid #141414!important;outline-offset:-2px!important;border-radius:14px!important;background:#F4EAD5!important;color:#141414!important}
+html[data-gt-skin="plakat"] .sch-pk .gt-sch-board{outline:2.5px solid #141414!important;outline-offset:-2.5px!important;border-radius:18px!important;box-shadow:0 6px 0 #141414!important}
+html[data-gt-skin="plakat"] .sch-pk .gt-sch-name{font-family:'Bagel Fat One','Bowlby One',sans-serif!important;font-weight:400!important;font-size:16px!important;letter-spacing:.01em!important}
 html[data-gt-skin="plakat"] .sch-pk .gt-sch-classic .gt-sch-target,html[data-gt-skin="plakat"] .sch-pk .gt-sch-target{font-family:'Bagel Fat One','Bowlby One',sans-serif!important;font-weight:400!important;color:#F4EAD5!important}
-html[data-gt-skin="plakat"] .sch-pk .gt-weis-open{border:2.5px solid #141414!important;border-radius:18px!important;background:#F4EAD5!important;color:#141414!important;box-shadow:0 4px 0 #141414;font-family:'Bagel Fat One','Bowlby One',sans-serif!important;font-weight:400!important;font-size:17px!important;letter-spacing:.01em}
+html[data-gt-skin="plakat"] .sch-pk .gt-weis-open{outline:2.5px solid #141414!important;outline-offset:-2.5px!important;border-radius:18px!important;background:#F4EAD5!important;color:#141414!important;box-shadow:0 4px 0 #141414;font-family:'Bagel Fat One','Bowlby One',sans-serif!important;font-weight:400!important;font-size:17px!important;letter-spacing:.01em}
 html[data-gt-skin="plakat"] .sch-pk .gt-weis-open:active{transform:translateY(3px);box-shadow:0 1px 0 #141414}
 html[data-gt-skin="plakat"] .sch-pk .gt-weis-open:focus-visible{outline:3px solid #F4EAD5;outline-offset:3px}
 html[data-gt-skin="plakat"] .sch-pk .gt-wk-mid .gt-weis-brief{font-family:'Bagel Fat One','Bowlby One',sans-serif!important;font-weight:400!important}
@@ -53,12 +53,12 @@ html[data-gt-skin="plakat"] .sch-pk .gt-wk-mid .gt-weis-brief{font-family:'Bagel
 html[data-gt-skin="plakat"] .sch-pk .gt-sch-ed{background:#141414!important;border-top:2.5px solid #141414!important;box-shadow:none!important;color:#F4EAD5}
 html[data-gt-skin="plakat"] .sch-pk #gt-sch-edt{color:#F4EAD5!important;font-family:'Bagel Fat One','Bowlby One',sans-serif!important;font-weight:400!important;font-size:17px!important}
 html[data-gt-skin="plakat"] .sch-pk .gt-sch-x{color:#F4EAD5!important}
-html[data-gt-skin="plakat"] .sch-pk .gt-sch-trc{background:#F4EAD5!important;border:2.5px solid #141414;box-shadow:0 3px 0 #8A8068!important}
+html[data-gt-skin="plakat"] .sch-pk .gt-sch-trc{background:#F4EAD5!important;outline:2.5px solid #141414;outline-offset:-2.5px;box-shadow:0 3px 0 #8A8068!important}
 html[data-gt-skin="plakat"] .sch-pk .gt-sch-tr[aria-pressed="true"] .gt-sch-trc{box-shadow:0 0 0 3px #F4EAD5,0 3px 0 3px #8A8068!important}
 html[data-gt-skin="plakat"] .sch-pk .gt-sch-trn{color:#F4EAD5!important;font-family:'Bagel Fat One','Bowlby One',sans-serif!important;font-weight:400!important;font-size:12px}
 html[data-gt-skin="plakat"] .sch-pk .gt-sch-disp{background:#000!important;border:2px solid #F4EAD5;border-radius:14px!important}
 html[data-gt-skin="plakat"] .sch-pk .gt-sch-disp span{font-family:'Bagel Fat One','Bowlby One',sans-serif!important;font-weight:400!important}
-html[data-gt-skin="plakat"] .sch-pk .gt-sch-edpad>button{background:#F4EAD5!important;color:#141414!important;border:2.5px solid #141414!important;border-radius:14px!important;box-shadow:0 3px 0 #8A8068;font-family:'Bagel Fat One','Bowlby One',sans-serif!important;font-weight:400!important}
+html[data-gt-skin="plakat"] .sch-pk .gt-sch-edpad>button{background:#F4EAD5!important;color:#141414!important;outline:2.5px solid #141414!important;outline-offset:-2.5px!important;border-radius:14px!important;box-shadow:0 3px 0 #8A8068;font-family:'Bagel Fat One','Bowlby One',sans-serif!important;font-weight:400!important}
 html[data-gt-skin="plakat"] .sch-pk .gt-sch-edpad>button:active{transform:translateY(2px) scale(.97);box-shadow:0 1px 0 #8A8068}
 html[data-gt-skin="plakat"] .sch-pk .gt-sch-edpad>button[aria-pressed="true"]{background:#B3242E!important;color:#F4EAD5!important;border-color:#F4EAD5!important}
 html[data-gt-skin="plakat"] .sch-pk .gt-sch-edok{background:#2F6B52!important;color:#F4EAD5!important;border:2.5px solid #F4EAD5!important;border-radius:16px!important;font-family:'Bagel Fat One','Bowlby One',sans-serif!important;font-weight:400!important;font-size:17px!important;opacity:1!important}
@@ -66,19 +66,19 @@ html[data-gt-skin="plakat"] .sch-pk .gt-sch-edok:disabled{background:#3A3A3A!imp
 html[data-gt-skin="plakat"] .sch-pk .gt-sch-ed button:focus-visible{outline-color:#F4EAD5}
 html[data-gt-skin="plakat"] .sch-pk .gt-wy{--wy-bg:#F4EAD5;--wy-edge:transparent;--wy-line:#141414;--wy-ink:#141414;--wy-ink2:#3B342A;--wy-tile:#FFFDF7;--wy-chip:#F4EAD5;--wy-xbg:#FFFDF7;--wy-pt:#2F6B52;--wy-top:none;--wy-fir:#2F6B52;--wy-firbg:#2F6B52;--wy-on:#F4EAD5;--wy-off:#C9BFA8;--wy-offink:#141414;border-top:2.5px solid #141414;border-radius:22px 22px 0 0;box-shadow:none!important}
 html[data-gt-skin="plakat"] .sch-pk .gt-wy-head h2{font-family:'Bagel Fat One','Bowlby One',sans-serif;font-weight:400;font-size:22px}
-html[data-gt-skin="plakat"] .sch-pk .gt-wy-x{border:2.5px solid #141414;box-shadow:0 3px 0 #141414}
-html[data-gt-skin="plakat"] .sch-pk .gt-wy-tile,html[data-gt-skin="plakat"] .sch-pk .gt-wy-row{border:2.5px solid #141414!important;box-shadow:0 3px 0 #141414!important;border-radius:16px!important}
+html[data-gt-skin="plakat"] .sch-pk .gt-wy-x{outline:2.5px solid #141414;outline-offset:-2.5px;box-shadow:0 3px 0 #141414}
+html[data-gt-skin="plakat"] .sch-pk .gt-wy-tile,html[data-gt-skin="plakat"] .sch-pk .gt-wy-row{outline:2.5px solid #141414!important;outline-offset:-2.5px!important;box-shadow:0 3px 0 #141414!important;border-radius:16px!important}
 html[data-gt-skin="plakat"] .sch-pk .gt-wy-tile.is-on .gt-wy-tb,html[data-gt-skin="plakat"] .sch-pk .gt-wy-row.is-on>button,html[data-gt-skin="plakat"] .sch-pk .gt-wy-tile.is-on .gt-wy-qty,html[data-gt-skin="plakat"] .sch-pk .gt-wy-row.is-on .gt-wy-qty{color:#F4EAD5}
 html[data-gt-skin="plakat"] .sch-pk .gt-wy-tile.is-on .gt-wy-tb i,html[data-gt-skin="plakat"] .sch-pk .gt-wy-row.is-on>button i{color:#F4EAD5}
 html[data-gt-skin="plakat"] .sch-pk .gt-wy-tb b,html[data-gt-skin="plakat"] .sch-pk .gt-wy-row>button span{font-family:'Bagel Fat One','Bowlby One',sans-serif;font-weight:400}
-html[data-gt-skin="plakat"] .sch-pk .gt-wy-chk{background:#F4EAD5!important;color:#141414!important;border:2px solid #141414}
-html[data-gt-skin="plakat"] .sch-pk .gt-wy-qty button,html[data-gt-skin="plakat"] .sch-pk .gt-wy-who button,html[data-gt-skin="plakat"] .sch-pk .gt-wy-seg button,html[data-gt-skin="plakat"] .sch-pk .gt-wy-opts input{border:2.5px solid #141414!important;box-shadow:0 2px 0 #141414!important;border-radius:13px!important;background:#FFFDF7;color:#141414}
+html[data-gt-skin="plakat"] .sch-pk .gt-wy-chk{background:#F4EAD5!important;color:#141414!important;outline:2px solid #141414;outline-offset:-2px}
+html[data-gt-skin="plakat"] .sch-pk .gt-wy-qty button,html[data-gt-skin="plakat"] .sch-pk .gt-wy-who button,html[data-gt-skin="plakat"] .sch-pk .gt-wy-seg button,html[data-gt-skin="plakat"] .sch-pk .gt-wy-opts input{outline:2.5px solid #141414!important;outline-offset:-2.5px!important;box-shadow:0 2px 0 #141414!important;border-radius:13px!important;background:#FFFDF7;color:#141414}
 html[data-gt-skin="plakat"] .sch-pk .gt-wy-who button[aria-pressed="true"]{background:#2F6B52;color:#F4EAD5}
 html[data-gt-skin="plakat"] .sch-pk .gt-wy-seg button[aria-pressed="true"]{background:#2F6B52!important;color:#F4EAD5}
 html[data-gt-skin="plakat"] .sch-pk .gt-wy-who button,html[data-gt-skin="plakat"] .sch-pk .gt-wy-seg button,html[data-gt-skin="plakat"] .sch-pk .gt-wy-opts input,html[data-gt-skin="plakat"] .sch-pk .gt-wy-more{font-family:'Bagel Fat One','Bowlby One',sans-serif;font-weight:400}
 html[data-gt-skin="plakat"] .sch-pk .gt-wy-more{border-bottom:2.5px solid #141414}
 html[data-gt-skin="plakat"] .sch-pk .gt-wy-foot{border-top:2.5px solid #141414}
-html[data-gt-skin="plakat"] .sch-pk .gt-weis-save{border:2.5px solid #141414!important;border-radius:16px!important;box-shadow:0 4px 0 #141414;font-family:'Bagel Fat One','Bowlby One',sans-serif;font-weight:400;font-size:17px}
+html[data-gt-skin="plakat"] .sch-pk .gt-weis-save{outline:2.5px solid #141414!important;outline-offset:-2.5px!important;border-radius:16px!important;box-shadow:0 4px 0 #141414;font-family:'Bagel Fat One','Bowlby One',sans-serif;font-weight:400;font-size:17px}
 html[data-gt-skin="plakat"] .sch-pk .gt-weis-save:active{transform:translateY(3px);box-shadow:0 1px 0 #141414}
 html[data-gt-skin="plakat"] .sch-pk .gt-wy button:focus-visible{outline-color:#141414}
 `;const SCHIEBER_PL_CSS=`

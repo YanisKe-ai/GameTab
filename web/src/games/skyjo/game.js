@@ -192,31 +192,31 @@ const SK_PK_CSS=`
 .sk-pk .sk-word{font-family:var(--pkf);font-weight:400;font-size:clamp(34px,11vw,46px);white-space:nowrap;color:#F4EAD5;-webkit-text-stroke:.09em #141414;paint-order:stroke fill;text-shadow:.05em .07em 0 #141414;letter-spacing:0}
 .sk-pk .sk-fan{filter:drop-shadow(0 3px 0 #141414)}
 .sk-pk .sk-sub{color:#141414}
-.sk-pk .sk-row{border:2.5px solid #141414;box-shadow:0 4px 0 #141414;border-radius:18px}
+.sk-pk .sk-row{outline:2.5px solid #141414;outline-offset:-2.5px;box-shadow:0 4px 0 #141414;border-radius:18px}
 .sk-pk .sk-row[data-on="1"]{border-color:#141414;box-shadow:0 4px 0 #141414,inset 0 0 0 3px #157A64}
-.sk-pk .sk-flag{background:#F4EAD5;border:2.5px solid #141414;color:#141414}
+.sk-pk .sk-flag{background:#F4EAD5;outline:2.5px solid #141414;outline-offset:-2.5px;color:#141414}
 .sk-pk .sk-flag[aria-pressed="true"]{background:#157A64;color:#FFFDF7}
 .sk-pk .sk-name{font-family:var(--pkf);font-weight:400;font-size:17px}
 .sk-pk .sk-t1{font-weight:600;color:#141414}
 .sk-pk .sk-t1[data-k="dbl"]{color:#157A64;font-weight:800}
 .sk-pk .sk-t1[data-k="near"]{color:#B3261E}
-.sk-pk .sk-gb{border:2.5px solid #141414;background:#F4EAD5;color:#141414}
-.sk-pk .sk-val{border:2.5px solid #141414;font-family:var(--pkf);font-weight:400;font-size:24px;border-radius:14px}
+.sk-pk .sk-gb{outline:2.5px solid #141414;outline-offset:-2.5px;background:#F4EAD5;color:#141414}
+.sk-pk .sk-val{outline:2.5px solid #141414;outline-offset:-2.5px;font-family:var(--pkf);font-weight:400;font-size:24px;border-radius:14px}
 .sk-pk .sk-val[data-on="1"]{background:#FFFDF7;box-shadow:0 0 0 3px #157A64}
-.sk-pk .sk-none button{border:2.5px dashed #141414;background:#FFFDF7;color:#141414;font-family:var(--pkf);font-weight:400;font-size:14px}
+.sk-pk .sk-none button{outline:2.5px dashed #141414;outline-offset:-2.5px;background:#FFFDF7;color:#141414;font-family:var(--pkf);font-weight:400;font-size:14px}
 .sk-pk .sk-none button[aria-pressed="true"]{border-style:solid;background:#157A64;color:#FFFDF7}
-.sk-pk .sk-key{border:2.5px solid #141414;background:#FFFDF7;color:#141414;box-shadow:0 3px 0 #141414;font-family:var(--pkf);font-weight:400}
+.sk-pk .sk-key{outline:2.5px solid #141414;outline-offset:-2.5px;background:#FFFDF7;color:#141414;box-shadow:0 3px 0 #141414;font-family:var(--pkf);font-weight:400}
 .sk-pk .sk-key:active{transform:translateY(2px);box-shadow:0 1px 0 #141414}
 .sk-pk .sk-key[data-op="1"]{background:#F4EAD5;color:#141414}
 .sk-pk .sk-pad3 .sk-key[data-op="1"]{font-family:var(--pkf)}
-.sk-pk .sk-ghost{border:2.5px solid #141414;background:#FFFDF7;color:#141414;box-shadow:0 4px 0 #141414;font-family:var(--pkf);font-weight:400}
+.sk-pk .sk-ghost{outline:2.5px solid #141414;outline-offset:-2.5px;background:#FFFDF7;color:#141414;box-shadow:0 4px 0 #141414;font-family:var(--pkf);font-weight:400}
 .sk-pk .sk-ghost:active,.sk-pk .sk-save:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 #141414}
-.sk-pk .sk-save{position:relative;border:2.5px solid #141414;background:#157A64;color:#FFFDF7;box-shadow:0 6px 0 #141414;font-family:var(--pkf);font-weight:400;font-size:17px;border-radius:20px}
+.sk-pk .sk-save{position:relative;outline:2.5px solid #141414;outline-offset:-2.5px;background:#157A64;color:#FFFDF7;box-shadow:0 6px 0 #141414;font-family:var(--pkf);font-weight:400;font-size:17px;border-radius:20px}
 .sk-pk .sk-save:disabled{background:#E8DFC8;color:#141414;opacity:1;box-shadow:0 6px 0 #141414}
 .sk-pk .sk-save:not(:disabled)::after{content:"";position:absolute;top:0;bottom:0;left:0;width:35%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);animation:pk-shine 3.2s ease-in-out infinite;pointer-events:none}
 .sk-pk .sk-hint,.sk-pk .sk-dp,.sk-pk .sk-wl,.sk-pk .sk-dl{color:#141414}
 .sk-pk .sk-hint{font-weight:600}
-.sk-pk .sk-tbl{background:#FFFDF7;border:2.5px solid #141414;box-shadow:0 4px 0 #141414;border-radius:20px}
+.sk-pk .sk-tbl{background:#FFFDF7;outline:2.5px solid #141414;outline-offset:-2.5px;box-shadow:0 4px 0 #141414;border-radius:20px}
 .sk-pk .sk-th{font-family:var(--pkf);font-weight:400;font-size:12px}
 .sk-pk .sk-rn{font-family:var(--pkf);font-weight:400}
 .sk-pk .sk-cell{font-family:var(--pkf);font-weight:400}
@@ -225,37 +225,37 @@ const SK_PK_CSS=`
 .sk-pk .sk-tot .sk-cell{font-weight:400}
 .sk-pk .sk-tot .sk-cell[data-near="1"]{color:#B3261E}
 .sk-pk .sk-empty{color:#141414}
-.sk-pk .sk-card{background:#FFFDF7;border:2.5px solid #141414;box-shadow:0 4px 0 #141414;border-radius:20px}
+.sk-pk .sk-card{background:#FFFDF7;outline:2.5px solid #141414;outline-offset:-2.5px;box-shadow:0 4px 0 #141414;border-radius:20px}
 .sk-pk .sk-over{color:#157A64;font-family:var(--pkf);font-weight:400;letter-spacing:.06em}
 .sk-pk .sk-q{font-family:var(--pkf);font-weight:400}
 .sk-pk .sk-qh{color:#141414}
-.sk-pk .sk-tile{border:2.5px solid #141414;box-shadow:0 3px 0 #141414;background:#FFFDF7;border-radius:18px}
+.sk-pk .sk-tile{outline:2.5px solid #141414;outline-offset:-2.5px;box-shadow:0 3px 0 #141414;background:#FFFDF7;border-radius:18px}
 .sk-pk .sk-tile[aria-pressed="true"]{background:#157A64;border-color:#141414;color:#FFFDF7}
 .sk-pk .sk-tn{font-family:var(--pkf);font-weight:400;font-size:16px}
 .sk-pk .sk-tt{color:#141414}
 .sk-pk .sk-tt[data-near="1"]{color:#B3261E}
 .sk-pk .sk-tile[aria-pressed="true"] .sk-tt{color:#FFFDF7}
-.sk-pk .sk-chip{border:2.5px dashed #141414}
+.sk-pk .sk-chip{outline:2.5px dashed #141414;outline-offset:-2.5px}
 .sk-pk .sk-chip[data-s="done"]{border-style:solid;background:#FFFDF7;box-shadow:0 2px 0 #141414}
 .sk-pk .sk-chip[data-s="cur"]{border-color:#141414;background:#157A64;color:#FFFDF7;box-shadow:0 2px 0 #141414}
 .sk-pk .sk-cn{font-weight:600}
 .sk-pk .sk-cv{font-family:var(--pkf);font-weight:400}
 .sk-pk .sk-wn{font-family:var(--pkf);font-weight:400}
-.sk-pk .sk-disp{border:2.5px solid #141414;box-shadow:0 4px 0 #141414;background:#FFFDF7;border-radius:20px}
+.sk-pk .sk-disp{outline:2.5px solid #141414;outline-offset:-2.5px;box-shadow:0 4px 0 #141414;background:#FFFDF7;border-radius:20px}
 .sk-pk .sk-dv{font-family:var(--pkf);font-weight:400}
 .sk-pk .sk-dv[data-e="1"]{color:#141414;opacity:.55}
 .sk-pk .sk-dl[data-k="dbl"]{color:#157A64}
-.sk-pk .sk-gbtn{border:2.5px solid #141414;background:#FFFDF7;color:#141414;box-shadow:0 3px 0 #141414;font-family:var(--pkf);font-weight:400}
+.sk-pk .sk-gbtn{outline:2.5px solid #141414;outline-offset:-2.5px;background:#FFFDF7;color:#141414;box-shadow:0 3px 0 #141414;font-family:var(--pkf);font-weight:400}
 .sk-pk .sk-undo{color:#141414;font-family:var(--pkf);font-weight:400}
-.sk-pk .sk-sheet{background:#FFFDF7;border:2.5px solid #141414;border-bottom:none;box-shadow:0 -5px 0 #141414}
+.sk-pk .sk-sheet{background:#FFFDF7;outline:2.5px solid #141414;outline-offset:-2.5px;border-bottom:none;box-shadow:0 -5px 0 #141414}
 .sk-pk .sk-sh-title{font-family:var(--pkf);font-weight:400}
-.sk-pk .sk-slot{border:2.5px dashed #141414;background:#FFFDF7;color:#141414;font-family:var(--pkf);font-weight:400}
+.sk-pk .sk-slot{outline:2.5px dashed #141414;outline-offset:-2.5px;background:#FFFDF7;color:#141414;font-family:var(--pkf);font-weight:400}
 .sk-pk .sk-slot[data-sel="1"]{border-style:solid;box-shadow:0 0 0 3px #157A64}
-.sk-pk .sk-slot[data-v="1"]{border:2.5px solid #141414}
+.sk-pk .sk-slot[data-v="1"]{outline:2.5px solid #141414;outline-offset:-2.5px}
 .sk-pk .sk-slot[data-v="1"][data-sel="1"]{box-shadow:0 0 0 3px #157A64}
-.sk-pk .sk-gone{border:2.5px solid #141414;background:#FFFDF7;color:#141414;font-family:var(--pkf);font-weight:400}
-.sk-pk .sk-pick{border:2.5px solid #141414;font-family:var(--pkf);font-weight:400;box-shadow:0 2px 0 #141414}
-.sk-pk .sk-pick[data-clr="1"]{background:#FFFDF7;border:2.5px solid #141414;color:#141414;font-family:var(--pkf)}
+.sk-pk .sk-gone{outline:2.5px solid #141414;outline-offset:-2.5px;background:#FFFDF7;color:#141414;font-family:var(--pkf);font-weight:400}
+.sk-pk .sk-pick{outline:2.5px solid #141414;outline-offset:-2.5px;font-family:var(--pkf);font-weight:400;box-shadow:0 2px 0 #141414}
+.sk-pk .sk-pick[data-clr="1"]{background:#FFFDF7;outline:2.5px solid #141414;outline-offset:-2.5px;color:#141414;font-family:var(--pkf)}
 .sk-pk .sk-sumline{color:#141414}
 .sk-pk .sk-sumline b{font-family:var(--pkf);font-weight:400}
 .sk-pk .sk-dockplain{background:#FFFDF7}

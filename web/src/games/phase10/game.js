@@ -101,49 +101,49 @@ const P10_PK_CSS=`
 .gtL-shellpage:has(.p10-pk){--pk-bg:#E0464E;background:radial-gradient(rgba(20,20,20,.10) 1.2px,transparent 1.4px) 0 0/14px 14px,#E0464E!important}
 .gtL-shellpage:has(.p10-pk) .gt-wm{color:#F9C22E!important;font-size:clamp(34px,12vw,48px)!important;white-space:nowrap!important;word-break:keep-all!important}
 .p10-pk{--pkf:'Bagel Fat One','Bowlby One',sans-serif;--p-card:#FFFDF7;--p-bg:#F4EAD5;--p-ink:#141414;--p-muted:#4A4236;--p-line:#141414;--p-acc:#F9C22E;--p-on:#141414;--p-gold:#141414}
-.p10-pk .p10-seg{background:#FFFDF7;border:2.5px solid #141414;box-shadow:0 4px 0 #141414;border-radius:18px}
+.p10-pk .p10-seg{background:#FFFDF7;outline:2.5px solid #141414;outline-offset:-2.5px;box-shadow:0 4px 0 #141414;border-radius:18px}
 .p10-pk .p10-seg button{font-family:var(--pkf);font-weight:400;font-size:15px;color:#141414}
 .p10-pk .p10-seg button[aria-selected="true"]{background:#F9C22E;box-shadow:inset 0 0 0 2px #141414}
-.p10-pk .p10-tie{background:#FFFDF7;border:2.5px solid #141414;box-shadow:0 4px 0 #141414;font-weight:600}
+.p10-pk .p10-tie{background:#FFFDF7;outline:2.5px solid #141414;outline-offset:-2.5px;box-shadow:0 4px 0 #141414;font-weight:600}
 .p10-pk .p10-tie b{font-family:var(--pkf);font-weight:400;color:#141414}
-.p10-pk .p10-tie button{border:2.5px solid #141414;background:#F9C22E;color:#141414;font-family:var(--pkf);font-weight:400;box-shadow:0 3px 0 #141414}
-.p10-pk .p10-chip{background:#FFFDF7;border:2.5px solid #141414;box-shadow:0 3px 0 #141414;margin-bottom:3px}
+.p10-pk .p10-tie button{outline:2.5px solid #141414;outline-offset:-2.5px;background:#F9C22E;color:#141414;font-family:var(--pkf);font-weight:400;box-shadow:0 3px 0 #141414}
+.p10-pk .p10-chip{background:#FFFDF7;outline:2.5px solid #141414;outline-offset:-2.5px;box-shadow:0 3px 0 #141414;}
 .p10-pk .p10-chip[data-s="cur"]{background:#F9C22E}
 .p10-pk .p10-cn{color:#141414}
 .p10-pk .p10-cv{font-family:var(--pkf);font-weight:400}
 .p10-pk .p10-cv i{color:#141414}
 .p10-pk .p10-wl{font-family:var(--pkf);font-weight:400;color:#141414;font-size:13px}
-.p10-pk .p10-wn{font-family:var(--pkf);font-weight:400;font-size:26px;color:#141414}
+.p10-pk .p10-wn{font-family:var(--pkf);font-weight:400;color:#141414}
 .p10-pk .p10-wp{color:#141414;font-weight:700}
 .p10-pk .p10-wt{color:#141414;font-weight:700}
 .p10-pk .p10-wt b{font-family:var(--pkf);font-weight:400;font-size:36px}
-.p10-pk .p10-st{background:#FFFDF7;border:2px solid #141414;box-sizing:border-box}
+.p10-pk .p10-st{background:#FFFDF7;outline:2px solid #141414;outline-offset:-2px;box-sizing:border-box}
 .p10-pk .p10-st[data-d="1"]{background:#F9C22E}
-.p10-pk .p10-st[data-c="1"]{background:#FFFDF7;border:2.5px dashed #141414}
-.p10-pk .p10-tg{background:#FFFDF7;border:2.5px solid #141414;box-shadow:0 4px 0 #141414;font-family:var(--pkf);font-weight:400;font-size:14px;color:#141414;margin-bottom:2px}
+.p10-pk .p10-st[data-c="1"]{background:#FFFDF7;outline:2.5px dashed #141414;outline-offset:-2.5px}
+.p10-pk .p10-tg{background:#FFFDF7;outline:2.5px solid #141414;outline-offset:-2.5px;box-shadow:0 4px 0 #141414;font-family:var(--pkf);font-weight:400;font-size:14px;color:#141414;}
 .p10-pk .p10-tg[aria-pressed="true"]{background:#F9C22E;border-color:#141414;color:#141414}
 .p10-pk .p10-tg:disabled{opacity:.5}
 .p10-pk .p10-tg:active{transform:translateY(3px);box-shadow:0 1px 0 #141414}
 .p10-pk .p10-lab{color:#141414;font-family:var(--pkf);font-weight:400;letter-spacing:.04em}
 .p10-pk .p10-lab b{font-family:var(--pkf);font-weight:400;font-size:17px}
-.p10-pk .p10-row{background:#FFFDF7;border:2.5px solid #141414;box-shadow:0 3px 0 #141414;margin-bottom:2px;border-radius:16px}
-.p10-pk .p10-card{border:2px solid #141414;box-shadow:0 2px 0 #141414;font-family:var(--pkf);font-weight:400}
+.p10-pk .p10-row{background:#FFFDF7;outline:2.5px solid #141414;outline-offset:-2.5px;box-shadow:0 3px 0 #141414;border-radius:16px}
+.p10-pk .p10-card{outline:2px solid #141414;outline-offset:-2px;box-shadow:0 2px 0 #141414;font-family:var(--pkf);font-weight:400}
 .p10-pk .p10-rt{font-weight:700;color:#141414}
 .p10-pk .p10-rt small{color:#4A4236}
-.p10-pk .p10-pm{border:2.5px solid #141414;background:#F4EAD5;color:#141414;font-family:var(--pkf);font-weight:400;box-shadow:0 3px 0 #141414}
+.p10-pk .p10-pm{outline:2.5px solid #141414;outline-offset:-2.5px;background:#F4EAD5;color:#141414;font-family:var(--pkf);font-weight:400;box-shadow:0 3px 0 #141414}
 .p10-pk .p10-pm:active:not(:disabled){transform:translateY(2px);box-shadow:0 1px 0 #141414}
 .p10-pk .p10-pm:disabled{opacity:1;background:#EADDC2;color:#4A4236;box-shadow:0 3px 0 #4A4236;border-color:#4A4236}
 .p10-pk .p10-cnt{font-family:var(--pkf);font-weight:400;color:#141414}
 .p10-pk .p10-foot{padding-bottom:6px}
-.p10-pk .p10-ghost{border:2.5px solid #141414;background:#FFFDF7;color:#141414;box-shadow:0 4px 0 #141414;font-family:var(--pkf);font-weight:400}
+.p10-pk .p10-ghost{outline:2.5px solid #141414;outline-offset:-2.5px;background:#FFFDF7;color:#141414;box-shadow:0 4px 0 #141414;font-family:var(--pkf);font-weight:400}
 .p10-pk .p10-ghost:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 #141414}
 .p10-pk .p10-ghost:disabled{opacity:1;background:#EADDC2;color:#4A4236}
 .p10-pk .gt-su-add{background:#FFFDF7!important;color:#141414!important;border-style:solid!important;box-shadow:0 3px 0 #141414}
 .p10-pk .gt-su-add *{color:#141414!important}
-.p10-pk .p10-save{position:relative;overflow:hidden;border:2.5px solid #141414;background:#F9C22E;color:#141414;box-shadow:0 6px 0 #141414;font-family:var(--pkf);font-weight:400;font-size:17px;border-radius:20px}
+.p10-pk .p10-save{position:relative;overflow:hidden;outline:2.5px solid #141414;outline-offset:-2.5px;background:#F9C22E;color:#141414;box-shadow:0 6px 0 #141414;font-family:var(--pkf);font-weight:400;font-size:17px;border-radius:20px}
 .p10-pk .p10-save::after{content:"";position:absolute;top:0;bottom:0;left:0;width:35%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.42),transparent);animation:pk-shine 3.2s ease-in-out infinite;pointer-events:none}
 .p10-pk .p10-save:active{transform:translateY(4px);box-shadow:0 2px 0 #141414}
-.p10-pk .p10-tbl{background:#FFFDF7;border:2.5px solid #141414;box-shadow:0 4px 0 #141414;border-radius:20px;margin-bottom:4px}
+.p10-pk .p10-tbl{background:#FFFDF7;outline:2.5px solid #141414;outline-offset:-2.5px;box-shadow:0 4px 0 #141414;border-radius:20px;}
 .p10-pk .p10-th{font-family:var(--pkf);font-weight:400;color:#141414}
 .p10-pk .p10-rn{font-family:var(--pkf);font-weight:400;color:#141414}
 .p10-pk .p10-cell{font-family:var(--pkf);font-weight:400;font-size:17px;color:#141414}
@@ -152,11 +152,11 @@ const P10_PK_CSS=`
 .p10-pk .p10-tot{border-top:2.5px solid #141414}
 .p10-pk .p10-empty{color:#141414}
 .p10-pk .p10-ov{background:rgba(20,20,20,.6)}
-.p10-pk .p10-sheet{background:#F4EAD5;border:2.5px solid #141414;border-bottom:0}
+.p10-pk .p10-sheet{background:#F4EAD5;outline:2.5px solid #141414;outline-offset:-2.5px;border-bottom:0}
 .p10-pk .p10-sh{font-family:var(--pkf);font-weight:400;font-size:18px}
 .p10-pk .p10-x{color:#141414}
 .p10-pk .p10-tg:focus-visible,.p10-pk .p10-pm:focus-visible,.p10-pk .p10-chip:focus-visible,.p10-pk .p10-seg button:focus-visible,.p10-pk .p10-save:focus-visible,.p10-pk .p10-ghost:focus-visible,.p10-pk .p10-cell:focus-visible,.p10-pk .p10-tie button:focus-visible{outline:3px solid #141414;outline-offset:2px}
-.gtL-shellpage:has(.p10-pk) .p10-plist,.gtL-shellpage:has(.p10-pk) .p10-stand{background:#FFFDF7!important;border:2.5px solid #141414!important;box-shadow:0 4px 0 #141414;border-radius:22px!important}
+.gtL-shellpage:has(.p10-pk) .p10-plist,.gtL-shellpage:has(.p10-pk) .p10-stand{background:#FFFDF7!important;outline:2.5px solid #141414!important;outline-offset:-2.5px!important;box-shadow:0 4px 0 #141414;border-radius:22px!important}
 @media (prefers-reduced-motion:reduce){.p10-pk .p10-save::after{animation:none}}
 `;
 function p10PkTk(tk){return{...tk,bg:"#F4EAD5",bg2:"#EADDC2",card:"#FFFDF7",ink:"#141414",muted:"#141414",teal:"#141414",gold:"#141414",border:"#141414",btnFrom:"#F9C22E",btnTo:"#F9C22E",onAccent:"#141414"};}

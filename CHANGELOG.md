@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.15-3 (15.11.2026 10:44)
+- Plakat: Statusleiste und Abstand oben korrigiert (kein grauer Balken mehr), Ränder und Schrift verschieben nichts mehr, Listentitel lesbar
+
 ## 2026.11.15-2 (15.11.2026 01:56)
 - Modus Plakat: Startseite, Einstellungen, Listen und alle Spiele im Plakat-Stil
 

@@ -17,15 +17,15 @@ function pkPartyTk(tk) {
 }
 // Hauptknopf (Schwarz, Creme-Schrift, harter Schatten)
 function pkPrim(extra) {
-  return { border: PK.border, borderRadius: 18, background: INK, color: CREAM, boxShadow: PK.shadowLg, fontFamily: F, fontWeight: 400, letterSpacing: ".02em", cursor: "pointer", ...(extra || {}) };
+  return { outline: PK.border, outlineOffset: -2.5, borderRadius: 18, background: INK, color: CREAM, boxShadow: PK.shadowLg, fontFamily: F, fontWeight: 400, letterSpacing: ".02em", cursor: "pointer", ...(extra || {}) };
 }
 // Zweitknopf (Papier, schwarzer Rand)
 function pkGhost(extra) {
-  return { border: PK.border, borderRadius: 18, background: PAPER, color: INK, boxShadow: PK.shadow, fontFamily: F, fontWeight: 400, cursor: "pointer", ...(extra || {}) };
+  return { outline: PK.border, outlineOffset: -2.5, borderRadius: 18, background: PAPER, color: INK, boxShadow: PK.shadow, fontFamily: F, fontWeight: 400, cursor: "pointer", ...(extra || {}) };
 }
 // Karte (Papier, schwarzer Rand, harter Schatten)
 function pkBox(extra) {
-  return { background: PAPER, border: PK.border, borderRadius: 22, boxShadow: PK.shadow, color: INK, ...(extra || {}) };
+  return { background: PAPER, outline: PK.border, outlineOffset: -2.5, borderRadius: 22, boxShadow: PK.shadow, color: INK, ...(extra || {}) };
 }
 
 // Gemeinsame CSS-Schicht (Klasse .pkp am Wurzelelement des Spiels)
@@ -38,10 +38,10 @@ function pkPartyCss(game, sel) {
 .pkp .gt-pass-bar i.past{background:${INK}}
 .pkp .gt-pass-label{color:${INK};font-family:${F};font-weight:400;font-size:14px;letter-spacing:.08em}
 .pkp .gt-pass-name{font-family:${F}!important;font-weight:400;color:${CREAM}!important;-webkit-text-stroke:.07em ${INK};paint-order:stroke fill;text-shadow:.05em .07em 0 ${INK}}
-.pkp .gt-pass .gt-pass-wrap .gt-flip-face{border:2.5px solid ${INK}!important;box-shadow:0 6px 0 ${INK}!important;background:${PAPER}!important;color:${INK}}
+.pkp .gt-pass .gt-pass-wrap .gt-flip-face{outline:2.5px solid ${INK}!important;outline-offset:-2.5px!important;box-shadow:0 6px 0 ${INK}!important;background:${PAPER}!important;color:${INK}}
 .pkp .gt-pass .gt-pass-wrap .gt-flip-front p{font-family:${F};font-weight:400;font-size:19px}
 .pkp .gt-pass-note{color:${INK};font-weight:600}
-.pkp .gt-pass .gt-pass-next{background:${INK};color:${CREAM};border:2.5px solid ${INK};box-shadow:0 5px 0 ${INK};font-family:${F};font-weight:400;font-size:18px;position:relative;overflow:hidden;min-height:56px}
+.pkp .gt-pass .gt-pass-next{background:${INK};color:${CREAM};outline:2.5px solid ${INK};outline-offset:-2.5px;box-shadow:0 5px 0 ${INK};font-family:${F};font-weight:400;font-size:18px;position:relative;overflow:hidden;min-height:56px}
 .pkp .gt-pass .gt-pass-next:active:not(:disabled){transform:translateY(3px);box-shadow:0 2px 0 ${INK}}
 .pkp .gt-pass .gt-pass-next:disabled{background:${PK.cream2};color:${PK.muted};border-color:${PK.muted};box-shadow:0 3px 0 ${PK.muted}}
 .pkp .gt-pass .gt-pass-next:not(:disabled)::after{content:"";position:absolute;top:0;bottom:0;left:0;width:35%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.32),transparent);animation:pk-shine 3.2s ease-in-out infinite;pointer-events:none}
@@ -53,34 +53,34 @@ function pkPartyCss(game, sel) {
 .pkp .pk-rowb{font-family:${F};font-weight:400!important;font-size:18px!important;box-shadow:0 4px 0 ${INK}}
 .pkp .pk-rowb:active{transform:translateY(2px);box-shadow:0 2px 0 ${INK}}
 .pkp [style*="Space Grotesk"]{font-family:${F}!important;font-weight:400!important}
-.pkp .pk-prim{background:${INK}!important;color:${CREAM}!important;border:2.5px solid ${INK}!important;border-radius:18px!important;box-shadow:0 5px 0 ${INK}!important;font-family:${F}!important;font-weight:400!important;letter-spacing:.02em}
-.pkp .pk-gh{background:${PAPER}!important;color:${INK}!important;border:2.5px solid ${INK}!important;border-radius:18px!important;box-shadow:0 4px 0 ${INK}!important;font-family:${F}!important;font-weight:400!important}
+.pkp .pk-prim{background:${INK}!important;color:${CREAM}!important;outline:2.5px solid ${INK}!important;outline-offset:-2.5px!important;border-radius:18px!important;box-shadow:0 5px 0 ${INK}!important;font-family:${F}!important;font-weight:400!important;letter-spacing:.02em}
+.pkp .pk-gh{background:${PAPER}!important;color:${INK}!important;outline:2.5px solid ${INK}!important;outline-offset:-2.5px!important;border-radius:18px!important;box-shadow:0 4px 0 ${INK}!important;font-family:${F}!important;font-weight:400!important}
 .pkp .pk-gh:disabled{opacity:.6}
-.pkp .pk-chip{border:2.5px solid ${INK}!important;box-shadow:0 3px 0 ${INK};font-family:${F}!important;font-weight:400!important;font-size:15px!important}
+.pkp .pk-chip{outline:2.5px solid ${INK}!important;outline-offset:-2.5px!important;box-shadow:0 3px 0 ${INK};font-family:${F}!important;font-weight:400!important;font-size:15px!important}
 .pkp .pk-chip:disabled{background:${PAPER}!important;opacity:.55}
-.pkp .h1l-ctr div[style*="border-radius: 22px"]{border:2.5px solid ${INK}!important;box-shadow:0 4px 0 ${INK}}
+.pkp .h1l-ctr div[style*="border-radius: 22px"]{outline:2.5px solid ${INK}!important;outline-offset:-2.5px!important;box-shadow:0 4px 0 ${INK}}
 .pkp .pk-chip:active{transform:translateY(2px);box-shadow:0 1px 0 ${INK}}
-.pkp [data-pk-rowc]{border:2.5px solid ${INK}!important;box-shadow:0 3px 0 ${INK};border-radius:16px!important}
-.pkp .g-timer{background:${PAPER}!important;border:2.5px solid ${INK}!important;box-shadow:0 5px 0 ${INK};border-radius:24px!important}
-.pkp .gt-row{border:2.5px solid ${INK}!important;box-shadow:0 4px 0 ${INK};background:${PAPER}!important;font-family:${F}!important;font-weight:400!important;font-size:19px!important}
+.pkp [data-pk-rowc]{outline:2.5px solid ${INK}!important;outline-offset:-2.5px!important;box-shadow:0 3px 0 ${INK};border-radius:16px!important}
+.pkp .g-timer{background:${PAPER}!important;outline:2.5px solid ${INK}!important;outline-offset:-2.5px!important;box-shadow:0 5px 0 ${INK};border-radius:24px!important}
+.pkp .gt-row{outline:2.5px solid ${INK}!important;outline-offset:-2.5px!important;box-shadow:0 4px 0 ${INK};background:${PAPER}!important;font-family:${F}!important;font-weight:400!important;font-size:19px!important}
 .pkp .gt-row:active{transform:translateY(2px);box-shadow:0 2px 0 ${INK}}
-.pkp .pk-in{border:2.5px solid ${INK}!important;background:${PAPER}!important;color:${INK}!important;box-shadow:0 3px 0 ${INK};font-weight:600}
-.pkp .impostor-file{background:${PAPER}!important;border:2.5px solid ${INK}!important;box-shadow:0 6px 0 ${INK}!important}
+.pkp .pk-in{outline:2.5px solid ${INK}!important;outline-offset:-2.5px!important;background:${PAPER}!important;color:${INK}!important;box-shadow:0 3px 0 ${INK};font-weight:600}
+.pkp .impostor-file{background:${PAPER}!important;outline:2.5px solid ${INK}!important;outline-offset:-2.5px!important;box-shadow:0 6px 0 ${INK}!important}
 .pkp .impostor-stamp{color:${INK}!important;border-color:${INK}!important;font-family:${F}!important;font-weight:400!important;border-width:2.5px}
-.pkp div[style*="border-radius: 24px"],.pkp div[style*="border-radius: 22px"],.pkp div[style*="border-radius: 20px"][style*="padding: 12px 14px"]{background:${PAPER}!important;border:2.5px solid ${INK}!important;box-shadow:0 4px 0 ${INK}!important}
-.pkp li[style*="border-radius: 14px"]{border:2px solid ${INK}!important;box-shadow:0 2px 0 ${INK}}
-.pkp div[style*="border-radius: 26px"]{background:${PAPER}!important;border:2.5px solid ${INK}!important;box-shadow:0 6px 0 ${INK}!important}
+.pkp div[style*="border-radius: 24px"],.pkp div[style*="border-radius: 22px"],.pkp div[style*="border-radius: 20px"][style*="padding: 12px 14px"]{background:${PAPER}!important;outline:2.5px solid ${INK}!important;outline-offset:-2.5px!important;box-shadow:0 4px 0 ${INK}!important}
+.pkp li[style*="border-radius: 14px"]{outline:2px solid ${INK}!important;outline-offset:-2px!important;box-shadow:0 2px 0 ${INK}}
+.pkp div[style*="border-radius: 26px"]{background:${PAPER}!important;outline:2.5px solid ${INK}!important;outline-offset:-2.5px!important;box-shadow:0 6px 0 ${INK}!important}
 .pkp .gt-row[aria-pressed="true"]{background:${bg}!important}
 .pkp .gt-row[aria-pressed="true"] *{color:${INK}!important}
-.pkp .ml-card{background:${PAPER}!important;border:2.5px solid ${INK}!important;box-shadow:0 6px 0 ${INK}}
+.pkp .ml-card{background:${PAPER}!important;outline:2.5px solid ${INK}!important;outline-offset:-2.5px!important;box-shadow:0 6px 0 ${INK}}
 .pkp .ml-card>div{font-family:${F}!important;font-weight:400!important}
-.pkp .ml-pick>button{border:2.5px solid ${INK}!important;box-shadow:0 4px 0 ${INK};font-family:${F}!important;font-weight:400!important;font-size:19px!important}
+.pkp .ml-pick>button{outline:2.5px solid ${INK}!important;outline-offset:-2.5px!important;box-shadow:0 4px 0 ${INK};font-family:${F}!important;font-weight:400!important;font-size:19px!important}
 .pkp .ml-pick>button:active{transform:translateY(2px);box-shadow:0 2px 0 ${INK}}
-.pkp .ml-skip{background:${PAPER}!important;border:2.5px solid ${INK}!important;box-shadow:0 4px 0 ${INK}!important;font-family:${F}!important;font-weight:400!important}
-.pkp .ml-row{border:2px solid ${INK}!important;box-shadow:0 3px 0 ${INK}!important}
+.pkp .ml-skip{background:${PAPER}!important;outline:2.5px solid ${INK}!important;outline-offset:-2.5px!important;box-shadow:0 4px 0 ${INK}!important;font-family:${F}!important;font-weight:400!important}
+.pkp .ml-row{outline:2px solid ${INK}!important;outline-offset:-2px!important;box-shadow:0 3px 0 ${INK}!important}
 .pkp .ml-row span{font-family:${F}!important;font-weight:400!important}
-.pkp [data-ml-result-panel]{background:${CREAM}!important;border:2.5px solid ${INK}!important;box-shadow:0 6px 0 ${INK}}
-.pkp [data-ml-result-panel] div[style*="border-radius: 20px"]{background:${PAPER}!important;border:2.5px solid ${INK}!important}
+.pkp [data-ml-result-panel]{background:${CREAM}!important;outline:2.5px solid ${INK}!important;outline-offset:-2.5px!important;box-shadow:0 6px 0 ${INK}}
+.pkp [data-ml-result-panel] div[style*="border-radius: 20px"]{background:${PAPER}!important;outline:2.5px solid ${INK}!important;outline-offset:-2.5px!important}
 .pkp .gt-su-num{background:${INK}!important;color:${CREAM}!important}
 .pkp .h1l-plist{padding-top:10px}
 .pkp .gt-wm{color:${CREAM}!important;font-size:clamp(34px,12vw,48px)!important;white-space:nowrap!important;word-break:keep-all!important}

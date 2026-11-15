@@ -212,45 +212,45 @@ const JD_PK_CSS=`
 .jdp-pk.jdp{font-weight:700}
 .jdp-pk .jdp-status{color:#141414;font-weight:700}
 .jdp-pk .jdp-status .win{font-family:var(--pkf);font-weight:400;font-size:18px;color:#141414}
-.jdp-pk .jdp-status .lead{background:#FFFDF7;border:2.5px solid #141414;box-shadow:0 3px 0 #141414;font-family:var(--pkf);font-weight:400;color:#141414}
+.jdp-pk .jdp-status .lead{background:#FFFDF7;outline:2.5px solid #141414;outline-offset:-2.5px;box-shadow:0 3px 0 #141414;font-family:var(--pkf);font-weight:400;color:#141414}
 .jdp-pk .jdp-status .lead .cr,.jdp-pk .jdp-crown{color:#141414}
 .jdp-pk .jdp-nm{color:#141414;font-family:var(--pkf);font-weight:400;font-size:12.5px}
 .jdp-pk .jdp-lab .cn{font-family:var(--pkf);font-weight:400;font-size:13.5px;color:#141414}
 .jdp-pk .jdp-lab .cf{font-family:var(--pkf);font-weight:400;color:#141414;font-size:11px}
 .jdp-pk .jdp-lab.cur .cn{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:3px}
 .jdp-pk .jdp-card{filter:drop-shadow(1.5px 2px 0 #141414)}
-.jdp-pk .jdp-c{border:2.5px solid #141414;box-shadow:0 2px 0 #141414;background:#FFFDF7;color:#141414;border-radius:13px;transition:transform .12s ease-out,box-shadow .12s ease-out}
+.jdp-pk .jdp-c{outline:2.5px solid #141414;outline-offset:-2.5px;box-shadow:0 2px 0 #141414;background:#FFFDF7;color:#141414;border-radius:13px;transition:transform .12s ease-out,box-shadow .12s ease-out}
 .jdp-pk .jdp-c:active{transform:translateY(2px);box-shadow:0 0 0 #141414}
 .jdp-pk .jdp-c.p,.jdp-pk .jdp-c.p:hover{background:#FFFDF7;color:#141414}
 .jdp-pk .jdp-c.n{background:#D52B1E;color:#FFFDF7}
 .jdp-pk .jdp-c b{font-family:var(--pkf);font-weight:400;font-size:clamp(11px,calc((100cqw - 104px) / var(--n) / 3.9),17px)}
 .jdp-pk .jdp-c em{font-weight:700;color:#141414}
 .jdp-pk .jdp-c.n em{color:#FFFDF7}
-.jdp-pk .jdp-c.e{background:rgba(255,253,247,.28);border:2.5px dashed #141414;box-shadow:none}
-.jdp-pk .jdp-c.nx{background:#FFFDF7;border:2.5px solid #141414;box-shadow:0 2px 0 #141414,0 0 0 3px #FFFDF7}
+.jdp-pk .jdp-c.e{background:rgba(255,253,247,.28);outline:2.5px dashed #141414;outline-offset:-2.5px;box-shadow:none}
+.jdp-pk .jdp-c.nx{background:#FFFDF7;outline:2.5px solid #141414;outline-offset:-2.5px;box-shadow:0 2px 0 #141414,0 0 0 3px #FFFDF7}
 .jdp-pk .jdp-c.ed{background:#FFFDF7;box-shadow:0 0 0 3px #FFFDF7,0 0 0 5.5px #141414}
 .jdp-pk .jdp-tl,.jdp-pk .jdp-tv{border-top:2.5px solid #141414;color:#141414;font-family:var(--pkf);font-weight:400}
 .jdp-pk .jdp-tl .l1,.jdp-pk .jdp-tl .l2,.jdp-pk .jdp-tv .l1{color:#141414;font-family:var(--pkf);font-weight:400}
 .jdp-pk .jdp-tv .l2,.jdp-pk .jdp-tv .l2.p,.jdp-pk .jdp-tv .l2.n{color:#141414;font-family:var(--pkf);font-weight:400}
 .jdp-pk .jdp-hm.is-scroll .jdp-lab,.jdp-pk .jdp-hm.is-scroll .jdp-tl{background:#2A9D68}
-.jdp-pk .jdp-cta{position:relative;overflow:hidden;background:#D52B1E;color:#FFFDF7;border:2.5px solid #141414;border-radius:18px;box-shadow:0 5px 0 #141414;font-family:var(--pkf);font-weight:400;font-size:18px}
+.jdp-pk .jdp-cta{position:relative;overflow:hidden;background:#D52B1E;color:#FFFDF7;outline:2.5px solid #141414;outline-offset:-2.5px;border-radius:18px;box-shadow:0 5px 0 #141414;font-family:var(--pkf);font-weight:400;font-size:18px}
 .jdp-pk .jdp-cta::after{content:"";position:absolute;top:0;bottom:0;left:0;width:35%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);animation:pk-shine 3.2s ease-in-out infinite;pointer-events:none}
 .jdp-pk .jdp-cta:active{transform:translateY(3px);box-shadow:0 2px 0 #141414}
 .jdp-pk .jdp-scrim{background:rgba(20,20,20,.6)}
-.jdp-pk .jdp-slip{background:#F4EAD5;border:2.5px solid #141414;border-bottom:0;border-radius:24px 24px 0 0;box-shadow:none}
+.jdp-pk .jdp-slip{background:#F4EAD5;outline:2.5px solid #141414;outline-offset:-2.5px;border-bottom:0;border-radius:24px 24px 0 0;box-shadow:none}
 .jdp-pk .jdp-grab i{background:#141414;opacity:1}
 .jdp-pk .jdp-who{font-family:var(--pkf);font-weight:400;font-size:24px;color:#141414}
 .jdp-pk .jdp-strike{color:#141414;font-family:var(--pkf);font-weight:400}
-.jdp-pk .jdp-cat{background:#2A9D68;border:2.5px solid #141414;box-shadow:0 2px 0 #141414;font-family:var(--pkf);font-weight:400;color:#141414}
+.jdp-pk .jdp-cat{background:#2A9D68;outline:2.5px solid #141414;outline-offset:-2.5px;box-shadow:0 2px 0 #141414;font-family:var(--pkf);font-weight:400;color:#141414}
 .jdp-pk .jdp-val{font-family:var(--pkf);font-weight:400;color:#141414}
 .jdp-pk .jdp-caret{background:#D52B1E}
 .jdp-pk .jdp-calc{font-family:var(--pkf);font-weight:400;color:#141414}
 .jdp-pk .jdp-calc.jdp-err,.jdp-pk .jdp-err{color:#B3141C;font-weight:700}
-.jdp-pk .jdp-k{background:#FFFDF7;border:2.5px solid #141414;box-shadow:0 3px 0 #141414;color:#141414;font-family:var(--pkf);font-weight:400;border-radius:14px}
+.jdp-pk .jdp-k{background:#FFFDF7;outline:2.5px solid #141414;outline-offset:-2.5px;box-shadow:0 3px 0 #141414;color:#141414;font-family:var(--pkf);font-weight:400;border-radius:14px}
 .jdp-pk .jdp-k:active{transform:translateY(2px);box-shadow:0 1px 0 #141414}
 .jdp-pk .jdp-k.ok{background:#D52B1E;color:#FFFDF7}
 .jdp-pk .jdp-k[aria-disabled=true]{opacity:1;background:#E2D8C0;color:#4A4236;border-color:#4A4236;box-shadow:0 3px 0 #4A4236}
-.jdp-pk .jdp-sb{background:#FFFDF7;border:2.5px solid #141414;box-shadow:0 4px 0 #141414}
+.jdp-pk .jdp-sb{background:#FFFDF7;outline:2.5px solid #141414;outline-offset:-2.5px;box-shadow:0 4px 0 #141414}
 .jdp-pk .jdp-sbr .nm,.jdp-pk .jdp-sbr .pt,.jdp-pk .jdp-sbr .df,.jdp-pk .jdp-sbr .df.p,.jdp-pk .jdp-sbr .df.n{color:#141414;font-family:var(--pkf);font-weight:400}
 .jdp-pk .jdp-sb h3{color:#141414;font-family:var(--pkf);font-weight:400}
 .jdp-pk .jdp-c:focus-visible,.jdp-pk .jdp-k:focus-visible,.jdp-pk .jdp-cta:focus-visible,.jdp-pk .jdp-grab:focus-visible,.jdp-pk .jdp-strike:focus-visible{outline:3px solid #141414;outline-offset:3px}

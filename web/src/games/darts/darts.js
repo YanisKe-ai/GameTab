@@ -77,7 +77,7 @@ ${S} .gt-su-add{color:#F4EAD5!important;border:2.5px dashed #F4EAD5!important;ba
 ${S} button[style*="border: 14px"]{color:#F4EAD5!important;box-shadow:inset 0 0 0 2px #F4EAD5!important}
 ${S} .gt-su-btn{background:#F4EAD5!important;background-image:none!important;color:#141414!important}
 ${S} [style*="border-radius: 22px"]{box-shadow:0 4px 0 #141414}
-${S} .dl-side-players>div{border:2.5px solid #141414!important;box-shadow:0 4px 0 #141414;background:#FFFDF7!important}
+${S} .dl-side-players>div{outline:2.5px solid #141414!important;outline-offset:-2.5px!important;box-shadow:0 4px 0 #141414;background:#FFFDF7!important}
 ${S} .dl-side-players>div[style*="border: 2px solid rgb(200, 16, 46)"]{background:#F4EAD5!important}
 ${S} .gtL-split-setup .gtL-col-side>div[style*="font-size: 12px"]{color:#F4EAD5!important;font-size:13px!important}
 ${S} .press-fx:active{transform:translateY(3px)}

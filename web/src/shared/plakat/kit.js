@@ -19,11 +19,11 @@ function pkPage(bg, extra) {
 }
 // Karte: Papier, schwarzer Rand, harter Schatten
 function pkCard(bg, extra) {
-  return Object.assign({ background: bg || PK.paper, border: PK.border, borderRadius: 22, boxShadow: PK.shadow, color: pkOn(bg || PK.paper) }, extra || {});
+  return Object.assign({ background: bg || PK.paper, outline: PK.border, outlineOffset: -2.5, borderRadius: 22, boxShadow: PK.shadow, color: pkOn(bg || PK.paper) }, extra || {});
 }
 // Knopf-Stil (Hauptknopf)
 function pkBtn(bg, extra) {
-  return Object.assign({ background: bg, color: pkOn(bg), border: PK.border, borderRadius: 18, boxShadow: PK.shadowLg, fontFamily: PK.font, fontWeight: 400, letterSpacing: ".02em" }, extra || {});
+  return Object.assign({ background: bg, color: pkOn(bg), outline: PK.border, outlineOffset: -2.5, borderRadius: 18, boxShadow: PK.shadowLg, fontFamily: PK.font, fontWeight: 400, letterSpacing: ".02em" }, extra || {});
 }
 // Titel im Plakat-Stil (gleich gross auf jeder Spielseite)
 function pkTitle(fill, size, extra) {
@@ -31,9 +31,10 @@ function pkTitle(fill, size, extra) {
   return Object.assign({ fontFamily: PK.font, fontWeight: 400, fontSize: s, lineHeight: 1.02, color: fill, WebkitTextStroke: Math.max(3, Math.round(s * 0.08)) + "px " + PK.ink, paintOrder: "stroke fill", textShadow: Math.round(s * 0.05) + "px " + Math.round(s * 0.065) + "px 0 " + PK.ink, whiteSpace: "nowrap", textAlign: "center", letterSpacing: 0 }, extra || {});
 }
 
-// Schräges Band mit Kerben (wie auf den Plakaten)
-function PkRibbon({ children, bg, color, style }) {
-  return <div style={{ display: "flex", justifyContent: "center", ...style }}><div style={{ clipPath: "polygon(0 0,100% 0,96% 50%,100% 100%,0 100%,4% 50%)", background: bg || PK.ink, color: color || pkOn(bg || PK.ink), padding: "7px 26px", fontFamily: PK.font, fontSize: 14, letterSpacing: ".05em", whiteSpace: "nowrap", transform: "rotate(-2deg)" }}>{children}</div></div>;
+// Schräges Band mit Kerben (wie auf den Plakaten). Das Band liegt absolut hinter dem Text
+// und nimmt keinen Platz: die Zeile ist so hoch wie der ersetzte Text (fontSize/lineHeight).
+function PkRibbon({ children, bg, color, style, fontSize, lineHeight }) {
+  return <div style={{ display: "flex", justifyContent: "center", ...style }}><div style={{ position: "relative", isolation: "isolate", padding: "0 22px", color: color || pkOn(bg || PK.ink), fontFamily: PK.font, fontSize: fontSize || 14, lineHeight: lineHeight || "normal", letterSpacing: ".05em", whiteSpace: "nowrap", transform: "rotate(-2deg)" }}><span aria-hidden="true" style={{ position: "absolute", inset: "-5px 0", zIndex: -1, clipPath: "polygon(0 0,100% 0,96% 50%,100% 100%,0 100%,4% 50%)", background: bg || PK.ink }} />{children}</div></div>;
 }
 
 // Briefmarkenrand (Lochrand oben und unten) als className-Hilfe

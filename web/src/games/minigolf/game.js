@@ -165,28 +165,28 @@ const MG_PK_CSS = `
 .mg-pk .gt-wm{color:#F9C22E!important;font-size:clamp(34px,12vw,48px)!important;white-space:nowrap!important;word-break:keep-all!important}
 .mg-pk .gt-su-label{color:#141414!important}
 .mg-pk .gt-su-add{background:#FFFDF7!important;color:#141414!important;font-family:var(--pkf);font-weight:400;box-shadow:0 3px 0 #141414}
-.mg-pk .mg-seg{background:#FFFDF7!important;border:2.5px solid #141414!important;box-shadow:0 4px 0 #141414;border-radius:18px!important;margin-bottom:12px!important}
+.mg-pk .mg-seg{background:#FFFDF7!important;outline:2.5px solid #141414!important;outline-offset:-2.5px!important;box-shadow:0 4px 0 #141414;border-radius:18px!important}
 .mg-pk .mg-seg button{font-family:var(--pkf)!important;font-weight:400!important;color:#141414!important;border-radius:13px!important;box-shadow:none!important}
 .mg-pk .mg-seg button[aria-selected="true"]{background:#F9C22E!important}
-.mg-pk .mgBoard{border:6px solid #7A4E2A!important;outline:2.5px solid #141414;border-radius:18px!important;box-shadow:0 6px 0 #141414!important;margin-bottom:14px!important}
+.mg-pk .mgBoard{border:6px solid #7A4E2A!important;outline:2.5px solid #141414;border-radius:18px!important;box-shadow:0 6px 0 #141414!important}
 .mg-pk .mgTile{box-shadow:inset 0 -3px 0 rgba(0,0,0,.13),0 0 0 2px #141414,0 3px 0 2px #141414}
 .mg-pk .mgNav{border:2px solid #F4EAD5!important}
-.mg-pk .mgPc{border-width:2.5px!important;border-color:#141414!important;box-shadow:0 4px 0 #141414!important;border-radius:18px!important;background:#FFFDF7!important;margin-bottom:4px}
+.mg-pk .mgPc{border-width:2.5px!important;border-color:#141414!important;box-shadow:0 4px 0 #141414!important;border-radius:18px!important;background:#FFFDF7!important;}
 .mg-pk .mgPc span{font-family:var(--pkf)!important;font-weight:400!important;letter-spacing:0!important;color:#141414!important}
 .mg-pk .mgKeys{gap:6px}
-.mg-pk .mgKey{border:2.5px solid #141414!important;background:#FFFDF7!important;color:#141414!important;box-shadow:0 3px 0 #141414;font-family:var(--pkf)!important;font-weight:400;margin-bottom:3px;border-radius:12px!important}
+.mg-pk .mgKey{outline:2.5px solid #141414!important;outline-offset:-2.5px!important;background:#FFFDF7!important;color:#141414!important;box-shadow:0 3px 0 #141414;font-family:var(--pkf)!important;font-weight:400;border-radius:12px!important}
 .mg-pk .mgKey:active:not(:disabled){transform:translateY(2px)!important;box-shadow:0 1px 0 #141414}
 .mg-pk .mgKey[aria-pressed="true"]{background:#F9C22E!important}
 .mg-pk .mgKey[data-mg-giveup="1"]{border-style:dashed!important}
 .mg-pk .mgKey span{color:#141414!important}
 .mg-pk #mg-status{color:#141414!important;font-family:var(--pkf)!important;font-weight:400!important}
-.mg-pk [data-mg-undo]{border:2.5px solid #141414!important;background:#FFFDF7!important;color:#141414!important;box-shadow:0 4px 0 #141414;margin-bottom:4px}
-.mg-pk [data-mg-main]{position:relative;overflow:hidden;border:2.5px solid #141414!important;box-shadow:0 6px 0 #141414!important;font-family:var(--pkf)!important;font-weight:400!important;margin-bottom:6px}
+.mg-pk [data-mg-undo]{outline:2.5px solid #141414!important;outline-offset:-2.5px!important;background:#FFFDF7!important;color:#141414!important;box-shadow:0 4px 0 #141414;}
+.mg-pk [data-mg-main]{position:relative;overflow:hidden;outline:2.5px solid #141414!important;outline-offset:-2.5px!important;box-shadow:0 6px 0 #141414!important;font-family:var(--pkf)!important;font-weight:400!important;}
 .mg-pk [data-mg-main]:not(:disabled):not([aria-disabled="true"]){background:#F9C22E!important;color:#141414!important}
 .mg-pk [data-mg-main]:disabled,.mg-pk [data-mg-main][aria-disabled="true"]{background:#FFFDF7!important;color:#4A4236!important;box-shadow:0 4px 0 #141414!important}
 .mg-pk [data-mg-main]:active:not(:disabled){transform:translateY(3px)!important;box-shadow:0 2px 0 #141414!important}
-.mg-pk .mg-banner{background:#F9C22E!important;color:#141414!important;border:2.5px solid #141414;box-shadow:0 4px 0 #141414;font-family:var(--pkf)!important;font-weight:400!important}
-.mg-pk .mgTableWrap{background:#FFFDF7!important;border:2.5px solid #141414!important;box-shadow:0 4px 0 #141414!important;border-radius:20px!important}
+.mg-pk .mg-banner{background:#F9C22E!important;color:#141414!important;outline:2.5px solid #141414;outline-offset:-2.5px;box-shadow:0 4px 0 #141414;font-family:var(--pkf)!important;font-weight:400!important}
+.mg-pk .mgTableWrap{background:#FFFDF7!important;outline:2.5px solid #141414!important;outline-offset:-2.5px!important;box-shadow:0 4px 0 #141414!important;border-radius:20px!important}
 .mg-pk .mgTableWrap th,.mg-pk .mgTableWrap td{border-color:rgba(20,20,20,.3)!important}
 .mg-pk .mgTableWrap thead th{border-bottom:2.5px solid #141414!important;font-family:var(--pkf)!important;font-weight:400!important;color:#141414!important;background:#F9C22E!important}
 .mg-pk .mgTableWrap tbody th{font-family:var(--pkf)!important;font-weight:400!important}
@@ -194,11 +194,11 @@ const MG_PK_CSS = `
 .mg-pk .mg-editor{background:#FFFDF7!important;border-top:2.5px solid #141414!important;box-shadow:0 -6px 0 #141414!important}
 .mg-pk .mg-editor span{color:#141414!important;font-family:var(--pkf)!important;font-weight:400!important}
 .mg-pk .mg-editor .mg-edhint{color:#4A4236!important}
-.mg-pk .mg-editor button{border:2.5px solid #141414!important;background:#FFFDF7!important;color:#141414!important;box-shadow:0 3px 0 #141414;font-family:var(--pkf)!important;font-weight:400!important;margin-bottom:3px}
+.mg-pk .mg-editor button{outline:2.5px solid #141414!important;outline-offset:-2.5px!important;background:#FFFDF7!important;color:#141414!important;box-shadow:0 3px 0 #141414;font-family:var(--pkf)!important;font-weight:400!important;}
 .mg-pk .mg-editor button[aria-pressed="true"]{background:#F9C22E!important}
 .mg-pk .mg-editor div[style*="gap: 6px"]>button:last-child{background:#F9C22E!important}
 .mg-pk .mg-editor div[style*="gap: 6px"]>button:last-child:disabled{background:#EDE1BE!important;opacity:.6}
-.mg-pk .mg-editor input{border:2.5px solid #141414!important;background:#FFFDF7!important;color:#141414!important}
+.mg-pk .mg-editor input{outline:2.5px solid #141414!important;outline-offset:-2.5px!important;background:#FFFDF7!important;color:#141414!important}
 @media (prefers-reduced-motion:reduce){.mg-pk [data-mg-main]::after{animation:none!important}}
 `;
 function MinigolfTopBar({ subtitle, onBack, theme, t, onHome, rulesText, onEndGame, moreItems, onMenuOpen }) {

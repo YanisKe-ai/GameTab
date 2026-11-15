@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.15-29 (15.11.2026 21:41)
+- Tutto: Punkte bleiben auch beim Spielerwechsel stehen
+
 ## 2026.11.15-28 (15.11.2026 21:20)
 - Tutto: Punkte zuerst tippen, dann Spieler wählen
 

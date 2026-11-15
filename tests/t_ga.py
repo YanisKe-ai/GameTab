@@ -95,7 +95,8 @@ def run_tutto(pg):
     assert inp.input_value() == "500", "Tutto: Eingabe nicht gesetzt"
     pg.locator(".tt-lane").nth(1).click()
     wait(pg, 500)
-    assert pg.get_by_placeholder("Punkte").first.input_value() == "", "Tutto: Eingabe wandert zur naechsten Person"
+    # Regel seit 15.11.2026 (Yanis): Eingabe bleibt beim Personenwechsel stehen
+    assert pg.get_by_placeholder("Punkte").first.input_value() == "500", "Tutto: Eingabe beim Personenwechsel verloren"
     # gleiche Person erneut antippen leert nicht
     pg.get_by_placeholder("Punkte").first.fill("300")
     wait(pg, 200)

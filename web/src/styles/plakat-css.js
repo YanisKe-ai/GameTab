@@ -70,15 +70,31 @@ ${P} .gtL-start .gtL-showcase-hint,${P} .gtL-start .gtL-showcase-arrow{color:${I
 ${P} .gtL-start .gtL-tipcard-body{background:${INK2}!important;border:none!important;outline:none!important;border-radius:10px!important;box-shadow:none!important}
 ${P} .gtL-start .gtL-tipcard-body *{color:${CREAM2}!important}
 ${P} .gtL-start .gtL-tipcard>button{color:${INK2}!important}
-/* ===== Einstellungen neu (Plakat) ===== */
-${P} .st-page{--pk-bg:#F9C22E;background:radial-gradient(rgba(20,20,20,.10) 1.2px,transparent 1.4px) 0 0/14px 14px,#F9C22E!important}
-${P} .st-title{font-family:${FONT}!important;font-weight:400!important;color:${INK}!important;-webkit-text-stroke:0;text-shadow:3px 3px 0 ${PAPER}!important}
-${P} .st-card{outline:2.5px solid ${INK}!important;outline-offset:-2.5px!important;box-shadow:0 5px 0 ${INK}!important;background:${PAPER}!important;border-radius:22px!important}
-${P} .st-row{border-color:${INK}!important}
-${P} .st-seg{background:${CREAM}!important;outline:2px solid ${INK}!important;outline-offset:-2px!important}
-${P} .st-segbtn[aria-pressed="true"]{background:${INK}!important;color:${PAPER}!important;border-color:transparent!important;font-family:${FONT}!important;font-weight:400!important}
-${P} .st-segbtn{color:${INK}!important}
-${P} .st-foot,${P} .st-build{color:${INK}!important}
+/* ===== Einstellungen neu (Plakat, Entwurf E4, 2026-11-15) ===== */
+${P} .st-page{--pk-bg:${RED};background:${NOISE} 0 0/180px 180px,${RED}!important;background-blend-mode:multiply;color:${INK2}!important}
+${P} .st-page .st-title{font-family:${FONT}!important;font-weight:400!important;font-size:40px!important;color:${INK2}!important;text-shadow:4.0px 0.0px 0 ${CREAM2}, 3.9px 1.0px 0 ${CREAM2}, 3.5px 2.0px 0 ${CREAM2}, 2.8px 2.8px 0 ${CREAM2}, 2.0px 3.5px 0 ${CREAM2}, 1.0px 3.9px 0 ${CREAM2}, -0.0px 4.0px 0 ${CREAM2}, -1.0px 3.9px 0 ${CREAM2}, -2.0px 3.5px 0 ${CREAM2}, -2.8px 2.8px 0 ${CREAM2}, -3.5px 2.0px 0 ${CREAM2}, -3.9px 1.0px 0 ${CREAM2}, -4.0px -0.0px 0 ${CREAM2}, -3.9px -1.0px 0 ${CREAM2}, -3.5px -2.0px 0 ${CREAM2}, -2.8px -2.8px 0 ${CREAM2}, -2.0px -3.5px 0 ${CREAM2}, -1.0px -3.9px 0 ${CREAM2}, 0.0px -4.0px 0 ${CREAM2}, 1.0px -3.9px 0 ${CREAM2}, 2.0px -3.5px 0 ${CREAM2}, 2.8px -2.8px 0 ${CREAM2}, 3.5px -2.0px 0 ${CREAM2}, 3.9px -1.0px 0 ${CREAM2}, 5px 5px 0 ${INK2}, 6px 6px 0 ${INK2}, 7px 7px 0 ${INK2}, 8px 8px 0 ${INK2}, 9px 9px 0 ${INK2}!important;transform:rotate(-2deg);margin:12px 0 10px 4px!important;align-self:flex-start}
+${P} .st-page .st-cards{gap:20px!important;padding:4px 8px 8px 6px}
+${P} .st-page .st-card{border:none!important;outline:none!important;border-radius:22px!important;overflow:hidden}
+${P} .st-page .st-card:nth-child(odd){background:${CREAM2}!important;color:${INK2}!important;box-shadow:0 0 0 4px ${INK2},6px 7px 0 4px ${INK2}!important;transform:rotate(-1deg)}
+${P} .st-page .st-card:nth-child(even){background:${INK2}!important;color:${CREAM2}!important;box-shadow:0 0 0 4px ${CREAM2},6px 7px 0 4px ${INK2}!important;transform:rotate(1deg)}
+${P} .st-page .st-card:nth-child(odd) *{border-color:${INK2}!important}
+${P} .st-page .st-card:nth-child(even) *{border-color:#3A3532!important}
+${P} .st-page .st-card:nth-child(even) .st-row,${P} .st-page .st-card:nth-child(even) .st-row span{color:${CREAM2}!important}
+${P} .st-page .st-card:nth-child(even) .gtL-danger{color:#FF6A5E!important}
+${P} .st-page .st-card:nth-child(even) .gtL-danger:disabled{color:#B9AF9C!important}
+${P} .st-page .st-card:nth-child(odd) .gtL-danger{color:#B3201A!important}
+${P} .st-page .st-seg{background:#E5D9BD!important;outline:none!important;border:none!important;border-radius:999px!important}
+${P} .st-page .st-segbtn{color:${INK2}!important;border-radius:999px!important;border:none!important}
+${P} .st-page .st-segbtn[aria-pressed="true"]{background:${INK2}!important;color:${RED}!important;font-family:${FONT}!important;font-weight:400!important}
+${P} .st-page .st-fill,${P} .st-page .st-fill *{color:${INK2}!important}
+${P} .st-page [role="switch"]>span[aria-hidden]{background:#4A4440!important;box-shadow:none!important}
+${P} .st-page [role="switch"]>span[aria-hidden]>span{background:${CREAM2}!important;box-shadow:none!important}
+${P} .st-page [role="switch"][aria-checked="true"]>span[aria-hidden]{background:${RED}!important}
+${P} .st-page [role="switch"][aria-checked="true"]>span[aria-hidden]>span{background:${CREAM2}!important}
+@media (max-height:780px){${P} .st-page .st-title{font-size:30px!important;margin:4px 0 2px 4px!important}${P} .st-page .st-cards{gap:12px!important}}
+${P} .st-page .st-foot{gap:2px!important;margin-top:4px}
+${P} .st-page .st-foot button{font-size:11px!important;color:${INK2}!important;padding:0 8px!important;font-weight:600!important}
+${P} .st-page .st-build{font-size:10px!important;color:${INK2}!important}
 
 /* ===== Spiellisten (Plakat) ===== */
 ${P} [data-pk-cat="score"]{--pk-bg:#F9C22E;background:radial-gradient(rgba(20,20,20,.10) 1.2px,transparent 1.4px) 0 0/14px 14px,#F9C22E!important}

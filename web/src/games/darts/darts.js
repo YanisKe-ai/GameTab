@@ -61,14 +61,14 @@ function DartsPlay({state,setState,tk,t,onConfirmTurn,onUndoTurn,onNewGame,onEdi
 <div style={{fontSize:40,fontWeight:700,color:tk.ink,fontFamily:"'Baloo 2', sans-serif",fontVariantNumeric:"tabular-nums"}}>{state.remaining[p.id]!==undefined?state.remaining[p.id]:state.mode}</div></div>;})}</div>
 </div></div></div>;}
 // Modus Plakat (nur unter html[data-gt-skin="plakat"], Rest unveraendert): Darts rot #C8102E, Creme #F4EAD5, Papier, harte Schatten.
-const DT_PK_CSS=(()=>{const S='html[data-gt-skin="plakat"] .dl-shell';const F="'Bagel Fat One','Bowlby One',sans-serif";return `
+const DT_PK_CSS=(()=>{const S='html[data-gt-skin="plakat"] .dl-shell';const F="'Bagel Fat One','Bowlby One',sans-serif";const FN="'Bowlby One','Bagel Fat One',sans-serif";return `
 ${S}{--pk-bg:#E4312B;font-family:'Inter',sans-serif}
 ${S} .gt-wm{color:#F4EAD5!important;white-space:nowrap!important;hyphens:none!important;word-break:keep-all!important}
 ${S} .gt-su-label{color:#F4EAD5!important}
 ${S} .gt-su-title,${S} .gt-su-h{color:#F4EAD5!important}
 ${S} [style*="border: 1px solid"]{border-width:2.5px!important}
 ${S} [style*="border-radius: 24px"]{box-shadow:0 4px 0 #141414!important}
-${S} [style*="Baloo 2"]{font-family:${F}!important;font-weight:400!important}
+${S} [style*="Baloo 2"]{font-family:${FN}!important;font-weight:400!important}
 ${S} .gt-wm{font-size:clamp(34px,12vw,48px)!important}
 ${S} .gt-gamehead h1{color:#F4EAD5!important;font-family:${F}!important;font-weight:400!important;letter-spacing:0!important;-webkit-text-stroke:.06em #141414;paint-order:stroke fill;text-shadow:.05em .07em 0 #141414}
 ${S} .gt-su-chip{box-shadow:0 3px 0 #141414!important}
@@ -83,17 +83,20 @@ ${S} .press-fx:active{transform:translateY(3px)}
 /* Kreidetafel: Punktestand als schwarze Tafel mit Cremerahmen und Kreideschrift */
 ${S} .reveal-1{background:#1A1716!important;border:none!important;border-radius:22px!important;box-shadow:inset 0 0 0 3px #1A1716,inset 0 0 0 5px rgba(243,234,211,.6),0 5px 0 #141414!important;transform:rotate(-.6deg);padding-top:12px!important;padding-bottom:12px!important}
 ${S} .reveal-1 :is(div,span):not([style*="228, 49, 43"]){color:#F3EAD3!important;border-color:#F3EAD3!important}
-${S} .reveal-1 [style*="font-size: 56px"]{font-family:${F}!important;font-weight:400!important;letter-spacing:.01em;text-shadow:0 0 1px rgba(243,234,211,.7)}
+${S} .reveal-1 [style*="font-size: 56px"]{font-family:${FN}!important;font-weight:400!important;letter-spacing:.01em;text-shadow:0 0 1px rgba(243,234,211,.7)}
 ${S} .reveal-1 [style*="border-radius: 999px"]{background:rgba(243,234,211,.08)}
 ${S} .reveal-1 span[style*="inline-flex"] span{border-color:#F3EAD3!important}
 ${S} .reveal-1 span[style*="inline-flex"] span[style*="rgb(228, 49, 43)"]{border-color:#E4312B!important}
-${S} .reveal-1 [style*="rgb(228, 49, 43)"]{color:#FF8A82!important}
+${S} .reveal-1 [style*="rgb(228, 49, 43)"]{color:#F3EAD3!important}
+${S} .reveal-1 [style*="border-radius: 999px"][style*="rgb(228, 49, 43)"]{background:#E4312B!important;border-color:#F3EAD3!important}
+${S} .reveal-1 [style*="font-size: 56px"][style*="rgb(228, 49, 43)"]{color:#E4312B!important}
 ${S} .gt-count::after{background:#F3EAD3!important;color:#141414!important;font-family:${F}!important;font-weight:400!important}
 ${S} .gt-count[data-gt-dt="b"]::after{background:#E4312B!important;color:#F3EAD3!important}
+${S} .gtL-col-side>div[style*="font-size: 12px"][style*="line-height: 1.5"]{color:#F3EAD3!important;font-size:13px!important}
 /* Cricket: Markentafel als Kreidetafel */
 ${S} div[style*="overflow-x: auto"][style*="border-radius: 22px"]{background:#1A1716!important;box-shadow:inset 0 0 0 2px rgba(243,234,211,.55),0 5px 0 #141414}
 ${S} div[style*="overflow-x: auto"][style*="border-radius: 22px"] div:not([style*="color: rgb(228, 49, 43)"]){color:#F3EAD3!important;border-top-color:rgba(243,234,211,.28)!important}
-${S} div[style*="overflow-x: auto"][style*="border-radius: 22px"] div[style*="font-size: 28px"]{font-family:${F}!important;font-weight:400!important}
+${S} div[style*="overflow-x: auto"][style*="border-radius: 22px"] div[style*="font-size: 28px"]{font-family:${FN}!important;font-weight:400!important}
 /* Wurfchips und Bestaetigen */
 ${S} div[style*="rgb(228, 49, 43)"][style*="padding: 7px 0px"]{background:#1A1716!important;color:#F3EAD3!important;border-color:#141414!important;box-shadow:0 3px 0 #141414}
 ${S} div[style*="border-radius: 20px"][style*="rgb(228, 49, 43)"]{background:#1A1716!important;color:#F3EAD3!important;border-color:#141414!important;box-shadow:0 3px 0 #141414;transform:rotate(-1.5deg)}

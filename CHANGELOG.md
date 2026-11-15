@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.15-7 (15.11.2026 13:11)
+- Modus heisst jetzt Ryū (japanisch für Drache), in allen Sprachen
+
 ## 2026.11.15-6 (15.11.2026 12:54)
 - Plakat: Spiellisten als Spielkarten (Name in zwei Ecken, Icon in der Mitte), Schreibunterlagen rot, Partyspiele schwarz
 

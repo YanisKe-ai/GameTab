@@ -49,7 +49,7 @@ for a in ARGS:
     elif a == "all":
         ENGINES = ["chromium", "webkit"]
 VIEWS = {"mobile": (393, 852, "Handy"), "laptop": (1512, 982, "Laptop")}
-THEMES = ["Nocturne", "Hell", "Noir", "Plakat"]
+THEMES = ["Nocturne", "Hell", "Noir", "Ryū"]
 WAIT = 500  # nach Klicks mindestens 500 ms (CLAUDE.md)
 
 # Meldungen, die keine App-Fehler sind

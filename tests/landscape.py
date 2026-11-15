@@ -32,7 +32,7 @@ OUT = ROOT / "tests" / "out" / "landscape"
 HTML_PATH = (ROOT / os.environ.get("GAMETAB_HTML", "docs/index.html")).resolve()
 URL = HTML_PATH.as_uri()
 VIEWPORTS = [(568, 320), (667, 375), (740, 360), (812, 375), (844, 390), (852, 393), (932, 430)]
-THEMES = ["Nocturne", "Hell", "Noir", "Plakat"]
+THEMES = ["Nocturne", "Hell", "Noir", "Ryū"]
 ATTR = "data-phone-landscape"
 CALM_CSS = ("*,*::before,*::after{animation:none!important;transition:none!important;"
             "caret-color:transparent!important;scroll-behavior:auto!important}")

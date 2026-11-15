@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.16-1 (16.11.2026 00:20)
+- Ryū: eigenes Design für Skyjo, Wizard, Minigolf, Flip 7, Phase 10, Rommé, Freies Spiel, Darts (alle Modi), Tabu; Punkteverlauf schwarz/rot; Nocturne: Kachel-Icons Neon-Lila
+
 ## 2026.11.15-31 (15.11.2026 23:18)
 - Ryū: alle Spielseiten rot ohne Gold, Darts-Auswahl neu, Statistik-Knopf schräg, Abzeichen in Ryū-Farben; Nocturne: Schriftzug Neon-Kontur; Jass-Icon ganz sichtbar
 

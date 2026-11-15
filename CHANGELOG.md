@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.15-22 (15.11.2026 18:34)
+- Yatzy: neue Animation bei Yatzy (Stempel mit Strahlen) und «Autsch» mit fehlenden Punkten, wenn der Bonus verpasst wird, in allen Modi
+
 ## 2026.11.15-21 (15.11.2026 18:24)
 - Ryū: Titel aller Spiele wie Molotow, Partyspiele-Liste rot, Punkt bei laufender Partie rot
 

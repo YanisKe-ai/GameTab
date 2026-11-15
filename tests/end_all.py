@@ -62,7 +62,7 @@ def one(b, w, h, mode, theme, errors):
         start_three(pg, mode == "Laptop")
         pg.goto(R.URL); R.wait(pg, 800)
         if mode == "Laptop":
-            assert pg.locator(".gtL-sidebar").get_by_text(re.compile("Skyjo")).count() >= 1, "vorher: Skyjo nicht in Seitenleiste"
+            assert pg.locator('.gtL-sidebar [aria-label="Skyjo"]').count() >= 1, "vorher: Skyjo nicht in Seitenleiste"
         else:
             assert R.has_text(pg, r"Weiterspielen"), "vorher: kein Weiterspielen"
         settings(pg)
@@ -88,7 +88,7 @@ def one(b, w, h, mode, theme, errors):
             else:
                 R.click(pg, pg.get_by_role("button", name="Zur Startseite").first, 700)
             if mode == "Laptop":
-                n = pg.locator(".gtL-sidebar").get_by_text(re.compile(r"Skyjo|Freies Spiel|Tutto")).count()
+                n = pg.locator('.gtL-sidebar [aria-label="Skyjo"], .gtL-sidebar [aria-label="Freies Spiel"], .gtL-sidebar [aria-label="Tutto"]').count()
                 assert n == 0, f"{phase}: Seitenleiste zeigt noch laufende Spiele"
             else:
                 assert not R.has_text(pg, r"Weiterspielen"), f"{phase}: Weiterspielen steht noch"

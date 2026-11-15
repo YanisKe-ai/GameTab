@@ -31,8 +31,7 @@ const PK_VB = "120 " + Math.floor(PK_DY - 4) + " 404 " + Math.ceil(176 - PK_DY);
 
 const HM_CSS = ".gt-hero-mark{position:relative;width:var(--hm-w,330px);margin:0 auto}" +
   ".gt-hero-mark svg{display:block;width:100%;height:auto;overflow:visible}" +
-  ".gt-hm-solo{display:block;aspect-ratio:820/235;-webkit-mask:var(--hm-mask) center/contain no-repeat;mask:var(--hm-mask) center/contain no-repeat}" +
-  ".gtL-sidebar:not(.is-collapsed) .gtL-side-dragon{display:none!important}";
+  ".gt-hm-solo{display:block;aspect-ratio:820/235;-webkit-mask:var(--hm-mask) center/contain no-repeat;mask:var(--hm-mask) center/contain no-repeat}";
 
 let hmUid = 0;
 
@@ -155,7 +154,7 @@ function GtHeroMark({ theme, width, className, style, markRef }) {
 // Nur der Drache (eingeklappte Laptop-Seitenleiste)
 function GtHeroDragon({ theme, width, className }) {
   const c = (isPlakat() ? HM_COLORS.plakat : HM_COLORS[theme]) || HM_COLORS.dark;
-  return <span className={"gt-hm-solo" + (className ? " " + className : "")} aria-hidden="true" style={{ width: width || 56, "--hm-mask": "url(" + DRAGON_MASK + ")", background: c.dragon }} />;
+  return <React.Fragment><style>{HM_CSS}</style><span className={"gt-hm-solo" + (className ? " " + className : "")} aria-hidden="true" style={{ width: width || 56, "--hm-mask": "url(" + DRAGON_MASK + ")", background: c.dragon }} /></React.Fragment>;
 }
 
 export { GtHeroMark, GtHeroDragon, HM_COLORS };

@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.15-14 (15.11.2026 15:03)
+- Ryū: Spiellisten als kleine Querkarten (Icon links, Name rechts, schräg, mehr Abstand)
+
 ## 2026.11.15-13 (15.11.2026 14:52)
 - Ryū-Tutto-Einrichtung: Spiel starten schwarz, Ziel und Nummern schwarz, Spieler hinzufügen creme
 

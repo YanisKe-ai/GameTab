@@ -104,30 +104,31 @@ ${P} .st-page .st-foot{gap:2px!important;margin-top:4px}
 ${P} .st-page .st-foot button{font-size:11px!important;color:${INK2}!important;padding:0 8px!important;font-weight:600!important}
 ${P} .st-page .st-build{font-size:10px!important;color:${INK2}!important}
 
-/* ===== Spiellisten (Plakat, Entwurf K3 Spielkarten, 2026-11-15) ===== */
+/* ===== Spiellisten (Ryū, Entwurf KK3 Querkarten, 2026-11-15) ===== */
 ${P} [data-pk-cat="score"]{--pk-bg:${RED};background:${NOISE} 0 0/180px 180px,${RED}!important;background-blend-mode:multiply}
 ${P} [data-pk-cat="party"]{--pk-bg:${INK2};background:${INK2}!important}
 ${P} [data-pk-cat] .gt-gamehead h1:not(.gt-wm){font-family:${FONT}!important;font-weight:400!important;-webkit-text-stroke:0!important;transform:rotate(-2deg);padding:4px 0 8px}
 ${P} [data-pk-cat="score"] .gt-gamehead h1:not(.gt-wm){color:${INK2}!important;text-shadow:4.0px 0.0px 0 ${CREAM2}, 3.9px 1.0px 0 ${CREAM2}, 3.5px 2.0px 0 ${CREAM2}, 2.8px 2.8px 0 ${CREAM2}, 2.0px 3.5px 0 ${CREAM2}, 1.0px 3.9px 0 ${CREAM2}, -0.0px 4.0px 0 ${CREAM2}, -1.0px 3.9px 0 ${CREAM2}, -2.0px 3.5px 0 ${CREAM2}, -2.8px 2.8px 0 ${CREAM2}, -3.5px 2.0px 0 ${CREAM2}, -3.9px 1.0px 0 ${CREAM2}, -4.0px -0.0px 0 ${CREAM2}, -3.9px -1.0px 0 ${CREAM2}, -3.5px -2.0px 0 ${CREAM2}, -2.8px -2.8px 0 ${CREAM2}, -2.0px -3.5px 0 ${CREAM2}, -1.0px -3.9px 0 ${CREAM2}, 0.0px -4.0px 0 ${CREAM2}, 1.0px -3.9px 0 ${CREAM2}, 2.0px -3.5px 0 ${CREAM2}, 2.8px -2.8px 0 ${CREAM2}, 3.5px -2.0px 0 ${CREAM2}, 3.9px -1.0px 0 ${CREAM2}, 5px 5px 0 ${INK2}, 6px 6px 0 ${INK2}, 7px 7px 0 ${INK2}, 8px 8px 0 ${INK2}, 9px 9px 0 ${INK2}!important}
 ${P} [data-pk-cat="party"] .gt-gamehead h1:not(.gt-wm){color:${RED}!important;text-shadow:4.0px 0.0px 0 ${CREAM2}, 3.9px 1.0px 0 ${CREAM2}, 3.5px 2.0px 0 ${CREAM2}, 2.8px 2.8px 0 ${CREAM2}, 2.0px 3.5px 0 ${CREAM2}, 1.0px 3.9px 0 ${CREAM2}, -0.0px 4.0px 0 ${CREAM2}, -1.0px 3.9px 0 ${CREAM2}, -2.0px 3.5px 0 ${CREAM2}, -2.8px 2.8px 0 ${CREAM2}, -3.5px 2.0px 0 ${CREAM2}, -3.9px 1.0px 0 ${CREAM2}, -4.0px -0.0px 0 ${CREAM2}, -3.9px -1.0px 0 ${CREAM2}, -3.5px -2.0px 0 ${CREAM2}, -2.8px -2.8px 0 ${CREAM2}, -2.0px -3.5px 0 ${CREAM2}, -1.0px -3.9px 0 ${CREAM2}, 0.0px -4.0px 0 ${CREAM2}, 1.0px -3.9px 0 ${CREAM2}, 2.0px -3.5px 0 ${CREAM2}, 2.8px -2.8px 0 ${CREAM2}, 3.5px -2.0px 0 ${CREAM2}, 3.9px -1.0px 0 ${CREAM2}, 5px 5px 0 ${RED}, 6px 6px 0 ${RED}, 7px 7px 0 ${RED}, 8px 8px 0 ${RED}, 9px 9px 0 ${RED}!important}
-${P} [data-pk-cat][data-pk-cat] .gtL-cards{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 18px!important;padding:6px 6px 10px}
+${P} [data-pk-cat][data-pk-cat] .gtL-cards{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 20px!important;padding:8px 8px 12px 6px}
 ${P} [data-pk-cat][data-pk-cat] .gtL-cards>div{width:auto!important}
-${P} [data-pk-cat][data-pk-cat] .gtL-gamecard{position:relative;height:auto!important;aspect-ratio:5/7;flex-direction:column!important;justify-content:center!important;padding:8px!important;border:none!important;outline:none!important;border-radius:16px!important;background:${CREAM2}!important;color:${INK2}!important;box-shadow:0 0 0 4px ${INK2},6px 7px 0 4px ${INK2}!important;--pkf:#D9CCAE}
-${P} [data-pk-cat][data-pk-cat] .gtL-cards>:nth-child(4n+2).gtL-gamecard,${P} [data-pk-cat][data-pk-cat] .gtL-cards>:nth-child(4n+2) .gtL-gamecard,${P} [data-pk-cat][data-pk-cat] .gtL-cards>:nth-child(4n+3).gtL-gamecard,${P} [data-pk-cat][data-pk-cat] .gtL-cards>:nth-child(4n+3) .gtL-gamecard{background:${INK2}!important;color:${CREAM2}!important;box-shadow:0 0 0 4px ${CREAM2},6px 7px 0 4px #000!important;--pkf:#4A4440}
-${P} [data-pk-cat][data-pk-cat] .gtL-cards>:nth-child(4n+1){transform:rotate(-2deg)}${P} [data-pk-cat][data-pk-cat] .gtL-cards>:nth-child(4n+2){transform:rotate(1.5deg)}${P} [data-pk-cat][data-pk-cat] .gtL-cards>:nth-child(4n+3){transform:rotate(1deg)}${P} [data-pk-cat][data-pk-cat] .gtL-cards>:nth-child(4n){transform:rotate(-1.5deg)}
+${P} [data-pk-cat][data-pk-cat] .gtL-gamecard{position:relative;height:auto!important;min-height:72px;aspect-ratio:2.3/1;flex-direction:row!important;justify-content:flex-start!important;align-items:center!important;gap:10px!important;padding:0 10px!important;border:none!important;outline:none!important;border-radius:16px!important;background:${CREAM2}!important;color:${INK2}!important;box-shadow:0 0 0 3px ${INK2},4px 5px 0 3px ${INK2}!important}
+${P} [data-pk-cat][data-pk-cat] .gtL-cards>:nth-child(4n+2).gtL-gamecard,${P} [data-pk-cat][data-pk-cat] .gtL-cards>:nth-child(4n+2) .gtL-gamecard,${P} [data-pk-cat][data-pk-cat] .gtL-cards>:nth-child(4n+3).gtL-gamecard,${P} [data-pk-cat][data-pk-cat] .gtL-cards>:nth-child(4n+3) .gtL-gamecard{background:${INK2}!important;color:${CREAM2}!important;box-shadow:0 0 0 3px ${CREAM2},4px 5px 0 3px ${INK2}!important}
+${P} [data-pk-cat][data-pk-cat] .gtL-cards>:nth-child(6n+1){transform:rotate(-2deg)}${P} [data-pk-cat][data-pk-cat] .gtL-cards>:nth-child(6n+2){transform:rotate(1.5deg)}${P} [data-pk-cat][data-pk-cat] .gtL-cards>:nth-child(6n+3){transform:rotate(-1deg)}${P} [data-pk-cat][data-pk-cat] .gtL-cards>:nth-child(6n+4){transform:rotate(2deg)}${P} [data-pk-cat][data-pk-cat] .gtL-cards>:nth-child(6n+5){transform:rotate(1deg)}${P} [data-pk-cat][data-pk-cat] .gtL-cards>:nth-child(6n){transform:rotate(-1.5deg)}
 ${P} [data-pk-cat][data-pk-cat] .gtL-gamecard:active{transform:translateY(3px)}
-${P} [data-pk-cat][data-pk-cat] .gtL-gamecard-logo{position:absolute!important;inset:8px;width:auto!important;min-width:0!important;border:2px solid var(--pkf);border-radius:10px;background:radial-gradient(circle at 50% 50%,${CREAM2} 0 38px,transparent 39px)!important}
-${P} [data-pk-cat][data-pk-cat] .gtL-gamecard-logo>*{width:58px!important;height:58px!important;max-width:58px!important}
-${P} [data-pk-cat][data-pk-cat] .gtL-gamecard-body{position:absolute;top:14px;left:14px;right:22%;z-index:1;flex:none!important}
-${P} [data-pk-cat][data-pk-cat] .gtL-gamecard-title{font-family:${FONT}!important;font-weight:400!important;font-size:15px!important;line-height:1.02!important;color:inherit!important;overflow-wrap:normal}
-${P} [data-pk-cat][data-pk-cat] .gtL-gamecard-var,${P} [data-pk-cat][data-pk-cat] .gtL-gamecard-status{font-size:10px!important;color:inherit!important;opacity:.8;letter-spacing:.02em!important;margin-top:3px!important}
-${P} [data-pk-cat][data-pk-cat] .gtL-gamecard-mirror{display:block!important;position:absolute;bottom:14px;right:14px;max-width:70%;transform:rotate(180deg);font-family:${FONT};font-size:15px;line-height:1.02;text-align:left;z-index:1}
-${P} [data-pk-cat][data-pk-cat] .gtL-gamecard-chev,${P} [data-pk-cat][data-pk-cat] .gtL-gamecard-spacer{display:none!important}
-${P} [data-pk-cat][data-pk-cat] .gt-favstar{top:auto!important;bottom:6px!important;left:6px!important;right:auto!important;transform:none!important}
+${P} [data-pk-cat][data-pk-cat] .gtL-gamecard-logo{width:48px!important;min-width:48px!important;height:48px;border-radius:50%;background:transparent!important}
+${P} [data-pk-cat][data-pk-cat] .gtL-cards>:nth-child(4n+2) .gtL-gamecard-logo,${P} [data-pk-cat][data-pk-cat] .gtL-cards>:nth-child(4n+3) .gtL-gamecard-logo{background:${CREAM2}!important}
+${P} [data-pk-cat][data-pk-cat] .gtL-gamecard-logo>*{width:36px!important;height:36px!important;max-width:36px!important}
+${P} [data-pk-cat][data-pk-cat] .gtL-gamecard-body{flex:1;min-width:0}
+${P} [data-pk-cat][data-pk-cat] .gtL-gamecard-title{font-family:${FONT}!important;font-weight:400!important;font-size:16px!important;line-height:1.05!important;color:inherit!important;overflow-wrap:normal}
+${P} [data-pk-cat][data-pk-cat] .gtL-gamecard-var,${P} [data-pk-cat][data-pk-cat] .gtL-gamecard-status{font-size:10px!important;color:inherit!important;opacity:.8;letter-spacing:.02em!important;margin-top:2px!important}
+${P} [data-pk-cat][data-pk-cat] .gtL-gamecard-chev,${P} [data-pk-cat][data-pk-cat] .gtL-gamecard-spacer,${P} [data-pk-cat][data-pk-cat] .gtL-gamecard-mirror{display:none!important}
+${P} [data-pk-cat][data-pk-cat] .gt-favstar{top:-4px!important;right:-4px!important;left:auto!important;bottom:auto!important;transform:none!important;width:36px!important;height:36px!important}
+${P} [data-pk-cat][data-pk-cat] .gt-favstar svg{width:15px;height:15px}
 ${P} [data-pk-cat][data-pk-cat] .gt-favstar[aria-pressed="true"] path{fill:${RED};stroke:${RED}}
 ${P} [data-pk-cat][data-pk-cat] .gt-favstar[aria-pressed="false"] path{stroke:#8A8178}
-${P} .gtL-content [data-pk-cat][data-pk-cat] .gtL-cards{grid-template-columns:repeat(4,minmax(0,1fr))!important}
-@media (max-width:1099px){${P} .gtL-content [data-pk-cat][data-pk-cat] .gtL-cards{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+${P} .gtL-content [data-pk-cat][data-pk-cat] .gtL-cards{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+@media (max-width:360px){${P} [data-pk-cat][data-pk-cat] .gtL-gamecard-title{font-size:14px!important}${P} [data-pk-cat][data-pk-cat] .gtL-cards{gap:20px 16px!important}}
 /* Weiches Einblenden der Titel (Magic UI «Blur Fade») */
 ${P} .gt-wm{animation:pk-in .55s cubic-bezier(.2,.8,.2,1) both}
 @keyframes pk-in{from{opacity:0;transform:translateY(8px);filter:blur(5px)}to{opacity:1;transform:none;filter:none}}

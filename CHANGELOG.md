@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.15-15 (15.11.2026 15:14)
+- Ryū-Tutto: Punktzahl ab 1000 rot mit schwarzem Rand
+
 ## 2026.11.15-14 (15.11.2026 15:03)
 - Ryū: Spiellisten als kleine Querkarten (Icon links, Name rechts, schräg, mehr Abstand)
 

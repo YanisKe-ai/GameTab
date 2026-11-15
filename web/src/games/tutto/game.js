@@ -66,6 +66,7 @@ function TuttoSetup({players,setPlayers,target,setTarget,onStart,tk:gtTk0,t,them
 .tt-pk .tt-nmt{font-family:'Bagel Fat One','Bowlby One',sans-serif;font-weight:400;font-size:20px;}
 .tt-pk .tt-num{font-family:'Bagel Fat One','Bowlby One',sans-serif;font-weight:400;}
 .tt-pk .tt-pop{font-family:'Bagel Fat One','Bowlby One',sans-serif;font-weight:400;}
+.tt-pk .tt-big{font-family:'Bagel Fat One','Bowlby One',sans-serif;font-weight:400;color:#E4312B;-webkit-text-stroke:.09em #1A1716;paint-order:stroke fill;text-shadow:.05em .06em 0 #1A1716;}
 .tt-pk .tt-path{border-top-width:3px;}
 .tt-pk .tt-die{background:#E4312B!important;border-radius:6px;box-shadow:0 0 0 2.5px #1A1716,2px 3px 0 2.5px #000;}
 .tt-pk .tt-lane.is-sel .tt-die{box-shadow:0 0 0 2.5px #F3EAD3,2px 3px 0 2.5px #000;}

@@ -8,7 +8,8 @@ import DRAGON_PLAKAT from "../assets/img/gt-dragon-plakat.webp";
 
 const HM_COLORS = {
   plakat: { game: "#1A1716", tab: "#1A1716", dragon: "#1A1716", stroke: "#F3EAD3" },
-  dark: { game: "#B48CFF", tab: "#FFD27A", dragon: "#FFECC8" },
+  // Nocturne: Entwurf 6 «Neon-Kontur» (2026-11-15): GAME nur Umriss, TAB gefüllt, lila Leuchten
+  dark: { game: "#15121F", tab: "#E9DDFF", dragon: "#FFECC8", neon: "#D4B8FF" },
   light: { game: "#111111", tab: "#111111", dragon: "#111111" },
   noir: { game: "#F2F2F2", tab: "#F2F2F2", dragon: "#F2F2F2" },
 };
@@ -142,7 +143,7 @@ function GtHeroMark({ theme, width, className, style, markRef }) {
           </mask>
         </defs>
         <rect x={HM_DX} y={HM_DY} width={HM_DW} height={HM_DH} fill={c.dragon} mask={"url(#" + mid + ")"} />
-        <text x="320" y={HM_BASE} textAnchor="middle" fontFamily="'Bagel Fat One', sans-serif" fontSize={HM_FONT} stroke={c.stroke || undefined} strokeWidth={c.stroke ? 5 : undefined} paintOrder="stroke fill" style={c.stroke ? { filter: "drop-shadow(4px 5px 0 #141414)" } : undefined}>
+        <text x="320" y={HM_BASE} textAnchor="middle" fontFamily="'Bagel Fat One', sans-serif" fontSize={HM_FONT} stroke={c.stroke || c.neon || undefined} strokeWidth={c.stroke ? 5 : c.neon ? 2.3 : undefined} strokeLinejoin="round" paintOrder={c.neon ? "fill stroke" : "stroke fill"} style={c.stroke ? { filter: "drop-shadow(4px 5px 0 #141414)" } : c.neon ? { filter: "drop-shadow(0 0 6px rgba(201,168,255,.85)) drop-shadow(0 0 18px rgba(150,100,255,.55))" } : undefined}>
           <tspan fill={c.game}>GAME</tspan>
           <tspan fill={c.tab}>TAB</tspan>
         </text>

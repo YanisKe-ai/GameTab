@@ -40,4 +40,9 @@ function PkRibbon({ children, bg, color, style, fontSize, lineHeight }) {
 // Briefmarkenrand (Lochrand oben und unten) als className-Hilfe
 const PK_STAMP_CSS = ".pk-stamp{-webkit-mask:radial-gradient(circle 5px at 50% 0,#0000 98%,#000) 0 0/16px 51% repeat-x,radial-gradient(circle 5px at 50% 100%,#0000 98%,#000) 0 100%/16px 51% repeat-x;mask:radial-gradient(circle 5px at 50% 0,#0000 98%,#000) 0 0/16px 51% repeat-x,radial-gradient(circle 5px at 50% 100%,#0000 98%,#000) 0 100%/16px 51% repeat-x}";
 
-export { pkOn, pkContrast, pkPage, pkCard, pkBtn, pkTitle, PkRibbon, PK_STAMP_CSS };
+// Ryū (Entwurf R2b): kräftiges Rot mit Körnung, warmes Schwarz, Creme
+const RYU = { red: "#E4312B", ink: "#1A1716", cream: "#F3EAD3",
+  noise: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.32'/%3E%3C/svg%3E\")" };
+function ryuPage(bg) { const c = bg || RYU.red; return { "--pk-bg": c, background: RYU.noise + " 0 0/180px 180px, " + c, backgroundBlendMode: "multiply" }; }
+
+export { pkOn, pkContrast, pkPage, pkCard, pkBtn, pkTitle, PkRibbon, PK_STAMP_CSS, RYU, ryuPage };

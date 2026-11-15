@@ -73,6 +73,8 @@ ${P} .gtL-start .gtL-showcase-label{color:${INK2}!important;opacity:1!important;
 ${P} .gtL-start .gtL-showcase-hint,${P} .gtL-start .gtL-showcase-arrow{color:${INK2}!important}
 ${P} .gtL-start .gtL-tipcard-body{background:${INK2}!important;border:none!important;outline:none!important;border-radius:10px!important;box-shadow:none!important}
 ${P} .gtL-start .gtL-tipcard-body *{color:${CREAM2}!important}
+${P} .gtL-start .gtL-tipcard-body svg [fill]:not([fill="none"]){fill:${CREAM2}!important}
+${P} .gtL-start .gtL-tipcard-body svg [stroke]:not([stroke="none"]){stroke:${CREAM2}!important}
 ${P} .gtL-start .gtL-tipcard>button{color:${INK2}!important}
 /* ===== Einstellungen neu (Plakat, Entwurf E4, 2026-11-15) ===== */
 ${P} .st-page{--pk-bg:${RED};background:${NOISE} 0 0/180px 180px,${RED}!important;background-blend-mode:multiply;color:${INK2}!important}

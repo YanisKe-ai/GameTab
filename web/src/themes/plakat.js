@@ -56,6 +56,7 @@ const PAGE2_KEYS = /^(pageBg2|bg2)$/;
 const CARD_KEYS = /^(card|headerBg|cellEmptyBg|surface)$/;
 const CARD2_KEYS = /^(cardElevated|cardAlt|cellFilledBg|subheadBg)$/;
 const LINE_KEYS = /^(border|groupLine)$/;
+const GOLD_KEYS = /^(gold|gold2|goldSoft|goldDim|accentGold|star|starOn)$/;
 
 function plakatMap(r) {
   if (!r || typeof r !== "object") return r;
@@ -70,6 +71,7 @@ function plakatMap(r) {
     else if (CARD_KEYS.test(k)) o[k] = PK.paper;
     else if (CARD2_KEYS.test(k)) o[k] = PK.white;
     else if (LINE_KEYS.test(k)) o[k] = PK.line;
+    else if (GOLD_KEYS.test(k)) o[k] = "#E4312B"; // Ryū: kein Gold, nur Rot, Schwarz, Creme
   }
   // Seiten-Hülle (minHeight/background/padding)
   if (typeof o.background === "string" && ("minHeight" in o || "padding" in o)) o.background = PK_PAGE_BG;

@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.15-9 (15.11.2026 13:34)
+- Ryū: Tutto im neuen Stil (Sticker-Karten, schwarzes Tastenfeld), kein Gold mehr (Tippkarte creme, Sterne rot)
+
 ## 2026.11.15-8 (15.11.2026 13:22)
 - Ryū-Startseite: Logo etwas höher, Knöpfe mittig zwischen ALL-IN-ONE und Suche
 

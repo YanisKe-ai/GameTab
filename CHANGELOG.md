@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.15-24 (15.11.2026 18:55)
+- Yatzy: neue Bonus-Animation Würfel-Rakete mit Feuerwerk, in allen Modi
+
 ## 2026.11.15-23 (15.11.2026 18:44)
 - Yatzy: Anzeige bei Yatzy und verpasstem Bonus dauert 3,5 Sekunden
 

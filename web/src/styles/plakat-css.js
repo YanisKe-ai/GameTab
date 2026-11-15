@@ -22,6 +22,10 @@ ${P} .gt-hb:active .gt-hf{transform:translateY(2px);box-shadow:0 1px 0 ${INK}!im
 ${P} .gt-su-label{font-family:${FONT}!important;letter-spacing:.06em!important;color:${INK}!important}
 ${P} .gt-su-row{outline:2px solid ${INK}!important;outline-offset:-2px!important;box-shadow:0 3px 0 ${INK}!important;background:${PAPER}!important}
 ${P} .gt-su-chip,${P} .gt-su-ib,${P} .gt-su-add,${P} .gt-su-numin{outline:2px solid ${INK}!important;outline-offset:-2px!important}
+/* «+ Spieler»: nie graue Schrift auf Rot, sondern Creme-Sticker mit gestricheltem Rand */
+${P} .gt-su-add{background:${CREAM2}!important;color:${INK2}!important;border:2px dashed ${INK2}!important;outline:none!important;font-family:${FONT}!important;font-weight:400!important}
+${P} .gt-su-add svg{stroke:${INK2}!important;color:${INK2}!important}
+${P} .gt-su-add:disabled{opacity:.55}
 ${P} .gt-su-chip{font-family:${FONT}!important;font-weight:400!important}
 ${P} .gt-su-btn{position:relative;overflow:hidden;outline:2.5px solid ${INK}!important;outline-offset:-2.5px!important;box-shadow:0 5px 0 ${INK}!important;font-family:${FONT}!important;font-weight:400!important;letter-spacing:.02em}
 ${P} .gt-su-cta::before{background:var(--pk-bg,${CREAM})!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
@@ -145,6 +149,10 @@ ${P} [data-pk-cat] .gtL-gamecard-status>span[aria-hidden]{background:${RED}!impo
 ${P} .gt-wm.gt-wm.gt-wm{display:block!important;width:100%!important;text-align:center!important;box-sizing:border-box}
 ${P} .gt-gamehead h1:not(.gt-wm){font-family:${FONT}!important;font-weight:400!important;text-transform:uppercase!important;color:${INK2}!important;-webkit-text-fill-color:${INK2}!important;-webkit-text-stroke:.05em #141414!important;paint-order:stroke fill!important;text-shadow:.05em .065em 0 #141414!important;letter-spacing:0!important;white-space:nowrap!important;word-break:keep-all!important;hyphens:none!important!important}
 ${P} :focus-visible{outline-color:#2D6BFF!important}
+/* Zahl-Änderungen (+15 / −3) als Sticker: neutral creme, gut schwarz, schlecht rot */
+${P} .gt-count::after{background:${CREAM2}!important;color:${INK2}!important;box-shadow:0 0 0 1.5px ${INK2},0 2px 0 ${INK2}!important;font-family:${FONT}!important;font-weight:400!important}
+${P} .gt-count[data-gt-dt="g"]::after{background:${INK2}!important;color:${CREAM2}!important}
+${P} .gt-count[data-gt-dt="b"]::after{background:${RED}!important;color:${CREAM2}!important}
 /* Ryū: Seiten mit Körnung (pkPage().background ohne eigenes Blend) richtig einfärben */
 ${P} [style*="feTurbulence"]{background-blend-mode:multiply}
 /* Statistik-Knopf Spielliste: Form F1 Gezackter Sticker (Ryū) */

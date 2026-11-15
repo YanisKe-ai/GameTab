@@ -17,6 +17,8 @@ import { GtCol } from "../../shared/unit.js";
 import { GtUbStyle } from "../../shared/unit-boards.js";
 import { WyFan, WEIS_LBL, SCHIEBER_PL_CSS } from "../schieber/game.js";
 import { MolotowLogo } from "./logo.js";
+import { usePlakat } from "../../themes/theme-id.js";
+import { pkPage } from "../../shared/plakat/kit.js";
 import herzA from "../schieber/img/herz-A.svg";
 import eckeA from "./img/ecke-A.svg";
 import schaufelA from "./img/schaufel-A.svg";
@@ -39,7 +41,8 @@ function SuitGlyph({ s, size = 14 }) {
   return <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style={{ flex: "none" }}><path d={MOL_SUIT_PATH[s]} /></svg>;
 }
 
-function molTk(theme) {
+function molTk(theme, pk) {
+  if (pk) return { theme: "light", pk: true, bg: "#B8D52A", bgSolid: "#B8D52A", ink: "#141414", muted: "#141414", card: "#FFFDF7", border: "#141414", acc: "#2F6B52", on: "#F4EAD5", sheet: "#F4EAD5", sheetLine: "#141414", slate: "#1F2B24", w1: "#F4EAD5", w2: "#F4EAD5", ch: "#F4EAD5", chm: "rgba(244,234,213,0.78)", mi: "#C8E04A", pl: "#FF9A7B", hues: ["#B8D52A", "#F9C22E", "#FF7A6B", "#F4EAD5", "#8BC3E8", "#C9A6F0"], badgeInk: "#141414" };
   if (theme === "light") return { theme, bg: "radial-gradient(ellipse at 50% -10%, #FBF7EC 0%, #F6F1E7 55%, #EFE8D8 100%)", bgSolid: "#F6F1E7", ink: "#1E1A15", muted: "#5E574C", card: "#FFFCF6", border: "rgba(30,26,21,0.18)", acc: "#59690A", on: "#FFFFFF", sheet: "#FBF7EC", sheetLine: "rgba(30,26,21,0.14)", slate: "#26302A", w1: "#B48A58", w2: "#8A6339", ch: "#F4F1E8", chm: "rgba(244,241,232,0.62)", mi: "#C8E04A", pl: "#FF9A7B", hues: ["#59690A", "#1F7A6A", "#A85F12", "#B23A63", "#3F58B5", "#7B4FB5"], badgeInk: "#FFFFFF" };
   if (theme === "noir") return { theme, bg: "#000000", bgSolid: "#000000", ink: "#EBEBEB", muted: "#A8A8A8", card: "#1A1A1A", border: "#5F5F5F", acc: "#EBEBEB", on: "#000000", sheet: "#111111", sheetLine: "#3A3A3A", slate: "#0D0D0D", w1: "#6C6C6C", w2: "#444444", ch: "#FFFFFF", chm: "rgba(255,255,255,0.62)", mi: "#FFFFFF", pl: "#D4D4D4", hues: ["#E6E6E6", "#C8C8C8", "#AAAAAA", "#D8D8D8", "#B8B8B8", "#9C9C9C"], badgeInk: "#000000" };
   return { theme: "dark", bg: "radial-gradient(ellipse at 50% -10%, #28351F 0%, #151B11 55%, #0B0E09 100%)", bgSolid: "#12170E", ink: "#EEF1E4", muted: "#A9B29C", card: "rgba(238,241,228,0.06)", border: "rgba(238,241,228,0.16)", acc: "#B8D52A", on: "#18200A", sheet: "#161C12", sheetLine: "rgba(238,241,228,0.12)", slate: "#222C26", w1: "#9A6F43", w2: "#6B4A2A", ch: "#F4F1E8", chm: "rgba(244,241,232,0.62)", mi: "#C8E04A", pl: "#FF9A7B", hues: ["#B8D52A", "#6EC9B8", "#F2A65A", "#E9779A", "#8FA8F0", "#C9A6F0"], badgeInk: "#141A0A" };
@@ -47,7 +50,7 @@ function molTk(theme) {
 function molVars(k) {
   return { "--mo-bg": k.bgSolid, "--mo-ink": k.ink, "--mo-mu": k.muted, "--mo-card": k.card, "--mo-line": k.border, "--mo-acc": k.acc, "--mo-on": k.on, "--mo-sheet": k.sheet, "--mo-sline": k.sheetLine, "--mo-sl": k.slate, "--mo-w1": k.w1, "--mo-w2": k.w2, "--mo-ch": k.ch, "--mo-chm": k.chm, "--mo-mi": k.mi, "--mo-pl": k.pl, "--mo-bi": k.badgeInk };
 }
-function molShell(theme) { const k = molTk(theme); return { minHeight: "100vh", boxSizing: "border-box", background: k.bg, padding: "20px 12px 32px", ...molVars(k) }; }
+function molShell(theme, pk) { const k = molTk(theme, pk); return { minHeight: "100vh", boxSizing: "border-box", background: k.bg, padding: "20px 12px 32px", ...molVars(k), ...(pk ? pkPage("#B8D52A", { boxSizing: "border-box" }) : null) }; }
 
 const MO_CSS = `
 .mo-root{font-family:'Inter',system-ui,sans-serif;color:var(--mo-ink)}
@@ -195,10 +198,94 @@ const MO_CSS = `
 [data-phone-landscape] .mo-pad button{height:44px}
 `;
 
+const MO_PK_CSS = `
+.mo-pk{--pkf:'Bagel Fat One','Bowlby One',sans-serif;color:#141414}
+.gtL-shellpage.mo-pk .gt-wm{color:#FFFDF7!important;font-size:clamp(34px,12vw,48px)!important;white-space:nowrap!important;word-break:keep-all!important;hyphens:none!important}
+.mo-pk .mo-lbl{font-family:var(--pkf);font-weight:400;font-size:13px;letter-spacing:.06em;color:#141414}
+.mo-pk .mo-info{font-weight:600;color:#141414}
+.mo-pk .mo-sw{background:#FFFDF7;border:2.5px solid #141414;box-shadow:0 4px 0 #141414;border-radius:18px;color:#141414;margin-bottom:3px}
+.mo-pk .mo-sw b{font-family:var(--pkf);font-weight:400;font-size:16px}
+.mo-pk .mo-sw small{color:#141414;font-weight:600}
+.mo-pk .mo-sw:active{transform:translateY(3px);box-shadow:0 1px 0 #141414}
+.mo-pk .mo-tg{background:#E2D8C0;border:2.5px solid #141414;box-sizing:border-box}
+.mo-pk .mo-tg::after{left:2px;top:2px;width:19px;height:19px;background:#FFFDF7;border:2px solid #141414;box-shadow:none;box-sizing:border-box}
+.mo-pk .mo-sw[aria-checked="true"] .mo-tg{background:#2F6B52}
+.mo-pk .mo-sw[aria-checked="true"] .mo-tg::after{transform:translateX(18px)}
+.mo-pk .mo-chip{background:#FFFDF7;border:2.5px solid #141414;box-shadow:0 3px 0 #141414;border-radius:14px;color:#141414;font-family:var(--pkf);font-weight:400;font-size:15px;margin-bottom:3px}
+.mo-pk .mo-chip.on{background:#2F6B52;border-color:#141414;color:#F4EAD5}
+.mo-pk .mo-fan img{filter:drop-shadow(2px 3px 0 #141414)}
+.mo-pk .mo-frame{padding:9px;background:#F4EAD5;border:2.5px solid #141414;box-shadow:0 6px 0 #141414;border-radius:20px}
+.mo-pk .mo-slate{border:2.5px solid #141414;border-radius:11px;box-shadow:none}
+.mo-pk .mo-hn{color:#F4EAD5;font-weight:700;font-size:11.5px}
+.mo-pk .mo-bd{border:2px solid #141414;font-family:var(--pkf);font-weight:400}
+.mo-pk .mo-rn,.mo-pk .mo-v{font-family:var(--pkf);font-weight:400}
+.mo-pk .mo-rn{color:#F4EAD5;font-size:15px}
+.mo-pk .mo-v{color:#F4EAD5}
+.mo-pk .mo-v.neg{color:#C8E04A}
+.mo-pk .mo-tot .mo-rn{font-size:12px;font-family:var(--pkf);color:#F4EAD5}
+.mo-pk .mo-tc .mo-v{font-weight:400}
+.mo-pk .mo-rk{font-family:var(--pkf);font-weight:400;color:#F4EAD5}
+.mo-pk .mo-trow.zero .mo-v{opacity:.6}
+.mo-pk .mo-row.cur{background:rgba(200,224,74,.2);box-shadow:inset 4px 0 0 #C8E04A}
+.mo-pk .mo-legend{color:#141414;font-weight:700}
+.mo-pk .mo-legend b{font-family:var(--pkf);font-weight:400;color:#141414!important;border:2px solid #141414;border-radius:50%;width:20px;height:20px;display:inline-grid;place-items:center;font-size:14px;background:#C8E04A}
+.mo-pk .mo-legend span:nth-child(2) b{background:#FF9A7B}
+.mo-pk .mo-dkinfo b{font-family:var(--pkf);font-weight:400;font-size:16px;color:#141414}
+.mo-pk .mo-dkinfo span{color:#141414;font-weight:700}
+.mo-pk .mo-cta{position:relative;overflow:hidden;background:#2F6B52;color:#F4EAD5;border:2.5px solid #141414;box-shadow:0 5px 0 #141414;font-family:var(--pkf);font-weight:400;font-size:17px;border-radius:18px}
+.mo-pk .mo-cta::after{content:"";position:absolute;top:0;bottom:0;left:0;width:35%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);animation:pk-shine 3.2s ease-in-out infinite;pointer-events:none}
+.mo-pk .mo-cta:active{transform:translateY(3px);box-shadow:0 2px 0 #141414}
+.mo-pk .mo-ib{background:#FFFDF7;border:2.5px solid #141414;box-shadow:0 4px 0 #141414;color:#141414;border-radius:16px}
+.mo-pk .mo-ib:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 #141414}
+.mo-pk .mo-ib:disabled{opacity:1;background:#E2D8C0;color:#4A4236;border-color:#4A4236;box-shadow:0 4px 0 #4A4236}
+.mo-pk .mo-win{font-family:var(--pkf);font-weight:400;color:#141414;font-size:18px}
+.mo-pk button:focus-visible{outline:3px solid #141414;outline-offset:3px}
+.mo-pk.mo-ov{background:rgba(20,20,20,.6)}
+.mo-pk .mo-sheet{background:#F4EAD5;border-top:2.5px solid #141414;box-shadow:none;border-radius:22px 22px 0 0}
+.mo-pk .mo-eh h2{font-family:var(--pkf);font-weight:400;font-size:21px}
+.mo-pk .mo-eh p{color:#141414;font-weight:600}
+.mo-pk .mo-x{background:#FFFDF7;border:2.5px solid #141414;box-shadow:0 3px 0 #141414;color:#141414}
+.mo-pk .mo-trump>span{color:#141414;font-family:var(--pkf);font-weight:400}
+.mo-pk .mo-tb{background:#FFFDF7;border:2.5px solid #141414;box-shadow:0 3px 0 #141414;border-radius:13px}
+.mo-pk .mo-tb[aria-pressed="true"]{background:#B8D52A;box-shadow:0 3px 0 #141414,inset 0 0 0 2px #141414}
+.mo-pk .mo-tb img{filter:none}
+.mo-pk .mo-ecap{background:#F4EAD5;color:#141414;font-family:var(--pkf);font-weight:400}
+.mo-pk .mo-er{border:2.5px solid transparent;border-radius:16px}
+.mo-pk .mo-er.act{background:#FFFDF7;border-color:#141414;box-shadow:0 3px 0 #141414}
+.mo-pk .mo-en b{font-family:var(--pkf);font-weight:400;font-size:15px}
+.mo-pk .mo-en small{color:#141414;font-weight:700}
+.mo-pk .mo-c{background:#FFFDF7;border:2.5px solid #141414;box-shadow:0 3px 0 #141414;color:#141414;font-family:var(--pkf);font-weight:400;border-radius:13px}
+.mo-pk .mo-c:active{transform:translateY(2px);box-shadow:0 1px 0 #141414}
+.mo-pk .mo-c.act{background:#B8D52A;box-shadow:0 3px 0 #141414}
+.mo-pk .mo-c.on.mi{background:#2F6B52;border-color:#141414;color:#F4EAD5}
+.mo-pk .mo-c.on.pl{background:#FF7A6B;border-color:#141414;color:#141414}
+.mo-pk .mo-pad{background:#F4EAD5;border-top:2.5px solid #141414}
+.mo-pk .mo-pad button{background:#FFFDF7;border:2.5px solid #141414;box-shadow:0 3px 0 #141414;color:#141414;font-family:var(--pkf);font-weight:400;border-radius:13px}
+.mo-pk .mo-pad button:active{transform:translateY(2px);box-shadow:0 1px 0 #141414}
+.mo-pk .mo-pad .nx{background:#2F6B52;color:#F4EAD5}
+.mo-pk .mo-pad-note{color:#141414;font-weight:700}
+.mo-pk .gt-wy{--wy-bg:#F4EAD5;--wy-edge:transparent;--wy-line:#141414;--wy-ink:#141414;--wy-ink2:#3B342A;--wy-tile:#FFFDF7;--wy-chip:#F4EAD5;--wy-xbg:#FFFDF7;--wy-pt:#2F6B52;--wy-top:none;--wy-fir:#2F6B52;--wy-firbg:#2F6B52;--wy-on:#F4EAD5;--wy-off:#C9BFA8;--wy-offink:#141414;border-top:2.5px solid #141414;border-radius:22px 22px 0 0;box-shadow:none!important}
+.mo-pk .gt-wy-head h2{font-family:var(--pkf);font-weight:400;font-size:22px}
+.mo-pk .gt-wy-x{border:2.5px solid #141414;box-shadow:0 3px 0 #141414}
+.mo-pk .gt-wy-tile,.mo-pk .gt-wy-row{border:2.5px solid #141414!important;box-shadow:0 3px 0 #141414!important;border-radius:16px!important}
+.mo-pk .gt-wy-tile.is-on .gt-wy-tb,.mo-pk .gt-wy-row.is-on>button,.mo-pk .gt-wy-tile.is-on .gt-wy-qty,.mo-pk .gt-wy-row.is-on .gt-wy-qty{color:#F4EAD5}
+.mo-pk .gt-wy-tile.is-on .gt-wy-tb i,.mo-pk .gt-wy-row.is-on>button i{color:#F4EAD5}
+.mo-pk .gt-wy-tb b,.mo-pk .gt-wy-row>button span{font-family:var(--pkf);font-weight:400}
+.mo-pk .gt-wy-chk{background:#F4EAD5!important;color:#141414!important;border:2px solid #141414}
+.mo-pk .gt-wy-qty button{border:2.5px solid #141414!important;box-shadow:0 2px 0 #141414!important;border-radius:13px!important;background:#FFFDF7;color:#141414}
+.mo-pk .gt-wy-more{font-family:var(--pkf);font-weight:400;border-bottom:2.5px solid #141414}
+.mo-pk .gt-wy-foot{border-top:2.5px solid #141414}
+.mo-pk .gt-weis-save{border:2.5px solid #141414!important;border-radius:16px!important;box-shadow:0 4px 0 #141414;font-family:var(--pkf);font-weight:400;font-size:17px}
+.mo-pk .gt-weis-save:active{transform:translateY(3px);box-shadow:0 1px 0 #141414}
+.mo-pk .gt-wy button:focus-visible{outline-color:#141414}
+@media (prefers-reduced-motion:reduce){.mo-pk .mo-cta::after{animation:none}}
+`;
+
 function MoSuitLabel(t, s) { return t(MOL_SUIT_KEY[s]); }
 
 /* ---------- Wyys-Auswahl (gleiche Kartenkacheln und Werte wie der Wyys-Dialog im Schieber) ---------- */
 function MolWeisPicker({ open, kind, name, value, onSave, onClose, t, theme }) {
+  const pk = usePlakat();
   const [items, setItems] = useState([]);
   const [more, setMore] = useState(false);
   const ref = useGtDialog({ open, onClose });
@@ -212,7 +299,7 @@ function MolWeisPicker({ open, kind, name, value, onSave, onClose, t, theme }) {
   const chk = <span className="gt-wy-chk" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" /></svg></span>;
   const qty = k => <div className="gt-wy-qty"><button type="button" onClick={() => step(k, -1)} aria-label={t("weisLess") + ": " + t(WEIS_LBL[k])}>{"−"}</button><span aria-live="polite">{count(k)}</span><button type="button" onClick={() => step(k, 1)} aria-label={t("weisMoreQty") + ": " + t(WEIS_LBL[k])}>+</button></div>;
   const title = kind === "t" ? t("molTischOf")(name) : t("molWeisOf")(name);
-  return <div ref={ref} role="dialog" aria-modal="true" aria-label={title} className="gt-weis-ov mo-wov" style={{ position: "fixed", inset: 0, display: "flex", flexDirection: "column", justifyContent: "flex-end", background: "rgba(20,16,10,0.46)" }} onClick={onClose}>
+  return <div ref={ref} role="dialog" aria-modal="true" aria-label={title} className={"gt-weis-ov mo-wov" + (pk ? " mo-pk" : "")} style={{ position: "fixed", inset: 0, display: "flex", flexDirection: "column", justifyContent: "flex-end", background: "rgba(20,16,10,0.46)" }} onClick={onClose}>
     <div className={"gt-weis-panel gt-wy" + (theme === "noir" ? " gt-wy-noir" : theme === "light" ? " gt-wy-light" : "")} onClick={e => e.stopPropagation()}>
       <div className="gt-wy-head"><h2>{title}</h2><button type="button" className="gt-wy-x" onClick={onClose} aria-label={t("weisClose")}><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" /></svg></button></div>
       <div className="gt-wy-body">
@@ -238,6 +325,7 @@ function MolWeisPicker({ open, kind, name, value, onSave, onClose, t, theme }) {
 
 /* ---------- Eingabe-Blatt fuer eine Runde ---------- */
 function MolRoundSheet({ idx, st, state, setCell, setTrump, onClose, t, theme }) {
+  const pk = usePlakat();
   const players = st.players, noWeis = !!state.noWeis, tens = !!state.tens;
   const round = st.rounds[idx] || null;
   const firstOpen = () => { const p = players.find(q => molCell(round, q.id).k === null); return p ? p.id : (players[0] ? players[0].id : 0); };
@@ -283,7 +371,7 @@ function MolRoundSheet({ idx, st, state, setCell, setTrump, onClose, t, theme })
   const starter = molStarter(players, state.startId, idx);
   const cols = noWeis ? "62px 52px" : "58px 50px 46px 50px";
   const pickPlayer = pick ? players.find(p => p.id === pick.pid) : null;
-  return <div ref={ref} role="dialog" aria-modal="true" aria-label={t("molRoundOf")(idx + 1, st.rc)} className={"mo-ov gt-weis-ov mo-root" + (theme === "noir" ? " mo-noir" : "")} style={molVars(molTk(theme))} onClick={onClose}>
+  return <div ref={ref} role="dialog" aria-modal="true" aria-label={t("molRoundOf")(idx + 1, st.rc)} className={"mo-ov gt-weis-ov mo-root" + (theme === "noir" ? " mo-noir" : "") + (pk ? " mo-pk" : "")} style={molVars(molTk(theme, pk))} onClick={onClose}>
     <div className={"mo-sheet " + (noWeis ? "mo-w2" : "mo-w4")} style={{ "--mo-cc": cols }} onClick={e => e.stopPropagation()}>
       <div className="mo-eh">
         <div style={{ minWidth: 0 }}><h2>{t("molRoundOf")(idx + 1, st.rc)}</h2>{starter && <p>{t("molBegins")(starter.name)}</p>}</div>
@@ -377,7 +465,8 @@ function MolBoard({ st, state, onOpen, t, mk }) {
 
 /* ---------- Einrichtung ---------- */
 function MolotowSetup({ state, setState, onStart, theme, t }) {
-  const mk = molTk(theme);
+  const pk = usePlakat();
+  const mk = molTk(theme, pk);
   const wt = { ...mk, gold: mk.acc, hues: mk.hues, pageBg: mk.bgSolid };
   const gtS = gtSkin(theme, wt, "molotow", { ink: mk.ink, acc: mk.acc, bg: mk.bgSolid, card: theme === "light" ? "#FFFCF6" : undefined });
   const players = state.players;
@@ -408,7 +497,8 @@ function MolotowSetup({ state, setState, onStart, theme, t }) {
 /* ---------- Spielansicht ---------- */
 function MolotowPlay({ state, setState, onBack, onHome, onEndGame, lang, theme }) {
   const t = useT(lang);
-  const mk = molTk(theme);
+  const pk = usePlakat();
+  const mk = molTk(theme, pk);
   const st = molState(state);
   const { players, rounds, rc, cur, totals, anyDone, finished } = st;
   const hist = Array.isArray(state.hist) ? state.hist : [];
@@ -469,8 +559,8 @@ function MolotowPlay({ state, setState, onBack, onHome, onEndGame, lang, theme }
   const curRound = cur >= 0 ? rounds[cur] : null;
   const partial = !!curRound && players.some(p => molCell(curRound, p.id).k !== null);
   const undoBtn = <button type="button" className="mo-ib" onClick={undo} disabled={!undoable} aria-label={t("mgUndo")} title={t("mgUndo")}><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5" /><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11" /></svg></button>;
-  return <div className={"gtL-shellpage mo-root mo-land pl-page pl-head-compact" + (theme === "noir" ? " mo-noir" : "")} style={{ ...molShell(theme), paddingBottom: 14 }}>
-    <style>{GLOBAL_STYLES}{SCHIEBER_PL_CSS}{MO_CSS}</style>
+  return <div className={"gtL-shellpage mo-root mo-land pl-page pl-head-compact" + (theme === "noir" ? " mo-noir" : "") + (pk ? " mo-pk" : "")} style={{ ...molShell(theme, pk), paddingBottom: 14 }}>
+    <style>{GLOBAL_STYLES}{SCHIEBER_PL_CSS}{MO_CSS}{pk ? MO_PK_CSS : ""}</style>
     {celebration}
     <PodiumOverlay gameId="molotow" gameLabel={t("gameMolotow")} open={podiumOpen} onClose={() => setPodiumOpen(false)} onRestart={resetDone} ranked={podiumRanked} tk={hk} t={t} theme={theme} />
     <GtCol accent={mk.acc} className="reveal-1 gtL-game mo-inner" style={{ maxWidth: 560, margin: "0 auto" }}>
@@ -506,7 +596,8 @@ function MolotowPlay({ state, setState, onBack, onHome, onEndGame, lang, theme }
 
 function MolotowGame({ state, setState, onBack, onHome, onEndGame, lang = "de", theme = "dark" }) {
   const t = useT(lang);
-  const mk = molTk(theme);
+  const pk = usePlakat();
+  const mk = molTk(theme, pk);
   useEffect(() => {
     if (state.phase === "setup" && state.players.length < 3) setState(s => {
       if (s.phase !== "setup" || s.players.length >= 3) return s;
@@ -517,7 +608,7 @@ function MolotowGame({ state, setState, onBack, onHome, onEndGame, lang = "de", 
   }, [state.phase, state.players.length]);
   if (state.phase === "setup") {
     const startGame = () => setState(s => ({ ...s, phase: "play", rounds: [], hist: [], ended: false, startId: s.players.some(p => p.id === s.startId) ? s.startId : (s.players[0] ? s.players[0].id : 0), roundCount: molClampRounds(s.roundCount) }));
-    return <div className={"gtL-shellpage mo-root" + (theme === "noir" ? " mo-noir" : "")} style={molShell(theme)}><style>{GLOBAL_STYLES}{MO_CSS}</style>
+    return <div className={"gtL-shellpage mo-root" + (theme === "noir" ? " mo-noir" : "") + (pk ? " mo-pk" : "")} style={molShell(theme, pk)}><style>{GLOBAL_STYLES}{MO_CSS}{pk ? MO_PK_CSS : ""}</style>
       <div className="gtL-page gtL-game" style={{ maxWidth: 380, margin: "0 auto", position: "relative", zIndex: 1 }}>
         <GtCol accent={mk.acc}>
           <GtUbStyle />

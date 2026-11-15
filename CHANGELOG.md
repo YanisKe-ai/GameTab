@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.15-2 (15.11.2026 01:56)
+- Modus Plakat: Startseite, Einstellungen, Listen und alle Spiele im Plakat-Stil
+
 ## 2026.11.15-1 (15.11.2026 00:40)
 - Neuer Modus Plakat (Grundstufe): wählbar in den Einstellungen, Creme-Papier mit Plakat-Rändern
 

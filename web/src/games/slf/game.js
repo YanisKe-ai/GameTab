@@ -20,7 +20,9 @@ import { cleanCustom, slfBuildLink, slfEncode, slfFormatCode, slfParseInput, slf
 import { slfQr, slfQrPath } from "./qr-gen.js";
 import { DEFAULT_SLF, LETTERS, SLF_MAX_CATS, SLF_MIN_CATS, SLF_POINTS, SLF_TIMERS, detectLetter, firstLetter, freshGame, freshRound, isOff, roundSum, slfNormalize, totalOf } from "./logic.js";
 import { SlfLogo } from "./logo.js";
-import { SLF_CSS, SLF_FONTS, slfTk, slfVars } from "./styles.js";
+import { SLF_CSS, SLF_FONTS, SLF_PK_CSS, slfPkTk, slfTk, slfVars } from "./styles.js";
+import { usePlakat } from "../../themes/theme-id.js";
+import { PK_STAMP_CSS } from "../../shared/plakat/kit.js";
 import "./text.js";
 
 const ic = { fill: "none", stroke: "currentColor", strokeWidth: 2.2, strokeLinecap: "round", strokeLinejoin: "round" };
@@ -89,10 +91,15 @@ function Sheet({ open, onClose, title, children, label }) {
   </div>;
 }
 
-function AlphaStrip({ used, cur, t }) {
+function AlphaStrip({ used, cur, t, pk, onLetter }) {
   const usedList = LETTERS.filter((l) => used.includes(l));
-  return <div className="slf-strip" role="img" aria-label={usedList.length ? usedList.join(", ") + " " + t("slfUsedLetter") : "A bis Z"}>
+  const strip = <div className="slf-strip" role="img" aria-label={usedList.length ? usedList.join(", ") + " " + t("slfUsedLetter") : "A bis Z"}>
     {LETTERS.map((l) => <span key={l} className={(used.includes(l) ? "is-used " : "") + (cur === l ? "is-cur" : "")}>{l}</span>)}
+  </div>;
+  if (!pk) return strip;
+  // Plakat: Buchstabe ändern als kleiner Knopf neben der Leiste (kein grosser Kasten)
+  return <div className="slf-alpha">{strip}
+    <button type="button" className={"slf-lettbtn" + (cur ? "" : " is-unknown")} onClick={onLetter} aria-label={t("slfLetterBtn") + (cur ? ": " + cur : "")}><span aria-hidden="true">{cur || "?"}</span><IcPen /></button>
   </div>;
 }
 
@@ -284,7 +291,7 @@ function Setup({ S, upd, t, lang, theme, tk, onStart, onShow }) {
 
 // ---------------------------------------------------------------- Runde schreiben
 
-function Play({ S, upd, cols, eff, t, left, tk, onLetter, onStartRound, firstRef }) {
+function Play({ S, upd, cols, eff, t, left, tk, onLetter, onStartRound, firstRef, pk }) {
   const locked = S.stage !== "write";
   const ready = S.stage === "ready";
   const used = S.rounds.map((r) => r.letter);
@@ -305,7 +312,12 @@ function Play({ S, upd, cols, eff, t, left, tk, onLetter, onStartRound, firstRef
   };
   return <React.Fragment>
     <div className="gtL-split"><div className="gtL-col-main slf-body">
-      <div className="slf-top">
+      {pk ? (S.stage === "write" && S.timer > 0) || (S.stage === "write" && !eff) || ready || S.stage === "stopped" ? <div className="slf-pkrow">
+        {S.stage === "write" && S.timer > 0 && <GtTimerRing left={left} total={S.timer} size={48} stroke={5} color="#141414"><span style={{ font: "400 17px 'Bagel Fat One',sans-serif" }}>{left}</span></GtTimerRing>}
+        {S.stage === "write" && !eff && <p className="slf-hint" style={{ margin: 0 }}>{t("slfLetterHint")}</p>}
+        {ready && <p className="slf-hint" style={{ margin: 0 }}>{t("slfReady")}</p>}
+        {S.stage === "stopped" && <p className="slf-hint" role="status" style={{ margin: 0, fontWeight: 700 }}>{S.stopWhy === "time" ? t("slfTimeUp") : t("slfLocked")}</p>}
+      </div> : null : <div className="slf-top">
         <button type="button" className={"slf-letter" + (eff ? "" : " is-unknown")} onClick={onLetter} aria-label={t("slfLetterBtn") + (eff ? ": " + eff : "")}>
           <span className="ch" key={eff || "?"}>{eff || "?"}</span><span className="pen" aria-hidden="true"><IcPen /></span>
         </button>
@@ -318,9 +330,9 @@ function Play({ S, upd, cols, eff, t, left, tk, onLetter, onStartRound, firstRef
           {ready && <p className="slf-hint">{t("slfReady")}</p>}
           {S.stage === "stopped" && <p className="slf-hint" role="status" style={{ color: "var(--s-ink)", fontWeight: 700 }}>{S.stopWhy === "time" ? t("slfTimeUp") : t("slfLocked")}</p>}
         </div>
-      </div>
-      <AlphaStrip used={used} cur={eff} t={t} />
-      <div className="slf-paper" style={{ position: "relative" }}>
+      </div>}
+      <AlphaStrip used={used} cur={eff} t={t} pk={pk} onLetter={onLetter} />
+      <div className={pk ? "slf-stampwrap" : undefined}><div className={"slf-paper" + (pk ? " pk-stamp" : "")} style={{ position: "relative" }}>
         {S.stage === "stopped" && <div className="slf-stampbar" aria-hidden="true"><span className="slf-stamp">{t("slfStop")}</span></div>}
         <ol className="slf-sheet">
           {cols.map((c, i) => {
@@ -336,7 +348,7 @@ function Play({ S, upd, cols, eff, t, left, tk, onLetter, onStartRound, firstRef
             </li>;
           })}
         </ol>
-      </div>
+      </div></div>
     </div><div className="gtL-col-side slf-body">
       {S.rounds.length > 0 && <div className="slf-card"><div className="slf-h">{t("slfTable")}</div><RoundsTable cols={cols} rounds={S.rounds} t={t} /></div>}
     </div></div>
@@ -396,7 +408,8 @@ function Done({ S, cols, t, lang, tk, onNew, solo }) {
 
 function SlfGame({ state, setState, onBack, onHome, onEndGame, lang = "de", theme = "dark" }) {
   const t = useT(lang);
-  const tk = slfTk(theme);
+  const pk = usePlakat();
+  const tk = pk ? slfPkTk() : slfTk(theme);
   const [S, setS] = useState(() => slfNormalize(state));
   const sRef = useRef(S);
   sRef.current = S;
@@ -520,7 +533,7 @@ function SlfGame({ state, setState, onBack, onHome, onEndGame, lang = "de", them
     const stage = S.stage;
     body = stage === "score"
       ? <Score S={S} upd={upd} cols={cols} eff={eff} t={t} />
-      : <Play S={S} upd={upd} cols={cols} eff={eff} t={t} left={left} tk={tk} onLetter={() => { if (stage === "write" || stage === "stopped") setLetterOpen(true); }} onStartRound={startRound} firstRef={firstRef} />;
+      : <Play S={S} upd={upd} cols={cols} eff={eff} t={t} left={left} tk={tk} onLetter={() => { if (stage === "write" || stage === "stopped") setLetterOpen(true); }} onStartRound={startRound} firstRef={firstRef} pk={pk} />;
     dock = <GtDock>
       {stage === "ready" && <button type="button" className="slf-btn" onClick={startRound}>{t("slfStartRound")}</button>}
       {stage === "write" && <button type="button" className="slf-stop" onClick={stop}><IcStop />{t("slfStop")}</button>}
@@ -530,8 +543,8 @@ function SlfGame({ state, setState, onBack, onHome, onEndGame, lang = "de", them
   }
 
   const wordmark = S.phase === "setup";
-  return <div className="gtL-shellpage slf-root" style={{ minHeight: "100vh", background: tk.pageBg, padding: "20px 12px 32px", ...slfVars(tk) }}>
-    <style>{GLOBAL_STYLES}{SLF_FONTS}{SLF_CSS}</style>
+  return <div className={"gtL-shellpage slf-root" + (pk ? " slf-pk" : "")} style={{ minHeight: "100vh", background: tk.pageBg, padding: "20px 12px 32px", ...slfVars(tk) }}>
+    <style>{GLOBAL_STYLES}{SLF_FONTS}{SLF_CSS}{pk ? SLF_PK_CSS + PK_STAMP_CSS : null}</style>
     {celebration}
     <div className="gtL-game pl-wide pl-page pl-head-compact slf-wrap" style={{ maxWidth: 440, margin: "0 auto", position: "relative" }}>
       <GtCol accent={tk.acc} style={{ gap: 14 }}>

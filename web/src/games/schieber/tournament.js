@@ -14,6 +14,8 @@ import { PodiumOverlay } from "../../shared/podium.js";
 import { GT_ST, GT_ST_STORE, useGtStStore } from "./tournament-core.js";
 import { useSavedGroups } from "../../shared/groups.js";
 import { gtCR, gtHexRgb, gtSkin } from "../../shared/setup-ui.js";
+import { usePlakat } from "../../themes/theme-id.js";
+import { pkPage } from "../../shared/plakat/kit.js";
 /*@gt-body-begin*/
 /*GT_ST_END*/
 /*GT_STU_BEGIN*/
@@ -313,6 +315,53 @@ const ST_PL_CSS=`
 [data-phone-landscape] .gtst-sbody:has(> .gtst-mx-ppl) .gtst-tbox>b{grid-column:1 / -1}
 [data-phone-landscape] .gtst-mx-ppl .gtst-plist2{grid-template-columns:repeat(auto-fill,minmax(180px,1fr))}
 `;
+/* Modus «Plakat»: nur aktiv, wenn usePlakat() true ist (Aufbau bleibt, nur Aussehen) */
+const ST_PK_VARS={"--st-hink":"#F4EAD5","--st-hmuted":"#F4EAD5","--st-uline":"#F4EAD5","--st-live":"#F4EAD5","--st-title-font":"400 30px/1.1 'Bagel Fat One','Bowlby One',sans-serif","--st-title-track":"0","--st-pagebg":"#2F6B52","--st-body-solid":"#FFFDF7","--st-panel":"#FFFDF7","--st-pline":"#141414","--st-pshadow":"0 4px 0 #141414","--st-ink":"#141414","--st-muted":"#4A4236","--st-bline":"#141414","--st-rline":"rgba(20,20,20,0.22)","--st-accent":"#071743","--st-on-accent":"#F4EAD5","--st-accent-soft":"rgba(7,23,67,0.1)","--st-focus":"#071743","--st-danger":"#B3242E","--st-field":"#FFFFFF","--st-ph":"#6A6252","--st-hover":"rgba(20,20,20,0.07)","--st-tabgap":"4px","--st-tabpad":"4px","--st-tabbg":"#F4EAD5","--st-tabr":"16px","--st-tabline":"none","--st-tabon-ink":"#F4EAD5","--st-tabon-bg":"#071743","--st-lead":"#F4EAD5","--st-lead-ink":"#2F6B52","--st-pt":"#141414","--st-pos":"#2F6B52","--st-chalk":"#141414","--st-self":"#F4EAD5","--st-leadbox":"#F4EAD5","--st-leadbox-ink":"#141414","--st-leadbox-cap":"#2F6B52","--st-leadbox-line":"2.5px solid #141414","--st-lname-font":"400 26px/1.1 'Bagel Fat One','Bowlby One',sans-serif","--st-sel":"rgba(7,23,67,0.25)","--st-toast":"#141414","--st-toast-ink":"#F4EAD5","--st-cta-shadow":"0 4px 0 #141414","--st-sheet-line":"2.5px solid #141414"};
+const ST_PK_CSS=`
+.gtst-pk .gt-gamehead h1{font-family:'Bagel Fat One','Bowlby One',sans-serif!important;font-weight:400!important;font-size:28px!important;letter-spacing:0!important;color:#F4EAD5!important;-webkit-text-stroke:5px #141414;paint-order:stroke fill;text-shadow:2px 3px 0 #141414;white-space:nowrap}
+.gtst-pk .gt-gamehead h1+div{color:#F4EAD5!important}
+.gtst-pk .gtst-title{font-weight:400!important;-webkit-text-stroke:4px #141414;paint-order:stroke fill;text-shadow:2px 3px 0 #141414}
+.gtst-pk .gtst-panel,.gtst-pk .gtst-lead{border:2.5px solid #141414;border-radius:20px;box-shadow:0 4px 0 #141414}
+.gtst-pk .gtst-lname,.gtst-pk .gtst-nm,.gtst-pk .gtst-tname,.gtst-pk .gtst-label,.gtst-pk .gtst-lrow .nm,.gtst-pk .gtst-shead h2,.gtst-pk .gtst-rk,.gtst-pk .gtst-pt,.gtst-pk .gtst-lpts{font-family:'Bagel Fat One','Bowlby One',sans-serif!important;font-weight:400!important}
+.gtst-pk .gtst-label{color:#141414;font-size:14px}
+.gtst-pk .gtst-btn{border:2.5px solid #141414;border-radius:16px;background:#FFFDF7;color:#141414;box-shadow:0 3px 0 #141414;font-family:'Bagel Fat One','Bowlby One',sans-serif;font-weight:400;letter-spacing:.01em}
+.gtst-pk .gtst-btn:active:not(:disabled){transform:translateY(2px);box-shadow:0 1px 0 #141414}
+.gtst-pk .gtst-btn.is-primary{background:#071743;border-color:#141414;color:#F4EAD5;font-weight:400;box-shadow:0 4px 0 #141414}
+.gtst-pk .gtst-btn.is-ghost{background:transparent;border-color:transparent;box-shadow:none}
+.gtst-pk .gtst-btn.is-danger{color:#B3242E}
+.gtst-pk .gtst-btn:disabled{opacity:1;background:#C9BFA8;color:#4A4236;box-shadow:none}
+.gtst-pk .gtst-btn.is-primary:disabled{background:#C9BFA8;color:#4A4236}
+.gtst-pk .gtst-cap{color:#F4EAD5}
+.gtst-pk .gtst-help{color:#F4EAD5}
+.gtst-pk .gtst-panel .gtst-help,.gtst-pk .gtst-sheet .gtst-help{color:#4A4236}
+.gtst-pk .gtst-panel .gtst-dot{background:#2F6B52}
+.gtst-pk .gtst-panel .gtst-state{color:#4A4236}
+.gtst-pk .gtst-panel .gtst-cap,.gtst-pk .gtst-sheet .gtst-cap{color:#4A4236}
+.gtst-pk .gtst-lead .gtst-cap{color:#2F6B52}
+.gtst-pk .gtst-title span{-webkit-text-stroke:2px #141414}
+.gtst-pk .gtst-ibtn{border:2.5px solid #141414;background:#FFFDF7;box-shadow:0 2px 0 #141414;border-radius:14px}
+.gtst-pk .gtst-ibtn:active{transform:translateY(2px);box-shadow:none}
+.gtst-pk .gtst-input,.gtst-pk .gtst-sel{border:2.5px solid #141414;border-radius:14px}
+.gtst-pk .gtst-tabs{border:2.5px solid #141414;box-shadow:0 3px 0 #141414}
+.gtst-pk .gtst-tab{font-family:'Bagel Fat One','Bowlby One',sans-serif;font-weight:400;color:#141414}
+.gtst-pk .gtst-tab[aria-selected=true]{color:#F4EAD5}
+.gtst[data-d=app].gtst-pk .gtst-tab[aria-selected=true]::after{display:none}
+.gtst-pk .gtst-chip,.gtst-pk .gtst-pbtn,.gtst-pk .gtst-wbtn,.gtst-pk .gtst-slot,.gtst-pk .gtst-mini,.gtst-pk .gtst-team,.gtst-pk .gtst-tbox,.gtst-pk .gtst-when,.gtst-pk .gtst-mx{border-width:2px;border-color:#141414}
+.gtst-pk .gtst-chip,.gtst-pk .gtst-pbtn,.gtst-pk .gtst-wbtn,.gtst-pk .gtst-mini{background:#FFFDF7}
+.gtst-pk .gtst-chip{font-family:'Bagel Fat One','Bowlby One',sans-serif;font-weight:400}
+.gtst-pk .gtst-chip[aria-pressed=true],.gtst-pk .gtst-wbtn[aria-pressed=true]{background:#071743;color:#F4EAD5}
+.gtst-pk .gtst-chip[aria-pressed=true] .gtst-av{background:#F4EAD5!important;box-shadow:none!important}
+.gtst-pk .gtst-pbtn[aria-pressed=true]{background:#F4EAD5;border-width:3px}
+.gtst-pk .gtst-sheet{border:2.5px solid #141414;border-bottom:none}
+.gtst-pk .gtst-sfoot{border-top:2.5px solid #141414}
+.gtst-pk .gtst-toast{border:2.5px solid #F4EAD5;border-radius:16px}
+.gtst-pk .gtst-badge{border-width:2px;border-color:#141414;font-family:'Bagel Fat One','Bowlby One',sans-serif;font-weight:400}
+.gtst-pk .gtst-sum,.gtst-pk .gtst-ro,.gtst-pk .gtst-note{border:2px solid #141414}
+.gtst-pk .gtst-cta::before{background:linear-gradient(to bottom,transparent,#2F6B52 55%)}
+.gtst-pk :focus-visible{outline-color:#F4EAD5}
+.gtst-pk .gtst-panel :focus-visible,.gtst-pk .gtst-sheet :focus-visible{outline-color:#071743}
+.gtst-pk .gtst-toast :focus-visible{outline-color:#F4EAD5}
+`;
 function rootStyle(d){const v=VARS[d]||VARS.strichliste;const bg=d==="grandslam"?"#2448E8":"radial-gradient(120% 55% at 12% -4%, rgba(244,243,234,0.07) 0%, rgba(244,243,234,0) 62%), radial-gradient(80% 40% at 100% 100%, rgba(133,209,245,0.05) 0%, rgba(133,209,245,0) 70%), #15191C";return Object.assign({},v,{minHeight:"100vh",background:bg,padding:"20px 12px calc(env(safe-area-inset-bottom,0px) + 32px)"});}
 /* ---------- Bausteine ---------- */
 function useLabels(tour){return useMemo(()=>{const by={},m={};if(!tour)return{lbl:id=>"",map:m};tour.participants.slice().sort((a,b)=>a.stableOrder-b.stableOrder).forEach(p=>{const k=fold(p.displayName).trim();(by[k]=by[k]||[]).push(p);});Object.keys(by).forEach(k=>{const arr=by[k];arr.forEach((p,i)=>{m[p.id]=arr.length>1?p.displayName+" ("+(i+1)+")":p.displayName;});});return{lbl:id=>m[id]!=null?m[id]:"?",map:m};},[tour]);}
@@ -484,7 +533,7 @@ return <Sheet title={t("stuSuggestT")} onClose={onClose} footer={footer}>{none?<
 {r.matches.map(m=><div key={m.tableId} className="gtst-panel gtst-sug"><span className="gtst-tname">{tbl(m.tableId)}</span><div className="gtst-teams"><div className="gtst-team"><b>{t("stuTeamA")}</b><span>{nm(m.teamA)}</span></div><span className="gtst-vs">{t("stuVs")}</span><div className="gtst-team"><b>{t("stuTeamB")}</b><span>{nm(m.teamB)}</span></div></div></div>)}
 {r.resting.length>0&&<p className="gtst-help" style={{display:"block"}}>{fmt(t("stuSuggestRest"),{names:r.resting.map(lbl).join(", ")})}</p>}</Fragment>}</Sheet>;}
 /* ---------- Wurzel ---------- */
-function SchieberTournament({onBack,onHome,lang="de",theme="dark",tafelMid=null,onToTafel}){const t=useT(lang);const snap=useGtStStore();
+function SchieberTournament({onBack,onHome,lang="de",theme="dark",tafelMid=null,onToTafel}){const pk=usePlakat();const t=useT(lang);const snap=useGtStStore();
 const[autoId,setAutoId]=useState(()=>{const s=GT_ST_STORE.getSnapshot();const a=s.activeId&&s.list.find(x=>x.id===s.activeId);if(a&&a.status!=="completed")return null;const run=s.list.filter(x=>x.status!=="completed");return run.length===1?run[0].id:null;});
 useEffect(()=>{if(autoId){GT_ST_STORE.setActive(autoId);setAutoId(null);}},[]);
 const[screen,setScreen]=useState(()=>{const s=GT_ST_STORE.getSnapshot();const a=s.activeId&&s.list.find(x=>x.id===s.activeId);return autoId||a?"tour":s.list.length?"list":"setup";});
@@ -511,7 +560,7 @@ if(r.mode==="enter")toast({msg,undo:()=>GT_ST_STORE.commit(tid,x=>GT_ST.voidMatc
 else if(r.mode==="edit"&&r.prev){const p=r.prev;toast({msg:t("stuToastEdited"),undo:()=>GT_ST_STORE.commit(tid,x=>GT_ST.editMatch(x,p.id,{teamA:p.teamA,teamB:p.teamB,winner:p.winner}))});}
 else toast({msg});};
 const commitT=(fn,okMsg)=>{const r=GT_ST_STORE.commit(tour.id,fn);if(!r.ok){toast({msg:errText(t,r,lbl,tour)});return r;}if(okMsg)toast({msg:okMsg});return r;};
-const sk=stuSkin(theme);const tk={ink:sk.ink,muted:sk.muted,border:sk.border,card:sk.card};
+const sk=stuSkin(theme);const tk=pk?{ink:"#F4EAD5",muted:"#F4EAD5",border:"#141414",card:"#FFFDF7"}:{ink:sk.ink,muted:sk.muted,border:sk.border,card:sk.card};
 const roT=!!tour&&tour.status==="completed";
 const moreItems=scr==="tour"&&tour?[{key:"people",icon:"users",label:t("stuManagePeople"),onClick:()=>openSheet({k:"people"})},!roT&&{key:"tables",icon:"table",label:t("stuTables"),onClick:()=>openSheet({k:"tables"})},!roT&&{key:"export",icon:"share",label:t("stuExport"),onClick:()=>openSheet({k:"export"})},!roT&&{key:"end",icon:"flag",label:t("stuEndTour"),onClick:()=>openSheet({k:"end"})},{key:"repeat",icon:"copy",label:t("stuRepeat"),onClick:()=>openSheet({k:"repeat"})},{key:"delete",icon:"trash",danger:true,label:t("stuDeleteTour"),onClick:()=>openSheet({k:"delete"})}].filter(Boolean):[];
 let sheetEl=null;
@@ -531,9 +580,9 @@ else if(k==="export")sheetEl=typeof GtStExportSheet==="function"?<GtStExportShee
 if(sheet&&sheet.k==="rules")sheetEl=<Sheet title={t("stuRulesT")} onClose={close}>{String(t("stuRules")).split("\n\n").map((x,i)=><p key={i} style={{margin:"0 0 12px",font:"500 15px/1.55 var(--st-ui)"}}>{x}</p>)}</Sheet>;
 else if(sheet&&sheet.k==="delete"&&sheet.target)sheetEl=<ConfirmSheet cancel={t("stuCancel")} title={fmt(t("stuDeleteT"),{name:sheet.target.name})} text={t("stuDeleteText")} ok={t("stuDeleteOk")} danger onClose={close} onOk={()=>doDelete(sheet.target)}/>;
 const gtitle=t("stuMode");
-return <div className="gtL-shellpage gtst" data-d="app" data-t={stuT(theme)} data-scr={scr} lang={lang} style={stuRoot(theme)}><style>{GLOBAL_STYLES}{CSS}{ST_PL_CSS}</style>
+return <div className={"gtL-shellpage gtst"+(pk?" gtst-pk":"")} data-d="app" data-t={stuT(theme)} data-scr={scr} lang={lang} style={pk?{...stuRoot(theme),...ST_PK_VARS,"--pk-bg":"#2F6B52",background:pkPage("#2F6B52").background}:stuRoot(theme)}><style>{GLOBAL_STYLES}{CSS}{ST_PL_CSS}{pk?ST_PK_CSS:""}</style>
 <div className="gtL-page gtL-game gtst-page pl-head-compact" style={{maxWidth:scr==="tour"?380:420,margin:"0 auto"}}>
-<GameHeader title={gtitle} subtitle={scr==="list"?t("stuListSub"):scr==="setup"?t("stuSetupSub"):null} onBack={back} backLabel={t("back")} tk={tk} accent={sk.txt} icon={<GtStuLogo color={sk.txt}/>} titleFont="'Inter', sans-serif" onRules={()=>openSheet({k:"rules"})} onHome={onHome} moreItems={moreItems}/>
+<GameHeader title={gtitle} subtitle={scr==="list"?t("stuListSub"):scr==="setup"?t("stuSetupSub"):null} onBack={back} backLabel={t("back")} tk={tk} accent={pk?"#F4EAD5":sk.txt} icon={<GtStuLogo color={pk?"#F4EAD5":sk.txt}/>} titleFont="'Inter', sans-serif" onRules={()=>openSheet({k:"rules"})} onHome={onHome} moreItems={moreItems}/>
 {snap.error&&snap.error.code==="STORAGE"&&<div className="gtst-note" role="alert" style={{marginBottom:10,background:"var(--st-body-solid)"}}>{t("stuErr_STORAGE")}<button type="button" className="gtst-btn is-small" style={{marginLeft:8}} onClick={()=>GT_ST_STORE.dismissError()}>{t("stuOk")}</button></div>}
 {scr==="tour"&&tour?<Fragment><TourHead tour={tour} t={t} lang={lang} onRename={nm=>{const r=GT_ST_STORE.commit(tour.id,x=>GT_ST.rename(x,nm));return r.ok?r:{ok:false,msg:errText(t,r,lbl,tour)};}}/><TourView tour={tour} t={t} lang={lang} toast={toast} openSheet={openSheet} onToTafel={onToTafel} tafelMid={tafelMid}/></Fragment>
 :scr==="setup"?<SetupView t={t} lang={lang} onCreate={create} err={err} usedNames={snap.tournaments.filter(x=>!x.deletedAt).map(x=>x.name)}/>

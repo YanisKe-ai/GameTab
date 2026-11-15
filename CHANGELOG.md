@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.15-25 (15.11.2026 19:12)
+- Stadt Land Fluss: Karteikarten in allen Modi, ohne grossen Buchstaben; Ryū in Rot, Schwarz, Creme
+
 ## 2026.11.15-24 (15.11.2026 18:55)
 - Yatzy: neue Bonus-Animation Würfel-Rakete mit Feuerwerk, in allen Modi
 

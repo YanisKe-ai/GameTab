@@ -96,8 +96,7 @@ function AlphaStrip({ used, cur, t, pk, onLetter }) {
   const strip = <div className="slf-strip" role="img" aria-label={usedList.length ? usedList.join(", ") + " " + t("slfUsedLetter") : "A bis Z"}>
     {LETTERS.map((l) => <span key={l} className={(used.includes(l) ? "is-used " : "") + (cur === l ? "is-cur" : "")}>{l}</span>)}
   </div>;
-  if (!pk) return strip;
-  // Plakat: Buchstabe ändern als kleiner Knopf neben der Leiste (kein grosser Kasten)
+  // Buchstabe ändern als kleiner Knopf neben der Leiste (alle Modi)
   return <div className="slf-alpha">{strip}
     <button type="button" className={"slf-lettbtn" + (cur ? "" : " is-unknown")} onClick={onLetter} aria-label={t("slfLetterBtn") + (cur ? ": " + cur : "")}><span aria-hidden="true">{cur || "?"}</span><IcPen /></button>
   </div>;
@@ -317,38 +316,31 @@ function Play({ S, upd, cols, eff, t, left, tk, onLetter, onStartRound, firstRef
         {S.stage === "write" && !eff && <p className="slf-hint" style={{ margin: 0 }}>{t("slfLetterHint")}</p>}
         {ready && <p className="slf-hint" style={{ margin: 0 }}>{t("slfReady")}</p>}
         {S.stage === "stopped" && <p className="slf-hint" role="status" style={{ margin: 0, fontWeight: 700 }}>{S.stopWhy === "time" ? t("slfTimeUp") : t("slfLocked")}</p>}
-      </div> : null : <div className="slf-top">
-        <button type="button" className={"slf-letter" + (eff ? "" : " is-unknown")} onClick={onLetter} aria-label={t("slfLetterBtn") + (eff ? ": " + eff : "")}>
-          <span className="ch" key={eff || "?"}>{eff || "?"}</span><span className="pen" aria-hidden="true"><IcPen /></span>
-        </button>
-        <div className="slf-side">
-          <div className="slf-round">{t("slfRound")(S.rounds.length + 1)}</div>
-          {S.stage === "write" && S.timer > 0 && <div className="slf-ring">
-            <GtTimerRing left={left} total={S.timer} size={56} stroke={5} color={tk.acc}><span style={{ font: "800 18px 'Space Grotesk',sans-serif" }}>{left}</span></GtTimerRing>
-          </div>}
-          {S.stage === "write" && !eff && <p className="slf-hint">{t("slfLetterHint")}</p>}
-          {ready && <p className="slf-hint">{t("slfReady")}</p>}
-          {S.stage === "stopped" && <p className="slf-hint" role="status" style={{ color: "var(--s-ink)", fontWeight: 700 }}>{S.stopWhy === "time" ? t("slfTimeUp") : t("slfLocked")}</p>}
-        </div>
+      </div> : null : <div className="slf-pkrow slf-toprow">
+        <div className="slf-round">{t("slfRound")(S.rounds.length + 1)}</div>
+        {S.stage === "write" && S.timer > 0 && <GtTimerRing left={left} total={S.timer} size={48} stroke={5} color={tk.acc}><span style={{ font: "800 16px 'Space Grotesk',sans-serif" }}>{left}</span></GtTimerRing>}
+        {S.stage === "write" && !eff && <p className="slf-hint" style={{ margin: 0 }}>{t("slfLetterHint")}</p>}
+        {ready && <p className="slf-hint" style={{ margin: 0 }}>{t("slfReady")}</p>}
+        {S.stage === "stopped" && <p className="slf-hint" role="status" style={{ margin: 0, color: "var(--s-ink)", fontWeight: 700 }}>{S.stopWhy === "time" ? t("slfTimeUp") : t("slfLocked")}</p>}
       </div>}
       <AlphaStrip used={used} cur={eff} t={t} pk={pk} onLetter={onLetter} />
-      <div className={pk ? "slf-stampwrap" : undefined}><div className={"slf-paper" + (pk ? " pk-stamp" : "")} style={{ position: "relative" }}>
-        {S.stage === "stopped" && <div className="slf-stampbar" aria-hidden="true"><span className="slf-stamp">{t("slfStop")}</span></div>}
-        <ol className="slf-sheet">
-          {cols.map((c, i) => {
-            const off = isOff(S.answers[i], eff);
-            const fl = firstLetter(S.answers[i]);
-            return <li key={c.k} className={"slf-row" + (off ? " is-off" : "") + (locked ? " is-locked" : "")}>
-              <label className="slf-lab" htmlFor={"slf-in-" + i}>{c.name}</label>
-              <input id={"slf-in-" + i} ref={(el) => { inputs.current[i] = el; if (i === 0) firstRef.current = el; }} className="slf-in" type="text" value={S.answers[i] || ""} readOnly={locked} aria-readonly={locked ? "true" : undefined}
-                maxLength={60} autoComplete="off" autoCorrect="off" autoCapitalize="words" spellCheck={false} enterKeyHint={i + 1 < cols.length ? "next" : "done"}
-                aria-label={t("slfAnswerFor")(c.name)} aria-describedby={off ? "slf-off-" + i : undefined}
-                onChange={(e) => set(i, e.target.value)} onFocus={onFocus} onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); focusNext(i); } }} />
-              {off && <span className="slf-off" id={"slf-off-" + i} aria-label={t("slfOffLetter")(eff)}>{fl}{"≠"}{eff}</span>}
-            </li>;
-          })}
-        </ol>
-      </div></div>
+      {S.stage === "stopped" && <div className="slf-stampbar" aria-hidden="true"><span className="slf-stamp">{t("slfStop")}</span></div>}
+      <ol className="slf-cards">
+        {cols.map((c, i) => {
+          const off = isOff(S.answers[i], eff);
+          const fl = firstLetter(S.answers[i]);
+          const done = !!(S.answers[i] || "").trim();
+          return <li key={c.k} className={"slf-card2" + (off ? " is-off" : "") + (locked ? " is-locked" : "") + (done ? " is-done" : "")}>
+            <label className="slf-lab" htmlFor={"slf-in-" + i}>{c.name}</label>
+            {done && <span className="slf-chk" aria-hidden="true">{"✓"}</span>}
+            <input id={"slf-in-" + i} ref={(el) => { inputs.current[i] = el; if (i === 0) firstRef.current = el; }} className="slf-in" type="text" value={S.answers[i] || ""} readOnly={locked} aria-readonly={locked ? "true" : undefined}
+              maxLength={60} autoComplete="off" autoCorrect="off" autoCapitalize="words" spellCheck={false} enterKeyHint={i + 1 < cols.length ? "next" : "done"}
+              aria-label={t("slfAnswerFor")(c.name)} aria-describedby={off ? "slf-off-" + i : undefined}
+              onChange={(e) => set(i, e.target.value)} onFocus={onFocus} onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); focusNext(i); } }} />
+            {off && <span className="slf-off" id={"slf-off-" + i} aria-label={t("slfOffLetter")(eff)}>{fl}{"≠"}{eff}</span>}
+          </li>;
+        })}
+      </ol>
     </div><div className="gtL-col-side slf-body">
       {S.rounds.length > 0 && <div className="slf-card"><div className="slf-h">{t("slfTable")}</div><RoundsTable cols={cols} rounds={S.rounds} t={t} /></div>}
     </div></div>

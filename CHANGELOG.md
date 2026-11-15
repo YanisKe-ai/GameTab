@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.15-21 (15.11.2026 18:24)
+- Ryū: Titel aller Spiele wie Molotow, Partyspiele-Liste rot, Punkt bei laufender Partie rot
+
 ## 2026.11.15-20 (15.11.2026 18:11)
 - Ryū: Titel Jass-Auswahl, Coiffeur, Schieber-Turnier wie Molotow; Yatzy- und Bonus-Effekt in Rot, Schwarz, Creme
 

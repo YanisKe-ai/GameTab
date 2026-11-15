@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.15-23 (15.11.2026 18:44)
+- Yatzy: Anzeige bei Yatzy und verpasstem Bonus dauert 3,5 Sekunden
+
 ## 2026.11.15-22 (15.11.2026 18:34)
 - Yatzy: neue Animation bei Yatzy (Stempel mit Strahlen) und «Autsch» mit fehlenden Punkten, wenn der Bonus verpasst wird, in allen Modi
 

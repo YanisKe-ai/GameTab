@@ -9,17 +9,16 @@ const GT_RAIL_CSS = `
   width:var(--rl-w);flex:0 0 var(--rl-w);box-sizing:border-box;height:100%;display:flex;flex-direction:column;align-items:center;gap:10px;padding:12px 0 14px;background:var(--rl-bg);border-right:1px solid var(--rl-edge);position:relative;z-index:3;overflow:visible}
 html[data-gt-theme="light"] .gtL-sidebar{--rl-bg:#F6F1E7;--rl-edge:#D9CCB2;--rl-btn:#FFFCF6;--rl-btn-edge:#DACDB3;--rl-ink:#4A443A;--rl-hover:#FFFFFF;--rl-well:rgba(23,19,15,.05);--rl-on-bg:#FFFCF6;--rl-on-edge:#82580E;--rl-on-ink:#82580E;--rl-glow:0 0 0 3px rgba(130,88,14,.16),0 2px 8px rgba(130,88,14,.18);--rl-tip-bg:#17130F;--rl-tip-ink:#FFFCF6;--rl-tip-edge:transparent;--rl-focus:#1B4FA0}
 html[data-gt-theme="noir"] .gtL-sidebar{--rl-bg:#000;--rl-edge:#5F5F5F;--rl-btn:#000;--rl-btn-edge:#5F5F5F;--rl-ink:#EBEBEB;--rl-hover:#1A1A1A;--rl-well:#111;--rl-on-bg:#FFFFFF;--rl-on-edge:#FFFFFF;--rl-on-ink:#000;--rl-glow:none;--rl-tip-bg:#EBEBEB;--rl-tip-ink:#000;--rl-tip-edge:transparent;--rl-focus:#FFFFFF}
-.gtL-side-brand{width:100%;min-height:44px;border:0;background:transparent;display:flex;align-items:center;justify-content:center;padding:6px 0 12px;cursor:pointer;color:inherit}
-.gtL-side-brand .gt-hm-solo{transition:transform .2s ease,filter .2s ease}
-html[data-gt-theme="dark"]:not([data-gt-skin="plakat"]) .gtL-side-brand .gt-hm-solo{filter:drop-shadow(0 0 5px rgba(150,100,255,.65))}
-@media (hover:hover) and (pointer:fine){.gtL-side-brand:hover .gt-hm-solo{transform:scale(1.06)}}
+.gtL-side-brand{width:62px;height:62px;margin:10px 0 6px;overflow:hidden}
+.gtL-side-brand .gt-hm-solo{flex:0 0 auto;background:var(--rl-ink)!important;transition:transform .2s ease}
+html[data-gt-theme="noir"] .gtL-side-brand .gt-hm-solo{background:#FFFFFF!important}
+@media (hover:hover) and (pointer:fine){.gtL-side-brand:hover .gt-hm-solo{transform:scale(1.08)}}
 .gtL-rail-main{display:flex;flex-direction:column;align-items:center;gap:12px}
 .gtL-rb{position:relative;box-sizing:border-box;flex:0 0 auto;width:56px;height:56px;padding:0;margin:0;border-radius:50%;border:1.5px solid var(--rl-btn-edge);background:var(--rl-btn);color:var(--rl-ink);display:flex;align-items:center;justify-content:center;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .16s ease,box-shadow .18s ease,background-color .16s ease,border-color .16s ease,color .16s ease}
 @media (hover:hover) and (pointer:fine){.gtL-rb:hover{background:var(--rl-hover);transform:translateY(-1px)}}
 .gtL-rb:active{transform:scale(.94)}
 .gtL-rb[aria-current="page"]{border-width:2px;border-color:var(--rl-on-edge);background:var(--rl-on-bg);color:var(--rl-on-ink);box-shadow:var(--rl-glow)}
 .gtL-shell .gtL-sidebar :is(.gtL-rb,.gtL-side-brand):focus-visible{outline:2.5px solid var(--rl-focus)!important;outline-offset:3px!important}
-.gtL-shell .gtL-sidebar .gtL-side-brand:focus-visible{border-radius:14px}
 .gtL-rail-run{flex:0 1 auto;min-height:0;width:68px;display:flex;flex-direction:column;border-radius:34px;background:var(--rl-well);margin-top:4px}
 .gtL-rail-runlist{min-height:0;display:flex;flex-direction:column;align-items:center;gap:12px;padding:10px 0;overflow-y:auto;overflow-x:hidden;scrollbar-width:none}
 .gtL-rail-runlist::-webkit-scrollbar{display:none}
@@ -40,8 +39,8 @@ html[data-gt-theme="noir"] .gtL-rb-dot{background:#FFFFFF}
 
 /* Ryū: schwarze Leiste, Creme-Sticker, aktiver Knopf rot und leicht schräg. Nur Rot, Schwarz, Creme. */
 ${R} .gtL-sidebar{--rl-bg:${INK};--rl-edge:#000;--rl-btn:${CREAM};--rl-btn-edge:${INK};--rl-ink:${INK};--rl-hover:${PAPER};--rl-well:rgba(243,234,211,.09);--rl-on-bg:${RED};--rl-on-edge:${CREAM};--rl-on-ink:${CREAM};--rl-glow:0 4px 0 #000;--rl-tip-bg:${CREAM};--rl-tip-ink:${INK};--rl-tip-edge:${INK};--rl-focus:${CREAM};background:${INK}!important;border-right:2.5px solid #000!important;box-shadow:none!important}
-${R} .gtL-sidebar .gt-hm-solo{background:${CREAM}!important}
 ${R} .gtL-rb{border:2.5px solid ${INK};box-shadow:0 4px 0 ${RED};transform:rotate(var(--rl-rot,0deg))}
+${R} .gtL-side-brand{--rl-rot:-3deg}
 ${R} .gtL-rail-main .gtL-rb:nth-child(odd){--rl-rot:-2deg}
 ${R} .gtL-rail-main .gtL-rb:nth-child(even){--rl-rot:2deg}
 ${R} .gtL-rb:active{transform:translateY(3px) rotate(var(--rl-rot,0deg));box-shadow:0 1px 0 ${RED}}

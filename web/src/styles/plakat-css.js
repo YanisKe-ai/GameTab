@@ -37,6 +37,11 @@ ${P} .podium-pop[role="dialog"]{outline:2.5px solid ${INK}!important;outline-off
 ${P} .podium-pop[role="dialog"] h2,${P} .podium-pop[role="dialog"] [id^="gt-cf-t"]{font-family:${FONT}!important;font-weight:400!important}
 ${P} .podium-pop[role="dialog"] button{outline:2px solid ${INK}!important;outline-offset:-2px!important;box-shadow:0 3px 0 ${INK}!important}
 ${P} .gt-hm-panel{--hm-panel:${PAPER};--hm-ink:${INK};outline:2.5px solid ${INK};outline-offset:-2.5px;box-shadow:0 5px 0 ${INK}!important}
+/* Stand-Karte (GtLStandings, z. B. Tutto Laptop): Creme, Sticker-Rand, Punkte und Balken nur Rot/Schwarz */
+${P} .gt-lstand{background:${CREAM}!important;border:none!important;outline:2.5px solid ${INK};outline-offset:-2.5px;box-shadow:0 4px 0 ${INK};color:${INK}!important}
+${P} .gt-lstand div,${P} .gt-lstand span{color:${INK}!important}
+${P} .gt-lstand span[style*="border-radius: 50%"]{background:${RED}!important;box-shadow:0 0 0 1.5px ${INK}}
+${P} .gt-lstand div[style*="scaleX"]{background:${INK}!important}
 ${P} .gt-su-btn:active{transform:translateY(3px);box-shadow:0 2px 0 ${INK}!important}
 ${P} .gt-su-btn::after,${P} .pk-shine::after{content:"";position:absolute;top:0;bottom:0;left:0;width:35%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.42),transparent);animation:pk-shine 3.2s ease-in-out infinite;pointer-events:none}
 @keyframes pk-shine{0%{transform:translateX(-120%) skewX(-20deg)}55%,100%{transform:translateX(320%) skewX(-20deg)}}

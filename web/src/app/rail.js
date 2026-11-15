@@ -38,7 +38,7 @@ function GtRail({ theme, lt, nav, activeNav, running, view, goTo, goToV }) {
     return <button key={id} type="button" onClick={() => goTo(id)} data-tip={label} aria-label={label} aria-current={active ? "page" : undefined} data-onboard={id === "settings" ? "settings" : undefined} className={"gtL-rb press-fx" + (extra ? " " + extra : "")}>{railIcon(id, 26)}</button>;
   };
   return <nav className="gtL-sidebar" aria-label={lt("mainMenu")} data-rail="1" onMouseOver={railTipShow} onMouseLeave={railTipHide} onFocus={railTipShow} onBlur={railTipHide}>
-    <button type="button" onClick={() => goTo("start")} className="gtL-side-brand" aria-label="GameTab" data-tip="GameTab"><GtHeroDragon theme={theme} width={84} className="gtL-side-dragon" /></button>
+    <button type="button" onClick={() => goTo("start")} className="gtL-side-brand gtL-rb press-fx" aria-label="GameTab" data-tip="GameTab"><GtHeroDragon theme={theme} width={128} className="gtL-side-dragon" /></button>
     <div className="gtL-rail-main">{nav.map(item => btn(item.id, item.label))}</div>
     {running.length > 0 && <div className="gtL-rail-run" role="group" aria-label={lt("runningGames")}>
       <div className="gtL-rail-runlist">{running.map(g => {

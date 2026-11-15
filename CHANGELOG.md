@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.15-20 (15.11.2026 18:11)
+- Ryū: Titel Jass-Auswahl, Coiffeur, Schieber-Turnier wie Molotow; Yatzy- und Bonus-Effekt in Rot, Schwarz, Creme
+
 ## 2026.11.15-19 (15.11.2026 17:50)
 - Nocturne-Startseite: Kacheln höher, Suche und Alle Spiele gleichmässig verteilt. Ryū-Coiffeur: Titel mittig ohne Icon
 

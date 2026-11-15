@@ -271,7 +271,8 @@ const JD_PK_CSS=`
 .jdp-pk .gt-gamehead>div:nth-of-type(2)>span:first-child{display:none!important}
 .jdp-pk .gt-gamehead>div:nth-of-type(2)>div{text-align:center;align-items:center}
 .jdp-pk .gt-gamehead>div:nth-of-type(2)>div>div{display:none!important}
-html[data-gt-skin="plakat"] .jdp-pk.jdp-pk .gt-gamehead h1:not(.gt-wm){font-size:40px!important;transform:rotate(-3deg)}
+html[data-gt-skin="plakat"] .jdp-pk.jdp-pk .gt-gamehead h1:not(.gt-wm){font-size:clamp(34px,12vw,47px)!important;font-family:'Bagel Fat One','Bowlby One',sans-serif!important;font-weight:400!important;text-transform:uppercase!important;color:#1A1716!important;-webkit-text-fill-color:#1A1716!important;-webkit-text-stroke:.05em #141414!important;paint-order:stroke fill!important;text-shadow:.05em .065em 0 #141414!important;letter-spacing:0!important;transform:none!important;line-height:1.05!important;white-space:nowrap!important;text-align:center!important;display:block!important}
+html[data-gt-skin="plakat"] .jdp-pk.jdp-pk .gt-gamehead>div:nth-of-type(2)>div{width:100%}
 .jdp-pk .jdp-tl .l1,.jdp-pk .jdp-tv .l1{height:18px;font-size:15px}
 .jdp-pk .jdp-tl .l2,.jdp-pk .jdp-tv .l2{height:26px;font-size:22px}
 .jdp-pk .jdp-tl .l2{font-size:13px}

@@ -214,7 +214,9 @@ const SLF_CSS = `
 
 /* Karteikarten (Spielseite, alle Modi) */
 .slf-toprow{padding:0 2px;margin-top:4px}
-.slf-toprow .slf-round{font-size:22px;flex:1;min-width:0}
+.slf-toprow .slf-round{font-size:22px;flex:none;white-space:nowrap}
+.slf-toprow .slf-hint{flex:1;min-width:0}
+.slf-toprow:has(.slf-hint) .slf-round{font-size:19px}
 .slf-pkrow{display:flex;align-items:center;gap:12px}
 .slf-alpha{display:flex;gap:8px;align-items:stretch;margin-top:14px}
 .slf-alpha .slf-strip{flex:1;min-width:0}

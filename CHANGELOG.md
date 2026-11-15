@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.15-26 (15.11.2026 19:35)
+- Stadt Land Fluss: «Runde» überlappt den Hinweis nicht mehr
+
 ## 2026.11.15-25 (15.11.2026 19:12)
 - Stadt Land Fluss: Karteikarten in allen Modi, ohne grossen Buchstaben; Ryū in Rot, Schwarz, Creme
 

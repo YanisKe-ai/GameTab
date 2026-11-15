@@ -9,6 +9,7 @@ const NOISE = "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg
 
 const PLAKAT_CSS = `
 ${P} body{background:${CREAM}}
+${P} .gtL-shellpage::before{display:none!important}
 ${P} ::selection{background:#F9C22E;color:${INK}}
 /* Ränder als Outline nach innen: sie nehmen keinen Platz, Aufbau bleibt wie in Hell */
 /* Titel-Schriftzüge der Spiele */

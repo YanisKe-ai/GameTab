@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.15-16 (15.11.2026 17:04)
+- Ryū: Yatzy im neuen Stil (rote Seite, Cremeblatt, schwarzes Eingabeblatt), Hintergrund-Deko im Ryū-Modus aus
+
 ## 2026.11.15-15 (15.11.2026 15:14)
 - Ryū-Tutto: Punktzahl ab 1000 rot mit schwarzem Rand
 

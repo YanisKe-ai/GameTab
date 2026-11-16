@@ -87,7 +87,7 @@ ${P} .gtL-showcase-icon{outline:2px solid ${INK}!important;outline-offset:-2px!i
 
 /* ===== Startseite neu (Plakat, Entwurf S1 / R2b, 2026-11-15) ===== */
 ${P} .gtL-start{--pk-bg:${RED};background:${NOISE} 0 0/180px 180px,${RED}!important;background-blend-mode:multiply}
-${P} .gt-hero-logo.gt-hero-mark-pk svg{transform:translate(-4px,14px) scale(.93) rotate(-9deg)!important;transform-origin:50% 50%}
+${P} .gt-hero-logo.gt-hero-mark-pk svg{transform:translate(-14px,4px) scale(.93) rotate(-9deg)!important;transform-origin:50% 50%}
 ${P} .gtL-start .gtL-start-gear{background:${CREAM2}!important;outline:none!important;border:none!important;box-shadow:4px 5px 0 ${INK2}!important;color:${INK2}!important}
 ${P} .gtL-start .gt-hero-sub{display:flex;justify-content:center}
 /* eigene Eigenschaft «translate», damit Einblend-Animationen (transform) das Logo beim Zurückkommen nicht springen lassen */

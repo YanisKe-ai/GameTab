@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.16-13 (16.11.2026 19:49)
+- Laptop-Spielseiten mittig, Ryū-Logo Handy
+
 ## 2026.11.16-12 (16.11.2026 19:35)
 - Nocturne-Logo Sticker Nacht, Suche am Ort
 

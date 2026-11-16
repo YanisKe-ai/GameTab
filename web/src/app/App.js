@@ -79,7 +79,7 @@ function RulesButton({onClick,onHome,onEndGame,moreItems,onMenuOpen,tokens}){ret
         .gtL-content .gtL-col-side { position: sticky; top: 16px; }
         .gtL-content .gtL-split-setup .gtL-col-main, .gtL-content .gtL-split-setup .gtL-col-side { gap: 14px; }
         .gtL-content .gtL-split-setup { margin-top: 0; align-items: stretch; }
-        .gtL-content div:has(> .gtL-split-setup) { min-height: calc(100dvh - 190px); display: flex; flex-direction: column; justify-content: flex-start; padding-top: 4vh; padding-bottom: 6vh; box-sizing: border-box; }
+        .gtL-content div:has(> .gtL-split-setup) { min-height: calc(100dvh - 190px); display: flex; flex-direction: column; justify-content: center; padding-top: 4vh; padding-bottom: 6vh; box-sizing: border-box; }
         .gtL-content .gtL-split-setup > .gtL-col-main, .gtL-content .gtL-split-setup > .gtL-col-side { padding: 22px 24px; border-radius: 24px; border: 1px solid rgba(128,128,128,0.2); background: rgba(128,128,128,0.07); box-sizing: border-box; position: static; }
         .gtL-content .gtL-split-setup > .gtL-col-side { display: flex !important; flex-direction: column; }
         .gtL-content .gtL-split-setup > .gtL-col-side > .gt-su-cta { margin-top: auto; }
@@ -135,12 +135,12 @@ function RulesButton({onClick,onHome,onEndGame,moreItems,onMenuOpen,tokens}){ret
         .gtL-content .gtL-only { display: block !important; }
         /* C6 gemeinsame linke Kante: Spalte max. 1180px, links buendig, 28px Abstand zur Seitenleiste */
         .gtL-content .gtL-page { padding-left: 16px !important; padding-right: 16px !important; }
-        .gtL-content .gtL-page > *, .gtL-content .gtL-startcol > *, .gtL-content .gtL-startfoot > * { max-width: var(--gtl-col); margin-left: max(0px, calc((100% - var(--gtl-col)) / 2)) !important; margin-right: auto !important; }
+        .gtL-content .gtL-page > *, .gtL-content .gtL-startcol > *, .gtL-content .gtL-startfoot > * { max-width: var(--gtl-col); margin-left: auto !important; margin-right: auto !important; }
         .gtL-content .gtL-tiles, .gtL-content .gtL-cards, .gtL-content .gtL-showcase, .gtL-content .gtL-tipcard { max-width: var(--gtl-col) !important; }
         .gtL-content .gtL-tiles, .gtL-content .gtL-showcase { margin-left: 0 !important; margin-right: 0 !important; }
-        .gtL-content .gtL-game { max-width: min(640px, calc(100% - 32px)) !important; margin-left: max(16px, calc((100% - var(--gtl-col)) / 2)) !important; margin-right: auto !important; }
+        .gtL-content .gtL-game { max-width: min(640px, calc(100% - 32px)) !important; margin-left: auto !important; margin-right: auto !important; }
         .gtL-content .gtL-game:has(.gtL-split) { max-width: min(var(--gtl-col), calc(100% - 32px)) !important; }
-        .gtL-content .gtL-shellpage > .paper-grid { max-width: min(760px, calc(100% - 32px)) !important; margin-left: max(16px, calc((100% - var(--gtl-col)) / 2)) !important; margin-right: auto !important; }
+        .gtL-content .gtL-shellpage > .paper-grid { max-width: min(760px, calc(100% - 32px)) !important; margin-left: auto !important; margin-right: auto !important; }
         .gtL-content .gtL-shellpage > .paper-grid:has(.gtL-yatzy-sheets), .gtL-content .gtL-shellpage > .paper-grid:has(.gtL-split) { max-width: min(var(--gtl-col), calc(100% - 32px)) !important; }
         .gtL-content .gtL-startcol > *, .gtL-content .gtL-startfoot > * { width: min(100%, var(--gtl-col)); box-sizing: border-box; }
         /* Platzverteilung Laptop: Inhalt nutzt die Fensterbreite, Haupt- zu Nebenspalte etwa 70 zu 30 */

@@ -1,8 +1,10 @@
 // Erzeugt von tools/split.mjs aus index.html. Inhalt zwischen den gt-body-Markern ist 1:1 Originalcode.
+import { isHell, hc } from "../../themes/hell.js";
 import { ryuLogo } from "../../themes/plakat.js";
 import { React } from "../../vendor/react-globals.js";
 import { useEffect, useState } from "../../prelude.js";
-import { HUES, playerHue } from "../../themes/palette.js";
+import { HUES, playerHue as playerHue0 } from "../../themes/palette.js";
+const HELL_HUES=["#1E1A15","#4A443A","#5E574C","#2B261F","#6B6458","#38322A","#524B40","#756D60"];function playerHue(i,theme){return theme==="light"&&isHell()?HELL_HUES[i%8]:playerHue0(i,theme);}
 import { GLOBAL_STYLES } from "../../styles/global.js";
 import { TRANSLATIONS } from "../../i18n/translations.js";
 import { GT_S8P, RulesButton, RulesSheet } from "../../app/App.js";
@@ -53,7 +55,7 @@ const S8_VBASE={bg2:"rgba(255,255,255,0.04)",card:"rgba(255,255,255,0.07)",gold:
 const P10_TK={d:{btnFrom:"#4FB0FF",btnTo:"#1F78D1",onAccent:"#04121F",bg:"#10141B",bg2:"#151B24",card:"#1B222D",ink:"#EAF3FC",muted:"#8A94A6",teal:"#2E9BF0",gold:"#E0BA72",red:"#F0716F",border:"#28303D"},l:{btnFrom:"#1D6FB8",btnTo:"#155A99",onAccent:"#FFFFFF",bg:"#F4F7FB",bg2:"#E3ECF6",card:"#FFFFFF",ink:"#141C26",muted:"#4B5468",teal:"#1D6FB8",gold:"#83683B",red:"#B42318",border:"#4A4038"},v:{...S8_VBASE,btnFrom:"#8FCFFF",btnTo:"#2E86D6",onAccent:"#04121F",bg:S8_VB("143,207,255"),ink:"#F2F4F8",muted:"#A3A7B0",teal:"#8FCFFF",red:"#FF9A98"}};
 const ROM_TK={d:{btnFrom:"#FF7DB0",btnTo:"#D23F7E",onAccent:"#2A0716",bg:"#141117",bg2:"#1A161D",card:"#221C25",ink:"#FBEFF5",muted:"#9A8E9C",teal:"#F25C9A",gold:"#E0BA72",red:"#F0716F",border:"#322A35"},l:{btnFrom:"#B8326E",btnTo:"#99245A",onAccent:"#FFFFFF",bg:"#FBF5F8",bg2:"#F2E3EB",card:"#FFFFFF",ink:"#24141C",muted:"#5A4B54",teal:"#B8326E",gold:"#83683B",red:"#B42318",border:"#4A4038"},v:{...S8_VBASE,btnFrom:"#FFA3C8",btnTo:"#D9467F",onAccent:"#2A0716",bg:S8_VB("255,143,190"),ink:"#F2F4F8",muted:"#A3A7B0",teal:"#FF8FBE",red:"#FF9A98"}};
 const TRT_TK={d:{btnFrom:"#A6DE5A",btnTo:"#5E9A1E",onAccent:"#0F1A04",bg:"#0E110D",bg2:"#141912",card:"#1A2017",ink:"#EEF5E8",muted:"#8E9A88",teal:"#8FCB3F",gold:"#E0BA72",red:"#E5484D",border:"#29321F"},l:{btnFrom:"#4F7A1A",btnTo:"#3D6213",onAccent:"#FFFFFF",bg:"#F5F7F0",bg2:"#E6ECDA",card:"#FFFFFF",ink:"#18200F",muted:"#4E5646",teal:"#4F7A1A",gold:"#83683B",red:"#B42318",border:"#4A4038"},v:{...S8_VBASE,btnFrom:"#C4F08A",btnTo:"#6FA82E",onAccent:"#0F1A04",bg:S8_VB("181,231,122"),ink:"#F2F4F8",muted:"#A3A7B0",teal:"#B5E77A",red:"#FF8A8E"}};
-function s8Tok(theme,c){if(theme==="noir")return{btnFrom:"#C1C1C1",btnTo:"#969696",onAccent:"#000000",bg:"#000000",bg2:"#000000",card:"#1A1A1A",ink:"#EBEBEB",muted:"#969696",teal:"#C1C1C1",gold:"#C1C1C1",red:"#EBEBEB",border:"#5F5F5F"};return{...(theme==="light"?c.l:c.d)};}
+function s8Tok(theme,c){if(theme==="light"&&isHell())return{btnFrom:"#1E1A15",btnTo:"#1E1A15",onAccent:"#FFFCF6",bg:"#F6F1E7",bg2:"#EDE5D5",card:"#FFFCF6",ink:"#1E1A15",muted:"#4A443A",teal:"#1E1A15",gold:"#1E1A15",red:"#1E1A15",border:"#1E1A15"};if(theme==="noir")return{btnFrom:"#C1C1C1",btnTo:"#969696",onAccent:"#000000",bg:"#000000",bg2:"#000000",card:"#1A1A1A",ink:"#EBEBEB",muted:"#969696",teal:"#C1C1C1",gold:"#C1C1C1",red:"#EBEBEB",border:"#5F5F5F"};return{...(theme==="light"?c.l:c.d)};}
 function s8Shell(theme,tk){return{minHeight:"100vh",background:shellTokens(theme).pageBg,padding:"20px 12px 32px"};}
 function s8Lbl(tk,txt,st){return <div style={{fontSize:11,color:tk.muted,letterSpacing:"0.08em",textTransform:"uppercase",fontFamily:S8I,fontWeight:600,marginBottom:8,...(st||{})}}>{txt}</div>;}
 function s8Prim(tk,dis){return{border:"none",borderRadius:22,background:dis?GT_DISABLED_BG:`linear-gradient(135deg, ${tk.btnFrom}, ${tk.btnTo})`,color:dis?tk.muted:tk.onAccent,fontSize:15,fontWeight:800,padding:"14px 0",width:"100%",cursor:dis?"default":"pointer",fontFamily:S8F,boxShadow:dis?"none":`0 6px 20px -6px ${tk.teal}88`};}

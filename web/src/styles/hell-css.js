@@ -13,6 +13,8 @@ ${H} body *:is(input,textarea,select){border-color:${INK}!important;caret-color:
 ${H} body :is(h1.gt-wm,.yz-word,.tt-word,.f7-word,.sk-word,.gt-wm-sub){color:${INK}!important;-webkit-text-fill-color:${INK}!important;background:none!important;text-shadow:none!important;-webkit-text-stroke:0!important;filter:none!important}
 /* Schwebende Hintergrund-Deko schwarz */
 ${H} .gtL-shellpage::before,${H} body::after{filter:grayscale(1) brightness(0)!important;opacity:.32!important}
+/* Erfolgs-Abzeichen (Gold, Silber, Bronze) grau */
+${H} [data-gt-achv-hint] :is(svg,span,div)[style*="gradient"],${H} [data-gt-achv-hint] svg,${H} [data-gt-achv] :is(svg,[style*="gradient"]){filter:grayscale(1) contrast(1.15)}
 /* Fokusrahmen schwarz */
 ${H} :focus-visible{outline-color:${INK}!important}
 /* Startkacheln: Bleistift und Maske schwarz im Kreis */

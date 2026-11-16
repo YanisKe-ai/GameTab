@@ -6,6 +6,7 @@ import { React } from "../vendor/react-globals.js";
 import { useEffect, useRef, useState } from "../prelude.js";
 import GT_NEON_LOGO from "../assets/img/gt-logo-neon.webp";
 import { usePlakat } from "../themes/theme-id.js";
+import { isHell } from "../themes/hell.js";
 
 // [Kern Hauptroehre, Gluehen Hauptroehre, Kern Zweitroehre, Gluehen Zweitroehre]
 const GT_NEON_COL = {"slf":["#EEE8FF","#8B6CFF","#FFF7D6","#FFD84D"],"skyjo":["#D8FEEE","#13DAA7","#EEF4FF","#6D9AFF"],"phase10":["#ECF4FF","#569FFF","#FFF2D6","#FBC100"],"romme":["#FFEEF3","#FB5C9E","#F6F0FF","#B97CF8"],"jass-differenzler":["#FFF9F3","#F0CA9B","#FFEFED","#FF6459"],"schieber":["#FDFAF1","#F0CA9B","#D9FEEB","#00BB85"],"schieber-turnier":["#FDFAF1","#F0CA9B","#D9FEEB","#00BB85"],"molotow":["#F7FFD0","#B8D52A","#FFF0E6","#FF8A5E"],"darts":["#FFEFEE","#FF635E","#FFF2D6","#E7C77B"],"cricket":["#DBFDE9","#18D188","#FFF3D2","#F2C535"],"shanghai":["#EAF5FF","#4FB0FF","#FFEFED","#FF6B5E"],"hiscore":["#DEF9FF","#00D4F0","#FFF2DC","#FFBE38"],"splitscore":["#F7F0FF","#BA7BFA","#DEF9FF","#00D4F0"],"wizard":["#FFF2DA","#F1B526","#F3F1FF","#A486FF"],"minigolf":["#E5FBDE","#7ADA4F","#FFEFEE","#FF6364"],"mafia":["#FFF2DC","#D99B00","#FFEFEE","#FF6362"],"impostor":["#FBEEFF","#DD5AFF","#FFF2D8","#F7C033"],"werwolf":["#FEF3D2","#F0C635","#F2F2FF","#958DFF"],"mostlikely":["#D3FEF6","#00D5BF","#FFEEF5","#FF6FB5"],"traitor":["#E7FBDD","#7CC054","#FFEFEF","#F07079"],"tabu":["#F6F1FF","#B47DFF","#FEF9F1","#F0CA9B"],"headsup":["#EFF3FF","#9DB4FF","#E6F6FF","#4AC9FF"],"fivesec":["#FFF0E6","#FF9640","#FEF9F1","#F0CA9B"],"flip7":["#FFF0EA","#FF7A3D","#FEF9F1","#F0CA9B"],"yatzy":["#F1F3FF","#8C90FF","#FEF9F1","#F0CA9B"],"tutto":["#FFEFEE","#FF6265","#FEF9F1","#F0CA9B"],"freeplay":["#FAEFFF","#C37DE1","#FCF8FF","#F0CA9B"],"jass":["#FFEFED","#FF6552","#DEFDE5","#39BA6E"]};
@@ -124,6 +125,30 @@ html[data-gt-podium-open] .gt-gamehead,html[data-gt-podium-open] .gt-headbtns{vi
 @media (prefers-reduced-motion: reduce){.gtr-run *,.gtr-run *::before,.gtr-run *::after{animation:none!important}}
 `;
 
+// Hell «Schwarz auf Creme» (16.11.2026): Ryū-Schild in Creme mit schwarzer Schrift, ohne Farbe
+const HELL_SIGN_CSS = `
+.gtr.gtr-hell{--red:#FFFCF6;--ink:#1E1A15;--cream:#FFFCF6;color:var(--ink)}
+.gtr-hell .gtr-glow{display:none}
+.gtr-hell .gtr-board{background:#FFFCF6;color:var(--ink);box-shadow:0 0 0 2.5px #1E1A15,0 9px 0 2.5px #1E1A15,0 30px 36px rgba(30,26,21,.18)}
+.gtr-hell .gtr-board::after{border-color:rgba(30,26,21,.35)}
+.gtr-hell .gtr-eye{background:#FFFCF6}
+.gtr-hell .gtr-scr{background:#1E1A15;border-color:#FFFCF6}
+.gtr-hell .gtr-logo{background:#1E1A15}
+.gtr-hell :is(.gtr-gname,.gtr-wname,.gtr-pts){color:#1E1A15;-webkit-text-stroke:0;filter:none}
+.gtr-hell .gtr-rk li{color:#1E1A15}
+.gtr-hell .gtr-rk li>*{-webkit-text-stroke:0}
+.gtr-hell .gtr-played{color:#4A443A}
+.gtr-hell .gtr-ring{border-color:#1E1A15}
+.gtr.gtr.gtr-hell[role="dialog"]{color:#1E1A15!important}
+.gtr.gtr.gtr-hell .gtr-p1{background:#1E1A15!important;color:#FFFCF6!important;border-color:#1E1A15!important;box-shadow:0 4px 0 rgba(30,26,21,.35)!important}
+.gtr.gtr.gtr-hell .gtr-p2{background:#FFFCF6!important;color:#1E1A15!important;border-color:#1E1A15!important;box-shadow:0 4px 0 #1E1A15!important}
+.gtr.gtr.gtr-hell .gtr-p3{color:#1E1A15!important}
+.gtr.gtr.gtr-hell .gtr-x{background:#1E1A15!important;color:#FFFCF6!important}
+.gtr-hell .gtr-btn:focus-visible,.gtr-hell .gtr-x:focus-visible{outline-color:#1E1A15}
+.gtr-hell [data-gt-achv-hint]>div{background:#FFFCF6!important;border-color:#1E1A15!important;box-shadow:0 3px 0 #1E1A15!important}
+.gtr-hell [data-gt-achv-hint] *{color:#1E1A15!important}
+`;
+
 // Ryu-Text: Buchstaben einzeln (poppen als Sticker auf), Woerter bleiben ganz, Bindestrich-Teile als Notumbruch
 function RyuText({ text, start, step, run }) {
   const words = String(text == null ? "" : text).split(/\s+/).filter(Boolean);
@@ -188,7 +213,9 @@ function useFitName(ref, deps) {
 }
 
 export function GtNeonPodium({ phase, ranked, ranks, gameId, gameLabel, theme, t, play, onClose, onEnd, onSkip, onRestart, extraAct, onShare, isSharing, playCount, hideCount, bestRecord, noteEl, achvEl, dlgRef }) {
-  const ryu = usePlakat();
+  const ryu0 = usePlakat();
+  const hell = !ryu0 && theme === "light" && isHell();
+  const ryu = ryu0 || hell;
   const [pc, pg, sc, sg] = gtNeonCol(gameId, theme);
   const P = gtNeonVars(pc, pg), S = gtNeonVars(sc, sg);
   const rigRef = useRef(null), nameRef = useRef(null), wrapRef = useRef(null), boardRef = useRef(null);
@@ -244,10 +271,10 @@ export function GtNeonPodium({ phase, ranked, ranks, gameId, gameLabel, theme, t
     const rmLabel = extraAct ? extraAct.label : t("rematch");
     const scrMask = (fade.t || fade.b) ? (m => ({ WebkitMaskImage: m, maskImage: m }))(`linear-gradient(180deg,${fade.t ? "transparent 0,#000 16px" : "#000 0"},${fade.b ? "#000 calc(100% - 22px),transparent 100%" : "#000 100%"})`) : null;
     const fi = (d) => run ? { "--d": `${d}s` } : undefined;
-    return <div onClick={() => { if (onSkip()) return; if (!onEnd) onClose(); }} className="gt-scrim-in" style={{ position: "fixed", inset: 0, zIndex: 130, background: "linear-gradient(180deg,#221d1b 0%,#1A1716 60%,#120f0e 100%)", overflow: "hidden" }}>
-      <style>{RYU_CSS}</style>
+    return <div onClick={() => { if (onSkip()) return; if (!onEnd) onClose(); }} className="gt-scrim-in" style={{ position: "fixed", inset: 0, zIndex: 130, background: hell ? "linear-gradient(180deg,#F6F1E7 0%,#EDE5D5 100%)" : "linear-gradient(180deg,#221d1b 0%,#1A1716 60%,#120f0e 100%)", overflow: "hidden" }}>
+      <style>{RYU_CSS}{hell ? HELL_SIGN_CSS : ""}</style>
       <div ref={wrapRef} style={{ position: "absolute", left: "50%", top: 0, width: 390, height: fh, marginLeft: -195, transform: `scale(${k})`, transformOrigin: "50% 0" }}>
-        <div ref={dlgRef} data-gt-podium="1" role="dialog" aria-modal="true" aria-label={label} onClick={e => { e.stopPropagation(); onSkip(); }} className={"gtr " + (run ? "gtr-run" : "gtr-lit") + " gtsb-" + (phase || "done")} style={{ position: "absolute", inset: 0 }}>
+        <div ref={dlgRef} data-gt-podium="1" role="dialog" aria-modal="true" aria-label={label} onClick={e => { e.stopPropagation(); onSkip(); }} className={"gtr " + (hell ? "gtr-hell " : "") + (run ? "gtr-run" : "gtr-lit") + " gtsb-" + (phase || "done")} style={{ position: "absolute", inset: 0 }}>
           <div ref={rigRef} style={{ position: "absolute", left: 0, right: 0, top: 0, height: 800, transformOrigin: "195px -420px" }}>
             {[86, 292].map(x => <div key={x} aria-hidden className="gtr-chain" style={{ left: x }} />)}
             <div style={{ position: "absolute", left: 34, right: 34, top: 140 }}>

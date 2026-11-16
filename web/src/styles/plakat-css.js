@@ -45,6 +45,16 @@ ${P} .podium-pop[role="dialog"]{outline:2.5px solid ${INK}!important;outline-off
 ${P} .podium-pop[role="dialog"] h2,${P} .podium-pop[role="dialog"] [id^="gt-cf-t"]{font-family:${FONT}!important;font-weight:400!important}
 ${P} .podium-pop[role="dialog"] button{outline:2px solid ${INK}!important;outline-offset:-2px!important;box-shadow:0 3px 0 ${INK}!important}
 ${P} .gt-hm-panel{--hm-panel:${PAPER};--hm-ink:${INK};outline:2.5px solid ${INK};outline-offset:-2.5px;box-shadow:0 5px 0 ${INK}!important}
+/* Spielmenü: Icons schwarz auf Creme statt bunt, Überschrift schwarzes Etikett; nur «Spiel verwerfen» rot */
+${P} .gt-hm-panel{--hm-muted:${INK2};--hm-line:rgba(26,23,22,.25);--hm-hover:rgba(228,49,43,.12)}
+${P} .gt-hm-row:not(.is-danger) .gt-hm-ic{--ic:${INK2}!important;background:${CREAM2}!important;box-shadow:inset 0 0 0 2px ${INK2}}
+${P} .gt-hm-row.is-danger .gt-hm-ic{--ic:${CREAM2}!important;background:${RED}!important;box-shadow:inset 0 0 0 2px ${INK2}}
+${P} .gt-hm-row.is-danger{color:${RED}!important}
+${P} .gt-hm-h{display:table;margin:4px 8px 4px;padding:3px 9px 2px!important;border-radius:7px;background:${INK2};color:${CREAM2}!important;font-family:${FONT};font-weight:400!important}
+${P} .gt-hm-row{font-weight:700}
+/* Einstellungen «Ich bin»: Hinweis auf schwarzer Zeile lesbar */
+${P} #gt-profile-hint{color:rgba(243,234,211,.82)!important}
+${P} .gt-hm-row:focus-visible,${P} [role=dialog] :focus-visible{outline-color:${INK2}!important}
 /* Stand-Karte (GtLStandings, z. B. Tutto Laptop): Creme, Sticker-Rand, Punkte und Balken nur Rot/Schwarz */
 ${P} .gt-lstand,${P} .gtL-standings{background:${CREAM}!important;border:none!important;outline:2.5px solid ${INK};outline-offset:-2.5px;box-shadow:0 4px 0 ${INK};color:${INK}!important}
 ${P} .gt-lstand div,${P} .gt-lstand span,${P} .gtL-standings div,${P} .gtL-standings span{color:${INK}!important}
@@ -166,6 +176,8 @@ ${P} .gt-ryu-statsbtn:focus-visible{outline:3px solid ${INK2};outline-offset:4px
 ${P} .gt-ryu-sb-bg{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none}
 ${P} .gt-ryu-sb-in{position:relative;display:flex;align-items:center;justify-content:center;gap:7px;height:100%;white-space:nowrap;padding:0 10px}
 ${P} .gt-ryu-statsbtn .gtL-statsbtn-txt{display:inline!important}
+/* Spieltitel einheitlich im Molotow-Stil (Entscheid Yanis 15.11.): schwarz mit schwarzer Tiefe; überstimmt Spiel-Regeln */
+${P} body h1.gt-wm.gt-wm.gt-wm.gt-wm.gt-wm.gt-wm,${P} body .f7-word.f7-word.f7-word.f7-word.f7-word.f7-word{color:${INK2}!important;-webkit-text-fill-color:${INK2}!important;-webkit-text-stroke:.05em #141414!important;paint-order:stroke fill!important;text-shadow:.05em .065em 0 #141414!important}
 @media (prefers-reduced-motion: reduce){${P} .gt-su-btn::after,${P} .pk-shine::after,${P} .gt-wm{animation:none!important}}
 `;
 

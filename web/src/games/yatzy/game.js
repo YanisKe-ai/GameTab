@@ -46,7 +46,7 @@ import { pkPage } from "../../shared/plakat/kit.js";
 `;const YZ_PK_CSS=`
 .yz-pk .yz-title{transform:rotate(-3deg)}
 .yz-pk .yz-word{font-family:'Bagel Fat One','Bowlby One',sans-serif;color:#1A1716;-webkit-text-stroke:0;letter-spacing:0;padding:0 .1em;text-shadow:5.0px 0.0px 0 #F3EAD3, 4.8px 1.3px 0 #F3EAD3, 4.3px 2.5px 0 #F3EAD3, 3.5px 3.5px 0 #F3EAD3, 2.5px 4.3px 0 #F3EAD3, 1.3px 4.8px 0 #F3EAD3, -0.0px 5.0px 0 #F3EAD3, -1.3px 4.8px 0 #F3EAD3, -2.5px 4.3px 0 #F3EAD3, -3.5px 3.5px 0 #F3EAD3, -4.3px 2.5px 0 #F3EAD3, -4.8px 1.3px 0 #F3EAD3, -5.0px -0.0px 0 #F3EAD3, -4.8px -1.3px 0 #F3EAD3, -4.3px -2.5px 0 #F3EAD3, -3.5px -3.5px 0 #F3EAD3, -2.5px -4.3px 0 #F3EAD3, -1.3px -4.8px 0 #F3EAD3, 0.0px -5.0px 0 #F3EAD3, 1.3px -4.8px 0 #F3EAD3, 2.5px -4.3px 0 #F3EAD3, 3.5px -3.5px 0 #F3EAD3, 4.3px -2.5px 0 #F3EAD3, 4.8px -1.3px 0 #F3EAD3, 6px 6px 0 #1A1716, 7px 7px 0 #1A1716, 8px 8px 0 #1A1716, 9px 9px 0 #1A1716, 10px 10px 0 #1A1716, 11px 11px 0 #1A1716}
-.yz-pk .yz-hint{color:#1A1716;font-weight:700}
+.yz-pk .yz-hint{color:#F3EAD3;font-weight:700;background:#1A1716;display:table;margin:0 auto 8px;padding:3px 10px 2px;border-radius:8px;font-size:11.5px}
 .yz-pk .yz-paper{outline:none;border:none;border-radius:18px;box-shadow:0 0 0 4px #1A1716,6px 7px 0 4px #1A1716}
 .yz-pk .yz-corner,.yz-pk .yz-hd{background:#1A1716}
 .yz-pk .yz-hd{border-left-color:#3A3532}

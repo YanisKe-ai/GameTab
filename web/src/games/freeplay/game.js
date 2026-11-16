@@ -109,7 +109,7 @@ html[data-gt-skin="plakat"] .fp-pk h1.gt-wm.gt-wm.gt-wm{color:#1A1716!important;
 .fp-pk .gtL-col-side>div>div>div[style*="overflow-wrap"]{flex:0 1 auto!important;background:#FFFDF7;color:#141414!important;font-family:var(--pkf)!important;font-weight:400!important;padding:8px 14px;border-radius:14px;outline:2.5px solid #141414;outline-offset:-2.5px;box-shadow:0 3px 0 #141414;transform:rotate(-1deg)}
 /* Notizblatt: Linien, roter Rand, Lochung */
 .fp-pk .fp-card{padding:16px 16px 14px 32px!important;border-color:transparent!important;transition:background-color .3s,color .3s;background-image:linear-gradient(90deg,transparent 27px,rgba(228,49,43,.55) 27px,rgba(228,49,43,.55) 29px,transparent 29px),repeating-linear-gradient(to bottom,transparent 0,transparent 25px,rgba(26,23,22,.11) 25px,rgba(26,23,22,.11) 26px)!important;background-size:auto!important;background-position:0 0!important}
-.fp-pk .fp-card>div:nth-child(2){background:linear-gradient(90deg,rgba(228,49,43,.13),rgba(228,49,43,.03))!important;left:29px!important;width:calc(100% - 29px)!important;border-radius:0 18px 18px 0}
+.fp-pk .fp-card>div:nth-child(2){background:rgba(26,23,22,.06)!important;box-shadow:inset -2px 0 0 rgba(26,23,22,.28);left:29px!important;width:calc(100% - 29px)!important;border-radius:0 18px 18px 0}
 .fp-pk .fp-band,.fp-pk .fp-band.fp-win{width:24px!important;background-color:transparent!important;background-image:radial-gradient(circle at 12px 13px,#E4312B 0 4.5px,#1A1716 4.5px 7.5px,transparent 8px)!important;background-size:24px 26px!important;background-repeat:repeat-y!important;background-position:0 4px!important}
 .fp-pk .fp-card [style*="width: 34px"]{width:40px!important;height:40px!important;background:#1A1716!important;color:#F3EAD3!important;border:0!important;box-shadow:none!important;font-family:var(--pkf)!important;font-weight:400!important;font-size:18px!important;transform:rotate(-7deg);border-radius:12px!important}
 .fp-pk .fp-card>div[style*="align-items: center"]{gap:12px!important}
@@ -124,7 +124,7 @@ html[data-gt-skin="plakat"] .fp-pk h1.gt-wm.gt-wm.gt-wm{color:#1A1716!important;
 .fp-pk .fp-chips>button:active{transform:translateY(2px)}
 /* aktuell Fuehrende und Gewinner: schwarzes Blatt */
 .fp-pk .fp-card.fp-lead{background-color:#1A1716!important;color:#F3EAD3;background-image:linear-gradient(90deg,transparent 27px,rgba(228,49,43,.9) 27px,rgba(228,49,43,.9) 29px,transparent 29px),repeating-linear-gradient(to bottom,transparent 0,transparent 25px,rgba(243,234,211,.12) 25px,rgba(243,234,211,.12) 26px)!important}
-.fp-pk .fp-card.fp-lead>div:nth-child(2){background:linear-gradient(90deg,rgba(228,49,43,.32),rgba(228,49,43,.06))!important}
+.fp-pk .fp-card.fp-lead>div:nth-child(2){background:rgba(243,234,211,.08)!important;box-shadow:inset -2px 0 0 rgba(243,234,211,.35)}
 .fp-pk .fp-card.fp-lead .fp-band{background-image:radial-gradient(circle at 12px 13px,#E4312B 0 4.5px,#F3EAD3 4.5px 7.5px,transparent 8px)!important}
 .fp-pk .fp-card.fp-lead [style*="width: 34px"]{background:#E4312B!important;color:#F3EAD3!important;outline:2.5px solid #F3EAD3;outline-offset:-2.5px;transform:rotate(7deg)}
 .fp-pk .fp-card.fp-lead input:not([data-fp-in]),.fp-pk .fp-card.fp-lead .gt-count,.fp-pk .fp-card.fp-lead .fp-tally{color:#F3EAD3!important}

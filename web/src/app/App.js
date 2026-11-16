@@ -181,6 +181,7 @@ function RulesButton({onClick,onHome,onEndGame,moreItems,onMenuOpen,tokens}){ret
         .gtL-content .gtL-padsheet { border-radius: 24px !important; max-height: 90vh !important; max-height: calc(100% - 16px) !important; overflow-y: auto !important; padding-bottom: 18px !important; box-shadow: 0 24px 64px rgba(0,0,0,0.45) !important; backdrop-filter: blur(28px) saturate(150%); -webkit-backdrop-filter: blur(28px) saturate(150%); animation: gtlDialogIn 200ms cubic-bezier(.23,1,.32,1) both; }
         .gtL-content .gtL-noanim, .gtL-content .gtL-noanim .gtL-padsheet { animation: none !important; }
         /* C2 Yatzy/Jass-Editor als schmales Panel unten in der Mitte */
+        .gtL-content .yz-spacer { display: none !important; } /* Laptop: Eingabefeld schwebt, kein Scroll-Platzhalter (sonst wird die Seite länger und kleiner gezoomt) */
         .gtL-content .gtL-editor { left: 50% !important; right: auto !important; bottom: 20px !important; width: min(440px, calc(100% - 48px)); box-sizing: border-box; transform: translateX(-50%); border-radius: 20px !important; box-shadow: 0 18px 50px rgba(0,0,0,0.35) !important; padding-bottom: 14px !important; animation: gtlEditorIn 200ms cubic-bezier(.23,1,.32,1) both; }
         @keyframes gtlFadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes gtlDialogIn { from { opacity: 0; transform: translateY(8px) scale(.97); } to { opacity: 1; transform: none; } }

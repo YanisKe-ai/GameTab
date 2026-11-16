@@ -9,6 +9,8 @@ const S = ".gtSt2";
 const GT_ST_RYU_CSS = `
 ${S}{--pk-bg:${RED};background:${NOISE} 0 0/180px 180px,${RED}!important;background-blend-mode:multiply;color:${INK}}
 ${S} [style*="Baloo 2"]{font-family:${FONT}!important;font-weight:400!important}
+/* Sticky-Kopf: Weicher Rotverlauf unter der Kopfleiste: Filterleiste und Karten verschwinden sauber statt angeschnitten hervorzuschauen */
+${S} .gt-gamehead.is-stuck::after{content:'';position:absolute;left:0;right:0;top:calc(100% + 2.5px);height:26px;pointer-events:none;background:linear-gradient(${RED} 0,${RED} 30%,rgba(228,49,43,0) 100%)}
 ${S} .gt-hf{border:2.5px solid ${INK}!important;box-shadow:0 3px 0 ${INK};background:${CR}!important;color:${INK}!important}
 /* Filter und Tabs */
 ${S} .gtSt2-seg{background:${CR}!important;border:2.5px solid ${INK}!important;border-radius:16px;box-shadow:0 4px 0 ${INK}}
@@ -18,6 +20,9 @@ ${S} .gtSt2-sel{background:${CR}!important;border:2.5px solid ${INK}!important;b
 ${S} .gtSt2-sel span{color:${INK}!important}
 ${S} .gtSt2-sel svg path{stroke:${INK}}
 ${S} .gtSt2-filters>[role=status],${S} .gtSt2-filters>[role=status] *{color:${INK}!important}
+${S} .gtSt2-filters>[role=status]{padding:0!important;gap:10px!important}
+${S} .gtSt2-filters>[role=status]>span{flex:0 1 auto!important;background:${CR};border:2px solid ${INK};border-radius:10px;box-shadow:0 2px 0 ${INK};padding:4px 10px;box-sizing:border-box}
+${S} .gtSt2-filters>[role=status]>:last-child{margin-left:auto;background:${INK}!important;color:${CR}!important;border:2px solid ${CR}!important;border-radius:999px;padding:0 16px!important;min-height:44px;font-family:${FONT}!important;font-weight:400!important;text-decoration:none!important;box-shadow:0 3px 0 ${INK}}
 ${S} .gtSt2-filters{gap:12px}
 /* Abschnitts-Chips */
 ${S} .gtSt2-sec,${S} .gtSt2-h2{display:inline-block;background:${CR};color:${INK}!important;border:2.5px solid ${INK};box-shadow:0 3px 0 ${INK};border-radius:999px;padding:4px 14px 3px;font-family:${FONT}!important;font-weight:400!important;font-size:.95rem!important;letter-spacing:.01em!important;transform:rotate(-1deg)}

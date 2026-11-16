@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.16-5 (16.11.2026 13:41)
+- Ryū: Teilen-Bild des Jahresrückblicks als Jahresplakat, Startseite springt beim Zurückkommen nicht mehr, Spielkopf überall gleich hoch, Beschriftungen immer lesbar
+
 ## 2026.11.16-4 (16.11.2026 12:29)
 - Offene Punkte: Flip 7 Laptop mit grossem Titel, Spieltitel ohne Icon/Karten (Flip 7, Skyjo), Molotow und SLF auf dem Laptop grösser und ohne Abschneiden, Heads Up iPad einspaltig, Darts-Startansage über der Tafel ohne Verschieben, 5 Sekunden mit «Zeit abgelaufen»-Stempel, Ryū-Jahresplakat, Statistik-Kopf sauber, «ū» kräftig, Einzahl «1 Partie», Favoriten-Stern grössere Trefferfläche
 

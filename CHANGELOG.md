@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.16-8 (16.11.2026 17:40)
+- Laptop-Startseite zweispaltig, Yatzy ohne Scroll beim Eingeben
+
 ## 2026.11.16-7 (16.11.2026 16:30)
 - Laptop ohne Seitenleiste, Tutto ohne Punkteverlauf
 

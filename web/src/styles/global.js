@@ -127,6 +127,8 @@ input[type="number"] { -moz-appearance: textfield; }
 html[data-gt-theme="noir"] .gtsp-primary { background: #EBEBEB !important; color: #000000 !important; }
 html[data-gt-theme="noir"] .gt-count::after { background: #5F5F5F; color: #FFFFFF; box-shadow: none; }
 html[data-gt-theme="noir"] .gt-count[data-gt-dt="g"]::after { background: #EBEBEB; color: #000000; }
+html[data-gt-theme="light"]:not([data-gt-skin]) .gt-count[data-gt-dt]::after { background: #1E1A15; color: #FFFCF6; }
+html[data-gt-theme="light"]:not([data-gt-skin]) .gt-count[data-gt-dt="b"]::after { background: #FFFCF6; color: #1E1A15; outline: 1.5px solid #1E1A15; }
 html[data-gt-theme="noir"] .gt-count[data-gt-dt="b"]::after { background: #2C2C2C; color: #EBEBEB; outline: 1px solid #969696; }
 .gt-count.gt-d-a::after { animation: gtDTa .7s var(--gt-ease-out, cubic-bezier(.23,1,.32,1)) forwards; }
 .gt-count.gt-d-b::after { animation: gtDTb .7s var(--gt-ease-out, cubic-bezier(.23,1,.32,1)) forwards; }

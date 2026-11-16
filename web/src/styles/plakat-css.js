@@ -99,8 +99,11 @@ ${P} .gtL-start .gt-hero-sub{display:flex;justify-content:center}
 /* eigene Eigenschaft «translate», damit Einblend-Animationen (transform) das Logo beim Zurückkommen nicht springen lassen */
 ${P} .gtL-start .gtL-headwrap{translate:0 -22px}
 ${P}:not(.gt-laptopmode):not([data-phone-landscape]) .gtL-start .gtL-headwrap{translate:0 -38px}
-${P}:not(.gt-laptopmode):not([data-phone-landscape]) .gtL-start .gt-hero-sub{translate:-6px 16px;rotate:-11deg}
-@media (max-height:760px){${P}:not(.gt-laptopmode):not([data-phone-landscape]) .gtL-start .gt-hero-sub{translate:-6px 6px}
+${P}:not(.gt-laptopmode):not([data-phone-landscape]) .gtL-start .gt-hero-sub{translate:-6px 14px;rotate:0deg;filter:drop-shadow(2.5px 0 0 ${INK2}) drop-shadow(-2.5px 0 0 ${INK2}) drop-shadow(0 2.5px 0 ${INK2}) drop-shadow(0 -2.5px 0 ${INK2}) drop-shadow(4px 5px 0 ${INK2})}
+${P}:not(.gt-laptopmode):not([data-phone-landscape]) body .gtL-start .gt-hero-sub.gt-hero-sub div{background:${CREAM2}!important;color:${INK2}!important;clip-path:polygon(100.0% 50.0%,85.1% 58.0%,95.0% 71.7%,78.1% 72.4%,81.2% 89.1%,65.6% 82.4%,61.1% 98.7%,50.0% 86.0%,38.9% 98.7%,34.4% 82.4%,18.8% 89.1%,21.9% 72.4%,5.0% 71.7%,14.9% 58.0%,0.0% 50.0%,14.9% 42.0%,5.0% 28.3%,21.9% 27.6%,18.8% 10.9%,34.4% 17.6%,38.9% 1.3%,50.0% 14.0%,61.1% 1.3%,65.6% 17.6%,81.2% 10.9%,78.1% 27.6%,95.0% 28.3%,85.1% 42.0%)!important;transform:none!important;padding:28px 34px!important;margin-top:0!important;font-size:12px!important;cursor:pointer;-webkit-tap-highlight-color:transparent}
+${P}:not(.gt-laptopmode):not([data-phone-landscape]) body .gtL-start .gt-hero-sub.gt-hero-sub div:active{scale:.94}
+${P}:not(.gt-laptopmode):not([data-phone-landscape]) body .gtL-start .gt-hero-sub.gt-hero-sub div:focus-visible{outline:3px dashed ${INK2};outline-offset:2px}
+@media (max-height:760px){${P}:not(.gt-laptopmode):not([data-phone-landscape]) .gtL-start .gt-hero-sub{translate:-6px 0px}
 ${P}:not(.gt-laptopmode):not([data-phone-landscape]) .gtL-start .gtL-start-gear.gtL-start-gear.gtL-start-gear:not(.gtL-start-theme){top:30px!important}
 ${P}:not(.gt-laptopmode):not([data-phone-landscape]) .gtL-start .gtL-start-gear.gtL-start-theme.pl-hide{top:72px!important}}
 ${P} .gtL-start [data-onboard="scorepads-tile"],${P} .gtL-start [data-onboard="party-tile"]{translate:0 var(--pk-tshift,0px)}

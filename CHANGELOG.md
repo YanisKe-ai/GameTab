@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.16-19 (16.11.2026 23:53)
+- Ryū: ALL-IN-ONE als Explosion mit Comic-Showdown
+
 ## 2026.11.16-18 (16.11.2026 22:50)
 - Hell Schwarz auf Creme
 

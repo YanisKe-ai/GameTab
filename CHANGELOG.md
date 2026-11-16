@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.16-3 (16.11.2026 01:53)
+- Ryū Qualitätskontrolle: Spieltitel wie das Logo (lesbar, einheitlich), Spielmenü ohne bunte Icons, Beschriftungen als Etikett, Suche dunkel, Laptop ohne Creme-Band, Seitenleisten-Icons umgefärbt, Logo auf 320 px, Freies Spiel ruhiger
+
 ## 2026.11.16-2 (16.11.2026 01:05)
 - Ryū: eigenes Design für Impostor, Verräter, Werwolf, Mafia, Am ehesten, Heads Up, 5 Sekunden; neue Laptop-Seitenleiste «Spielerbank» in allen Modi; Ryū-Feinschliff (Stand-Karte, Unterzeilen, «+ Spieler», Eigene Wörter, Zahl-Änderungen)
 

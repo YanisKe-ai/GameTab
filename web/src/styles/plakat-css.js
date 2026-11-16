@@ -87,12 +87,22 @@ ${P} .gtL-showcase-icon{outline:2px solid ${INK}!important;outline-offset:-2px!i
 
 /* ===== Startseite neu (Plakat, Entwurf S1 / R2b, 2026-11-15) ===== */
 ${P} .gtL-start{--pk-bg:${RED};background:${NOISE} 0 0/180px 180px,${RED}!important;background-blend-mode:multiply}
-${P} .gtL-start .gtL-start-theme.pl-hide{top:86px!important;right:20px!important}
+/* Ryū Handy R1 (Wahl Yanis 16.11.2026): Zahnrad und Modus-Knopf als runde Zacken-Sticker wie der Statistik-Sticker, untereinander, leicht versetzt, sich berührend */
+${P}:not(.gt-laptopmode):not([data-phone-landscape]) .gtL-start .gtL-start-gear.gtL-start-gear.gtL-start-gear,${P}:not(.gt-laptopmode):not([data-phone-landscape]) .gtL-start .gtL-start-gear.gtL-start-theme.pl-hide{background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2068%22%3E%3Cpolygon%20points%3D%2260.5%2C32.0%2057.1%2C36.4%2058.8%2C41.7%2054.1%2C44.8%2053.8%2C50.3%2048.4%2C51.5%2046.2%2C56.7%2040.7%2C56.0%2036.9%2C60.1%2032.0%2C57.5%2027.1%2C60.1%2023.3%2C56.0%2017.8%2C56.7%2015.6%2C51.5%2010.2%2C50.3%209.9%2C44.8%205.2%2C41.7%206.9%2C36.4%203.5%2C32.0%206.9%2C27.6%205.2%2C22.3%209.9%2C19.2%2010.2%2C13.7%2015.6%2C12.5%2017.7%2C7.3%2023.3%2C8.0%2027.1%2C3.9%2032.0%2C6.5%2036.9%2C3.9%2040.7%2C8.0%2046.2%2C7.3%2048.4%2C12.5%2053.8%2C13.7%2054.1%2C19.3%2058.8%2C22.3%2057.1%2C27.6%22%20transform%3D%22translate%280%2C4%29%22%20fill%3D%22%231A1716%22%20stroke%3D%22%231A1716%22%20stroke-width%3D%222.5%22%20stroke-linejoin%3D%22round%22/%3E%3Cpolygon%20points%3D%2260.5%2C32.0%2057.1%2C36.4%2058.8%2C41.7%2054.1%2C44.8%2053.8%2C50.3%2048.4%2C51.5%2046.2%2C56.7%2040.7%2C56.0%2036.9%2C60.1%2032.0%2C57.5%2027.1%2C60.1%2023.3%2C56.0%2017.8%2C56.7%2015.6%2C51.5%2010.2%2C50.3%209.9%2C44.8%205.2%2C41.7%206.9%2C36.4%203.5%2C32.0%206.9%2C27.6%205.2%2C22.3%209.9%2C19.2%2010.2%2C13.7%2015.6%2C12.5%2017.7%2C7.3%2023.3%2C8.0%2027.1%2C3.9%2032.0%2C6.5%2036.9%2C3.9%2040.7%2C8.0%2046.2%2C7.3%2048.4%2C12.5%2053.8%2C13.7%2054.1%2C19.3%2058.8%2C22.3%2057.1%2C27.6%22%20fill%3D%22%23F3EAD3%22%20stroke%3D%22%231A1716%22%20stroke-width%3D%222.5%22%20stroke-linejoin%3D%22round%22/%3E%3C/svg%3E") center/100% 100% no-repeat!important;border:none!important;box-shadow:none!important;outline:none!important;border-radius:0!important;padding-bottom:4px!important;box-sizing:border-box;width:56px!important;height:60px!important}
+${P}:not(.gt-laptopmode):not([data-phone-landscape]) .gtL-start .gtL-start-gear svg{color:#1A1716!important}
+${P}:not(.gt-laptopmode):not([data-phone-landscape]) .gtL-start .gtL-start-gear.gtL-start-gear.gtL-start-gear:not(.gtL-start-theme){top:132px!important;right:14px!important;rotate:7deg;z-index:4}
+${P}:not(.gt-laptopmode):not([data-phone-landscape]) .gtL-start .gtL-start-gear.gtL-start-theme.pl-hide{top:174px!important;right:30px!important;rotate:-6deg;z-index:3}
+${P}:not(.gt-laptopmode):not([data-phone-landscape]) .gtL-start .gtL-start-gear:focus-visible{outline:3px solid #1A1716!important;outline-offset:2px}
 ${P} .gt-hero-logo.gt-hero-mark-pk svg{transform:translate(-38px,-8px) scale(.93) rotate(-9deg)!important;transform-origin:50% 50%}
 ${P} .gtL-start .gtL-start-gear{background:${CREAM2}!important;outline:none!important;border:none!important;box-shadow:4px 5px 0 ${INK2}!important;color:${INK2}!important}
 ${P} .gtL-start .gt-hero-sub{display:flex;justify-content:center}
 /* eigene Eigenschaft «translate», damit Einblend-Animationen (transform) das Logo beim Zurückkommen nicht springen lassen */
 ${P} .gtL-start .gtL-headwrap{translate:0 -22px}
+${P}:not(.gt-laptopmode):not([data-phone-landscape]) .gtL-start .gtL-headwrap{translate:0 -38px}
+${P}:not(.gt-laptopmode):not([data-phone-landscape]) .gtL-start .gt-hero-sub{translate:-38px 32px;rotate:-7deg}
+@media (max-height:760px){${P}:not(.gt-laptopmode):not([data-phone-landscape]) .gtL-start .gt-hero-sub{translate:-38px 20px}
+${P}:not(.gt-laptopmode):not([data-phone-landscape]) .gtL-start .gtL-start-gear.gtL-start-gear.gtL-start-gear:not(.gtL-start-theme){top:30px!important}
+${P}:not(.gt-laptopmode):not([data-phone-landscape]) .gtL-start .gtL-start-gear.gtL-start-theme.pl-hide{top:72px!important}}
 ${P} .gtL-start [data-onboard="scorepads-tile"],${P} .gtL-start [data-onboard="party-tile"]{translate:0 var(--pk-tshift,0px)}
 ${P}.gt-laptopmode .gtL-start .gtL-headwrap,${P}[data-phone-landscape] .gtL-start .gtL-headwrap{translate:none;transform:none}
 ${P}.gt-laptopmode .gtL-start [data-onboard$="-tile"],${P}[data-phone-landscape] .gtL-start [data-onboard$="-tile"]{translate:none}

@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.16-16 (16.11.2026 20:57)
+- Ryū Handy: runde Zacken-Sticker R1, ALL-IN-ONE mittig
+
 ## 2026.11.16-15 (16.11.2026 20:24)
 - Ryū Handy: Modus-Knopf unter Zahnrad, Logo links oben
 

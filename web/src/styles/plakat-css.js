@@ -160,6 +160,7 @@ ${P} [data-pk-cat][data-pk-cat] .gtL-gamecard-var,${P} [data-pk-cat][data-pk-cat
 ${P} [data-pk-cat][data-pk-cat] .gtL-gamecard-chev,${P} [data-pk-cat][data-pk-cat] .gtL-gamecard-spacer,${P} [data-pk-cat][data-pk-cat] .gtL-gamecard-mirror{display:none!important}
 ${P} [data-pk-cat][data-pk-cat] .gt-favstar{top:-4px!important;right:-4px!important;left:auto!important;bottom:auto!important;transform:none!important;width:36px!important;height:36px!important}
 ${P} [data-pk-cat][data-pk-cat] .gt-favstar svg{width:15px;height:15px}
+${P} .gt-favstar::after{content:"";position:absolute;inset:-4px;border-radius:50%}
 ${P} [data-pk-cat][data-pk-cat] .gt-favstar[aria-pressed="true"] path{fill:${RED};stroke:${RED}}
 ${P} [data-pk-cat][data-pk-cat] .gt-favstar[aria-pressed="false"] path{stroke:#8A8178}
 ${P} .gtL-content [data-pk-cat][data-pk-cat] .gtL-cards{grid-template-columns:repeat(3,minmax(0,1fr))!important}

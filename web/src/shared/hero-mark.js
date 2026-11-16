@@ -34,6 +34,8 @@ const HM_CSS = ".gt-hero-mark{position:relative;width:var(--hm-w,330px);margin:0
   ".gt-hm-solo{display:block;aspect-ratio:820/235;-webkit-mask:var(--hm-mask) center/contain no-repeat;mask:var(--hm-mask) center/contain no-repeat}";
 
 let hmUid = 0;
+// Letzte Kachel-Verschiebung der Ryū-Startseite: beim Zurückkommen sofort setzen, damit nichts nachrutscht
+let pkShiftLast = null;
 
 function GtHeroMark({ theme, width, className, style, markRef }) {
   const c = (isPlakat() ? HM_COLORS.plakat : HM_COLORS[theme]) || HM_COLORS.dark;
@@ -63,15 +65,20 @@ function GtHeroMark({ theme, width, className, style, markRef }) {
         const shift = Math.round((gapTop + gapBot - top - bot - dv) / 2);
         const curS = parseFloat(page.style.getPropertyValue("--pk-tshift"));
         if (isNaN(curS) || Math.abs(curS - shift) >= 2) page.style.setProperty("--pk-tshift", shift + "px");
+        pkShiftLast = shift;
       } catch (e) { /* nur Optik */ }
     };
-    fit();
-    const tms = [120, 400, 900, 1600].map((ms) => setTimeout(fit, ms));
+    // Gemerkten Wert sofort setzen; neu rechnen erst nach den Einblend-Animationen (sonst misst fit() verschobene Lagen und schiebt mehrfach nach)
+    if (pkShiftLast !== null) page.style.setProperty("--pk-tshift", pkShiftLast + "px");
+    const tms = (pkShiftLast === null ? [0, 120, 400, 900, 1600] : [900, 1600]).map((ms) => setTimeout(fit, ms));
     let ro = null;
-    if (window.ResizeObserver) { ro = new ResizeObserver(() => fit()); ro.observe(page); }
-    window.addEventListener("resize", fit);
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit).catch(() => {});
-    return () => { tms.forEach(clearTimeout); if (ro) ro.disconnect(); window.removeEventListener("resize", fit); page.style.removeProperty("--pk-tshift"); };
+    // Beim Zurückkommen (Wert bekannt) erst nach der Einblendung auf Grössenänderungen reagieren
+    const t0 = Date.now();
+    const fitLate = () => { if (pkShiftLast !== null && Date.now() - t0 < 850) return; fit(); };
+    if (window.ResizeObserver) { ro = new ResizeObserver(() => fitLate()); ro.observe(page); }
+    window.addEventListener("resize", fitLate);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitLate).catch(() => {});
+    return () => { tms.forEach(clearTimeout); if (ro) ro.disconnect(); window.removeEventListener("resize", fitLate); page.style.removeProperty("--pk-tshift"); };
   }, []);
   // Startseite Nocturne, Hell, Noir (Handy): Kacheln etwas höher; Suche und «Alle Spiele» gleichmässig zwischen Kacheln und Tippkarte.
   React.useEffect(() => {

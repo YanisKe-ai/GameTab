@@ -89,9 +89,10 @@ ${P} .gtL-showcase-icon{outline:2px solid ${INK}!important;outline-offset:-2px!i
 ${P} .gtL-start{--pk-bg:${RED};background:${NOISE} 0 0/180px 180px,${RED}!important;background-blend-mode:multiply}
 ${P} .gtL-start .gtL-start-gear{background:${CREAM2}!important;outline:none!important;border:none!important;box-shadow:4px 5px 0 ${INK2}!important;color:${INK2}!important}
 ${P} .gtL-start .gt-hero-sub{display:flex;justify-content:center}
-${P} .gtL-start .gtL-headwrap{transform:translateY(-22px)}
+/* eigene Eigenschaft «translate», damit Einblend-Animationen (transform) das Logo beim Zurückkommen nicht springen lassen */
+${P} .gtL-start .gtL-headwrap{translate:0 -22px}
 ${P} .gtL-start [data-onboard="scorepads-tile"],${P} .gtL-start [data-onboard="party-tile"]{translate:0 var(--pk-tshift,0px)}
-${P}.gt-laptopmode .gtL-start .gtL-headwrap,${P}[data-phone-landscape] .gtL-start .gtL-headwrap{transform:none}
+${P}.gt-laptopmode .gtL-start .gtL-headwrap,${P}[data-phone-landscape] .gtL-start .gtL-headwrap{translate:none;transform:none}
 ${P}.gt-laptopmode .gtL-start [data-onboard$="-tile"],${P}[data-phone-landscape] .gtL-start [data-onboard$="-tile"]{translate:none}
 ${P} .gtL-start .gt-hero-sub div{display:inline-block;background:${INK2};color:${CREAM2}!important;font-family:${FONT}!important;font-size:12px!important;letter-spacing:.28em!important;padding:7px 26px 7px 30px;margin-top:8px!important;transform:rotate(2deg);clip-path:polygon(0 0,100% 0,95% 50%,100% 100%,0 100%,5% 50%)}
 ${P} .gtL-start .gtL-tile{border:none!important;outline:none!important;border-radius:999px!important;justify-content:center!important;padding:18px 20px!important;margin:10px 10px 18px 8px!important;width:calc(100% - 18px)!important}

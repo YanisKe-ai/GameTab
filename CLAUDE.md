@@ -26,6 +26,7 @@ Live: https://yaniske-ai.github.io/GameTab/ (Repo-Name auf GitHub prüfen: `Game
 
 ## Themes
 - Themes: `dark`, `light`, `noir`. Pro Spiel `xxxTokens(theme)` und `xxxPageShellStyle(theme)`. Unbekannte Themes fallen auf dark.
+- Hell ist seit 16.11.2026 «Schwarz auf Creme» (wie Noir, nur hell): Hintergrund #F6F1E7 überall, Flächen #FFFCF6, Schrift und Ränder #1E1A15, nur Spiel-Icons in Listen und die zwei roten Lösch-Einträge farbig. Grundlage `web/src/themes/hell.js` (`isHell()`, `hc()`, `hellMap`, `hellWrap`), Sicherheitsnetz `web/src/styles/hell-css.js`, Prüfskript `dev-notes/plan/hell-mono/hellcheck.py` (Ziel 0 Farbstellen). Ryū hat intern Hell als Basis: jede Hell-Änderung mit `isHell()` absichern.
 - Vitrum (Glas) wurde am 07.11.2026 auf Wunsch von Yanis komplett entfernt. Gespeichertes `vitrum` wird beim Laden zu `dark`. Nicht wieder einbauen.
 
 ## Akzentfarben der Spiele

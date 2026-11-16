@@ -68,11 +68,16 @@ function hc(v) { return isHell() ? hellColor(v) : v; }
 
 const ACCENT_KEYS = /^(accent|accent2|gold|gold2|goldSoft|goldDim|accentGold|primary|btn|btnFrom|btnTo|hl|highlight|win|lead)$/i;
 // Token-Objekt eines Spiels in Hell umrechnen (alle Farbwerte, Akzente schwarz).
+const HELL_PAGE_KEYS = /^(pageBg|bg|pageBg2|bg2|pageBackground)$/;
 function hellMap(r) {
   if (!r || typeof r !== "object" || Array.isArray(r)) return r;
   const o = { ...r };
+  // Seiten-Hülle (minHeight/background/padding): überall das Hell-Creme
+  if (typeof o.background === "string" && ("minHeight" in o || "padding" in o)) o.background = HELL.page;
   for (const k of Object.keys(o)) {
     const v = o[k];
+    if (k === "background" && o[k] === HELL.page) continue;
+    if (typeof v === "string" && HELL_PAGE_KEYS.test(k)) { o[k] = HELL.page; continue; }
     if (typeof v === "string") o[k] = ACCENT_KEYS.test(k) && parse(v.trim()) ? HELL.ink : hellColor(v);
     else if (Array.isArray(v)) o[k] = v.map((x) => (typeof x === "string" ? hellColor(x) : x));
     else if (v && typeof v === "object" && !React_isElement(v)) o[k] = hellMap(v);

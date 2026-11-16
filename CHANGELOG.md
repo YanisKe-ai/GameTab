@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.16-18 (16.11.2026 22:50)
+- Hell Schwarz auf Creme
+
 ## 2026.11.16-17 (16.11.2026 21:58)
 - Ryū Handy: Logo grösser, ALL-IN-ONE schräg, Kacheln grösser
 

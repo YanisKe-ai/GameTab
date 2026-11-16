@@ -217,7 +217,6 @@ const MO_CSS = `
 .gtL-content .mo-root .mo-rk-row b{font-size:19px}
 .gtL-content .mo-root .mo-rk-row i{font-size:28px}
 .gtL-content .mo-root .mo-dock{background:none;padding:0}
-.gtL-content .mo-pk .mo-cta,.gtL-content .mo-pk.mo-pk .gt-su-btn{color:#F3EAD3!important}
 [data-phone-landscape] .mo-main,[data-phone-landscape] .mo-board{max-width:none}
 /* Querformat: Eingabe-Blatt zweispaltig, links Kopf und Spieler, rechts die Ziffern */
 [data-phone-landscape] .mo-sheet{max-width:none;max-height:none;height:calc(var(--pl-vh,100vh) - 8px);display:grid;grid-template-columns:minmax(0,1fr) min(270px,42%);grid-template-rows:auto auto minmax(0,1fr);border-radius:18px 18px 0 0;padding-left:var(--pl-sal,0px);padding-right:var(--pl-sar,0px)}

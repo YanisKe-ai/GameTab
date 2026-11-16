@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.16-2 (16.11.2026 01:05)
+- Ryū: eigenes Design für Impostor, Verräter, Werwolf, Mafia, Am ehesten, Heads Up, 5 Sekunden; neue Laptop-Seitenleiste «Spielerbank» in allen Modi; Ryū-Feinschliff (Stand-Karte, Unterzeilen, «+ Spieler», Eigene Wörter, Zahl-Änderungen)
+
 ## 2026.11.16-1 (16.11.2026 00:20)
 - Ryū: eigenes Design für Skyjo, Wizard, Minigolf, Flip 7, Phase 10, Rommé, Freies Spiel, Darts (alle Modi), Tabu; Punkteverlauf schwarz/rot; Nocturne: Kachel-Icons Neon-Lila
 

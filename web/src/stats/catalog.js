@@ -53,7 +53,7 @@ function GtMatchCatalog({ matches, t, tk, lk, theme, lang, onChanged, Mark }) {
   const selN = sel ? sel.size : 0;
   return <div>
     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8, flexWrap: "wrap", margin: "4px 2px 12px" }}>
-      <span className="gtSt2-sub" style={{ fontSize: ".875rem", color: tk.muted, fontFamily: FF }}>{fmt(t("catCount"), { n: list.length })}</span>
+      <span className="gtSt2-sub" style={{ fontSize: ".875rem", color: tk.muted, fontFamily: FF }}>{(list.length === 1 ? t("catCountOne") : fmt(t("catCount"), { n: list.length }))}</span>
       <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
         {sel && noNames.length > 0 && <button type="button" className="gtSt2-btn gtSt2-pill" style={pill(false)} onClick={() => setSel(new Set(noNames.map((m) => String(m.id))))}>{fmt(t("catPickNoNames"), { n: noNames.length })}</button>}
         <button type="button" className="gtSt2-btn" aria-pressed={!!sel} style={pill(!!sel)} onClick={() => setSel(sel ? null : new Set())}>{sel ? t("catDone") : t("catSelect")}</button>

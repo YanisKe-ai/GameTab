@@ -43,7 +43,7 @@ function isIOS() {
 }
 // Safari im Browser geht selbst vom Rand zurueck: dort nicht aktiv. Home-Bildschirm und Android: aktiv.
 function gestureEnabled() { return !(isIOS() && !standalone()); }
-function isLaptop() { return !!document.querySelector(".gtL-sidebar"); }
+function isLaptop() { return !!document.querySelector(".spieleblock-laptop-frame"); }
 function getRoot() { return isLaptop() ? document.querySelector(".gtL-content") : document.getElementById("root"); }
 function vhCss() { return standalone() ? "100vh" : "100dvh"; }
 function sig() { const d = document.documentElement; return (d.getAttribute("data-gt-theme") || "") + "|" + (d.lang || ""); }

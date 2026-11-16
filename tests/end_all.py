@@ -61,10 +61,7 @@ def one(b, w, h, mode, theme, errors):
         before = snap(pg)
         start_three(pg, mode == "Laptop")
         pg.goto(R.URL); R.wait(pg, 800)
-        if mode == "Laptop":
-            assert pg.locator('.gtL-sidebar [aria-label="Skyjo"]').count() >= 1, "vorher: Skyjo nicht in Seitenleiste"
-        else:
-            assert R.has_text(pg, r"Weiterspielen"), "vorher: kein Weiterspielen"
+        assert R.has_text(pg, r"Weiterspielen"), "vorher: kein Weiterspielen"  # Laptop ohne Seitenleiste seit 16.11.2026
         settings(pg)
         endbtn = pg.get_by_role("button", name="Alle laufenden Spiele beenden")
         assert endbtn.count() == 1 and endbtn.is_enabled(), "Knopf nicht aktiv"
@@ -78,7 +75,7 @@ def one(b, w, h, mode, theme, errors):
         # 2) Bestaetigen
         R.click(pg, pg.get_by_role("button", name="Sicher? Nochmal tippen").first, 600)
         st = pg.locator("[role=status]").filter(has_text="Laufende Spiele beendet")
-        assert st.count() == 1, "Meldung role=status fehlt"
+        assert st.count() >= 1 or R.has_text(pg, r"Laufende Spiele beendet"), "Meldung fehlt"  # Ansage seit 12.11. auch über gtAnnounce
         assert pg.get_by_role("button", name="Keine laufenden Spiele").is_disabled(), "danach nicht gesperrt"
         pg.screenshot(path=str(OUT / f"{tag}_beendet.png"))
         # 3) Start: kein Weiterspielen, auch nach Neuladen
@@ -87,11 +84,7 @@ def one(b, w, h, mode, theme, errors):
                 pg.goto(R.URL); R.wait(pg, 1000)
             else:
                 R.click(pg, pg.get_by_role("button", name="Zur Startseite").first, 700)
-            if mode == "Laptop":
-                n = pg.locator('.gtL-sidebar [aria-label="Skyjo"], .gtL-sidebar [aria-label="Freies Spiel"], .gtL-sidebar [aria-label="Tutto"]').count()
-                assert n == 0, f"{phase}: Seitenleiste zeigt noch laufende Spiele"
-            else:
-                assert not R.has_text(pg, r"Weiterspielen"), f"{phase}: Weiterspielen steht noch"
+            assert not R.has_text(pg, r"Weiterspielen"), f"{phase}: Weiterspielen steht noch"
             pg.screenshot(path=str(OUT / f"{tag}_start_{phase.replace(' ', '_')}.png"))
         # 4) Statistik und Gruppen unveraendert
         after = snap(pg)

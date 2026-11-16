@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.16-7 (16.11.2026 16:30)
+- Laptop ohne Seitenleiste, Tutto ohne Punkteverlauf
+
 ## 2026.11.16-6 (16.11.2026 15:49)
 - Aufräumen: alter Podest-Code, Haptik-Testseite, Tests
 

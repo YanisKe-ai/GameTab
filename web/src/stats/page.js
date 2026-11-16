@@ -197,7 +197,7 @@ const animKey=range+"|"+(game||"")+"|"+(groupId||"");
 const open=k=>{if(k)setPerson(normalizeName(k));};
 const hasAny=matches.length>0;const empty=!model||!model.summary||!model.summary.matches;
 const[tab,setTab]=useState("rank");const[allRank,setAllRank]=useState(false);const[pLoad,setPLoad]=useState(20);const[gLoad,setGLoad]=useState(20);const[achP,setAchP]=useState(null);const[lapS,setLap]=useState(false);const plnd=usePhoneLandscape();const lap=lapS||plnd;
-useEffect(()=>{try{setLap(!!document.querySelector(".gtL-sidebar"));}catch(e){}},[]);
+useEffect(()=>{try{setLap(!!document.querySelector(".spieleblock-laptop-frame"));}catch(e){}},[]);
 useEffect(()=>{if(lap&&tab==="games")setTab("rank");},[lap,tab]);
 const sig=range+"|"+game+"|"+groupId+"|"+tab+"|"+(person||"")+"|"+(view||"");const sigRef=useRef(sig);const movedRef=useRef(false);if(sigRef.current!==sig){sigRef.current=sig;movedRef.current=true;}const moved=movedRef.current;
 const filters=hasAny&&!calcErr&&!view&&<GtSt2Filters t={t} tk={tk} lk={lk} range={range} setRange={setRange} game={game} setGame={setGame} groupId={groupId} setGroupId={setGroupId} groups={groups} gameOpts={gameOpts} acc={acc} onReset={reset} lang={lang}/>;

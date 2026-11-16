@@ -436,8 +436,8 @@ def t_erfolge(pg, env):
     skyjo_round(pg, ["Spieler 1", "Spieler 2"], [5, 120], ender="Spieler 1")
     expect_text(pg, r"Neuer Erfolg: Erste Partie", "Erfolge: Hinweis auf dem Podest fehlt", timeout=9000)
     pg.goto(URL); wait(pg, 700)
-    if pg.viewport_size["width"] < 768:
-        click(pg, pg.get_by_text("Schreibunterlagen", exact=True).first, 700)
+    # Statistik ueber den Knopf in der Spielliste (Laptop seit 16.11.2026 ohne Seitenleiste, wie am Handy)
+    click(pg, pg.get_by_text("Schreibunterlagen", exact=True).first, 700)
     click(pg, pg.get_by_role("button", name=re.compile(r"Statistik", re.I)).first, 900)
     # Neue Statistik (Paket SD): Profil ueber den Reiter "Personen"
     tab = pg.get_by_role("tab", name=re.compile(r"^Personen$"))

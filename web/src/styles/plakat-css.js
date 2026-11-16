@@ -21,7 +21,7 @@ ${P} .gt-wm{font-family:${FONT}!important;-webkit-text-stroke:.05em ${INK}!impor
 ${P} .gt-hf{background:${PAPER}!important;outline:2.5px solid ${INK}!important;outline-offset:-2.5px!important;box-shadow:0 3px 0 ${INK}!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;color:${INK}!important}
 ${P} .gt-hb:active .gt-hf{transform:translateY(2px);box-shadow:0 1px 0 ${INK}!important}
 /* Einrichtung (gemeinsam für alle Spiele) */
-${P} .gt-su-label{font-family:${FONT}!important;letter-spacing:.06em!important;color:${INK}!important}
+${P} .gt-su-label{font-family:${FONT}!important;letter-spacing:.06em!important;color:${CREAM2}!important;background:${INK2};display:inline-block;width:auto!important;padding:3px 9px 2px;border-radius:7px;line-height:1.3}
 ${P} .gt-su-row{outline:2px solid ${INK}!important;outline-offset:-2px!important;box-shadow:0 3px 0 ${INK}!important;background:${PAPER}!important}
 ${P} .gt-su-chip,${P} .gt-su-ib,${P} .gt-su-add,${P} .gt-su-numin{outline:2px solid ${INK}!important;outline-offset:-2px!important}
 /* «+ Spieler»: nie graue Schrift auf Rot, sondern Creme-Sticker mit gestricheltem Rand */
@@ -54,6 +54,8 @@ ${P} .gt-hm-h{display:table;margin:4px 8px 4px;padding:3px 9px 2px!important;bor
 ${P} .gt-hm-row{font-weight:700}
 /* Einstellungen «Ich bin»: Hinweis auf schwarzer Zeile lesbar */
 ${P} #gt-profile-hint{color:rgba(243,234,211,.82)!important}
+${P} body .gtL-start .gtL-showcase-hint.gtL-showcase-hint,${P} .gtL-showcase-hint{-webkit-text-fill-color:${CREAM2}!important;display:table!important;margin:10px auto 0!important;padding:3px 10px 2px;border-radius:8px;background:${INK2};color:${CREAM2}!important;font-weight:600!important;font-size:12px!important}
+${P} body button.gt-srch-cancel.gt-srch-cancel{color:${CREAM2}!important;-webkit-text-fill-color:${CREAM2}!important;position:relative;z-index:1000}
 ${P} .gt-hm-row:focus-visible,${P} [role=dialog] :focus-visible{outline-color:${INK2}!important}
 /* Stand-Karte (GtLStandings, z. B. Tutto Laptop): Creme, Sticker-Rand, Punkte und Balken nur Rot/Schwarz */
 ${P} .gt-lstand,${P} .gtL-standings{background:${CREAM}!important;border:none!important;outline:2.5px solid ${INK};outline-offset:-2.5px;box-shadow:0 4px 0 ${INK};color:${INK}!important}

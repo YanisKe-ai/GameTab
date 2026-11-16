@@ -27,5 +27,8 @@ function isPlakatDom() { try { return document.documentElement.getAttribute("dat
 let GT_SKIN = "";
 function setSkinNow(s) { GT_SKIN = s || ""; }
 function curSkin() { return GT_SKIN; }
+let GT_THEME_BASE = "dark";
+function setThemeNow(t) { GT_THEME_BASE = t || "dark"; }
+function curThemeBase() { return GT_THEME_BASE; }
 
-export { setSkinNow, curSkin, THEMES, isValidTheme, themeBase, themeSkin, themeBar, nextTheme, GtSkinCtx, usePlakat, isPlakatDom };
+export { setSkinNow, curSkin, setThemeNow, curThemeBase, THEMES, isValidTheme, themeBase, themeSkin, themeBar, nextTheme, GtSkinCtx, usePlakat, isPlakatDom };

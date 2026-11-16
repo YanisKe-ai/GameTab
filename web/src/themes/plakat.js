@@ -1,6 +1,7 @@
 // Modus «Plakat» (2026-11-15): Design-Tokens und Grundzuordnung.
 // Keine Importe aus Spieldateien (keine Kreisabhängigkeiten).
 import { curSkin } from "./theme-id.js";
+import { hellMap, isHell } from "./hell.js";
 import { React } from "../vendor/react-globals.js";
 
 const PK = {
@@ -84,7 +85,9 @@ function plakatMap(r) {
 function pkWrap(fn) {
   return function (theme, ...rest) {
     const r = fn(theme, ...rest);
-    return theme === "light" && isPlakat() ? plakatMap(r) : r;
+    if (theme !== "light") return r;
+    if (isPlakat()) return plakatMap(r);
+    return isHell() ? hellMap(r) : r;
   };
 }
 

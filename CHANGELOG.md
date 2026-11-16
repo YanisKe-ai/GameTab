@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.16-9 (16.11.2026 18:01)
+- Laptop: Modus-Knopf auf der Startseite, grössere Spieltitel
+
 ## 2026.11.16-8 (16.11.2026 17:40)
 - Laptop-Startseite zweispaltig, Yatzy ohne Scroll beim Eingeben
 

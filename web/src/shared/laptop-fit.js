@@ -43,7 +43,8 @@ function gtFitMeasure(root) {
   const z0 = avail / nat;
   // Lange Seiten (Tabellen) scrollen wie bisher; knapp zu hohe Seiten (bis 13 %) werden leicht verkleinert, damit nichts abgeschnitten ist
   if (z0 < 0.87) return zBig;
-  const lo = z0 < 1 ? 0.88 : 1;
+  // Untergrenze immer 0.88: misst die natürliche Höhe knapp zu tief (z. B. Werwolf-Einrichtung), darf die Seite trotzdem leicht verkleinern
+  const lo = 0.88;
   let z = Math.min(GT_FIT_MAX, Math.max(z0 < 1 ? lo : zBig, z0));
   // Kontrolle am echten Ergebnis: läuft die Seite nach dem Zoom über (z. B. absolut platzierte Teile), schrittweise verkleinern
   const over = () => root.scrollHeight - root.clientHeight;
@@ -62,7 +63,7 @@ function gtFitMeasure(root) {
       z = Math.max(0.88, z * k * 0.99);
       set(z.toFixed(3));
       // Bleibt ein Rest durch innere Bildschirmhöhen-Flächen (wachsen mit dem Zoom), zählt der sichtbare Inhalt
-      if (over() > 2) z = z0 < 1 ? Math.max(0.88, z0 * 0.995) : zBig;
+      if (over() > 2 && z0 < 1) z = Math.max(0.88, z0 * 0.995);
     } else z = z0 < 1 ? Math.max(0.88, z0 * 0.995) : zBig;
   }
   return Math.floor(z * 100) / 100;

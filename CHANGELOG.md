@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.17-1 (17.11.2026 00:46)
+- Ryū Startseite feiner verteilt
+
 ## 2026.11.16-19 (16.11.2026 23:53)
 - Ryū: ALL-IN-ONE als Explosion mit Comic-Showdown
 

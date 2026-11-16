@@ -192,6 +192,8 @@ ${P} .gt-ryu-statsbtn .gtL-statsbtn-txt{display:inline!important}
 ${P} body h1.gt-wm.gt-wm.gt-wm.gt-wm.gt-wm.gt-wm,${P} body .f7-word.f7-word.f7-word.f7-word.f7-word.f7-word,${P} body .tt-word.tt-word.tt-word.tt-word.tt-word.tt-word,${P} body .yz-word.yz-word.yz-word.yz-word.yz-word.yz-word,${P} body .sk-word.sk-word.sk-word.sk-word.sk-word.sk-word,${P} body .gt-gamehead.gt-gamehead h1:not(.gt-wm):not(.gt-x1):not(.gt-x2){color:${INK2}!important;-webkit-text-fill-color:${INK2}!important;-webkit-text-stroke:0!important;paint-order:normal!important;text-shadow:0.075em 0.000em 0 ${CREAM2}, 0.069em 0.029em 0 ${CREAM2}, 0.053em 0.053em 0 ${CREAM2}, 0.029em 0.069em 0 ${CREAM2}, 0.000em 0.075em 0 ${CREAM2}, -0.029em 0.069em 0 ${CREAM2}, -0.053em 0.053em 0 ${CREAM2}, -0.069em 0.029em 0 ${CREAM2}, -0.075em 0.000em 0 ${CREAM2}, -0.069em -0.029em 0 ${CREAM2}, -0.053em -0.053em 0 ${CREAM2}, -0.029em -0.069em 0 ${CREAM2}, -0.000em -0.075em 0 ${CREAM2}, 0.029em -0.069em 0 ${CREAM2}, 0.053em -0.053em 0 ${CREAM2}, 0.069em -0.029em 0 ${CREAM2}!important;filter:drop-shadow(.06em .08em 0 #141414)!important;letter-spacing:.02em!important}
 /* Sehr schmale Handys: Ryū-Logo etwas kleiner, damit das Zahnrad das «B» nicht überdeckt */
 @media (max-width:350px){${P} .gtL-start .gt-hero-mark-pk{width:min(var(--hm-w,330px),calc(100vw - 92px))!important}}
+/* Beschriftungen: immer schwarzes Etikett mit Creme-Schrift (überstimmt Spiel-Regeln, die sonst schwarz auf schwarz ergeben) */
+${P} body .gt-su-label.gt-su-label.gt-su-label{background:${INK2}!important;color:${CREAM2}!important;-webkit-text-fill-color:${CREAM2}!important}
 @media (prefers-reduced-motion: reduce){${P} .gt-su-btn::after,${P} .pk-shine::after,${P} .gt-wm{animation:none!important}}
 `;
 

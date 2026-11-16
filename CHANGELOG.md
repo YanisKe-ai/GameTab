@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.16-4 (16.11.2026 12:29)
+- Offene Punkte: Flip 7 Laptop mit grossem Titel, Spieltitel ohne Icon/Karten (Flip 7, Skyjo), Molotow und SLF auf dem Laptop grösser und ohne Abschneiden, Heads Up iPad einspaltig, Darts-Startansage über der Tafel ohne Verschieben, 5 Sekunden mit «Zeit abgelaufen»-Stempel, Ryū-Jahresplakat, Statistik-Kopf sauber, «ū» kräftig, Einzahl «1 Partie», Favoriten-Stern grössere Trefferfläche
+
 ## 2026.11.16-3 (16.11.2026 01:53)
 - Ryū Qualitätskontrolle: Spieltitel wie das Logo (lesbar, einheitlich), Spielmenü ohne bunte Icons, Beschriftungen als Etikett, Suche dunkel, Laptop ohne Creme-Band, Seitenleisten-Icons umgefärbt, Logo auf 320 px, Freies Spiel ruhiger
 

@@ -295,7 +295,8 @@ const SK_PK_CSS=`
 @media (max-height:620px){.sk-pk .sk-word::before,.sk-pk .sk-word::after{display:none}}
 @media (prefers-reduced-motion:no-preference){.sk-pk .sk-tile{transition:transform .18s cubic-bezier(.3,1.5,.5,1),box-shadow .18s}}
 @media (prefers-reduced-motion:reduce){.sk-pk .sk-save::after{animation:none;display:none}}
-`;
+
+.sk-pk .sk-word::before,.sk-pk .sk-word::after{content:none!important;display:none!important}`;
 function skyT(theme){const b=skyjoTokens(theme);if(theme==="light")return{...b,line:"rgba(40,36,30,0.16)",red:"#B3261E",input:"#F4F1E8"};if(theme==="noir")return{...b,line:"#454545",red:"#E0E0E0",input:"#111111"};return{...b,bg:"#12141C",bg2:"#181B25",card:"#1A1E2B",ink:"#F0F1F5",muted:"#8890A0",line:"#2A3040",red:"#FF8A80",input:"#12141C"};}
 function skyShell(theme){const sk=skyT(theme);return{minHeight:"100vh",background:`radial-gradient(ellipse at 50% -10%, ${sk.bg2} 0%, ${sk.bg} 65%)`,padding:"20px 12px 32px"};}
 function skyVars(sk,pk){if(pk)return{"--sk-card":"#FFFDF7","--sk-ink":"#141414","--sk-muted":"#141414","--sk-line":"#141414","--sk-acc":"#1A1716","--sk-on":"#FFFDF7","--sk-red":"#B3261E","--sk-in":"#F4EAD5"};return{"--sk-card":sk.card,"--sk-ink":sk.ink,"--sk-muted":sk.muted,"--sk-line":sk.line,"--sk-acc":sk.teal,"--sk-on":sk.onAccent,"--sk-red":sk.red,"--sk-in":sk.input};}

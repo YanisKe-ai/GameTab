@@ -178,7 +178,8 @@ const MO_CSS = `
 .gtL-content .mo-split{align-items:start}
 .gtL-content .mo-rows{max-height:max(180px,calc(100dvh - 470px))}
 .gtL-content .mo-slate.dense{--mo-rh:36px}
-.gtL-content .mo-main{width:min(560px,56vw)}
+.gtL-content .mo-inner{max-width:1120px!important}
+.gtL-content .mo-main{width:min(680px,56vw)}
 .gtL-content .mo-rank{display:flex;flex-direction:column;gap:6px}
 .gtL-content .mo-rank h3{margin:0 0 4px;font:700 12px/1.2 'Inter',sans-serif;letter-spacing:.06em;color:var(--mo-mu)}
 .gtL-content .mo-rk-row{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:8px;align-items:center;min-height:48px;padding:0 14px;border-radius:14px;border:1px solid var(--mo-line);background:var(--mo-card)}
@@ -186,6 +187,37 @@ const MO_CSS = `
 .gtL-content .mo-rk-row b{font:700 15px/1.2 'Inter',sans-serif;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .gtL-content .mo-rk-row i{font:800 20px/1 'Inter',sans-serif;font-style:normal;font-variant-numeric:tabular-nums}
 .gtL-content .mo-dock{position:static;margin:12px 0 0;padding:0;background:none}
+/* Laptop: grössere Schrift und Elemente, Breite nutzen (Handy bleibt unverändert) */
+.gtL-content .mo-split{gap:32px}
+.gtL-content .mo-main.gtL-col-main{flex:none}
+.gtL-content .mo-root .mo-board .mo-slate{--mo-lc:52px;padding:6px 10px 10px}
+.gtL-content .mo-root .mo-bd{width:30px;height:30px;font-size:15px}
+.gtL-content .mo-root .mo-hn{font-size:15px}
+.gtL-content .mo-root .mo-rn{font-size:20px}
+.gtL-content .mo-root .mo-v{font-size:28px}
+.gtL-content .mo-root .mo-n6 .mo-v{font-size:24px}
+.gtL-content .mo-root .mo-sg{width:26px;height:26px;font-size:17px}
+.gtL-content .mo-root .mo-trow{min-height:40px}
+.gtL-content .mo-root .mo-tot{min-height:58px}
+.gtL-content .mo-root .mo-tot .mo-rn{font-size:14px}
+.gtL-content .mo-root .mo-tc .mo-v{font-size:36px}
+.gtL-content .mo-root .mo-n6 .mo-tc .mo-v{font-size:30px}
+.gtL-content .mo-root .mo-tc.lead::before{height:46px;width:min(86%,66px)}
+.gtL-content .mo-root .mo-rk{font-size:13px}
+.gtL-content .mo-root .mo-legend{font-size:14px}
+.gtL-content .mo-root .mo-legend b{font-size:15px}
+.gtL-content .mo-root .mo-dkinfo b{font-size:19px}
+.gtL-content .mo-root .mo-dkinfo span{font-size:15px}
+.gtL-content .mo-root .mo-cta{min-height:58px;font-size:18px;padding:0 28px}
+.gtL-content .mo-root .mo-ib{width:58px;height:58px}
+.gtL-content .mo-root .mo-win{font-size:20px}
+.gtL-content .mo-root .mo-rank{width:min(420px,32vw);gap:10px}
+.gtL-content .mo-root .mo-rank h3{font-size:15px}
+.gtL-content .mo-root .mo-rk-row{min-height:58px;padding:0 18px}
+.gtL-content .mo-root .mo-rk-row b{font-size:19px}
+.gtL-content .mo-root .mo-rk-row i{font-size:28px}
+.gtL-content .mo-root .mo-dock{background:none;padding:0}
+.gtL-content .mo-pk .mo-cta,.gtL-content .mo-pk.mo-pk .gt-su-btn{color:#F3EAD3!important}
 [data-phone-landscape] .mo-main,[data-phone-landscape] .mo-board{max-width:none}
 /* Querformat: Eingabe-Blatt zweispaltig, links Kopf und Spieler, rechts die Ziffern */
 [data-phone-landscape] .mo-sheet{max-width:none;max-height:none;height:calc(var(--pl-vh,100vh) - 8px);display:grid;grid-template-columns:minmax(0,1fr) min(270px,42%);grid-template-rows:auto auto minmax(0,1fr);border-radius:18px 18px 0 0;padding-left:var(--pl-sal,0px);padding-right:var(--pl-sar,0px)}

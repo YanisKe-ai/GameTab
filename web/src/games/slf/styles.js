@@ -245,6 +245,65 @@ const SLF_CSS = `
 .gtL-content .slf-wrap{max-width:none!important}
 .gtL-content .slf-letter{width:112px;height:112px;font-size:80px}
 .gtL-content .slf-root .gt-u-dock{position:sticky;bottom:12px;margin-top:16px}
+/* Laptop: grössere Schrift, Gruppen-Chips umbrechen statt abgeschnitten (Handy unverändert) */
+.gtL-content .slf-root .slf-groups{flex-wrap:wrap;overflow:visible;scroll-snap-type:none;margin:0;padding:2px 0 6px}
+.gtL-content .slf-root .slf-chip{min-height:48px;font-size:16px;padding:8px 18px}
+.gtL-content .slf-root .slf-groups .slf-chip .n{font-size:14px;min-width:24px;height:24px}
+.gtL-content .slf-root .slf-h{font-size:16px}
+.gtL-content .slf-root .slf-hint{font-size:15.5px}
+.gtL-content .slf-root .slf-status{font-size:15px}
+.gtL-content .slf-root .slf-ghost{font-size:16px;min-height:48px}
+.gtL-content .slf-root .slf-btn{font-size:20px;min-height:62px}
+.gtL-content .slf-root .slf-card{padding:18px}
+.gtL-content .slf-root .slf-lab{font-size:14px}
+.gtL-content .slf-root .slf-in{font-size:27px;min-height:56px}
+.gtL-content .slf-root .slf-card2{min-height:92px;padding:12px 16px 8px}
+.gtL-content .slf-root .slf-card2 .slf-lab{font-size:13px}
+.gtL-content .slf-root .slf-card2 .slf-in{font-size:26px;min-height:52px}
+.gtL-content .slf-root .slf-mini-head b{font-size:26px}
+.gtL-content .slf-root .slf-mini-head span{font-size:16px}
+.gtL-content .slf-root .slf-mini-list{grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
+.gtL-content .slf-root .slf-mini-list li{min-height:52px}
+.gtL-content .slf-root .slf-mini-list .nm{font-size:22px}
+.gtL-content .slf-root .slf-round{font-size:30px}
+.gtL-content .slf-root .slf-table{font-size:17px}
+.gtL-content .slf-root .slf-table .th{font-size:14px}
+.gtL-content .slf-root .slf-big .v{font-size:64px}
+.gtL-content .slf-root .slf-big .l{font-size:17px}
+.gtL-content .slf-root .slf-fact b{font-size:24px}
+.gtL-content .slf-root .slf-fact span{font-size:15px}
+.gtL-content .slf-root .slf-code{font-size:42px}
+.gtL-content .slf-root .slf-qr{width:260px}
+.gtL-content .slf-root .slm-body{gap:16px}
+.gtL-content .slf-root .slm-hero{padding:16px 20px;gap:18px;border-radius:28px}
+.gtL-content .slf-root .slm-ring,.slm-ringbox{width:76px;height:76px}
+.gtL-content .slf-root .slm-ringbox svg{width:76px;height:76px}
+.gtL-content .slf-root .slm-let{font-size:32px}
+.gtL-content .slf-root .slm-tx .slf-round{font-size:26px}
+.gtL-content .slf-root .slm-tx span{font-size:15px}
+.gtL-content .slf-root .slm-cnt b{font-size:28px}
+.gtL-content .slf-root .slm-cnt span{font-size:15px}
+.gtL-content .slf-root .slm-az{display:grid;grid-template-columns:repeat(26,minmax(0,1fr));gap:3px;overflow:visible}
+.gtL-content .slf-root .slm-az span{flex:none;width:auto;height:40px;font-size:16px;border-radius:10px}
+.gtL-content .slf-root .slm-row{min-height:62px;padding:0 20px;gap:14px}
+.gtL-content .slf-root .slm-lab{width:110px;font-size:13px}
+.gtL-content .slf-root .slm-row .slf-in{min-height:60px;height:60px;font-size:27px}
+.gtL-content .slf-root .slm-ok{width:28px;height:28px;font-size:15px}
+.gtL-content .slf-root .slm-off{font-size:14px;padding:4px 7px}
+.gtL-content .slf-root .slm-legend{font-size:15px}
+.gtL-content .slf-root .slm-legend b{font-size:16px}
+.gtL-content .slf-root .slm-row.is-score{min-height:76px;padding:10px 18px}
+.gtL-content .slf-root .slm-ans{font-size:24px}
+.gtL-content .slf-root .slm-ans.is-empty{font-size:16px}
+.gtL-content .slf-root .slm-chips{gap:6px}
+.gtL-content .slf-root .slm-chips .slf-pt{min-height:52px;width:52px;font-size:19px}
+.gtL-content .slf-root .slm-sum{padding:16px 24px}
+.gtL-content .slf-root .slm-sum span{font-size:15px}
+.gtL-content .slf-root .slm-sum b{font-size:34px}
+.gtL-content .slf-root .slf-stop{min-height:76px;font-size:32px}
+.gtL-content .slf-root .slf-stamp{font-size:30px}
+.gtL-content .slf-root .slm-stampbar .slf-stamp{font-size:22px}
+.gtL-content .slf-root .slf-strip span{font-size:15px}
 @media (prefers-reduced-motion:reduce){.slf-letter .ch,.slf-stamp,.slf-ov,.slf-box{animation:none}.slf-btn,.slf-ghost,.slf-chip,.slf-pt,.slf-stop,.slf-lb,.slf-letter{transition:none}}
 [data-phone-landscape] .slf-top{gap:12px}
 [data-phone-landscape] .slf-letter{width:84px;height:84px;border-radius:22px;font-size:58px}

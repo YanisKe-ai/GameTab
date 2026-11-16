@@ -3,10 +3,12 @@
 // Summe der Zahlenkarten, bei x2 verdoppeln, dann +2/+4/+6/+8/+10 addieren, bei Flip 7 (7 verschiedene Zahlen) +15.
 // Bust = 0 Punkte. Bonuskarten allein zaehlen auch ohne Zahlenkarten. Spielende: nach der Runde, in der jemand 200 erreicht,
 // gewinnt die hoechste Punktzahl. Gleichstand an der Spitze: Stechrunde mit allen (Op Games FAQ).
+import { isHell, hc } from "../../themes/hell.js";
 import { React } from "../../vendor/react-globals.js";
 import { useGtDialog } from "../../shared/dialog.js";
 import { useEffect, useRef, useState } from "../../prelude.js";
-import { playerHue } from "../../themes/palette.js";
+import { playerHue as playerHue0 } from "../../themes/palette.js";
+const HELL_HUES=["#1E1A15","#4A443A","#5E574C","#2B261F","#6B6458","#38322A","#524B40","#756D60"];function playerHue(i,theme){return theme==="light"&&isHell()?HELL_HUES[i%8]:playerHue0(i,theme);}
 import { GLOBAL_STYLES } from "../../styles/global.js";
 import { RulesButton, RulesSheet } from "../../app/App.js";
 import { useT } from "../../i18n/use-t.js";
@@ -31,12 +33,12 @@ const FLIP7_MODS=[2,4,6,8,10];
 const F7_NUMS=[0,1,2,3,4,5,6,7,8,9,10,11,12];
 function flip7RoundScore({numberSum,busted,x2,mods,flip7}){if(busted)return 0;let base=numberSum||0;if(x2)base*=2;const flat=(mods||[]).reduce((s,m)=>s+m,0);let total=base+flat;if(flip7)total+=15;return total;}
 function f7Entry(nums,mods,x2,busted){const ns=[...new Set((nums||[]).filter(n=>F7_NUMS.includes(n)))].sort((a,b)=>a-b);const ms=[...new Set((mods||[]).filter(m=>FLIP7_MODS.includes(m)))].sort((a,b)=>a-b);const b=!!busted;return{busted:b,nums:b?[]:ns,numberSum:b?0:ns.reduce((s,n)=>s+n,0),mods:b?[]:ms,x2:b?false:!!x2,flip7:!b&&ns.length>=7};}
-function f7T(theme){const b=flip7Tokens(theme);if(theme==="light")return{...b,bg:"#FAF7F0",bg2:"#F2EADB",card:"#FFFFFF",ink:"#1B1815",muted:"#585360",line:"rgba(40,36,30,0.16)",acc:"#C4470F",on:"#FFFFFF",red:"#B3261E",gold:"#8A6100",face:"#FFF6EA",faceLine:"rgba(40,36,30,0.22)",back:"#C4470F",bink:"#FFFFFF"};if(theme==="noir")return{...b,line:"#454545",acc:"#D6D6D6",on:"#111111",red:"#F2F2F2",gold:"#D6D6D6",face:"#EDEDED",faceLine:"#5A5A5A",back:"#3A3A3A"};return{...b,bg:"#12141C",bg2:"#181B25",card:"#1A1E2B",ink:"#F0F1F5",muted:"#8890A0",line:"#2A3040",acc:"#FF7A3D",on:"#1A0E06",red:"#FF6B5E",gold:"#FFC24B",face:"#FFF1DC",faceLine:"rgba(255,255,255,0.28)",back:"#FF7A3D"};}
+function f7T(theme){const b=flip7Tokens(theme);if(theme==="light"&&isHell())return{...b,bg:"#F6F1E7",bg2:"#EDE5D5",card:"#FFFCF6",ink:"#1E1A15",muted:"#4A443A",line:"#B5AC9A",acc:"#1E1A15",on:"#FFFCF6",red:"#1E1A15",gold:"#1E1A15",face:"#FFFCF6",faceLine:"#4A443A",back:"#1E1A15",bink:"#F6F1E7"};if(theme==="light")return{...b,bg:"#FAF7F0",bg2:"#F2EADB",card:"#FFFFFF",ink:"#1B1815",muted:"#585360",line:"rgba(40,36,30,0.16)",acc:"#C4470F",on:"#FFFFFF",red:"#B3261E",gold:"#8A6100",face:"#FFF6EA",faceLine:"rgba(40,36,30,0.22)",back:"#C4470F",bink:"#FFFFFF"};if(theme==="noir")return{...b,line:"#454545",acc:"#D6D6D6",on:"#111111",red:"#F2F2F2",gold:"#D6D6D6",face:"#EDEDED",faceLine:"#5A5A5A",back:"#3A3A3A"};return{...b,bg:"#12141C",bg2:"#181B25",card:"#1A1E2B",ink:"#F0F1F5",muted:"#8890A0",line:"#2A3040",acc:"#FF7A3D",on:"#1A0E06",red:"#FF6B5E",gold:"#FFC24B",face:"#FFF1DC",faceLine:"rgba(255,255,255,0.28)",back:"#FF7A3D"};}
 function f7PkT(b){return{...b,pageBg:"#E4312B",bg:"#E4312B",bg2:"#E4312B",card:"#FFFDF7",ink:"#141414",muted:"#141414",line:"#141414",acc:"#1A1716",on:"#F4EAD5",red:"#B3261E",gold:"#141414",face:"#FFFDF7",faceLine:"#141414",back:"#1A1716",bink:"#F4EAD5"};}
 function f7Shell(theme){const k=f7T(theme);return{minHeight:"100vh",background:`radial-gradient(ellipse at 50% -10%, ${k.bg2} 0%, ${k.bg} 65%)`,padding:"20px 12px 32px"};}
 function f7Vars(k,pk){if(pk)return{"--f7-card":"#FFFDF7","--f7-ink":"#141414","--f7-muted":"#141414","--f7-line":"#141414","--f7-acc":"#1A1716","--f7-on":"#F4EAD5","--f7-red":"#B3261E","--f7-gold":"#141414","--f7-face":"#FFFDF7","--f7-fline":"#141414","--f7-back":"#2B1607","--f7-bink":"#F4EAD5"};return{"--f7-card":k.card,"--f7-ink":k.ink,"--f7-muted":k.muted,"--f7-line":k.line,"--f7-acc":k.acc,"--f7-on":k.on,"--f7-red":k.red,"--f7-gold":k.gold,"--f7-face":k.face,"--f7-fline":k.faceLine,"--f7-back":k.back,"--f7-bink":k.bink||"#1A1205"};}
 const F7_NUM_COL=["#6B6F80","#8C5A2B","#2E7D5B","#B2384E","#2F6FB0","#3E8E41","#8A4FB0","#C2571A","#1F7F86","#A0367A","#A85A12","#3D5BA8","#6A3FA0"];
-function f7NumCol(n,theme){return theme==="noir"?"#2C2C2C":F7_NUM_COL[n]||"#333";}
+function f7NumCol(n,theme){return theme==="noir"?"#2C2C2C":theme==="light"&&isHell()?"#1E1A15":F7_NUM_COL[n]||"#333";}
 function flip7BtnPrimary(theme){const k=f7T(theme);return{border:"none",borderRadius:18,background:k.acc,color:k.on,fontSize:15,fontWeight:800,padding:"14px 0",cursor:"pointer",fontFamily:FLIP7_FONT};}
 function flip7BtnGhost(theme){const k=f7T(theme);return{border:`1px solid ${k.line}`,borderRadius:18,background:"transparent",color:k.muted,fontSize:13,fontWeight:700,padding:"12px 20px",cursor:"pointer",fontFamily:"'Inter', sans-serif"};}
 function Flip7TopBar({subtitle,onBack,theme,t,hideTitle}){const k=f7T(theme);return <GameHeader title={t("gameFlip7")} subtitle={subtitle} onBack={onBack} backLabel={t("back")} tk={k} accent={k.acc} titleFont={FLIP7_FONT} icon={<Flip7Logo color={k.acc} theme={theme}/>} hideTitle={hideTitle}/>;}

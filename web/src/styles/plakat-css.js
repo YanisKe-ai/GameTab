@@ -180,6 +180,8 @@ ${P} .gt-ryu-sb-in{position:relative;display:flex;align-items:center;justify-con
 ${P} .gt-ryu-statsbtn .gtL-statsbtn-txt{display:inline!important}
 /* Spieltitel einheitlich im Molotow-Stil (Entscheid Yanis 15.11.): schwarz mit schwarzer Tiefe; überstimmt Spiel-Regeln */
 ${P} body h1.gt-wm.gt-wm.gt-wm.gt-wm.gt-wm.gt-wm,${P} body .f7-word.f7-word.f7-word.f7-word.f7-word.f7-word{color:${INK2}!important;-webkit-text-fill-color:${INK2}!important;-webkit-text-stroke:.05em #141414!important;paint-order:stroke fill!important;text-shadow:.05em .065em 0 #141414!important}
+/* Sehr schmale Handys: Ryū-Logo etwas kleiner, damit das Zahnrad das «B» nicht überdeckt */
+@media (max-width:350px){${P} .gtL-start .gt-hero-mark-pk{width:min(var(--hm-w,330px),calc(100vw - 92px))!important}}
 @media (prefers-reduced-motion: reduce){${P} .gt-su-btn::after,${P} .pk-shine::after,${P} .gt-wm{animation:none!important}}
 `;
 

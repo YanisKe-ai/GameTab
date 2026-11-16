@@ -1,63 +1,66 @@
-// Laptop-Startseite «E1 Zwei Spalten» (Wahl Yanis 16.11.2026).
-// Links: Logo oben, darunter Zuletzt gespielt, Suche, Tippkarte (Tippkarte beginnt auf Höhe der untersten Icon-Reihe rechts,
-// per --e1-pb aus start.js). Rechts: Schreibunterlagen und Partyspiele gross übereinander, darunter alle Spiele in 6 Spalten.
-// Nur im Laptop-Modus eingehängt. Unter 900 px Inhaltsbreite (iPad hoch) wieder einspaltig.
-const E = ".gtL-content .gtL-start .gtL-e1";
+// Laptop-Startseite «N3 Bühne + Leiste» (Wahl Yanis 16.11.2026, ersetzt E1).
+// Oben das Logo gross mittig, darunter vier gleich hohe Karten (Weiterspielen/Zuletzt gespielt + Suche, Schreibunterlagen,
+// Partyspiele, Tipp), unten alle Spiele als waagrecht scrollbare Reihe wie am Handy. Nur im Laptop-Modus eingehängt.
+// Unter 900 px Inhaltsbreite (iPad hoch) zweispaltig gestapelt.
+const GT_N3_SEL = ".gtL-content .gtL-start .gtL-n3";
+const GT_N3_RYU = 'html[data-gt-skin="plakat"] .gtL-content .gtL-start .gtL-n3';
 
 const GT_LAPTOP_START_CSS = `
-${E}{flex:1 1 auto;display:grid;grid-template-columns:minmax(0,41fr) minmax(0,59fr);column-gap:clamp(32px,4.5vw,72px);width:100%;max-width:1480px;margin:0 auto;padding:26px clamp(28px,4vw,64px) 28px;box-sizing:border-box;min-height:0;align-items:stretch;justify-content:stretch!important;overflow:visible!important}
-${E} .gtL-e1-l{display:flex;flex-direction:column;min-width:0}
-${E} .gtL-e1-r{display:flex;flex-direction:column;gap:clamp(18px,2.6vh,26px);min-width:0;padding-top:64px}
-/* Logo: gross und oben */
-${E} .gtL-startheadpad{padding:0!important;flex:none}
-${E} .gtL-headwrap{max-width:none!important;width:100%!important;margin:0!important;padding:4px 0 0!important}
-${E} .gtL-headwrap>*{max-width:none!important}
-${E} .gtL-e1-sub{font-size:11px!important;letter-spacing:.34em!important;margin-top:10px!important}
-/* Gruppe unten links: gleichmässige Abstände, nach unten geschoben */
-${E} .gtL-e1-group{margin-top:auto;padding-top:28px;margin-bottom:var(--e1-pb,0px);display:flex;flex-direction:column;gap:30px}
-${E} .gtL-e1-group>*{margin:0!important;max-width:none!important;width:100%!important}
-${E} .gtL-resumerow>div{grid-template-columns:minmax(0,1fr)!important;gap:16px!important}
-${E} .gtL-e1-tip .gtL-tipcard{margin:0!important;max-width:none!important;width:100%!important}
-${E} .gtL-e1-tip>*{margin-top:0!important}
-/* Kategorien gross übereinander */
-${E} .gtL-tiles{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:clamp(16px,2.4vh,24px)!important;max-width:none!important;margin:0!important}
-${E} .gtL-tile{padding:clamp(18px,2.8vh,28px) 32px!important;gap:24px!important;border-radius:28px!important}
-${E} .gtL-tile-iconwrap{width:clamp(56px,8.4vh,76px)!important;height:clamp(56px,8.4vh,76px)!important}
-${E} .gtL-tile-iconwrap svg{width:clamp(28px,4.2vh,38px)!important;height:clamp(28px,4.2vh,38px)!important}
-${E} .gtL-tile-title{font-size:clamp(22px,3.4vh,32px)!important}
-${E} .gtL-tile-chevron{font-size:32px!important}
-/* Alle Spiele: 6 Spalten, grössere Icons */
-${E} .gtL-showcase{max-width:none!important;width:100%!important;margin:0!important}
-${E} .gtL-showcase-row{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:clamp(12px,1.8vh,18px) 8px!important;justify-items:center!important;padding:0!important}
-${E} .gtL-showcase-item{width:auto!important;min-width:0!important;gap:8px!important}
-${E} .gtL-showcase-icon{width:clamp(56px,7.8vh,70px)!important;height:clamp(56px,7.8vh,70px)!important}
-${E} .gtL-showcase-icon svg{width:clamp(32px,4.5vh,40px)!important;height:clamp(32px,4.5vh,40px)!important}
-${E} .gtL-showcase-label{font-size:13.5px!important}
-/* Niedrige Fenster (z. B. 1000x625): kompakter, Spiele in 8 Spalten (3 Reihen statt 4) */
-@media (max-height: 760px){
-  ${E}{padding-top:18px;padding-bottom:18px}
-  ${E} .gtL-e1-r{padding-top:58px;gap:14px}
-  ${E} .gtL-e1-group{gap:18px;padding-top:18px}
-  ${E} .gtL-tiles{gap:14px!important}
-  ${E} .gtL-tile{padding:14px 26px!important}
-  ${E} .gtL-showcase-row{grid-template-columns:repeat(8,minmax(0,1fr))!important;gap:12px 4px!important}
-  ${E} .gtL-showcase-icon{width:54px!important;height:54px!important}
-  ${E} .gtL-showcase-icon svg{width:30px!important;height:30px!important}
-  ${E} .gtL-showcase-label{font-size:12px!important}
-  ${E} .gtL-tipcard-body{padding:12px 18px!important}
-  ${E} .gtL-tipcard-text{font-size:14px!important;line-height:1.45!important}
-}
-/* Schmal (iPad hoch): eine Spalte, gewohnte Reihenfolge */
+${GT_N3_SEL}{flex:1 1 auto;display:flex;flex-direction:column;gap:clamp(14px,2.8vh,28px);width:100%;max-width:1600px;margin:0 auto;padding:clamp(14px,3vh,30px) clamp(24px,3vw,44px) clamp(14px,3vh,28px);box-sizing:border-box;min-height:0;justify-content:stretch!important;overflow:visible!important}
+/* Bühne: Logo gross und mittig */
+${GT_N3_SEL} .gtL-n3-top{flex:1 1 auto;min-height:0;display:flex;align-items:center;justify-content:center}
+${GT_N3_SEL} .gtL-startheadpad{padding:0!important}
+${GT_N3_SEL} .gtL-headwrap{max-width:none!important;width:auto!important;margin:0!important;padding:0!important}
+${GT_N3_SEL} .gtL-headwrap>*{max-width:none!important}
+${GT_N3_SEL} .gtL-e1-sub{font-size:11px!important;letter-spacing:.34em!important;margin-top:8px!important}
+/* Vier gleich hohe Karten */
+${GT_N3_SEL} .gtL-n3-mid{flex:none;height:clamp(168px,29vh,270px);display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1fr) minmax(0,1fr) minmax(0,.92fr);gap:clamp(14px,2vw,26px)}
+${GT_N3_SEL} .gtL-n3-mid>*{min-width:0;min-height:0}
+${GT_N3_SEL} .gtL-n3-card{border-radius:28px;box-sizing:border-box}
+${GT_N3_SEL} .gtL-n3-side{display:flex;flex-direction:column;justify-content:center;gap:clamp(10px,1.8vh,16px);padding:clamp(12px,2vh,20px);overflow:hidden}
+${GT_N3_SEL} .gtL-n3-side>*{margin:0!important;max-width:none!important;width:100%!important}
+${GT_N3_SEL} .gtL-resumerow>div{display:flex!important;flex-direction:column;gap:10px!important}
+${GT_N3_SEL} .gtL-resumerow button:not([aria-label]){padding:9px 14px!important}
+${GT_N3_SEL} .gtL-resumerow>div>*,${GT_N3_SEL} .gtL-resumerow button:not([aria-label]){width:100%!important;box-sizing:border-box}
+/* Läuft ein Spiel, zeigt die Karte nur Weiterspielen (Zuletzt gespielt wäre doppelt und zu eng) */
+${GT_N3_SEL} .gtL-resumerow:has(.gt-resume)>div>div:not(.gt-resume){display:none!important}
+${GT_N3_SEL} .gtL-tiles{display:contents!important}
+${GT_N3_SEL} .gtL-tiles>*{height:100%;min-height:0;margin:0!important}
+${GT_N3_SEL} .gtL-tile{height:100%!important;width:100%!important;margin:0!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:clamp(10px,2.2vh,22px)!important;padding:0 16px!important;border-radius:28px!important;box-sizing:border-box;text-align:center}
+${GT_N3_SEL} .gtL-tile>div:nth-child(2){flex:none!important}
+${GT_N3_SEL} .gtL-tile-chevron{display:none!important}
+${GT_N3_SEL} .gtL-tile-iconwrap{width:clamp(54px,9vh,84px)!important;height:clamp(54px,9vh,84px)!important}
+${GT_N3_SEL} .gtL-tile-iconwrap svg{width:clamp(28px,4.8vh,44px)!important;height:clamp(28px,4.8vh,44px)!important}
+${GT_N3_SEL} .gtL-tile-title{font-size:clamp(19px,3.2vh,30px)!important}
+${GT_N3_SEL} .gtL-n3-tip .gtL-tipcard{height:100%;margin:0!important;max-width:none!important;width:100%!important;gap:0!important}
+${GT_N3_SEL} .gtL-n3-tip .gtL-tipcard>button{display:none!important}
+${GT_N3_SEL} .gtL-n3-tip .gtL-tipcard-body{height:100%;box-sizing:border-box;flex-direction:column!important;align-items:flex-start!important;justify-content:center!important;gap:8px!important;padding:clamp(12px,2.2vh,22px)!important;border-radius:28px!important}
+${GT_N3_SEL} .gtL-n3-tip .gtL-tipcard-body>div{height:auto!important;min-height:0!important}
+${GT_N3_SEL} .gtL-n3-tip .gtL-tipcard-text{font-size:clamp(13px,2vh,16px)!important;line-height:1.45!important;height:auto!important}
+/* Spielreihe unten, waagrecht scrollbar mit Pfeilen */
+${GT_N3_SEL} .gtL-n3-shelf{flex:none;padding:clamp(10px,1.8vh,18px) clamp(14px,2vw,24px) clamp(8px,1.4vh,14px)}
+${GT_N3_SEL} .gtL-showcase{max-width:none!important;width:100%!important;margin:0!important}
+${GT_N3_SEL} .gtL-showcase-row{display:flex!important;flex-wrap:nowrap!important;justify-content:flex-start!important;overflow-x:auto!important;gap:clamp(6px,1.2vw,16px)!important;padding:4px 2px 2px!important;scroll-snap-type:x mandatory;scrollbar-width:none}
+${GT_N3_SEL} .gtL-showcase-row::-webkit-scrollbar{display:none}
+${GT_N3_SEL} .gtL-showcase-item{flex:none!important;width:clamp(80px,10.5vh,112px)!important;min-width:0!important;gap:8px!important;scroll-snap-align:start}
+${GT_N3_SEL} .gtL-showcase-icon{width:clamp(54px,8.6vh,80px)!important;height:clamp(54px,8.6vh,80px)!important}
+${GT_N3_SEL} .gtL-showcase-icon svg{width:clamp(30px,4.8vh,44px)!important;height:clamp(30px,4.8vh,44px)!important}
+${GT_N3_SEL} .gtL-showcase-label{font-size:clamp(12px,1.7vh,14.5px)!important}
+${GT_N3_SEL} .gtL-showcase-arrow{display:flex!important}
+${GT_N3_SEL} .gtL-showcase-fade{display:none!important}
+${GT_N3_SEL} .gtL-showcase-hint{display:none!important}
+/* Ryū: Seitenkarten als schwarze Sticker, Spielreihe auf Schwarz */
+${GT_N3_RYU} .gtL-n3-card{background:#1A1716!important;border:2.5px solid #1A1716!important;box-shadow:5px 6px 0 #1A1716}
+${GT_N3_RYU} .gtL-n3-shelf .gtL-seclabel,${GT_N3_RYU} .gtL-n3-shelf .gtL-showcase-label{color:#F3EAD3!important}
+${GT_N3_RYU} .gtL-n3-side .gtL-seclabel{color:#F3EAD3!important}
+${GT_N3_RYU} .gtL-n3-shelf .gtL-showcase-arrow{color:#F3EAD3!important}
+${GT_N3_RYU} .gtL-showcase .gtL-showcase-hint{display:none!important}
+/* Schmal (iPad hoch): zweispaltig gestapelt */
 @container gtl (max-width: 899px){
-  ${E}{display:flex!important;flex-direction:column;gap:20px;padding-top:20px}
-  ${E} .gtL-e1-l,${E} .gtL-e1-r,${E} .gtL-e1-group{display:contents}
-  ${E} .gtL-startheadpad{order:1;padding-top:30px!important}
-  ${E} .gtL-resumerow{order:2}
-  ${E} .gtL-tiles{order:3;grid-template-columns:repeat(2,minmax(0,1fr))!important}
-  ${E} [data-onboard="search"]{order:4}
-  ${E} .gtL-showcase{order:5}
-  ${E} .gtL-e1-tip{order:6}
-  ${E} .gtL-showcase-row{grid-template-columns:repeat(auto-fill,minmax(92px,1fr))!important}
+  ${GT_N3_SEL} .gtL-n3-top{flex:none;padding-top:40px}
+  ${GT_N3_SEL} .gtL-n3-mid{height:auto;grid-template-columns:repeat(2,minmax(0,1fr))}
+  ${GT_N3_SEL} .gtL-n3-side,${GT_N3_SEL} .gtL-n3-tip{grid-column:1/-1}
+  ${GT_N3_SEL} .gtL-tiles>*{height:150px}
 }
 `;
 

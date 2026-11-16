@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.16-11 (16.11.2026 19:20)
+- Laptop-Startseite N3, Modus-Knopf am Handy, Ryū-Logo schräger
+
 ## 2026.11.16-10 (16.11.2026 18:33)
 - Laptop: Auto-Zoom verkleinert knapp zu hohe Seiten
 

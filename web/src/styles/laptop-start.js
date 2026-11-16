@@ -55,6 +55,9 @@ ${GT_N3_RYU} .gtL-n3-shelf .gtL-seclabel,${GT_N3_RYU} .gtL-n3-shelf .gtL-showcas
 ${GT_N3_RYU} .gtL-n3-side .gtL-seclabel{color:#F3EAD3!important}
 ${GT_N3_RYU} .gtL-n3-shelf .gtL-showcase-arrow{color:#F3EAD3!important}
 ${GT_N3_RYU} .gtL-showcase .gtL-showcase-hint{display:none!important}
+/* Ryū: Kategorie-Schriftzüge füllen die Kachel (Wunsch Yanis), Grösse aus der Kachelbreite */
+${GT_N3_RYU} .gtL-tile{container-type:inline-size}
+${GT_N3_RYU} .gtL-tile .gtL-tile-title{font-size:clamp(20px,11.6cqi,64px)!important;line-height:1.05!important;white-space:nowrap}
 /* Schmal (iPad hoch): zweispaltig gestapelt */
 @container gtl (max-width: 899px){
   ${GT_N3_SEL} .gtL-n3-top{flex:none;padding-top:40px}

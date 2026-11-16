@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.16-14 (16.11.2026 20:02)
+- Ryū Laptop: grössere Kategorie-Schriftzüge
+
 ## 2026.11.16-13 (16.11.2026 19:49)
 - Laptop-Spielseiten mittig, Ryū-Logo Handy
 

@@ -101,7 +101,59 @@ function GtYearReview({t,theme,onClose,year}){
 let gtYrLogoP=null;
 function gtYrLogo(){if(!gtYrLogoP)gtYrLogoP=new Promise(res=>{try{const im=new Image();im.onload=()=>res(im);im.onerror=()=>res(null);im.src=APP_LOGO_URI_GOLD;}catch(_){res(null);}});return gtYrLogoP;}
 function gtYrRR(x,l,t,w,h,r){x.beginPath();x.moveTo(l+r,t);x.lineTo(l+w-r,t);x.arcTo(l+w,t,l+w,t+r,r);x.lineTo(l+w,t+h-r);x.arcTo(l+w,t+h,l+w-r,t+h,r);x.lineTo(l+r,t+h);x.arcTo(l,t+h,l,t+h-r,r);x.lineTo(l,t+r);x.arcTo(l,t,l+r,t,r);x.closePath();}
+/* Ryū: Jahresplakat als Bild (rot mit Körnung, Creme-Sticker, Bagel-Zahl mit Rand und hartem Schatten, schwarzes Eintrittskarten-Band mit Logo und Nummer-Stempel) */
+function gtYrRyuNoise(x,W,H){let sd=7919;const rnd=()=>{sd=(sd*16807)%2147483647;return sd/2147483647;};for(let k=0;k<9000;k++){const px=rnd()*W,py=rnd()*H,r=0.7+rnd()*1.5;x.fillStyle=rnd()<0.62?"rgba(26,23,22,"+(0.05+rnd()*0.09).toFixed(3)+")":"rgba(243,234,211,"+(0.03+rnd()*0.06).toFixed(3)+")";x.beginPath();x.arc(px,py,r,0,6.2832);x.fill();}}
+function gtYrDrawRyu(spec,logo){
+  const RED="#E4312B",INK="#1A1716",CR="#F3EAD3",CR2="#D8CBA8";
+  const W=1080,H=1920,M=84,F=gtStxF;const BG=(s)=>"400 "+s+"px 'Bagel Fat One','Bowlby One','GT Inter',sans-serif";
+  const cv=document.createElement("canvas");cv.width=W;cv.height=H;const x=cv.getContext("2d");x.textBaseline="alphabetic";x.direction="ltr";x.lineJoin="round";
+  x.fillStyle=RED;x.fillRect(0,0,W,H);gtYrRyuNoise(x,W,H);
+  /* Kartenzeichen gross und dunkel im Hintergrund */
+  x.save();x.translate(W*0.52,H*0.58);x.rotate(-12*Math.PI/180);x.scale(36,36);x.fillStyle="rgba(26,23,22,0.15)";x.fill(new Path2D(GT_YR_SUIT[GT_YR_SUIT_ORDER[(spec.idx||0)%4]]));x.restore();
+  /* Fortschritt: Ticket-Segmente */
+  const tot=spec.total,gap=10,bw=(W-2*M-(tot-1)*gap)/tot;for(let k=0;k<tot;k++){gtYrRR(x,M+k*(bw+gap),64,bw,22,11);x.fillStyle=k<=spec.idx?CR:"rgba(26,23,22,0.28)";x.fill();x.lineWidth=5;x.strokeStyle=INK;x.stroke();}
+  /* Kopf: schwarzer Marken-Sticker */
+  {const label="GameTab "+spec.year;x.font=BG(44);const tw=x.measureText(label).width;const pw=tw+84,ph=84;x.save();x.translate(M,118);x.rotate(-2*Math.PI/180);
+    gtYrRR(x,0,6,pw,ph,42);x.fillStyle="rgba(26,23,22,0.35)";x.fill();gtYrRR(x,0,0,pw,ph,42);x.fillStyle=INK;x.fill();
+    x.beginPath();x.arc(38,ph/2,12,0,6.2832);x.fillStyle=RED;x.fill();x.lineWidth=3;x.strokeStyle=CR;x.stroke();
+    x.fillStyle=CR;x.fillText("GameTab",62,ph/2+15);const gw=x.measureText("GameTab ").width;x.fillStyle=CR2;x.fillText(String(spec.year),62+gw,ph/2+15);x.restore();}
+  /* Inhalt messen */
+  const maxW=W-2*M;let stack=0;
+  const eb=String(spec.eyebrow||"").toUpperCase();const ebS=40,ebLS=4;const ebF=BG(ebS);const ebLines=gtStxWrap(x,eb,maxW-84,ebF,ebLS).slice(0,2);const ebLH=56;const ebH=ebLines.length*ebLH+34;stack+=ebH+50;
+  const val=String(spec.value==null?"":spec.value);const vlen=Array.from(val).length;
+  let vLines,vSize,vLH;
+  if(vlen<=9){vSize=gtStxFit(x,val,maxW-30,BG,vlen<=3?500:vlen<=5?380:270,100);vLines=[val];vLH=vSize*1.0;}
+  else{const r=gtStxFitLines(x,val,maxW-30,BG,150,76,4,3);vSize=r.s;vLines=r.l;vLH=vSize*1.1;}
+  const vH=vLH*vLines.length;stack+=vH+60;
+  let tLines=[],tSize=50,tLH=0,tW=0;
+  if(spec.text){const r=gtStxFitLines(x,String(spec.text),maxW-80,s=>F.inter(600,s),52,36,2,6);tSize=r.s;tLines=r.l;tLH=tSize*1.36;x.font=F.inter(600,tSize);tW=Math.max.apply(null,tLines.map(l=>x.measureText(l).width));stack+=tLines.length*tLH+64+40;}
+  const pills=[];let pH=0;
+  if(spec.names&&spec.names.length){x.font=BG(40);let row=[],rw=0;const rows=[];spec.names.forEach(nm=>{let s=String(nm);while(x.measureText(s).width>maxW-72&&s.length>2)s=s.slice(0,-1);if(s!==nm)s=s.replace(/\s+$/,"")+"...";const w=x.measureText(s).width+68;if(row.length&&rw+14+w>maxW){rows.push(row);row=[];rw=0;}row.push({s:s,w:w});rw+=(row.length>1?14:0)+w;});if(row.length)rows.push(row);rows.slice(0,3).forEach(r=>pills.push(r));pH=pills.length*(88+16);stack+=pH+20;}
+  let y=Math.max(290,Math.round((H-150-stack)/2)+20);
+  /* Titelstreifen */
+  {x.font=ebF;const lw=Math.max.apply(null,ebLines.map(l=>(x.measureText(l).width+ebLS*Math.max(0,gtStxG(l).length-1))));const bwid=lw+64;x.save();x.translate(M,y);x.rotate(-2*Math.PI/180);
+    gtYrRR(x,0,6,bwid,ebH,ebLines.length>1?34:ebH/2);x.fillStyle=INK;x.fill();gtYrRR(x,0,0,bwid,ebH,ebLines.length>1?34:ebH/2);x.fillStyle=CR;x.fill();x.lineWidth=5;x.strokeStyle=INK;x.stroke();
+    x.font=ebF;x.fillStyle=INK;ebLines.forEach((ln,k)=>{let px=32;gtStxG(ln).forEach(g=>{x.fillText(g,px,26+ebS*0.78+k*ebLH);px+=x.measureText(g).width+ebLS;});});x.restore();}
+  y+=ebH+50;
+  /* Wert: Creme mit schwarzem Rand und hartem Schatten */
+  {x.save();x.translate(M,y);x.rotate(-2*Math.PI/180);x.font=BG(vSize);x.lineWidth=vSize*0.17;
+    vLines.forEach((ln,k)=>{const by=vSize*0.86+k*vLH;x.strokeStyle=INK;x.fillStyle=INK;x.strokeText(ln,vSize*0.05+4,by+vSize*0.06);x.fillText(ln,vSize*0.05+4,by+vSize*0.06);x.strokeText(ln,4,by);x.fillStyle=CR;x.fillText(ln,4,by);});x.restore();y+=vH+60;}
+  /* Satz auf Creme-Etikett */
+  if(tLines.length){const bw2=Math.min(maxW,tW+64),bh=tLines.length*tLH+40;x.save();x.translate(M,y);x.rotate(1*Math.PI/180);gtYrRR(x,0,7,bw2,bh,30);x.fillStyle=INK;x.fill();gtYrRR(x,0,0,bw2,bh,30);x.fillStyle=CR;x.fill();x.lineWidth=5;x.strokeStyle=INK;x.stroke();
+    x.font=F.inter(600,tSize);x.fillStyle=INK;tLines.forEach((ln,k)=>x.fillText(ln,32,20+tSize*0.88+k*tLH));x.restore();y+=bh+40;}
+  /* Namen: schwarze Sticker */
+  pills.forEach((r,ri)=>{let px=M;r.forEach((p,k)=>{x.save();x.translate(px,y+4);x.rotate((k%2?1.5:-2)*Math.PI/180);gtYrRR(x,0,0,p.w,88,44);x.fillStyle=INK;x.fill();x.font=BG(40);x.fillStyle=CR;x.fillText(p.s,34,88/2+14);x.restore();px+=p.w+14;});y+=88+16;});
+  /* Eintrittskarten-Band unten: Perforation, Logo links, Nummer-Stempel rechts */
+  {const bh=150,top=H-bh;x.fillStyle=INK;x.fillRect(0,top,W,bh);x.fillStyle=RED;for(let cx=0;cx<W+26;cx+=26){x.beginPath();x.arc(cx,top,11,0,Math.PI);x.fill();}
+    x.setLineDash([14,12]);x.lineWidth=3;x.strokeStyle="rgba(243,234,211,0.35)";x.beginPath();x.moveTo(0,top+36);x.lineTo(W,top+36);x.stroke();x.setLineDash([]);
+    if(logo&&logo.naturalWidth){const lh=72,lw=lh*logo.naturalWidth/logo.naturalHeight;const oc=document.createElement("canvas");oc.width=Math.round(lw);oc.height=lh;const o=oc.getContext("2d");o.drawImage(logo,0,0,oc.width,lh);o.globalCompositeOperation="source-in";o.fillStyle=CR;o.fillRect(0,0,oc.width,lh);x.drawImage(oc,M,top+52);x.font=BG(44);x.fillStyle=CR;x.fillText("GameTab",M+lw+22,top+52+lh*0.72);}
+    else{x.font=BG(44);x.fillStyle=CR;x.fillText("GameTab",M,top+110);}
+    x.save();x.translate(W-M-48,top+28);x.rotate(9*Math.PI/180);x.beginPath();x.arc(0,3,52,0,6.2832);x.fillStyle=INK;x.fill();x.lineWidth=0;x.beginPath();x.arc(0,0,52,0,6.2832);x.fillStyle=CR;x.fill();x.lineWidth=5;x.strokeStyle=INK;x.stroke();
+    x.font=BG(46);x.fillStyle=INK;x.textAlign="center";x.fillText(String(spec.idx+1).padStart(2,"0"),0,16);x.textAlign="left";x.restore();}
+  return cv;
+}
 function gtYrDraw(spec,theme,logo){
+  if(isPlakat())return gtYrDrawRyu(spec,logo);
   const W=1080,H=1920,M=84,F=gtStxF;const pal=gtYrPal(theme);
   const cv=document.createElement("canvas");cv.width=W;cv.height=H;const x=cv.getContext("2d");x.textBaseline="alphabetic";x.direction="ltr";
   const accRaw=gtYrRaw(spec.game,theme,pal.gold);const acc=gtYrAccent(spec.game,theme,pal.gold);const fill=theme==="light"?acc:accRaw;
@@ -154,6 +206,6 @@ function gtYearReviewImage(model,t,theme){
   const nm=(model&&model.nameMap)||{};const specs=cs.map(c=>({eyebrow:c.title||"",value:gtYrVal(c),text:c.text||"",names:gtYrNames(c,nm),game:c.game||null,year:yr}));
   specs.forEach((s,k)=>{s.idx=k;s.total=specs.length;});
   const all=specs.map(s=>[s.eyebrow,s.value,s.text].concat(s.names||[]).join(" ")).join(" ");
-  return Promise.all([gtStxFonts(GT_EC_CJK.test(all)),gtYrLogo()]).then(r=>{const logo=r[1];return specs.map(s=>gtYrDraw(s,theme,logo));});
+  return Promise.all([gtStxFonts(GT_EC_CJK.test(all)),gtYrLogo(),isPlakat()?Promise.all([document.fonts.load("400 100px 'Bagel Fat One'","0123456789ABC"),document.fonts.load("600 40px 'GT Inter'")]).catch(()=>null):null]).then(r=>{const logo=r[1];return specs.map(s=>gtYrDraw(s,theme,logo));});
 }/*@gt-body-end*/
 export { GT_YR_SUIT, GT_YR_SUIT_ORDER, gtYrAccent, gtYrRaw, gtYrA, gtYrPal, gtYrNames, gtYrVal, gtYrSplit, gtYrValSize, useGtYrTicker, GtYrNum, GT_YR_CSS, GtYearReview, gtYrLogoP, gtYrLogo, gtYrRR, gtYrDraw, gtYearReviewImage };

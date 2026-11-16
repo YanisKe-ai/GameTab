@@ -57,6 +57,17 @@ html:not([data-phone-landscape]) .gtL-shellpage.hu-ls .gt-gamehead { position: r
 [data-phone-landscape] .hu-over .hu-b .reveal-3 { max-width: none !important; }
 [data-phone-landscape] .hu-over .hu-b .reveal-4 { margin-top: 0 !important; flex-wrap: wrap; justify-content: center; }
 [data-phone-landscape] .hu-over .hu-b .reveal-4 button { min-height: 48px; }
+/* iPad hochkant (bis 900 px): Intro, Zusammenfassung und Ende einspaltig zentriert statt zwei schmaler Spalten */
+@media (max-width: 900px) {
+  html:not([data-phone-landscape]) .gtL-content .hu-intro, html:not([data-phone-landscape]) .gtL-content .hu-over { display: flex !important; flex-direction: column; align-items: center; justify-items: initial; gap: 16px !important; max-width: 440px; margin-left: auto; margin-right: auto; width: 100%; }
+  html:not([data-phone-landscape]) .gtL-content .hu-a, html:not([data-phone-landscape]) .gtL-content .hu-b { grid-area: auto; width: 100%; max-width: 100%; }
+  html:not([data-phone-landscape]) .gtL-content .hu-a { margin-top: auto; }
+  html:not([data-phone-landscape]) .gtL-content .hu-intro .hu-a > p { max-width: 420px !important; }
+  html:not([data-phone-landscape]) .gtL-content .hu-intro .hu-b > div { max-width: 420px !important; }
+  html:not([data-phone-landscape]) .gtL-content .hu-intro .hu-b .gt-u-dock { max-width: 420px; width: 100%; align-self: center !important; }
+  html:not([data-phone-landscape]) .gtL-content .hu-intro .hu-b button { white-space: normal; }
+  html:not([data-phone-landscape]) .gtL-content .hu-over .hu-b .reveal-3 { max-width: 420px !important; margin-left: auto; margin-right: auto; }
+}
 /* Laptop: Spielphase nicht im kompakten Querformat-Rahmen (Handy quer), Wortkarte gross */
 .gtL-content .gtL-shellpage.hu-ls { height: auto !important; min-height: calc(100% / max(1, var(--gtL-fit, 1))) !important; overflow: visible !important; padding: 20px 12px 32px !important; }
 .gtL-content .gtL-headsup-word { min-height: clamp(220px, 40vh, 420px) !important; }

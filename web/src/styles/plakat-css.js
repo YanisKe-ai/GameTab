@@ -39,6 +39,12 @@ ${P} .gt-rn-row{overflow-y:hidden!important;overscroll-behavior:contain;touch-ac
 ${P} .gt-gamehead.is-stuck,${P} .gt-gamehead.is-stuck::before{background:radial-gradient(rgba(20,20,20,.10) 1.2px,transparent 1.4px) 0 0/14px 14px,var(--pk-bg,${CREAM})!important;background-attachment:fixed!important}
 ${P} .gt-gamehead.is-stuck{box-shadow:0 2.5px 0 ${INK}!important}
 ${P} .gtL-content .gt-gamehead.is-stuck{background:none!important;box-shadow:none!important}
+/* Laptop/iPad: unter kurzen Seiten nie Creme, immer Rot mit Körnung */
+${P} .gtL-content{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.32'/%3E%3C/svg%3E") 0 0/180px 180px,${RED}!important;background-blend-mode:multiply}
+/* Querformat: Unterzeile hat neben den Kopfknöpfen keinen Platz */
+[data-phone-landscape] ${P} .gt-wm-sub,${P}[data-phone-landscape] .gt-wm-sub{display:none!important}
+${P} .trt-info{display:table;background:${CREAM2};color:${INK2}!important;padding:3px 9px;border-radius:8px;box-shadow:0 0 0 2px ${INK2};font-weight:600}
+${P} .gt-pass-label{display:table!important;margin-left:auto!important;margin-right:auto!important;background:${INK2};color:${CREAM2}!important;padding:3px 10px 2px;border-radius:8px}
 ${P} .gt-gamehead h1:not(.gt-wm){font-family:${FONT}!important;font-weight:400!important;font-size:clamp(21px,6.6vw,30px)!important;line-height:1.05!important;letter-spacing:0!important;color:${CREAM}!important;-webkit-text-stroke:.07em ${INK};paint-order:stroke fill;text-shadow:.05em .065em 0 ${INK};white-space:nowrap;overflow-wrap:normal!important}
 ${P} [data-pk-cat] .gt-gamehead h1:not(.gt-wm){color:${INK}!important;-webkit-text-stroke:0;text-shadow:2px 2px 0 ${PAPER}!important}
 ${P} .podium-pop[role="dialog"]{outline:2.5px solid ${INK}!important;outline-offset:-2.5px!important;box-shadow:0 6px 0 ${INK}!important;background:${PAPER}!important;color:${INK}!important}

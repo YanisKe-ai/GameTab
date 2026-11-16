@@ -6,6 +6,7 @@ import { useT } from "../i18n/use-t.js";
 import { noirAccent } from "../themes/shell.js";
 import { shellTokens } from "../themes/tokens.js";
 import { isPlakat } from "../themes/plakat.js";
+import { isHell } from "../themes/hell.js";
 import { GT_ST_RYU_CSS } from "./ryu-css.js";
 import { GT_STATS } from "./core.js";
 import { GtYearReview } from "./year-review.js";
@@ -80,7 +81,7 @@ function gtSt2F(s,o){return String(s).replace(/\{(\w+):([^|}]*)\|([^}]*)\}/g,(m,
 function gtSt2RM(){try{return!!(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches);}catch(e){return false;}}
 function gtSt2Pct(r){const v=Number(r);return isFinite(v)?Math.round(v*100):0;}
 function gtSt2Acc(theme,tk,game){if(!game)return tk.gold;if(theme==="noir")return noirAccent(game);return(typeof STATS_GAME_COLORS!=="undefined"&&STATS_GAME_COLORS[game])||tk.gold;}
-function gtSt2Look(theme){const o=gtSt2Look0(theme);return isPlakat()?Object.assign({},o,{track:"#D8CBA8",segOn:"#1A1716",segSh:"none",hover:"rgba(26,23,22,0.06)",line:"#1A1716",barTrack:"#D8CBA8",ph:"#4A4236",acc:"#1A1716",onAcc:"#F3EAD3",bar:"#E4312B",card2:"#EADFC2"}):o;}
+function gtSt2Look(theme){const o0=gtSt2Look0(theme);const o=theme==="light"&&isHell()?Object.assign({},o0,{line:"#1E1A15",barTrack:"#E4DCCB",acc:"#1E1A15",onAcc:"#FFFCF6",bar:"#1E1A15",track:"#E4DCCB",card2:"#E4DCCB"}):o0;return isPlakat()?Object.assign({},o,{track:"#D8CBA8",segOn:"#1A1716",segSh:"none",hover:"rgba(26,23,22,0.06)",line:"#1A1716",barTrack:"#D8CBA8",ph:"#4A4236",acc:"#1A1716",onAcc:"#F3EAD3",bar:"#E4312B",card2:"#EADFC2"}):o;}
 function gtSt2Look0(theme){const L=theme==="light",Nr=theme==="noir";return{L,Nr,track:L?"#E0D5BF":Nr?"#161616":"rgba(255,255,255,0.055)",segOn:L?"#FFFFFF":Nr?"#2A2A2A":"rgba(255,255,255,0.11)",segSh:L?"0 1px 2px rgba(20,24,32,0.12), 0 0 0 1px rgba(20,24,32,0.05)":"0 1px 2px rgba(0,0,0,0.35)",hover:L?"rgba(20,24,32,0.035)":"rgba(255,255,255,0.04)",line:L?"#CBBDA2":Nr?"#333333":"rgba(255,255,255,0.08)",barTrack:L?"#CBBDA2":Nr?"#3A3A3A":"#2E3446",ph:L?"#665E52":"rgba(242,244,248,0.55)",acc:L?"#6E4B0A":Nr?"#C1C1C1":"#C9A15C",onAcc:L?"#FFFFFF":Nr?"#111111":"#1A1408",bar:L?"#6E4B0A":Nr?"#EBEBEB":"#C9A15C",card2:L?"#E0D5BF":Nr?"#2C2C2C":"#262B3A"};}
 function gtSt2Date(ts,lang,o){try{return new Date(ts).toLocaleDateString(GT_ST2_LOC[lang]||"de-CH",o||{day:"numeric",month:"short",year:"numeric"});}catch(e){return"";}}
 function gtSt2NightDate(d,lang){const p=String(d||"").split("-").map(Number);if(p.length!==3||!p[0])return String(d||"");return gtSt2Date(new Date(p[0],p[1]-1,p[2]).getTime(),lang,{weekday:"short",day:"numeric",month:"short"});}

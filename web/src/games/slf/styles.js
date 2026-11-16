@@ -1,8 +1,20 @@
 // Stadt Land Fluss: Farben pro Theme (Nocturne, Hell, Noir) und das gesamte CSS. Alle Farben laufen ueber Variablen --s-*.
 import { shellTokens } from "../../themes/tokens.js";
+import { isHell, HELL } from "../../themes/hell.js";
 
 // Eigene Akzentfarbe: Tintenviolett (kommt sonst in keinem Spiel vor).
 function slfTk(theme) {
+  if (theme === "light" && isHell()) {
+    const sh = shellTokens(theme);
+    return {
+      acc: HELL.ink, accText: HELL.ink, btn1: "#3A352C", btn2: HELL.ink, onAcc: HELL.card,
+      pageBg: sh.pageBg, card: HELL.card, ink: HELL.ink, muted: HELL.muted, border: "rgba(30,26,21,.3)",
+      paper: HELL.card, line: "rgba(30,26,21,.18)", margin: "rgba(30,26,21,.4)", hand: HELL.ink,
+      tile1: "#3A352C", tile2: HELL.ink, onTile: HELL.card, tileShadow: "#878175",
+      off: HELL.muted, stop1: "#3A352C", stop2: HELL.ink, onStop: HELL.card, zero: "#6B6358", gold: HELL.ink, bg2: HELL.soft,
+      binding: "#EDE5D5",
+    };
+  }
   const sh = shellTokens(theme);
   if (theme === "light") {
     return {
@@ -369,6 +381,8 @@ const SLF_CSS = `
 .slm-sum b{font:800 26px/1 'Space Grotesk',sans-serif;font-variant-numeric:tabular-nums}
 @media (max-width:359px){.slm-hero{padding:10px;gap:9px}.slm-lab{width:58px;font-size:10px}.slm-row{padding:0 10px;gap:8px}.slm-row .slf-in{font-size:18px}.slm-chips .slf-pt{width:32px;font-size:14px}.slm-chips{gap:3px}.slm-row.is-score{padding:8px 8px 8px 10px}}
 @media (prefers-reduced-motion:reduce){.slm-row{transition:none}}
+/* Hell «Schwarz auf Creme» (16.11.2026) */
+html[data-gt-theme="light"]:not([data-gt-skin]) .slf-th-light{--m-ring:#F6F1E7;--m-track:rgba(255,255,255,.22);--m-stopc:#F6F1E7;--m-azc:#1E1A15;--m-azt:#F6F1E7;--m-chip:#1E1A15;--m-chipt:#F6F1E7;--m-ok:#1E1A15;--m-focus:rgba(30,26,21,.08);--m-focusb:#1E1A15}
 `;
 
 const SLF_PK_CSS = `

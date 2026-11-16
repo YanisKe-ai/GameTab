@@ -1,10 +1,14 @@
 // Minigolf "Greenline": Bahnansicht mit Schlagzaehlern, Tabelle, Zwischenstand. Logik in ./logic.js.
+import { isHell, hc } from "../../themes/hell.js";
 import { React } from "../../vendor/react-globals.js";
 import { useEffect, useRef, useState } from "../../prelude.js";
 import { GtHoldLabel, gtHold } from "../../shared/fx.js";
 import { GLOBAL_STYLES } from "../../styles/global.js";
 import { useT } from "../../i18n/use-t.js";
 import { minigolfPageShellStyle, minigolfTokens, shellTokens } from "../../themes/tokens.js";
+const MG_HELL = { bg: "#F6F1E7", bg2: "#F6F1E7", card: "#FFFCF6", ink: "#1E1A15", muted: "#4A443A", green: "#1E1A15", border: "#B5AC9A", gridLine: "#E4DCCB", surf: "#FFFCF6", surf2: "#F6F1E7", line: "#B5AC9A", acc: "#1E1A15", onAcc: "#FFFCF6", accInk: "#1E1A15", accSoft: "rgba(30,26,21,0.06)", segBg: "#1E1A15", segInk: "#FFFCF6", track: "#E4DCCB", ctrl: "#F6F1E7", ctrlLine: "#B5AC9A", flag: "#1E1A15", accLine: "rgba(30,26,21,0.45)", solid: "#FFFCF6", err: "#1E1A15", btnFrom: "#1E1A15", btnTo: "#1E1A15", onAccent: "#FFFCF6", gold: "#1E1A15", shadow: "0 1px 2px rgba(30,26,21,0.05), 0 8px 22px -14px rgba(30,26,21,0.28)", ctaShadow: "none", hues: ["#1E1A15", "#4A443A", "#5E574C", "#2B261F", "#6B6458", "#38322A", "#524B40", "#756D60"] };
+function mgTkH(theme) { const b = minigolfTokens(theme); return theme === "light" && isHell() ? { ...b, ...MG_HELL } : b; }
+function mgShellH(theme) { return theme === "light" && isHell() ? { minHeight: "100vh", background: "#F6F1E7", padding: "20px 12px 32px" } : minigolfPageShellStyle(theme); }
 import { rankedPodium } from "../../shared/ranking.js";
 import { useGtRecord, usePersonalBest } from "../../stats/match-log.js";
 import { gtJoinNames, gtWinLine } from "../../shared/game-helpers.js";
@@ -242,7 +246,7 @@ html[data-gt-skin] body .mg-pk h1.gt-wm.gt-wm.gt-wm.gt-wm{letter-spacing:0!impor
 `;
 function MinigolfTopBar({ subtitle, onBack, theme, t, onHome, rulesText, onEndGame, moreItems, onMenuOpen }) {
   const pk = usePlakat();
-  const mg = minigolfTokens(theme);
+  const mg = mgTkH(theme);
   return (
     <GameHeader
       title={t("gameMinigolf")}
@@ -285,7 +289,7 @@ function MgRyuCourse() {
 }
 function MinigolfSetup({ players, setPlayers, onStart, theme, t }) {
   const pk = usePlakat();
-  const mg = gtSoftTk(minigolfTokens(theme), theme);
+  const mg = gtSoftTk(mgTkH(theme), theme);
   const gtS = gtSkin(theme, mg, "minigolf", theme === "noir" ? { font: MINIGOLF_FONT } : { font: MINIGOLF_FONT, acc: pk ? "#1A1716" : mg.acc });
   const rename = (idx, name) => setPlayers((ps) => ps.map((p, i) => (i === idx ? { ...p, name } : p)));
   const addPlayer = () =>
@@ -507,6 +511,7 @@ function MgSegmented({ tab, onTab, mg, t, segOn, segInk }) {
 // Anzeigetafel: Farben des Objekts (Holzrahmen, Rasengruen). Im Hell-Theme bleibt die Tafel dunkelgruen, Noir graustufig.
 function mgBoardTk(theme) {
   const noir = theme === "noir";
+  if (theme === "light" && isHell()) return { frame: "#1E1A15", inner: "#FFFCF6", tile: "#1E1A15", tileInk: "#F6F1E7", lime: "#1E1A15", ink: "#1E1A15", muted: "#4A443A", grass: "#E4DCCB", grassHi: "#B5AC9A", dim: "rgba(30,26,21,0.34)", flag: "#1E1A15", pole: "#4A443A", hole: "#1E1A15", btn: "rgba(30,26,21,0.08)" };
   return {
     frame: noir ? "#4A4A4A" : "#7A4E2A",
     inner: noir ? "#141414" : "#123A27",
@@ -796,7 +801,7 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
   const [confirmingSetup, setConfirmingSetup] = useState(false);
   const [nudge, setNudge] = useState(false);
   const t = useT(lang);
-  const mg = minigolfTokens(theme);
+  const mg = mgTkH(theme);
   const bt = pk ? MG_BOARD_RYU : mgBoardTk(theme);
   const ct = mgCardTk(theme, mg);
   const segOn = theme === "light" ? mg.acc : mg.segBg;
@@ -1000,7 +1005,7 @@ function MinigolfPlay({ state, setState, onResetSheet, onEditPlayers, onBack, on
     fontFamily: MG_UI,
   });
   return (
-    <div className={"gtL-shellpage mgGL mg-land pl-page pl-head-compact" + (pk ? " mg-pk" : "")} style={{ ...minigolfPageShellStyle(theme), ...(pk ? ryuPage() : null), position: "relative", overflowX: "clip", paddingBottom: editing ? 290 : 24 }}>
+    <div className={"gtL-shellpage mgGL mg-land pl-page pl-head-compact" + (pk ? " mg-pk" : "")} style={{ ...mgShellH(theme), ...(pk ? ryuPage() : null), position: "relative", overflowX: "clip", paddingBottom: editing ? 290 : 24 }}>
       <style>
         {GLOBAL_STYLES}
         {MG_CSS}
@@ -1094,10 +1099,10 @@ function MinigolfGame({ state, setState, onBack, onHome, onEndGame, lang = "de",
   const goToSetup = () => setState((s) => ({ ...s, phase: "setup" }));
   if (state.phase === "setup") {
     return (
-      <div className={"gtL-shellpage" + (pk ? " mg-pk" : "")} style={{ ...minigolfPageShellStyle(theme), ...(pk ? ryuPage() : null) }}>
+      <div className={"gtL-shellpage" + (pk ? " mg-pk" : "")} style={{ ...mgShellH(theme), ...(pk ? ryuPage() : null) }}>
         <style>{GLOBAL_STYLES}{pk ? MG_PK_CSS : ""}</style>
         <div className="gtL-page gtL-game" style={{ maxWidth: 380, margin: "0 auto", position: "relative", zIndex: 1 }}>
-          <GtCol accent={minigolfTokens(theme).acc}>
+          <GtCol accent={mgTkH(theme).acc}>
             <GtUbStyle />
             <MinigolfTopBar subtitle={t("gtNewMatch")} onBack={onBack} theme={theme} t={t} onHome={onHome} rulesText={t("rulesMinigolf")} />
             <MinigolfSetup players={state.players} setPlayers={setPlayers} onStart={startGame} theme={theme} t={t} />

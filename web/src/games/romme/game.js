@@ -1,4 +1,5 @@
 // Erzeugt von tools/split.mjs aus index.html. Inhalt zwischen den gt-body-Markern ist 1:1 Originalcode.
+import { isHell, hc } from "../../themes/hell.js";
 import { React } from "../../vendor/react-globals.js";
 import { useState } from "../../prelude.js";
 import { useGtDialog } from "../../shared/dialog.js";
@@ -264,7 +265,7 @@ const ROM_PK_CSS=`
 `;
 function romPkTk(tk){return{...tk,bg:"#F4EAD5",bg2:"#EADDC2",card:"#FFFDF7",ink:"#141414",muted:"#141414",teal:"#141414",gold:"#141414",border:"#141414",btnFrom:"#141414",btnTo:"#141414",onAccent:"#F4EAD5"};}
 function romVars(tk,theme){return{"--r-card":tk.card,"--r-bg":tk.bg,"--r-ink":tk.ink,"--r-muted":tk.muted,"--r-line":theme==="light"?"rgba(24,22,32,0.14)":tk.border,"--r-acc":tk.teal,"--r-on":tk.onAccent,"--r-face":theme==="noir"?"#EBEBEB":"#FFF6EE"};}
-function romCol(c,i,theme){if(theme==="noir")return"#1E1E1E";if(c==="J")return"#7A3FB0";return i%2?"#C8102E":"#1B1B24";}
+function romCol(c,i,theme){if(theme==="noir")return"#1E1E1E";if(theme==="light"&&isHell())return"#1E1A15";if(c==="J")return"#7A3FB0";return i%2?"#C8102E":"#1B1B24";}
 const ROM_FAN=[["★",-34,0],["A",-17,1],["K",0,2],["D",17,3],["B",34,4]];
 const ROM_SP={h:"M12 21C5 15 2 11.5 2 8a5 5 0 0 1 10-1 5 5 0 0 1 10 1c0 3.5-3 7-10 13z",d:"M12 2l8 10-8 10-8-10z",s:"M12 2C7 8 3 11 3 14.5A4.5 4.5 0 0 0 11 17c0 2-1 3.5-3 5h8c-2-1.5-3-3-3-5a4.5 4.5 0 0 0 8-2.5C21 11 17 8 12 2z",c:"M12 2a4.5 4.5 0 0 0-3.5 7.3A4.5 4.5 0 1 0 11 16c0 2-1 4-3 6h8c-2-2-3-4-3-6a4.5 4.5 0 1 0 2.5-6.7A4.5 4.5 0 0 0 12 2z"};
 function RomFan({setup}){const suit=["s","h","d","c"];return <div className={"rm-fan"+(setup?" rm-fan-s":"")} aria-hidden="true"><svg viewBox="0 0 300 140" focusable="false">{ROM_FAN.map(([l,a,i])=>{const jk=l==="★";const sp=jk?null:suit[(i-1)%4];const red=sp==="h"||sp==="d";const col=red?"#E4312B":"#141414";return <g key={l} className="rm-fc" style={{"--a":a+"deg","--d":(i*70)+"ms"}}><g transform="translate(115 20)"><rect x="1.5" y="1.5" width="67" height="97" rx="8" fill={jk?"#141414":"#FFFDF7"} stroke="#141414" strokeWidth="3"/>{jk?<g fill="#F4EAD5"><path transform="translate(7 7) scale(1.3)" d="M12 1.5l2.8 6.6 7.1.6-5.4 4.7 1.6 7-6.1-3.7-6.1 3.7 1.6-7L2.1 8.7l7.1-.6z"/><path transform="translate(20 44) scale(1.8)" d="M12 1.5l2.8 6.6 7.1.6-5.4 4.7 1.6 7-6.1-3.7-6.1 3.7 1.6-7L2.1 8.7l7.1-.6z"/></g>:<g><text x="9" y="26" fontFamily="'Bagel Fat One','Bowlby One',sans-serif" fontSize="23" fill={col}>{l}</text><path transform="translate(9 31) scale(.55)" d={ROM_SP[sp]} fill={col}/><path transform="translate(22 46) scale(1.1)" d={ROM_SP[sp]} fill={col}/></g>}</g></g>;})}</svg></div>;}

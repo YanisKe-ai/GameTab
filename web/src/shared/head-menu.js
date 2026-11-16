@@ -6,10 +6,13 @@
 // Dialogverhalten (Escape, Tippen ausserhalb, Fokus, Hintergrund inert) kommt von useGtDialog.
 import { React, ReactDOM } from "../vendor/react-globals.js";
 import { useGtDialog } from "./dialog.js";
+import { isHell } from "../themes/hell.js";
 // (gtHold und GtHoldLabel aus fx.js werden hier nicht mehr gebraucht)
 
 const GT_HM_CSS = `.gt-hmt-dark{--hm-btn:#1B2235;--hm-ring:#ffffff1f;--hm-ink:#E9ECF4;--hm-on-bg:#E9ECF4;--hm-on-ink:#0D1220;--hm-panel:#161C2E;--hm-line:rgba(255,255,255,.11);--hm-muted:#9AA4BE;--hm-hover:rgba(255,255,255,.08);--hm-shadow:0 18px 44px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.1);--hm-dim:rgba(4,8,18,.5);--hm-danger:#FF7B7F}
 .gt-hmt-light{--hm-btn:#FFFFFF;--hm-ring:rgba(27,34,53,.18);--hm-ink:#1B2235;--hm-on-bg:#1B2235;--hm-on-ink:#FFFFFF;--hm-panel:#FFFFFF;--hm-line:rgba(27,34,53,.1);--hm-muted:#5C6580;--hm-hover:rgba(27,34,53,.06);--hm-shadow:0 18px 40px rgba(20,28,50,.22),0 0 0 1px rgba(27,34,53,.1);--hm-dim:rgba(20,26,44,.34);--hm-danger:#C9302C}
+.gt-hmt-hell{--hm-btn:#FFFCF6;--hm-ring:#1E1A15;--hm-ink:#1E1A15;--hm-on-bg:#1E1A15;--hm-on-ink:#FFFCF6;--hm-panel:#FFFCF6;--hm-line:rgba(30,26,21,.14);--hm-muted:#4A443A;--hm-hover:rgba(30,26,21,.06);--hm-shadow:0 18px 40px rgba(30,26,21,.18),0 0 0 1.5px #1E1A15;--hm-dim:rgba(30,26,21,.30);--hm-danger:#1E1A15}
+.gt-hmt-hell .gt-hm-row.is-confirm{background:#1E1A15;color:#FFFCF6}
 .gt-hmt-noir{--hm-btn:#1C1C1C;--hm-ring:rgba(255,255,255,.18);--hm-ink:#EDEDED;--hm-on-bg:#EDEDED;--hm-on-ink:#0A0A0A;--hm-panel:#141414;--hm-line:rgba(255,255,255,.13);--hm-muted:#A3A3A3;--hm-hover:rgba(255,255,255,.09);--hm-shadow:0 18px 44px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.14);--hm-dim:rgba(0,0,0,.6);--hm-danger:#FF8F8F}
 .gt-hb.gt-hbn>.gt-hf{width:40px;height:40px;min-width:40px;padding:0;border:none;background:var(--hm-btn);color:var(--hm-ink);box-shadow:inset 0 0 0 1px var(--hm-ring);-webkit-backdrop-filter:none;backdrop-filter:none}
 .gt-hb.gt-hbn[aria-expanded="true"]>.gt-hf{background:var(--hm-on-bg)!important;color:var(--hm-on-ink)!important;box-shadow:none!important}
@@ -59,6 +62,7 @@ const ICONS = {
 const COLORS = {
   dark: { restart: "#F0A63A", undo: "#F0A63A", users: "#3FB8A6", flag: "#FF7B7F", rules: "#8C9AFF", gear: "#9AA4BE", home: "#5FB38C", plus: "#8C9AFF", table: "#3FB8A6", share: "#8C9AFF", copy: "#F0A63A", trash: "#FF7B7F" },
   light: { restart: "#B86F00", undo: "#B86F00", users: "#12806F", flag: "#C9302C", rules: "#4353D6", gear: "#5C6580", home: "#2A7F5A", plus: "#4353D6", table: "#12806F", share: "#4353D6", copy: "#B86F00", trash: "#C9302C" },
+  hell: { restart: "#1E1A15", undo: "#1E1A15", users: "#1E1A15", flag: "#1E1A15", rules: "#1E1A15", gear: "#1E1A15", home: "#1E1A15", plus: "#1E1A15", table: "#1E1A15", share: "#1E1A15", copy: "#1E1A15", trash: "#1E1A15" },
   noir: { restart: "#D2D2D2", undo: "#D2D2D2", users: "#D2D2D2", flag: "#FF8F8F", rules: "#D2D2D2", gear: "#D2D2D2", home: "#D2D2D2", plus: "#D2D2D2", table: "#D2D2D2", share: "#D2D2D2", copy: "#D2D2D2", trash: "#FF8F8F" },
 };
 
@@ -72,7 +76,7 @@ function GtHmRow({ icon, color, danger, confirming, warm, timer, onClick, childr
 }
 
 function GtHeadButtons({ theme, css, L, onRules, onHome, onEndGame, items, onOpen }) {
-  const th = theme === "light" ? "light" : theme === "noir" ? "noir" : "dark";
+  const th = theme === "light" ? (isHell() ? "hell" : "light") : theme === "noir" ? "noir" : "dark";
   const col = COLORS[th];
   const list = Array.isArray(items) ? items.filter(Boolean) : [];
   const [open, setOpen] = React.useState(false);

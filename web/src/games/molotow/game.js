@@ -18,6 +18,7 @@ import { GtUbStyle } from "../../shared/unit-boards.js";
 import { WyFan, WEIS_LBL, SCHIEBER_PL_CSS } from "../schieber/game.js";
 import { MolotowLogo } from "./logo.js";
 import { usePlakat } from "../../themes/theme-id.js";
+import { hellMap, isHell, HELL } from "../../themes/hell.js";
 import { ryuPage } from "../../shared/plakat/kit.js";
 import herzA from "../schieber/img/herz-A.svg";
 import eckeA from "./img/ecke-A.svg";
@@ -42,6 +43,10 @@ function SuitGlyph({ s, size = 14 }) {
 }
 
 function molTk(theme, pk) {
+  const r = molTk0(theme, pk);
+  return theme === "light" && !pk && isHell() ? { ...hellMap(r), acc: HELL.ink, on: HELL.card, muted: HELL.muted, slate: "#262421", mi: "#F6F1E7", pl: "#B5AC9A", hues: ["#1E1A15", "#6E665A", "#3A352C", "#878175", "#2A261F", "#574F42"] } : r;
+}
+function molTk0(theme, pk) {
   if (pk) return { theme: "light", pk: true, bg: "#E4312B", bgSolid: "#E4312B", ink: "#1A1716", muted: "#1A1716", card: "#F3EAD3", border: "#1A1716", acc: "#1A1716", on: "#F3EAD3", sheet: "#1A1716", sheetLine: "#6B6460", slate: "#F3EAD3", w1: "#F3EAD3", w2: "#F3EAD3", ch: "#1A1716", chm: "#6B6255", mi: "#E4312B", pl: "#E4312B", hues: ["#1A1716", "#1A1716", "#1A1716", "#1A1716", "#1A1716", "#1A1716"], badgeInk: "#F3EAD3" };
   if (theme === "light") return { theme, bg: "radial-gradient(ellipse at 50% -10%, #FBF7EC 0%, #F6F1E7 55%, #EFE8D8 100%)", bgSolid: "#F6F1E7", ink: "#1E1A15", muted: "#5E574C", card: "#FFFCF6", border: "rgba(30,26,21,0.18)", acc: "#59690A", on: "#FFFFFF", sheet: "#FBF7EC", sheetLine: "rgba(30,26,21,0.14)", slate: "#26302A", w1: "#B48A58", w2: "#8A6339", ch: "#F4F1E8", chm: "rgba(244,241,232,0.62)", mi: "#C8E04A", pl: "#FF9A7B", hues: ["#59690A", "#1F7A6A", "#A85F12", "#B23A63", "#3F58B5", "#7B4FB5"], badgeInk: "#FFFFFF" };
   if (theme === "noir") return { theme, bg: "#000000", bgSolid: "#000000", ink: "#EBEBEB", muted: "#A8A8A8", card: "#1A1A1A", border: "#5F5F5F", acc: "#EBEBEB", on: "#000000", sheet: "#111111", sheetLine: "#3A3A3A", slate: "#0D0D0D", w1: "#6C6C6C", w2: "#444444", ch: "#FFFFFF", chm: "rgba(255,255,255,0.62)", mi: "#FFFFFF", pl: "#D4D4D4", hues: ["#E6E6E6", "#C8C8C8", "#AAAAAA", "#D8D8D8", "#B8B8B8", "#9C9C9C"], badgeInk: "#000000" };
@@ -227,6 +232,10 @@ const MO_CSS = `
 [data-phone-landscape] .mo-eb{grid-column:1;grid-row:3;min-height:0}
 [data-phone-landscape] .mo-pad{grid-column:2;grid-row:1/4;border-top:0;border-left:1px solid var(--mo-sline);align-content:center;padding-top:8px}
 [data-phone-landscape] .mo-pad button{height:44px}
+/* Hell «Schwarz auf Creme» (16.11.2026) */
+html[data-gt-theme="light"]:not([data-gt-skin]) .mo-row.cur{background:rgba(244,241,232,.12)}
+html[data-gt-theme="light"]:not([data-gt-skin]) .mo-root img{filter:grayscale(1) contrast(1.05)}
+html[data-gt-theme="light"]:not([data-gt-skin]) .mo-c.on.pl{background:#878175;border-color:#878175;color:#fff}
 `;
 
 const MO_PK_CSS = `

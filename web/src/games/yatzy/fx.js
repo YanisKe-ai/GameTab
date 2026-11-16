@@ -6,7 +6,7 @@ import { isPlakat } from "../../themes/plakat.js";
 function yzFxPal(theme) {
   if (isPlakat()) return { acc: "#E4312B", ink: "#1A1716", card: "#F3EAD3", pip: "#F3EAD3", shade: "rgba(26,23,22,.72)", font: "'Bagel Fat One','Bowlby One',sans-serif" };
   if (theme === "noir") return { acc: "#E6E6E6", ink: "#0A0A0A", card: "#F2F2F2", pip: "#0A0A0A", shade: "rgba(0,0,0,.78)", font: "'Bowlby One',sans-serif", accInk: "#0A0A0A" };
-  if (theme === "light") return { acc: "#3D5E8C", ink: "#17130F", card: "#FFFCF6", pip: "#FFFCF6", shade: "rgba(23,19,15,.55)", font: "'Bowlby One',sans-serif" };
+  if (theme === "light") return { acc: "#FFFCF6", ink: "#1E1A15", card: "#FFFCF6", pip: "#1E1A15", shade: "rgba(30,26,21,.55)", accInk: "#1E1A15", font: "'Bowlby One',sans-serif" };
   return { acc: "#6F8FC4", ink: "#0E1220", card: "#F4F1EA", pip: "#F4F1EA", shade: "rgba(9,11,19,.74)", font: "'Bowlby One',sans-serif" };
 }
 

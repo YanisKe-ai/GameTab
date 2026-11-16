@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.16-17 (16.11.2026 21:58)
+- Ryū Handy: Logo grösser, ALL-IN-ONE schräg, Kacheln grösser
+
 ## 2026.11.16-16 (16.11.2026 20:57)
 - Ryū Handy: runde Zacken-Sticker R1, ALL-IN-ONE mittig
 

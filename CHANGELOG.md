@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.16-6 (16.11.2026 15:49)
+- Aufräumen: alter Podest-Code, Haptik-Testseite, Tests
+
 ## 2026.11.16-5 (16.11.2026 13:41)
 - Ryū: Teilen-Bild des Jahresrückblicks als Jahresplakat, Startseite springt beim Zurückkommen nicht mehr, Spielkopf überall gleich hoch, Beschriftungen immer lesbar
 

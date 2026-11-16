@@ -38,13 +38,22 @@ def overlay_open(pg):
     return pg.locator('input[placeholder][aria-label]:visible').count() >= 2
 
 
+def type_search(pg, inp, text):
+    """Touch-Handy (GT_IOS=1): unteres Feld ist readOnly, Tippen oeffnet das Overlay und fokussiert das obere Feld."""
+    if inp.get_attribute("readonly") is not None:
+        inp.click(); wait(pg, 400)
+        pg.keyboard.type(text, delay=40)
+    else:
+        inp.fill(""); inp.focus(); inp.type(text, delay=40)
+
+
 def run(pg):
     inp = pg.locator('input[aria-label]').first
     # 1. Tab/Fokus allein oeffnet nichts
     inp.focus(); wait(pg, 600)
     check(pg.locator('input[aria-label]').count() == 1, "blosser Fokus oeffnet das Overlay")
     # 2. Tippfehler: erstes Zeichen oeffnet, wizzard -> Wizard, nicht Tutto
-    inp.type("wizzard", delay=40); wait(pg, 600)
+    type_search(pg, inp, "wizzard"); wait(pg, 600)
     check(pg.locator('input[aria-label]').count() == 2, "Tippen oeffnet das Overlay nicht")
     txt = pg.locator("body").inner_text()
     check("Wizard" in txt, "wizzard findet Wizard nicht")
@@ -54,7 +63,7 @@ def run(pg):
     pg.keyboard.press("Escape"); wait(pg, 500)
     check(pg.locator('input[aria-label]').count() == 1, "Escape schliesst nicht")
     # 4. Meintest du
-    inp.fill(""); inp.focus(); inp.type("skyjxxx", delay=40); wait(pg, 600)
+    type_search(pg, inp, "skyjxxx"); wait(pg, 600)
     check(pg.locator('[data-gt-didyoumean]').count() == 1, "Meintest-du-Zeile fehlt")
     pg.locator('[data-gt-didyoumean]').click(); wait(pg, 800)
     # 5. Kontrast des Favoriten-Hinweises (Token-Farben gegen Seitenhintergrund, alle Themes)

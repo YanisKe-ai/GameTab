@@ -17,6 +17,8 @@ function nextTheme(t) { const i = THEMES.indexOf(t); return THEMES[(i + 1) % THE
 
 // Kontext: true, wenn der Modus Plakat aktiv ist. Umgestaltete Seiten lesen ihn.
 const GtSkinCtx = (typeof React !== "undefined" && React && React.createContext) ? React.createContext("") : null;
+// Kontext ist eine Modulkonstante, die Hook-Reihenfolge bleibt in jedem Render gleich.
+// eslint-disable-next-line react-hooks/rules-of-hooks
 function usePlakat() { return GtSkinCtx ? React.useContext(GtSkinCtx) === "plakat" : false; }
 // Ausserhalb von React (Overlays, Effekte): Attribut auf <html>
 function isPlakatDom() { try { return document.documentElement.getAttribute("data-gt-skin") === "plakat"; } catch (e) { return false; } }

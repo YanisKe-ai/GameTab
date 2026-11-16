@@ -342,8 +342,8 @@ def run_repro(b, eng):
         for n in ["Maximiliane Huber-Brunner", "Ölçü Zoë Alexandra von Hohenberg", "Cora", "Dino Karl-Heinz Superlangername"]:
             inp.fill(n); pg.keyboard.press("Enter"); R.wait(pg, 300)
         R.click(pg, R.btn(pg, "Turnier anlegen"), 1200)
-        R.click(pg, pg.get_by_role("button", name=re.compile("Turniermenü")).first, 700)
-        R.click(pg, pg.get_by_role("button", name=re.compile("Exportieren|als Bild", re.I)).first, 900)
+        R.click(pg, pg.get_by_role("button", name=re.compile("^(Turniermenü|Menü)$")).first, 700)  # seit 07.11. einheitlicher Spielkopf: «Menü»
+        R.click(pg, pg.locator("button,[role=menuitem]", has_text=re.compile("Exportieren|als Bild", re.I)).first, 900)
         cand = pg.get_by_role("button", name=re.compile("Bild", re.I))
         if pg.locator(".gtstx-panel").count() == 0 and cand.count():
             R.click(pg, cand.first, 900)

@@ -2,12 +2,15 @@
 // Nocturne, Hell und Noir bleiben unberührt. Inline-Stile der Bauteile werden mit !important übersteuert.
 const P = 'html[data-gt-skin="plakat"]';
 const INK = "#141414", CREAM = "#F4EAD5", PAPER = "#FFFDF7";
-const FONT = "'Bagel Fat One','Bowlby One',sans-serif";
+const FONT = "'GT Ryu Ext','Bagel Fat One','Bowlby One',sans-serif";
 // Startseite Plakat (Entwurf R2b): kräftiges Rot, warmes Schwarz, Creme, Körnung
 const RED = "#E4312B", INK2 = "#1A1716", CREAM2 = "#F3EAD3";
 const NOISE = "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.32'/%3E%3C/svg%3E\")";
 
 const PLAKAT_CSS = `
+/* Zeichen wie «ū» (Ryū) fehlen in Bagel Fat One: kräftiger Ersatz nur für erweiterte Lateinzeichen */
+@font-face{font-family:'GT Ryu Ext';src:url('./fonts/ArchivoBlack-Regular.ttf') format('truetype');font-display:swap;unicode-range:U+0100-024F}
+${P} body .st-btn.st-segbtn.st-segbtn{font-family:${FONT}!important}
 ${P} body{background:${CREAM}}
 ${P} .gtL-shellpage::before{display:none!important}
 ${P} .gt-gamehead h1.gt-wm{display:block!important;width:100%!important;text-align:center!important}

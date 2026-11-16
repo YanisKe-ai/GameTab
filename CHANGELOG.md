@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.16-12 (16.11.2026 19:35)
+- Nocturne-Logo Sticker Nacht, Suche am Ort
+
 ## 2026.11.16-11 (16.11.2026 19:20)
 - Laptop-Startseite N3, Modus-Knopf am Handy, Ryū-Logo schräger
 

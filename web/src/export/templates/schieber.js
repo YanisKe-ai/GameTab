@@ -232,7 +232,7 @@ function ryuPage(d, k, R, m) {
     ryuFighter(c, k, R, m, m.teams[0], 40, 225, 880, 350, -2.4, true, { sh: 13, nameMax: 96, totMax: 210, nameRes: 110 });
     ryuFighter(c, k, R, m, m.teams[1], 150, 650, 880, 350, 2.4, true, { sh: 13, nameMax: 96, totMax: 210, nameRes: 110 });
     crowns.push([130, 222, 150, -14], [1000 - 40, 648, 150, 12]);
-    vs = [112, 610, 100, 8];
+    vs = [130, 610, 100, 8];
   }
   /* VS-Explosion */
   R.burst(c, vs[0], vs[1], vs[2], vs[2] * 0.62, 14, { fill: R.CR, sh: 9, lw: 6, rot: vs[3] });

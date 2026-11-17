@@ -3,6 +3,7 @@
 // Der Kartenfaecher im Entwurf zeigt die ECHTEN besten Rundenpunkte des Siegers (hoechstens 7, absteigend, nur Werte ueber 0), nicht Kartenwerte.
 // Der Stern "Flip 7 Bonus +15" erscheint nur, wenn der Sieger mindestens eine Runde mit Flip-7-Bonus hatte (Bonus +15 ist die Regel der App).
 import { F_ARCHIVO } from "./fonts-a.js";
+import { heroMeasure, heroDraw, list2, titleTilt } from "./ryu-b.js";
 
 const BG = "#150A07", CREAM = "#FFF1DC", ORG = "#FF7A3D", RED = "#D9431F";
 const NUM_COL = ["#FF7A3D", "#E8552B", "#FF7A3D", "#D9431F", "#FF7A3D", "#E8552B", "#FF7A3D"];
@@ -181,6 +182,57 @@ function prepare(d) {
   const f = Number(p.flip7); d.flip7 = isFinite(f) && f > 0 ? Math.round(f) : 0;
 }
 
+/* ---------- Ryū-Fassung: riesiger «7»-Explosionsstern ----------
+   Roter Grund, Titel schräg, grosser Creme-Explosionsstern mit «7», die besten Rundenpunkte des Siegers als Kartenfächer (Creme-Sticker),
+   Flip-7-Bonus als schwarzer Zackenstempel, Sieger-Sticker, übrige Plätze als Sticker-Zeilen. Gleiche Seitenaufteilung wie render(). */
+function ryuFan(c, k, R, vals, x0, aw, zoneTop, zoneH) {
+  const n = vals.length; if (!n) return;
+  const cw = Math.min(150, zoneH * 0.74, aw / (1 + (n - 1) * 0.84)), ch = cw / 0.72, dx = cw * 0.84, mid = (n - 1) / 2, sag = ch * 0.08;
+  const cx = x0 + aw / 2, cy = zoneTop + zoneH / 2;
+  const order = vals.map((v, i) => ({ v, i })).sort((p, q) => Math.abs(q.i - mid) - Math.abs(p.i - mid) || p.i - q.i);
+  order.forEach((o) => {
+    const off = o.i - mid;
+    c.save(); c.translate(cx + off * dx, cy + off * off * ch * 0.02 - sag); c.rotate(off * 7 * Math.PI / 180);
+    R.sticker(c, -cw / 2, -ch / 2, cw, ch, { r: cw * 0.12, sh: 7, lw: 4.5 });
+    const lab = String(o.v), mf = k.fit(c, lab, { w: 400, fam: R.F_BAGEL, max: cw * 0.58, min: 18, maxW: cw * 0.66, lines: 1 });
+    k.setFont(c, 400, mf.size, R.F_BAGEL); c.fillStyle = o.i % 2 ? R.INK : R.RED; c.textAlign = "center"; c.fillText(mf.lines[0], 0, mf.size * 0.36 + ch * 0.04); c.textAlign = "left";
+    c.restore();
+  });
+}
+function ryuBonus(c, k, R, d, count, cx, cy, ro) {
+  R.burst(c, cx, cy, ro, ro * 0.74, 16, { fill: R.INK, stroke: R.CR, sh: 8, lw: 5, rot: 8 });
+  const bt = d.tr("tplFlip7Bonus", "Flip 7 Bonus"), lines = bt.split(/\s+/).length > 2 ? [bt.split(/\s+/).slice(0, -1).join(" "), bt.split(/\s+/).slice(-1)[0]] : [bt];
+  const f = k.fit(c, lines.reduce((a, b) => (a.length > b.length ? a : b), ""), { w: 400, fam: R.F_BAGEL, max: ro * 0.2, min: 16, maxW: ro * 1.15, lines: 1 });
+  k.setFont(c, 400, f.size, R.F_BAGEL); c.fillStyle = R.CR; c.textAlign = "center";
+  const lh = f.size * 1.05; lines.forEach((l, i) => c.fillText(l, cx, cy - ro * 0.36 + f.size * 0.36 + i * lh));
+  R.pop(c, "+15", cx, cy + ro * 0.34 + (lines.length > 1 ? 8 : 0), ro * 0.5, { align: "center", fill: R.RED, stroke: R.CR, shadow: R.INK, sh: 4, sw: 5 });
+  if (count > 1) { k.setFont(c, 400, ro * 0.2, R.F_BAGEL); c.fillStyle = R.CR; c.textAlign = "center"; c.fillText("×" + count, cx, cy + ro * 0.62); }
+  c.textAlign = "left";
+}
+function ryuPage1(d, k, R, others) {
+  const { cv, c } = k.tplCanvas(); R.bg(c, R.RED, 7117);
+  /* Riesen-Explosionsstern mit 7 oben rechts */
+  R.burst(c, 860, 165, 200, 128, 14, { fill: R.CR, sh: 12, lw: 6, rot: 6 });
+  R.pop(c, "7", 860, 252, 230, { align: "center", fill: R.RED, stroke: R.INK, sh: 12, sw: 14 });
+  titleTilt(c, k, R, d, 64, 215, -5, 560, 150, d.up(d.gameLabel).replace(/\s*\d+$/, "") || d.up(d.gameLabel));
+  const win = d.winners.length ? d.winners : d.rows.slice(0, 1);
+  const m = heroMeasure(c, k, R, d, win, 960), hasFan = d.fanVals.length > 0;
+  const n = others.length, cols = n > 4 ? 2 : 1, nR = Math.ceil(n / cols), pitch = n <= 2 ? 112 : nR <= 3 ? 98 : nR <= 4 ? 88 : 80, listH = n ? nR * pitch : 0;
+  const zoneTop = 330, heroGap = n ? 46 : 0;
+  let heroY = 1176 - listH - heroGap - m.h;
+  if (!hasFan) heroY = Math.max(zoneTop + 60, Math.min(heroY, zoneTop + 60 + (1176 - zoneTop - 60 - (m.h + heroGap + listH)) * 0.4));
+  heroDraw(c, k, R, d, win, m, 60, heroY, 960, { rot: -2 });
+  if (hasFan) {
+    const zt = zoneTop, zh = heroY - 50 - zt;
+    const zz = Math.max(90, zh), top2 = d.flip7 > 0 ? zt + 40 : zt;
+    ryuFan(c, k, R, d.fanVals, 50, d.flip7 > 0 ? 620 : 980, top2, zz - (top2 - zt));
+    if (d.flip7 > 0) ryuBonus(c, k, R, d, d.flip7, 850, top2 + (zz - (top2 - zt)) * 0.55, Math.min(150, Math.max(105, zz * 0.5)));
+  }
+  list2(c, k, R, others.map((r) => ({ rank: r.rank, name: r.name, right: r.value })), { x: cols === 1 ? 110 : 60, w: cols === 1 ? 860 : 960, top: heroY + m.h + heroGap, bottom: 1176, cols, maxPitch: pitch, fs: 46 });
+  R.footer(c, k, d);
+  return cv;
+}
+
 export default {
   games: ["flip7"],
   fonts: ["400 100px \"GTR Archivo\"", "400 100px \"GTR Anton\"", "800 52px \"Baloo 2\"", "700 26px \"Baloo 2\"", "600 30px \"Baloo 2\""],
@@ -194,6 +246,15 @@ export default {
     const sty = { bg: (c) => bg(c, k), ink: CREAM, sub: "rgba(255,241,220,0.7)", acc: ORG, line: "rgba(255,122,61,0.35)", fam: k.F_ANTON, logo: ORG, titleFam: F_ARCHIVO, titleCase: true, subFam: k.F_BALOO,
       rowFill: "rgba(255,122,61,0.12)", rowEdge: "rgba(255,122,61,0.4)", brand: ORG };
     parts.slice(1).forEach((p, i) => out.push(k.continuationPage(d, p, i + 2, parts.length, sty)));
+    return out;
+  },
+  renderRyu(d, k, R) {
+    prepare(d);
+    const win = d.winners.length ? d.winners : d.rows.slice(0, 1);
+    const rest = d.rows.filter((r) => win.indexOf(r) < 0);
+    const parts = k.chunks(rest, Math.max(1, k.ONE_PAGE - win.length), 12);
+    const out = [ryuPage1(d, k, R, parts[0])];
+    parts.slice(1).forEach((p, i) => out.push(R.contPage(d, k, p, i + 2, parts.length)));
     return out;
   },
 };

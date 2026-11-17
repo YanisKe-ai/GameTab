@@ -3,6 +3,7 @@
 // Die Karten im Entwurf sind die ECHTEN Rundenwerte des Siegers (eine Karte pro Runde, Skyjo-Farben). Doppelte Runde = kleines x2.
 // tief gewinnt: die Rangfolge kommt unveraendert aus gtEcModel/rankedPodium (kleinster Wert zuerst).
 import { F_ARCHIVO, F_BRUSH } from "./fonts-a.js";
+import { heroMeasure, heroDraw, list2, titleTilt } from "./ryu-b.js";
 
 const BG = "#0A2D33", ACC = "#2FD9A8", INK = "#FFFFFF", ON_ACC = "#06302A";
 
@@ -169,6 +170,59 @@ function winnerRounds(d) {
   return rr.filter((q) => q && isFinite(Number(q.score))).map((q) => ({ score: Math.round(Number(q.score)), doubled: !!q.doubled })).slice(0, 36);
 }
 
+
+/* ---------- Ryū-Fassung: Kartenfächer-Sticker ----------
+   Roter Grund, Titel schräg, «tief gewinnt» als Stempel, Sieger-Sticker, die echten Rundenwerte des Siegers als Creme-Karten
+   (negative Werte schwarz, doppelte Runde mit ×2-Pille), übrige Plätze als Sticker-Zeilen. Gleiche Seitenaufteilung wie render(). */
+function ryuCard(c, k, R, x, y, w, h, v, dbl, deg) {
+  const neg = v < 0;
+  R.sticker(c, x, y, w, h, { r: w * 0.14, rot: deg, sh: Math.max(4, w * 0.06), lw: Math.max(3, w * 0.035), fill: neg ? R.INK : R.CR, stroke: neg ? R.CR : R.INK });
+  R.rot(c, x, y, w, h, deg, () => {
+    const label = String(v).replace("-", "−"), mf = k.fit(c, label, { w: 400, fam: R.F_BAGEL, max: w * 0.62, min: 14, maxW: w * 0.8, lines: 1 });
+    k.setFont(c, 400, mf.size, R.F_BAGEL); c.fillStyle = neg ? R.CR : R.INK; c.textAlign = "center"; c.fillText(mf.lines[0], w / 2, h / 2 + mf.size * 0.36); c.textAlign = "left";
+    if (dbl) {
+      const pw = w * 0.56, ph = Math.max(20, w * 0.26);
+      c.fillStyle = R.RED; R.rr(c, w / 2 - pw / 2, -ph * 0.5, pw, ph, ph / 2); c.fill();
+      c.lineWidth = Math.max(2.5, w * 0.03); c.strokeStyle = R.INK; R.rr(c, w / 2 - pw / 2, -ph * 0.5, pw, ph, ph / 2); c.stroke();
+      k.setFont(c, 400, ph * 0.72, R.F_BAGEL); c.fillStyle = R.INK; c.textAlign = "center"; c.fillText("×2", w / 2, ph * 0.26); c.textAlign = "left";
+    }
+  });
+}
+function ryuCards(c, k, R, rounds, y0, ah) {
+  const n = rounds.length; if (!n || ah < 60) return;
+  const aw = 940, ar = 1.32, cap = n <= 2 ? 200 : n <= 5 ? 170 : 150;
+  let best = null;
+  for (let cols = 1; cols <= 14; cols++) {
+    const rows = Math.ceil(n / cols), g = 14;
+    const cw = Math.min(cap, (aw - (cols - 1) * g) / cols, (ah - (rows - 1) * g - 14) / (rows * ar));
+    if (cw > 20 && (!best || cw > best.cw + 0.01)) best = { cols, rows, cw, g };
+  }
+  if (!best) return;
+  const { cols, rows, cw, g } = best, ch = cw * ar, totalH = rows * ch + (rows - 1) * g, top = y0 + Math.max(0, (ah - totalH) / 2);
+  for (let i = 0; i < n; i++) {
+    const row = Math.floor(i / cols), col = i % cols, inRow = row === rows - 1 ? n - row * cols : cols, rowW = inRow * cw + (inRow - 1) * g;
+    ryuCard(c, k, R, 540 - rowW / 2 + col * (cw + g), top + row * (ch + g), cw, ch, rounds[i].score, rounds[i].doubled, [-3, 2, -1.5, 3.5, -2.5, 1.5][i % 6]);
+  }
+}
+function ryuPage1(d, k, R, rows) {
+  const { cv, c } = k.tplCanvas(); R.bg(c, R.RED, 2207);
+  R.dots(c, 600, 0, 480, 300, 26, 4.2, "rgba(26,23,22,0.16)");
+  titleTilt(c, k, R, d, 64, 190, -4, 520, 150);
+  R.stamp(c, k, d.tr("tplSkyjoLow", "tief gewinnt"), 790, 110, 46, 5, R.INK, 440);
+  const win = d.winners.length ? d.winners : d.rows.slice(0, 1), rest = rows.filter((r) => win.indexOf(r) < 0);
+  const m = heroMeasure(c, k, R, d, win, 960), hasCards = d.rounds && d.rounds.length > 0;
+  const cols = rest.length > 4 ? 2 : 1, nR = Math.ceil(rest.length / cols), pitch = rest.length <= 2 ? 140 : nR <= 3 ? 104 : nR <= 4 ? 96 : 84;
+  const listH = nR * pitch, top0 = 290;
+  let y = top0;
+  if (!hasCards) y = top0 + Math.max(0, (1176 - top0 - (m.h + 46 + listH)) * 0.4);
+  heroDraw(c, k, R, d, win, m, 60, y, 960, { rot: -2 });
+  const listTop = Math.min(1176 - listH, hasCards ? 1176 - listH : y + m.h + 46);
+  if (hasCards) ryuCards(c, k, R, d.rounds, y + m.h + 36, listTop - 20 - (y + m.h + 36));
+  list2(c, k, R, rest.map((r) => ({ hot: false, rank: r.rank, name: r.name, right: r.value })), { x: cols === 1 ? 110 : 60, w: cols === 1 ? 860 : 960, top: listTop, bottom: 1176, cols, maxPitch: pitch, fs: rest.length <= 2 ? 54 : 46 });
+  R.footer(c, k, d);
+  return cv;
+}
+
 export default {
   games: ["skyjo"],
   fonts: ["400 100px \"GTR Archivo\"", "400 100px \"GTR Brush\"", "400 100px \"GTR Anton\"", "800 52px \"Baloo 2\"", "700 26px \"Baloo 2\""],
@@ -181,6 +235,13 @@ export default {
     const sty = { bg: (c) => bg(c, k), ink: INK, sub: "rgba(47,217,168,0.8)", acc: ACC, line: "rgba(47,217,168,0.3)", fam: k.F_ANTON, logo: ACC, titleFam: F_ARCHIVO, titleCase: true, subFam: F_BRUSH,
       rowFill: BG, rowFillWin: ACC, rowEdge: "rgba(47,217,168,0.33)", winInk: ON_ACC };
     parts.forEach((p, i) => out.push(k.continuationPage(d, p, i + 2, parts.length + 1, sty)));
+    return out;
+  },
+  renderRyu(d, k, R) {
+    d.rounds = winnerRounds(d);
+    const out = [ryuPage1(d, k, R, d.rows.slice(0, k.ONE_PAGE))];
+    const parts = k.chunks(d.rows.slice(k.ONE_PAGE), 12, 12).filter((p) => p.length);
+    parts.forEach((p, i) => out.push(R.contPage(d, k, p, i + 2, parts.length + 1)));
     return out;
   },
 };

@@ -4,6 +4,7 @@
 //   {name: Variantenname, sub: [Zeilen], rows:[{name, rest}] (nur X01), checkout:{total, label} (nur X01, echter letzter Wurf)}.
 // Checkout nur, wenn er im Verlauf wirklich steht. Shanghai-Sieg als Hinweis nur, wenn das Modell den Grund "shanghai" kennt.
 import { pickRows, breakHy, unHy } from "./util.js";
+import { list2, pill } from "./ryu-b.js";
 
 const BGC = "#120C0B", RED = "#C8102E", CREAM = "#F4EEDD", SOFT = "#C9BFA8", EC = "#EFE3C2", GRN = "#1E6B3A", DARK = "#17120F";
 const MONO = '"Space Grotesk","Inter","GT Clean","GT CJK",sans-serif';
@@ -121,6 +122,52 @@ function page1(d, k, info, list) {
   return cv;
 }
 
+/* ---------- Ryū-Fassung: Zielscheiben-Sticker ----------
+   Roter Grund, Zielscheibe (Schwarz, Creme, Rot) mit drei Darts oben rechts, Variantenname schräg, Untertitel als Creme-Pillen,
+   Banner «GAME SHOT» als Pop-Schrift, Zeilen als Sticker (Checkout oder Rest unter dem Namen, Einheit unter dem Wert). Gleiche Inhalte wie render(). */
+function ryuBoard(c, k, R, cx, cy, r0) {
+  const s = r0 / 255, P = (r, a) => [cx + r * s * Math.sin(a), cy - r * s * Math.cos(a)];
+  const segr = (a0, a1, r0_, r1_, col) => { c.beginPath(); let q = P(r1_, a0); c.moveTo(q[0], q[1]); c.arc(cx, cy, r1_ * s, a0 - Math.PI / 2, a1 - Math.PI / 2); q = P(r0_, a1); c.lineTo(q[0], q[1]); c.arc(cx, cy, r0_ * s, a1 - Math.PI / 2, a0 - Math.PI / 2, true); c.closePath(); c.fillStyle = col; c.fill(); };
+  c.fillStyle = R.INK; c.beginPath(); c.arc(cx + 12, cy + 12, 300 * s, 0, 7); c.fill();
+  c.fillStyle = R.INK; c.beginPath(); c.arc(cx, cy, 300 * s, 0, 7); c.fill(); c.lineWidth = 6; c.strokeStyle = R.CR; c.beginPath(); c.arc(cx, cy, 300 * s - 3, 0, 7); c.stroke();
+  ORDER.forEach((num, i) => {
+    const a0 = (i * 18 - 9) * Math.PI / 180, a1 = (i * 18 + 9) * Math.PI / 180, even = i % 2 === 0, sc = even ? R.INK : R.CR, rc = even ? R.RED : R.INK;
+    segr(a0, a1, 24, 153, sc); segr(a0, a1, 153, 165.75, rc); segr(a0, a1, 165.75, 238.4, sc); segr(a0, a1, 238.4, 255, rc);
+    const am = i * 18 * Math.PI / 180, q = P(278, am); k.setFont(c, 400, 38 * s, R.F_BAGEL); c.fillStyle = R.CR; c.textAlign = "center"; c.fillText(String(num), q[0], q[1] + 38 * s * 0.36); c.textAlign = "left";
+  });
+  c.lineWidth = 2.5; c.strokeStyle = R.INK; c.beginPath(); c.arc(cx, cy, 255 * s, 0, 7); c.stroke();
+  c.fillStyle = R.CR; c.beginPath(); c.arc(cx, cy, 24 * s, 0, 7); c.fill(); c.fillStyle = R.RED; c.beginPath(); c.arc(cx, cy, 10 * s, 0, 7); c.fill();
+}
+function ryuDart(c, R, x, y, rot, sc) {
+  c.save(); c.translate(x, y); c.rotate(rot * Math.PI / 180); c.scale(sc, sc); c.lineJoin = "round"; c.lineWidth = 5; c.strokeStyle = R.INK;
+  c.fillStyle = R.INK; c.beginPath(); c.moveTo(0, 0); c.lineTo(-3.5, -34); c.lineTo(3.5, -34); c.closePath(); c.fill();
+  c.fillStyle = R.CR; R.rr(c, -9, -118, 18, 86, 6); c.fill(); c.stroke();
+  c.fillStyle = R.INK; c.fillRect(-3.5, -150, 7, 34);
+  c.fillStyle = R.CR; c.beginPath(); c.moveTo(-3, -146); c.lineTo(-30, -214); c.lineTo(-3, -194); c.lineTo(0, -218); c.lineTo(3, -194); c.lineTo(30, -214); c.lineTo(3, -146); c.closePath(); c.fill(); c.stroke();
+  c.restore();
+}
+function ryuPage1(d, k, R, info, list) {
+  const { cv, c } = k.tplCanvas(); R.bg(c, R.RED, 4747);
+  ryuBoard(c, k, R, 800, 250, 200);
+  ryuDart(c, R, 770, 245, 6, 0.8); ryuDart(c, R, 830, 190, -8, 0.8); ryuDart(c, R, 850, 300, 14, 0.8);
+  /* Variantenname, bis 2 Zeilen */
+  const title = d.up(info.name); let tf = k.fit(c, title, { w: 400, fam: R.F_BAGEL, max: 112, min: 56, maxW: 460, lines: 1 }), tl = tf.lines;
+  if (tf.cut) { tf = k.fit(c, breakHy(title), { w: 400, fam: R.F_BAGEL, max: 92, min: 40, maxW: 460, lines: 2 }); tl = unHy(tf.lines); }
+  c.save(); c.translate(64, 150 + tf.size * 0.5); c.rotate(-4 * Math.PI / 180);
+  tl.forEach((ln, i) => R.pop(c, ln, 0, i * tf.size * 1.05, tf.size, { sh: tf.size * 0.08 })); c.restore();
+  let sy = 160 + (tl.length - 1) * tf.size * 1.05 + tf.size * 0.5 + 50;
+  info.sub.forEach((s) => { const p = pill(c, k, R, d.up(s), 64, sy, 26, -1.5, { maxW: 440, fam: R.F_TXT, wt: 800, fill: R.CR, ink: R.INK }); sy += p.h + 14; });
+  /* Banner */
+  const bf = k.fit(c, info.banner, { w: 400, fam: R.F_BAGEL, max: 130, min: 56, maxW: 900, lines: 1 });
+  const by = Math.max(sy + 70, 590) + bf.size * 0.3;
+  c.save(); c.translate(540, by); c.rotate(-3 * Math.PI / 180); R.pop(c, bf.lines[0], 0, 0, bf.size, { align: "center", sh: bf.size * 0.09 }); c.restore();
+  const n = list.length, cols = n > 5 ? 2 : 1, top = by + 50;
+  list2(c, k, R, list.map((r, i) => ({ hot: r.winner, rank: r.rank, name: r.name, nameSub: info.mid[i], right: r.value, rightSub: info.unit(r.score) })),
+    { x: cols === 1 ? 110 : 60, w: cols === 1 ? 860 : 960, top, bottom: 1176, cols, maxPitch: n <= 2 ? 190 : n <= 3 ? 160 : n <= 5 ? 130 : 120, fs: n <= 3 ? 58 : 46 });
+  R.footer(c, k, d);
+  return cv;
+}
+
 export default {
   games: ["darts", "cricket", "shanghai", "hiscore", "splitscore"],
   fonts: ["400 100px \"GTR Anton\"", "800 52px \"Baloo 2\"", "600 24px \"Space Grotesk\"", "500 22px \"Space Grotesk\""],
@@ -152,6 +199,30 @@ export default {
     const out = [page1(d, k, Object.assign({}, info, { mid: mid.slice(0, FIRST_CAP) }), parts[0])];
     const sty = { bg: (c) => { c.fillStyle = BGC; c.fillRect(0, 0, k.TPL_W, k.TPL_H); c.fillStyle = RED; c.fillRect(0, 0, 1080, 14); }, ink: "#fff", sub: SOFT, acc: "#fff", line: "rgba(255,255,255,0.3)", fam: k.F_ANTON, logo: CREAM };
     parts.slice(1).forEach((p, i) => out.push(k.listPage(d, p, i + 2, parts.length, sty)));
+    return out;
+  },
+  renderRyu(d, k, R) {
+    const ex = d.extra || {}, gid = d.gameId, picked = pickRows(d, ex.rows, null);
+    const shanghai = gid === "shanghai" && d.model.detail && d.model.detail === d.tr("ecWinShanghai", "");
+    const co = ex.checkout && ex.checkout.total != null ? ex.checkout : null;
+    const mid = d.rows.map((r, i) => {
+      const e = picked[i];
+      if (r.winner) {
+        if (gid === "darts" && co && d.winners[0] === r) return d.tr("tplDtCheckout", (a, b) => a + " " + b)(d.num(co.total), co.label || "");
+        if (shanghai) return d.tr("ecWinShanghai", "");
+        return "";
+      }
+      if (gid === "darts" && e && e.rest != null && isFinite(Number(e.rest))) return d.tr("tplDtRest", (a) => a)(d.num(Number(e.rest)));
+      return "";
+    });
+    const uw = d.tr(gid === "darts" || gid === "cricket" ? "nlULegs" : "nlUPoints", null);
+    const one = (n) => (d.lang === "fr" || d.lang === "pt" ? Math.abs(n) < 2 : Math.abs(n) === 1);
+    const unit = (n) => (Array.isArray(uw) && n != null ? String(uw[one(n) ? 0 : 1] || "") : "");
+    const banner = shanghai ? "SHANGHAI!" : (gid === "darts" || gid === "cricket") && !d.tie ? "GAME SHOT" : d.up(d.model.heroLabel);
+    const info = { name: ex.name || d.gameLabel, sub: Array.isArray(ex.sub) ? ex.sub.filter(Boolean) : [], mid, unit, banner };
+    const parts = k.chunks(d.rows, FIRST_CAP, 12);
+    const out = [ryuPage1(d, k, R, Object.assign({}, info, { mid: mid.slice(0, FIRST_CAP) }), parts[0])];
+    parts.slice(1).forEach((p, i) => out.push(R.contPage(d, k, p, i + 2, parts.length)));
     return out;
   },
 };

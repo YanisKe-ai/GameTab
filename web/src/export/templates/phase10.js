@@ -2,6 +2,7 @@
 // Daten: Rang und geschaffte Phasen (gtEcModel, Score = Phasen). Zusatz (shareExtra aus S8GameOver): {players:[{name, done, total}]} (total = Strafpunkte).
 // Ohne Strafpunkte-Daten wird die Zeile weggelassen (nie als 0 gezeigt).
 import { pickRows, breakHy, unHy } from "./util.js";
+import { heroMeasure, heroDraw, list2, titleTilt } from "./ryu-b.js";
 
 const BG = "#14141C", YEL = "#F2C230", DARKINK = "#14141C";
 const STEP_COL = [["#E2453C", "#fff"], ["#2F6FDE", "#fff"], ["#2FA84F", "#fff"], ["#F2C230", DARKINK]];
@@ -140,6 +141,50 @@ function page1(d, k, pens) {
   return cv;
 }
 
+/* ---------- Ryū-Fassung: Treppe aus Stickern ----------
+   Roter Grund, Titel schräg, Untertitel als Stempel, Sieger-Sticker, zehn Creme-Stufen (die zehnte schwarz), pro Person ein Platz-Zackenkreis
+   auf der erreichten Phase (Sieger rot), unten Sticker-Zeilen mit Phasen und Strafpunkten. Gleiche Inhalte wie render(). */
+function ryuPage1(d, k, R, pens) {
+  const { cv, c } = k.tplCanvas(); R.bg(c, R.RED, 1010);
+  R.dots(c, 600, 0, 480, 300, 26, 4.2, "rgba(26,23,22,0.16)");
+  titleTilt(c, k, R, d, 64, 190, -4, 540, 140);
+  const win = d.winners.length ? d.winners : d.rows.slice(0, 1), w0 = win[0];
+  let sub;
+  if (d.tie) sub = d.tr("ecTied", "Gemeinsamer erster Platz");
+  else if (w0 && w0.score >= 10) sub = d.tr("tplP10Top", "ganz oben angekommen");
+  else sub = d.tr("tplP10Reach", (n) => n + "/10")(w0 ? w0.score : 0);
+  const m = heroMeasure(c, k, R, d, win, 960, { valH: 120, minH: 210 });
+  const heroY = 262; heroDraw(c, k, R, d, win, m, 60, heroY, 960, { rot: -2, value: false });
+  R.stamp(c, k, sub, 250 + 270, heroY + m.h - 46, 40, -2, R.RED2, 520);
+  const n = d.rows.length, cols = n > 3 ? 2 : 1, nR = Math.ceil(n / cols), pitch = n <= 3 ? 110 : 100, listH = nR * pitch, listTop = 1176 - listH;
+  /* Treppe */
+  const X0 = 110, SW = 91, base = listTop - 30, groups = {};
+  d.rows.forEach((r) => { const s = Math.max(0, Math.min(10, Math.round(r.score || 0))); (groups[s] = groups[s] || []).push(r); });
+  let hmax = 380; const need = () => Math.max.apply(null, Object.keys(groups).map((s) => { const n0 = Number(s); return (n0 === 0 ? 0 : 40 + (hmax - 40) * (n0 - 1) / 9) + 14 + 56 * groups[s].length; }));
+  while (hmax > 120 && base - need() < heroY + m.h + 50) hmax -= 10;
+  const hOf = (i) => 40 + (hmax - 40) * (i - 1) / 9;
+  for (let i = 1; i <= 10; i++) {
+    const x = X0 + (i - 1) * SW, h = hOf(i), top = base - h, last = i === 10;
+    R.sticker(c, x, top, SW + 4, h, { r: 10, sh: 6, lw: 4, fill: last ? R.INK : (i % 2 ? R.CR : R.CR2), stroke: last ? R.CR : R.INK });
+    const fs = Math.min(34, h * 0.6); k.setFont(c, 400, fs, R.F_BAGEL); c.fillStyle = last ? R.CR : R.INK; c.textAlign = "center"; c.fillText(String(i), x + SW / 2 + 2, top + h / 2 + fs * 0.36); c.textAlign = "left";
+  }
+  c.fillStyle = R.INK; c.fillRect(40, base, 1000, 8);
+  /* Platzmarken auf der erreichten Phase, bei mehreren auf derselben Stufe gestapelt */
+  Object.keys(groups).forEach((s) => {
+    const idx = groups[s], n0 = Number(s), cx = n0 === 0 ? 70 : X0 + (n0 - 0.5) * SW + 2, top = n0 === 0 ? base : base - hOf(n0);
+    idx.forEach((r, j) => {
+      const rad = r.winner ? 34 : 28, cy = top - 14 - rad - j * 58;
+      R.zig(c, cx, cy, rad, { fill: r.winner ? R.RED : R.CR, n: 14, sh: 5, lw: 4.5, depth: 0.84 });
+      k.setFont(c, 400, rad * 1.05, R.F_BAGEL); c.fillStyle = r.winner ? R.CR : R.INK; c.textAlign = "center"; c.fillText(String(r.rank), cx, cy + rad * 0.37); c.textAlign = "left";
+    });
+  });
+  const ph = d.tr("tplP10Phases", (q) => q + "/10"), pl = d.tr("tplP10Pen", "Strafpunkte");
+  list2(c, k, R, d.rows.map((r, i) => ({ hot: r.winner, rank: r.rank, name: r.name, nameSub: ph(r.score), right: pens[i] != null ? d.num(pens[i]) : "", rightSub: pens[i] != null ? pl : "" })),
+    { x: cols === 1 ? 110 : 60, w: cols === 1 ? 860 : 960, top: listTop, bottom: 1176, cols, maxPitch: pitch, fs: 46 });
+  R.footer(c, k, d);
+  return cv;
+}
+
 export default {
   games: ["phase10"],
   fonts: ["400 100px \"GTR Anton\"", "800 104px \"Baloo 2\"", "700 26px \"Baloo 2\"", "700 60px Kalam"],
@@ -150,5 +195,11 @@ export default {
     const picked = pickRows(d, ex.players, "done");
     const pens = picked.map((e) => (e && e.total != null && isFinite(Number(e.total)) ? Number(e.total) : null));
     return [page1(d, k, pens)];
+  },
+  renderRyu(d, k, R) {
+    const ex = d.extra || {};
+    const picked = pickRows(d, ex.players, "done");
+    const pens = picked.map((e) => (e && e.total != null && isFinite(Number(e.total)) ? Number(e.total) : null));
+    return [ryuPage1(d, k, R, pens)];
   },
 };

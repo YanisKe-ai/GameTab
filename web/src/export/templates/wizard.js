@@ -2,6 +2,7 @@
 // Daten: Rang und Punkte (gtEcModel). Zusatz (shareExtra aus WizardGame): {roundCount, players:[{name, hits}]} (hits = Runden, in denen die Ansage genau getroffen wurde).
 // "Prophezeiung erfuellt" nur, wenn alle Sieger jede Ansage getroffen haben; sonst der Gleichstand-Hinweis. Die getroffenen Ansagen stehen in der Rangliste, darum kein Untertitel.
 import { pickRows, star, setI } from "./util.js";
+import { row2, titleTilt, pill } from "./ryu-b.js";
 
 const GOLD = "#E0BA72", HERO = "#F3DFA9", DARK = "#070818";
 const F_FRAU = '"Fraunces","Inter","GT Clean","GT CJK",serif';
@@ -119,6 +120,54 @@ function page1(d, k, N, rowsData) {
   return cv;
 }
 
+/* ---------- Ryū-Fassung: Zauberhut-Sticker ----------
+   Roter Grund, Titel schräg, Untertitel als schwarze Pille, Zauberkarte (Creme-Sticker mit grossem Buchstaben) mit Zauberhut oben rechts,
+   alle Plätze als Sticker-Zeilen (Sieger schwarz und grösser) mit Ansagen unter dem Wert. Gleiche Inhalte wie render(). */
+function ryuHat(c, R, cx, by, W, deg) {
+  c.save(); c.translate(cx, by); c.rotate(deg * Math.PI / 180);
+  const cone = () => { c.beginPath(); c.moveTo(-W * 0.34, 0); c.quadraticCurveTo(-W * 0.14, -W * 0.5, W * 0.22, -W * 0.95); c.quadraticCurveTo(W * 0.2, -W * 0.4, W * 0.34, 0); c.closePath(); };
+  c.fillStyle = R.INK; cone(); c.fill(); c.lineWidth = 4; c.strokeStyle = R.CR; c.lineJoin = "round"; cone(); c.stroke();
+  c.fillStyle = R.INK; c.beginPath(); c.ellipse(0, 0, W * 0.6, W * 0.13, 0, 0, 6.2832); c.fill(); c.lineWidth = 4.5; c.strokeStyle = R.CR; c.stroke();
+  c.fillStyle = R.CR; R.starPath(c, W * 0.03, -W * 0.34, W * 0.14, W * 0.06, 5, 0); c.fill();
+  c.fillStyle = R.RED; c.fillRect(-W * 0.3, -W * 0.1, W * 0.6, W * 0.05);
+  c.restore();
+}
+function ryuWizCard(c, k, R, cx, cy, ch, deg, letter, word) {
+  const s = ch / 540, cw = 400 * s;
+  c.save(); c.translate(cx, cy); c.rotate(deg * Math.PI / 180); c.translate(-cw / 2, -ch / 2);
+  R.sticker(c, 0, 0, cw, ch, { r: 34 * s, sh: 14 * s, lw: Math.max(4, 7 * s) });
+  c.lineWidth = Math.max(3, 4 * s); c.strokeStyle = R.INK; R.rr(c, 24 * s, 24 * s, cw - 48 * s, ch - 48 * s, 20 * s); c.stroke();
+  [[70, 82, 20, R.RED], [330, 82, 20, R.RED], [70, 458, 16, R.INK], [330, 458, 16, R.INK]].forEach(([x, y, r, col]) => { c.fillStyle = col; R.starPath(c, x * s, y * s, r * s * 1.6, r * s * 0.6, 4, 0); c.fill(); });
+  k.setFont(c, 400, 330 * s, R.F_BAGEL); c.fillStyle = R.INK; c.textAlign = "center"; c.fillText(letter, cw / 2, ch / 2 + 125 * s);
+  const wf = k.fit(c, word, { w: 400, fam: R.F_BAGEL, max: 44 * s, min: 14, maxW: cw - 100 * s, lines: 1 });
+  k.setFont(c, 400, wf.size, R.F_BAGEL); c.fillStyle = R.RED; c.fillText(wf.lines[0], cw / 2, ch - 62 * s); c.textAlign = "left";
+  c.restore();
+}
+function ryuPage1(d, k, R, N, extras) {
+  const { cv, c } = k.tplCanvas(); R.bg(c, R.RED, 3373);
+  R.dots(c, 0, 0, 520, 360, 26, 4.2, "rgba(26,23,22,0.16)");
+  const n = d.rows.length, bh = n <= 3 ? 104 : n === 4 ? 92 : n === 5 ? 84 : 78, gap = 14;
+  const hs = d.rows.map((r) => (r.winner ? Math.round(bh * 1.32) : bh)), total = hs.reduce((a, b) => a + b + gap, 0) - gap, listTop = 1176 - total;
+  titleTilt(c, k, R, d, 64, 215, -5, 900, 150);
+  const win = d.winners, perfect = N > 0 && win.length > 0 && win.every((r) => { const e = extras[d.rows.indexOf(r)]; return e && e.hits === N; });
+  let sub = "";
+  if (perfect) sub = d.tr("tplWzPerfect", "Prophezeiung erfüllt");
+  else if (d.tie) sub = d.tr("ecTied", "Gemeinsamer erster Platz");
+  else { const e = extras[d.rows.indexOf(win[0])]; if (!(e && e.hits != null && N > 0)) sub = d.tr("ecWon", "Gewonnen"); }
+  if (sub) pill(c, k, R, sub, 64, 262, 40, -2, { maxW: 540 });
+  const zt = sub ? 318 : 280, ch = Math.max(240, Math.min(470, listTop - 36 - zt)), cw = ch * 400 / 540, ccx = sub ? 760 : 540, ccy = zt + (listTop - 36 - zt) / 2;
+  ryuWizCard(c, k, R, ccx, ccy, ch, 4, d.up(k.seg(d.tr("tplWzCard", "Zauberer"))[0] || "Z"), d.tr("tplWzCard", "Zauberer"));
+  ryuHat(c, R, ccx - cw / 2 + 24, ccy - ch / 2 + 46, Math.min(220, ch * 0.5), -16);
+  let y = listTop;
+  d.rows.forEach((r, i) => {
+    const e = extras[i], ra = e && e.hits != null ? d.tr("tplWzBids", (a, b) => a + "/" + b)(e.hits, N) : "";
+    row2(c, k, R, { x: 60, y, w: 960, h: hs[i], rot: i % 2 ? 0.8 : -0.8, hot: r.winner, rank: r.rank, name: r.name, right: r.value, rightSub: ra, fs: Math.min(r.winner ? 62 : 46, hs[i] * 0.5) });
+    y += hs[i] + gap;
+  });
+  R.footer(c, k, d);
+  return cv;
+}
+
 export default {
   games: ["wizard"],
   fonts: ["700 170px Fraunces", "italic 500 68px Fraunces", "italic 700 410px Fraunces", "800 52px \"Baloo 2\"", "700 26px \"Baloo 2\""],
@@ -130,5 +179,12 @@ export default {
     const picked = pickRows(d, ex.players, "total");
     const extras = picked.map((e) => (e && e.hits != null ? { hits: Number(e.hits) } : null));
     return [page1(d, k, N, extras)];
+  },
+  renderRyu(d, k, R) {
+    const ex = d.extra || {};
+    const N = Number(ex.roundCount) || 0;
+    const picked = pickRows(d, ex.players, "total");
+    const extras = picked.map((e) => (e && e.hits != null ? { hits: Number(e.hits) } : null));
+    return [ryuPage1(d, k, R, N, extras)];
   },
 };

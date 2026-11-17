@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.17-6 (17.11.2026 10:23)
+- Hell: Schieber-Spielseite in Creme, Platzhalter besser lesbar
+
 ## 2026.11.17-5 (17.11.2026 02:12)
 - Ryū: Siegbilder Yatzy, Tutto, Minigolf, Stadt Land Fluss und Schieber frecher
 

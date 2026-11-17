@@ -319,6 +319,7 @@ html[data-phone-landscape] body:has(> #root > .gtL-start) { position: static !im
 }
 /* Nocturne (17.11.): Platzhalter und kleiner Statistik-Hinweis mit genug Kontrast; spieleigene Platzhalter-Regeln gehen vor */
 :where(html[data-gt-theme="dark"]:not([data-gt-skin])) :is(input,textarea)::placeholder{color:#8E97AD;opacity:1}
+:where(html[data-gt-theme="noir"]) :is(input,textarea)::placeholder{color:#9A9A9A;opacity:1}
 html[data-gt-theme="dark"]:not([data-gt-skin]) .gtSt2-lowhint{color:#B0A390!important}
 `;/*@gt-body-end*/
 export { GLOBAL_STYLES };

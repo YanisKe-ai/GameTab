@@ -1,6 +1,7 @@
 // Ergebnisbild Romme (Entwurf dev-notes/ergebnisbild-entwuerfe/pro-spiel/romme.png): gruener Filz, Karten als Dekoration (Reihen und Saetze, keine echten Haende).
 // Daten: Rang und Minuspunkte (gtEcModel, weniger ist besser). Zusatz (shareExtra aus Romme): {rounds, target}. Fehlt rounds, fehlt die Zeile.
-import { card } from "./cards.js";
+import { card, suit } from "./cards.js";
+import { heroMeasure, heroDraw, list2, titleTilt, pill } from "./ryu-b.js";
 import { breakHy, unHy, setI } from "./util.js";
 
 const GOLD = "#E8D8A8", F_FRAU = '"Fraunces","Inter","GT Clean","GT CJK",serif';
@@ -81,6 +82,41 @@ function page1(d, k, rows, rounds, target) {
   return cv;
 }
 
+/* ---------- Ryū-Fassung: Handkarten-Fächer ----------
+   Roter Grund, Titel schräg, «Minuspunkte» als Stempel, Sieger-Sticker mit Wert, schwarzer Explosionsstern mit fünf Creme-Karten
+   (reine Dekoration wie bisher), übrige Plätze als Sticker-Zeilen, Rundenzeile als Pille. Gleiche Inhalte wie render(). */
+const RY_FAN = [["5", "heart"], ["6", "spade"], ["7", "heart"], ["8", "club"], ["9", "diamond"]];
+function ryuHand(c, k, R, cx, zoneTop, zoneH) {
+  const ch = Math.min(220, zoneH / 1.32), cw = ch * 0.72, step = 13, pivY = zoneTop + 1.45 * ch, n = RY_FAN.length;
+  R.burst(c, cx, zoneTop + zoneH * 0.5, Math.min(zoneH * 0.72, 330), Math.min(zoneH * 0.72, 330) * 0.7, 18, { fill: R.INK, stroke: R.CR, sh: 10, lw: 5, rot: 4 });
+  RY_FAN.forEach(([rank, s], i) => {
+    const a = (i - (n - 1) / 2) * step;
+    c.save(); c.translate(cx, pivY); c.rotate(a * Math.PI / 180);
+    R.sticker(c, -cw / 2, -1.45 * ch, cw, ch, { r: cw * 0.1, sh: 6, lw: 4.5 });
+    const col = s === "heart" || s === "diamond" ? R.RED2 : R.INK;
+    k.setFont(c, 400, cw * 0.3, R.F_BAGEL); c.fillStyle = col; c.fillText(rank, -cw / 2 + 12, -1.45 * ch + cw * 0.3 + 8);
+    suit(c, s, 0, -1.45 * ch + ch * 0.58, cw * 0.46, col);
+    c.restore();
+  });
+}
+function ryuPage1(d, k, R, rows, rounds, target) {
+  const { cv, c } = k.tplCanvas(); R.bg(c, R.RED, 5151);
+  R.dots(c, 600, 0, 480, 300, 26, 4.2, "rgba(26,23,22,0.16)");
+  titleTilt(c, k, R, d, 64, 190, -4, 500, 150);
+  R.stamp(c, k, d.tr("tplRmPts", "Minuspunkte"), 830, 110, 44, 5, R.INK, 380);
+  const win = d.winners.length ? d.winners : d.rows.slice(0, 1), rest = rows.filter((r) => win.indexOf(r) < 0);
+  const m = heroMeasure(c, k, R, d, win, 960), top0 = 300;
+  const n = rest.length, cols = n > 3 ? 2 : 1, nR = Math.ceil(n / cols), pitch = n <= 2 ? 112 : 96, listH = n ? nR * pitch : 0;
+  heroDraw(c, k, R, d, win, m, 60, top0, 960, { rot: -2 });
+  const listTop = 1176 - listH, fy = top0 + m.h + 40;
+  if (rounds != null) pill(c, k, R, d.tr("tplRmSub", (q) => q + "")(rounds, target), 64, fy + 6, 34, -2, { maxW: 560, fam: R.F_TXT, wt: 800 });
+  const zt = fy + 70, zh = listTop - 20 - zt;
+  if (zh > 150) ryuHand(c, k, R, 640, zt, zh);
+  list2(c, k, R, rest.map((r) => ({ rank: r.rank, name: r.name, right: r.value })), { x: cols === 1 ? 110 : 60, w: cols === 1 ? 860 : 960, top: listTop, bottom: 1176, cols, maxPitch: pitch, fs: 46 });
+  R.footer(c, k, d);
+  return cv;
+}
+
 export default {
   games: ["romme"],
   fonts: ["400 100px \"GTR Anton\"", "italic 700 112px Fraunces", "700 44px Fraunces", "600 36px Fraunces", "800 52px \"Baloo 2\"", "700 26px \"Baloo 2\""],
@@ -91,5 +127,11 @@ export default {
     const rounds = ex.rounds != null && isFinite(Number(ex.rounds)) ? Number(ex.rounds) : null;
     const target = ex.target != null && isFinite(Number(ex.target)) ? Number(ex.target) : null;
     return [page1(d, k, d.rows.slice(0, FIRST_CAP), rounds != null && target != null ? rounds : null, target)];
+  },
+  renderRyu(d, k, R) {
+    const ex = d.extra || {};
+    const rounds = ex.rounds != null && isFinite(Number(ex.rounds)) ? Number(ex.rounds) : null;
+    const target = ex.target != null && isFinite(Number(ex.target)) ? Number(ex.target) : null;
+    return [ryuPage1(d, k, R, d.rows.slice(0, FIRST_CAP), rounds != null && target != null ? rounds : null, target)];
   },
 };

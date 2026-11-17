@@ -2,6 +2,7 @@
 // Daten: Rang und Gesamtschlaege (gtEcModel, weniger ist besser). Zusatz (shareExtra aus MinigolfPlay): {players:[{name, total, strokes:[18 Schlaege]}]}.
 // Kein PAR (gibt es im Spiel nicht): Abstand zum Sieger "+n". Hole in one nur, wo ein Schlag 1 wirklich eingetragen ist.
 import { pickRows } from "./util.js";
+import { titleTilt, pill } from "./ryu-b.js";
 
 const LIME = "#D6F23A", SOFT = "#B9D9A8", INK = "#F2F4E0", TILE = "#F7F5E6", TILE_INK = "#0F3A1C", GOLD = "#FFD84A";
 const FIRST_CAP = 10;
@@ -135,6 +136,67 @@ function page1(d, k, extras, rowsList, pageNo, pageCount) {
   return cv;
 }
 
+/* ---------- Ryū-Fassung: Scorecard-Ticket mit Fahne ----------
+   Roter Grund, Titel schräg, Fahne, Bahnenzahl als schwarze Pille, Zeilen als Sticker mit schwarzen Schlag-Kacheln und Abstand «+n»,
+   die Schläge des Siegers als Stempel-Raster (Hole in one schwarz), Hole-in-one-Stempel. Gleiche Inhalte wie render(). */
+function ryuFlag(c, R, x, top, h) {
+  c.fillStyle = R.INK; R.rr(c, x - 5, top, 10, h, 4); c.fill();
+  c.beginPath(); c.moveTo(x + 5, top + 4); c.lineTo(x + 120, top + 40); c.lineTo(x + 5, top + 84); c.closePath();
+  c.fillStyle = R.INK; c.save(); c.translate(7, 7); c.fill(); c.restore(); c.fillStyle = R.CR; c.fill(); c.lineWidth = 5; c.lineJoin = "round"; c.strokeStyle = R.INK; c.stroke();
+  c.fillStyle = R.INK; c.beginPath(); c.ellipse(x, top + h + 6, 54, 14, 0, 0, 6.2832); c.fill();
+}
+function ryuPage1(d, k, R, extras, rowsList) {
+  const { cv, c } = k.tplCanvas(); R.bg(c, R.RED, 1818);
+  R.dots(c, 560, 0, 520, 330, 26, 4.2, "rgba(26,23,22,0.16)");
+  ryuFlag(c, R, 880, 60, 190);
+  titleTilt(c, k, R, d, 64, 195, -4, 700, 140);
+  const holes = extras.holes, nShown = rowsList.length, compact = nShown >= 8;
+  const sub = d.up(d.tr("tplMgSub", (q) => q + " holes")(holes));
+  const sp = pill(c, k, R, sub, 64, 240, 30, -2, { maxW: 520 });
+  const best = d.winners.length ? d.winners[0].score : null, win = d.winners, val = win.length ? d.num(win[0].score) : "";
+  if (d.tie) { const tl = d.tr("tplMgTie", (q) => q + "")(val); pill(c, k, R, tl, 64 + sp.w + 20, 240, 30, 2, { maxW: Math.max(200, 1020 - (64 + sp.w + 20)), fill: R.CR, ink: R.INK }); }
+  const aces = extras.aces;
+  if (aces.length) {
+    const a0 = aces[0], l2 = a0.name + ", " + d.tr("tplMgHole", (l) => l)(a0.holes.join(", ")) + (aces.length > 1 ? " +" + (aces.length - 1) : "");
+    R.stamp(c, k, d.up(d.tr("tplMgAce", "Hole in one")) + ": " + l2, 540, 345, 40, 2.5, R.INK, 940);
+  }
+  const w0 = d.winners[0] || d.rows[0], st = extras.byRow[d.rows.indexOf(w0)], strokes = st && Array.isArray(st.strokes) ? st.strokes : null;
+  const hasGrid = !!(strokes && strokes.length === holes && !compact), gridH = hasGrid ? Math.ceil(holes / 9) * 72 : 0;
+  const top = aces.length ? 400 : 340, bottom = hasGrid ? 1176 - gridH - 80 : 1176;
+  const pitch = Math.min(nShown <= 2 ? 190 : nShown <= 3 ? 160 : nShown <= 5 ? 130 : 124, (bottom - top) / nShown), h = pitch - 14, gw = 130;
+  rowsList.forEach((r, i) => {
+    const y = top + i * pitch, hot = r.winner, ink = hot ? R.CR : R.INK, rt = i % 2 ? 0.7 : -0.7, fs = Math.min(hot ? 66 : 54, h * 0.5);
+    R.sticker(c, 60, y, 960, h, { r: Math.min(22, h * 0.3), rot: rt, sh: 7, lw: 4, fill: hot ? R.INK : R.CR });
+    R.rot(c, 60, y, 960, h, rt, () => {
+      k.setFont(c, 400, fs * 0.92, R.F_BAGEL); c.fillStyle = hot ? R.RED : R.INK; c.textAlign = "center"; c.fillText(String(r.rank), h * 0.56, h / 2 + fs * 0.33); c.textAlign = "left";
+      const digits = Array.from(String(r.value).replace(/[^0-9]/g, "")), nd = digits.length || 1, th = h * 0.7, tw = th * (nd >= 3 ? 0.62 : 0.74), tg = 6;
+      const tilesW = nd * tw + (nd - 1) * tg, tx = 960 - 24 - gw - tilesW + 10;
+      digits.forEach((ch, q) => {
+        const x = tx + q * (tw + tg), ty = (h - th) / 2;
+        c.fillStyle = hot ? R.CR : R.INK; R.rr(c, x, ty, tw, th, 8); c.fill();
+        k.setFont(c, 400, th * 0.74, R.F_BAGEL); c.fillStyle = hot ? R.INK : R.CR; c.textAlign = "center"; c.fillText(ch, x + tw / 2, ty + th / 2 + th * 0.74 * 0.36); c.textAlign = "left";
+      });
+      if (!hot && best != null && r.score != null) { k.setFont(c, 400, fs * 0.9, R.F_BAGEL); c.fillStyle = ink; c.textAlign = "right"; c.fillText("+" + d.num(r.score - best), 960 - 22, h / 2 + fs * 0.32); c.textAlign = "left"; }
+      const nx = h * 1.06, nf = k.nameFit(c, r.name, { w: 400, fam: R.F_BAGEL, max: fs, maxW: tx - nx - 24, lines: 2 });
+      k.setFont(c, 400, nf.size, R.F_BAGEL); c.fillStyle = ink; const lh = nf.size * 1.05;
+      nf.lines.forEach((ln, q) => c.fillText(ln, nx, h / 2 + nf.size * 0.36 - ((nf.lines.length - 1) * lh) / 2 + q * lh));
+    });
+  });
+  if (hasGrid) {
+    const gy = 1176 - gridH;
+    pill(c, k, R, d.up(d.tr("tplMgPer", (q) => q)(w0.name)), 64, gy - 70, 28, -1.5, { maxW: 900, fam: R.F_TXT, wt: 800 });
+    const cw = (960 - 8 * 8) / 9;
+    strokes.forEach((v, i) => {
+      const x = 60 + (i % 9) * (cw + 8), y = gy + Math.floor(i / 9) * 72, ace = v === 1;
+      R.sticker(c, x, y, cw, 62, { r: 10, sh: 4, lw: 3.5, fill: ace ? R.INK : R.CR, stroke: ace ? R.CR : R.INK, rot: (i % 3 - 1) * 1.2 });
+      k.setFont(c, 700, 17, R.F_TXT); c.fillStyle = ace ? R.CR : R.INK; c.fillText(String(i + 1), x + 9, y + 22);
+      k.setFont(c, 400, 36, R.F_BAGEL); c.textAlign = "center"; c.fillText(v == null ? "–" : String(v), x + cw / 2 + 4, y + 50); c.textAlign = "left";
+    });
+  }
+  R.footer(c, k, d);
+  return cv;
+}
+
 export default {
   games: ["minigolf"],
   fonts: ["400 100px \"GTR Anton\"", "800 52px \"Baloo 2\"", "700 28px \"Space Grotesk\"", "500 22px \"Space Grotesk\""],
@@ -151,6 +213,18 @@ export default {
     const out = [page1(d, k, extras, parts[0], 1, parts.length)];
     const sty = { bg: (c) => { bg(c, k); }, ink: INK, sub: SOFT, acc: LIME, line: "rgba(214,242,58,0.25)", fam: k.F_ANTON, logo: LIME };
     parts.slice(1).forEach((p, i) => out.push(k.listPage(d, p, i + 2, parts.length, sty)));
+    return out;
+  },
+  renderRyu(d, k, R) {
+    const ex = d.extra || {};
+    const byRow = pickRows(d, ex.players, "total");
+    const holes = (byRow.find((e) => e && Array.isArray(e.strokes)) || { strokes: [] }).strokes.length || 18;
+    const aces = [];
+    d.rows.forEach((r, i) => { const e = byRow[i]; if (!e || !Array.isArray(e.strokes)) return; const hs = []; e.strokes.forEach((v, j) => { if (v === 1) hs.push(j + 1); }); if (hs.length) aces.push({ name: r.name, holes: hs }); });
+    const extras = { byRow, holes, aces };
+    const parts = k.chunks(d.rows, FIRST_CAP, 12);
+    const out = [ryuPage1(d, k, R, extras, parts[0])];
+    parts.slice(1).forEach((p, i) => out.push(R.contPage(d, k, p, i + 2, parts.length)));
     return out;
   },
 };

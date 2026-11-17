@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.17-11 (17.11.2026 21:22)
+- Ryū: kleine rote Schrift besser lesbar
+
 ## 2026.11.17-10 (17.11.2026 20:35)
 - Ryū: Spielmenü und Flip 7 nur in Ryū-Farben
 

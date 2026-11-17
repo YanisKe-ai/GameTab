@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.17-10 (17.11.2026 20:35)
+- Ryū: Spielmenü und Flip 7 nur in Ryū-Farben
+
 ## 2026.11.17-9 (17.11.2026 12:22)
 - Noir: Kartenfächer und Molotow-Tafel ohne Farbe
 

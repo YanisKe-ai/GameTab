@@ -37,7 +37,7 @@ function slfTk(theme) {
     };
   }
   return {
-    acc: "#8B6CFF", accText: "#B7A2FF", btn1: "#7C5BF5", btn2: "#5F3FE0", onAcc: "#FFFFFF",
+    acc: "#8B6CFF", accText: "#B7A2FF", btn1: "#7C5BF5", btn2: "#5F3FE0", onAcc: "#FFFFFF", chipOn: "#6847E8", chipN: "rgba(20,10,60,.35)",
     pageBg: sh.pageBg, card: sh.card, ink: "#ECEFF9", muted: "#A9B1CC", border: "rgba(150,170,255,.2)",
     paper: "#19224A", line: "rgba(140,170,255,.2)", margin: "rgba(255,120,140,.5)", hand: "#F6F0DC",
     tile1: "#A58BFF", tile2: "#6B49F0", onTile: "#FFFFFF", tileShadow: "#3B26A8",
@@ -60,7 +60,7 @@ function slfPkTk() {
 
 function slfVars(tk) {
   return {
-    "--s-acc": tk.acc, "--s-acct": tk.accText, "--s-btn1": tk.btn1, "--s-btn2": tk.btn2, "--s-onacc": tk.onAcc,
+    "--s-acc": tk.acc, "--s-chipon": tk.chipOn || tk.acc, "--s-chipn": tk.chipN || "rgba(255,255,255,.28)", "--s-acct": tk.accText, "--s-btn1": tk.btn1, "--s-btn2": tk.btn2, "--s-onacc": tk.onAcc,
     "--s-bg": tk.pageBg, "--s-card": tk.card, "--s-ink": tk.ink, "--s-mut": tk.muted, "--s-border": tk.border,
     "--s-paper": tk.paper, "--s-line": tk.line, "--s-margin": tk.margin, "--s-hand": tk.hand,
     "--s-tile1": tk.tile1, "--s-tile2": tk.tile2, "--s-ontile": tk.onTile, "--s-tshadow": tk.tileShadow,
@@ -96,14 +96,14 @@ const SLF_CSS = `
 .slf-chips{display:flex;flex-wrap:wrap;gap:8px}
 .slf-chip{display:inline-flex;align-items:center;gap:6px;min-height:44px;max-width:100%;padding:8px 14px;border-radius:999px;border:1px solid var(--s-border);background:var(--s-card);color:var(--s-ink);font:600 14px/1.2 'Inter',sans-serif;cursor:pointer;text-align:left;transition:background-color .18s,transform .16s cubic-bezier(.23,1,.32,1)}
 .slf-chip:active{transform:scale(.97)}
-.slf-chip[aria-pressed="true"]{background:var(--s-acc);border-color:transparent;color:var(--s-onacc)}
+.slf-chip[aria-pressed="true"]{background:var(--s-chipon);border-color:transparent;color:var(--s-onacc)}
 .slf-chip[aria-disabled="true"]{opacity:.45}
 .slf-chip .ck{flex-shrink:0}
 .slf-groups{display:flex;gap:8px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;padding:2px 2px 6px;margin:0 -2px;scrollbar-width:none}
 .slf-groups::-webkit-scrollbar{display:none}
 .slf-groups .slf-chip{flex:0 0 auto;scroll-snap-align:start;white-space:nowrap}
 .slf-groups .slf-chip .n{font:800 12px 'Space Grotesk',sans-serif;min-width:20px;height:20px;border-radius:10px;background:rgba(127,127,127,.25);display:inline-flex;align-items:center;justify-content:center;padding:0 5px}
-.slf-groups .slf-chip[aria-pressed="true"] .n{background:rgba(255,255,255,.28)}
+.slf-groups .slf-chip[aria-pressed="true"] .n{background:var(--s-chipn)}
 
 /* Mini-Blatt in der Einrichtung */
 .slf-paper{position:relative;background:var(--s-paper);border:1px solid var(--s-border);border-radius:18px;box-shadow:0 14px 30px -22px rgba(0,0,0,.6);overflow:hidden}

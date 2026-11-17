@@ -317,5 +317,8 @@ html[data-phone-landscape] body:has(> #root > .gtL-start) { position: static !im
   :is([style*="font-size: 9.5px"],[style*="font-size: 10px"],[style*="font-size: 10.5px"],[style*="font-size: 11px"],[style*="font-size: 11.5px"],[style*="font-size: 12px"],[style*="font-size: 12.5px"]):not(td, th, .gtL-content *, .gt-nofloor, .gt-nofloor *) { font-size: 13px !important; }
   :is([style*="font-size: 9.5px"],[style*="font-size: 10px"],[style*="font-size: 10.5px"],[style*="font-size: 11px"],[style*="font-size: 11.5px"],[style*="font-size: 12px"],[style*="font-size: 12.5px"])[style*="text-transform: uppercase"]:not(td, th, .gtL-content *, .gt-nofloor, .gt-nofloor *) { font-size: 12px !important; }
 }
+/* Nocturne (17.11.): Platzhalter und kleiner Statistik-Hinweis mit genug Kontrast; spieleigene Platzhalter-Regeln gehen vor */
+:where(html[data-gt-theme="dark"]:not([data-gt-skin])) :is(input,textarea)::placeholder{color:#8E97AD;opacity:1}
+html[data-gt-theme="dark"]:not([data-gt-skin]) .gtSt2-lowhint{color:#B0A390!important}
 `;/*@gt-body-end*/
 export { GLOBAL_STYLES };

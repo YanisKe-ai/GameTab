@@ -87,6 +87,77 @@ function render(d, k, cont) {
   return [cv];
 }
 
+/* ---------- Ryū-Fassung: Abstimmungs-Sticker mit Pfeilen ----------
+   Roter Grund, Liebling der Runde auf grossem Creme-Sticker mit Häkchen-Zacke, jede Stimmenzahl als Pfeil-Balken
+   (Sieger rot, übrige schwarz). Gleiche Seitenaufteilung wie render(). */
+function ryuArrow(c, R, x, y, w, h, fill) {
+  const hd = Math.min(h * 0.7, w), b = Math.max(0, w - hd);
+  const path = (dx, dy) => { c.beginPath(); c.moveTo(x + dx, y + h * 0.16 + dy); c.lineTo(x + b + dx, y + h * 0.16 + dy); c.lineTo(x + b + dx, y + dy); c.lineTo(x + w + dx, y + h / 2 + dy); c.lineTo(x + b + dx, y + h + dy); c.lineTo(x + b + dx, y + h * 0.84 + dy); c.lineTo(x + dx, y + h * 0.84 + dy); c.closePath(); };
+  c.lineJoin = "round"; path(4, 4); c.fillStyle = R.INK; c.fill();
+  path(0, 0); c.fillStyle = fill; c.fill(); c.lineWidth = 4; c.strokeStyle = R.INK; c.stroke();
+}
+function ryuMlPage(d, k, R, cont) {
+  const { cv, c } = k.tplCanvas(); R.bg(c, R.RED, cont ? 3613 + cont.no : 3607);
+  R.dots(c, 600, 0, 480, 330, 26, 4.2, "rgba(26,23,22,0.18)");
+  const rows = d.rows.map((r) => ({ name: r.name, v: r.score == null ? 0 : r.score, rank: r.rank, winner: r.winner }));
+  const total = rows.reduce((a, r) => a + r.v, 0), maxV = Math.max(1, ...rows.map((r) => r.v));
+  const winners = rows.filter((r) => r.winner), tie = winners.length > 1;
+  const first = cont ? rows.slice(cont.from, cont.from + PER_CONT) : rows.slice(0, firstCap(rows.length));
+  /* Titel */
+  c.save(); c.translate(60, 165); c.rotate(-4 * Math.PI / 180);
+  const tf = k.fit(c, d.up(d.gameLabel), { w: 400, fam: R.F_BAGEL, max: 124, min: 56, maxW: 700, lines: 1 });
+  R.pop(c, tf.lines[0], 0, 0, tf.size, { sh: tf.size * 0.08 });
+  /* kleine Zeile: Fortsetzung / Seitenzahl bzw. Summe */
+  const pgf = d.tr("ecPage", (x, y2) => x + "/" + y2);
+  const small = cont ? d.up(d.tr("tplMlCont", "Fortsetzung")) + "  " + (typeof pgf === "function" ? pgf(cont.no, cont.count) : cont.no + "/" + cont.count) : d.tr("tplMlFoot", (v, p) => v + ", " + p)(total, rows.length);
+  const sf = k.fit(c, small, { w: 400, fam: R.F_BAGEL, max: 38, min: 22, maxW: 640, lines: 1 });
+  k.setFont(c, 400, sf.size, R.F_BAGEL); const sw = c.measureText(sf.lines[0]).width + 52, sh = sf.size + 28;
+  R.sticker(c, 6, 34, sw, sh, { r: sh / 2, fill: R.INK, sh: 6, lw: 0 });
+  k.setFont(c, 400, sf.size, R.F_BAGEL); c.fillStyle = R.CR; c.fillText(sf.lines[0], 32, 34 + sh / 2 + sf.size * 0.35);
+  c.restore();
+  let top = cont ? 330 : 330;
+  if (!cont) {
+    /* Liebling der Runde */
+    const many = first.length > 7, hh = many ? 176 : 270, hx = 60, hw = 960, hy = top + (many ? 14 : 36);
+    const nm = winners.map((r) => r.name).join(" & ");
+    const lbT = d.up(d.tr(tie ? "tplMlTie" : "tplMlFav", "Liebling der Runde"));
+    R.sticker(c, hx, hy, hw, hh, { r: 30, rot: -1.5, sh: 12, lw: 6 });
+    R.rot(c, hx, hy, hw, hh, -1.5, () => {
+      R.zig(c, 112, hh / 2 + 6, many ? 66 : 84, { fill: R.RED, n: 18, sh: 6, lw: 5 });
+      c.save(); c.strokeStyle = R.CR; c.lineWidth = many ? 12 : 15; c.lineCap = "round"; c.lineJoin = "round"; const q = many ? 26 : 32;
+      c.beginPath(); c.moveTo(112 - q, hh / 2 + 6); c.lineTo(112 - q * 0.25, hh / 2 + 6 + q * 0.75); c.lineTo(112 + q, hh / 2 + 6 - q * 0.8); c.stroke(); c.restore();
+      const nxx = 112 + (many ? 66 : 84) + 28, tw = hw - nxx - 36;
+      const lf = k.fit(c, lbT, { w: 400, fam: R.F_BAGEL, max: 34, min: 20, maxW: tw, lines: 1 });
+      const wf = k.heroFit(c, d.clean(nm), { w: 400, fam: R.F_BAGEL, maxW: tw }, [{ max: many ? 90 : 120, min: 50, lines: 1 }, { max: many ? 68 : 90, min: 40, lines: 2 }, { max: 52, min: 28, lines: 3 }, { max: 36, min: 24, lines: 4 }]);
+      const wlh = wf.size * 1.03, th = lf.size * 1.4 + wlh * wf.lines.length; let yy = (hh - th) / 2;
+      k.setFont(c, 400, lf.size, R.F_BAGEL); c.fillStyle = R.RED2; c.fillText(lf.lines[0], nxx, yy + lf.size * 0.95); yy += lf.size * 1.4;
+      k.setFont(c, 400, wf.size, R.F_BAGEL); c.fillStyle = R.INK; wf.lines.forEach((ln, i) => c.fillText(ln, nxx, yy + wf.size * 0.82 + i * wlh));
+    });
+    top = hy + hh + (many ? 24 : 34);
+  }
+  /* Pfeil-Balken */
+  const bottom = 1176, n = first.length, pitch = Math.min(cont ? 100 : (n <= 4 ? 170 : n <= 6 ? 130 : 112), (bottom - top) / n), rh = pitch - 12;
+  const y00 = top + (cont ? Math.max(0, ((bottom - top) - pitch * n) * 0.25) : 0);
+  const nfs = Math.min(n <= 4 && !cont ? 70 : 54, rh * 0.5), vfs = Math.min(n <= 4 && !cont ? 80 : 62, rh * 0.58);
+  k.setFont(c, 400, nfs, R.F_BAGEL);
+  let nameW = 160; first.forEach((r) => { nameW = Math.max(nameW, Math.min(330, c.measureText(r.name).width + 10)); });
+  k.setFont(c, 400, vfs, R.F_BAGEL); const vW = Math.max(...first.map((r) => c.measureText(String(r.v)).width)) + 30;
+  const barX = 60 + 24 + nameW + 18, barMax = 1020 - 24 - vW - barX;
+  first.forEach((r, i) => {
+    const y = y00 + i * pitch;
+    R.sticker(c, 60, y, 960, rh, { r: Math.min(20, rh * 0.3), rot: 0, sh: 6, lw: 3.5, fill: r.winner ? R.CR : R.CR2 });
+    const nf = k.nameFit(c, r.name, { w: 400, fam: R.F_BAGEL, max: nfs, maxW: nameW, lines: 2, max2: Math.max(24, Math.min(nfs, (rh - 8) / 2.1)) });
+    const nlh = nf.size * 1.04; k.setFont(c, 400, nf.size, R.F_BAGEL); c.fillStyle = R.INK;
+    nf.lines.forEach((ln, q) => c.fillText(ln, 84, y + rh / 2 - ((nf.lines.length - 1) * nlh) / 2 + q * nlh + nf.size * 0.35));
+    const bh = Math.max(24, rh * 0.62), by = y + (rh - bh) / 2;
+    if (r.v > 0) ryuArrow(c, R, barX, by, Math.max(bh, (r.v / maxV) * barMax), bh, r.winner ? R.RED : R.INK);
+    else { c.fillStyle = R.INK; R.rr(c, barX, y + rh / 2 - 4, 40, 8, 4); c.fill(); }
+    k.setFont(c, 400, vfs, R.F_BAGEL); c.fillStyle = R.INK; c.textAlign = "right"; c.fillText(String(r.v), 1020 - 24, y + rh / 2 + vfs * 0.35); c.textAlign = "left";
+  });
+  R.footer(c, k, d);
+  return cv;
+}
+
 export default {
   games: ["mostlikely"],
   fonts: ['800 100px "Baloo 2"', '600 34px "Baloo 2"'].concat(FONTS_BASE),
@@ -97,6 +168,13 @@ export default {
     const rest = d.rows.length - firstCap(d.rows.length);
     const nCont = rest > 0 ? Math.ceil(rest / PER_CONT) : 0;
     for (let i = 0; i < nCont; i++) out.push(render(d, k, { from: firstCap(d.rows.length) + i * PER_CONT, no: i + 2, count: nCont + 1 })[0]);
+    return out;
+  },
+  renderRyu(d, k, R) {
+    const out = [ryuMlPage(d, k, R)];
+    const rest = d.rows.length - firstCap(d.rows.length);
+    const nCont = rest > 0 ? Math.ceil(rest / PER_CONT) : 0;
+    for (let i = 0; i < nCont; i++) out.push(ryuMlPage(d, k, R, { from: firstCap(d.rows.length) + i * PER_CONT, no: i + 2, count: nCont + 1 }));
     return out;
   },
 };

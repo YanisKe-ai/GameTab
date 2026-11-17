@@ -132,10 +132,80 @@ function render(d, k) {
   return [cv];
 }
 
+/* ---------- Ryū-Fassung: Steckbriefe mit Kapuze ----------
+   Roter Grund, Kapuzenfigur im Zackensticker, Titel und Ergebnis als Sticker, jede Person ein Steckbrief-Sticker
+   (Verräter schwarz mit roten Augen, Treue mit Schild), Schlusssatz auf schwarzem Band. Inhalt wie render(). */
+function ryuHood(c, R, cx, cy, s, eye) {
+  c.save(); c.translate(cx, cy); c.lineJoin = "round";
+  c.beginPath(); c.moveTo(0, -s); c.bezierCurveTo(0.5 * s, -0.8 * s, 0.95 * s, -0.2 * s, 0.85 * s, 0.5 * s); c.lineTo(0.9 * s, 0.98 * s); c.lineTo(0.35 * s, 0.82 * s); c.lineTo(0, 1.0 * s); c.lineTo(-0.35 * s, 0.82 * s); c.lineTo(-0.9 * s, 0.98 * s); c.lineTo(-0.85 * s, 0.5 * s); c.bezierCurveTo(-0.95 * s, -0.2 * s, -0.5 * s, -0.8 * s, 0, -s); c.closePath();
+  c.fillStyle = R.INK; c.fill(); c.lineWidth = Math.max(2.5, s * 0.07); c.strokeStyle = R.CR; c.stroke();
+  c.beginPath(); c.ellipse(0, 0.02 * s, 0.46 * s, 0.56 * s, 0, 0, 6.2832); c.fillStyle = "#0b0908"; c.fill();
+  c.fillStyle = eye || R.RED; [-1, 1].forEach((sg) => { c.beginPath(); c.ellipse(sg * 0.2 * s, -0.04 * s, 0.1 * s, 0.065 * s, sg * -0.35, 0, 6.2832); c.fill(); });
+  c.restore();
+}
+function ryuShield(c, R, cx, cy, s) {
+  c.save(); c.translate(cx, cy); c.lineJoin = "round";
+  c.beginPath(); c.moveTo(-0.8 * s, -0.85 * s); c.lineTo(0.8 * s, -0.85 * s); c.lineTo(0.8 * s, 0.1 * s); c.bezierCurveTo(0.8 * s, 0.6 * s, 0.3 * s, 0.9 * s, 0, 1.05 * s); c.bezierCurveTo(-0.3 * s, 0.9 * s, -0.8 * s, 0.6 * s, -0.8 * s, 0.1 * s); c.closePath();
+  c.fillStyle = R.CR; c.fill(); c.lineWidth = Math.max(3, s * 0.1); c.strokeStyle = R.INK; c.stroke();
+  R.starPath(c, 0, -0.05 * s, 0.52 * s, 0.22 * s, 5, 0, false); c.fillStyle = R.RED; c.fill(); c.lineWidth = Math.max(2, s * 0.05); c.stroke();
+  c.restore();
+}
+function ryuRender(d, k, R) {
+  const { cv, c } = k.tplCanvas(); R.bg(c, R.RED, 3303);
+  R.dots(c, 600, 0, 480, 360, 26, 4.2, "rgba(26,23,22,0.18)");
+  const ex = d.extra, P = ex.players, N = P.length, fw = ex.winner === "faithful";
+  const alive = d.tr("tplPartyAlive", "lebt"), dead = d.tr("tplPartyDead", "tot");
+  const faith = d.tr("tplTrtFaithful", "treu"), trait = d.tr("tplTrtTraitor", "Verraeter");
+  R.zig(c, 885, 170, 138, { fill: R.CR, n: 20, sh: 10, lw: 5 });
+  ryuHood(c, R, 885, 172, 98, R.RED);
+  c.save(); c.translate(60, 175); c.rotate(-4 * Math.PI / 180);
+  const tf = k.fit(c, d.up(d.gameLabel), { w: 400, fam: R.F_BAGEL, max: 128, min: 60, maxW: 640, lines: 1 });
+  R.pop(c, tf.lines[0], 0, 0, tf.size, { sh: tf.size * 0.08 });
+  const head = d.up(d.tr(fw ? "tplTrtHeadF" : "tplTrtHeadT", fw ? "enttarnt" : "siegen"));
+  const hf = k.fit(c, head, { w: 400, fam: R.F_BAGEL, max: 56, min: 28, maxW: 600, lines: 1 });
+  k.setFont(c, 400, hf.size, R.F_BAGEL); const hw = c.measureText(hf.lines[0]).width + 56, hh = hf.size + 32;
+  R.sticker(c, 6, 36, hw, hh, { r: hh / 2, fill: R.INK, sh: 7, lw: 0 });
+  k.setFont(c, 400, hf.size, R.F_BAGEL); c.fillStyle = R.CR; c.fillText(hf.lines[0], 34, 36 + hh / 2 + hf.size * 0.35);
+  c.restore();
+  /* Schlusssatz unten auf schwarzem Band */
+  const tn = P.filter((p) => p.traitor).map((p) => d.clean(p.name)), many = tn.length > 1;
+  const sfn = d.tr(fw ? (many ? "tplTrtSubFN" : "tplTrtSubF1") : (many ? "tplTrtSubTN" : "tplTrtSubT1"), (n) => n);
+  const sub = sfn(listJoin(tn, d.locale));
+  const sf = k.fit(c, sub, { w: 700, fam: R.F_TXT, max: 34, min: 22, maxW: 860, lines: 3 });
+  const slh = sf.size * 1.25, bandH = slh * sf.lines.length + 36, bandY = 1176 - bandH;
+  R.sticker(c, 60, bandY, 960, bandH, { r: 22, fill: R.INK, rot: -0.8, sh: 8, lw: 0 });
+  R.rot(c, 60, bandY, 960, bandH, -0.8, () => { k.setFont(c, 700, sf.size, R.F_TXT); c.fillStyle = R.CR; sf.lines.forEach((ln, i) => c.fillText(ln, 40, 18 + sf.size * 0.95 + i * slh)); });
+  /* Steckbriefe */
+  const top = 360, bottom = bandY - 22, cols = N <= 6 ? 1 : 2, nr = Math.ceil(N / cols), gap = 14;
+  const pitch = Math.min(cols === 1 ? (N <= 4 ? 196 : 150) : 128, (bottom - top) / nr), h = pitch - gap, cw = (960 - (cols - 1) * 22) / cols;
+  const y00 = top + Math.max(0, ((bottom - top) - pitch * nr) / 2);
+  P.forEach((p, i) => {
+    const col = Math.floor(i / nr), ri = i % nr, x = 60 + col * (cw + 22), y = y00 + ri * pitch, rotC = 0;
+    const hot = !!p.traitor, ink = hot ? R.CR : R.INK;
+    R.sticker(c, x, y, cw, h, { r: Math.min(20, h * 0.28), rot: rotC, sh: 6, lw: 3.5, fill: hot ? R.INK : (p.alive ? R.CR : R.CR2) });
+    R.rot(c, x, y, cw, h, rotC, () => {
+      const rad = Math.min(h * 0.4, 58), nx = Math.min(h, 140) * 1.0, cx = nx * 0.5 - 2;
+      R.zig(c, cx, h / 2, rad, { fill: hot ? R.RED : R.CR3, n: 14, sh: 0, lw: 3 });
+      if (hot) ryuHood(c, R, cx, h / 2 + 1, rad * 0.7, R.RED); else ryuShield(c, R, cx, h / 2 - 1, rad * 0.5);
+      if (!p.alive) { c.save(); c.strokeStyle = R.INK; c.lineWidth = Math.max(4, rad * 0.14); c.lineCap = "round"; const q = rad * 0.7; c.beginPath(); c.moveTo(cx - q, h / 2 - q); c.lineTo(cx + q, h / 2 + q); c.moveTo(cx + q, h / 2 - q); c.lineTo(cx - q, h / 2 + q); c.stroke(); c.restore(); }
+      const tw = cw - nx - 20, fs = Math.min(64, h * 0.4), sfs = Math.max(22, Math.min(32, h * 0.26));
+      const role = (p.traitor ? trait : faith) + ", " + (p.alive ? alive : dead);
+      const rf = k.fit(c, role, { w: 700, fam: R.F_TXT, max: sfs, min: 20, maxW: tw, lines: 1 });
+      const nf = k.nameFit(c, d.clean(p.name), { w: 400, fam: R.F_BAGEL, max: fs, maxW: tw, lines: 2, max2: Math.max(24, Math.min(fs, (h - rf.size - 18) / 2.1)) });
+      const nlh = nf.size * 1.04, tot = nlh * nf.lines.length + rf.size * 1.25; let yy = (h - tot) / 2;
+      k.setFont(c, 400, nf.size, R.F_BAGEL); c.fillStyle = ink; nf.lines.forEach((ln, q) => c.fillText(ln, nx, yy + nf.size * 0.82 + q * nlh)); yy += nlh * nf.lines.length;
+      k.setFont(c, 700, rf.size, R.F_TXT); c.fillStyle = ink; c.fillText(rf.lines[0], nx, yy + rf.size * 1.0);
+    });
+  });
+  R.footer(c, k, d);
+  return [cv];
+}
+
 export default {
   games: ["traitor"],
   fonts: ['700 100px "Fraunces"', '500 42px "Fraunces"', 'italic 500 42px "Fraunces"'].concat(FONTS_BASE),
   accepts: (d) => !!(d.extra && Array.isArray(d.extra.players) && d.extra.players.length >= 2 && d.extra.winner),
   texts: (d) => (d.extra ? [d.extra.players.map((p) => p.name).join(" "), ["tplTrtHeadF", "tplTrtHeadT", "tplTrtFaithful", "tplTrtTraitor", "tplPartyAlive", "tplPartyDead"].map((q) => d.tr(q, "")).join(" "), ["tplTrtSubF1", "tplTrtSubFN", "tplTrtSubT1", "tplTrtSubTN"].map((q) => { const f = d.tr(q, null); return typeof f === "function" ? f("x") : ""; }).join(" ")] : []),
   render,
+  renderRyu: ryuRender,
 };

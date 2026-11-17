@@ -136,6 +136,102 @@ function render(d, k) {
   footer(c, k, d, "#D77BF0", 34);
   return [cv];
 }
+/* ---------- Ryū-Fassung: geheime Akte mit Maske ----------
+   Roter Grund, Maske im Zackensticker, Titel und Ergebnis als Sticker, grosse Creme-Akte mit Stempel (Erwischt / Unschuldig),
+   Rollen als Sticker-Zeilen (Impostor schwarz). Inhalt wie render(). */
+function ryuMask(c, R, cx, cy, s) {
+  c.save(); c.translate(cx, cy); c.lineJoin = "round";
+  const face = () => { c.beginPath(); c.moveTo(-0.78 * s, -0.7 * s); c.bezierCurveTo(-0.5 * s, -1.05 * s, 0.5 * s, -1.05 * s, 0.78 * s, -0.7 * s); c.bezierCurveTo(0.9 * s, -0.1 * s, 0.7 * s, 0.55 * s, 0.28 * s, 0.98 * s); c.lineTo(-0.28 * s, 0.98 * s); c.bezierCurveTo(-0.7 * s, 0.55 * s, -0.9 * s, -0.1 * s, -0.78 * s, -0.7 * s); c.closePath(); };
+  c.save(); c.translate(s * 0.07, s * 0.07); face(); c.fillStyle = R.INK; c.fill(); c.restore();
+  face(); c.fillStyle = R.CR; c.fill(); c.lineWidth = Math.max(4, s * 0.06); c.strokeStyle = R.INK; c.stroke();
+  [-1, 1].forEach((sg) => { c.save(); c.translate(sg * 0.34 * s, -0.22 * s); c.rotate(sg * -0.35); c.beginPath(); c.ellipse(0, 0, 0.22 * s, 0.1 * s, 0, 0, 6.2832); c.fillStyle = R.INK; c.fill(); c.restore();
+    c.beginPath(); c.arc(sg * 0.5 * s, 0.22 * s, 0.14 * s, 0, 6.2832); c.fillStyle = R.RED; c.fill(); });
+  c.lineCap = "round"; c.lineWidth = Math.max(4, s * 0.07); c.strokeStyle = R.INK;
+  c.beginPath(); c.moveTo(-0.5 * s, 0.38 * s); c.bezierCurveTo(-0.25 * s, 0.28 * s, 0.25 * s, 0.28 * s, 0.5 * s, 0.38 * s); c.stroke();
+  c.beginPath(); c.moveTo(-0.3 * s, 0.52 * s); c.quadraticCurveTo(0, 0.78 * s, 0.3 * s, 0.52 * s); c.stroke();
+  c.beginPath(); c.moveTo(0, 0.78 * s); c.lineTo(0, 0.92 * s); c.stroke();
+  c.restore();
+}
+function ryuImpRow(c, k, R, r, x, y, w, h, rot) {
+  const hot = r.imp, ink = hot ? R.CR : R.INK;
+  R.sticker(c, x, y, w, h, { r: Math.min(20, h * 0.28), rot, sh: 6, lw: 3.5, fill: hot ? R.INK : (r.win ? R.CR : R.CR2) });
+  R.rot(c, x, y, w, h, rot, () => {
+    const rad = Math.min(h * 0.36, 40), nx = Math.min(h, 104) * 1.0, cx = nx * 0.5 - 2, wide = w > 700;
+    R.zig(c, cx, h / 2, rad, { fill: hot ? R.RED : R.CR3, n: 14, sh: 0, lw: 3 });
+    k.setFont(c, 400, rad * 1.1, R.F_BAGEL); c.fillStyle = R.INK; c.textAlign = "center"; c.fillText(String(r.n), cx, h / 2 + rad * 0.38); c.textAlign = "left";
+    let rightW = 0;
+    if (wide) {
+      /* breite Zeile: Rolle als Pille rechts, Status darunter */
+      const rf = k.fit(c, r.role, { w: 400, fam: R.F_BAGEL, max: Math.min(40, h * 0.3), min: 22, maxW: 300, lines: 1 });
+      k.setFont(c, 400, rf.size, R.F_BAGEL); const pw = c.measureText(rf.lines[0]).width + 40, ph = rf.size + 22;
+      const sf2 = r.st ? k.fit(c, r.st, { w: 700, fam: R.F_TXT, max: 28, min: 20, maxW: 300, lines: 1 }) : null;
+      const tot = ph + (sf2 ? sf2.size * 1.3 : 0), y0 = (h - tot) / 2, px = w - 24 - pw;
+      c.fillStyle = hot ? R.RED : R.INK; R.rr(c, px, y0, pw, ph, ph / 2); c.fill();
+      k.setFont(c, 400, rf.size, R.F_BAGEL); c.fillStyle = hot ? R.INK : R.CR; c.fillText(rf.lines[0], px + 20, y0 + ph / 2 + rf.size * 0.35);
+      if (sf2) { k.setFont(c, 700, sf2.size, R.F_TXT); c.fillStyle = ink; c.textAlign = "right"; c.fillText(sf2.lines[0], w - 24, y0 + ph + sf2.size * 1.05); c.textAlign = "left"; rightW = Math.max(pw, c.measureText(sf2.lines[0]).width); }
+      else rightW = pw;
+      const tw = w - nx - 40 - rightW, fs = Math.min(64, h * 0.42);
+      const nf = k.nameFit(c, r.name, { w: 400, fam: R.F_BAGEL, max: fs, maxW: tw, lines: 2 });
+      const nlh = nf.size * 1.04; k.setFont(c, 400, nf.size, R.F_BAGEL); c.fillStyle = ink;
+      nf.lines.forEach((ln, i) => c.fillText(ln, nx, h / 2 - ((nf.lines.length - 1) * nlh) / 2 + i * nlh + nf.size * 0.35));
+      return;
+    }
+    const tw = w - nx - 20, fs = Math.min(58, h * 0.4), sfs = Math.max(22, Math.min(30, h * 0.26));
+    const sub = r.role + (r.st ? "  ·  " + r.st : "");
+    const sf = k.fit(c, sub, { w: 700, fam: R.F_TXT, max: sfs, min: 20, maxW: tw, lines: 1 });
+    const nf = k.nameFit(c, r.name, { w: 400, fam: R.F_BAGEL, max: fs, maxW: tw, lines: 2, max2: Math.max(24, Math.min(fs, (h - sf.size - 18) / 2.1)) });
+    const nlh = nf.size * 1.04, tot = nlh * nf.lines.length + sf.size * 1.25;
+    let yy = (h - tot) / 2;
+    k.setFont(c, 400, nf.size, R.F_BAGEL); c.fillStyle = ink;
+    nf.lines.forEach((ln, i) => c.fillText(ln, nx, yy + nf.size * 0.82 + i * nlh)); yy += nlh * nf.lines.length;
+    k.setFont(c, 700, sf.size, R.F_TXT); c.fillStyle = hot ? R.CR : R.INK; c.fillText(sf.lines[0], nx, yy + sf.size * 1.0);
+  });
+}
+function ryuRender(d, k, R) {
+  const { cv, c } = k.tplCanvas(); R.bg(c, R.RED, 3101);
+  R.dots(c, 600, 0, 480, 360, 26, 4.2, "rgba(26,23,22,0.18)");
+  const m = build(d), N = m.rows.length;
+  /* Maske im Zackensticker oben rechts */
+  R.zig(c, 880, 175, 138, { fill: R.INK, n: 20, sh: 10, lw: 5 });
+  ryuMask(c, R, 880, 182, 100);
+  /* Titel und Ergebnis */
+  c.save(); c.translate(60, 175); c.rotate(-4 * Math.PI / 180);
+  const tf = k.fit(c, d.up(d.gameLabel), { w: 400, fam: R.F_BAGEL, max: 128, min: 60, maxW: 640, lines: 1 });
+  R.pop(c, tf.lines[0], 0, 0, tf.size, { sh: tf.size * 0.08 });
+  const hf = k.fit(c, d.up(m.head2), { w: 400, fam: R.F_BAGEL, max: 56, min: 28, maxW: 600, lines: 1 });
+  k.setFont(c, 400, hf.size, R.F_BAGEL); const hw = c.measureText(hf.lines[0]).width + 56, hh = hf.size + 32;
+  R.sticker(c, 6, 36, hw, hh, { r: hh / 2, fill: R.INK, sh: 7, lw: 0 });
+  k.setFont(c, 400, hf.size, R.F_BAGEL); c.fillStyle = R.CR; c.fillText(hf.lines[0], 34, 36 + hh / 2 + hf.size * 0.35);
+  c.restore();
+  /* Akte */
+  const ax = 50, ay = 330, aw = 980, ah = 1160 - ay - 8, rotA = -1;
+  R.sticker(c, ax, ay, aw, ah, { r: 30, rot: rotA, sh: 12, lw: 6 });
+  R.tape(c, ax + 150, ay + 6, 150, 44, -5 + rotA); R.tape(c, ax + aw - 150, ay + 6, 150, 44, 4 + rotA);
+  R.rot(c, ax, ay, aw, ah, rotA, () => {
+    const pad = 40; let y = 44;
+    const tw = m.stamp ? 520 : aw - pad * 2;
+    const wf = k.fit(c, m.lines[0], { w: 400, fam: R.F_BAGEL, max: 46, min: 28, maxW: tw, lines: 2 });
+    k.setFont(c, 400, wf.size, R.F_BAGEL); c.fillStyle = R.INK;
+    wf.lines.forEach((ln, i) => c.fillText(ln, pad, y + wf.size * 0.85 + i * wf.size * 1.06)); y += wf.lines.length * wf.size * 1.06 + 8;
+    k.setFont(c, 700, 30, R.F_TXT); c.fillStyle = R.INK;
+    m.lines.slice(1).forEach((l) => { k.wrap(c, l, tw).forEach((ln) => { c.fillText(ln, pad, y + 28); y += 38; }); });
+    y += 12;
+    const cols = N <= 4 ? 1 : 2, nr = Math.ceil(N / cols), gap = 14, avail = ah - y - 36;
+    const pitch = Math.min(cols === 1 ? 176 : 150, avail / nr), h = pitch - gap, cw = (aw - pad * 2 - (cols - 1) * 20) / cols;
+    m.rows.forEach((r, i) => {
+      const col = Math.floor(i / nr), ri = i % nr;
+      ryuImpRow(c, k, R, r, pad + col * (cw + 20), y + ri * pitch, cw, h, (i % 2 ? 0.6 : -0.6) * 0);
+    });
+  });
+  if (m.stamp) {
+    c.save(); c.globalAlpha = 0.96;
+    R.stamp(c, k, d.up(m.stamp), 800, ay + 105, 62, -8, m.crewWin ? R.RED2 : R.INK, 380);
+    c.restore();
+  }
+  R.footer(c, k, d);
+  return [cv];
+}
+
 function ex(d) { return d.extra.eliminated; }
 
 export default {
@@ -144,4 +240,5 @@ export default {
   accepts: (d) => !!(d.extra && Array.isArray(d.extra.players) && d.extra.players.length >= 2 && d.extra.outcome),
   texts: (d) => (d.extra ? [d.extra.word || "", d.extra.players.map((p) => p.name).join(" "), "0123456789 cm", d.up(d.tr("tplImpHCaught", "") + d.tr("tplImpHEscape", "") + d.tr("tplImpHGuess", "") + d.tr("tplImpHTie", "") + d.tr("tplImpStCaught", "") + d.tr("tplImpStInno", ""))] : []),
   render,
+  renderRyu: ryuRender,
 };

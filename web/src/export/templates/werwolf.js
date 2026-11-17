@@ -86,6 +86,72 @@ function render(d, k) {
   footer(c, k, d, CREAM, 34);
   return [cv];
 }
+/* ---------- Ryū-Fassung: Mond-Plakat mit Krallenspuren ----------
+   Roter Grund, grosser Creme-Mond mit Wolfskopf und drei Krallenspuren, Titel und Sieger als Sticker,
+   jede Person ein Rollen-Sticker (Wolf schwarz, Liebespaar mit Herz). Inhalt wie render(). */
+function ryuMoon(c, R, cx, cy, r) {
+  R.zig(c, cx, cy, r, { fill: R.CR, n: 30, depth: 0.95, sh: 12, lw: 6 });
+  c.save(); c.beginPath(); c.arc(cx, cy, r * 0.84, 0, 6.2832); c.clip();
+  c.fillStyle = R.CR2; [[-0.45, -0.4, 0.17], [0.5, -0.55, 0.1], [0.5, 0.45, 0.2]].forEach(([x, y, q]) => { c.beginPath(); c.arc(cx + x * r, cy + y * r, q * r, 0, 6.2832); c.fill(); });
+  /* Krallenspuren (hinter dem Wolf) */
+  c.lineCap = "round";
+  [[-0.55, -1.0], [-0.2, -1.05], [0.15, -1.1]].forEach(([dx, dy]) => {
+    const x0 = cx + dx * r, y0 = cy + dy * r, x1 = x0 + 0.6 * r, y1 = y0 + 1.7 * r;
+    c.lineWidth = 15; c.strokeStyle = R.INK; c.beginPath(); c.moveTo(x0, y0); c.lineTo(x1, y1); c.stroke();
+    c.lineWidth = 6; c.strokeStyle = R.RED; c.beginPath(); c.moveTo(x0, y0); c.lineTo(x1, y1); c.stroke();
+  });
+  const ws = r * 1.85 / 360; c.translate(cx - 180 * ws, cy - 115 * ws); c.scale(ws, ws);
+  c.fillStyle = R.INK; c.beginPath();
+  [[0, 330], [10, 250], [60, 215], [95, 140], [110, 40], [145, 120], [185, 110], [225, 120], [255, 40], [268, 145], [305, 215], [350, 250], [360, 330]].forEach(([x, y], i) => (i ? c.lineTo(x, y) : c.moveTo(x, y)));
+  c.closePath(); c.fill();
+  c.fillStyle = R.RED; c.beginPath(); c.moveTo(135, 195); c.lineTo(165, 215); c.lineTo(150, 225); c.closePath(); c.moveTo(225, 195); c.lineTo(195, 215); c.lineTo(210, 225); c.closePath(); c.fill();
+  c.restore();
+}
+function ryuHeart(c, R, cx, cy, s) {
+  c.save(); c.translate(cx, cy); c.beginPath(); c.moveTo(0, s * 0.9); c.bezierCurveTo(-s * 1.6, -s * 0.1, -s * 0.7, -s * 1.1, 0, -s * 0.35); c.bezierCurveTo(s * 0.7, -s * 1.1, s * 1.6, -s * 0.1, 0, s * 0.9); c.closePath();
+  c.fillStyle = R.RED; c.fill(); c.lineWidth = Math.max(2.5, s * 0.22); c.strokeStyle = R.INK; c.stroke(); c.restore();
+}
+function ryuRender(d, k, R) {
+  const { cv, c } = k.tplCanvas(); R.bg(c, R.RED, 3407);
+  R.dots(c, 0, 380, 1080, 300, 26, 4, "rgba(26,23,22,0.12)");
+  const ex = d.extra, P = ex.players, N = P.length;
+  ryuMoon(c, R, 850, 210, 165);
+  c.save(); c.translate(60, 150); c.rotate(-4 * Math.PI / 180);
+  const tf = k.fit(c, d.up(d.gameLabel), { w: 400, fam: R.F_BAGEL, max: 120, min: 56, maxW: 600, lines: 1 });
+  R.pop(c, tf.lines[0], 0, 0, tf.size, { sh: tf.size * 0.08 });
+  const fb = ex.winner === "wolf" ? ["Die Werwoelfe", "haben gewonnen"] : ex.winner === "lovers" ? ["Das Liebespaar", "hat gewonnen"] : ["Das Dorf", "hat gewonnen"];
+  const win = d.tr(ex.winner === "wolf" ? "tplWerWinW" : ex.winner === "lovers" ? "tplWerWinL" : "tplWerWinV", fb);
+  const fo = { w: 400, fam: R.F_BAGEL, maxW: 600, lines: 1 };
+  const a1 = k.fit(c, win[0], Object.assign({ max: 76, min: 32 }, fo)), a2 = k.fit(c, win[1], Object.assign({ max: 48, min: 26 }, fo));
+  R.pop(c, a1.lines[0], 4, 78 + a1.size * 0.5, a1.size, { sh: a1.size * 0.07, sw: a1.size * 0.08 });
+  k.setFont(c, 400, a2.size, R.F_BAGEL); const pw = c.measureText(a2.lines[0]).width + 56, ph = a2.size + 30, py = 96 + a1.size * 0.7;
+  R.sticker(c, 4, py, pw, ph, { r: ph / 2, fill: ex.winner === "lovers" ? R.CR : R.INK, sh: 7, lw: ex.winner === "lovers" ? 4 : 0 });
+  k.setFont(c, 400, a2.size, R.F_BAGEL); c.fillStyle = ex.winner === "lovers" ? R.INK : R.CR; c.fillText(a2.lines[0], 32, py + ph / 2 + a2.size * 0.35);
+  c.restore();
+  /* Rollen-Sticker */
+  const alive = d.tr("tplPartyAlive", "lebt"), dead = d.tr("tplPartyDead", "tot"), lover = d.tr("tplWerLover", "verliebt");
+  const top = 400, bottom = 1176, cols = N <= 5 ? 1 : N <= 12 ? 2 : 3, nr = Math.ceil(N / cols), gap = cols === 3 ? 12 : 14;
+  const pitch = Math.min(cols === 1 ? (N <= 3 ? 230 : 180) : cols === 2 ? 150 : 130, (bottom - top) / nr), h = pitch - gap, cw = (960 - (cols - 1) * 18) / cols;
+  const y00 = top + Math.max(0, ((bottom - top) - pitch * nr) / 2);
+  P.forEach((p, i) => {
+    const col = i % cols, ri = Math.floor(i / cols), x = 60 + col * (cw + 18), y = y00 + ri * pitch, wolf = p.team === "wolf";
+    R.sticker(c, x, y, cw, h, { r: Math.min(20, h * 0.26), rot: 0, sh: 6, lw: 3.5, fill: wolf ? R.INK : (p.alive ? R.CR : R.CR2) });
+    R.rot(c, x, y, cw, h, 0, () => {
+      const ink = wolf ? R.CR : R.INK, pad = cols === 3 ? 16 : 24, hs = cols === 3 ? 0 : (p.lover ? 40 : 0);
+      const tw = cw - pad * 2 - hs, fs = Math.min(cols === 1 ? 76 : 44, h * 0.36), sfs = Math.max(22, Math.min(cols === 1 ? 34 : 28, h * 0.22));
+      const stat = [d.clean(p.role)].concat(p.lover ? [lover] : []).concat([p.alive ? alive : dead]).join(", ");
+      const sf = k.fit(c, stat, { w: 700, fam: R.F_TXT, max: sfs, min: 20, maxW: tw, lines: cols === 3 ? 2 : 1 });
+      const nf = k.nameFit(c, d.clean(p.name), { w: 400, fam: R.F_BAGEL, max: fs, maxW: tw, lines: 2, max2: Math.max(24, Math.min(fs, (h - sf.size * 1.25 * sf.lines.length - 14) / 2.1)) });
+      const nlh = nf.size * 1.04, slh = sf.size * 1.22, tot = nlh * nf.lines.length + slh * sf.lines.length; let yy = (h - tot) / 2;
+      k.setFont(c, 400, nf.size, R.F_BAGEL); c.fillStyle = ink; nf.lines.forEach((ln, q) => c.fillText(ln, pad, yy + nf.size * 0.82 + q * nlh)); yy += nlh * nf.lines.length;
+      k.setFont(c, 700, sf.size, R.F_TXT); c.fillStyle = ink; sf.lines.forEach((ln, q) => c.fillText(ln, pad, yy + sf.size * 0.98 + q * slh));
+      if (p.lover) ryuHeart(c, R, cw - (cols === 3 ? 26 : 36), cols === 3 ? 26 : h / 2, cols === 3 ? 11 : 16);
+    });
+  });
+  R.footer(c, k, d);
+  return [cv];
+}
+
 function spacedC(c, k, text, cx, y, sp) { k.spaced(c, text, cx, y, sp, "center"); }
 
 export default {
@@ -94,4 +160,5 @@ export default {
   accepts: (d) => !!(d.extra && Array.isArray(d.extra.players) && d.extra.players.length >= 2 && d.extra.winner),
   texts: (d) => (d.extra ? [d.extra.players.map((p) => p.name + " " + p.role).join(" "), ["tplWerWinV", "tplWerWinW", "tplWerWinL"].map((q) => [].concat(d.tr(q, [""])).join(" ")).join(" "), d.tr("tplPartyAlive", "") + d.tr("tplPartyDead", "") + d.tr("tplWerLover", "")] : []),
   render,
+  renderRyu: ryuRender,
 };

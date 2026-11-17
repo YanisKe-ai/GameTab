@@ -85,6 +85,44 @@ function page1(d, k, rows, wordsArr) {
   return cv;
 }
 
+/* ---------- Ryū-Fassung: Verbotsschild und Karte ----------
+   Roter Grund, schräge Tabu-Karte (schwarzer Kopf, Kartenwort, vier durchgestrichene Wörter wie in render()), Verbotsschild,
+   Teamtafeln als Sticker-Zeilen (Sieger schwarz). Inhalt wie render(). */
+function ryuTabuCard(c, k, R, words, cx, cy, sc, deg) {
+  c.save(); c.translate(cx, cy); c.rotate(deg * Math.PI / 180); c.scale(sc, sc); c.translate(-310, -280);
+  const W = 620, H = 560;
+  c.fillStyle = R.INK; R.rr(c, 14, 14, W, H, 30); c.fill();
+  c.fillStyle = R.CR; R.rr(c, 0, 0, W, H, 30); c.fill(); c.lineWidth = 6; c.strokeStyle = R.INK; R.rr(c, 3, 3, W - 6, H - 6, 28); c.stroke();
+  c.save(); R.rr(c, 3, 3, W - 6, H - 6, 28); c.clip(); c.fillStyle = R.INK; c.fillRect(0, 0, W, 140); c.restore();
+  const tf = k.fit(c, "TABU", { w: 400, fam: R.F_BAGEL, max: 110, min: 60, maxW: 520, lines: 1 });
+  k.setFont(c, 400, tf.size, R.F_BAGEL); c.fillStyle = R.CR; c.textAlign = "center"; c.fillText("TABU", W / 2, 70 + tf.size * 0.36); c.textAlign = "left";
+  words.forEach((w, i) => {
+    const y = 150 + i * 80;
+    if (i === 0) { c.fillStyle = R.CR3; c.fillRect(24, y + 6, W - 48, 74); }
+    const f = k.fit(c, String(w), { w: 400, fam: R.F_BAGEL, max: i === 0 ? 58 : 44, min: 24, maxW: 500, lines: 1 });
+    k.setFont(c, 400, f.size, R.F_BAGEL); c.fillStyle = R.INK; c.textAlign = "center"; c.fillText(f.lines[0], W / 2, y + 46 + f.size * 0.33); c.textAlign = "left";
+    if (i > 0) { c.save(); c.translate(W / 2, y + 43); c.rotate(-1.5 * Math.PI / 180); c.fillStyle = R.RED; c.fillRect(-250, -5, 500, 10); c.restore(); }
+  });
+  c.restore();
+}
+function ryuNoSign(c, R, cx, cy, r) {
+  c.beginPath(); c.arc(cx + 10, cy + 10, r, 0, 6.2832); c.fillStyle = R.INK; c.fill();
+  c.beginPath(); c.arc(cx, cy, r, 0, 6.2832); c.fillStyle = R.CR; c.fill(); c.lineWidth = 6; c.strokeStyle = R.INK; c.stroke();
+  c.beginPath(); c.arc(cx, cy, r * 0.8, 0, 6.2832); c.lineWidth = r * 0.2; c.strokeStyle = R.RED; c.stroke();
+  c.save(); c.translate(cx, cy); c.rotate(-45 * Math.PI / 180); c.fillStyle = R.RED; c.fillRect(-r * 0.8, -r * 0.1, r * 1.6, r * 0.2); c.lineWidth = 4; c.strokeStyle = R.INK; c.strokeRect(-r * 0.8, -r * 0.1, r * 1.6, r * 0.2); c.restore();
+}
+function ryuTabuPage(d, k, R, rows, words) {
+  const { cv, c } = k.tplCanvas(); R.bg(c, R.RED, 3709);
+  R.dots(c, 560, 0, 520, 600, 26, 4.2, "rgba(26,23,22,0.18)");
+  const n = rows.length, many = n > 3;
+  ryuTabuCard(c, k, R, words, 390, many ? 335 : 400, many ? 0.9 : 1.1, -4);
+  ryuNoSign(c, R, 875, many ? 250 : 290, many ? 125 : 150);
+  const top = many ? 655 : 770, bottom = 1176;
+  R.list(c, k, rows, { x: 60, w: 960, top, bottom, maxPitch: n <= 3 ? 150 : 120, fs: 54, tilt: false });
+  R.footer(c, k, d);
+  return cv;
+}
+
 export default {
   games: ["tabu"],
   fonts: ["400 160px \"GTR Anton\"", "800 64px \"Baloo 2\"", "800 50px \"Baloo 2\"", "600 24px Inter"],
@@ -94,5 +132,10 @@ export default {
     const w = d.tr("tplTbCard", ["Pokal", "Gewinner", "Meister", "Preis", "Sieg"]);
     const words = Array.isArray(w) && w.length >= 5 ? w.slice(0, 5) : ["Pokal", "Gewinner", "Meister", "Preis", "Sieg"];
     return [page1(d, k, d.rows.slice(0, FIRST_CAP), words)];
+  },
+  renderRyu(d, k, R) {
+    const w = d.tr("tplTbCard", ["Pokal", "Gewinner", "Meister", "Preis", "Sieg"]);
+    const words = Array.isArray(w) && w.length >= 5 ? w.slice(0, 5) : ["Pokal", "Gewinner", "Meister", "Preis", "Sieg"];
+    return [ryuTabuPage(d, k, R, d.rows.slice(0, FIRST_CAP), words)];
   },
 };

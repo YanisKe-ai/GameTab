@@ -141,6 +141,58 @@ function page1(d, k, rows) {
   return cv;
 }
 
+/* ---------- Ryū-Fassung: Stirnkarte ----------
+   Roter Grund, Creme-Kopf mit schwarzer Karte auf der Stirn (Zahl der erratenen Begriffe, Gewonnen-Streifen), Titel und Siegertext als Sticker,
+   Rangliste als Sticker-Zeilen (Sieger schwarz). Gleiche Seitenaufteilung wie render(). */
+function ryuHeadsPage(d, k, R, rows) {
+  const { cv, c } = k.tplCanvas(); R.bg(c, R.RED, 3811);
+  R.dots(c, 560, 0, 520, 460, 26, 4.2, "rgba(26,23,22,0.18)");
+  c.save(); c.translate(60, 175); c.rotate(-4 * Math.PI / 180);
+  const tf = k.fit(c, d.up(d.gameLabel), { w: 400, fam: R.F_BAGEL, max: 140, min: 60, maxW: 700, lines: 1 });
+  R.pop(c, tf.lines[0], 0, 0, tf.size, { sh: tf.size * 0.08 });
+  c.restore();
+  const win = d.winners.length ? d.winners : d.rows.slice(0, 1);
+  const names = win.map((r) => r.name);
+  const joined = names.length < 2 ? names[0] : names.slice(0, -1).join(", ") + " " + d.tr("stuAnd", "&") + " " + names[names.length - 1];
+  const fn = d.tr(names.length > 1 ? "tplHeadsWinN" : "tplHeadsWin1");
+  const sub = typeof fn === "function" ? fn(joined) : joined;
+  const sf = k.heroFit(c, d.clean(sub), { w: 400, fam: R.F_BAGEL, maxW: 860 }, [{ max: 54, min: 34, lines: 1 }, { max: 46, min: 28, lines: 2 }, { max: 34, min: 24, lines: 3 }]);
+  const slh = sf.size * 1.06, sh = slh * sf.lines.length + 36, sy = 215;
+  R.sticker(c, 60, sy, 960, sh, { r: 26, fill: R.INK, rot: -1, sh: 8, lw: 0 });
+  R.rot(c, 60, sy, 960, sh, -1, () => { k.setFont(c, 400, sf.size, R.F_BAGEL); c.fillStyle = R.CR; sf.lines.forEach((ln, i) => c.fillText(ln, 30, 18 + sf.size * 0.85 + i * slh)); });
+  /* Kopf mit Karte */
+  const n = rows.length, dense = n >= 5, nr = dense ? Math.ceil(n / 2) : n;
+  const pitch = dense ? (nr <= 4 ? 100 : 88) : Math.min(120, 440 / Math.max(n, 1));
+  const listH = nr * pitch, listTop = 1176 - listH, hTop = sy + sh + 30, hAvail = listTop - 24 - hTop;
+  const sc = Math.max(0.45, Math.min(1, hAvail / 380));
+  c.save(); c.translate(540, hTop + 190 * sc); c.scale(sc, sc);
+  const cx = -230, cy = 40;
+  c.fillStyle = R.INK; c.beginPath(); c.ellipse(cx + 8, cy + 8, 150, 170, 0, 0, 6.2832); c.fill();
+  c.fillStyle = R.CR; c.beginPath(); c.ellipse(cx, cy, 150, 170, 0, 0, 6.2832); c.fill(); c.lineWidth = 6; c.strokeStyle = R.INK; c.stroke();
+  [-1, 1].forEach((sg) => { c.fillStyle = R.INK; c.beginPath(); c.ellipse(cx + sg * 52, cy + 20, 16, 22, 0, 0, 6.2832); c.fill(); c.fillStyle = R.CR; c.beginPath(); c.arc(cx + sg * 52 + 5, cy + 12, 5, 0, 6.2832); c.fill(); });
+  c.fillStyle = R.RED; [-1, 1].forEach((sg) => { c.beginPath(); c.arc(cx + sg * 96, cy + 76, 20, 0, 6.2832); c.fill(); });
+  c.lineWidth = 8; c.lineCap = "round"; c.strokeStyle = R.INK; c.beginPath(); c.arc(cx, cy + 62, 58, 0.25, Math.PI - 0.25); c.stroke();
+  /* Stirnband und Karte */
+  c.fillStyle = R.INK; c.fillRect(cx - 148, cy - 58, 296, 26);
+  const cw = 470, ch = 290, kx = 150, ky = -10;
+  c.save(); c.translate(kx, ky); c.rotate(-6 * Math.PI / 180);
+  c.fillStyle = R.INK; R.rr(c, -cw / 2 + 12, -ch / 2 + 12, cw, ch, 30); c.fill();
+  c.fillStyle = R.CR; R.rr(c, -cw / 2, -ch / 2, cw, ch, 30); c.fill(); c.lineWidth = 6; c.strokeStyle = R.INK; R.rr(c, -cw / 2 + 3, -ch / 2 + 3, cw - 6, ch - 6, 28); c.stroke();
+  const val = win[0].value, vf = k.fit(c, val, { w: 400, fam: R.F_BAGEL, max: 150, min: 70, maxW: cw - 80, lines: 1 });
+  k.setFont(c, 400, vf.size, R.F_BAGEL); c.fillStyle = R.INK; c.textAlign = "center"; c.fillText(vf.lines[0], 0, -ch / 2 + 28 + vf.size * 0.78);
+  const lf = k.fit(c, d.tr("tplHeadsGuessed", "Begriffe erraten"), { w: 400, fam: R.F_BAGEL, max: 34, min: 22, maxW: cw - 60, lines: 1 });
+  k.setFont(c, 400, lf.size, R.F_BAGEL); c.fillStyle = R.INK; c.fillText(lf.lines[0], 0, -ch / 2 + 28 + vf.size * 0.78 + lf.size * 1.25);
+  const bt = d.tie ? d.tr("ecWonMany", "Gemeinsam gewonnen") : d.tr("ecWon", "Gewonnen"), bf = k.fit(c, bt, { w: 400, fam: R.F_BAGEL, max: 40, min: 22, maxW: cw - 50, lines: 1 });
+  c.fillStyle = R.INK; c.save(); R.rr(c, -cw / 2 + 3, ch / 2 - 66, cw - 6, 63, 26); c.clip(); c.fillRect(-cw / 2, ch / 2 - 66, cw, 66); c.restore();
+  k.setFont(c, 400, bf.size, R.F_BAGEL); c.fillStyle = R.CR; c.fillText(bf.lines[0], 0, ch / 2 - 34 + bf.size * 0.35);
+  c.textAlign = "left"; c.restore();
+  c.restore();
+  /* Rangliste */
+  R.list(c, k, rows, { x: 60, w: 960, top: listTop, bottom: 1176, cols: dense ? 2 : 1, maxPitch: pitch, fs: 46, tilt: false });
+  R.footer(c, k, d);
+  return cv;
+}
+
 export default {
   games: ["headsup"],
   fonts: ["400 100px \"GTR Anton\"", "800 58px \"Baloo 2\"", "600 26px \"Baloo 2\"", "600 26px \"GTR Mono\""],
@@ -151,6 +203,12 @@ export default {
     const sty = { bg: (c) => bg(c, k), ink: "#FFFFFF", sub: LILA, acc: "#FFFFFF", line: "rgba(255,255,255,0.25)", fam: k.F_BALOO, logo: "#FFFFFF", titleFam: k.F_ANTON, titleCase: true, subFam: k.F_BALOO,
       rowFill: NAVY, rowFillWin: GREEN, winInk: "#06241B" };
     parts.slice(1).forEach((p, i) => out.push(k.continuationPage(d, p, i + 2, parts.length, sty)));
+    return out;
+  },
+  renderRyu(d, k, R) {
+    const parts = k.chunks(d.rows, k.ONE_PAGE, 12);
+    const out = [ryuHeadsPage(d, k, R, parts[0])];
+    parts.slice(1).forEach((p, i) => out.push(R.contPage(d, k, p, i + 2, parts.length)));
     return out;
   },
 };

@@ -94,6 +94,47 @@ function page1(d, k, rows) {
   return cv;
 }
 
+/* ---------- Ryū-Fassung: Bombe mit Lunte ----------
+   Roter Grund, schwarze Bombe mit Creme-Ring (Anteil des Siegers an allen Punkten wie in render()), brennende Lunte,
+   grosse Punktzahl in der Mitte, Rangliste als Sticker-Zeilen. Gleiche Seitenaufteilung wie render(). */
+function ryuFivePage(d, k, R, rows) {
+  const { cv, c } = k.tplCanvas(); R.bg(c, R.RED, 3911);
+  R.dots(c, 0, 0, 1080, 300, 26, 4.2, "rgba(26,23,22,0.14)");
+  const win = d.winners.length ? d.winners : d.rows.slice(0, 1);
+  const N = rows.length, dense = N >= 5, nr = dense ? Math.ceil(N / 2) : N;
+  const pitch = dense ? (nr <= 3 ? 112 : nr <= 4 ? 100 : 88) : Math.min(124, 380 / Math.max(N, 1));
+  const listH = nr * pitch, listTop = 1176 - listH;
+  /* Titel */
+  c.save(); c.translate(60, 150); c.rotate(-4 * Math.PI / 180);
+  const tf = k.fit(c, d.up(d.gameLabel), { w: 400, fam: R.F_BAGEL, max: 110, min: 50, maxW: 640, lines: 1 });
+  R.pop(c, tf.lines[0], 0, 0, tf.size, { sh: tf.size * 0.08 });
+  c.restore();
+  /* Bombe */
+  const hAvail = listTop - 24 - 200, rb = Math.max(110, Math.min(230, hAvail / 2 - 30)), bx = 540, by = 200 + 30 + rb + 20;
+  const total = d.rows.reduce((a, r) => a + (r.score > 0 ? r.score : 0), 0);
+  const frac = total > 0 && win[0].score > 0 ? win[0].score / total : 0;
+  /* Lunte */
+  c.lineCap = "round"; c.strokeStyle = R.INK; c.lineWidth = 14;
+  c.beginPath(); c.moveTo(bx + rb * 0.55, by - rb * 0.85); c.bezierCurveTo(bx + rb * 0.8, by - rb * 1.25, bx + rb * 0.4, by - rb * 1.35, bx + rb * 0.75, by - rb * 1.55); c.stroke();
+  R.burst(c, bx + rb * 0.75, by - rb * 1.58, rb * 0.2, rb * 0.09, 8, { fill: R.CR, sh: 5, lw: 4, rot: 10 });
+  /* Koerper */
+  c.beginPath(); c.arc(bx + 12, by + 12, rb, 0, 6.2832); c.fillStyle = R.INK; c.fill();
+  c.beginPath(); c.arc(bx, by, rb, 0, 6.2832); c.fillStyle = R.INK; c.fill(); c.lineWidth = 7; c.strokeStyle = R.CR; c.stroke();
+  c.fillStyle = R.INK; R.rr(c, bx + rb * 0.3, by - rb * 1.02, rb * 0.5, rb * 0.24, 6); c.fill(); c.lineWidth = 5; c.strokeStyle = R.CR; R.rr(c, bx + rb * 0.3, by - rb * 1.02, rb * 0.5, rb * 0.24, 6); c.stroke();
+  /* Ring */
+  const rr0 = rb * 0.78; c.lineCap = "round"; c.lineWidth = rb * 0.12; c.strokeStyle = "rgba(243,234,211,0.2)"; c.beginPath(); c.arc(bx, by, rr0, 0, 6.2832); c.stroke();
+  if (frac > 0) { c.strokeStyle = R.CR; c.beginPath(); c.arc(bx, by, rr0, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * Math.min(1, frac)); c.stroke(); }
+  const val = win[0].value, vf = k.fit(c, val, { w: 400, fam: R.F_BAGEL, max: rb * 0.78, min: 50, maxW: rb * 1.2, lines: 1 });
+  c.textAlign = "center"; k.setFont(c, 400, vf.size, R.F_BAGEL); c.fillStyle = R.CR; c.fillText(vf.lines[0], bx, by + vf.size * 0.28);
+  const unit = d.tr("fiveSecScoreLabel", "Punkte"), uf = k.fit(c, unit, { w: 400, fam: R.F_BAGEL, max: 34, min: 22, maxW: rb * 1.2, lines: 1 });
+  k.setFont(c, 400, uf.size, R.F_BAGEL); c.fillStyle = R.CR; c.fillText(uf.lines[0], bx, by + vf.size * 0.28 + uf.size * 1.3); c.textAlign = "left";
+  if (d.tie) { const sx = Math.min(810, bx + rb * 0.95), sy = Math.min(by + rb * 0.7, listTop - 60); R.sticker(c, sx - 240, sy - 46, 480, 92, { r: 18, fill: R.CR, rot: -8, sh: 8, lw: 4 }); R.stamp(c, k, d.up(d.tr("ecTied", "")), sx, sy, 40, -8, R.INK, 380); }
+  /* Rangliste */
+  R.list(c, k, rows, { x: 60, w: 960, top: listTop, bottom: 1176, cols: dense ? 2 : 1, maxPitch: pitch, fs: 46, tilt: false });
+  R.footer(c, k, d);
+  return cv;
+}
+
 export default {
   games: ["fivesec"],
   fonts: ["400 100px \"GTR Anton\"", "700 50px \"Space Grotesk\"", "700 28px \"Space Grotesk\"", "800 52px \"Baloo 2\"", "600 26px \"GTR Mono\""],
@@ -104,6 +145,12 @@ export default {
     const sty = { bg: (c) => bg(c, k), ink: INK, sub: PEACH, acc: ORG, line: "rgba(255,255,255,0.15)", fam: F_SPACE, logo: ORG, titleFam: k.F_ANTON, titleCase: true, subFam: F_MONO,
       rowFill: "#2A1B0D", rowEdge: "rgba(255,150,64,0.35)", rowFillWin: "#2A1B0D" };
     parts.slice(1).forEach((p, i) => out.push(k.continuationPage(d, p, i + 2, parts.length, sty)));
+    return out;
+  },
+  renderRyu(d, k, R) {
+    const parts = k.chunks(d.rows, k.ONE_PAGE, 12);
+    const out = [ryuFivePage(d, k, R, parts[0])];
+    parts.slice(1).forEach((p, i) => out.push(R.contPage(d, k, p, i + 2, parts.length)));
     return out;
   },
 };

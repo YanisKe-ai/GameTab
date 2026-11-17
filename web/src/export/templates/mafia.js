@@ -130,10 +130,75 @@ function render(d, k) {
   return [cv];
 }
 
+/* ---------- Ryū-Fassung: Zeitungsausschnitt mit Hut ----------
+   Roter Grund, Zeitungskopf als schräger Creme-Sticker mit Klebeband und Hut im Zackensticker (Schlagzeile = Stempeltext von render()),
+   jede Person ein Fahndungsfoto-Sticker (Mafia schwarz mit Hut, tot mit Kreuz). Inhalt wie render(). */
+function ryuHat(c, R, cx, cy, s, col, band) {
+  c.save(); c.translate(cx, cy); c.lineJoin = "round";
+  c.beginPath(); c.ellipse(0, 0.35 * s, 1.15 * s, 0.3 * s, 0, 0, 6.2832); c.fillStyle = col; c.fill(); c.lineWidth = Math.max(2.5, s * 0.07); c.strokeStyle = R.CR; c.stroke();
+  c.beginPath(); c.moveTo(-0.62 * s, 0.32 * s); c.lineTo(-0.5 * s, -0.5 * s); c.quadraticCurveTo(-0.2 * s, -0.7 * s, 0, -0.5 * s); c.quadraticCurveTo(0.2 * s, -0.7 * s, 0.5 * s, -0.5 * s); c.lineTo(0.62 * s, 0.32 * s); c.closePath();
+  c.fillStyle = col; c.fill(); c.stroke();
+  c.fillStyle = band || R.RED; c.beginPath(); c.moveTo(-0.6 * s, 0.1 * s); c.lineTo(0.6 * s, 0.1 * s); c.lineTo(0.62 * s, 0.32 * s); c.lineTo(-0.62 * s, 0.32 * s); c.closePath(); c.fill();
+  c.restore();
+}
+function ryuPerson(c, R, cx, cy, s, col) {
+  c.fillStyle = col; c.beginPath(); c.arc(cx, cy - 0.28 * s, 0.36 * s, 0, 6.2832); c.fill();
+  c.beginPath(); c.moveTo(cx - 0.8 * s, cy + 0.8 * s); c.bezierCurveTo(cx - 0.8 * s, cy + 0.2 * s, cx - 0.4 * s, cy + 0.1 * s, cx, cy + 0.1 * s); c.bezierCurveTo(cx + 0.4 * s, cy + 0.1 * s, cx + 0.8 * s, cy + 0.2 * s, cx + 0.8 * s, cy + 0.8 * s); c.closePath(); c.fill();
+}
+function ryuRender(d, k, R) {
+  const { cv, c } = k.tplCanvas(); R.bg(c, R.RED, 3511);
+  const ex = d.extra, P = ex.players, N = P.length;
+  R.dots(c, 0, 360, 1080, 260, 26, 4, "rgba(26,23,22,0.12)");
+  /* Zeitungskopf */
+  const l1 = d.up(d.tr("tplMafCase", "Fall abgeschlossen")), l2 = d.up(d.tr(ex.winner === "mafia" ? "tplMafWinM" : "tplMafWinT", "Die Mafia gewinnt"));
+  const nx = 50, ny = 50, nw = 980, nh = 310, rotN = -1.5;
+  R.sticker(c, nx, ny, nw, nh, { r: 18, rot: rotN, sh: 12, lw: 6 });
+  R.tape(c, nx + 120, ny + 4, 140, 42, -6 + rotN); R.tape(c, nx + nw - 120, ny + 4, 140, 42, 5 + rotN);
+  R.rot(c, nx, ny, nw, nh, rotN, () => {
+    const pad = 36, tfw = nw - pad * 2 - 190;
+    const tf = k.fit(c, d.up(d.gameLabel), { w: 400, fam: R.F_BAGEL, max: 92, min: 48, maxW: tfw, lines: 1 });
+    k.setFont(c, 400, tf.size, R.F_BAGEL); c.fillStyle = R.INK; c.fillText(tf.lines[0], pad, 44 + tf.size * 0.8);
+    const ry = 52 + tf.size; c.fillStyle = R.INK; c.fillRect(pad, ry, nw - pad * 2, 5); c.fillRect(pad, ry + 10, nw - pad * 2, 2);
+    const f1 = k.fit(c, l1, { w: 400, fam: R.F_BAGEL, max: 36, min: 22, maxW: tfw + 20, lines: 1 });
+    k.setFont(c, 400, f1.size, R.F_BAGEL); c.fillStyle = R.RED2; c.fillText(f1.lines[0], pad, ry + 28 + f1.size * 0.9);
+    const hy = ry + 40 + f1.size, f2 = k.fit(c, l2, { w: 400, fam: R.F_BAGEL, max: 84, min: 34, maxW: nw - pad * 2, lines: 2 });
+    k.setFont(c, 400, f2.size, R.F_BAGEL); c.fillStyle = R.INK;
+    f2.lines.forEach((ln, i) => c.fillText(ln, pad, hy + f2.size * 0.85 + i * f2.size * 1.02));
+    R.zig(c, nw - 105, 105, 78, { fill: R.RED, n: 18, sh: 6, lw: 4.5 });
+    ryuHat(c, R, nw - 105, 98, 50, R.INK, R.CR);
+  });
+  /* Fahndungsfotos */
+  const alive = d.tr("tplPartyAlive", "lebt"), dead = d.tr("tplPartyDead", "tot");
+  const top = 400, bottom = 1176, cols = N <= 12 ? 2 : 3, nr = Math.ceil(N / cols), gap = 14;
+  const pitch = Math.min(cols === 2 ? (N <= 8 ? 215 : 165) : 130, (bottom - top) / nr), h = pitch - (cols === 3 ? 10 : gap), cw = (960 - (cols - 1) * 18) / cols;
+  const y00 = top + Math.max(0, ((bottom - top) - pitch * nr) / 2);
+  P.forEach((p, i) => {
+    const col = i % cols, ri = Math.floor(i / cols), x = 60 + col * (cw + 18), y = y00 + ri * pitch, mf = p.team === "mafia";
+    R.sticker(c, x, y, cw, h, { r: Math.min(20, h * 0.26), rot: 0, sh: 6, lw: 3.5, fill: mf ? R.INK : (p.alive ? R.CR : R.CR2) });
+    R.rot(c, x, y, cw, h, 0, () => {
+      const ink = mf ? R.CR : R.INK, rad = Math.min(h * (cols === 3 ? 0.34 : 0.42), cols === 3 ? 40 : 54), px = (cols === 3 ? rad : Math.min(h, 120) * 0.5) + 6;
+      R.zig(c, px, h / 2, rad, { fill: mf ? R.RED : R.CR3, n: 14, sh: 0, lw: 3 });
+      c.save(); c.beginPath(); c.arc(px, h / 2, rad * 0.9, 0, 6.2832); c.clip(); ryuPerson(c, R, px, h / 2 + rad * 0.12, rad * 0.78, R.INK); c.restore();
+      if (mf) ryuHat(c, R, px, h / 2 - rad * 0.42, rad * 0.5, R.INK, R.RED);
+      if (!p.alive) { c.save(); c.strokeStyle = mf ? R.CR : R.RED2; c.lineWidth = Math.max(4, rad * 0.16); c.lineCap = "round"; const q = rad * 0.62; c.beginPath(); c.moveTo(px - q, h / 2 - q); c.lineTo(px + q, h / 2 + q); c.moveTo(px + q, h / 2 - q); c.lineTo(px - q, h / 2 + q); c.stroke(); c.restore(); }
+      const nx2 = px + rad + (cols === 3 ? 10 : 16), tw = cw - nx2 - 18, fs = Math.min(N <= 8 ? 66 : 56, h * 0.38), sfs = Math.max(22, Math.min(N <= 8 ? 34 : 30, h * 0.22));
+      const stat = d.clean(p.role) + ", " + (p.alive ? alive : dead);
+      const sf = k.fit(c, stat, { w: 700, fam: R.F_TXT, max: sfs, min: 20, maxW: tw, lines: cols === 3 ? 2 : 1 });
+      const nf = k.nameFit(c, d.clean(p.name), { w: 400, fam: R.F_BAGEL, max: fs, maxW: tw, lines: cols === 3 ? 3 : 2, max2: Math.max(24, Math.min(fs, (h - sf.size * 1.22 * sf.lines.length - 14) / (cols === 3 ? 3.15 : 2.1))) });
+      const nlh = nf.size * 1.04, slh = sf.size * 1.22, tot = nlh * nf.lines.length + slh * sf.lines.length; let yy = (h - tot) / 2;
+      k.setFont(c, 400, nf.size, R.F_BAGEL); c.fillStyle = ink; nf.lines.forEach((ln, q) => c.fillText(ln, nx2, yy + nf.size * 0.82 + q * nlh)); yy += nlh * nf.lines.length;
+      k.setFont(c, 700, sf.size, R.F_TXT); c.fillStyle = ink; sf.lines.forEach((ln, q) => c.fillText(ln, nx2, yy + sf.size * 0.98 + q * slh));
+    });
+  });
+  R.footer(c, k, d);
+  return [cv];
+}
+
 export default {
   games: ["mafia"],
   fonts: ['400 100px "GTR Anton"', '700 52px "Kalam"'].concat(FONTS_BASE),
   accepts: (d) => !!(d.extra && Array.isArray(d.extra.players) && d.extra.players.length >= 2 && d.extra.winner),
   texts: (d) => (d.extra ? [d.extra.players.map((p) => p.name + " " + p.role).join(" "), d.up(d.tr("tplMafCase", "") + d.tr("tplMafWinM", "") + d.tr("tplMafWinT", "")), d.tr("tplPartyAlive", "") + d.tr("tplPartyDead", ""), ", "] : []),
   render,
+  renderRyu: ryuRender,
 };

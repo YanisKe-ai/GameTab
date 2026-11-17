@@ -234,6 +234,7 @@ const MO_CSS = `
 [data-phone-landscape] .mo-pad button{height:44px}
 /* Hell «Schwarz auf Creme» (16.11.2026) */
 html[data-gt-theme="light"]:not([data-gt-skin]) .mo-row.cur{background:rgba(244,241,232,.12)}
+html[data-gt-theme="noir"] .mo-row.cur{background:rgba(255,255,255,.1)}
 html[data-gt-theme="light"]:not([data-gt-skin]) .mo-root img{filter:grayscale(1) contrast(1.05)}
 html[data-gt-theme="light"]:not([data-gt-skin]) .mo-c.on.pl{background:#878175;border-color:#878175;color:#fff}
 `;

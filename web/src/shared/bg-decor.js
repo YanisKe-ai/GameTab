@@ -1,3 +1,4 @@
+import { isHell } from "../themes/hell.js";
 // Schwebende Symbole im Hintergrund jedes Spiels (wie bei Tutto), pro Spiel eigene Symbole und Farbe.
 // Wird als CSS-Hintergrund (::before der Seitenhuelle) eingesetzt: liegt hinter dem Inhalt, faengt keine Klicks.
 const SYM = {
@@ -52,9 +53,9 @@ SYM.clover = SYM.club;
 GAMES["schieber-turnier"] = GAMES.schieber;
 GAMES.molotow = ["#B8D52A", ["spade", "heart", "club", "diamond"]];
 const POS = [["8%","3%",-12,24],["46%","1%",14,14],["84%","2%",10,15],["4%","14%",-8,17],["64%","10%",-10,13],["92%","18%",18,19],["22%","20%",-14,15],["6%","30%",-15,14],["88%","34%",12,16],["40%","36%",8,18],["70%","46%",16,15],["12%","48%",-9,13],["92%","54%",-16,17],["30%","58%",10,16],["6%","64%",-12,15],["80%","68%",14,14],["18%","78%",11,18],["60%","80%",-10,16],["92%","84%",-8,15],["40%","88%",9,14],["78%","94%",-14,19],["4%","92%",12,13]];
-function tile(color, syms) {
+function tile(color, syms, sparse) {
   const W = 400, H = 860;
-  const parts = POS.map((p, i) => {
+  const parts = POS.filter((p, i) => !sparse || i % 2 === 0).map((p, i) => {
     const x = parseFloat(p[0]) / 100 * W, y = parseFloat(p[1]) / 100 * H, s = p[3] / 24;
     const f = SYM[syms[i % syms.length]] || SYM.star;
     return `<g transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${p[2]}) scale(${s.toFixed(2)})">${f(color)}</g>`;
@@ -65,11 +66,13 @@ const CACHE = {};
 export function gtBgDecorCss(view, theme) {
   const g = GAMES[view];
   if (!g) return "";
-  const key = view + "|" + theme;
+  const hell = theme === "light" && isHell();
+  const key = view + "|" + theme + (hell ? "|hell" : "");
   if (CACHE[key]) return CACHE[key];
-  const col = theme === "noir" ? "#FFFFFF" : g[0];
-  const op = theme === "noir" ? 0.06 : theme === "light" ? 0.2 : 0.1;
-  const uri = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(tile(col, g[1]));
+  // Hell «Schwarz auf Creme»: dunkle Zeichen, halb so viele, sehr zurückhaltend (Wunsch Yanis 17.11.2026)
+  const col = theme === "noir" ? "#FFFFFF" : hell ? "#1E1A15" : g[0];
+  const op = theme === "noir" ? 0.06 : hell ? 0.06 : theme === "light" ? 0.2 : 0.1;
+  const uri = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(tile(col, g[1], hell));
   const css = `.gtL-shellpage{isolation:isolate}.gtL-shellpage::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background-image:url("${uri}");background-size:400px auto;background-repeat:repeat;opacity:${op}}`;
   CACHE[key] = css;
   return css;

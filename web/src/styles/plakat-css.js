@@ -98,7 +98,7 @@ ${P} .gtL-start .gtL-start-gear{background:${CREAM2}!important;outline:none!impo
 ${P} .gtL-start .gt-hero-sub{display:flex;justify-content:center}
 /* eigene Eigenschaft «translate», damit Einblend-Animationen (transform) das Logo beim Zurückkommen nicht springen lassen */
 ${P} .gtL-start .gtL-headwrap{translate:0 -22px}
-${P}:not(.gt-laptopmode):not([data-phone-landscape]) .gtL-start .gtL-headwrap{translate:0 -16px}
+${P}:not(.gt-laptopmode):not([data-phone-landscape]) .gtL-start .gtL-headwrap{translate:0 -36px}
 ${P}:not(.gt-laptopmode):not([data-phone-landscape]) .gtL-start .gt-hero-sub{translate:-6px 14px;rotate:0deg;filter:drop-shadow(2.5px 0 0 ${INK2}) drop-shadow(-2.5px 0 0 ${INK2}) drop-shadow(0 2.5px 0 ${INK2}) drop-shadow(0 -2.5px 0 ${INK2}) drop-shadow(4px 5px 0 ${INK2})}
 ${P}:not(.gt-laptopmode):not([data-phone-landscape]) body .gtL-start .gt-hero-sub.gt-hero-sub div{background:${CREAM2}!important;color:${INK2}!important;clip-path:polygon(100.0% 50.0%,85.1% 58.0%,95.0% 71.7%,78.1% 72.4%,81.2% 89.1%,65.6% 82.4%,61.1% 98.7%,50.0% 86.0%,38.9% 98.7%,34.4% 82.4%,18.8% 89.1%,21.9% 72.4%,5.0% 71.7%,14.9% 58.0%,0.0% 50.0%,14.9% 42.0%,5.0% 28.3%,21.9% 27.6%,18.8% 10.9%,34.4% 17.6%,38.9% 1.3%,50.0% 14.0%,61.1% 1.3%,65.6% 17.6%,81.2% 10.9%,78.1% 27.6%,95.0% 28.3%,85.1% 42.0%)!important;transform:none!important;padding:28px 34px!important;margin-top:0!important;font-size:12px!important;cursor:pointer;-webkit-tap-highlight-color:transparent}
 ${P}:not(.gt-laptopmode):not([data-phone-landscape]) body .gtL-start .gt-hero-sub.gt-hero-sub div:active{scale:.94}
@@ -110,12 +110,13 @@ ${P} .gtL-start [data-onboard="scorepads-tile"],${P} .gtL-start [data-onboard="p
 /* Ryū Handy (Wunsch Yanis 16.11.): Kacheln etwas grösser und weiter oben */
 ${P}:not(.gt-laptopmode):not([data-phone-landscape]) .gtL-start [data-onboard="scorepads-tile"],${P}:not(.gt-laptopmode):not([data-phone-landscape]) .gtL-start [data-onboard="party-tile"]{translate:0 calc(var(--pk-tshift,0px) + 2px - var(--pk-tfix,0px))}
 ${P}:not(.gt-laptopmode):not([data-phone-landscape]) .gtL-start .gtL-tile{padding:23px 20px!important}
-${P}:not(.gt-laptopmode):not([data-phone-landscape]) .gtL-start{--pk-tfix:18px}
-${P}:not(.gt-laptopmode):not([data-phone-landscape]) .gtL-start [data-onboard="search"]{transform:translateY(-14px)}
-${P}:not(.gt-laptopmode):not([data-phone-landscape]) .gtL-start .gtL-showcase{transform:translateY(-20px)}
-${P}:not(.gt-laptopmode):not([data-phone-landscape]) .gtL-start .gtL-tipcard{transform:translateY(-24px)}
-@media (display-mode: standalone){${P}:not(.gt-laptopmode):not([data-phone-landscape]) .gtL-start .gtL-tipcard{transform:translateY(-40px)}}
-@media (max-height:760px){${P}:not(.gt-laptopmode):not([data-phone-landscape]) .gtL-start .gtL-tipcard{transform:translateY(-6px)}}
+${P}:not(.gt-laptopmode):not([data-phone-landscape]) .gtL-start{--pk-tfix:3px}
+/* Abstände über margin statt transform: transform kollidiert mit den Einblend-Animationen und springt danach (Zurückwischen) */
+${P}:not(.gt-laptopmode):not([data-phone-landscape]) .gtL-start [data-onboard="search"]{margin-top:-34px}
+${P}:not(.gt-laptopmode):not([data-phone-landscape]) .gtL-start .gtL-showcase.gtL-showcase{margin-top:23px!important}
+${P}:not(.gt-laptopmode):not([data-phone-landscape]) .gtL-start .gtL-tipcard.gtL-tipcard{margin-top:18px!important}
+@media (display-mode: standalone){${P}:not(.gt-laptopmode):not([data-phone-landscape]) .gtL-start .gtL-tipcard.gtL-tipcard{margin-top:-20px!important}}
+@media (max-height:760px){${P}:not(.gt-laptopmode):not([data-phone-landscape]) .gtL-start .gtL-tipcard.gtL-tipcard{margin-top:14px!important}}
 ${P}:not(.gt-laptopmode):not([data-phone-landscape]) .gtL-start .gtL-tile-title{font-size:clamp(24px,8.1vw,33px)!important}
 ${P}.gt-laptopmode .gtL-start .gtL-headwrap,${P}[data-phone-landscape] .gtL-start .gtL-headwrap{translate:none;transform:none}
 ${P}.gt-laptopmode .gtL-start [data-onboard$="-tile"],${P}[data-phone-landscape] .gtL-start [data-onboard$="-tile"]{translate:none}

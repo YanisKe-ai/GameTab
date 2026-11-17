@@ -2,7 +2,9 @@
 // Augen, Augen, Würfelbecher, Faust auf den Tisch («Das zählt nicht!»), KRACH! und GAMETAB, dann reisst die Seite auf.
 // Vollbild-Ebene über der Startseite, nur Rot, Schwarz, Creme. Bei «Bewegung reduzieren» nur ein kurzes Aufblitzen.
 /* eslint-disable no-unused-vars */
+import { TRANSLATIONS } from "../i18n/translations.js";
 const gtRyuComic = (() => {
+const tx = (k, d) => { try { const L = TRANSLATIONS[document.documentElement.lang] || TRANSLATIONS.de; return L[k] || TRANSLATIONS.de[k] || d; } catch (e) { return d; } };
 const RED = "#E4312B", INK = "#1A1716", CR = "#F3EAD3";
 const NS = "http://www.w3.org/2000/svg";
 let fx = null, box = null, stage = null, phone = null, PID = 0;
@@ -65,8 +67,8 @@ async function slamProfile(par,y,h,trail){const ty=y+h-30;tableTop(par,ty);const
   if(trail){for(let k=0;k<6;k++){const a=(-150+k*30)*Math.PI/180;el("path",{d:`M${70+12*.7} ${y+h+8-20*.7} m${Math.sin(-a)*60} ${-Math.cos(-a)*60} a60 60 0 0 1 10 10`,stroke:INK,"stroke-width":3,fill:"none",opacity:.5},par);}
     el("path",{d:`M${78} ${y+h-60} A62 62 0 0 1 ${142} ${ty-6}`,fill:"none",stroke:CR,"stroke-width":10,opacity:.8,"stroke-linecap":"round"},par);el("path",{d:`M${74} ${y+h-56} A68 68 0 0 1 ${144} ${ty-2}`,fill:"none",stroke:INK,"stroke-width":2,"stroke-dasharray":"6 6"},par);}
   anim(A.upper,[-160,-75],160,"cubic-bezier(.7,0,1,.5)");await anim(A.fore,[-20,-15],160,"cubic-bezier(.7,0,1,.5)").finished;
-  shake(stage,8,280);dust(par,150,ty,10);jump(d,200,ty-9,30,90,520,.45);jump(cupG,240,ty,14,-12,520,.5);const wm=sfx(par,215,y+34,"WUMMS!",26,6,RED);
-  anim(B.head,[0,-6],200);await wait(650);wm.animate([{opacity:1},{opacity:0}],{duration:200,fill:"forwards"});bubble(par,150,y+26,150,32,92,y+46,"DAS ZÄHLT NICHT!",11);}
+  shake(stage,8,280);dust(par,150,ty,10);jump(d,200,ty-9,30,90,520,.45);jump(cupG,240,ty,14,-12,520,.5);const wm=sfx(par,215,y+34,tx("comicSlam","WUMMS!"),26,6,RED);
+  anim(B.head,[0,-6],200);await wait(650);wm.animate([{opacity:1},{opacity:0}],{duration:200,fill:"forwards"});bubble(par,150,y+26,150,32,92,y+46,tx("comicNoCount","DAS ZÄHLT NICHT!"),11);}
 function gutterBG(){const g=el("rect",{x:0,y:0,width:370,height:680,fill:"#FFFDF6"});return g;}
 function realLogo(par,cx,cy,w,rot){const src=document.querySelector(".gt-hero-logo svg");const h=w*179/404;
   const g=el("g",{},par);const sv=document.createElementNS(NS,"svg");sv.setAttribute("viewBox",src.getAttribute("viewBox"));sv.setAttribute("x",cx-w/2);sv.setAttribute("y",cy-h/2);sv.setAttribute("width",w);sv.setAttribute("height",h);sv.setAttribute("overflow","visible");
@@ -106,7 +108,7 @@ async function story() {
   p = panel(B(266, 150), "url(#htC)"); await slamProfile(p.inner, 266, 150); await wait(1100);
   await impact(2);
   p = panel("10,424 360,424 360,670 10,670", "url(#htR)"); speed(p.inner, 185, 548, 60, 40, 420);
-  const w = bigSfx(p.inner, 185, 566, "KRACH!", 56, -6, CR, INK); shake(phone, 10, 380); await wait(600);
+  const w = bigSfx(p.inner, 185, 566, tx("comicCrash","KRACH!"), 56, -6, CR, INK); shake(phone, 10, 380); await wait(600);
   await w.animate([{ opacity: 1, transform: "rotate(-6deg) scale(1)" }, { opacity: 0, transform: "rotate(-6deg) scale(1.6)" }], { duration: 220, fill: "forwards" }).finished; w.remove();
   await logoBurst(p.inner, 185, 548, 175);
   await wait(1150);

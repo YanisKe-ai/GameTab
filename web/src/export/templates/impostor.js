@@ -225,7 +225,7 @@ function ryuRender(d, k, R) {
   });
   if (m.stamp) {
     c.save(); c.globalAlpha = 0.96;
-    R.stamp(c, k, d.up(m.stamp), 800, ay + 105, 62, -8, m.crewWin ? R.RED2 : R.INK, 380);
+    R.stamp(c, k, d.up(m.stamp), 830, ay + 105, 62, -8, m.crewWin ? R.RED2 : R.INK, 330);
     c.restore();
   }
   R.footer(c, k, d);

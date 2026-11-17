@@ -51,11 +51,11 @@ function row2(c, k, R, o) {
     if (o.right != null && o.right !== "") {
       const vf = k.fit(c, String(o.right), { w: 400, fam: R.F_BAGEL, max: fs, min: fs * 0.55, maxW: Math.min(300, w * 0.36), lines: 1 });
       k.setFont(c, 400, vf.size, R.F_BAGEL); rw = c.measureText(vf.lines[0]).width;
-      c.fillStyle = ink; c.textAlign = "right"; c.fillText(vf.lines[0], w - 24, (hasRS ? h * 0.42 : h / 2) + vf.size * 0.36); c.textAlign = "left";
+      c.fillStyle = ink; c.textAlign = "right"; c.fillText(vf.lines[0], w - 24, (hasRS ? h * 0.37 : h / 2) + vf.size * 0.36); c.textAlign = "left";
     }
     if (hasRS) {
       const sf = k.fit(c, String(o.rightSub), { w: 700, fam: R.F_TXT, max: ss, min: 17, maxW: Math.min(w * 0.34, 260), lines: 1 });
-      k.setFont(c, 700, sf.size, R.F_TXT); c.fillStyle = subC; c.textAlign = "right"; c.fillText(sf.lines[0], w - 24, h * 0.82); rw = Math.max(rw, c.measureText(sf.lines[0]).width); c.textAlign = "left";
+      k.setFont(c, 700, sf.size, R.F_TXT); c.fillStyle = subC; c.textAlign = "right"; c.fillText(sf.lines[0], w - 24, h * 0.86); rw = Math.max(rw, c.measureText(sf.lines[0]).width); c.textAlign = "left";
     }
     const maxW = w - nx - rw - 52;
     const nf = k.nameFit(c, o.name, { w: 400, fam: R.F_BAGEL, max: fs, maxW, lines: 2, max2: hasNS ? Math.max(24, h * 0.27) : fs * 0.8 });

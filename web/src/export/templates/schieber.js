@@ -204,9 +204,12 @@ function ryuPage(d, k, R, m) {
     const hot = tm.win && !m.tie, fill = hot ? R.INK : R.CR, ink = hot ? R.CR : R.INK;
     R.sticker(c, xs[i], ty, tw, th, { r: 26, fill, rot: rts[i], sh: 11, lw: 5, stroke: hot ? R.CR : R.INK });
     R.rot(c, xs[i], ty, tw, th, rts[i], () => {
-      const sf = k.fit(c, m.num(tm.total), { w: 400, fam: R.F_BAGEL, max: 84, min: 44, maxW: tw - 56, lines: 1 });
-      const nf = k.nameFit(c, tm.name, { w: 400, fam: R.F_BAGEL, max: 44, maxW: tw - 56, lines: 2, max2: 34 });
-      k.setFont(c, 400, nf.size, R.F_BAGEL); c.fillStyle = ink; const nlh = nf.size * 1.05;
+      const nf = k.nameFit(c, tm.name, { w: 400, fam: R.F_BAGEL, max: 44, maxW: tw - 56, lines: 2, max2: 30 });
+      const nlh = nf.size * 1.05, nBot = 22 + nf.size * 0.85 + (nf.lines.length - 1) * nlh + nf.size * 0.22;
+      /* Punktzahl nie in den Namen: Grösse nach dem freien Platz unter dem Namen */
+      const sMax = Math.max(40, Math.min(84, (th - 26 - nBot - 10) / 0.74));
+      const sf = k.fit(c, m.num(tm.total), { w: 400, fam: R.F_BAGEL, max: sMax, min: Math.min(44, sMax), maxW: tw - 56, lines: 1 });
+      k.setFont(c, 400, nf.size, R.F_BAGEL); c.fillStyle = ink;
       nf.lines.forEach((ln, j) => c.fillText(ln, 28, 22 + nf.size * 0.85 + j * nlh));
       k.setFont(c, 400, sf.size, R.F_BAGEL); c.fillStyle = hot ? R.RED : R.INK; c.textAlign = "right"; c.fillText(m.num(tm.total), tw - 28, th - 26); c.textAlign = "left";
     });

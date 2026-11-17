@@ -101,7 +101,7 @@ function ryuTabuCard(c, k, R, words, cx, cy, sc, deg) {
     if (i === 0) { c.fillStyle = R.CR3; c.fillRect(24, y + 6, W - 48, 74); }
     const f = k.fit(c, String(w), { w: 400, fam: R.F_BAGEL, max: i === 0 ? 58 : 44, min: 24, maxW: 500, lines: 1 });
     k.setFont(c, 400, f.size, R.F_BAGEL); c.fillStyle = R.INK; c.textAlign = "center"; c.fillText(f.lines[0], W / 2, y + 46 + f.size * 0.33); c.textAlign = "left";
-    if (i > 0) { c.save(); c.translate(W / 2, y + 43); c.rotate(-1.5 * Math.PI / 180); c.fillStyle = R.RED; c.fillRect(-250, -5, 500, 10); c.restore(); }
+    if (i > 0) { c.save(); c.translate(W / 2, y + 44); c.rotate(-1.5 * Math.PI / 180); c.fillStyle = R.RED; c.fillRect(-250, -2.5, 500, 5); c.restore(); }
   });
   c.restore();
 }

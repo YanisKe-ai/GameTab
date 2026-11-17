@@ -149,6 +149,79 @@ function contPage(d, k, rows, no, count) {
   return cv;
 }
 
+
+/* ---------- Ryū-Fassung: Würfelbecher-Plakat ----------
+   Roter Grund mit Körnung, Titel YATZY als Pop-Schrift, schwarzer Becher kippt oben rechts fünf Creme-Würfel (Sechser) aus,
+   Sieger als grosser schräger Creme-Sticker mit Zackenkreis «1», übrige Plätze als Sticker-Zeilen. Gleiche Seitenaufteilung wie render(). */
+function ryuDie(c, R, cx, cy, s, deg) {
+  c.save(); c.translate(cx, cy); c.rotate(deg * Math.PI / 180);
+  c.fillStyle = R.INK; R.rr(c, -s / 2 + s * 0.08, -s / 2 + s * 0.08, s, s, s * 0.2); c.fill();
+  c.fillStyle = R.CR; R.rr(c, -s / 2, -s / 2, s, s, s * 0.2); c.fill();
+  c.lineWidth = Math.max(3, s * 0.05); c.strokeStyle = R.INK; R.rr(c, -s / 2, -s / 2, s, s, s * 0.2); c.stroke();
+  c.fillStyle = R.INK; SIX.forEach(([px, py]) => { c.beginPath(); c.arc(-s / 2 + px * s, -s / 2 + py * s, s * 0.085, 0, Math.PI * 2); c.fill(); });
+  c.restore();
+}
+function ryuCup(c, R, cx, cy, s, deg) {
+  c.save(); c.translate(cx, cy); c.rotate(deg * Math.PI / 180);
+  const top = s * 0.5, bot = s * 0.36, h = s;
+  const path = (dx, dy) => { c.beginPath(); c.moveTo(-top + dx, -h / 2 + dy); c.lineTo(top + dx, -h / 2 + dy); c.lineTo(bot + dx, h / 2 + dy); c.lineTo(-bot + dx, h / 2 + dy); c.closePath(); };
+  path(s * 0.06, s * 0.06); c.fillStyle = R.INK; c.fill();
+  path(0, 0); c.fillStyle = R.INK; c.fill(); c.lineWidth = Math.max(4, s * 0.03); c.strokeStyle = R.CR; c.stroke();
+  /* Rillen und Rand in Creme */
+  c.lineWidth = Math.max(3, s * 0.022); c.strokeStyle = R.CR;
+  [0.18, 0.62].forEach((f) => { const y = -h / 2 + h * f, w = top - (top - bot) * f; c.beginPath(); c.moveTo(-w + 14, y); c.lineTo(w - 14, y); c.stroke(); });
+  c.fillStyle = R.CR; R.rr(c, -top - s * 0.04, -h / 2 - s * 0.07, top * 2 + s * 0.08, s * 0.12, s * 0.05); c.fill();
+  c.lineWidth = Math.max(3, s * 0.025); c.strokeStyle = R.INK; R.rr(c, -top - s * 0.04, -h / 2 - s * 0.07, top * 2 + s * 0.08, s * 0.12, s * 0.05); c.stroke();
+  c.restore();
+}
+function ryuPage1(d, k, R, rows) {
+  const { cv, c } = k.tplCanvas(); R.bg(c, R.RED, 1301);
+  R.dots(c, 560, 0, 520, 420, 26, 4.2, "rgba(26,23,22,0.18)");
+  /* Becher und Würfel oben rechts */
+  ryuCup(c, R, 905, 165, 230, 28);
+  [[760, 250, 92, -14], [660, 330, 84, 12], [835, 360, 80, 31], [565, 260, 74, -26], [720, 120, 70, 8]].forEach(([x, y, s, r]) => ryuDie(c, R, x, y, s, r));
+  /* Titel */
+  c.save(); c.translate(64, 205); c.rotate(-5 * Math.PI / 180);
+  const tf = k.fit(c, d.up(d.gameLabel), { w: 400, fam: R.F_BAGEL, max: 150, min: 64, maxW: 560, lines: 1 });
+  R.pop(c, tf.lines[0], 0, 0, tf.size, { sh: tf.size * 0.08 }); c.restore();
+  const win = d.winners.filter((w) => rows.indexOf(w) >= 0), rest = rows.filter((r) => win.indexOf(r) < 0);
+  /* Sieger-Sticker und Liste als Block, bei wenigen Personen mittig im freien Bereich */
+  const cols = rest.length > 5 ? 2 : 1, nRow = Math.ceil(rest.length / cols), pitch = rest.length <= 3 ? 124 : nRow <= 4 ? 112 : 96;
+  let heroH = 0;
+  if (win.length) {
+    const names0 = win.map((w) => d.up(w.name)).join(" · ");
+    const f0 = k.heroFit(c, names0, { w: 400, fam: R.F_BAGEL, maxW: 670 }, [{ max: 110, min: 64, lines: 1 }, { max: 84, min: 50, lines: 2 }, { max: 62, min: 34, lines: 3 }, { max: 44, min: 24, lines: 4 }]);
+    heroH = Math.max(250, f0.lines.length * f0.size * 1.05 + 150) + 46;
+  }
+  const blockH = heroH + nRow * pitch, top0 = 430, avail = 1170 - top0;
+  let y = top0 + Math.max(0, (avail - blockH) * 0.42);
+  if (win.length) {
+    const names = win.map((w) => d.up(w.name)).join(" · ");
+    const hx = 60, hw = 960, inner = hw - 250 - 40;
+    k.setFont(c, 400, 100, R.F_BAGEL);
+    const nf = k.heroFit(c, names, { w: 400, fam: R.F_BAGEL, maxW: inner }, [{ max: 110, min: 64, lines: 1 }, { max: 84, min: 50, lines: 2 }, { max: 62, min: 34, lines: 3 }, { max: 44, min: 24, lines: 4 }]);
+    const lh = nf.size * 1.05, nameH = nf.lines.length * lh, hh = Math.max(250, nameH + 150);
+    R.sticker(c, hx, y, hw, hh, { r: 34, rot: -2.5, sh: 14, lw: 6 });
+    R.rot(c, hx, y, hw, hh, -2.5, () => {
+      R.zig(c, 130, hh / 2, 92, { fill: R.RED, n: 20, sh: 7, lw: 5 });
+      R.pop(c, "1", 130, hh / 2 + 34, 104, { align: "center", sh: 5, sw: 9 });
+      k.setFont(c, 400, nf.size, R.F_BAGEL); c.fillStyle = R.INK;
+      const n0 = (hh - nameH - 74) / 2 + nf.size * 0.86;
+      nf.lines.forEach((ln, j) => c.fillText(ln, 250, n0 + j * lh));
+      const vf = k.fit(c, win[0].value, { w: 400, fam: R.F_BAGEL, max: 64, min: 30, maxW: inner, lines: 1 });
+      k.setFont(c, 400, vf.size, R.F_BAGEL); const vw = c.measureText(vf.lines[0]).width;
+      const vy = n0 + (nf.lines.length - 1) * lh + 22;
+      c.fillStyle = R.INK; R.rr(c, 250, vy, vw + 40, vf.size + 22, (vf.size + 22) / 2); c.fill();
+      c.fillStyle = R.CR; c.fillText(vf.lines[0], 270, vy + (vf.size + 22) / 2 + vf.size * 0.36);
+    });
+    y += hh + 46;
+  }
+  /* Übrige Plätze */
+  R.list(c, k, rest, { x: cols === 1 ? 110 : 60, w: cols === 1 ? 860 : 950, top: y, bottom: 1176, cols, maxPitch: Math.min(pitch, (1176 - y) / Math.max(1, nRow)), fs: rest.length <= 3 ? 54 : 48 });
+  R.footer(c, k, d);
+  return cv;
+}
+
 export default {
   games: ["yatzy"],
   fonts: ["400 100px \"GTR Bowlby\"", "800 52px \"Baloo 2\"", "600 30px Inter"],
@@ -157,6 +230,13 @@ export default {
     const parts = k.chunks(d.rows, FIRST_CAP, 12);
     const out = [page1(d, k, parts[0])];
     parts.slice(1).forEach((p, i) => out.push(contPage(d, k, p, i + 2, parts.length)));
+    return out;
+  },
+  renderRyu(d, k, R) {
+    upFn = d.up;
+    const parts = k.chunks(d.rows, FIRST_CAP, 12);
+    const out = [ryuPage1(d, k, R, parts[0])];
+    parts.slice(1).forEach((p, i) => out.push(R.contPage(d, k, p, i + 2, parts.length)));
     return out;
   },
 };

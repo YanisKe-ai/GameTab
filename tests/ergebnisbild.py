@@ -27,7 +27,9 @@ from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parent.parent
 DOCS = ROOT / os.environ.get("GAMETAB_DOCS", "docs")
-OUT = ROOT / "tests" / "out" / "ergebnisbild"
+RYU = "--ryu" in sys.argv
+JPG = "--jpg" in sys.argv
+OUT = ROOT / "tests" / "out" / ("ergebnisbild_ryu" if RYU else "ergebnisbild")
 OUT.mkdir(parents=True, exist_ok=True)
 ARGS = sys.argv[1:]
 GAMES = [ARGS[i + 1] for i, a in enumerate(ARGS) if a == "--game" and i + 1 < len(ARGS)]
@@ -49,6 +51,7 @@ def launch(p, name):
 
 JS = """async (c) => {
   document.documentElement.lang = c.lang;
+  if (c.ryu) document.documentElement.setAttribute("data-gt-skin", "plakat"); else document.documentElement.removeAttribute("data-gt-skin");
   const D = TRANSLATIONS[c.lang] || TRANSLATIONS.de;
   const t = (k) => D[k] || TRANSLATIONS.de[k] || k;
   const label = c.label || t(c.labelKey || ("game" + c.gameId.charAt(0).toUpperCase() + c.gameId.slice(1)));
@@ -72,6 +75,7 @@ def main():
             continue
         for c in json.loads(f.read_text(encoding="utf-8")):
             c.setdefault("gameId", gid)
+            c["ryu"] = RYU
             if CASES and c["name"] not in CASES:
                 continue
             cases.append(c)
@@ -113,6 +117,9 @@ def main():
                     for i, q in enumerate(r["pages"]):
                         path = OUT / (tag + (f"_{i + 1}" if len(r["pages"]) > 1 else "") + ".png")
                         path.write_bytes(base64.b64decode(q["url"].split(",", 1)[1]))
+                        if JPG:
+                            from PIL import Image
+                            jp = path.with_suffix(".jpg"); Image.open(path).convert("RGB").save(jp, quality=82); path.unlink(); path = jp
                         shots.setdefault(f"{eng}_{c['gameId']}", []).append(path)
                     print("OK    ", tag, f"{len(r['pages'])} Seite(n), {r['ms']} ms")
                 b.close()
@@ -127,7 +134,7 @@ def main():
             sh = Image.new("RGB", (cols * 330, rows * 411), "white")
             for i, im in enumerate(ims):
                 sh.paste(im, ((i % cols) * 330, (i // cols) * 411))
-            sh.save(OUT / f"_sheet_{k}.png")
+            sh.save(OUT / f"_sheet_{k}.jpg", quality=80)
     print(f"\n{len(cases) * len(ENG) - len(set(f.split(':')[0] for f in fails))} OK, {len(fails)} Fehler")
     for f in fails:
         print("  -", f)

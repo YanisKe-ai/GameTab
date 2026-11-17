@@ -144,6 +144,51 @@ function listPageBook(d, k, rows, no, count) {
   return cv;
 }
 
+/* ---------- Ryū-Fassung: Notizblock-Seite ----------
+   Roter Grund, grosser schräger Creme-Block mit Spiralösen und Linien, Titel als Pop-Schrift darüber, Sieger-Zeilen als roter Leuchtstift,
+   Stempel «Gewonnen» unten rechts, «tief gewinnt» als schwarzes Etikett. Gleiche Daten und Seitenaufteilung wie render(). */
+function ryuPage1(d, k, R, rows) {
+  const { cv, c } = k.tplCanvas(); R.bg(c, R.RED, 3301);
+  R.dots(c, 0, 0, 1080, 260, 26, 4.2, "rgba(26,23,22,0.14)");
+  c.save(); c.translate(70, 190); c.rotate(-3 * Math.PI / 180);
+  const tf = k.fit(c, d.up(d.gameLabel), { w: 400, fam: R.F_BAGEL, max: 125, min: 56, maxW: d.low ? 520 : 760, lines: 1 });
+  R.pop(c, tf.lines[0], 0, 0, tf.size, { sh: tf.size * 0.08 }); c.restore();
+  if (d.low) {
+    const lt = d.tr("tplSkyjoLow", "tief gewinnt"), lf = k.fit(c, lt, { w: 400, fam: R.F_BAGEL, max: 44, min: 22, maxW: 330, lines: 1 });
+    k.setFont(c, 400, lf.size, R.F_BAGEL); const lw = c.measureText(lf.lines[0]).width + 50, lh = lf.size + 34;
+    R.sticker(c, 1010 - lw, 110, lw, lh, { r: lh / 2, fill: R.INK, rot: 4, sh: 7, lw: 0 });
+    R.rot(c, 1010 - lw, 110, lw, lh, 4, () => { k.setFont(c, 400, lf.size, R.F_BAGEL); c.fillStyle = R.CR; c.fillText(lf.lines[0], 25, lh / 2 + lf.size * 0.34); });
+  }
+  const px = 70, py = 262, pw = 940, ph = 930, rotD = 1.2;
+  R.sticker(c, px, py, pw, ph, { r: 22, rot: rotD, sh: 14, lw: 6 });
+  R.rot(c, px, py, pw, ph, rotD, () => {
+    c.strokeStyle = R.CR3; c.lineWidth = 2.5;
+    for (let y = 150; y < ph - 24; y += 50) { c.beginPath(); c.moveTo(34, y); c.lineTo(pw - 34, y); c.stroke(); }
+    c.strokeStyle = R.RED; c.lineWidth = 3; c.beginPath(); c.moveTo(118, 100); c.lineTo(118, ph - 20); c.stroke();
+    for (let x = 52; x < pw - 30; x += 58) { c.fillStyle = R.INK; R.rr(c, x - 9, -26, 18, 62, 9); c.fill(); c.fillStyle = R.CR3; c.beginPath(); c.arc(x, 20, 7, 0, 6.2832); c.fill(); }
+    const n = rows.length, nw = rows.filter((r) => r.winner).length, top = 118, bot = ph - 150;
+    const p = Math.min(150, (bot - top) / (n + 0.25 * nw));
+    let y = top;
+    rows.forEach((r) => {
+      const hot = r.winner, h = p * (hot ? 1.25 : 1), rh = h - 8, cy = y + h / 2;
+      if (hot) { R.sticker(c, 40, y + 2, pw - 80, rh, { r: 16, fill: R.RED, rot: -0.6, sh: 6, lw: 4 }); }
+      const ink = hot ? R.CR : R.INK, fs = Math.min(80, rh * 0.5);
+      k.setFont(c, 400, fs * 0.9, R.F_BAGEL); c.fillStyle = ink; c.textAlign = "center"; c.fillText(String(r.rank), 78, cy + fs * 0.32); c.textAlign = "left";
+      const vf = k.fit(c, r.value, { w: 400, fam: R.F_BAGEL, max: fs * 1.1, min: fs * 0.5, maxW: 300, lines: 1 });
+      k.setFont(c, 400, vf.size, R.F_BAGEL); const vw = c.measureText(r.value).width; c.textAlign = "right"; c.fillText(r.value, pw - 62, cy + vf.size * 0.33); c.textAlign = "left";
+      const nf = k.nameFit(c, r.name, { w: 400, fam: R.F_BAGEL, max: fs, maxW: pw - 62 - vw - 140 - 24, lines: 2, max2: Math.min(fs, (rh - 8) / 2.15) });
+      k.setFont(c, 400, nf.size, R.F_BAGEL); c.fillStyle = ink; const lh = nf.size * 1.05;
+      nf.lines.forEach((ln, j) => c.fillText(ln, 140, cy + nf.size * 0.33 - ((nf.lines.length - 1) * lh) / 2 + j * lh));
+      y += h;
+    });
+    const st = d.tie ? d.tr("ecWonMany", "Gemeinsam gewonnen") : d.tr("ecWon", "Gewonnen");
+    R.stamp(c, k, st, pw - 270, ph - 70, 50, -8, R.RED, 440);
+  });
+  R.tape(c, 120, 262, 150, 44, -12); R.tape(c, 960, 1190, 150, 44, -10);
+  R.footer(c, k, d);
+  return cv;
+}
+
 export default {
   games: ["freeplay"],
   fonts: ["700 100px Fraunces", "700 78px Kalam", "400 44px Kalam", "700 44px Kalam", "800 44px \"Baloo 2\""],
@@ -156,6 +201,13 @@ export default {
     const rest = d.rows.slice(k.ONE_PAGE);
     const parts = k.chunks(rest, 12, 12).filter((p) => p.length);
     parts.forEach((p, i) => out.push(listPageBook(d, k, p, i + 2, parts.length + 1)));
+    return out;
+  },
+  renderRyu(d, k, R) {
+    d.low = !!(d.extra && d.extra.lowWins);
+    const out = [ryuPage1(d, k, R, d.rows.slice(0, k.ONE_PAGE))];
+    const parts = k.chunks(d.rows.slice(k.ONE_PAGE), 12, 12).filter((p) => p.length);
+    parts.forEach((p, i) => out.push(R.contPage(d, k, p, i + 2, parts.length + 1)));
     return out;
   },
 };

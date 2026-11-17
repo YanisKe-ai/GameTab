@@ -1,0 +1,400 @@
+[
+ {
+  "name": "entwurf",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 62
+   },
+   {
+    "name": "Yanis",
+    "score": 48
+   },
+   {
+    "name": "Matteo",
+    "score": 34
+   }
+  ]
+ },
+ {
+  "name": "zwei",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Lea",
+    "score": 52
+   },
+   {
+    "name": "Noah",
+    "score": 38
+   }
+  ]
+ },
+ {
+  "name": "vier",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 60
+   },
+   {
+    "name": "Yanis",
+    "score": 47
+   },
+   {
+    "name": "Matteo",
+    "score": 34
+   },
+   {
+    "name": "Lea",
+    "score": 21
+   }
+  ]
+ },
+ {
+  "name": "gleichstand",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 55
+   },
+   {
+    "name": "Yanis",
+    "score": 55
+   },
+   {
+    "name": "Matteo",
+    "score": 31
+   }
+  ]
+ },
+ {
+  "name": "gleichstand_lang",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Maximiliane Huber-Brunner von Hohenstaufen-Zollern",
+    "score": 55
+   },
+   {
+    "name": "Yanis",
+    "score": 55
+   },
+   {
+    "name": "Matteo und Lea",
+    "score": 55
+   },
+   {
+    "name": "Kim",
+    "score": 31
+   }
+  ]
+ },
+ {
+  "name": "lange_namen",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Maximiliane Huber-Brunner von Hohenstaufen-Zollern",
+    "score": 92
+   },
+   {
+    "name": "Konstantinopelstrasse-Wanderverein-Vorsitzender",
+    "score": 71
+   },
+   {
+    "name": "Zoë-Ägidius Öztürk",
+    "score": 40
+   },
+   {
+    "name": "Kim",
+    "score": 12
+   }
+  ]
+ },
+ {
+  "name": "cjk",
+  "lang": "de",
+  "players": [
+   {
+    "name": "田中太郎",
+    "score": 92
+   },
+   {
+    "name": "王小明",
+    "score": 71
+   },
+   {
+    "name": "김민수",
+    "score": 40
+   },
+   {
+    "name": "Ana",
+    "score": 12
+   }
+  ]
+ },
+ {
+  "name": "acht",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 95
+   },
+   {
+    "name": "Yanis",
+    "score": 84
+   },
+   {
+    "name": "Matteo",
+    "score": 73
+   },
+   {
+    "name": "Lea",
+    "score": 62
+   },
+   {
+    "name": "Noah",
+    "score": 51
+   },
+   {
+    "name": "Zoë",
+    "score": 40
+   },
+   {
+    "name": "Ölçü",
+    "score": 29
+   },
+   {
+    "name": "Kim",
+    "score": 18
+   }
+  ]
+ },
+ {
+  "name": "n10",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 100
+   },
+   {
+    "name": "Yanis",
+    "score": 91
+   },
+   {
+    "name": "Matteo",
+    "score": 82
+   },
+   {
+    "name": "Lea",
+    "score": 73
+   },
+   {
+    "name": "Noah",
+    "score": 64
+   },
+   {
+    "name": "Zoë",
+    "score": 55
+   },
+   {
+    "name": "Ölçü",
+    "score": 46
+   },
+   {
+    "name": "Kim",
+    "score": 37
+   },
+   {
+    "name": "Anna",
+    "score": 28
+   },
+   {
+    "name": "Ben",
+    "score": 19
+   }
+  ]
+ },
+ {
+  "name": "en",
+  "lang": "en",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 62
+   },
+   {
+    "name": "Yanis",
+    "score": 48
+   },
+   {
+    "name": "Matteo",
+    "score": 34
+   }
+  ]
+ },
+ {
+  "name": "fr",
+  "lang": "fr",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 62
+   },
+   {
+    "name": "Yanis",
+    "score": 48
+   },
+   {
+    "name": "Matteo",
+    "score": 34
+   }
+  ]
+ },
+ {
+  "name": "grosse_zahlen",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 12480
+   },
+   {
+    "name": "Yanis",
+    "score": 9041
+   },
+   {
+    "name": "Matteo",
+    "score": 1180
+   }
+  ]
+ },
+ {
+  "name": "n11",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 110
+   },
+   {
+    "name": "Yanis",
+    "score": 101
+   },
+   {
+    "name": "Matteo",
+    "score": 92
+   },
+   {
+    "name": "Lea",
+    "score": 83
+   },
+   {
+    "name": "Noah",
+    "score": 74
+   },
+   {
+    "name": "Zoë",
+    "score": 65
+   },
+   {
+    "name": "Ölçü",
+    "score": 56
+   },
+   {
+    "name": "Kim",
+    "score": 47
+   },
+   {
+    "name": "Anna",
+    "score": 38
+   },
+   {
+    "name": "Ben",
+    "score": 29
+   },
+   {
+    "name": "Mia",
+    "score": 20
+   }
+  ],
+  "pages": 2
+ },
+ {
+  "name": "n16",
+  "lang": "de",
+  "players": [
+   {
+    "name": "Tony",
+    "score": 120
+   },
+   {
+    "name": "Yanis",
+    "score": 113
+   },
+   {
+    "name": "Matteo",
+    "score": 106
+   },
+   {
+    "name": "Lea",
+    "score": 99
+   },
+   {
+    "name": "Noah",
+    "score": 92
+   },
+   {
+    "name": "Zoë",
+    "score": 85
+   },
+   {
+    "name": "Ölçü",
+    "score": 78
+   },
+   {
+    "name": "Kim",
+    "score": 71
+   },
+   {
+    "name": "Anna",
+    "score": 64
+   },
+   {
+    "name": "Ben",
+    "score": 57
+   },
+   {
+    "name": "Mia",
+    "score": 50
+   },
+   {
+    "name": "Luca",
+    "score": 43
+   },
+   {
+    "name": "Sara",
+    "score": 36
+   },
+   {
+    "name": "Jonas",
+    "score": 29
+   },
+   {
+    "name": "Elena",
+    "score": 22
+   },
+   {
+    "name": "Fabian",
+    "score": 15
+   }
+  ],
+  "pages": 2
+ }
+]

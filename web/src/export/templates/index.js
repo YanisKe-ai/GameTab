@@ -25,9 +25,11 @@ import romme from "./romme.js";
 import differenzler from "./differenzler.js";
 import tabu from "./tabu.js";
 import darts from "./darts.js";
+import molotow from "./molotow.js";
+import slf from "./slf.js";
 
 /* Jede Vorlage: { games:[gameId...], fonts:[CSS-Schriftangaben], texts?(d)->[String], accepts?(d)->bool, render(d, kit)->[canvas...] } */
-const TEMPLATES = [yatzy, schieber, skyjo, flip7, tutto, freeplay, headsup, fivesec, wizard, minigolf, phase10, romme, differenzler, tabu, darts, impostor, werwolf, mafia, verraeter, mostlikely];
+const TEMPLATES = [yatzy, schieber, skyjo, flip7, tutto, freeplay, headsup, fivesec, wizard, minigolf, phase10, romme, differenzler, tabu, darts, impostor, werwolf, mafia, verraeter, mostlikely, molotow, slf];
 
 const GT_TPL = {};
 TEMPLATES.forEach((tp) => tp.games.forEach((g) => { GT_TPL[g] = tp; }));

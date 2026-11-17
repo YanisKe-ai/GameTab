@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.17-8 (17.11.2026 12:09)
+- Noir: ohne Farbreste, besser lesbar; Darts-Rangliste in richtiger Schrift
+
 ## 2026.11.17-7 (17.11.2026 10:52)
 - Nocturne: besser lesbar (SLF, Darts, Mafia, Platzhalter, Statistik)
 

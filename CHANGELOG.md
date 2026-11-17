@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.17-5 (17.11.2026 02:12)
+- Ryū: Siegbilder Yatzy, Tutto, Minigolf, Stadt Land Fluss und Schieber frecher
+
 ## 2026.11.17-4 (17.11.2026 01:46)
 - Ryū: eigenes Ergebnisbild für jedes Spiel, neue Bilder für Molotow und Stadt Land Fluss
 

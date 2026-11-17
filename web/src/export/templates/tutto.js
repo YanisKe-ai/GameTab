@@ -141,37 +141,119 @@ function ryuDie(c, R, cx, cy, s, deg, n) {
   PIPS[n].forEach(([px, py]) => { c.fillStyle = n === 1 ? R.RED : R.INK; c.beginPath(); c.arc(-s / 2 + px * s, -s / 2 + py * s, s * (n === 1 ? 0.15 : 0.085), 0, Math.PI * 2); c.fill(); if (n === 1) { c.lineWidth = 4; c.strokeStyle = R.INK; c.stroke(); } });
   c.restore();
 }
+function tSpiky(c, cx, cy, rx, ry, n, inn, seed) {
+  let sd = seed || 11; const rnd = () => { sd = (sd * 16807) % 2147483647; return sd / 2147483647; };
+  c.beginPath();
+  for (let i = 0; i < n * 2; i++) {
+    const a = (i / (n * 2)) * Math.PI * 2 - Math.PI / 2, f = i % 2 ? inn : 0.9 + rnd() * 0.1;
+    const px = cx + Math.cos(a) * rx * f, py = cy + Math.sin(a) * ry * f; if (i) c.lineTo(px, py); else c.moveTo(px, py);
+  }
+  c.closePath();
+}
+/* Zerdrueckter Wuerfel mit Rissen, Mittelpunkt (0,0) lokal */
+function crushedDie(c, R, s) {
+  c.save(); c.scale(1.1, 0.8);
+  c.fillStyle = R.RED; R.rr(c, -s / 2 + s * 0.08, -s / 2 + s * 0.08, s, s, s * 0.2); c.fill();
+  c.fillStyle = R.CR; R.rr(c, -s / 2, -s / 2, s, s, s * 0.2); c.fill();
+  c.restore();
+  c.save(); c.scale(1.1, 0.8);
+  c.lineWidth = s * 0.03; c.strokeStyle = R.INK; R.rr(c, -s / 2, -s / 2, s, s, s * 0.2); c.stroke(); c.restore();
+  c.fillStyle = R.INK; PIPS[5].forEach(([px, py]) => { c.beginPath(); c.ellipse((px - 0.5) * s * 1.1, (py - 0.5) * s * 0.8, s * 0.075 * 1.1, s * 0.075 * 0.8, 0, 0, 6.2832); c.fill(); });
+  /* Risse */
+  c.strokeStyle = R.INK; c.lineWidth = Math.max(4, s * 0.025); c.lineJoin = "miter"; c.lineCap = "round";
+  const cr = [[[0.02, -0.02], [0.12, -0.1], [0.08, -0.2], [0.2, -0.3], [0.17, -0.42]], [[0.02, -0.02], [-0.1, 0.06], [-0.08, 0.16], [-0.22, 0.24], [-0.3, 0.4]], [[0.02, -0.02], [0.14, 0.04], [0.22, 0.02], [0.3, 0.12], [0.42, 0.1]], [[0.02, -0.02], [-0.08, -0.1], [-0.2, -0.08], [-0.3, -0.18], [-0.44, -0.16]]];
+  cr.forEach((pts) => { c.beginPath(); pts.forEach(([x, y], i) => { const px = x * s * 1.1, py = y * s * 0.8 * 1.25; if (i) c.lineTo(px, py); else c.moveTo(px, py); }); c.stroke(); });
+  c.lineJoin = "round"; c.lineCap = "butt";
+}
+function ticketPath(c, w, h, amp, step) {
+  c.beginPath(); c.moveTo(0, 0);
+  for (let x = step, i = 1; x <= w + 0.5; x += step, i++) c.lineTo(Math.min(x, w), i % 2 ? amp : 0);
+  c.lineTo(w, h);
+  for (let x = w - step, i = 1; x >= -0.5; x -= step, i++) c.lineTo(Math.max(x, 0), h - (i % 2 ? amp : 0));
+  c.closePath();
+}
 function ryuPage1(d, k, R, rows) {
   const { cv, c } = k.tplCanvas(); R.bg(c, R.RED, 2701);
-  R.dots(c, 600, 0, 480, 400, 26, 4.2, "rgba(26,23,22,0.18)");
-  c.save(); c.translate(64, 215); c.rotate(-5 * Math.PI / 180);
-  const tf = k.fit(c, d.up(d.gameLabel), { w: 400, fam: R.F_BAGEL, max: 175, min: 70, maxW: 570, lines: 1 });
-  R.pop(c, tf.lines[0], 0, 0, tf.size, { sh: tf.size * 0.08 }); c.restore();
-  ryuDie(c, R, 790, 150, 140, -14, 1); ryuDie(c, R, 935, 245, 130, 13, 5);
-  const N = rows.length, tx = 60, tw = 960, pad = 36, head = 58, areaTop = 340, areaBot = 1176;
-  const pMax = N <= 2 ? 290 : N <= 3 ? 240 : N <= 5 ? 170 : 130;
-  const p = Math.min(pMax, (areaBot - areaTop - head - pad * 2 - 10) / N);
-  const th = head + pad * 2 + N * p, ty = areaTop + Math.max(0, (areaBot - areaTop - th) * 0.35);
-  R.sticker(c, tx, ty, tw, th, { r: 30, rot: -1.2, sh: 14, lw: 6 });
-  R.rot(c, tx, ty, tw, th, -1.2, () => {
-    const rh = p * 0.84, rankW = 64, x0 = pad + rankW, x1 = tw - pad;
-    k.setFont(c, 700, 26, R.F_TXT); c.fillStyle = R.INK; c.textAlign = "left"; c.fillText(d.num(0), x0, pad + 30); c.textAlign = "right"; c.fillText(d.num(d.target), x1, pad + 30); c.textAlign = "left";
-    if (d.tie) R.stamp(c, k, d.up(d.tr("ecTied", "")), tw / 2, pad + 18, 28, -2, R.RED2, 560);
-    rows.forEach((r, i) => {
-      const y = pad + head + i * p, hot = r.winner, ink = hot ? R.CR : R.INK;
-      if (hot) { c.fillStyle = R.INK; R.rr(c, pad - 14, y - 4, tw - pad * 2 + 28, rh + 8, 22); c.fill(); }
-      const bh = Math.max(18, Math.round(rh * 0.26)), nh = rh - bh - 8, fs = Math.min(64, nh * 0.8 + (nh > 90 ? 10 : 0));
-      k.setFont(c, 400, fs, R.F_BAGEL); const vw = c.measureText(r.value).width + 20, cyN = y + nh / 2;
-      k.setFont(c, 400, fs * 0.95, R.F_BAGEL); c.fillStyle = hot ? R.RED : R.INK; c.textAlign = "center"; c.fillText(String(r.rank), pad + rankW / 2 - 6, cyN + fs * 0.33); c.textAlign = "left";
-      const two = nh >= 56, nf = k.nameFit(c, r.name, { w: 400, fam: R.F_BAGEL, max: fs, maxW: x1 - x0 - vw, lines: two ? 2 : 1, max2: Math.min(fs, nh / 2.15) });
-      k.setFont(c, 400, nf.size, R.F_BAGEL); c.fillStyle = ink; const lh = nf.size * 1.05;
-      nf.lines.forEach((ln, j) => c.fillText(ln, x0, cyN + nf.size * 0.34 - ((nf.lines.length - 1) * lh) / 2 + j * lh));
-      k.setFont(c, 400, fs, R.F_BAGEL); c.fillStyle = ink; c.textAlign = "right"; c.fillText(r.value, x1, cyN + fs * 0.34); c.textAlign = "left";
-      const by = y + rh - bh, bx = x0, bw = x1 - x0, pct = r.score != null && d.target > 0 ? Math.max(0, Math.min(1, r.score / d.target)) : 0, lw = 4;
-      c.save(); R.rr(c, bx, by, bw, bh, bh / 2); c.clip(); c.fillStyle = hot ? R.CR : R.CR2; c.fillRect(bx, by, bw, bh); c.fillStyle = hot ? R.RED : R.INK; c.fillRect(bx, by, bw * pct, bh); c.restore();
-      c.lineWidth = lw; c.strokeStyle = hot ? R.CR : R.INK; R.rr(c, bx + lw / 2, by + lw / 2, bw - lw, bh - lw, bh / 2); c.stroke();
-    });
+  const win = rows.filter((r) => r.winner), rest = rows.filter((r) => !r.winner);
+  const winners = win.length ? win : rows.slice(0, 1), losers = win.length ? rest : rows.slice(1);
+  const L = losers.length, dense = L > 6;
+  R.dots(c, 0, 0, 1080, 500, 26, 4.2, "rgba(26,23,22,0.18)");
+  /* Titel-Explosion */
+  const tRy = dense ? 112 : L === 0 ? 190 : 170, tcy = 34 + tRy;
+  c.fillStyle = R.INK; tSpiky(c, 552, tcy + 12, 540, tRy, 19, 0.78, 3); c.fill();
+  c.fillStyle = R.CR; tSpiky(c, 540, tcy, 540, tRy, 19, 0.78, 3); c.fill();
+  c.lineWidth = 6; c.lineJoin = "miter"; c.strokeStyle = R.INK; tSpiky(c, 540, tcy, 540, tRy, 19, 0.78, 3); c.stroke(); c.lineJoin = "round";
+  c.save(); c.translate(540, tcy); c.rotate(-3 * Math.PI / 180);
+  const tf = k.fit(c, d.up(d.gameLabel), { w: 400, fam: R.F_BAGEL, max: dense ? 140 : 210, min: 70, maxW: 760, lines: 1 });
+  R.pop(c, tf.lines[0], 0, tf.size * 0.34, tf.size, { align: "center", fill: R.RED, stroke: R.INK, shadow: R.INK, sw: tf.size * 0.05, sh: tf.size * 0.06 });
+  c.restore();
+  /* Siegerpanel */
+  const names = winners.map((w) => d.up(w.name)).join(" · ");
+  const big = L === 0;
+  const nf = k.heroFit(c, names, { w: 400, fam: R.F_BAGEL, maxW: 610 }, [{ max: big ? 150 : dense ? 84 : 120, min: 60, lines: 1 }, { max: big ? 110 : dense ? 66 : 90, min: 44, lines: 2 }, { max: 66, min: 36, lines: 3 }, { max: 46, min: 24, lines: 4 }]);
+  const lh = nf.size * 1.04, nameH = nf.lines.length * lh, ss = big ? 112 : dense ? 66 : 92;
+  const val = String(winners[0].value), stampH = ss + 40, y0 = 28;
+  const stampTop = y0 + nameH + 14, labBase = stampTop + stampH + 46, barTop = labBase + 10, H = barTop + 26 + 26;
+  const pTop0 = tcy + tRy + 34;
+  const head = 100, pad = 40, pitchMax = L <= 3 ? 130 : 100, thWant = head + L * pitchMax + 36;
+  const tTop = L ? Math.max(pTop0 + H + 40, 1170 - thWant) : 1170, th = 1170 - tTop;
+  const pTop = L === 0 ? pTop0 + Math.max(0, (1176 - pTop0 - H) * 0.4) : pTop0 + Math.max(0, (tTop - 40 - pTop0 - H) * 0.5);
+  const px = 40, pw = 1000;
+  R.sticker(c, px, pTop, pw, H, { r: 28, fill: R.INK, stroke: R.CR, rot: -1.5, sh: 12, lw: 6 });
+  R.rot(c, px, pTop, pw, H, -1.5, () => {
+    const ds = Math.min(L === 0 ? 300 : 240, H - 44);
+    c.save(); c.translate(48 + ds * 0.6, H / 2 + 6); c.rotate(-9 * Math.PI / 180); crushedDie(c, R, ds); c.restore();
+    const nx = 52 + ds * 1.2 + 24, nw = pw - nx - 36;
+    nf.lines.forEach((ln, j) => R.pop(c, ln, nx, y0 + nf.size * 0.82 + j * lh, nf.size, { fill: R.CR, shadow: R.RED, stroke: R.INK, sw: nf.size * 0.01, sh: nf.size * 0.05 }));
+    /* Stempel mit Punkten */
+    const vf = k.fit(c, val, { w: 400, fam: R.F_BAGEL, max: ss, min: 30, maxW: nw - 80, lines: 1 });
+    k.setFont(c, 400, vf.size, R.F_BAGEL); const vw = c.measureText(vf.lines[0]).width, sw = vw + 76, sh = vf.size + 40;
+    const sx = Math.max(52 + ds * 0.75, nx - 20);
+    R.sticker(c, sx, stampTop, sw, sh, { r: 16, fill: R.RED, stroke: R.CR, rot: -7, sh: 9, lw: 5 });
+    R.rot(c, sx, stampTop, sw, sh, -7, () => { k.setFont(c, 400, vf.size, R.F_BAGEL); c.fillStyle = R.CR; c.textAlign = "center"; c.fillText(vf.lines[0], sw / 2, sh / 2 + vf.size * 0.36); c.textAlign = "left"; });
+    /* Balken Summe / Ziel */
+    const bw = nw, bh = 26, pct = winners[0].score != null && d.target > 0 ? Math.max(0, Math.min(1, winners[0].score / d.target)) : 0;
+    k.setFont(c, 700, 28, R.F_TXT); c.fillStyle = R.CR; c.textAlign = "left"; c.fillText(d.num(0), nx, labBase); c.textAlign = "right"; c.fillText(d.num(d.target), nx + bw, labBase); c.textAlign = "left";
+    c.save(); R.rr(c, nx, barTop, bw, bh, bh / 2); c.clip(); c.fillStyle = R.CR3; c.fillRect(nx, barTop, bw, bh); c.fillStyle = R.RED; c.fillRect(nx, barTop, bw * pct, bh); c.restore();
+    c.lineWidth = 4; c.strokeStyle = R.CR; R.rr(c, nx + 2, barTop + 2, bw - 4, bh - 4, bh / 2); c.stroke();
+    if (d.tie) {
+      const tt = d.up(d.tr("ecTied", "")); const tfz = k.fit(c, tt, { w: 400, fam: R.F_BAGEL, max: 30, min: 18, maxW: 360, lines: 1 });
+      k.setFont(c, 400, tfz.size, R.F_BAGEL); const w2 = c.measureText(tfz.lines[0]).width + 36, h2 = tfz.size + 20;
+      R.sticker(c, pw - w2 - 30, -h2 / 2, w2, h2, { r: h2 / 2, fill: R.RED, stroke: R.CR, rot: 3, sh: 5, lw: 4 });
+      R.rot(c, pw - w2 - 30, -h2 / 2, w2, h2, 3, () => { k.setFont(c, 400, tfz.size, R.F_BAGEL); c.fillStyle = R.CR; c.fillText(tfz.lines[0], 18, h2 / 2 + tfz.size * 0.36); });
+    }
   });
+  /* Verlierer-Kassenzettel */
+  if (L) {
+    const pitch = Math.min(pitchMax, (th - head - 30) / L), tw = 900, tx = 90;
+    c.save(); c.translate(tx, tTop); c.rotate(1.6 * Math.PI / 180);
+    c.fillStyle = R.INK; c.save(); c.translate(12, 12); ticketPath(c, tw, th, 10, 30); c.fill(); c.restore();
+    c.fillStyle = R.CR; ticketPath(c, tw, th, 10, 30); c.fill();
+    c.strokeStyle = R.CR3; c.lineWidth = 3; [[0.18, 0, 0.3, 1], [0.62, 0, 0.5, 1], [0, 0.45, 1, 0.55]].forEach(([a, b, e, f]) => { c.beginPath(); c.moveTo(a * tw, b * th); c.lineTo((a + e) / 2 * tw + 20, (b + f) / 2 * th - 14); c.lineTo(e * tw, f * th); c.stroke(); });
+    c.lineWidth = 5; c.lineJoin = "miter"; c.strokeStyle = R.INK; ticketPath(c, tw, th, 10, 30); c.stroke(); c.lineJoin = "round";
+    const bx = 460, bw = 180, bhh = Math.max(12, Math.min(22, pitch * 0.28)), vx = tw - pad;
+    k.setFont(c, 700, 24, R.F_TXT); c.fillStyle = R.INK; c.textAlign = "left"; c.fillText(d.num(0), bx, head - 14); c.textAlign = "right"; c.fillText(d.num(d.target), bx + bw, head - 14); c.textAlign = "left";
+    losers.forEach((r, i) => {
+      const y = head + i * pitch, rh = pitch * 0.86, cyr = y + rh / 2, fs = Math.min(60, rh * 0.6);
+      c.fillStyle = R.INK; c.fillRect(pad, y - 4, tw - pad * 2, 3);
+      k.setFont(c, 400, fs, R.F_BAGEL); c.textAlign = "center"; c.fillStyle = R.RED2; c.fillText(String(r.rank), pad + 24, cyr + fs * 0.34); c.textAlign = "left";
+      const vf = k.fit(c, String(r.value), { w: 400, fam: R.F_BAGEL, max: fs, min: 20, maxW: 170, lines: 1 });
+      k.setFont(c, 400, vf.size, R.F_BAGEL); c.fillStyle = R.INK; c.textAlign = "right"; c.fillText(vf.lines[0], vx, cyr + vf.size * 0.34); c.textAlign = "left";
+      const nf2 = k.nameFit(c, d.up(r.name), { w: 400, fam: R.F_BAGEL, max: fs, maxW: bx - pad - 64 - 24, lines: rh >= 50 ? 2 : 1, max2: Math.min(fs, rh / 2.1) });
+      k.setFont(c, 400, nf2.size, R.F_BAGEL); const l2 = nf2.size * 1.05;
+      nf2.lines.forEach((ln, j) => c.fillText(ln, pad + 64, cyr + nf2.size * 0.34 - ((nf2.lines.length - 1) * l2) / 2 + j * l2));
+      const pct = r.score != null && d.target > 0 ? Math.max(0, Math.min(1, r.score / d.target)) : 0, by = cyr - bhh / 2;
+      c.save(); R.rr(c, bx, by, bw, bhh, bhh / 2); c.clip(); c.fillStyle = R.CR3; c.fillRect(bx, by, bw, bhh); c.fillStyle = R.INK; c.fillRect(bx, by, bw * pct, bhh); c.restore();
+      c.lineWidth = 3; c.strokeStyle = R.INK; R.rr(c, bx + 1.5, by + 1.5, bw - 3, bhh - 3, bhh / 2); c.stroke();
+    });
+    /* Spruch-Stempel */
+    const sp = d.tr("ryuTCash", "Kassiert.");
+    const sf = k.fit(c, sp, { w: 400, fam: R.F_BAGEL, max: 54, min: 28, maxW: 330, lines: 1 });
+    k.setFont(c, 400, sf.size, R.F_BAGEL); const ssw = c.measureText(sf.lines[0]).width + 52, ssh = sf.size + 30;
+    R.sticker(c, 36, -14, ssw, ssh, { r: 12, fill: R.RED, stroke: R.INK, rot: -6, sh: 7, lw: 5 });
+    R.rot(c, 36, -14, ssw, ssh, -6, () => { k.setFont(c, 400, sf.size, R.F_BAGEL); c.fillStyle = R.CR; c.textAlign = "center"; c.fillText(sf.lines[0], ssw / 2, ssh / 2 + sf.size * 0.36); c.textAlign = "left"; });
+    c.restore();
+  }
   R.footer(c, k, d);
   return cv;
 }

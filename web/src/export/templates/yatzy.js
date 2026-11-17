@@ -174,50 +174,107 @@ function ryuCup(c, R, cx, cy, s, deg) {
   c.lineWidth = Math.max(3, s * 0.025); c.strokeStyle = R.INK; R.rr(c, -top - s * 0.04, -h / 2 - s * 0.07, top * 2 + s * 0.08, s * 0.12, s * 0.05); c.stroke();
   c.restore();
 }
+/* Gezackter Explosionsstern als Ellipse (rx, ry), fester Zufall. */
+function ryuSpiky(c, cx, cy, rx, ry, n, inn, seed) {
+  let sd = seed || 11; const rnd = () => { sd = (sd * 16807) % 2147483647; return sd / 2147483647; };
+  c.beginPath();
+  for (let i = 0; i < n * 2; i++) {
+    const a = (i / (n * 2)) * Math.PI * 2 - Math.PI / 2, f = i % 2 ? inn : 0.9 + rnd() * 0.1;
+    const px = cx + Math.cos(a) * rx * f, py = cy + Math.sin(a) * ry * f; if (i) c.lineTo(px, py); else c.moveTo(px, py);
+  }
+  c.closePath();
+}
+/* Strahlen (Speedlines) aus dem Mittelpunkt, dunkleres Rot */
+function ryuSpeed(c, R, cx, cy, n, yMax) {
+  c.save(); c.beginPath(); c.rect(0, 0, 1080, yMax); c.clip(); c.fillStyle = R.RED2;
+  for (let i = 0; i < n; i++) {
+    const a = (i / n) * Math.PI * 2 + 0.1, w = 0.05 + (i % 3) * 0.018;
+    c.beginPath(); c.moveTo(cx, cy); c.lineTo(cx + Math.cos(a - w) * 1500, cy + Math.sin(a - w) * 1500); c.lineTo(cx + Math.cos(a + w) * 1500, cy + Math.sin(a + w) * 1500); c.closePath(); c.fill();
+  }
+  c.restore();
+}
+/* Verlierer-Sticker: kleiner Wuerfel mit Platz, Name, Wert */
+function ryuLoser(c, k, R, r, x, y, w, h, deg, d) {
+  R.sticker(c, x, y, w, h, { r: Math.min(20, h * 0.28), rot: deg, sh: 7, lw: 4 });
+  R.rot(c, x, y, w, h, deg, () => {
+    const s = h - 22, dx = 12, dy = 11;
+    c.save(); c.translate(dx + s / 2, dy + s / 2); c.rotate(-deg * 1.6 * Math.PI / 180);
+    c.fillStyle = R.INK; R.rr(c, -s / 2 + 4, -s / 2 + 4, s, s, s * 0.22); c.fill();
+    c.fillStyle = R.CR2; R.rr(c, -s / 2, -s / 2, s, s, s * 0.22); c.fill(); c.lineWidth = 3.5; c.strokeStyle = R.INK; R.rr(c, -s / 2, -s / 2, s, s, s * 0.22); c.stroke();
+    c.fillStyle = R.INK; k.setFont(c, 400, s * 0.62, R.F_BAGEL); c.textAlign = "center"; c.fillText(String(r.rank), 0, s * 0.22); c.textAlign = "left";
+    c.restore();
+    const fs = Math.min(46, h * 0.46), nx = dx + s + 18;
+    const vf = k.fit(c, String(r.value), { w: 400, fam: R.F_BAGEL, max: fs, min: 20, maxW: w * 0.3, lines: 1 });
+    k.setFont(c, 400, vf.size, R.F_BAGEL); const vw = c.measureText(vf.lines[0]).width;
+    c.fillStyle = R.INK; c.textAlign = "right"; c.fillText(vf.lines[0], w - 20, h / 2 + vf.size * 0.36); c.textAlign = "left";
+    const nf = k.nameFit(c, d.up(r.name), { w: 400, fam: R.F_BAGEL, max: fs, maxW: w - nx - vw - 44, lines: 2 });
+    k.setFont(c, 400, nf.size, R.F_BAGEL); c.fillStyle = R.INK; const lh = nf.size * 1.05;
+    nf.lines.forEach((ln, j) => c.fillText(ln, nx, h / 2 + nf.size * 0.36 - ((nf.lines.length - 1) * lh) / 2 + j * lh));
+  });
+}
 function ryuPage1(d, k, R, rows) {
   const { cv, c } = k.tplCanvas(); R.bg(c, R.RED, 1301);
-  R.dots(c, 560, 0, 520, 420, 26, 4.2, "rgba(26,23,22,0.18)");
-  /* Becher und Würfel oben rechts */
-  ryuCup(c, R, 905, 165, 230, 28);
-  [[760, 250, 92, -14], [660, 330, 84, 12], [835, 360, 80, 31], [565, 260, 74, -26], [720, 120, 70, 8]].forEach(([x, y, s, r]) => ryuDie(c, R, x, y, s, r));
-  /* Titel */
-  c.save(); c.translate(64, 205); c.rotate(-5 * Math.PI / 180);
+  const win = d.winners.filter((w) => rows.indexOf(w) >= 0), rest = rows.filter((r) => win.indexOf(r) < 0);
+  const L = rest.length, cols = L > 4 ? 2 : 1, nRow = Math.ceil(L / cols);
+  const labelH = L ? 66 : 0;
+  /* Sieger-Name */
+  const names = (win.length ? win : rows.slice(0, 1)).map((w) => d.up(w.name)).join(" · ");
+  const innerW = 740;
+  const nf = k.heroFit(c, names, { w: 400, fam: R.F_BAGEL, maxW: innerW }, [{ max: 175, min: 90, lines: 1 }, { max: 130, min: 66, lines: 2 }, { max: 92, min: 46, lines: 3 }, { max: 62, min: 24, lines: 4 }]);
+  const lh = nf.size * 1.02, nameH = nf.lines.length * lh;
+  let ry = Math.max(215, nameH * 0.74 + 40); const top = 300;
+  if (!L) ry = Math.max(ry, 330);
+  else { const ip = L <= 2 ? 118 : L <= 4 ? 104 : 96; ry = Math.max(ry, Math.min(300, (1180 - (labelH + nRow * ip + 14) - 60 - top) / 2)); }
+  let cy = top + ry;
+  if (!L) cy = Math.max(cy, (top + 1130) / 2);
+  let lossTop = L ? cy + ry + 60 : 1180;
+  const pitch = L ? Math.max(60, Math.min(L <= 2 ? 118 : L <= 4 ? 104 : 96, (1180 - lossTop - labelH - 14) / nRow)) : 0;
+  if (L && lossTop + labelH + nRow * pitch + 14 > 1190) { const sh = lossTop + labelH + nRow * pitch + 14 - 1190; cy -= sh; lossTop -= sh; }
+  const cx = 540, rx = 520;
+  ryuSpeed(c, R, cx, cy, 30, 1350);
+  R.dots(c, 0, 0, 1080, 330, 26, 4.2, "rgba(26,23,22,0.18)");
+  /* Titel und Becher */
+  c.save(); c.translate(60, 175); c.rotate(-6 * Math.PI / 180);
   const tf = k.fit(c, d.up(d.gameLabel), { w: 400, fam: R.F_BAGEL, max: 150, min: 64, maxW: 560, lines: 1 });
   R.pop(c, tf.lines[0], 0, 0, tf.size, { sh: tf.size * 0.08 }); c.restore();
-  const win = d.winners.filter((w) => rows.indexOf(w) >= 0), rest = rows.filter((r) => win.indexOf(r) < 0);
-  /* Sieger-Sticker und Liste als Block, bei wenigen Personen mittig im freien Bereich */
-  const cols = rest.length > 5 ? 2 : 1, nRow = Math.ceil(rest.length / cols), pitch = rest.length <= 3 ? 124 : nRow <= 4 ? 112 : 96;
-  let heroH = 0;
-  if (win.length) {
-    const names0 = win.map((w) => d.up(w.name)).join(" · ");
-    const f0 = k.heroFit(c, names0, { w: 400, fam: R.F_BAGEL, maxW: 670 }, [{ max: 110, min: 64, lines: 1 }, { max: 84, min: 50, lines: 2 }, { max: 62, min: 34, lines: 3 }, { max: 44, min: 24, lines: 4 }]);
-    heroH = Math.max(250, f0.lines.length * f0.size * 1.05 + 150) + 46;
-  }
-  const blockH = heroH + nRow * pitch, top0 = 430, avail = 1170 - top0;
-  let y = top0 + Math.max(0, (avail - blockH) * 0.42);
-  if (win.length) {
-    const names = win.map((w) => d.up(w.name)).join(" · ");
-    const hx = 60, hw = 960, inner = hw - 250 - 40;
-    k.setFont(c, 400, 100, R.F_BAGEL);
-    const nf = k.heroFit(c, names, { w: 400, fam: R.F_BAGEL, maxW: inner }, [{ max: 110, min: 64, lines: 1 }, { max: 84, min: 50, lines: 2 }, { max: 62, min: 34, lines: 3 }, { max: 44, min: 24, lines: 4 }]);
-    const lh = nf.size * 1.05, nameH = nf.lines.length * lh, hh = Math.max(250, nameH + 150);
-    R.sticker(c, hx, y, hw, hh, { r: 34, rot: -2.5, sh: 14, lw: 6 });
-    R.rot(c, hx, y, hw, hh, -2.5, () => {
-      R.zig(c, 130, hh / 2, 92, { fill: R.RED, n: 20, sh: 7, lw: 5 });
-      R.pop(c, "1", 130, hh / 2 + 34, 104, { align: "center", sh: 5, sw: 9 });
-      k.setFont(c, 400, nf.size, R.F_BAGEL); c.fillStyle = R.INK;
-      const n0 = (hh - nameH - 74) / 2 + nf.size * 0.86;
-      nf.lines.forEach((ln, j) => c.fillText(ln, 250, n0 + j * lh));
-      const vf = k.fit(c, win[0].value, { w: 400, fam: R.F_BAGEL, max: 64, min: 30, maxW: inner, lines: 1 });
-      k.setFont(c, 400, vf.size, R.F_BAGEL); const vw = c.measureText(vf.lines[0]).width;
-      const vy = n0 + (nf.lines.length - 1) * lh + 22;
-      c.fillStyle = R.INK; R.rr(c, 250, vy, vw + 40, vf.size + 22, (vf.size + 22) / 2); c.fill();
-      c.fillStyle = R.CR; c.fillText(vf.lines[0], 270, vy + (vf.size + 22) / 2 + vf.size * 0.36);
+  ryuCup(c, R, 850, 207, 250, 196);
+  /* Explosion */
+  c.fillStyle = R.INK; ryuSpiky(c, cx + 12, cy + 12, rx, ry, 17, 0.76, 5); c.fill();
+  c.fillStyle = R.CR; ryuSpiky(c, cx, cy, rx, ry, 17, 0.76, 5); c.fill();
+  c.lineWidth = 6; c.lineJoin = "miter"; c.strokeStyle = R.INK; ryuSpiky(c, cx, cy, rx, ry, 17, 0.76, 5); c.stroke(); c.lineJoin = "round";
+  ryuDie(c, R, 95, top + 25, 86, -18);
+  /* Name */
+  c.save(); c.translate(cx, cy - 8); c.rotate(-2.5 * Math.PI / 180);
+  nf.lines.forEach((ln, j) => R.pop(c, ln, 0, (j - (nf.lines.length - 1) / 2) * lh + nf.size * 0.34, nf.size, { align: "center", fill: R.INK, shadow: R.RED, stroke: R.INK, sw: nf.size * 0.015, sh: nf.size * 0.05 }));
+  c.restore();
+  /* Punktzahl als Wuerfel-Stempel */
+  const val = String((win[0] || rows[0]).value), vs = 84;
+  k.setFont(c, 400, vs, R.F_BAGEL); const vtw = c.measureText(val).width, dw = Math.max(210, vtw + 120), dh = 156, dcx = cx + 340, dcy = cy + ry * 0.9;
+  c.save(); c.translate(dcx, dcy); c.rotate(7 * Math.PI / 180);
+  c.fillStyle = R.INK; R.rr(c, -dw / 2 + 10, -dh / 2 + 10, dw, dh, 30); c.fill();
+  c.fillStyle = R.INK; R.rr(c, -dw / 2, -dh / 2, dw, dh, 30); c.fill(); c.lineWidth = 5; c.strokeStyle = R.CR; R.rr(c, -dw / 2 + 5, -dh / 2 + 5, dw - 10, dh - 10, 26); c.stroke();
+  c.fillStyle = R.CR; [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(([sx, sy]) => { c.beginPath(); c.arc(sx * (dw / 2 - 24), sy * (dh / 2 - 24), 8, 0, 6.2832); c.fill(); });
+  k.setFont(c, 400, vs, R.F_BAGEL); c.textAlign = "center"; c.fillText(val, 0, vs * 0.34); c.textAlign = "left"; c.restore();
+  if (L) {
+    /* Spruch */
+    const tx = d.tr("ryuTEasy", "Zu einfach.");
+    const sf = k.fit(c, tx, { w: 400, fam: R.F_BAGEL, max: 58, min: 30, maxW: 360, lines: 1 });
+    k.setFont(c, 400, sf.size, R.F_BAGEL); const sw = c.measureText(sf.lines[0]).width + 56, sh = sf.size + 36;
+    const scx = cx - 300, scy = cy + ry * 0.9;
+    R.sticker(c, scx - sw / 2, scy - sh / 2, sw, sh, { r: 14, fill: R.RED, stroke: R.INK, rot: -8, sh: 8, lw: 5 });
+    R.rot(c, scx - sw / 2, scy - sh / 2, sw, sh, -8, () => { k.setFont(c, 400, sf.size, R.F_BAGEL); c.fillStyle = R.CR; c.textAlign = "center"; c.fillText(sf.lines[0], sw / 2, sh / 2 + sf.size * 0.36); c.textAlign = "left"; });
+    /* Verlierer */
+    const nt = d.tr("ryuTNext", "Nächstes Mal vielleicht.");
+    const lf = k.fit(c, nt, { w: 400, fam: R.F_BAGEL, max: 40, min: 24, maxW: 760, lines: 1 });
+    k.setFont(c, 400, lf.size, R.F_BAGEL); const lw = c.measureText(lf.lines[0]).width + 56, lhh = lf.size + 26;
+    R.sticker(c, 60, lossTop, lw, lhh, { r: lhh / 2, fill: R.INK, rot: -2, sh: 0, lw: 0 });
+    R.rot(c, 60, lossTop, lw, lhh, -2, () => { k.setFont(c, 400, lf.size, R.F_BAGEL); c.fillStyle = R.CR; c.fillText(lf.lines[0], 28, lhh / 2 + lf.size * 0.36); });
+    const gap = 24, cw = cols === 1 ? 860 : (960 - gap) / 2, x0 = cols === 1 ? 110 : 60, ty = lossTop + labelH, rot = [-2.5, 2, -1.5, 3, -3, 1.5, -2, 2.5];
+    rest.forEach((r, i) => {
+      const col = cols === 1 ? 0 : i % cols, ri = cols === 1 ? i : Math.floor(i / cols);
+      ryuLoser(c, k, R, r, x0 + col * (cw + gap) + ((i * 37) % 22) - 8, ty + ri * pitch, cw, pitch - 14, rot[i % rot.length], d);
     });
-    y += hh + 46;
   }
-  /* Übrige Plätze */
-  R.list(c, k, rest, { x: cols === 1 ? 110 : 60, w: cols === 1 ? 860 : 950, top: y, bottom: 1176, cols, maxPitch: Math.min(pitch, (1176 - y) / Math.max(1, nRow)), fs: rest.length <= 3 ? 54 : 48 });
   R.footer(c, k, d);
   return cv;
 }

@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.17-3 (17.11.2026 01:31)
+- Ryū Handy: Startseite etwas höher, Tipp etwas tiefer
+
 ## 2026.11.17-2 (17.11.2026 01:15)
 - Ryū: kein Springen beim Zurückkehren, Comic übersetzt, Hell-Deko dezent
 

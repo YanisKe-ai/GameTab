@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.17-4 (17.11.2026 01:46)
+- Ryū: eigenes Ergebnisbild für jedes Spiel, neue Bilder für Molotow und Stadt Land Fluss
+
 ## 2026.11.17-3 (17.11.2026 01:31)
 - Ryū Handy: Startseite etwas höher, Tipp etwas tiefer
 

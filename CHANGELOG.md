@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.17-9 (17.11.2026 12:22)
+- Noir: Kartenfächer und Molotow-Tafel ohne Farbe
+
 ## 2026.11.17-8 (17.11.2026 12:09)
 - Noir: ohne Farbreste, besser lesbar; Darts-Rangliste in richtiger Schrift
 

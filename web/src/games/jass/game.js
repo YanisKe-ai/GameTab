@@ -296,7 +296,7 @@ html[data-gt-skin="plakat"] .jdp-pk.jdp-pk .gt-gamehead>div:nth-of-type(2)>div{w
 .jdp-pk .jdp-c.ed{background:#E9DDC2;outline:none;box-shadow:inset 0 0 0 3px #E4312B}
 .jdp-pk .jdp-tl,.jdp-pk .jdp-tv{border-top:3px solid #1A1716;color:#1A1716;padding-top:4px}
 .jdp-pk .jdp-tl .l1,.jdp-pk .jdp-tl .l2{color:#1A1716}
-.jdp-pk .jdp-tv .l1,.jdp-pk .jdp-tv .l2,.jdp-pk .jdp-tv .l2.p,.jdp-pk .jdp-tv .l2.n{color:#E4312B}
+.jdp-pk .jdp-tv .l1,.jdp-pk .jdp-tv .l2,.jdp-pk .jdp-tv .l2.p,.jdp-pk .jdp-tv .l2.n{color:#B3221D}
 .jdp-pk .jdp-hm.is-scroll .jdp-lab,.jdp-pk .jdp-hm.is-scroll .jdp-tl{background:#F3EAD3}
 .jdp-pk .jdp-cta{background:#1A1716;color:#E4312B;outline:none;border-radius:999px;box-shadow:0 0 0 4px #F3EAD3,6px 7px 0 4px #1A1716;width:calc(100% - 12px);margin:12px 8px 6px 4px}
 .jdp-pk .jdp-cta::after{display:none}

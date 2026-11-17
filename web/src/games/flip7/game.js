@@ -222,8 +222,8 @@ const F7_PK_CSS=`
 @keyframes f7PkDeal{0%{transform:translateY(-22px) rotate(calc(var(--r) * 5)) scale(.8);opacity:.2}100%{transform:translateY(-4px) rotate(var(--r)) scale(1);opacity:1}}
 .f7-pk .f7-c:active:not(:disabled){transform:translateY(0) scale(.95) rotate(var(--r))}
 /* die Sieben: Heldenkarte */
-.f7-pk .f7-c[data-v="7"]{background:#FFFDF7;color:#E4312B;outline-style:solid;box-shadow:0 3px 0 #141414}
-.f7-pk .f7-c[data-v="7"][data-on="1"]{color:#E4312B;box-shadow:0 5px 0 #141414,0 0 0 2px #F3EAD3,0 0 0 4px #141414;z-index:1}
+.f7-pk .f7-c[data-v="7"]{background:#FFFDF7;color:#B3221D;outline-style:solid;box-shadow:0 3px 0 #141414}
+.f7-pk .f7-c[data-v="7"][data-on="1"]{color:#B3221D;box-shadow:0 5px 0 #141414,0 0 0 2px #F3EAD3,0 0 0 4px #141414;z-index:1}
 .f7-pk .f7-c[data-v="7"]:disabled{opacity:.55}
 /* Bust: roter Stempel */
 .f7-pk .f7-c[data-k="bust"]{transform:rotate(-4deg);outline-style:double;outline-width:4px;outline-offset:-5px;color:#B3261E;background:#FFFDF7;letter-spacing:.02em;font-size:12.5px}
@@ -233,7 +233,7 @@ const F7_PK_CSS=`
 .f7-pk .f7-m{border-radius:999px;color:#141414}
 .f7-pk .f7-m[aria-pressed="true"]{background:#1A1716;color:#F3EAD3;transform:rotate(-2deg);box-shadow:0 4px 0 #141414}
 .f7-pk .f7-m:last-child{font-size:19px}
-.f7-pk .f7-m:last-child:not([aria-pressed="true"]){background:#FFFDF7;outline-style:solid;color:#E4312B}
+.f7-pk .f7-m:last-child:not([aria-pressed="true"]){background:#FFFDF7;outline-style:solid;color:#B3221D}
 .f7-pk .f7-mg{padding-top:2px}
 /* Tabelle */
 .f7-pk .f7-tbl{padding:10px 8px}

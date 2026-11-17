@@ -224,6 +224,9 @@ ${P} body .gt-su-label.gt-su-label.gt-su-label{background:${INK2}!important;colo
 @media (prefers-reduced-motion: reduce){${P} .gt-su-btn::after,${P} .pk-shine::after,${P} .gt-wm{animation:none!important}}
 /* Ryū-Kontrolle 17.11.: Spielmenü ohne Navy-Reste aus dem hellen Grundstil (offener Menüknopf, Ränder, Abdunklung) */
 ${P} .gt-hmt-light{--hm-ink:#1A1716;--hm-on-bg:#1A1716;--hm-on-ink:#F3EAD3;--hm-ring:rgba(26,23,22,.3);--hm-line:rgba(26,23,22,.14);--hm-muted:#4A3F3A;--hm-hover:rgba(26,23,22,.06);--hm-dim:rgba(26,23,22,.34)}
+/* Ryū-Kontrast Entwurf A (Wahl Yanis 17.11.): kleine rote Schrift auf Creme etwas dunkler */
+${P} .gt-hm-row.is-danger,${P} .gt-hm-row.is-danger .gt-hm-txt{color:#B3221D!important}
+${P} .jdp-lab.cur .cn,${P} span:has(> .yz-noch),${P} .yz-noch + span,${P} .yz-noch,${P} .yz-lab.is-acc,${P} .yz-auto.is-acc .gt-count,${P} .yz-auto .gt-count{color:#B3221D!important}
 `;
 
 export { PLAKAT_CSS };

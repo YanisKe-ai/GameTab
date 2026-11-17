@@ -279,17 +279,17 @@ const MO_PK_CSS = `
 .mo-pk .mo-rn.h svg,.mo-pk .mo-rn.d svg{color:#E4312B}
 .mo-pk .mo-v{color:#1A1716}
 .mo-pk .mo-v.part{opacity:.6}
-.mo-pk .mo-v.neg{color:#E4312B}
+.mo-pk .mo-v.neg{color:#B3221D}
 .mo-pk .mo-div{border-top:2px solid #D9CCAE}
 .mo-pk .mo-sg{border:0;width:24px;height:24px;font-family:var(--pkf);font-weight:400;font-size:17px}
 .mo-pk .mo-trow.mi .mo-sg{background:#E9DFC4;color:#1A1716;box-shadow:inset 0 0 0 2px #1A1716}
 .mo-pk .mo-trow.pl .mo-sg{background:#E4312B;color:#1A1716}
 .mo-pk .mo-trow.mi .mo-v{color:#1A1716}
-.mo-pk .mo-trow.pl .mo-v{color:#E4312B}
+.mo-pk .mo-trow.pl .mo-v{color:#B3221D}
 .mo-pk .mo-trow.zero .mo-v{opacity:.6}
 .mo-pk .mo-tot{border-top:2.5px solid #1A1716;min-height:54px}
 .mo-pk .mo-tot .mo-rn{font-size:12px;color:#1A1716}
-.mo-pk .mo-tc .mo-v{color:#E4312B;font-weight:400;font-size:clamp(22px,6.4vw,28px)}
+.mo-pk .mo-tc .mo-v{color:#B3221D;font-weight:400;font-size:clamp(22px,6.4vw,28px)}
 .mo-pk .mo-tc.lead::before{border-color:#1A1716;opacity:1}
 .mo-pk .mo-rk{font-family:var(--pkf);font-weight:400;color:#1A1716}
 .mo-pk .mo-legend{color:#1A1716;font-weight:700;margin-top:12px}

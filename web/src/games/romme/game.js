@@ -189,7 +189,7 @@ const ROM_PK2=`
 [data-phone-landscape] .rm-fan,.gtL-content .rm-fan{display:none!important}
 .rm-pk .gt-su-num{background:#FFFDF7!important;color:#141414!important;border-radius:7px!important;width:30px!important;height:38px!important;outline:2.5px solid #141414;outline-offset:-2.5px;font-family:'Bagel Fat One','Bowlby One',sans-serif!important;font-weight:400!important;font-size:18px!important;position:relative;transform:rotate(-4deg);box-shadow:0 2px 0 #141414}
 .rm-pk .gt-su-row:nth-child(even) .gt-su-num{transform:rotate(3deg)}
-.rm-pk .gt-su-row:nth-child(4n+1) .gt-su-num,.rm-pk .gt-su-row:nth-child(4n+3) .gt-su-num{color:#E4312B!important}
+.rm-pk .gt-su-row:nth-child(4n+1) .gt-su-num,.rm-pk .gt-su-row:nth-child(4n+3) .gt-su-num{color:#B3221D!important}
 .rm-pk .gt-su-num::after{content:"";position:absolute;right:3px;bottom:3px;width:9px;height:9px;background:var(--suit) center/contain no-repeat}
 .rm-pk .gt-su-row:nth-child(4n+1) .gt-su-num{--suit:var(--su-h)}
 .rm-pk .gt-su-row:nth-child(4n+2) .gt-su-num{--suit:var(--su-s)}

@@ -336,7 +336,7 @@ html[data-gt-skin="plakat"] .gtst-pk .gt-gamehead h1+div{color:#F3EAD3!important
 .gtst-pk .gtst-btn:active:not(:disabled){transform:translateY(2px);box-shadow:0 1px 0 #1A1716}
 .gtst-pk .gtst-btn.is-primary{background:#1A1716;border-color:#1A1716;color:#F3EAD3;font-weight:400;box-shadow:0 4px 0 #1A1716}
 .gtst-pk .gtst-btn.is-ghost{background:transparent;border-color:transparent;box-shadow:none}
-.gtst-pk .gtst-btn.is-danger{color:#E4312B}
+.gtst-pk .gtst-btn.is-danger{color:#B3221D}
 .gtst-pk .gtst-btn:disabled{opacity:1;background:#B9AF9C;color:#6B6255;box-shadow:none}
 .gtst-pk .gtst-btn.is-primary:disabled{background:#B9AF9C;color:#6B6255}
 .gtst-pk .gtst-cap{color:#F3EAD3}

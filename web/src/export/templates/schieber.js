@@ -172,6 +172,83 @@ function render(d, k) {
   return [cv];
 }
 
+/* ---------- Ryū-Fassung: rotes Fanzine ----------
+   Roter Grund, Titel als Pop-Schrift, Schlagzeile im breiten Explosionsstern, die zwei Teams als schräge Sticker auf Klebeband
+   (Sieger schwarz), darunter die Einträge als Strichlisten-Tabelle (bester Eintrag rot hinterlegt, Summe auf schwarzem Band). Inhalt wie render(). */
+function ryuChip(c, k, R, text, x, y, w0, deg, fill) {
+  const f = k.fit(c, text, { w: 400, fam: R.F_BAGEL, max: 40, min: 20, maxW: w0 - 40, lines: 1 });
+  k.setFont(c, 400, f.size, R.F_BAGEL); const w = Math.min(w0, c.measureText(f.lines[0]).width + 44), h = f.size + 28, bx = x - w;
+  R.sticker(c, bx, y, w, h, { r: h / 2, fill: fill || R.INK, rot: deg, sh: 6, lw: fill ? 4 : 0 });
+  R.rot(c, bx, y, w, h, deg, () => { k.setFont(c, 400, f.size, R.F_BAGEL); c.fillStyle = fill ? R.INK : R.CR; c.fillText(f.lines[0], 22, h / 2 + f.size * 0.34); });
+  return h;
+}
+function ryuPage(d, k, R, m) {
+  const { cv, c } = k.tplCanvas(); R.bg(c, R.RED, 6101);
+  R.dots(c, 0, 380, 1080, 330, 26, 4.2, "rgba(26,23,22,0.12)");
+  /* Titel und Chips */
+  c.save(); c.translate(64, 160); c.rotate(-3 * Math.PI / 180);
+  const tf = k.fit(c, d.up(d.gameLabel), { w: 400, fam: R.F_BAGEL, max: 130, min: 60, maxW: 600, lines: 1 });
+  R.pop(c, tf.lines[0], 0, 0, tf.size, { sh: tf.size * 0.08 }); c.restore();
+  const h1 = ryuChip(c, k, R, m.up(m.lblTarget + " " + m.tgt), 1020, 60, 340, 3);
+  ryuChip(c, k, R, m.rounds + " " + (m.rounds === 1 ? m.lblEntryOne : m.lblEntries), 1020, 60 + h1 + 16, 340, -2, R.CR);
+  /* Schlagzeile im Explosionsstern */
+  const bcx = 540, bcy = 340, sx = 2.4, ro = 172;
+  const star = (dx, dy) => { c.save(); c.translate(bcx + dx, bcy + dy); c.scale(sx, 1); R.starPath(c, 0, 0, ro, ro * 0.8, 18, 4, true); c.restore(); };
+  c.fillStyle = R.INK; star(12, 12); c.fill(); c.fillStyle = R.CR; star(0, 0); c.fill(); c.lineWidth = 6; c.lineJoin = "miter"; c.strokeStyle = R.INK; star(0, 0); c.stroke(); c.lineJoin = "round";
+  const hf = k.heroFit(c, m.msg, { w: 400, fam: R.F_BAGEL, maxW: 520 }, [{ max: 76, min: 56, lines: 1 }, { max: 66, min: 36, lines: 2 }, { max: 50, min: 28, lines: 3 }, { max: 38, min: 22, lines: 4 }]);
+  k.setFont(c, 400, hf.size, R.F_BAGEL); c.fillStyle = R.INK; c.textAlign = "center"; const lh = hf.size * 1.08;
+  hf.lines.forEach((ln, i) => c.fillText(ln, bcx, bcy + hf.size * 0.34 - ((hf.lines.length - 1) * lh) / 2 + i * lh)); c.textAlign = "left";
+  /* Team-Sticker */
+  const ty = 540, tw = 470, th = 176, xs = [50, 560], rts = [-2.2, 1.8];
+  m.teams.forEach((tm, i) => {
+    const hot = tm.win && !m.tie, fill = hot ? R.INK : R.CR, ink = hot ? R.CR : R.INK;
+    R.sticker(c, xs[i], ty, tw, th, { r: 26, fill, rot: rts[i], sh: 11, lw: 5, stroke: hot ? R.CR : R.INK });
+    R.rot(c, xs[i], ty, tw, th, rts[i], () => {
+      const sf = k.fit(c, m.num(tm.total), { w: 400, fam: R.F_BAGEL, max: 84, min: 44, maxW: tw - 56, lines: 1 });
+      const nf = k.nameFit(c, tm.name, { w: 400, fam: R.F_BAGEL, max: 44, maxW: tw - 56, lines: 2, max2: 34 });
+      k.setFont(c, 400, nf.size, R.F_BAGEL); c.fillStyle = ink; const nlh = nf.size * 1.05;
+      nf.lines.forEach((ln, j) => c.fillText(ln, 28, 22 + nf.size * 0.85 + j * nlh));
+      k.setFont(c, 400, sf.size, R.F_BAGEL); c.fillStyle = hot ? R.RED : R.INK; c.textAlign = "right"; c.fillText(m.num(tm.total), tw - 28, th - 26); c.textAlign = "left";
+    });
+    R.tape(c, xs[i] + tw / 2, ty + 2, 130, 40, i ? 8 : -8);
+    if (hot) {
+      const wf = k.fit(c, m.lblWinner, { w: 400, fam: R.F_BAGEL, max: 32, min: 18, maxW: 200, lines: 1 }); k.setFont(c, 400, wf.size, R.F_BAGEL);
+      const ww = c.measureText(wf.lines[0]).width + 36, wh = wf.size + 24, wx = xs[i] + tw - ww - 4, wy = ty - 30;
+      R.sticker(c, wx, wy, ww, wh, { r: wh / 2, fill: R.RED, rot: 7, sh: 6, lw: 4 });
+      R.rot(c, wx, wy, ww, wh, 7, () => { k.setFont(c, 400, wf.size, R.F_BAGEL); c.fillStyle = R.CR; c.fillText(wf.lines[0], 18, wh / 2 + wf.size * 0.34); });
+    }
+  });
+  /* Tabelle */
+  const top = 752, bot = 1182, shown = Math.min(m.rounds, 9), extra = m.rounds > 9 ? 1 : 0, sumH = 62;
+  const rh = Math.max(30, Math.min(58, (bot - top - 40 - sumH) / (1 + shown + extra * 0.6))), fs = Math.max(24, Math.min(40, rh * 0.7));
+  R.sticker(c, 60, top, 960, bot - top, { r: 24, rot: -0.5, sh: 10, lw: 5 });
+  R.rot(c, 60, top, 960, bot - top, -0.5, () => {
+    const cw = [130, 415, 415], cx = [0, cw[0], cw[0] + cw[1]], mid = (i) => cx[i + 1] + cw[i + 1] / 2;
+    let y = 14;
+    k.setFont(c, 400, fs * 0.85, R.F_BAGEL); c.fillStyle = R.INK; c.fillText("#", 34, y + rh * 0.68);
+    m.teams.forEach((tm, i) => { const f = k.fit(c, tm.name, { w: 400, fam: R.F_BAGEL, max: fs, min: 22, maxW: cw[i + 1] - 30, lines: 1 }); k.setFont(c, 400, f.size, R.F_BAGEL); c.textAlign = "center"; c.fillText(f.lines[0], mid(i), y + rh * 0.7); c.textAlign = "left"; });
+    y += rh; c.fillStyle = R.INK; c.fillRect(24, y, 912, 4);
+    if (extra) { k.setFont(c, 400, fs, R.F_BAGEL); c.fillText("...", 34, y + rh * 0.55); y += rh * 0.6; }
+    const first = m.rounds - shown;
+    for (let j = first; j < m.rounds; j++) {
+      k.setFont(c, 400, fs * 0.9, R.F_BAGEL); c.fillStyle = R.INK; c.textAlign = "left"; c.fillText(String(j + 1), 34, y + rh * 0.7);
+      m.teams.forEach((tm, i) => {
+        const v = tm.entries[j]; if (v == null) return; const best = tm.bestIdx === j, s = m.num(v);
+        k.setFont(c, 400, fs, R.F_BAGEL); const w = c.measureText(s).width;
+        if (best) { c.fillStyle = R.RED; R.rr(c, mid(i) - w / 2 - 16, y + 3, w + 32, rh - 6, (rh - 6) / 2); c.fill(); c.lineWidth = 3; c.strokeStyle = R.INK; c.stroke(); }
+        c.fillStyle = best ? R.CR : R.INK; c.textAlign = "center"; c.fillText(s, mid(i), y + rh * 0.7); c.textAlign = "left";
+      });
+      y += rh; c.save(); c.setLineDash([8, 7]); c.strokeStyle = "rgba(26,23,22,0.45)"; c.lineWidth = 2; c.beginPath(); c.moveTo(24, y); c.lineTo(936, y); c.stroke(); c.restore();
+    }
+    const sy = y + 8, sh = sumH;
+    c.fillStyle = R.INK; R.rr(c, 20, sy, 920, sh, 16); c.fill();
+    const sf2 = Math.min(fs * 1.15, sh * 0.62); k.setFont(c, 400, sf2 * 0.7, R.F_BAGEL); c.fillStyle = R.CR; c.fillText(m.up(m.lblSum), 34, sy + sh / 2 + sf2 * 0.24);
+    m.teams.forEach((tm, i) => { k.setFont(c, 400, sf2, R.F_BAGEL); c.fillStyle = tm.win ? R.RED : R.CR; c.textAlign = "center"; c.fillText(m.num(tm.total), mid(i), sy + sh / 2 + sf2 * 0.34); c.textAlign = "left"; });
+  });
+  R.footer(c, k, d);
+  return cv;
+}
+
 export default {
   games: ["schieber"],
   fonts: ["700 80px Fraunces", "500 25px Fraunces", "800 28px \"Baloo 2\"", "600 24px Inter", "700 24px Inter", "800 34px Inter"],
@@ -179,4 +256,5 @@ export default {
   prepare: async (k) => { const [bauer, dame, papier] = await Promise.all([BAUER_URL, DAME_URL, PAPIER_URL].map((u) => k.tplImg(u))); return { bauer, dame, papier }; },
   texts: (d) => ["−'’!¡#… " + d.tr("tplNewsEntries", "") + d.tr("schieberEntryOne", "") + d.up(d.tr("tplNewsWinner", "") + d.tr("tplNewsSum", "") + d.tr("targetLabel", "")) + (d.extra ? d.extra.teams.map((t) => t.name).join(" ") : "")],
   render,
+  renderRyu(d, k, R) { const { cv } = { cv: ryuPage(d, k, R, buildModel(d)) }; return [cv]; },
 };

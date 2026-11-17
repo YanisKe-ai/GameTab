@@ -98,6 +98,81 @@ function page1(d, k, extras, title) {
   return cv;
 }
 
+/* ---------- Ryū-Fassung: Heatmap-Raster ----------
+   Roter Grund, Spielname als kleines Etikett, Titel als Pop-Schrift, Schlagzeile auf Creme-Sticker, Regel als schwarzes Band.
+   Zeilen als Sticker: Name, Punkte, Differenz als Heat-Zelle (Stufen Creme, Sand, Rot, Schwarz nach Höhe der Differenz). Gleiche Daten wie render(). */
+function ryuHeat(R, t) { return t >= 0.99 ? { f: R.INK, t: R.CR } : t >= 0.55 ? { f: R.RED, t: R.CR } : t >= 0.2 ? { f: R.CR3, t: R.INK } : { f: R.CR, t: R.INK }; }
+function ryuPage(d, k, R, extras, title) {
+  const { cv, c } = k.tplCanvas(); R.bg(c, R.RED, 5101);
+  R.dots(c, 640, 0, 440, 360, 26, 4.2, "rgba(26,23,22,0.18)");
+  /* Spielname als Etikett, Titel als Pop-Schrift */
+  const tag = d.up(d.gameLabel), tt = title ? d.up(title) : null;
+  let y = 66;
+  if (tt) {
+    const gf = k.fit(c, tag, { w: 400, fam: R.F_BAGEL, max: 34, min: 20, maxW: 400, lines: 1 });
+    k.setFont(c, 400, gf.size, R.F_BAGEL); const gw = c.measureText(gf.lines[0]).width + 44, gh = gf.size + 26;
+    R.sticker(c, 66, y, gw, gh, { r: gh / 2, fill: R.INK, rot: -3, sh: 5, lw: 0 });
+    R.rot(c, 66, y, gw, gh, -3, () => { k.setFont(c, 400, gf.size, R.F_BAGEL); c.fillStyle = R.CR; c.fillText(gf.lines[0], 22, gh / 2 + gf.size * 0.34); });
+    y += gh + 14;
+  }
+  c.save(); c.translate(64, y + 100); c.rotate(-3 * Math.PI / 180);
+  const f0 = k.fit(c, tt || tag, { w: 400, fam: R.F_BAGEL, max: 130, min: 52, maxW: 880, lines: 1 });
+  R.pop(c, f0.lines[0], 0, 0, f0.size, { sh: f0.size * 0.08 }); c.restore();
+  y += 138;
+  /* Schlagzeile */
+  const win = d.winners.length ? d.winners : d.rows.slice(0, 1);
+  const names = win.map((r) => r.name).join(" & ");
+  const line = d.tie ? d.tr("tplDfWinN", (nm) => nm + "")(names) : d.tr("tplDfWin1", (nm) => nm + "")(names);
+  const hf = k.heroFit(c, line, { w: 400, fam: R.F_BAGEL, maxW: 840 }, [{ max: 84, min: 50, lines: 1 }, { max: 62, min: 34, lines: 2 }, { max: 44, min: 24, lines: 3 }]);
+  const hh = hf.lines.length * hf.size * 1.08 + 58;
+  R.sticker(c, 60, y, 960, hh, { r: 30, rot: -1.2, sh: 12, lw: 6 });
+  R.rot(c, 60, y, 960, hh, -1.2, () => {
+    k.setFont(c, 400, hf.size, R.F_BAGEL); c.fillStyle = R.INK; c.textAlign = "center";
+    hf.lines.forEach((ln, i) => c.fillText(ln, 480, 29 + hf.size * 0.85 + i * hf.size * 1.08)); c.textAlign = "left";
+  });
+  R.tape(c, 130, y + 2, 130, 40, -10);
+  y += hh + 34;
+  /* Regel als schwarzes Band */
+  const rule = d.tr("tplDfRule", "Höchste Gesamtdifferenz gewinnt");
+  const rf = k.fit(c, rule, { w: 400, fam: R.F_BAGEL, max: 38, min: 20, maxW: 860, lines: 1 });
+  k.setFont(c, 400, rf.size, R.F_BAGEL); const rw = Math.min(940, c.measureText(rf.lines[0]).width + 70), rh = rf.size + 34;
+  R.sticker(c, 540 - rw / 2, y, rw, rh, { r: 14, fill: R.INK, rot: 1.2, sh: 8, lw: 0 });
+  R.rot(c, 540 - rw / 2, y, rw, rh, 1.2, () => { k.setFont(c, 400, rf.size, R.F_BAGEL); c.fillStyle = R.CR; c.textAlign = "center"; c.fillText(rf.lines[0], rw / 2, rh / 2 + rf.size * 0.34); c.textAlign = "left"; });
+  y += rh + 28;
+  /* Raster */
+  const hasPts = extras.some((e) => e && e.points != null), n = d.rows.length;
+  const bottom = 1186, avail = bottom - y - 52, pitch = Math.min(n <= 2 ? 270 : n === 3 ? 215 : 170, avail / n);
+  const sc = d.rows.map((r) => (r.score != null ? r.score : 0)), mx = Math.max(...sc), mn = Math.min(...sc);
+  const cellW = n <= 2 ? 340 : 270, ptsW = hasPts ? 190 : 0;
+  const lab = (t, x, al) => { k.setFont(c, 400, 26, R.F_BAGEL); c.fillStyle = R.INK; c.textAlign = al; c.fillText(d.up(t), x, y + 28); c.textAlign = "left"; };
+  if (hasPts) lab(d.tr("tplDfPts", "Punkte"), 1020 - 20 - cellW - 14 - ptsW / 2, "center");
+  lab(d.tr("tplDfDiff", "Differenz"), 1020 - 20 - cellW / 2, "center");
+  let yy = y + 48;
+  d.rows.forEach((r, i) => {
+    const h = pitch - 16, hot = r.winner, e = extras[i], t = mx > mn ? (sc[i] - mn) / (mx - mn) : 1, hc = hot ? { f: R.INK, t: R.CR } : ryuHeat(R, Math.min(t, 0.98));
+    const rot = i % 2 ? 0.7 : -0.7;
+    R.sticker(c, 60, yy, 960, h, { r: 22, rot, sh: 8, lw: 5, fill: R.CR });
+    R.rot(c, 60, yy, 960, h, rot, () => {
+      const fs = Math.min(92, h * 0.46), cy = h / 2;
+      const cx0 = 960 - 20 - cellW; c.fillStyle = hc.f; R.rr(c, cx0, 14, cellW, h - 28, 16); c.fill(); c.lineWidth = 4; c.strokeStyle = R.INK; R.rr(c, cx0, 14, cellW, h - 28, 16); c.stroke();
+      const ds = r.score != null ? signed(d, r.score) : r.value, df = k.fit(c, ds, { w: 400, fam: R.F_BAGEL, max: fs * 1.1, min: 24, maxW: cellW - 30, lines: 1 });
+      k.setFont(c, 400, df.size, R.F_BAGEL); c.fillStyle = hc.t; c.textAlign = "center"; c.fillText(df.lines[0], cx0 + cellW / 2, cy + df.size * 0.34);
+      let nr = cx0 - 22;
+      if (hasPts && e && e.points != null) {
+        const pf = k.fit(c, d.num(e.points), { w: 400, fam: R.F_BAGEL, max: fs * 0.85, min: 22, maxW: ptsW - 10, lines: 1 });
+        k.setFont(c, 400, pf.size, R.F_BAGEL); c.fillStyle = R.INK; c.textAlign = "center"; c.fillText(d.num(e.points), cx0 - 14 - ptsW / 2, cy + pf.size * 0.34); nr = cx0 - 14 - ptsW - 12;
+      }
+      c.textAlign = "left";
+      const nf = k.nameFit(c, r.name, { w: 400, fam: R.F_BAGEL, max: hot ? fs * 1.1 : fs, maxW: nr - 40, lines: 2, max2: Math.min(fs, (h - 14) / 2.15) });
+      k.setFont(c, 400, nf.size, R.F_BAGEL); c.fillStyle = R.INK; const lh = nf.size * 1.05;
+      nf.lines.forEach((ln, j) => c.fillText(ln, 34, cy + nf.size * 0.34 - ((nf.lines.length - 1) * lh) / 2 + j * lh));
+    });
+    yy += pitch;
+  });
+  R.footer(c, k, d);
+  return cv;
+}
+
 export default {
   games: ["jass-differenzler"],
   fonts: ["700 104px Fraunces", "800 52px \"Baloo 2\"", "700 28px \"Space Grotesk\"", "500 22px \"Space Grotesk\""],
@@ -109,5 +184,12 @@ export default {
     const extras = picked.map((e) => (e && e.points != null && isFinite(Number(e.points)) ? { points: Number(e.points) } : null));
     const title = typeof ex.title === "string" && ex.title ? ex.title : null;
     return [page1(d, k, extras, title)];
+  },
+  renderRyu(d, k, R) {
+    const ex = d.extra || {};
+    const picked = pickRows(d, ex.players, "diff");
+    const extras = picked.map((e) => (e && e.points != null && isFinite(Number(e.points)) ? { points: Number(e.points) } : null));
+    const title = typeof ex.title === "string" && ex.title ? ex.title : null;
+    return [ryuPage(d, k, R, extras, title)];
   },
 };

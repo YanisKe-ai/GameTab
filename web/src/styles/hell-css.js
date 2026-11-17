@@ -9,6 +9,10 @@ const HELL_CSS = `
 /* Umrahmungen schwarz (transparente Abstandsränder ausgenommen) */
 ${H} body *:not(svg):not(svg *):not([style*="transparent"]){border-color:${INK}!important}
 ${H} body *:is(input,textarea,select){border-color:${INK}!important;caret-color:${INK}}
+/* Platzhalter in Feldern gut lesbar (Kontrast über 5:1) */
+${H} body *:is(input,textarea)::placeholder{color:#6B6458!important;opacity:1}
+/* Schieber-Spielseite: Creme wie überall statt Papier mit Pfirsichton (Tafel bleibt) */
+${H} .gt-sch-classic:not(.gt-sch-night){background:${HELL.page}!important}
 /* Spieltitel und Schriftzüge: schwarz, ohne Farbschatten */
 ${H} body :is(h1.gt-wm,.yz-word,.tt-word,.f7-word,.sk-word,.gt-wm-sub){color:${INK}!important;-webkit-text-fill-color:${INK}!important;background:none!important;text-shadow:none!important;-webkit-text-stroke:0!important;filter:none!important}
 /* Schwebende Hintergrund-Deko schwarz */

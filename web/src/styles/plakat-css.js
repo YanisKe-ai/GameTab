@@ -222,6 +222,8 @@ ${P} body h1.gt-wm.gt-wm.gt-wm.gt-wm.gt-wm.gt-wm,${P} body .f7-word.f7-word.f7-w
 /* Beschriftungen: immer schwarzes Etikett mit Creme-Schrift (überstimmt Spiel-Regeln, die sonst schwarz auf schwarz ergeben) */
 ${P} body .gt-su-label.gt-su-label.gt-su-label{background:${INK2}!important;color:${CREAM2}!important;-webkit-text-fill-color:${CREAM2}!important}
 @media (prefers-reduced-motion: reduce){${P} .gt-su-btn::after,${P} .pk-shine::after,${P} .gt-wm{animation:none!important}}
+/* Ryū-Kontrolle 17.11.: Spielmenü ohne Navy-Reste aus dem hellen Grundstil (offener Menüknopf, Ränder, Abdunklung) */
+${P} .gt-hmt-light{--hm-ink:#1A1716;--hm-on-bg:#1A1716;--hm-on-ink:#F3EAD3;--hm-ring:rgba(26,23,22,.3);--hm-line:rgba(26,23,22,.14);--hm-muted:#4A3F3A;--hm-hover:rgba(26,23,22,.06);--hm-dim:rgba(26,23,22,.34)}
 `;
 
 export { PLAKAT_CSS };

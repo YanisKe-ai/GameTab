@@ -136,62 +136,137 @@ function page1(d, k, extras, rowsList, pageNo, pageCount) {
   return cv;
 }
 
-/* ---------- Ryū-Fassung: Scorecard-Ticket mit Fahne ----------
-   Roter Grund, Titel schräg, Fahne, Bahnenzahl als schwarze Pille, Zeilen als Sticker mit schwarzen Schlag-Kacheln und Abstand «+n»,
-   die Schläge des Siegers als Stempel-Raster (Hole in one schwarz), Hole-in-one-Stempel. Gleiche Inhalte wie render(). */
-function ryuFlag(c, R, x, top, h) {
-  c.fillStyle = R.INK; R.rr(c, x - 5, top, 10, h, 4); c.fill();
-  c.beginPath(); c.moveTo(x + 5, top + 4); c.lineTo(x + 120, top + 40); c.lineTo(x + 5, top + 84); c.closePath();
-  c.fillStyle = R.INK; c.save(); c.translate(7, 7); c.fill(); c.restore(); c.fillStyle = R.CR; c.fill(); c.lineWidth = 5; c.lineJoin = "round"; c.strokeStyle = R.INK; c.stroke();
-  c.fillStyle = R.INK; c.beginPath(); c.ellipse(x, top + h + 6, 54, 14, 0, 0, 6.2832); c.fill();
+/* ---------- Ryū-Fassung (Runde 2): Draufsicht auf die Bahn ----------
+   Sieger-Ball sitzt im Loch unter der Fahne (Explosion, Krone), Name riesig, Schlaege als schwarze Kacheln.
+   Die anderen landen im Teich (Wellenringe) oder im Sandbunker, mit Schlaegen und Abstand «+n». Spruch «Ab in den Teich.». */
+function blob(c, x, y, w, h, seed) {
+  const N = 72; c.beginPath();
+  for (let i = 0; i < N; i++) {
+    const a = (i / N) * Math.PI * 2, cs = Math.cos(a), sn = Math.sin(a), wob = 1 + 0.022 * Math.sin(5 * a + seed) + 0.015 * Math.sin(9 * a + seed * 2);
+    const px = x + w / 2 + Math.sign(cs) * Math.pow(Math.abs(cs), 0.42) * (w / 2) * wob, py = y + h / 2 + Math.sign(sn) * Math.pow(Math.abs(sn), 0.42) * (h / 2) * wob;
+    if (i) c.lineTo(px, py); else c.moveTo(px, py);
+  }
+  c.closePath();
+}
+function golfBall(c, R, x, y, r, txt, k, fs) {
+  c.fillStyle = R.INK; c.beginPath(); c.arc(x + r * 0.12, y + r * 0.14, r, 0, 6.2832); c.fill();
+  c.fillStyle = R.CR; c.beginPath(); c.arc(x, y, r, 0, 6.2832); c.fill(); c.lineWidth = Math.max(3, r * 0.1); c.strokeStyle = R.INK; c.stroke();
+  c.fillStyle = "rgba(26,23,22,0.18)";
+  for (let i = 0; i < 9; i++) { const a = i * 2.4, q = r * (0.35 + 0.5 * ((i * 37) % 10) / 10); c.beginPath(); c.arc(x + Math.cos(a) * q * 0.9, y + Math.sin(a) * q * 0.9, Math.max(1.5, r * 0.05), 0, 6.2832); c.fill(); }
+  if (txt != null) { k.setFont(c, 400, fs || r * 1.0, R.F_BAGEL); c.fillStyle = R.INK; c.textAlign = "center"; c.fillText(String(txt), x, y + (fs || r) * 0.36); c.textAlign = "left"; }
+}
+function crown(c, R, x, y, w) {
+  const h = w * 0.62; c.save(); c.translate(x, y); c.rotate(-8 * Math.PI / 180);
+  c.beginPath(); c.moveTo(-w / 2, 0); c.lineTo(-w / 2, -h * 0.7); c.lineTo(-w * 0.25, -h * 0.3); c.lineTo(0, -h); c.lineTo(w * 0.25, -h * 0.3); c.lineTo(w / 2, -h * 0.7); c.lineTo(w / 2, 0); c.closePath();
+  c.fillStyle = R.INK; c.save(); c.translate(5, 5); c.fill(); c.restore(); c.fillStyle = R.RED; c.fill(); c.lineWidth = 5; c.lineJoin = "round"; c.strokeStyle = R.INK; c.stroke();
+  c.fillStyle = R.CR; [[-w / 2, -h * 0.7], [0, -h], [w / 2, -h * 0.7]].forEach((q) => { c.beginPath(); c.arc(q[0], q[1], w * 0.07, 0, 6.2832); c.fill(); c.stroke(); });
+  c.restore();
+}
+/* Wie k.heroFit, aber ueberspringt Stufen, in denen ein Wort mitten durchgetrennt wuerde */
+function heroFitW(c, k, text, o, tiers) {
+  let f = null; const words = text.split(/\s+/).filter(Boolean);
+  for (let i = 0; i < tiers.length; i++) {
+    for (let sz = tiers[i].max; sz >= tiers[i].min; sz -= 4) {
+      f = k.fit(c, text, Object.assign({}, o, tiers[i], { max: sz, min: sz }));
+      if (!f.cut && words.every((w) => f.lines.some((ln) => ln.indexOf(w) >= 0))) return f;
+    }
+  }
+  return k.heroFit(c, text, o, tiers);
 }
 function ryuPage1(d, k, R, extras, rowsList) {
   const { cv, c } = k.tplCanvas(); R.bg(c, R.RED, 1818);
-  R.dots(c, 560, 0, 520, 330, 26, 4.2, "rgba(26,23,22,0.16)");
-  ryuFlag(c, R, 880, 60, 190);
-  titleTilt(c, k, R, d, 64, 195, -4, 700, 140);
-  const holes = extras.holes, nShown = rowsList.length, compact = nShown >= 8;
+  R.dots(c, 560, 0, 520, 280, 26, 4.2, "rgba(26,23,22,0.16)");
+  titleTilt(c, k, R, d, 64, 170, -4, 760, 130);
+  const holes = extras.holes;
   const sub = d.up(d.tr("tplMgSub", (q) => q + " holes")(holes));
-  const sp = pill(c, k, R, sub, 64, 240, 30, -2, { maxW: 520 });
-  const best = d.winners.length ? d.winners[0].score : null, win = d.winners, val = win.length ? d.num(win[0].score) : "";
-  if (d.tie) { const tl = d.tr("tplMgTie", (q) => q + "")(val); pill(c, k, R, tl, 64 + sp.w + 20, 240, 30, 2, { maxW: Math.max(200, 1020 - (64 + sp.w + 20)), fill: R.CR, ink: R.INK }); }
+  const sp = pill(c, k, R, sub, 64, 212, 30, -2, { maxW: 520 });
+  const win = rowsList.filter((r) => r.winner), rest = rowsList.filter((r) => !r.winner), allWin = d.winners, hasLosers = allWin.length < d.rows.length;
+  const best = allWin.length ? allWin[0].score : null, val = allWin.length ? d.num(allWin[0].score) : "";
+  if (d.tie) { const tl = d.tr("tplMgTie", (q) => q + "")(val); pill(c, k, R, tl, 64 + sp.w + 20, 212, 30, 2, { maxW: Math.max(200, 1020 - (64 + sp.w + 20)), fill: R.CR, ink: R.INK }); }
   const aces = extras.aces;
+  const nRest = rest.length, zTop0 = aces.length ? 740 : 650, bottom0 = 1172, cols0 = nRest > 5, pondN0 = Math.ceil(nRest / 2), sandN0 = nRest - pondN0;
+  const pitch0 = nRest ? (cols0 ? Math.min(100, (bottom0 - zTop0 - 80) / pondN0) : Math.min(190, (bottom0 - zTop0 - (sandN0 ? 160 : 90) - 18) / nRest)) : 0;
+  const zonesH = nRest ? (cols0 ? pondN0 * pitch0 + 80 : pondN0 * pitch0 + 80 + (sandN0 ? sandN0 * pitch0 + 80 + 18 : 0)) : 0;
+  const leftover = nRest ? Math.max(0, bottom0 - zTop0 - zonesH) : 0, shiftHero = Math.min(100, leftover * 0.35), shiftZ = Math.min(300, leftover * 0.8);
   if (aces.length) {
     const a0 = aces[0], l2 = a0.name + ", " + d.tr("tplMgHole", (l) => l)(a0.holes.join(", ")) + (aces.length > 1 ? " +" + (aces.length - 1) : "");
-    R.stamp(c, k, d.up(d.tr("tplMgAce", "Hole in one")) + ": " + l2, 540, 345, 40, 2.5, R.INK, 940);
+    R.stamp(c, k, d.up(d.tr("tplMgAce", "Hole in one")) + ": " + l2, 540, 668 + shiftHero, 34, 2, R.INK, 940);
   }
-  const w0 = d.winners[0] || d.rows[0], st = extras.byRow[d.rows.indexOf(w0)], strokes = st && Array.isArray(st.strokes) ? st.strokes : null;
-  const hasGrid = !!(strokes && strokes.length === holes && !compact), gridH = hasGrid ? Math.ceil(holes / 9) * 72 : 0;
-  const top = aces.length ? 400 : 340, bottom = hasGrid ? 1176 - gridH - 80 : 1176;
-  const pitch = Math.min(nShown <= 2 ? 190 : nShown <= 3 ? 160 : nShown <= 5 ? 130 : 124, (bottom - top) / nShown), h = pitch - 14, gw = 130;
-  rowsList.forEach((r, i) => {
-    const y = top + i * pitch, hot = r.winner, ink = hot ? R.CR : R.INK, rt = i % 2 ? 0.7 : -0.7, fs = Math.min(hot ? 66 : 54, h * 0.5);
-    R.sticker(c, 60, y, 960, h, { r: Math.min(22, h * 0.3), rot: rt, sh: 7, lw: 4, fill: hot ? R.INK : R.CR });
-    R.rot(c, 60, y, 960, h, rt, () => {
-      k.setFont(c, 400, fs * 0.92, R.F_BAGEL); c.fillStyle = hot ? R.RED : R.INK; c.textAlign = "center"; c.fillText(String(r.rank), h * 0.56, h / 2 + fs * 0.33); c.textAlign = "left";
-      const digits = Array.from(String(r.value).replace(/[^0-9]/g, "")), nd = digits.length || 1, th = h * 0.7, tw = th * (nd >= 3 ? 0.62 : 0.74), tg = 6;
-      const tilesW = nd * tw + (nd - 1) * tg, tx = 960 - 24 - gw - tilesW + 10;
-      digits.forEach((ch, q) => {
-        const x = tx + q * (tw + tg), ty = (h - th) / 2;
-        c.fillStyle = hot ? R.CR : R.INK; R.rr(c, x, ty, tw, th, 8); c.fill();
-        k.setFont(c, 400, th * 0.74, R.F_BAGEL); c.fillStyle = hot ? R.INK : R.CR; c.textAlign = "center"; c.fillText(ch, x + tw / 2, ty + th / 2 + th * 0.74 * 0.36); c.textAlign = "left";
-      });
-      if (!hot && best != null && r.score != null) { k.setFont(c, 400, fs * 0.9, R.F_BAGEL); c.fillStyle = ink; c.textAlign = "right"; c.fillText("+" + d.num(r.score - best), 960 - 22, h / 2 + fs * 0.32); c.textAlign = "left"; }
-      const nx = h * 1.06, nf = k.nameFit(c, r.name, { w: 400, fam: R.F_BAGEL, max: fs, maxW: tx - nx - 24, lines: 2 });
-      k.setFont(c, 400, nf.size, R.F_BAGEL); c.fillStyle = ink; const lh = nf.size * 1.05;
-      nf.lines.forEach((ln, q) => c.fillText(ln, nx, h / 2 + nf.size * 0.36 - ((nf.lines.length - 1) * lh) / 2 + q * lh));
-    });
+  /* ---- Sieger-Zone ---- */
+  const dy = rest.length ? shiftHero : 170, hx = 212, hy = 465 + dy;
+  R.burst(c, hx, hy, 205, 146, 15, { fill: R.CR, sh: 12, lw: 6, rot: 8 });
+  c.fillStyle = R.INK; c.beginPath(); c.ellipse(hx, hy + 56, 118, 40, 0, 0, 6.2832); c.fill();
+  c.fillStyle = R.INK; R.rr(c, hx + 100, hy - 160, 10, 215, 4); c.fill();
+  c.beginPath(); c.moveTo(hx + 110, hy - 158); c.lineTo(hx + 172, hy - 128); c.lineTo(hx + 110, hy - 96); c.closePath(); c.fillStyle = R.INK; c.save(); c.translate(6, 6); c.fill(); c.restore();
+  c.fillStyle = R.RED; c.fill(); c.lineWidth = 5; c.lineJoin = "round"; c.strokeStyle = R.INK; c.stroke();
+  golfBall(c, R, hx - 8, hy + 18, 62, null, k);
+  c.fillStyle = R.INK; c.beginPath(); c.ellipse(hx, hy + 56, 118, 40, 0, 0, Math.PI); c.fill();
+  crown(c, R, hx - 8, hy - 42, 100);
+  const names = d.up(win.map((r) => r.name).join(" & "));
+  const nf = heroFitW(c, k, names, { w: 400, fam: R.F_BAGEL, maxW: 590 }, [{ max: 210, min: 84, lines: 1 }, { max: 120, min: 60, lines: 2 }, { max: 76, min: 40, lines: 3 }, { max: 52, min: 26, lines: 4 }]);
+  const lh = nf.size * 1.02, nameH = nf.lines.length * lh, th = nf.lines.length >= 3 ? 72 : 108;
+  const blockH = nameH + 22 + th, top0 = hy - 20 - blockH / 2 + 10;
+  c.save(); c.translate(425, top0); c.rotate(-2.5 * Math.PI / 180);
+  nf.lines.forEach((ln, j) => R.pop(c, ln, 0, nf.size * 0.82 + j * lh, nf.size, { fill: R.CR, sh: nf.size * 0.06, sw: nf.size * 0.11 }));
+  const digits = Array.from(String(win.length ? win[0].value : "").replace(/[^0-9]/g, "")), nd = digits.length || 1, tw = th * (nd >= 3 ? 0.64 : 0.76), tg = 8;
+  digits.forEach((ch, q) => {
+    const x = q * (tw + tg) + 6, y0 = nameH + 22;
+    c.fillStyle = R.INK; R.rr(c, x + 6, y0 + 6, tw, th, 10); c.fill(); c.fillStyle = R.CR; R.rr(c, x, y0, tw, th, 10); c.fill(); c.lineWidth = 4; c.strokeStyle = R.INK; R.rr(c, x, y0, tw, th, 10); c.stroke();
+    k.setFont(c, 400, th * 0.76, R.F_BAGEL); c.fillStyle = R.INK; c.textAlign = "center"; c.fillText(ch, x + tw / 2, y0 + th / 2 + th * 0.76 * 0.36); c.textAlign = "left";
   });
-  if (hasGrid) {
-    const gy = 1176 - gridH;
-    pill(c, k, R, d.up(d.tr("tplMgPer", (q) => q)(w0.name)), 64, gy - 70, 28, -1.5, { maxW: 900, fam: R.F_TXT, wt: 800 });
-    const cw = (960 - 8 * 8) / 9;
-    strokes.forEach((v, i) => {
-      const x = 60 + (i % 9) * (cw + 8), y = gy + Math.floor(i / 9) * 72, ace = v === 1;
-      R.sticker(c, x, y, cw, 62, { r: 10, sh: 4, lw: 3.5, fill: ace ? R.INK : R.CR, stroke: ace ? R.CR : R.INK, rot: (i % 3 - 1) * 1.2 });
-      k.setFont(c, 700, 17, R.F_TXT); c.fillStyle = ace ? R.CR : R.INK; c.fillText(String(i + 1), x + 9, y + 22);
-      k.setFont(c, 400, 36, R.F_BAGEL); c.textAlign = "center"; c.fillText(v == null ? "–" : String(v), x + cw / 2 + 4, y + 50); c.textAlign = "left";
+  c.restore();
+  /* ---- Teich und Sandbunker ---- */
+  const n = rest.length;
+  if (n) {
+    const zTop = zTop0 + shiftZ, cols = cols0;
+    const pondN = cols ? Math.ceil(n / 2) : Math.ceil(n / 2), sandN = n - pondN;
+    const pitch = pitch0;
+    const zones = [];
+    if (cols) { const hh = pondN * pitch + 80; zones.push({ kind: "pond", rows: rest.filter((_, i) => i % 2 === 0), x: 40, y: zTop, w: 505, h: hh }); zones.push({ kind: "sand", rows: rest.filter((_, i) => i % 2 === 1), x: 555, y: zTop, w: 485, h: hh }); }
+    else {
+      const ph = pondN * pitch + 80; zones.push({ kind: "pond", rows: rest.slice(0, pondN), x: 40, y: zTop, w: 1000, h: ph });
+      if (sandN) zones.push({ kind: "sand", rows: rest.slice(pondN), x: 40, y: zTop + ph + 18, w: 1000, h: sandN * pitch + 80 });
+    }
+    zones.forEach((z, zi) => {
+      const pond = z.kind === "pond", ink = pond ? R.CR : R.INK, bgc = pond ? R.INK : R.CR2;
+      c.fillStyle = R.INK; blob(c, z.x + 9, z.y + 9, z.w, z.h, 3 + zi); c.fill();
+      c.fillStyle = bgc; blob(c, z.x, z.y, z.w, z.h, 3 + zi); c.fill();
+      c.save(); blob(c, z.x, z.y, z.w, z.h, 3 + zi); c.clip();
+      if (pond) { c.strokeStyle = R.CR; c.lineWidth = 3; c.setLineDash([30, 22]); c.globalAlpha = 0.4; [14, 30].forEach((q) => { blob(c, z.x + q, z.y + q, z.w - 2 * q, z.h - 2 * q, 3 + zi); c.stroke(); }); c.setLineDash([]); c.globalAlpha = 1; }
+      else R.dots(c, z.x, z.y, z.w, z.h, 22, 3.2, "rgba(26,23,22,0.22)");
+      c.restore();
+      c.lineWidth = 6; c.strokeStyle = R.INK; blob(c, z.x, z.y, z.w, z.h, 3 + zi); c.stroke();
+      const padX = cols ? 44 : 80, ix = z.x + padX, iw = z.w - padX * 2, br = Math.min(cols ? 34 : 46, pitch * 0.36);
+      z.rows.forEach((r, i) => {
+        const cy = z.y + 40 + i * pitch + pitch / 2, bx = ix + br;
+        if (pond) { c.strokeStyle = R.CR; c.lineWidth = 3; c.globalAlpha = 0.5; [1.55, 2.1].forEach((q) => { c.beginPath(); c.ellipse(bx, cy + br * 0.2, br * q, br * q * 0.42, 0, 0, 6.2832); c.stroke(); }); c.globalAlpha = 1; }
+        golfBall(c, R, bx, cy, br, r.rank, k, br * 1.05);
+        const th2 = Math.min(pitch * 0.66, cols ? 60 : 78), digs = Array.from(String(r.value).replace(/[^0-9]/g, "")), ndg = digs.length || 1, tw2 = th2 * (ndg >= 3 ? 0.62 : 0.72), tg2 = 5, tilesW = ndg * tw2 + (ndg - 1) * tg2;
+        let rx = ix + iw;
+        digs.forEach((ch, q2) => {
+          const x = rx - tilesW + q2 * (tw2 + tg2), y0 = cy - th2 / 2;
+          c.fillStyle = pond ? R.CR : R.INK; R.rr(c, x, y0, tw2, th2, 8); c.fill();
+          k.setFont(c, 400, th2 * 0.74, R.F_BAGEL); c.fillStyle = pond ? R.INK : R.CR; c.textAlign = "center"; c.fillText(ch, x + tw2 / 2, y0 + th2 / 2 + th2 * 0.74 * 0.36); c.textAlign = "left";
+        });
+        rx -= tilesW + 14;
+        if (best != null && r.score != null) {
+          const df = "+" + d.num(r.score - best), dfs = Math.min(th2 * 0.7, 40); k.setFont(c, 400, dfs, R.F_BAGEL); const dw = c.measureText(df).width;
+          c.fillStyle = pond ? R.CR : R.INK; c.textAlign = "right"; c.fillText(df, rx, cy + dfs * 0.36); c.textAlign = "left";
+          rx -= dw + 16;
+        }
+        const nx = bx + br + 18, nfm = Math.min(cols ? 46 : 62, pitch * 0.46), nf2 = k.nameFit(c, r.name, { w: 400, fam: R.F_BAGEL, max: nfm, maxW: rx - nx, lines: 2 });
+        k.setFont(c, 400, nf2.size, R.F_BAGEL); c.fillStyle = ink; const l2 = nf2.size * 1.04;
+        nf2.lines.forEach((ln, j) => c.fillText(ln, nx, cy + nf2.size * 0.36 - ((nf2.lines.length - 1) * l2) / 2 + j * l2));
+      });
     });
+    /* Spruch als Schild auf dem Teichrand */
+    if (hasLosers) {
+      const t = d.up(d.tr("ryuTPond", "Ab in den Teich.")), z0 = zones[0];
+      const f = k.fit(c, t, { w: 400, fam: R.F_BAGEL, max: 40, min: 22, maxW: 520, lines: 1 });
+      k.setFont(c, 400, f.size, R.F_BAGEL); const w2 = c.measureText(f.lines[0]).width + 52, h2 = f.size + 26, sx = cols ? z0.x + 40 : 1040 - w2 - 40, sy = z0.y - h2 / 2 - 4;
+      R.sticker(c, sx, sy, w2, h2, { r: 12, rot: cols ? -3 : 3, sh: 6, lw: 4, fill: R.CR });
+      R.rot(c, sx, sy, w2, h2, cols ? -3 : 3, () => { k.setFont(c, 400, f.size, R.F_BAGEL); c.fillStyle = R.RED2; c.fillText(f.lines[0], 26, h2 / 2 + f.size * 0.36); });
+    }
   }
   R.footer(c, k, d);
   return cv;

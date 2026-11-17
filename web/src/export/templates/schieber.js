@@ -172,9 +172,9 @@ function render(d, k) {
   return [cv];
 }
 
-/* ---------- Ryū-Fassung: rotes Fanzine ----------
-   Roter Grund, Titel als Pop-Schrift, Schlagzeile im breiten Explosionsstern, die zwei Teams als schräge Sticker auf Klebeband
-   (Sieger schwarz), darunter die Einträge als Strichlisten-Tabelle (bester Eintrag rot hinterlegt, Summe auf schwarzem Band). Inhalt wie render(). */
+/* ---------- Ryū-Fassung: Box-Plakat ----------
+   Roter Grund mit Speedlines, Titel, zwei Kämpfer-Sticker: Sieger gross, schwarz, mit Krone und riesiger Punktzahl, Verlierer kleiner, schräg, mit K.O.-Stern
+   und Stempel (Ausgejasst.). VS-Explosion dazwischen, Schlagzeile unten. Keine Eintragstabelle. Gleichstand: beide Kämpfer gleich gross mit Krone. */
 function ryuChip(c, k, R, text, x, y, w0, deg, fill) {
   const f = k.fit(c, text, { w: 400, fam: R.F_BAGEL, max: 40, min: 20, maxW: w0 - 40, lines: 1 });
   k.setFont(c, 400, f.size, R.F_BAGEL); const w = Math.min(w0, c.measureText(f.lines[0]).width + 44), h = f.size + 28, bx = x - w;
@@ -182,71 +182,77 @@ function ryuChip(c, k, R, text, x, y, w0, deg, fill) {
   R.rot(c, bx, y, w, h, deg, () => { k.setFont(c, 400, f.size, R.F_BAGEL); c.fillStyle = fill ? R.INK : R.CR; c.fillText(f.lines[0], 22, h / 2 + f.size * 0.34); });
   return h;
 }
+function ryuCrown(c, R, cx, cy, w, deg) {
+  const h = w * 0.78; c.save(); c.translate(cx, cy); c.rotate(deg * Math.PI / 180);
+  const path = (o) => { c.beginPath(); c.moveTo(-w / 2 + o, h / 2 + o); c.lineTo(-w / 2 + o, -h / 4 + o); c.lineTo(-w / 4 + o, h / 10 + o); c.lineTo(o, -h / 2 + o); c.lineTo(w / 4 + o, h / 10 + o); c.lineTo(w / 2 + o, -h / 4 + o); c.lineTo(w / 2 + o, h / 2 + o); c.closePath(); };
+  c.fillStyle = R.INK; path(8); c.fill(); c.fillStyle = R.CR; path(0); c.fill();
+  c.lineWidth = 6; c.lineJoin = "miter"; c.strokeStyle = R.INK; path(0); c.stroke(); c.lineJoin = "round";
+  c.fillStyle = R.RED; c.fillRect(-w / 2 + 3, h / 2 - h * 0.2, w - 6, h * 0.2 - 3);
+  [[-w / 2, -h / 4], [0, -h / 2], [w / 2, -h / 4]].forEach(([x, y]) => { c.beginPath(); c.arc(x, y, w * 0.06, 0, 7); c.fillStyle = R.RED; c.fill(); c.lineWidth = 4; c.stroke(); });
+  c.restore();
+}
+function ryuFighter(c, k, R, m, tm, x, y, w, h, deg, hot, o) {
+  const fill = hot ? R.INK : R.CR, ink = hot ? R.CR : R.INK, pad = 34;
+  R.sticker(c, x, y, w, h, { r: 30, fill, rot: deg, sh: o.sh, lw: 6, stroke: hot ? R.CR : R.INK });
+  R.rot(c, x, y, w, h, deg, () => {
+    const nf = k.nameFit(c, tm.name, { w: 400, fam: R.F_BAGEL, max: o.nameMax, maxW: w - pad * 2 - (o.nameRes || 0), lines: 2, max2: o.nameMax * 0.78 });
+    const nlh = nf.size * 1.04, nBot = 20 + nf.size * 0.85 + (nf.lines.length - 1) * nlh + nf.size * 0.2;
+    const sMax = Math.max(40, Math.min(o.totMax, (h - 22 - nBot - 6) / 0.74));
+    const sf = k.fit(c, m.num(tm.total), { w: 400, fam: R.F_BAGEL, max: sMax, min: Math.min(44, sMax), maxW: w - pad * 2, lines: 1 });
+    k.setFont(c, 400, nf.size, R.F_BAGEL); c.fillStyle = ink;
+    nf.lines.forEach((ln, j) => c.fillText(ln, pad, 20 + nf.size * 0.85 + j * nlh));
+    k.setFont(c, 400, sf.size, R.F_BAGEL); c.fillStyle = hot ? R.RED : R.INK; c.textAlign = "right"; c.fillText(m.num(tm.total), w - pad, h - 24); c.textAlign = "left";
+  });
+}
 function ryuPage(d, k, R, m) {
   const { cv, c } = k.tplCanvas(); R.bg(c, R.RED, 6101);
-  R.dots(c, 0, 380, 1080, 330, 26, 4.2, "rgba(26,23,22,0.12)");
-  /* Titel und Chips */
-  c.save(); c.translate(64, 160); c.rotate(-3 * Math.PI / 180);
-  const tf = k.fit(c, d.up(d.gameLabel), { w: 400, fam: R.F_BAGEL, max: 130, min: 60, maxW: 600, lines: 1 });
+  /* Speedlines aus der Mitte */
+  c.save(); c.fillStyle = "rgba(26,23,22,0.16)"; const ox = 540, oy = 640, N = 30;
+  for (let i = 0; i < N; i++) { const a = (i / N) * Math.PI * 2, da = 0.045 + (i % 3) * 0.012; c.beginPath(); c.moveTo(ox, oy); c.lineTo(ox + Math.cos(a - da) * 1700, oy + Math.sin(a - da) * 1700); c.lineTo(ox + Math.cos(a + da) * 1700, oy + Math.sin(a + da) * 1700); c.closePath(); c.fill(); }
+  c.restore();
+  R.dots(c, 0, 0, 1080, 200, 26, 4, "rgba(26,23,22,0.14)");
+  /* Titel und Ziel */
+  c.save(); c.translate(56, 150); c.rotate(-3 * Math.PI / 180);
+  const tf = k.fit(c, d.up(d.gameLabel), { w: 400, fam: R.F_BAGEL, max: 110, min: 56, maxW: 560, lines: 1 });
   R.pop(c, tf.lines[0], 0, 0, tf.size, { sh: tf.size * 0.08 }); c.restore();
-  const h1 = ryuChip(c, k, R, m.up(m.lblTarget + " " + m.tgt), 1020, 60, 340, 3);
-  ryuChip(c, k, R, m.rounds + " " + (m.rounds === 1 ? m.lblEntryOne : m.lblEntries), 1020, 60 + h1 + 16, 340, -2, R.CR);
-  /* Schlagzeile im Explosionsstern */
-  const bcx = 540, bcy = 340, sx = 2.4, ro = 172;
-  const star = (dx, dy) => { c.save(); c.translate(bcx + dx, bcy + dy); c.scale(sx, 1); R.starPath(c, 0, 0, ro, ro * 0.8, 18, 4, true); c.restore(); };
-  c.fillStyle = R.INK; star(12, 12); c.fill(); c.fillStyle = R.CR; star(0, 0); c.fill(); c.lineWidth = 6; c.lineJoin = "miter"; c.strokeStyle = R.INK; star(0, 0); c.stroke(); c.lineJoin = "round";
-  const hf = k.heroFit(c, m.msg, { w: 400, fam: R.F_BAGEL, maxW: 520 }, [{ max: 76, min: 56, lines: 1 }, { max: 66, min: 36, lines: 2 }, { max: 50, min: 28, lines: 3 }, { max: 38, min: 22, lines: 4 }]);
-  k.setFont(c, 400, hf.size, R.F_BAGEL); c.fillStyle = R.INK; c.textAlign = "center"; const lh = hf.size * 1.08;
-  hf.lines.forEach((ln, i) => c.fillText(ln, bcx, bcy + hf.size * 0.34 - ((hf.lines.length - 1) * lh) / 2 + i * lh)); c.textAlign = "left";
-  /* Team-Sticker */
-  const ty = 540, tw = 470, th = 176, xs = [50, 560], rts = [-2.2, 1.8];
-  m.teams.forEach((tm, i) => {
-    const hot = tm.win && !m.tie, fill = hot ? R.INK : R.CR, ink = hot ? R.CR : R.INK;
-    R.sticker(c, xs[i], ty, tw, th, { r: 26, fill, rot: rts[i], sh: 11, lw: 5, stroke: hot ? R.CR : R.INK });
-    R.rot(c, xs[i], ty, tw, th, rts[i], () => {
-      const nf = k.nameFit(c, tm.name, { w: 400, fam: R.F_BAGEL, max: 44, maxW: tw - 56, lines: 2, max2: 30 });
-      const nlh = nf.size * 1.05, nBot = 22 + nf.size * 0.85 + (nf.lines.length - 1) * nlh + nf.size * 0.22;
-      /* Punktzahl nie in den Namen: Grösse nach dem freien Platz unter dem Namen */
-      const sMax = Math.max(40, Math.min(84, (th - 26 - nBot - 10) / 0.74));
-      const sf = k.fit(c, m.num(tm.total), { w: 400, fam: R.F_BAGEL, max: sMax, min: Math.min(44, sMax), maxW: tw - 56, lines: 1 });
-      k.setFont(c, 400, nf.size, R.F_BAGEL); c.fillStyle = ink;
-      nf.lines.forEach((ln, j) => c.fillText(ln, 28, 22 + nf.size * 0.85 + j * nlh));
-      k.setFont(c, 400, sf.size, R.F_BAGEL); c.fillStyle = hot ? R.RED : R.INK; c.textAlign = "right"; c.fillText(m.num(tm.total), tw - 28, th - 26); c.textAlign = "left";
-    });
-    R.tape(c, xs[i] + tw / 2, ty + 2, 130, 40, i ? 8 : -8);
-    if (hot) {
-      const wf = k.fit(c, m.lblWinner, { w: 400, fam: R.F_BAGEL, max: 32, min: 18, maxW: 200, lines: 1 }); k.setFont(c, 400, wf.size, R.F_BAGEL);
-      const ww = c.measureText(wf.lines[0]).width + 36, wh = wf.size + 24, wx = xs[i] + tw - ww - 4, wy = ty - 30;
-      R.sticker(c, wx, wy, ww, wh, { r: wh / 2, fill: R.RED, rot: 7, sh: 6, lw: 4 });
-      R.rot(c, wx, wy, ww, wh, 7, () => { k.setFont(c, 400, wf.size, R.F_BAGEL); c.fillStyle = R.CR; c.fillText(wf.lines[0], 18, wh / 2 + wf.size * 0.34); });
-    }
-  });
-  /* Tabelle */
-  const top = 752, bot = 1182, shown = Math.min(m.rounds, 9), extra = m.rounds > 9 ? 1 : 0, sumH = 62;
-  const rh = Math.max(30, Math.min(58, (bot - top - 40 - sumH) / (1 + shown + extra * 0.6))), fs = Math.max(24, Math.min(40, rh * 0.7));
-  R.sticker(c, 60, top, 960, bot - top, { r: 24, rot: -0.5, sh: 10, lw: 5 });
-  R.rot(c, 60, top, 960, bot - top, -0.5, () => {
-    const cw = [130, 415, 415], cx = [0, cw[0], cw[0] + cw[1]], mid = (i) => cx[i + 1] + cw[i + 1] / 2;
-    let y = 14;
-    k.setFont(c, 400, fs * 0.85, R.F_BAGEL); c.fillStyle = R.INK; c.fillText("#", 34, y + rh * 0.68);
-    m.teams.forEach((tm, i) => { const f = k.fit(c, tm.name, { w: 400, fam: R.F_BAGEL, max: fs, min: 22, maxW: cw[i + 1] - 30, lines: 1 }); k.setFont(c, 400, f.size, R.F_BAGEL); c.textAlign = "center"; c.fillText(f.lines[0], mid(i), y + rh * 0.7); c.textAlign = "left"; });
-    y += rh; c.fillStyle = R.INK; c.fillRect(24, y, 912, 4);
-    if (extra) { k.setFont(c, 400, fs, R.F_BAGEL); c.fillText("...", 34, y + rh * 0.55); y += rh * 0.6; }
-    const first = m.rounds - shown;
-    for (let j = first; j < m.rounds; j++) {
-      k.setFont(c, 400, fs * 0.9, R.F_BAGEL); c.fillStyle = R.INK; c.textAlign = "left"; c.fillText(String(j + 1), 34, y + rh * 0.7);
-      m.teams.forEach((tm, i) => {
-        const v = tm.entries[j]; if (v == null) return; const best = tm.bestIdx === j, s = m.num(v);
-        k.setFont(c, 400, fs, R.F_BAGEL); const w = c.measureText(s).width;
-        if (best) { c.fillStyle = R.RED; R.rr(c, mid(i) - w / 2 - 16, y + 3, w + 32, rh - 6, (rh - 6) / 2); c.fill(); c.lineWidth = 3; c.strokeStyle = R.INK; c.stroke(); }
-        c.fillStyle = best ? R.CR : R.INK; c.textAlign = "center"; c.fillText(s, mid(i), y + rh * 0.7); c.textAlign = "left";
-      });
-      y += rh; c.save(); c.setLineDash([8, 7]); c.strokeStyle = "rgba(26,23,22,0.45)"; c.lineWidth = 2; c.beginPath(); c.moveTo(24, y); c.lineTo(936, y); c.stroke(); c.restore();
-    }
-    const sy = y + 8, sh = sumH;
-    c.fillStyle = R.INK; R.rr(c, 20, sy, 920, sh, 16); c.fill();
-    const sf2 = Math.min(fs * 1.15, sh * 0.62); k.setFont(c, 400, sf2 * 0.7, R.F_BAGEL); c.fillStyle = R.CR; c.fillText(m.up(m.lblSum), 34, sy + sh / 2 + sf2 * 0.24);
-    m.teams.forEach((tm, i) => { k.setFont(c, 400, sf2, R.F_BAGEL); c.fillStyle = tm.win ? R.RED : R.CR; c.textAlign = "center"; c.fillText(m.num(tm.total), mid(i), sy + sh / 2 + sf2 * 0.34); c.textAlign = "left"; });
+  const h1 = ryuChip(c, k, R, m.up(m.lblTarget + " " + m.tgt), 1030, 52, 380, 3);
+  ryuChip(c, k, R, m.rounds + " " + (m.rounds === 1 ? m.lblEntryOne : m.lblEntries), 1030, 52 + h1 + 14, 380, -2, R.CR);
+  const tie = m.tie, win = m.teams.filter((t) => t.win && !tie)[0], los = m.teams.filter((t) => t !== win)[0];
+  let vs, crowns = [];
+  if (!tie) {
+    ryuFighter(c, k, R, m, win, 40, 225, 880, 430, -2.6, true, { sh: 14, nameMax: 112, totMax: 270, nameRes: 120 });
+    crowns.push([120, 198, 190, -12]);
+    const wf = k.fit(c, m.lblWinner, { w: 400, fam: R.F_BAGEL, max: 34, min: 18, maxW: 210, lines: 1 }); k.setFont(c, 400, wf.size, R.F_BAGEL);
+    const ww = c.measureText(wf.lines[0]).width + 40, wh = wf.size + 26, wx = 920 - ww - 20, wy = 215;
+    R.sticker(c, wx, wy, ww, wh, { r: wh / 2, fill: R.RED, rot: 6, sh: 6, lw: 4, stroke: R.CR });
+    R.rot(c, wx, wy, ww, wh, 6, () => { k.setFont(c, 400, wf.size, R.F_BAGEL); c.fillStyle = R.CR; c.fillText(wf.lines[0], 20, wh / 2 + wf.size * 0.34); });
+    ryuFighter(c, k, R, m, los, 300, 712, 730, 290, 3.4, false, { sh: 10, nameMax: 76, totMax: 150, nameRes: 160 });
+    vs = [150, 700, 105, -8];
+  } else {
+    ryuFighter(c, k, R, m, m.teams[0], 40, 225, 880, 350, -2.4, true, { sh: 13, nameMax: 96, totMax: 210, nameRes: 110 });
+    ryuFighter(c, k, R, m, m.teams[1], 150, 650, 880, 350, 2.4, true, { sh: 13, nameMax: 96, totMax: 210, nameRes: 110 });
+    crowns.push([130, 222, 150, -14], [1000 - 40, 648, 150, 12]);
+    vs = [112, 610, 100, 8];
+  }
+  /* VS-Explosion */
+  R.burst(c, vs[0], vs[1], vs[2], vs[2] * 0.62, 14, { fill: R.CR, sh: 9, lw: 6, rot: vs[3] });
+  k.setFont(c, 400, vs[2] * 0.8, R.F_BAGEL); c.fillStyle = R.INK; c.textAlign = "center"; c.fillText("VS", vs[0], vs[1] + vs[2] * 0.28); c.textAlign = "left";
+  crowns.forEach((q) => ryuCrown(c, R, q[0], q[1], q[2] * 0.6, q[3]));
+  if (!tie) {
+    /* K.O.-Stern am Verlierer, Stempel links daneben */
+    R.burst(c, 960, 742, 92, 54, 11, { fill: R.CR, sh: 8, lw: 6, rot: 12 });
+    k.setFont(c, 400, 62, R.F_BAGEL); c.fillStyle = R.RED; c.save(); c.translate(960, 742); c.rotate(10 * Math.PI / 180); c.textAlign = "center"; c.lineWidth = 7; c.strokeStyle = R.INK; c.lineJoin = "round"; c.strokeText("K.O.", 0, 21); c.fillText("K.O.", 0, 21); c.restore(); c.textAlign = "left";
+    const sp = d.tr("ryuTOver", "Ausgejasst.");
+    R.sticker(c, 40, 835, 250, 80, { r: 14, fill: R.CR, rot: -8, sh: 6, lw: 4 });
+    R.stamp(c, k, sp, 165, 876, 36, -8, R.RED, 215);
+  }
+  /* Schlagzeile */
+  const my = 1030, mh = 150;
+  R.sticker(c, 40, my, 1000, mh, { r: 28, fill: R.CR, rot: -0.8, sh: 10, lw: 6 });
+  R.rot(c, 40, my, 1000, mh, -0.8, () => {
+    const hf = k.heroFit(c, m.msg, { w: 400, fam: R.F_BAGEL, maxW: 920 }, [{ max: 64, min: 44, lines: 1 }, { max: 56, min: 32, lines: 2 }, { max: 40, min: 24, lines: 3 }]);
+    k.setFont(c, 400, hf.size, R.F_BAGEL); c.fillStyle = R.INK; c.textAlign = "center"; const lh = hf.size * 1.08;
+    hf.lines.forEach((ln, i) => c.fillText(ln, 500, mh / 2 + hf.size * 0.34 - ((hf.lines.length - 1) * lh) / 2 + i * lh)); c.textAlign = "left";
   });
   R.footer(c, k, d);
   return cv;

@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.17-7 (17.11.2026 10:52)
+- Nocturne: besser lesbar (SLF, Darts, Mafia, Platzhalter, Statistik)
+
 ## 2026.11.17-6 (17.11.2026 10:23)
 - Hell: Schieber-Spielseite in Creme, Platzhalter besser lesbar
 

@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.18-6 (18.11.2026 23:15)
+- Querformat-Startseite: Knöpfe neben der Suche, ganze Höhe genutzt, Spielreihe läuft weich aus
+
 ## 2026.11.18-5 (18.11.2026 22:43)
 - Startseite im Handy-Querformat neu: Entwurf S10 Mittelachse (alle Modi)
 

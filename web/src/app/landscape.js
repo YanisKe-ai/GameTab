@@ -10,8 +10,8 @@ export const APP_LANDSCAPE_CSS = `
 @media (max-width: 600px) { [data-phone-landscape] .pl-app .gtL-cards, [data-phone-landscape] .pl-app .pl-grid2 { gap: 8px !important; } }
 
 /* Startseite: Entwurf S10 «Mittelachse» (Wahl Yanis, 2026-11-18). Logo mittig, Kategorien als Flügel, darunter Suche mit Zahnrad/Modus, dann Spielreihe. */
-[data-phone-landscape] .gtL-start { --s10-top: clamp(130px, calc(var(--pl-avail, 100vh) - var(--pl-sat, 0px) - var(--pl-sab, 0px) - 212px), 230px); --s10-sw: min(400px, 48vw); }
-[data-phone-landscape] .gtL-startmain { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(240px, 1.25fr) minmax(0, 1fr); grid-template-rows: var(--s10-top) 44px auto; column-gap: 16px; row-gap: 8px; padding: calc(var(--pl-sat) + 8px) var(--pl-gutter-r) 0 var(--pl-gutter-l) !important; box-sizing: border-box; overflow: visible !important; justify-content: stretch !important; flex: 0 0 auto !important; }
+[data-phone-landscape] .gtL-start { --s10-sw: min(400px, 48vw); }
+[data-phone-landscape] .gtL-startmain { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(240px, 1.25fr) minmax(0, 1fr); grid-template-rows: minmax(130px, 236px) 44px auto; align-content: center; column-gap: 16px; row-gap: 10px; height: var(--pl-avail, 100vh); padding: calc(var(--pl-sat) + 8px) var(--pl-gutter-r) calc(var(--pl-sab) + 8px) var(--pl-gutter-l) !important; box-sizing: border-box; overflow: visible !important; justify-content: stretch !important; flex: 0 0 auto !important; }
 [data-phone-landscape] .gtL-startmain > .pl-hide { display: none !important; }
 [data-phone-landscape] .gtL-startheadpad { grid-column: 2; grid-row: 1; padding: 0 !important; display: flex; align-items: center; justify-content: center; min-width: 0; }
 [data-phone-landscape] .gtL-headwrap { max-width: none !important; padding-top: 0 !important; width: 100%; }
@@ -32,15 +32,16 @@ export const APP_LANDSCAPE_CSS = `
 [data-phone-landscape] .gtL-startmain-tiles > div:nth-child(2) { grid-column: 1 / -1; grid-row: 2; justify-self: center; width: var(--s10-sw); margin: 0 !important; transform: translateX(52px); }
 [data-phone-landscape] .gtL-startcol > .gtL-tipcard, [data-phone-landscape] .gtL-startcol > .gt-resume { display: none !important; }
 [data-phone-landscape] .gtL-startcol > [data-onboard="showcase"] { grid-column: 1 / -1; grid-row: 3; margin: 2px 0 0 !important; min-width: 0; }
-[data-phone-landscape] .gtL-start .gtL-start-gear { top: calc(var(--pl-sat) + 8px + var(--s10-top) + 8px) !important; right: auto !important; left: calc(50% - var(--s10-sw) / 2 + 52px - 52px) !important; width: 44px !important; height: 44px !important; }
-[data-phone-landscape] .gtL-start .gtL-start-gear.gtL-start-theme { display: flex !important; left: calc(50% - var(--s10-sw) / 2 + 52px - 104px) !important; }
+[data-phone-landscape] .gtL-start .gtL-start-gear { top: var(--s10-gy, -200px) !important; right: auto !important; left: calc(var(--s10-gx, 0px) - 54px) !important; width: 44px !important; height: 44px !important; }
+[data-phone-landscape] .gtL-start .gtL-start-gear.gtL-start-theme { display: flex !important; left: calc(var(--s10-gx, 0px) - 106px) !important; }
 [data-phone-landscape] .gtL-startcol .gtL-showcase { margin-top: 0 !important; }
 [data-phone-landscape] .gtL-showcase .gtL-seclabel { justify-content: center !important; text-align: center; }
-[data-phone-landscape] .gtL-showcase-row { display: flex !important; flex-wrap: nowrap !important; gap: 4px !important; overflow-x: auto !important; overflow-y: hidden !important; scroll-snap-type: x proximity !important; scrollbar-width: none; }
+[data-phone-landscape] .gtL-showcase-row { display: flex !important; flex-wrap: nowrap !important; gap: 4px !important; -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 44px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 44px), transparent); padding-right: 30px !important; overflow-x: auto !important; overflow-y: hidden !important; scroll-snap-type: x proximity !important; scrollbar-width: none; }
 [data-phone-landscape] .gtL-showcase-row::-webkit-scrollbar { display: none; }
 [data-phone-landscape] .gtL-showcase-item { flex: 0 0 78px !important; width: 78px !important; min-height: 76px; padding: 4px 2px !important; scroll-snap-align: start; }
 [data-phone-landscape] .gtL-showcase-label { font-size: 12px !important; opacity: 1 !important; overflow-wrap: normal !important; word-break: keep-all !important; }
-[data-phone-landscape] .gtL-startfoot { max-width: none !important; padding: 4px var(--pl-gutter-r) calc(var(--pl-sab) + 6px) var(--pl-gutter-l) !important; }
+[data-phone-landscape] .gtL-startfoot { max-width: none !important; padding: 0 var(--pl-gutter-r) 0 var(--pl-gutter-l) !important; }
+[data-phone-landscape] .gtL-startfoot:empty { display: none !important; }
 [data-phone-landscape] .gtL-startfoot p { font-size: 12px !important; }
 
 /* Kopfknopf Statistiken (Kategorieseiten) */

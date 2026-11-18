@@ -203,7 +203,9 @@ def run_contrast(pg, theme):
     start(pg, theme=theme)
     calm(pg)
     vals = {}
-    vals["Favoriten-Hinweis"] = [pg.locator(".gtL-showcase-hint").first.evaluate(CONTRAST_JS)]
+    # Favoriten-Hinweis entfernt (2026-11-18, Wunsch Yanis): nur pruefen, falls vorhanden
+    if pg.locator(".gtL-showcase-hint").count():
+        vals["Favoriten-Hinweis"] = [pg.locator(".gtL-showcase-hint").first.evaluate(CONTRAST_JS)]
     _seed_stats(pg)
     _open_stats(pg)
     calm(pg)

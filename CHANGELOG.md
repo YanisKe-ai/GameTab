@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.18-7 (18.11.2026 23:30)
+- Ryū Querformat-Startseite: Zahnrad und Modus als gezackte Sticker
+
 ## 2026.11.18-6 (18.11.2026 23:15)
 - Querformat-Startseite: Knöpfe neben der Suche, ganze Höhe genutzt, Spielreihe läuft weich aus
 

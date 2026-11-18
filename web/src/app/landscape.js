@@ -9,33 +9,38 @@ export const APP_LANDSCAPE_CSS = `
 [data-phone-landscape] .pl-app .gtL-cards > button, [data-phone-landscape] .pl-app .gtL-cards > a, [data-phone-landscape] .pl-app .pl-grid2 > button { min-height: 64px; height: 100%; box-sizing: border-box; }
 @media (max-width: 600px) { [data-phone-landscape] .pl-app .gtL-cards, [data-phone-landscape] .pl-app .pl-grid2 { gap: 8px !important; } }
 
-/* Startseite */
-[data-phone-landscape] .gtL-startmain { overflow: visible !important; justify-content: flex-start !important; flex: 0 0 auto !important; }
-[data-phone-landscape] .gtL-startheadpad { padding: calc(var(--pl-sat) + 6px) calc(var(--pl-gutter-r) + 52px) 0 var(--pl-gutter-l) !important; }
-[data-phone-landscape] .gtL-headwrap { max-width: none !important; padding-top: 0 !important; }
-[data-phone-landscape] .gtL-headwrap > div { flex-direction: row !important; align-items: center !important; justify-content: flex-start !important; text-align: left !important; gap: 14px; }
+/* Startseite: Entwurf S10 «Mittelachse» (Wahl Yanis, 2026-11-18). Logo mittig, Kategorien als Flügel, darunter Suche mit Zahnrad/Modus, dann Spielreihe. */
+[data-phone-landscape] .gtL-start { --s10-top: clamp(130px, calc(var(--pl-avail, 100vh) - var(--pl-sat, 0px) - var(--pl-sab, 0px) - 212px), 230px); --s10-sw: min(400px, 48vw); }
+[data-phone-landscape] .gtL-startmain { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(240px, 1.25fr) minmax(0, 1fr); grid-template-rows: var(--s10-top) 44px auto; column-gap: 16px; row-gap: 8px; padding: calc(var(--pl-sat) + 8px) var(--pl-gutter-r) 0 var(--pl-gutter-l) !important; box-sizing: border-box; overflow: visible !important; justify-content: stretch !important; flex: 0 0 auto !important; }
+[data-phone-landscape] .gtL-startmain > .pl-hide { display: none !important; }
+[data-phone-landscape] .gtL-startheadpad { grid-column: 2; grid-row: 1; padding: 0 !important; display: flex; align-items: center; justify-content: center; min-width: 0; }
+[data-phone-landscape] .gtL-headwrap { max-width: none !important; padding-top: 0 !important; width: 100%; }
+[data-phone-landscape] .gtL-headwrap > div { flex-direction: column !important; align-items: center !important; justify-content: center !important; text-align: center !important; gap: 4px; }
 [data-phone-landscape] .gtL-headwrap > div > div:first-child { margin-bottom: 0 !important; flex: none; width: auto !important; }
-[data-phone-landscape] .gtL-headwrap .gt-hero-logo { --hm-w: 190px !important; margin: 0 !important; }
+[data-phone-landscape] .gtL-headwrap .gt-hero-logo { --hm-w: clamp(200px, 30vw, 300px) !important; margin: 0 !important; }
 [data-phone-landscape] .gtL-headwrap .gt-hero-wrap { transform: none !important; }
-
 [data-phone-landscape] .gtL-headwrap > div > div:last-child { transform: none !important; }
-
-
-[data-phone-landscape] .gtL-start .gtL-start-gear { top: calc(var(--pl-sat) + 8px) !important; right: calc(var(--pl-gutter-r) - 2px) !important; width: 44px !important; height: 44px !important; }
-[data-phone-landscape] .gtL-startcol { max-width: none !important; margin: 0 !important; width: 100% !important; box-sizing: border-box; padding: 6px var(--pl-gutter-r) 0 var(--pl-gutter-l) !important; display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 16px; align-items: start; }
-[data-phone-landscape] .gtL-startcol > .gtL-startmain-tiles { grid-column: 1; grid-row: 1; transform: none !important; }
-[data-phone-landscape] .gtL-startcol > [data-onboard="showcase"] { grid-column: 1 / -1; grid-row: 2; margin-top: 10px !important; }
-[data-phone-landscape] .gtL-startcol > .gt-resume, [data-phone-landscape] .gtL-startcol > .gtL-tipcard { grid-column: 2; grid-row: 1; margin-top: 0 !important; }
-[data-phone-landscape] .gtL-startcol .gtL-tipcard { padding-right: 6px; }
-[data-phone-landscape] .gtL-startcol .gtL-tiles { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; margin-top: 0 !important; }
-[data-phone-landscape] .gtL-startcol .gtL-tile { margin-bottom: 0 !important; min-height: 56px; padding-top: 6px !important; padding-bottom: 6px !important; }
-[data-phone-landscape] .gtL-startcol .gtL-tile-title { font-size: 20px !important; }
-[data-phone-landscape] .gtL-startcol .gtL-showcase { margin-top: 6px !important; }
-[data-phone-landscape] .gtL-showcase-row { display: grid !important; grid-template-columns: repeat(auto-fill, minmax(88px, 1fr)); gap: 10px 8px !important; overflow: visible !important; scroll-snap-type: none !important; }
-[data-phone-landscape] .gtL-showcase-item { width: auto !important; min-height: 76px; padding: 4px 2px !important; }
-[data-phone-landscape] .gtL-showcase-label { font-size: 12px !important; opacity: 1 !important; overflow-wrap: break-word; }
-[data-phone-landscape] .gtL-showcase-arrow { display: none !important; }
-[data-phone-landscape] .gtL-startfoot { max-width: none !important; padding: 10px var(--pl-gutter-r) calc(var(--pl-sab) + 14px) var(--pl-gutter-l) !important; }
+[data-phone-landscape] .gtL-startcol, [data-phone-landscape] .gtL-startmain-tiles, [data-phone-landscape] .gtL-startcol .gtL-tiles { display: contents !important; }
+[data-phone-landscape] .gtL-startcol .gtL-tiles > div { min-width: 0; height: 100%; }
+[data-phone-landscape] .gtL-startcol .gtL-tiles > div:nth-child(1) { grid-column: 1; grid-row: 1; }
+[data-phone-landscape] .gtL-startcol .gtL-tiles > div:nth-child(2) { grid-column: 3; grid-row: 1; }
+[data-phone-landscape] .gtL-startcol .gtL-tile { height: 100% !important; min-height: 0 !important; width: 100% !important; margin: 0 !important; box-sizing: border-box; flex-direction: column !important; justify-content: center !important; align-items: center !important; gap: 10px !important; padding: 12px 10px !important; text-align: center !important; }
+[data-phone-landscape] .gtL-startcol .gtL-tile-iconwrap { margin: 0 !important; }
+[data-phone-landscape] .gtL-startcol .gtL-tile > div:not([class]) { flex: none !important; }
+[data-phone-landscape] .gtL-startcol .gtL-tile-title { font-size: 19px !important; text-align: center !important; white-space: normal !important; flex: none !important; }
+[data-phone-landscape] .gtL-startcol .gtL-tile-chevron { margin: 0 !important; position: static !important; }
+[data-phone-landscape] .gtL-startmain-tiles > div:nth-child(2) { grid-column: 1 / -1; grid-row: 2; justify-self: center; width: var(--s10-sw); margin: 0 !important; transform: translateX(52px); }
+[data-phone-landscape] .gtL-startcol > .gtL-tipcard, [data-phone-landscape] .gtL-startcol > .gt-resume { display: none !important; }
+[data-phone-landscape] .gtL-startcol > [data-onboard="showcase"] { grid-column: 1 / -1; grid-row: 3; margin: 2px 0 0 !important; min-width: 0; }
+[data-phone-landscape] .gtL-start .gtL-start-gear { top: calc(var(--pl-sat) + 8px + var(--s10-top) + 8px) !important; right: auto !important; left: calc(50% - var(--s10-sw) / 2 + 52px - 52px) !important; width: 44px !important; height: 44px !important; }
+[data-phone-landscape] .gtL-start .gtL-start-gear.gtL-start-theme { display: flex !important; left: calc(50% - var(--s10-sw) / 2 + 52px - 104px) !important; }
+[data-phone-landscape] .gtL-startcol .gtL-showcase { margin-top: 0 !important; }
+[data-phone-landscape] .gtL-showcase .gtL-seclabel { justify-content: center !important; text-align: center; }
+[data-phone-landscape] .gtL-showcase-row { display: flex !important; flex-wrap: nowrap !important; gap: 4px !important; overflow-x: auto !important; overflow-y: hidden !important; scroll-snap-type: x proximity !important; scrollbar-width: none; }
+[data-phone-landscape] .gtL-showcase-row::-webkit-scrollbar { display: none; }
+[data-phone-landscape] .gtL-showcase-item { flex: 0 0 78px !important; width: 78px !important; min-height: 76px; padding: 4px 2px !important; scroll-snap-align: start; }
+[data-phone-landscape] .gtL-showcase-label { font-size: 12px !important; opacity: 1 !important; overflow-wrap: normal !important; word-break: keep-all !important; }
+[data-phone-landscape] .gtL-startfoot { max-width: none !important; padding: 4px var(--pl-gutter-r) calc(var(--pl-sab) + 6px) var(--pl-gutter-l) !important; }
 [data-phone-landscape] .gtL-startfoot p { font-size: 12px !important; }
 
 /* Kopfknopf Statistiken (Kategorieseiten) */

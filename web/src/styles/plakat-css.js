@@ -132,6 +132,11 @@ ${P} .gtL-start [data-onboard="scorepads-tile"] .gtL-tile-title{text-shadow:1px 
 ${P} .gtL-start [data-onboard="party-tile"] .gtL-tile{background:${INK2}!important;box-shadow:0 0 0 5px ${CREAM2},7px 9px 0 5px ${INK2}!important;transform:rotate(2deg)}
 ${P} .gtL-start [data-onboard="scorepads-tile"] .gtL-tile:active{transform:rotate(-2deg) translateY(4px);box-shadow:0 0 0 5px ${INK2},3px 4px 0 5px ${INK2}!important}
 ${P} .gtL-start [data-onboard="party-tile"] .gtL-tile:active{transform:rotate(2deg) translateY(4px);box-shadow:0 0 0 5px ${CREAM2},3px 4px 0 5px ${INK2}!important}
+/* Startseite Querformat S10 (Ryū): Flügel als schräge Sticker-Karten, Zahnrad und Modus überlappen leicht */
+${P}[data-phone-landscape] .gtL-start .gtL-startcol .gtL-tile{border-radius:26px!important;margin:6px 10px 12px 6px!important;width:calc(100% - 16px)!important;height:calc(100% - 18px)!important;padding:14px 12px!important}
+${P}[data-phone-landscape] .gtL-start .gtL-startcol .gtL-tile>div{flex:none!important}
+${P}[data-phone-landscape] .gtL-start .gtL-startcol .gtL-tile-title{font-size:clamp(15px,2.5vw,27px)!important;line-height:1.05!important;overflow-wrap:normal!important;word-break:keep-all!important}
+${P}[data-phone-landscape] .gtL-start .gtL-start-gear.gtL-start-theme{left:calc(50% - var(--s10-sw) / 2 + 52px - 92px)!important;z-index:3}
 ${P} .gtL-start [data-onboard="search"] input,${P} .gtL-start [data-onboard="search"] [class*="search"]{outline:none!important;border:none!important;border-radius:26px!important;background:${CREAM2}!important;box-shadow:4px 5px 0 ${INK2}!important;color:${INK2}!important}
 ${P} .gtL-start .gtL-seclabel{color:${INK2}!important;font-family:${FONT}!important;font-weight:400!important;letter-spacing:.12em!important}
 ${P} .gtL-start .gtL-showcase-icon{background:${CREAM2}!important;outline:none!important;border:none!important;box-shadow:3px 4px 0 ${INK2}!important}

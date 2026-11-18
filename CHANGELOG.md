@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.18-5 (18.11.2026 22:43)
+- Startseite im Handy-Querformat neu: Entwurf S10 Mittelachse (alle Modi)
+
 ## 2026.11.18-4 (18.11.2026 22:08)
 - Spielkopf und Spieltitel bleiben beim Scrollen stehen (alle Spiele), Kopf springt nicht mehr 14 px
 

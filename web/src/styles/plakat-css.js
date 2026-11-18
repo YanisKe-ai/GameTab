@@ -165,6 +165,22 @@ ${P} .st-page [role="switch"][aria-checked="true"]>span[aria-hidden]>span{backgr
 ${P} .st-page .st-foot{gap:2px!important;margin-top:4px}
 ${P} .st-page .st-foot button{font-size:11px!important;color:${INK2}!important;padding:0 8px!important;font-weight:600!important}
 ${P} .st-page .st-build{font-size:10px!important;color:${INK2}!important}
+/* Einstellungen Querformat (Entwurf RE2b, 2026-11-18): Menü links, Inhalt rechts */
+${P}[data-phone-landscape] .st-page .st-title{justify-self:start;font-size:24px!important;color:${CREAM2}!important;text-shadow:none!important;background:${INK2};padding:6px 14px 8px;border-radius:12px;box-shadow:0 0 0 3px ${CREAM2},4px 5px 0 3px ${INK2};transform:rotate(-2deg);margin:6px 0 10px 6px!important}
+${P}[data-phone-landscape] .st-page .st-nav{gap:8px;padding:4px 10px 6px 6px}
+${P}[data-phone-landscape] .st-page .st-navbtn{background:transparent!important;border:none!important;color:${INK2}!important;font-family:${FONT}!important;font-weight:400!important;font-size:16px;border-radius:999px;min-height:44px}
+${P}[data-phone-landscape] .st-page .st-navbtn svg{color:${INK2}!important}
+${P}[data-phone-landscape] .st-page .st-navk{background:${CREAM2}!important;color:${INK2}!important;box-shadow:0 0 0 2px ${INK2};font-family:${FONT}!important;font-weight:400!important}
+${P}[data-phone-landscape] .st-page .st-navbtn[data-on]{background:${INK2}!important;color:${RED}!important;box-shadow:0 0 0 3px ${CREAM2},4px 5px 0 3px ${INK2}}
+${P}[data-phone-landscape] .st-page .st-navbtn[data-on] svg{color:${CREAM2}!important}
+${P}[data-phone-landscape] .st-page .st-navbtn[data-on] .st-navk{background:${RED}!important;color:${CREAM2}!important;box-shadow:0 0 0 2px ${CREAM2}}
+${P}[data-phone-landscape] .st-page .st-grptitle{color:${INK2}!important;font-family:${FONT}!important;font-weight:400!important;font-size:19px!important;letter-spacing:.02em!important;text-transform:none!important;padding:4px 6px 2px!important}
+${P}[data-phone-landscape] .st-page .st-main{padding:6px 12px 14px 8px}
+${P}[data-phone-landscape] .st-page .st-cards{gap:18px!important;padding:2px 2px 6px!important}
+${P}[data-phone-landscape] .st-page[data-st-grp="info"] .st-foot{background:${CREAM2}!important;border:none!important;border-radius:22px!important;box-shadow:0 0 0 4px ${INK2},6px 7px 0 4px ${INK2};transform:rotate(-1deg);margin:4px 8px 0 4px}
+${P}[data-phone-landscape] .st-page[data-st-grp="info"] .st-foot button{font-size:15px!important;color:${INK2}!important;padding:0 16px!important}
+${P}[data-phone-landscape] .st-page[data-st-grp="info"] .st-foot button+button{border-top:2px solid ${INK2}!important}
+${P}[data-phone-landscape] .st-page[data-st-grp="info"] .st-build{font-size:13px!important;padding:12px 16px!important}
 
 /* ===== Spiellisten (Ryū, Entwurf KK3 Querkarten, 2026-11-15) ===== */
 ${P} [data-pk-cat="score"]{--pk-bg:${RED};background:${NOISE} 0 0/180px 180px,${RED}!important;background-blend-mode:multiply}

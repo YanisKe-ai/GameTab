@@ -42,6 +42,8 @@ ${P} .gt-rn-row{overflow-y:hidden!important;overscroll-behavior:contain;touch-ac
 ${P} .gt-gamehead.is-stuck,${P} .gt-gamehead.is-stuck::before{background:radial-gradient(rgba(20,20,20,.10) 1.2px,transparent 1.4px) 0 0/14px 14px,var(--pk-bg,${CREAM})!important;background-attachment:fixed!important}
 ${P} .gt-gamehead.is-stuck{box-shadow:0 2.5px 0 ${INK}!important}
 ${P} .gtL-content .gt-gamehead.is-stuck{background:none!important;box-shadow:none!important}
+${P} .gt-gamehead[data-gt-hst].is-stuck::after{background:radial-gradient(rgba(20,20,20,.10) 1.2px,transparent 1.4px) 0 0/14px 14px,var(--pk-bg,${CREAM})!important;background-attachment:fixed!important;box-shadow:0 2.5px 0 ${INK}!important}
+${P} .gt-gamehead[data-gt-hst].is-stuck{box-shadow:none!important}
 /* Laptop/iPad: unter kurzen Seiten nie Creme, immer Rot mit Körnung */
 ${P} .gtL-content{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.32'/%3E%3C/svg%3E") 0 0/180px 180px,${RED}!important;background-blend-mode:multiply}
 /* Querformat: Unterzeile hat neben den Kopfknöpfen keinen Platz */

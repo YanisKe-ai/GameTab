@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.18-4 (18.11.2026 22:08)
+- Spielkopf und Spieltitel bleiben beim Scrollen stehen (alle Spiele), Kopf springt nicht mehr 14 px
+
 ## 2026.11.18-3 (18.11.2026 21:32)
 - Querformat-Einstellungen: Menü links, Inhalt rechts (Nocturne, Hell, Noir, Ryū); Wizard-Hut nur wenn Platz
 

@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.18-8 (18.11.2026 23:41)
+- Ryū Querformat: ALL-IN-ONE als Explosion, Comic-Showdown nur im Hochformat
+
 ## 2026.11.18-7 (18.11.2026 23:30)
 - Ryū Querformat-Startseite: Zahnrad und Modus als gezackte Sticker
 

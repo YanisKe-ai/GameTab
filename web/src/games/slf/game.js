@@ -42,13 +42,18 @@ function useKbInset() {
     const vv = window.visualViewport;
     if (!vv) return undefined;
     const f = () => {
-      const inset = Math.max(0, Math.round(window.innerHeight - vv.height - vv.offsetTop));
+      const ae = document.activeElement;
+      const typing = !!ae && (ae.tagName === "INPUT" || ae.tagName === "TEXTAREA");
+      const inset = typing ? Math.max(0, Math.round(window.innerHeight - vv.height - vv.offsetTop)) : 0;
       document.documentElement.style.setProperty("--slf-kb", (inset > 80 ? inset : 0) + "px");
     };
     f();
     vv.addEventListener("resize", f);
     vv.addEventListener("scroll", f);
-    return () => { vv.removeEventListener("resize", f); vv.removeEventListener("scroll", f); document.documentElement.style.removeProperty("--slf-kb"); };
+    const fo = () => setTimeout(f, 60);
+    document.addEventListener("focusin", fo);
+    document.addEventListener("focusout", fo);
+    return () => { vv.removeEventListener("resize", f); vv.removeEventListener("scroll", f); document.removeEventListener("focusin", fo); document.removeEventListener("focusout", fo); document.documentElement.style.removeProperty("--slf-kb"); };
   }, []);
 }
 

@@ -323,5 +323,8 @@ html[data-phone-landscape] body:has(> #root > .gtL-start) { position: static !im
 /* Noir: Kartenfächer (Schieber, Coiffeur, Molotow) schwarz-weiss wie die übrige Spielfläche */
 html[data-gt-theme="noir"] :is(.jd-setfan,.mo-fan,.gt-sch-fan-in){filter:grayscale(1)}
 html[data-gt-theme="dark"]:not([data-gt-skin]) .gtSt2-lowhint{color:#B0A390!important}
+/* Alle Spiele: Namen nie mitten im Wort trennen («Moloto w»), Ryū unverändert (2026-11-18) */
+html:not([data-gt-skin="plakat"]) .gtL-showcase-label{overflow-wrap:normal!important;word-break:keep-all!important;hyphens:none!important}
+@media (max-width:360px){html:not([data-gt-skin="plakat"]) :not(.gtL-content) .gtL-showcase-label{white-space:normal!important;margin-left:-7px!important;margin-right:-7px!important;font-size:12px!important;letter-spacing:-.01em}}
 `;/*@gt-body-end*/
 export { GLOBAL_STYLES };

@@ -165,6 +165,9 @@ html[data-gt-theme="light"] .yz-hint{color:#4A443A}
 @media (max-height:800px){.yz-hint{display:none}}
 @media (hover:hover) and (pointer:fine){.yz-cell:hover{background:var(--yz-act)}}
 @media (max-width:380px){.yz-lab{font-size:12px}.yz-nm{font-size:12px}}
+/* schmale Handys: Beschriftungen einzeilig (Summe oben, Grosse Strasse), 2026-11-18 */
+@media (max-width:420px){.yz-paper:not(.is-many) .yz-lab{font-size:12.5px;letter-spacing:-.01em}.yz-paper:not(.is-many) .yz-lab.is-bold{font-size:13px}}
+@media (max-width:380px){.yz-paper:not(.is-many) .yz-lab{font-size:11.5px}.yz-paper:not(.is-many) .yz-lab.is-bold{font-size:12px}}
 @media (min-width:700px) and (min-height:600px){.yz-lab{font-size:14px}.yz-lab.is-bold{font-size:15px}.yz-nm{font-size:14px}.yz-cell{font-size:18px}.yz-auto{font-size:16px}.yz-auto.is-bold{font-size:18px}.yz-auto.is-acc{font-size:21px}.yz-auto.is-bonus{font-size:13px}.yz-sec{font-size:12px}.yz-turn{font-size:12px}.yz-dot{font-size:22px}}
 @media (prefers-reduced-motion: reduce){.yz-word{animation:none}.yz-pop{animation:yzFade .15s ease both}.yz-colov b{transition:opacity .15s ease}.yz-cell .yz-v,.yz-cell .yz-dot{transition:none}.yz-cell:active .yz-v,.yz-cell:active .yz-dot{transform:none}}
 `;

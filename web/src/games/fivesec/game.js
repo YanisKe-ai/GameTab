@@ -100,7 +100,7 @@ const FS_PK_CSS=`
 .fs-pk .fs-ringin.fs-urgent::before{opacity:0}
 .fs-pk .fs-ringin.fs-urgent~.fs-fuse .fs-spark{animation-duration:.22s}
 @media (prefers-reduced-motion: reduce){.fs-pk .fs-spark,.fs-pk .fs-ringin.fs-urgent{animation:none!important}}
-@media (max-height:700px){.fs-pk .fs-big{width:112px;height:112px;font-size:72px!important}.fs-pk .fs-fuse{--fs-r:76px}.fs-pk .fs-star .fs-fuse{--fs-r:82px}.fs-pk .fs-play{gap:10px!important}.fs-pk .fs-card{padding:32px 18px 14px!important}.fs-pk .fs-card::before{height:14px}}
+@media (max-height:700px){.fs-pk .fs-big{width:112px;height:112px;font-size:72px!important}.fs-pk .fs-fuse{--fs-r:72px;width:78px;height:67px;margin-left:-39px;margin-top:-67px;transform-origin:39px 67px}.fs-pk .fs-star .fs-fuse{--fs-r:82px}.fs-pk .fs-play{gap:10px!important}.fs-pk .fs-card{padding:32px 18px 14px!important}.fs-pk .fs-card::before{height:14px}}
 @media (max-height:620px){.fs-pk .fs-play{gap:6px!important}.fs-pk .fs-card{min-height:0!important;padding:28px 16px 10px!important}.fs-pk .fs-card>div{font-size:21px!important}.fs-pk .fs-label{padding:4px 14px;font-size:15px!important}.fs-pk .fs-star{margin-top:30px}.fs-pk .fs-tile{min-height:70px}}
 [data-phone-landscape] .fs-pk .fs-big{width:58px;height:58px;font-size:30px!important}
 [data-phone-landscape] .fs-pk .fs-fuse{display:none}

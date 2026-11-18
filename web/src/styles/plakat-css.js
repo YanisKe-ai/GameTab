@@ -187,6 +187,11 @@ ${P} [data-pk-cat][data-pk-cat] .gtL-gamecard-var,${P} [data-pk-cat][data-pk-cat
 ${P} [data-pk-cat][data-pk-cat] .gtL-gamecard-chev,${P} [data-pk-cat][data-pk-cat] .gtL-gamecard-spacer,${P} [data-pk-cat][data-pk-cat] .gtL-gamecard-mirror{display:none!important}
 ${P} [data-pk-cat][data-pk-cat] .gt-favstar{top:-4px!important;right:-4px!important;left:auto!important;bottom:auto!important;transform:none!important;width:36px!important;height:36px!important}
 ${P} [data-pk-cat][data-pk-cat] .gt-favstar svg{width:15px;height:15px}
+/* Stern als kleiner Sticker auf der Kartenecke, damit er den Spielnamen nicht verdeckt (2026-11-18) */
+${P} [data-pk-cat][data-pk-cat] .gt-favstar{top:-14px!important;right:-14px!important;width:40px!important;height:40px!important;isolation:isolate}
+${P} [data-pk-cat][data-pk-cat] .gt-favstar::before{content:"";position:absolute;left:50%;top:50%;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;background:${CREAM2};box-shadow:0 0 0 2px ${INK2},2px 2px 0 2px ${INK2};z-index:-1}
+${P} [data-pk-cat][data-pk-cat] .gt-favstar svg{position:relative;width:14px;height:14px}
+${P} [data-pk-cat][data-pk-cat] .gtL-gamecard-body{padding-right:4px}
 ${P} .gt-favstar::after{content:"";position:absolute;inset:-4px;border-radius:50%}
 ${P} [data-pk-cat][data-pk-cat] .gt-favstar[aria-pressed="true"] path{fill:${RED};stroke:${RED}}
 ${P} [data-pk-cat][data-pk-cat] .gt-favstar[aria-pressed="false"] path{stroke:#8A8178}

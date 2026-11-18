@@ -1,5 +1,8 @@
 # Änderungsprotokoll GameTab
 
+## 2026.11.18-1 (18.11.2026 21:00)
+- Überlagerungen behoben: Ryū-Listen (Stern auf der Ecke), Wizard, Coiffeur, Stadt Land Fluss, Yatzy, Molotow, 5 Sekunden, Startseite
+
 ## 2026.11.17-11 (17.11.2026 21:22)
 - Ryū: kleine rote Schrift besser lesbar
 

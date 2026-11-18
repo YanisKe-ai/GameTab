@@ -138,7 +138,7 @@ const TUTTO_PLAY_CSS=`@font-face{font-family:'Inter';font-style:italic;font-weig
 .tt-dh{display:grid;grid-template-columns:minmax(0,1fr) auto 44px 44px;align-items:center;column-gap:6px;min-height:44px;padding:0 0 0 4px;font-size:15px;}
 @container tt (max-width:279px){.tt-dn{grid-column:1/-1;min-height:26px;}.tt-disp{grid-column:1/3;margin-left:0;}}
 .tt-dn{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600;}
-.tt-disp{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:24px;font-weight:600;color:var(--tt-ink);}
+.tt-disp{margin-left:auto;display:flex;align-items:center;gap:9px;font-size:24px;font-weight:600;color:var(--tt-ink);}
 .tt-in{flex:none;min-width:6ch;border:0;outline:0;background:transparent;font-size:24px;font-weight:600;font-family:inherit;font-variant-numeric:tabular-nums;color:inherit;padding:0;text-align:left;}
 .tt-in::placeholder{color:var(--tt-mut);opacity:1;font-weight:600;}
 .tt-rb{flex:none;width:44px;height:44px;border-radius:22px;background:transparent;display:grid;place-items:center;padding:0;color:var(--tt-mut);transition:transform .12s ease-out,opacity .15s linear;}
